@@ -8,6 +8,7 @@ pipeline {
         docker {
           image 'cloudfluff/databaker'
           args "-v ${env.WORKSPACE}:/workspace"
+          reuseNode true
         }
       }
       steps {
