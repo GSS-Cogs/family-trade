@@ -12,7 +12,7 @@ pipeline {
         }
       }
       steps {
-        sh 'jupyter-nbconvert --to python --stdout CN8_Non-EU_cod_2014.ipynb | python'
+        sh 'jupyter-nbconvert --to python --stdout Transform_CN8_Non-EU_cod_XXXX_to_WDA.ipynb | python'
       }
     }
   }
