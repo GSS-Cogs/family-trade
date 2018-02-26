@@ -1,0 +1,18 @@
+{
+  "xsd": "http://www.w3.org/2001/XMLSchema#",
+  "prov": "http://www.w3.org/ns/prov#",
+  "foaf": "http://xmlns.com/foaf/0.1/",
+  "agent": { "@type": "@id", "@id": "prov:Agent" },
+  "entity": { "@type": "@id", "@id": "prov:Entity" },
+  "activity": { "@type": "@id", "@id": "prov:Activity" },
+  "hadPlan": { "@type": "@id", "@id": "prov:hadPlan" },
+  "hadRole": { "@type": "@id", "@id": "prov:hadRole" },
+  "wasAttributedTo": { "@type": "@id", "@id": "prov:wasAttributedTo" },
+  "wasAssociatedWith": { "@type": "@id", "@id": "prov:wasAssociatedWith" },
+  "used": { "@type": "@id", "@id": "prov:used" },
+  "wasUsedBy": { "@type": "@id", "@id": "prov:wasUsedBy" },
+  "wasGeneratedBy": { "@type": "@id", "@id": "prov:wasGeneratedBy" },
+  "startedAtTime": { "@type": "xsd:dateTime", "@id": "prov:startedAtTime" },
+  "endedAtTime": { "@type": "xsd:dateTime", "@id": "prov:endedAtTime" },
+  "label": "rdfs:label"
+}
