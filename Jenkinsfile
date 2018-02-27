@@ -21,11 +21,13 @@ pipeline {
           image 'cloudfluff/ons-wda-grafter'
           args "-v ${env.WORKSPACE}:/workspace"
           reuseNode true
+        }
       }
       steps {
-        sh 'run ons-graft.import.pipeline/data-baker /data/balanceofpayments2017q3.csv "ONS_BoP" /data/balanceofpayments2017q3.nq'
+        sh 'lein grafter run ons-graft.import.pipeline/data-baker /workspace/out/balanceofpayments2017q3.csv "ONS_BoP" /workspace/out/balanceofpayments2017q3.nq'
       }
     }
+
   }
   post {
     always {
