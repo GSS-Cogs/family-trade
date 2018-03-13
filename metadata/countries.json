@@ -559,8 +559,8 @@
     "http://vocab.getty.edu/tgn/7927800",
     "http://vocab.getty.edu/tgn/7014831"
   ],
-  "Sao Tome-Princ.": [],
-  "Niue Island": [],
+  "Sao Tome-Princ.": ["http://vocab.getty.edu/tgn/1000188"],
+  "Niue Island": ["http://vocab.getty.edu/tgn/7004687"],
   "Turkmenistan": [
     "http://vocab.getty.edu/tgn/7006659"
   ],
@@ -568,7 +568,7 @@
     "http://vocab.getty.edu/tgn/7905337",
     "http://vocab.getty.edu/tgn/1000156"
   ],
-  "Cent Afr Rep": [],
+  "Cent Afr Rep": ["http://vocab.getty.edu/tgn/1000155"],
   "Lesotho": [
     "http://vocab.getty.edu/tgn/7001660"
   ],
@@ -578,7 +578,7 @@
     "http://vocab.getty.edu/tgn/8036736",
     "http://vocab.getty.edu/tgn/7000529"
   ],
-  "N Mariana Is": [],
+  "N Mariana Is": ["http://vocab.getty.edu/tgn/7000552"],
   "Micronesia": [
     "http://vocab.getty.edu/tgn/1010146",
     "http://vocab.getty.edu/tgn/1000220"
@@ -598,8 +598,10 @@
   "Timor-Leste": [
     "http://vocab.getty.edu/tgn/7003703"
   ],
-  "Melilla": [],
-  "Fr Southern Terr": [],
+  "Melilla": ["http://vocab.getty.edu/tgn/7000462",
+   "http://vocab.getty.edu/tgn/7001151",
+   "http://vocab.getty.edu/tgn/7049992"],
+  "Fr Southern Terr": ["http://vocab.getty.edu/tgn/1000163"],
   "Pitcairn": [
     "http://vocab.getty.edu/tgn/7834446",
     "http://vocab.getty.edu/tgn/7005269"
@@ -609,14 +611,14 @@
   ],
   "Low Value Trade": [],
   "Br Ind Oc Terr": ["http://vocab.getty.edu/tgn/7008651"],
-  "US Minor Islands": [],
+  "US Minor Islands": ["http://vocab.getty.edu/tgn/7023938"],
   "Tuvalu": [
     "http://vocab.getty.edu/tgn/1000236"
   ],
-  "Christmas Is": [],
-  "St Kitts & Nevis": [],
+  "Christmas Is": ["http://vocab.getty.edu/tgn/7004615"],
+  "St Kitts & Nevis": ["http://vocab.getty.edu/tgn/7005605"],
   "Bosnia & Herz.": ["http://vocab.getty.edu/tgn/7006664"],
-  "Turks & Caicos": [],
-  "Wallis & Futuna": [],
-  "Heard & Mcdonald": []
+  "Turks & Caicos": ["http://vocab.getty.edu/tgn/7004630"],
+  "Wallis & Futuna": ["http://vocab.getty.edu/tgn/7006219"],
+  "Heard & Mcdonald": ["http://vocab.getty.edu/tgn/4000115"]
 }
