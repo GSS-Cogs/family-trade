@@ -67,7 +67,9 @@
   "Qatar": [
     "http://vocab.getty.edu/tgn/1000136"
   ],
-  "UAE": [],
+  "UAE": [
+    "http://vocab.getty.edu/tgn/1000143"
+  ],
   "Oman": [
     "http://vocab.getty.edu/tgn/1000131"
   ],
@@ -296,7 +298,9 @@
   "Bahamas": [
     "http://vocab.getty.edu/tgn/7005332"
   ],
-  "Antigua:Barbuda": ["http://vocab.getty.edu/tgn/1000009"],
+  "Antigua:Barbuda": [
+    "http://vocab.getty.edu/tgn/1000009"
+  ],
   "Barbados": [
     "http://vocab.getty.edu/tgn/7004770",
     "http://vocab.getty.edu/tgn/7030373"
@@ -608,14 +612,18 @@
     "http://vocab.getty.edu/tgn/7006213"
   ],
   "Low Value Trade": [],
-  "Br Ind Oc Terr": ["http://vocab.getty.edu/tgn/7008651"],
+  "Br Ind Oc Terr": [
+    "http://vocab.getty.edu/tgn/7008651"
+  ],
   "US Minor Islands": [],
   "Tuvalu": [
     "http://vocab.getty.edu/tgn/1000236"
   ],
   "Christmas Is": [],
   "St Kitts & Nevis": [],
-  "Bosnia & Herz.": ["http://vocab.getty.edu/tgn/7006664"],
+  "Bosnia & Herz.": [
+    "http://vocab.getty.edu/tgn/7006664"
+  ],
   "Turks & Caicos": [],
   "Wallis & Futuna": [],
   "Heard & Mcdonald": []
