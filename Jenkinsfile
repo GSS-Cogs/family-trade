@@ -3,7 +3,7 @@ pipeline {
       label 'master'
   }
   stages {
-    stage('Transform') {
+    stage('Prepare CSVW') {
       agent {
         docker {
           image 'cloudfluff/databaker'
@@ -12,6 +12,35 @@ pipeline {
       }
       steps {
         sh 'jupyter-nbconvert --to python --stdout Prepare_sources.ipynb | python'
+      }
+    }
+    stage('CSV2RDF') {
+      agent {
+        docker {
+          image 'cloudfluff/rdf-tabular'
+          reuseNode true
+        }
+      }
+      steps {
+        sh 'rdf serialize --input-format tabular --output-format ttl --stream out/cn8_2012.csv > out/cn8_2012.ttl'
+        sh 'rdf serialize --input-format tabular --output-format ttl --stream out/cn8_2013.csv > out/cn8_2013.ttl'
+        sh 'rdf serialize --input-format tabular --output-format ttl --stream out/cn8_2014.csv > out/cn8_2014.ttl'
+        sh 'rdf serialize --input-format tabular --output-format ttl --stream out/cn8_2015.csv > out/cn8_2015.ttl'
+        sh 'rdf serialize --input-format tabular --output-format ttl --stream out/cn8_2016.csv > out/cn8_2016.ttl'
+      }
+    }
+    stage('Normalize Cube') {
+      steps {
+        sh 'java -cp bin/sparql uk.org.floop.updateInPlace.Run -q sparql-normalize out/cn8_2012.ttl'
+        sh 'java -cp bin/sparql uk.org.floop.updateInPlace.Run -q sparql-normalize out/cn8_2013.ttl'
+        sh 'java -cp bin/sparql uk.org.floop.updateInPlace.Run -q sparql-normalize out/cn8_2014.ttl'
+        sh 'java -cp bin/sparql uk.org.floop.updateInPlace.Run -q sparql-normalize out/cn8_2015.ttl'
+        sh 'java -cp bin/sparql uk.org.floop.updateInPlace.Run -q sparql-normalize out/cn8_2016.ttl'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'java -cp bin/sparql uk.org.floop.sparqlTestRunner.Run -i -t tests/qb -r reports/TESTS-qb.xml out/cn8_2012.ttl'
       }
     }
   }
