@@ -1,0 +1,118 @@
+{
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "@id": "http://gss-data.org.uk/data/hmrccn8",
+  "url": "cn8_2012.csv",
+  "dc:title": "Data by Commodity Code",
+  "dc:description": "Data from trade (in goods) between the UK and non-EU countries are collected from UK Customs import and export entries, and between the UK and other EU Member States from VAT returns and the HMRC Intrastat survey.",
+  "dc:publisher": {
+    "@id": "https://www.gov.uk/government/organisations/hm-revenue-customs",
+    "rdfs:label": "HM Revenue & Customs"
+  },
+  "qb:structure": {
+    "@id": "http://gss-data.org.uk/data/hmrccn8#dsd",
+    "@type": "qb:DataStructureDefinition",
+    "qb:component": [
+      {
+        "@id": "http://gss-data.org.uk/data/hmrccn8#component-year",
+        "@type": "qb:ComponentSpecification",
+        "qb:dimension": {
+          "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+          "@type": ["qb:DimensionProperty", "owl:ObjectProperty"],
+          "rdfs:label": "reference period for observation value",
+          "rdfs:range": {
+            "@id": "http://www.w3.org/2006/time#Interval"
+          }
+        }
+      }, {
+        "@id": "http://gss-data.org.uk/data/hmrcots#component-flow",
+        "@type": "qb:ComponentSpecification",
+        "qb:dimension": {
+          "@id": "http://gss-data.org.uk/def/trade#flow",
+          "@type": ["qb:DimensionProperty", "owl:ObjectProperty"],
+          "rdfs:label": "Flow",
+          "rdfs:range": {
+            "@id": "http://gss-data.org.uk/def/trade#Flow"
+          }
+        }
+      }, {
+        "@id": "http://gss-data.org.uk/data/hmrcots#component-commodity",
+        "@type": "qb:ComponentSpecification",
+        "qb:dimension": {
+          "@id": "http://gss-data.org.uk/def/trade#commodity",
+          "@type": ["qb:DimensionProperty", "owl:ObjectProperty"],
+          "rdfs:label": "CN code",
+          "rdfs:range": {
+            "@id": "https://trade.ec.europa.eu/def/cn#CN8"
+          }
+        }
+      }, {
+        "@id": "http://gss-data.org.uk/data/hmrcots#component-country",
+        "@type": "qb:ComponentSpecification",
+        "qb:measure": {
+          "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+          "@type": [ "owl:Object", "qb:DimensionProperty" ],
+          "rdfs:label": "Country",
+          "rdfs:range": {
+            "@id": "http://vocab.getty.edu/ontology#AdminPlaceConcept"
+          }
+        }
+      }, {
+        "@id": "http://gss-data.org.uk/data/hmrcots#component-value",
+        "@type": "qb:ComponentSpecification",
+        "qb:measure": {
+          "@id": "http://gss-data.org.uk/def/trade#value",
+          "@type": [ "owl:DatatypeProperty", "qb:MeasureProperty" ],
+          "rdfs:label": "value of goods",
+          "rdfs:range": {
+            "@id": "xsd:nonNegativeInteger"
+          }
+        }
+      }
+    ]
+  },
+  "tableSchema": {
+    "columns": [ {
+      "name": "year",
+      "titles": "year",
+      "datatype": "integer",
+      "required": true,
+      "propertyUrl": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+      "valueUrl": "http://reference.data.gov.uk/id/year/{year}"
+    }, {
+      "name": "flow",
+      "titles": "flow",
+      "datatype": "string",
+      "required": true,
+      "propertyUrl": "http://gss-data.org.uk/def/trade#flow",
+      "valueUrl": "http://gss-data.org.uk/def/trade#{flow}"
+    }, {
+      "name": "comcode",
+      "titles": "comcode",
+      "datatype": "string",
+      "required": true,
+      "propertyUrl": "http://gss-data.org.uk/def/trade#commodity",
+      "valueUrl": "https://trade.ec.europa.eu/def/cn#cn8_{comcode}"
+    }, {
+      "name": "country",
+      "titles": "country",
+      "datatype": "string",
+      "required": true,
+      "propertyUrl": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+      "valueUrl": "http://vocab.getty.edu/tgn/1000143"
+    }, {
+      "name": "svalue",
+      "titles": "svalue",
+      "dc:description": "GBP (£)",
+      "datatype": "integer",
+      "required": true,
+      "propertyUrl": "http://gss-data.org.uk/def/trade#value"
+    }, {
+      "name": "dataset_ref",
+      "rdfs:comment": "virtual column linking observations to the dataset",
+      "virtual": true,
+      "propertyUrl": "qb:dataSet",
+      "valueUrl": "http://gss-data.org.uk/data/hmrccn8"
+    }],
+    "aboutUrl": "http://gss-data.org.uk/data/hmrccn8#obs-{year}-{flow}-{comcode}"
+  }
+}
