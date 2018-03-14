@@ -97,8 +97,9 @@
   "Hong Kong": [
     "http://vocab.getty.edu/tgn/7004542"
   ],
-  "Macao": ["http://vocab.getty.edu/tgn/7486575"
-   ],
+  "Macao": [
+    "http://vocab.getty.edu/tgn/7486575"
+  ],
   "Australia": [
     "http://vocab.getty.edu/tgn/7000490"
   ],
@@ -106,8 +107,9 @@
     "http://vocab.getty.edu/tgn/1000226",
     "http://vocab.getty.edu/tgn/7518253"
   ],
-  "St Vincent": ["http://vocab.getty.edu/tgn/7004773"
-   ],
+  "St Vincent": [
+    "http://vocab.getty.edu/tgn/7004773"
+  ],
   "Russia": [
     "http://vocab.getty.edu/tgn/7002435"
   ],
@@ -131,7 +133,8 @@
     "http://vocab.getty.edu/tgn/7924686",
     "http://vocab.getty.edu/tgn/8005098"
   ],
-  "Trinidad:Tobago": ["http://vocab.getty.edu/tgn/7004787"
+  "Trinidad:Tobago": [
+    "http://vocab.getty.edu/tgn/7004787"
   ],
   "Egypt": [
     "http://vocab.getty.edu/tgn/7014986",
@@ -235,7 +238,9 @@
   "Vietnam": [
     "http://vocab.getty.edu/tgn/1000145"
   ],
-  "Br Virgin Is": ["http://vocab.getty.edu/tgn/7004677"],
+  "Br Virgin Is": [
+    "http://vocab.getty.edu/tgn/7004677"
+  ],
   "Sierra Leone": [
     "http://vocab.getty.edu/tgn/1000191"
   ],
@@ -273,8 +278,12 @@
   "Comoros": [
     "http://vocab.getty.edu/tgn/1000157"
   ],
-  "Equat Guinea": ["http://vocab.getty.edu/tgn/1000161"],
-  "Congo (Republic)": ["http://vocab.getty.edu/tgn/1001144"],
+  "Equat Guinea": [
+    "http://vocab.getty.edu/tgn/1000161"
+  ],
+  "Congo (Republic)": [
+    "http://vocab.getty.edu/tgn/1001144"
+  ],
   "French Polynesia": [
     "http://vocab.getty.edu/tgn/1000216"
   ],
@@ -294,7 +303,8 @@
   "Angola": [
     "http://vocab.getty.edu/tgn/1000149"
   ],
-  "Nl Antilles": ["http://vocab.getty.edu/tgn/7004549"
+  "Nl Antilles": [
+    "http://vocab.getty.edu/tgn/7004549"
   ],
   "Antarctica": [
     "http://vocab.getty.edu/tgn/1000007"
@@ -312,7 +322,8 @@
   "Maldives": [
     "http://vocab.getty.edu/tgn/7000331"
   ],
-  "Congo (Dem. Rep)": ["http://vocab.getty.edu/aat/300016309"
+  "Congo (Dem. Rep)": [
+    "http://vocab.getty.edu/aat/300016309"
   ],
   "Namibia": [
     "http://vocab.getty.edu/tgn/1000198"
@@ -327,7 +338,8 @@
     "http://vocab.getty.edu/tgn/7004641",
     "http://vocab.getty.edu/tgn/7030369"
   ],
-  "St Lucia": ["http://vocab.getty.edu/tgn/7004772"
+  "St Lucia": [
+    "http://vocab.getty.edu/tgn/7004772"
   ],
   "Grenada": [
     "http://vocab.getty.edu/tgn/7004771"
@@ -335,7 +347,9 @@
   "Ethiopia": [
     "http://vocab.getty.edu/tgn/7000489"
   ],
-  "Burkina": ["http://vocab.getty.edu/tgn/1000208"],
+  "Burkina": [
+    "http://vocab.getty.edu/tgn/1000208"
+  ],
   "Togo": [
     "http://vocab.getty.edu/tgn/7792101",
     "http://vocab.getty.edu/tgn/7016577"
@@ -351,7 +365,9 @@
   "Mozambique": [
     "http://vocab.getty.edu/tgn/1000180"
   ],
-  "Fyr Macedonia": ["http://vocab.getty.edu/aat/300020688"],
+  "Fyr Macedonia": [
+    "http://vocab.getty.edu/aat/300020688"
+  ],
   "Mayotte": [
     "http://vocab.getty.edu/tgn/7001669"
   ],
@@ -361,7 +377,9 @@
   "Brunei": [
     "http://vocab.getty.edu/tgn/1000107"
   ],
-  "South Georgia Is": [],
+  "South Georgia Is": [
+    "http://vocab.getty.edu/tgn/7005153"
+  ],
   "Croatia": [
     "http://vocab.getty.edu/tgn/7006663"
   ],
@@ -413,7 +431,9 @@
   "Yemen": [
     "http://vocab.getty.edu/tgn/7000261"
   ],
-  "Burma": ["http://vocab.getty.edu/aat/300343857"],
+  "Burma": [
+    "http://vocab.getty.edu/aat/300343857"
+  ],
   "Niger": [
     "http://vocab.getty.edu/tgn/1001912",
     "http://vocab.getty.edu/tgn/1000181"
@@ -424,7 +444,9 @@
   "El Salvador": [
     "http://vocab.getty.edu/tgn/7005441"
   ],
-  "Dominican Rep": ["http://vocab.getty.edu/aat/300386023"],
+  "Dominican Rep": [
+    "http://vocab.getty.edu/aat/300386023"
+  ],
   "Surinam": [
     "http://vocab.getty.edu/tgn/7015386"
   ],
@@ -458,7 +480,9 @@
   "Albania": [
     "http://vocab.getty.edu/tgn/7006417"
   ],
-  "Occ Palest Terr": ["http://vocab.getty.edu/tgn/7018359"],
+  "Occ Palest Terr": [
+    "http://vocab.getty.edu/tgn/7018359"
+  ],
   "Bolivia": [
     "http://vocab.getty.edu/tgn/7864299",
     "http://vocab.getty.edu/tgn/1000046"
@@ -523,12 +547,14 @@
   "Haiti": [
     "http://vocab.getty.edu/tgn/7005502"
   ],
-  "US Virgin Is": ["http://vocab.getty.edu/tgn/7005118"
+  "US Virgin Is": [
+    "http://vocab.getty.edu/tgn/7005118"
   ],
   "Anguilla": [
     "http://vocab.getty.edu/tgn/7004637"
   ],
-  "St Pierre-Mique": ["http://vocab.getty.edu/tgn/7005663"
+  "St Pierre-Mique": [
+    "http://vocab.getty.edu/tgn/7005663"
   ],
   "Montserrat": [
     "http://vocab.getty.edu/tgn/7004786"
@@ -566,14 +592,19 @@
   "Marshall Islands": [
     "http://vocab.getty.edu/tgn/7016730"
   ],
-  "Ceuta": ["http://vocab.getty.edu/tgn/7001160"
+  "Ceuta": [
+    "http://vocab.getty.edu/tgn/7001160"
   ],
   "Bhutan": [
     "http://vocab.getty.edu/tgn/7927800",
     "http://vocab.getty.edu/tgn/7014831"
   ],
-  "Sao Tome-Princ.": ["http://vocab.getty.edu/tgn/1000188"],
-  "Niue Island": ["http://vocab.getty.edu/tgn/7004687"],
+  "Sao Tome-Princ.": [
+    "http://vocab.getty.edu/tgn/1000188"
+  ],
+  "Niue Island": [
+    "http://vocab.getty.edu/tgn/7004687"
+  ],
   "Turkmenistan": [
     "http://vocab.getty.edu/tgn/7006659"
   ],
@@ -581,8 +612,9 @@
     "http://vocab.getty.edu/tgn/7905337",
     "http://vocab.getty.edu/tgn/1000156"
   ],
-  "Cent Afr Rep": ["http://vocab.getty.edu/tgn/1000155"
-   ],
+  "Cent Afr Rep": [
+    "http://vocab.getty.edu/tgn/1000155"
+  ],
   "Lesotho": [
     "http://vocab.getty.edu/tgn/7001660"
   ],
@@ -592,7 +624,8 @@
     "http://vocab.getty.edu/tgn/8036736",
     "http://vocab.getty.edu/tgn/7000529"
   ],
-  "N Mariana Is": ["http://vocab.getty.edu/tgn/7000552"
+  "N Mariana Is": [
+    "http://vocab.getty.edu/tgn/7000552"
   ],
   "Micronesia": [
     "http://vocab.getty.edu/tgn/1010146",
@@ -613,11 +646,14 @@
   "Timor-Leste": [
     "http://vocab.getty.edu/tgn/7003703"
   ],
-  "Melilla": ["http://vocab.getty.edu/tgn/7000462",
-   "http://vocab.getty.edu/tgn/7001151",
-   "http://vocab.getty.edu/tgn/7049992"],
-  "Fr Southern Terr": ["http://vocab.getty.edu/tgn/1000163"
-   ],
+  "Melilla": [
+    "http://vocab.getty.edu/tgn/7000462",
+    "http://vocab.getty.edu/tgn/7001151",
+    "http://vocab.getty.edu/tgn/7049992"
+  ],
+  "Fr Southern Terr": [
+    "http://vocab.getty.edu/tgn/1000163"
+  ],
   "Pitcairn": [
     "http://vocab.getty.edu/tgn/7834446",
     "http://vocab.getty.edu/tgn/7005269"
@@ -626,17 +662,31 @@
     "http://vocab.getty.edu/tgn/7006213"
   ],
   "Low Value Trade": [],
-  "Br Ind Oc Terr": ["http://vocab.getty.edu/tgn/7008651"
-   ],
-  "US Minor Islands": ["http://vocab.getty.edu/tgn/7023938"
+  "Br Ind Oc Terr": [
+    "http://vocab.getty.edu/tgn/7008651"
+  ],
+  "US Minor Islands": [
+    "http://vocab.getty.edu/tgn/7023938"
   ],
   "Tuvalu": [
     "http://vocab.getty.edu/tgn/1000236"
   ],
-  "Christmas Is": ["http://vocab.getty.edu/tgn/7004615"],
-  "St Kitts & Nevis": ["http://vocab.getty.edu/tgn/7005605"],
-  "Bosnia & Herz.": ["http://vocab.getty.edu/tgn/7006664"],
-  "Turks & Caicos": ["http://vocab.getty.edu/tgn/7004630"],
-  "Wallis & Futuna": ["http://vocab.getty.edu/tgn/7006219"],
-  "Heard & Mcdonald": ["http://vocab.getty.edu/tgn/4000115"]
+  "Christmas Is": [
+    "http://vocab.getty.edu/tgn/7004615"
+  ],
+  "St Kitts & Nevis": [
+    "http://vocab.getty.edu/tgn/7005605"
+  ],
+  "Bosnia & Herz.": [
+    "http://vocab.getty.edu/tgn/7006664"
+  ],
+  "Turks & Caicos": [
+    "http://vocab.getty.edu/tgn/7004630"
+  ],
+  "Wallis & Futuna": [
+    "http://vocab.getty.edu/tgn/7006219"
+  ],
+  "Heard & Mcdonald": [
+    "http://vocab.getty.edu/tgn/4000115"
+  ]
 }
