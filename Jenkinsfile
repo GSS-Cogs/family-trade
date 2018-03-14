@@ -14,6 +14,17 @@ pipeline {
         sh 'jupyter-nbconvert --to python --stdout Prepare_sources.ipynb | python'
       }
     }
+    stage('Fetch countries') {
+      agent {
+        docker {
+          image 'cloudfluff/databaker'
+          reuseNode true
+        }
+      }
+      steps {
+        sh 'jupyter-nbconvert --to python --stdout Fetch_countries.ipynb | python'
+      }
+    }
     stage('CSV2RDF') {
       agent {
         docker {
