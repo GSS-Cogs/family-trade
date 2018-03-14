@@ -97,7 +97,8 @@
   "Hong Kong": [
     "http://vocab.getty.edu/tgn/7004542"
   ],
-  "Macao": [],
+  "Macao": ["http://vocab.getty.edu/tgn/7486575"
+   ],
   "Australia": [
     "http://vocab.getty.edu/tgn/7000490"
   ],
@@ -105,7 +106,8 @@
     "http://vocab.getty.edu/tgn/1000226",
     "http://vocab.getty.edu/tgn/7518253"
   ],
-  "St Vincent": [],
+  "St Vincent": ["http://vocab.getty.edu/tgn/7004773"
+   ],
   "Russia": [
     "http://vocab.getty.edu/tgn/7002435"
   ],
@@ -129,7 +131,8 @@
     "http://vocab.getty.edu/tgn/7924686",
     "http://vocab.getty.edu/tgn/8005098"
   ],
-  "Trinidad:Tobago": ["http://vocab.getty.edu/tgn/7004787"],
+  "Trinidad:Tobago": ["http://vocab.getty.edu/tgn/7004787"
+  ],
   "Egypt": [
     "http://vocab.getty.edu/tgn/7014986",
     "http://vocab.getty.edu/tgn/7016833"
@@ -291,7 +294,8 @@
   "Angola": [
     "http://vocab.getty.edu/tgn/1000149"
   ],
-  "Nl Antilles": [],
+  "Nl Antilles": ["http://vocab.getty.edu/tgn/7004549"
+  ],
   "Antarctica": [
     "http://vocab.getty.edu/tgn/1000007"
   ],
@@ -308,7 +312,8 @@
   "Maldives": [
     "http://vocab.getty.edu/tgn/7000331"
   ],
-  "Congo (Dem. Rep)": ["http://vocab.getty.edu/aat/300016309"],
+  "Congo (Dem. Rep)": ["http://vocab.getty.edu/aat/300016309"
+  ],
   "Namibia": [
     "http://vocab.getty.edu/tgn/1000198"
   ],
@@ -322,7 +327,8 @@
     "http://vocab.getty.edu/tgn/7004641",
     "http://vocab.getty.edu/tgn/7030369"
   ],
-  "St Lucia": ["http://vocab.getty.edu/tgn/7004772"],
+  "St Lucia": ["http://vocab.getty.edu/tgn/7004772"
+  ],
   "Grenada": [
     "http://vocab.getty.edu/tgn/7004771"
   ],
@@ -560,7 +566,8 @@
   "Marshall Islands": [
     "http://vocab.getty.edu/tgn/7016730"
   ],
-  "Ceuta": [],
+  "Ceuta": ["http://vocab.getty.edu/tgn/7001160"
+  ],
   "Bhutan": [
     "http://vocab.getty.edu/tgn/7927800",
     "http://vocab.getty.edu/tgn/7014831"
@@ -574,7 +581,8 @@
     "http://vocab.getty.edu/tgn/7905337",
     "http://vocab.getty.edu/tgn/1000156"
   ],
-  "Cent Afr Rep": ["http://vocab.getty.edu/tgn/1000155"],
+  "Cent Afr Rep": ["http://vocab.getty.edu/tgn/1000155"
+   ],
   "Lesotho": [
     "http://vocab.getty.edu/tgn/7001660"
   ],
@@ -584,7 +592,8 @@
     "http://vocab.getty.edu/tgn/8036736",
     "http://vocab.getty.edu/tgn/7000529"
   ],
-  "N Mariana Is": ["http://vocab.getty.edu/tgn/7000552"],
+  "N Mariana Is": ["http://vocab.getty.edu/tgn/7000552"
+  ],
   "Micronesia": [
     "http://vocab.getty.edu/tgn/1010146",
     "http://vocab.getty.edu/tgn/1000220"
