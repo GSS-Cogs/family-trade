@@ -51,8 +51,12 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'java -cp bin/sparql uk.org.floop.sparqlTestRunner.Run -i -t tests/qb -r reports/TESTS-qb.xml out/cn8_*.ttl'
-      }
+        sh 'java -cp bin/sparql uk.org.floop.sparqlTestRunner.Run -i -t tests/qb -r reports/TESTS-qb-2012.xml out/cn8_2012.ttl'
+        sh 'java -cp bin/sparql uk.org.floop.sparqlTestRunner.Run -i -t tests/qb -r reports/TESTS-qb-2013.xml out/cn8_2013.ttl'
+        sh 'java -cp bin/sparql uk.org.floop.sparqlTestRunner.Run -i -t tests/qb -r reports/TESTS-qb-2014.xml out/cn8_2014.ttl'
+        sh 'java -cp bin/sparql uk.org.floop.sparqlTestRunner.Run -i -t tests/qb -r reports/TESTS-qb-2015.xml out/cn8_2015.ttl'
+        sh 'java -cp bin/sparql uk.org.floop.sparqlTestRunner.Run -i -t tests/qb -r reports/TESTS-qb-2016.xml out/cn8_2016.ttl'
+       }
     }
   }
   post {
