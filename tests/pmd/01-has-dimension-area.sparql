@@ -1,0 +1,8 @@
+# Must have at least one dimension dim:refArea
+
+PREFIX dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX qb:      <http://purl.org/linked-data/cube#>
+
+ASK {
+  FILTER NOT EXISTS { dim:refArea a qb:DimensionProperty }
+}
