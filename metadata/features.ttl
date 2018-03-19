@@ -1,0 +1,7 @@
+PREFIX cn: <https://www.uktradeinfo.com/Statistics/def/ots#>
+PREFIX foi: <http://publishmydata.com/def/ontology/foi/>
+
+<http://gss-data.org.uk/def/trade#commodity> a foi:ReferenceFeatureProperty .
+
+<http://gss-data.org.uk/def/trade#flow> a  foi:ReferenceFeatureProperty .
+
