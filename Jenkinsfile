@@ -51,7 +51,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'java -cp bin/sparql uk.org.floop.sparqlTestRunner.Run -i -t tests/pmd -r reports/TESTS-pmd-2012.xml out/cn8_2012.ttl out/countries.ttl'
+        sh 'java -cp bin/sparql uk.org.floop.sparqlTestRunner.Run -i -t tests/pmd -r reports/TESTS-pmd-2012.xml out/cn8_2012.ttl out/countries.ttl vocabs/flow.ttl'
        }
     }
   }
