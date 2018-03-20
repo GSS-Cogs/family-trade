@@ -3,6 +3,11 @@ pipeline {
       label 'master'
   }
   stages {
+    stage('Clean') {
+      steps {
+        sh 'rm -rf out'
+      }
+    }
     stage('Transform') {
       agent {
         docker {
@@ -11,7 +16,8 @@ pipeline {
         }
       }
       steps {
-        sh 'jupyter-nbconvert --to python --stdout Balanceofpayments2017q3_TabF.ipynb | python'
+        sh 'jupyter-nbconvert --to python --stdout Balanceofpayments2017q3_TabF.ipynb | ipython'
+        sh 'jupyter-nbconvert --to python --stdout Pinkbook2017chapter3_3.1.ipynb | ipython'
       }
     }
   }
