@@ -11,7 +11,7 @@ pipeline {
         }
       }
       steps {
-        sh 'jupyter-nbconvert --to python --stdout Balanceofpayments2017q3_TabF.ipynb | python
+        sh 'jupyter-nbconvert --to python --stdout Balanceofpayments2017q3_TabF.ipynb | python'
       }
     }
   }
