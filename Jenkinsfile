@@ -25,6 +25,7 @@ pipeline {
         sh 'jupyter-nbconvert --to python --stdout Pinkbook2017chapter3_3.6.ipynb | ipython'
         sh 'jupyter-nbconvert --to python --stdout Pinkbook2017chapter3_3.7.ipynb | ipython'
         sh 'jupyter-nbconvert --to python --stdout Pinkbook2017chapter3_3.8.ipynb | ipython'
+        sh 'jupyter-nbconvert --to python --stdout Pinkbook2017chapter3_3.9.ipynb | ipython'
       }
     }
   }
