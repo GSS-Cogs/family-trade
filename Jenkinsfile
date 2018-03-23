@@ -29,7 +29,7 @@ pipeline {
         sh 'jupyter-nbconvert --to python --stdout Pinkbook2017chapter3_3.10.ipynb | ipython'
       }
     }
-    state('Test') {
+    stage('Test') {
       agent {
         docker {
           image 'cloudfluff/rdf-tabular'
