@@ -1,0 +1,16 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "../out/balanceofpayments2017q3.csv",
+  "tableSchema": {
+    "columns": [
+      {"titles": "Geography"},
+      {"titles": "Period"},
+      {"titles": "Cdid"},
+      {"titles": "Services"},
+      {"titles": "Flow"},
+      {"titles": "Measure Type"},
+      {"titles": "Value"},
+      {"titles": "Unit"}
+    ]
+  }
+}

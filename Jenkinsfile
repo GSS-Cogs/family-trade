@@ -29,6 +29,17 @@ pipeline {
         sh 'jupyter-nbconvert --to python --stdout Pinkbook2017chapter3_3.10.ipynb | ipython'
       }
     }
+    state('Test') {
+      agent {
+        docker {
+          image 'cloudfluff/rdf-tabular'
+          reuseNode true
+        }
+      }
+      steps {
+        sh 'rdf validate --input-format=tabular metadata/balanceofpayments2017q3.csv-metadata.json'
+      }
+    }
   }
   post {
     always {
