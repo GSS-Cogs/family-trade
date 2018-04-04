@@ -16,7 +16,7 @@ pipeline {
         }
       }
       steps {
-        sh 'jupyter-nbconvert --to python --stdout 'ABS To Tidydata.ipynb' | ipython'
+        sh 'jupyter-nbconvert --to python --stdout "ABS To Tidydata.ipynb" | ipython'
       }
     }
   }
