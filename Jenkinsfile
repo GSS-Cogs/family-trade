@@ -22,7 +22,7 @@ pipeline {
   }
   post {
     always {
-      archiveArtifacts 'out/*'
+      archiveArtifacts 'out/**'
     }
   }
 }
