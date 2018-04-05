@@ -43,7 +43,7 @@ pipeline {
     stage('table2qb') {
       steps {
         sh "mkdir -p out"
-        sh "java -jar lib/table2qb-0.1.0-SNAPSHOT-standalone.jar build.clj"
+        sh "java -jar lib/table2qb-0.1.1-SNAPSHOT-standalone.jar build.clj"
       }
     }
     stage('CSV2RDF') {
