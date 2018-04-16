@@ -1,0 +1,4 @@
+"Label","Filename","Comments"
+"Seasonal Adjustments","seasonal-adjustments.csv",
+"Chain-linking Methods","chain-linking-methods.csv","This is very definitely a work in progress. We might actually want to treat these as measures, not dimension-values. Please see GDP-120 for the full discussion."
+"HMRC Geographies","hmrc-geographies.csv","This codelist will have 2 labels for 13 of the codes. We might want to revise the pipeline to allow distinguish skos:prefLabel and skos:altLabel. It also doesn't include Geographical Region which may be useful (if we have data published on this basis)."
