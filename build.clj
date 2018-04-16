@@ -1,6 +1,0 @@
-(require 'table2qb.core)
-(ns table2qb.core)
-(components-pipeline "metadata/components.csv" "out")
-(codelist-pipeline "metadata/flow-directions.csv" "out" "Flow Directions" "flow-directions")
-(codelist-pipeline "metadata/services.csv" "out" "Services" "services")
-(data-pipeline "out/balanceofpayments2017q3.csv" "out" "ONS Balance of Payments 2017 quarter 3" "ons-bop-2017-q3")
