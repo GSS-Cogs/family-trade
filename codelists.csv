@@ -7,3 +7,4 @@ Countries of Ownership,countries-of-ownership.csv,"Not sure that this is country
 Turnover Size Bands,turnover-size-bands.csv,I’ve taken the opportunity to simplify the notation here as our blunt slugify transformation would convert commas to dashes – we’ll need to either submit this notation or add a custom transformation.
 EU vs World Geographies,eu-rw-ww.csv,I don’t really know what to call this…
 HMRC Geographies,hmrc-geographies.slugs.csv,Use this until the observation data uses the proper code notations
+Transactions,transactions.csv,See GDP-182 for the full discussion
