@@ -1,0 +1,5 @@
+Label,Notation,Parent Notation,Description
+Exports,exports,,
+Imports,imports,,
+Dispatches,dispatches,exports,Exports to the EU made on an HMRC basis
+Arrivals,arrivals,imports,Imports from the EU made on an HMRC basis
