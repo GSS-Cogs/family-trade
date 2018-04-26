@@ -16,7 +16,7 @@ pipeline {
         }
       }
       steps {
-        sh "jupyter-nbconvert --to python --stdout 'Mret to Tidy data(Code Classification merge).ipynb' | ipython"
+        sh "jupyter-nbconvert --to python --stdout 'Mret to Tidy data(Code Classification merge).ipynb' | python"
       }
     }
   }
