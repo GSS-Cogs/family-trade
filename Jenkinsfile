@@ -56,11 +56,26 @@ pipeline {
           def newDraftResponse = httpRequest(acceptType: 'APPLICATION_JSON', authentication: 'onspmd',
             httpMode: 'POST', url: "${PMD}/v1/draftsets?display-name=${env.JOB_NAME}")
           if (newDraftResponse.status == 200) {
-            drafts = readJSON(text: httpRequest(acceptType: 'APPLICATION_JSON',
-              authentication: 'onspmd',
-              httpMode: 'GET',
-              url: "${PMD}/v1/draftsets").content)
-            jobDraft = drafts.find { it['display-name'] == env.JOB_NAME }
+            newJobDraft = readJSON(text: newDraftResponse.content)
+            def COMP = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines/ons-table2qb.core/components/import'
+            withCredentials([usernameColonPassword(credentialsId: 'onspmd', variable: 'USERPASS')]) {
+              String draftsetId = '399821a0-8106-4511-8362-77de7c0996c8'
+              String endpointType = 'grafter-server.destination/draftset-update'
+              String endpoint = groovy.json.JsonOutput.toJson([
+                url: "http://localhost:3001/v1/draftset/${newJobDraft.id}/data",
+                headers: [Authorization: "Basic ${USERPASS.bytes.encodeBase64()}"]
+              ])
+              String boundary = UUID.randomUUID().toString()
+              String body = [
+                  "--${boundary}", 'Content-Disposition: form-data; name="__endpoint-type"', '', endpointType,
+                  "--${boundary}", 'Content-Disposition: form-data; name="__endpoint"', '', endpoint,
+                  "--${boundary}", 'Content-Disposition: form-data; name="components-csv"', '', readFile('metadata/components.csv'),
+                  "--${boundary}--"
+              ].join('\r\n') + '\r\n'
+              def uploadComponents = httpRequest(acceptType: 'APPLICATION_JSON', authentication: 'onspmd',
+                httpMode: 'POST', url: COMP, requestBody: body,
+                customHeaders: [[name: 'Content-Type', value: 'multipart/form-data;boundary="' + boundary + '"']])
+            }
           }
         }
       }
