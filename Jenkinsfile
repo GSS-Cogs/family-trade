@@ -26,30 +26,15 @@ pipeline {
           def drafts = readJSON(text: httpRequest(acceptType: 'APPLICATION_JSON',
             authentication: 'onspmd',
             httpMode: 'GET',
-            url: "${PMD}/v1/draftsets").content)
+            url: "${PMD}/v1/draftsets?include=owned").content)
           def jobDraft = drafts.find  { it['display-name'] == env.JOB_NAME }
           if (jobDraft) {
             def rmDraftResponse = httpRequest(acceptType: 'APPLICATION_JSON',
               authentication: 'onspmd', httpMode: 'DELETE', url: "${PMD}/v1/draftset/${jobDraft.id}")
             if (rmDraftResponse.status == 202) {
               def rmDraftJob = readJSON(text: rmDraftResponse.content)
-              def running = true
-              def success = false
-              while (running) {
-                jobResponse = httpRequest(acceptType: 'APPLICATION_JSON', authentication: 'onspmd',
-                  httpMode: 'GET', url: "${PMD}/${rmDraftJob['finished-job']}")
-                if (jobResponse.status == 404) {
-                  if (readJSON(text: jobResponse.content)['restart-id'] != rmDraftJob['restart-id']) {
-                    running = false
-                  } else {
-                    sleep 10
-                  }
-                } else if (jobResponse.status == 200) {
-                  running = false
-                  if (readJSON(text: jobResponse.content)['restart-id'] == rmDraftJob['restart-id']) {
-                    success = true
-                  }
-                }
+              if (!waitForJob("${PMD}/${rmDraftJob['finished-job']}", rmDraftJob['restart-id'])) {
+                error "waiting to delete job draftset"
               }
             }
           }
@@ -69,12 +54,20 @@ pipeline {
               String body = [
                   "--${boundary}", 'Content-Disposition: form-data; name="__endpoint-type"', '', endpointType,
                   "--${boundary}", 'Content-Disposition: form-data; name="__endpoint"', '', endpoint,
-                  "--${boundary}", 'Content-Disposition: form-data; name="components-csv"', '', readFile('metadata/components.csv'),
+                  "--${boundary}", 'Content-Disposition: form-data; name="components-csv"; filename="components.csv"', 'Content-Type: text/csv', '', readFile('metadata/components.csv'),
                   "--${boundary}--"
               ].join('\r\n') + '\r\n'
+              echo body
               def uploadComponents = httpRequest(acceptType: 'APPLICATION_JSON', authentication: 'onspmd',
                 httpMode: 'POST', url: COMP, requestBody: body,
                 customHeaders: [[name: 'Content-Type', value: 'multipart/form-data;boundary="' + boundary + '"']])
+              if (uploadComponents.status == 202) {
+                echo uploadComponents.content
+                def uploadComponentsJob = readJSON(text: uploadComponents.content)
+                if (!waitForJob("http://production-grafter-ons-alpha.publishmydata.com${uploadComponentsJob['finished-job']}", uploadComponentsJob['restart-id'])) {
+                  error "Failed to upload components.csv"
+                }
+              }
             }
           }
         }
@@ -86,4 +79,27 @@ pipeline {
       archiveArtifacts 'out/*'
     }
   }
+}
+
+boolean waitForJob(pollUrl, restartId) {
+  def running = true
+  def success = false
+  while (running) {
+    jobResponse = httpRequest(acceptType: 'APPLICATION_JSON', authentication: 'onspmd',
+                    httpMode: 'GET', url: pollUrl, validResponseCodes: '200:404')
+    if (jobResponse.status == 404) {
+      if (readJSON(text: jobResponse.content)['restart-id'] != restartId) {
+        running = false
+      } else {
+        sleep 10
+      }
+    } else if (jobResponse.status == 200) {
+      running = false
+      def jobResponseObj = readJSON(text: jobResponse.content)
+      if ((jobResponseObj.type == 'ok') && (jobResponseObj['restart-id'] == restartId)) {
+        success = true
+      }
+    }
+  }
+  return success
 }
