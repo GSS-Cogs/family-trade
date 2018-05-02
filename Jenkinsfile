@@ -43,30 +43,11 @@ pipeline {
           if (newDraftResponse.status == 200) {
             newJobDraft = readJSON(text: newDraftResponse.content)
             def COMP = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines/ons-table2qb.core/components/import'
-            withCredentials([usernameColonPassword(credentialsId: 'onspmd', variable: 'USERPASS')]) {
-              String draftsetId = '399821a0-8106-4511-8362-77de7c0996c8'
-              String endpointType = 'grafter-server.destination/draftset-update'
-              String endpoint = groovy.json.JsonOutput.toJson([
-                url: "http://localhost:3001/v1/draftset/${newJobDraft.id}/data",
-                headers: [Authorization: "Basic ${USERPASS.bytes.encodeBase64()}"]
-              ])
-              String boundary = UUID.randomUUID().toString()
-              String body = [
-                  "--${boundary}", 'Content-Disposition: form-data; name="__endpoint-type"', '', endpointType,
-                  "--${boundary}", 'Content-Disposition: form-data; name="__endpoint"', '', endpoint,
-                  "--${boundary}", 'Content-Disposition: form-data; name="components-csv"; filename="components.csv"', 'Content-Type: text/csv', '', readFile('metadata/components.csv'),
-                  "--${boundary}--"
-              ].join('\r\n') + '\r\n'
-              def uploadComponents = httpRequest(acceptType: 'APPLICATION_JSON', authentication: 'onspmd',
-                httpMode: 'POST', url: COMP, requestBody: body,
-                customHeaders: [[name: 'Content-Type', value: 'multipart/form-data;boundary="' + boundary + '"']])
-              if (uploadComponents.status == 202) {
-                def uploadComponentsJob = readJSON(text: uploadComponents.content)
-                if (!waitForJob("http://production-grafter-ons-alpha.publishmydata.com${uploadComponentsJob['finished-job']}", uploadComponentsJob['restart-id'])) {
-                  error "Failed to upload components.csv"
-                }
-              }
-            }
+            runPipeline(
+              'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines/ons-table2qb.core/components/import',
+              newJobDraft.id, 'onspmd',
+              [[name: 'components-csv', file: [name: 'metadata/components.csv', type: 'text/csv']]]
+            )
           }
         }
       }
@@ -75,6 +56,42 @@ pipeline {
   post {
     always {
       archiveArtifacts 'out/*'
+    }
+  }
+}
+
+void runPipeline(pipelineUrl, draftsetId, credentials, params) {
+  withCredentials([usernameColonPassword(credentialsId: credentials, variable: 'USERPASS')]) {
+    String boundary = UUID.randomUUID().toString()
+        allParams = [
+            [name: '__endpoint-type', value: 'grafter-server.destination/draftset-update'],
+            [name: '__endpoint', value: groovy.json.JsonOutput.toJson([
+                url: "http://localhost:3001/v1/draftset/${draftsetId}/data",
+                headers: [Authorization: "Basic ${USERPASS.bytes.encodeBase64()}"]
+            ])]] + params
+    String body = ""
+    allParams.each { param ->
+      body += "--${boundary}\r\n"
+      body += 'Content-Disposition: form-data; name="' + param.name + '"'
+      if (param.containsKey('file')) {
+        body += '; filename="' + param.file.name + '"\r\nContent-Type: "' + param.file.type + '\r\n\r\n'
+        body += readFile(param.file.name) + '\r\n'
+      } else {
+        body += "\r\n\r\n${param.value}\r\n"
+      }
+    }
+    body += "--${boundary}--\r\n"
+    def importRequest = httpRequest(acceptType: 'APPLICATION_JSON', authentication: credentials,
+                                httpMode: 'POST', url: pipelineUrl, requestBody: body,
+                                customHeaders: [[name: 'Content-Type', value: 'multipart/form-data;boundary="' + boundary + '"']])
+    if (importRequest.status == 202) {
+      def importJob = readJSON(text: importRequest.content)
+      String jobUrl = new java.net.URI(pipelineUrl).resolve(importJob['finished-job']) as String
+      if (!waitForJob(jobUrl, importJob['restart-id'])) {
+        error "Failed import job"
+      }
+    } else {
+      error "Failed import, ${importRequest.status} : {$importRequest.content}"
     }
   }
 }
