@@ -57,12 +57,10 @@ pipeline {
                   "--${boundary}", 'Content-Disposition: form-data; name="components-csv"; filename="components.csv"', 'Content-Type: text/csv', '', readFile('metadata/components.csv'),
                   "--${boundary}--"
               ].join('\r\n') + '\r\n'
-              echo body
               def uploadComponents = httpRequest(acceptType: 'APPLICATION_JSON', authentication: 'onspmd',
                 httpMode: 'POST', url: COMP, requestBody: body,
                 customHeaders: [[name: 'Content-Type', value: 'multipart/form-data;boundary="' + boundary + '"']])
               if (uploadComponents.status == 202) {
-                echo uploadComponents.content
                 def uploadComponentsJob = readJSON(text: uploadComponents.content)
                 if (!waitForJob("http://production-grafter-ons-alpha.publishmydata.com${uploadComponentsJob['finished-job']}", uploadComponentsJob['restart-id'])) {
                   error "Failed to upload components.csv"
