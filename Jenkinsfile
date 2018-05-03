@@ -34,12 +34,32 @@ pipeline {
                         if (rmDraftResponse.status == 202) {
                             def rmDraftJob = readJSON(text: rmDraftResponse.content)
                             waitForJob("${PMD}/${rmDraftJob['finished-job']}", rmDraftJob['restart-id'])
+                        } else {
+                            error "Problem deleting existing draftset ${rmDraftResponse.status} : ${rmDraftResponse.content}"
                         }
                     }
                     def newDraftResponse = httpRequest(acceptType: 'APPLICATION_JSON', authentication: 'onspmd',
                                                        httpMode: 'POST', url: "${PMD}/v1/draftsets?display-name=${env.JOB_NAME}")
                     if (newDraftResponse.status == 200) {
                         newJobDraft = readJSON(text: newDraftResponse.content)
+                        String metadataGraph = "http://gss-data.org.uk/graph/ons-balance-of-payments/metadata"
+                        String encGraph = java.net.URLEncoder.encode(metadataGraph, "UTF-8")
+                        rmDatasetMetadataResponse = httpRequest(acceptType: 'APPLICATION_JSON',
+                                                                authentication: 'onspmd', httpMode: 'DELETE',
+                                                                url: "${PMD}/v1/draftset/${newJobDraft.id}/graph?graph=${encGraph}&silent=true")
+                        if (rmDatasetMetadataResponse.status != 200) {
+                            error "Problem deleting dataset metadata graph ${rmDatasetMetadataResponse.status} : ${rmDatasetMetadataResponse.content}"
+                        }
+                        addDatasetMetadataResponse = httpRequest(acceptType: 'APPLICATION_JSON',
+                                                                 authentication: 'onspmd', httpMode: 'PUT',
+                                                                 url: "${PMD}/v1/draftset/${newJobDraft.id}/data",
+                                                                 requestBody: readFile("metadata/dataset.trig"))
+                        if (addDatasetMetadataResponse.status == 202) {
+                            def addDatasetMetadataJob = readJSON(text: addDatasetMetadataResponse.content)
+                            waitForJob("${PMD}/${addDatasetMetadataJob['finished-job']}", addDatasetMetadataJob['restart-id'])
+                        } else {
+                            error "Problem adding dataset metadata ${addDatasetMetadataResponse.status} : ${addDatasetMetadataResponse.content}"
+                        }
                         runPipeline(
                             'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines/ons-table2qb.core/components/import',
                             newJobDraft.id, 'onspmd',
@@ -112,7 +132,7 @@ void runPipeline(pipelineUrl, draftsetId, credentials, params) {
             String jobUrl = new java.net.URI(pipelineUrl).resolve(importJob['finished-job']) as String
             waitForJob(jobUrl, importJob['restart-id'])
         } else {
-            error "Failed import, ${importRequest.status} : {$importRequest.content}"
+            error "Failed import, ${importRequest.status} : ${importRequest.content}"
         }
     }
 }
