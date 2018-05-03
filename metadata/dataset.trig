@@ -8,7 +8,7 @@
 <http://gss-data.org.uk/graph/ons-balance-of-payments/metadata> {
     <http://gss-data.org.uk/data/ons-balance-of-payments>
             a                    qb:DataSet , pmd:Dataset , pmd:LinkedDataset ;
-            rdfs:label           "ONS Balance of Payments"@en,
+            rdfs:label           "ONS Balance of Payments"@en ;
             pmd:contactEmail     <mailto:bop@ons.gsi.gov.uk> ;
             pmd:graph            <http://gss-data.org.uk/graph/ons-balance-of-payments> ;
             dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
