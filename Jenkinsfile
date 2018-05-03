@@ -33,7 +33,7 @@ pipeline {
                                                           authentication: 'onspmd', httpMode: 'DELETE', url: "${PMD}/v1/draftset/${jobDraft.id}")
                         if (rmDraftResponse.status == 202) {
                             def rmDraftJob = readJSON(text: rmDraftResponse.content)
-                            waitForJob("${PMD}/${rmDraftJob['finished-job']}", rmDraftJob['restart-id'])
+                            waitForJob("${PMD}${rmDraftJob['finished-job']}", rmDraftJob['restart-id'])
                         } else {
                             error "Problem deleting existing draftset ${rmDraftResponse.status} : ${rmDraftResponse.content}"
                         }
@@ -53,10 +53,12 @@ pipeline {
                         addDatasetMetadataResponse = httpRequest(acceptType: 'APPLICATION_JSON',
                                                                  authentication: 'onspmd', httpMode: 'PUT',
                                                                  url: "${PMD}/v1/draftset/${newJobDraft.id}/data",
-                                                                 requestBody: readFile("metadata/dataset.trig"))
+                                                                 requestBody: readFile("metadata/dataset.trig"),
+                                                                 customHeaders: [[name: 'Content-Type',
+                                                                                  value: 'application/trig']])
                         if (addDatasetMetadataResponse.status == 202) {
                             def addDatasetMetadataJob = readJSON(text: addDatasetMetadataResponse.content)
-                            waitForJob("${PMD}/${addDatasetMetadataJob['finished-job']}", addDatasetMetadataJob['restart-id'])
+                            waitForJob("${PMD}${addDatasetMetadataJob['finished-job']}", addDatasetMetadataJob['restart-id'])
                         } else {
                             error "Problem adding dataset metadata ${addDatasetMetadataResponse.status} : ${addDatasetMetadataResponse.content}"
                         }
