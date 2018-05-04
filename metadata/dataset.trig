@@ -12,9 +12,8 @@
             pmd:contactEmail     <mailto:bop@ons.gsi.gov.uk> ;
             pmd:graph            <http://gss-data.org.uk/graph/ons-balance-of-payments> ;
             dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
-            dct:issued           "2018-04-17T15:17:43Z"^^xsd:dateTime ;
+            dct:issued           "2017-12-22T09:30:00Z"^^xsd:dateTime ;
             dct:license          <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
-            dct:modified         "2018-05-02T16:41:09Z"^^xsd:dateTime ;
             dct:publisher        <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
             dct:references       <http://gss-data.org.uk/help> ;
             dct:title            "ONS Balance of Payments"@en ;
