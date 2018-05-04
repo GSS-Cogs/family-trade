@@ -97,6 +97,37 @@ pipeline {
                 }
             }
         }
+        stage('Test Draftset') {
+            steps {
+                echo 'Placeholder for acceptance tests from e.g. GDP-205'
+            }
+        }
+        stage('Publish') {
+            steps {
+                script {
+                    def PMD = 'https://production-drafter-ons-alpha.publishmydata.com'
+                    def drafts = readJSON(text: httpRequest(acceptType: 'APPLICATION_JSON',
+                                                            authentication: 'onspmd',
+                                                            httpMode: 'GET',
+                                                            url: "${PMD}/v1/draftsets?include=owned").content)
+                    def jobDraft = drafts.find  { it['display-name'] == env.JOB_NAME }
+                    if (jobDraft) {
+                        def publishResponse = httpRequest(acceptType: 'APPLICATION_JSON',
+                                                      authentication: 'onspmd',
+                                                      httpMode: 'POST',
+                                                      url: "${PMD}/v1/draftset/${jobDraft.id}/publish")
+                        if (publishResponse.status == 202) {
+                            def publishJob = readJSON(text: publishResponse.content)
+                            waitForJob("${PMD}${publishJob['finished-job']}", publishJob['restart-id'])
+                        } else {
+                            error "Problem publishing draftset ${publishResponse.status} : ${publishResponse.content}"
+                        }
+                    } else {
+                        error "Expecting a draftset for this job."
+                    }
+                }
+            }
+        }
     }
     post {
         always {
