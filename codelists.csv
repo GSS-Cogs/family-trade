@@ -1,10 +1,11 @@
 Label,Filename,Comments
 Seasonal Adjustments,seasonal-adjustments.csv,
-Price Classifications,price-classifications.csv,Taken from https://collaborate2.ons.gov.uk/jira/secure/attachment/12495/Prices%20classification.xlsx.
+Price Classifications,price-classifications.csv,Taken from https://collaborate2.ons.gov.uk/jira/secure/attachment/12495/Prices%20classification.xlsx. See GDP-237 for more.
 HMRC Geographies,hmrc-geographies.csv,This codelist will have 2 labels for 13 of the codes. We might want to revise the pipeline to allow distinguish skos:prefLabel and skos:altLabel. It also doesn't include Geographical Region which may be useful (if we have data published on this basis).
 Employment Size Bands,employment-size-bands.csv,We could introduce 2 levels to the hierarchy but I don’t think this is necessary at this point.
 Countries of Ownership,countries-of-ownership.csv,"Not sure that this is country really, but that seems ok for now."
 Turnover Size Bands,turnover-size-bands.csv,I’ve taken the opportunity to simplify the notation here as our blunt slugify transformation would convert commas to dashes – we’ll need to either submit this notation or add a custom transformation.
 EU vs World Geographies,eu-rw-ww.csv,I don’t really know what to call this…
 HMRC Geographies,hmrc-geographies.slugs.csv,Use this until the observation data uses the proper code notations
-Transactions,transactions.csv,See GDP-182 for the full discussion
+Flow Directions,flow-directions.csv,See GDP-182 for the full discussion
+Flow Directions,flow-directions.no-description.csv,Use instead of flow-directions.csv until GDP-249 is resolved.
