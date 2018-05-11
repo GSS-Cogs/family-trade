@@ -9,3 +9,4 @@ EU vs World Geographies,eu-rw-ww.csv,I don’t really know what to call this…
 HMRC Geographies,hmrc-geographies.slugs.csv,Use this until the observation data uses the proper code notations
 Flow Directions,flow-directions.csv,See GDP-182 for the full discussion
 Flow Directions,flow-directions.no-description.csv,Use instead of flow-directions.csv until GDP-249 is resolved.
+International Trade Basis,international-trade-basis.csv,"GDP-183, accounting basis"
