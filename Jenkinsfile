@@ -1,25 +1,25 @@
 pipeline {
-  agent {
-      label 'master'
-  }
-  stages {
-    stage('Clean') {
-      steps {
-        sh 'rm -rf out'
-      }
+    agent {
+        label 'master'
     }
-    stage('Transform') {
-      agent {
-        docker {
-          image 'cloudfluff/databaker'
-          reuseNode true
+    stages {
+        stage('Clean') {
+            steps {
+                sh 'rm -rf out'
+            }
         }
-      }
-      steps {
-        sh "jupyter-nbconvert --to python --stdout tidy.ipynb | python"
-      }
-    }
-    stage('Upload draftset') {
+        stage('Transform') {
+            agent {
+                docker {
+                    image 'cloudfluff/databaker'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh "jupyter-nbconvert --to python --stdout tidy.ipynb | python"
+            }
+        }
+        stage('Upload draftset') {
             steps {
                 script {
                     def PMD = 'https://production-drafter-ons-alpha.publishmydata.com'
@@ -37,7 +37,7 @@ pipeline {
                     def PIPELINE = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines'
                     runPipeline("${PIPELINE}/ons-table2qb.core/components/import",
                                 newJobDraft.id, credentials, [[name: 'components-csv',
-                                                                file: [name: 'metadata/components.csv', type: 'text/csv']]])
+                                                               file: [name: 'metadata/components.csv', type: 'text/csv']]])
                     runPipeline("${PIPELINE}/ons-table2qb.core/data-cube/import",
                                 newJobDraft.id, credentials, [[name: 'observations-csv',
                                                                file: [name: 'out/bop_observations.csv', type: 'text/csv']],
@@ -66,10 +66,9 @@ pipeline {
             }
         }
     }
-  }
-  post {
-    always {
-      archiveArtifacts 'out/*'
+    post {
+        always {
+            archiveArtifacts 'out/*'
+        }
     }
-  }
 }
