@@ -1,0 +1,243 @@
+Label,Notation,Parent Notation
+Top level: Total trade in services,0,
+Manufacturing services on physical inputs owned by others,1,0
+Goods for processing in reporting economy - Goods returned (CR.) Goods received (DR.) (see para 10.6,1.1,1
+"Goods for processing abroad - Goods sent (CR.), Goods returned (DR.) (See para 10.67)",1.2,1
+Maintenance and Repair Services n.i.e,2,0
+TRANSPORT,3,0
+Sea transport,3.1,3
+Sea Transport: Passenger,3.1.1,3.1
+Sea Transport: Passenger revenue,3.1.1.N1,3.1.1
+Sea Transport: Time charter receipts,3.1.1.N2,3.1.1
+Sea Transport: Passenger Pay,3.1.1.N3,3.1.1
+Sea Transport: Freight,3.1.2,3.1
+Sea Transport: Dry cargo,3.1.2.N1,3.1.2
+Sea Transport: Dry cargo: freight on UK trade,3.1.2.N11,3.1.2
+Sea Transport: Dry cargo: freight on cross trades,3.1.2.N12,3.1.2
+Sea Transport: Dry cargo: time charter receipts,3.1.2.N13,3.1.2
+Sea Trans: Dry Pay,3.1.2.N14,3.1.2
+Sea Transport: Wet cargo,3.1.2.N2,3.1.2
+Sea Transport: Wet cargo: freight on UK trade,3.1.2.N21,3.1.2
+Sea Transport: Wet cargo: freight on cross trades,3.1.2.N22,3.1.2
+Sea Transport: Time charter receipts,3.1.2.N23,3.1.2
+Sea Trans: Wet Pay,3.1.2.N24,3.1.2
+Sea Transport: Other (freight on UK coastal routes),3.1.2.N3,3.1.2
+Sea Transport: Other,3.1.3,3.1
+Sea Transport: Disbursements: Dry cargo,3.1.3.N1,3.1.3
+Sea Transport: Disbursements: Wet cargo,3.1.3.N2,3.1.3
+Sea Transport: Disbursements: Other cargo,3.1.3.N3,3.1.3
+Sea Transport: Disbursements: Other: crew spending,3.1.3.N31,3.1.3
+Sea Transport: Disbursements: Other: Ships stores,3.1.3.N32,3.1.3
+Sea Transport: Port expenditure,3.1.3.N33,3.1.3
+Sea Transport: Light dues,3.1.3.N34,3.1.3
+Sea Transport: Management,3.1.3.N35,3.1.3
+Marine Fuel,3.1.3.N36,3.1.3
+Marine Gas,3.1.3.N37,3.1.3
+Total Sales To Foreign Ships,3.1.3.N38,3.1.3
+Air transport,3.2,3
+Air transport: Passenger,3.2.1,3.2
+Air transport: Freight,3.2.2,3.2
+Air transport : Other,3.2.3,3.2
+Air Transport: Other: Disbursements,3.2.3.N1,3.2.3
+Air Transport: Other: Other revenue,3.2.3.N2,3.2.3
+Other modes of transport,3.3,3
+Other modes of transport : Passenger,3.3.1,3.3
+Rail transport passenger,3.6.1,3.6
+Road transport passenger,3.7.1,3.7
+Inland waterway transport passenger,3.8.1,3.8
+Freight,3.3.2,3.3
+Rail transport freight,3.6.2,3.6
+Road transport freight,3.7.2,3.7
+Inland waterway transport freight,3.8.2,3.8
+Pipeline transport freight Gas,3.9,3
+Other transport,3.3.3,3.3
+Space Transport,3.5,3
+Rail transport other,3.6.3,3.6
+Road transport other,3.7.3,3.7
+Inland waterway transport: Other,3.8.3,3.8
+Electricity transmission,3.10,3
+Electricity transmission component,3.10.N1,3.10
+Other supporting and auxiliary transport,3.11,3
+Postal and courier services,3.4,3
+Communications Services: Postal services,3.4.N1,3.4
+Communications Services: Postal services (ITIS),3.4.N11,3.4
+Communications Services: Royal Mail (Surface),3.4.N12,3.4
+Communications Services: Royal Mail (Airmail),3.4.N13,3.4
+Communications Services: Payments to overseas carriers,3.4.N14,3.4
+Communications Services: Courier Services,3.4.N2,3.4
+Communications Services: Courier services (ITIS),3.4.N21,3.4
+Communications Services: Courier (Parcel Force),3.4.N22,3.4
+TRAVEL,4,0
+Business,4.1,4
+"Acquisition of goods and services by border, seasonal, and other short-term workers",4.1.1,4.1
+Other,4.1.2,4.1
+Personal,4.2,4
+Health-related,4.2.1,4.2
+Education-related,4.2.2,4.2
+Other,4.2.3,4.2
+Travel: Personal: Total IPS data,4.2.3.N1,4.2.3
+Travel: Personal imports of cars,4.2.3.N2,4.2.3
+Other Independent holidays,4.2.3.N3,4.2.3
+Travel: Other: Package holidays,4.2.3.N4,4.2.3
+Travel: Personal: Other: VFR (visiting friend and relatives),4.2.3.N5,4.2.3
+Travel: Miscellaneous,4.2.3.N6,4.2.3
+Travel: Imputed rental,4.2.3.N7,4.2.3
+CONSTRUCTION,5,0
+Construction abroad,5.1,5
+Construction in the reporting economy,5.2,5
+INSURANCE & PENSION SERVICES,6,0
+Direct insurance,6.1,6
+Life Insurance,6.1.1,6.1
+Freight Insurance,6.1.2,6.1
+Freight Insurance (Lloyds),6.1.2.N1,6.1.2
+Freight Insurance (Insurance Inquiry),6.1.2.N2,6.1.2
+Other direct insurance,6.1.3,6.1
+Other Direct Insurance - excluding claims for disasters,6.1.3.N1,6.1.3
+Other Direct Insurance - claims for disasters,6.1.3.N2,6.1.3
+Reinsurance,6.2,6
+Auxiliary insurance services,6.3,6
+Pension and standardised guarantee services,6.4,6
+Pension Funds,6.4.1,6.4
+Standardised guarantees,6.4.2,6.4
+FINANCIAL SERVICES,7,0
+Explicitly charged and other financial services,7.1,7
+Fund managers,7.1.N1,7.1
+Securities dealers,7.1.N2,7.1
+Securities dealers: commissions and fees,7.1.N21,7.1
+Securities dealers: spread earnings,7.1.N22,7.1
+Baltic Exchange,7.1.N3,7.1
+Monetary financial institutions,7.1.N4,7.1
+Monetary financial institutions excluding FISIM,7.1.N41,7.1
+Banks: commissions and fees,7.1.N411,7.1
+Banks: net spread earnings,7.1.N412,7.1
+Banks net spread earnings: exports: foreign exchange,7.1.N4121,7.1
+Banks net spread earnings: exports: securities,7.1.N4122,7.1
+Banks net spread earnings: exports: derivatives,7.1.N4123,7.1
+Other financial institutions,7.1.N5,7.1
+Other financial institutions excluding FISIM,7.1.N51,7.1
+Financial Services(ITIS),7.1.N511,7.1
+Financial Services (ARBITAGE),7.1.N512,7.1
+Money market brokers,7.1.N513,7.1
+Financial Services (Trading inquiry),7.1.N514,7.1
+Futures and Options dealers,7.1.N515,7.1
+IMF Charges,7.1.N516,7.1
+Net spread earnings: imports,7.1.N517,7.1
+Financial intermediation services indirectly measured (FISIM),7.2,7
+Monetary financial institutions: FISIM,7.2.N1,7.2
+Monetary financial institutions: FISIM on loans,7.2.N12,7.2
+Monetary financial institutions: FISIM on loans: sterling,7.2.N121,7.2
+Monetary financial institutions: FISIM on loans: foreign currency,7.2.N122,7.2
+Monetary financial institutions: FISIM on deposits,7.2.N13,7.2
+Monetary financial institutions: FISIM on deposits: sterling,7.2.N131,7.2
+Monetary financial institutions: FISIM on deposits: foreign currency,7.2.N132,7.2
+Other financial institutions: FISIM,7.2.N2,7.2
+Other financial institutions: FISIM on loans,7.2.N21,7.2
+Other financial institutions: FISIM on deposits,7.2.N22,7.2
+Charges for the use of intellectual property n.i.e.,8,0
+Franchises and trademarks licensing fees (ITIS 18b),8.1,8
+Licences for the use of outcomes of research and development (ITIS 20b),8.2,8
+Licences to reproduce and/or distribute computer software (ITIS 19b),8.3,8
+Licences to reproduce and/or distribute audio-visual and related product (ITIS 19b),8.4,8
+Licences to reproduce and/or distribute audio-visual and related - Component 1,8.4.N1,8.4
+Licences to reproduce and/or distribute audio-visual and related - Component 2,8.4.N2,8.4
+"Telecommunications, computer, and information services",9,0
+Telecommunications services,9.1,9
+Computer services,9.2,9
+Information services,9.3,9
+News agency services,9.3.1,9.3
+Other information services,9.3.2,9.3
+Other information: ITIS,9.3.N21,9.3
+Publishing,9.3.N22,9.3
+Other Business Services,10,0
+Research and development services,10.1,10
+ITIS R&D,10.1.N1,10.1
+R&D private labs,10.1.N2,10.1
+Work undertaken on a systematic basis to increase the stock of knowledge (ITIS R&D ),10.1.1,10.1
+Provision of customised and non-customised research and development services (ITIS 16),10.1.1.1,10.1.1
+Sale of proprietary rights arising from research and development (ITIS 20b),10.1.1.2,10.1.1
+Other (ITIS 17),10.1.2,10.1
+Professional and management consulting services,10.2,10
+"Legal, Accounting and Management",10.2.1,10.2
+Legal Services,10.2.1.1,10.2.1
+Legal Activities,10.2.1.N11,10.2.1
+Law Society,10.2.1.N12,10.2.1
+Commercial Bar Association,10.2.1.N13,10.2.1
+Legal Services (ITIS - Other Bar Assoc.),10.2.1.N14,10.2.1
+"Accounting, Auditing, Book-Keeping and Tax Consulting",10.2.1.2,10.2.1
+Business and management consulting and public relations services,10.2.1.3,10.2.1
+Management consulting,10.2.1.N31,10.2.1
+Property management,10.2.1.N32,10.2.1
+CDC business management,10.2.1.N33,10.2.1
+Other business and management services,10.2.1.N34,10.2.1
+Public relations,10.2.1.N35,10.2.1
+Management charges,10.2.1.N36,10.2.1
+Recruitment,10.2.1.N37,10.2.1
+"Advertising, Market Research and public opinion polling services",10.2.2,10.2
+Market Research,10.2.2.N1,10.2.2
+Advertising,10.2.2.N2,10.2.2
+"Technical, trade-related, and other business services",10.3,10
+"Architectural, engineering, scientific, and other technical services",10.3.1,10.3
+Architectural Services,10.3.1.1,10.3.1
+Engineering Services,10.3.1.2,10.3.1
+Scientific and other technical services (ITIS 50),10.3.1.3,10.3.1
+Scientific & Other Tech comp 1,10.3.1.3.N1,10.3.1
+Scientific & Other Tech comp 2,10.3.1.3.N2,10.3.1
+Waste treatment and de-pollution (ITIS 3) - On site processing services,10.3.2,10.3
+Waste treatment and de-pollution,10.3.2.1,10.3.2
+"Services incidental to agriculture, forestry and fishing (ITIS 1) - Agricultural",10.3.2.2,10.3.2
+"Services incidental to mining, oil and gas extraction (ITIS 2) - Extraction Metal Ore",10.3.2.3,10.3.2
+"North Sea, oil and gas",10.3.2.N4,10.3.2
+Operational Leasing Services,10.3.3,10.3
+Operational Leasing Services (ITIS),10.3.N31,10.3
+Operational Leasing Sea charters,10.3.N32,10.3
+Trade-related services,10.3.4,10.3
+"Agricultural, Mining and On-Site Processing Services",10.3.N41,10.3
+Other Trade-Related Services (New ITIS 42),10.3.N411,10.3
+Other trade-related comp 1,10.3.N4111,10.3
+Other trade-related comp 2,10.3.N4112,10.3
+Service Credits,10.3.N412,10.3
+Other business services n.i.e,10.3.5,10.3
+Other Misc: Business Services (ITIS),10.3.N51,10.3
+Other Education,10.3.N52,10.3
+Subscriptions to Professional bodies,10.3.N53,10.3
+Other Trade in Services (New ITIS 52),10.3.N54,10.3
+Other Miscellaneous Business Services: Banks,10.3.N55,10.3
+North sea oil and gas adjustment,10.3.N56,10.3
+Other Miscellaneous Business Services: Securities dealers,10.3.N57,10.3
+Other Misc: Procurement (New ITIS 13),10.3.N58,10.3
+"Services between affiliated enterprises, n.i.e",10.3.N59,10.3
+"PERSONAL, CULTURAL , and RECREATIONAL SERVICES",11,0
+Audiovisual and related services,11.1,11
+Film and TV,11.1.1,11.1
+Other audiovisual and related services,11.1.2,11.1
+TV and radio related services (ITIS),11.1.N21,11.1
+Music related services (ITIS),11.1.N22,11.1
+"Other personal, cultural, and recreational services",11.2,11
+Health services,11.2.1,11.2
+Education services,11.2.2,11.2
+Personal Services (Correspondence Courses),11.2.N21,11.2
+Personal Services (British Exam Boards),11.2.N22,11.2
+Personal Education: ITIS,11.2.N23,11.2
+Heritage and recreational services (ITIS 46),11.2.3,11.2
+Remote Gambling,11.2.3.N1,11.2.3
+Other heritage and recreational services (ITIS 46),11.2.3.N2,11.2.3
+Other personal services,11.2.4,11.2
+GOVERNMENT GOODS AND SERVICES n.i.e,12,0
+Embassies and consulates,12.1,12
+Military Units and Agencies,12.2,12
+TiS Govt Military [MOD Receipts from US forces],12.2.N1,12.2
+Other military units and agencies,12.2.N2,12.2
+Other government goods and servi,12.3,12
+Other Govt EU institutions,12.3.N1,12.3
+Own resources refund,12.3.N11,12.3
+Euratom,12.3.N12,12.3
+EU tax collection fees,12.3.N13,12.3
+Other non-EU government services,12.3.N2,12.3
+Bilateral Aid,12.3.N21,12.3
+JET,12.3.N22,12.3
+Appropriations in aid: medical costs,12.3.N23,12.3
+UKAEA,12.3.N24,12.3
+Appropriations in aid: Cyprus,12.3.N25,12.3
+Appropriations in aid : Singapore and Malaysia,12.3.N26,12.3
+British Council Overseas payments,12.3.N27,12.3
+Miscellaneous government services,12.3.N28,12.3
