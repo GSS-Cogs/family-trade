@@ -32,6 +32,10 @@ pipeline {
                             echo "Caught error: ${e.message}"
                         }
                     }
+                    echo "Uploading components.csv"
+                    runPipeline("${PIPELINE}/ons-table2qb.core/components/import",
+                                newJobDraft.id, credentials, [[name: 'components-csv',
+                                                               file: [name: 'components.csv', type: 'text/csv']]])
                 }
             }
         }
