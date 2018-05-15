@@ -35,9 +35,6 @@ pipeline {
                     drafter.addData(PMD, credentials, newJobDraft.id,
                                     readFile("metadata/dataset.trig"), "application/trig")
                     def PIPELINE = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines'
-                    runPipeline("${PIPELINE}/ons-table2qb.core/components/import",
-                                newJobDraft.id, credentials, [[name: 'components-csv',
-                                                               file: [name: 'metadata/components.csv', type: 'text/csv']]])
                     runPipeline("${PIPELINE}/ons-table2qb.core/data-cube/import",
                                 newJobDraft.id, credentials, [[name: 'observations-csv',
                                                                file: [name: 'out/bop_observations.csv', type: 'text/csv']],
