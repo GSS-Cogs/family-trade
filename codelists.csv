@@ -11,3 +11,4 @@ Flow Directions,flow-directions.csv,See GDP-182 for the full discussion
 Flow Directions,flow-directions.no-description.csv,Use instead of flow-directions.csv until GDP-249 is resolved.
 International Trade Basis,international-trade-basis.csv,"GDP-183, accounting basis"
 BPM6 Services,bpm6-services.csv,"GDP-183, BPM6 services"
+CORD SITC,cord-sitc.csv,GDP-248
