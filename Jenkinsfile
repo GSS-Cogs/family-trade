@@ -19,6 +19,9 @@ pipeline {
                     def newJobDraft = drafter.createDraftset(PMD, credentials, env.JOB_NAME)
                     def PIPELINE = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines'
                     for (String[] row : codelists) {
+                        drafter.deleteGraph(PMD, credentials, newJobDraft.id,
+                                            "http://gss-data.org.uk/graph/${row[0].replace(' ', '-').toLowerCase()}")
+
                         try {
                             echo "Uploading ${row[0]}"
                             runPipeline("${PIPELINE}/ons-table2qb.core/codelist/import",
@@ -28,6 +31,21 @@ pipeline {
                         } catch (Exception e) {
                             echo "Caught error: ${e.message}"
                         }
+                    }
+                }
+            }
+        }
+        stage('Publish') {
+            steps {
+                script {
+                    def PMD = 'https://production-drafter-ons-alpha.publishmydata.com'
+                    def credentials = 'onspmd'
+                    def drafts = drafter.listDraftsets(PMD, credentials, 'owned')
+                    def jobDraft = drafts.find  { it['display-name'] == env.JOB_NAME }
+                    if (jobDraft) {
+                        drafter.publishDraftset(PMD, credentials, jobDraft.id)
+                    } else {
+                        error "Expecting a draftset for this job."
                     }
                 }
             }
