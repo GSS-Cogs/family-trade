@@ -6,7 +6,7 @@ pipeline {
         stage('Upload draftset') {
             steps {
                 script {
-                    List<String[]> codelists = new File('codelists.csv').text.tail().split('\n').collect {
+                    List<String[]> codelists = readFile('codelists.csv').split('\n').tail().collect {
                         l -> l.split(',')
                     }
                     def PMD = 'https://production-drafter-ons-alpha.publishmydata.com'
