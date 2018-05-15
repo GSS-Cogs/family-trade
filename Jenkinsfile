@@ -19,10 +19,15 @@ pipeline {
                     def newJobDraft = drafter.createDraftset(PMD, credentials, env.JOB_NAME)
                     def PIPELINE = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines'
                     for (String[] row : codelists) {
-                        runPipeline("${PIPELINE}/ons-table2qb.core/codelist/import",
-                                    newJobDraft.id, credentials, [[name: 'codelist-csv',
-                                                                   file: [name: "codelists/${row[1]}", type: 'text/csv']],
-                                                                  [name: 'codelist-name', value: "${row[0]}"]])
+                        try {
+                            echo "Uploading ${row[0]}"
+                            runPipeline("${PIPELINE}/ons-table2qb.core/codelist/import",
+                                        newJobDraft.id, credentials, [[name: 'codelist-csv',
+                                                                       file: [name: "codelists/${row[1]}", type: 'text/csv']],
+                                                                      [name: 'codelist-name', value: "${row[0]}"]])
+                        } catch (Exception e) {
+                            echo "Caught error: ${e.message}"
+                        }
                     }
                 }
             }
