@@ -23,6 +23,7 @@ pipeline {
             steps {
                 script {
                     def PMD = 'https://production-drafter-ons-alpha.publishmydata.com'
+                    def credentials = 'onspmd'
                     def drafts = drafter.listDraftsets(PMD, credentials, 'owned')
                     def jobDraft = drafts.find  { it['display-name'] == env.JOB_NAME }
                     if (jobDraft) {
