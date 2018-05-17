@@ -13,3 +13,4 @@ BPM6 Services,bpm6-services.csv,"GDP-183, BPM6 services"
 CORD SITC,cord-sitc.csv,GDP-248
 ONS Trade Areas Legacy,eu-rw-ww.csv,GDP-184
 ONS Trade Areas CORD,cord-geographies.csv,GDP-184
+Pink Book Services,pink-book-services.csv,GDP-279
