@@ -37,7 +37,7 @@ pipeline {
                     def PIPELINE = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines'
                     runPipeline("${PIPELINE}/ons-table2qb.core/data-cube/import",
                                 newJobDraft.id, credentials, [[name: 'observations-csv',
-                                                               file: [name: 'out/CPA_Tidydata.csv', type: 'text/csv']],
+                                                               file: [name: 'out/ABS.csv', type: 'text/csv']],
                                                               [name: 'dataset-name', value: 'ONS ABS']])
                 }
             }
