@@ -44,7 +44,7 @@ pipeline {
                     for (int i = 0; i < observationFiles.size(); i++) {
                         runPipeline("${PIPELINE}/ons-table2qb.core/data-cube/import",
                                     newJobDraft.id, credentials, [[name: 'observations-csv',
-                                                                   file: [name: "out/${observationFile[i].name}", type: 'text/csv']],
+                                                                   file: [name: "out/${observationFiles[i].name}", type: 'text/csv']],
                                                                   [name: 'dataset-name', value: 'ONS Pink Book Chapter 3']])
                     }
                 }
