@@ -13,6 +13,8 @@
         pmd:contactEmail     <mailto:trade@ons.gsi.gov.uk> ;
         pmd:graph            <http://gss-data.org.uk/graph/ons-trade-in-goods-mrets> ;
         dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
+        dct:issued           "${issued}"^^xsd:dateTime ;
+        dct:modified         "${modified}"^^xsd:dateTime ;
         dct:license          <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
         dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dct:references       <http://gss-data.org.uk/help> ;
