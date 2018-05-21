@@ -13,6 +13,7 @@
             pmd:graph            <http://gss-data.org.uk/graph/ons-balance-of-payments> ;
             dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
             dct:issued           "2017-12-22T09:30:00Z"^^xsd:dateTime ;
+            dct:modified         "2017-12-22T09:30:00Z"^^xsd:dateTime ;
             dct:license          <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
             dct:publisher        <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
             dct:references       <http://gss-data.org.uk/help> ;
