@@ -19,7 +19,7 @@ pipeline {
                 script {
                     def notebooks = findFiles(glob: 'Pinkbook2017chapter3_*.ipynb')
                     for (int i = 0; i < notebooks.size(); i++) {
-                        sh "jupyter-nbconvert --to python --stdout '${notebook[i].name}' | ipython"
+                        sh "jupyter-nbconvert --to python --stdout '${notebooks[i].name}' | ipython"
                     }
                 }
             }
