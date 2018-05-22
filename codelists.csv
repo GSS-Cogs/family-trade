@@ -6,8 +6,7 @@ Employment Size Bands,employment-size-bands.csv,We could introduce 2 levels to t
 Countries of Ownership,countries-of-ownership.csv,"Not sure that this is country really, but that seems ok for now."
 Turnover Size Bands,turnover-size-bands.csv,I’ve taken the opportunity to simplify the notation here as our blunt slugify transformation would convert commas to dashes – we’ll need to either submit this notation or add a custom transformation.
 HMRC Geographies,hmrc-geographies.slugs.csv,Use this until the observation data uses the proper code notations
-Flow Directions,flow-directions.csv,See GDP-182 for the full discussion
-Flow Directions,flow-directions.no-description.csv,Use instead of flow-directions.csv until GDP-249 is resolved.
+Flow Directions,flow-directions.no-description.csv,GDP-182. using instead of flow-directions.csv until GDP-249 is resolved.
 International Trade Basis,international-trade-basis.csv,"GDP-183, accounting basis"
 BPM6 Services,bpm6-services.csv,"GDP-183, BPM6 services"
 CORD SITC,cord-sitc.csv,GDP-248
