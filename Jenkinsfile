@@ -22,15 +22,11 @@ pipeline {
                         drafter.deleteGraph(PMD, credentials, newJobDraft.id,
                                             "http://gss-data.org.uk/graph/${row[0].replace(' ', '-').toLowerCase()}")
 
-                        try {
-                            echo "Uploading ${row[0]}"
-                            runPipeline("${PIPELINE}/ons-table2qb.core/codelist/import",
-                                        newJobDraft.id, credentials, [[name: 'codelist-csv',
-                                                                       file: [name: "codelists/${row[1]}", type: 'text/csv']],
-                                                                      [name: 'codelist-name', value: "${row[0]}"]])
-                        } catch (Exception e) {
-                            echo "Caught error: ${e.message}"
-                        }
+                        echo "Uploading ${row[0]}"
+                        runPipeline("${PIPELINE}/ons-table2qb.core/codelist/import",
+                                    newJobDraft.id, credentials, [[name: 'codelist-csv',
+                                                                   file: [name: "codelists/${row[1]}", type: 'text/csv']],
+                                                                  [name: 'codelist-name', value: "${row[0]}"]])
                     }
                     echo "Uploading components.csv"
                     runPipeline("${PIPELINE}/ons-table2qb.core/components/import",
