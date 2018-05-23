@@ -5,6 +5,7 @@ HMRC Geographies,hmrc-geographies.csv,This codelist will have 2 labels for 13 of
 Employment Size Bands,employment-size-bands.csv,We could introduce 2 levels to the hierarchy but I don’t think this is necessary at this point.
 Countries of Ownership,countries-of-ownership.csv,"Not sure that this is country really, but that seems ok for now."
 Turnover Size Bands,turnover-size-bands.csv,I’ve taken the opportunity to simplify the notation here as our blunt slugify transformation would convert commas to dashes – we’ll need to either submit this notation or add a custom transformation.
+Age of Business,age-of-business.csv,
 HMRC Geographies,hmrc-geographies.slugs.csv,Use this until the observation data uses the proper code notations
 Flow Directions,flow-directions.no-description.csv,GDP-182. using instead of flow-directions.csv until GDP-249 is resolved.
 International Trade Basis,international-trade-basis.csv,"GDP-183, accounting basis"
