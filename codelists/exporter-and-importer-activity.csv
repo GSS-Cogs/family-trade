@@ -1,6 +1,6 @@
-Notation,Label,Parent Notation
-businesses,Businesses ,
-exporters,Exporters,businesses
-importers,Importers,businesses
-exporter-and-importer,Exporter and Importer,businesses
-exporter-and-or-importer,Exporter and/or Importer ,businesses
+Label,Notation,Parent Notation
+Businesses ,businesses,
+Exporters,exporters,businesses
+Importers,importers,businesses
+Exporter and Importer,exporter-and-importer,businesses
+Exporter and/or Importer ,exporter-and-or-importer,businesses
