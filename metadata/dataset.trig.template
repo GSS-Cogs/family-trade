@@ -14,7 +14,7 @@
         pmd:graph            <http://gss-data.org.uk/graph/ons-abs> ;
         dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dct:issued           "2017-10-31T09:30:00Z"^^xsd:dateTime ;
-        dct:modified         "2017-10-31T09:30:00Z"^^xsd:dateTime ;
+        dct:modified         "${modified}"^^xsd:dateTime ;
         dct:license          <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
         dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dct:references       <http://gss-data.org.uk/help> ;

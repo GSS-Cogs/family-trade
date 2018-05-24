@@ -21,6 +21,7 @@ pipeline {
                     for (int i = 0; i < notebooks.size(); i++) {
                         sh "jupyter-nbconvert --to python --stdout '${notebooks[i].name}' | ipython"
                     }
+                    sh "jupyter-nbconvert --to python --stdout update_metadata.ipynb | ipython"
                 }
             }
         }
@@ -38,7 +39,7 @@ pipeline {
                     drafter.deleteGraph(PMD, credentials, newJobDraft.id,
                                         "http://gss-data.org.uk/graph/ons-pink-book-chapter-3/metadata")
                     drafter.addData(PMD, credentials, newJobDraft.id,
-                                    readFile("metadata/dataset.trig"), "application/trig")
+                                    readFile("out/dataset.trig"), "application/trig")
                     def PIPELINE = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines'
                     def observationFiles = findFiles(glob: 'out/*.csv')
                     for (int i = 0; i < observationFiles.size(); i++) {
