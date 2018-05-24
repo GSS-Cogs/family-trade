@@ -18,6 +18,7 @@ pipeline {
             steps {
                 sh "jupyter-nbconvert --to python --stdout HMRC_RTS_Mass.ipynb | ipython"
                 sh "jupyter-nbconvert --to python --stdout HMRC_RTS_Value.ipynb | ipython"
+                sh "jupyter-nbconvert --to python --stdout update_metadata.ipynb | ipython"
             }
         }
         stage('Upload draftset') {
@@ -34,7 +35,7 @@ pipeline {
                     drafter.deleteGraph(PMD, credentials, newJobDraft.id,
                                         "http://gss-data.org.uk/graph/hmrc-regional-trade-statistics/metadata")
                     drafter.addData(PMD, credentials, newJobDraft.id,
-                                    readFile("metadata/dataset.trig"), "application/trig")
+                                    readFile("out/dataset.trig"), "application/trig")
                     def PIPELINE = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines'
                     def observationFiles = findFiles(glob: 'out/*.csv')
                     for (int i = 0; i < observationFiles.size(); i++) {

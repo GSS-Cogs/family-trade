@@ -14,7 +14,7 @@
         pmd:graph            <http://gss-data.org.uk/graph/hmrc-overseas-trade-statistics> ;
         dct:creator          <https://www.gov.uk/government/organisations/hm-revenue-customs> ;
         dct:issued           "2018-03-08T09:30:00Z"^^xsd:dateTime ;
-        dct:modified         "2018-03-08T09:30:00Z"^^xsd:dateTime ;
+        dct:modified         "${modified}"^^xsd:dateTime ;
         dct:license          <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
         dct:publisher        <https://www.gov.uk/government/organisations/hm-revenue-customs> ;
         dct:references       <http://gss-data.org.uk/help> ;
