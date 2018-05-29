@@ -32,6 +32,8 @@ pipeline {
                     }
                     def newJobDraft = drafter.createDraftset(PMD, credentials, env.JOB_NAME)
                     drafter.deleteGraph(PMD, credentials, newJobDraft.id,
+                                        "http://gss-data.org.uk/graph/ons-balance-of-payments")
+                    drafter.deleteGraph(PMD, credentials, newJobDraft.id,
                                         "http://gss-data.org.uk/graph/ons-balance-of-payments/metadata")
                     drafter.addData(PMD, credentials, newJobDraft.id,
                                     readFile("out/dataset.trig"), "application/trig")
