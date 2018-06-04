@@ -33,6 +33,8 @@ pipeline {
                     def newJobDraft = drafter.createDraftset(PMD, credentials, env.JOB_NAME)
                     drafter.deleteGraph(PMD, credentials, newJobDraft.id,
                                         "http://gss-data.org.uk/graph/ons-cpa/metadata")
+                    drafter.deleteGraph(PMD, credentials, newJobDraft.id,
+                                        "http://gss-data.org.uk/graph/ons-cpa")
                     drafter.addData(PMD, credentials, newJobDraft.id,
                                     readFile("out/dataset.trig"), "application/trig")
                     def PIPELINE = 'http://production-grafter-ons-alpha.publishmydata.com/v1/pipelines'
