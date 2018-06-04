@@ -6,7 +6,7 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
 <http://gss-data.org.uk/graph/ons-cpa/metadata> {
-  <http://gss-data.org.uk/graph/ons-cpa>
+  <http://gss-data.org.uk/data/ons-cpa>
         a                    pmd:LinkedDataset , pmd:Dataset , qb:DataSet ;
         rdfs:comment         "UK trade in goods by classification of product by activity time series." ;
         rdfs:label           "ONS CPA"@en ;
@@ -19,6 +19,5 @@
         dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dct:references       <http://gss-data.org.uk/help> ;
         dct:title            "UK trade in goods by classification of product by activity time series."@en ;
-        qb:structure         <http://gss-data.org.uk/data/ons-cpa> ;
         void:sparqlEndpoint  <http://gss-data.org.uk/sparql> .
 }
