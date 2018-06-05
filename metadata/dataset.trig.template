@@ -7,7 +7,7 @@
 @prefix gdp:   <http://gss-data.org.uk/def/ontology/gdp#> .
 
 <http://gss-data.org.uk/graph/ons-abs/metadata> {
-  <http://gss-data.org.uk/graph/ons-abs>
+  <http://gss-data.org.uk/data/ons-abs>
         a                    pmd:LinkedDataset , pmd:Dataset , qb:DataSet, gdp:TradeDataset ;
         rdfs:comment         "Annual Business Survey importers and exporters." ;
         rdfs:label           "ONS ABS"@en ;
@@ -20,6 +20,5 @@
         dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dct:references       <http://gss-data.org.uk/help> ;
         dct:title            "Annual Business Survey importers and exporters."@en ;
-        qb:structure         <http://gss-data.org.uk/data/ons-abs> ;
         void:sparqlEndpoint  <http://gss-data.org.uk/sparql> .
 }
