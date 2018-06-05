@@ -19,6 +19,5 @@
         dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dct:references       <http://gss-data.org.uk/help> ;
         dct:title            "ONS Trade in goods MRETS"@en ;
-        qb:structure         <http://gss-data.org.uk/data/ons-trade-in-goods-mrets> ;
         void:sparqlEndpoint  <http://gss-data.org.uk/sparql> .
 }
