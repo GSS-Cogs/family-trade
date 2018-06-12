@@ -11,7 +11,7 @@
         rdfs:comment         "HM Revenue & Customs (HMRC) introduced the Regional Trade Statistics (RTS) series in January 1999 to support the economic decision-making of the devolved Scottish Government, Assemblies and other regional bodies within the UK. These statistics provide a useful breakdown of the flows of imports and exports between regions of the UK and other countries. RTS was designed to provide a meaningful breakdown of the UK’s Overseas Trade Statistics (OTS)." ;
         rdfs:label           "HMRC Regional Trade Statistics"@en ;
         pmd:contactEmail     <mailto:uktradeinfo@hmrc.gsi.gov.uk> ;
-        pmd:graph            <http://gss-data.org.uk/graph/hmrc-overseas-trade-statistics> ;
+
         dct:creator          <https://www.gov.uk/government/organisations/hm-revenue-customs> ;
         dct:issued           "2018-03-08T09:30:00Z"^^xsd:dateTime ;
         dct:modified         "${modified}"^^xsd:dateTime ;
