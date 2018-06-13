@@ -32,6 +32,13 @@ pipeline {
                     runPipeline("${PIPELINE}/ons-table2qb.core/components/import",
                                 newJobDraft.id, credentials, [[name: 'components-csv',
                                                                file: [name: 'components.csv', type: 'text/csv']]])
+                    echo "Creating Countries of Ownership FOI"
+                    runPipeline("${PIPELINE}/ons-table2qb.features/area-collection/import",
+                                newJobDraft.id, credentials, [[name: 'codelist-csv',
+                                                               file: [name: 'codelists/countries-of-ownership.csv', type: 'text/csv']],
+							       [name: 'codelist-name-singular', value: 'Country of Ownership'],
+							       [name: 'codelist-name-plural', value: 'Countries of Ownership'],
+							       [name: 'sort-priority', value: 1]])
                 }
             }
         }
