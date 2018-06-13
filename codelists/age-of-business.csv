@@ -5,3 +5,10 @@ Label,Notation,Parent Notation
 10-<20,10-20,total
 20 Above,20-above,total
 Total,total,
+0 to 1 years,0-to-1-years,total
+2 to 3 years,2-to-3-years,total
+4 to 5 years,4-to-5-years,total
+6 to 9 years,6-to-9-years,total
+10 to 20 years,10-to-20-years,total
+20+ years,20-years,total
+Unknown,unknown,total
