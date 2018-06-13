@@ -1,11 +1,13 @@
 Label,Notation,Parent Notation
-Agriculture and Food,group-1,
-"Mining, Petroleum products and Waste",group-2,
-Chemicals,group-3,
-Pharmaceuticals,group-4,
-Electronic and Electrical equipment,group-5,
-Machinery and equipment n.e.s,group-6,
-"Motor vehicles, transport equipment (excluding aerospace)",group-7,
-Aerospace and related machinery,group-8,
-Other manufacturing,group-9,
-Services,group-10,
+Agriculture and Food,group-1,total
+"Mining, Petroleum products and Waste",group-2,total
+Chemicals,group-3,total
+Pharmaceuticals,group-4,total
+Electronic and Electrical equipment,group-5,total
+Machinery and equipment n.e.s,group-6,total
+"Motor vehicles, transport equipment (excluding aerospace)",group-7,total
+Aerospace and related machinery,group-8,total
+Other manufacturing,group-9,total
+Services,group-10,total
+Total,total,
+Unknown,unknown,total
