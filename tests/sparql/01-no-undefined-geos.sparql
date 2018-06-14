@@ -1,0 +1,13 @@
+# There are no unused geography codes
+PREFIX qb:   <http://purl.org/linked-data/cube#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT ?geography
+WHERE {
+  ?obs qb:dataSet <http://gss-data.org.uk/data/hmrc-overseas-trade-statistics>;
+       <http://gss-data.org.uk/def/dimension/trade-partner-geography> ?geography;
+       .
+  FILTER NOT EXISTS {
+    ?geography skos:inScheme <http://gss-data.org.uk/def/concept-scheme/hmrc-geographies> .
+  }
+}
