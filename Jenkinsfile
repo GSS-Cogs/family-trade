@@ -16,14 +16,18 @@ pipeline {
                 }
             }
             steps {
-                sh "jupyter-nbconvert --to python --stdout 'CPA to Tidy data(Code Classification merge).ipynb' | ipython"
+                sh "jupyter-nbconvert --to python --stdout 'tidy.ipynb' | ipython"
                 sh "jupyter-nbconvert --to python --stdout 'update_metadata.ipynb' | ipython"
             }
         }
         stage('Upload draftset') {
             steps {
                 script {
-                    uploadDraftset('ONS CPA', ['out/CPA_Tidydata.csv'])
+                    def csvs = []
+                    for (def file : findFiles(glob: 'out/*.csv')) {
+                        csvs.add("out/${file.name}")
+                    }
+                    uploadDraftset('ONS CPA', csvs)
                 }
             }
         }
