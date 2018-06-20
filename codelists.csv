@@ -18,3 +18,4 @@ Export and Import Activity,exporter-and-importer-activity.csv,
 HMRC Industry Groups,hmrc-industry-groups.csv,Based upon SIC codes
 HMRC Regions,hmrc-regions.csv,Based upon NUTS1 regions
 Measurement Units,measurement-units.csv,
+SITC 4, sitc4.csv, GDP-287
