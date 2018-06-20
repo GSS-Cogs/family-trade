@@ -18,3 +18,4 @@ Export and Import Activity,Whether and how the business is trading international
 Count,The total number of items,Measure,
 Proportion of all Business,The proportion of all businesses that match the specified criteria,Measure,
 Total Turnover,The total value of turnover,Measure,
+SITC 4,Standard International Trade Classification Revision 4,Dimension,http://gss-data.org.uk/def/concept-scheme/sitc-4
