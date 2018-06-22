@@ -10,8 +10,8 @@ Label,Notation,Parent Notation
 50 to 249,50-to-249,total
 Total,total,
 No employees,0-employees,total-employees
-1 to 9 employees,1-9-employees,total-employees
-10 to 49 employees,10-49-employees,total-employees
+1 to 9 employees,1-to-9-employees,total-employees
+10 to 49 employees,10-to-49-employees,total-employees
 50 to 249 employees,50-to-249-employees,total-employees
 250 or more employees,250-employees,total-employees
 Unknown number of employees,unknown-employees,total-employees
