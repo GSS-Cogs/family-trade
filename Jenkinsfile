@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Test Draftset') {
             steps {
-                echo 'Placeholder for acceptance tests'
+	    	sh 'java -cp lib/sparql.jar uk.org.floop.sparqlTestRunner.Run -i -s https://production-drafter-ons-alpha.publishmydata.com/v1/sparql/live'
             }
         }
         stage('Publish') {
@@ -40,6 +40,7 @@ pipeline {
     post {
         always {
             archiveArtifacts 'out/*'
+	    junit 'reports/**/*.xml'
         }
     }
 }
