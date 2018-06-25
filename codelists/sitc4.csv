@@ -1,4 +1,4 @@
-Label,Notation,Parent Notation
+Description,Code,Parent Notation
 Food and live animals,0,
 Live animals other than animals of division 03,00,0
 Live animals other than animals of division 03,001,00
@@ -561,8 +561,7 @@ Wood in chips or particles,246.1,246
 "Wood in the rough, whether or not stripped of bark or sapwood, or roughly squared",247,24
 "Wood in the rough (whether or not stripped of bark or sapwood) or roughly squared, treated with paint, stains or other preservatives",247.3,247
 "Wood of coniferous species, in the rough (whether or not stripped of bark or sapwood) or roughly squared, but not treated with paint, stains or other preservatives.",247.4,247
-"Wood of non-coniferous species, in the rough (whether or not stripped of bark or sapwood) or roughly squared, but not treated with paint, stains or other preservatives of the following tropical woods:",247.5,247
-,"Abura, Acajou d’Afrique, Afrormosia, Ako, Alan, Andiroba, Aningré, Avodiré, Azobé, Balau, Balsa, Bossé clair, Bossé foncé, Cativo, Cedro, Dabema, Dark Red Meranti, Dibétou, Doussié, Framiré, Freijo, Fromager, Fuma, Geronggang, Ilomba, Imbuia, Ipé, Iroko, Jaboty, Jelutong, Jequitiba, Jongkong, Kapur, Kempas, Keruing, Kosipo, Kotibé, Koto, Light Red Meranti, Limba, Louro, Maçaranduba, Mahogany, Makoré, Mandioqueira, Mansonia, Mengkulang, Meranti Bakau, Merawan, Merbau, Merpauh, Mersawa, Moabi, Niangon, Nyatoh, Obeche, Okoumé, Onzabili, Orey, Ovengkol, Pzogp. Padauk, Paldao, Palissandre de Guatemala, Palissandre de Para, Palissandre de Rio, Palissandre de Rose, Pau Amarelo, Pau Marfim, Pulai, Punah, Quaruba, Ramin, Sapelli, Saqui-Saqui, Spetir, Sipo, Sucupira, Suren, Tauari, Teak, Tiama, Tola, Virola, White Lauan, White Meranti, White Seraya, Yellow Meranti","Abura, Acajou d’Afrique, Afrormosia, Ako, Alan, Andiroba, Aningré, Avodiré, Azobé, Balau, Balsa, Bossé clair, Bossé foncé, Cativo, Cedro, Dabema, Dark Red Meranti, Dibétou, Doussié, Framiré, Freijo, Fromager, Fuma, Geronggang, Ilomba, Imbuia, Ipé, Iroko, Jaboty, Jelutong, Jequitiba, Jongkong, Kapur, Kempas, Keruing, Kosipo, Kotibé, Koto, Light Red Meranti, Limba, Louro, Maçaranduba, Mahogany, Makoré, Mandioqueira, Mansonia, Mengkulang, Meranti Bakau, Merawan, Merbau, Merpauh, Mersawa, Moabi, Niangon, Nyatoh, Obeche, Okoumé, Onzabili, Orey, Ovengkol, Pzogp. Padauk, Paldao, Palissandre de Guatemala, Palissandre de Para, Palissandre de Rio, Palissandre de Rose, Pau Amarelo, Pau Marfim, Pulai, Punah, Quaruba, Ramin, Sapelli, Saqui-Saqui, Spetir, Sipo, Sucupira, Suren, Tauari, Teak, Tiama, Tola, Virola, White Lauan, White Meranti, White Seraya, Yellow Merant"
+"Wood of non-coniferous species, in the rough (whether or not stripped of bark or sapwood) or roughly squared, but not treated with paint, stains or other preservatives of the following tropical woods: Abura, Acajou d’Afrique, Afrormosia, Ako, Alan, Andiroba, Aningré, Avodiré, Azobé, Balau, Balsa, Bossé clair, Bossé foncé, Cativo, Cedro, Dabema, Dark Red Meranti, Dibétou, Doussié, Framiré, Freijo, Fromager, Fuma, Geronggang, Ilomba, Imbuia, Ipé, Iroko, Jaboty, Jelutong, Jequitiba, Jongkong, Kapur, Kempas, Keruing, Kosipo, Kotibé, Koto, Light Red Meranti, Limba, Louro, Maçaranduba, Mahogany, Makoré, Mandioqueira, Mansonia, Mengkulang, Meranti Bakau, Merawan, Merbau, Merpauh, Mersawa, Moabi, Niangon, Nyatoh, Obeche, Okoumé, Onzabili, Orey, Ovengkol, Pzogp. Padauk, Paldao, Palissandre de Guatemala, Palissandre de Para, Palissandre de Rio, Palissandre de Rose, Pau Amarelo, Pau Marfim, Pulai, Punah, Quaruba, Ramin, Sapelli, Saqui-Saqui, Spetir, Sipo, Sucupira, Suren, Tauari, Teak, Tiama, Tola, Virola, White Lauan, White Meranti, White Seraya, Yellow Meranti",247.5,247
 "Woods in the rough or roughly squared, n.e.s.",247.9,247
 "Wood, simply worked, and railway sleepers of wood",248,24
 Railway or tramway sleepers (cross-ties) of wood,248.1,248
@@ -685,8 +684,7 @@ Silica sands and quartz sands,273.31,273.3
 Other sands,273.39,273.3
 "Pebbles, gravel, broken or crushed stone, of a kind commonly used for concrete aggregates, for road metalling or for railway or other ballast, shingle and flint, whether or not heat-treated; macadam of slag, dross or similar industrial waste, whether or not incorporating materials cited in the first part of the heading; tarred macadam; granules, chippings and powder, of stones of heading 273.12 or 273.13, whether or not heat-treated",273.4,273
 Sulphur and unroasted iron pyrites,274,27
-"Sulphur of all kinds, other than sublimed sulphur, precipitated",274.1,274
-,sulphur and colloidal sulphur,sulphur and colloidal sulphu
+"Sulphur of all kinds, other than sublimed sulphur, precipitated sulphur and colloidal sulphur",274.1,274
 "Iron pyrites, unroasted",274.2,274
 "Natural abrasives, n.e.s. (including industrial diamonds)",277,27
 "Industrial diamonds, sorted, whether or not worked",277.1,277
@@ -3905,8 +3903,7 @@ Golf equipment,894.75,894.7
 "Office and stationery supplies, n.e.s.",895,89
 "Office and stationery supplies, of base metal",895.1,895
 "Filing cabinets, card index cabinets, paper trays, paper rests, pen trays, office-stamp stands and similar office or desk equipment, of base metal (other than office furniture of group 821)",895.11,895.1
-"Fittings for loose-leaf binders or files, letter clips, letter corners, paper-clips, indexing tags and similar office articles, of base metal; staples in strips (e.g., for offices, upholstery, packaging), of base metal.              ",895.12,895.1
-,"Fittings for loose-leaf binders or files, letter clips, letter corners, paper-clips, indexing tags and similar office articles, of base metal; staples in strips (e.g., for offices, upholstery, packaging), of base metal","Fittings for loose-leaf binders or files, letter clips, letter corners, paper-clips, indexing tags and similar office articles, of base metal; staples in strips (e.g., for offices, upholstery, packaging), of base meta"
+"Fittings for loose-leaf binders or files, letter clips, letter corners, paper-clips, indexing tags and similar office articles, of base metal; staples in strips (e.g., for offices, upholstery, packaging), of base metal.",895.12,895.1
 "Pens, pencils and fountain-pens",895.2,895
 "Ball-point pens; felt-tipped or other porous-tipped pens and markers; fountain-pens, stylograph pens and other pens; duplicating stylos; propelling or sliding pencils; penholders, pencil-holders and similar holders; parts (including caps and clips) of the foregoing articles (not including goods of heading 895.22 or 895.23)",895.21,895.2
 Pen nibs and nib points,895.22,895.2
