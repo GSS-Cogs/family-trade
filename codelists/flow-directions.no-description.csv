@@ -1,6 +1,0 @@
-Label,Notation,Parent Notation
-Exports,exports,
-Imports,imports,
-Dispatches,dispatches,exports
-Arrivals,arrivals,imports
-Balance,balance,
