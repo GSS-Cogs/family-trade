@@ -1,0 +1,10 @@
+# There should be only one value per observation for a given measure.
+PREFIX qb: <http://purl.org/linked-data/cube#>
+
+SELECT * WHERE {
+  ?mp a qb:MeasureProperty .
+  ?o a qb:Observation ;
+       ?mp ?v1 ;
+       ?mp ?v2 .
+  FILTER (?v1 != ?v2) .
+} LIMIT 100
