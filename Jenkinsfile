@@ -38,7 +38,7 @@ pipeline {
                         def jobDraft = drafts.find  { it['display-name'] == env.JOB_NAME }
                         if (jobDraft) {
                             withCredentials([usernameColonPassword(credentialsId: credentials, variable: 'USERPASS')]) {
-                                sh "java -cp lib/sparql.jar uk.org.floop.sparqlTestRunner.Run -i -s ${PMD}/v1/draftset/${jobDraft.id}/query?union-with-live=false -a \'${USERPASS}\'"
+                                sh "java -cp lib/sparql.jar uk.org.floop.sparqlTestRunner.Run -i -s ${PMD}/v1/draftset/${jobDraft.id}/query?union-with-live=true -a \'${USERPASS}\'"
                             }
                         } else {
                             error "Expecting a draftset for this job."
