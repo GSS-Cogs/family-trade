@@ -1,0 +1,4 @@
+Label,Notation,Parent Notation
+Goods,goods,goods-and-services,1
+Services,services,goods-and-services,2
+Goods and Services,goods-and-services,,3
