@@ -1,10 +1,10 @@
 Label,Notation,Parent Notation,Sort Priority
-<2,-2,total,1
-2-<4,2-4,total,2
-4-<10,4-10,total,3
-10-<20,10-20,total,4
-20 Above,20-above,total,5
-Total,total,,6
+<2,-2,any,1
+2-<4,2-4,any,2
+4-<10,4-10,any,3
+10-<20,10-20,any,4
+20+,20-above,any,5
+Any,any,,6
 0 to 1 years,0-to-1-years,total,7
 2 to 3 years,2-to-3-years,total,8
 4 to 5 years,4-to-5-years,total,9
@@ -12,3 +12,4 @@ Total,total,,6
 10 to 20 years,10-to-20-years,total,11
 20+ years,20-years,total,12
 Unknown,unknown,total,13
+Total,total,,14
