@@ -23,7 +23,7 @@ pipeline {
         stage('Upload draftset') {
             steps {
                 script {
-                    uploadDraftset('ONS ABS', ['out/ABS.csv'])
+                    uploadDraftset('ONS ABS', ['out/observations.csv'])
                 }
             }
         }
