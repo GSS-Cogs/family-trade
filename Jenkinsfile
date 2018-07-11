@@ -16,8 +16,7 @@ pipeline {
                 }
             }
             steps {
-                sh "jupyter-nbconvert --to python --stdout HMRC_RTS_Mass.ipynb | ipython"
-                sh "jupyter-nbconvert --to python --stdout HMRC_RTS_Value.ipynb | ipython"
+                sh "jupyter-nbconvert --to python --stdout tidy_published.ipynb | ipython"
                 sh "jupyter-nbconvert --to python --stdout update_metadata.ipynb | ipython"
             }
         }
