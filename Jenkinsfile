@@ -47,6 +47,17 @@ pipeline {
                 }
             }
         }
+        stage('Acceptance Tests') {
+            agent {
+                docker {
+                    image 'cloudfluff/databaker'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh 'behave -f json -o reports/acceptance.json'
+            }
+        }
         stage('Publish') {
             steps {
                 script {
@@ -59,6 +70,7 @@ pipeline {
         always {
             archiveArtifacts 'out/**'
             junit 'reports/**/*.xml'
+            cucumber fileIncludePattern: '**/*.json', jsonReportDirectory: 'reports'
         }
     }
 }
