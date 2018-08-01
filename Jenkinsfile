@@ -55,7 +55,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'behave -f json -o reports/acceptance.json'
+                sh 'behave -f json.cucumber -o reports/acceptance.json'
             }
         }
         stage('Publish') {
