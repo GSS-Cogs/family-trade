@@ -19,25 +19,14 @@ pipeline {
                 sh "jupyter-nbconvert --to python --stdout 'tidy.ipynb' | ipython"
             }
         }
-        stage('RDF Data Cube') {
-            agent {
-                docker {
-                    image 'cloudfluff/table2qb'
-                    reuseNode true
-                }
-            }
-            steps {
-                error 'need to declare columns.csv'
-            }
-        }
         stage('Upload draftset') {
             steps {
                 script {
-                    def obslist = []
-                    for (def file : findFiles(glob: 'out/*.ttl')) {
-                        obslist.add("out/${file.name}")
+                    def csvs = []
+                    for (def file : findFiles(glob: 'out/*.csv')) {
+                        csvs.add("out/${file.name}")
                     }
-                    uploadCube('ONS FDI inward', obslist)
+                    uploadDraftset('ONS FDI inward', csvs)
                 }
             }
         }
