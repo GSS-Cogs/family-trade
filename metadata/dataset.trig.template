@@ -4,10 +4,12 @@
 @prefix pmd:   <http://publishmydata.com/def/dataset#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix gdp:   <http://gss-data.org.uk/def/gdp#> .
 
 <http://gss-data.org.uk/graph/ons-balance-of-payments/metadata> {
     <http://gss-data.org.uk/data/ons-balance-of-payments>
             a                    qb:DataSet , pmd:Dataset , pmd:LinkedDataset ;
+            gdp:family           gdp:trade ;
             rdfs:label           "ONS Balance of Payments"@en ;
             pmd:contactEmail     <mailto:bop@ons.gsi.gov.uk> ;
             pmd:graph            <http://gss-data.org.uk/graph/ons-balance-of-payments> ;
@@ -18,6 +20,5 @@
             dct:publisher        <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
             dct:references       <http://gss-data.org.uk/help> ;
             dct:title            "ONS Balance of Payments"@en ;
-            qb:structure         <http://gss-data.org.uk/data/ons-balance-of-payments/structure> ;
             void:sparqlEndpoint  <http://gss-data.org.uk/sparql> .
 }
