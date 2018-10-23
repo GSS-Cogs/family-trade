@@ -19,19 +19,9 @@ pipeline {
                 sh "jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute main.ipynb"
             }
         }
-        stage('Upload draftset') {
+        stage('Review') {
             steps {
-                script {
-                    jobDraft.replace()
-                    uploadTidy(['observations.csv'])
-                }
-            }
-        }
-        stage('Publish') {
-            steps {
-                script {
-                    jobDraft.publish()
-                }
+                error "Needs review"
             }
         }
     }
