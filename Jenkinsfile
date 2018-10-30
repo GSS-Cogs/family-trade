@@ -16,7 +16,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'jupyter-nbconvert --to python --stdout Balanceofpayments2017q3_TabF.ipynb | ipython'
+                sh 'jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute Balanceofpayments2017q3_TabF.ipynb'
                 sh 'jupyter-nbconvert --to python --stdout update_metadata.ipynb | ipython'
             }
         }
@@ -46,4 +46,3 @@ pipeline {
         }
     }
 }
-
