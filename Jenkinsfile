@@ -16,7 +16,7 @@ pipeline {
                 }
             }
             steps {
-                sh "jupyter-nbconvert --to python --stdout tidy.ipynb | ipython"
+                sh "jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute tidy.ipynb"
                 sh 'jupyter-nbconvert --to python --stdout update_metadata.ipynb | ipython'
             }
         }
