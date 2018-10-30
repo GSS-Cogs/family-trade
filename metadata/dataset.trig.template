@@ -9,15 +9,15 @@
 <http://gss-data.org.uk/graph/ons-abs/metadata> {
   <http://gss-data.org.uk/data/ons-abs>
         a                    pmd:LinkedDataset , pmd:Dataset , qb:DataSet, gdp:TradeDataset ;
-        rdfs:comment         "Annual Business Survey importers and exporters." ;
-        rdfs:label           "ONS ABS"@en ;
+        rdfs:comment         "Businesses involved in international trade - importing and/or exporting." ;
+        rdfs:label           "ONS Annual Business Survey - Importers and Exporters"@en ;
         pmd:contactEmail     <mailto:abs@ons.gsi.gov.uk> ;
         pmd:graph            <http://gss-data.org.uk/graph/ons-abs> ;
         dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
+        dct:publisher        <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dct:issued           "2017-11-09T09:30:00Z"^^xsd:dateTime ;
         dct:modified         "${modified}"^^xsd:dateTime ;
         dct:license          <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
-        dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
         dct:references       <http://gss-data.org.uk/help> ;
         dct:title            "Annual Business Survey importers and exporters."@en ;
         void:sparqlEndpoint  <http://gss-data.org.uk/sparql> .
