@@ -9,6 +9,7 @@
     <http://gss-data.org.uk/data/ons-bop-individual-country-data>
             a                    qb:DataSet , pmd:Dataset , pmd:LinkedDataset ;
             rdfs:label           "ONS BoP Individual Country Data"@en ;
+            rdfs:comment         "Balance of Payments accounts including trade on the current account, capital transfers, transactions and levels of UK external assets and liabilities."@en;
             pmd:contactEmail     <mailto:bop@ons.gsi.gov.uk> ;
             pmd:graph            <http://gss-data.org.uk/graph/ons-bop-individual-country-data> ;
             dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
