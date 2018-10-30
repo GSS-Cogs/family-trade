@@ -9,8 +9,8 @@
 <http://gss-data.org.uk/graph/ons-abs/metadata> {
   <http://gss-data.org.uk/data/ons-abs>
         a                    pmd:LinkedDataset , pmd:Dataset , qb:DataSet, gdp:TradeDataset ;
-        rdfs:comment         "Businesses involved in international trade - importing and/or exporting." ;
-        rdfs:label           "ONS Annual Business Survey - Importers and Exporters"@en ;
+        rdfs:comment         "Annual Business Survey - Businesses involved in international trade - importing and/or exporting." ;
+        rdfs:label           "ONS ABS"@en ;
         pmd:contactEmail     <mailto:abs@ons.gsi.gov.uk> ;
         pmd:graph            <http://gss-data.org.uk/graph/ons-abs> ;
         dct:creator          <https://www.gov.uk/government/organisations/office-for-national-statistics> ;
