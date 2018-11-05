@@ -17,6 +17,7 @@ pipeline {
             }
             steps {
                 sh 'jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute bop_table_f.ipynb'
+
             }
         }
         stage('Upload draftset') {
@@ -45,4 +46,3 @@ pipeline {
         }
     }
 }
-
