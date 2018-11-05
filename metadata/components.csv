@@ -1,3 +1,0 @@
-Label,Description,Component Type,Codelist
-Cdid,Time series identifier,Dimension,
-Services,The type of service being traded,Dimension,http://gss-data.org.uk/def/concept/services
