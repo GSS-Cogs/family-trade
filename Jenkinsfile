@@ -16,26 +16,22 @@ pipeline {
                 }
             }
             steps {
-                sh 'jupyter-nbconvert --to python --stdout Balanceofpayments2017q3_TabF.ipynb | ipython'
-                sh 'jupyter-nbconvert --to python --stdout update_metadata.ipynb | ipython'
+                sh 'jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute bop_table_f.ipynb'
             }
         }
         stage('Upload draftset') {
             steps {
                 script {
-                    uploadDraftset('ONS Balance of Payments', ['out/balanceofpayments2017q3.csv'])
+                    jobDraft.replace()
+                    uploadTidy(['out/observations.csv'],
+                               'https://github.com/ONS-OpenData/ref_trade/raw/master/columns.csv')
                 }
-            }
-        }
-        stage('Test Draftset') {
-            steps {
-                echo 'Placeholder for acceptance tests from e.g. GDP-205'
             }
         }
         stage('Publish') {
             steps {
                 script {
-                    publishDraftset()
+                    jobDraft.publish()
                 }
             }
         }
@@ -43,6 +39,9 @@ pipeline {
     post {
         always {
             archiveArtifacts 'out/*'
+        }
+        success {
+            build job: '../GDP-tests', wait: false
         }
     }
 }
