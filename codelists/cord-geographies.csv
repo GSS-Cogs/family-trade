@@ -1,1627 +1,1627 @@
-Label,Notation,Parent Notation
-Whole world,A1,
-Total EU(28),V3,A1
-Total EU (27),V1,V3
-Total EU (25),D3,V1
-Total EU (15),D2,D3
-Austria,AT,D2
-Belgium & Luxembourg,A3,D2
-Belgium,BE,A3
-Luxembourg,LU,A3
-Denmark,DK,D2
-Finland,FI,D2
-France,FR,D2
-Germany,DE,D2
-Greece,GR,D2
-Irish Republic,IE,D2
-Italy,IT,D2
-Netherlands,NL,D2
-Portugal,PT,D2
-Spain,ES,D2
-Sweden,SE,D2
-Cyprus,CY,D3
-Czech Republic,CZ,D3
-Estonia,EE,D3
-Hungary,HU,D3
-Latvia,LV,D3
-Lithuania,LT,D3
-Malta,MT,D3
-Poland,PL,D3
-Slovakia,SK,D3
-Slovenia,SI,D3
-Bulgaria,BG,V1
-Romania,RO,V1
-Croatia,HR,V3
-"Non-EU ( D4 is known as Extra EU-15, here it is REst of World or V2)",D4,A1
-Rest of Western Europe,C80,D4
-EFTA,A5,C80
-Iceland,IS,A5
-Liechtenstein,LI,A5
-Norway,NO,A5
-Switzerland,CH,A5
-Gibraltar,GI,C80
-Turkey,TR,C80
-Other Western Europe,C482,C80
-Andorra,AD,C482
-Faroe Islands,FO,C482
-Jersey,JE,C482
-San Marino,SM,C482
-Vatican City,VA,C482
-North America,C83,D4
-NAFTA,B1,C83
-Canada,CA,B1
-Mexico,MX,B1
-United States,US,B1
-United States exc Puerto Rico,US1,US
-United States inc Puerto Rico,US2,US
-Puerto Rico,PR,US
-Other North America,C484,C83
-Greenland,GL,C484
-St. Pierre & Miquelon,PM,C484
-Other OECD countries,C76,D4
-Australia,AU,C76
-Japan,JP,C76
-New Zealand,NZ,C76
-South Korea,KR,C76
-Ceuta,XC,C76
-Melilla,XL,C76
-Oil exporting countries,C77,D4
-Saudi Arabia,SA,C77
-United Arab Emirates,AE,C77
-United Arab Emirates (HMRC),AE1,AE
-Abu Dhabi,DH,AE
-Dubai,DU,AE
-Sharjah etc,HA,AE
-Other Gulf Arabian,C486,C77
-Bahrain,BH,C486
-Kuwait,KW,C486
-Iraq,IQ,C486
-Oman,OM,C486
-Qatar,QA,C486
-Other oil exporters,C487,C77
-Algeria,DZ,C487
-Brunei,BN,C487
-East Timor,TL,C487
-Ecuador,EC,C487
-Gabon,GA,C487
-Indonesia,ID,C487
-Iran,IR,C487
-Libya,LY,C487
-Nigeria,NG,C487
-Trinidad & Tobago,TT,C487
-Venezuela,VE,C487
-Rest of World,C72,D4
-Rest of World: Europe,C493,C72
-Albania,AL,C493
-Belarus,BY,C493
-Bosnia & Herzegovina,BA,C493
-FYR Macedonia,MK,C493
-Moldova,MD,C493
-Russia,RU,C493
-Yugoslavia,C114,C493
-Serbia and Montenegro,CS,C114
-Montenegro,ME,CS
-Serbia,XS,CS
-Kosovo,XK,C114
-Ukraine,UA,C493
-Rest of World: Central America,C472,C72
-Bahamas,BS,C472
-Barbados,BB,C472
-Jamaica,JM,C472
-Panama,PA,C472
-St Kitts & Nevis,KN,C472
-Central America Offshores,C473,C472
-Bermuda,BM,C473
-British Virgin Islands,VG,C473
-Cayman Islands,KY,C473
-Montserrat,MS,C473
-Netherlands Antilles,AN,C473
-Other Caribbean ACP,C474,C472
-Antigua & Barbuda,AG,C474
-Belize,BZ,C474
-Dominica,DM,C474
-Dominican Republic,DO,C474
-Grenada,GD,C474
-Haiti,HT,C474
-St Lucia,LC,C474
-St Vincent,VC,C474
-Other Latin America,C475,C472
-Costa Rica,CR,C475
-Cuba,CU,C475
-El Salvador,SV,C475
-Guatemala,GT,C475
-Honduras,HN,C475
-Nicaragua,NI,C475
-Other Caribbean,C476,C472
-Anguilla,AI,C476
-Aruba,AW,C476
-Turks & Caicos Islands,TC,C476
-US Virgin Islands,VI,C476
-Rest of World: South America,C489,C72
-Argentina,AR,C489
-Bolivia,BO,C489
-Brazil,BR,C489
-Chile,CL,C489
-Colombia,CO,C489
-Falkland Islands,FK,C489
-Guyana,GY,C489
-Paraguay,PY,C489
-Peru,PE,C489
-Surinam,SR,C489
-Uruguay,UY,C489
-Rest of World: Africa,C488,C72
-Morocco,MA,C488
-Tunisia,TN,C488
-Egypt,EG,C488
-South Africa,ZA,C488
-Rest of Africa,C494,C488
-Rest of French Franc Zone,C469,C494
-Benin,BJ,C469
-Burkina Faso,BF,C469
-Cameroon,CM,C469
-Central African Republic,CF,C469
-Chad,TD,C469
-Comoros,KM,C469
-Congo (Republic),CG,C469
-Equatorial Guinea,GQ,C469
-Guinea Bissau,GW,C469
-Ivory Coast,CI,C469
-Mali,ML,C469
-Mayotte,YT,C469
-Niger,NE,C469
-Senegal,SN,C469
-Togo,TG,C469
-Rest of Africa ACP,C470,C494
-Angola,AO,C470
-Botswana,BW,C470
-Burundi,BI,C470
-Cape Verde,CV,C470
-Congo (Democratic Republic),CD,C470
-Djibouti,DJ,C470
-Eritrea,ER,C470
-Ethiopia,ET,C470
-Gambia,GM,C470
-Ghana,GH,C470
-Guinea,GN,C470
-Kenya,KE,C470
-Lesotho,LS,C470
-Liberia,LR,C470
-Madagascar,MG,C470
-Malawi,MW,C470
-Mauritania,MR,C470
-Mauritius,MU,C470
-Mozambique,MZ,C470
-Namibia,NA,C470
-Rwanda,RW,C470
-Sao Tome & Principe,ST,C470
-Seychelles,SC,C470
-Sierra Leone,SL,C470
-Somalia,SO,C470
-Sudan,SD,C470
-Swaziland,SZ,C470
-Tanzania,TZ,C470
-Uganda,UG,C470
-Zambia,ZM,C470
-Zimbabwe,ZW,C470
-Rest of Africa nes,C471,C494
-British Indian Ocean Territory,IO,C471
-St. Helena,SH,C471
-Rest of World: Asia,C490,C72
-China,CN,C490
-Hong Kong,HK,C490
-India,IN,C490
-Israel,IL,C490
-Lebanon,LB,C490
-Malaysia,MY,C490
-Pakistan,PK,C490
-Philippines,PH,C490
-Singapore,SG,C490
-Taiwan,TW,C490
-Thailand,TH,C490
-Vietnam,VN,C490
-Yemen,YE,C490
-Former Soviet Near & Middle East,C477,C490
-Armenia,AM,C477
-Azerbaijan,AZ,C477
-Georgia,GE,C477
-Other Former Soviet Asia,C478,C490
-Kazakhstan,KZ,C478
-Kyrgyz Republic,KG,C478
-Tajikistan,TJ,C478
-Turkmenistan,TM,C478
-Uzbekistan,UZ,C478
-Rest of Near & Middle East,C481,C490
-Jordan,JO,C481
-Occupied Palestinian Territory,PS,C481
-Syria,SY,C481
-Rest of ASEAN,C479,C490
-Myanmar,MM,C479
-Laos,LA,C479
-Cambodia,KH,C479
-Rest of Other Asia,C480,C490
-Afghanistan,AF,C480
-Bangladesh,BD,C480
-Maldives,MV,C480
-Sri Lanka,LK,C480
-Nepal,NP,C480
-Bhutan,BT,C480
-Mongolia,MN,C480
-North Korea,KP,C480
-Macao,MO,C480
-Rest of World: Oceania,C415,C72
-Papua New Guinea,PG,C415
-Vanuatu,VU,C415
-Australian Oceania,C441,C415
-Cocos Islands,CC,C441
-Christmas Islands,CX,C441
-Heard & McDonald Islands,HM,C441
-Norfolk Islands,NF,C441
-US Oceania,C442,C415
-American Samoa,AS,C442
-Guam,GU,C442
-US Minor Outlying Islands,UM,C442
-New Zealand Oceania,C443,C415
-Cook Islands,CK,C443
-Niue Island,NU,C443
-Tokelau Islands,TK,C443
-Polar Regions,C444,C415
-Antarctica,AQ,C444
-Bouvet Island,BV,C444
-French Southern Territories,TF,C444
-South Georgia,GS,C444
-Other Oceania,C491,C415
-Fiji,FJ,C491
-French Polynesia,PF,C491
-Kiribati,KI,C491
-Marshall Islands,MH,C491
-Micronesia,FM,C491
-Nauru,NR,C491
-New Caledonia,NC,C491
-Northern Mariana Islands,MP,C491
-Palau,PW,C491
-Pitcairn,PN,C491
-Samoa,WS,C491
-Solomon Islands,SB,C491
-Tonga,TO,C491
-Tuvalu,TV,C491
-Wallis & Futuna,WF,C491
-Extra EU-27 or Rest of world excluding EU-27 countries,V2,
-Europe,E1,
-Total EU (27),V1,E1
-Total EU (25),D3,V1
-Total EU (15),D2,D3
-Austria,AT,D2
-Belgium & Luxembourg,A3,D2
-Belgium,BE,A3
-Luxembourg,LU,A3
-Denmark,DK,D2
-Finland,FI,D2
-France,FR,D2
-Germany,DE,D2
-Greece,GR,D2
-Irish Republic,IE,D2
-Italy,IT,D2
-Netherlands,NL,D2
-Portugal,PT,D2
-Spain,ES,D2
-Sweden,SE,D2
-Cyprus,CY,D3
-Czech Republic,CZ,D3
-Estonia,EE,D3
-Hungary,HU,D3
-Latvia,LV,D3
-Lithuania,LT,D3
-Malta,MT,D3
-Poland,PL,D3
-Slovakia,SK,D3
-Slovenia,SI,D3
-Bulgaria,BG,V1
-Romania,RO,V1
-EFTA,A5,E1
-Iceland,IS,A5
-Liechtenstein,LI,A5
-Norway,NO,A5
-Switzerland,CH,A5
-Other Europe,E2,E1
-Gibraltar,GI,E2
-Turkey,TR,E2
-Other Western Europe,C482,E2
-Andorra,AD,C482
-Faroe Islands,FO,C482
-Jersey,JE,C482
-San Marino,SM,C482
-Vatican City,VA,C482
-Rest of World: Europe,C493,E2
-Albania,AL,C493
-Belarus,BY,C493
-Bosnia & Herzegovina,BA,C493
-FYR Macedonia,MK,C493
-Moldova,MD,C493
-Russia,RU,C493
-Yugoslavia,C114,C493
-Serbia and Montenegro,CS,C114
-Montenegro,ME,CS
-Serbia,XS,CS
-Kosovo,XK,C114
-Ukraine,UA,C493
-Residual Europe (aka R1-Residual other Europe),8A,
-Gibraltar,GI,8A
-Other Western Europe,C482,8A
-Andorra,AD,C482
-Faroe Islands,FO,C482
-Jersey,JE,C482
-San Marino,SM,C482
-Vatican City,VA,C482
-Bosnia & Herzegovina,BA,8A
-FYR Macedonia,MK,8A
-Moldova,MD,8A
-Non-EMU(13),K3,
-Cyprus,CY,K3
-Malta,MT,K3
-Non-EMU(15),K4,K3
-Slovakia,SK,K4
-Non-EMU(16),K5,K4
-Estonia,EE,K5
-Non-EMU(17),K6,K5
-Denmark,DK,K6
-Sweden,SE,K6
-Czech Republic,CZ,K6
-Hungary,HU,K6
-Latvia,LV,K6
-Lithuania,LT,K6
-Poland,PL,K6
-Bulgaria,BG,K6
-Romania,RO,K6
-Non-EMU(16) excluding DK and SE,S5,
-Estonia,EE,S5
-Non-EMU(17) excluding DK and SE,S6,S5
-Czech Republic,CZ,S6
-Hungary,HU,S6
-Latvia,LV,S6
-Lithuania,LT,S6
-Poland,PL,S6
-Bulgaria,BG,S6
-Romania,RO,S6
-Extra Euro Area(13),J3,
-Cyprus,CY,J3
-Malta,MT,J3
-Extra Euro Area(15),J4,J3
-Slovakia,SK,J4
-Extra Euro Area(16),J5,J4
-Estonia,EE,J5
-Extra Euro Area(17),J6,J5
-Latvia,LV,J6
-Extra Euro Area(18),J7,J6
-Denmark,DK,J7
-Sweden,SE,J7
-Czech Republic,CZ,J7
-Hungary,HU,J7
-Lithuania,LT,J7
-Poland,PL,J7
-Bulgaria,BG,J7
-Romania,RO,J7
-Croatia,HR,J7
-EFTA,A5,J7
-Iceland,IS,A5
-Liechtenstein,LI,A5
-Norway,NO,A5
-Switzerland,CH,A5
-Ceuta,XC,J7
-Other Europe,E2,J7
-Gibraltar,GI,E2
-Turkey,TR,E2
-Other Western Europe,C482,E2
-Andorra,AD,C482
-Faroe Islands,FO,C482
-Jersey,JE,C482
-San Marino,SM,C482
-Vatican City,VA,C482
-Rest of World: Europe,C493,E2
-Albania,AL,C493
-Belarus,BY,C493
-Bosnia & Herzegovina,BA,C493
-FYR Macedonia,MK,C493
-Moldova,MD,C493
-Russia,RU,C493
-Yugoslavia,C114,C493
-Serbia and Montenegro,CS,C114
-Montenegro,ME,CS
-Serbia,XS,CS
-Kosovo,XK,C114
-Ukraine,UA,C493
-Africa,E4,J7
-North Africa,E5,E4
-Morocco,MA,E5
-Egypt,EG,E5
-Residual North Africa,R9,E5
-Algeria,DZ,R9
-Libya,LY,R9
-Tunisia,TN,R9
-Other Africa,E6,E4
-South Africa,ZA,E6
-Residual Other Africa (aka R2 - Residual Other Africa,8C,E6
-Nigeria,NG,8C
-Residual Other Africa exc Nigeria,8D,8C
-Gabon,GA,8D
-Rest of Africa,C494,8D
-Rest of French Franc Zone,C469,C494
-Benin,BJ,C469
-Burkina Faso,BF,C469
-Cameroon,CM,C469
-Central African Republic,CF,C469
-Chad,TD,C469
-Comoros,KM,C469
-Congo (Republic),CG,C469
-Equatorial Guinea,GQ,C469
-Guinea Bissau,GW,C469
-Ivory Coast,CI,C469
-Mali,ML,C469
-Mayotte,YT,C469
-Niger,NE,C469
-Senegal,SN,C469
-Togo,TG,C469
-Rest of Africa ACP,C470,C494
-Angola,AO,C470
-Botswana,BW,C470
-Burundi,BI,C470
-Cape Verde,CV,C470
-Congo (Democratic Republic),CD,C470
-Djibouti,DJ,C470
-Eritrea,ER,C470
-Ethiopia,ET,C470
-Gambia,GM,C470
-Ghana,GH,C470
-Guinea,GN,C470
-Kenya,KE,C470
-Lesotho,LS,C470
-Liberia,LR,C470
-Madagascar,MG,C470
-Malawi,MW,C470
-Mauritania,MR,C470
-Mauritius,MU,C470
-Mozambique,MZ,C470
-Namibia,NA,C470
-Rwanda,RW,C470
-Sao Tome & Principe,ST,C470
-Seychelles,SC,C470
-Sierra Leone,SL,C470
-Somalia,SO,C470
-Sudan,SD,C470
-Swaziland,SZ,C470
-Tanzania,TZ,C470
-Uganda,UG,C470
-Zambia,ZM,C470
-Zimbabwe,ZW,C470
-Rest of Africa nes,C471,C494
-British Indian Ocean Territory,IO,C471
-St. Helena,SH,C471
-Western Sahara,EH,E6
-South Sudan,SS,E6
-America,E7,J7
-North America (BoP),E8,E7
-Canada,CA,E8
-United States,US,E8
-United States exc Puerto Rico,US1,US
-United States inc Puerto Rico,US2,US
-Puerto Rico,PR,US
-Other North America,C484,E8
-Greenland,GL,C484
-St. Pierre & Miquelon,PM,C484
-Central America,E9,E7
-Mexico,MX,E9
-Residual Central America,R3,E9
-Trinidad & Tobago,TT,R3
-Rest of World: Central America,C472,R3
-Bahamas,BS,C472
-Barbados,BB,C472
-Jamaica,JM,C472
-Panama,PA,C472
-St Kitts & Nevis,KN,C472
-Central America Offshores,C473,C472
-Bermuda,BM,C473
-British Virgin Islands,VG,C473
-Cayman Islands,KY,C473
-Montserrat,MS,C473
-Netherlands Antilles,AN,C473
-Other Caribbean ACP,C474,C472
-Antigua & Barbuda,AG,C474
-Belize,BZ,C474
-Dominica,DM,C474
-Dominican Republic,DO,C474
-Grenada,GD,C474
-Haiti,HT,C474
-St Lucia,LC,C474
-St Vincent,VC,C474
-Other Latin America,C475,C472
-Costa Rica,CR,C475
-Cuba,CU,C475
-El Salvador,SV,C475
-Guatemala,GT,C475
-Honduras,HN,C475
-Nicaragua,NI,C475
-Other Caribbean,C476,C472
-Anguilla,AI,C476
-Aruba,AW,C476
-Turks & Caicos Islands,TC,C476
-US Virgin Islands,VI,C476
-Saint Barthelemy,BL,E9
-Bonaire,BQ,E9
-Curacao,CW,E9
-Sint Maarten,SX,E9
-South America,F1,E7
-Ecuador,EC,F1
-Venezuela,VE,F1
-Rest of World: South America,C489,F1
-Argentina,AR,C489
-Bolivia,BO,C489
-Brazil,BR,C489
-Chile,CL,C489
-Colombia,CO,C489
-Falkland Islands,FK,C489
-Guyana,GY,C489
-Paraguay,PY,C489
-Peru,PE,C489
-Surinam,SR,C489
-Uruguay,UY,C489
-Asia,F2,J7
-Near & Middle East,F3,F2
-Iran,IR,F3
-Israel,IL,F3
-Gulf Arabian Countries,F4,F3
-Saudi Arabia,SA,F4
-Residual Gulf Arabian (aka R5-Residual Gulf Arabian),J8,F4
-United Arab Emirates,AE,J8
-United Arab Emirates (HMRC),AE1,AE
-Abu Dhabi,DH,AE
-Dubai,DU,AE
-Sharjah etc,HA,AE
-Other Gulf Arabian,C486,J8
-Bahrain,BH,C486
-Kuwait,KW,C486
-Iraq,IQ,C486
-Oman,OM,C486
-Qatar,QA,C486
-Yemen,YE,J8
-Other Near & Middle East,F5,F3
-Lebanon,LB,F5
-Former Soviet Near & Middle East,C477,F5
-Armenia,AM,C477
-Azerbaijan,AZ,C477
-Georgia,GE,C477
-Rest of Near & Middle East,C481,F5
-Jordan,JO,C481
-Occupied Palestinian Territory,PS,C481
-Syria,SY,C481
-Other Asia,F6,F2
-Japan,JP,F6
-South Korea,KR,F6
-Indonesia,ID,F6
-China,CN,F6
-Hong Kong,HK,F6
-India,IN,F6
-Malaysia,MY,F6
-Pakistan,PK,F6
-Philippines,PH,F6
-Singapore,SG,F6
-Taiwan,TW,F6
-Thailand,TH,F6
-Residual Asia (aka R6-Residual Asia),8B,F6
-Brunei,BN,8B
-East Timor,TL,8B
-Vietnam,VN,8B
-Other Former Soviet Asia,C478,8B
-Kazakhstan,KZ,C478
-Kyrgyz Republic,KG,C478
-Tajikistan,TJ,C478
-Turkmenistan,TM,C478
-Uzbekistan,UZ,C478
-Rest of ASEAN,C479,8B
-Myanmar,MM,C479
-Laos,LA,C479
-Cambodia,KH,C479
-Rest of Other Asia,C480,8B
-Afghanistan,AF,C480
-Bangladesh,BD,C480
-Maldives,MV,C480
-Sri Lanka,LK,C480
-Nepal,NP,C480
-Bhutan,BT,C480
-Mongolia,MN,C480
-North Korea,KP,C480
-Macao,MO,C480
-Oceania & Polar Regions,F7,J7
-Australia,AU,F7
-New Zealand,NZ,F7
-Rest of World: Oceania,C415,F7
-Papua New Guinea,PG,C415
-Vanuatu,VU,C415
-Australian Oceania,C441,C415
-Cocos Islands,CC,C441
-Christmas Islands,CX,C441
-Heard & McDonald Islands,HM,C441
-Norfolk Islands,NF,C441
-US Oceania,C442,C415
-American Samoa,AS,C442
-Guam,GU,C442
-US Minor Outlying Islands,UM,C442
-New Zealand Oceania,C443,C415
-Cook Islands,CK,C443
-Niue Island,NU,C443
-Tokelau Islands,TK,C443
-Polar Regions,C444,C415
-Antarctica,AQ,C444
-Bouvet Island,BV,C444
-French Southern Territories,TF,C444
-South Georgia,GS,C444
-Other Oceania,C491,C415
-Fiji,FJ,C491
-French Polynesia,PF,C491
-Kiribati,KI,C491
-Marshall Islands,MH,C491
-Micronesia,FM,C491
-Nauru,NR,C491
-New Caledonia,NC,C491
-Northern Mariana Islands,MP,C491
-Palau,PW,C491
-Pitcairn,PN,C491
-Samoa,WS,C491
-Solomon Islands,SB,C491
-Tonga,TO,C491
-Tuvalu,TV,C491
-Wallis & Futuna,WF,C491
-OECD,A8,
-Total EU (15),D2,A8
-Austria,AT,D2
-Belgium & Luxembourg,A3,D2
-Belgium,BE,A3
-Luxembourg,LU,A3
-Denmark,DK,D2
-Finland,FI,D2
-France,FR,D2
-Germany,DE,D2
-Greece,GR,D2
-Irish Republic,IE,D2
-Italy,IT,D2
-Netherlands,NL,D2
-Portugal,PT,D2
-Spain,ES,D2
-Sweden,SE,D2
-Czech Republic,CZ,A8
-Hungary,HU,A8
-Slovakia,SK,A8
-Iceland,IS,A8
-Norway,NO,A8
-Switzerland,CH,A8
-Turkey,TR,A8
-NAFTA,B1,A8
-Canada,CA,B1
-Mexico,MX,B1
-United States,US,B1
-United States exc Puerto Rico,US1,US
-United States inc Puerto Rico,US2,US
-Puerto Rico,PR,US
-Other OECD countries,C76,A8
-Australia,AU,C76
-Japan,JP,C76
-New Zealand,NZ,C76
-South Korea,KR,C76
-Ceuta,XC,C76
-Melilla,XL,C76
-ASEAN,B3,
-Brunei,BN,B3
-East Timor,TL,B3
-Indonesia,ID,B3
-Malaysia,MY,B3
-Philippines,PH,B3
-Singapore,SG,B3
-Thailand,TH,B3
-Vietnam,VN,B3
-Rest of ASEAN,C479,B3
-Myanmar,MM,C479
-Laos,LA,C479
-Cambodia,KH,C479
-OPEC,B4,
-Saudi Arabia,SA,B4
-United Arab Emirates,AE,B4
-United Arab Emirates (HMRC),AE1,AE
-Abu Dhabi,DH,AE
-Dubai,DU,AE
-Sharjah etc,HA,AE
-Kuwait,KW,B4
-Iraq,IQ,B4
-Qatar,QA,B4
-Algeria,DZ,B4
-Indonesia,ID,B4
-Iran,IR,B4
-Libya,LY,B4
-Nigeria,NG,B4
-Venezuela,VE,B4
-ACP,B5,
-African ACP,C449,B5
-Gabon,GA,C449
-Nigeria,NG,C449
-South Africa,ZA,C449
-Rest of French Franc Zone,C469,C449
-Benin,BJ,C469
-Burkina Faso,BF,C469
-Cameroon,CM,C469
-Central African Republic,CF,C469
-Chad,TD,C469
-Comoros,KM,C469
-Congo (Republic),CG,C469
-Equatorial Guinea,GQ,C469
-Guinea Bissau,GW,C469
-Ivory Coast,CI,C469
-Mali,ML,C469
-Mayotte,YT,C469
-Niger,NE,C469
-Senegal,SN,C469
-Togo,TG,C469
-Rest of Africa ACP,C470,C449
-Angola,AO,C470
-Botswana,BW,C470
-Burundi,BI,C470
-Cape Verde,CV,C470
-Congo (Democratic Republic),CD,C470
-Djibouti,DJ,C470
-Eritrea,ER,C470
-Ethiopia,ET,C470
-Gambia,GM,C470
-Ghana,GH,C470
-Guinea,GN,C470
-Kenya,KE,C470
-Lesotho,LS,C470
-Liberia,LR,C470
-Madagascar,MG,C470
-Malawi,MW,C470
-Mauritania,MR,C470
-Mauritius,MU,C470
-Mozambique,MZ,C470
-Namibia,NA,C470
-Rwanda,RW,C470
-Sao Tome & Principe,ST,C470
-Seychelles,SC,C470
-Sierra Leone,SL,C470
-Somalia,SO,C470
-Sudan,SD,C470
-Swaziland,SZ,C470
-Tanzania,TZ,C470
-Uganda,UG,C470
-Zambia,ZM,C470
-Zimbabwe,ZW,C470
-Caribbean ACP,C450,B5
-Trinidad & Tobago,TT,C450
-Bahamas,BS,C450
-Barbados,BB,C450
-Jamaica,JM,C450
-St Kitts & Nevis,KN,C450
-Other Caribbean ACP,C474,C450
-Antigua & Barbuda,AG,C474
-Belize,BZ,C474
-Dominica,DM,C474
-Dominican Republic,DO,C474
-Grenada,GD,C474
-Haiti,HT,C474
-St Lucia,LC,C474
-St Vincent,VC,C474
-Surinam,SR,C450
-Pacific ACP,C451,B5
-Papua New Guinea,PG,C451
-Vanuatu,VU,C451
-Cook Islands,CK,C451
-Niue Island,NU,C451
-Fiji,FJ,C451
-Kiribati,KI,C451
-Marshall Islands,MH,C451
-Micronesia,FM,C451
-Nauru,NR,C451
-Palau,PW,C451
-Samoa,WS,C451
-Solomon Islands,SB,C451
-Tonga,TO,C451
-Tuvalu,TV,C451
-NICs1,B9,
-South Korea,KR,B9
-Hong Kong,HK,B9
-Singapore,SG,B9
-Taiwan,TW,B9
-NICs2A,C453,
-Malaysia,MY,C453
-Philippines,PH,C453
-Thailand,TH,C453
-NICs2LA,C454,
-Mexico,MX,C454
-Argentina,AR,C454
-Brazil,BR,C454
-Chile,CL,C454
-CIS,C6,
-Belarus,BY,C6
-Moldova,MD,C6
-Russia,RU,C6
-Ukraine,UA,C6
-Former Soviet Near & Middle East,C477,C6
-Armenia,AM,C477
-Azerbaijan,AZ,C477
-Georgia,GE,C477
-Other Former Soviet Asia,C478,C6
-Kazakhstan,KZ,C478
-Kyrgyz Republic,KG,C478
-Tajikistan,TJ,C478
-Turkmenistan,TM,C478
-Uzbekistan,UZ,C478
-Central & Eastern Europe,C402,
-Czech Republic,CZ,C402
-Hungary,HU,C402
-Poland,PL,C402
-Slovakia,SK,C402
-Slovenia,SI,C402
-Bulgaria,BG,C402
-Romania,RO,C402
-Albania,AL,C402
-Bosnia & Herzegovina,BA,C402
-FYR Macedonia,MK,C402
-Yugoslavia,C114,C402
-Serbia and Montenegro,CS,C114
-Montenegro,ME,CS
-Serbia,XS,CS
-Kosovo,XK,C114
-Baltic Countries,E3,C402
-Estonia,EE,E3
-Latvia,LV,E3
-Lithuania,LT,E3
-Offshore Financial Centres,C405,
-Bahrain,BH,C405
-Bahamas,BS,C405
-Barbados,BB,C405
-Jamaica,JM,C405
-Panama,PA,C405
-St Kitts & Nevis,KN,C405
-Central America Offshores,C473,C405
-Bermuda,BM,C473
-British Virgin Islands,VG,C473
-Cayman Islands,KY,C473
-Montserrat,MS,C473
-Netherlands Antilles,AN,C473
-Liberia,LR,C405
-Hong Kong,HK,C405
-Lebanon,LB,C405
-Philippines,PH,C405
-Singapore,SG,C405
-Vanuatu,VU,C405
-EEA,C445,
-Total EU (27),V1,C445
-Total EU (25),D3,V1
-Total EU (15),D2,D3
-Austria,AT,D2
-Belgium & Luxembourg,A3,D2
-Belgium,BE,A3
-Luxembourg,LU,A3
-Denmark,DK,D2
-Finland,FI,D2
-France,FR,D2
-Germany,DE,D2
-Greece,GR,D2
-Irish Republic,IE,D2
-Italy,IT,D2
-Netherlands,NL,D2
-Portugal,PT,D2
-Spain,ES,D2
-Sweden,SE,D2
-Cyprus,CY,D3
-Czech Republic,CZ,D3
-Estonia,EE,D3
-Hungary,HU,D3
-Latvia,LV,D3
-Lithuania,LT,D3
-Malta,MT,D3
-Poland,PL,D3
-Slovakia,SK,D3
-Slovenia,SI,D3
-Bulgaria,BG,V1
-Romania,RO,V1
-Iceland,IS,C445
-Liechtenstein,LI,C445
-Norway,NO,C445
-Latin America,C447,
-Mexico,MX,C447
-Ecuador,EC,C447
-Venezuela,VE,C447
-Panama,PA,C447
-Other Latin America,C475,C447
-Costa Rica,CR,C475
-Cuba,CU,C475
-El Salvador,SV,C475
-Guatemala,GT,C475
-Honduras,HN,C475
-Nicaragua,NI,C475
-Bolivia,BO,C447
-Chile,CL,C447
-Colombia,CO,C447
-Peru,PE,C447
-Mercosur countries,C459,C447
-Argentina,AR,C459
-Brazil,BR,C459
-Paraguay,PY,C459
-Uruguay,UY,C459
-Mediterranean Basin,C455,
-Cyprus,CY,C455
-Malta,MT,C455
-Gibraltar,GI,C455
-Turkey,TR,C455
-Albania,AL,C455
-Morocco,MA,C455
-Egypt,EG,C455
-Israel,IL,C455
-Lebanon,LB,C455
-Rest of Near & Middle East,C481,C455
-Jordan,JO,C481
-Occupied Palestinian Territory,PS,C481
-Syria,SY,C481
-Residual North Africa,R9,C455
-Algeria,DZ,R9
-Libya,LY,R9
-Tunisia,TN,R9
-Former Yugoslavia,C93,C455
-Slovenia,SI,C93
-Bosnia & Herzegovina,BA,C93
-FYR Macedonia,MK,C93
-Yugoslavia,C114,C93
-Serbia and Montenegro,CS,C114
-Montenegro,ME,CS
-Serbia,XS,CS
-Kosovo,XK,C114
-French Franc Zone,C456,
-Gabon,GA,C456
-Rest of French Franc Zone,C469,C456
-Benin,BJ,C469
-Burkina Faso,BF,C469
-Cameroon,CM,C469
-Central African Republic,CF,C469
-Chad,TD,C469
-Comoros,KM,C469
-Congo (Republic),CG,C469
-Equatorial Guinea,GQ,C469
-Guinea Bissau,GW,C469
-Ivory Coast,CI,C469
-Mali,ML,C469
-Mayotte,YT,C469
-Niger,NE,C469
-Senegal,SN,C469
-Togo,TG,C469
-Maghreb countries,C457,
-Algeria,DZ,C457
-Morocco,MA,C457
-Tunisia,TN,C457
-Mashrek countries,C458,
-Egypt,EG,C458
-Rest of Near & Middle East,C481,C458
-Jordan,JO,C481
-Occupied Palestinian Territory,PS,C481
-Syria,SY,C481
-APEC,C460,
-NAFTA,B1,C460
-Canada,CA,B1
-Mexico,MX,B1
-United States,US,B1
-United States exc Puerto Rico,US1,US
-United States inc Puerto Rico,US2,US
-Puerto Rico,PR,US
-Australia,AU,C460
-Japan,JP,C460
-New Zealand,NZ,C460
-South Korea,KR,C460
-Brunei,BN,C460
-East Timor,TL,C460
-Indonesia,ID,C460
-Chile,CL,C460
-Peru,PE,C460
-China,CN,C460
-Hong Kong,HK,C460
-Malaysia,MY,C460
-Philippines,PH,C460
-Singapore,SG,C460
-Taiwan,TW,C460
-Thailand,TH,C460
-Vietnam,VN,C460
-Papua New Guinea,PG,C460
-Residual America (aka R8- Residual America),C462,
-Other North America,C484,C462
-Greenland,GL,C484
-St. Pierre & Miquelon,PM,C484
-Ecuador,EC,C462
-Bolivia,BO,C462
-Falkland Islands,FK,C462
-Guyana,GY,C462
-Paraguay,PY,C462
-Peru,PE,C462
-Surinam,SR,C462
-used to aggregate suppressed data,999X,
-Unknown Country A,X997,999X
-Unknown Country B,X999,999X
-Unknown Country C,X977,999X
-Extra EU-25 - world less EU-25 countries,D5,
-Bulgaria,BG,D5
-Romania,RO,D5
-EFTA,A5,D5
-Iceland,IS,A5
-Liechtenstein,LI,A5
-Norway,NO,A5
-Switzerland,CH,A5
-Other Europe,E2,D5
-Gibraltar,GI,E2
-Turkey,TR,E2
-Other Western Europe,C482,E2
-Andorra,AD,C482
-Faroe Islands,FO,C482
-Jersey,JE,C482
-San Marino,SM,C482
-Vatican City,VA,C482
-Rest of World: Europe,C493,E2
-Albania,AL,C493
-Belarus,BY,C493
-Bosnia & Herzegovina,BA,C493
-FYR Macedonia,MK,C493
-Moldova,MD,C493
-Russia,RU,C493
-Yugoslavia,C114,C493
-Serbia and Montenegro,CS,C114
-Montenegro,ME,CS
-Serbia,XS,CS
-Kosovo,XK,C114
-Ukraine,UA,C493
-Africa,E4,D5
-North Africa,E5,E4
-Morocco,MA,E5
-Egypt,EG,E5
-Residual North Africa,R9,E5
-Algeria,DZ,R9
-Libya,LY,R9
-Tunisia,TN,R9
-Other Africa,E6,E4
-South Africa,ZA,E6
-Residual Other Africa (aka R2 - Residual Other Africa,8C,E6
-Nigeria,NG,8C
-Residual Other Africa exc Nigeria,8D,8C
-Gabon,GA,8D
-Rest of Africa,C494,8D
-Rest of French Franc Zone,C469,C494
-Benin,BJ,C469
-Burkina Faso,BF,C469
-Cameroon,CM,C469
-Central African Republic,CF,C469
-Chad,TD,C469
-Comoros,KM,C469
-Congo (Republic),CG,C469
-Equatorial Guinea,GQ,C469
-Guinea Bissau,GW,C469
-Ivory Coast,CI,C469
-Mali,ML,C469
-Mayotte,YT,C469
-Niger,NE,C469
-Senegal,SN,C469
-Togo,TG,C469
-Rest of Africa ACP,C470,C494
-Angola,AO,C470
-Botswana,BW,C470
-Burundi,BI,C470
-Cape Verde,CV,C470
-Congo (Democratic Republic),CD,C470
-Djibouti,DJ,C470
-Eritrea,ER,C470
-Ethiopia,ET,C470
-Gambia,GM,C470
-Ghana,GH,C470
-Guinea,GN,C470
-Kenya,KE,C470
-Lesotho,LS,C470
-Liberia,LR,C470
-Madagascar,MG,C470
-Malawi,MW,C470
-Mauritania,MR,C470
-Mauritius,MU,C470
-Mozambique,MZ,C470
-Namibia,NA,C470
-Rwanda,RW,C470
-Sao Tome & Principe,ST,C470
-Seychelles,SC,C470
-Sierra Leone,SL,C470
-Somalia,SO,C470
-Sudan,SD,C470
-Swaziland,SZ,C470
-Tanzania,TZ,C470
-Uganda,UG,C470
-Zambia,ZM,C470
-Zimbabwe,ZW,C470
-Rest of Africa nes,C471,C494
-British Indian Ocean Territory,IO,C471
-St. Helena,SH,C471
-Western Sahara,EH,E6
-South Sudan,SS,E6
-America,E7,D5
-North America (BoP),E8,E7
-Canada,CA,E8
-United States,US,E8
-United States exc Puerto Rico,US1,US
-United States inc Puerto Rico,US2,US
-Puerto Rico,PR,US
-Other North America,C484,E8
-Greenland,GL,C484
-St. Pierre & Miquelon,PM,C484
-Central America,E9,E7
-Mexico,MX,E9
-Residual Central America,R3,E9
-Trinidad & Tobago,TT,R3
-Rest of World: Central America,C472,R3
-Bahamas,BS,C472
-Barbados,BB,C472
-Jamaica,JM,C472
-Panama,PA,C472
-St Kitts & Nevis,KN,C472
-Central America Offshores,C473,C472
-Bermuda,BM,C473
-British Virgin Islands,VG,C473
-Cayman Islands,KY,C473
-Montserrat,MS,C473
-Netherlands Antilles,AN,C473
-Other Caribbean ACP,C474,C472
-Antigua & Barbuda,AG,C474
-Belize,BZ,C474
-Dominica,DM,C474
-Dominican Republic,DO,C474
-Grenada,GD,C474
-Haiti,HT,C474
-St Lucia,LC,C474
-St Vincent,VC,C474
-Other Latin America,C475,C472
-Costa Rica,CR,C475
-Cuba,CU,C475
-El Salvador,SV,C475
-Guatemala,GT,C475
-Honduras,HN,C475
-Nicaragua,NI,C475
-Other Caribbean,C476,C472
-Anguilla,AI,C476
-Aruba,AW,C476
-Turks & Caicos Islands,TC,C476
-US Virgin Islands,VI,C476
-Saint Barthelemy,BL,E9
-Bonaire,BQ,E9
-Curacao,CW,E9
-Sint Maarten,SX,E9
-South America,F1,E7
-Ecuador,EC,F1
-Venezuela,VE,F1
-Rest of World: South America,C489,F1
-Argentina,AR,C489
-Bolivia,BO,C489
-Brazil,BR,C489
-Chile,CL,C489
-Colombia,CO,C489
-Falkland Islands,FK,C489
-Guyana,GY,C489
-Paraguay,PY,C489
-Peru,PE,C489
-Surinam,SR,C489
-Uruguay,UY,C489
-Asia,F2,D5
-Near & Middle East,F3,F2
-Iran,IR,F3
-Israel,IL,F3
-Gulf Arabian Countries,F4,F3
-Saudi Arabia,SA,F4
-Residual Gulf Arabian (aka R5-Residual Gulf Arabian),J8,F4
-United Arab Emirates,AE,J8
-United Arab Emirates (HMRC),AE1,AE
-Abu Dhabi,DH,AE
-Dubai,DU,AE
-Sharjah etc,HA,AE
-Other Gulf Arabian,C486,J8
-Bahrain,BH,C486
-Kuwait,KW,C486
-Iraq,IQ,C486
-Oman,OM,C486
-Qatar,QA,C486
-Yemen,YE,J8
-Other Near & Middle East,F5,F3
-Lebanon,LB,F5
-Former Soviet Near & Middle East,C477,F5
-Armenia,AM,C477
-Azerbaijan,AZ,C477
-Georgia,GE,C477
-Rest of Near & Middle East,C481,F5
-Jordan,JO,C481
-Occupied Palestinian Territory,PS,C481
-Syria,SY,C481
-Other Asia,F6,F2
-Japan,JP,F6
-South Korea,KR,F6
-Indonesia,ID,F6
-China,CN,F6
-Hong Kong,HK,F6
-India,IN,F6
-Malaysia,MY,F6
-Pakistan,PK,F6
-Philippines,PH,F6
-Singapore,SG,F6
-Taiwan,TW,F6
-Thailand,TH,F6
-Residual Asia (aka R6-Residual Asia),8B,F6
-Brunei,BN,8B
-East Timor,TL,8B
-Vietnam,VN,8B
-Other Former Soviet Asia,C478,8B
-Kazakhstan,KZ,C478
-Kyrgyz Republic,KG,C478
-Tajikistan,TJ,C478
-Turkmenistan,TM,C478
-Uzbekistan,UZ,C478
-Rest of ASEAN,C479,8B
-Myanmar,MM,C479
-Laos,LA,C479
-Cambodia,KH,C479
-Rest of Other Asia,C480,8B
-Afghanistan,AF,C480
-Bangladesh,BD,C480
-Maldives,MV,C480
-Sri Lanka,LK,C480
-Nepal,NP,C480
-Bhutan,BT,C480
-Mongolia,MN,C480
-North Korea,KP,C480
-Macao,MO,C480
-Oceania & Polar Regions,F7,D5
-Australia,AU,F7
-New Zealand,NZ,F7
-Rest of World: Oceania,C415,F7
-Papua New Guinea,PG,C415
-Vanuatu,VU,C415
-Australian Oceania,C441,C415
-Cocos Islands,CC,C441
-Christmas Islands,CX,C441
-Heard & McDonald Islands,HM,C441
-Norfolk Islands,NF,C441
-US Oceania,C442,C415
-American Samoa,AS,C442
-Guam,GU,C442
-US Minor Outlying Islands,UM,C442
-New Zealand Oceania,C443,C415
-Cook Islands,CK,C443
-Niue Island,NU,C443
-Tokelau Islands,TK,C443
-Polar Regions,C444,C415
-Antarctica,AQ,C444
-Bouvet Island,BV,C444
-French Southern Territories,TF,C444
-South Georgia,GS,C444
-Other Oceania,C491,C415
-Fiji,FJ,C491
-French Polynesia,PF,C491
-Kiribati,KI,C491
-Marshall Islands,MH,C491
-Micronesia,FM,C491
-Nauru,NR,C491
-New Caledonia,NC,C491
-Northern Mariana Islands,MP,C491
-Palau,PW,C491
-Pitcairn,PN,C491
-Samoa,WS,C491
-Solomon Islands,SB,C491
-Tonga,TO,C491
-Tuvalu,TV,C491
-Wallis & Futuna,WF,C491
-France & Saint Barthelemy,FRB,
-France,FR,FRB
-Saint Barthelemy,BL,FRB
-EMU(18),I7,
-Latvia,LV,I7
-EMU(17) Euro Area 17,I6,I7
-Estonia,EE,I6
-EMU(16),I5,I6
-Slovakia,SK,I5
-EMU(15),I4,I5
-Cyprus,CY,I4
-Malta,MT,I4
-EMU(13) Euro Area 13,I3,I4
-Austria,AT,I3
-Belgium & Luxembourg,A3,I3
-Belgium,BE,A3
-Luxembourg,LU,A3
-Finland,FI,I3
-France,FR,I3
-Germany,DE,I3
-Greece,GR,I3
-Irish Republic,IE,I3
-Italy,IT,I3
-Netherlands,NL,I3
-Portugal,PT,I3
-Spain,ES,I3
-Slovenia,SI,I3
-World total excl EU-27,V4,
-"Non-EU ( D4 is known as Extra EU-15, here it is REst of World or V2)",D4,V4
-Rest of Western Europe,C80,D4
-EFTA,A5,C80
-Iceland,IS,A5
-Liechtenstein,LI,A5
-Norway,NO,A5
-Switzerland,CH,A5
-Gibraltar,GI,C80
-Turkey,TR,C80
-Other Western Europe,C482,C80
-Andorra,AD,C482
-Faroe Islands,FO,C482
-Jersey,JE,C482
-San Marino,SM,C482
-Vatican City,VA,C482
-North America,C83,D4
-NAFTA,B1,C83
-Canada,CA,B1
-Mexico,MX,B1
-United States,US,B1
-United States exc Puerto Rico,US1,US
-United States inc Puerto Rico,US2,US
-Puerto Rico,PR,US
-Other North America,C484,C83
-Greenland,GL,C484
-St. Pierre & Miquelon,PM,C484
-Other OECD countries,C76,D4
-Australia,AU,C76
-Japan,JP,C76
-New Zealand,NZ,C76
-South Korea,KR,C76
-Ceuta,XC,C76
-Melilla,XL,C76
-Oil exporting countries,C77,D4
-Saudi Arabia,SA,C77
-United Arab Emirates,AE,C77
-United Arab Emirates (HMRC),AE1,AE
-Abu Dhabi,DH,AE
-Dubai,DU,AE
-Sharjah etc,HA,AE
-Other Gulf Arabian,C486,C77
-Bahrain,BH,C486
-Kuwait,KW,C486
-Iraq,IQ,C486
-Oman,OM,C486
-Qatar,QA,C486
-Other oil exporters,C487,C77
-Algeria,DZ,C487
-Brunei,BN,C487
-East Timor,TL,C487
-Ecuador,EC,C487
-Gabon,GA,C487
-Indonesia,ID,C487
-Iran,IR,C487
-Libya,LY,C487
-Nigeria,NG,C487
-Trinidad & Tobago,TT,C487
-Venezuela,VE,C487
-Rest of World,C72,D4
-Rest of World: Europe,C493,C72
-Albania,AL,C493
-Belarus,BY,C493
-Bosnia & Herzegovina,BA,C493
-FYR Macedonia,MK,C493
-Moldova,MD,C493
-Russia,RU,C493
-Yugoslavia,C114,C493
-Serbia and Montenegro,CS,C114
-Montenegro,ME,CS
-Serbia,XS,CS
-Kosovo,XK,C114
-Ukraine,UA,C493
-Rest of World: Central America,C472,C72
-Bahamas,BS,C472
-Barbados,BB,C472
-Jamaica,JM,C472
-Panama,PA,C472
-St Kitts & Nevis,KN,C472
-Central America Offshores,C473,C472
-Bermuda,BM,C473
-British Virgin Islands,VG,C473
-Cayman Islands,KY,C473
-Montserrat,MS,C473
-Netherlands Antilles,AN,C473
-Other Caribbean ACP,C474,C472
-Antigua & Barbuda,AG,C474
-Belize,BZ,C474
-Dominica,DM,C474
-Dominican Republic,DO,C474
-Grenada,GD,C474
-Haiti,HT,C474
-St Lucia,LC,C474
-St Vincent,VC,C474
-Other Latin America,C475,C472
-Costa Rica,CR,C475
-Cuba,CU,C475
-El Salvador,SV,C475
-Guatemala,GT,C475
-Honduras,HN,C475
-Nicaragua,NI,C475
-Other Caribbean,C476,C472
-Anguilla,AI,C476
-Aruba,AW,C476
-Turks & Caicos Islands,TC,C476
-US Virgin Islands,VI,C476
-Rest of World: South America,C489,C72
-Argentina,AR,C489
-Bolivia,BO,C489
-Brazil,BR,C489
-Chile,CL,C489
-Colombia,CO,C489
-Falkland Islands,FK,C489
-Guyana,GY,C489
-Paraguay,PY,C489
-Peru,PE,C489
-Surinam,SR,C489
-Uruguay,UY,C489
-Rest of World: Africa,C488,C72
-Morocco,MA,C488
-Tunisia,TN,C488
-Egypt,EG,C488
-South Africa,ZA,C488
-Rest of Africa,C494,C488
-Rest of French Franc Zone,C469,C494
-Benin,BJ,C469
-Burkina Faso,BF,C469
-Cameroon,CM,C469
-Central African Republic,CF,C469
-Chad,TD,C469
-Comoros,KM,C469
-Congo (Republic),CG,C469
-Equatorial Guinea,GQ,C469
-Guinea Bissau,GW,C469
-Ivory Coast,CI,C469
-Mali,ML,C469
-Mayotte,YT,C469
-Niger,NE,C469
-Senegal,SN,C469
-Togo,TG,C469
-Rest of Africa ACP,C470,C494
-Angola,AO,C470
-Botswana,BW,C470
-Burundi,BI,C470
-Cape Verde,CV,C470
-Congo (Democratic Republic),CD,C470
-Djibouti,DJ,C470
-Eritrea,ER,C470
-Ethiopia,ET,C470
-Gambia,GM,C470
-Ghana,GH,C470
-Guinea,GN,C470
-Kenya,KE,C470
-Lesotho,LS,C470
-Liberia,LR,C470
-Madagascar,MG,C470
-Malawi,MW,C470
-Mauritania,MR,C470
-Mauritius,MU,C470
-Mozambique,MZ,C470
-Namibia,NA,C470
-Rwanda,RW,C470
-Sao Tome & Principe,ST,C470
-Seychelles,SC,C470
-Sierra Leone,SL,C470
-Somalia,SO,C470
-Sudan,SD,C470
-Swaziland,SZ,C470
-Tanzania,TZ,C470
-Uganda,UG,C470
-Zambia,ZM,C470
-Zimbabwe,ZW,C470
-Rest of Africa nes,C471,C494
-British Indian Ocean Territory,IO,C471
-St. Helena,SH,C471
-Rest of World: Asia,C490,C72
-China,CN,C490
-Hong Kong,HK,C490
-India,IN,C490
-Israel,IL,C490
-Lebanon,LB,C490
-Malaysia,MY,C490
-Pakistan,PK,C490
-Philippines,PH,C490
-Singapore,SG,C490
-Taiwan,TW,C490
-Thailand,TH,C490
-Vietnam,VN,C490
-Yemen,YE,C490
-Former Soviet Near & Middle East,C477,C490
-Armenia,AM,C477
-Azerbaijan,AZ,C477
-Georgia,GE,C477
-Other Former Soviet Asia,C478,C490
-Kazakhstan,KZ,C478
-Kyrgyz Republic,KG,C478
-Tajikistan,TJ,C478
-Turkmenistan,TM,C478
-Uzbekistan,UZ,C478
-Rest of Near & Middle East,C481,C490
-Jordan,JO,C481
-Occupied Palestinian Territory,PS,C481
-Syria,SY,C481
-Rest of ASEAN,C479,C490
-Myanmar,MM,C479
-Laos,LA,C479
-Cambodia,KH,C479
-Rest of Other Asia,C480,C490
-Afghanistan,AF,C480
-Bangladesh,BD,C480
-Maldives,MV,C480
-Sri Lanka,LK,C480
-Nepal,NP,C480
-Bhutan,BT,C480
-Mongolia,MN,C480
-North Korea,KP,C480
-Macao,MO,C480
-Rest of World: Oceania,C415,C72
-Papua New Guinea,PG,C415
-Vanuatu,VU,C415
-Australian Oceania,C441,C415
-Cocos Islands,CC,C441
-Christmas Islands,CX,C441
-Heard & McDonald Islands,HM,C441
-Norfolk Islands,NF,C441
-US Oceania,C442,C415
-American Samoa,AS,C442
-Guam,GU,C442
-US Minor Outlying Islands,UM,C442
-New Zealand Oceania,C443,C415
-Cook Islands,CK,C443
-Niue Island,NU,C443
-Tokelau Islands,TK,C443
-Polar Regions,C444,C415
-Antarctica,AQ,C444
-Bouvet Island,BV,C444
-French Southern Territories,TF,C444
-South Georgia,GS,C444
-Other Oceania,C491,C415
-Fiji,FJ,C491
-French Polynesia,PF,C491
-Kiribati,KI,C491
-Marshall Islands,MH,C491
-Micronesia,FM,C491
-Nauru,NR,C491
-New Caledonia,NC,C491
-Northern Mariana Islands,MP,C491
-Palau,PW,C491
-Pitcairn,PN,C491
-Samoa,WS,C491
-Solomon Islands,SB,C491
-Tonga,TO,C491
-Tuvalu,TV,C491
-Wallis & Futuna,WF,C491
-Store & provisions EU ships,QR,
-Stores & provisions non-EU ships,QS,
-Euro area (19),I8,
-Austria,AT,I8
-Belgium,BE,I8
-Luxembourg,LU,I8
-Finland,FI,I8
-France,FR,I8
-Germany,DE,I8
-Greece,GR,I8
-Irish Republic,IE,I8
-Italy,IT,I8
-Netherlands,NL,I8
-Portugal,PT,I8
-Spain,ES,I8
-Cyprus,CY,I8
-Estonia,EE,I8
-Latvia,LV,I8
-Lithuania,LT,I8
-Malta,MT,I8
-Slovakia,SK,I8
-Slovenia,SI,I8
-European Central Bank,4F,I8
-European Stability Mechanism,4S,I8
-"Euro Area, Changing Composition",U29,I8
-EU countries non Euro,K8,
-Denmark,DK,K8
-Sweden,SE,K8
-Czech Republic,CZ,K8
-Hungary,HU,K8
-Poland,PL,K8
-Bulgaria,BG,K8
-Romania,RO,K8
-Croatia,HR,K8
-EU Institutions (non Euro area),4A,K8
+Label,Notation,Parent Notation,Sort Priority,Description
+Whole world,A1,,,
+Total EU(28),V3,A1,,
+Total EU (27),V1,V3,,
+Total EU (25),D3,V1,,
+Total EU (15),D2,D3,,
+Austria,AT,D2,,
+Belgium & Luxembourg,A3,D2,,
+Belgium,BE,A3,,
+Luxembourg,LU,A3,,
+Denmark,DK,D2,,
+Finland,FI,D2,,
+France,FR,D2,,
+Germany,DE,D2,,
+Greece,GR,D2,,
+Irish Republic,IE,D2,,
+Italy,IT,D2,,
+Netherlands,NL,D2,,
+Portugal,PT,D2,,
+Spain,ES,D2,,
+Sweden,SE,D2,,
+Cyprus,CY,D3,,
+Czech Republic,CZ,D3,,
+Estonia,EE,D3,,
+Hungary,HU,D3,,
+Latvia,LV,D3,,
+Lithuania,LT,D3,,
+Malta,MT,D3,,
+Poland,PL,D3,,
+Slovakia,SK,D3,,
+Slovenia,SI,D3,,
+Bulgaria,BG,V1,,
+Romania,RO,V1,,
+Croatia,HR,V3,,
+"Non-EU ( D4 is known as Extra EU-15, here it is REst of World or V2)",D4,A1,,
+Rest of Western Europe,C80,D4,,
+EFTA,A5,C80,,
+Iceland,IS,A5,,
+Liechtenstein,LI,A5,,
+Norway,NO,A5,,
+Switzerland,CH,A5,,
+Gibraltar,GI,C80,,
+Turkey,TR,C80,,
+Other Western Europe,C482,C80,,
+Andorra,AD,C482,,
+Faroe Islands,FO,C482,,
+Jersey,JE,C482,,
+San Marino,SM,C482,,
+Vatican City,VA,C482,,
+North America,C83,D4,,
+NAFTA,B1,C83,,
+Canada,CA,B1,,
+Mexico,MX,B1,,
+United States,US,B1,,
+United States exc Puerto Rico,US1,US,,
+United States inc Puerto Rico,US2,US,,
+Puerto Rico,PR,US,,
+Other North America,C484,C83,,
+Greenland,GL,C484,,
+St. Pierre & Miquelon,PM,C484,,
+Other OECD countries,C76,D4,,
+Australia,AU,C76,,
+Japan,JP,C76,,
+New Zealand,NZ,C76,,
+South Korea,KR,C76,,
+Ceuta,XC,C76,,
+Melilla,XL,C76,,
+Oil exporting countries,C77,D4,,
+Saudi Arabia,SA,C77,,
+United Arab Emirates,AE,C77,,
+United Arab Emirates (HMRC),AE1,AE,,
+Abu Dhabi,DH,AE,,
+Dubai,DU,AE,,
+Sharjah etc,HA,AE,,
+Other Gulf Arabian,C486,C77,,
+Bahrain,BH,C486,,
+Kuwait,KW,C486,,
+Iraq,IQ,C486,,
+Oman,OM,C486,,
+Qatar,QA,C486,,
+Other oil exporters,C487,C77,,
+Algeria,DZ,C487,,
+Brunei,BN,C487,,
+East Timor,TL,C487,,
+Ecuador,EC,C487,,
+Gabon,GA,C487,,
+Indonesia,ID,C487,,
+Iran,IR,C487,,
+Libya,LY,C487,,
+Nigeria,NG,C487,,
+Trinidad & Tobago,TT,C487,,
+Venezuela,VE,C487,,
+Rest of World,C72,D4,,
+Rest of World: Europe,C493,C72,,
+Albania,AL,C493,,
+Belarus,BY,C493,,
+Bosnia & Herzegovina,BA,C493,,
+FYR Macedonia,MK,C493,,
+Moldova,MD,C493,,
+Russia,RU,C493,,
+Yugoslavia,C114,C493,,
+Serbia and Montenegro,CS,C114,,
+Montenegro,ME,CS,,
+Serbia,XS,CS,,
+Kosovo,XK,C114,,
+Ukraine,UA,C493,,
+Rest of World: Central America,C472,C72,,
+Bahamas,BS,C472,,
+Barbados,BB,C472,,
+Jamaica,JM,C472,,
+Panama,PA,C472,,
+St Kitts & Nevis,KN,C472,,
+Central America Offshores,C473,C472,,
+Bermuda,BM,C473,,
+British Virgin Islands,VG,C473,,
+Cayman Islands,KY,C473,,
+Montserrat,MS,C473,,
+Netherlands Antilles,AN,C473,,
+Other Caribbean ACP,C474,C472,,
+Antigua & Barbuda,AG,C474,,
+Belize,BZ,C474,,
+Dominica,DM,C474,,
+Dominican Republic,DO,C474,,
+Grenada,GD,C474,,
+Haiti,HT,C474,,
+St Lucia,LC,C474,,
+St Vincent,VC,C474,,
+Other Latin America,C475,C472,,
+Costa Rica,CR,C475,,
+Cuba,CU,C475,,
+El Salvador,SV,C475,,
+Guatemala,GT,C475,,
+Honduras,HN,C475,,
+Nicaragua,NI,C475,,
+Other Caribbean,C476,C472,,
+Anguilla,AI,C476,,
+Aruba,AW,C476,,
+Turks & Caicos Islands,TC,C476,,
+US Virgin Islands,VI,C476,,
+Rest of World: South America,C489,C72,,
+Argentina,AR,C489,,
+Bolivia,BO,C489,,
+Brazil,BR,C489,,
+Chile,CL,C489,,
+Colombia,CO,C489,,
+Falkland Islands,FK,C489,,
+Guyana,GY,C489,,
+Paraguay,PY,C489,,
+Peru,PE,C489,,
+Surinam,SR,C489,,
+Uruguay,UY,C489,,
+Rest of World: Africa,C488,C72,,
+Morocco,MA,C488,,
+Tunisia,TN,C488,,
+Egypt,EG,C488,,
+South Africa,ZA,C488,,
+Rest of Africa,C494,C488,,
+Rest of French Franc Zone,C469,C494,,
+Benin,BJ,C469,,
+Burkina Faso,BF,C469,,
+Cameroon,CM,C469,,
+Central African Republic,CF,C469,,
+Chad,TD,C469,,
+Comoros,KM,C469,,
+Congo (Republic),CG,C469,,
+Equatorial Guinea,GQ,C469,,
+Guinea Bissau,GW,C469,,
+Ivory Coast,CI,C469,,
+Mali,ML,C469,,
+Mayotte,YT,C469,,
+Niger,NE,C469,,
+Senegal,SN,C469,,
+Togo,TG,C469,,
+Rest of Africa ACP,C470,C494,,
+Angola,AO,C470,,
+Botswana,BW,C470,,
+Burundi,BI,C470,,
+Cape Verde,CV,C470,,
+Congo (Democratic Republic),CD,C470,,
+Djibouti,DJ,C470,,
+Eritrea,ER,C470,,
+Ethiopia,ET,C470,,
+Gambia,GM,C470,,
+Ghana,GH,C470,,
+Guinea,GN,C470,,
+Kenya,KE,C470,,
+Lesotho,LS,C470,,
+Liberia,LR,C470,,
+Madagascar,MG,C470,,
+Malawi,MW,C470,,
+Mauritania,MR,C470,,
+Mauritius,MU,C470,,
+Mozambique,MZ,C470,,
+Namibia,NA,C470,,
+Rwanda,RW,C470,,
+Sao Tome & Principe,ST,C470,,
+Seychelles,SC,C470,,
+Sierra Leone,SL,C470,,
+Somalia,SO,C470,,
+Sudan,SD,C470,,
+Swaziland,SZ,C470,,
+Tanzania,TZ,C470,,
+Uganda,UG,C470,,
+Zambia,ZM,C470,,
+Zimbabwe,ZW,C470,,
+Rest of Africa nes,C471,C494,,
+British Indian Ocean Territory,IO,C471,,
+St. Helena,SH,C471,,
+Rest of World: Asia,C490,C72,,
+China,CN,C490,,
+Hong Kong,HK,C490,,
+India,IN,C490,,
+Israel,IL,C490,,
+Lebanon,LB,C490,,
+Malaysia,MY,C490,,
+Pakistan,PK,C490,,
+Philippines,PH,C490,,
+Singapore,SG,C490,,
+Taiwan,TW,C490,,
+Thailand,TH,C490,,
+Vietnam,VN,C490,,
+Yemen,YE,C490,,
+Former Soviet Near & Middle East,C477,C490,,
+Armenia,AM,C477,,
+Azerbaijan,AZ,C477,,
+Georgia,GE,C477,,
+Other Former Soviet Asia,C478,C490,,
+Kazakhstan,KZ,C478,,
+Kyrgyz Republic,KG,C478,,
+Tajikistan,TJ,C478,,
+Turkmenistan,TM,C478,,
+Uzbekistan,UZ,C478,,
+Rest of Near & Middle East,C481,C490,,
+Jordan,JO,C481,,
+Occupied Palestinian Territory,PS,C481,,
+Syria,SY,C481,,
+Rest of ASEAN,C479,C490,,
+Myanmar,MM,C479,,
+Laos,LA,C479,,
+Cambodia,KH,C479,,
+Rest of Other Asia,C480,C490,,
+Afghanistan,AF,C480,,
+Bangladesh,BD,C480,,
+Maldives,MV,C480,,
+Sri Lanka,LK,C480,,
+Nepal,NP,C480,,
+Bhutan,BT,C480,,
+Mongolia,MN,C480,,
+North Korea,KP,C480,,
+Macao,MO,C480,,
+Rest of World: Oceania,C415,C72,,
+Papua New Guinea,PG,C415,,
+Vanuatu,VU,C415,,
+Australian Oceania,C441,C415,,
+Cocos Islands,CC,C441,,
+Christmas Islands,CX,C441,,
+Heard & McDonald Islands,HM,C441,,
+Norfolk Islands,NF,C441,,
+US Oceania,C442,C415,,
+American Samoa,AS,C442,,
+Guam,GU,C442,,
+US Minor Outlying Islands,UM,C442,,
+New Zealand Oceania,C443,C415,,
+Cook Islands,CK,C443,,
+Niue Island,NU,C443,,
+Tokelau Islands,TK,C443,,
+Polar Regions,C444,C415,,
+Antarctica,AQ,C444,,
+Bouvet Island,BV,C444,,
+French Southern Territories,TF,C444,,
+South Georgia,GS,C444,,
+Other Oceania,C491,C415,,
+Fiji,FJ,C491,,
+French Polynesia,PF,C491,,
+Kiribati,KI,C491,,
+Marshall Islands,MH,C491,,
+Micronesia,FM,C491,,
+Nauru,NR,C491,,
+New Caledonia,NC,C491,,
+Northern Mariana Islands,MP,C491,,
+Palau,PW,C491,,
+Pitcairn,PN,C491,,
+Samoa,WS,C491,,
+Solomon Islands,SB,C491,,
+Tonga,TO,C491,,
+Tuvalu,TV,C491,,
+Wallis & Futuna,WF,C491,,
+Extra EU-27 or Rest of world excluding EU-27 countries,V2,,,
+Europe,E1,,,
+Total EU (27),V1,E1,,
+Total EU (25),D3,V1,,
+Total EU (15),D2,D3,,
+Austria,AT,D2,,
+Belgium & Luxembourg,A3,D2,,
+Belgium,BE,A3,,
+Luxembourg,LU,A3,,
+Denmark,DK,D2,,
+Finland,FI,D2,,
+France,FR,D2,,
+Germany,DE,D2,,
+Greece,GR,D2,,
+Irish Republic,IE,D2,,
+Italy,IT,D2,,
+Netherlands,NL,D2,,
+Portugal,PT,D2,,
+Spain,ES,D2,,
+Sweden,SE,D2,,
+Cyprus,CY,D3,,
+Czech Republic,CZ,D3,,
+Estonia,EE,D3,,
+Hungary,HU,D3,,
+Latvia,LV,D3,,
+Lithuania,LT,D3,,
+Malta,MT,D3,,
+Poland,PL,D3,,
+Slovakia,SK,D3,,
+Slovenia,SI,D3,,
+Bulgaria,BG,V1,,
+Romania,RO,V1,,
+EFTA,A5,E1,,
+Iceland,IS,A5,,
+Liechtenstein,LI,A5,,
+Norway,NO,A5,,
+Switzerland,CH,A5,,
+Other Europe,E2,E1,,
+Gibraltar,GI,E2,,
+Turkey,TR,E2,,
+Other Western Europe,C482,E2,,
+Andorra,AD,C482,,
+Faroe Islands,FO,C482,,
+Jersey,JE,C482,,
+San Marino,SM,C482,,
+Vatican City,VA,C482,,
+Rest of World: Europe,C493,E2,,
+Albania,AL,C493,,
+Belarus,BY,C493,,
+Bosnia & Herzegovina,BA,C493,,
+FYR Macedonia,MK,C493,,
+Moldova,MD,C493,,
+Russia,RU,C493,,
+Yugoslavia,C114,C493,,
+Serbia and Montenegro,CS,C114,,
+Montenegro,ME,CS,,
+Serbia,XS,CS,,
+Kosovo,XK,C114,,
+Ukraine,UA,C493,,
+Residual Europe (aka R1-Residual other Europe),8A,,,
+Gibraltar,GI,8A,,
+Other Western Europe,C482,8A,,
+Andorra,AD,C482,,
+Faroe Islands,FO,C482,,
+Jersey,JE,C482,,
+San Marino,SM,C482,,
+Vatican City,VA,C482,,
+Bosnia & Herzegovina,BA,8A,,
+FYR Macedonia,MK,8A,,
+Moldova,MD,8A,,
+Non-EMU(13),K3,,,
+Cyprus,CY,K3,,
+Malta,MT,K3,,
+Non-EMU(15),K4,K3,,
+Slovakia,SK,K4,,
+Non-EMU(16),K5,K4,,
+Estonia,EE,K5,,
+Non-EMU(17),K6,K5,,
+Denmark,DK,K6,,
+Sweden,SE,K6,,
+Czech Republic,CZ,K6,,
+Hungary,HU,K6,,
+Latvia,LV,K6,,
+Lithuania,LT,K6,,
+Poland,PL,K6,,
+Bulgaria,BG,K6,,
+Romania,RO,K6,,
+Non-EMU(16) excluding DK and SE,S5,,,
+Estonia,EE,S5,,
+Non-EMU(17) excluding DK and SE,S6,S5,,
+Czech Republic,CZ,S6,,
+Hungary,HU,S6,,
+Latvia,LV,S6,,
+Lithuania,LT,S6,,
+Poland,PL,S6,,
+Bulgaria,BG,S6,,
+Romania,RO,S6,,
+Extra Euro Area(13),J3,,,
+Cyprus,CY,J3,,
+Malta,MT,J3,,
+Extra Euro Area(15),J4,J3,,
+Slovakia,SK,J4,,
+Extra Euro Area(16),J5,J4,,
+Estonia,EE,J5,,
+Extra Euro Area(17),J6,J5,,
+Latvia,LV,J6,,
+Extra Euro Area(18),J7,J6,,
+Denmark,DK,J7,,
+Sweden,SE,J7,,
+Czech Republic,CZ,J7,,
+Hungary,HU,J7,,
+Lithuania,LT,J7,,
+Poland,PL,J7,,
+Bulgaria,BG,J7,,
+Romania,RO,J7,,
+Croatia,HR,J7,,
+EFTA,A5,J7,,
+Iceland,IS,A5,,
+Liechtenstein,LI,A5,,
+Norway,NO,A5,,
+Switzerland,CH,A5,,
+Ceuta,XC,J7,,
+Other Europe,E2,J7,,
+Gibraltar,GI,E2,,
+Turkey,TR,E2,,
+Other Western Europe,C482,E2,,
+Andorra,AD,C482,,
+Faroe Islands,FO,C482,,
+Jersey,JE,C482,,
+San Marino,SM,C482,,
+Vatican City,VA,C482,,
+Rest of World: Europe,C493,E2,,
+Albania,AL,C493,,
+Belarus,BY,C493,,
+Bosnia & Herzegovina,BA,C493,,
+FYR Macedonia,MK,C493,,
+Moldova,MD,C493,,
+Russia,RU,C493,,
+Yugoslavia,C114,C493,,
+Serbia and Montenegro,CS,C114,,
+Montenegro,ME,CS,,
+Serbia,XS,CS,,
+Kosovo,XK,C114,,
+Ukraine,UA,C493,,
+Africa,E4,J7,,
+North Africa,E5,E4,,
+Morocco,MA,E5,,
+Egypt,EG,E5,,
+Residual North Africa,R9,E5,,
+Algeria,DZ,R9,,
+Libya,LY,R9,,
+Tunisia,TN,R9,,
+Other Africa,E6,E4,,
+South Africa,ZA,E6,,
+Residual Other Africa (aka R2 - Residual Other Africa,8C,E6,,
+Nigeria,NG,8C,,
+Residual Other Africa exc Nigeria,8D,8C,,
+Gabon,GA,8D,,
+Rest of Africa,C494,8D,,
+Rest of French Franc Zone,C469,C494,,
+Benin,BJ,C469,,
+Burkina Faso,BF,C469,,
+Cameroon,CM,C469,,
+Central African Republic,CF,C469,,
+Chad,TD,C469,,
+Comoros,KM,C469,,
+Congo (Republic),CG,C469,,
+Equatorial Guinea,GQ,C469,,
+Guinea Bissau,GW,C469,,
+Ivory Coast,CI,C469,,
+Mali,ML,C469,,
+Mayotte,YT,C469,,
+Niger,NE,C469,,
+Senegal,SN,C469,,
+Togo,TG,C469,,
+Rest of Africa ACP,C470,C494,,
+Angola,AO,C470,,
+Botswana,BW,C470,,
+Burundi,BI,C470,,
+Cape Verde,CV,C470,,
+Congo (Democratic Republic),CD,C470,,
+Djibouti,DJ,C470,,
+Eritrea,ER,C470,,
+Ethiopia,ET,C470,,
+Gambia,GM,C470,,
+Ghana,GH,C470,,
+Guinea,GN,C470,,
+Kenya,KE,C470,,
+Lesotho,LS,C470,,
+Liberia,LR,C470,,
+Madagascar,MG,C470,,
+Malawi,MW,C470,,
+Mauritania,MR,C470,,
+Mauritius,MU,C470,,
+Mozambique,MZ,C470,,
+Namibia,NA,C470,,
+Rwanda,RW,C470,,
+Sao Tome & Principe,ST,C470,,
+Seychelles,SC,C470,,
+Sierra Leone,SL,C470,,
+Somalia,SO,C470,,
+Sudan,SD,C470,,
+Swaziland,SZ,C470,,
+Tanzania,TZ,C470,,
+Uganda,UG,C470,,
+Zambia,ZM,C470,,
+Zimbabwe,ZW,C470,,
+Rest of Africa nes,C471,C494,,
+British Indian Ocean Territory,IO,C471,,
+St. Helena,SH,C471,,
+Western Sahara,EH,E6,,
+South Sudan,SS,E6,,
+America,E7,J7,,
+North America (BoP),E8,E7,,
+Canada,CA,E8,,
+United States,US,E8,,
+United States exc Puerto Rico,US1,US,,
+United States inc Puerto Rico,US2,US,,
+Puerto Rico,PR,US,,
+Other North America,C484,E8,,
+Greenland,GL,C484,,
+St. Pierre & Miquelon,PM,C484,,
+Central America,E9,E7,,
+Mexico,MX,E9,,
+Residual Central America,R3,E9,,
+Trinidad & Tobago,TT,R3,,
+Rest of World: Central America,C472,R3,,
+Bahamas,BS,C472,,
+Barbados,BB,C472,,
+Jamaica,JM,C472,,
+Panama,PA,C472,,
+St Kitts & Nevis,KN,C472,,
+Central America Offshores,C473,C472,,
+Bermuda,BM,C473,,
+British Virgin Islands,VG,C473,,
+Cayman Islands,KY,C473,,
+Montserrat,MS,C473,,
+Netherlands Antilles,AN,C473,,
+Other Caribbean ACP,C474,C472,,
+Antigua & Barbuda,AG,C474,,
+Belize,BZ,C474,,
+Dominica,DM,C474,,
+Dominican Republic,DO,C474,,
+Grenada,GD,C474,,
+Haiti,HT,C474,,
+St Lucia,LC,C474,,
+St Vincent,VC,C474,,
+Other Latin America,C475,C472,,
+Costa Rica,CR,C475,,
+Cuba,CU,C475,,
+El Salvador,SV,C475,,
+Guatemala,GT,C475,,
+Honduras,HN,C475,,
+Nicaragua,NI,C475,,
+Other Caribbean,C476,C472,,
+Anguilla,AI,C476,,
+Aruba,AW,C476,,
+Turks & Caicos Islands,TC,C476,,
+US Virgin Islands,VI,C476,,
+Saint Barthelemy,BL,E9,,
+Bonaire,BQ,E9,,
+Curacao,CW,E9,,
+Sint Maarten,SX,E9,,
+South America,F1,E7,,
+Ecuador,EC,F1,,
+Venezuela,VE,F1,,
+Rest of World: South America,C489,F1,,
+Argentina,AR,C489,,
+Bolivia,BO,C489,,
+Brazil,BR,C489,,
+Chile,CL,C489,,
+Colombia,CO,C489,,
+Falkland Islands,FK,C489,,
+Guyana,GY,C489,,
+Paraguay,PY,C489,,
+Peru,PE,C489,,
+Surinam,SR,C489,,
+Uruguay,UY,C489,,
+Asia,F2,J7,,
+Near & Middle East,F3,F2,,
+Iran,IR,F3,,
+Israel,IL,F3,,
+Gulf Arabian Countries,F4,F3,,
+Saudi Arabia,SA,F4,,
+Residual Gulf Arabian (aka R5-Residual Gulf Arabian),J8,F4,,
+United Arab Emirates,AE,J8,,
+United Arab Emirates (HMRC),AE1,AE,,
+Abu Dhabi,DH,AE,,
+Dubai,DU,AE,,
+Sharjah etc,HA,AE,,
+Other Gulf Arabian,C486,J8,,
+Bahrain,BH,C486,,
+Kuwait,KW,C486,,
+Iraq,IQ,C486,,
+Oman,OM,C486,,
+Qatar,QA,C486,,
+Yemen,YE,J8,,
+Other Near & Middle East,F5,F3,,
+Lebanon,LB,F5,,
+Former Soviet Near & Middle East,C477,F5,,
+Armenia,AM,C477,,
+Azerbaijan,AZ,C477,,
+Georgia,GE,C477,,
+Rest of Near & Middle East,C481,F5,,
+Jordan,JO,C481,,
+Occupied Palestinian Territory,PS,C481,,
+Syria,SY,C481,,
+Other Asia,F6,F2,,
+Japan,JP,F6,,
+South Korea,KR,F6,,
+Indonesia,ID,F6,,
+China,CN,F6,,
+Hong Kong,HK,F6,,
+India,IN,F6,,
+Malaysia,MY,F6,,
+Pakistan,PK,F6,,
+Philippines,PH,F6,,
+Singapore,SG,F6,,
+Taiwan,TW,F6,,
+Thailand,TH,F6,,
+Residual Asia (aka R6-Residual Asia),8B,F6,,
+Brunei,BN,8B,,
+East Timor,TL,8B,,
+Vietnam,VN,8B,,
+Other Former Soviet Asia,C478,8B,,
+Kazakhstan,KZ,C478,,
+Kyrgyz Republic,KG,C478,,
+Tajikistan,TJ,C478,,
+Turkmenistan,TM,C478,,
+Uzbekistan,UZ,C478,,
+Rest of ASEAN,C479,8B,,
+Myanmar,MM,C479,,
+Laos,LA,C479,,
+Cambodia,KH,C479,,
+Rest of Other Asia,C480,8B,,
+Afghanistan,AF,C480,,
+Bangladesh,BD,C480,,
+Maldives,MV,C480,,
+Sri Lanka,LK,C480,,
+Nepal,NP,C480,,
+Bhutan,BT,C480,,
+Mongolia,MN,C480,,
+North Korea,KP,C480,,
+Macao,MO,C480,,
+Oceania & Polar Regions,F7,J7,,
+Australia,AU,F7,,
+New Zealand,NZ,F7,,
+Rest of World: Oceania,C415,F7,,
+Papua New Guinea,PG,C415,,
+Vanuatu,VU,C415,,
+Australian Oceania,C441,C415,,
+Cocos Islands,CC,C441,,
+Christmas Islands,CX,C441,,
+Heard & McDonald Islands,HM,C441,,
+Norfolk Islands,NF,C441,,
+US Oceania,C442,C415,,
+American Samoa,AS,C442,,
+Guam,GU,C442,,
+US Minor Outlying Islands,UM,C442,,
+New Zealand Oceania,C443,C415,,
+Cook Islands,CK,C443,,
+Niue Island,NU,C443,,
+Tokelau Islands,TK,C443,,
+Polar Regions,C444,C415,,
+Antarctica,AQ,C444,,
+Bouvet Island,BV,C444,,
+French Southern Territories,TF,C444,,
+South Georgia,GS,C444,,
+Other Oceania,C491,C415,,
+Fiji,FJ,C491,,
+French Polynesia,PF,C491,,
+Kiribati,KI,C491,,
+Marshall Islands,MH,C491,,
+Micronesia,FM,C491,,
+Nauru,NR,C491,,
+New Caledonia,NC,C491,,
+Northern Mariana Islands,MP,C491,,
+Palau,PW,C491,,
+Pitcairn,PN,C491,,
+Samoa,WS,C491,,
+Solomon Islands,SB,C491,,
+Tonga,TO,C491,,
+Tuvalu,TV,C491,,
+Wallis & Futuna,WF,C491,,
+OECD,A8,,,
+Total EU (15),D2,A8,,
+Austria,AT,D2,,
+Belgium & Luxembourg,A3,D2,,
+Belgium,BE,A3,,
+Luxembourg,LU,A3,,
+Denmark,DK,D2,,
+Finland,FI,D2,,
+France,FR,D2,,
+Germany,DE,D2,,
+Greece,GR,D2,,
+Irish Republic,IE,D2,,
+Italy,IT,D2,,
+Netherlands,NL,D2,,
+Portugal,PT,D2,,
+Spain,ES,D2,,
+Sweden,SE,D2,,
+Czech Republic,CZ,A8,,
+Hungary,HU,A8,,
+Slovakia,SK,A8,,
+Iceland,IS,A8,,
+Norway,NO,A8,,
+Switzerland,CH,A8,,
+Turkey,TR,A8,,
+NAFTA,B1,A8,,
+Canada,CA,B1,,
+Mexico,MX,B1,,
+United States,US,B1,,
+United States exc Puerto Rico,US1,US,,
+United States inc Puerto Rico,US2,US,,
+Puerto Rico,PR,US,,
+Other OECD countries,C76,A8,,
+Australia,AU,C76,,
+Japan,JP,C76,,
+New Zealand,NZ,C76,,
+South Korea,KR,C76,,
+Ceuta,XC,C76,,
+Melilla,XL,C76,,
+ASEAN,B3,,,
+Brunei,BN,B3,,
+East Timor,TL,B3,,
+Indonesia,ID,B3,,
+Malaysia,MY,B3,,
+Philippines,PH,B3,,
+Singapore,SG,B3,,
+Thailand,TH,B3,,
+Vietnam,VN,B3,,
+Rest of ASEAN,C479,B3,,
+Myanmar,MM,C479,,
+Laos,LA,C479,,
+Cambodia,KH,C479,,
+OPEC,B4,,,
+Saudi Arabia,SA,B4,,
+United Arab Emirates,AE,B4,,
+United Arab Emirates (HMRC),AE1,AE,,
+Abu Dhabi,DH,AE,,
+Dubai,DU,AE,,
+Sharjah etc,HA,AE,,
+Kuwait,KW,B4,,
+Iraq,IQ,B4,,
+Qatar,QA,B4,,
+Algeria,DZ,B4,,
+Indonesia,ID,B4,,
+Iran,IR,B4,,
+Libya,LY,B4,,
+Nigeria,NG,B4,,
+Venezuela,VE,B4,,
+ACP,B5,,,
+African ACP,C449,B5,,
+Gabon,GA,C449,,
+Nigeria,NG,C449,,
+South Africa,ZA,C449,,
+Rest of French Franc Zone,C469,C449,,
+Benin,BJ,C469,,
+Burkina Faso,BF,C469,,
+Cameroon,CM,C469,,
+Central African Republic,CF,C469,,
+Chad,TD,C469,,
+Comoros,KM,C469,,
+Congo (Republic),CG,C469,,
+Equatorial Guinea,GQ,C469,,
+Guinea Bissau,GW,C469,,
+Ivory Coast,CI,C469,,
+Mali,ML,C469,,
+Mayotte,YT,C469,,
+Niger,NE,C469,,
+Senegal,SN,C469,,
+Togo,TG,C469,,
+Rest of Africa ACP,C470,C449,,
+Angola,AO,C470,,
+Botswana,BW,C470,,
+Burundi,BI,C470,,
+Cape Verde,CV,C470,,
+Congo (Democratic Republic),CD,C470,,
+Djibouti,DJ,C470,,
+Eritrea,ER,C470,,
+Ethiopia,ET,C470,,
+Gambia,GM,C470,,
+Ghana,GH,C470,,
+Guinea,GN,C470,,
+Kenya,KE,C470,,
+Lesotho,LS,C470,,
+Liberia,LR,C470,,
+Madagascar,MG,C470,,
+Malawi,MW,C470,,
+Mauritania,MR,C470,,
+Mauritius,MU,C470,,
+Mozambique,MZ,C470,,
+Namibia,NA,C470,,
+Rwanda,RW,C470,,
+Sao Tome & Principe,ST,C470,,
+Seychelles,SC,C470,,
+Sierra Leone,SL,C470,,
+Somalia,SO,C470,,
+Sudan,SD,C470,,
+Swaziland,SZ,C470,,
+Tanzania,TZ,C470,,
+Uganda,UG,C470,,
+Zambia,ZM,C470,,
+Zimbabwe,ZW,C470,,
+Caribbean ACP,C450,B5,,
+Trinidad & Tobago,TT,C450,,
+Bahamas,BS,C450,,
+Barbados,BB,C450,,
+Jamaica,JM,C450,,
+St Kitts & Nevis,KN,C450,,
+Other Caribbean ACP,C474,C450,,
+Antigua & Barbuda,AG,C474,,
+Belize,BZ,C474,,
+Dominica,DM,C474,,
+Dominican Republic,DO,C474,,
+Grenada,GD,C474,,
+Haiti,HT,C474,,
+St Lucia,LC,C474,,
+St Vincent,VC,C474,,
+Surinam,SR,C450,,
+Pacific ACP,C451,B5,,
+Papua New Guinea,PG,C451,,
+Vanuatu,VU,C451,,
+Cook Islands,CK,C451,,
+Niue Island,NU,C451,,
+Fiji,FJ,C451,,
+Kiribati,KI,C451,,
+Marshall Islands,MH,C451,,
+Micronesia,FM,C451,,
+Nauru,NR,C451,,
+Palau,PW,C451,,
+Samoa,WS,C451,,
+Solomon Islands,SB,C451,,
+Tonga,TO,C451,,
+Tuvalu,TV,C451,,
+NICs1,B9,,,
+South Korea,KR,B9,,
+Hong Kong,HK,B9,,
+Singapore,SG,B9,,
+Taiwan,TW,B9,,
+NICs2A,C453,,,
+Malaysia,MY,C453,,
+Philippines,PH,C453,,
+Thailand,TH,C453,,
+NICs2LA,C454,,,
+Mexico,MX,C454,,
+Argentina,AR,C454,,
+Brazil,BR,C454,,
+Chile,CL,C454,,
+CIS,C6,,,
+Belarus,BY,C6,,
+Moldova,MD,C6,,
+Russia,RU,C6,,
+Ukraine,UA,C6,,
+Former Soviet Near & Middle East,C477,C6,,
+Armenia,AM,C477,,
+Azerbaijan,AZ,C477,,
+Georgia,GE,C477,,
+Other Former Soviet Asia,C478,C6,,
+Kazakhstan,KZ,C478,,
+Kyrgyz Republic,KG,C478,,
+Tajikistan,TJ,C478,,
+Turkmenistan,TM,C478,,
+Uzbekistan,UZ,C478,,
+Central & Eastern Europe,C402,,,
+Czech Republic,CZ,C402,,
+Hungary,HU,C402,,
+Poland,PL,C402,,
+Slovakia,SK,C402,,
+Slovenia,SI,C402,,
+Bulgaria,BG,C402,,
+Romania,RO,C402,,
+Albania,AL,C402,,
+Bosnia & Herzegovina,BA,C402,,
+FYR Macedonia,MK,C402,,
+Yugoslavia,C114,C402,,
+Serbia and Montenegro,CS,C114,,
+Montenegro,ME,CS,,
+Serbia,XS,CS,,
+Kosovo,XK,C114,,
+Baltic Countries,E3,C402,,
+Estonia,EE,E3,,
+Latvia,LV,E3,,
+Lithuania,LT,E3,,
+Offshore Financial Centres,C405,,,
+Bahrain,BH,C405,,
+Bahamas,BS,C405,,
+Barbados,BB,C405,,
+Jamaica,JM,C405,,
+Panama,PA,C405,,
+St Kitts & Nevis,KN,C405,,
+Central America Offshores,C473,C405,,
+Bermuda,BM,C473,,
+British Virgin Islands,VG,C473,,
+Cayman Islands,KY,C473,,
+Montserrat,MS,C473,,
+Netherlands Antilles,AN,C473,,
+Liberia,LR,C405,,
+Hong Kong,HK,C405,,
+Lebanon,LB,C405,,
+Philippines,PH,C405,,
+Singapore,SG,C405,,
+Vanuatu,VU,C405,,
+EEA,C445,,,
+Total EU (27),V1,C445,,
+Total EU (25),D3,V1,,
+Total EU (15),D2,D3,,
+Austria,AT,D2,,
+Belgium & Luxembourg,A3,D2,,
+Belgium,BE,A3,,
+Luxembourg,LU,A3,,
+Denmark,DK,D2,,
+Finland,FI,D2,,
+France,FR,D2,,
+Germany,DE,D2,,
+Greece,GR,D2,,
+Irish Republic,IE,D2,,
+Italy,IT,D2,,
+Netherlands,NL,D2,,
+Portugal,PT,D2,,
+Spain,ES,D2,,
+Sweden,SE,D2,,
+Cyprus,CY,D3,,
+Czech Republic,CZ,D3,,
+Estonia,EE,D3,,
+Hungary,HU,D3,,
+Latvia,LV,D3,,
+Lithuania,LT,D3,,
+Malta,MT,D3,,
+Poland,PL,D3,,
+Slovakia,SK,D3,,
+Slovenia,SI,D3,,
+Bulgaria,BG,V1,,
+Romania,RO,V1,,
+Iceland,IS,C445,,
+Liechtenstein,LI,C445,,
+Norway,NO,C445,,
+Latin America,C447,,,
+Mexico,MX,C447,,
+Ecuador,EC,C447,,
+Venezuela,VE,C447,,
+Panama,PA,C447,,
+Other Latin America,C475,C447,,
+Costa Rica,CR,C475,,
+Cuba,CU,C475,,
+El Salvador,SV,C475,,
+Guatemala,GT,C475,,
+Honduras,HN,C475,,
+Nicaragua,NI,C475,,
+Bolivia,BO,C447,,
+Chile,CL,C447,,
+Colombia,CO,C447,,
+Peru,PE,C447,,
+Mercosur countries,C459,C447,,
+Argentina,AR,C459,,
+Brazil,BR,C459,,
+Paraguay,PY,C459,,
+Uruguay,UY,C459,,
+Mediterranean Basin,C455,,,
+Cyprus,CY,C455,,
+Malta,MT,C455,,
+Gibraltar,GI,C455,,
+Turkey,TR,C455,,
+Albania,AL,C455,,
+Morocco,MA,C455,,
+Egypt,EG,C455,,
+Israel,IL,C455,,
+Lebanon,LB,C455,,
+Rest of Near & Middle East,C481,C455,,
+Jordan,JO,C481,,
+Occupied Palestinian Territory,PS,C481,,
+Syria,SY,C481,,
+Residual North Africa,R9,C455,,
+Algeria,DZ,R9,,
+Libya,LY,R9,,
+Tunisia,TN,R9,,
+Former Yugoslavia,C93,C455,,
+Slovenia,SI,C93,,
+Bosnia & Herzegovina,BA,C93,,
+FYR Macedonia,MK,C93,,
+Yugoslavia,C114,C93,,
+Serbia and Montenegro,CS,C114,,
+Montenegro,ME,CS,,
+Serbia,XS,CS,,
+Kosovo,XK,C114,,
+French Franc Zone,C456,,,
+Gabon,GA,C456,,
+Rest of French Franc Zone,C469,C456,,
+Benin,BJ,C469,,
+Burkina Faso,BF,C469,,
+Cameroon,CM,C469,,
+Central African Republic,CF,C469,,
+Chad,TD,C469,,
+Comoros,KM,C469,,
+Congo (Republic),CG,C469,,
+Equatorial Guinea,GQ,C469,,
+Guinea Bissau,GW,C469,,
+Ivory Coast,CI,C469,,
+Mali,ML,C469,,
+Mayotte,YT,C469,,
+Niger,NE,C469,,
+Senegal,SN,C469,,
+Togo,TG,C469,,
+Maghreb countries,C457,,,
+Algeria,DZ,C457,,
+Morocco,MA,C457,,
+Tunisia,TN,C457,,
+Mashrek countries,C458,,,
+Egypt,EG,C458,,
+Rest of Near & Middle East,C481,C458,,
+Jordan,JO,C481,,
+Occupied Palestinian Territory,PS,C481,,
+Syria,SY,C481,,
+APEC,C460,,,
+NAFTA,B1,C460,,
+Canada,CA,B1,,
+Mexico,MX,B1,,
+United States,US,B1,,
+United States exc Puerto Rico,US1,US,,
+United States inc Puerto Rico,US2,US,,
+Puerto Rico,PR,US,,
+Australia,AU,C460,,
+Japan,JP,C460,,
+New Zealand,NZ,C460,,
+South Korea,KR,C460,,
+Brunei,BN,C460,,
+East Timor,TL,C460,,
+Indonesia,ID,C460,,
+Chile,CL,C460,,
+Peru,PE,C460,,
+China,CN,C460,,
+Hong Kong,HK,C460,,
+Malaysia,MY,C460,,
+Philippines,PH,C460,,
+Singapore,SG,C460,,
+Taiwan,TW,C460,,
+Thailand,TH,C460,,
+Vietnam,VN,C460,,
+Papua New Guinea,PG,C460,,
+Residual America (aka R8- Residual America),C462,,,
+Other North America,C484,C462,,
+Greenland,GL,C484,,
+St. Pierre & Miquelon,PM,C484,,
+Ecuador,EC,C462,,
+Bolivia,BO,C462,,
+Falkland Islands,FK,C462,,
+Guyana,GY,C462,,
+Paraguay,PY,C462,,
+Peru,PE,C462,,
+Surinam,SR,C462,,
+used to aggregate suppressed data,999X,,,
+Unknown Country A,X997,999X,,
+Unknown Country B,X999,999X,,
+Unknown Country C,X977,999X,,
+Extra EU-25 - world less EU-25 countries,D5,,,
+Bulgaria,BG,D5,,
+Romania,RO,D5,,
+EFTA,A5,D5,,
+Iceland,IS,A5,,
+Liechtenstein,LI,A5,,
+Norway,NO,A5,,
+Switzerland,CH,A5,,
+Other Europe,E2,D5,,
+Gibraltar,GI,E2,,
+Turkey,TR,E2,,
+Other Western Europe,C482,E2,,
+Andorra,AD,C482,,
+Faroe Islands,FO,C482,,
+Jersey,JE,C482,,
+San Marino,SM,C482,,
+Vatican City,VA,C482,,
+Rest of World: Europe,C493,E2,,
+Albania,AL,C493,,
+Belarus,BY,C493,,
+Bosnia & Herzegovina,BA,C493,,
+FYR Macedonia,MK,C493,,
+Moldova,MD,C493,,
+Russia,RU,C493,,
+Yugoslavia,C114,C493,,
+Serbia and Montenegro,CS,C114,,
+Montenegro,ME,CS,,
+Serbia,XS,CS,,
+Kosovo,XK,C114,,
+Ukraine,UA,C493,,
+Africa,E4,D5,,
+North Africa,E5,E4,,
+Morocco,MA,E5,,
+Egypt,EG,E5,,
+Residual North Africa,R9,E5,,
+Algeria,DZ,R9,,
+Libya,LY,R9,,
+Tunisia,TN,R9,,
+Other Africa,E6,E4,,
+South Africa,ZA,E6,,
+Residual Other Africa (aka R2 - Residual Other Africa,8C,E6,,
+Nigeria,NG,8C,,
+Residual Other Africa exc Nigeria,8D,8C,,
+Gabon,GA,8D,,
+Rest of Africa,C494,8D,,
+Rest of French Franc Zone,C469,C494,,
+Benin,BJ,C469,,
+Burkina Faso,BF,C469,,
+Cameroon,CM,C469,,
+Central African Republic,CF,C469,,
+Chad,TD,C469,,
+Comoros,KM,C469,,
+Congo (Republic),CG,C469,,
+Equatorial Guinea,GQ,C469,,
+Guinea Bissau,GW,C469,,
+Ivory Coast,CI,C469,,
+Mali,ML,C469,,
+Mayotte,YT,C469,,
+Niger,NE,C469,,
+Senegal,SN,C469,,
+Togo,TG,C469,,
+Rest of Africa ACP,C470,C494,,
+Angola,AO,C470,,
+Botswana,BW,C470,,
+Burundi,BI,C470,,
+Cape Verde,CV,C470,,
+Congo (Democratic Republic),CD,C470,,
+Djibouti,DJ,C470,,
+Eritrea,ER,C470,,
+Ethiopia,ET,C470,,
+Gambia,GM,C470,,
+Ghana,GH,C470,,
+Guinea,GN,C470,,
+Kenya,KE,C470,,
+Lesotho,LS,C470,,
+Liberia,LR,C470,,
+Madagascar,MG,C470,,
+Malawi,MW,C470,,
+Mauritania,MR,C470,,
+Mauritius,MU,C470,,
+Mozambique,MZ,C470,,
+Namibia,NA,C470,,
+Rwanda,RW,C470,,
+Sao Tome & Principe,ST,C470,,
+Seychelles,SC,C470,,
+Sierra Leone,SL,C470,,
+Somalia,SO,C470,,
+Sudan,SD,C470,,
+Swaziland,SZ,C470,,
+Tanzania,TZ,C470,,
+Uganda,UG,C470,,
+Zambia,ZM,C470,,
+Zimbabwe,ZW,C470,,
+Rest of Africa nes,C471,C494,,
+British Indian Ocean Territory,IO,C471,,
+St. Helena,SH,C471,,
+Western Sahara,EH,E6,,
+South Sudan,SS,E6,,
+America,E7,D5,,
+North America (BoP),E8,E7,,
+Canada,CA,E8,,
+United States,US,E8,,
+United States exc Puerto Rico,US1,US,,
+United States inc Puerto Rico,US2,US,,
+Puerto Rico,PR,US,,
+Other North America,C484,E8,,
+Greenland,GL,C484,,
+St. Pierre & Miquelon,PM,C484,,
+Central America,E9,E7,,
+Mexico,MX,E9,,
+Residual Central America,R3,E9,,
+Trinidad & Tobago,TT,R3,,
+Rest of World: Central America,C472,R3,,
+Bahamas,BS,C472,,
+Barbados,BB,C472,,
+Jamaica,JM,C472,,
+Panama,PA,C472,,
+St Kitts & Nevis,KN,C472,,
+Central America Offshores,C473,C472,,
+Bermuda,BM,C473,,
+British Virgin Islands,VG,C473,,
+Cayman Islands,KY,C473,,
+Montserrat,MS,C473,,
+Netherlands Antilles,AN,C473,,
+Other Caribbean ACP,C474,C472,,
+Antigua & Barbuda,AG,C474,,
+Belize,BZ,C474,,
+Dominica,DM,C474,,
+Dominican Republic,DO,C474,,
+Grenada,GD,C474,,
+Haiti,HT,C474,,
+St Lucia,LC,C474,,
+St Vincent,VC,C474,,
+Other Latin America,C475,C472,,
+Costa Rica,CR,C475,,
+Cuba,CU,C475,,
+El Salvador,SV,C475,,
+Guatemala,GT,C475,,
+Honduras,HN,C475,,
+Nicaragua,NI,C475,,
+Other Caribbean,C476,C472,,
+Anguilla,AI,C476,,
+Aruba,AW,C476,,
+Turks & Caicos Islands,TC,C476,,
+US Virgin Islands,VI,C476,,
+Saint Barthelemy,BL,E9,,
+Bonaire,BQ,E9,,
+Curacao,CW,E9,,
+Sint Maarten,SX,E9,,
+South America,F1,E7,,
+Ecuador,EC,F1,,
+Venezuela,VE,F1,,
+Rest of World: South America,C489,F1,,
+Argentina,AR,C489,,
+Bolivia,BO,C489,,
+Brazil,BR,C489,,
+Chile,CL,C489,,
+Colombia,CO,C489,,
+Falkland Islands,FK,C489,,
+Guyana,GY,C489,,
+Paraguay,PY,C489,,
+Peru,PE,C489,,
+Surinam,SR,C489,,
+Uruguay,UY,C489,,
+Asia,F2,D5,,
+Near & Middle East,F3,F2,,
+Iran,IR,F3,,
+Israel,IL,F3,,
+Gulf Arabian Countries,F4,F3,,
+Saudi Arabia,SA,F4,,
+Residual Gulf Arabian (aka R5-Residual Gulf Arabian),J8,F4,,
+United Arab Emirates,AE,J8,,
+United Arab Emirates (HMRC),AE1,AE,,
+Abu Dhabi,DH,AE,,
+Dubai,DU,AE,,
+Sharjah etc,HA,AE,,
+Other Gulf Arabian,C486,J8,,
+Bahrain,BH,C486,,
+Kuwait,KW,C486,,
+Iraq,IQ,C486,,
+Oman,OM,C486,,
+Qatar,QA,C486,,
+Yemen,YE,J8,,
+Other Near & Middle East,F5,F3,,
+Lebanon,LB,F5,,
+Former Soviet Near & Middle East,C477,F5,,
+Armenia,AM,C477,,
+Azerbaijan,AZ,C477,,
+Georgia,GE,C477,,
+Rest of Near & Middle East,C481,F5,,
+Jordan,JO,C481,,
+Occupied Palestinian Territory,PS,C481,,
+Syria,SY,C481,,
+Other Asia,F6,F2,,
+Japan,JP,F6,,
+South Korea,KR,F6,,
+Indonesia,ID,F6,,
+China,CN,F6,,
+Hong Kong,HK,F6,,
+India,IN,F6,,
+Malaysia,MY,F6,,
+Pakistan,PK,F6,,
+Philippines,PH,F6,,
+Singapore,SG,F6,,
+Taiwan,TW,F6,,
+Thailand,TH,F6,,
+Residual Asia (aka R6-Residual Asia),8B,F6,,
+Brunei,BN,8B,,
+East Timor,TL,8B,,
+Vietnam,VN,8B,,
+Other Former Soviet Asia,C478,8B,,
+Kazakhstan,KZ,C478,,
+Kyrgyz Republic,KG,C478,,
+Tajikistan,TJ,C478,,
+Turkmenistan,TM,C478,,
+Uzbekistan,UZ,C478,,
+Rest of ASEAN,C479,8B,,
+Myanmar,MM,C479,,
+Laos,LA,C479,,
+Cambodia,KH,C479,,
+Rest of Other Asia,C480,8B,,
+Afghanistan,AF,C480,,
+Bangladesh,BD,C480,,
+Maldives,MV,C480,,
+Sri Lanka,LK,C480,,
+Nepal,NP,C480,,
+Bhutan,BT,C480,,
+Mongolia,MN,C480,,
+North Korea,KP,C480,,
+Macao,MO,C480,,
+Oceania & Polar Regions,F7,D5,,
+Australia,AU,F7,,
+New Zealand,NZ,F7,,
+Rest of World: Oceania,C415,F7,,
+Papua New Guinea,PG,C415,,
+Vanuatu,VU,C415,,
+Australian Oceania,C441,C415,,
+Cocos Islands,CC,C441,,
+Christmas Islands,CX,C441,,
+Heard & McDonald Islands,HM,C441,,
+Norfolk Islands,NF,C441,,
+US Oceania,C442,C415,,
+American Samoa,AS,C442,,
+Guam,GU,C442,,
+US Minor Outlying Islands,UM,C442,,
+New Zealand Oceania,C443,C415,,
+Cook Islands,CK,C443,,
+Niue Island,NU,C443,,
+Tokelau Islands,TK,C443,,
+Polar Regions,C444,C415,,
+Antarctica,AQ,C444,,
+Bouvet Island,BV,C444,,
+French Southern Territories,TF,C444,,
+South Georgia,GS,C444,,
+Other Oceania,C491,C415,,
+Fiji,FJ,C491,,
+French Polynesia,PF,C491,,
+Kiribati,KI,C491,,
+Marshall Islands,MH,C491,,
+Micronesia,FM,C491,,
+Nauru,NR,C491,,
+New Caledonia,NC,C491,,
+Northern Mariana Islands,MP,C491,,
+Palau,PW,C491,,
+Pitcairn,PN,C491,,
+Samoa,WS,C491,,
+Solomon Islands,SB,C491,,
+Tonga,TO,C491,,
+Tuvalu,TV,C491,,
+Wallis & Futuna,WF,C491,,
+France & Saint Barthelemy,FRB,,,
+France,FR,FRB,,
+Saint Barthelemy,BL,FRB,,
+EMU(18),I7,,,
+Latvia,LV,I7,,
+EMU(17) Euro Area 17,I6,I7,,
+Estonia,EE,I6,,
+EMU(16),I5,I6,,
+Slovakia,SK,I5,,
+EMU(15),I4,I5,,
+Cyprus,CY,I4,,
+Malta,MT,I4,,
+EMU(13) Euro Area 13,I3,I4,,
+Austria,AT,I3,,
+Belgium & Luxembourg,A3,I3,,
+Belgium,BE,A3,,
+Luxembourg,LU,A3,,
+Finland,FI,I3,,
+France,FR,I3,,
+Germany,DE,I3,,
+Greece,GR,I3,,
+Irish Republic,IE,I3,,
+Italy,IT,I3,,
+Netherlands,NL,I3,,
+Portugal,PT,I3,,
+Spain,ES,I3,,
+Slovenia,SI,I3,,
+World total excl EU-27,V4,,,
+"Non-EU ( D4 is known as Extra EU-15, here it is REst of World or V2)",D4,V4,,
+Rest of Western Europe,C80,D4,,
+EFTA,A5,C80,,
+Iceland,IS,A5,,
+Liechtenstein,LI,A5,,
+Norway,NO,A5,,
+Switzerland,CH,A5,,
+Gibraltar,GI,C80,,
+Turkey,TR,C80,,
+Other Western Europe,C482,C80,,
+Andorra,AD,C482,,
+Faroe Islands,FO,C482,,
+Jersey,JE,C482,,
+San Marino,SM,C482,,
+Vatican City,VA,C482,,
+North America,C83,D4,,
+NAFTA,B1,C83,,
+Canada,CA,B1,,
+Mexico,MX,B1,,
+United States,US,B1,,
+United States exc Puerto Rico,US1,US,,
+United States inc Puerto Rico,US2,US,,
+Puerto Rico,PR,US,,
+Other North America,C484,C83,,
+Greenland,GL,C484,,
+St. Pierre & Miquelon,PM,C484,,
+Other OECD countries,C76,D4,,
+Australia,AU,C76,,
+Japan,JP,C76,,
+New Zealand,NZ,C76,,
+South Korea,KR,C76,,
+Ceuta,XC,C76,,
+Melilla,XL,C76,,
+Oil exporting countries,C77,D4,,
+Saudi Arabia,SA,C77,,
+United Arab Emirates,AE,C77,,
+United Arab Emirates (HMRC),AE1,AE,,
+Abu Dhabi,DH,AE,,
+Dubai,DU,AE,,
+Sharjah etc,HA,AE,,
+Other Gulf Arabian,C486,C77,,
+Bahrain,BH,C486,,
+Kuwait,KW,C486,,
+Iraq,IQ,C486,,
+Oman,OM,C486,,
+Qatar,QA,C486,,
+Other oil exporters,C487,C77,,
+Algeria,DZ,C487,,
+Brunei,BN,C487,,
+East Timor,TL,C487,,
+Ecuador,EC,C487,,
+Gabon,GA,C487,,
+Indonesia,ID,C487,,
+Iran,IR,C487,,
+Libya,LY,C487,,
+Nigeria,NG,C487,,
+Trinidad & Tobago,TT,C487,,
+Venezuela,VE,C487,,
+Rest of World,C72,D4,,
+Rest of World: Europe,C493,C72,,
+Albania,AL,C493,,
+Belarus,BY,C493,,
+Bosnia & Herzegovina,BA,C493,,
+FYR Macedonia,MK,C493,,
+Moldova,MD,C493,,
+Russia,RU,C493,,
+Yugoslavia,C114,C493,,
+Serbia and Montenegro,CS,C114,,
+Montenegro,ME,CS,,
+Serbia,XS,CS,,
+Kosovo,XK,C114,,
+Ukraine,UA,C493,,
+Rest of World: Central America,C472,C72,,
+Bahamas,BS,C472,,
+Barbados,BB,C472,,
+Jamaica,JM,C472,,
+Panama,PA,C472,,
+St Kitts & Nevis,KN,C472,,
+Central America Offshores,C473,C472,,
+Bermuda,BM,C473,,
+British Virgin Islands,VG,C473,,
+Cayman Islands,KY,C473,,
+Montserrat,MS,C473,,
+Netherlands Antilles,AN,C473,,
+Other Caribbean ACP,C474,C472,,
+Antigua & Barbuda,AG,C474,,
+Belize,BZ,C474,,
+Dominica,DM,C474,,
+Dominican Republic,DO,C474,,
+Grenada,GD,C474,,
+Haiti,HT,C474,,
+St Lucia,LC,C474,,
+St Vincent,VC,C474,,
+Other Latin America,C475,C472,,
+Costa Rica,CR,C475,,
+Cuba,CU,C475,,
+El Salvador,SV,C475,,
+Guatemala,GT,C475,,
+Honduras,HN,C475,,
+Nicaragua,NI,C475,,
+Other Caribbean,C476,C472,,
+Anguilla,AI,C476,,
+Aruba,AW,C476,,
+Turks & Caicos Islands,TC,C476,,
+US Virgin Islands,VI,C476,,
+Rest of World: South America,C489,C72,,
+Argentina,AR,C489,,
+Bolivia,BO,C489,,
+Brazil,BR,C489,,
+Chile,CL,C489,,
+Colombia,CO,C489,,
+Falkland Islands,FK,C489,,
+Guyana,GY,C489,,
+Paraguay,PY,C489,,
+Peru,PE,C489,,
+Surinam,SR,C489,,
+Uruguay,UY,C489,,
+Rest of World: Africa,C488,C72,,
+Morocco,MA,C488,,
+Tunisia,TN,C488,,
+Egypt,EG,C488,,
+South Africa,ZA,C488,,
+Rest of Africa,C494,C488,,
+Rest of French Franc Zone,C469,C494,,
+Benin,BJ,C469,,
+Burkina Faso,BF,C469,,
+Cameroon,CM,C469,,
+Central African Republic,CF,C469,,
+Chad,TD,C469,,
+Comoros,KM,C469,,
+Congo (Republic),CG,C469,,
+Equatorial Guinea,GQ,C469,,
+Guinea Bissau,GW,C469,,
+Ivory Coast,CI,C469,,
+Mali,ML,C469,,
+Mayotte,YT,C469,,
+Niger,NE,C469,,
+Senegal,SN,C469,,
+Togo,TG,C469,,
+Rest of Africa ACP,C470,C494,,
+Angola,AO,C470,,
+Botswana,BW,C470,,
+Burundi,BI,C470,,
+Cape Verde,CV,C470,,
+Congo (Democratic Republic),CD,C470,,
+Djibouti,DJ,C470,,
+Eritrea,ER,C470,,
+Ethiopia,ET,C470,,
+Gambia,GM,C470,,
+Ghana,GH,C470,,
+Guinea,GN,C470,,
+Kenya,KE,C470,,
+Lesotho,LS,C470,,
+Liberia,LR,C470,,
+Madagascar,MG,C470,,
+Malawi,MW,C470,,
+Mauritania,MR,C470,,
+Mauritius,MU,C470,,
+Mozambique,MZ,C470,,
+Namibia,NA,C470,,
+Rwanda,RW,C470,,
+Sao Tome & Principe,ST,C470,,
+Seychelles,SC,C470,,
+Sierra Leone,SL,C470,,
+Somalia,SO,C470,,
+Sudan,SD,C470,,
+Swaziland,SZ,C470,,
+Tanzania,TZ,C470,,
+Uganda,UG,C470,,
+Zambia,ZM,C470,,
+Zimbabwe,ZW,C470,,
+Rest of Africa nes,C471,C494,,
+British Indian Ocean Territory,IO,C471,,
+St. Helena,SH,C471,,
+Rest of World: Asia,C490,C72,,
+China,CN,C490,,
+Hong Kong,HK,C490,,
+India,IN,C490,,
+Israel,IL,C490,,
+Lebanon,LB,C490,,
+Malaysia,MY,C490,,
+Pakistan,PK,C490,,
+Philippines,PH,C490,,
+Singapore,SG,C490,,
+Taiwan,TW,C490,,
+Thailand,TH,C490,,
+Vietnam,VN,C490,,
+Yemen,YE,C490,,
+Former Soviet Near & Middle East,C477,C490,,
+Armenia,AM,C477,,
+Azerbaijan,AZ,C477,,
+Georgia,GE,C477,,
+Other Former Soviet Asia,C478,C490,,
+Kazakhstan,KZ,C478,,
+Kyrgyz Republic,KG,C478,,
+Tajikistan,TJ,C478,,
+Turkmenistan,TM,C478,,
+Uzbekistan,UZ,C478,,
+Rest of Near & Middle East,C481,C490,,
+Jordan,JO,C481,,
+Occupied Palestinian Territory,PS,C481,,
+Syria,SY,C481,,
+Rest of ASEAN,C479,C490,,
+Myanmar,MM,C479,,
+Laos,LA,C479,,
+Cambodia,KH,C479,,
+Rest of Other Asia,C480,C490,,
+Afghanistan,AF,C480,,
+Bangladesh,BD,C480,,
+Maldives,MV,C480,,
+Sri Lanka,LK,C480,,
+Nepal,NP,C480,,
+Bhutan,BT,C480,,
+Mongolia,MN,C480,,
+North Korea,KP,C480,,
+Macao,MO,C480,,
+Rest of World: Oceania,C415,C72,,
+Papua New Guinea,PG,C415,,
+Vanuatu,VU,C415,,
+Australian Oceania,C441,C415,,
+Cocos Islands,CC,C441,,
+Christmas Islands,CX,C441,,
+Heard & McDonald Islands,HM,C441,,
+Norfolk Islands,NF,C441,,
+US Oceania,C442,C415,,
+American Samoa,AS,C442,,
+Guam,GU,C442,,
+US Minor Outlying Islands,UM,C442,,
+New Zealand Oceania,C443,C415,,
+Cook Islands,CK,C443,,
+Niue Island,NU,C443,,
+Tokelau Islands,TK,C443,,
+Polar Regions,C444,C415,,
+Antarctica,AQ,C444,,
+Bouvet Island,BV,C444,,
+French Southern Territories,TF,C444,,
+South Georgia,GS,C444,,
+Other Oceania,C491,C415,,
+Fiji,FJ,C491,,
+French Polynesia,PF,C491,,
+Kiribati,KI,C491,,
+Marshall Islands,MH,C491,,
+Micronesia,FM,C491,,
+Nauru,NR,C491,,
+New Caledonia,NC,C491,,
+Northern Mariana Islands,MP,C491,,
+Palau,PW,C491,,
+Pitcairn,PN,C491,,
+Samoa,WS,C491,,
+Solomon Islands,SB,C491,,
+Tonga,TO,C491,,
+Tuvalu,TV,C491,,
+Wallis & Futuna,WF,C491,,
+Store & provisions EU ships,QR,,,
+Stores & provisions non-EU ships,QS,,,
+Euro area (19),I8,,,
+Austria,AT,I8,,
+Belgium,BE,I8,,
+Luxembourg,LU,I8,,
+Finland,FI,I8,,
+France,FR,I8,,
+Germany,DE,I8,,
+Greece,GR,I8,,
+Irish Republic,IE,I8,,
+Italy,IT,I8,,
+Netherlands,NL,I8,,
+Portugal,PT,I8,,
+Spain,ES,I8,,
+Cyprus,CY,I8,,
+Estonia,EE,I8,,
+Latvia,LV,I8,,
+Lithuania,LT,I8,,
+Malta,MT,I8,,
+Slovakia,SK,I8,,
+Slovenia,SI,I8,,
+European Central Bank,4F,I8,,
+European Stability Mechanism,4S,I8,,
+"Euro Area, Changing Composition",U29,I8,,
+EU countries non Euro,K8,,,
+Denmark,DK,K8,,
+Sweden,SE,K8,,
+Czech Republic,CZ,K8,,
+Hungary,HU,K8,,
+Poland,PL,K8,,
+Bulgaria,BG,K8,,
+Romania,RO,K8,,
+Croatia,HR,K8,,
+EU Institutions (non Euro area),4A,K8,,

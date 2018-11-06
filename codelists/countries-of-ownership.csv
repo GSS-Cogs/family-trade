@@ -1,4 +1,4 @@
-Label,Notation,Parent Notation
-UK,uk,
-Foreign,foreign,
-Any,any,
+Label,Notation,Parent Notation,Sort Priority,Description
+UK,uk,,,
+Foreign,foreign,,,
+Any,any,,,

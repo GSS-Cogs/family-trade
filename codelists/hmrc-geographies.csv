@@ -1,273 +1,273 @@
-Label,Notation,Parent Notation
-Afghanistan,AF,A
-Albania,AL,B
-Algeria,DZ,F
-American Samoa,AS,A
-Andorra,AD,I
-Angola,AO,H
-Anguilla,AI,D
-Antarctica,AQ,A
-Antigua and Barbuda,AG,D
-Argentina,AR,D
-Armenia,AM,B
-Aruba,AW,D
-Australia,AU,A
-Austria,AT,C
-Azerbaijan,AZ,B
-Bahamas,BS,D
-Bahrain,BH,F
-Bangladesh,BD,A
-Barbados,BB,D
-Belarus,BY,B
-Belgium,BE,C
-Belize,BZ,D
-Benin,BJ,H
-Bermuda,BM,D
-Bhutan,BT,A
-Bolivia,BO,D
-"Bonaire, Sint Eustatius and Saba",BQ,D
-Bosnia-Herzegovina,BA,B
-Botswana,BW,H
-Bouvet Island,BV,A
-Brazil,BR,D
-British Indian Ocean Territory,IO,H
-"Virgin Islands, British",VG,D
-Brunei,BN,A
-Bulgaria,BG,C
-Burkina Faso,BF,H
-Myanmar,MM,A
-Burundi,BI,H
-Cambodia,KH,A
-Cameroon,CM,H
-Canada,CA,G
-Canary Islands,IC,
-Cape Verde,CV,H
-Cayman Islands,KY,D
-Central Africa Republic,CF,H
-Ceuta,XC,F
-Chad,TD,H
-Chile,CL,D
-China,CN,A
-Christmas Islands,CX,A
-Keeling Islands,CC,A
-Colombia,CO,D
-Comoros,KM,H
-Congo,CG,H
-Congo (Democratic Republic of the),CD,H
-Cook Islands,CK,A
-Costa Rica,CR,D
-Ivory Coast,CI,H
-Croatia,HR,
-Cuba,CU,D
-Curacao,CW,D
-Cyprus,CY,C
-Czech Republic,CZ,C
-Denmark,DK,C
-Djibouti,DJ,H
-Dominica,DM,D
-Dominican Republic,DO,D
-Ecuador,EC,D
-Egypt,EG,F
-El Salvador,SV,D
-Equatorial Guinea,GQ,H
-Eritrea,ER,H
-Estonia,EE,C
-Ethiopia,ET,H
-Falklands Islands and dependencies,FK,D
-Faroe Islands,FO,I
-Fiji,FJ,A
-Finland,FI,C
-Macedonia,MK,B
-France,FR,C
-French Guiana,GF,
-French Polynesia,PF,A
-French Southern Territories,TF,A
-Gabon,GA,H
-Gambia,GM,H
-Georgia,GE,B
-Germany,DE,C
-Ghana,GH,H
-Gibraltar,GI,I
-Greece,GR,C
-Greenland,GL,G
-Grenada,GD,D
-Guadeloupe,GP,
-Guam,GU,A
-Guatemala,GT,D
-Guernsey,GG,
-Guinea,GN,H
-Guinea Bissau,GW,H
-Guyana,GY,D
-Haiti,HT,D
-Heard Island and McDonald Islands,HM,A
-Vatican City State,VA,I
-Honduras,HN,D
-Hong Kong,HK,A
-Hungary,HU,C
-Iceland,IS,I
-India,IN,A
-Indonesia,ID,A
-Iran (Islamic Republic of),IR,F
-Iraq,IQ,F
-Republic of Ireland,IE,C
-Israel,IL,F
-Italy,IT,C
-Jamaica,JM,D
-Japan,JP,A
-Jersey,JE,
-Jordan,JO,F
-Kazakhstan,KZ,B
-Kenya,KE,H
-Kiribati,KI,A
-North Korea,KP,A
-South Korea,KR,A
-Kosovo,XK,B
-Kuwait,KW,F
-Kyrgyz Republic,KG,B
-Laos,LA,A
-Latvia,LV,C
-Lebanon,LB,F
-Lesotho,LS,H
-Liberia,LR,H
-Libya,LY,F
-Liechtenstein,LI,I
-Lithuania,LT,C
-Luxembourg,LU,C
-Macao,MO,A
-Madagascar,MG,H
-Malawi,MW,H
-Malaysia,MY,A
-Maldives,MV,A
-Mali,ML,H
-Malta,MT,C
-Marshall Islands,MH,A
-Martinique,MQ,
-Mauritania,MR,H
-Mauritius,MU,H
-Mayotte,YT,
-Melilla,XL,F
-Mexico,MX,G
-Micronesia (Federated States of),FM,A
-"Moldova, Republic of",MD,B
-Mongolia,MN,A
-Montenegro,ME,B
-Montserrat,MS,D
-Morocco,MA,F
-Mozambique,MZ,H
-Namibia,NA,H
-Nauru,NR,A
-Nepal,NP,A
-Netherlands,NL,C
-New Caledonia,NC,A
-New Zealand,NZ,A
-Nicaragua,NI,D
-Niger,NE,H
-Nigeria,NG,H
-Niue Island,NU,A
-Norfolk Island,NF,A
-Northern Mariana Islands,MP,A
-Norway,NO,I
-Occupied Palestinian Territory,PS,F
-Oman,OM,F
-Pakistan,PK,A
-Palau,PW,A
-Panama,PA,D
-Papua New Guinea,PG,A
-Paraguay,PY,D
-Peru,PE,D
-Philippines,PH,A
-Pitcairn,PN,A
-Poland,PL,C
-Portugal,PT,C
-Qatar,QA,F
-Reunion,RE,
-Romania,RO,C
-Russian Federation,RU,B
-Rwanda,RW,H
-Saint Barthelemy,BL,D
-Samoa,WS,A
-San Marino,SM,I
-Sao Tome and Principe,ST,H
-Saudi Arabia,SA,F
-Senegal,SN,H
-Serbia ,XS,B
-Seychelles,SC,H
-Sierra Leone,SL,H
-Singapore,SG,A
-Sint Maarten (Dutch part),SX,D
-Slovakia,SK,C
-Slovenia,SI,C
-Solomon Islands,SB,A
-Somalia,SO,H
-South Africa,ZA,H
-South Georgia and South Sandwich Islands,GS,
-South Sudan,SS,F
-Spain,ES,C
-Sri Lanka,LK,A
-"St Helena, Ascension and Tristan da Cunha",SH,H
-St Kitts and Nevis,KN,D
-St Lucia,LC,D
-St Pierre and Miquelon,PM,G
-St Vincent and the Grenadines,VC,D
-Stores & Provisions,QR,
-Stores & Provisions,QS,
-Sudan,SD,F
-Surinam,SR,D
-Swaziland,SZ,H
-Sweden,SE,C
-Switzerland,CH,I
-Syrian Arab Republic,SY,F
-Taiwan,TW,A
-Tajikistan,TJ,B
-Tanzania (United Republic of),TZ,H
-Thailand,TH,A
-Timor-Leste,TL,A
-Togo,TG,H
-Tonga,TO,A
-Trinidad and Tobago,TT,D
-Tunisia,TN,F
-Turkey,TR,I
-Turkmenistan,TM,B
-Turks and Caicos Islands,TC,D
-Tuvalu,TV,A
-Uganda,UG,H
-Ukraine,UA,B
-United Arab Emirates,AE,F
-United Kingdom,GB,
-United States,US,G
-United States Minor outlying islands,UM,A
-"Virgin Islands, United States",VI,D
-Uruguay,UY,D
-Uzbekistan,UZ,B
-Vanuatu,VU,A
-"Venezuela, Bolivarian Republic of",VE,D
-Vietnam,VN,A
-Wallis and Futuna,WF,A
-Western Sahara,EH,H
-Yemen,YE,F
-Zambia,ZM,H
-Zimbabwe,ZW,H
-Belgian Continental Shelf,ZB,
-Cyprus Continental Shelf,ZJ,
-Danish Continental Shelf,ZD,
-Finnish Continental Shelf,ZK,
-Fish Flag,FF,
-French Continental Shelf,ZF,
-German Continental Shelf,ZG,
-Greece Continental Shelf,ZC,
-Irish Continental Shelf,ZE,
-Low Value Trade,ZY,
-Netherlands Continental Shelf,ZH,
-Norwegian Continental Shelf,ZN,
-Parcel Post,XX,
-Pseudo Flag,ZZ,
-Swedish Continental Shelf,ZS,
-UK Continental Shelf,ZU,
-Asia and Oceania,A,
-Eastern Europe (excl. EU),B,
-European Union,C,
-Latin America and Caribbean,D,
-Middle East and North Africa,F,
-North America,G,
-Sub-Saharan Africa,H,
-Western Europe (excl. EU),I,
+Label,Notation,Parent Notation,Sort Priority,Description
+Afghanistan,AF,A,,
+Albania,AL,B,,
+Algeria,DZ,F,,
+American Samoa,AS,A,,
+Andorra,AD,I,,
+Angola,AO,H,,
+Anguilla,AI,D,,
+Antarctica,AQ,A,,
+Antigua and Barbuda,AG,D,,
+Argentina,AR,D,,
+Armenia,AM,B,,
+Aruba,AW,D,,
+Australia,AU,A,,
+Austria,AT,C,,
+Azerbaijan,AZ,B,,
+Bahamas,BS,D,,
+Bahrain,BH,F,,
+Bangladesh,BD,A,,
+Barbados,BB,D,,
+Belarus,BY,B,,
+Belgium,BE,C,,
+Belize,BZ,D,,
+Benin,BJ,H,,
+Bermuda,BM,D,,
+Bhutan,BT,A,,
+Bolivia,BO,D,,
+"Bonaire, Sint Eustatius and Saba",BQ,D,,
+Bosnia-Herzegovina,BA,B,,
+Botswana,BW,H,,
+Bouvet Island,BV,A,,
+Brazil,BR,D,,
+British Indian Ocean Territory,IO,H,,
+"Virgin Islands, British",VG,D,,
+Brunei,BN,A,,
+Bulgaria,BG,C,,
+Burkina Faso,BF,H,,
+Myanmar,MM,A,,
+Burundi,BI,H,,
+Cambodia,KH,A,,
+Cameroon,CM,H,,
+Canada,CA,G,,
+Canary Islands,IC,,,
+Cape Verde,CV,H,,
+Cayman Islands,KY,D,,
+Central Africa Republic,CF,H,,
+Ceuta,XC,F,,
+Chad,TD,H,,
+Chile,CL,D,,
+China,CN,A,,
+Christmas Islands,CX,A,,
+Keeling Islands,CC,A,,
+Colombia,CO,D,,
+Comoros,KM,H,,
+Congo,CG,H,,
+Congo (Democratic Republic of the),CD,H,,
+Cook Islands,CK,A,,
+Costa Rica,CR,D,,
+Ivory Coast,CI,H,,
+Croatia,HR,,,
+Cuba,CU,D,,
+Curacao,CW,D,,
+Cyprus,CY,C,,
+Czech Republic,CZ,C,,
+Denmark,DK,C,,
+Djibouti,DJ,H,,
+Dominica,DM,D,,
+Dominican Republic,DO,D,,
+Ecuador,EC,D,,
+Egypt,EG,F,,
+El Salvador,SV,D,,
+Equatorial Guinea,GQ,H,,
+Eritrea,ER,H,,
+Estonia,EE,C,,
+Ethiopia,ET,H,,
+Falklands Islands and dependencies,FK,D,,
+Faroe Islands,FO,I,,
+Fiji,FJ,A,,
+Finland,FI,C,,
+Macedonia,MK,B,,
+France,FR,C,,
+French Guiana,GF,,,
+French Polynesia,PF,A,,
+French Southern Territories,TF,A,,
+Gabon,GA,H,,
+Gambia,GM,H,,
+Georgia,GE,B,,
+Germany,DE,C,,
+Ghana,GH,H,,
+Gibraltar,GI,I,,
+Greece,GR,C,,
+Greenland,GL,G,,
+Grenada,GD,D,,
+Guadeloupe,GP,,,
+Guam,GU,A,,
+Guatemala,GT,D,,
+Guernsey,GG,,,
+Guinea,GN,H,,
+Guinea Bissau,GW,H,,
+Guyana,GY,D,,
+Haiti,HT,D,,
+Heard Island and McDonald Islands,HM,A,,
+Vatican City State,VA,I,,
+Honduras,HN,D,,
+Hong Kong,HK,A,,
+Hungary,HU,C,,
+Iceland,IS,I,,
+India,IN,A,,
+Indonesia,ID,A,,
+Iran (Islamic Republic of),IR,F,,
+Iraq,IQ,F,,
+Republic of Ireland,IE,C,,
+Israel,IL,F,,
+Italy,IT,C,,
+Jamaica,JM,D,,
+Japan,JP,A,,
+Jersey,JE,,,
+Jordan,JO,F,,
+Kazakhstan,KZ,B,,
+Kenya,KE,H,,
+Kiribati,KI,A,,
+North Korea,KP,A,,
+South Korea,KR,A,,
+Kosovo,XK,B,,
+Kuwait,KW,F,,
+Kyrgyz Republic,KG,B,,
+Laos,LA,A,,
+Latvia,LV,C,,
+Lebanon,LB,F,,
+Lesotho,LS,H,,
+Liberia,LR,H,,
+Libya,LY,F,,
+Liechtenstein,LI,I,,
+Lithuania,LT,C,,
+Luxembourg,LU,C,,
+Macao,MO,A,,
+Madagascar,MG,H,,
+Malawi,MW,H,,
+Malaysia,MY,A,,
+Maldives,MV,A,,
+Mali,ML,H,,
+Malta,MT,C,,
+Marshall Islands,MH,A,,
+Martinique,MQ,,,
+Mauritania,MR,H,,
+Mauritius,MU,H,,
+Mayotte,YT,,,
+Melilla,XL,F,,
+Mexico,MX,G,,
+Micronesia (Federated States of),FM,A,,
+"Moldova, Republic of",MD,B,,
+Mongolia,MN,A,,
+Montenegro,ME,B,,
+Montserrat,MS,D,,
+Morocco,MA,F,,
+Mozambique,MZ,H,,
+Namibia,NA,H,,
+Nauru,NR,A,,
+Nepal,NP,A,,
+Netherlands,NL,C,,
+New Caledonia,NC,A,,
+New Zealand,NZ,A,,
+Nicaragua,NI,D,,
+Niger,NE,H,,
+Nigeria,NG,H,,
+Niue Island,NU,A,,
+Norfolk Island,NF,A,,
+Northern Mariana Islands,MP,A,,
+Norway,NO,I,,
+Occupied Palestinian Territory,PS,F,,
+Oman,OM,F,,
+Pakistan,PK,A,,
+Palau,PW,A,,
+Panama,PA,D,,
+Papua New Guinea,PG,A,,
+Paraguay,PY,D,,
+Peru,PE,D,,
+Philippines,PH,A,,
+Pitcairn,PN,A,,
+Poland,PL,C,,
+Portugal,PT,C,,
+Qatar,QA,F,,
+Reunion,RE,,,
+Romania,RO,C,,
+Russian Federation,RU,B,,
+Rwanda,RW,H,,
+Saint Barthelemy,BL,D,,
+Samoa,WS,A,,
+San Marino,SM,I,,
+Sao Tome and Principe,ST,H,,
+Saudi Arabia,SA,F,,
+Senegal,SN,H,,
+Serbia ,XS,B,,
+Seychelles,SC,H,,
+Sierra Leone,SL,H,,
+Singapore,SG,A,,
+Sint Maarten (Dutch part),SX,D,,
+Slovakia,SK,C,,
+Slovenia,SI,C,,
+Solomon Islands,SB,A,,
+Somalia,SO,H,,
+South Africa,ZA,H,,
+South Georgia and South Sandwich Islands,GS,,,
+South Sudan,SS,F,,
+Spain,ES,C,,
+Sri Lanka,LK,A,,
+"St Helena, Ascension and Tristan da Cunha",SH,H,,
+St Kitts and Nevis,KN,D,,
+St Lucia,LC,D,,
+St Pierre and Miquelon,PM,G,,
+St Vincent and the Grenadines,VC,D,,
+Stores & Provisions,QR,,,
+Stores & Provisions,QS,,,
+Sudan,SD,F,,
+Surinam,SR,D,,
+Swaziland,SZ,H,,
+Sweden,SE,C,,
+Switzerland,CH,I,,
+Syrian Arab Republic,SY,F,,
+Taiwan,TW,A,,
+Tajikistan,TJ,B,,
+Tanzania (United Republic of),TZ,H,,
+Thailand,TH,A,,
+Timor-Leste,TL,A,,
+Togo,TG,H,,
+Tonga,TO,A,,
+Trinidad and Tobago,TT,D,,
+Tunisia,TN,F,,
+Turkey,TR,I,,
+Turkmenistan,TM,B,,
+Turks and Caicos Islands,TC,D,,
+Tuvalu,TV,A,,
+Uganda,UG,H,,
+Ukraine,UA,B,,
+United Arab Emirates,AE,F,,
+United Kingdom,GB,,,
+United States,US,G,,
+United States Minor outlying islands,UM,A,,
+"Virgin Islands, United States",VI,D,,
+Uruguay,UY,D,,
+Uzbekistan,UZ,B,,
+Vanuatu,VU,A,,
+"Venezuela, Bolivarian Republic of",VE,D,,
+Vietnam,VN,A,,
+Wallis and Futuna,WF,A,,
+Western Sahara,EH,H,,
+Yemen,YE,F,,
+Zambia,ZM,H,,
+Zimbabwe,ZW,H,,
+Belgian Continental Shelf,ZB,,,
+Cyprus Continental Shelf,ZJ,,,
+Danish Continental Shelf,ZD,,,
+Finnish Continental Shelf,ZK,,,
+Fish Flag,FF,,,
+French Continental Shelf,ZF,,,
+German Continental Shelf,ZG,,,
+Greece Continental Shelf,ZC,,,
+Irish Continental Shelf,ZE,,,
+Low Value Trade,ZY,,,
+Netherlands Continental Shelf,ZH,,,
+Norwegian Continental Shelf,ZN,,,
+Parcel Post,XX,,,
+Pseudo Flag,ZZ,,,
+Swedish Continental Shelf,ZS,,,
+UK Continental Shelf,ZU,,,
+Asia and Oceania,A,,,
+Eastern Europe (excl. EU),B,,,
+European Union,C,,,
+Latin America and Caribbean,D,,,
+Middle East and North Africa,F,,,
+North America,G,,,
+Sub-Saharan Africa,H,,,
+Western Europe (excl. EU),I,,,

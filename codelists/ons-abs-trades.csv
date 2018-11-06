@@ -1,4 +1,4 @@
-Label,Notation,Parent Notation,Sort Priority
-Goods,goods,,1
-Services,services,,2
-Goods and Services,goods-and-services,,3
+Label,Notation,Parent Notation,Sort Priority,Description
+Goods,goods,,1,
+Services,services,,2,
+Goods and Services,goods-and-services,,3,
