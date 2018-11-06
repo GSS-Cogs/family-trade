@@ -1,0 +1,31 @@
+{
+  "fields": [
+    {
+      "name": "Label",
+      "constraints": {
+        "required": true
+      }
+    }, {
+      "name": "Notation",
+      "constraints": {
+        "required": true,
+        "unique": true
+      }
+    }, {
+      "name": "Parent Notation",
+      "constraints": {
+        "required": false
+      }
+    }, {
+      "name": "Sort Priority",
+      "constraints": {
+        "required": false
+      }
+    }, {
+      "name": "Description",
+      "constraints": {
+        "required": false
+      }
+    }
+  ]
+}
