@@ -1,6 +1,7 @@
 @prefix qb:    <http://purl.org/linked-data/cube#> .
 @prefix void:  <http://rdfs.org/ns/void#> .
 @prefix dct:   <http://purl.org/dc/terms/> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix pmd:   <http://publishmydata.com/def/dataset#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
@@ -23,6 +24,7 @@
         dct:title            "Annual Business Survey importers and exporters."@en ;
         void:sparqlEndpoint  <http://gss-data.org.uk/sparql>;
         pmdf:inFolder        <http://gss-data.org.uk/def/concept/folders/themes/trade>;
+        dcat:theme           <http://gss-data.org.uk/def/concept/folders/themes/trade>;
         gdp:family           gdp:trade;
         .
 }
