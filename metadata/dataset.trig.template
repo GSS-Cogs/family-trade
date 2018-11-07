@@ -4,7 +4,8 @@
 @prefix pmd:   <http://publishmydata.com/def/dataset#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix gdp:   <http://gss-data.org.uk/def/ontology/gdp#> .
+@prefix gdp:   <http://gss-data.org.uk/def/gdp#> .
+@prefix pmdf:   <http://publishmydata.com/def/ontology/folder/> .
 
 <http://gss-data.org.uk/graph/ons-abs/metadata> {
   <http://gss-data.org.uk/data/ons-abs>
@@ -20,5 +21,8 @@
         dct:license          <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
         dct:references       <http://gss-data.org.uk/help> ;
         dct:title            "Annual Business Survey importers and exporters."@en ;
-        void:sparqlEndpoint  <http://gss-data.org.uk/sparql> .
+        void:sparqlEndpoint  <http://gss-data.org.uk/sparql>;
+        pmdf:inFolder        <http://gss-data.org.uk/def/concept/folders/themes/trade>;
+        gdp:family           gdp:trade;
+        .
 }
