@@ -10,13 +10,13 @@
       "constraints": {
         "required": true,
         "unique": true,
-        "pattern": "^[\\w\\/]+(-[\\w\\/]+)*$"
+        "pattern": "^-?[\\w\\/]+(-[\\w\\/]+)*$"
       }
     }, {
       "name": "Parent Notation",
       "constraints": {
         "required": false,
-        "pattern": "^([\\w\\/]+(-[\\w\\/]+)*|)$"
+        "pattern": "^(-?[\\w\\/]+(-[\\w\\/]+)*|)$"
       }
     }, {
       "name": "Sort Priority",
