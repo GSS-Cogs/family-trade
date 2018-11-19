@@ -1,0 +1,83 @@
+{
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "tables": [
+    {
+      "url": "https://ons-opendata.github.io/ref_alcohol/codelists/alcohol-category.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_alcohol/codelists/alcohol-content.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_alcohol/codelists/alcohol-duty.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+    "url": "out/observations.csv",
+      "tableSchema": {
+        "columns": [{
+          "titles": "Period",
+          "name": "period",
+          "datatype": {
+            "format": "^(year/[0-9]{4}|gegorian-interval/.*|month/[0-9]{4}-[0-9]{2}|day/[0-9]{4}-[0-9]{2}-[0-9]{2})$"
+          },
+          "required": true
+        }, {
+          "titles": "Alcohol Duty",
+          "name": "alcohol_duty",
+          "datatype": {
+            "format": "^-?[\\w\\/]+(-[\\w\\/]+)*$"
+          },
+          "required": true
+        }, {
+          "titles": "Alcohol Content",
+          "name": "alcohol_content",
+          "datatype": {
+            "format": "^-?[\\w\\/]+(-[\\w\\/]+)*$"
+          },
+          "required": true
+        }, {
+          "titles": "Alcohol Category",
+          "name": "alcohol_category",
+          "datatype": {
+            "format": "^-?[\\w\\/]+(-[\\w\\/]+)*$"
+          },
+          "required": true
+        }, {
+          "titles": "Measure Type",
+          "name": "measure_type",
+          "required": true
+        }, {
+          "titles": "Value",
+          "name": "value",
+          "datatype": {
+            "format": "^(-|)([0-9]|[1-9][0-9]+)$"
+          },
+          "required": true
+        }, {
+          "titles": "Unit",
+          "name": "unit",
+          "required": true
+        }, {
+          "titles": "Revision",
+          "name": "revision",
+          "datatype": {
+            "format": "^(revised|provisional|estimated|original-value)$"
+          },
+          "required": true
+        }],
+        "foreignKeys": [{
+          "columnReference": "alcohol_duty",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_alcohol/codelists/alcohol-duty.csv",
+            "columnReference": "notation"
+          }
+        }],
+        "primaryKey": [
+          "period", "alcohol_duty", "alcohol_content", "alcohol_category", "measure_type", "value", "unit", "revision"
+        ]
+      }
+    }
+  ]
+}
