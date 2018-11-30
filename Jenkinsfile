@@ -16,46 +16,47 @@ pipeline {
                 }
             }
             steps {
-                sh "jupyter-nbconvert --to python --stdout 'Trade_merge.ipynb' | ipython"
-                sh "jupyter-nbconvert --to python --stdout 'update_metadata.ipynb' | ipython"
+                sh "jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute main.ipynb"
+            }
+        }
+        stage('Test') {
+            agent {
+                docker {
+                    image 'cloudfluff/csvlint'
+                    reuseNode true
+                }
+            }
+            steps {
+                script {
+                    ansiColor('xterm') {
+                        sh "csvlint -s schema.json"
+                    }
+                }
             }
         }
         stage('Upload draftset') {
             steps {
-                uploadDraftset('HMRC UK Trade in Goods Statistics by Business Characteristics 2015',
-                               ['out/Businesscharacteristics.csv'])
-            }
-        }
-        stage('Test Draftset') {
-            steps {
                 script {
-                    configFileProvider([configFile(fileId: 'pmd', variable: 'configfile')]) {
-                        def config = readJSON(text: readFile(file: configfile))
-                        String PMD = config['pmd_api']
-                        String credentials = config['credentials']
-                        def drafts = drafter.listDraftsets(PMD, credentials, 'owned')
-                        def jobDraft = drafts.find  { it['display-name'] == env.JOB_NAME }
-                        if (jobDraft) {
-                            withCredentials([usernameColonPassword(credentialsId: credentials, variable: 'USERPASS')]) {
-                                sh "java -cp lib/sparql.jar uk.org.floop.sparqlTestRunner.Run -i -s ${PMD}/v1/draftset/${jobDraft.id}/query?union-with-live=true -a \'${USERPASS}\'"
-                            }
-                        } else {
-                            error "Expecting a draftset for this job."
-                        }
-                    }
+                    jobDraft.replace()
+                    uploadTidy(['out/observations.csv'],
+                               'https://ons-opendata.github.io/ref_trade/columns.csv')
                 }
             }
         }
         stage('Publish') {
             steps {
-                publishDraftset()
+                script {
+                    jobDraft.publishDraftset()
+                }
             }
         }
     }
     post {
         always {
             archiveArtifacts 'out/*'
-            junit 'reports/**/*.xml'
+        }
+        success {
+            build job: '../GDP-tests', wait: false
         }
     }
 }
