@@ -1,0 +1,101 @@
+{
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "tables": [
+    {
+      "url": "codelists/seasonal-adjustments.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "Seasonal Adjustments"
+    }, {
+      "url": "codelists/price-classifications.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "Price Classifications",
+      "rdfs:comment": "Taken from https://collaborate2.ons.gov.uk/jira/secure/attachment/12495/Prices%20classification.xlsx. See GDP-237 for more."
+    }, {
+      "url": "codelists/hmrc-geographies.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "HMRC Geographies",
+      "rdfs:comment": "This codelist will have 2 labels for 13 of the codes. We might want to revise the pipeline to allow distinguish skos:prefLabel and skos:altLabel. It also doesn't include Geographical Region which may be useful (if we have data published on this basis)."
+    }, {
+      "url": "codelists/employment-size-bands.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "Employment Size Bands",
+      "rdfs:comment": "We could introduce 2 levels to the hierarchy but I don’t think this is necessary at this point."
+    }, {
+      "url": "codelists/countries-of-ownership.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "Countries of Ownership",
+      "rdfs:comment": "Not sure that this is country really, but that seems ok for now."
+    }, {
+      "url": "codelists/turnover-size-bands.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "Turnover Size Bands",
+      "rdfs:comment": "I’ve taken the opportunity to simplify the notation here as our blunt slugify transformation would convert commas to dashes – we’ll need to either submit this notation or add a custom transformation."
+    }, {
+      "url": "codelists/age-of-business.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "Age of Business"
+    }, {
+      "url": "codelists/flow-directions.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "Flow Directions"
+    }, {
+      "url": "codelists/international-trade-basis.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "International Trade Basis",
+      "rdfs:comment": "GDP-183, accounting basis"
+    }, {
+      "url": "codelists/bpm6-services.csv",
+      "tableSchema": "schemas/bpm6-schema.json",
+      "rdfs:label": "BPM6 Services",
+      "rdfs:comment": "GDP-183, BPM6 services"
+    }, {
+      "url": "codelists/cord-sitc.csv",
+      "tableSchema": "schemas/cord-sitc-schema.json",
+      "rdfs:label": "CORD SITC",
+      "rdfs:comment": "GDP-248"
+    }, {
+      "url": "codelists/eu-rw-ww.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "ONS Trade Areas Legacy",
+      "rdfs:comment": "GDP-184"
+    }, {
+      "url": "codelists/cord-geographies.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "ONS Trade Areas CORD",
+      "rdfs:comment": "GDP-184"
+    }, {
+      "url": "codelists/bop-services.csv",
+      "tableSchema": "schemas/bop-schema.json",
+      "rdfs:label": "BOP Services",
+      "rdfs:comment": "Need correspondence links to BPM6"
+    }, {
+      "url": "codelists/pink-book-services.csv",
+      "tableSchema": "schemas/pink-book-schema.json",
+      "rdfs:label": "Pink Book Services",
+      "rdfs:comment": "GDP-279. Need correspondence links to BPM6"
+    }, {
+      "url": "codelists/exporter-and-importer-activity.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "Export and Import Activity"
+    }, {
+      "url": "codelists/hmrc-industry-groups.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "HMRC Industry Groups",
+      "rdfs:comment": "Based upon SIC codes"
+    }, {
+      "url": "codelists/hmrc-regions.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "HMRC Regions",
+      "rdfs:comment": "Based upon NUTS1 regions"
+    }, {
+      "url": "codelists/sitc4.csv",
+      "tableSchema": "schemas/sitc4-schema.json",
+      "rdfs:label": "SITC 4",
+      "rdfs:comment": "GDP-287"
+    }, {
+      "url": "codelists/ons-abs-trades.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "ONS ABS Trades"
+    }
+  ]
+}

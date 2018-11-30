@@ -1,0 +1,40 @@
+{
+  "@id": "codelist-schema.json",
+  "@context": "http://www.w3.org/ns/csvw",
+  "columns": [
+    {
+      "titles": "Label",
+      "name": "label",
+      "datatype": "string",
+      "required": true
+    },
+    {
+      "titles": "Notation",
+      "name": "notation",
+      "datatype": {
+        "base": "string",
+        "format": "^[0-9]{1,2}(\\.[0-9]{1,2})*(\\.N[0-9]+)?$"
+      },
+      "required": true
+    },
+    {
+      "titles": "Parent Notation",
+      "datatype": {
+        "base": "string",
+        "format": "^[0-9]{1,2}(\\.[0-9]{1,2})*(\\.N[0-9]+)?|$"
+      },
+      "required": false
+    },
+    {
+      "titles": "Sort Priority",
+      "datatype": "number",
+      "required": false
+    },
+    {
+      "titles": "Description",
+      "datatype": "string",
+      "required": false
+    }
+  ],
+  "primaryKey": "notation"
+}
