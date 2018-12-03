@@ -19,6 +19,7 @@
     },
     {
       "titles": "Parent Notation",
+      "name": "parent_notation",
       "datatype": {
         "base": "string",
         "format": "^.*|$"
@@ -36,5 +37,5 @@
       "required": false
     }
   ],
-  "primaryKey": "notation"
+  "primaryKey": ["notation", "parent_notation"]
 }
