@@ -75,7 +75,7 @@
           }
         }],
         "primaryKey": [
-          "period", "alcohol_duty", "alcohol_content", "alcohol_category", "measure_type", "value", "unit", "revision"
+          "period", "alcohol_duty", "alcohol_content", "alcohol_category", "measure_type", "unit", "revision"
         ]
       }
     }
