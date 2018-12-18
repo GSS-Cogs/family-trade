@@ -20,7 +20,7 @@
           "titles": "Period",
           "name": "period",
           "datatype": {
-            "format": "^(year/[0-9]{4}|gegorian-interval/.*|month/[0-9]{4}-[0-9]{2}|day/[0-9]{4}-[0-9]{2}-[0-9]{2})$"
+            "format": "^(year/[0-9]{4}|gregorian-interval/.*|month/[0-9]{4}-[0-9]{2}|day/[0-9]{4}-[0-9]{2}-[0-9]{2})$"
           },
           "required": true
         }, {
