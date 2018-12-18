@@ -70,6 +70,24 @@
             "resource": "https://ons-opendata.github.io/ref_alcohol/codelists/alcohol-duty.csv",
             "columnReference": "notation"
           }
+        }, {
+          "columnReference": "alcohol_content",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_alcohol/codelists/alcohol-content.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "alcohol_category",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_alcohol/codelists/alcohol-category.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "unit",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+            "columnReference": "notation"
+          }
         }],
         "primaryKey": [
           "period", "alcohol_duty", "alcohol_content", "alcohol_category", "measure_type", "unit", "revision"
