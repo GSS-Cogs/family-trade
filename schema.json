@@ -24,6 +24,13 @@
           },
           "required": true
         }, {
+          "titles": "Alcohol Category",
+          "name": "alcohol_category",
+          "datatype": {
+            "format": "^-?[\\w\\/]+(-[\\w\\/]+)*$"
+          },
+          "required": true
+        }, {
           "titles": "Alcohol Duty",
           "name": "alcohol_duty",
           "datatype": {
@@ -38,22 +45,12 @@
           },
           "required": true
         }, {
-          "titles": "Alcohol Category",
-          "name": "alcohol_category",
-          "datatype": {
-            "format": "^-?[\\w\\/]+(-[\\w\\/]+)*$"
-          },
-          "required": true
-        }, {
           "titles": "Measure Type",
           "name": "measure_type",
           "required": true
         }, {
           "titles": "Value",
           "name": "value",
-          "datatype": {
-            "format": "^(-|)([0-9]|[1-9][0-9]+)$"
-          },
           "required": true
         }, {
           "titles": "Unit",
