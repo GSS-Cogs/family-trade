@@ -58,7 +58,7 @@
           "titles": "Unit",
           "name": "unit",
           "datatype": {
-            "format": "^Businesses|Employees|£ Million$"
+            "format": "^Businesses|Employees|GBP Million$"
           },
           "required": true
         }],
@@ -84,7 +84,7 @@
           "columnReference": "hmrc_industry",
           "reference": {
             "resource": "https://ons-opendata.github.io/ref_trade/codelists/hmrc-industry-groups.csv",
-            "columnReference": "label"
+            "columnReference": "notation"
           }
         }],
         "primaryKey": [
