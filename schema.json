@@ -5,6 +5,9 @@
       "url": "https://ons-opendata.github.io/ref_trade/codelists/employment-size-bands.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/age-of-business.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
       "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
@@ -62,6 +65,12 @@
         "foreignKeys": [{
           "columnReference": "age_of_business",
           "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/age-of-business.csv",
+            "columnReference": "label"
+          }
+        }, {
+          "columnReference": "employment",
+          "reference": {
             "resource": "https://ons-opendata.github.io/ref_trade/codelists/employment-size-bands.csv",
             "columnReference": "label"
           }
@@ -80,7 +89,7 @@
         }],
         "primaryKey": [
           "geography", "year", "employment", "flow", "age_of_business", "hmrc_industry",
-          "measure_type", "value", "unit"
+          "measure_type", "unit"
         ]
       }
     }
