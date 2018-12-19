@@ -72,7 +72,7 @@
           "columnReference": "employment",
           "reference": {
             "resource": "https://ons-opendata.github.io/ref_trade/codelists/employment-size-bands.csv",
-            "columnReference": "label"
+            "columnReference": "notation"
           }
         }, {
           "columnReference": "unit",
