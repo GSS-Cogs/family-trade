@@ -51,6 +51,7 @@
         }, {
           "titles": "Value",
           "name": "value",
+          "datatype": "number",
           "required": true
         }, {
           "titles": "Unit",
