@@ -78,12 +78,6 @@
             "columnReference": "notation"
           }
         }, {
-          "columnReference": "cord_sitc",
-          "reference": {
-            "resource": "https://ons-opendata.github.io/ref_trade/codelists/cord-sitc.csv",
-            "columnReference": "notation"
-          }
-        }, {
           "columnReference": "unit",
           "reference": {
             "resource": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
