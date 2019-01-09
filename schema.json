@@ -66,12 +66,6 @@
           "required": true
         }],
         "foreignKeys": [{
-          "columnReference": "ons_geography",
-          "reference": {
-            "resource": "https://ons-opendata.github.io/ref_trade/codelists/cord-geographies.csv",
-            "columnReference": "notation"
-          }
-        }, {
           "columnReference": "flow",
           "reference": {
             "resource": "https://ons-opendata.github.io/ref_trade/codelists/flow-directions.csv",
@@ -81,12 +75,6 @@
           "columnReference": "sa",
           "reference": {
             "resource": "https://ons-opendata.github.io/ref_trade/codelists/seasonal-adjustments.csv",
-            "columnReference": "notation"
-          }
-        }, {
-          "columnReference": "pb_services",
-          "reference": {
-            "resource": "https://ons-opendata.github.io/ref_trade/codelists/pink-book-services.csv",
             "columnReference": "notation"
           }
         }, {
