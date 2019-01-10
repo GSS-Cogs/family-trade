@@ -17,7 +17,7 @@
       "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
-    "url": "out/observations.csv",
+    "url": "out/observations_0000.csv",
       "tableSchema": {
         "columns": [{
           "titles": "ONS Partner Geography",
