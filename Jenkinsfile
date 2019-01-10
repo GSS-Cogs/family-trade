@@ -42,8 +42,11 @@ pipeline {
             steps {
                 script {
                     jobDraft.replace()
-                    uploadTidy(['out/observations.csv'],
-                               'https://github.com/ONS-OpenData/ref_trade/raw/master/columns.csv')
+                    def csvs = []
+                    for (def file : findFiles(glob: 'out/*.csv')) {
+                        csvs.add("out/${file.name}")
+                    }
+                    uploadTidy(csvs, 'https://github.com/ONS-OpenData/ref_trade/raw/master/columns.csv')
                 }
             }
         }
