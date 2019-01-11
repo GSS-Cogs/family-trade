@@ -25,6 +25,5 @@
         void:sparqlEndpoint  <http://gss-data.org.uk/sparql>;
         pmdf:inFolder        <http://gss-data.org.uk/def/concept/folders/themes/trade>;
         dcat:theme           <http://gss-data.org.uk/def/concept/folders/themes/trade>;
-        gdp:family           gdp:trade;
-        .
+        gdp:family           gdp:trade .
 }
