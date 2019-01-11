@@ -11,7 +11,7 @@ Age of Business,How long the business has been trading,Dimension,
 Country of Ownership,Country of Ownership,Dimension,http://gss-data.org.uk/def/concept-scheme/countries-of-ownership
 Product,Good or service being traded,Dimension,
 Price Classification,Methodology for handling prices,Dimension,http://gss-data.org.uk/def/concept-scheme/price-classification
-Trade Partner Geography,Location of the trade partner. Typically a foreign geography. The destination of exports or origin of imports.,Dimension,
+Trade Partner Geography,Location of the trade partner. Typically a foreign geography. The destination of exports or origin of imports.,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-trade-areas-cord
 Trade Reporter Geography,Location of the trade reporter. Typically a domestic geography. The destination of imports or origin of exports.,Dimension,
 International Trade Basis,The methodological basis on which the trade statistics have been calculated,Dimension,http://gss-data.org.uk/def/concept-scheme/international-trade-basis
 Export and Import Activity,Whether and how the business is trading internationally,Dimension,

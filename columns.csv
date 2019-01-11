@@ -25,7 +25,7 @@ Price Classification,price_classification,qb:dimension,http://gss-data.org.uk/de
 CORD SITC,cord_sitc,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/cord-sitc/{cord_sitc},string,
 HMRC Partner Geography,hmrc_partner_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-partner-geography,http://gss-data.org.uk/def/concept/hmrc-geographies/{hmrc_partner_geography},string,
 HMRC Reporter Geography,hmrc_reporter_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-reporter-geography,http://statistics.data.gov.uk/id/statistical-geography/{hmrc_reporter_geography},string,
-ONS Partner Geography,ons_partner_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-partner-geography,http://gss-data.org.uk/def/concept/ons-trade-areas-{ons_partner_geography},string,
+ONS Partner Geography,ons_partner_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-partner-geography,http://gss-data.org.uk/def/concept/ons-trade-areas-cord/{ons_partner_geography},string,
 ONS Reporter Geography,ons_reporter_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-reporter-geography,http://statistics.data.gov.uk/id/statistical-geography/{ons_reporter_geography},string,
 International Trade Basis,international_trade_basis,qb:dimension,http://gss-data.org.uk/def/dimension/international-trade-basis,http://gss-data.org.uk/def/concept/international-trade-basis/{international_trade_basis},string,
 Export and Import Activity,export_and_import_activity,qb:dimension,http://gss-data.org.uk/def/dimension/export-and-import-activity,http://gss-data.org.uk/def/concept/export-and-import-activity/{export_and_import_activity},string,slugize
