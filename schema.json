@@ -34,7 +34,7 @@
           "titles": "CDID",
           "name": "cdid",
           "datatype": {
-            "format": "^[A-Z]{4}$"
+            "format": "^[A-Z0-9]{4}$"
           },
           "required": true
         }, {
