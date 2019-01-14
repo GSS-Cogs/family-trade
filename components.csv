@@ -14,8 +14,12 @@ Price Classification,Methodology for handling prices,Dimension,http://gss-data.o
 Trade Partner Geography,Location of the trade partner. Typically a foreign geography. The destination of exports or origin of imports.,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-trade-areas-cord
 Trade Reporter Geography,Location of the trade reporter. Typically a domestic geography. The destination of imports or origin of exports.,Dimension,
 International Trade Basis,The methodological basis on which the trade statistics have been calculated,Dimension,http://gss-data.org.uk/def/concept-scheme/international-trade-basis
+Investment Direction,Direction of foreign direct investment into the UK (inward) or abroad (outward),Dimension,http://gss-data.org.uk/def/concept-scheme/investment-direction
 Export and Import Activity,Whether and how the business is trading internationally,Dimension,
 Count,The total number of items,Measure,
 Proportion of all Business,The proportion of all businesses that match the specified criteria,Measure,
 Total Turnover,The total value of turnover,Measure,
 SITC 4,Standard International Trade Classification Revision 4,Dimension,http://gss-data.org.uk/def/concept-scheme/sitc-4
+ONS FDI Area,Area from which foreign direct investment (FDI) flows into/out of the UK,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-fdi-area
+FDI Component,Foreign direct investment (FDI) component being measured,Dimension,http://gss-data.org.uk/def/concept-scheme/fdi-component
+SIC Industry,High level industry groupings based on SIC 2007,Dimension,http://gss-data.org.uk/def/concept-scheme/sic-industry
