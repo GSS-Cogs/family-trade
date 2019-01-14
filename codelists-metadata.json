@@ -101,10 +101,6 @@
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
       "rdfs:label": "Investment Direction"
     }, {
-      "url": "codelists/fdi-geographies.csv",
-      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
-      "rdfs:label": "ONS FDI Area"
-    }, {
       "url": "codelists/fdi-component.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
       "rdfs:label": "FDI Component"
