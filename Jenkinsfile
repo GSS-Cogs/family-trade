@@ -50,7 +50,7 @@ pipeline {
         stage('Upload reference data') {
             steps {
                 script {
-                    PMD pmd = pmdConfig("pmd")
+                    def pmd = pmdConfig("pmd")
                     String draftId = pmd.drafter.findDraftset(env.JOB_NAME).id
                     String graph = "http://gss-data.org.uk/def/cdid"
                     pmd.drafter.deleteGraph(draftId, graph)
