@@ -54,7 +54,7 @@ pipeline {
                     String draftId = pmd.drafter.findDraftset(env.JOB_NAME).id
                     String graph = "http://gss-data.org.uk/def/cdid"
                     pmd.drafter.deleteGraph(draftId, graph)
-                    pmd.drafter.addData(draftId, 'out/cdids.ttl', 'text/turtle', 'UTF-8', graph)
+                    pmd.drafter.addData(draftId, "${WORKSPACE}/out/cdids.ttl", 'text/turtle', 'UTF-8', graph)
                 }
             }
         }
