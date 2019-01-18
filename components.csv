@@ -16,6 +16,8 @@ Trade Reporter Geography,Location of the trade reporter. Typically a domestic ge
 International Trade Basis,The methodological basis on which the trade statistics have been calculated,Dimension,http://gss-data.org.uk/def/concept-scheme/international-trade-basis
 Investment Direction,Direction of foreign direct investment into the UK (inward) or abroad (outward),Dimension,http://gss-data.org.uk/def/concept-scheme/investment-direction
 Export and Import Activity,Whether and how the business is trading internationally,Dimension,
+Count of Businesses,The total number of businesses,Measure,
+Count of Employees,The total number of employees,Measure,
 Count,The total number of items,Measure,
 Proportion of all Business,The proportion of all businesses that match the specified criteria,Measure,
 Total Turnover,The total value of turnover,Measure,
