@@ -47,12 +47,13 @@
           "titles": "Measure Type",
           "name": "measure_type",
           "datatype": {
-            "format": "^Count|Total Turnover$"
+            "format": "^Total Turnover$|^Count of Employees$|^Count of Businesses$"
           },
           "required": true
         }, {
           "titles": "Value",
           "name": "value",
+          "datatype": "integer",
           "required": true
         }, {
           "titles": "Unit",
