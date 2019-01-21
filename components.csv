@@ -25,3 +25,4 @@ SITC 4,Standard International Trade Classification Revision 4,Dimension,http://g
 ONS FDI Area,Area from which foreign direct investment (FDI) flows into/out of the UK,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-fdi-area
 FDI Component,Foreign direct investment (FDI) component being measured,Dimension,http://gss-data.org.uk/def/concept-scheme/fdi-component
 SIC Industry,High level industry groupings based on SIC 2007,Dimension,http://gss-data.org.uk/def/concept-scheme/sic-industry
+HMRC Industry,HMRC Industry,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-industry-groups
