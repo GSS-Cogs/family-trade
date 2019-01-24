@@ -1,0 +1,94 @@
+{
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "tables": [
+    {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/age-of-business.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/exporter-and-importer-activity.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/seasonal-adjustments.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/pink-book-services.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_trade/schemas/pink-book-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+    "url": "out/observations.csv",
+      "tableSchema": {
+        "columns": [{
+          "titles": "Age of Business",
+          "name": "age_of_business",
+          "required": true
+        }, {
+          "titles": "Export and Import Activity",
+          "name": "activity",
+          "required": true
+        }, {
+          "titles": "Measure Type",
+          "name": "measure_type",
+          "datatype": {
+            "format": "^Count$|^Proportion of all Business$"
+          },
+          "required": true
+        }, {
+          "titles": "Value",
+          "name": "value",
+          "datatype": "number",
+          "required": true
+        }, {
+          "titles": "Country of Ownership",
+          "name": "country",
+          "required": true
+        }, {
+          "titles": "ONS ABS Trade",
+          "name": "ons_abs_trade",
+          "required": true
+        }, {
+          "titles": "Turnover",
+          "name": "turnover",
+          "required": true
+        }, {
+          "titles": "Year",
+          "name": "year",
+          "datatype": "number",
+          "required": true
+        }, {
+          "titles": "Employment",
+          "name": "employment",
+          "required": true
+        }, {
+          "titles": "Unit",
+          "name": "unit",
+          "required": true
+        }],
+        "foreignKeys": [{
+          "columnReference": "age_of_business",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/age-of-business.csv",
+            "columnReference": "label"
+          }
+        }, {
+          "columnReference": "activity",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/exporter-and-importer-activity.csv",
+            "columnReference": "label"
+          }
+        }, {
+          "columnReference": "unit",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+            "columnReference": "label"
+          }
+        }],
+        "primaryKey": [
+          "age_of_business", "activity", "country", "ons_abs_trade", "turnover", "year", "employment",
+          "measure_type", "unit"
+        ]
+      }
+    }
+  ]
+}

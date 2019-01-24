@@ -2,6 +2,10 @@ pipeline {
     agent {
         label 'master'
     }
+    triggers {
+        upstream(upstreamProjects: '../Reference/ref_trade',
+                 threshold: hudson.model.Result.SUCCESS)
+    }
     stages {
         stage('Clean') {
             steps {
@@ -17,45 +21,30 @@ pipeline {
             }
             steps {
                 sh 'jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute "ABS To Tidydata.ipynb"'
-                sh 'jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute update_metadata.ipynb'
+            }
+        }
+        stage('Test') {
+            agent {
+                docker {
+                    image 'cloudfluff/csvlint'
+                    reuseNode true
+                }
+            }
+            steps {
+                script {
+                    ansiColor('xterm') {
+                        sh "csvlint -s schema.json"
+                    }
+                }
             }
         }
         stage('Upload draftset') {
             steps {
                 script {
-                    uploadDraftset('ONS ABS', ['out/observations.csv'])
+                    jobDraft.replace()
+                    uploadTidy(['out/observations.csv'],
+                               'https://github.com/ONS-OpenData/ref_trade/raw/master/columns.csv')
                 }
-            }
-        }
-        stage('Test Draftset') {
-            steps {
-                script {
-                    configFileProvider([configFile(fileId: 'pmd', variable: 'configfile')]) {
-                        def config = readJSON(text: readFile(file: configfile))
-                        String PMD = config['pmd_api']
-                        String credentials = config['credentials']
-                        def drafts = drafter.listDraftsets(PMD, credentials, 'owned')
-                        def jobDraft = drafts.find  { it['display-name'] == env.JOB_NAME }
-                        if (jobDraft) {
-                            withCredentials([usernameColonPassword(credentialsId: credentials, variable: 'USERPASS')]) {
-                                sh "java -cp lib/sparql.jar uk.org.floop.sparqlTestRunner.Run -i -s ${PMD}/v1/draftset/${jobDraft.id}/query?union-with-live=true -a \'${USERPASS}\'"
-                            }
-                        } else {
-                            error "Expecting a draftset for this job."
-                        }
-                    }
-                }
-            }
-        }
-        stage('Acceptance Tests') {
-            agent {
-                docker {
-                    image 'cloudfluff/databaker'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh 'behave -f json.cucumber -o reports/acceptance.json || true'
             }
         }
         stage('Publish') {
@@ -68,9 +57,10 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts 'out/**'
-            junit 'reports/**/*.xml'
-            cucumber fileIncludePattern: '**/*.json', jsonReportDirectory: 'reports'
+            script {
+                archiveArtifacts 'out/**'
+                updateCard '5b471bd506801d3da306e747'
+            }
         }
     }
 }
