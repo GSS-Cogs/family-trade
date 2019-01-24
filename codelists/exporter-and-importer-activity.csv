@@ -1,6 +1,6 @@
 Label,Notation,Parent Notation,Sort Priority,Description
-Businesses ,businesses,,1,
+Businesses,businesses,,1,
 Exporters,exporters,,2,
 Importers,importers,,3,
 Exporter and Importer,exporter-and-importer,,4,
-Exporter and/or Importer ,exporter-and/or-importer,,5,
+Exporter and/or Importer,exporter-and/or-importer,,5,
