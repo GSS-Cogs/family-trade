@@ -26,3 +26,5 @@ ONS FDI Area,Area from which foreign direct investment (FDI) flows into/out of t
 FDI Component,Foreign direct investment (FDI) component being measured,Dimension,http://gss-data.org.uk/def/concept-scheme/fdi-component
 SIC Industry,High level industry groupings based on SIC 2007,Dimension,http://gss-data.org.uk/def/concept-scheme/sic-industry
 HMRC Industry,HMRC Industry,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-industry-groups
+NUTS1 Geography,The Nomenclature of Territorial Units for Statistics (NUTS) is a geocode standard by Eurostat for referencing the subdivisions of the United Kingdom of Great Britain and Northern Ireland for statistical purposes.,Dimension,http://gss-data.org.uk/def/concept-scheme/nuts1-geography
+ONS Functional Category,ONS high level industry groupings based on SIC 2007,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-functional-category

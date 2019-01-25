@@ -27,6 +27,7 @@ HMRC Partner Geography,hmrc_partner_geography,qb:dimension,http://gss-data.org.u
 HMRC Reporter Geography,hmrc_reporter_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-reporter-geography,http://statistics.data.gov.uk/id/statistical-geography/{hmrc_reporter_geography},string,
 ONS Partner Geography,ons_partner_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-partner-geography,http://gss-data.org.uk/def/concept/ons-trade-areas-cord/{ons_partner_geography},string,
 ONS Reporter Geography,ons_reporter_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-reporter-geography,http://statistics.data.gov.uk/id/statistical-geography/{ons_reporter_geography},string,
+NUTS1 Geography,nuts1_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-reporter-geography,http://gss-data.org.uk/def/concept/nuts1-geography/{nuts1_geography},string,
 International Trade Basis,international_trade_basis,qb:dimension,http://gss-data.org.uk/def/dimension/international-trade-basis,http://gss-data.org.uk/def/concept/international-trade-basis/{international_trade_basis},string,
 Export and Import Activity,export_and_import_activity,qb:dimension,http://gss-data.org.uk/def/dimension/export-and-import-activity,http://gss-data.org.uk/def/concept/export-and-import-activity/{export_and_import_activity},string,slugize
 Count of Businesses,count_of_businesses,qb:measure,http://gss-data.org.uk/def/measure/count-of-businesses,,string,
@@ -42,3 +43,4 @@ Investment Direction,investment_direction,qb:dimension,http://gss-data.org.uk/de
 ONS FDI Area,ons_fdi_area,qb:dimension,http://gss-data.org.uk/def/dimension/ons-fdi-area,http://gss-data.org.uk/def/concept/ons-fdi-area/{ons_fdi_area},string,
 FDI Component,fdi_component,qb:dimension,http://gss-data.org.uk/def/dimension/fdi-component,http://gss-data.org.uk/def/concept/fdi-component/{fdi_component},string,
 SIC Industry,sic_industry,qb:dimension,http://gss-data.org.uk/def/dimension/sic-industry,http://gss-data.org.uk/def/concept/sic-industry/{sic_industry},string,
+ONS Functional Category,ons_func_category,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/ons-functional-category/{ons_func_category},string,
