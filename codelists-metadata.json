@@ -116,6 +116,10 @@
       "url": "codelists/ons-functional-categories.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
       "rdfs:label": "ONS Functional Category"
+    }, {
+      "url": "codelists/itis-geographies.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "ONS Trade Areas ITIS"
     }
   ]
 }
