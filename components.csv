@@ -29,3 +29,4 @@ HMRC Industry,HMRC Industry,Dimension,http://gss-data.org.uk/def/concept-scheme/
 NUTS1 Geography,The Nomenclature of Territorial Units for Statistics (NUTS) is a geocode standard by Eurostat for referencing the subdivisions of the United Kingdom of Great Britain and Northern Ireland for statistical purposes.,Dimension,http://gss-data.org.uk/def/concept-scheme/nuts1-geography
 ONS Functional Category,ONS high level industry groupings based on SIC 2007,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-functional-category
 ONS Trade Areas ITIS,ONS Trade Areas ITIS,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-trade-areas-itis
+ITIS Service,ITIS Service,Dimension,http://gss-data.org.uk/def/concept-scheme/itis-services

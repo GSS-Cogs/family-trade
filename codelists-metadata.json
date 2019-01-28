@@ -120,6 +120,10 @@
       "url": "codelists/itis-geographies.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
       "rdfs:label": "ONS Trade Areas ITIS"
+    }, {
+      "url": "codelists/itis-services.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "ITIS Services"
     }
   ]
 }
