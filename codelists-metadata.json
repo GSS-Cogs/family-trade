@@ -109,9 +109,9 @@
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
       "rdfs:label": "SIC Industry"
     }, {
-      "url": "codelists/nuts1-geographies.csv",
+      "url": "codelists/nuts-geographies.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
-      "rdfs:label": "NUTS1 Geography"
+      "rdfs:label": "NUTS Geography"
     }, {
       "url": "codelists/ons-functional-categories.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",

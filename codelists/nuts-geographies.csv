@@ -1,0 +1,14 @@
+Label,Notation,Parent Notation,Sort Priority
+All,nuts1/all,,1
+North East,nuts1/UKC,nuts1/all,2
+North West,nuts1/UKD,nuts1/all,3
+Yorkshire and The Humber,nuts1/UKE,nuts1/all,4
+East Midlands,nuts1/UKF,nuts1/all,5
+West Midlands,nuts1/UKG,nuts1/all,6
+East of England,nuts1/UKH,nuts1/all,7
+London,nuts1/UKI,nuts1/all,8
+South East,nuts1/UKJ,nuts1/all,9
+South West,nuts1/UKK,nuts1/all,10
+Wales,nuts1/UKL,nuts1/all,11
+Scotland,nuts1/UKM,nuts1/all,12
+Northern Ireland,nuts1/UKN,nuts1/all,13
