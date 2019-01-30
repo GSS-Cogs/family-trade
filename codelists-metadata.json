@@ -124,6 +124,10 @@
       "url": "codelists/itis-services.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
       "rdfs:label": "ITIS Services"
+    }, {
+      "url": "codelists/itis-industry.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "ITIS Industry"
     }
   ]
 }

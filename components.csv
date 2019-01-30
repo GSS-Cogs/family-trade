@@ -30,3 +30,4 @@ NUTS Geography,The Nomenclature of Territorial Units for Statistics (NUTS) is a 
 ONS Functional Category,ONS high level industry groupings based on SIC 2007,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-functional-category
 ONS Trade Areas ITIS,ONS Trade Areas ITIS,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-trade-areas-itis
 ITIS Service,ITIS Service,Dimension,http://gss-data.org.uk/def/concept-scheme/itis-services
+ITIS Industry,ITIS Industry,Dimension,http://gss-data.org.uk/def/concept-scheme/itis-industry
