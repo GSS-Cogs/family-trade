@@ -1,0 +1,112 @@
+{
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "tables": [
+    {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/international-trade-basis.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/investment-direction.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/fdi-geographies.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/fdi-component.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/sic-industry.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+    "url": "out/fdi.csv",
+      "tableSchema": {
+        "columns": [{
+          "titles": "International Trade Basis",
+          "name": "international_trade_basis",
+          "required": true
+        }, {
+          "titles": "Investment Direction",
+          "name": "investment_direction",
+          "required": true
+        }, {
+          "titles": "ONS FDI Area",
+          "name": "ons_fdi_area",
+          "required": true
+        }, {
+          "titles": "Value",
+          "name": "value",
+          "datatype": "number",
+          "required": true
+        }, {
+          "titles": "Year",
+          "name": "year",
+          "datatype": {
+            "format": "^[0-9]{4}$"
+          },
+          "required": true
+        }, {
+          "titles": "FDI Component",
+          "name": "fdi_component",
+          "required": true
+        }, {
+          "titles": "SIC Industry",
+          "name": "sic_industry",
+          "required": true
+        }, {
+          "titles": "Unit",
+          "name": "unit",
+          "required": true
+        }, {
+          "titles": "Measure Type",
+          "name": "measure_type",
+          "datatype": {
+            "format": "^GBP Total$"
+          },
+          "required": true
+        }],
+        "foreignKeys": [{
+          "columnReference": "international_trade_basis",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/international-trade-basis.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "investment_direction",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/investment-direction.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "ons_fdi_area",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/fdi-geographies.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "fdi_component",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/fdi-component.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "sic_industry",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/sic-industry.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "unit",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+            "columnReference": "notation"
+          }
+        }],
+        "primaryKey": [
+          "international_trade_basis", "investment_direction", "ons_fdi_area", "year", "fdi_component", "sic_industry", "measure_type", "unit"
+        ]
+      }
+    }
+  ]
+}

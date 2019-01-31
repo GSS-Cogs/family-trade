@@ -32,7 +32,6 @@ pipeline {
             }
             steps {
                 script {
-                    error "Needs review and schema."
                     ansiColor('xterm') {
                         sh "csvlint -s schema.json"
                     }
