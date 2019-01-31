@@ -17,9 +17,6 @@
       "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
-      "url": "https://ons-opendata.github.io/ref_common/codelists/itis-industry.csv",
-      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
-    },{
     "url": "out/tidy.csv",
       "tableSchema": {
         "columns": [{
@@ -40,10 +37,6 @@
           "name": "itis_service",
           "required": true
         }, {
-          "titles": "ITIS Industry",
-          "name": "itis_service",
-          "required": true
-        },{
           "titles": "International Trade Basis",
           "name": "trade_basis",
           "required": true
@@ -86,12 +79,6 @@
             "columnReference": "notation"
           }
         }, {
-          "columnReference": "itis_industry",
-          "reference": {
-            "resource": "https://ons-opendata.github.io/ref_trade/codelists/itis-industry.csv",
-            "columnReference": "notation"
-          }
-        },{
           "columnReference": "trade_basis",
           "reference": {
             "resource": "https://ons-opendata.github.io/ref_trade/codelists/international-trade-basis.csv",
@@ -105,8 +92,8 @@
           }
         }],
         "primaryKey": [
-          "ons_trade_areas", "year", "flow", "itis_service", "itis_industry", "trade_basis",
-          "measure_type","value", "unit"
+          "ons_trade_areas", "year", "flow", "itis_service", "trade_basis",
+          "measure_type", "unit"
         ]
       }
     }
