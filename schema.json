@@ -11,6 +11,9 @@
       "url": "https://ons-opendata.github.io/ref_trade/codelists/itis-services.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/itis-industry.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
       "url": "https://ons-opendata.github.io/ref_trade/codelists/international-trade-basis.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_trade/schemas/cord-sitc-schema.json"
     }, {
@@ -35,6 +38,10 @@
         }, {
           "titles": "ITIS Service",
           "name": "itis_service",
+          "required": true
+        }, {
+          "titles": "ITIS Industry",
+          "name": "itis_industry",
           "required": true
         }, {
           "titles": "International Trade Basis",
@@ -76,6 +83,12 @@
           "columnReference": "itis_service",
           "reference": {
             "resource": "https://ons-opendata.github.io/ref_trade/codelists/itis-services.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "itis_industry",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/itis-industry.csv",
             "columnReference": "notation"
           }
         }, {
