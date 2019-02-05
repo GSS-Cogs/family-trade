@@ -8,14 +8,14 @@
       "url": "https://ons-opendata.github.io/ref_trade/codelists/international-trade-basis.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/price-classifications.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
       "url": "https://ons-opendata.github.io/ref_trade/codelists/flow-directions.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
       "url": "https://ons-opendata.github.io/ref_trade/codelists/seasonal-adjustments.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
-    }, {
-      "url": "https://ons-opendata.github.io/ref_trade/codelists/price-classifications.csv",
-      "tableSchema": "https://ons-opendata.github.io/ref_trade/schemas/cord-sitc-schema.json"
     }, {
       "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
@@ -45,17 +45,6 @@
           "name": "basis",
           "required": true
         }, {
-          "titles": "CPA 2008",
-          "name": "cpa_2008",
-          "required": true
-        }, {
-          "titles": "Seasonal Adjustment",
-          "name": "sa",
-          "datatype": {
-            "format": "^NSA|SA$"
-          },
-          "required": true
-        }, {
           "titles": "Flow",
           "name": "flow",
           "datatype": {
@@ -63,8 +52,22 @@
           },
           "required": true
         }, {
+          "titles": "CPA 2008",
+          "name": "cpa_2008",
+          "datatype": {
+            "format": "^section/[A-S]$|^division/[0-9]{2}$|^group/[0-9]{2}\\.[0-9]$|^class/[0-9]{2}\\.[0-9]{2}$"
+          },
+          "required": true
+        }, {
           "titles": "Price Classification",
           "name": "price_classification",
+          "required": true
+        }, {
+          "titles": "Seasonal Adjustment",
+          "name": "sa",
+          "datatype": {
+            "format": "^NSA|SA$"
+          },
           "required": true
         }, {
           "titles": "Measure Type",
