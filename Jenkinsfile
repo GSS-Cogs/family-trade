@@ -16,37 +16,53 @@ pipeline {
                 }
             }
             steps {
-                sh "jupyter-nbconvert --to python --stdout tidy_published.ipynb | ipython"
-                sh "jupyter-nbconvert --to python --stdout update_metadata.ipynb | ipython"
+                sh "jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute main.ipynb"
+            }
+        }
+        stage('Test') {
+            agent {
+                docker {
+                    image 'cloudfluff/csvlint'
+                    reuseNode true
+                }
+            }
+            steps {
+                script {
+                    ansiColor('xterm') {
+                        sh "csvlint -s schema.json"
+                    }
+                }
             }
         }
         stage('Upload draftset') {
             steps {
                 script {
+                    jobDraft.replace()
                     def csvs = []
                     for (def file : findFiles(glob: 'out/*.csv')) {
                         csvs.add("out/${file.name}")
                     }
-                    uploadDraftset('HMRC Regional Trade Statistics', csvs)
+                    uploadTidy(csvs, 'https://github.com/ONS-OpenData/ref_trade/raw/master/columns.csv')
                 }
-            }
-        }
-        stage('Test Draftset') {
-            steps {
-                echo 'Placeholder for acceptance tests from e.g. GDP-205'
             }
         }
         stage('Publish') {
             steps {
                 script {
-                    publishDraftset()
+                    jobDraft.publish()
                 }
             }
         }
     }
     post {
         always {
-            archiveArtifacts 'out/*'
+            script {
+                archiveArtifacts 'out/*'
+                updateCard '5c52eb7f6b197c10809c1aab'
+            }
+        }
+        success {
+            build job: '../GDP-tests', wait: false
         }
     }
 }
