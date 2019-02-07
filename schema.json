@@ -1,0 +1,93 @@
+{
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "tables": [
+    {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/hmrc-regions.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/hmrc-geographies.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/sitc4.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_trade/schemas/sitc4-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+    "url": "out/rtsweb-13q1-txt.mass.csv",
+      "tableSchema": {
+        "columns": [{
+          "titles": "Period",
+          "name": "period",
+          "datatype": {
+            "format": "^(year/[0-9]{4}|gregorian-interval/.*|month/[0-9]{4}-[0-9]{2}|day/[0-9]{4}-[0-9]{2}-[0-9]{2}|quarter/[0-9]{4}-Q[1-4])$"
+          },
+          "required": true
+        }, {
+          "titles": "Flow",
+          "name": "flow",
+          "datatype": {
+            "format": "^(Imports|Exports)$"
+          },
+          "required": true
+        }, {
+          "titles": "HMRC Reporter Region",
+          "name": "hmrc_reporter",
+          "required": true
+        }, {
+          "titles": "HMRC Partner Geography",
+          "name": "hmrc_partner",
+          "required": true
+        }, {
+          "titles": "SITC 4",
+          "name": "sitc_4",
+          "required": true
+        }, {
+          "titles": "Value",
+          "name": "value",
+          "datatype": "number",
+          "required": true
+        }, {
+          "titles": "Measure Type",
+          "name": "measure_type",
+          "datatype": {
+            "format": "^Net Mass$"
+          },
+          "required": true
+        }, {
+          "titles": "Unit",
+          "name": "unit",
+          "required": true
+        }],
+        "foreignKeys": [{
+          "columnReference": "hmrc_reporter",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/hmrc-regions.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "hmrc_partner",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/hmrc-geographies.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "sitc_4",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/sitc4.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "unit",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+            "columnReference": "notation"
+          }
+        }],
+        "primaryKey": [
+          "period", "flow", "hmrc_reporter", "hmrc_partner", "sitc_5", "measure_type", "unit"
+        ]
+      }
+    }
+  ]
+}
