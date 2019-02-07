@@ -105,7 +105,7 @@
           }
         }],
         "primaryKey": [
-          "ons_trade_areas", "year", "flow", "itis_service", "trade_basis",
+          "ons_trade_areas", "year", "flow", "itis_service", "itis_industry", "trade_basis",
           "measure_type", "unit"
         ]
       }
