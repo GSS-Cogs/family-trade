@@ -15,7 +15,7 @@ Period,period,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPe
 CDID,cdid,qb:attribute,http://gss-data.org.uk/def/attribute/cdid,http://gss-data.org.uk/def/cdid/{cdid},string,
 BOP Services,bop_services,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/bop-services/{bop_services},string,
 ITIS Service,itis_service,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/itis-services/{itis_service},string,
-ITIS Industry,itis_industry,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/itis-industry/{itis_industry},string,
+ITIS Industry,itis_industry,qb:dimension,http://gss-data.org.uk/def/dimension/itis-industry,http://gss-data.org.uk/def/concept/itis-industry/{itis_industry},string,
 Pink Book Services,pink_book_services,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/pink-book-services/{pink_book_services},string,
 Seasonal Adjustment,seasonal_adjustment,qb:dimension,http://gss-data.org.uk/def/dimension/seasonal-adjustment,http://gss-data.org.uk/def/concept/seasonal-adjustments/{seasonal_adjustment},string,
 Turnover,turnover_size_band,qb:dimension,http://gss-data.org.uk/def/dimension/turnover,http://gss-data.org.uk/def/concept/turnover-size-bands/{turnover_size_band},string,slugize
