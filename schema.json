@@ -20,7 +20,7 @@
       "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
-    "url": "out/tidy.csv",
+    "url": "out/observations.csv",
       "tableSchema": {
         "columns": [{
           "titles": "ONS Trade Areas ITIS",
