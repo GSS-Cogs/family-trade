@@ -96,7 +96,8 @@
           }
         }],
         "primaryKey": [
-          "period", "ons_geography", "period", "flow", "pb_services", "sa", "measure_type", "unit"
+          "ons_geography", "period", "flow", "cord_sitc", "price_classification", "sa",
+          "measure_type", "unit"
         ]
       }
     }
