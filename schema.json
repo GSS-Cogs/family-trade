@@ -8,7 +8,7 @@
       "url": "https://ons-opendata.github.io/ref_trade/codelists/investment-direction.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
-      "url": "https://ons-opendata.github.io/ref_trade/codelists/fdi-geographies.csv",
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/ons-fdi-area.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
       "url": "https://ons-opendata.github.io/ref_trade/codelists/fdi-component.csv",
@@ -20,24 +20,11 @@
       "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
-    "url": "out/fdi.csv",
+    "url": "out/observations.csv",
       "tableSchema": {
         "columns": [{
-          "titles": "International Trade Basis",
-          "name": "international_trade_basis",
-          "required": true
-        }, {
           "titles": "Investment Direction",
           "name": "investment_direction",
-          "required": true
-        }, {
-          "titles": "ONS FDI Area",
-          "name": "ons_fdi_area",
-          "required": true
-        }, {
-          "titles": "Value",
-          "name": "value",
-          "datatype": "number",
           "required": true
         }, {
           "titles": "Year",
@@ -47,12 +34,25 @@
           },
           "required": true
         }, {
+          "titles": "International Trade Basis",
+          "name": "international_trade_basis",
+          "required": true
+        }, {
+          "titles": "ONS FDI Area",
+          "name": "ons_fdi_area",
+          "required": true
+        }, {
           "titles": "FDI Component",
           "name": "fdi_component",
           "required": true
         }, {
           "titles": "SIC Industry",
           "name": "sic_industry",
+          "required": true
+        }, {
+          "titles": "Value",
+          "name": "value",
+          "datatype": "number",
           "required": true
         }, {
           "titles": "Unit",
@@ -81,7 +81,7 @@
         }, {
           "columnReference": "ons_fdi_area",
           "reference": {
-            "resource": "https://ons-opendata.github.io/ref_trade/codelists/fdi-geographies.csv",
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/ons-fdi-area.csv",
             "columnReference": "notation"
           }
         }, {
@@ -104,7 +104,8 @@
           }
         }],
         "primaryKey": [
-          "international_trade_basis", "investment_direction", "ons_fdi_area", "year", "fdi_component", "sic_industry", "measure_type", "unit"
+          "investment_direction", "year", "international_trade_basis", "ons_fdi_area", "fdi_component", "sic_industry",
+          "measure_type", "unit"
         ]
       }
     }
