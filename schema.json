@@ -11,10 +11,6 @@
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     },
     {
-      "url": "https://ons-opendata.github.io/ref_trade/codelists/sic-industry.csv",
-      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
-    },
-    {
       "url": "out/observations.csv",
       "tableSchema": {
         "columns": [
@@ -43,9 +39,9 @@
             "datatype": "string"
           },
           {
-            "titles": "SIC Industry",
+            "titles": "SIC 2007",
             "required": true,
-            "name": "sic_industry",
+            "name": "sic2007",
             "datatype": "string"
           },
           {
@@ -74,13 +70,6 @@
               "resource": "https://ons-opendata.github.io/ref_trade/codelists/flow-directions.csv",
               "columnReference": "notation"
             }
-          },
-          {
-            "columnReference": "sic_industry",
-            "reference": {
-              "resource": "https://ons-opendata.github.io/ref_trade/codelists/sic-industry.csv",
-              "columnReference": "notation"
-            }
           }
         ],
         "primaryKey": [
@@ -88,7 +77,7 @@
           "period",
           "flow",
           "cord_sitc",
-          "sic_industry",
+          "sic2007",
           "measure_type",
           "unit"
         ]
