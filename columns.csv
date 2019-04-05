@@ -47,4 +47,4 @@ ONS FDI Area,ons_fdi_area,qb:dimension,http://gss-data.org.uk/def/dimension/ons-
 FDI Component,fdi_component,qb:dimension,http://gss-data.org.uk/def/dimension/fdi-component,http://gss-data.org.uk/def/concept/fdi-component/{fdi_component},string,
 FDI Industry,fdi_industry,qb:dimension,http://gss-data.org.uk/def/dimension/fdi-industry,http://gss-data.org.uk/def/concept/fdi-industry/{fdi_industry},string,
 ONS Functional Category,ons_func_category,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/ons-functional-category/{ons_func_category},string,
-SIC 2007,sic2007,qb:dimension,http://gss-data.org.uk/dev/dimension/sic-industry,http://business.data.gov.uk/companies/def/sic-2007/{sic2007},string,
+SIC 2007,sic2007,qb:dimension,http://gss-data.org.uk/def/dimension/sic-industry,http://business.data.gov.uk/companies/def/sic-2007/{sic2007},string,
