@@ -11,9 +11,6 @@
 <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
     gdp:wikidata <http://www.wikidata.org/entity/Q878> .
 
-<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AE1> a <http://www.w3.org/2004/02/skos/core#Concept> ;
-    gdp:wikidata <http://www.wikidata.org/entity/Q878> .
-
 <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AF> a <http://www.w3.org/2004/02/skos/core#Concept> ;
     gdp:wikidata <http://www.wikidata.org/entity/Q889> .
 
@@ -205,9 +202,6 @@
 
 <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
     gdp:wikidata <http://www.wikidata.org/entity/Q262> .
-
-<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E7> a <http://www.w3.org/2004/02/skos/core#Concept> ;
-    gdp:wikidata <http://www.wikidata.org/entity/Q30> .
 
 <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/EC> a <http://www.w3.org/2004/02/skos/core#Concept> ;
     gdp:wikidata <http://www.wikidata.org/entity/Q736> .
@@ -947,6 +941,8 @@ gdp:wikidata a owl:ObjectProperty .
 
 <http://www.wikidata.org/entity/Q298> a <http://wikiba.se/ontology#Item> .
 
+<http://www.wikidata.org/entity/Q30> a <http://wikiba.se/ontology#Item> .
+
 <http://www.wikidata.org/entity/Q30971> a <http://wikiba.se/ontology#Item> .
 
 <http://www.wikidata.org/entity/Q31> a <http://wikiba.se/ontology#Item> .
@@ -1173,6 +1169,8 @@ gdp:wikidata a owl:ObjectProperty .
 
 <http://www.wikidata.org/entity/Q874> a <http://wikiba.se/ontology#Item> .
 
+<http://www.wikidata.org/entity/Q878> a <http://wikiba.se/ontology#Item> .
+
 <http://www.wikidata.org/entity/Q881> a <http://wikiba.se/ontology#Item> .
 
 <http://www.wikidata.org/entity/Q884> a <http://wikiba.se/ontology#Item> .
@@ -1228,10 +1226,6 @@ gdp:wikidata a owl:ObjectProperty .
 <http://www.wikidata.org/entity/Q983> a <http://wikiba.se/ontology#Item> .
 
 <http://www.wikidata.org/entity/Q986> a <http://wikiba.se/ontology#Item> .
-
-<http://www.wikidata.org/entity/Q30> a <http://wikiba.se/ontology#Item> .
-
-<http://www.wikidata.org/entity/Q878> a <http://wikiba.se/ontology#Item> .
 
 <http://wikiba.se/ontology#Item> a owl:Class .
 
