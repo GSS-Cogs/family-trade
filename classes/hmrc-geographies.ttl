@@ -1,0 +1,1713 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/A> a owl:Class ;
+    rdfs:label "Asia and Oceania"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/hmrc-geographies/AF> <http://gss-data.org.uk/def/class/hmrc-geographies/AS> <http://gss-data.org.uk/def/class/hmrc-geographies/AQ> <http://gss-data.org.uk/def/class/hmrc-geographies/AU> <http://gss-data.org.uk/def/class/hmrc-geographies/BD> <http://gss-data.org.uk/def/class/hmrc-geographies/BT> <http://gss-data.org.uk/def/class/hmrc-geographies/BV> <http://gss-data.org.uk/def/class/hmrc-geographies/BN> <http://gss-data.org.uk/def/class/hmrc-geographies/MM> <http://gss-data.org.uk/def/class/hmrc-geographies/KH> <http://gss-data.org.uk/def/class/hmrc-geographies/CN> <http://gss-data.org.uk/def/class/hmrc-geographies/CX> <http://gss-data.org.uk/def/class/hmrc-geographies/CC> <http://gss-data.org.uk/def/class/hmrc-geographies/CK> <http://gss-data.org.uk/def/class/hmrc-geographies/FJ> <http://gss-data.org.uk/def/class/hmrc-geographies/PF> <http://gss-data.org.uk/def/class/hmrc-geographies/TF> <http://gss-data.org.uk/def/class/hmrc-geographies/GU> <http://gss-data.org.uk/def/class/hmrc-geographies/HM> <http://gss-data.org.uk/def/class/hmrc-geographies/HK> <http://gss-data.org.uk/def/class/hmrc-geographies/IN> <http://gss-data.org.uk/def/class/hmrc-geographies/ID> <http://gss-data.org.uk/def/class/hmrc-geographies/JP> <http://gss-data.org.uk/def/class/hmrc-geographies/KI> <http://gss-data.org.uk/def/class/hmrc-geographies/KP> <http://gss-data.org.uk/def/class/hmrc-geographies/KR> <http://gss-data.org.uk/def/class/hmrc-geographies/LA> <http://gss-data.org.uk/def/class/hmrc-geographies/MO> <http://gss-data.org.uk/def/class/hmrc-geographies/MY> <http://gss-data.org.uk/def/class/hmrc-geographies/MV> <http://gss-data.org.uk/def/class/hmrc-geographies/MH> <http://gss-data.org.uk/def/class/hmrc-geographies/FM> <http://gss-data.org.uk/def/class/hmrc-geographies/MN> <http://gss-data.org.uk/def/class/hmrc-geographies/NR> <http://gss-data.org.uk/def/class/hmrc-geographies/NP> <http://gss-data.org.uk/def/class/hmrc-geographies/NC> <http://gss-data.org.uk/def/class/hmrc-geographies/NZ> <http://gss-data.org.uk/def/class/hmrc-geographies/NU> <http://gss-data.org.uk/def/class/hmrc-geographies/NF> <http://gss-data.org.uk/def/class/hmrc-geographies/MP> <http://gss-data.org.uk/def/class/hmrc-geographies/PK> <http://gss-data.org.uk/def/class/hmrc-geographies/PW> <http://gss-data.org.uk/def/class/hmrc-geographies/PG> <http://gss-data.org.uk/def/class/hmrc-geographies/PH> <http://gss-data.org.uk/def/class/hmrc-geographies/PN> <http://gss-data.org.uk/def/class/hmrc-geographies/WS> <http://gss-data.org.uk/def/class/hmrc-geographies/SG> <http://gss-data.org.uk/def/class/hmrc-geographies/SB> <http://gss-data.org.uk/def/class/hmrc-geographies/LK> <http://gss-data.org.uk/def/class/hmrc-geographies/TW> <http://gss-data.org.uk/def/class/hmrc-geographies/TH> <http://gss-data.org.uk/def/class/hmrc-geographies/TL> <http://gss-data.org.uk/def/class/hmrc-geographies/TO> <http://gss-data.org.uk/def/class/hmrc-geographies/TV> <http://gss-data.org.uk/def/class/hmrc-geographies/UM> <http://gss-data.org.uk/def/class/hmrc-geographies/VU> <http://gss-data.org.uk/def/class/hmrc-geographies/VN> <http://gss-data.org.uk/def/class/hmrc-geographies/WF> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/A> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/B> a owl:Class ;
+    rdfs:label "Eastern Europe (excl. EU)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/hmrc-geographies/AL> <http://gss-data.org.uk/def/class/hmrc-geographies/AM> <http://gss-data.org.uk/def/class/hmrc-geographies/AZ> <http://gss-data.org.uk/def/class/hmrc-geographies/BY> <http://gss-data.org.uk/def/class/hmrc-geographies/BA> <http://gss-data.org.uk/def/class/hmrc-geographies/MK> <http://gss-data.org.uk/def/class/hmrc-geographies/GE> <http://gss-data.org.uk/def/class/hmrc-geographies/KZ> <http://gss-data.org.uk/def/class/hmrc-geographies/XK> <http://gss-data.org.uk/def/class/hmrc-geographies/KG> <http://gss-data.org.uk/def/class/hmrc-geographies/MD> <http://gss-data.org.uk/def/class/hmrc-geographies/ME> <http://gss-data.org.uk/def/class/hmrc-geographies/RU> <http://gss-data.org.uk/def/class/hmrc-geographies/XS> <http://gss-data.org.uk/def/class/hmrc-geographies/TJ> <http://gss-data.org.uk/def/class/hmrc-geographies/TM> <http://gss-data.org.uk/def/class/hmrc-geographies/UA> <http://gss-data.org.uk/def/class/hmrc-geographies/UZ> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/B> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/C> a owl:Class ;
+    rdfs:label "European Union"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/hmrc-geographies/AT> <http://gss-data.org.uk/def/class/hmrc-geographies/BE> <http://gss-data.org.uk/def/class/hmrc-geographies/BG> <http://gss-data.org.uk/def/class/hmrc-geographies/CY> <http://gss-data.org.uk/def/class/hmrc-geographies/CZ> <http://gss-data.org.uk/def/class/hmrc-geographies/DK> <http://gss-data.org.uk/def/class/hmrc-geographies/EE> <http://gss-data.org.uk/def/class/hmrc-geographies/FI> <http://gss-data.org.uk/def/class/hmrc-geographies/FR> <http://gss-data.org.uk/def/class/hmrc-geographies/DE> <http://gss-data.org.uk/def/class/hmrc-geographies/GR> <http://gss-data.org.uk/def/class/hmrc-geographies/HU> <http://gss-data.org.uk/def/class/hmrc-geographies/IE> <http://gss-data.org.uk/def/class/hmrc-geographies/IT> <http://gss-data.org.uk/def/class/hmrc-geographies/LV> <http://gss-data.org.uk/def/class/hmrc-geographies/LT> <http://gss-data.org.uk/def/class/hmrc-geographies/LU> <http://gss-data.org.uk/def/class/hmrc-geographies/MT> <http://gss-data.org.uk/def/class/hmrc-geographies/NL> <http://gss-data.org.uk/def/class/hmrc-geographies/PL> <http://gss-data.org.uk/def/class/hmrc-geographies/PT> <http://gss-data.org.uk/def/class/hmrc-geographies/RO> <http://gss-data.org.uk/def/class/hmrc-geographies/SK> <http://gss-data.org.uk/def/class/hmrc-geographies/SI> <http://gss-data.org.uk/def/class/hmrc-geographies/ES> <http://gss-data.org.uk/def/class/hmrc-geographies/SE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/C> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/D> a owl:Class ;
+    rdfs:label "Latin America and Caribbean"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/hmrc-geographies/AI> <http://gss-data.org.uk/def/class/hmrc-geographies/AG> <http://gss-data.org.uk/def/class/hmrc-geographies/AR> <http://gss-data.org.uk/def/class/hmrc-geographies/AW> <http://gss-data.org.uk/def/class/hmrc-geographies/BS> <http://gss-data.org.uk/def/class/hmrc-geographies/BB> <http://gss-data.org.uk/def/class/hmrc-geographies/BZ> <http://gss-data.org.uk/def/class/hmrc-geographies/BM> <http://gss-data.org.uk/def/class/hmrc-geographies/BO> <http://gss-data.org.uk/def/class/hmrc-geographies/BQ> <http://gss-data.org.uk/def/class/hmrc-geographies/BR> <http://gss-data.org.uk/def/class/hmrc-geographies/VG> <http://gss-data.org.uk/def/class/hmrc-geographies/KY> <http://gss-data.org.uk/def/class/hmrc-geographies/CL> <http://gss-data.org.uk/def/class/hmrc-geographies/CO> <http://gss-data.org.uk/def/class/hmrc-geographies/CR> <http://gss-data.org.uk/def/class/hmrc-geographies/CU> <http://gss-data.org.uk/def/class/hmrc-geographies/CW> <http://gss-data.org.uk/def/class/hmrc-geographies/DM> <http://gss-data.org.uk/def/class/hmrc-geographies/DO> <http://gss-data.org.uk/def/class/hmrc-geographies/EC> <http://gss-data.org.uk/def/class/hmrc-geographies/SV> <http://gss-data.org.uk/def/class/hmrc-geographies/FK> <http://gss-data.org.uk/def/class/hmrc-geographies/GD> <http://gss-data.org.uk/def/class/hmrc-geographies/GT> <http://gss-data.org.uk/def/class/hmrc-geographies/GY> <http://gss-data.org.uk/def/class/hmrc-geographies/HT> <http://gss-data.org.uk/def/class/hmrc-geographies/HN> <http://gss-data.org.uk/def/class/hmrc-geographies/JM> <http://gss-data.org.uk/def/class/hmrc-geographies/MS> <http://gss-data.org.uk/def/class/hmrc-geographies/NI> <http://gss-data.org.uk/def/class/hmrc-geographies/PA> <http://gss-data.org.uk/def/class/hmrc-geographies/PY> <http://gss-data.org.uk/def/class/hmrc-geographies/PE> <http://gss-data.org.uk/def/class/hmrc-geographies/BL> <http://gss-data.org.uk/def/class/hmrc-geographies/SX> <http://gss-data.org.uk/def/class/hmrc-geographies/KN> <http://gss-data.org.uk/def/class/hmrc-geographies/LC> <http://gss-data.org.uk/def/class/hmrc-geographies/VC> <http://gss-data.org.uk/def/class/hmrc-geographies/SR> <http://gss-data.org.uk/def/class/hmrc-geographies/TT> <http://gss-data.org.uk/def/class/hmrc-geographies/TC> <http://gss-data.org.uk/def/class/hmrc-geographies/VI> <http://gss-data.org.uk/def/class/hmrc-geographies/UY> <http://gss-data.org.uk/def/class/hmrc-geographies/VE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/D> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/F> a owl:Class ;
+    rdfs:label "Middle East and North Africa"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/hmrc-geographies/DZ> <http://gss-data.org.uk/def/class/hmrc-geographies/BH> <http://gss-data.org.uk/def/class/hmrc-geographies/XC> <http://gss-data.org.uk/def/class/hmrc-geographies/EG> <http://gss-data.org.uk/def/class/hmrc-geographies/IR> <http://gss-data.org.uk/def/class/hmrc-geographies/IQ> <http://gss-data.org.uk/def/class/hmrc-geographies/IL> <http://gss-data.org.uk/def/class/hmrc-geographies/JO> <http://gss-data.org.uk/def/class/hmrc-geographies/KW> <http://gss-data.org.uk/def/class/hmrc-geographies/LB> <http://gss-data.org.uk/def/class/hmrc-geographies/LY> <http://gss-data.org.uk/def/class/hmrc-geographies/XL> <http://gss-data.org.uk/def/class/hmrc-geographies/MA> <http://gss-data.org.uk/def/class/hmrc-geographies/PS> <http://gss-data.org.uk/def/class/hmrc-geographies/OM> <http://gss-data.org.uk/def/class/hmrc-geographies/QA> <http://gss-data.org.uk/def/class/hmrc-geographies/SA> <http://gss-data.org.uk/def/class/hmrc-geographies/SS> <http://gss-data.org.uk/def/class/hmrc-geographies/SD> <http://gss-data.org.uk/def/class/hmrc-geographies/SY> <http://gss-data.org.uk/def/class/hmrc-geographies/TN> <http://gss-data.org.uk/def/class/hmrc-geographies/AE> <http://gss-data.org.uk/def/class/hmrc-geographies/YE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/F> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/FF> a owl:Class ;
+    rdfs:label "Fish Flag"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/FF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/G> a owl:Class ;
+    rdfs:label "North America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/hmrc-geographies/CA> <http://gss-data.org.uk/def/class/hmrc-geographies/GL> <http://gss-data.org.uk/def/class/hmrc-geographies/MX> <http://gss-data.org.uk/def/class/hmrc-geographies/PM> <http://gss-data.org.uk/def/class/hmrc-geographies/US> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/G> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GB> a owl:Class ;
+    rdfs:label "United Kingdom"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GB> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GF> a owl:Class ;
+    rdfs:label "French Guiana"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GG> a owl:Class ;
+    rdfs:label "Guernsey"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GP> a owl:Class ;
+    rdfs:label "Guadeloupe"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GP> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GS> a owl:Class ;
+    rdfs:label "South Georgia and South Sandwich Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/H> a owl:Class ;
+    rdfs:label "Sub-Saharan Africa"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/hmrc-geographies/AO> <http://gss-data.org.uk/def/class/hmrc-geographies/BJ> <http://gss-data.org.uk/def/class/hmrc-geographies/BW> <http://gss-data.org.uk/def/class/hmrc-geographies/IO> <http://gss-data.org.uk/def/class/hmrc-geographies/BF> <http://gss-data.org.uk/def/class/hmrc-geographies/BI> <http://gss-data.org.uk/def/class/hmrc-geographies/CM> <http://gss-data.org.uk/def/class/hmrc-geographies/CV> <http://gss-data.org.uk/def/class/hmrc-geographies/CF> <http://gss-data.org.uk/def/class/hmrc-geographies/TD> <http://gss-data.org.uk/def/class/hmrc-geographies/KM> <http://gss-data.org.uk/def/class/hmrc-geographies/CG> <http://gss-data.org.uk/def/class/hmrc-geographies/CD> <http://gss-data.org.uk/def/class/hmrc-geographies/CI> <http://gss-data.org.uk/def/class/hmrc-geographies/DJ> <http://gss-data.org.uk/def/class/hmrc-geographies/GQ> <http://gss-data.org.uk/def/class/hmrc-geographies/ER> <http://gss-data.org.uk/def/class/hmrc-geographies/ET> <http://gss-data.org.uk/def/class/hmrc-geographies/GA> <http://gss-data.org.uk/def/class/hmrc-geographies/GM> <http://gss-data.org.uk/def/class/hmrc-geographies/GH> <http://gss-data.org.uk/def/class/hmrc-geographies/GN> <http://gss-data.org.uk/def/class/hmrc-geographies/GW> <http://gss-data.org.uk/def/class/hmrc-geographies/KE> <http://gss-data.org.uk/def/class/hmrc-geographies/LS> <http://gss-data.org.uk/def/class/hmrc-geographies/LR> <http://gss-data.org.uk/def/class/hmrc-geographies/MG> <http://gss-data.org.uk/def/class/hmrc-geographies/MW> <http://gss-data.org.uk/def/class/hmrc-geographies/ML> <http://gss-data.org.uk/def/class/hmrc-geographies/MR> <http://gss-data.org.uk/def/class/hmrc-geographies/MU> <http://gss-data.org.uk/def/class/hmrc-geographies/MZ> <http://gss-data.org.uk/def/class/hmrc-geographies/NA> <http://gss-data.org.uk/def/class/hmrc-geographies/NE> <http://gss-data.org.uk/def/class/hmrc-geographies/NG> <http://gss-data.org.uk/def/class/hmrc-geographies/RW> <http://gss-data.org.uk/def/class/hmrc-geographies/ST> <http://gss-data.org.uk/def/class/hmrc-geographies/SN> <http://gss-data.org.uk/def/class/hmrc-geographies/SC> <http://gss-data.org.uk/def/class/hmrc-geographies/SL> <http://gss-data.org.uk/def/class/hmrc-geographies/SO> <http://gss-data.org.uk/def/class/hmrc-geographies/ZA> <http://gss-data.org.uk/def/class/hmrc-geographies/SH> <http://gss-data.org.uk/def/class/hmrc-geographies/SZ> <http://gss-data.org.uk/def/class/hmrc-geographies/TZ> <http://gss-data.org.uk/def/class/hmrc-geographies/TG> <http://gss-data.org.uk/def/class/hmrc-geographies/UG> <http://gss-data.org.uk/def/class/hmrc-geographies/EH> <http://gss-data.org.uk/def/class/hmrc-geographies/ZM> <http://gss-data.org.uk/def/class/hmrc-geographies/ZW> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/H> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/HR> a owl:Class ;
+    rdfs:label "Croatia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/HR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/I> a owl:Class ;
+    rdfs:label "Western Europe (excl. EU)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/hmrc-geographies/AD> <http://gss-data.org.uk/def/class/hmrc-geographies/FO> <http://gss-data.org.uk/def/class/hmrc-geographies/GI> <http://gss-data.org.uk/def/class/hmrc-geographies/VA> <http://gss-data.org.uk/def/class/hmrc-geographies/IS> <http://gss-data.org.uk/def/class/hmrc-geographies/LI> <http://gss-data.org.uk/def/class/hmrc-geographies/NO> <http://gss-data.org.uk/def/class/hmrc-geographies/SM> <http://gss-data.org.uk/def/class/hmrc-geographies/CH> <http://gss-data.org.uk/def/class/hmrc-geographies/TR> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/I> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/IC> a owl:Class ;
+    rdfs:label "Canary Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/IC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/JE> a owl:Class ;
+    rdfs:label "Jersey"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/JE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MQ> a owl:Class ;
+    rdfs:label "Martinique"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MQ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/QR> a owl:Class ;
+    rdfs:label "Stores & Provisions"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/QR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/QS> a owl:Class ;
+    rdfs:label "Stores & Provisions"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/QS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/RE> a owl:Class ;
+    rdfs:label "Reunion"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/RE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/XX> a owl:Class ;
+    rdfs:label "Parcel Post"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/XX> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/YT> a owl:Class ;
+    rdfs:label "Mayotte"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/YT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZB> a owl:Class ;
+    rdfs:label "Belgian Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZB> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZC> a owl:Class ;
+    rdfs:label "Greece Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZD> a owl:Class ;
+    rdfs:label "Danish Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZE> a owl:Class ;
+    rdfs:label "Irish Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZF> a owl:Class ;
+    rdfs:label "French Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZG> a owl:Class ;
+    rdfs:label "German Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZH> a owl:Class ;
+    rdfs:label "Netherlands Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZJ> a owl:Class ;
+    rdfs:label "Cyprus Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZJ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZK> a owl:Class ;
+    rdfs:label "Finnish Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZN> a owl:Class ;
+    rdfs:label "Norwegian Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZS> a owl:Class ;
+    rdfs:label "Swedish Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZU> a owl:Class ;
+    rdfs:label "UK Continental Shelf"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZY> a owl:Class ;
+    rdfs:label "Low Value Trade"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZZ> a owl:Class ;
+    rdfs:label "Pseudo Flag"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/below-threshold-traders> a owl:Class ;
+    rdfs:label "Below Threshold Traders"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/below-threshold-traders> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/europe> a owl:Class ;
+    rdfs:label "Europe"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/europe> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/non-eu> a owl:Class ;
+    rdfs:label "Non-EU"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/non-eu> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/other-asia-and-oceania> a owl:Class ;
+    rdfs:label "Other Asia and Oceania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/other-asia-and-oceania> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/other-eastern-europe> a owl:Class ;
+    rdfs:label "Other Eastern Europe (excl EU)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/other-eastern-europe> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/other-latin-america-and-caribbean> a owl:Class ;
+    rdfs:label "Other Latin America and Caribbean"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/other-latin-america-and-caribbean> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/other-middle-east-and-north-africa> a owl:Class ;
+    rdfs:label "Other Middle East and North Africa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/other-middle-east-and-north-africa> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/other-north-america> a owl:Class ;
+    rdfs:label "Other North America"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/other-north-america> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/other-sub-saharan-africa> a owl:Class ;
+    rdfs:label "Other Sub-Saharan Africa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/other-sub-saharan-africa> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/other-western-europe> a owl:Class ;
+    rdfs:label "Other Western Europe (excl EU)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/other-western-europe> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/residual-trade> a owl:Class ;
+    rdfs:label "Residual Trade"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/residual-trade> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AD> a owl:Class ;
+    rdfs:label "Andorra"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AE> a owl:Class ;
+    rdfs:label "United Arab Emirates"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AF> a owl:Class ;
+    rdfs:label "Afghanistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AG> a owl:Class ;
+    rdfs:label "Antigua and Barbuda"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AI> a owl:Class ;
+    rdfs:label "Anguilla"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AL> a owl:Class ;
+    rdfs:label "Albania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AM> a owl:Class ;
+    rdfs:label "Armenia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AO> a owl:Class ;
+    rdfs:label "Angola"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AQ> a owl:Class ;
+    rdfs:label "Antarctica"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AQ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AR> a owl:Class ;
+    rdfs:label "Argentina"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AS> a owl:Class ;
+    rdfs:label "American Samoa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AT> a owl:Class ;
+    rdfs:label "Austria"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AU> a owl:Class ;
+    rdfs:label "Australia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AW> a owl:Class ;
+    rdfs:label "Aruba"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/AZ> a owl:Class ;
+    rdfs:label "Azerbaijan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/AZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BA> a owl:Class ;
+    rdfs:label "Bosnia-Herzegovina"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BB> a owl:Class ;
+    rdfs:label "Barbados"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BB> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BD> a owl:Class ;
+    rdfs:label "Bangladesh"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BE> a owl:Class ;
+    rdfs:label "Belgium"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BF> a owl:Class ;
+    rdfs:label "Burkina Faso"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BG> a owl:Class ;
+    rdfs:label "Bulgaria"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BH> a owl:Class ;
+    rdfs:label "Bahrain"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BI> a owl:Class ;
+    rdfs:label "Burundi"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BJ> a owl:Class ;
+    rdfs:label "Benin"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BJ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BL> a owl:Class ;
+    rdfs:label "Saint Barthelemy"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BM> a owl:Class ;
+    rdfs:label "Bermuda"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BN> a owl:Class ;
+    rdfs:label "Brunei"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BO> a owl:Class ;
+    rdfs:label "Bolivia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BQ> a owl:Class ;
+    rdfs:label "Bonaire, Sint Eustatius and Saba"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BQ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BR> a owl:Class ;
+    rdfs:label "Brazil"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BS> a owl:Class ;
+    rdfs:label "Bahamas"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BT> a owl:Class ;
+    rdfs:label "Bhutan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BV> a owl:Class ;
+    rdfs:label "Bouvet Island"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BW> a owl:Class ;
+    rdfs:label "Botswana"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BY> a owl:Class ;
+    rdfs:label "Belarus"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/BZ> a owl:Class ;
+    rdfs:label "Belize"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/BZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CA> a owl:Class ;
+    rdfs:label "Canada"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CC> a owl:Class ;
+    rdfs:label "Keeling Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CD> a owl:Class ;
+    rdfs:label "Congo (Democratic Republic of the)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CF> a owl:Class ;
+    rdfs:label "Central Africa Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CG> a owl:Class ;
+    rdfs:label "Congo"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CH> a owl:Class ;
+    rdfs:label "Switzerland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CI> a owl:Class ;
+    rdfs:label "Ivory Coast"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CK> a owl:Class ;
+    rdfs:label "Cook Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CL> a owl:Class ;
+    rdfs:label "Chile"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CM> a owl:Class ;
+    rdfs:label "Cameroon"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CN> a owl:Class ;
+    rdfs:label "China"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CO> a owl:Class ;
+    rdfs:label "Colombia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CR> a owl:Class ;
+    rdfs:label "Costa Rica"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CU> a owl:Class ;
+    rdfs:label "Cuba"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CV> a owl:Class ;
+    rdfs:label "Cape Verde"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CW> a owl:Class ;
+    rdfs:label "Curacao"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CX> a owl:Class ;
+    rdfs:label "Christmas Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CX> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CY> a owl:Class ;
+    rdfs:label "Cyprus"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/CZ> a owl:Class ;
+    rdfs:label "Czech Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/CZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/DE> a owl:Class ;
+    rdfs:label "Germany"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/DE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/DJ> a owl:Class ;
+    rdfs:label "Djibouti"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/DJ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/DK> a owl:Class ;
+    rdfs:label "Denmark"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/DK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/DM> a owl:Class ;
+    rdfs:label "Dominica"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/DM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/DO> a owl:Class ;
+    rdfs:label "Dominican Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/DO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/DZ> a owl:Class ;
+    rdfs:label "Algeria"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/DZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/EC> a owl:Class ;
+    rdfs:label "Ecuador"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/EC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/EE> a owl:Class ;
+    rdfs:label "Estonia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/EE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/EG> a owl:Class ;
+    rdfs:label "Egypt"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/EG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/EH> a owl:Class ;
+    rdfs:label "Western Sahara"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/EH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ER> a owl:Class ;
+    rdfs:label "Eritrea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ER> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ES> a owl:Class ;
+    rdfs:label "Spain"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ES> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ET> a owl:Class ;
+    rdfs:label "Ethiopia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ET> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/FI> a owl:Class ;
+    rdfs:label "Finland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/FI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/FJ> a owl:Class ;
+    rdfs:label "Fiji"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/FJ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/FK> a owl:Class ;
+    rdfs:label "Falklands Islands and dependencies"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/FK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/FM> a owl:Class ;
+    rdfs:label "Micronesia (Federated States of)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/FM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/FO> a owl:Class ;
+    rdfs:label "Faroe Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/FO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/FR> a owl:Class ;
+    rdfs:label "France"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/FR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GA> a owl:Class ;
+    rdfs:label "Gabon"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GD> a owl:Class ;
+    rdfs:label "Grenada"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GE> a owl:Class ;
+    rdfs:label "Georgia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GH> a owl:Class ;
+    rdfs:label "Ghana"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GI> a owl:Class ;
+    rdfs:label "Gibraltar"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GL> a owl:Class ;
+    rdfs:label "Greenland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GM> a owl:Class ;
+    rdfs:label "Gambia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GN> a owl:Class ;
+    rdfs:label "Guinea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GQ> a owl:Class ;
+    rdfs:label "Equatorial Guinea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GQ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GR> a owl:Class ;
+    rdfs:label "Greece"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GT> a owl:Class ;
+    rdfs:label "Guatemala"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GU> a owl:Class ;
+    rdfs:label "Guam"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GW> a owl:Class ;
+    rdfs:label "Guinea Bissau"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/GY> a owl:Class ;
+    rdfs:label "Guyana"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/GY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/HK> a owl:Class ;
+    rdfs:label "Hong Kong"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/HK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/HM> a owl:Class ;
+    rdfs:label "Heard Island and McDonald Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/HM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/HN> a owl:Class ;
+    rdfs:label "Honduras"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/HN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/HT> a owl:Class ;
+    rdfs:label "Haiti"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/HT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/HU> a owl:Class ;
+    rdfs:label "Hungary"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/HU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ID> a owl:Class ;
+    rdfs:label "Indonesia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ID> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/IE> a owl:Class ;
+    rdfs:label "Republic of Ireland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/IE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/IL> a owl:Class ;
+    rdfs:label "Israel"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/IL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/IN> a owl:Class ;
+    rdfs:label "India"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/IN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/IO> a owl:Class ;
+    rdfs:label "British Indian Ocean Territory"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/IO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/IQ> a owl:Class ;
+    rdfs:label "Iraq"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/IQ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/IR> a owl:Class ;
+    rdfs:label "Iran (Islamic Republic of)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/IR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/IS> a owl:Class ;
+    rdfs:label "Iceland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/IS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/IT> a owl:Class ;
+    rdfs:label "Italy"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/IT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/JM> a owl:Class ;
+    rdfs:label "Jamaica"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/JM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/JO> a owl:Class ;
+    rdfs:label "Jordan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/JO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/JP> a owl:Class ;
+    rdfs:label "Japan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/JP> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KE> a owl:Class ;
+    rdfs:label "Kenya"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KG> a owl:Class ;
+    rdfs:label "Kyrgyz Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KH> a owl:Class ;
+    rdfs:label "Cambodia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KI> a owl:Class ;
+    rdfs:label "Kiribati"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KM> a owl:Class ;
+    rdfs:label "Comoros"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KN> a owl:Class ;
+    rdfs:label "St Kitts and Nevis"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KP> a owl:Class ;
+    rdfs:label "North Korea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KP> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KR> a owl:Class ;
+    rdfs:label "South Korea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KW> a owl:Class ;
+    rdfs:label "Kuwait"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KY> a owl:Class ;
+    rdfs:label "Cayman Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/KZ> a owl:Class ;
+    rdfs:label "Kazakhstan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/KZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LA> a owl:Class ;
+    rdfs:label "Laos"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LB> a owl:Class ;
+    rdfs:label "Lebanon"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LB> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LC> a owl:Class ;
+    rdfs:label "St Lucia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LI> a owl:Class ;
+    rdfs:label "Liechtenstein"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LK> a owl:Class ;
+    rdfs:label "Sri Lanka"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LR> a owl:Class ;
+    rdfs:label "Liberia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LS> a owl:Class ;
+    rdfs:label "Lesotho"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LT> a owl:Class ;
+    rdfs:label "Lithuania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LU> a owl:Class ;
+    rdfs:label "Luxembourg"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LV> a owl:Class ;
+    rdfs:label "Latvia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/LY> a owl:Class ;
+    rdfs:label "Libya"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/LY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MA> a owl:Class ;
+    rdfs:label "Morocco"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MD> a owl:Class ;
+    rdfs:label "Moldova, Republic of"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ME> a owl:Class ;
+    rdfs:label "Montenegro"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ME> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MG> a owl:Class ;
+    rdfs:label "Madagascar"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MH> a owl:Class ;
+    rdfs:label "Marshall Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MK> a owl:Class ;
+    rdfs:label "Macedonia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ML> a owl:Class ;
+    rdfs:label "Mali"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ML> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MM> a owl:Class ;
+    rdfs:label "Myanmar"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MN> a owl:Class ;
+    rdfs:label "Mongolia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MO> a owl:Class ;
+    rdfs:label "Macao"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MP> a owl:Class ;
+    rdfs:label "Northern Mariana Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MP> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MR> a owl:Class ;
+    rdfs:label "Mauritania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MS> a owl:Class ;
+    rdfs:label "Montserrat"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MT> a owl:Class ;
+    rdfs:label "Malta"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MU> a owl:Class ;
+    rdfs:label "Mauritius"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MV> a owl:Class ;
+    rdfs:label "Maldives"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MW> a owl:Class ;
+    rdfs:label "Malawi"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MX> a owl:Class ;
+    rdfs:label "Mexico"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MX> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MY> a owl:Class ;
+    rdfs:label "Malaysia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/MZ> a owl:Class ;
+    rdfs:label "Mozambique"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/MZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NA> a owl:Class ;
+    rdfs:label "Namibia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NC> a owl:Class ;
+    rdfs:label "New Caledonia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NE> a owl:Class ;
+    rdfs:label "Niger"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NF> a owl:Class ;
+    rdfs:label "Norfolk Island"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NG> a owl:Class ;
+    rdfs:label "Nigeria"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NI> a owl:Class ;
+    rdfs:label "Nicaragua"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NL> a owl:Class ;
+    rdfs:label "Netherlands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NO> a owl:Class ;
+    rdfs:label "Norway"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NP> a owl:Class ;
+    rdfs:label "Nepal"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NP> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NR> a owl:Class ;
+    rdfs:label "Nauru"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NU> a owl:Class ;
+    rdfs:label "Niue Island"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/NZ> a owl:Class ;
+    rdfs:label "New Zealand"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/NZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/OM> a owl:Class ;
+    rdfs:label "Oman"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/OM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PA> a owl:Class ;
+    rdfs:label "Panama"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PE> a owl:Class ;
+    rdfs:label "Peru"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PF> a owl:Class ;
+    rdfs:label "French Polynesia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PG> a owl:Class ;
+    rdfs:label "Papua New Guinea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PH> a owl:Class ;
+    rdfs:label "Philippines"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PK> a owl:Class ;
+    rdfs:label "Pakistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PL> a owl:Class ;
+    rdfs:label "Poland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PM> a owl:Class ;
+    rdfs:label "St Pierre and Miquelon"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PN> a owl:Class ;
+    rdfs:label "Pitcairn"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PS> a owl:Class ;
+    rdfs:label "Occupied Palestinian Territory"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PT> a owl:Class ;
+    rdfs:label "Portugal"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PW> a owl:Class ;
+    rdfs:label "Palau"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/PY> a owl:Class ;
+    rdfs:label "Paraguay"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/PY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/QA> a owl:Class ;
+    rdfs:label "Qatar"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/QA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/RO> a owl:Class ;
+    rdfs:label "Romania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/RO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/RU> a owl:Class ;
+    rdfs:label "Russian Federation"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/RU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/RW> a owl:Class ;
+    rdfs:label "Rwanda"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/RW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SA> a owl:Class ;
+    rdfs:label "Saudi Arabia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SB> a owl:Class ;
+    rdfs:label "Solomon Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SB> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SC> a owl:Class ;
+    rdfs:label "Seychelles"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SD> a owl:Class ;
+    rdfs:label "Sudan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SE> a owl:Class ;
+    rdfs:label "Sweden"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SG> a owl:Class ;
+    rdfs:label "Singapore"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SH> a owl:Class ;
+    rdfs:label "St Helena, Ascension and Tristan da Cunha"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SI> a owl:Class ;
+    rdfs:label "Slovenia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SK> a owl:Class ;
+    rdfs:label "Slovakia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SL> a owl:Class ;
+    rdfs:label "Sierra Leone"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SM> a owl:Class ;
+    rdfs:label "San Marino"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SN> a owl:Class ;
+    rdfs:label "Senegal"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SO> a owl:Class ;
+    rdfs:label "Somalia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SR> a owl:Class ;
+    rdfs:label "Surinam"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SS> a owl:Class ;
+    rdfs:label "South Sudan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ST> a owl:Class ;
+    rdfs:label "Sao Tome and Principe"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ST> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SV> a owl:Class ;
+    rdfs:label "El Salvador"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SX> a owl:Class ;
+    rdfs:label "Sint Maarten (Dutch part)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SX> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SY> a owl:Class ;
+    rdfs:label "Syrian Arab Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/SZ> a owl:Class ;
+    rdfs:label "Swaziland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/SZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TC> a owl:Class ;
+    rdfs:label "Turks and Caicos Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TD> a owl:Class ;
+    rdfs:label "Chad"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TF> a owl:Class ;
+    rdfs:label "French Southern Territories"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TG> a owl:Class ;
+    rdfs:label "Togo"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TH> a owl:Class ;
+    rdfs:label "Thailand"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TJ> a owl:Class ;
+    rdfs:label "Tajikistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TJ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TL> a owl:Class ;
+    rdfs:label "Timor-Leste"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TM> a owl:Class ;
+    rdfs:label "Turkmenistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TN> a owl:Class ;
+    rdfs:label "Tunisia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TO> a owl:Class ;
+    rdfs:label "Tonga"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TR> a owl:Class ;
+    rdfs:label "Turkey"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TT> a owl:Class ;
+    rdfs:label "Trinidad and Tobago"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TV> a owl:Class ;
+    rdfs:label "Tuvalu"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TW> a owl:Class ;
+    rdfs:label "Taiwan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/TZ> a owl:Class ;
+    rdfs:label "Tanzania (United Republic of)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/TZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/UA> a owl:Class ;
+    rdfs:label "Ukraine"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/UA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/UG> a owl:Class ;
+    rdfs:label "Uganda"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/UG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/UM> a owl:Class ;
+    rdfs:label "United States Minor outlying islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/UM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/US> a owl:Class ;
+    rdfs:label "United States"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/US> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/UY> a owl:Class ;
+    rdfs:label "Uruguay"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/UY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/UZ> a owl:Class ;
+    rdfs:label "Uzbekistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/UZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/VA> a owl:Class ;
+    rdfs:label "Vatican City State"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/VA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/VC> a owl:Class ;
+    rdfs:label "St Vincent and the Grenadines"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/VC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/VE> a owl:Class ;
+    rdfs:label "Venezuela, Bolivarian Republic of"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/VE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/VG> a owl:Class ;
+    rdfs:label "Virgin Islands, British"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/VG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/VI> a owl:Class ;
+    rdfs:label "Virgin Islands, United States"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/VI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/VN> a owl:Class ;
+    rdfs:label "Vietnam"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/VN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/VU> a owl:Class ;
+    rdfs:label "Vanuatu"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/VU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/WF> a owl:Class ;
+    rdfs:label "Wallis and Futuna"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/WF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/WS> a owl:Class ;
+    rdfs:label "Samoa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/WS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/XC> a owl:Class ;
+    rdfs:label "Ceuta"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/XC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/XK> a owl:Class ;
+    rdfs:label "Kosovo"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/XK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/XL> a owl:Class ;
+    rdfs:label "Melilla"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/XL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/XS> a owl:Class ;
+    rdfs:label "Serbia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/XS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/YE> a owl:Class ;
+    rdfs:label "Yemen"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/YE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZA> a owl:Class ;
+    rdfs:label "South Africa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZM> a owl:Class ;
+    rdfs:label "Zambia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/hmrc-geographies/ZW> a owl:Class ;
+    rdfs:label "Zimbabwe"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/hmrc-geographies/ZW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+
