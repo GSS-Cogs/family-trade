@@ -68,7 +68,7 @@ Melilla,Q5831,XL,C76
 Oil exporting countries,,C77,D4
 Saudi Arabia,Q851,SA,C77
 United Arab Emirates,Q878,AE,C77
-United Arab Emirates (HMRC),Q878,AE1,AE
+United Arab Emirates (HMRC),,AE1,AE
 Abu Dhabi,Q187712,DH,AE
 Dubai,Q613,DU,AE
 Sharjah etc,,HA,AE
@@ -497,7 +497,7 @@ British Indian Ocean Territory,Q43448,IO,C471
 St. Helena,Q34497,SH,C471
 Western Sahara,,EH,E6
 South Sudan,Q958,SS,E6
-America,Q30,E7,J7
+America,,E7,J7
 North America (BoP),,E8,E7
 Canada,Q16,CA,E8
 United States,Q30,US,E8
@@ -571,7 +571,7 @@ Gulf Arabian Countries,,F4,F3
 Saudi Arabia,Q851,SA,F4
 Residual Gulf Arabian (aka R5-Residual Gulf Arabian),,J8,F4
 United Arab Emirates,Q878,AE,J8
-United Arab Emirates (HMRC),Q878,AE1,AE
+United Arab Emirates (HMRC),,AE1,AE
 Abu Dhabi,Q187712,DH,AE
 Dubai,Q613,DU,AE
 Sharjah etc,,HA,AE
@@ -723,7 +723,7 @@ Cambodia,Q424,KH,C479
 OPEC,,B4,
 Saudi Arabia,Q851,SA,B4
 United Arab Emirates,Q878,AE,B4
-United Arab Emirates (HMRC),Q878,AE1,AE
+United Arab Emirates (HMRC),,AE1,AE
 Abu Dhabi,Q187712,DH,AE
 Dubai,Q613,DU,AE
 Sharjah etc,,HA,AE
@@ -1137,7 +1137,7 @@ British Indian Ocean Territory,Q43448,IO,C471
 St. Helena,Q34497,SH,C471
 Western Sahara,,EH,E6
 South Sudan,Q958,SS,E6
-America,Q30,E7,D5
+America,,E7,D5
 North America (BoP),,E8,E7
 Canada,Q16,CA,E8
 United States,Q30,US,E8
@@ -1211,7 +1211,7 @@ Gulf Arabian Countries,,F4,F3
 Saudi Arabia,Q851,SA,F4
 Residual Gulf Arabian (aka R5-Residual Gulf Arabian),,J8,F4
 United Arab Emirates,Q878,AE,J8
-United Arab Emirates (HMRC),Q878,AE1,AE
+United Arab Emirates (HMRC),,AE1,AE
 Abu Dhabi,Q187712,DH,AE
 Dubai,Q613,DU,AE
 Sharjah etc,,HA,AE
@@ -1373,7 +1373,7 @@ Melilla,Q5831,XL,C76
 Oil exporting countries,,C77,D4
 Saudi Arabia,Q851,SA,C77
 United Arab Emirates,Q878,AE,C77
-United Arab Emirates (HMRC),Q878,AE1,AE
+United Arab Emirates (HMRC),,AE1,AE
 Abu Dhabi,Q187712,DH,AE
 Dubai,Q613,DU,AE
 Sharjah etc,,HA,AE
