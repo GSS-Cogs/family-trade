@@ -63,9 +63,9 @@
             "datatype": "string"
           }
           {
-            "titles": "DATA MARKER",
+            "titles": "Marker",
             "required": true,
-            "name": "data_marker",
+            "name": "marker",
             "datatype": "string"
           }
         ],
@@ -86,7 +86,7 @@
           "sic2007",
           "measure_type",
           "unit"
-          "data_marker"
+          "marker"
         ]
       }
     }
