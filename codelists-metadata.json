@@ -132,6 +132,10 @@
       "url": "codelists/itis-industry.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
       "rdfs:label": "ITIS Industry"
+    }, {
+      "url": "codelists/markers.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json",
+      "rdfs:label": "Markers"
     }
   ]
 }
