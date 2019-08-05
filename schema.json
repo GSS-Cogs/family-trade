@@ -61,7 +61,7 @@
             "required": true,
             "name": "unit",
             "datatype": "string"
-          }
+          },
           {
             "titles": "Marker",
             "required": true,
@@ -85,7 +85,7 @@
           "cord_sitc",
           "sic2007",
           "measure_type",
-          "unit"
+          "unit",
           "marker"
         ]
       }
