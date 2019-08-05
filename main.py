@@ -28,7 +28,7 @@ def run_script(s):
     return table
 
 observations = pd.concat(
-    run_script(s) for s in ['exports.ipynb', 'imports.ipynb']
+    run_script(s) for s in ['exports', 'imports']
 ).drop_duplicates()
 # -
 
@@ -50,3 +50,5 @@ scraper.dataset
 
 with open(out / 'dataset.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
+csvw = CSVWMetadata('https://ons-opendata.github.io/ref_trade/')
+csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
