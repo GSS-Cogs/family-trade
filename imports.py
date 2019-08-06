@@ -61,7 +61,7 @@ table = c1.topandas()
 # table['Value'] = table['Value'].map(lambda x:'' if x == '...' else x )
 # -
 
-table['DATAMARKER'] = table['DATAMARKER'].map(lambda x:'suppressed data' if x == '..' else x )
+table['DATAMARKER'] = table['DATAMARKER'].map(lambda x:'suppressed' if x == '..' else x )
 
 import numpy as np
 table['OBS'].replace('', np.nan, inplace=True)
