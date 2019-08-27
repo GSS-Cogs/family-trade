@@ -73,6 +73,7 @@ TableStruct_types = (str, str, int, int, int, int, int, int, int, int, int)
 header = None
 struct = None
 label = None
+all_labels = set()
 observations = []
 
 slices = defaultdict(list)
@@ -92,7 +93,7 @@ while line:
         header = TableHeader._make(parse_92(line))
     elif line_type == '93':
         label = parse_93(line)
-        print(label)
+        all_labels.add(label)
     elif line_type == '96':
         struct = TableStruct._make(t(v) for (v, t) in zip(parse_96(line), TableStruct_types))
     elif line_type == '97':
@@ -111,6 +112,10 @@ slices[header.identifier].append({
     'observations': observations
 })
 
+for l in sorted(all_labels):
+    print(l)
+
+
 # +
 AV_STERLING_EXCHANGE = 'Average Sterling exchange rate: '
 COUNTRIES = set(['estonia', 'ww', 'cyprus', 'latvia', 'lithuania', 'malta', 'slovakia',
@@ -126,26 +131,34 @@ COUNTRIES = set(['estonia', 'ww', 'cyprus', 'latvia', 'lithuania', 'malta', 'slo
 DIRECTION = set(['imports', 'exports', 'balance', 'ex', 'im', 'bal', 'terms-of-trade'])
 BASIS = set(['bop'])
 ADJUST = set(['nsa', 'sa'])
-CP = set(['cp', 'cvm', 'tons', 'idef', 'av-value-per-ton'])
+UNIT = set(['cp', 'cvm', 'tons', 'idef', 'av-value-per-ton'])
 TIG = 'Trade in Goods'
 TT = 'total trade'
 
-TradeInProduct = namedtuple('TradeInProduct', 'country, product, direction, basis, cp, adjustment')
+TradeInProduct = namedtuple('TradeInProduct', 'country, product, direction, basis, unit, adjustment')
 SterlingEffectiveERI = namedtuple('SterlingEffectiveERI', 'measure base')
 ExchangeRate = namedtuple('ExchangeRate', 'currency')
+
 import re
 ERI_RE = re.compile(r'Sterling effective exchange rate index: ([^(]*) \(([^)]*)\)')
+PROD_RE = re.compile(r'.*\(([^)]+)\)')
 
 sitc = {}
 currency_label = {}
 country_label = {}
 product_label = {}
 
+def prod_code(l):
+    match = PROD_RE.match(l)
+    if match is not None:
+        return match.group(1)
+    return None
+
 def dim_val(t):
     if t.startswith(TIG) and t[len(TIG)+1] != ':':
         t = t[0:len(TIG)] + ':' + t[len(TIG)+1:]
     elif t.lower().startswith(TT):
-        t = TIG + ':' + t
+        t = TIG + ': ' + t
     labels = [d.strip() for d in t.split(':')]
     dims = [pathify(l) for l in labels]
     if dims[0] == 'average-sterling-exchange-rate':
@@ -157,50 +170,65 @@ def dim_val(t):
             return SterlingEffectiveERI(match.group(1), match.group(2))
         raise(Exception(t))
     elif dims[0] == 'trade-in-goods':
-        if dims[1] in COUNTRIES and dims[3] in DIRECTION and dims[4] in BASIS and dims[5] in CP and dims[6] in ADJUST:
+        if dims[1] in COUNTRIES and dims[3] in DIRECTION and dims[4] in BASIS and dims[5] in UNIT and dims[6] in ADJUST:
             country_label[dims[1]] = labels[1]
-            product = 'total-goods' if dims[2] == 'total' else dims[2]
+            product = prod_code(labels[2])
+            if product is None:
+                assert labels[2] == 'Total', f"Trade in Goods: some-country should be something in brackets or 'Total' but it's {labels[2]}"
+                product = 'T'
             product_label[product] = labels[2]
             return TradeInProduct(
-                country=dims[1], product='total-goods' if dims[2] == 'total' else dims[2],
-                direction=dims[3], basis=dims[4], cp=dims[5], adjustment=dims[6])
-        elif dims[2] in COUNTRIES and dims[3] in DIRECTION and dims[4] in BASIS and dims[5] in CP and dims[6] in ADJUST:
+                country=dims[1], product=product,
+                direction=dims[3], basis=dims[4], unit=dims[5], adjustment=dims[6])
+        elif dims[2] in COUNTRIES and dims[3] in DIRECTION and dims[4] in BASIS and dims[5] in UNIT and dims[6] in ADJUST:
             country_label[dims[2]] = labels[2]
-            product = 'total-goods' if dims[1] == 'total' else dims[1]
+            product = prod_code(labels[1])
+            if product is None:
+                raise(Exception(labels[1]))
             product_label[product] = labels[1]
             return TradeInProduct(
-                country=dims[2], product='total-goods' if dims[1] == 'total' else dims[1],
-                direction=dims[3], basis=dims[4], cp=dims[5], adjustment=dims[6])
+                country=dims[2], product=product,
+                direction=dims[3], basis=dims[4], unit=dims[5], adjustment=dims[6])
         # ['trade-in-goods', 'emu-19', 'balance', 'bop', 'cp', 'sa']
-        elif dims[1] in COUNTRIES and dims[2] in DIRECTION and dims[3] in BASIS and dims[4] in CP and dims[5] in ADJUST:
+        elif dims[1] in COUNTRIES and dims[2] in DIRECTION and dims[3] in BASIS and dims[4] in UNIT and dims[5] in ADJUST:
             country_label[dims[1]] = label[1]
             return TradeInProduct(
-                country=dims[1], product='total-goods', direction=dims[2],
-                basis=dims[3], cp=dims[4], adjustment=dims[5])
+                country=dims[1], product='T', direction=dims[2],
+                basis=dims[3], unit=dims[4], adjustment=dims[5])
         else:
             raise(Exception(dims))
-    elif dims[0] == 'trade-in-goods-t' and dims[1] in COUNTRIES and dims[2] in DIRECTION and dims[3] in BASIS and dims[4] in CP and dims[5] in ADJUST:
-        country_label[dims[1]] = label[1]
+    elif dims[0] == 'trade-in-goods-t' and dims[1] in COUNTRIES and dims[2] in DIRECTION and dims[3] in BASIS and dims[4] in UNIT and dims[5] in ADJUST:
+        product = prod_code(labels[0])
+        if product is None:
+            raise Exception(labels[0])
+        product_label[product] = labels[0]
+        country_label[dims[1]] = labels[1]
         return TradeInProduct(
-            country=dims[1], product='total-goods', direction=dims[2],
-            basis=dims[3], cp=dims[4], adjustment=dims[5])
-    elif dims[0] == 'trade-in-services-ts' and dims[1] == 'ww' and dims[2] in DIRECTION and dims[3] in BASIS and dims[4] in CP and dims[5] in ADJUST:
-        country_label[dims[1]] = label[1]
+            country=dims[1], product=product, direction=dims[2],
+            basis=dims[3], unit=dims[4], adjustment=dims[5])
+    elif dims[0] == 'trade-in-services-ts' and dims[1] == 'ww' and dims[2] in DIRECTION and dims[3] in BASIS and dims[4] in UNIT and dims[5] in ADJUST:
+        product = prod_code(labels[0])
+        if product is None:
+            raise(Exception(t))
+        product_label[product] = labels[0]
+        country_label[dims[1]] = labels[1]
         return TradeInProduct(
-            country=dims[1], product='total-services', direction=dims[2], basis=dims[3],
-            cp=dims[4], adjustment=dims[5])
+            country=dims[1], product=product, direction=dims[2], basis=dims[3],
+            unit=dims[4], adjustment=dims[5])
     elif dims[0] in set(['eu-2004', 'non-eu-2004']) and dims[1] in BASIS and dims[2] in DIRECTION and dims[5].startswith('sitc'):
-        country_label[dims[0]] = label[0]
-        product_label[dims[4]] = label[4]
-        sitc[dims[4]] = dims[5]
+        country_label[dims[0]] = labels[0]
+        product = labels[5].replace(' ', '_')
+        product_label[product] = labels[4]
+        sitc[product] = dims[5]
         return TradeInProduct(
-            country=dims[0], product=dims[4], direction=dims[2], basis=dims[1], adjustment=dims[3], cp='cp')
+            country=dims[0], product=product, direction=dims[2], basis=dims[1], adjustment=dims[3], unit='cp')
     # ['bop', 'ex', 'sa', 'ships-and-aircraft-sna', 'sitc-792-793']
     elif dims[0] in BASIS and dims[1] in DIRECTION and dims[2] in ADJUST and dims[4].startswith('sitc'):
-        sitc[dims[3]] = dims[4]
-        product_label[dims[3]] = label[3]
+        product = labels[4].replace(' ', '_')
+        sitc[product] = dims[4]
+        product_label[product] = labels[3]
         return TradeInProduct(
-            country='ww', product=dims[3], direction=dims[1], basis=dims[0], cp='cp',
+            country='ww', product=product, direction=dims[1], basis=dims[0], unit='cp',
             adjustment=dims[2])
     else:
         raise(Exception(dims))
@@ -257,5 +285,7 @@ exchange_currency_observations.to_csv(out / 'exchange-currency-observations.csv'
 # -
 
 currency_label
+
+product_label
 
 
