@@ -67,7 +67,7 @@ savepreviewhtml(c2)
 
 tidy
 
-tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'Not Applicable'
+tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'not-applicable'
                                   if (x == 'N/A')
                                   else (x))
 

@@ -64,7 +64,7 @@ tidy = pd.concat([tidy, table2])
 
 savepreviewhtml(c2)
 
-tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'Not Applicable'
+tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'not-applicable'
                                   if (x == 'N/A')
                                   else (x))
 

@@ -60,7 +60,7 @@ c2 = ConversionSegment(observations1, Dimensions, processTIMEUNIT=True)
 table2 = c2.topandas()
 tidy = pd.concat([tidy, table2])
 
-tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'Not Applicable'
+tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'not-applicable'
                                   if (x == 'N/A')
                                   else (x))
 
