@@ -84,8 +84,8 @@ tidy['Value'] = tidy['Value'].map(lambda x:''
 tidy['SITC 4'] = tidy['SITC 4'].map(lambda cell: cell.replace('.0',''))
 tidy['SITC 4'] = tidy['SITC 4'].map(
     lambda x: {
-        'Below Threshold Traders':'all', 
-        'Residual Trade - no SITC Section displayed' : 'all'}.get(x, x))
+        'Below Threshold Traders':'low trade', 
+        'Residual Trade - no SITC Section displayed' : 'no sitc'}.get(x, x))
 
 for col in tidy.columns:
     if col not in ['Value', 'Year']:
