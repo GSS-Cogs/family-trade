@@ -16,10 +16,11 @@
 # +
 from gssutils import *
 
-if is_interactive():
-    scraper = Scraper("https://www.gov.uk/government/statistics/regional-trade-in-goods-statistics-dis-aggregated-by-smaller-geographical-areas-2017")
+scraper = Scraper("https://www.gov.uk/government/collections/uk-regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas")
+scraper
 # -
 
+scraper.select_dataset(latest=True)
 scraper
 
 tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
@@ -64,8 +65,6 @@ table2 = c2.topandas()
 tidy = pd.concat([tidy, table2])
 
 savepreviewhtml(c2)
-
-tidy
 
 tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'not-applicable'
                                   if (x == 'N/A')

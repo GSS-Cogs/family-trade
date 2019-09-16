@@ -16,10 +16,14 @@
 # +
 from gssutils import *
 
-if is_interactive():
-    scraper = Scraper("https://www.gov.uk/government/statistics/regional-trade-in-goods-statistics-dis-aggregated-by-smaller-geographical-areas-2017")
-    tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
+scraper = Scraper("https://www.gov.uk/government/collections/uk-regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas")
+scraper
 # -
+
+scraper.select_dataset(latest=True)
+scraper
+
+tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
 
 tab = tabs['T2 NUTS2']
 
@@ -183,3 +187,5 @@ tidy['Flow'] = tidy['Flow'].cat.rename_categories({
 # -
 
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
+
+
