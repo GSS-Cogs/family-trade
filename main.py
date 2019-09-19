@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -130,7 +129,7 @@ observations = pd.concat(process_tab(t) for t in tabs if t.name not in ['Content
 # -
 
 observations.rename(index= str, columns= {'DATAMARKER':'Marker'}, inplace = True)
-observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'nil or less than £500,000','..' : 'Disclosive data'}.get(x, x))
+observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil','..' : 'disclosive'}.get(x, x))
 
 for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     observations[col] = observations[col].astype('category')
