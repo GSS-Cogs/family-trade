@@ -58,7 +58,7 @@ for distribution in scraper.distributions:
                 
                 # Generic changes that apply to both "mass" and "value" outputs
                 table['Period'] = table['Period'].map(lambda x: f'quarter/{x[2:]}-Q{x[0]}')
-                table['Flow'] = table['Flow'].map(lambda x: 'Exports' if x == 'E' else 'Imports')
+                table['Flow'] = table['Flow'].map(lambda x: 'exports' if x == 'E' else 'imports')
                 table['HMRC Partner Geography'] = table.apply(
                     lambda x: x['Codseq'] if x['Codseq'][0] != '#' else x['Codalpha'],
                     axis=1)
