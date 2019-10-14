@@ -16,8 +16,14 @@ pipeline {
                 }
             }
             steps {
-                sh "jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute tidy.ipynb"
-                sh 'jupyter-nbconvert --to python --stdout update_metadata.ipynb | ipython'
+                script {
+                    ansiColor('xterm') {
+                        if (fileExists('main.py')) {
+                            sh "jupytext --to notebook *.py"
+                            }
+                        sh "jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute 'main.ipynb'"
+                        }
+                  }
             }
         }
         stage('Upload draftset') {
@@ -62,4 +68,3 @@ pipeline {
         }
     }
 }
-

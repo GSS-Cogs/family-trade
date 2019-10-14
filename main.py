@@ -16,7 +16,7 @@
 # ###  Individual country data (goods) on a monthly basis to Tidy Data
 
 from databaker.framework import *
-import pandas as pd 
+import pandas as pd
 
 # This scrape will be a bit nasty as the data source is an adhoc, so url conventions appear to change between publications.
 #
@@ -30,6 +30,7 @@ import pandas as pd
 # <a href="/redir/eyJhbGciOiJIUzI1NiJ9.eyJpbmRleCI6MSwicGFnZVNpemUiOjEwLCJ0ZXJtIjoiaW5kaXZpZHVhbCBjb3VudHJ5IGRhdGEgb24gYSBtb250aGx5IGJhc2lzIGZyb20gamFudWFyeS9kYXRhIiwicGFnZSI6MSwidXJpIjoiL2Vjb25vbXkvbmF0aW9uYWxhY2NvdW50cy9iYWxhbmNlb2ZwYXltZW50cy9hZGhvY3MvMDA2Njc1aW5kaXZpZHVhbGNvdW50cnlkYXRhb25hbW9udGhseWJhc2lzZnJvbWphbnVhcnkyMDE2dG9qYW51YXJ5MjAxNyIsImxpc3RUeXBlIjoic2VhcmNoIn0.Gdw3U8ZGrtT85SftZUcHMEVqem3KmGpWRyRjS_ow77Y" data-gtm-uri="/economy/nationalaccounts/balanceofpayments/adhocs/006675individualcountrydataonamonthlybasisfromjanuary2016tojanuary2017"><strong>Individual</strong> <strong>Country</strong> <strong>data</strong> on a <strong>monthly</strong> <strong>basis</strong> <strong>from</strong> <strong>January</strong> 2016 to <strong>January</strong> 2017 </a>```
 
 # +
+import requests
 search_for = "https://www.ons.gov.uk/search?q=individual+country+data+on+a+monthly+basis+from+january/data"
 
 # get the page
@@ -42,14 +43,14 @@ if r.status_code != 200:
 find = ["individual", "country", "data", "monthly", "tojanuary"]
 found_urls = []
 for html_line in r.text.split("\n"): # for every line of html
-    
+
     # if all have matched and if its a redirect (they're all redirects) and has a data url
     matched = [x for x in find if x in html_line.lower()]
     if len(matched) == len(find) and 'href="/redir' in html_line and 'data-gtm-uri=' in html_line:
-        
+
         # prefix the boiler plate and store the new url in our list
         found_urls.append("http://www.ons.gov.uk" + html_line.split('data-gtm-uri="')[1].split("\"")[0])
-        
+
 found_urls
 # -
 
