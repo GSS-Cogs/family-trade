@@ -159,7 +159,7 @@ new_table.head(10)
 
 new_table['Unit'] = '£ Million'
 new_table['Measure Type'] = 'GBP Total'
-new_table['Flow'] = 'Exports'
+new_table['Flow'] = 'exports'
 new_table.tail(5)
 
 new_table.rename(index= str, columns= {'OBS':'Value'}, inplace = True)
@@ -231,7 +231,7 @@ new_table.head(10)
 
 new_table['Unit'] = '£ Million'
 new_table['Measure Type'] = 'GBP Total'
-new_table['Flow'] = 'Imports'
+new_table['Flow'] = 'imports'
 new_table.tail(5)
 
 new_table.rename(index= str, columns= {'OBS':'Value'}, inplace = True)
@@ -300,7 +300,7 @@ new_table.head(10)
 
 new_table['Unit'] = '£ Million'
 new_table['Measure Type'] = 'GBP Total'
-new_table['Flow'] = 'Exports'
+new_table['Flow'] = 'exports'
 new_table.tail(5)
 
 new_table.rename(index= str, columns= {'OBS':'Value'}, inplace = True)
@@ -371,7 +371,7 @@ new_table.head(10)
 
 new_table['Unit'] = '£ Million'
 new_table['Measure Type'] = 'GBP Total'
-new_table['Flow'] = 'Imports'
+new_table['Flow'] = 'imports'
 new_table.tail(5)
 
 new_table.rename(index= str, columns= {'OBS':'Value'}, inplace = True)
