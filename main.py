@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       jupytext_version: 1.2.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -50,5 +50,7 @@ scraper.dataset
 
 with open(out / 'dataset.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://ons-opendata.github.io/ref_trade/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+#csvw = CSVWMetadata('https://gss-cogs.github.io/ref_migration/')
+#csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+
+

@@ -1,0 +1,84 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/csvw",
+    {
+      "@language": "en"
+    }
+  ],
+  "tables": [
+      
+    {
+      "url": "out/observations.csv",
+      "tableSchema": {
+        "columns": [
+          {
+            "titles": "ONS Partner Geography",
+            "required": true,
+            "name": "ons_partner_geography",
+            "datatype": "string"
+          },
+          {
+            "titles": "Period",
+            "required": true,
+            "name": "period",
+            "datatype": "string"
+          },
+          {
+            "titles": "Flow",
+            "required": true,
+            "name": "migration",
+            "datatype": "string"
+          },
+          {
+            "titles": "CORD SITC",
+            "required": true,
+            "name": "cord_sitc",
+            "datatype": "string"
+          },  
+          {
+            "titles": "SIC 2007",
+            "required": true,
+            "name": "sitc_2007",
+            "datatype": "number"
+          },  
+          {
+            "titles": "Measure Type",
+            "required": true,
+            "name": "measure_type",
+            "datatype": "string"
+          },
+          {
+            "titles": "Value",
+            "required": false,
+            "name": "value",
+            "datatype": "number"
+          },
+          {
+            "titles": "Unit",
+            "required": true,
+            "name": "unit",
+            "datatype": "string"
+          },
+          {
+            "titles": "Marker",
+            "required": true,
+            "name": "marker",
+            "datatype": "string"
+          }
+        ],
+        "foreignKeys": [],
+        "primaryKey": [
+          "ons_partner_geography",
+          "period",
+          "Flow",
+          "CORD SITC",
+          "SIC 2007",
+          "measure_type",
+          "Value",
+          "unit",
+          "Marker"
+        ]
+      }
+    }
+  ]
+}

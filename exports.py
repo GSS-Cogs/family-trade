@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       jupytext_version: 1.2.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -21,10 +21,9 @@ scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpaym
 scraper
 # -
 
-tabs = {tab.name: tab for tab in scraper.distribution().as_databaker()}
-tabs.keys()
-
-tabs = scraper.distribution().as_databaker()
+tabs = scraper.distributions[0].as_databaker()
+for i in tabs:
+    print(i.name)
 
 tab = next(t for t in tabs if t.name =='tig_ind_ex_publ')
 
