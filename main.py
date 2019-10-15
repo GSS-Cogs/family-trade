@@ -50,7 +50,7 @@ scraper.dataset
 
 with open(out / 'dataset.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
-#csvw = CSVWMetadata('https://gss-cogs.github.io/ref_migration/')
-#csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 
 
