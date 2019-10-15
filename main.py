@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -35,6 +35,11 @@ from io import BytesIO, TextIOWrapper
 out = Path('out')
 out.mkdir(exist_ok=True, parents=True)
 extracted_files = []
+
+observations_file = out / 'observations.csv'
+if observations_file.exists():
+    observations_file.unlink()
+header = True
 
 # For each distribution, open the zipfile and put each source in turn into a dataframe
 # for each source we're looking to create one "value" output, and one "mass" output
@@ -70,24 +75,21 @@ for distribution in scraper.distributions:
                 mass['Measure Type'] = 'Net Mass'
                 mass['Unit'] = 'kg-thousands'
                 mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
-                textFile = out / pathify(name)
-                extracted_files.append(textFile.with_suffix('.mass.csv'))
-                mass.to_csv(textFile.with_suffix('.mass.csv'), index=False)
+                mass.to_csv(observations_file, header=header, mode='a', index=False)
+                # only output header row the first time
+                header = False
                 
                 # Output the value observations for this input file
                 value = table.drop(columns=['Netmass'])
                 value['Measure Type'] = 'GBP Total'
                 value['Unit'] = 'gbp-thousands'
-                extracted_files.append(textFile.with_suffix('.value.csv'))
-                value.to_csv(textFile.with_suffix('.value.csv'), index=False)
+                value.to_csv(observations_file, header=header, mode='a', index=False)
 # -
 
 scraper.dataset.family = 'trade'
 with open(out / 'dataset.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
-# Output a schema.json for each "value" and "mass" csv we've outputted
-for extracted_file in extracted_files:
-    csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
-    csvw.create(extracted_file, out / f'{extracted_file.name[:-4]}-csv-schema.json')
+csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw.create(observations_file, observations_file.with_suffix('.csv-schema.json'))
 
