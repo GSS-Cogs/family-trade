@@ -414,8 +414,11 @@ with open(Path('metadata') / 'dataset.trig.template', 'r') as metadata_template_
     metadata_template = Template(metadata_template_file.read())
     with open(destinationFolder / 'dataset.trig', 'w') as metadata_file:
         metadata_file.write(metadata_template.substitute(modified=modified_date))
-# -
 
+# +
 # generate schema
+out = Path('out')
+out.mkdir(exist_ok=True, parents=True)
+
 csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
