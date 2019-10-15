@@ -20,7 +20,7 @@ from databaker.framework import *
 import pandas as pd
 
 # we're only using CSVWMetadata from gssutils (for now), remember to change when we update this recipe
-from gss-utils import CSVWMetadata
+from gssutils import CSVWMetadata
 # -
 
 # This scrape will be a bit nasty as the data source is an adhoc, so url conventions appear to change between publications.
