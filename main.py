@@ -140,3 +140,6 @@ from gssutils.metadata import THEME
 scraper.dataset.theme = THEME['business-industry-trade-energy']
 with open(out / 'dataset.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+
+csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
