@@ -16,7 +16,7 @@ pipeline {
                 }
             }
             steps {
-                sh "--execute main.py"
+                sh "python main.py"
             }
         }
         stage('Test') {
