@@ -21,11 +21,11 @@ from gssutils import *
 
 
 def run_script(s):
-    get_ipython().run_line_magic('run', '"$s"')
+    %run "$s"
     return table
 
 observations = pd.concat(
-    run_script(s) for s in ['exports.ipynb', 'imports.ipynb']
+    run_script(s) for s in ['exports', 'imports']
 ).drop_duplicates()
 
 
