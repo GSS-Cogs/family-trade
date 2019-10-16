@@ -17,11 +17,11 @@
 from gssutils import *
 
 
-# In[4]:
+# In[10]:
 
 
 def run_script(s):
-    %run "$s"
+    get_ipython().run_line_magic('run', '"$s"')
     return table
 
 observations = pd.concat(
@@ -29,7 +29,7 @@ observations = pd.concat(
 ).drop_duplicates()
 
 
-# In[5]:
+# In[11]:
 
 
 from pathlib import Path
@@ -45,7 +45,7 @@ for i in np.arange(len(observations) // slice_size):
 
 # Fix up title and description as we're combining the data into one Data Cube dataset
 
-# In[6]:
+# In[12]:
 
 
 from gssutils.metadata import THEME
@@ -57,7 +57,7 @@ scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and 
 scraper.dataset
 
 
-# In[9]:
+# In[13]:
 
 
 with open(out / 'dataset.trig', 'wb') as metadata:
