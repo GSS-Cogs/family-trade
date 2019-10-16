@@ -16,7 +16,7 @@ pipeline {
                 }
             }
             steps {
-                sh "--output-dir=out --ExecutePreprocessor.timeout=None --execute main.py"
+                sh "--execute main.py"
             }
         }
         stage('Test') {
