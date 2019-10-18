@@ -17,7 +17,7 @@
       "suppressOutput": true
     },
     {
-      "url": "observations_0000.csv",
+      "url": "out/observations_0000.csv",
       "tableSchema": {
         "columns": [
           {
