@@ -3,29 +3,28 @@
 
 # # Country by commodity exports
 
-# In[3]:
+# In[95]:
 
 
 from gssutils import *
-
+import time
 scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/' +                  'uktradecountrybycommodityexports')
 scraper
 
 
-# In[66]:
-
+# In[97]:
 
 
 data = scraper.distribution().as_pandas(sheet_name = 1, dtype={
     'COMMODITY': 'category',
     'COUNTRY': 'category',
     'DIRECTION': 'category'
-}, na_values=[''], keep_default_na=False)
+}, na_values=['','N/A'], keep_default_na=False)
 
 data
 
 
-# In[67]:
+# In[78]:
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -40,7 +39,7 @@ table['Period'] = table['Period'].astype('category')
 #table['Value'] = table['Value'].astype(int)
 
 
-# In[68]:
+# In[79]:
 
 
 #display(table['CORD SITC'].cat.categories)
@@ -49,7 +48,7 @@ table['Period'] = table['Period'].astype('category')
 
 # Fix up category strings
 
-# In[69]:
+# In[80]:
 
 
 table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split(' ')[0])
@@ -58,7 +57,7 @@ table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].c
 #display(table['ONS Partner Geography'].cat.categories)
 
 
-# In[70]:
+# In[81]:
 
 
 import re
@@ -92,7 +91,7 @@ def time2period(t):
 table['Period'].cat.categories = table['Period'].cat.categories.map(time2period)
 
 
-# In[71]:
+# In[82]:
 
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
@@ -101,16 +100,17 @@ table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
 table['Flow'] = pd.Series('exports', index=table.index, dtype='category')
 
 
-# In[72]:
+# In[83]:
 
 
 #table.memory_usage()
 
 
-# In[73]:
+# In[84]:
 
 
 table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'Seasonal Adjustment', 'Measure Type','Value','Unit' ]]
+table
 
 
 # In[74]:

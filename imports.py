@@ -19,7 +19,7 @@ data = scraper.distribution().as_pandas(sheet_name = 1, dtype={
     'COMMODITY': 'category',
     'COUNTRY': 'category',
     'DIRECTION': 'category'
-}, na_values=[''], keep_default_na=False)
+}, na_values=['','N/A'], keep_default_na=False)
 data
 
 
