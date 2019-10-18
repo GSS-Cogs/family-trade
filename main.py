@@ -86,13 +86,13 @@ tidy = tidy[tidy['Detailed employment'] != '250 and over'].reset_index(drop=True
 
 display(tidy['Employment'].unique())
 display(tidy['Detailed employment'].unique())
-tidy['Employees'] = tidy.apply(lambda x: x['Employment'] if pd.notnull(x['Employment']) else x['Detailed employment'], axis=1)
+tidy['employees'] = tidy.apply(lambda x: x['Employment'] if pd.notnull(x['Employment']) else x['Detailed employment'], axis=1)
 tidy = tidy.drop(columns=['Employment', 'Detailed employment'])
 tidy
 
 # Fill NaN with top values.
 
-tidy.fillna(value={'Age': 'Any', 'Ownership': 'Any', 'Turnover': 'Any', 'Employees': 'Any', }, inplace=True)
+tidy.fillna(value={'Age': 'Any', 'Ownership': 'Any', 'Turnover': 'Any', 'Employees': 'Any' }, inplace=True)
 tidy
 
 # Show the range of the codes and check for duplicated rows.
@@ -112,11 +112,13 @@ tidy['Unit'] = tidy['Measure Type'].map(lambda x: 'Businesses' if x == 'Count' e
 
 # And rename some columns.
 
-tidy.rename(columns={'Employees': 'Employment',
+tidy.rename(columns={'Turnover': 'turnover',
                      'Ownership': 'Country of Ownership',
                      'OBS': 'Value',
                      'Trade': 'ONS ABS Trade'
                     }, inplace=True)
+
+# Update labels as according to Ref_trade codelist
 
 # +
 import urllib.request as request
@@ -140,6 +142,21 @@ tidy = pd.merge(tidy, c, how = 'left', left_on = 'Import/Export', right_on = 'La
 tidy.columns = ['Export and Import Activity' if x=='Notation' else x for x in tidy.columns]
 
 # -
+
+r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/turnover-size-bands.csv').read().decode('utf8').split("\n")
+reader = csv.reader(r)
+url="https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/turnover-size-bands.csv"
+s=requests.get(url).content
+c=pd.read_csv(io.StringIO(s.decode('utf-8')))
+tidy = pd.merge(tidy, c, how = 'left', left_on = 'turnover', right_on = 'Label')
+tidy.columns = ['Turnover' if x=='Notation' else x for x in tidy.columns]
+r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/employment-size-bands.csv').read().decode('utf8').split("\n")
+reader = csv.reader(r)
+url="https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/employment-size-bands.csv"
+s=requests.get(url).content
+c=pd.read_csv(io.StringIO(s.decode('utf-8')))
+tidy = pd.merge(tidy, c, how = 'left', left_on = 'employees', right_on = 'Label')
+tidy.columns = ['Employment' if x=='Notation' else x for x in tidy.columns]
 
 tidy = tidy[['Age of Business', 'Export and Import Activity','Measure Type','Value',
              'Country of Ownership','ONS ABS Trade','Turnover','Year','Employment','Unit']]
