@@ -120,6 +120,8 @@ tidy.rename(columns={'Turnover': 'turnover',
 
 # Update labels as according to Ref_trade codelist
 
+tidy['Country of Ownership'] = tidy['Country of Ownership'].str.lower()
+
 # +
 import urllib.request as request
 import csv
