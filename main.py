@@ -92,7 +92,7 @@ tidy
 
 # Fill NaN with top values.
 
-tidy.fillna(value={'Age': 'Any', 'Ownership': 'Any', 'Turnover': 'Any', 'Employees': 'Any' }, inplace=True)
+tidy.fillna(value={'Age': 'Any', 'Ownership': 'Any', 'Turnover': 'Any', 'employees': 'Any' }, inplace=True)
 tidy
 
 # Show the range of the codes and check for duplicated rows.
