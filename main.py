@@ -82,8 +82,8 @@ final_table.replace({
         'no-employees': '0-employees'
     },
     'Flow': {
-        'Export': 'Exports',
-        'Import': 'Imports'
+        'Export': 'exports',
+        'Import': 'imports'
     },
     'Unit': {
         '£ Million': 'GBP Million'
