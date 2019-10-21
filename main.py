@@ -129,7 +129,11 @@ observations = pd.concat(process_tab(t) for t in tabs if t.name not in ['Content
 # -
 
 observations.rename(index= str, columns= {'DATAMARKER':'Marker'}, inplace = True)
-observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil','..' : 'disclosive'}.get(x, x))
+observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil',
+                                                               '..' : 'disclosive',
+                                                               '.' : 'disclosive',
+                                                               '...' : 'disclosive'
+                                                              }.get(x, x))
 
 for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     observations[col] = observations[col].astype('category')
@@ -146,7 +150,7 @@ scraper.dataset.theme = THEME['business-industry-trade-energy']
 
 with open(out / 'dataset.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://ons-opendata.github.io/ref_trade/')
+csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # -
 
