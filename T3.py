@@ -82,10 +82,10 @@ tidy['Value'] = tidy['Value'].map(lambda x:''
                                   else (x))
 
 tidy['SITC 4'] = tidy['SITC 4'].map(lambda cell: cell.replace('.0',''))
-# tidy['SITC 4'] = tidy['SITC 4'].map(
-#     lambda x: {
-#         'Below Threshold Traders':'all', 
-#         'Residual Trade - no SITC Section displayed' : 'all'}.get(x, x))
+tidy['SITC 4'] = tidy['SITC 4'].map(
+    lambda x: {
+        'Below Threshold Traders':'below-threshold-traders', 
+        'Residual Trade - no SITC Section displayed' : 'residual-trade'}.get(x, x))
 
 for col in tidy.columns:
     if col not in ['Value', 'Year']:
@@ -179,7 +179,3 @@ tidy['Flow'] = tidy['Flow'].cat.rename_categories({
 # -
 
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
-
-tidy
-
-
