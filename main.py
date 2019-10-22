@@ -1,127 +1,56 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[10]:
+# In[81]:
 
 
 from gssutils import *
 
+def left(s, amount):
+    return s[:amount]
+
+def right(s, amount):
+    return s[-amount:]
+
+def mid(s, offset, amount):
+    return s[offset:offset+amount]
+
 scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/regionalisedestimatesofukserviceexports')
-"""distribution = scraper.distribution(
-    mediaType='application/vnd.ms-excel',
-    title='Regionalised estimates of UK service exports')
-display(distribution)
-"""
+
 distribution = scraper.distributions[0]
 
 
-# In[11]:
+# In[79]:
 
 
-tidy = pd.DataFrame()
+xl = pd.ExcelFile(distribution.open())
 
 
-# In[12]:
+# In[88]:
 
 
-tab = distribution.as_pandas(sheet_name = 'NUTS1 by category 2011')
-observations = tab.iloc[2:17, :13]
-observations.rename(columns= observations.iloc[0], inplace=True)
-observations.drop(observations.index[0], inplace = True)
-table = pd.melt(observations, id_vars=['Functional category'], var_name='Area', value_name='Value')
-table.Value.dropna(inplace =True)
-table['Unit'] = 'gbp-million'
-table['Measure Type'] = 'GBP Total'
-table['Year'] = '2011'
-table['Flow'] = 'exports'
-tidy = pd.concat([tidy, table])
+tidied_sheets = []
 
+for i in xl.sheet_names:
+    if not i in ['NUTS1 by category 2011','NUTS1 by category 2012','NUTS1 by category 2013','NUTS1 by category 2014','NUTS1 by category 2015','NUTS1 by category 2016']:
+        continue
+    tab = xl.parse(i)
+    
+    observations = tab.iloc[2:17]
+    observations.rename(columns = observations.iloc[0], inplace = True)
+    observations.drop(observations.index[0], inplace = True)
+    
+    table = pd.melt(observations, id_vars = ['Functional category'], var_name = 'Area', value_name = 'Value')
+    table.Value.dropna(inplace = True)
+    table['Unit'] = 'gpb-million'
+    table['Measure Type'] = 'GBP Total'
+    table['Year']  = right(i,4)
+    table['Flow'] = 'exports'    
+    
+    tidied_sheets.append(table)
 
-# In[13]:
-
-
-tab = distribution.as_pandas(sheet_name = 'NUTS1 by category 2012')
-observations = tab.iloc[2:17, :13]
-observations.rename(columns= observations.iloc[0], inplace=True)
-observations.drop(observations.index[0], inplace = True)
-table = pd.melt(observations, id_vars=['Functional category'], var_name='Area', value_name='Value')
-table.Value.dropna(inplace =True)
-table['Unit'] = 'gbp-million'
-table['Measure Type'] = 'GBP Total'
-table['Year'] = '2012'
-table['Flow'] = 'exports'
-tidy = pd.concat([tidy, table])
-
-
-# In[14]:
-
-
-tab = distribution.as_pandas(sheet_name = 'NUTS1 by category 2013')
-observations = tab.iloc[2:17, :13]
-observations.rename(columns= observations.iloc[0], inplace=True)
-observations.drop(observations.index[0], inplace = True)
-table = pd.melt(observations, id_vars=['Functional category'], var_name='Area', value_name='Value')
-table.Value.dropna(inplace =True)
-table['Unit'] = 'gbp-million'
-table['Measure Type'] = 'GBP Total'
-table['Year'] = '2013'
-table['Flow'] = 'exports'
-tidy = pd.concat([tidy, table])
-
-
-# In[15]:
-
-
-tab = distribution.as_pandas(sheet_name = 'NUTS1 by category 2014')
-observations = tab.iloc[2:17, :13]
-observations.rename(columns= observations.iloc[0], inplace=True)
-observations.drop(observations.index[0], inplace = True)
-table = pd.melt(observations, id_vars=['Functional category'], var_name='Area', value_name='Value')
-table.Value.dropna(inplace =True)
-table['Unit'] = 'gbp-million'
-table['Measure Type'] = 'GBP Total'
-table['Year'] = '2014'
-table['Flow'] = 'exports'
-tidy = pd.concat([tidy, table])
-
-
-# In[16]:
-
-
-tab = distribution.as_pandas(sheet_name = 'NUTS1 by category 2015')
-observations = tab.iloc[2:17, :13]
-observations.rename(columns= observations.iloc[0], inplace=True)
-observations.drop(observations.index[0], inplace = True)
-table = pd.melt(observations, id_vars=['Functional category'], var_name='Area', value_name='Value')
-table.Value.dropna(inplace =True)
-table['Unit'] = 'gbp-million'
-table['Measure Type'] = 'GBP Total'
-table['Year'] = '2015'
-table['Flow'] = 'exports'
-tidy = pd.concat([tidy, table])
-
-
-# In[17]:
-
-
-tab = distribution.as_pandas(sheet_name = 'NUTS1 by category 2016')
-observations = tab.iloc[2:17, :13]
-observations.rename(columns= observations.iloc[0], inplace=True)
-observations.drop(observations.index[0], inplace = True)
-table = pd.melt(observations, id_vars=['Functional category'], var_name='Area', value_name='Value')
-table.Value.dropna(inplace =True)
-table['Unit'] = 'gbp-million'
-table['Measure Type'] = 'GBP Total'
-table['Year'] = '2016'
-table['Flow'] = 'exports'
-tidy = pd.concat([tidy, table])
-
-
-# In[18]:
-
-
-tab = distribution.as_pandas(sheet_name = 'Northern Ireland')
-observations = tab.iloc[3:18, :6]
+tabNI = xl.parse('Northern Ireland')    
+observations = tabNI.iloc[3:18, :6]
 observations.rename(columns= observations.iloc[0], inplace=True)
 observations.drop(observations.index[0], inplace = True)
 observations.columns.values[0] = 1
@@ -136,16 +65,19 @@ table['Year'] = table['Year'].apply(lambda x: pd.to_numeric(x, downcast='integer
 table['Year'] = table['Year'].astype(int)
 table['Functional category'] = table['Functional category'].map(lambda x: { 
                     'Total in all categories':'Total in all categories for NUTS1 area' }.get(x, x))
-tidy = pd.concat([tidy, table], sort=False)
+tidied_sheets.append(table)
+
+tidy = pd.concat(tidied_sheets, ignore_index = True, sort = False).fillna('')
+tidy
 
 
-# In[19]:
+# In[89]:
 
 
 tidy['Area'] = tidy['Area'].map(lambda x: { 'Yorkshire and the Humber':'Yorkshire and The Humber' }.get(x, x))
 
 
-# In[20]:
+# In[90]:
 
 
 for col in tidy.columns:
@@ -155,7 +87,7 @@ for col in tidy.columns:
         display(tidy[col].cat.categories)
 
 
-# In[21]:
+# In[91]:
 
 
 tidy['NUTS Geography'] = tidy['Area'].cat.rename_categories({
@@ -191,7 +123,7 @@ tidy['ONS Functional Category'] = tidy['Functional category'].cat.rename_categor
 })
 
 
-# In[22]:
+# In[92]:
 
 
 tidy['Value'] = tidy['Value'].map(lambda x:'' 
@@ -200,13 +132,13 @@ tidy['Value'] = tidy['Value'].map(lambda x:''
 tidy = tidy[tidy['Value'] != '']
 
 
-# In[23]:
+# In[93]:
 
 
 tidy = tidy[['NUTS Geography','Year','ONS Functional Category','Flow','Measure Type','Value','Unit']]
 
 
-# In[24]:
+# In[94]:
 
 
 from pathlib import Path
@@ -215,7 +147,7 @@ out.mkdir(exist_ok=True)
 tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
 
-# In[25]:
+# In[95]:
 
 
 from gssutils.metadata import THEME
@@ -226,13 +158,7 @@ with open(out / 'dataset.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
 
-# In[26]:
-
-
-tidy
-
-
-# In[27]:
+# In[96]:
 
 
 from gssutils.metadata import THEME
