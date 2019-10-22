@@ -20,7 +20,7 @@ pipeline {
                 }
             }
             steps {
-                sh "jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute main.ipynb"
+                sh "jupyter-nbconvert --output-dir=out --ExecutePreprocessor.timeout=None --execute main.py"
             }
         }
         stage('Test') {
