@@ -390,8 +390,6 @@ Final_table['ONS Partner Geography'].unique()
 
 Final_table['ONS Partner Geography'] = Final_table['ONS Partner Geography'].astype(str).str[0:2]
 
-Final_table['ONS Partner Geography'] = 'Final_table['ONS Partner Geography'
-
 Final_table.head()
 
 Final_table.tail()
