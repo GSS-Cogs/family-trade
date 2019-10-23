@@ -42,7 +42,7 @@ for i in xl.sheet_names:
     
     table = pd.melt(observations, id_vars = ['Functional category'], var_name = 'Area', value_name = 'Value')
     table.Value.dropna(inplace = True)
-    table['Unit'] = 'gpb-million'
+    table['Unit'] = 'gbp-million'
     table['Measure Type'] = 'GBP Total'
     table['Year']  = right(i,4)
     table['Flow'] = 'exports'    
