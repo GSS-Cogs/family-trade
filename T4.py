@@ -216,10 +216,8 @@ tidy
 
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
-# +
-#tidy2 = tidy[tidy['HMRC Partner Geography'] == 'residual-trade'] 
-#tidy['HMRC Partner Geography'].unique()
+tidy2 = tidy[tidy['SITC 4'] == 'residual-trade'] 
+tidy['SITC 4'].unique()
 #tidy2 
-# -
 
 

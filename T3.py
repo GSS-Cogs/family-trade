@@ -48,7 +48,9 @@ c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 table1 = c1.topandas()
 tidy = pd.concat([tidy, table1])
 
-savepreviewhtml(c1)
+# +
+#savepreviewhtml(c1)
+# -
 
 observations1 = tab.filter('Business Count').fill(DOWN).is_not_blank().is_not_whitespace()
 observations1 = observations1.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
@@ -65,7 +67,9 @@ c2 = ConversionSegment(observations1, Dimensions, processTIMEUNIT=True)
 table2 = c2.topandas()
 tidy = pd.concat([tidy, table2])
 
-savepreviewhtml(c2)
+# +
+#savepreviewhtml(c2)
+# -
 
 tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'not-applicable'
                                   if (x == 'N/A')
@@ -180,10 +184,14 @@ tidy['Flow'] = tidy['Flow'].cat.rename_categories({
 
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
-tidy
+import numpy
+tidy['Marker'] = numpy.where(tidy['SITC 4'] == 'residual-trade', tidy['SITC 4'], tidy['Marker'])
+tidy['Marker'] = numpy.where(tidy['SITC 4'] == 'below-threshold-traders', tidy['SITC 4'], tidy['Marker'])
+tidy['SITC 4'] = numpy.where(tidy['SITC 4'] == 'residual-trade', 'all', tidy['SITC 4'])
+tidy['SITC 4'] = numpy.where(tidy['SITC 4'] == 'below-threshold-traders', 'all', tidy['SITC 4'])
+tidy['SITC 4'].unique()
 
-# tidy2 = tidy[tidy['HMRC Partner Geography'] == 'residual-trade']
-# tidy['HMRC Partner Geography'].unique()
+tidy
 
 
 
