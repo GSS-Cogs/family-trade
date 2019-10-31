@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       jupytext_version: 1.2.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -20,8 +20,8 @@ from gssutils import *
 
 scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
                   'internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted')
-    
-tabs = {tab.name: tab for tab in scraper.distribution().as_databaker()}    
+
+tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet").as_databaker()} 
 # -
 
 tab = tabs['TiS by country']

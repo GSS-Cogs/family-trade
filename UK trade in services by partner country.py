@@ -23,7 +23,7 @@ scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
 scraper
 # -
 
-tab = scraper.distribution().as_pandas(header=None)
+tab = scraper.distribution(latest=True, mediaType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet").as_pandas(header=None)
 tab.rename(columns=tab.iloc[0], inplace=True)
 tab = tab.iloc[1:, :]
 tab = tab.drop(tab.columns[[2,4,8]], axis = 1)
