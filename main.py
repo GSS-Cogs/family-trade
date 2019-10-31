@@ -23,7 +23,7 @@ scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
 scraper
 # -
 
-sheets = scraper.distribution().as_databaker()
+sheets = scraper.distributions[0].as_databaker()
 
 # +
 import re
