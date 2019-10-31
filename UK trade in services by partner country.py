@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       jupytext_version: 1.2.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -21,8 +21,8 @@ from gssutils import *
 scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
                   'internationaltrade/datasets/uktradeinservicesservicetypebypartnercountrynonseasonallyadjusted')
 scraper
-# -
 
+# +
 dist = scraper.distribution(latest=True)
 dist.mediaType = Excel
 tab = dist.as_pandas(header = None)
@@ -31,6 +31,7 @@ tab.rename(columns=tab.iloc[0], inplace=True)
 tab = tab.iloc[1:, :]
 tab = tab.drop(tab.columns[[2,4,8]], axis = 1)
 tab
+# -
 
 tab.columns.values[0] = 'Flow'
 tab.columns.values[1] = 'Pink Book Services'
@@ -94,5 +95,15 @@ new_table['Marker'] = new_table.apply(lambda row: user_perc(row['Value']), axis 
 new_table['Value'] = pd.to_numeric(new_table['Value'], errors = 'coerce')
 
 new_table = new_table[['ONS Partner Geography', 'Period','Flow','Pink Book Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
+
+new_table
+
+
+
+# +
+
+
+
+# -
 
 

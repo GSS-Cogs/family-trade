@@ -79,3 +79,12 @@ new_table = new_table.loc[new_table['ONS Partner Geography'].isin(['AD','AE','AF
                                                                 'WS','XK','YE','ZM','ZW'])]
 
 new_table = new_table[['ONS Partner Geography', 'Period','Flow','Pink Book Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
+
+new_table
+
+
+
+
+
+
+
