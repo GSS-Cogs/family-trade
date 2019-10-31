@@ -208,16 +208,19 @@ c=pd.read_csv(io.StringIO(s.decode('utf-8')))
 tidy = pd.merge(tidy, c, how = 'left', left_on = 'Geography', right_on = 'Label')
 
 tidy.columns = ['HMRC Partner Geography' if x=='Notation' else x for x in tidy.columns]
-# -
 
-import numpy
-tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == 'residual-trade', tidy['EU Non EU'], tidy['HMRC Partner Geography'])
-tidy
+# +
+#import numpy
+#tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == 'residual-trade', tidy['EU Non EU'], tidy['HMRC Partner Geography'])
+#tidy
+# -
 
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
-tidy2 = tidy[tidy['SITC 4'] == 'residual-trade'] 
-tidy['SITC 4'].unique()
+# +
+#tidy2 = tidy[tidy['SITC 4'] == 'residual-trade'] 
+#['SITC 4'].unique()
 #tidy2 
+# -
 
 

@@ -23,13 +23,12 @@ scraper.select_dataset(latest=True)
 scraper
 
 tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
-tabs.keys()
+#tabs.keys()
 
 year_cell = tabs['Title'].filter('Detailed Data Tables').shift(UP)
 year_cell.assert_one()
 dataset_year = int(year_cell.value)
-dataset_year
-
+#dataset_year
 
 # +
 # %%capture
@@ -39,8 +38,10 @@ def process_tab(t):
     return tidy
 
 table = pd.concat(process_tab(f'{t}.py') for t in ['T1', 'T2', 'T3', 'T4', 'T5'])
-table
+#table
 # -
+table.drop_duplicates()
+
 
 out = Path('out')
 out.mkdir(exist_ok=True)
@@ -53,7 +54,8 @@ scraper.dataset.theme = THEME['business-industry-trade-energy']
 
 with open(out / 'dataset.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://ons-opendata.github.io/ref_trade/')
+#csvw = CSVWMetadata('https://ons-opendata.github.io/ref_trade/')
+csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # -
 
