@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       jupytext_version: 1.2.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -31,11 +31,13 @@ tidy = pd.DataFrame()
 
 flow = tab.filter('Flow').fill(DOWN).is_not_blank().is_not_whitespace()
 geography = tab.filter('Partner Country').fill(DOWN).is_not_blank().is_not_whitespace() 
+EuNonEu = tab.filter('EU / Non-EU').fill(DOWN).is_not_blank().is_not_whitespace()
 nut = tab.filter('NUTS2').fill(DOWN).is_not_blank().is_not_whitespace() 
 observations = tab.filter('Statistical Value (£ million)').fill(DOWN).is_not_blank().is_not_whitespace()
 observations = observations.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
 Dimensions = [
             HDim(flow,'Flow',DIRECTLY,LEFT),
+            HDim(EuNonEu,'EU Non EU',DIRECTLY,LEFT),
             HDim(geography,'Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDimConst('SITC 4', 'all'),
@@ -45,14 +47,19 @@ Dimensions = [
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 table1 = c1.topandas()
+t1 = tidy
+t2 = table1
 tidy = pd.concat([tidy, table1])
 
-savepreviewhtml(c1)
+# +
+#tidy
+# -
 
 observations1 = tab.filter('Business Count').fill(DOWN).is_not_blank().is_not_whitespace()
 observations1 = observations1.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
 Dimensions = [
             HDim(flow,'Flow',DIRECTLY,LEFT),
+            HDim(EuNonEu,'EU Non EU',DIRECTLY,LEFT),
             HDim(geography,'Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDimConst('SITC 4', 'all'),
@@ -62,9 +69,10 @@ Dimensions = [
             ]
 c2 = ConversionSegment(observations1, Dimensions, processTIMEUNIT=True)
 table2 = c2.topandas()
+
 tidy = pd.concat([tidy, table2])
 
-savepreviewhtml(c2)
+tidy
 
 tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'not-applicable'
                                   if (x == 'N/A')
@@ -202,8 +210,16 @@ tidy = pd.merge(tidy, c, how = 'left', left_on = 'Geography', right_on = 'Label'
 tidy.columns = ['HMRC Partner Geography' if x=='Notation' else x for x in tidy.columns]
 # -
 
+import numpy
+tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == 'residual-trade', tidy['EU Non EU'], tidy['HMRC Partner Geography'])
+tidy
+
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
-tidy
+# +
+#tidy2 = tidy[tidy['HMRC Partner Geography'] == 'residual-trade'] 
+#tidy['HMRC Partner Geography'].unique()
+#tidy2 
+# -
 
 
