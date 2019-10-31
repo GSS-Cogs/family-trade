@@ -189,9 +189,15 @@ tidy['Marker'] = numpy.where(tidy['SITC 4'] == 'residual-trade', tidy['SITC 4'],
 tidy['Marker'] = numpy.where(tidy['SITC 4'] == 'below-threshold-traders', tidy['SITC 4'], tidy['Marker'])
 tidy['SITC 4'] = numpy.where(tidy['SITC 4'] == 'residual-trade', 'all', tidy['SITC 4'])
 tidy['SITC 4'] = numpy.where(tidy['SITC 4'] == 'below-threshold-traders', 'all', tidy['SITC 4'])
-tidy['SITC 4'].unique()
+
+
+#tidy[(tidy['Marker'] == 'below-threshold-traders') & (tidy['Value'].notna())].count()
+tidy = tidy[(tidy['Marker'] != 'below-threshold-traders') & (tidy['Value'].notna())]
+
+#tidy['SITC 4'].unique()
+tidy['NUTS Geography'].unique()
+#tidy.count()
 
 tidy
-
 
 
