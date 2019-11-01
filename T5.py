@@ -156,9 +156,10 @@ tidy = pd.merge(tidy, c, how = 'left', left_on = 'Geography', right_on = 'Label'
 
 tidy.columns = ['NUTS Geography' if x=='Notation' else x for x in tidy.columns]
 
-# -
 
-tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
+# +
+#tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
+# -
 
 tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 

@@ -183,9 +183,10 @@ tidy['HMRC Partner Geography'] = tidy['HMRC Partner Geography'].cat.rename_categ
 tidy['Flow'] = tidy['Flow'].cat.rename_categories({
         'Exp'   : 'exports',
         'Imp' : 'imports'})
-# -
 
-tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
+# +
+#tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
+# -
 
 tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 

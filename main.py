@@ -43,6 +43,9 @@ table.count()
 sorted(table)
 table = table[(table['Marker'] != 'residual-trade')]
 table = table.drop_duplicates()
+tidy['HMRC Partner Geography'] = tidy['HMRC Partner Geography'].cat.rename_categories({
+        'EU'   : 'C',
+        'Non EU' : 'non eu'})
 #table.count()
 #t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
 #tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
