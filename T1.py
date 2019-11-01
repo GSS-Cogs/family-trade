@@ -30,14 +30,13 @@ tab = tabs['T1 NUTS1 (Summary Data)']
 tidy = pd.DataFrame()
 
 flow = tab.filter('Flow').fill(DOWN).is_not_blank().is_not_whitespace()
-EuNonEu = tab.filter('EU / Non-EU').fill(DOWN).is_not_blank().is_not_whitespace()
+#EuNonEu = tab.filter('EU / Non-EU').fill(DOWN).is_not_blank().is_not_whitespace()
 geography = tab.filter('EU / Non-EU').fill(DOWN).is_not_blank().is_not_whitespace() | flow
 nut = tab.filter('NUTS1').fill(DOWN).is_not_blank().is_not_whitespace() | flow
 observations = tab.filter('Statistical Value (£ million)').fill(DOWN).is_not_blank().is_not_whitespace()
 observations = observations.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
 Dimensions = [
-            HDim(flow,'Flow',DIRECTLY,LEFT),
-            HDim(EuNonEu,'EU / Non EU',DIRECTLY,LEFT),
+            HDim(flow,'Flow',DIRECTLY,LEFT),            
             HDim(geography,'HMRC Partner Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDimConst('SITC 4', 'all'),
@@ -57,8 +56,7 @@ tidy = pd.concat([tidy, table1])
 observations1 = tab.filter('Business Count').fill(DOWN).is_not_blank().is_not_whitespace()
 observations1 = observations1.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
 Dimensions = [
-            HDim(flow,'Flow',DIRECTLY,LEFT),
-            HDim(EuNonEu,'EU / Non EU',DIRECTLY,LEFT),
+            HDim(flow,'Flow',DIRECTLY,LEFT),           
             HDim(geography,'HMRC Partner Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDimConst('Measure Type', 'Count of Businesses'),
@@ -96,8 +94,8 @@ tidy['NUTS Geography'] = tidy['NUTS Geography'].map(
 
 tidy['HMRC Partner Geography'] = tidy['HMRC Partner Geography'].map(
     lambda x: {
-        'Exp' : 'C',
-        'Imp': 'C'}.get(x, x))
+        'Exp' : 'europe',
+        'Imp': 'europe'}.get(x, x))
 # -
 
 for col in tidy.columns:
@@ -131,7 +129,9 @@ tidy['Flow'] = tidy['Flow'].cat.rename_categories({
         'Exp'   : 'exports',
         'Imp' : 'imports'})
 
-tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
+# +
+#tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
+# -
 
 tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
