@@ -26,7 +26,9 @@ tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType="ap
 
 tab = tabs['TiS by country']
 
-observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank()
+d5 = tab.filter('D5').expand(RIGHT)
+
+observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank() - d5
 
 Year = tab.excel_ref('C4').expand(RIGHT).is_not_whitespace()
 
