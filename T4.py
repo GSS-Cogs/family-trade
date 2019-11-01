@@ -211,13 +211,15 @@ tidy.columns = ['HMRC Partner Geography' if x=='Notation' else x for x in tidy.c
 # -
 
 tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
+import numpy
+tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == 'residual-trade', tidy['EU - Non-EU'], tidy['HMRC Partner Geography'])
 
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
 # +
 #tidy2 = tidy[tidy['SITC 4'] == 'residual-trade'] 
 #['SITC 4'].unique()
-#tidy2 
+#tidy
 # -
 
 
