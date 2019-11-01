@@ -40,13 +40,13 @@ def process_tab(t):
 table = pd.concat(process_tab(f'{t}.py') for t in ['T1', 'T2', 'T3', 'T4', 'T5'])
 table.count()
 # + {}
-sorted(table)
-table = table[(table['Marker'] != 'residual-trade')]
-table = table.drop_duplicates()
-
 import numpy
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'EU', 'C', table['HMRC Partner Geography'])
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'Non EU', 'non-eu', table['HMRC Partner Geography'])
+
+sorted(table)
+table = table[(table['Marker'] != 'residual-trade')]
+table = table.drop_duplicates()
 
 #table.count()
 #t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
