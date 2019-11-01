@@ -42,7 +42,7 @@ table.count()
 # + {}
 import numpy
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'EU', 'C', table['HMRC Partner Geography'])
-table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'Non EU', 'non-eu', table['HMRC Partner Geography'])
+table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'Non-EU', 'non-eu', table['HMRC Partner Geography'])
 
 sorted(table)
 table = table[(table['Marker'] != 'residual-trade')]
@@ -51,9 +51,11 @@ table = table.drop_duplicates()
 #table.count()
 #t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
 #t = table[(table['HMRC Partner Geography'] == 'EU')]
-#t['HMRC Partner Geography'].unique()
+
 # -
 
+
+table['HMRC Partner Geography'].unique()
 
 out = Path('out')
 out.mkdir(exist_ok=True)
