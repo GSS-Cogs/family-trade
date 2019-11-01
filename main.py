@@ -45,12 +45,13 @@ table = table[(table['Marker'] != 'residual-trade')]
 table = table.drop_duplicates()
 
 import numpy
-tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == 'EU', 'C', tidy['HMRC Partner Geography'])
-tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == 'Non EU', 'non-eu', tidy['HMRC Partner Geography'])
+table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'EU', 'C', table['HMRC Partner Geography'])
+table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'Non EU', 'non-eu', table['HMRC Partner Geography'])
 
 #table.count()
 #t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
-#tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
+#t = table[(table['HMRC Partner Geography'] == 'EU')]
+#t['HMRC Partner Geography'].unique()
 # -
 
 
