@@ -38,9 +38,13 @@ def process_tab(t):
     return tidy
 
 table = pd.concat(process_tab(f'{t}.py') for t in ['T1', 'T2', 'T3', 'T4', 'T5'])
-#table
+table.count()
 # -
-table.drop_duplicates()
+#sorted(table)
+table = table.drop_duplicates()
+#table.count()
+#t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
+#t
 
 
 out = Path('out')
