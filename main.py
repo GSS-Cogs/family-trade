@@ -45,7 +45,7 @@ table.count()
 #table = table.drop_duplicates()
 #table.count()
 #t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
-tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
+tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','EU - Non-EU','Marker']]
 
 
 out = Path('out')
