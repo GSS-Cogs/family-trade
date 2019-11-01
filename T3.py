@@ -30,6 +30,7 @@ tab = tabs['T3 NUTS2 SITC Section']
 tidy = pd.DataFrame()
 
 flow = tab.filter('Flow').fill(DOWN).is_not_blank().is_not_whitespace()
+EuNonEu = tab.filter('EU / Non-EU').fill(DOWN).is_not_blank().is_not_whitespace()
 geography = tab.filter('EU / Non-EU').fill(DOWN).is_not_blank().is_not_whitespace() 
 nut = tab.filter('NUTS2').fill(DOWN).is_not_blank().is_not_whitespace() 
 sitc = tab.filter('SITC Section').fill(DOWN).is_not_blank().is_not_whitespace()
@@ -37,6 +38,7 @@ observations = tab.filter('Statistical Value (£ million)').fill(DOWN).is_not_bl
 observations = observations.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
 Dimensions = [
             HDim(flow,'Flow',DIRECTLY,LEFT),
+            HDim(EuNonEu,'EU / Non EU',DIRECTLY,LEFT),
             HDim(geography,'HMRC Partner Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDim(sitc,'SITC 4',DIRECTLY,LEFT),
@@ -56,6 +58,7 @@ observations1 = tab.filter('Business Count').fill(DOWN).is_not_blank().is_not_wh
 observations1 = observations1.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
 Dimensions = [
             HDim(flow,'Flow',DIRECTLY,LEFT),
+            HDim(EuNonEu,'EU / Non EU',DIRECTLY,LEFT),
             HDim(geography,'HMRC Partner Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDim(sitc,'SITC 4',DIRECTLY,LEFT),
@@ -182,7 +185,9 @@ tidy['Flow'] = tidy['Flow'].cat.rename_categories({
         'Imp' : 'imports'})
 # -
 
-tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
+tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
+
+tidy =tidy[['Year','EU - Non-EU', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
 import numpy
 tidy['Marker'] = numpy.where(tidy['SITC 4'] == 'residual-trade', tidy['SITC 4'], tidy['Marker'])
@@ -194,10 +199,6 @@ tidy['SITC 4'] = numpy.where(tidy['SITC 4'] == 'below-threshold-traders', 'all',
 #tidy[(tidy['Marker'] == 'below-threshold-traders') & (tidy['Value'].notna())].count()
 tidy = tidy[(tidy['Marker'] != 'below-threshold-traders') & (tidy['Value'].notna())]
 
-
-#tidy['SITC 4'].unique()
-tidy['NUTS Geography'].unique()
-#tidy.count()
 
 tidy
 
