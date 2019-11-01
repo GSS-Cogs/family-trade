@@ -96,8 +96,8 @@ tidy['NUTS Geography'] = tidy['NUTS Geography'].map(
 
 tidy['HMRC Partner Geography'] = tidy['HMRC Partner Geography'].map(
     lambda x: {
-        'Exp' : 'europe',
-        'Imp': 'europe'}.get(x, x))
+        'Exp' : 'C',
+        'Imp': 'C'}.get(x, x))
 # -
 
 for col in tidy.columns:
@@ -133,7 +133,7 @@ tidy['Flow'] = tidy['Flow'].cat.rename_categories({
 
 tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
 
-tidy =tidy[['Year','EU - Non-EU', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
+tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
 tidy
 

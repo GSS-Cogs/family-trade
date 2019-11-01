@@ -160,6 +160,6 @@ tidy.columns = ['NUTS Geography' if x=='Notation' else x for x in tidy.columns]
 
 tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
 
-tidy =tidy[['Year','EU - Non-EU', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
+tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
 

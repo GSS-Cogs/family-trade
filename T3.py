@@ -187,7 +187,7 @@ tidy['Flow'] = tidy['Flow'].cat.rename_categories({
 
 tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
 
-tidy =tidy[['Year','EU - Non-EU', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
+tidy =tidy[['Year', 'NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
 import numpy
 tidy['Marker'] = numpy.where(tidy['SITC 4'] == 'residual-trade', tidy['SITC 4'], tidy['Marker'])
