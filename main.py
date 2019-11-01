@@ -43,7 +43,7 @@ table.count()
 sorted(table)
 table = table[(table['Marker'] != 'residual-trade')]
 table = table.drop_duplicates()
-#table.count()
+table.count()
 #t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
 #t
 
