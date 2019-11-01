@@ -37,7 +37,7 @@ observations = tab.filter('Statistical Value (£ million)').fill(DOWN).is_not_bl
 observations = observations.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
 Dimensions = [
             HDim(flow,'Flow',DIRECTLY,LEFT),
-            HDim(EuNonEu,'EU - Non EU',DIRECTLY,LEFT),
+            HDim(EuNonEu,'EU / Non EU',DIRECTLY,LEFT),
             HDim(geography,'HMRC Partner Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDimConst('SITC 4', 'all'),
