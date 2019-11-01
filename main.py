@@ -40,7 +40,7 @@ def process_tab(t):
 table = pd.concat(process_tab(f'{t}.py') for t in ['T1', 'T2', 'T3', 'T4', 'T5'])
 table.count()
 # -
-#sorted(table)
+sorted(table)
 table = table.drop_duplicates()
 #table.count()
 #t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
