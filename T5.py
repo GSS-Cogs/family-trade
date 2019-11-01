@@ -56,7 +56,7 @@ observations1 = tab.filter('Business Count').fill(DOWN).is_not_blank().is_not_wh
 observations1 = observations1.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
 Dimensions = [
             HDim(flow,'Flow',DIRECTLY,LEFT),
-            HDim(EuNonEu,'EU / ßNon EU',DIRECTLY,LEFT),
+            HDim(EuNonEu,'EU / Non EU',DIRECTLY,LEFT),
             HDim(geography,'HMRC Partner Geography',DIRECTLY,LEFT),
             HDim(nut,'Geography',DIRECTLY,LEFT),
             HDimConst('SITC 4', 'all'),
