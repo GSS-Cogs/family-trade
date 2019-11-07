@@ -21,7 +21,7 @@ from gssutils import *
 scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
                   'internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted')
 
-tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet").as_databaker()} 
+tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType=Excel).as_databaker()} 
 # -
 
 tab = tabs['TiS by country']

@@ -23,8 +23,7 @@ scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
 scraper
 
 # +
-dist = scraper.distribution(latest=True)
-dist.mediaType = Excel
+dist = scraper.distribution(latest=True, mediaType = Excel)
 tab = dist.as_pandas(header = None)
 
 tab.rename(columns=tab.iloc[0], inplace=True)
