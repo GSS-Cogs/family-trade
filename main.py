@@ -202,10 +202,4 @@ with open(out / 'dataset.trig', 'wb') as metadata:
 csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # -
-with open(out / 'dataset.trig', 'wb') as metadata:
-     metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
-
-
 
