@@ -1,4 +1,4 @@
 transformPipeline {
     refFamily = 'ref_trade'
-    trelloCard = '5c9b75a030317547cdd6be5b'
+    trelloCard = '5b4718ece2e0484a70069f85'
 }
