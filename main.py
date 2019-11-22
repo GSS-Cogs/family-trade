@@ -25,32 +25,40 @@ scraper
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 list(tabs)
 
-sheetnames = list(tabs)[1:7]
+# +
 Final_table = pd.DataFrame()
-i = 0
-for i in list(range(0,len(sheetnames))):
-    
-    tab = tabs[sheetnames[i]]
+
+def product(name):
+    if 'Total Trade' in name:
+        return 'goods-and-services'
+    elif 'TiG' in name:
+        return 'goods'
+    elif 'TiS' in name:
+        return 'services'
+    raise ValueError(f'Unknown product type ${name}')
+
+for name, tab in tabs.items():
+    if 'Index' in name or 'Contact Sheet' in name:
+        continue
     observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
     Year = tab.excel_ref('C4').expand(RIGHT).is_not_blank().is_not_whitespace()
     Flow = tab.fill(DOWN).one_of(['Exports','Imports'])
     geo = tab.excel_ref('A7').expand(DOWN).is_not_blank().is_not_whitespace()
     Dimensions = [
-            HDim(Year,'Period',DIRECTLY,ABOVE),
-            HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
-            HDim(Flow, 'Flow',CLOSEST,ABOVE),
-            HDimConst('Measure Type', 'GBP Total'),
-            HDimConst('Unit','gbp-million')            
-                ]
+        HDim(Year,'Period',DIRECTLY,ABOVE),
+        HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
+        HDim(Flow, 'Flow',CLOSEST,ABOVE),
+        HDimConst('Measure Type', 'GBP Total'),
+        HDimConst('Unit','gbp-million')
+    ]
     c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
     new_table = c1.topandas()
     import numpy as np
     new_table.rename(columns={'OBS': 'Value'}, inplace=True)
     new_table['Flow'] = new_table['Flow'].map(lambda s: s.lower().strip())
-    new_table['Seasonal Adjustment'] =  'NSA'
+    new_table['ONS ABS Trade'] = product(name)
     new_table['Period'] = new_table['Period'].astype(str)
-    new_table = new_table[['ONS Partner Geography', 'Period','Flow','Seasonal Adjustment', 'Measure Type','Value','Unit' ]]
-    i = i+1
+    new_table = new_table[['ONS Partner Geography', 'Period','Flow','ONS ABS Trade', 'Measure Type','Value','Unit' ]]
     Final_table = pd.concat([Final_table, new_table])
 
 # +
