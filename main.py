@@ -49,9 +49,8 @@ for i in list(range(0,len(sheetnames))):
         new_table['Flow'] = 'other'
     
     new_table.rename(columns={'OBS': 'Value'}, inplace=True)
-    new_table['Seasonal Adjustment'] =  'SA'
     new_table['Period'] = new_table['Period'].astype(str)
-    new_table = new_table[['ONS Partner Geography', 'Period','Flow','Seasonal Adjustment', 'Measure Type','Value','Unit' ]]
+    new_table = new_table[['ONS Partner Geography', 'Period','Flow','Measure Type','Value' ,'Unit' ]]
     i = i+1
     Final_table = pd.concat([Final_table, new_table])
 
