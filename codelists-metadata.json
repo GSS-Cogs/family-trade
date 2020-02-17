@@ -133,9 +133,9 @@
       "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
       "rdfs:label": "ITIS Industry"
     }, {
-      "url": "codelists/markers.csv",
+      "url": "codelists/marker.csv",
       "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
-      "rdfs:label": "Markers"
+      "rdfs:label": "Marker"
     }
   ]
 }
