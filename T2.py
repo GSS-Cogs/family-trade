@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -48,15 +48,13 @@ Dimensions = [
             HDimConst('SITC 4', 'all'),
             HDimConst('Measure Type', 'GBP Total'),
             HDimConst('Unit', 'gbp-million'),
-            HDimConst('Year', '2017')
+            HDimConst('Year', '2018')
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 table1 = c1.topandas()
 tidy = pd.concat([tidy, table1])
 
-# +
-#savepreviewhtml(c1)
-# -
+savepreviewhtml(c1)
 
 observations1 = tab.filter('Business Count').fill(DOWN).is_not_blank().is_not_whitespace()
 observations1 = observations1.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
@@ -72,7 +70,7 @@ Dimensions = [
             ]
 c2 = ConversionSegment(observations1, Dimensions, processTIMEUNIT=True)
 table2 = c2.topandas()
-tidy = pd.concat([tidy, table2])
+tidy = pd.concat([tidy, table2], sort=True)
 
 # +
 #tidy
@@ -178,6 +176,7 @@ tidy['NUTS Geography'] = tidy['NUTS Geography'].cat.rename_categories({
     'West Central Scotland':'nuts2/UKM8',
     'West Midlands':'nuts2/UKG3',
     'West Wales':'nuts2/UKL1',
+    'West Wales and The Valleys' : 'nuts2/UKL1',
     'West Yorkshire':'nuts2/UKE4',
     'WA BTTA':'nuts2/wa-btta',
     'WA Energy':'nuts2/wa-energy',

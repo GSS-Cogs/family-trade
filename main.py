@@ -1,11 +1,12 @@
 # ---
 # jupyter:
 #   jupytext:
+#     cell_metadata_json: true
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -39,7 +40,7 @@ def process_tab(t):
 
 table = pd.concat(process_tab(f'{t}.py') for t in ['T1', 'T2', 'T3', 'T4', 'T5'])
 table.count()
-# + {}
+# +
 import numpy
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'EU', 'C', table['HMRC Partner Geography'])
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'Non-EU', 'non-eu', table['HMRC Partner Geography'])

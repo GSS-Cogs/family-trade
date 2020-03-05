@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -42,16 +42,14 @@ Dimensions = [
             HDimConst('SITC 4', 'all'),
             HDimConst('Measure Type', 'GBP Total'),
             HDimConst('Unit', 'gbp-million'),
-            HDimConst('Year', '2017')
+            HDimConst('Year', '2018')
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 table1 = c1.topandas()
 tidy = pd.concat([tidy, table1])
 
-# +
-#savepreviewhtml(c1)
+savepreviewhtml(c1)
 #tidy
-# -
 
 observations1 = tab.filter('Business Count').fill(DOWN).is_not_blank().is_not_whitespace()
 observations1 = observations1.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
@@ -62,11 +60,11 @@ Dimensions = [
             HDimConst('Measure Type', 'Count of Businesses'),
             HDimConst('SITC 4', 'all'),
             HDimConst('Unit', 'businesses'),
-            HDimConst('Year', '2017')
+            HDimConst('Year', '2018')
             ]
 c2 = ConversionSegment(observations1, Dimensions, processTIMEUNIT=True)
 table2 = c2.topandas()
-tidy = pd.concat([tidy, table2])
+tidy = pd.concat([tidy, table2], sort=True)
 
 #savepreviewhtml(c2)
 tidy
@@ -116,11 +114,11 @@ tidy['NUTS Geography'] = tidy['NUTS Geography'].cat.rename_categories({
     'Total for functional category' : 'nuts1/all', 
     'Wales' : 'nuts1/UKL', 
     'West Midlands' : 'nuts1/UKG',
-    'Yorkshire and The Humber' : 'nuts1/UKE',
+    'Yorkshire and the Humber' : 'nuts1/UKE',
     'Northern Ireland' : 'nuts1/UKN',
     'East of England' : 'nuts1/UKH', 
-    'Unallocated - Known' : 'nuts1/unk', 
-    'Unallocated - Unknown' : 'nuts1/unu'
+    'Unallocated-Known' : 'nuts1/unk', 
+    'Unallocated-Unknown' : 'nuts1/unu'
 })
 tidy['HMRC Partner Geography'] = tidy['HMRC Partner Geography'].cat.rename_categories({
         'EU'   : 'C',
