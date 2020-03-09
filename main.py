@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -5,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -181,11 +182,7 @@ observations = observations[['Investment Direction', 'Year', 'International Trad
 out = Path('out')
 out.mkdir(exist_ok=True, parents=True)
 
-observations.drop(columns=['__x', '__y', '__tablename']).drop_duplicates().to_csv(out / 'observations.csv', index=False)
-# -
-
-display(inward_scraper)
-display(outward_scraper)
+observations.drop(columns=['__x', '__y', '__tablename']).drop_duplicates(subset=observations.columns.difference(['Value','__x', '__y', '__tablename'])).to_csv(out / 'observations.csv', index=False)
 
 # +
 inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
@@ -201,3 +198,5 @@ with open(out / 'dataset.trig', 'wb') as metadata:
 csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # -
+
+
