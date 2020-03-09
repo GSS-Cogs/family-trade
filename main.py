@@ -38,7 +38,7 @@ def process_tab(t):
     %run "$t"
     return tidy
 
-table = pd.concat(process_tab(f'{t}.py') for t in ['T1', 'T2', 'T3', 'T4', 'T5'])
+table = pd.concat(process_tab(f'{t}.py') for t in ['T1','T2','T3','T4','T5'])
 table.count()
 # +
 import numpy
@@ -47,6 +47,7 @@ table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] ==
 
 sorted(table)
 table = table[(table['Marker'] != 'residual-trade')]
+table = table[(table['Marker'] != 'below-threshold-traders')]
 table = table.drop_duplicates()
 
 #table.count()
@@ -73,5 +74,4 @@ with open(out / 'dataset.trig', 'wb') as metadata:
 csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # -
-
 

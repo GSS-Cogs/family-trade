@@ -56,9 +56,7 @@ tidy = pd.concat([tidy, table1])
 
 savepreviewhtml(c1)
 
-# +
-#tidy
-# -
+tidy
 
 observations1 = tab.filter('Business Count').fill(DOWN).is_not_blank().is_not_whitespace()
 observations1 = observations1.filter(lambda x: type(x.value) != str or 'HMRC' not in x.value)
@@ -189,6 +187,7 @@ tidy['NUTS Geography'] = tidy['NUTS Geography'].cat.rename_categories({
 tidy['HMRC Partner Geography'] = tidy['HMRC Partner Geography'].cat.rename_categories({
         'EU'   : 'C',
         'Non-EU' : 'non-eu'})
+
 tidy['Flow'] = tidy['Flow'].cat.rename_categories({
         'Exp'   : 'exports',
         'Imp' : 'imports'})
@@ -204,10 +203,8 @@ tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == '
 
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
-# +
 #tidy2 = tidy[tidy['SITC 4'] == 'residual-trade'] 
-#['SITC 4'].unique()
-#tidy
-# -
+tidy['SITC 4'].unique()
+
 tidy
 
