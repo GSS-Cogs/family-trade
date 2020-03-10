@@ -100,21 +100,21 @@ def process_tab(tab):
     obs['Year'] = obs['Year'].apply(lambda y: int(float(y)))
     if tab_group[0] in ['A', 'B']:
         obs['ITIS Industry'] = 'all'
-        obs['ITIS Services'] = fix_title(tab_title)
+        obs['ITIS Service'] = fix_title(tab_title)
         obs['ONS Trade Areas ITIS'] = obs.apply(fix_area, axis='columns')
     elif tab_group[0] == 'C':
         if tab_group == 'C1':
             obs['ITIS Industry'] = 'all'
         else:
             obs['ITIS Industry'] = fix_title(tab_title)
-        obs['ITIS Services'] = obs.apply(fix_service, axis='columns')
+        obs['ITIS Service'] = obs.apply(fix_service, axis='columns')
         obs['ONS Trade Areas ITIS'] = 'itis/world'
     else:
         # Table D2 has 'Exports' in the wrong place
         if tab_group == 'D2':
             obs['Flow'].fillna('exports', inplace=True)
         obs['ITIS Industry'] = fix_title(tab_title)
-        obs['ITIS Services'] = 'total-international-trade-in-services'
+        obs['ITIS Service'] = 'total-international-trade-in-services'
         obs['ONS Trade Areas ITIS'] = obs.apply(fix_area, axis='columns')
     obs.drop(columns=['H1', 'H2'], inplace=True)
     obs['Flow'] = obs['Flow'].apply(lambda x: pathify(x.strip()))
@@ -122,7 +122,7 @@ def process_tab(tab):
     obs['Measure Type'] = 'GBP Total'
     obs['Unit'] = 'gbp-million'
     return obs
-    return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Services', 'ITIS Industry',
+    return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry',
                 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
 observations = pd.concat(process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0'])
@@ -135,7 +135,7 @@ observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil'
                                                                '...' : 'disclosive'
                                                               }.get(x, x))
 
-for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Services', 'ITIS Industry']:
+for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     observations[col] = observations[col].astype('category')
     display(observations[col].cat.categories)
 
