@@ -122,7 +122,7 @@ def process_tab(tab):
     obs['Measure Type'] = 'GBP Total'
     obs['Unit'] = 'gbp-million'
     return obs
-    return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry',
+    return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Services', 'ITIS Industry',
                 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
 observations = pd.concat(process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0'])
@@ -135,7 +135,7 @@ observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil'
                                                                '...' : 'disclosive'
                                                               }.get(x, x))
 
-for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
+for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Services', 'ITIS Industry']:
     observations[col] = observations[col].astype('category')
     display(observations[col].cat.categories)
 
