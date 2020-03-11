@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -32,6 +32,7 @@ tidy = pd.DataFrame()
 
 for sheet in sheets[1:-1]:
     name_match = tab_name_re.match(sheet.name)
+    print (sheet.name)
     assert name_match, "sheet name doesn't match regex"
     for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover', 'Age']:
         year = HDimConst('Year', name_match.group(1))
@@ -108,7 +109,14 @@ tidy[dups]
 
 # We need to specify the units of the observations.
 
+# +
 tidy['Unit'] = tidy['Measure Type'].map(lambda x: 'Businesses' if x == 'Count' else 'Percent')
+
+
+tidy = tidy.replace({'Import/Export' : {
+    'both Exporter and Importer'   : 'Exporter and Importer',
+    'either Exporter and/or Importer 7' : 'Exporter and/or Importer'}})
+# -
 
 # And rename some columns.
 
