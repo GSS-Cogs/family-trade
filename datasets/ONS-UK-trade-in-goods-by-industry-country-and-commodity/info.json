@@ -12,7 +12,10 @@
         "stage": "Published"
     },
     "transform": {
-        "airtable": ["recduvpZS53BpXU3W", "rec6SvP3d4MJ3pXYR"]
+        "airtable": [
+            "rec6SvP3d4MJ3pXYR",
+            "recduvpZS53BpXU3W"
+        ]
     },
     "sizingNotes": "",
     "notes": ""
