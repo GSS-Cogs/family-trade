@@ -1,0 +1,19 @@
+{
+    "title": "UK trade in goods by classification of product by activity time series",
+    "publisher": "Office for National Statistics",
+    "description": "Monthly value of UK exports and imports of goods and services by current price, chained volume measures and implied deflators.",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/uktradeingoodsbyclassificationofproductbyactivity",
+    "published": "2019-12-13",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS, CSV",
+        "stage": "Published"
+    },
+    "transform": {
+        "airtable": "reczfd6qupE77fzEV"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}
