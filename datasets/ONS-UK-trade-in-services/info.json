@@ -1,0 +1,19 @@
+{
+    "title": "UK trade in services: service type by partner country, non-seasonally adjusted",
+    "publisher": "Office for National Statistics",
+    "description": "",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/uktradeinservicesservicetypebypartnercountrynonseasonallyadjusted",
+    "published": "2020-01-22",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Published"
+    },
+    "transform": {
+        "airtable": "reczFVGkUgwXtzkoH"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}
