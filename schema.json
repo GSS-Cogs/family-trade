@@ -1,0 +1,100 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/csvw",
+    {
+      "@language": "en"
+    }
+  ],
+  "tables": [
+    {
+      "url": "https://gss-cogs.github.io/ref_trade/codelists/flow-directions.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+      "suppressOutput": true
+    },
+    {
+      "url": "https://gss-cogs.github.io/ref_trade/codelists/seasonal-adjustments.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+      "suppressOutput": true
+    },
+    {
+      "url": "out/observations_0000.csv",
+      "tableSchema": {
+        "columns": [
+          {
+            "titles": "ONS Partner Geography",
+            "required": true,
+            "name": "ons_partner_geography",
+            "datatype": "string"
+          },
+          {
+            "titles": "Period",
+            "required": true,
+            "name": "period",
+            "datatype": "string"
+          },
+          {
+            "titles": "Flow",
+            "required": true,
+            "name": "flow",
+            "datatype": "string"
+          },
+          {
+            "titles": "CORD SITC",
+            "required": true,
+            "name": "cord_sitc",
+            "datatype": "string"
+          },
+          {
+            "titles": "Seasonal Adjustment",
+            "required": true,
+            "name": "seasonal_adjustment",
+            "datatype": "string"
+          },
+          {
+            "titles": "Measure Type",
+            "required": true,
+            "name": "measure_type",
+            "datatype": "string"
+          },
+          {
+            "titles": "Value",
+            "required": false,
+            "name": "value",
+            "datatype": "number"
+          },
+          {
+            "titles": "Unit",
+            "required": true,
+            "name": "unit",
+            "datatype": "string"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "columnReference": "flow",
+            "reference": {
+              "resource": "https://gss-cogs.github.io/ref_trade/codelists/flow-directions.csv",
+              "columnReference": "notation"
+            }
+          },
+          {
+            "columnReference": "seasonal_adjustment",
+            "reference": {
+              "resource": "https://gss-cogs.github.io/ref_trade/codelists/seasonal-adjustments.csv",
+              "columnReference": "notation"
+            }
+          }
+        ],
+        "primaryKey": [
+          "ons_partner_geography",
+          "period",
+          "flow",
+          "cord_sitc",
+          "seasonal_adjustment",
+          "measure_type",
+          "unit"
+        ]
+      }
+    }
+  ]
+}
