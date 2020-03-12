@@ -1,0 +1,18 @@
+{
+    "title": "Overseas Trade Statistics (CN8)",
+    "publisher": "HM Revenue & Customs",
+    "description": "",
+    "landingPage": "",
+    "published": "",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": ""
+    },
+    "transform": {
+        "airtable": "recvSzMgbU9mqu7ln"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

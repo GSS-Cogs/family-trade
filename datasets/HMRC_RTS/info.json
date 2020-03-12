@@ -1,0 +1,19 @@
+{
+    "title": "REGIONAL TRADE STATISTICS",
+    "publisher": "HM Revenue & Customs",
+    "description": "",
+    "landingPage": "https://www.uktradeinfo.com/Statistics/RTS/Pages/default.aspx",
+    "published": "2019-12-05",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Published"
+    },
+    "transform": {
+        "airtable": "reclNM0WAApNZVyh4"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}
