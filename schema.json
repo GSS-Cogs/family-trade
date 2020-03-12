@@ -1,0 +1,105 @@
+{
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "tables": [
+    {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/cord-geographies.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/flow-directions.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/seasonal-adjustments.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_trade/codelists/cord-sitc.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_trade/schemas/cord-sitc-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+    "url": "out/bop_observations.csv",
+      "tableSchema": {
+        "columns": [{
+          "titles": "ONS Partner Geography",
+          "name": "ons_geography",
+          "required": true
+        }, {
+          "titles": "Period",
+          "name": "period",
+          "datatype": {
+            "format": "^(year/[0-9]{4}|gregorian-interval/.*|month/[0-9]{4}-[0-9]{2}|day/[0-9]{4}-[0-9]{2}-[0-9]{2}|quarter/[0-9]{4}-Q[1-4])$"
+          },
+          "required": true
+        }, {
+          "titles": "CDID",
+          "name": "cdid",
+          "datatype": {
+            "format": "^[A-Z0-9]{4}$"
+          },
+          "required": true
+        }, {
+          "titles": "Flow",
+          "name": "flow",
+          "datatype": {
+            "format": "^balance|imports|exports$"
+          },
+          "required": true
+        }, {
+          "titles": "CORD SITC",
+          "name": "cord_sitc",
+          "required": true
+        }, {
+          "titles": "Price Classification",
+          "name": "price_classification",
+          "required": true
+        }, {
+          "titles": "Seasonal Adjustment",
+          "name": "sa",
+          "datatype": {
+            "format": "^NSA|SA$"
+          },
+          "required": true
+        }, {
+          "titles": "Measure Type",
+          "name": "measure_type",
+          "datatype": {
+            "format": "^GBP Total$"
+          },
+          "required": true
+        }, {
+          "titles": "Value",
+          "name": "value",
+          "datatype": "number",
+          "required": true
+        }, {
+          "titles": "Unit",
+          "name": "unit",
+          "required": true
+        }],
+        "foreignKeys": [{
+          "columnReference": "flow",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/flow-directions.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "sa",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_trade/codelists/seasonal-adjustments.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "unit",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+            "columnReference": "notation"
+          }
+        }],
+        "primaryKey": [
+          "ons_geography", "period", "flow", "cord_sitc", "price_classification", "sa",
+          "measure_type", "unit"
+        ]
+      }
+    }
+  ]
+}
