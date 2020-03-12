@@ -1,0 +1,23 @@
+@prefix qb:    <http://purl.org/linked-data/cube#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix pmd:   <http://publishmydata.com/def/dataset#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://gss-data.org.uk/graph/hmrc-uk-trade-in-goods-statistics-by-business-characteristics-2015/metadata> {
+  <http://gss-data.org.uk/data/hmrc-uk-trade-in-goods-statistics-by-business-characteristics-2015>
+        a                    pmd:LinkedDataset , pmd:Dataset , qb:DataSet ;
+        rdfs:comment         "UK Trade in Goods Statistics by Business Characteristics 2015." ;
+        rdfs:label           "HMRC UK Trade in Goods Statistics by Business Characteristics 2015"@en ;
+        pmd:contactEmail     <mailto:uktradeinfo@hmrc.gsi.gov.uk> ;
+        pmd:graph            <http://gss-data.org.uk/graph/hmrc-uk-trade-in-goods-statistics-by-business-characteristics-2015> ;
+        dct:creator          <https://www.gov.uk/government/organisations/hm-revenue-customs> ;
+        dct:issued           "2016-11-24T09:30:00Z"^^xsd:dateTime ;
+        dct:modified         "${modified}"^^xsd:dateTime ;
+        dct:license          <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+        dct:publisher        <https://www.gov.uk/government/organisations/hm-revenue-customs> ;
+        dct:references       <http://gss-data.org.uk/help> ;
+        dct:title            "HMRC UK Trade in Goods Statistics by Business Characteristics 2015"@en ;
+        void:sparqlEndpoint  <http://gss-data.org.uk/sparql> .
+}
