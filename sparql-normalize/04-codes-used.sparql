@@ -1,0 +1,26 @@
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX csvw:  <http://www.w3.org/ns/csvw#>
+PREFIX qb:    <http://purl.org/linked-data/cube#>
+PREFIX pmdq:  <http://publishmydata.com/def/qb/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#>
+
+INSERT {
+  ?comp pmdq:codesUsed ?codeScheme .
+  ?codeScheme a skos:ConceptScheme .
+} WHERE {
+  ?comp a qb:ComponentSpecification .
+  BIND(IRI(CONCAT(STR(?comp), '-used')) AS ?codeScheme)
+};
+
+INSERT {
+  ?codeScheme skos:member ?code
+} WHERE {
+  [] a qb:Observation ;
+    qb:dataSet [ qb:structure [ qb:component ?comp ] ] ;
+    ?dim ?code .
+  ?comp qb:dimension ?dim .
+  BIND(IRI(CONCAT(STR(?comp), '-used')) AS ?codeScheme)
+};

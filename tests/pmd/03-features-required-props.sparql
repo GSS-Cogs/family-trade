@@ -1,0 +1,11 @@
+# foi:Features must have foi:displayName
+
+PREFIX dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX qb:  <http://purl.org/linked-data/cube#>
+PREFIX foi: <http://publishmydata.com/def/ontology/foi/>
+
+SELECT * {
+  ?obs dim:refArea ?area .
+  ?area a foi:Feature .
+  FILTER NOT EXISTS { ?area foi:displayName ?disp } .
+}

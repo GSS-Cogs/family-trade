@@ -1,0 +1,25 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix trade: <http://gss-data.org.uk/def/trade#> .
+@prefix sdmx:    <http://purl.org/linked-data/sdmx#> .
+
+<http://gss-data.org.uk/def/trade/flow> a skos:ConceptScheme, sdmx:CodeList ;
+  rdfs:label "Trade flow" .
+
+trade:Flow a owl:Class ;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Trade flow code list" ;
+  skos:hasTopConcept trade:i, trade:e ;
+  skos:member trade:i, trade:e .
+
+trade:i a trade:Flow, skos:Concept ;
+  rdfs:label "Imports" ;
+  skos:topConceptOf <http://gss-data.org.uk/def/trade/flow> ;
+  skos:inScheme <http://gss-data.org.uk/def/trade/flow> .
+
+trade:e a trade:Flow, skos:Concept ;
+  rdfs:label "Exports" ;
+  skos:topConceptOf <http://gss-data.org.uk/def/trade/flow> ;
+  skos:inScheme <http://gss-data.org.uk/def/trade/flow> .
