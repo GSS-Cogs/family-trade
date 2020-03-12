@@ -1,0 +1,22 @@
+{
+    "title": "UK Trade in goods, CPA(08)",
+    "publisher": "Office for National Statistics",
+    "description": "Additional information for UK trade in goods by classification of product by activity.",
+    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/publicationtablesuktradecpa08/current",
+    "datasetNotes": [
+        "on landing page, named Publication tables, UK trade in goods, CPA (08)"
+    ],
+    "published": "2019-12-13",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Prioritized"
+    },
+    "transform": {
+        "airtable": "recvtVrl03bBWW552"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

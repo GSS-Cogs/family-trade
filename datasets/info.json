@@ -1,0 +1,32 @@
+{
+    "family": "Trade",
+    "github": "https://github.com/GSS-Cogs/family-trade",
+    "jenkins": {
+        "base": "https://ci.floop.org.uk",
+        "path": [
+            "GSS_data",
+            "Trade"
+        ]
+    },
+    "pipelines": [
+        "HMRC-RTS-Small-area",
+        "HMRC_OTS_CN8",
+        "HMRC_RTS",
+        "HMRC_Trade",
+        "ONS-GDP-at-current-prices-real-time-database-YBHA",
+        "ONS-International-Trade-in-Services",
+        "ONS-Quarterly-National-Accounts",
+        "ONS-Trade-in-goods",
+        "ONS-Trade-in-goods",
+        "ONS-UK-Ecconomic-Accounts-balance-of-payments-current-account",
+        "ONS-UK-SA-Trade-in-goods",
+        "ONS-UK-Total-trade",
+        "ONS-UK-Trade-in-goods-CPA-08",
+        "ONS-UK-trade-in-goods-by-industry-country-and-commodity",
+        "ONS-UK-trade-in-goods-by-industry-country-and-commodity",
+        "ONS-UK-trade-in-services",
+        "ONS_BoP",
+        "ONS_CPA",
+        "ONS_MRETS"
+    ]
+}

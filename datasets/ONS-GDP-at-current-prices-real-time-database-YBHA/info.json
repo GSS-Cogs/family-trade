@@ -1,0 +1,22 @@
+{
+    "title": "GDP at current prices - real time database (YBHA)",
+    "publisher": "Office for National Statistics",
+    "description": "Quarterly levels for UK gross domestic product (GDP) at current market prices",
+    "landingPage": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/realtimedatabaseforukgdpybha",
+    "datasetNotes": [
+        "On landing page, latest version"
+    ],
+    "published": "2020-02-11",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Prioritized"
+    },
+    "transform": {
+        "airtable": "recRRRJmihn12ddNh"
+    },
+    "sizingNotes": "Will probably need a conversation about what it means",
+    "notes": ""
+}
