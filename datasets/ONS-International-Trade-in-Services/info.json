@@ -1,0 +1,22 @@
+{
+    "title": "International trade in services",
+    "publisher": "Office for National Statistics",
+    "description": "Detailed breakdown of annual trade in UK services estimates, analysing data by country, product and industry.",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesreferencetables",
+    "datasetNotes": [
+        "Data can be found on the lading page "
+    ],
+    "published": "2020-01-31",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Published"
+    },
+    "transform": {
+        "airtable": "recHVWhF3sVZo2T9I"
+    },
+    "sizingNotes": "Multiple tabs with multiple small tables and simple structure but some footnotes",
+    "notes": ""
+}
