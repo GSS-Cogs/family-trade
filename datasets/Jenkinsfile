@@ -1,3 +1,3 @@
 @Library('pmd@family-v1') _
 
-familyReferencePipeline {}
+familyTransformPipeline {}
