@@ -15,7 +15,8 @@
         "stage": "Published"
     },
     "transform": {
-        "airtable": "recyJa07EdGj8as91"
+        "airtable": "recyJa07EdGj8as91",
+        "main_issue": 16
     },
     "sizingNotes": "Simple file structure",
     "notes": "Supporting information is available in the PDF on the lading page"

@@ -15,7 +15,8 @@
         "stage": "Prioritized"
     },
     "transform": {
-        "airtable": "recRRRJmihn12ddNh"
+        "airtable": "recRRRJmihn12ddNh",
+        "main_issue": 7
     },
     "sizingNotes": "Will probably need a conversation about what it means",
     "notes": ""

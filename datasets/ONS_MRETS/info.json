@@ -14,7 +14,8 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recJYQCqmFWk7XKKJ"
+        "airtable": "recJYQCqmFWk7XKKJ",
+        "main_issue": 5
     },
     "sizingNotes": "",
     "notes": ""

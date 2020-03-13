@@ -15,7 +15,8 @@
         "stage": "Published"
     },
     "transform": {
-        "airtable": "recHVWhF3sVZo2T9I"
+        "airtable": "recHVWhF3sVZo2T9I",
+        "main_issue": 4
     },
     "sizingNotes": "Multiple tabs with multiple small tables and simple structure but some footnotes",
     "notes": ""

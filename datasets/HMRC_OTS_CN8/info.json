@@ -11,7 +11,8 @@
         "source": ""
     },
     "transform": {
-        "airtable": "recvSzMgbU9mqu7ln"
+        "airtable": "recvSzMgbU9mqu7ln",
+        "main_issue": 14
     },
     "sizingNotes": "",
     "notes": ""

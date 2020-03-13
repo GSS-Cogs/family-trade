@@ -12,7 +12,8 @@
         "stage": "Published"
     },
     "transform": {
-        "airtable": "reczfd6qupE77fzEV"
+        "airtable": "reczfd6qupE77fzEV",
+        "main_issue": 18
     },
     "sizingNotes": "",
     "notes": ""

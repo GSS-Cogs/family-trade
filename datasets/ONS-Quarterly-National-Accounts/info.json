@@ -15,7 +15,8 @@
         "stage": "Prioritized"
     },
     "transform": {
-        "airtable": "recvRRELh7LMjqFtF"
+        "airtable": "recvRRELh7LMjqFtF",
+        "main_issue": 13
     },
     "sizingNotes": "",
     "notes": ""

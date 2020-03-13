@@ -18,7 +18,8 @@
         "airtable": [
             "recWLO6lMVlcBiBiz",
             "recrQBCo8oII5TUpF"
-        ]
+        ],
+        "main_issue": 9
     },
     "sizingNotes": "Large table simple format",
     "notes": "The data set is located in a Zip folder"

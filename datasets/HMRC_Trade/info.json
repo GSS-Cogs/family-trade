@@ -15,7 +15,8 @@
         "stage": "Published"
     },
     "transform": {
-        "airtable": "recVDI0VC5iKZCd2r"
+        "airtable": "recVDI0VC5iKZCd2r",
+        "main_issue": 8
     },
     "sizingNotes": "Non-simple file structure but with multiple table within tabs, multiple dimensions, subdimensions and footnotes.",
     "notes": "Supporting information is available in the PDF on the lading page"
