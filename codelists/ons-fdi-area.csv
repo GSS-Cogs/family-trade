@@ -1,0 +1,69 @@
+Label,Notation,Parent Notation,Sort Priority
+Europe,fdi/europe,fdi/world-total,1
+EU,fdi/eu,fdi/europe,2
+Austria,fdi/austria,fdi/eu,3
+Belgium,fdi/belgium,fdi/eu,4
+Bulgaria,fdi/bulgaria,fdi/eu,5
+Cyprus,fdi/cyprus,fdi/eu,6
+Czech Republic,fdi/czech-republic,fdi/eu,7
+Denmark,fdi/denmark,fdi/eu,8
+Estonia,fdi/estonia,fdi/eu,9
+Finland,fdi/finland,fdi/eu,10
+France,fdi/france,fdi/eu,11
+Germany,fdi/germany,fdi/eu,12
+Greece,fdi/greece,fdi/eu,13
+Hungary,fdi/hungary,fdi/eu,14
+Irish Republic,fdi/irish-republic,fdi/eu,15
+Italy,fdi/italy,fdi/eu,16
+Latvia,fdi/latvia,fdi/eu,17
+Lithuania,fdi/lithuania,fdi/eu,18
+Luxembourg,fdi/luxembourg,fdi/eu,19
+Malta,fdi/malta,fdi/eu,20
+Netherlands,fdi/netherlands,fdi/eu,21
+Poland,fdi/poland,fdi/eu,22
+Portugal,fdi/portugal,fdi/eu,23
+Romania,fdi/romania,fdi/eu,24
+Slovakia,fdi/slovakia,fdi/eu,25
+Slovenia,fdi/slovenia,fdi/eu,26
+Spain,fdi/spain,fdi/eu,27
+Sweden,fdi/sweden,fdi/eu,28
+EFTA,fdi/efta,fdi/europe,29
+Norway,fdi/norway,fdi/efta,30
+Switzerland,fdi/switzerland,fdi/efta,31
+Other European Countries,fdi/other-european-countries,fdi/europe,32
+Russia,fdi/russia,fdi/other-european-countries,33
+Brazil,fdi/brazil,fdi/the-americas,34
+Canada,fdi/canada,fdi/the-americas,35
+Usa,fdi/usa,fdi/the-americas,36
+Asia,fdi/asia,fdi/world-total,37
+China,fdi/china,fdi/other-asian-countries,38
+Hong Kong,fdi/hong-kong,fdi/other-asian-countries,39
+India,fdi/india,fdi/other-asian-countries,40
+Japan,fdi/japan,fdi/other-asian-countries,41
+Singapore,fdi/singapore,fdi/other-asian-countries,42
+South Korea,fdi/south-korea,fdi/other-asian-countries,43
+Australia,fdi/australia,fdi/australasia-oceania,44
+New Zealand,fdi/new-zealand,fdi/australasia-oceania,45
+South Africa,fdi/south-africa,fdi/africa,46
+OECD,fdi/oecd,fdi/world-total,47
+UK Offshore Islands,fdi/uk-offshore-islands,fdi/other-european-countries,48
+The Americas,fdi/the-americas,fdi/world-total,49
+Near & Middle East Countries,fdi/near-middle-east-countries,fdi/asia,50
+Other Asian Countries,fdi/other-asian-countries,fdi/asia,51
+Australasia & Oceania,fdi/australasia-oceania,fdi/world-total,52
+Africa,fdi/africa,fdi/world-total,53
+World Total,fdi/world-total,,54
+Central & Eastern Europe,fdi/central-eastern-europe,fdi/world-total,55
+Croatia,fdi/croatia,fdi/eu,56
+Bermuda,fdi/bermuda,fdi/the-americas,57
+Chile,fdi/chile,fdi/the-americas,58
+Colombia,fdi/colombia,fdi/the-americas,59
+Mexico,fdi/mexico,fdi/the-americas,60
+Panama,fdi/panama,fdi/the-americas,61
+Indonesia,fdi/indonesia,fdi/other-asian-countries,62
+Malaysia,fdi/malaysia,fdi/other-asian-countries,63
+Gulf Arabian Countries,fdi/gulf-arabian-countries,fdi/near-middle-east-countries,64
+Thailand,fdi/thailand,fdi/other-asian-countries,65
+Kenya,fdi/kenya,fdi/africa,66
+Nigeria,fdi/nigeria,fdi/africa,67
+Zimbabwe,fdi/zimbabwe,fdi/africa,68

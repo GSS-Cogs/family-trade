@@ -1,0 +1,24 @@
+@prefix owl:            <http://www.w3.org/2002/07/owl#> .
+@prefix cord:           <http://gss-data.org.uk/def/class/cord-geographies/> .
+@prefix hmrc:           <http://gss-data.org.uk/def/class/hmrc-geographies/> .
+@prefix gdp:            <http://gss-data.org.uk/def/gdp#> .
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wb:             <http://wikiba.se/ontology#> .
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:            <http://purl.org/dc/terms/> .
+
+<http://gss-data.org.uk/def/ons-hmrc-eg> a owl:Ontology ;
+  owl:imports <cord-geographies.ttl> ;
+  owl:imports <hmrc-geographies.ttl> ;
+  owl:imports <cord-geographies-wikidata.ttl> ;
+  owl:imports <hmrc-geographies-wikidata.ttl> ;
+.
+
+<http://gss-data.org.uk/def/gdp#wikidata> a owl:InverseFunctionalProperty ;
+  rdfs:label "wikidata entity"@en-gb;
+  rdfs:comment "Concept is reconciled with the wikidata entity"@en-gb;
+  rdfs:domain skos:Concept ;
+  rdfs:range wb:Item ;
+.
+
+<http://gss-data.org.uk/def/dimension/trade-partner-geography> a owl:ObjectProperty .

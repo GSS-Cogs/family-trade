@@ -1,0 +1,236 @@
+Country,Geographical Area,Suppressed Country
+Australia,Asia and Oceania,No
+Bangladesh,Asia and Oceania,No
+China,Asia and Oceania,No
+Hong Kong,Asia and Oceania,No
+India,Asia and Oceania,No
+Indonesia,Asia and Oceania,No
+Japan,Asia and Oceania,No
+Malaysia,Asia and Oceania,No
+New Zealand,Asia and Oceania,No
+Pakistan,Asia and Oceania,No
+Singapore,Asia and Oceania,No
+South Korea,Asia and Oceania,No
+Sri Lanka,Asia and Oceania,No
+Taiwan,Asia and Oceania,No
+Thailand,Asia and Oceania,No
+Vietnam,Asia and Oceania,No
+Afghanistan,Asia and Oceania,Yes
+American Samoa,Asia and Oceania,Yes
+Antarctica,Asia and Oceania,Yes
+Bhutan,Asia and Oceania,Yes
+Bouvet Island,Asia and Oceania,Yes
+Brunei,Asia and Oceania,Yes
+Burma,Asia and Oceania,Yes
+Cambodia,Asia and Oceania,Yes
+Christmas Is,Asia and Oceania,Yes
+Cocos Islands,Asia and Oceania,Yes
+Cook Islands,Asia and Oceania,Yes
+Fiji,Asia and Oceania,Yes
+Fr Southern Terr,Asia and Oceania,Yes
+French Polynesia,Asia and Oceania,Yes
+Guam,Asia and Oceania,Yes
+Heard & Mcdonald,Asia and Oceania,Yes
+Kiribati,Asia and Oceania,Yes
+Laos,Asia and Oceania,Yes
+Macao,Asia and Oceania,Yes
+Maldives,Asia and Oceania,Yes
+Marshall Islands,Asia and Oceania,Yes
+Micronesia,Asia and Oceania,Yes
+Mongolia,Asia and Oceania,Yes
+N Mariana Is,Asia and Oceania,Yes
+Nauru,Asia and Oceania,Yes
+Nepal,Asia and Oceania,Yes
+New Caledonia,Asia and Oceania,Yes
+Niue Island,Asia and Oceania,Yes
+Norfolk Island,Asia and Oceania,Yes
+North Korea,Asia and Oceania,Yes
+Palau,Asia and Oceania,Yes
+Papua New Guinea,Asia and Oceania,Yes
+Philipines,Asia and Oceania,Yes
+Pitcairn,Asia and Oceania,Yes
+Samoa,Asia and Oceania,Yes
+Solomon Islands,Asia and Oceania,Yes
+Timor-Leste,Asia and Oceania,Yes
+Tonga,Asia and Oceania,Yes
+Tuvalu,Asia and Oceania,Yes
+Us Minor Islands,Asia and Oceania,Yes
+Vanuatu,Asia and Oceania,Yes
+Wallis & Futuna,Asia and Oceania,Yes
+Azerbaijan,Eastern Europe (excl. EU),No
+Fyr Macedonia,Eastern Europe (excl. EU),No
+Georgia,Eastern Europe (excl. EU),No
+Kazakhstan,Eastern Europe (excl. EU),No
+Russia,Eastern Europe (excl. EU),No
+Serbia,Eastern Europe (excl. EU),No
+Ukraine,Eastern Europe (excl. EU),No
+Albania,Eastern Europe (excl. EU),Yes
+Armenia,Eastern Europe (excl. EU),Yes
+Belarus,Eastern Europe (excl. EU),Yes
+Bosnia & Herz.,Eastern Europe (excl. EU),Yes
+Kosovo,Eastern Europe (excl. EU),Yes
+Kyrkyz Republic,Eastern Europe (excl. EU),Yes
+Moldova,Eastern Europe (excl. EU),Yes
+Montenegro,Eastern Europe (excl. EU),Yes
+Tajikistan,Eastern Europe (excl. EU),Yes
+Turkmenistan,Eastern Europe (excl. EU),Yes
+Uzbekistan,Eastern Europe (excl. EU),Yes
+Austria,European Union,No
+Belgium,European Union,No
+Bulgaria,European Union,No
+Cyprus,European Union,No
+Czech Republic,European Union,No
+Denmark,European Union,No
+Estonia,European Union,No
+Finland,European Union,No
+France,European Union,No
+Germany,European Union,No
+Greece,European Union,No
+Hungary,European Union,No
+Irish Republic,European Union,No
+Italy,European Union,No
+Latvia,European Union,No
+Lithuania,European Union,No
+Luxembourg,European Union,No
+Malta,European Union,No
+Netherlands,European Union,No
+Poland,European Union,No
+Portugal,European Union,No
+Romania,European Union,No
+Slovakia,European Union,No
+Slovenia,European Union,No
+Spain,European Union,No
+Sweden,European Union,No
+Argentina,Latin America and Caribbean,No
+Brazil,Latin America and Caribbean,No
+Chile,Latin America and Caribbean,No
+Colombia,Latin America and Caribbean,No
+Costa Rica,Latin America and Caribbean,No
+Dominican Rep,Latin America and Caribbean,No
+Ecuador,Latin America and Caribbean,No
+Falkland Islands,Latin America and Caribbean,No
+Guatemala,Latin America and Caribbean,No
+Honduras,Latin America and Caribbean,No
+Panama,Latin America and Caribbean,No
+Peru,Latin America and Caribbean,No
+Trinidad:Tobago,Latin America and Caribbean,No
+Uruguay,Latin America and Caribbean,No
+Venezuela,Latin America and Caribbean,No
+Anguilla,Latin America and Caribbean,Yes
+Antigua:Barbuda,Latin America and Caribbean,Yes
+Aruba,Latin America and Caribbean,Yes
+Bahamas,Latin America and Caribbean,Yes
+Barbados,Latin America and Caribbean,Yes
+Belize,Latin America and Caribbean,Yes
+Bermuda,Latin America and Caribbean,Yes
+Bolivia,Latin America and Caribbean,Yes
+Bonaire,Latin America and Caribbean,Yes
+Br Virgin Is,Latin America and Caribbean,Yes
+Cayman Islands,Latin America and Caribbean,Yes
+Cuba,Latin America and Caribbean,Yes
+Curacao,Latin America and Caribbean,Yes
+Dominica,Latin America and Caribbean,Yes
+El Salvador,Latin America and Caribbean,Yes
+Grenada,Latin America and Caribbean,Yes
+Guyana,Latin America and Caribbean,Yes
+Haiti,Latin America and Caribbean,Yes
+Jamaica,Latin America and Caribbean,Yes
+Montserrat,Latin America and Caribbean,Yes
+Nicaragua,Latin America and Caribbean,Yes
+Paraguay,Latin America and Caribbean,Yes
+Saint Barthelemy,Latin America and Caribbean,Yes
+Saint Maarten,Latin America and Caribbean,Yes
+St Kitts & Nevis,Latin America and Caribbean,Yes
+St Lucia,Latin America and Caribbean,Yes
+St Vincent,Latin America and Caribbean,Yes
+Surinam,Latin America and Caribbean,Yes
+Turks & Caicos,Latin America and Caribbean,Yes
+Us Virgin Is,Latin America and Caribbean,Yes
+Algeria,Middle East and North Africa,No
+Bahrain,Middle East and North Africa,No
+Egypt,Middle East and North Africa,No
+Iraq,Middle East and North Africa,No
+Israel,Middle East and North Africa,No
+Jordan,Middle East and North Africa,No
+Kuwait,Middle East and North Africa,No
+Lebanon,Middle East and North Africa,No
+Morocco,Middle East and North Africa,No
+Oman,Middle East and North Africa,No
+Qatar,Middle East and North Africa,No
+Saudi Arabia,Middle East and North Africa,No
+UAE,Middle East and North Africa,No
+Ceuta,Middle East and North Africa,Yes
+Iran,Middle East and North Africa,Yes
+Libya,Middle East and North Africa,Yes
+Melilla,Middle East and North Africa,Yes
+Occ Palestinian Territories,Middle East and North Africa,Yes
+South Sudan,Middle East and North Africa,Yes
+Sudan,Middle East and North Africa,Yes
+Syria,Middle East and North Africa,Yes
+Tunisia,Middle East and North Africa,Yes
+Yemen,Middle East and North Africa,Yes
+Canada,North America,No
+Mexico,North America,No
+USA incl. Puerto Rico,North America,No
+Greenland,North America,Yes
+St Pierre-Mique,North America,Yes
+Angola,Sub-Saharan Africa,No
+Cameroon,Sub-Saharan Africa,No
+Congo (Republic),Sub-Saharan Africa,No
+Equat. Guinea,Sub-Saharan Africa,No
+Ethiopia,Sub-Saharan Africa,No
+Ghana,Sub-Saharan Africa,No
+Ivory Coast,Sub-Saharan Africa,No
+Kenya,Sub-Saharan Africa,No
+Mauritius,Sub-Saharan Africa,No
+Nigeria,Sub-Saharan Africa,No
+Senegal,Sub-Saharan Africa,No
+South Africa,Sub-Saharan Africa,No
+Tanzania,Sub-Saharan Africa,No
+Benin,Sub-Saharan Africa,Yes
+Botswana,Sub-Saharan Africa,Yes
+Br Ind Oc Terr,Sub-Saharan Africa,Yes
+Burkina,Sub-Saharan Africa,Yes
+Burundi,Sub-Saharan Africa,Yes
+Cape Verde,Sub-Saharan Africa,Yes
+Cent Afr Rep,Sub-Saharan Africa,Yes
+Chad,Sub-Saharan Africa,Yes
+Comoros,Sub-Saharan Africa,Yes
+Congo (Dem. Rep),Sub-Saharan Africa,Yes
+Djibouti,Sub-Saharan Africa,Yes
+Eritrea,Sub-Saharan Africa,Yes
+Gabon,Sub-Saharan Africa,Yes
+Gambia,Sub-Saharan Africa,Yes
+Guinea,Sub-Saharan Africa,Yes
+Guinea-Bissau,Sub-Saharan Africa,Yes
+Lesotho,Sub-Saharan Africa,Yes
+Liberia,Sub-Saharan Africa,Yes
+Madagascar,Sub-Saharan Africa,Yes
+Malawi,Sub-Saharan Africa,Yes
+Mali,Sub-Saharan Africa,Yes
+Mauritania,Sub-Saharan Africa,Yes
+Mozambique,Sub-Saharan Africa,Yes
+Namibia,Sub-Saharan Africa,Yes
+Niger,Sub-Saharan Africa,Yes
+Rwanda,Sub-Saharan Africa,Yes
+Sao Tome-Princ.,Sub-Saharan Africa,Yes
+Seychelles,Sub-Saharan Africa,Yes
+Sierra Leone,Sub-Saharan Africa,Yes
+Somalia,Sub-Saharan Africa,Yes
+St Helena,Sub-Saharan Africa,Yes
+Swaziland,Sub-Saharan Africa,Yes
+Togo,Sub-Saharan Africa,Yes
+Uganda,Sub-Saharan Africa,Yes
+Western Sahara,Sub-Saharan Africa,Yes
+Zambia,Sub-Saharan Africa,Yes
+Zimbabwe,Sub-Saharan Africa,Yes
+Gibraltar,Western Europe (excl. EU),No
+Iceland,Western Europe (excl. EU),No
+Norway,Western Europe (excl. EU),No
+Switzerland,Western Europe (excl. EU),No
+Turkey,Western Europe (excl. EU),No
+Andorra,Western Europe (excl. EU),Yes
+Faroe Islands,Western Europe (excl. EU),Yes
+Liechtenstein,Western Europe (excl. EU),Yes
+San Marino,Western Europe (excl. EU),Yes
+Vatican City,Western Europe (excl. EU),Yes

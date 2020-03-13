@@ -1,0 +1,1234 @@
+@prefix gdp: <http://gss-data.org.uk/def/gdp#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AD> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q228> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q878> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AF> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q889> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q781> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q25228> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q222> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q399> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q25227> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q916> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q414> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q16641> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q40> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q408> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q21203> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q227> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q225> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BB> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q244> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BD> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q902> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q31> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BF> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q965> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q219> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BH> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q398> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q967> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BJ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q962> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q25362> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q23635> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q921> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q750> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BQ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q25396> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q155> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q778> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q917> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BV> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q23408> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q963> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BY> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q184> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q242> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C114> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q36704> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C83> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q49> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q16> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CC> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q36004> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CD> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q974> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CF> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q929> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q971> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CH> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q39> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1008> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q26988> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q298> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1009> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q148> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q739> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q800> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q37024> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q241> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CV> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1011> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q25279> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CX> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q31063> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CY> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q229> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q213> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q183> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DH> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q187712> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DJ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q977> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q35> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q784> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q786> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q613> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q262> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/EC> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q736> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/EE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q191> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/EG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q79> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ER> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q986> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ES> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q29> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ET> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q115> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q33> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FJ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q712> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1249802> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q702> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q4628> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q142> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1000> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GD> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q769> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q230> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GH> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q117> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q21958349> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q223> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1005> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1006> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GQ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q983> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q41> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1137202> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q774> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q16635> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1007> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GY> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q734> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q8646> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q131198> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q783> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q224> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q790> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q28> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ID> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q252> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q27> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q801> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q668> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q43448> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IQ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q796> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q794> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q189> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q38> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/JE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q785> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/JM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q766> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/JO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q810> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/JP> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q17> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q114> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q813> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KH> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q424> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q710> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q970> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q763> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KP> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q423> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q884> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q817> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KY> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q5785> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q232> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q819> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LB> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q822> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LC> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q760> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q347> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q854> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1014> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1013> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q37> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q32> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LV> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q211> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LY> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1016> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1028> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MD> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q217> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ME> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q236> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1019> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MH> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q709> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q221> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ML> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q912> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q836> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q711> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q642005> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MP> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q16644> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1025> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q13353> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q233> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1027> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MV> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q826> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1020> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MX> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q96> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MY> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q833> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1029> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1030> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NC> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q33788> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1032> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NF> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q31057> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1033> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q811> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q55> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q20> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NP> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q837> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q697> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q34020> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q664> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/OM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q842> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q804> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q419> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PF> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q30971> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q691> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PH> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q928> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q843> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q36> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q34617> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q35672> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1183> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q407199> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q45> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q695> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PY> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q733> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/QA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q846> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/RO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q218> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/RU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q159> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/RW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1037> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q851> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SB> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q685> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SC> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1042> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SD> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1049> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q34> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q334> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SH> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q34497> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q215> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q214> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1044> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q238> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1041> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1045> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q730> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q958> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ST> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1039> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SV> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q792> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SX> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q26273> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SY> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q858> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1050> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TC> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q18221> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TD> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q657> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TF> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q129003> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q945> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TH> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q869> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TJ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q863> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q9380379> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q574> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q874> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q948> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TO> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q678> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TR> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q43> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q754> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TV> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q672> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q865> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q924> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/UA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q212> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/UG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1036> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/US> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q30> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/UY> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q77> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/UZ> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q265> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q237> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VC> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q757> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q717> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VG> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q25305> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VI> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q11703> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VN> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q881> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VU> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q686> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/WF> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q35555> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/WS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q683> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/XC> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q5823> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/XK> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q1246> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/XL> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q5831> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/XS> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q403> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/YE> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q805> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/YT> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q17063> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ZA> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q258> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ZM> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q953> .
+
+<http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ZW> a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    gdp:wikidata <http://www.wikidata.org/entity/Q954> .
+
+gdp:wikidata a owl:ObjectProperty .
+
+<http://www.wikidata.org/entity/Q1000> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1005> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1006> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1007> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1008> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1009> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1011> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1013> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1014> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1016> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1019> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1020> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1025> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1027> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1028> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1029> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1030> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1032> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1033> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1036> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1037> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1039> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1041> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1042> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1044> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1045> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1049> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1050> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1137202> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q114> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q115> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q117> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q11703> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1183> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1246> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q1249802> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q129003> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q131198> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q13353> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q142> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q148> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q155> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q159> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q16> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q16635> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q16641> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q16644> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q17> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q17063> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q18221> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q183> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q184> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q187712> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q189> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q191> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q20> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q211> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q212> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q21203> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q213> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q214> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q215> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q217> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q218> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q219> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q21958349> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q221> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q222> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q223> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q224> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q225> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q227> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q228> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q229> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q230> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q232> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q233> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q23408> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q236> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q23635> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q237> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q238> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q241> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q242> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q244> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q252> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q25227> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q25228> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q25279> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q25305> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q25362> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q25396> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q258> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q262> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q26273> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q265> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q26988> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q27> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q28> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q29> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q298> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q30> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q30971> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q31> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q31057> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q31063> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q32> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q33> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q334> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q33788> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q34> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q34020> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q34497> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q34617> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q347> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q35> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q35555> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q35672> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q36> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q36004> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q36704> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q37> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q37024> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q38> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q39> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q398> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q399> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q40> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q403> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q407199> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q408> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q41> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q414> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q419> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q423> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q424> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q43> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q43448> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q45> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q4628> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q49> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q55> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q574> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q5785> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q5823> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q5831> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q613> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q642005> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q657> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q664> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q668> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q672> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q678> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q683> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q685> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q686> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q691> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q695> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q697> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q702> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q709> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q710> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q711> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q712> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q717> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q730> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q733> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q734> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q736> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q739> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q750> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q754> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q757> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q760> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q763> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q766> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q769> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q77> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q774> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q778> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q781> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q783> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q784> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q785> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q786> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q79> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q790> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q792> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q794> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q796> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q800> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q801> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q804> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q805> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q810> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q811> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q813> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q817> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q819> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q822> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q826> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q833> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q836> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q837> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q842> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q843> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q846> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q851> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q854> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q858> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q863> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q8646> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q865> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q869> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q874> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q878> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q881> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q884> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q889> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q902> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q912> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q916> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q917> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q921> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q924> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q928> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q929> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q9380379> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q945> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q948> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q953> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q954> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q958> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q96> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q962> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q963> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q965> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q967> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q970> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q971> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q974> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q977> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q983> a <http://wikiba.se/ontology#Item> .
+
+<http://www.wikidata.org/entity/Q986> a <http://wikiba.se/ontology#Item> .
+
+<http://wikiba.se/ontology#Item> a owl:Class .
+
+<http://www.w3.org/2004/02/skos/core#Concept> a owl:Class .
+
+

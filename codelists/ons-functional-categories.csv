@@ -1,0 +1,15 @@
+Label,Notation,Parent Notation,Sort Priority
+All categories,all,,1
+Primary and utilities,primary-utilities,all,2
+Manufacturing,manufacturing,all,3
+Transport,transport,all,4
+Travel,travel,all,5
+Construction,construction,all,6
+Wholesale and motor trades,wholesale-motor,all,7
+Retail (excluding motor trades),retail,all,8
+Information and communication,information-communication,all,9
+"Real estate, professional, scientific and technical",real-estate,all,10
+Insurance and pension services,insurance-pension,all,11
+Financial,financial,all,12
+Administrative and support services,administrative-support,all,13
+Other services,other,all,14

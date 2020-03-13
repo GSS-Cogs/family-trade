@@ -1,0 +1,13 @@
+Label,Notation,Parent Notation,Sort Priority,Description
+Agriculture and Food,group-1,total,1,
+"Mining, Petroleum products and Waste",group-2,total,2,
+Chemicals,group-3,total,3,
+Pharmaceuticals,group-4,total,4,
+Electronic and Electrical equipment,group-5,total,5,
+Machinery and equipment n.e.s,group-6,total,6,
+"Motor vehicles, transport equipment (excluding aerospace)",group-7,total,7,
+Aerospace and related machinery,group-8,total,8,
+Other manufacturing,group-9,total,9,
+Services,group-10,total,10,
+Total,total,,11,
+Unknown,unknown,total,12,

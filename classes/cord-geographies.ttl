@@ -1,0 +1,2467 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://gss-data.org.uk/def/class/cord-geographies/8A> a owl:Class ;
+    rdfs:label "Residual Europe (aka R1-Residual other Europe)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BA> <http://gss-data.org.uk/def/class/cord-geographies/C482> <http://gss-data.org.uk/def/class/cord-geographies/GI> <http://gss-data.org.uk/def/class/cord-geographies/MD> <http://gss-data.org.uk/def/class/cord-geographies/MK> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/8A> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/999X> a owl:Class ;
+    rdfs:label "used to aggregate suppressed data"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/X977> <http://gss-data.org.uk/def/class/cord-geographies/X997> <http://gss-data.org.uk/def/class/cord-geographies/X999> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/999X> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/9A> a owl:Class ;
+    rdfs:label "International Organisations"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/9A> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/A1> a owl:Class ;
+    rdfs:label "Whole world"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/D4> <http://gss-data.org.uk/def/class/cord-geographies/V3> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/A1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/A8> a owl:Class ;
+    rdfs:label "OECD"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/B1> <http://gss-data.org.uk/def/class/cord-geographies/C76> <http://gss-data.org.uk/def/class/cord-geographies/CH> <http://gss-data.org.uk/def/class/cord-geographies/CZ> <http://gss-data.org.uk/def/class/cord-geographies/D2> <http://gss-data.org.uk/def/class/cord-geographies/HU> <http://gss-data.org.uk/def/class/cord-geographies/IS> <http://gss-data.org.uk/def/class/cord-geographies/NO> <http://gss-data.org.uk/def/class/cord-geographies/SK> <http://gss-data.org.uk/def/class/cord-geographies/TR> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/A8> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/B3> a owl:Class ;
+    rdfs:label "ASEAN"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BN> <http://gss-data.org.uk/def/class/cord-geographies/C479> <http://gss-data.org.uk/def/class/cord-geographies/ID> <http://gss-data.org.uk/def/class/cord-geographies/MY> <http://gss-data.org.uk/def/class/cord-geographies/PH> <http://gss-data.org.uk/def/class/cord-geographies/SG> <http://gss-data.org.uk/def/class/cord-geographies/TH> <http://gss-data.org.uk/def/class/cord-geographies/TL> <http://gss-data.org.uk/def/class/cord-geographies/VN> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/B3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/B4> a owl:Class ;
+    rdfs:label "OPEC"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AE> <http://gss-data.org.uk/def/class/cord-geographies/DZ> <http://gss-data.org.uk/def/class/cord-geographies/ID> <http://gss-data.org.uk/def/class/cord-geographies/IQ> <http://gss-data.org.uk/def/class/cord-geographies/IR> <http://gss-data.org.uk/def/class/cord-geographies/KW> <http://gss-data.org.uk/def/class/cord-geographies/LY> <http://gss-data.org.uk/def/class/cord-geographies/NG> <http://gss-data.org.uk/def/class/cord-geographies/QA> <http://gss-data.org.uk/def/class/cord-geographies/SA> <http://gss-data.org.uk/def/class/cord-geographies/VE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/B4> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/B5> a owl:Class ;
+    rdfs:label "ACP"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C449> <http://gss-data.org.uk/def/class/cord-geographies/C450> <http://gss-data.org.uk/def/class/cord-geographies/C451> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/B5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/B9> a owl:Class ;
+    rdfs:label "NICs1"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/HK> <http://gss-data.org.uk/def/class/cord-geographies/KR> <http://gss-data.org.uk/def/class/cord-geographies/SG> <http://gss-data.org.uk/def/class/cord-geographies/TW> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/B9> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C402> a owl:Class ;
+    rdfs:label "Central & Eastern Europe"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AL> <http://gss-data.org.uk/def/class/cord-geographies/BA> <http://gss-data.org.uk/def/class/cord-geographies/BG> <http://gss-data.org.uk/def/class/cord-geographies/C114> <http://gss-data.org.uk/def/class/cord-geographies/CZ> <http://gss-data.org.uk/def/class/cord-geographies/E3> <http://gss-data.org.uk/def/class/cord-geographies/HU> <http://gss-data.org.uk/def/class/cord-geographies/MK> <http://gss-data.org.uk/def/class/cord-geographies/PL> <http://gss-data.org.uk/def/class/cord-geographies/RO> <http://gss-data.org.uk/def/class/cord-geographies/SI> <http://gss-data.org.uk/def/class/cord-geographies/SK> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C402> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C405> a owl:Class ;
+    rdfs:label "Offshore Financial Centres"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BB> <http://gss-data.org.uk/def/class/cord-geographies/BH> <http://gss-data.org.uk/def/class/cord-geographies/BS> <http://gss-data.org.uk/def/class/cord-geographies/C473> <http://gss-data.org.uk/def/class/cord-geographies/HK> <http://gss-data.org.uk/def/class/cord-geographies/JM> <http://gss-data.org.uk/def/class/cord-geographies/KN> <http://gss-data.org.uk/def/class/cord-geographies/LB> <http://gss-data.org.uk/def/class/cord-geographies/LR> <http://gss-data.org.uk/def/class/cord-geographies/PA> <http://gss-data.org.uk/def/class/cord-geographies/PH> <http://gss-data.org.uk/def/class/cord-geographies/SG> <http://gss-data.org.uk/def/class/cord-geographies/VU> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C405> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C445> a owl:Class ;
+    rdfs:label "EEA"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/IS> <http://gss-data.org.uk/def/class/cord-geographies/LI> <http://gss-data.org.uk/def/class/cord-geographies/NO> <http://gss-data.org.uk/def/class/cord-geographies/V1> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C445> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C447> a owl:Class ;
+    rdfs:label "Latin America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BO> <http://gss-data.org.uk/def/class/cord-geographies/C459> <http://gss-data.org.uk/def/class/cord-geographies/C475> <http://gss-data.org.uk/def/class/cord-geographies/CL> <http://gss-data.org.uk/def/class/cord-geographies/CO> <http://gss-data.org.uk/def/class/cord-geographies/EC> <http://gss-data.org.uk/def/class/cord-geographies/MX> <http://gss-data.org.uk/def/class/cord-geographies/PA> <http://gss-data.org.uk/def/class/cord-geographies/PE> <http://gss-data.org.uk/def/class/cord-geographies/VE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C447> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C453> a owl:Class ;
+    rdfs:label "NICs2A"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/MY> <http://gss-data.org.uk/def/class/cord-geographies/PH> <http://gss-data.org.uk/def/class/cord-geographies/TH> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C453> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C454> a owl:Class ;
+    rdfs:label "NICs2LA"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AR> <http://gss-data.org.uk/def/class/cord-geographies/BR> <http://gss-data.org.uk/def/class/cord-geographies/CL> <http://gss-data.org.uk/def/class/cord-geographies/MX> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C454> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C455> a owl:Class ;
+    rdfs:label "Mediterranean Basin"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AL> <http://gss-data.org.uk/def/class/cord-geographies/C481> <http://gss-data.org.uk/def/class/cord-geographies/C93> <http://gss-data.org.uk/def/class/cord-geographies/CY> <http://gss-data.org.uk/def/class/cord-geographies/EG> <http://gss-data.org.uk/def/class/cord-geographies/GI> <http://gss-data.org.uk/def/class/cord-geographies/IL> <http://gss-data.org.uk/def/class/cord-geographies/LB> <http://gss-data.org.uk/def/class/cord-geographies/MA> <http://gss-data.org.uk/def/class/cord-geographies/MT> <http://gss-data.org.uk/def/class/cord-geographies/R9> <http://gss-data.org.uk/def/class/cord-geographies/TR> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C455> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C456> a owl:Class ;
+    rdfs:label "French Franc Zone"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C469> <http://gss-data.org.uk/def/class/cord-geographies/GA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C456> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C457> a owl:Class ;
+    rdfs:label "Maghreb countries"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/DZ> <http://gss-data.org.uk/def/class/cord-geographies/MA> <http://gss-data.org.uk/def/class/cord-geographies/TN> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C457> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C458> a owl:Class ;
+    rdfs:label "Mashrek countries"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C481> <http://gss-data.org.uk/def/class/cord-geographies/EG> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C458> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C460> a owl:Class ;
+    rdfs:label "APEC"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AU> <http://gss-data.org.uk/def/class/cord-geographies/B1> <http://gss-data.org.uk/def/class/cord-geographies/BN> <http://gss-data.org.uk/def/class/cord-geographies/CL> <http://gss-data.org.uk/def/class/cord-geographies/CN> <http://gss-data.org.uk/def/class/cord-geographies/HK> <http://gss-data.org.uk/def/class/cord-geographies/ID> <http://gss-data.org.uk/def/class/cord-geographies/JP> <http://gss-data.org.uk/def/class/cord-geographies/KR> <http://gss-data.org.uk/def/class/cord-geographies/MY> <http://gss-data.org.uk/def/class/cord-geographies/NZ> <http://gss-data.org.uk/def/class/cord-geographies/PE> <http://gss-data.org.uk/def/class/cord-geographies/PG> <http://gss-data.org.uk/def/class/cord-geographies/PH> <http://gss-data.org.uk/def/class/cord-geographies/SG> <http://gss-data.org.uk/def/class/cord-geographies/TH> <http://gss-data.org.uk/def/class/cord-geographies/TL> <http://gss-data.org.uk/def/class/cord-geographies/TW> <http://gss-data.org.uk/def/class/cord-geographies/VN> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C460> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C462> a owl:Class ;
+    rdfs:label "Residual America (aka R8- Residual America)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BO> <http://gss-data.org.uk/def/class/cord-geographies/C484> <http://gss-data.org.uk/def/class/cord-geographies/EC> <http://gss-data.org.uk/def/class/cord-geographies/FK> <http://gss-data.org.uk/def/class/cord-geographies/GY> <http://gss-data.org.uk/def/class/cord-geographies/PE> <http://gss-data.org.uk/def/class/cord-geographies/PY> <http://gss-data.org.uk/def/class/cord-geographies/SR> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C462> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C6> a owl:Class ;
+    rdfs:label "CIS"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BY> <http://gss-data.org.uk/def/class/cord-geographies/C477> <http://gss-data.org.uk/def/class/cord-geographies/C478> <http://gss-data.org.uk/def/class/cord-geographies/MD> <http://gss-data.org.uk/def/class/cord-geographies/RU> <http://gss-data.org.uk/def/class/cord-geographies/UA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C6> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/D5> a owl:Class ;
+    rdfs:label "Extra EU-25 - world less EU-25 countries"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/A5> <http://gss-data.org.uk/def/class/cord-geographies/BG> <http://gss-data.org.uk/def/class/cord-geographies/E2> <http://gss-data.org.uk/def/class/cord-geographies/E4> <http://gss-data.org.uk/def/class/cord-geographies/E7> <http://gss-data.org.uk/def/class/cord-geographies/F2> <http://gss-data.org.uk/def/class/cord-geographies/F7> <http://gss-data.org.uk/def/class/cord-geographies/RO> <http://gss-data.org.uk/def/class/cord-geographies/GG> <http://gss-data.org.uk/def/class/cord-geographies/IM> <http://gss-data.org.uk/def/class/cord-geographies/RS> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/D5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/E1> a owl:Class ;
+    rdfs:label "Europe"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/A5> <http://gss-data.org.uk/def/class/cord-geographies/E2> <http://gss-data.org.uk/def/class/cord-geographies/V1> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/FRB> a owl:Class ;
+    rdfs:label "France & Saint Barthelemy"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BL> <http://gss-data.org.uk/def/class/cord-geographies/FR> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FRB> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/I7> a owl:Class ;
+    rdfs:label "EMU(18)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/I6> <http://gss-data.org.uk/def/class/cord-geographies/LV> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/I7> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/I8> a owl:Class ;
+    rdfs:label "Euro area (19)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/4F> <http://gss-data.org.uk/def/class/cord-geographies/4S> <http://gss-data.org.uk/def/class/cord-geographies/AT> <http://gss-data.org.uk/def/class/cord-geographies/BE> <http://gss-data.org.uk/def/class/cord-geographies/CY> <http://gss-data.org.uk/def/class/cord-geographies/DE> <http://gss-data.org.uk/def/class/cord-geographies/EE> <http://gss-data.org.uk/def/class/cord-geographies/ES> <http://gss-data.org.uk/def/class/cord-geographies/FI> <http://gss-data.org.uk/def/class/cord-geographies/FR> <http://gss-data.org.uk/def/class/cord-geographies/GR> <http://gss-data.org.uk/def/class/cord-geographies/IE> <http://gss-data.org.uk/def/class/cord-geographies/IT> <http://gss-data.org.uk/def/class/cord-geographies/LT> <http://gss-data.org.uk/def/class/cord-geographies/LU> <http://gss-data.org.uk/def/class/cord-geographies/LV> <http://gss-data.org.uk/def/class/cord-geographies/MT> <http://gss-data.org.uk/def/class/cord-geographies/NL> <http://gss-data.org.uk/def/class/cord-geographies/PT> <http://gss-data.org.uk/def/class/cord-geographies/SI> <http://gss-data.org.uk/def/class/cord-geographies/SK> <http://gss-data.org.uk/def/class/cord-geographies/U29> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/I8> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/J3> a owl:Class ;
+    rdfs:label "Extra Euro Area(13)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CY> <http://gss-data.org.uk/def/class/cord-geographies/J4> <http://gss-data.org.uk/def/class/cord-geographies/MT> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/J3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/K3> a owl:Class ;
+    rdfs:label "Non-EMU(13)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CY> <http://gss-data.org.uk/def/class/cord-geographies/K4> <http://gss-data.org.uk/def/class/cord-geographies/MT> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/K3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/K8> a owl:Class ;
+    rdfs:label "EU countries non Euro"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/4A> <http://gss-data.org.uk/def/class/cord-geographies/BG> <http://gss-data.org.uk/def/class/cord-geographies/CZ> <http://gss-data.org.uk/def/class/cord-geographies/DK> <http://gss-data.org.uk/def/class/cord-geographies/HR> <http://gss-data.org.uk/def/class/cord-geographies/HU> <http://gss-data.org.uk/def/class/cord-geographies/PL> <http://gss-data.org.uk/def/class/cord-geographies/RO> <http://gss-data.org.uk/def/class/cord-geographies/SE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/K8> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/O1> a owl:Class ;
+    rdfs:label "Total Australasia & Oceania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/O1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PB1> a owl:Class ;
+    rdfs:label "Other Europe"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PB1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PB2> a owl:Class ;
+    rdfs:label "Other Central American Countries"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PB2> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PB3> a owl:Class ;
+    rdfs:label "Other Americas"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PB3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PB4> a owl:Class ;
+    rdfs:label "Residual Gulf Arabian Countries"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PB4> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PB5> a owl:Class ;
+    rdfs:label "Other Near & Middle Eastern Countries"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PB5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PB6> a owl:Class ;
+    rdfs:label "Other Asia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PB6> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PB7> a owl:Class ;
+    rdfs:label "Other Australasia & Oceania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PB7> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PB8> a owl:Class ;
+    rdfs:label "Other North Africa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PB8> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PB9> a owl:Class ;
+    rdfs:label "Other Africa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PB9> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/QR> a owl:Class ;
+    rdfs:label "Store & provisions EU ships"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/QR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/QS> a owl:Class ;
+    rdfs:label "Stores & provisions non-EU ships"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/QS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/R2> a owl:Class ;
+    rdfs:label "Total EFTA"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/R2> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/S1> a owl:Class ;
+    rdfs:label "Total Asia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/S1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/S5> a owl:Class ;
+    rdfs:label "Non-EMU(16) excluding DK and SE"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/EE> <http://gss-data.org.uk/def/class/cord-geographies/S6> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/S5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/V2> a owl:Class ;
+    rdfs:label "Extra EU-27 or Rest of world excluding EU-27 countries"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/V2> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/V4> a owl:Class ;
+    rdfs:label "World total excl EU-27"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/D4> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/V4> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/W1> a owl:Class ;
+    rdfs:label "World total"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/W1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/legacy/B5> a owl:Class ;
+    rdfs:label "EU(2004)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/legacy/B5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/legacy/D5> a owl:Class ;
+    rdfs:label "Non-EU(2004)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/legacy/D5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/legacy/W1> a owl:Class ;
+    rdfs:label "Rest of the World"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/legacy/W1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/legacy/WW> a owl:Class ;
+    rdfs:label "Whole World"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/legacy/WW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/4A> a owl:Class ;
+    rdfs:label "EU Institutions (non Euro area)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/4A> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/4F> a owl:Class ;
+    rdfs:label "European Central Bank"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/4F> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/4S> a owl:Class ;
+    rdfs:label "European Stability Mechanism"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/4S> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/8B> a owl:Class ;
+    rdfs:label "Residual Asia (aka R6-Residual Asia)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BN> <http://gss-data.org.uk/def/class/cord-geographies/C478> <http://gss-data.org.uk/def/class/cord-geographies/C479> <http://gss-data.org.uk/def/class/cord-geographies/C480> <http://gss-data.org.uk/def/class/cord-geographies/TL> <http://gss-data.org.uk/def/class/cord-geographies/VN> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/8B> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/8C> a owl:Class ;
+    rdfs:label "Residual Other Africa (aka R2 - Residual Other Africa"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/8D> <http://gss-data.org.uk/def/class/cord-geographies/NG> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/8C> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/8D> a owl:Class ;
+    rdfs:label "Residual Other Africa exc Nigeria"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C494> <http://gss-data.org.uk/def/class/cord-geographies/GA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/8D> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AD> a owl:Class ;
+    rdfs:label "Andorra"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AE1> a owl:Class ;
+    rdfs:label "United Arab Emirates (HMRC)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AE1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AF> a owl:Class ;
+    rdfs:label "Afghanistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AG> a owl:Class ;
+    rdfs:label "Antigua & Barbuda"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AI> a owl:Class ;
+    rdfs:label "Anguilla"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AM> a owl:Class ;
+    rdfs:label "Armenia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AN> a owl:Class ;
+    rdfs:label "Netherlands Antilles"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AO> a owl:Class ;
+    rdfs:label "Angola"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AQ> a owl:Class ;
+    rdfs:label "Antarctica"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AQ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AS> a owl:Class ;
+    rdfs:label "American Samoa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AW> a owl:Class ;
+    rdfs:label "Aruba"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AZ> a owl:Class ;
+    rdfs:label "Azerbaijan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BD> a owl:Class ;
+    rdfs:label "Bangladesh"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BF> a owl:Class ;
+    rdfs:label "Burkina Faso"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BI> a owl:Class ;
+    rdfs:label "Burundi"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BJ> a owl:Class ;
+    rdfs:label "Benin"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BJ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BM> a owl:Class ;
+    rdfs:label "Bermuda"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BQ> a owl:Class ;
+    rdfs:label "Bonaire"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BQ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BT> a owl:Class ;
+    rdfs:label "Bhutan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BV> a owl:Class ;
+    rdfs:label "Bouvet Island"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BW> a owl:Class ;
+    rdfs:label "Botswana"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BZ> a owl:Class ;
+    rdfs:label "Belize"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C441> a owl:Class ;
+    rdfs:label "Australian Oceania"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CC> <http://gss-data.org.uk/def/class/cord-geographies/CX> <http://gss-data.org.uk/def/class/cord-geographies/HM> <http://gss-data.org.uk/def/class/cord-geographies/NF> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C441> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C442> a owl:Class ;
+    rdfs:label "US Oceania"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AS> <http://gss-data.org.uk/def/class/cord-geographies/GU> <http://gss-data.org.uk/def/class/cord-geographies/UM> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C442> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C443> a owl:Class ;
+    rdfs:label "New Zealand Oceania"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CK> <http://gss-data.org.uk/def/class/cord-geographies/NU> <http://gss-data.org.uk/def/class/cord-geographies/TK> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C443> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C444> a owl:Class ;
+    rdfs:label "Polar Regions"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AQ> <http://gss-data.org.uk/def/class/cord-geographies/BV> <http://gss-data.org.uk/def/class/cord-geographies/GS> <http://gss-data.org.uk/def/class/cord-geographies/TF> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C444> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C449> a owl:Class ;
+    rdfs:label "African ACP"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C469> <http://gss-data.org.uk/def/class/cord-geographies/C470> <http://gss-data.org.uk/def/class/cord-geographies/GA> <http://gss-data.org.uk/def/class/cord-geographies/NG> <http://gss-data.org.uk/def/class/cord-geographies/ZA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C449> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C450> a owl:Class ;
+    rdfs:label "Caribbean ACP"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BB> <http://gss-data.org.uk/def/class/cord-geographies/BS> <http://gss-data.org.uk/def/class/cord-geographies/C474> <http://gss-data.org.uk/def/class/cord-geographies/JM> <http://gss-data.org.uk/def/class/cord-geographies/KN> <http://gss-data.org.uk/def/class/cord-geographies/SR> <http://gss-data.org.uk/def/class/cord-geographies/TT> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C450> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C451> a owl:Class ;
+    rdfs:label "Pacific ACP"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CK> <http://gss-data.org.uk/def/class/cord-geographies/FJ> <http://gss-data.org.uk/def/class/cord-geographies/FM> <http://gss-data.org.uk/def/class/cord-geographies/KI> <http://gss-data.org.uk/def/class/cord-geographies/MH> <http://gss-data.org.uk/def/class/cord-geographies/NR> <http://gss-data.org.uk/def/class/cord-geographies/NU> <http://gss-data.org.uk/def/class/cord-geographies/PG> <http://gss-data.org.uk/def/class/cord-geographies/PW> <http://gss-data.org.uk/def/class/cord-geographies/SB> <http://gss-data.org.uk/def/class/cord-geographies/TO> <http://gss-data.org.uk/def/class/cord-geographies/TV> <http://gss-data.org.uk/def/class/cord-geographies/VU> <http://gss-data.org.uk/def/class/cord-geographies/WS> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C451> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C459> a owl:Class ;
+    rdfs:label "Mercosur countries"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AR> <http://gss-data.org.uk/def/class/cord-geographies/BR> <http://gss-data.org.uk/def/class/cord-geographies/PY> <http://gss-data.org.uk/def/class/cord-geographies/UY> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C459> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C471> a owl:Class ;
+    rdfs:label "Rest of Africa nes"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/IO> <http://gss-data.org.uk/def/class/cord-geographies/SH> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C471> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C476> a owl:Class ;
+    rdfs:label "Other Caribbean"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AI> <http://gss-data.org.uk/def/class/cord-geographies/AW> <http://gss-data.org.uk/def/class/cord-geographies/TC> <http://gss-data.org.uk/def/class/cord-geographies/VI> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C476> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C487> a owl:Class ;
+    rdfs:label "Other oil exporters"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BN> <http://gss-data.org.uk/def/class/cord-geographies/DZ> <http://gss-data.org.uk/def/class/cord-geographies/EC> <http://gss-data.org.uk/def/class/cord-geographies/GA> <http://gss-data.org.uk/def/class/cord-geographies/ID> <http://gss-data.org.uk/def/class/cord-geographies/IR> <http://gss-data.org.uk/def/class/cord-geographies/LY> <http://gss-data.org.uk/def/class/cord-geographies/NG> <http://gss-data.org.uk/def/class/cord-geographies/TL> <http://gss-data.org.uk/def/class/cord-geographies/TT> <http://gss-data.org.uk/def/class/cord-geographies/VE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C487> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C488> a owl:Class ;
+    rdfs:label "Rest of World: Africa"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C494> <http://gss-data.org.uk/def/class/cord-geographies/EG> <http://gss-data.org.uk/def/class/cord-geographies/MA> <http://gss-data.org.uk/def/class/cord-geographies/TN> <http://gss-data.org.uk/def/class/cord-geographies/ZA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C488> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C490> a owl:Class ;
+    rdfs:label "Rest of World: Asia"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C477> <http://gss-data.org.uk/def/class/cord-geographies/C478> <http://gss-data.org.uk/def/class/cord-geographies/C479> <http://gss-data.org.uk/def/class/cord-geographies/C480> <http://gss-data.org.uk/def/class/cord-geographies/C481> <http://gss-data.org.uk/def/class/cord-geographies/CN> <http://gss-data.org.uk/def/class/cord-geographies/HK> <http://gss-data.org.uk/def/class/cord-geographies/IL> <http://gss-data.org.uk/def/class/cord-geographies/IN> <http://gss-data.org.uk/def/class/cord-geographies/LB> <http://gss-data.org.uk/def/class/cord-geographies/MY> <http://gss-data.org.uk/def/class/cord-geographies/PH> <http://gss-data.org.uk/def/class/cord-geographies/PK> <http://gss-data.org.uk/def/class/cord-geographies/SG> <http://gss-data.org.uk/def/class/cord-geographies/TH> <http://gss-data.org.uk/def/class/cord-geographies/TW> <http://gss-data.org.uk/def/class/cord-geographies/VN> <http://gss-data.org.uk/def/class/cord-geographies/YE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C490> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C491> a owl:Class ;
+    rdfs:label "Other Oceania"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/FJ> <http://gss-data.org.uk/def/class/cord-geographies/FM> <http://gss-data.org.uk/def/class/cord-geographies/KI> <http://gss-data.org.uk/def/class/cord-geographies/MH> <http://gss-data.org.uk/def/class/cord-geographies/MP> <http://gss-data.org.uk/def/class/cord-geographies/NC> <http://gss-data.org.uk/def/class/cord-geographies/NR> <http://gss-data.org.uk/def/class/cord-geographies/PF> <http://gss-data.org.uk/def/class/cord-geographies/PN> <http://gss-data.org.uk/def/class/cord-geographies/PW> <http://gss-data.org.uk/def/class/cord-geographies/SB> <http://gss-data.org.uk/def/class/cord-geographies/TO> <http://gss-data.org.uk/def/class/cord-geographies/TV> <http://gss-data.org.uk/def/class/cord-geographies/WF> <http://gss-data.org.uk/def/class/cord-geographies/WS> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C491> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C72> a owl:Class ;
+    rdfs:label "Rest of World"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C415> <http://gss-data.org.uk/def/class/cord-geographies/C472> <http://gss-data.org.uk/def/class/cord-geographies/C488> <http://gss-data.org.uk/def/class/cord-geographies/C489> <http://gss-data.org.uk/def/class/cord-geographies/C490> <http://gss-data.org.uk/def/class/cord-geographies/C493> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C72> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C77> a owl:Class ;
+    rdfs:label "Oil exporting countries"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AE> <http://gss-data.org.uk/def/class/cord-geographies/C486> <http://gss-data.org.uk/def/class/cord-geographies/C487> <http://gss-data.org.uk/def/class/cord-geographies/SA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C77> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C80> a owl:Class ;
+    rdfs:label "Rest of Western Europe"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/A5> <http://gss-data.org.uk/def/class/cord-geographies/C482> <http://gss-data.org.uk/def/class/cord-geographies/GI> <http://gss-data.org.uk/def/class/cord-geographies/TR> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C80> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C83> a owl:Class ;
+    rdfs:label "North America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/B1> <http://gss-data.org.uk/def/class/cord-geographies/C484> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C83> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C93> a owl:Class ;
+    rdfs:label "Former Yugoslavia"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BA> <http://gss-data.org.uk/def/class/cord-geographies/C114> <http://gss-data.org.uk/def/class/cord-geographies/MK> <http://gss-data.org.uk/def/class/cord-geographies/SI> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C93> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CC> a owl:Class ;
+    rdfs:label "Cocos Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CD> a owl:Class ;
+    rdfs:label "Congo (Democratic Republic)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CF> a owl:Class ;
+    rdfs:label "Central African Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CG> a owl:Class ;
+    rdfs:label "Congo (Republic)"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CI> a owl:Class ;
+    rdfs:label "Ivory Coast"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CM> a owl:Class ;
+    rdfs:label "Cameroon"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CR> a owl:Class ;
+    rdfs:label "Costa Rica"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CS> a owl:Class ;
+    rdfs:label "Serbia and Montenegro"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/ME> <http://gss-data.org.uk/def/class/cord-geographies/XS> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CU> a owl:Class ;
+    rdfs:label "Cuba"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CV> a owl:Class ;
+    rdfs:label "Cape Verde"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CW> a owl:Class ;
+    rdfs:label "Curacao"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CX> a owl:Class ;
+    rdfs:label "Christmas Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CX> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/D3> a owl:Class ;
+    rdfs:label "Total EU (25)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CY> <http://gss-data.org.uk/def/class/cord-geographies/CZ> <http://gss-data.org.uk/def/class/cord-geographies/D2> <http://gss-data.org.uk/def/class/cord-geographies/EE> <http://gss-data.org.uk/def/class/cord-geographies/HU> <http://gss-data.org.uk/def/class/cord-geographies/LT> <http://gss-data.org.uk/def/class/cord-geographies/LV> <http://gss-data.org.uk/def/class/cord-geographies/MT> <http://gss-data.org.uk/def/class/cord-geographies/PL> <http://gss-data.org.uk/def/class/cord-geographies/SI> <http://gss-data.org.uk/def/class/cord-geographies/SK> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/D3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/DH> a owl:Class ;
+    rdfs:label "Abu Dhabi"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/DJ> a owl:Class ;
+    rdfs:label "Djibouti"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DJ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/DM> a owl:Class ;
+    rdfs:label "Dominica"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/DO> a owl:Class ;
+    rdfs:label "Dominican Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/DU> a owl:Class ;
+    rdfs:label "Dubai"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/E3> a owl:Class ;
+    rdfs:label "Baltic Countries"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/EE> <http://gss-data.org.uk/def/class/cord-geographies/LT> <http://gss-data.org.uk/def/class/cord-geographies/LV> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/E5> a owl:Class ;
+    rdfs:label "North Africa"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/EG> <http://gss-data.org.uk/def/class/cord-geographies/MA> <http://gss-data.org.uk/def/class/cord-geographies/R9> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/E6> a owl:Class ;
+    rdfs:label "Other Africa"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/8C> <http://gss-data.org.uk/def/class/cord-geographies/EH> <http://gss-data.org.uk/def/class/cord-geographies/SS> <http://gss-data.org.uk/def/class/cord-geographies/ZA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E6> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/E8> a owl:Class ;
+    rdfs:label "North America (BoP)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C484> <http://gss-data.org.uk/def/class/cord-geographies/CA> <http://gss-data.org.uk/def/class/cord-geographies/US> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E8> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/E9> a owl:Class ;
+    rdfs:label "Central America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BL> <http://gss-data.org.uk/def/class/cord-geographies/BQ> <http://gss-data.org.uk/def/class/cord-geographies/CW> <http://gss-data.org.uk/def/class/cord-geographies/MX> <http://gss-data.org.uk/def/class/cord-geographies/R3> <http://gss-data.org.uk/def/class/cord-geographies/SX> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E9> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/EH> a owl:Class ;
+    rdfs:label "Western Sahara"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/EH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ER> a owl:Class ;
+    rdfs:label "Eritrea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ER> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ET> a owl:Class ;
+    rdfs:label "Ethiopia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ET> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/F1> a owl:Class ;
+    rdfs:label "South America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C489> <http://gss-data.org.uk/def/class/cord-geographies/EC> <http://gss-data.org.uk/def/class/cord-geographies/VE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/F1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/F3> a owl:Class ;
+    rdfs:label "Near & Middle East"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/F4> <http://gss-data.org.uk/def/class/cord-geographies/F5> <http://gss-data.org.uk/def/class/cord-geographies/IL> <http://gss-data.org.uk/def/class/cord-geographies/IR> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/F3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/F4> a owl:Class ;
+    rdfs:label "Gulf Arabian Countries"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/J8> <http://gss-data.org.uk/def/class/cord-geographies/SA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/F4> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/F5> a owl:Class ;
+    rdfs:label "Other Near & Middle East"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C477> <http://gss-data.org.uk/def/class/cord-geographies/C481> <http://gss-data.org.uk/def/class/cord-geographies/LB> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/F5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/F6> a owl:Class ;
+    rdfs:label "Other Asia"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/8B> <http://gss-data.org.uk/def/class/cord-geographies/CN> <http://gss-data.org.uk/def/class/cord-geographies/HK> <http://gss-data.org.uk/def/class/cord-geographies/ID> <http://gss-data.org.uk/def/class/cord-geographies/IN> <http://gss-data.org.uk/def/class/cord-geographies/JP> <http://gss-data.org.uk/def/class/cord-geographies/KR> <http://gss-data.org.uk/def/class/cord-geographies/MY> <http://gss-data.org.uk/def/class/cord-geographies/PH> <http://gss-data.org.uk/def/class/cord-geographies/PK> <http://gss-data.org.uk/def/class/cord-geographies/SG> <http://gss-data.org.uk/def/class/cord-geographies/TH> <http://gss-data.org.uk/def/class/cord-geographies/TW> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/F6> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/FO> a owl:Class ;
+    rdfs:label "Faroe Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GD> a owl:Class ;
+    rdfs:label "Grenada"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GE> a owl:Class ;
+    rdfs:label "Georgia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GG> a owl:Class ;
+    rdfs:label "Guernsey"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GH> a owl:Class ;
+    rdfs:label "Ghana"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GL> a owl:Class ;
+    rdfs:label "Greenland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GM> a owl:Class ;
+    rdfs:label "Gambia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GN> a owl:Class ;
+    rdfs:label "Guinea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GQ> a owl:Class ;
+    rdfs:label "Equatorial Guinea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GQ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GS> a owl:Class ;
+    rdfs:label "South Georgia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GT> a owl:Class ;
+    rdfs:label "Guatemala"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GU> a owl:Class ;
+    rdfs:label "Guam"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GW> a owl:Class ;
+    rdfs:label "Guinea Bissau"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/HA> a owl:Class ;
+    rdfs:label "Sharjah etc"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/HM> a owl:Class ;
+    rdfs:label "Heard & McDonald Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/HN> a owl:Class ;
+    rdfs:label "Honduras"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/HT> a owl:Class ;
+    rdfs:label "Haiti"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/I3> a owl:Class ;
+    rdfs:label "EMU(13) Euro Area 13"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/A3> <http://gss-data.org.uk/def/class/cord-geographies/AT> <http://gss-data.org.uk/def/class/cord-geographies/DE> <http://gss-data.org.uk/def/class/cord-geographies/ES> <http://gss-data.org.uk/def/class/cord-geographies/FI> <http://gss-data.org.uk/def/class/cord-geographies/FR> <http://gss-data.org.uk/def/class/cord-geographies/GR> <http://gss-data.org.uk/def/class/cord-geographies/IE> <http://gss-data.org.uk/def/class/cord-geographies/IT> <http://gss-data.org.uk/def/class/cord-geographies/NL> <http://gss-data.org.uk/def/class/cord-geographies/PT> <http://gss-data.org.uk/def/class/cord-geographies/SI> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/I3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/I4> a owl:Class ;
+    rdfs:label "EMU(15)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CY> <http://gss-data.org.uk/def/class/cord-geographies/I3> <http://gss-data.org.uk/def/class/cord-geographies/MT> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/I4> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/I5> a owl:Class ;
+    rdfs:label "EMU(16)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/I4> <http://gss-data.org.uk/def/class/cord-geographies/SK> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/I5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/I6> a owl:Class ;
+    rdfs:label "EMU(17) Euro Area 17"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/EE> <http://gss-data.org.uk/def/class/cord-geographies/I5> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/I6> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/IM> a owl:Class ;
+    rdfs:label "Isle of Man"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/IO> a owl:Class ;
+    rdfs:label "British Indian Ocean Territory"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/J4> a owl:Class ;
+    rdfs:label "Extra Euro Area(15)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/J5> <http://gss-data.org.uk/def/class/cord-geographies/SK> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/J4> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/J5> a owl:Class ;
+    rdfs:label "Extra Euro Area(16)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/EE> <http://gss-data.org.uk/def/class/cord-geographies/J6> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/J5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/J6> a owl:Class ;
+    rdfs:label "Extra Euro Area(17)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/J7> <http://gss-data.org.uk/def/class/cord-geographies/LV> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/J6> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/J7> a owl:Class ;
+    rdfs:label "Extra Euro Area(18)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/A5> <http://gss-data.org.uk/def/class/cord-geographies/BG> <http://gss-data.org.uk/def/class/cord-geographies/CZ> <http://gss-data.org.uk/def/class/cord-geographies/DK> <http://gss-data.org.uk/def/class/cord-geographies/E2> <http://gss-data.org.uk/def/class/cord-geographies/E4> <http://gss-data.org.uk/def/class/cord-geographies/E7> <http://gss-data.org.uk/def/class/cord-geographies/F2> <http://gss-data.org.uk/def/class/cord-geographies/F7> <http://gss-data.org.uk/def/class/cord-geographies/HR> <http://gss-data.org.uk/def/class/cord-geographies/HU> <http://gss-data.org.uk/def/class/cord-geographies/LT> <http://gss-data.org.uk/def/class/cord-geographies/PL> <http://gss-data.org.uk/def/class/cord-geographies/RO> <http://gss-data.org.uk/def/class/cord-geographies/SE> <http://gss-data.org.uk/def/class/cord-geographies/XC> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/J7> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/J8> a owl:Class ;
+    rdfs:label "Residual Gulf Arabian (aka R5-Residual Gulf Arabian)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AE> <http://gss-data.org.uk/def/class/cord-geographies/C486> <http://gss-data.org.uk/def/class/cord-geographies/YE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/J8> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/JE> a owl:Class ;
+    rdfs:label "Jersey"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/JE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/JO> a owl:Class ;
+    rdfs:label "Jordan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/JO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/K4> a owl:Class ;
+    rdfs:label "Non-EMU(15)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/K5> <http://gss-data.org.uk/def/class/cord-geographies/SK> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/K4> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/K5> a owl:Class ;
+    rdfs:label "Non-EMU(16)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/EE> <http://gss-data.org.uk/def/class/cord-geographies/K6> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/K5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/K6> a owl:Class ;
+    rdfs:label "Non-EMU(17)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BG> <http://gss-data.org.uk/def/class/cord-geographies/CZ> <http://gss-data.org.uk/def/class/cord-geographies/DK> <http://gss-data.org.uk/def/class/cord-geographies/HU> <http://gss-data.org.uk/def/class/cord-geographies/LT> <http://gss-data.org.uk/def/class/cord-geographies/LV> <http://gss-data.org.uk/def/class/cord-geographies/PL> <http://gss-data.org.uk/def/class/cord-geographies/RO> <http://gss-data.org.uk/def/class/cord-geographies/SE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/K6> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KE> a owl:Class ;
+    rdfs:label "Kenya"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KG> a owl:Class ;
+    rdfs:label "Kyrgyz Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KH> a owl:Class ;
+    rdfs:label "Cambodia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KM> a owl:Class ;
+    rdfs:label "Comoros"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KP> a owl:Class ;
+    rdfs:label "North Korea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KP> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KY> a owl:Class ;
+    rdfs:label "Cayman Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KZ> a owl:Class ;
+    rdfs:label "Kazakhstan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LA> a owl:Class ;
+    rdfs:label "Laos"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LC> a owl:Class ;
+    rdfs:label "St Lucia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LK> a owl:Class ;
+    rdfs:label "Sri Lanka"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LS> a owl:Class ;
+    rdfs:label "Lesotho"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ME> a owl:Class ;
+    rdfs:label "Montenegro"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ME> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MG> a owl:Class ;
+    rdfs:label "Madagascar"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ML> a owl:Class ;
+    rdfs:label "Mali"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ML> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MM> a owl:Class ;
+    rdfs:label "Myanmar"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MN> a owl:Class ;
+    rdfs:label "Mongolia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MO> a owl:Class ;
+    rdfs:label "Macao"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MP> a owl:Class ;
+    rdfs:label "Northern Mariana Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MP> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MR> a owl:Class ;
+    rdfs:label "Mauritania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MS> a owl:Class ;
+    rdfs:label "Montserrat"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MU> a owl:Class ;
+    rdfs:label "Mauritius"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MV> a owl:Class ;
+    rdfs:label "Maldives"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MW> a owl:Class ;
+    rdfs:label "Malawi"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MZ> a owl:Class ;
+    rdfs:label "Mozambique"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NA> a owl:Class ;
+    rdfs:label "Namibia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NC> a owl:Class ;
+    rdfs:label "New Caledonia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NE> a owl:Class ;
+    rdfs:label "Niger"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NF> a owl:Class ;
+    rdfs:label "Norfolk Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NI> a owl:Class ;
+    rdfs:label "Nicaragua"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NP> a owl:Class ;
+    rdfs:label "Nepal"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NP> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/OM> a owl:Class ;
+    rdfs:label "Oman"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/OM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PF> a owl:Class ;
+    rdfs:label "French Polynesia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PM> a owl:Class ;
+    rdfs:label "St. Pierre & Miquelon"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PN> a owl:Class ;
+    rdfs:label "Pitcairn"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PR> a owl:Class ;
+    rdfs:label "Puerto Rico"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PS> a owl:Class ;
+    rdfs:label "Occupied Palestinian Territory"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/R3> a owl:Class ;
+    rdfs:label "Residual Central America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C472> <http://gss-data.org.uk/def/class/cord-geographies/TT> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/R3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/RS> a owl:Class ;
+    rdfs:label "Serbia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/RS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/RW> a owl:Class ;
+    rdfs:label "Rwanda"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/RW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/S6> a owl:Class ;
+    rdfs:label "Non-EMU(17) excluding DK and SE"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BG> <http://gss-data.org.uk/def/class/cord-geographies/CZ> <http://gss-data.org.uk/def/class/cord-geographies/HU> <http://gss-data.org.uk/def/class/cord-geographies/LT> <http://gss-data.org.uk/def/class/cord-geographies/LV> <http://gss-data.org.uk/def/class/cord-geographies/PL> <http://gss-data.org.uk/def/class/cord-geographies/RO> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/S6> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SC> a owl:Class ;
+    rdfs:label "Seychelles"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SD> a owl:Class ;
+    rdfs:label "Sudan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SH> a owl:Class ;
+    rdfs:label "St. Helena"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SL> a owl:Class ;
+    rdfs:label "Sierra Leone"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SM> a owl:Class ;
+    rdfs:label "San Marino"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SN> a owl:Class ;
+    rdfs:label "Senegal"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SO> a owl:Class ;
+    rdfs:label "Somalia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SS> a owl:Class ;
+    rdfs:label "South Sudan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ST> a owl:Class ;
+    rdfs:label "Sao Tome & Principe"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ST> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SV> a owl:Class ;
+    rdfs:label "El Salvador"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SX> a owl:Class ;
+    rdfs:label "Sint Maarten"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SX> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SY> a owl:Class ;
+    rdfs:label "Syria"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SZ> a owl:Class ;
+    rdfs:label "Swaziland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TC> a owl:Class ;
+    rdfs:label "Turks & Caicos Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TD> a owl:Class ;
+    rdfs:label "Chad"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TF> a owl:Class ;
+    rdfs:label "French Southern Territories"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TG> a owl:Class ;
+    rdfs:label "Togo"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TJ> a owl:Class ;
+    rdfs:label "Tajikistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TJ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TK> a owl:Class ;
+    rdfs:label "Tokelau Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TM> a owl:Class ;
+    rdfs:label "Turkmenistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TZ> a owl:Class ;
+    rdfs:label "Tanzania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/U29> a owl:Class ;
+    rdfs:label "Euro Area, Changing Composition"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/U29> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/UG> a owl:Class ;
+    rdfs:label "Uganda"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/UG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/UM> a owl:Class ;
+    rdfs:label "US Minor Outlying Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/UM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/US1> a owl:Class ;
+    rdfs:label "United States exc Puerto Rico"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/US1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/US2> a owl:Class ;
+    rdfs:label "United States inc Puerto Rico"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/US2> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/UZ> a owl:Class ;
+    rdfs:label "Uzbekistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/UZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/V3> a owl:Class ;
+    rdfs:label "Total EU(28)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/HR> <http://gss-data.org.uk/def/class/cord-geographies/V1> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/V3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/VA> a owl:Class ;
+    rdfs:label "Vatican City"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/VC> a owl:Class ;
+    rdfs:label "St Vincent"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/VG> a owl:Class ;
+    rdfs:label "British Virgin Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/VI> a owl:Class ;
+    rdfs:label "US Virgin Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/WF> a owl:Class ;
+    rdfs:label "Wallis & Futuna"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/WF> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/X977> a owl:Class ;
+    rdfs:label "Unknown Country C"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/X977> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/X997> a owl:Class ;
+    rdfs:label "Unknown Country A"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/X997> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/X999> a owl:Class ;
+    rdfs:label "Unknown Country B"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/X999> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/XK> a owl:Class ;
+    rdfs:label "Kosovo"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/XK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/XL> a owl:Class ;
+    rdfs:label "Melilla"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/XL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/XS> a owl:Class ;
+    rdfs:label "Serbia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/XS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/YT> a owl:Class ;
+    rdfs:label "Mayotte"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/YT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ZM> a owl:Class ;
+    rdfs:label "Zambia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ZM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ZW> a owl:Class ;
+    rdfs:label "Zimbabwe"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ZW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/A3> a owl:Class ;
+    rdfs:label "Belgium & Luxembourg"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BE> <http://gss-data.org.uk/def/class/cord-geographies/LU> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/A3> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BE> a owl:Class ;
+    rdfs:label "Belgium"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BH> a owl:Class ;
+    rdfs:label "Bahrain"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BL> a owl:Class ;
+    rdfs:label "Saint Barthelemy"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BY> a owl:Class ;
+    rdfs:label "Belarus"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C415> a owl:Class ;
+    rdfs:label "Rest of World: Oceania"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C441> <http://gss-data.org.uk/def/class/cord-geographies/C442> <http://gss-data.org.uk/def/class/cord-geographies/C443> <http://gss-data.org.uk/def/class/cord-geographies/C444> <http://gss-data.org.uk/def/class/cord-geographies/C491> <http://gss-data.org.uk/def/class/cord-geographies/PG> <http://gss-data.org.uk/def/class/cord-geographies/VU> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C415> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C470> a owl:Class ;
+    rdfs:label "Rest of Africa ACP"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AO> <http://gss-data.org.uk/def/class/cord-geographies/BI> <http://gss-data.org.uk/def/class/cord-geographies/BW> <http://gss-data.org.uk/def/class/cord-geographies/CD> <http://gss-data.org.uk/def/class/cord-geographies/CV> <http://gss-data.org.uk/def/class/cord-geographies/DJ> <http://gss-data.org.uk/def/class/cord-geographies/ER> <http://gss-data.org.uk/def/class/cord-geographies/ET> <http://gss-data.org.uk/def/class/cord-geographies/GH> <http://gss-data.org.uk/def/class/cord-geographies/GM> <http://gss-data.org.uk/def/class/cord-geographies/GN> <http://gss-data.org.uk/def/class/cord-geographies/KE> <http://gss-data.org.uk/def/class/cord-geographies/LR> <http://gss-data.org.uk/def/class/cord-geographies/LS> <http://gss-data.org.uk/def/class/cord-geographies/MG> <http://gss-data.org.uk/def/class/cord-geographies/MR> <http://gss-data.org.uk/def/class/cord-geographies/MU> <http://gss-data.org.uk/def/class/cord-geographies/MW> <http://gss-data.org.uk/def/class/cord-geographies/MZ> <http://gss-data.org.uk/def/class/cord-geographies/NA> <http://gss-data.org.uk/def/class/cord-geographies/RW> <http://gss-data.org.uk/def/class/cord-geographies/SC> <http://gss-data.org.uk/def/class/cord-geographies/SD> <http://gss-data.org.uk/def/class/cord-geographies/SL> <http://gss-data.org.uk/def/class/cord-geographies/SO> <http://gss-data.org.uk/def/class/cord-geographies/ST> <http://gss-data.org.uk/def/class/cord-geographies/SZ> <http://gss-data.org.uk/def/class/cord-geographies/TZ> <http://gss-data.org.uk/def/class/cord-geographies/UG> <http://gss-data.org.uk/def/class/cord-geographies/ZM> <http://gss-data.org.uk/def/class/cord-geographies/ZW> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C470> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C472> a owl:Class ;
+    rdfs:label "Rest of World: Central America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BB> <http://gss-data.org.uk/def/class/cord-geographies/BS> <http://gss-data.org.uk/def/class/cord-geographies/C473> <http://gss-data.org.uk/def/class/cord-geographies/C474> <http://gss-data.org.uk/def/class/cord-geographies/C475> <http://gss-data.org.uk/def/class/cord-geographies/C476> <http://gss-data.org.uk/def/class/cord-geographies/JM> <http://gss-data.org.uk/def/class/cord-geographies/KN> <http://gss-data.org.uk/def/class/cord-geographies/PA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C472> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C473> a owl:Class ;
+    rdfs:label "Central America Offshores"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AN> <http://gss-data.org.uk/def/class/cord-geographies/BM> <http://gss-data.org.uk/def/class/cord-geographies/KY> <http://gss-data.org.uk/def/class/cord-geographies/MS> <http://gss-data.org.uk/def/class/cord-geographies/VG> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C473> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C474> a owl:Class ;
+    rdfs:label "Other Caribbean ACP"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AG> <http://gss-data.org.uk/def/class/cord-geographies/BZ> <http://gss-data.org.uk/def/class/cord-geographies/DM> <http://gss-data.org.uk/def/class/cord-geographies/DO> <http://gss-data.org.uk/def/class/cord-geographies/GD> <http://gss-data.org.uk/def/class/cord-geographies/HT> <http://gss-data.org.uk/def/class/cord-geographies/LC> <http://gss-data.org.uk/def/class/cord-geographies/VC> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C474> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C475> a owl:Class ;
+    rdfs:label "Other Latin America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CR> <http://gss-data.org.uk/def/class/cord-geographies/CU> <http://gss-data.org.uk/def/class/cord-geographies/GT> <http://gss-data.org.uk/def/class/cord-geographies/HN> <http://gss-data.org.uk/def/class/cord-geographies/NI> <http://gss-data.org.uk/def/class/cord-geographies/SV> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C475> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C480> a owl:Class ;
+    rdfs:label "Rest of Other Asia"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AF> <http://gss-data.org.uk/def/class/cord-geographies/BD> <http://gss-data.org.uk/def/class/cord-geographies/BT> <http://gss-data.org.uk/def/class/cord-geographies/KP> <http://gss-data.org.uk/def/class/cord-geographies/LK> <http://gss-data.org.uk/def/class/cord-geographies/MN> <http://gss-data.org.uk/def/class/cord-geographies/MO> <http://gss-data.org.uk/def/class/cord-geographies/MV> <http://gss-data.org.uk/def/class/cord-geographies/NP> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C480> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C486> a owl:Class ;
+    rdfs:label "Other Gulf Arabian"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BH> <http://gss-data.org.uk/def/class/cord-geographies/IQ> <http://gss-data.org.uk/def/class/cord-geographies/KW> <http://gss-data.org.uk/def/class/cord-geographies/OM> <http://gss-data.org.uk/def/class/cord-geographies/QA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C486> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C489> a owl:Class ;
+    rdfs:label "Rest of World: South America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AR> <http://gss-data.org.uk/def/class/cord-geographies/BO> <http://gss-data.org.uk/def/class/cord-geographies/BR> <http://gss-data.org.uk/def/class/cord-geographies/CL> <http://gss-data.org.uk/def/class/cord-geographies/CO> <http://gss-data.org.uk/def/class/cord-geographies/FK> <http://gss-data.org.uk/def/class/cord-geographies/GY> <http://gss-data.org.uk/def/class/cord-geographies/PE> <http://gss-data.org.uk/def/class/cord-geographies/PY> <http://gss-data.org.uk/def/class/cord-geographies/SR> <http://gss-data.org.uk/def/class/cord-geographies/UY> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C489> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C493> a owl:Class ;
+    rdfs:label "Rest of World: Europe"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AL> <http://gss-data.org.uk/def/class/cord-geographies/BA> <http://gss-data.org.uk/def/class/cord-geographies/BY> <http://gss-data.org.uk/def/class/cord-geographies/C114> <http://gss-data.org.uk/def/class/cord-geographies/MD> <http://gss-data.org.uk/def/class/cord-geographies/MK> <http://gss-data.org.uk/def/class/cord-geographies/RU> <http://gss-data.org.uk/def/class/cord-geographies/UA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C493> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C494> a owl:Class ;
+    rdfs:label "Rest of Africa"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C469> <http://gss-data.org.uk/def/class/cord-geographies/C470> <http://gss-data.org.uk/def/class/cord-geographies/C471> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C494> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C76> a owl:Class ;
+    rdfs:label "Other OECD countries"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AU> <http://gss-data.org.uk/def/class/cord-geographies/JP> <http://gss-data.org.uk/def/class/cord-geographies/KR> <http://gss-data.org.uk/def/class/cord-geographies/NZ> <http://gss-data.org.uk/def/class/cord-geographies/XC> <http://gss-data.org.uk/def/class/cord-geographies/XL> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C76> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CA> a owl:Class ;
+    rdfs:label "Canada"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CH> a owl:Class ;
+    rdfs:label "Switzerland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CK> a owl:Class ;
+    rdfs:label "Cook Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CO> a owl:Class ;
+    rdfs:label "Colombia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/D2> a owl:Class ;
+    rdfs:label "Total EU (15)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/A3> <http://gss-data.org.uk/def/class/cord-geographies/AT> <http://gss-data.org.uk/def/class/cord-geographies/DE> <http://gss-data.org.uk/def/class/cord-geographies/DK> <http://gss-data.org.uk/def/class/cord-geographies/ES> <http://gss-data.org.uk/def/class/cord-geographies/FI> <http://gss-data.org.uk/def/class/cord-geographies/FR> <http://gss-data.org.uk/def/class/cord-geographies/GR> <http://gss-data.org.uk/def/class/cord-geographies/IE> <http://gss-data.org.uk/def/class/cord-geographies/IT> <http://gss-data.org.uk/def/class/cord-geographies/NL> <http://gss-data.org.uk/def/class/cord-geographies/PT> <http://gss-data.org.uk/def/class/cord-geographies/SE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/D2> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/D4> a owl:Class ;
+    rdfs:label "Non-EU ( D4 is known as Extra EU-15, here it is REst of World or V2)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C72> <http://gss-data.org.uk/def/class/cord-geographies/C76> <http://gss-data.org.uk/def/class/cord-geographies/C77> <http://gss-data.org.uk/def/class/cord-geographies/C80> <http://gss-data.org.uk/def/class/cord-geographies/C83> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/D4> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/E4> a owl:Class ;
+    rdfs:label "Africa"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/E5> <http://gss-data.org.uk/def/class/cord-geographies/E6> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E4> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/E7> a owl:Class ;
+    rdfs:label "America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/E8> <http://gss-data.org.uk/def/class/cord-geographies/E9> <http://gss-data.org.uk/def/class/cord-geographies/F1> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E7> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/F2> a owl:Class ;
+    rdfs:label "Asia"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/F3> <http://gss-data.org.uk/def/class/cord-geographies/F6> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/F2> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/F7> a owl:Class ;
+    rdfs:label "Oceania & Polar Regions"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AU> <http://gss-data.org.uk/def/class/cord-geographies/C415> <http://gss-data.org.uk/def/class/cord-geographies/NZ> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/F7> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/FJ> a owl:Class ;
+    rdfs:label "Fiji"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FJ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/FK> a owl:Class ;
+    rdfs:label "Falkland Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/FM> a owl:Class ;
+    rdfs:label "Micronesia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GY> a owl:Class ;
+    rdfs:label "Guyana"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/IN> a owl:Class ;
+    rdfs:label "India"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/IQ> a owl:Class ;
+    rdfs:label "Iraq"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IQ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KI> a owl:Class ;
+    rdfs:label "Kiribati"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KW> a owl:Class ;
+    rdfs:label "Kuwait"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LI> a owl:Class ;
+    rdfs:label "Liechtenstein"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LR> a owl:Class ;
+    rdfs:label "Liberia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LU> a owl:Class ;
+    rdfs:label "Luxembourg"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MH> a owl:Class ;
+    rdfs:label "Marshall Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NR> a owl:Class ;
+    rdfs:label "Nauru"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NU> a owl:Class ;
+    rdfs:label "Niue Island"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PK> a owl:Class ;
+    rdfs:label "Pakistan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PW> a owl:Class ;
+    rdfs:label "Palau"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/QA> a owl:Class ;
+    rdfs:label "Qatar"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/QA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/R9> a owl:Class ;
+    rdfs:label "Residual North Africa"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/DZ> <http://gss-data.org.uk/def/class/cord-geographies/LY> <http://gss-data.org.uk/def/class/cord-geographies/TN> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/R9> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/RU> a owl:Class ;
+    rdfs:label "Russia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/RU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SB> a owl:Class ;
+    rdfs:label "Solomon Islands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SB> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TO> a owl:Class ;
+    rdfs:label "Tonga"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TV> a owl:Class ;
+    rdfs:label "Tuvalu"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/UA> a owl:Class ;
+    rdfs:label "Ukraine"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/UA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/US> a owl:Class ;
+    rdfs:label "United States"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/PR> <http://gss-data.org.uk/def/class/cord-geographies/US1> <http://gss-data.org.uk/def/class/cord-geographies/US2> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/US> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/UY> a owl:Class ;
+    rdfs:label "Uruguay"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/UY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/WS> a owl:Class ;
+    rdfs:label "Samoa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/WS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/XC> a owl:Class ;
+    rdfs:label "Ceuta"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/XC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/YE> a owl:Class ;
+    rdfs:label "Yemen"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/YE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AE> a owl:Class ;
+    rdfs:label "United Arab Emirates"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AE1> <http://gss-data.org.uk/def/class/cord-geographies/DH> <http://gss-data.org.uk/def/class/cord-geographies/DU> <http://gss-data.org.uk/def/class/cord-geographies/HA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AL> a owl:Class ;
+    rdfs:label "Albania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AR> a owl:Class ;
+    rdfs:label "Argentina"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AT> a owl:Class ;
+    rdfs:label "Austria"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/AU> a owl:Class ;
+    rdfs:label "Australia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/AU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/B1> a owl:Class ;
+    rdfs:label "NAFTA"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CA> <http://gss-data.org.uk/def/class/cord-geographies/MX> <http://gss-data.org.uk/def/class/cord-geographies/US> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/B1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BB> a owl:Class ;
+    rdfs:label "Barbados"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BB> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BO> a owl:Class ;
+    rdfs:label "Bolivia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BR> a owl:Class ;
+    rdfs:label "Brazil"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BS> a owl:Class ;
+    rdfs:label "Bahamas"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C114> a owl:Class ;
+    rdfs:label "Yugoslavia"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CS> <http://gss-data.org.uk/def/class/cord-geographies/XK> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C114> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C469> a owl:Class ;
+    rdfs:label "Rest of French Franc Zone"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BF> <http://gss-data.org.uk/def/class/cord-geographies/BJ> <http://gss-data.org.uk/def/class/cord-geographies/CF> <http://gss-data.org.uk/def/class/cord-geographies/CG> <http://gss-data.org.uk/def/class/cord-geographies/CI> <http://gss-data.org.uk/def/class/cord-geographies/CM> <http://gss-data.org.uk/def/class/cord-geographies/GQ> <http://gss-data.org.uk/def/class/cord-geographies/GW> <http://gss-data.org.uk/def/class/cord-geographies/KM> <http://gss-data.org.uk/def/class/cord-geographies/ML> <http://gss-data.org.uk/def/class/cord-geographies/NE> <http://gss-data.org.uk/def/class/cord-geographies/SN> <http://gss-data.org.uk/def/class/cord-geographies/TD> <http://gss-data.org.uk/def/class/cord-geographies/TG> <http://gss-data.org.uk/def/class/cord-geographies/YT> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C469> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C477> a owl:Class ;
+    rdfs:label "Former Soviet Near & Middle East"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AM> <http://gss-data.org.uk/def/class/cord-geographies/AZ> <http://gss-data.org.uk/def/class/cord-geographies/GE> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C477> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C478> a owl:Class ;
+    rdfs:label "Other Former Soviet Asia"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/KG> <http://gss-data.org.uk/def/class/cord-geographies/KZ> <http://gss-data.org.uk/def/class/cord-geographies/TJ> <http://gss-data.org.uk/def/class/cord-geographies/TM> <http://gss-data.org.uk/def/class/cord-geographies/UZ> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C478> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C479> a owl:Class ;
+    rdfs:label "Rest of ASEAN"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/KH> <http://gss-data.org.uk/def/class/cord-geographies/LA> <http://gss-data.org.uk/def/class/cord-geographies/MM> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C479> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C482> a owl:Class ;
+    rdfs:label "Other Western Europe"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/AD> <http://gss-data.org.uk/def/class/cord-geographies/FO> <http://gss-data.org.uk/def/class/cord-geographies/JE> <http://gss-data.org.uk/def/class/cord-geographies/SM> <http://gss-data.org.uk/def/class/cord-geographies/VA> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C482> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C484> a owl:Class ;
+    rdfs:label "Other North America"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/GL> <http://gss-data.org.uk/def/class/cord-geographies/PM> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C484> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CN> a owl:Class ;
+    rdfs:label "China"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/DE> a owl:Class ;
+    rdfs:label "Germany"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/E2> a owl:Class ;
+    rdfs:label "Other Europe"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/C482> <http://gss-data.org.uk/def/class/cord-geographies/C493> <http://gss-data.org.uk/def/class/cord-geographies/GI> <http://gss-data.org.uk/def/class/cord-geographies/TR> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/E2> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ES> a owl:Class ;
+    rdfs:label "Spain"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ES> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/FI> a owl:Class ;
+    rdfs:label "Finland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GR> a owl:Class ;
+    rdfs:label "Greece"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/HR> a owl:Class ;
+    rdfs:label "Croatia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/IE> a owl:Class ;
+    rdfs:label "Irish Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/IL> a owl:Class ;
+    rdfs:label "Israel"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/IR> a owl:Class ;
+    rdfs:label "Iran"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/IS> a owl:Class ;
+    rdfs:label "Iceland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IS> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/IT> a owl:Class ;
+    rdfs:label "Italy"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/IT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/JM> a owl:Class ;
+    rdfs:label "Jamaica"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/JM> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/JP> a owl:Class ;
+    rdfs:label "Japan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/JP> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KN> a owl:Class ;
+    rdfs:label "St Kitts & Nevis"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LY> a owl:Class ;
+    rdfs:label "Libya"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MD> a owl:Class ;
+    rdfs:label "Moldova"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MD> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NL> a owl:Class ;
+    rdfs:label "Netherlands"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NO> a owl:Class ;
+    rdfs:label "Norway"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NZ> a owl:Class ;
+    rdfs:label "New Zealand"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PA> a owl:Class ;
+    rdfs:label "Panama"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PG> a owl:Class ;
+    rdfs:label "Papua New Guinea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PT> a owl:Class ;
+    rdfs:label "Portugal"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PY> a owl:Class ;
+    rdfs:label "Paraguay"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SA> a owl:Class ;
+    rdfs:label "Saudi Arabia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SR> a owl:Class ;
+    rdfs:label "Suriname"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TN> a owl:Class ;
+    rdfs:label "Tunisia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TT> a owl:Class ;
+    rdfs:label "Trinidad & Tobago"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/V1> a owl:Class ;
+    rdfs:label "Total EU (27)"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/BG> <http://gss-data.org.uk/def/class/cord-geographies/D3> <http://gss-data.org.uk/def/class/cord-geographies/RO> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/V1> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/VU> a owl:Class ;
+    rdfs:label "Vanuatu"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ZA> a owl:Class ;
+    rdfs:label "South Africa"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ZA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/A5> a owl:Class ;
+    rdfs:label "EFTA"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/CH> <http://gss-data.org.uk/def/class/cord-geographies/IS> <http://gss-data.org.uk/def/class/cord-geographies/LI> <http://gss-data.org.uk/def/class/cord-geographies/NO> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/A5> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BA> a owl:Class ;
+    rdfs:label "Bosnia & Herzegovina"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BN> a owl:Class ;
+    rdfs:label "Brunei"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/C481> a owl:Class ;
+    rdfs:label "Rest of Near & Middle East"@en-gb ;
+    owl:disjointUnionOf ( <http://gss-data.org.uk/def/class/cord-geographies/JO> <http://gss-data.org.uk/def/class/cord-geographies/PS> <http://gss-data.org.uk/def/class/cord-geographies/SY> ) ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/C481> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CL> a owl:Class ;
+    rdfs:label "Chile"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/DK> a owl:Class ;
+    rdfs:label "Denmark"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/DZ> a owl:Class ;
+    rdfs:label "Algeria"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/DZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/EC> a owl:Class ;
+    rdfs:label "Ecuador"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/EC> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/EG> a owl:Class ;
+    rdfs:label "Egypt"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/EG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/FR> a owl:Class ;
+    rdfs:label "France"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/FR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GA> a owl:Class ;
+    rdfs:label "Gabon"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/GI> a owl:Class ;
+    rdfs:label "Gibraltar"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/GI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/KR> a owl:Class ;
+    rdfs:label "South Korea"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/KR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LB> a owl:Class ;
+    rdfs:label "Lebanon"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LB> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MA> a owl:Class ;
+    rdfs:label "Morocco"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MA> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MK> a owl:Class ;
+    rdfs:label "FYR Macedonia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MX> a owl:Class ;
+    rdfs:label "Mexico"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MX> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/NG> a owl:Class ;
+    rdfs:label "Nigeria"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/NG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PE> a owl:Class ;
+    rdfs:label "Peru"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SE> a owl:Class ;
+    rdfs:label "Sweden"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TL> a owl:Class ;
+    rdfs:label "East Timor"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TR> a owl:Class ;
+    rdfs:label "Turkey"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TR> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TW> a owl:Class ;
+    rdfs:label "Taiwan"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TW> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/VE> a owl:Class ;
+    rdfs:label "Venezuela"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/VN> a owl:Class ;
+    rdfs:label "Vietnam"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/VN> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/HK> a owl:Class ;
+    rdfs:label "Hong Kong"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/ID> a owl:Class ;
+    rdfs:label "Indonesia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/ID> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MY> a owl:Class ;
+    rdfs:label "Malaysia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SI> a owl:Class ;
+    rdfs:label "Slovenia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SI> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/TH> a owl:Class ;
+    rdfs:label "Thailand"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/TH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CY> a owl:Class ;
+    rdfs:label "Cyprus"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CY> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LT> a owl:Class ;
+    rdfs:label "Lithuania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/MT> a owl:Class ;
+    rdfs:label "Malta"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/MT> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PH> a owl:Class ;
+    rdfs:label "Philippines"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PH> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/PL> a owl:Class ;
+    rdfs:label "Poland"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/PL> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SG> a owl:Class ;
+    rdfs:label "Singapore"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/BG> a owl:Class ;
+    rdfs:label "Bulgaria"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/BG> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/CZ> a owl:Class ;
+    rdfs:label "Czech Republic"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/CZ> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/EE> a owl:Class ;
+    rdfs:label "Estonia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/EE> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/HU> a owl:Class ;
+    rdfs:label "Hungary"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/HU> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/LV> a owl:Class ;
+    rdfs:label "Latvia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/LV> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/RO> a owl:Class ;
+    rdfs:label "Romania"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/RO> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+<http://gss-data.org.uk/def/class/cord-geographies/SK> a owl:Class ;
+    rdfs:label "Slovakia"@en-gb ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:hasValue <http://gss-data.org.uk/def/concept/ons-trade-areas-cord/SK> ;
+            owl:onProperty <http://gss-data.org.uk/def/dimension/trade-partner-geography> ] .
+
+

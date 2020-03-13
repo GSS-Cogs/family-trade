@@ -1,0 +1,306 @@
+Label,Notation,Parent Notation,Sort Priority
+All NUTS1 areas,nuts1/all,,1
+North East,nuts1/UKC,nuts1/all,2
+North West,nuts1/UKD,nuts1/all,3
+Yorkshire and The Humber,nuts1/UKE,nuts1/all,4
+East Midlands,nuts1/UKF,nuts1/all,5
+West Midlands,nuts1/UKG,nuts1/all,6
+East of England,nuts1/UKH,nuts1/all,7
+London,nuts1/UKI,nuts1/all,8
+South East,nuts1/UKJ,nuts1/all,9
+South West,nuts1/UKK,nuts1/all,10
+Wales,nuts1/UKL,nuts1/all,11
+Scotland,nuts1/UKM,nuts1/all,12
+Northern Ireland,nuts1/UKN,nuts1/all,13
+Unallocated - Known,nuts1/unk,nuts1/all,14
+Unallocated - Unknown,nuts1/unu,nuts1/all,15
+All NUTS2 areas,nuts2/all,,16
+Bedfordshire and Hertfordshire,nuts2/UKH2,nuts2/all,17
+"Berkshire, Buckinghamshire and Oxfordshire",nuts2/UKJ1,nuts2/all,18
+Cheshire,nuts2/UKD6,nuts2/all,19
+Cornwall and Isles of Scilly,nuts2/UKK3,nuts2/all,20
+Cumbria,nuts2/UKD1,nuts2/all,21
+Derbyshire and Nottinghamshire,nuts2/UKF1,nuts2/all,22
+Devon,nuts2/UKK4,nuts2/all,23
+Dorset and Somerset,nuts2/UKK2,nuts2/all,24
+East Anglia,nuts2/UKH1,nuts2/all,25
+East Anglia (Below Threshold Trade Allocations),nuts2/ea-btta,nuts2/all,26
+East Anglia (Energy),nuts2/ea-energy,nuts2/all,27
+East Anglia (Other),nuts2/ea-other,nuts2/all,28
+East Wales,nuts2/UKL2,nuts2/all,29
+East Yorkshire and Northern Lincolnshire,nuts2/UKE1,nuts2/all,30
+Eastern Scotland,nuts2/UKM7,nuts2/all,31
+East Midlands (Below Threshold Trade Allocations),nuts2/em-btta,nuts2/all,32
+East Midlands (Energy),nuts2/em-energy,nuts2/all,33
+East Midlands (Other),nuts2/em-other,nuts2/all,34
+Essex,nuts2/UKH3,nuts2/all,35
+"Gloucestershire, Wiltshire and Bath/Bristol area",nuts2/UKK1,nuts2/all,36
+Greater Manchester,nuts2/UKD3,nuts2/all,37
+Hampshire and Isle of Wight,nuts2/UKJ3,nuts2/all,38
+"Herefordshire, Worcestershire and Warwickshire",nuts2/UKG1,nuts2/all,39
+Highlands and Islands,nuts2/UKM6,nuts2/all,40
+Inner London - East,nuts2/UKI4,nuts2/all,41
+Inner London - West,nuts2/UKI3,nuts2/all,42
+Kent,nuts2/UKJ4,nuts2/all,43
+Lancashire,nuts2/UKD4,nuts2/all,44
+"Leicestershire, Rutland and Northamptonshire",nuts2/UKF2,nuts2/all,45
+Lincolnshire,nuts2/UKF3,nuts2/all,46
+London (Below Threshold Trade Allocations),nuts2/lo-btta,nuts2/all,47
+London (Other),nuts2/lo-other,nuts2/all,48
+Merseyside,nuts2/UKD7,nuts2/all,49
+North East (Below Threshold Trade Allocations),nuts2/ne-btta,nuts2/all,50
+North East (Energy),nuts2/ne-energy,nuts2/all,51
+North East (Other),nuts2/ne-other,nuts2/all,52
+North Eastern Scotland,nuts2/UKM5,nuts2/all,53
+North Yorkshire,nuts2/UKE2,nuts2/all,54
+Northern Ireland,nuts2/UKN0,nuts2/all,55
+Northumberland and Tyne and Wear,nuts2/UKC2,nuts2/all,56
+North West (Below Threshold Trade Allocations),nuts2/nw-btta,nuts2/all,57
+North West (Energy),nuts2/nw-energy,nuts2/all,58
+North West (Other),nuts2/nw-other,nuts2/all,59
+Outer London - East and North East,nuts2/UKI5,nuts2/all,60
+Outer London - South,nuts2/UKI6,nuts2/all,61
+Outer London - West and North West,nuts2/UKI7,nuts2/all,62
+Scotland (Below Threshold Trade Allocations),nuts2/sc-btta,nuts2/all,63
+Scotland (Energy),nuts2/sc-energy,nuts2/all,64
+Scotland (Other),nuts2/sc-other,nuts2/all,65
+South East (Below Threshold Trade Allocations),nuts2/se-btta,nuts2/all,66
+South East (Energy),nuts2/se-energy,nuts2/all,67
+South East (Other),nuts2/se-other,nuts2/all,68
+Shropshire and Staffordshire,nuts2/UKG2,nuts2/all,69
+South Western Scotland,nuts2/swsc,nuts2/all,70
+South West (Below Threshold Trade Allocations),nuts2/sw-btta,nuts2/all,71
+South West (Other),nuts2/sw-other,nuts2/all,72
+South Yorkshire,nuts2/UKE3,nuts2/all,73
+Southern Scotland,nuts2/UKM9,nuts2/all,74
+"Surrey, East and West Sussex",nuts2/UKJ2,nuts2/all,75
+Tees Valley and Durham,nuts2/UKC1,nuts2/all,76
+West Central Scotland,nuts2/UKM8,nuts2/all,77
+West Midlands,nuts2/UKG3,nuts2/all,78
+West Wales and The Valleys,nuts2/UKL1,nuts2/all,79
+West Yorkshire,nuts2/UKE4,nuts2/all,80
+Wales (Below Threshold Trade Allocations),nuts2/wa-btta,nuts2/all,81
+Wales (Energy),nuts2/wa-energy,nuts2/all,82
+Wales (Other),nuts2/wa-other,nuts2/all,83
+West Midlands (Below Threshold Trade Allocations),nuts2/wm-btta,nuts2/all,84
+West Midlands (Other),nuts2/wm-other,nuts2/all,85
+Yorkshire and the Humber (Below Threshold Trade Allocations),nuts2/yh-btta,nuts2/all,86
+Yorkshire and the Humber (Energy),nuts2/yh-energy,nuts2/all,87
+Yorkshire and the Humber (Other),nuts2/yh-other,nuts2/all,88
+All NUTS3 areas,nuts3/all,,89
+Aberdeen City and Aberdeenshire,nuts3/UKM50,nuts3/all,90
+Angus and Dundee City,nuts3/UKM71,nuts3/all,91
+Antrim and Newtownabbey,nuts3/UKN13,nuts3/all,92
+Ards and North Down,nuts3/UKN09,nuts3/all,93
+"Armagh City, Banbridge and Craigavon",nuts3/UKN07,nuts3/all,94
+Barking & Dagenham and Havering,nuts3/UKI52,nuts3/all,95
+Barnet,nuts3/UKI71,nuts3/all,96
+"Barnsley, Doncaster and Rotherham",nuts3/UKE31,nuts3/all,97
+"Bath and North East Somerset, North Somerset and South Gloucestershire",nuts3/UKK12,nuts3/all,98
+Bedford,nuts3/UKH24,nuts3/all,99
+Belfast,nuts3/UKN06,nuts3/all,100
+Berkshire,nuts3/UKJ11,nuts3/all,101
+Bexley and Greenwich,nuts3/UKI51,nuts3/all,102
+Birmingham,nuts3/UKG31,nuts3/all,103
+Blackburn with Darwen,nuts3/UKD41,nuts3/all,104
+Blackpool,nuts3/UKD42,nuts3/all,105
+Bournemouth and Poole,nuts3/UKK21,nuts3/all,106
+Bradford,nuts3/UKE41,nuts3/all,107
+Breckland and South Norfolk,nuts3/UKH17,nuts3/all,108
+Brent,nuts3/UKI72,nuts3/all,109
+Bridgend and Neath Port Talbot,nuts3/UKL17,nuts3/all,110
+Brighton and Hove,nuts3/UKJ21,nuts3/all,111
+"Bristol, City of",nuts3/UKK11,nuts3/all,112
+Bromley,nuts3/UKI61,nuts3/all,113
+Buckinghamshire CC,nuts3/UKJ13,nuts3/all,114
+Caithness and Sutherland and Ross and Cromarty,nuts3/UKM61,nuts3/all,115
+Calderdale and Kirklees,nuts3/UKE44,nuts3/all,116
+Cambridgeshire CC,nuts3/UKH12,nuts3/all,117
+Camden and City of London,nuts3/UKI31,nuts3/all,118
+Cardiff and Vale of Glamorgan,nuts3/UKL22,nuts3/all,119
+Causeway Coast and Glens,nuts3/UKN12,nuts3/all,120
+Central Bedfordshire,nuts3/UKH25,nuts3/all,121
+Central Hampshire,nuts3/UKJ36,nuts3/all,122
+Central Valleys,nuts3/UKL15,nuts3/all,123
+Cheshire East,nuts3/UKD62,nuts3/all,124
+Cheshire West and Chester,nuts3/UKD63,nuts3/all,125
+Chorley and West Lancashire,nuts3/UKD47,nuts3/all,126
+"Edinburgh, City of",nuts3/UKM75,nuts3/all,127
+Clackmannanshire and Fife,nuts3/UKM72,nuts3/all,128
+Conwy and Denbighshire,nuts3/UKL13,nuts3/all,129
+Cornwall and Isles of Scilly,nuts3/UKK30,nuts3/all,130
+Coventry,nuts3/UKG33,nuts3/all,131
+Croydon,nuts3/UKI62,nuts3/all,132
+Darlington,nuts3/UKC13,nuts3/all,133
+Derby,nuts3/UKF11,nuts3/all,134
+Derry City and Strabane,nuts3/UKN10,nuts3/all,135
+Devon CC,nuts3/UKK43,nuts3/all,136
+Dorset CC,nuts3/UKK22,nuts3/all,137
+Dudley,nuts3/UKG36,nuts3/all,138
+Dumfries and Galloway,nuts3/UKM92,nuts3/all,139
+Durham CC,nuts3/UKC14,nuts3/all,140
+Ealing,nuts3/UKI73,nuts3/all,141
+East Ayrshire and North Ayrshire mainland,nuts3/UKM93,nuts3/all,142
+East Cumbria,nuts3/UKD12,nuts3/all,143
+East Derbyshire,nuts3/UKF12,nuts3/all,144
+"East Dunbartonshire, West Dunbartonshire and Helensburgh and Lomond",nuts3/UKM81,nuts3/all,145
+East Kent,nuts3/UKJ44,nuts3/all,146
+East Lancashire,nuts3/UKD46,nuts3/all,147
+East Lothian and Midlothian,nuts3/UKM73,nuts3/all,148
+East Merseyside,nuts3/UKD71,nuts3/all,149
+East Riding of Yorkshire,nuts3/UKE12,nuts3/all,150
+East Surrey,nuts3/UKJ26,nuts3/all,151
+East Sussex CC,nuts3/UKJ22,nuts3/all,152
+Eilean Siar (Western Isles),nuts3/UKM64,nuts3/all,153
+Enfield,nuts3/UKI54,nuts3/all,154
+Essex Haven Gateway,nuts3/UKH34,nuts3/all,155
+Essex Thames Gateway,nuts3/UKH37,nuts3/all,156
+Falkirk,nuts3/UKM76,nuts3/all,157
+Fermanagh and Omagh,nuts3/UKN16,nuts3/all,158
+Flintshire and Wrexham,nuts3/UKL23,nuts3/all,159
+Glasgow City,nuts3/UKM82,nuts3/all,160
+Gloucestershire,nuts3/UKK13,nuts3/all,161
+Greater Manchester North East,nuts3/UKD37,nuts3/all,162
+Greater Manchester North West,nuts3/UKD36,nuts3/all,163
+Greater Manchester South East,nuts3/UKD35,nuts3/all,164
+Greater Manchester South West,nuts3/UKD34,nuts3/all,165
+Gwent Valleys,nuts3/UKL16,nuts3/all,166
+Gwynedd,nuts3/UKL12,nuts3/all,167
+Hackney and Newham,nuts3/UKI41,nuts3/all,168
+Haringey and Islington,nuts3/UKI43,nuts3/all,169
+Harrow and Hillingdon,nuts3/UKI74,nuts3/all,170
+Hartlepool and Stockton-on-Tees,nuts3/UKC11,nuts3/all,171
+Heart of Essex,nuts3/UKH36,nuts3/all,172
+"Herefordshire, County of",nuts3/UKG11,nuts3/all,173
+Hertfordshire,nuts3/UKH23,nuts3/all,174
+Hounslow and Richmond upon Thames,nuts3/UKI75,nuts3/all,175
+"Inverclyde, East Renfrewshire and Renfrewshire",nuts3/UKM83,nuts3/all,176
+"Inverness and Nairn and Moray, Badenoch and Strathspey",nuts3/UKM62,nuts3/all,177
+Isle of Anglesey,nuts3/UKL11,nuts3/all,178
+Isle of Wight,nuts3/UKJ34,nuts3/all,179
+Kensington & Chelsea and Hammersmith & Fulham,nuts3/UKI33,nuts3/all,180
+Kent Thames Gateway,nuts3/UKJ43,nuts3/all,181
+"Kingston upon Hull, City of",nuts3/UKE11,nuts3/all,182
+Lambeth,nuts3/UKI45,nuts3/all,183
+Lancaster and Wyre,nuts3/UKD44,nuts3/all,184
+Leeds,nuts3/UKE42,nuts3/all,185
+Leicester,nuts3/UKF21,nuts3/all,186
+Leicestershire CC and Rutland,nuts3/UKF22,nuts3/all,187
+Lewisham and Southwark,nuts3/UKI44,nuts3/all,188
+Lincolnshire,nuts3/UKF30,nuts3/all,189
+Lisburn and Castlereagh,nuts3/UKN14,nuts3/all,190
+Liverpool,nuts3/UKD72,nuts3/all,191
+"Lochaber, Skye and Lochalsh, Arran and Cumbrae and Argyll and Bute",nuts3/UKM63,nuts3/all,192
+Luton,nuts3/UKH21,nuts3/all,193
+Manchester,nuts3/UKD33,nuts3/all,194
+Medway,nuts3/UKJ41,nuts3/all,195
+"Merton, Kingston upon Thames and Sutton",nuts3/UKI63,nuts3/all,196
+Mid and East Antrim,nuts3/UKN15,nuts3/all,197
+Mid Kent,nuts3/UKJ45,nuts3/all,198
+Mid Lancashire,nuts3/UKD45,nuts3/all,199
+Mid Ulster,nuts3/UKN11,nuts3/all,200
+Milton Keynes,nuts3/UKJ12,nuts3/all,201
+Monmouthshire and Newport,nuts3/UKL21,nuts3/all,202
+"Newry, Mourne and Down",nuts3/UKN08,nuts3/all,203
+North and North East Lincolnshire,nuts3/UKE13,nuts3/all,204
+North and West Norfolk,nuts3/UKH16,nuts3/all,205
+North Hampshire,nuts3/UKJ37,nuts3/all,206
+North Lanarkshire,nuts3/UKM84,nuts3/all,207
+North Northamptonshire,nuts3/UKF25,nuts3/all,208
+North Nottinghamshire,nuts3/UKF15,nuts3/all,209
+North Yorkshire CC,nuts3/UKE22,nuts3/all,210
+Northumberland,nuts3/UKC21,nuts3/all,211
+Norwich and East Norfolk,nuts3/UKH15,nuts3/all,212
+Nottingham,nuts3/UKF14,nuts3/all,213
+Orkney Islands,nuts3/UKM65,nuts3/all,214
+Oxfordshire,nuts3/UKJ14,nuts3/all,215
+Perth and Kinross and Stirling,nuts3/UKM77,nuts3/all,216
+Peterborough,nuts3/UKH11,nuts3/all,217
+Plymouth,nuts3/UKK41,nuts3/all,218
+Portsmouth,nuts3/UKJ31,nuts3/all,219
+Powys,nuts3/UKL24,nuts3/all,220
+Redbridge and Waltham Forest,nuts3/UKI53,nuts3/all,221
+Sandwell,nuts3/UKG37,nuts3/all,222
+Scottish Borders,nuts3/UKM91,nuts3/all,223
+Sefton,nuts3/UKD73,nuts3/all,224
+Sheffield,nuts3/UKE32,nuts3/all,225
+Shetland Islands,nuts3/UKM66,nuts3/all,226
+Shropshire CC,nuts3/UKG22,nuts3/all,227
+Solihull,nuts3/UKG32,nuts3/all,228
+Somerset,nuts3/UKK23,nuts3/all,229
+South and West Derbyshire,nuts3/UKF13,nuts3/all,230
+South Ayrshire,nuts3/UKM94,nuts3/all,231
+South Hampshire,nuts3/UKJ35,nuts3/all,232
+South Lanarkshire,nuts3/UKM95,nuts3/all,233
+South Nottinghamshire,nuts3/UKF16,nuts3/all,234
+South Teesside,nuts3/UKC12,nuts3/all,235
+South West Wales,nuts3/UKL14,nuts3/all,236
+Southampton,nuts3/UKJ32,nuts3/all,237
+Southend-on-Sea,nuts3/UKH31,nuts3/all,238
+Staffordshire CC,nuts3/UKG24,nuts3/all,239
+Stoke-on-Trent,nuts3/UKG23,nuts3/all,240
+Suffolk,nuts3/UKH14,nuts3/all,241
+Sunderland,nuts3/UKC23,nuts3/all,242
+Swansea,nuts3/UKL18,nuts3/all,243
+Swindon,nuts3/UKK14,nuts3/all,244
+Telford and Wrekin,nuts3/UKG21,nuts3/all,245
+Thurrock,nuts3/UKH32,nuts3/all,246
+Torbay,nuts3/UKK42,nuts3/all,247
+Tower Hamlets,nuts3/UKI42,nuts3/all,248
+Tyneside,nuts3/UKC22,nuts3/all,249
+Wakefield,nuts3/UKE45,nuts3/all,250
+Walsall,nuts3/UKG38,nuts3/all,251
+Wandsworth,nuts3/UKI34,nuts3/all,252
+Warrington,nuts3/UKD61,nuts3/all,253
+Warwickshire,nuts3/UKG13,nuts3/all,254
+West Cumbria,nuts3/UKD11,nuts3/all,255
+West Essex,nuts3/UKH35,nuts3/all,256
+West Kent,nuts3/UKJ46,nuts3/all,257
+West Lothian,nuts3/UKM78,nuts3/all,258
+West Northamptonshire,nuts3/UKF24,nuts3/all,259
+West Surrey,nuts3/UKJ25,nuts3/all,260
+West Sussex (North East),nuts3/UKJ28,nuts3/all,261
+West Sussex (South West),nuts3/UKJ27,nuts3/all,262
+Westminster,nuts3/UKI32,nuts3/all,263
+Wiltshire,nuts3/UKK15,nuts3/all,264
+Wirral,nuts3/UKD74,nuts3/all,265
+Wolverhampton,nuts3/UKG39,nuts3/all,266
+Worcestershire,nuts3/UKG12,nuts3/all,267
+York,nuts3/UKE21,nuts3/all,268
+East Anglia (Below Threshold Trade Allocations),nuts3/ea-btta,nuts3/all,269
+East Anglia (Energy),nuts3/ea-energy,nuts3/all,270
+East Anglia (Other),nuts3/ea-other,nuts3/all,271
+East of Northern Ireland,nuts3/eni,nuts3/all,272
+East Midlands (Below Threshold Trade Allocations),nuts3/em-btta,nuts3/all,273
+East Midlands (Energy),nuts3/em-energy,nuts3/all,274
+East Midlands (Other),nuts3/em-other,nuts3/all,275
+London (Below Threshold Trade Allocations),nuts3/lo-btta,nuts3/all,276
+London (Other),nuts3/lo-other,nuts3/all,277
+North East (Below Threshold Trade Allocations),nuts3/ne-btta,nuts3/all,278
+North East (Energy),nuts3/ne-energy,nuts3/all,279
+North East (Other),nuts3/ne-other,nuts3/all,280
+Northern Ireland (Below Threshold Trade Allocations),nuts3/ni-btta,nuts3/all,281
+Northern Ireland (Energy),nuts3/ni-energy,nuts3/all,282
+Northern Ireland (Other),nuts3/ni-other,nuts3/all,283
+North of Northern Ireland,nuts3/nni,nuts3/all,284
+North West (Below Threshold Trade Allocations),nuts3/nw-btta,nuts3/all,285
+North West (Energy),nuts3/nw-energy,nuts3/all,286
+North West (Other),nuts3/nw-other,nuts3/all,287
+Outer Belfast,nuts3/ob,nuts3/all,288
+Scotland (Below Threshold Trade Allocations),nuts3/sc-btta,nuts3/all,289
+Scotland (Energy),nuts3/sc-energy,nuts3/all,290
+Scotland (Other),nuts3/sc-other,nuts3/all,291
+South East (Below Threshold Trade Allocations),nuts3/se-btta,nuts3/all,292
+South East (Energy),nuts3/se-energy,nuts3/all,293
+South East (Other),nuts3/se-other,nuts3/all,294
+South West (Below Threshold Trade Allocations),nuts3/sw-btta,nuts3/all,295
+South West (Other),nuts3/sw-other,nuts3/all,296
+Wales (Below Threshold Trade Allocations),nuts3/wa-btta,nuts3/all,297
+Wales (Energy),nuts3/wa-energy,nuts3/all,298
+Wales (Other),nuts3/wa-other,nuts3/all,299
+West and South of Northern Ireland,nuts3/wsni,nuts3/all,300
+West Midlands (Below Threshold Trade Allocations),nuts3/wm-btta,nuts3/all,301
+West Midlands (Other),nuts3/wm-other,nuts3/all,302
+Yorkshire and the Humber (Below Threshold Trade Allocations),nuts3/yh-btta,nuts3/all,303
+Yorkshire and the Humber (Energy),nuts3/yh-energy,nuts3/all,304
+Yorkshire and the Humber (Other),nuts3/yh-other,nuts3/all,305
