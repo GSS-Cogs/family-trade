@@ -1,0 +1,20 @@
+{
+    "title": "OVERSEAS TRADE STATISTICS",
+    "publisher": "HM Revenue & Customs",
+    "description": "",
+    "landingPage": "https://www.uktradeinfo.com/Statistics/OverseasTradeStatistics/Pages/OTS.aspx",
+    "published": "2020-02-11",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Published"
+    },
+    "transform": {
+        "airtable": "rechjFgtpFOE6ME0Q",
+        "main_issue": 10
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

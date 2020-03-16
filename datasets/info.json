@@ -9,6 +9,7 @@
         ]
     },
     "pipelines": [
+        "HMRC-OVERSEAS-TRADE-STATISTICS",
         "HMRC-RTS-Small-area",
         "HMRC_OTS_CN8",
         "HMRC_RTS",
