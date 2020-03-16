@@ -1,0 +1,43 @@
+{
+  "@context": [
+  "http://www.w3.org/ns/csvw",
+  {
+    "@language": "en"
+  }
+],
+  "tables": [
+    {
+      "url": "components.csv",
+      "tableSchema": {
+        "columns": [
+          {
+            "titles": "Label",
+            "required": true,
+            "name": "label",
+            "datatype": "string"
+          }, {
+            "titles": "Description",
+            "required": false,
+            "name": "description",
+            "datatype": "string"
+          }, {
+            "titles": "Component Type",
+            "required": true,
+            "name": "component_type",
+            "datatype": {
+              "format": "^(Dimension|Measure|Attribute)$"
+            }
+          }, {
+            "titles": "Codelist",
+            "required": false,
+            "name": "codelist",
+            "datatype": "anyURI"
+          }
+        ],
+        "primaryKey": [
+          "label"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "@context": [
+  "http://www.w3.org/ns/csvw",
+  {
+    "@language": "en"
+  }
+],
+  "tables": [
+    {
+      "url": "columns.csv",
+      "tableSchema": {
+        "columns": [
+          {
+            "titles": "title",
+            "required": true,
+            "name": "title",
+            "datatype": "string"
+          }, {
+            "titles": "name",
+            "required": true,
+            "name": "name",
+            "datatype": {
+              "base": "string",
+              "format": "^\\w+$"
+            }
+          }, {
+            "titles": "component_attachment",
+            "required": false,
+            "name": "component_attachment",
+            "datatype": {
+              "format": "^(qb:dimension|qb:measure|qb:attribute)$"
+            }
+          }, {
+            "titles": "property_template",
+            "required": false,
+            "name": "observation_status",
+            "datatype": "anyURI"
+          }, {
+            "titles": "value_template",
+            "required": false,
+            "name": "value_template",
+            "datatype": "anyURI"
+          }, {
+            "titles": "datatype",
+            "required": false,
+            "name": "datatype",
+            "datatype": {
+              "format": "^(string|number)$"
+            }
+          }, {
+            "titles": "value_transformation",
+            "required": false,
+            "name": "value_transformation",
+            "datatype": "string"
+          }, {
+            "titles": "regex",
+            "required": false,
+            "name": "regex",
+            "datatype": "string"
+          }, {
+            "titles": "range",
+            "required": false,
+            "name": "range",
+            "datatype": "anyURI"
+          }
+        ],
+        "primaryKey": [
+          "title"
+        ]
+      }
+    }
+  ]
+}
