@@ -1,0 +1,22 @@
+{
+    "title": "International exports of services from subnational areas of the UK",
+    "publisher": "Office for National Statistics",
+    "description": "Experimental estimated value of exports of services for 2017 for NUTS1, NUTS2, NUTS3 and 15 joint authorities, including industry and non-EU and EU split.",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/internationalexportsofservicesfromsubnationalareasoftheuk",
+    "datasetNotes": [
+        "On landing page, latest version"
+    ],
+    "published": "2019-09-12",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Prioritized"
+    },
+    "transform": {
+        "airtable": "rec4OsmnfMCd6wRMj"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}
