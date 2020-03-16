@@ -1,0 +1,22 @@
+{
+    "title": "Regionalised estimates of UK service exports",
+    "publisher": "Office for National Statistics",
+    "description": "The value of UK service exports broken down by country or English region, and by functional category.",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/regionalisedestimatesofukserviceexports",
+    "datasetNotes": [
+        "On landing page, latest version"
+    ],
+    "published": "2018-10-24",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Published"
+    },
+    "transform": {
+        "airtable": "recUOST414AWXRJbi"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}
