@@ -136,6 +136,10 @@
       "url": "codelists/marker.csv",
       "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
       "rdfs:label": "Marker"
+   }, {
+      "url": "codelists/ons-partner-geography.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "ONS Partner Geography"	
     }
   ]
 }
