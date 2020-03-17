@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.3.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -21,7 +21,7 @@ scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpaym
 scraper
 # -
 
-dist = scraper.distribution(mediaType='text/prs.ons+csdb')
+dist = scraper.distribution(mediaType='text/prs.ons+csdb', latest=True)
 dist
 
 # +
@@ -127,7 +127,8 @@ COUNTRIES = set(['estonia', 'ww', 'cyprus', 'latvia', 'lithuania', 'malta', 'slo
                 'south-africa', 'taiwan', 'india', 'united-states-inc-puerto-rico', 'turkey',
                 'mexico', 'switzerland', 'hong-kong', 'ww',
                 'philippines', 'pakistan', 'brazil', 'emu-19', 'bulgaria', 'romania', 'iceland',
-                 'australia', 'thailand', 'united-arab-emirates', 'new-zealand', 'greece', 'egypt', 'rw'])
+                'australia', 'thailand', 'united-arab-emirates', 'new-zealand', 'greece', 'egypt', 'rw',
+                'ww-ttlesspm'])
 DIRECTION = set(['imports', 'exports', 'balance', 'ex', 'im', 'bal', 'terms-of-trade'])
 BASIS = set(['bop'])
 ADJUST = set(['nsa', 'sa'])
@@ -254,8 +255,12 @@ def period(periodicity, year_start, i):
 
 for csid, slice_list in slices.items():
     for s in slice_list:
-        for i, v in enumerate(s['observations']):
+        try:
             dim_vals = dim_val(s['label'])
+        except Exception as e:
+            print(f'Error:\n{e}')
+            continue                
+        for i, v in enumerate(s['observations']):
             p = period(s['header'].periodicity, s['struct'].year_start, i)
             if isinstance(dim_vals, TradeInProduct):
                 product_data.append(TradeObservation._make(
