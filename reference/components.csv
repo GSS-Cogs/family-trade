@@ -34,4 +34,4 @@ ITIS Industry,ITIS Industry,Dimension,http://gss-data.org.uk/def/concept-scheme/
 SIC Industry,The current Standard Industrial Classification (SIC) used in classifying business establishments and other statistical units by the type of economic activity in which they are engaged.,Dimension,
 Marker,Marker for special values,Attribute,http://gss-data.org.uk/def/concept-scheme/marker
 ONS Partner Geography,ONS Partner Geography,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-partner-geography
-GBP Million,GBP Million,,
+GBP Million,GBP Million,Measure,
