@@ -110,10 +110,9 @@ df = df.replace({'Product' : {
     '3 Basic iron and steel' : 'Basic iron and steel', 
     '5 Other basic metals and casting' : 'Other basic metals and casting'}})
 
-df.rename(columns={'OBS' : 'Value',
-                   'Flow Directions' : 'Flow'}, inplace=True)
+df.rename(columns={'OBS' : 'Value'}, inplace=True)
 
-df = df[['Period', 'Flow','Product Department','Product Category','Product','Value','Measure Type','Unit']]
+df = df[['Period', 'Flow Directions','Product Department','Product Category','Product','Value','Measure Type','Unit']]
 
 for column in df:
     if column in ('Period', 'Flow Directions','Product Department','Product Category','Product','Measure Type','Unit'):
