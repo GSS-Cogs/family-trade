@@ -30,9 +30,22 @@ def run_script(s):
     %run "$s"
     return table
 
-observations = pd.concat(
-    run_script(s) for s in ['exports', 'imports']
-).drop_duplicates()
+#observations = pd.concat(
+    #run_script(s) for s in ['exports', 'imports']
+#    run_script(s) for s in ['imports']
+#).drop_duplicates()
+
+obsIMP = run_script('imports')
+obsEXP = run_script('exports')
+
+# +
+observations = pd.concat([obsIMP, obsEXP])
+#print(type(obsIMP))
+#print(type(obsEXP))
+
+#print(obsIMP.count())
+#print(obsEXP.count())
+#print(observations.count())
 
 # +
 from pathlib import Path
@@ -64,5 +77,7 @@ with open(out / 'dataset.trig', 'wb') as metadata:
 csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
 csvw.create(out / 'observations_0000.csv', out / 'observations.csv-schema.json')
 # -
+
+
 
 
