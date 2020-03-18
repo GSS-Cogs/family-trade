@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[15]:
+# In[49]:
 
 
 from gssutils import *
@@ -29,14 +29,14 @@ scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpaym
 scraper
 
 
-# In[16]:
+# In[50]:
 
 
 dist = scraper.distributions[0]
 dist
 
 
-# In[17]:
+# In[51]:
 
 
 tabs = (t for t in dist.as_databaker())
@@ -78,10 +78,11 @@ for tab in tabs:
     savepreviewhtml(tidy_sheet, fname="Preview.html")
 
     tidied_sheets.append(tidy_sheet.topandas())
+    
         
 
 
-# In[18]:
+# In[52]:
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -96,12 +97,12 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['Flow Directions'] = df['Flow Directions'].map(lambda x: right(x, len(x) - 2))
 df['Product Department'] = df['Product Department'].map(lambda x: right(x, len(x) - 2) if 'Total' not in x else x)
 
-df['Product'] = df['Product'].map(lambda x: '' if '.' not in left(x, 5) else x)
+df['Product'] = df['Product'].map(lambda x: '' if ('.' not in left(x, 5) and mid(x, 2, 1) == ' ') else x)
 df['Product'] = df['Product'].map(lambda x: 'All' if x == '' else x)
 
 df['Product Category'] = df['Product Category'].map(lambda x: 'All' if x == '' else x)
 df['Product Category'] = df['Product Category'].map(lambda x: right(x, len(x) - 3) if left(x, 2).isnumeric() == True else x)
-df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 5).strip() if left(x, 2).isnumeric() == True else x)
+df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 5).strip() if '.' in x else (right(x, len(x) - 4) if left(x, 2).isnumeric() == True else x))
 
 df = df.replace({'Product' : {
     '3 Processed and preserved fish, crustaceans, molluscs, fruit and vegetables' : 'Processed and preserved fish, crustaceans, molluscs, fruit and vegetables', 
@@ -117,11 +118,11 @@ df = df[['Period', 'Flow Directions','Product Department','Product Category','Pr
 for column in df:
     if column in ('Period', 'Flow Directions','Product Department','Product Category','Product','Measure Type','Unit'):
         df[column] = df[column].map(lambda x: pathify(x))
-
+        
 df.head(25)
 
 
-# In[19]:
+# In[53]:
 
 
 from IPython.core.display import HTML
@@ -132,7 +133,7 @@ for col in df:
         display(df[col].cat.categories) 
 
 
-# In[20]:
+# In[54]:
 
 
 from pathlib import Path
@@ -141,7 +142,7 @@ out.mkdir(exist_ok=True)
 df.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
 
-# In[21]:
+# In[55]:
 
 
 scraper.dataset.family = 'trade'
@@ -151,10 +152,4 @@ with open(out / 'dataset.trig', 'wb') as metadata:
     
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
-
-
-# In[ ]:
-
-
-
 
