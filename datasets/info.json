@@ -27,8 +27,11 @@
         "ONS-UK-Trade-in-goods-CPA-08",
         "ONS-UK-trade-in-goods-by-industry-country-and-commodity",
         "ONS-UK-trade-in-services",
+        "ONS_ABS",
         "ONS_BoP",
+        "ONS_BoP_individual-country-data",
         "ONS_CPA",
-        "ONS_MRETS"
+        "ONS_MRETS",
+        "ONS_PinkBook"
     ]
 }
