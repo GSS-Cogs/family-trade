@@ -35,3 +35,6 @@ SIC Industry,The current Standard Industrial Classification (SIC) used in classi
 Marker,Marker for special values,Attribute,http://gss-data.org.uk/def/concept-scheme/marker
 ONS Partner Geography,ONS Partner Geography,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-partner-geography
 GBP Million,GBP Million,Measure,
+Product Department,Product Department,Dimension,http://gss-data.org.uk/def/concept-scheme/product-department
+Product Category,Product Category,Dimension,http://gss-data.org.uk/def/concept-scheme/product-category
+Product,Product,Dimension,http://gss-data.org.uk/def/concept-scheme/product
