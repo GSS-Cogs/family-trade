@@ -4,3 +4,7 @@ Imports,imports,,2,
 Dispatches,dispatches,exports,4,Exports to the EU made on an HMRC basis
 Arrivals,arrivals,imports,5,Imports from the EU made on an HMRC basis
 Balance,balance,,3,Net Exports (Exports minus Imports)
+EU Exports,eu-exports,,4,
+EU Imports,eu-imports,,5,
+Non-EU Exports,non-eu-exports,,6,
+Non-EU Imports,non-eu-imports,,7,
