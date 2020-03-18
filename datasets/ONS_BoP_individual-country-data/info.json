@@ -1,20 +1,4 @@
 {
     "title": "ONS Balance of Payments Individual Country Data",
-    "publisher": "ONS",
-    "description": "",
-    "landingPage": "",
-    "published": "",
-    "families": [
-        "Trade"
-    ],
-    "extract": {
-        "source": "",
-        "stage": ""
-    },
-    "transform": {
-        "airtable": "",
-        "main_issue": ""
-    },
-    "sizingNotes": "",
-    "notes": ""
+    "publisher": "ONS"
 }
