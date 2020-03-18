@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -87,9 +87,9 @@ for distribution in scraper.distributions:
 # -
 
 scraper.dataset.family = 'trade'
-with open(out / 'dataset.trig', 'wb') as metadata:
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
-csvw.create(observations_file, observations_file.with_suffix('.csv-schema.json'))
+csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 
