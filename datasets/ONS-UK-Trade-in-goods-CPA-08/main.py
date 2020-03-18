@@ -82,7 +82,7 @@ for tab in tabs:
         
 
 
-# In[62]:
+# In[66]:
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -116,7 +116,7 @@ df.rename(columns={'OBS' : 'Value'}, inplace=True)
 df = df[['Period', 'Flow Directions','Product Department','Product Category','Product','Value','Measure Type','Unit']]
 
 for column in df:
-    if column in ('Period', 'Flow Directions','Product Department','Product Category','Product','Unit'):
+    if column in ('Flow Directions','Product Department','Product Category','Product','Unit'):
         df[column] = df[column].map(lambda x: pathify(x))
         
 df.head(25)
@@ -133,7 +133,7 @@ for col in df:
         display(df[col].cat.categories) 
 
 
-# In[64]:
+# In[65]:
 
 
 destinationFolder = Path('out')
@@ -150,7 +150,7 @@ with open(destinationFolder / f'{TAB_NAME}.csv-metadata.trig', 'wb') as metadata
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(destinationFolder / f'{TAB_NAME}.csv', destinationFolder / f'{TAB_NAME}.csv-schema.json')
-df
+df.head(25)
 
 
 # In[ ]:
