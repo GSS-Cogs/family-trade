@@ -53,3 +53,4 @@ GBP Million,gbp_million,qb:measure,http://gss-data.org.uk/def/measure/gbp-millio
 Product Department,product_department,qb:dimension,http://gss-data.org.uk/def/dimension/product-department,http://gss-data.org.uk/def/concept/product-department/{product_department},string,
 Product Category,product_category,qb:dimension,http://gss-data.org.uk/def/dimension/product-category,http://gss-data.org.uk/def/concept/product-category/{product_category},string,
 Product,product,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/product/{product},string,
+Flow Directions,flow_directions,qb:dimension,http://gss-data.org.uk/def/dimension/flow-directions,http://gss-data.org.uk/def/concept/flow-directions/{flow_directions},string,
