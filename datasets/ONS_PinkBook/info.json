@@ -1,0 +1,20 @@
+{
+    "title": "ONS Pink Book",
+    "publisher": "ONS",
+    "description": "",
+    "landingPage": "",
+    "published": "",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "",
+        "stage": ""
+    },
+    "transform": {
+        "airtable": "",
+        "main_issue": 
+    },
+    "sizingNotes": "",
+    "notes": ""
+}
