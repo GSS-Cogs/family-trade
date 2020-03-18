@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[49]:
+# In[59]:
 
 
 from gssutils import *
@@ -29,14 +29,14 @@ scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpaym
 scraper
 
 
-# In[50]:
+# In[60]:
 
 
 dist = scraper.distributions[0]
 dist
 
 
-# In[51]:
+# In[61]:
 
 
 tabs = (t for t in dist.as_databaker())
@@ -82,7 +82,7 @@ for tab in tabs:
         
 
 
-# In[52]:
+# In[62]:
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -122,7 +122,7 @@ for column in df:
 df.head(25)
 
 
-# In[53]:
+# In[63]:
 
 
 from IPython.core.display import HTML
@@ -133,23 +133,28 @@ for col in df:
         display(df[col].cat.categories) 
 
 
-# In[54]:
+# In[64]:
 
 
-from pathlib import Path
-out = Path('out')
-out.mkdir(exist_ok=True)
-df.drop_duplicates().to_csv(out / 'observations.csv', index = False)
+destinationFolder = Path('out')
+destinationFolder.mkdir(exist_ok=True, parents=True)
 
+TAB_NAME = 'observations'
 
-# In[55]:
-
+df.drop_duplicates().to_csv(destinationFolder / f'{TAB_NAME}.csv', index = False)
 
 scraper.dataset.family = 'trade'
-scraper.dataset.theme = THEME['business-industry-trade-energy']
-with open(out / 'dataset.trig', 'wb') as metadata:
+
+with open(destinationFolder / f'{TAB_NAME}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-    
+
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+csvw.create(destinationFolder / f'{TAB_NAME}.csv', destinationFolder / f'{TAB_NAME}.csv-schema.json')
+df
+
+
+# In[ ]:
+
+
+
 
