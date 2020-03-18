@@ -1,30 +1,37 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
 # # Country by commodity exports
 
-# In[95]:
-
-
+# %%
 from gssutils import *
 import time
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/' +                  'uktradecountrybycommodityexports')
+scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityexports')
 scraper
 
 
-# In[97]:
+# %%
+try:
+    #for i in scraper.distributions:
+        #if i.title == 'Trade in goods: country-by-commodity imports':
+            #print(i.title)
+            #sheet = i
+            #break
+    sheet = scraper.distributions[1]
+except Exception as e:
+        print(str(e))
 
-
-data = scraper.distribution().as_pandas(sheet_name = 1, dtype={
+# %%
+data = sheet.as_pandas(dtype={
     'COMMODITY': 'category',
     'COUNTRY': 'category',
     'DIRECTION': 'category'
 }, na_values=['','N/A'], keep_default_na=False)
 
-data
 
 
-# In[78]:
+# %%
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -39,7 +46,7 @@ table['Period'] = table['Period'].astype('category')
 #table['Value'] = table['Value'].astype(int)
 
 
-# In[79]:
+# %%
 
 
 #display(table['CORD SITC'].cat.categories)
@@ -48,7 +55,7 @@ table['Period'] = table['Period'].astype('category')
 
 # Fix up category strings
 
-# In[80]:
+# %%
 
 
 table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split(' ')[0])
@@ -57,7 +64,7 @@ table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].c
 #display(table['ONS Partner Geography'].cat.categories)
 
 
-# In[81]:
+# %%
 
 
 import re
@@ -91,7 +98,7 @@ def time2period(t):
 table['Period'].cat.categories = table['Period'].cat.categories.map(time2period)
 
 
-# In[82]:
+# %%
 
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
@@ -100,38 +107,38 @@ table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
 table['Flow'] = pd.Series('exports', index=table.index, dtype='category')
 
 
-# In[83]:
+# %%
 
 
 #table.memory_usage()
 
 
-# In[84]:
+# %%
 
 
 table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'Seasonal Adjustment', 'Measure Type','Value','Unit' ]]
 table
 
 
-# In[74]:
+# %%
 
 
 #table.count()
 
 
-# In[75]:
+# %%
 
 
 #table.dtypes
 
 
-# In[ ]:
+# %%
 
 
 
 
 
-# In[ ]:
+# %%
 
 
 

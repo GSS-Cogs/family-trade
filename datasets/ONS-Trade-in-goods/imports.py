@@ -1,29 +1,46 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
 # # Country by commodity imports
 
-# In[2]:
+# %%
 
 
 from gssutils import *
 
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/' +                   'uktradecountrybycommodityimports')
+scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityimports')
 scraper
 
 
-# In[9]:
+# %%
+try:
+    #for i in scraper.distributions:
+        #if i.title == 'Trade in goods: country-by-commodity imports':
+            #print(i.title)
+            #sheet = i
+            #break
+    sheet = scraper.distributions[1]
+except Exception as e:
+        print(str(e))
 
-
-data = scraper.distribution().as_pandas(sheet_name = 1, dtype={
+# %%
+data = sheet.as_pandas(dtype={
     'COMMODITY': 'category',
     'COUNTRY': 'category',
     'DIRECTION': 'category'
 }, na_values=['','N/A'], keep_default_na=False)
-data
+#data = sheet.as_databaker()
+#data = pd.DataFrame(data
+#data.head()
+                    
+#data = sheet.as_pandas() 
 
 
-# In[10]:
+# %%
+data.head()
+
+# %%
 
 
 table = data.drop(columns='DIRECTION')
@@ -35,7 +52,7 @@ table['Period'] = table['Period'].astype('category')
 #table['Value'] = table['Value'].astype(int)
 
 
-# In[11]:
+# %%
 
 
 #display(table['CORD SITC'].cat.categories)
@@ -43,8 +60,9 @@ table['Period'] = table['Period'].astype('category')
 
 
 # Fix up category strings
+table.head()
 
-# In[12]:
+# %%
 
 
 table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split(' ')[0])
@@ -53,7 +71,7 @@ table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].c
 #display(table['ONS Partner Geography'].cat.categories)
 
 
-# In[13]:
+# %%
 
 
 import re
@@ -87,7 +105,7 @@ def time2period(t):
 table['Period'].cat.categories = table['Period'].cat.categories.map(time2period)
 
 
-# In[14]:
+# %%
 
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
@@ -96,26 +114,26 @@ table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
 table['Flow'] = pd.Series('imports', index=table.index, dtype='category')
 
 
-# In[15]:
+# %%
 
 
 #table.memory_usage()
 
 
-# In[16]:
+# %%
 
 
 table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'Seasonal Adjustment', 'Measure Type','Value','Unit' ]]
 #table
 
 
-# In[17]:
+# %%
 
 
 #table.count()
 
 
-# In[11]:
+# %%
 
 
 #table.dtypes

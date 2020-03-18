@@ -33,13 +33,19 @@
           }, {
             "titles": "property_template",
             "required": false,
-            "name": "observation_status",
-            "datatype": "anyURI"
+            "name": "property_template",
+            "datatype": {
+              "base": "anyURI",
+              "format": "^(([^{]++)|(\\{[+#.\\/;?&=,!@|]?\\w++(\\.\\w+)*+}))++$"
+            }
           }, {
             "titles": "value_template",
             "required": false,
             "name": "value_template",
-            "datatype": "anyURI"
+            "datatype": {
+              "base": "anyURI",
+              "format": "^(([^{]++)|(\\{[+#.\\/;?&=,!@|]?\\w++(\\.\\w+)*+}))++$"
+            }
           }, {
             "titles": "datatype",
             "required": false,
