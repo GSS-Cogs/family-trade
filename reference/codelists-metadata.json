@@ -140,6 +140,18 @@
       "url": "codelists/ons-partner-geography.csv",
       "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
       "rdfs:label": "ONS Partner Geography"	
+    }, {
+      "url": "codelists/product-department.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Product Department"	
+    }, {
+      "url": "codelists/product-category.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Product Category"	
+    }, {
+      "url": "codelists/product.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Product"	
     }
   ]
 }
