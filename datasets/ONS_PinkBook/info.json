@@ -1,4 +1,23 @@
 {
-    "title": "ONS Pink Book",
-    "publisher": "ONS"
+    "title": "03 Trade in services, The Pink Book",
+    "publisher": "Office for National Statistics",
+    "description": "Detailed annual statistics on trade in services including transport, travel, insurance and pensions, financial, telecommunication and computer, cultural and recreational, and government.",
+    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/3tradeinservicesthepinkbook2016",
+    "datasetNotes": [
+        "On landing page, latest version"
+    ],
+    "published": "2019-10-31",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Published"
+    },
+    "transform": {
+        "airtable": "recPITJGpaxZOcwOo",
+        "main_issue": 34
+    },
+    "sizingNotes": "",
+    "notes": ""
 }

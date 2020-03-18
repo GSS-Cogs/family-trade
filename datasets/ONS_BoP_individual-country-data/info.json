@@ -1,4 +1,23 @@
 {
-    "title": "ONS Balance of Payments Individual Country Data",
-    "publisher": "ONS"
+    "title": "Individual country data (goods) on a monthly basis",
+    "publisher": "Office for National Statistics",
+    "description": "Exports and imports goods data by individual country for UK trade in goods.",
+    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/adhocs/008596individualcountrydatagoodsonamonthlybasisfromjanuary1998toapril2018",
+    "datasetNotes": [
+        "On landing page"
+    ],
+    "published": "2018-06-18",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS",
+        "stage": "Candidate"
+    },
+    "transform": {
+        "airtable": "recAD78IoUb406XYO",
+        "main_issue": 33
+    },
+    "sizingNotes": "",
+    "notes": ""
 }
