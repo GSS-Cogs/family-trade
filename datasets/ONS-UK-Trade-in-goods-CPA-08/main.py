@@ -116,7 +116,7 @@ df.rename(columns={'OBS' : 'Value'}, inplace=True)
 df = df[['Period', 'Flow Directions','Product Department','Product Category','Product','Value','Measure Type','Unit']]
 
 for column in df:
-    if column in ('Period', 'Flow Directions','Product Department','Product Category','Product','Measure Type','Unit'):
+    if column in ('Period', 'Flow Directions','Product Department','Product Category','Product','Unit'):
         df[column] = df[column].map(lambda x: pathify(x))
         
 df.head(25)
