@@ -8,6 +8,7 @@
             "Trade"
         ]
     },
+    "pmd": "http://gss-data.org.uk",
     "pipelines": [
         "HMRC-OVERSEAS-TRADE-STATISTICS",
         "HMRC-RTS-Small-area",
