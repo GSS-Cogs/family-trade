@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -35,24 +35,24 @@ tabs.keys()
 # %%capture
 
 processors = [
-    "Business count by Age of Business.ipynb",
-    "Business count by Employee Size.ipynb",
-    "Business count by Industry Group.ipynb",
-    "Employee count for Businesses by Age of Business.ipynb",
-    "Employee count for Businesses by Employee Size.ipynb",
-    "Employee count for Businesses by Industry Group.ipynb",
-    "Total value of UK trade by Age of Business.ipynb",
-    "Total value of UK trade by Employee Size.ipynb",
-    "Total value of UK trade by Industry Group.ipynb",
-    "TRADE IN GOODS STATISTICS -Business Count.ipynb",
-    "TRADE IN GOODS STATISTICS -Employee Count and age business.ipynb",
-    "TRADE IN GOODS STATISTICS -Employee Count and age employee count.ipynb",
-    "TRADE IN GOODS STATISTICS -Employee Count and age.ipynb",
-    "TRADE IN GOODS STATISTICS -Employee Count.ipynb",
-    "TRADE IN GOODS STATISTICS -total value of UK Trade.ipynb",
-    "TRADE IN GOODS STATISTICS_Employee size_Businesses.ipynb",
-    "TRADE IN GOODS STATISTICS_Employee size_Employee count.ipynb",
-    "TRADE IN GOODS STATISTICS_Employee size_value.ipynb"
+    "Business count by Age of Business.py",
+    "Business count by Employee Size.py",
+    "Business count by Industry Group.py",
+    "Employee count for Businesses by Age of Business.py",
+    "Employee count for Businesses by Employee Size.py",
+    "Employee count for Businesses by Industry Group.py",
+    "Total value of UK trade by Age of Business.py",
+    "Total value of UK trade by Employee Size.py",
+    "Total value of UK trade by Industry Group.py",
+    "TRADE IN GOODS STATISTICS -Business Count.py",
+    "TRADE IN GOODS STATISTICS -Employee Count and age business.py",
+    "TRADE IN GOODS STATISTICS -Employee Count and age employee count.py",
+    "TRADE IN GOODS STATISTICS -Employee Count and age.py",
+    "TRADE IN GOODS STATISTICS -Employee Count.py",
+    "TRADE IN GOODS STATISTICS -total value of UK Trade.py",
+    "TRADE IN GOODS STATISTICS_Employee size_Businesses.py",
+    "TRADE IN GOODS STATISTICS_Employee size_Employee count.py",
+    "TRADE IN GOODS STATISTICS_Employee size_value.py"
 ]
 
 def create_table(proc):
@@ -138,7 +138,7 @@ final_table.to_csv(out / 'observations.csv', index = False)
 scraper.dataset.family = 'trade'
 from gssutils.metadata import THEME
 scraper.dataset.theme = THEME['business-industry-trade-energy']
-with open(out / 'dataset.trig', 'wb') as metadata:
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
