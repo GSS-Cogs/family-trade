@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[59]:
+# In[2]:
 
 
 from gssutils import *
@@ -29,14 +29,14 @@ scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpaym
 scraper
 
 
-# In[60]:
+# In[3]:
 
 
 dist = scraper.distributions[0]
 dist
 
 
-# In[61]:
+# In[4]:
 
 
 tabs = (t for t in dist.as_databaker())
@@ -82,7 +82,7 @@ for tab in tabs:
         
 
 
-# In[66]:
+# In[29]:
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -102,6 +102,8 @@ df['Product'] = df['Product'].map(lambda x: 'All' if x == '' else x)
 
 df['Product Category'] = df['Product Category'].map(lambda x: 'All' if x == '' else x)
 df['Product Category'] = df['Product Category'].map(lambda x: right(x, len(x) - 3) if left(x, 2).isnumeric() == True else x)
+
+df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 8) if mid(x, 2, 5) == 'OTHER' else x)
 df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 5).strip() if '.' in x else (right(x, len(x) - 4) if left(x, 2).isnumeric() == True else x))
 
 df = df.replace({'Product' : {
@@ -119,10 +121,21 @@ for column in df:
     if column in ('Flow Directions','Product Department','Product Category','Product','Unit'):
         df[column] = df[column].map(lambda x: pathify(x))
         
-df.head(25)
+df = df.replace({'Product' : {
+    'a-products-of-agriculture-forestry-fishing' : 'products-of-agriculture-forestry-fishing',
+    'b-mining-quarrying' : 'mining-quarrying',
+    'c-manufactured-products' : 'manufactured-products',
+    'd-electricity-gas-steam-air-conditioning' : 'electricity-gas-steam-air-conditioning',
+    'e-water-supply-sewerage-waste-management' : 'water-supply-sewerage-waste-management',
+    'j-information-communication-services' : 'information-communication-services',
+    'm-professional-scientific-technical-services' : 'professional-scientific-technical-services',
+    'r-arts-entertainment-recreation' : 'arts-entertainment-recreation',
+    's-other-services' : 'other-services'}})
+        
+df['Product'].unique().tolist()
 
 
-# In[63]:
+# In[14]:
 
 
 from IPython.core.display import HTML
@@ -133,7 +146,7 @@ for col in df:
         display(df[col].cat.categories) 
 
 
-# In[65]:
+# In[15]:
 
 
 destinationFolder = Path('out')

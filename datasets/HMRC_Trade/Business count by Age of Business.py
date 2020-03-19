@@ -4,8 +4,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -14,23 +14,21 @@
 
 # Business count by Age of Business
 
+# +
 from gssutils import *
-if is_interactive():
-    scraper = Scraper('https://www.uktradeinfo.com/Statistics/OverseasTradeStatistics/AboutOverseastradeStatistics/Pages/OTSReports.aspx')
-    display(scraper)
-    scraper.select_dataset(title=lambda x: x.startswith('UK Trade in Goods by Business Characteristics'))
-    display(scraper)
-    idbrs = sorted(
-        [dist for dist in scraper.distributions if dist.title.startswith('IDBR OTS tables')],
-        key=lambda d: d.title, reverse=True)
-    idbr = idbrs[0]
-    display(idbr.title)
-    tabs = {tab.name: tab for tab in idbr.as_databaker()}
-    display(tabs.keys())
+
+scraper = Scraper('https://www.uktradeinfo.com/Statistics/OverseasTradeStatistics/AboutOverseastradeStatistics/Pages/OTSReports.aspx')
+scraper.select_dataset(title=lambda x: x.startswith('UK Trade in Goods by Business Characteristics'))
+idbrs = sorted(
+    [dist for dist in scraper.distributions if dist.title.startswith('IDBR OTS tables')],
+    key=lambda d: d.title, reverse=True)
+idbr = idbrs[0]
+display(idbr.title)
+tabs = {tab.name: tab for tab in idbr.as_databaker()}
+tabs.keys()
+# -
 
 tab = tabs['Age Group']
-
-savepreviewhtml(tab)
 
 observations = tab.excel_ref('C25').expand(DOWN).expand(RIGHT).is_not_blank()-tab.excel_ref('C24').expand(UP)
 
@@ -73,9 +71,3 @@ new_table['Age of Business'] = new_table['Age of Business'].map(str) + ' years'
 new_table['Value'] = new_table['Value'].astype(int)
 
 new_table = new_table[['Geography','Year','Age of Business','Flow','Measure Type','Value','Unit']]
-
-new_table.head(4)
-
-new_table.tail(4)
-
-
