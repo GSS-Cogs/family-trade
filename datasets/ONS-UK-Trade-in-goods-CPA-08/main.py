@@ -118,6 +118,17 @@ df = df[['Period', 'Flow Directions','Product Department','Product Category','Pr
 for column in df:
     if column in ('Flow Directions','Product Department','Product Category','Product','Unit'):
         df[column] = df[column].map(lambda x: pathify(x))
+
+df = df.replace({'Product' : {
+    'a-products-of-agriculture-forestry-fishing' : 'products-of-agriculture-forestry-fishing',
+    'b-mining-quarrying' : 'mining-quarrying',
+    'c-manufactured-products' : 'manufactured-products',
+    'd-electricity-gas-steam-air-conditioning' : 'electricity-gas-steam-air-conditioning',
+    'e-water-supply-sewerage-waste-management' : 'water-supply-sewerage-waste-management',
+    'j-information-communication-services' : 'information-communication-services',
+    'm-professional-scientific-technical-services' : 'professional-scientific-technical-services',
+    'r-arts-entertainment-recreation' : 'arts-entertainment-recreation',
+    's-other-services' : 'other-services'}})
         
 df.head(25)
 
