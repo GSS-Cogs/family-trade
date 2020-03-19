@@ -8,11 +8,10 @@
             "Trade"
         ]
     },
-    "pmd": "http://gss-data.org.uk",
     "pipelines": [
         "HMRC-OVERSEAS-TRADE-STATISTICS",
+        "HMRC-Overseas-Trade-Statistics-CN8",
         "HMRC-RTS-Small-area",
-        "HMRC_OTS_CN8",
         "HMRC_RTS",
         "HMRC_Trade",
         "ONS-FDI",
