@@ -1,3 +1,4 @@
 Label,Notation,Parent Notation,Sort Priority
 Primary income,primary-income,,1
-Investment Income,investment-income,,2
+Secondary income,secondary-income,,2
+Investment Income,investment-income,,3

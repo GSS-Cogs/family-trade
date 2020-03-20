@@ -41,4 +41,7 @@ Flow Directions,Flow Directions,Dimension,http://gss-data.org.uk/def/concept-sch
 Trades,Trades,Dimension,http://gss-data.org.uk/def/concept-scheme/trades
 Account Type,Account Type,Dimension,http://gss-data.org.uk/def/concept-scheme/account-type
 Income,Income,Dimension,http://gss-data.org.uk/def/concept-scheme/income
+Income Description,Income Description,Dimension,http://gss-data.org.uk/def/concept-scheme/income-description
 Earnings,Earnings,Dimension,http://gss-data.org.uk/def/concept-scheme/earnings
+Sector,Sector,Dimension,http://gss-data.org.uk/def/concept-scheme/sector
+Transaction Type,Transaction Type,Dimension,http://gss-data.org.uk/def/concept-scheme/transaction-type

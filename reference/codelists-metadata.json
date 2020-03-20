@@ -172,6 +172,14 @@
       "url": "codelists/earnings.csv",
       "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
       "rdfs:label": "Earnings"	
+    } , {
+      "url": "codelists/sector.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Sector"	
+    } , {
+      "url": "codelists/transaction-type.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Transaction Type"	
     }
   ]
 }

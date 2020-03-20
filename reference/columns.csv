@@ -59,3 +59,5 @@ Account Type,account_type,qb:dimension,http://gss-data.org.uk/def/dimension/acco
 Income,income,qb:dimension,http://gss-data.org.uk/def/dimension/income,http://gss-data.org.uk/def/concept/income/{income},string,
 Income Description,income_description,qb:dimension,http://gss-data.org.uk/def/dimension/income-description,http://gss-data.org.uk/def/concept/income-description/{income_description},string,
 Earnings,earnings,qb:dimension,http://gss-data.org.uk/def/dimension/earnings,http://gss-data.org.uk/def/concept/earnings/{earnings},string,
+Sector,sector,qb:dimension,http://gss-data.org.uk/def/dimension/sector,http://gss-data.org.uk/def/concept/sector/{sector},string,
+Transaction Type,transaction_type,qb:dimension,http://gss-data.org.uk/def/dimension/transaction-type,http://gss-data.org.uk/def/concept/transaction-type/{transaction_type},string,
