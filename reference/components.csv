@@ -38,3 +38,7 @@ GBP Million,GBP Million,Measure,
 Product Department,Product Department,Dimension,http://gss-data.org.uk/def/concept-scheme/product-department
 Product Category,Product Category,Dimension,http://gss-data.org.uk/def/concept-scheme/product-category
 Flow Directions,Flow Directions,Dimension,http://gss-data.org.uk/def/concept-scheme/flow-directions
+Trades,Trades,Dimension,http://gss-data.org.uk/def/concept-scheme/trades
+Account Type,Account Type,Dimension,http://gss-data.org.uk/def/concept-scheme/account-type
+Income,Income,Dimension,http://gss-data.org.uk/def/concept-scheme/income
+Earnings,Earnings,Dimension,http://gss-data.org.uk/def/concept-scheme/earnings

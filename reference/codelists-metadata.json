@@ -152,6 +152,26 @@
       "url": "codelists/product.csv",
       "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
       "rdfs:label": "Product"	
+    }, {
+      "url": "codelists/trades.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Trades"	
+    }, {
+      "url": "codelists/account-type.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Account Type"	
+    }, {
+      "url": "codelists/income.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Income"	
+    } , {
+      "url": "codelists/income-description.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Income Description"	
+    } , {
+      "url": "codelists/earnings.csv",
+      "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+      "rdfs:label": "Earnings"	
     }
   ]
 }

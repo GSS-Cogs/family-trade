@@ -54,3 +54,8 @@ Product Department,product_department,qb:dimension,http://gss-data.org.uk/def/di
 Product Category,product_category,qb:dimension,http://gss-data.org.uk/def/dimension/product-category,http://gss-data.org.uk/def/concept/product-category/{product_category},string,
 Product,product,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/product/{product},string,
 Flow Directions,flow_directions,qb:dimension,http://gss-data.org.uk/def/dimension/flow-directions,http://gss-data.org.uk/def/concept/flow-directions/{flow_directions},string,
+Trades,trades,qb:dimension,http://gss-data.org.uk/def/dimension/trades,http://gss-data.org.uk/def/concept/trades/{trades},string,
+Account Type,account_type,qb:dimension,http://gss-data.org.uk/def/dimension/account-type,http://gss-data.org.uk/def/concept/account-type/{account_type},string,
+Income,income,qb:dimension,http://gss-data.org.uk/def/dimension/income,http://gss-data.org.uk/def/concept/income/{income},string,
+Income Description,income_description,qb:dimension,http://gss-data.org.uk/def/dimension/income-description,http://gss-data.org.uk/def/concept/income-description/{income_description},string,
+Earnings,earnings,qb:dimension,http://gss-data.org.uk/def/dimension/earnings,http://gss-data.org.uk/def/concept/earnings/{earnings},string,

@@ -1,0 +1,24 @@
+Label,Notation,Parent Notation,Sort Priority
+Compensation of employees,compensation-of-employees,,1
+Earnings on direct investment abroad,earnings-on-direct-investment-abroad,,2
+Earnings on equity securities,earnings-on-equity-securities,,3
+Earnings on debt securities,earnings-on-debt-securities,,4
+Total portfolio investment,total-portfolio-investment,,5
+Earnings on other investment abroad,earnings-on-other-investment-abroad,,6
+Earnings on reserve assets,earnings-on-reserve-assets,,7
+Total investment income,total-investment-income,,8
+Other primary income,other-primary-income,,9
+Total credits ,total-credits,,10
+Foreign earnings on direct investment in the UK,foreign-earnings-on-direct-investment-in-the-uk,,11
+Earnings on other investment in the UK,earnings-on-other-investment-in-the-uk,,12
+Total debits ,total-debits,,13
+Direct investment,direct-investment,,14
+Other investment,other-investment,,15
+Reserve assets,reserve-assets,,16
+Total ,total,,17
+Total,total,,18
+Monetary financial institutions,monetary-financial-institutions,,19
+Central government,central-government,,20
+Local authorities,local-authorities,,21
+Public corporations,public-corporations,,22
+Other sectors,other-sectors,,23
