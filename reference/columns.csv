@@ -71,7 +71,7 @@ Expenditure Type,expenditure_type,qb:dimension,http://gss-data.org.uk/def/dimens
 Household Expenditure,household_expenditure,qb:dimension,http://gss-data.org.uk/def/dimension/household-expenditure,http://gss-data.org.uk/def/concept/household-expenditure/{household_expenditure},string,slugize,,
 Industrial Sector,industrial_sector,qb:dimension,http://gss-data.org.uk/def/dimension/industrial-sector,http://gss-data.org.uk/def/concept/industrial-sector/{industrial_sector},string,slugize,,
 Income Indicator,income_indicator,qb:dimension,http://gss-data.org.uk/def/dimension/income-indicator,http://gss-data.org.uk/def/concept/income-indicator/{income_indicator},string,slugize,,
-Category,category,qb:dimension,http://gss-data.org.uk/def/dimension/category,http://gss-data.org.uk/def/concept/category/{category},string,slugize,,
+Estimate Type,estimate_type,qb:dimension,http://gss-data.org.uk/def/dimension/estimate-type,http://gss-data.org.uk/def/concept/estimate-type/{estimate_type},string,slugize,,
 Trade Type,trade_type,qb:dimension,http://gss-data.org.uk/def/dimension/trade-type,http://gss-data.org.uk/def/concept/trade-type/{trade_type},string,slugize,,
 Aggregate,aggregate,qb:dimension,http://gss-data.org.uk/def/dimension/aggregate,http://gss-data.org.uk/def/concept/aggregate/{aggregate},string,slugize,,
 Expenditure,expenditure,qb:dimension,http://gss-data.org.uk/def/dimension/expenditure,http://gss-data.org.uk/def/concept/expenditure/{expenditure},string,slugize,,

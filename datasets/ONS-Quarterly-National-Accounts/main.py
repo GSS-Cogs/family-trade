@@ -25,14 +25,18 @@ scraper
 
 # %%
 tabs = scraper.distribution(downloadURL=lambda x: "estimate" in x, latest=True).as_databaker()
-scraper.dataset.title
 
 # %% [markdown]
 # ### Index
 #
-# We're going to create a dictionary from the index tab for use in building all the datacubes, this is so we can get the measure types based on CDID.
+# We're going to create a dictionary from the index tab for use in building all the datacubes, this is so we can: 
+#
+# - get the measure types based on CDID and series type.
+# - different better current price and chain volume measure using series description.
 
 # %%
+
+# TODO - might be easier to output this one tab as pandas for this
 
 tab = [x for x in tabs if x.name == "Index"]
 if len(tab) != 1:
@@ -41,14 +45,28 @@ if len(tab) != 1:
 # Select all values in columns A and D
 a_cells = tab[0].excel_ref('A').is_not_blank().is_not_whitespace()
 d_cells = tab[0].excel_ref('D').is_not_blank().is_not_whitespace()
+b_cells = tab[0].excel_ref('B').is_not_blank().is_not_whitespace()
 
 # Match the vertical offset (.y) of the xyCells to make the dict
-index_dict = {}
+measure_dict = {}
+estimate_type = {}
 for a_cell in a_cells:
+    
+    # Get {cdid: measure type}
     d_cell = [x for x in d_cells if x.y == a_cell.y][0]
     d_val = "GBP Million" if "£ million" in d_cell.value else d_cell.value
-    index_dict[a_cell.value] = d_val
-
+    measure_dict[a_cell.value] = d_val
+    
+    # Get {cdid: GDP Estimate}
+    b_cell = [x for x in b_cells if x.y == a_cell.y][0]
+    
+    if " cvm " in b_cell.value.lower():
+        estimate_type[a_cell.value] = "chain-volume-measure"
+    elif " cp " in b_cell.value.lower():
+        estimate_type[a_cell.value] = "current-price"
+    else:
+        estimate_type[a_cell.value] = "deflator"
+    
 
 # %% [markdown]
 # ### Reusable Code
@@ -108,7 +126,7 @@ class LookupMeasure(object):
             return self.overrides[self.job]()
         else:
             try:
-                return index_dict[cdid]
+                return measure_dict[cdid]
             except KeyError:
                 
                 # Use horrible tab f fallback if we have to
@@ -217,7 +235,7 @@ def table_e_totals_lookup(cdid_header_row):
         label_cell = [x for x in label_row if x.x == cdid_cell.x][0]
         lookup[cdid_cell.value] = label_cell.value
         
-    # TODO - rap the following comporehensions somehow, looks nasty
+    # TODO - wrap the following comprehensions somehow, looks nasty
     # TODO - assertion on assumed find of Total cells
     
     # Add domestic prefix
@@ -336,11 +354,10 @@ jobs = {
         "tabs": [x for x in tabs if x.name.startswith("A") and "AGGREGATES" in x.name],
         "cdid_header_row": '4',
         "dimension_looked_up_from_cdid_row": [
-            ("Aggregate", move_rows(-1)),
-            ("Category", lookup_from_offset_range(vertical=-2, left=-3, right=2))
+            ("Aggregate", move_rows(-1))
         ],
-        "clear_footnotes_from": ["Aggregate", "Category"],
-        "pathify": ["Aggregate", "Category"]
+        "clear_footnotes_from": ["Aggregate"],
+        "pathify": ["Aggregate"]
     },  
     "Output indicators": {
         "tabs": [x for x in tabs if x.name.startswith("B") and "OUTPUT" in x.name],
@@ -426,8 +443,6 @@ for job_name, job_details in jobs.items():
     
     try:
         
-        # --- Initial Extraction ---
-        
         for tab in job_details["tabs"]:
 
             # Get the CDID header row
@@ -439,8 +454,18 @@ for job_name, job_details in jobs.items():
             dimensions = [
                 HDim(time, "Period", DIRECTLY, LEFT),
                 HDimConst("Geography", "K02000001"),
-                HDim(cdid_header_row.expand(DOWN).filter(is_cdid), "Measure Type", DIRECTLY, ABOVE),
+                HDim(cdid_header_row.expand(DOWN).filter(is_cdid), "Measure Type", DIRECTLY, ABOVE)
             ]
+            
+            # missing CDID's for estiamte type ....
+            if job_name == "Gross fixed capital formation" or job_name == "Inventories":
+                dimensions.append(
+                HDim(tab.excel_ref("A").is_not_blank(), "Esimtate Type", CLOSEST, RIGHT, 
+                     cellvalueoverride={
+                         "£ million": "current-price",
+                         "Reference year 2016, £ million": "chain-volume-measure"
+                     })
+                )
                 
             for lookup_job in job_details.get("dimension_looked_up_from_cdid_row", []):
                 table_lookup = lookup_job[1](cdid_header_row)
@@ -452,6 +477,15 @@ for job_name, job_details in jobs.items():
                 
             # Appliable to all jobs
             df["Period"] = df["Period"].apply(format_time)
+            
+            # missing CDID's for estiamte type ....
+            if job_name == "Income indicators":
+                df["Estimate Type"] = "current price"
+            elif job_name == "Gross fixed capital formation" or job_name == "Inventories":
+                pass # handled with a dimension
+            else:
+                df["Estimate Type"] = df["Measure Type"].map(lambda x: estimate_type[x])
+                
             df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million")
             df = df.rename(columns={"OBS": "Value", "DATAMARKER": "Marker"})
@@ -495,3 +529,7 @@ for job_name, job_details in jobs.items():
                         .format(tab.name, job_name)) from e
         
 
+
+# %%
+
+# %%

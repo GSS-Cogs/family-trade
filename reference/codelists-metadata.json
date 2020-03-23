@@ -272,9 +272,9 @@
             "rdfs:label": "Income Indicator"
         },
         {
-            "url": "codelists/national-accounts-category.csv",
+            "url": "codelists/national-accounts-estimate-type.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
-            "rdfs:label": "Category"
+            "rdfs:label": "Estimate Type"
         },
         {
             "url": "codelists/national-accounts-trade-type.csv",

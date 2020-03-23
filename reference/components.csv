@@ -58,7 +58,7 @@ Inventory,,Dimension,http://gss-data.org.uk/def/concept-scheme/inventory
 Expenditure Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/expenditure-category
 Income Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/income-category
 Industrial Sector,,Dimension,http://gss-data.org.uk/def/concept-scheme/industrial-sector
-Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/category
+Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/estimate-type
 Expenditure,,Dimension,http://gss-data.org.uk/def/concept-scheme/expenditure
 Trade Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/trade-type
 Income Indicator,,Dimension,http://gss-data.org.uk/def/concept-scheme/income-indicator
