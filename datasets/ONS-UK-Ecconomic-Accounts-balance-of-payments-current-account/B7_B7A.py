@@ -48,10 +48,10 @@ for tab in tabs:
         
         dimensions = [
             HDim(account_Type, 'Account Type', CLOSEST, LEFT),
-            HDim(seasonal_adjustment, 'Seasonal adjustments', CLOSEST, LEFT),
+            HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
             HDim(services, 'Services', DIRECTLY, LEFT),
-            HDim(code, 'CIDI', DIRECTLY, LEFT),
+            HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
             HDimConst('Measure Type', 'GBP Total'),
@@ -74,12 +74,13 @@ df['Services'] = df['Services'].str.rstrip('2')
 df['Services'] = df['Services'].str.lstrip()
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'].replace(' -', 'unknown', inplace=True)
+df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
 
 # +
-tidy = df[['Period','Flow Directions','Services','Seasonal adjustments', 'CIDI', 'Account Type', 'Value', 
+tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
            'Marker','Measure Type', 'Unit']]
 for column in tidy:
-    if column in ('Flow Directions', 'Services', 'Seasonal adjustments', 'Account Type'):
+    if column in ('Flow Directions', 'Services', 'Account Type'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
         
@@ -93,6 +94,9 @@ TITLE = 'Balance of Payments Capital Account'
 OBS_ID = pathify(TITLE)
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# -
+
+print(OBS_ID)
 
 # +
 from gssutils.metadata import THEME
@@ -104,5 +108,5 @@ scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
-schema = CSVWMetadata('https://gss-cogs.github.io/family-disability/reference/')
+schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')

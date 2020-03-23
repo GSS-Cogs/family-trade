@@ -16,10 +16,20 @@
 # +
 import glob
 
-py_files = [i for i in glob.glob('*.{}'.format('py'))]
+# #%run 'B1.py' #DUPLICATE KEY ERROR
 
-for i in py_files:
-    file = "'" + i + "'"
-    if file.startswith("'main") == True:
-        continue
-    %run $file
+# %run 'B2_B2A_B3_B3A.py'
+
+# %run 'B4_B4A_B4B.py'
+
+# %run 'B5_B5A.py' 
+
+# #%run 'B6_B6A.py' #DUPLICATE KEY ERROR
+
+# %run 'B6B_B6B2_B6B3_B6C_B6C2_B6C3.py' 
+
+# #%run 'B7_B7A.py' #DUPLICATE KEY ERROR
+
+# -
+
+

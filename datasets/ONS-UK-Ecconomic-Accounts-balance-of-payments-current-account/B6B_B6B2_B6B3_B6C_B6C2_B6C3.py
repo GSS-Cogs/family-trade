@@ -61,12 +61,12 @@ for tab in tabs:
         
         dimensions = [
             HDim(account_Type, 'Account Type', CLOSEST, LEFT),
-            HDim(seasonal_adjustment, 'Seasonal adjustments', CLOSEST, LEFT),
+            HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(transaction_type, 'Transaction Type', CLOSEST, LEFT),
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
             HDim(services, 'Services', CLOSEST, ABOVE),
             HDim(country, 'Country Transaction', DIRECTLY, LEFT),
-            HDim(code, 'CIDI', DIRECTLY, LEFT),
+            HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
             HDimConst('Measure Type', 'GBP Total'),
@@ -89,13 +89,14 @@ df['Account Type'] = df['Account Type'].str.rstrip(':')
 df['Transaction Type'] = df['Transaction Type'].str.rstrip('1')
 df['Country Transaction'] = df['Country Transaction'].str.lstrip()
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
+df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
 df['Marker'].replace(' -', 'unknown', inplace=True)
 
 # +
-tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal adjustments', 
-           'CIDI', 'Value', 'Marker', 'Measure Type', 'Unit']]
+tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 
+           'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
 for column in tidy:
-    if column in ('Flow Directions', 'Services', 'Account Type', 'Seasonal adjustments', 'Transaction Type', 'Country Transaction'):
+    if column in ('Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
         
@@ -109,6 +110,9 @@ TITLE = 'Balance of Payments Current Account: Transactions with non-EU countries
 OBS_ID = pathify(TITLE)
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# -
+
+print(OBS_ID)
 
 # +
 from gssutils.metadata import THEME
@@ -120,7 +124,7 @@ scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
-schema = CSVWMetadata('https://gss-cogs.github.io/family-disability/reference/')
+schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
 # -
 

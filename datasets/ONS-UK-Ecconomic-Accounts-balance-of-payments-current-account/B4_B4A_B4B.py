@@ -58,10 +58,10 @@ for tab in tabs:
         dimensions = [
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDim(code, 'CIDI', DIRECTLY, LEFT),
+            HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
             HDim(income, 'Income Description', DIRECTLY, LEFT),
-            HDim(seasonal_adjustment, 'Seasonal adjustments', CLOSEST, LEFT),
+            HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(earning_type, 'Earnings', CLOSEST, ABOVE),
             HDim(income_type, 'Income', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
@@ -84,18 +84,19 @@ df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 df['Income Description'] = df['Income Description'].str.lstrip()
 df['Income Description'] = df['Income Description'].str.rstrip('1')
 df['Marker'].replace(' -', 'unknown', inplace=True)
+df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA', ' Sector analysis': 'sector-analysis' }})
 df = df.replace({'Earnings' : { '' : 'Net earnings', 
                                    ' (Net earnings)' : 'Net earnings',
                                    ' (Earnings of UK residents on investment abroad)' : 'Earnings of UK residents on investment abroad',
                                    ' (Foreign earnings on investment in UK)' : 'Foreign earnings on investment in the UK',
                                    ' (Foreign earnings on investment in the UK)' : 'Foreign earnings on investment in the UK'}})
-
 # +
-tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal adjustments', 
-           'CIDI', 'Value', 'Marker', 'Measure Type', 'Unit']]
+tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 
+           'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
 for column in tidy:
-    if column in ('Flow Directions', 'Income', 'Seasonal adjustments', 'Income Description', 'Earnings', 'Account Type'):
+    if column in ('Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type'):
         tidy[column] = tidy[column].str.lstrip()
+        tidy[column] = tidy[column].str.rstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
         
 tidy
@@ -108,6 +109,9 @@ TITLE = 'Balance of Payments Current Account: Primary income'
 OBS_ID = pathify(TITLE)
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# -
+
+print(OBS_ID)
 
 # +
 from gssutils.metadata import THEME
@@ -119,7 +123,7 @@ scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
-schema = CSVWMetadata('https://gss-cogs.github.io/family-disability/reference/')
+schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
 # -
 

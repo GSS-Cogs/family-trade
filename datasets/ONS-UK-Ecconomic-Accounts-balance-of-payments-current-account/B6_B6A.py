@@ -35,7 +35,7 @@ def right(s, amount):
 # -
 
 for tab in tabs:
-    if (tab.name == 'B6') or (tab.name == 'B6A'):
+    if (tab.name == 'B6') or (tab.name == 'B6A1'):
         
         account_Type = tab.excel_ref('B1')
         seasonal_adjustment = tab.excel_ref('B3')
@@ -50,10 +50,10 @@ for tab in tabs:
         
         dimensions = [
             HDim(account_Type, 'Account Type', CLOSEST, LEFT),
-            HDim(seasonal_adjustment, 'Seasonal adjustments', CLOSEST, LEFT),
+            HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(transaction_type, 'Transaction Type', CLOSEST, LEFT),
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
-            HDim(code, 'CIDI', DIRECTLY, LEFT),
+            HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
             HDim(services, 'Services', DIRECTLY, LEFT),
@@ -66,7 +66,6 @@ for tab in tabs:
         tidied_sheets.append(tidy_sheet.topandas())
 
 
-# +
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
 df['Quarter'] = df['Quarter'].astype(str)
 df['Quarter'] = df['Quarter'].map(lambda x: '-Q1' if 'Q1' in x else('-Q2' if 'Q2' in x else ('-Q3' if 'Q3' in x else ('-Q4' if 'Q4' in x else ''))))
@@ -76,14 +75,14 @@ df.drop(['Quarter', 'Year'], axis=1, inplace=True)
 df['Account Type'] = df['Account Type'].map(lambda x: x.split()[0]) + ' ' +  df['Account Type'].map(lambda x: x.split()[1])
 df['Account Type'] = df['Account Type'].str.rstrip(':')
 df['Services'] = df['Services'].str.rstrip('4')
-
+df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 
 # +
-tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Seasonal adjustments', 
-           'CIDI', 'Value', 'Measure Type', 'Unit']]
+tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Seasonal Adjustment', 
+           'CDID', 'Value', 'Measure Type', 'Unit']]
 for column in tidy:
-    if column in ('Flow Directions', 'Account Type', 'Seasonal adjustments', 'Transaction Type', 'Services'):
+    if column in ('Flow Directions', 'Account Type', 'Transaction Type', 'Services'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
         
@@ -97,6 +96,9 @@ TITLE = 'Balance of Payments Current Account: Transactions with the EU and EMU'
 OBS_ID = pathify(TITLE)
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# -
+
+print(OBS_ID)
 
 # +
 from gssutils.metadata import THEME
@@ -108,7 +110,7 @@ scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
-schema = CSVWMetadata('https://gss-cogs.github.io/family-disability/reference/')
+schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
 # -
 

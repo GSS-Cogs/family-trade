@@ -49,7 +49,7 @@ for tab in tabs:
         dimensions = [
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDim(code, 'CIDI', DIRECTLY, LEFT),
+            HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
             HDim(product, 'Product', DIRECTLY, LEFT),
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
@@ -79,7 +79,7 @@ for tab in tabs:
         dimensions = [
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDim(code, 'CIDI', DIRECTLY, LEFT),
+            HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
             HDim(product, 'Product', DIRECTLY, LEFT),
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
@@ -110,7 +110,7 @@ df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 
 
 # +
-tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CIDI', 'Services', 'Account Type', 'Value', 'Measure Type', 'Unit']]
+tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Measure Type', 'Unit']]
 for column in tidy:
     if column in ('Flow Directions', 'Product', 'Services', 'Account Type'):
         tidy[column] = tidy[column].str.lstrip()
@@ -126,6 +126,9 @@ TITLE = 'Balance of Payments Current Account: Trade in goods and services'
 OBS_ID = pathify(TITLE)
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# -
+
+print(OBS_ID)
 
 # +
 from gssutils.metadata import THEME
@@ -137,8 +140,5 @@ scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
-schema = CSVWMetadata('https://gss-cogs.github.io/family-disability/reference/')
+schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
-# -
-
-
