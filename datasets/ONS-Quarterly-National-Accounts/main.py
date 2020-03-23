@@ -437,7 +437,8 @@ for job_name, job_details in jobs.items():
             time = tab.excel_ref("A6").fill(DOWN).filter(is_time)
 
             dimensions = [
-                HDim(time, "Reference Period", DIRECTLY, LEFT),
+                HDim(time, "Date", DIRECTLY, LEFT),
+                HDimConst("Geography", "K02000001"),
                 HDim(cdid_header_row.expand(DOWN).filter(is_cdid), "Measure Type", DIRECTLY, ABOVE),
             ]
                 
@@ -450,7 +451,7 @@ for job_name, job_details in jobs.items():
             df = ConversionSegment(tab, dimensions, observations).topandas()
                 
             # Appliable to all jobs
-            df["Reference Period"] = df["Reference Period"].apply(format_time)
+            df["Date"] = df["Date"].apply(format_time)
             df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million")
             df = df.rename(columns={"OBS": "Value", "DATAMARKER": "Marker"})
