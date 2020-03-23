@@ -45,3 +45,25 @@ Income Description,Income Description,Dimension,http://gss-data.org.uk/def/conce
 Earnings,Earnings,Dimension,http://gss-data.org.uk/def/concept-scheme/earnings
 Sector,Sector,Dimension,http://gss-data.org.uk/def/concept-scheme/sector
 Transaction Type,Transaction Type,Dimension,http://gss-data.org.uk/def/concept-scheme/transaction-type
+1Y deflator GR,,Measure,
+4Q deflator GR,,Measure,
+Index deflator series,,Measure,
+Index,,Measure,
+4Q GR,,Measure,
+1Q GR,,Measure,
+1Q deflator GR,,Measure,
+1Y GR,,Measure,
+Index series,,Measure,
+Inventory,,Dimension,http://gss-data.org.uk/def/concept-scheme/inventory
+Expenditure Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/expenditure-category
+Income Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/income-category
+Industrial Sector,,Dimension,http://gss-data.org.uk/def/concept-scheme/industrial-sector
+Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/category
+Expenditure,,Dimension,http://gss-data.org.uk/def/concept-scheme/expenditure
+Trade Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/trade-type
+Income Indicator,,Dimension,http://gss-data.org.uk/def/concept-scheme/income-indicator
+Expenditure Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/expenditure-type
+Industry,,Dimension,http://gss-data.org.uk/def/concept-scheme/industry
+Aggregate,,Dimension,http://gss-data.org.uk/def/concept-scheme/aggregate
+Household Expenditure,,Dimension,http://gss-data.org.uk/def/concept-scheme/household-expenditure
+Capital Formation,,Dimension,http://gss-data.org.uk/def/concept-scheme/capital-formation
