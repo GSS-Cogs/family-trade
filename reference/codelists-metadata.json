@@ -292,6 +292,11 @@
             "rdfs:label": "Expenditure"
         },
         {
+            "url": "codelists/national-accounts-analysis.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Analysis"
+        },
+        {
             "url": "codelists/services.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Services"

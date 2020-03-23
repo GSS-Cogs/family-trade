@@ -56,6 +56,7 @@ Index,,Measure,
 Index series,,Measure,
 Inventory,,Dimension,http://gss-data.org.uk/def/concept-scheme/inventory
 Expenditure Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/expenditure-category
+Analysis,,Dimension,http://gss-data.org.uk/def/concept-scheme/analysis
 Income Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/income-category
 Industrial Sector,,Dimension,http://gss-data.org.uk/def/concept-scheme/industrial-sector
 Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/estimate-type

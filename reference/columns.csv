@@ -75,6 +75,7 @@ Estimate Type,estimate_type,qb:dimension,http://gss-data.org.uk/def/dimension/es
 Trade Type,trade_type,qb:dimension,http://gss-data.org.uk/def/dimension/trade-type,http://gss-data.org.uk/def/concept/trade-type/{trade_type},string,slugize,,
 Aggregate,aggregate,qb:dimension,http://gss-data.org.uk/def/dimension/aggregate,http://gss-data.org.uk/def/concept/aggregate/{aggregate},string,slugize,,
 Expenditure,expenditure,qb:dimension,http://gss-data.org.uk/def/dimension/expenditure,http://gss-data.org.uk/def/concept/expenditure/{expenditure},string,slugize,,
+Analysis,analysis,qb:dimension,http://gss-data.org.uk/def/dimension/analysis,http://gss-data.org.uk/def/concept/analysis/{analysis},string,slugize,,
 1Y deflator GR,1y_deflator_gr,qb:measure,http://gss-data.org.uk/def/measure/1y-deflator-gr,,,,,
 4Q deflator GR,4q_deflator_gr,qb:measure,http://gss-data.org.uk/def/measure/4q-deflator-gr,,,,,
 Index deflator series,index_deflator_series,qb:measure,http://gss-data.org.uk/def/measure/index-deflator-series,,,,,
