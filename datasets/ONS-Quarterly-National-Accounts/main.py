@@ -66,7 +66,7 @@ for a_cell in a_cells:
         estimate_type[a_cell.value] = "current-price"
     else:
         estimate_type[a_cell.value] = "deflator"
-    
+
 
 # %% [markdown]
 # ### Reusable Code
@@ -460,7 +460,7 @@ for job_name, job_details in jobs.items():
             # missing CDID's for estiamte type ....
             if job_name == "Gross fixed capital formation" or job_name == "Inventories":
                 dimensions.append(
-                HDim(tab.excel_ref("A").is_not_blank(), "Esimtate Type", CLOSEST, RIGHT, 
+                HDim(tab.excel_ref("1").is_not_blank(), "Esimtate Type", CLOSEST, RIGHT, 
                      cellvalueoverride={
                          "£ million": "current-price",
                          "Reference year 2016, £ million": "chain-volume-measure"
@@ -527,9 +527,5 @@ for job_name, job_details in jobs.items():
     except Exception as e:
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
-        
 
 
-# %%
-
-# %%
