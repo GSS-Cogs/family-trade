@@ -1,3 +1,4 @@
 Label,Notation,Parent Notation,Sort Priority
 Current Account,current-account,,1
 Capital Account,capital-account,,2
+Financial account,financial-account,,3
