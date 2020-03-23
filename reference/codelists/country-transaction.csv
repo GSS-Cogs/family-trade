@@ -1,0 +1,22 @@
+Label,Notation,Parent Notation,Sort Priority
+Exports of goods,exports-of-goods,,1
+of which Brazil,of-which-brazil,,2
+of which Canada,of-which-canada,,3
+of which China,of-which-china,,4
+of which Hong Kong,of-which-hong-kong,,5
+of which India,of-which-india,,6
+of which Japan,of-which-japan,,7
+of which Russia,of-which-russia,,8
+of which Switzerland,of-which-switzerland,,9
+of which USA,of-which-usa,,10
+Exports of services,exports-of-services,,11
+Total exports of goods and services,total-exports-of-goods-and-services,,12
+Primary income,primary-income,,13
+Secondary income,secondary-income,,14
+Total,total,,15
+Imports of goods,imports-of-goods,,16
+Imports of services,imports-of-services,,17
+Total imports of goods and services,total-imports-of-goods-and-services,,18
+Balances of goods,balances-of-goods,,19
+Balances of services,balances-of-services,,20
+Total balances of goods and services,total-balances-of-goods-and-services,,21

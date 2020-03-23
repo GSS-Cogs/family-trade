@@ -67,3 +67,5 @@ Industry,,Dimension,http://gss-data.org.uk/def/concept-scheme/industry
 Aggregate,,Dimension,http://gss-data.org.uk/def/concept-scheme/aggregate
 Household Expenditure,,Dimension,http://gss-data.org.uk/def/concept-scheme/household-expenditure
 Capital Formation,,Dimension,http://gss-data.org.uk/def/concept-scheme/capital-formation
+Services,Services,Dimension,http://gss-data.org.uk/def/concept-scheme/services
+Country Transaction,Country Transaction,Dimension,http://gss-data.org.uk/def/concept-scheme/country-transaction

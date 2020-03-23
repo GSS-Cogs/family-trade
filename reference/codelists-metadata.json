@@ -290,6 +290,16 @@
             "url": "codelists/national-accounts-expenditure.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Expenditure"
+        },
+        {
+            "url": "codelists/services.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Services"
+        },
+        {
+            "url": "codelists/country-transaction.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Country Transaction"
         }
     ]
 }

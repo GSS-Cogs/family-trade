@@ -1,0 +1,54 @@
+Label,Notation,Parent Notation,Sort Priority
+Trade in goods,trade-in-goods,,1
+Trade in services,trade-in-services,,2
+Total trade in goods and services,-total-trade-in-goods-and-services,,3
+Exports of goods,exports-of-goods,,4
+Exports of services,exports-of-services,,5
+Total exports of goods and services,total-exports-of-goods-and-services,,6
+Imports of goods,imports-of-goods,,7
+Imports of services,imports-of-services,,8
+Total imports of goods and services,total-imports-of-goods-and-services,,9
+of which EMU members,of-which-emu-members,,10
+Primary income,primary-income,,11
+Secondary income,secondary-income,,12
+Balances of goods,balances-of-goods,,13
+Balances of services,balances-of-services,,14
+Total balances of goods and services,total-balances-of-goods-and-services,,15
+Total,-total,,16
+Debt forgiveness,debt-forgiveness,,17
+Other capital transfers,other-capital-transfers,,18
+Total central government,total-central-government,,19
+Regional development fund,regional-development-fund,,20
+Agricultural fund for regional development,agricultural-fund-for-regional-development,,21
+Total EU institutions,total-eu-institutions,,22
+Total other sectors,total-other-sectors,,23
+Total capital transfers,total-capital-transfers,,24
+"Disposal of non-produced, non-financial assets",disposal-of-non-produced-non-financial-assets,,25
+Total credits,total-credits,,26
+Other capital transfers (project grants),other-capital-transfers-project-grants,,27
+Monetary financial institutions,monetary-financial-institutions,,28
+Public corporations,public-corporations,,29
+Total debt forgiveness,total-debt-forgiveness,,30
+"Acquisitions of non-produced, non-financial assets",acquisitions-of-non-produced-non-financial-assets,,31
+Total debits,total-debits,,32
+"Non-produced, non-financial assets",non-produced-non-financial-assets,,33
+"Acquisition of non-produced, non-financial assets",acquisition-of-non-produced-non-financial-assets,,34
+Total trade,total-trade,,35
+Compensation of employees,compensation-of-employees,,35
+Investment income,investment-income,,36
+Other primary income,other-primary-income,,37
+Total Primary income,total-primary-income,,38
+Central government,central-government,,39
+Other sectors,other-sectors,,40
+Total secondary income,total-secondary-income,,41
+Current balance,current-balance,,42
+Capital balance,capital-balance,,43
+Current balance as a percentage of GDP1,current-balance-as-a-percentage-of-gdp1,,44
+General government,general-government,,45
+Direct investment,direct-investment,,46
+Portfolio investment,portfolio-investment,,47
+Financial derivatives (net),financial-derivatives-net,,48
+Other investment,other-investment,,49
+Reserve assets,reserve-assets,,50
+Net financial transactions,net-financial-transactions,,51
+Net errors and omissions,net-errors-and-omissions,,52
