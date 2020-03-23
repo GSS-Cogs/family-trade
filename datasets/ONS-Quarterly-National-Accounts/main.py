@@ -397,9 +397,9 @@ jobs = {
         "cdid_header_row": "6:8",
          "dimension_looked_up_from_cdid_row": [
              ("Household Expenditure", table_e_totals_lookup),
-             ("Expenditure Category", table_e_national_or_domestic_lookup)
+             ("Household Expenditure Category", table_e_national_or_domestic_lookup)
          ],
-        "pathify": ["Household Expenditure", "Expenditure Category"],
+        "pathify": ["Household Expenditure", "Household Expenditure Category"],
     },
     "Gross fixed capital formation": {
         "tabs": [x for x in tabs if x.name.startswith("F") and "GFCF" in x.name],
