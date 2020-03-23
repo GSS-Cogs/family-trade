@@ -1,6 +1,6 @@
 Label,Notation,Parent Notation,Sort Priority,Description
-value-indices-at-current-prices,value-indices-at-current-prices,,,
-chained-volume-indices,chained-volume-indices,,,
-implied-deflators,implied-deflators,,,
-current-prices,current-prices,,,
-chained-volume-measure-reference-year,chained-volume-measure-reference-year,,,
+Value indices at current prices,value-indices-at-current-prices,,,
+Chained  volume indices,chained-volume-indices,,,
+Implied deflators,implied-deflators,,,
+Current prices,current-prices,,,
+Chained Volume Measure (Reference year ),chained-volume-measure-reference-year,,,

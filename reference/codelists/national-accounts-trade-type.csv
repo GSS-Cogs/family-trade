@@ -1,4 +1,4 @@
 Label,Notation,Parent Notation,Sort Priority,Description
-exports,exports,,,
-imports,imports,,,
-balance,balance,,,
+Exports,exports,,,
+Imports,imports,,,
+Balance,balance,,,

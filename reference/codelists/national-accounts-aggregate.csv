@@ -1,7 +1,7 @@
 Label,Notation,Parent Notation,Sort Priority,Description
-gross-domestic-product-at-market-prices,gross-domestic-product-at-market-prices,,,
-gross-value-added-at-basic-prices,gross-value-added-at-basic-prices,,,
-gross-national-expenditure,gross-national-expenditure,,,
-market-sector-gross-value-added,market-sector-gross-value-added,,,
-less-basic-price-adjustment,less-basic-price-adjustment,,,
-gross-value-added-excluding-oil-gas,gross-value-added-excluding-oil-gas,,,
+Gross domestic product at market prices,gross-domestic-product-at-market-prices,,,
+Gross value added at basic prices,gross-value-added-at-basic-prices,,,
+Gross national expenditure,gross-national-expenditure,,,
+Market sector gross value added,market-sector-gross-value-added,,,
+less Basic price adjustment,less-basic-price-adjustment,,,
+Gross value added excluding oil & gas,gross-value-added-excluding-oil-gas,,,
