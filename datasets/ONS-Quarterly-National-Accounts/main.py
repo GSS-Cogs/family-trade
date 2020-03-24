@@ -94,6 +94,10 @@ class LookupMeasure(object):
         self.job = job
         self.tab = tab
         self.title = [x.value for x in tab.excel_ref("B1")][0]
+        self.all_cdids = [x for x in self.tab.filter(is_cdid)]
+        
+        # TODO: for debugging remove
+        self.found = []
         
         # Overrides per job
         self.overrides = {
@@ -133,15 +137,16 @@ class LookupMeasure(object):
                 if self.job == "Gross fixed capital formation":
 
                     # If a cdid is used more than once if must be on the same vertical (.y) offset
-                    cdid_y_offset_cells = [x for x in self.tab.filter(cdid)]
+                    cdid_y_offset_cells = [x for x in self.all_cdids if x.value == cdid]
                     if len(set([x.y for x in cdid_y_offset_cells])) != 1:
                            raise Exception("The cdid '{}' appears under multiple measures type - this should not" 
                                            "be possible and indnicates a critical error in the data.".format(cdid))
                     
                     for k, v in self.f_fallback.items():
-                        if cdid_y_offset_cells[0].y < k:
-                            return v,
-                        return "4Q GR"
+                        if int(cdid_y_offset_cells[0].y) < k:
+                            return v
+                    return "4Q GR"
+                
                 else: 
                     return measure_dict[cdid]
             except Exception as e:
@@ -450,9 +455,6 @@ jobs = {
 
 for job_name, job_details in jobs.items():
     tidy_sheets = []
-    
-    if job_name != "Gross fixed capital formation":
-        continue
         
     try:
         
@@ -469,6 +471,7 @@ for job_name, job_details in jobs.items():
             dimensions = [
                 HDim(time, "Period", DIRECTLY, LEFT),
                 HDimConst("Geography", "K02000001"),
+                HDim(cdid_header_row.expand(DOWN).filter(is_cdid), "CDID", DIRECTLY, ABOVE),
                 HDim(cdid_header_row.expand(DOWN).filter(is_cdid), "Measure Type", DIRECTLY, ABOVE)
             ]
             
@@ -499,7 +502,8 @@ for job_name, job_details in jobs.items():
             elif job_name == "Gross fixed capital formation" or job_name == "Inventories":
                 pass # handled with a dimension
             else:
-                df["Estimate Type"] = df["Measure Type"].map(lambda x: estimate_type[x])
+                df["Estimate Type"] = df["Measure Type"]
+                df["Estimate Type"] = df["Estimate Type"].map(lambda x: estimate_type[x])
                 
             df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million")
