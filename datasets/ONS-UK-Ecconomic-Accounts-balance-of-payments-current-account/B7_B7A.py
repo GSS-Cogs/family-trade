@@ -63,7 +63,7 @@ for tab in tabs:
         tidy_sheet = ConversionSegment(tab, dimensions, observations)        
        # savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
         tidied_sheets.append(tidy_sheet.topandas()) 
-        
+
 
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
 df['Quarter'] = df['Quarter'].astype(str)
@@ -96,6 +96,7 @@ destinationFolder.mkdir(exist_ok=True, parents=True)
 
 TITLE = 'Balance of Payments Capital Account'
 OBS_ID = pathify(TITLE)
+GROUP_ID = 'ONS-UK-Ecconomic-Accounts-balance-of-payments-current-account'
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 # -
@@ -104,11 +105,11 @@ print(OBS_ID)
 
 # +
 from gssutils.metadata import THEME
-from os import environ
-scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
-scraper.dataset.title = f'{TITLE}'
-scraper.dataset.family = 'trade'
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(f'gss_data/trade/{GROUP_ID}/{OBS_ID}')
+scraper.dataset.title = TITLE
 
+scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 

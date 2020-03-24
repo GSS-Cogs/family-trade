@@ -107,6 +107,7 @@ destinationFolder.mkdir(exist_ok=True, parents=True)
 
 TITLE = 'Balance of Payments Current Account: Primary income'
 OBS_ID = pathify(TITLE)
+GROUP_ID = 'ONS-UK-Ecconomic-Accounts-balance-of-payments-current-account'
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 # -
@@ -115,11 +116,11 @@ print(OBS_ID)
 
 # +
 from gssutils.metadata import THEME
-from os import environ
-scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
-scraper.dataset.title = f'{TITLE}'
-scraper.dataset.family = 'trade'
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(f'gss_data/trade/{GROUP_ID}/{OBS_ID}')
+scraper.dataset.title = TITLE
 
+scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
