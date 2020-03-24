@@ -305,6 +305,11 @@
             "url": "codelists/country-transaction.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Country Transaction"
+        },
+        {
+            "url": "codelists/members.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Members"
         }
     ]
 }
