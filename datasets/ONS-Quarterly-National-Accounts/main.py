@@ -24,6 +24,8 @@ scraper
 
 
 # %%
+
+# TODO - this doesnt work, still the estimates one!
 tabs = scraper.distribution(downloadURL=lambda x: "estimate" in x, latest=True).as_databaker()
 
 # %% [markdown]
@@ -102,16 +104,17 @@ class LookupMeasure(object):
         # Unfortunetly, not all CDID codes for table F are included in the index (though they should be...)
         # Hopefully they'll be more consistent in the future, so for now we're going to have to build some 
         # fall back logic for identifying measure type on F tabs
-        if tab.name.startswith("F"):
+        if self.job == "Gross fixed capital formation":
             
             # Percentage is referenced 3 times in column A, we'll use this to differentiate
             # the measure type, based on vertical (.y) cell position.
             percentage_break_points = [x for x in tab.excel_ref("A") if "percent" in str(x.value).lower()]
             self.f_fallback = {
-                percentage_break_points[0].y: "GBP Million",
-                percentage_break_points[1].y: "1Y GR",
-                percentage_break_points[2].y: "1Q GR"
+                int(percentage_break_points[0].y): "GBP Million",
+                int(percentage_break_points[1].y): "1Y GR",
+                int(percentage_break_points[2].y): "1Q GR"
             }
+            print(self.f_fallback)
         else:
             self.f_fallback = None
             
@@ -126,19 +129,23 @@ class LookupMeasure(object):
             return self.overrides[self.job]()
         else:
             try:
-                return measure_dict[cdid]
-            except KeyError:
-                
                 # Use horrible tab f fallback if we have to
-                if self.f_fallback is not None:
-                    # TODO - horrifically slow!
-                    cdid_y_offset = [x for x in tab.filter(cdid).assert_one()][0].y
+                if self.job == "Gross fixed capital formation":
+
+                    # If a cdid is used more than once if must be on the same vertical (.y) offset
+                    cdid_y_offset_cells = [x for x in self.tab.filter(cdid)]
+                    if len(set([x.y for x in cdid_y_offset_cells])) != 1:
+                           raise Exception("The cdid '{}' appears under multiple measures type - this should not" 
+                                           "be possible and indnicates a critical error in the data.".format(cdid))
+                    
                     for k, v in self.f_fallback.items():
-                        if cdid_y_offset < k:
+                        if cdid_y_offset_cells[0].y < k:
                             return v,
                         return "4Q GR"
-                else:
-                    raise Exception("CDID-{}-NOT-FOUND".format(cdid), "tab is", self.tab.name)
+                else: 
+                    return measure_dict[cdid]
+            except Exception as e:
+                raise Exception("CDID-{}-NOT-FOUND".format(cdid), "tab is", self.tab.name) from e
 
 
 class lookup_from_offset_range(object):
@@ -324,6 +331,7 @@ def table_b_lookup(cdid_header_row):
                 clean_val = "".join([x for x in label_cell.value if not x.isdigit()]).replace("\n", "").strip()
                 if clean_val in header_list:
                     lookup[cdid.value] = override
+                    
     return lookup
 
 
@@ -399,16 +407,18 @@ jobs = {
              ("Household Expenditure", table_e_totals_lookup),
              ("Expenditure Category", table_e_national_or_domestic_lookup)
          ],
-        "pathify": ["Household Expenditure", "Expenditure Category"],
+        "pathify": ["Household Expenditure", "Expenditure Category"]
     },
     "Gross fixed capital formation": {
         "tabs": [x for x in tabs if x.name.startswith("F") and "GFCF" in x.name],
         "cdid_header_row": '5',
         "dimension_looked_up_from_cdid_row": [
-            ("Capital formation", table_f_lookup)
+            ("Capital Formation", table_f_lookup),
+            ("Analysis", lookup_from_offset_range(vertical=-3, left=-5, right=2)),
         ],
-        "clear_footnotes_from": ["Capital formation"],
-        "pathify": ["Capital formation"]
+        "clear_footnotes_from": ["Capital Formation", "Analysis"],
+        "pathify": ["Capital Formation", "Analysis"],
+        "drop_duplicates": True
     },
     "Inventories": {
         "tabs": [x for x in tabs if x.name.startswith("G") and "INVENTORIES" in x.name],
@@ -441,6 +451,9 @@ jobs = {
 for job_name, job_details in jobs.items():
     tidy_sheets = []
     
+    if job_name != "Gross fixed capital formation":
+        continue
+        
     try:
         
         for tab in job_details["tabs"]:
@@ -450,6 +463,8 @@ for job_name, job_details in jobs.items():
 
             # Get time
             time = tab.excel_ref("A6").fill(DOWN).filter(is_time)
+            
+            print(cdid_header_row.expand(DOWN).filter(is_cdid))
 
             dimensions = [
                 HDim(time, "Period", DIRECTLY, LEFT),
@@ -460,7 +475,7 @@ for job_name, job_details in jobs.items():
             # missing CDID's for estiamte type ....
             if job_name == "Gross fixed capital formation" or job_name == "Inventories":
                 dimensions.append(
-                HDim(tab.excel_ref("1").is_not_blank(), "Esimtate Type", CLOSEST, RIGHT, 
+                HDim(cdid_header_row.shift(0, -4).is_not_blank().is_not_whitespace(), "Estimate Type", CLOSEST, RIGHT, 
                      cellvalueoverride={
                          "£ million": "current-price",
                          "Reference year 2016, £ million": "chain-volume-measure"
@@ -478,7 +493,7 @@ for job_name, job_details in jobs.items():
             # Appliable to all jobs
             df["Period"] = df["Period"].apply(format_time)
             
-            # missing CDID's for estiamte type ....
+            # missing CDID's for estimate type ....
             if job_name == "Income indicators":
                 df["Estimate Type"] = "current price"
             elif job_name == "Gross fixed capital formation" or job_name == "Inventories":
@@ -502,6 +517,9 @@ for job_name, job_details in jobs.items():
         
             for col in job_details.get("pathify", []):
                 df[col] = df[col].apply(pathify) 
+                
+            if "drop_duplicates" in job_details.keys():
+                df = df.drop_duplicates()
                 
             tidy_sheets.append(df)
                 
@@ -529,3 +547,7 @@ for job_name, job_details in jobs.items():
                         .format(tab.name, job_name)) from e
 
 
+
+# %%
+
+# %%
