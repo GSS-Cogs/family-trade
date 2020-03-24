@@ -179,10 +179,10 @@ observations = observations[['Investment Direction', 'Year', 'International Trad
                              '__x', '__y', '__tablename']]
 
 # +
-out = Path('out')
-out.mkdir(exist_ok=True, parents=True)
+destinationFolder = Path('out')
+destinationFolder.mkdir(exist_ok=True, parents=True)
 
-observations.drop(columns=['__x', '__y', '__tablename']).drop_duplicates(subset=observations.columns.difference(['Value','__x', '__y', '__tablename'])).to_csv(out / 'observations.csv', index=False)
+observations.drop(columns=['__x', '__y', '__tablename']).drop_duplicates(subset=observations.columns.difference(['Value','__x', '__y', '__tablename'])).to_csv(destinationFolder / 'observations.csv', index=False)
 
 # +
 inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
@@ -193,10 +193,14 @@ from gssutils.metadata import THEME
 inward_scraper.dataset.theme = THEME['business-industry-trade-energy']
 inward_scraper.dataset.family = 'trade'
 
-with open(out / 'dataset.trig', 'wb') as metadata:
+TAB_NAME = 'observations'
+
+with open(destinationFolder / f'{TAB_NAME}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(inward_scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+csvw.create(destinationFolder / f'{TAB_NAME}.csv', destinationFolder / f'{TAB_NAME}.csv-schema.json')
+observations.head(25)
 # -
 
 
