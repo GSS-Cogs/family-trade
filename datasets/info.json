@@ -9,6 +9,7 @@
         ]
     },
     "sparql": "https://production-drafter-ons-alpha.publishmydata.com/v1/sparql/live",
+    "pmd": "http://gss-data.org.uk",
     "pipelines": [
         "HMRC-OVERSEAS-TRADE-STATISTICS",
         "HMRC-RTS-Small-area",

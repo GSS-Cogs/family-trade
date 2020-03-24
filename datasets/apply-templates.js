@@ -38,6 +38,14 @@ SELECT DISTINCT ?ds ?label WHERE { ?ds dcat:landingPage <${info.landingPage}>; r
                     fetchDatasets.resolve([]);
                 }
                 fetchDatasets.done(function(datasets) {
+                    if (mainInfo.hasOwnProperty('pmd')) {
+                        datasets = datasets.map(function(ds) {
+                            return {
+                                uri: mainInfo.pmd + '/resource?uri=' + encodeURIComponent(ds.uri),
+                                label: ds.label
+                            }
+                        });
+                    }
                     $("#body").html(template({
                         "dataset_path": dataset,
                         "main": mainInfo,
