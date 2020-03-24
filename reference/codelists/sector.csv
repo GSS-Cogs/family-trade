@@ -1,3 +1,6 @@
 Label,Notation,Parent Notation,Sort Priority
 General government,general-government,,1
 Other sectors,other-sectors,,2
+Central Government,central-government,,3
+EU Institutions,eu-institutions,,4
+Total,total,,5

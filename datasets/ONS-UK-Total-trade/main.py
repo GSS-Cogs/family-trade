@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.4.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,12 +17,13 @@
 
 # +
 from gssutils import *
+import json
 
-scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/uktotaltradeallcountriesnonseasonallyadjusted')
+scraper = Scraper(json.load(open('info.json'))['landingPage'])
 scraper
 # -
 
-tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
+tabs = { tab.name: tab for tab in scraper.distribution(latest=True).as_databaker() }
 list(tabs)
 
 # +
@@ -101,12 +102,12 @@ Final_table.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
 # +
 from gssutils.metadata import THEME
-scraper.dataset.family = 'Trade'
+scraper.dataset.family = 'trade'
 scraper.dataset.theme = THEME['business-industry-trade-energy']
 
-with open(out / 'dataset.trig', 'wb') as metadata:
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # -
 
