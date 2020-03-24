@@ -15,8 +15,9 @@
 
 # +
 from gssutils import *
+import json
 
-scraper = Scraper("https://www.gov.uk/government/collections/uk-regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas")
+scraper = Scraper(json.load(open('info.json'))['landingPage'])
 scraper
 # -
 
