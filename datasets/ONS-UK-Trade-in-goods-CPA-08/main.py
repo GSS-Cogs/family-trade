@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# In[2]:
-
-
+# %%
 from gssutils import *
 from databaker.framework import *
 import pandas as pd
@@ -25,18 +22,20 @@ def right(s, amount):
 def mid(s, offset, amount):
     return s[offset:offset+amount]
 
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/publicationtablesuktradecpa08')
+info = json.load(open('info.json'))
+
+scraper = Scraper(info['landingPage'])
 scraper
 
 
-# In[3]:
+# %%
 
 
 dist = scraper.distributions[0]
 dist
 
 
-# In[4]:
+# %%
 
 
 tabs = (t for t in dist.as_databaker())
@@ -82,7 +81,7 @@ for tab in tabs:
         
 
 
-# In[29]:
+# %%
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -135,7 +134,7 @@ df = df.replace({'Product' : {
 df['Product'].unique().tolist()
 
 
-# In[14]:
+# %%
 
 
 from IPython.core.display import HTML
@@ -146,7 +145,7 @@ for col in df:
         display(df[col].cat.categories) 
 
 
-# In[15]:
+# %%
 
 
 destinationFolder = Path('out')
@@ -166,7 +165,7 @@ csvw.create(destinationFolder / f'{TAB_NAME}.csv', destinationFolder / f'{TAB_NA
 df.head(25)
 
 
-# In[ ]:
+# %%
 
 
 
