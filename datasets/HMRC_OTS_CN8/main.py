@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.4.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -25,22 +25,13 @@
 #
 # We also keep track of the processing and the provenance of the inputs and outputs using W3C Prov.
 
-# +
 from datetime import datetime
 import json
 from pytz import timezone
 from os import environ
 from gssutils import *
 
-provActivity = {
-    '@id': environ.get('BUILD_URL', 'unknown-build') + "#prepare_sources",
-    '@type': 'activity',
-    'startedAtTime': datetime.now(timezone('Europe/London')).isoformat(),
-    'label': 'Prepare sources',
-    'comment': 'Jupyter Python notebook as part of Jenkins job %s' % environ.get('JOB_NAME', 'unknown-job')
-}
-
-# +
+# + pixiedust={"displayParams": {}}
 import requests
 from pathlib import Path
 from io import BytesIO
@@ -51,8 +42,6 @@ from cachecontrol.heuristics import LastModified
 session = CacheControl(requests.Session(),
                        cache=FileCache('.cache'),
                        heuristic=LastModified())
-
-provSources = []
 
 sources = [
     ('CN8_Non-EU_cod_2012.csv', '1P7YyFF6qXKXWVtR0Vt3kkvFPOjThMQH8'),
@@ -68,12 +57,6 @@ for filename, google_id in sources:
     
     sourceUrl = f'https://drive.google.com/uc?export=download&id={google_id}'
     sourceUrls.append(sourceUrl)
-    provSources.append({
-        '@id': sourceUrl,
-        '@type': 'entity',
-        'label': filename,
-        'wasUsedBy': provActivity['@id']
-    })
 
 # +
 import pandas as pd
@@ -125,61 +108,49 @@ table['Unit'] = '£'
 table['Flow'] = table['Flow'].map(lambda x: {'i': 'imports', 'e': 'exports'}[x])
 table = table[['Year', 'Flow', 'Combined Nomenclature', 'HMRC Partner Geography', 'Measure Type', 'Unit', 'Value']]
 
-# +
-import numpy as np
-destFolder = Path('out')
-destFolder.mkdir(exist_ok=True, parents=True)
-
-provOutputs = []
-output_file_names = []
-sliceSize = 50000
-for i in np.arange(len(table)//sliceSize):
-    outfile_name = f'observations_{i:04}.csv'
-    destFile = destFolder / outfile_name
-    table.iloc[i*sliceSize:i*sliceSize+sliceSize-1].to_csv(destFile, index=False)
-    provOutputs.append((destFile, 'observations table'))
-    output_file_names.append(outfile_name)
-# -
-
-# Output the PROV metadata as JSON-LD. This goes to the 'out' folder.
-
-# +
-metadataDir = Path('metadata')
-with open(metadataDir / 'prov_context.json') as contextFile:
-    context = json.load(contextFile)
-
-provActivity['endedAtTime'] = datetime.now(timezone('Europe/London')).isoformat()
-prov = {
-    '@context': context,
-    '@graph': [ provActivity ] + provSources + [
-        {
-            '@id': environ.get('BUILD_URL', 'unknown-build') + 'artifact/' + str(filename),
-            '@type': 'entity',
-            'wasGeneratedBy': provActivity['@id'],
-            'label': label
-        } for (filename, label) in provOutputs
-    ]
-}
-
-with open(destFolder / 'prov.jsonld', 'w') as provFile:
-    json.dump(prov, provFile, indent=2)
-# -
+from pathlib import Path
+out = Path('out')
+out.mkdir(exist_ok=True)
+table.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
 # Create dataset metadata
 
 # +
-modified_date = datetime.now(timezone('Europe/London')).isoformat()
+from gssutils import *
+from gssutils.metadata import *
+import json
+from dateutil.parser import parse
+from urllib.parse import urljoin
 
-from string import Template
-with open(Path('metadata') / 'dataset.trig.template', 'r') as metadata_template_file:
-    metadata_template = Template(metadata_template_file.read())
-    for out_file in output_file_names:
-        with open(destFolder / f'{out_file}-metadata.trig', 'w') as metadata_file:
-            metadata_file.write(metadata_template.substitute(modified=modified_date))
+info = json.load(Path('info.json').open())
+ds = PMDDataset()
+ds.theme = THEME['business-industry-trade-energy']
+ds.family = 'Trade'
+ds.title = info['title']
+ds.description = info['description']
+ds.issued = parse(info['published']).date()
+ds.landingPage = info['landingPage']
+ds.contactPoint = 'mailto:uktradeinfo@hmrc.gsi.gov.uk'
+ds.publisher = GOV['hm-revenue-customs']
+ds.rights = "https://www.uktradeinfo.com/AboutUs/Pages/TermsAndConditions.aspx"
+ds.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+
+ds_id = pathify(os.environ.get('JOB_NAME', 'GSS_data/Trade/HMRC_OTS_CN8'))
+ds_base = 'http://gss-data.org.uk'
+
+ds.uri = urljoin(ds_base, f'data/{ds_id}')
+ds.graph = urljoin(ds_base, f'graph/{ds_id}/metadata')
+ds.inGraph = urljoin(ds_base, f'graph/{ds_id}')
+ds.sparqlEndpoint = urljoin(ds_base, '/sparql')
+ds.modified = datetime.now()
+display(ds)
+
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
+     metadata.write(ds.as_quads().serialize(format='trig'))
+
 # -
 
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
-for out_file in output_file_names:
-    csvw.create(destFolder / out_file, destFolder / f'{out_file}-schema.json')
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 
 

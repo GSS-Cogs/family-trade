@@ -310,6 +310,16 @@
             "url": "codelists/members.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Members"
+        },
+        {
+            "url": "codelists/service-destination-geography.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Service Destination Geography"
+        },
+        {
+            "url": "codelists/service-origin-geography.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Service Origin Geography"
         }
     ]
 }
