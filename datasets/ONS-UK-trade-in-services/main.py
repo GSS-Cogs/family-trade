@@ -60,9 +60,9 @@ tidy['Measure Type'] = tidy['Measure Type'].astype('category')
 tidy['Measure Type'].cat.categories = tidy['Measure Type'].cat.categories.map(
     lambda x: pathify(x).replace('-', '_'))
 tidy.to_csv(out / 'observations-alt.csv', index = False)
-csvw.create(out / 'observations-alt.csv', out / 'observations-alt.csv-metadata.json', with_transform=True,
-            base_url='http://gss-data.org.uk/data/', base_path='gss_data/trade/ons-uk-trade-in-services',
-            dataset_metadata=scraper.dataset.as_quads())
+#csvw.create(out / 'observations-alt.csv', out / 'observations-alt.csv-metadata.json', with_transform=True,
+            #base_url='http://gss-data.org.uk/data/', base_path='gss_data/trade/ons-uk-trade-in-services',
+            #dataset_metadata=scraper.dataset.as_quads())
 
 
 # In[ ]:
