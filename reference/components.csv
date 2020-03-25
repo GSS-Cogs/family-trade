@@ -71,3 +71,5 @@ Capital Formation,,Dimension,http://gss-data.org.uk/def/concept-scheme/capital-f
 Services,Services,Dimension,http://gss-data.org.uk/def/concept-scheme/services
 Country Transaction,Country Transaction,Dimension,http://gss-data.org.uk/def/concept-scheme/country-transaction
 Members,Members,Dimension,http://gss-data.org.uk/def/concept-scheme/members
+Service Origin Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/service-origin-geography
+Service Destination Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/service-destination-geography
