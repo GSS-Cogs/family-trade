@@ -73,3 +73,4 @@ Country Transaction,Country Transaction,Dimension,http://gss-data.org.uk/def/con
 Members,Members,Dimension,http://gss-data.org.uk/def/concept-scheme/members
 Service Origin Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/service-origin-geography
 Service Destination Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/service-destination-geography
+GDP Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-estimate-type

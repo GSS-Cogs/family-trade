@@ -90,3 +90,6 @@ Country Transaction,country_transaction,qb:dimension,http://gss-data.org.uk/def/
 Members,members,qb:dimension,http://gss-data.org.uk/def/dimension/members,http://gss-data.org.uk/def/concept/members/{members},string,slugize,,
 Service Origin Geography,service_origin_geography,qb:dimension,http://gss-data.org.uk/def/dimension/service-origin-geography,http://gss-data.org.uk/def/concept/service-origin-geography/{service_origin_geography},string,,,
 Service Destination Geography,service_destination_geography,qb:dimension,http://gss-data.org.uk/def/dimension/service-destination-geography,http://gss-data.org.uk/def/concept/service_destination_geography/{service-destination-geography},string,,,
+Vintage,vintage,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod,http://reference.data.gov.uk/id/year/{vintage},string,,,
+Publication,publication,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod,http://reference.data.gov.uk/id/year/{publication},string,,,
+GDP Estimate Type,gdp_estimate_type,qb:dimension,http://gss-data.org.uk/def/dimension/gdp-estimate-type,http://gss-data.org.uk/def/concept/gdp-estimate-type/{gdp_estimate_type},string,slugize,,

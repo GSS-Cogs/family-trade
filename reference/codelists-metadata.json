@@ -320,6 +320,11 @@
             "url": "codelists/service-origin-geography.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Service Origin Geography"
+        },
+        {
+            "url": "codelists/gdp-estimate-type.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "GDP Estimate Type"
         }
     ]
 }
