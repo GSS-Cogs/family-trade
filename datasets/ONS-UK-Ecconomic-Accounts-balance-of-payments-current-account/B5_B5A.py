@@ -96,9 +96,9 @@ tidy
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
-TITLE = 'Balance of Payments Current Account: Secondary income'
+TITLE = 'Balance of Payments: Secondary income'
 OBS_ID = pathify(TITLE)
-GROUP_ID = 'ONS-UK-Ecconomic-Accounts-balance-of-payments-current-account'
+GROUP_ID = 'ons-uk-ecconomic-accounts-balance-of-payments'
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 # -

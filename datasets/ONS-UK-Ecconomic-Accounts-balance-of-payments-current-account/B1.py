@@ -91,9 +91,9 @@ tidy
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
-TITLE = 'Balance of Payments Current Account: Summary'
+TITLE = 'Balance of Payments: Summary'
 OBS_ID = pathify(TITLE)
-GROUP_ID = 'ONS-UK-Ecconomic-Accounts-balance-of-payments-current-account'
+GROUP_ID = 'ons-uk-ecconomic-accounts-balance-of-payments'
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 # -
@@ -109,6 +109,6 @@ scraper.dataset.title = TITLE
 scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-
-schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+    
+schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')   
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
