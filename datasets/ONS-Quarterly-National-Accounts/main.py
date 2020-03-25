@@ -26,7 +26,7 @@ scraper
 # %%
 
 # TODO - this doesnt work, still the estimates one!
-tabs = scraper.distribution(downloadURL=lambda x: "estimate" in x, latest=True).as_databaker()
+tabs = scraper.distribution(downloadURL=lambda x: "quarterlynationalaccounts" in x, latest=True).as_databaker()
 
 # %% [markdown]
 # ### Index
@@ -96,34 +96,24 @@ class LookupMeasure(object):
         self.title = [x.value for x in tab.excel_ref("B1")][0]
         self.all_cdids = [x for x in self.tab.filter(is_cdid)]
         
-        # TODO: for debugging remove
-        self.found = []
-        
         # Overrides per job
         self.overrides = {
-            "Income indicators": self._return_million,
             "Inventories": self._inventories
         }
-        
-        # Unfortunetly, not all CDID codes for table F are included in the index (though they should be...)
-        # Hopefully they'll be more consistent in the future, so for now we're going to have to build some 
-        # fall back logic for identifying measure type on F tabs
-        if self.job == "Gross fixed capital formation":
+         
+        # fall back logic for identifying measure types from column A
+        if self.job == "Gross fixed capital formation" or self.job == "Income indicators":
             
             # Percentage is referenced 3 times in column A, we'll use this to differentiate
             # the measure type, based on vertical (.y) cell position.
             percentage_break_points = [x for x in tab.excel_ref("A") if "percent" in str(x.value).lower()]
-            self.f_fallback = {
+            self.percentage_override = {
                 int(percentage_break_points[0].y): "GBP Million",
                 int(percentage_break_points[1].y): "1Y GR",
                 int(percentage_break_points[2].y): "1Q GR"
             }
-            print(self.f_fallback)
         else:
-            self.f_fallback = None
-            
-    def _return_million(self):
-        return "GBP Million"
+            self.percentage_override = None
     
     def _inventories(self):
         return "GBP Million" if "current prices" in self.title else "Index"
@@ -134,7 +124,7 @@ class LookupMeasure(object):
         else:
             try:
                 # Use horrible tab f fallback if we have to
-                if self.job == "Gross fixed capital formation":
+                if self.percentage_override is not None:
 
                     # If a cdid is used more than once if must be on the same vertical (.y) offset
                     cdid_y_offset_cells = [x for x in self.all_cdids if x.value == cdid]
@@ -142,7 +132,7 @@ class LookupMeasure(object):
                            raise Exception("The cdid '{}' appears under multiple measures type - this should not" 
                                            "be possible and indnicates a critical error in the data.".format(cdid))
                     
-                    for k, v in self.f_fallback.items():
+                    for k, v in self.percentage_override.items():
                         if int(cdid_y_offset_cells[0].y) < k:
                             return v
                     return "4Q GR"
@@ -400,7 +390,7 @@ jobs = {
         "cdid_header_row": '4',
         "dimension_looked_up_from_cdid_row": [
             ("Income Indicator", move_rows(-1)),
-            ("Income Category", lookup_from_offset_range(vertical=-2, left=-3, right=3, default="not-specified"))
+            ("Income Category", lookup_from_offset_range(vertical=-2, left=-3, right=1, default="not-specified"))
         ],
         "clear_footnotes_from": ["Income Indicator", "Income Category"],
         "pathify": ["Income Indicator", "Income Category"]
@@ -412,7 +402,7 @@ jobs = {
              ("Household Expenditure", table_e_totals_lookup),
              ("Expenditure Category", table_e_national_or_domestic_lookup)
          ],
-        "pathify": ["Household Expenditure", "Expenditure Category"]
+        "pathify": ["Household Expenditure", "Expenditure Category"],
     },
     "Gross fixed capital formation": {
         "tabs": [x for x in tabs if x.name.startswith("F") and "GFCF" in x.name],
@@ -422,8 +412,7 @@ jobs = {
             ("Analysis", lookup_from_offset_range(vertical=-3, left=-5, right=2)),
         ],
         "clear_footnotes_from": ["Capital Formation", "Analysis"],
-        "pathify": ["Capital Formation", "Analysis"],
-        "drop_duplicates": True
+        "pathify": ["Capital Formation", "Analysis"]
     },
     "Inventories": {
         "tabs": [x for x in tabs if x.name.startswith("G") and "INVENTORIES" in x.name],
@@ -438,11 +427,11 @@ jobs = {
         "tabs": [x for x in tabs if x.name.startswith("H") and "TRADE" in x.name],
         "cdid_header_row": '5:6',
         "dimension_looked_up_from_cdid_row": [
-            ("Trade Type", lookup_from_offset_range(vertical=-3, left=-1, right=1)),
-            ("Flow Directions", move_rows(-2))
+            ("Flow", lookup_from_offset_range(vertical=-3, left=-1, right=1)),
+            ("Trade Type", move_rows(-2))
         ],
-        "pathify": ["Trade Type", "Flow Directions"],
-        "clear_footnotes_from": ["Trade Type", "Flow Directions"]
+        "pathify": ["Trade Type", "Flow"],
+        "clear_footnotes_from": ["Trade Type", "Flow"]
     }
 }
 
@@ -466,8 +455,6 @@ for job_name, job_details in jobs.items():
             # Get time
             time = tab.excel_ref("A6").fill(DOWN).filter(is_time)
             
-            print(cdid_header_row.expand(DOWN).filter(is_cdid))
-
             dimensions = [
                 HDim(time, "Period", DIRECTLY, LEFT),
                 HDimConst("Geography", "K02000001"),
@@ -498,7 +485,7 @@ for job_name, job_details in jobs.items():
             
             # missing CDID's for estimate type ....
             if job_name == "Income indicators":
-                df["Estimate Type"] = "current price"
+                df["Estimate Type"] = "current-price"
             elif job_name == "Gross fixed capital formation" or job_name == "Inventories":
                 pass # handled with a dimension
             else:
@@ -522,9 +509,6 @@ for job_name, job_details in jobs.items():
             for col in job_details.get("pathify", []):
                 df[col] = df[col].apply(pathify) 
                 
-            if "drop_duplicates" in job_details.keys():
-                df = df.drop_duplicates()
-                
             tidy_sheets.append(df)
                 
         destinationFolder = Path('out')
@@ -533,7 +517,8 @@ for job_name, job_details in jobs.items():
         TITLE = info["title"] + ", " + dataset_title_prefix + ": " + job_name
         OBS_ID = pathify(TITLE)
         
-        df = pd.concat(tidy_sheets)
+        df = pd.concat(tidy_sheets).drop_duplicates()
+                
         df.to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
         scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
