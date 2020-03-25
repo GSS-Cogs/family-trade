@@ -45,3 +45,21 @@ c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 new_table = c1.topandas()
 import numpy as np
 new_table.rename(columns={'OBS': 'Value','DATAMARKER': 'Marker'}, inplace=True)
+# -
+
+new_table['Service Origin'] = new_table['Service Origin'].map(
+    lambda x: {  
+'United Kingdom':'nuts1/all',
+'North East ':'nuts1/UKC',
+'North West':'nuts1/UKD',
+'Yorkshire and The Humber':'nuts1/UKE',
+'East Midlands':'nuts1/UKF',
+'West Midlands':'nuts1/UKG',
+'East of England':'nuts1/UKH',
+'London':'nuts1/UKI',
+'South East':'nuts1/UKJ',
+'South West':'nuts1/UKK',
+'Wales':'nuts1/UKL',
+'Scotland':'nuts1/UKM',
+'Northern Ireland':'nuts1/UKN'      
+        }.get(x, x))

@@ -28,7 +28,7 @@ tab = tabs['2a']
 
 # +
 cell = tab.excel_ref('A5')
-industry = cell.fill(RIGHT).is_not_blank().is_not_whitespace()
+industry = cell.shift(1,0).fill(RIGHT).is_not_blank().is_not_whitespace()
 geography = cell.fill(DOWN).is_not_blank().is_not_whitespace()            
 observations = industry.fill(DOWN).is_not_blank().is_not_whitespace() 
 Dimensions = [
@@ -45,3 +45,6 @@ c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 new_table = c1.topandas()
 import numpy as np
 new_table.rename(columns={'OBS': 'Value','DATAMARKER': 'Marker'}, inplace=True)
+# -
+
+new_table['Service Origin'] = 'nuts2/' + new_table['Service Origin']
