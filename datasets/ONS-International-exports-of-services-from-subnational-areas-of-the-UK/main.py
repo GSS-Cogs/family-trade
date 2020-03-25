@@ -13,7 +13,7 @@
 #     name: python3
 # ---
 
-# UK trade in services: all countries, non-seasonally adjusted
+# ONS-International-exports-of-services-from-subnational-areas-of-the-UK
 
 # +
 from gssutils import *
@@ -45,7 +45,19 @@ next_table = pd.concat([next_table, new_table])
 next_table = pd.concat([next_table, new_table])
 # -
 
-next_table.head()
+next_table['Product'] = next_table['Product'].apply(pathify)
+
+next_table['Service Origin Geography'] = next_table['Service Origin'].apply(pathify)
+next_table['Service Destination Geography'] = next_table['Service Destination'].apply(pathify)
+next_table['Service Destination Geography'] = next_table['Service Destination Geography'].map(
+    lambda x: { 'total' : 'all', 'row' :'rest-of-world'        
+        }.get(x, x))
+
+next_table['Marker'] = next_table['Marker'].map(
+    lambda x: { '..' : 'suppressed'     
+        }.get(x, x))
+
+next_table = next_table[['Period','Product','Service Origin Geography','Service Destination Geography','Flow','Unit','Value','Measure Type', 'Marker']]
 
 from pathlib import Path
 import numpy as np
