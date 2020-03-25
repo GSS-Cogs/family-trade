@@ -46,3 +46,6 @@ c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 new_table = c1.topandas()
 import numpy as np
 new_table.rename(columns={'OBS': 'Value','DATAMARKER': 'Marker'}, inplace=True)
+# -
+
+new_table['Service Origin'] = 'nuts2/' + new_table['Service Origin']
