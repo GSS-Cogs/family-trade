@@ -24,8 +24,6 @@ scraper
 
 
 # %%
-
-# TODO - this doesnt work, still the estimates one!
 tabs = scraper.distribution(downloadURL=lambda x: "quarterlynationalaccounts" in x, latest=True).as_databaker()
 
 # %% [markdown]
@@ -101,7 +99,12 @@ class LookupMeasure(object):
             "Inventories": self._inventories
         }
          
-        # fall back logic for identifying measure types from column A
+        # The following is fall back logic for identifying measure types from column A, we're
+        # having to use this due to some CDIDs being missing from the index
+        
+        # TODO - half one way half the other is silly. May need to be refactored to
+        # all do it this way (or better yet their data could be correct).
+        
         if self.job == "Gross fixed capital formation" or self.job == "Income indicators":
             
             # Percentage is referenced 3 times in column A, we'll use this to differentiate
@@ -458,7 +461,6 @@ for job_name, job_details in jobs.items():
             dimensions = [
                 HDim(time, "Period", DIRECTLY, LEFT),
                 HDimConst("Geography", "K02000001"),
-                HDim(cdid_header_row.expand(DOWN).filter(is_cdid), "CDID", DIRECTLY, ABOVE),
                 HDim(cdid_header_row.expand(DOWN).filter(is_cdid), "Measure Type", DIRECTLY, ABOVE)
             ]
             
