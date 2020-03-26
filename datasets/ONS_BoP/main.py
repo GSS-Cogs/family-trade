@@ -150,7 +150,7 @@ for letter in "ABCDEFGHIJK":
     df = df.drop(["TIME", "TIMEUNIT", "Quarter"], axis=1)
     df["Flow Directions"] = df["Flow Directions"].str.strip().apply(pathify)
     df = df.rename(columns={"OBS": "Value"})
-    df = df[['Geography','Period','CDID','BOP Services','Flow','Measure Type','Value','Unit']]
+    df = df[['Geography','Period','CDID','BOP Services','Flow Directions','Measure Type','Value','Unit']]
     
     destinationFolder = Path('out')
     destinationFolder.mkdir(exist_ok=True, parents=True)
