@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -410,7 +410,7 @@ modified_date = pd.to_datetime('now').tz_localize('Europe/London').isoformat()
 from string import Template
 with open(Path('metadata') / 'dataset.trig.template', 'r') as metadata_template_file:
     metadata_template = Template(metadata_template_file.read())
-    with open(destinationFolder / 'dataset.trig', 'w') as metadata_file:
+    with open(destinationFolder / 'observations.csv-metadata.trig', 'w') as metadata_file:
         metadata_file.write(metadata_template.substitute(modified=modified_date))
 
 # +
@@ -418,5 +418,8 @@ with open(Path('metadata') / 'dataset.trig.template', 'r') as metadata_template_
 out = Path('out')
 out.mkdir(exist_ok=True, parents=True)
 
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+# -
+
+
