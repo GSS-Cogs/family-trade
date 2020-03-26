@@ -1,4 +1,5 @@
 Label,Description,Component Type,Codelist
+BOP Services,,Dimension,http://gss-data.org.uk/def/concept-scheme/bop-services
 Flow,Direction in which trade is measured,Dimension,http://gss-data.org.uk/def/concept-scheme/flow-directions
 SITC Section,Standard International Trade Classification,Dimension,http://gss-data.org.uk/def/concept-scheme/sitc-sections
 GBP Total,Total in British Pounds Sterling,Measure,
