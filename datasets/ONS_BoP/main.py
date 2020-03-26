@@ -5,7 +5,6 @@
 # %%
 
 
-
 from gssutils import *
 import json
 
@@ -54,7 +53,7 @@ table_name_lookup
 
 bop_services = {
         "Total":"0",
-        "Manufacturing and maintenance services":"1+2",
+        "Manufacturing and maintenance services":"1-and-2",
         "Transport":"3",
         "Travel":"4",
         "Construction":"5",
@@ -100,8 +99,6 @@ class is_one_of(object):
 # ## Extract and Transform
 
 # %%
-
-
 
 for letter in "ABCDEFGHIJK":
     
@@ -154,7 +151,6 @@ for letter in "ABCDEFGHIJK":
     
     destinationFolder = Path('out')
     destinationFolder.mkdir(exist_ok=True, parents=True)
-        
     
     TITLE = info["title"] + ": " + table_name_lookup[tab.name[-1]]
     OBS_ID = pathify(TITLE)
@@ -170,8 +166,7 @@ for letter in "ABCDEFGHIJK":
             
     schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
     schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
-    
-    
+ 
 
 
 # %%
