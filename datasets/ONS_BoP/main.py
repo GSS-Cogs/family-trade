@@ -135,15 +135,20 @@ for letter in "ABCDEFGHIJK":
     
     df = c1.topandas()
     
+    # Clean up whitespace
+    for col in df.columns.values:
+        try:
+            df[col] = df[col].str.strip()
+        except AttributeError:
+            pass # not everything is a sting
+        
     # Lookup BOP service dimension from the labels
-    df["label"] = df["label"].str.strip()
     df["BOP Services"] = df["label"].map(lambda x: bop_services[x])
     
     # Sort out time
     df["Period"] = df["TIME"].str.strip() + "-" + df["Quarter"].str.strip()
     df["Period"] = df["Period"].map(format_time)
-    
-    # Clean up
+        
     df = df.drop(["TIME", "TIMEUNIT", "Quarter"], axis=1)
     df["Flow Directions"] = df["Flow Directions"].str.strip().apply(pathify)
     df = df.rename(columns={"OBS": "Value"})
@@ -166,7 +171,6 @@ for letter in "ABCDEFGHIJK":
             
     schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
     schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
- 
 
 
 # %%
