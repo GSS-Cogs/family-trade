@@ -188,7 +188,7 @@ observations.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 from gssutils.metadata import THEME
 scraper.dataset.theme = THEME['business-industry-trade-energy']
 scraper.dataset.family = 'Trade'
-with open(out / 'dataset.trig', 'wb') as metadata:
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
