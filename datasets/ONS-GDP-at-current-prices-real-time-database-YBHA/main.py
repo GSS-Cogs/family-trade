@@ -40,8 +40,7 @@ def date_time(time_value):
 
 
 
-# -
-
+# +
 for tab in tabs:
         if (tab.name == '1989 - 1999') or (tab.name == '2000 - 2010') or (tab.name == '2011 - 2017') or (tab.name == '2018 -'):
             
@@ -69,6 +68,9 @@ for tab in tabs:
             tidy_sheet = ConversionSegment(tab, dimensions, observations)        
             #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
             tidied_sheets.append(tidy_sheet.topandas())
+            
+            
+# -
 
 
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
