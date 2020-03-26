@@ -35,8 +35,9 @@ def date_time(time_value):
         return "year/" + time_string
     elif time_len == 7:
         return "quarter/{}-{}".format(time_string[3:7], time_string[:2])
-    elif time_len == 10:
-        return "month/" + time_string[:7]
+    elif time_len == 10:       
+        return 'gregorian-interval/' + time_string[:7] + '-01T00:00:00/P3M'
+
 
 
 # -
