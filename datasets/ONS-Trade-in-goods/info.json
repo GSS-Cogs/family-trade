@@ -15,6 +15,7 @@
         "stage": "Published"
     },
     "transform": {
+	"validate": false,
         "airtable": [
             "recWLO6lMVlcBiBiz",
             "recrQBCo8oII5TUpF"
