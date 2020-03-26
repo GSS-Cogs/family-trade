@@ -1,6 +1,6 @@
 Label,Notation,Parent Notation,Sort Priority,Description
 Total,0,,,
-Manufacturing and maintenance services,1-and-2,0,,
+Manufacturing and maintenance services,1+2,0,,
 Transport,3,0,,
 Travel,4,0,,
 Construction,5,0,,

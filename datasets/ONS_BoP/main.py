@@ -53,7 +53,7 @@ table_name_lookup
 
 bop_services = {
         "Total":"0",
-        "Manufacturing and maintenance services":"1-and-2",
+        "Manufacturing and maintenance services":"1+2",
         "Transport":"3",
         "Travel":"4",
         "Construction":"5",
