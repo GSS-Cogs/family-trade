@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[94]:
+# %%
 
 
 
@@ -18,13 +19,11 @@ scraper = Scraper("https://www.ons.gov.uk/economy/nationalaccounts/balanceofpaym
 scraper
 
 
-# In[95]:
-
-
+# %%
 tabs = scraper.distributions[0].as_databaker()
 
 
-# In[96]:
+# %%
 
 
 # Create a dictionary of dataset names from 'Index' tab
@@ -50,7 +49,7 @@ table_name_lookup
 #     
 # Putting it inline instead (we're not using dict.get() so it'll blow up if anything's amiss).
 
-# In[97]:
+# %%
 
 
 bop_services = {
@@ -71,7 +70,7 @@ bop_services = {
 
 # ## Reusable Functions
 
-# In[98]:
+# %%
 
 
 
@@ -100,7 +99,7 @@ class is_one_of(object):
 
 # ## Extract and Transform
 
-# In[101]:
+# %%
 
 
 
@@ -132,7 +131,7 @@ for letter in "ABCDEFGHIJK":
                 HDimConst('Measure Type', 'GBP Total'),
                 HDimConst('Unit','£ Million'),
                 HDim(Services,'label',CLOSEST, ABOVE),
-                HDim(Trade,'Flow',CLOSEST,ABOVE)
+                HDim(Trade,'Flow Directions',CLOSEST,ABOVE)
     ]
 
     c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
@@ -149,7 +148,7 @@ for letter in "ABCDEFGHIJK":
     
     # Clean up
     df = df.drop(["TIME", "TIMEUNIT", "Quarter"], axis=1)
-    df["Flow"] = df["Flow"].str.strip().apply(pathify)
+    df["Flow Directions"] = df["Flow Directions"].str.strip().apply(pathify)
     df = df.rename(columns={"OBS": "Value"})
     df = df[['Geography','Period','CDID','BOP Services','Flow','Measure Type','Value','Unit']]
     
@@ -175,7 +174,7 @@ for letter in "ABCDEFGHIJK":
     
 
 
-# In[ ]:
+# %%
 
 
 
