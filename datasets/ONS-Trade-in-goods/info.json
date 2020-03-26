@@ -12,10 +12,10 @@
     ],
     "extract": {
         "source": "XLS",
-        "stage": "Published"
+        "stage": "Done"
     },
     "transform": {
-	"validate": false,
+        "validate": false,
         "airtable": [
             "recWLO6lMVlcBiBiz",
             "recrQBCo8oII5TUpF"
