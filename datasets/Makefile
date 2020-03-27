@@ -8,7 +8,7 @@ mains = $(transforms:/=/main.ipynb)
 
 $(mains): %.ipynb : %.py
 	for pyfile in $(dir $<)*.py; do \
-	  jupytext --to notebook "$$pyfile" ; \
+	  docker run -v $(CURDIR):/workspace -w /workspace gsscogs/databaker jupytext --to notebook "$$pyfile" ; \
 	done
 
 all_mains: $(mains)
