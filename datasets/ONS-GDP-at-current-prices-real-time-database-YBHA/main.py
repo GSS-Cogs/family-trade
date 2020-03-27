@@ -40,7 +40,8 @@ def date_time(time_value):
 
 
 
-# +
+# -
+
 for tab in tabs:
         if (tab.name == '1989 - 1999') or (tab.name == '2000 - 2010') or (tab.name == '2011 - 2017') or (tab.name == '2018 -'):
             
@@ -60,7 +61,7 @@ for tab in tabs:
                 HDim(vintage, 'Vintage', DIRECTLY, LEFT),
                 HDim(estimate_type, 'GDP Estimate Type', DIRECTLY, ABOVE),
                 HDim(publication, 'Publication', DIRECTLY, ABOVE),
-                HDim(code, 'CDID', CLOSEST, ABOVE),
+                #HDim(code, 'CDID', CLOSEST, ABOVE), #dropped for now
                 HDimConst('Seasonal Adjustment', seasonal_adjustment),
                 HDimConst('Measure Type', 'GBP Million'),
             ]
@@ -68,21 +69,19 @@ for tab in tabs:
             tidy_sheet = ConversionSegment(tab, dimensions, observations)        
             #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
             tidied_sheets.append(tidy_sheet.topandas())
-            
-            
-# -
 
 
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
-df['CDID'] = df['CDID'].map(lambda x: right(x,4))
-df['Publication'].replace('Q3  1990', 'Q3 1990', inplace=True)
-df['Publication'].replace('Q 2004', 'Q4 2004', inplace=True)
+#df['CDID'] = df['CDID'].map(lambda x: right(x,4)) #dropped for now
+df['Publication'].replace('Q3  1990', 'Q3 1990', inplace=True)  #removing space
+df['Publication'].replace('Q 2004', 'Q4 2004', inplace=True) #fixing typo
+df['Vintage'].replace('Q2 1010', 'Q2 2010', inplace=True) #fixing typo
 df["Vintage"] = df["Vintage"].apply(date_time)
 df["Publication"] = df["Publication"].apply(date_time)
 df['Marker'].replace('..', 'unknown', inplace=True)
 
-tidy = df[['Vintage','Publication','Value','GDP Estimate Type','CDID','Seasonal Adjustment', 'Measure Type','Marker']]
+tidy = df[['Vintage','Publication','Value','GDP Estimate Type','Seasonal Adjustment', 'Measure Type','Marker']]
 for column in tidy:
     if column in ('GDP Estimate Type'):
         tidy[column] = tidy[column].str.lstrip()
