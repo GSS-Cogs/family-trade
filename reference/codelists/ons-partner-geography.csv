@@ -184,77 +184,76 @@ San Marino,SM,D5,182
 Sao Tome & Principe,ST,D5,183
 Saudi Arabia,SA,D5,184
 Senegal,SN,D5,185
-Serbia,RS,D5,186
-Seychelles,SC,D5,187
-Sierra Leone,SL,D5,188
-Singapore,SG,D5,189
-Sint Maarten,SX,D5,190
-Solomon Islands,SB,D5,191
-Somalia,SO,D5,192
-South Africa,ZA,D5,193
-South Georgia,GS,D5,194
-South Korea,KR,D5,195
-South Sudan,SS,D5,196
-Sri Lanka,LK,D5,197
-St Kitts & Nevis,KN,D5,198
-St Lucia,LC,D5,199
-St Vincent,VC,D5,200
-St. Helena,SH,D5,201
-Sudan,SD,D5,202
-Suriname,SR,D5,203
-Swaziland,SZ,D5,204
-Switzerland,CH,D5,205
-Syria,SY,D5,206
-Taiwan,TW,D5,207
-Tajikistan,TJ,D5,208
-Tanzania,TZ,D5,209
-Thailand,TH,D5,210
-Togo,TG,D5,211
-Tokelau Islands,TK,D5,212
-Tonga,TO,D5,213
-Trinidad & Tobago,TT,D5,214
-Tunisia,TN,D5,215
-Turkey,TR,D5,216
-Turkmenistan,TM,D5,217
-Turks & Caicos Islands,TC,D5,218
-Tuvalu,TV,D5,219
-Uganda,UG,D5,220
-Ukraine,UA,D5,221
-United Arab Emirates,AE,D5,222
-United States inc Puerto Rico,US,D5,223
-Uruguay,UY,D5,224
-US Minor Outlying Islands,UM,D5,225
-US Virgin Islands,VI,D5,226
-Uzbekistan,UZ,D5,227
-Vanuatu,VU,D5,228
-Vatican City,VA,D5,229
-Venezuela,VE,D5,230
-Vietnam,VN,D5,231
-Wallis & Futuna,WF,D5,232
-Yemen,YE,D5,233
-Zambia,ZM,D5,234
-Zimbabwe,ZW,D5,235
-Extra EU-28 - world less EU-28 countries,D5,,236
-European Central Bank (ECB),4F,,237
-European Union Institutions (excl. ECB and ESM),4A,,238
-Guernsey,GG,,239
-Isle of Man,IM,,240
-International Organisations,9A,,241
-World Total,W1,,242
-Other Europe,PB1,,243
-Other Central American Countries,PB2,,244
-Other American Countries,PB3,,245
-Residual Gulf Arabian Countries,PB4,,246
-Other Near & Middle Eastern Countries,PB5,,247
-Other Asia,PB6,,248
-Other Australasia & Oceania,PB7,,249
-Other North Africa,PB8,,250
-Other Africa,PB9,,251
-Serbia and Montenegro,CS,E1,252
-Legacy World Total,legacy/W1,,253
-EU-28,legacy/B5,,254
-Extra EU-28,legacy/D5,,255
-Ceuta,XC,,256
-Puerto Rico,PR,,257
-Serbia,XS,,258
-St Pierre & Miquelon,PM,,259
+Seychelles,SC,D5,186
+Sierra Leone,SL,D5,187
+Singapore,SG,D5,188
+Sint Maarten,SX,D5,189
+Solomon Islands,SB,D5,190
+Somalia,SO,D5,191
+South Africa,ZA,D5,192
+South Georgia,GS,D5,193
+South Korea,KR,D5,194
+South Sudan,SS,D5,195
+Sri Lanka,LK,D5,196
+St Kitts & Nevis,KN,D5,197
+St Lucia,LC,D5,198
+St Vincent,VC,D5,199
+St. Helena,SH,D5,200
+Sudan,SD,D5,201
+Suriname,SR,D5,202
+Swaziland,SZ,D5,203
+Switzerland,CH,D5,204
+Syria,SY,D5,205
+Taiwan,TW,D5,206
+Tajikistan,TJ,D5,207
+Tanzania,TZ,D5,208
+Thailand,TH,D5,209
+Togo,TG,D5,210
+Tokelau Islands,TK,D5,211
+Tonga,TO,D5,212
+Trinidad & Tobago,TT,D5,213
+Tunisia,TN,D5,214
+Turkey,TR,D5,215
+Turkmenistan,TM,D5,216
+Turks & Caicos Islands,TC,D5,217
+Tuvalu,TV,D5,218
+Uganda,UG,D5,219
+Ukraine,UA,D5,220
+United Arab Emirates,AE,D5,221
+United States inc Puerto Rico,US,D5,222
+Uruguay,UY,D5,223
+US Minor Outlying Islands,UM,D5,224
+US Virgin Islands,VI,D5,225
+Uzbekistan,UZ,D5,226
+Vanuatu,VU,D5,227
+Vatican City,VA,D5,228
+Venezuela,VE,D5,229
+Vietnam,VN,D5,230
+Wallis & Futuna,WF,D5,231
+Yemen,YE,D5,232
+Zambia,ZM,D5,233
+Zimbabwe,ZW,D5,234
+Extra EU-28 - world less EU-28 countries,D5,,235
+European Central Bank (ECB),4F,,236
+European Union Institutions (excl. ECB and ESM),4A,,237
+Guernsey,GG,,238
+Isle of Man,IM,,239
+International Organisations,9A,,240
+World Total,W1,,241
+Other Europe,PB1,,242
+Other Central American Countries,PB2,,243
+Other American Countries,PB3,,244
+Residual Gulf Arabian Countries,PB4,,245
+Other Near & Middle Eastern Countries,PB5,,246
+Other Asia,PB6,,247
+Other Australasia & Oceania,PB7,,248
+Other North Africa,PB8,,249
+Other Africa,PB9,,250
+Serbia and Montenegro,CS,E1,251
+Legacy World Total,legacy/W1,,252
+EU-28,legacy/B5,,253
+Extra EU-28,legacy/D5,,254
+Ceuta,XC,,255
+Puerto Rico,PR,,256
+Serbia,XS,D5,257
+St Pierre & Miquelon,PM,,258
