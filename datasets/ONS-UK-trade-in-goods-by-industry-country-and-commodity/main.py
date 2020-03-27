@@ -4,8 +4,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.4.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -48,9 +48,9 @@ scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and 
 scraper.dataset
 # -
 
-with open(out / 'dataset.trig', 'wb') as metadata:
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 
 
