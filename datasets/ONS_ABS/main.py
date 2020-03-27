@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -18,8 +18,7 @@
 # +
 from gssutils import *
 
-scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
-                  'business/businessservices/datasets/annualbusinesssurveyimportersandexporters')
+scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/business/businessservices/datasets/annualbusinesssurveyimportersandexporters')
 scraper
 # -
 
@@ -32,7 +31,7 @@ tidy = pd.DataFrame()
 
 for sheet in sheets[1:-1]:
     name_match = tab_name_re.match(sheet.name)
-    print (sheet.name)
+    #print (sheet.name)
     assert name_match, "sheet name doesn't match regex"
     for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover', 'Age']:
         year = HDimConst('Year', name_match.group(1))
@@ -54,11 +53,11 @@ for sheet in sheets[1:-1]:
         measure.AddCellValueOverride('Number of 5', 'Count')
         measure.AddCellValueOverride('% 6', 'Proportion of all Business')
         tidy = tidy.append(ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure]).topandas(), sort=True)
-        savepreviewhtml([breakdown_obs, classifiers, import_export, measure])
+        #savepreviewhtml([breakdown_obs, classifiers, import_export, measure])
         #break
     #break
 
-tidy
+##tidy
 # -
 
 # Check for duplicate rows
@@ -78,7 +77,7 @@ assert detailed_emp_250.size > 0
 #assert emp_250.equals(detailed_emp_250)
 merged = emp_250.merge(detailed_emp_250, indicator=True, how='outer')
 
-display(merged[merged['_merge'] == 'right_only'])
+#display(merged[merged['_merge'] == 'right_only'])
 
 tidy = tidy[tidy['Detailed employment'] != '250 and over'].reset_index(drop=True)
 # -
@@ -89,12 +88,10 @@ display(tidy['Employment'].unique())
 display(tidy['Detailed employment'].unique())
 tidy['employees'] = tidy.apply(lambda x: x['Employment'] if pd.notnull(x['Employment']) else x['Detailed employment'], axis=1)
 tidy = tidy.drop(columns=['Employment', 'Detailed employment'])
-tidy
 
 # Fill NaN with top values.
 
 tidy.fillna(value={'Age': 'Any', 'Ownership': 'Any', 'Turnover': 'Any', 'employees': 'Any' }, inplace=True)
-tidy
 
 # Show the range of the codes and check for duplicated rows.
 
@@ -104,7 +101,7 @@ for col in tidy:
         display(HTML(f'<h2>{col}</h2>'))
         display(tidy[col].unique())
 dups = tidy.duplicated()
-display(dups.sum())
+#display(dups.sum())
 tidy[dups]
 
 # We need to specify the units of the observations.
@@ -129,61 +126,58 @@ tidy.rename(columns={'Turnover': 'turnover',
 # Update labels as according to Ref_trade codelist
 
 tidy['Country of Ownership'] = tidy['Country of Ownership'].str.lower()
+tidy
 
 # +
-import urllib.request as request
-import csv
-import io
-import requests
 
-r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/age-of-business.csv').read().decode('utf8').split("\n")
-reader = csv.reader(r)
-url="https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/age-of-business.csv"
-s=requests.get(url).content
-c=pd.read_csv(io.StringIO(s.decode('utf-8')))
+c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/age-of-business.csv")
 tidy = pd.merge(tidy, c, how = 'left', left_on = 'Age', right_on = 'Label')
 tidy.columns = ['Age of Business' if x=='Notation' else x for x in tidy.columns]
-r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/exporter-and-importer-activity.csv').read().decode('utf8').split("\n")
-reader = csv.reader(r)
-url="https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/exporter-and-importer-activity.csv"
-s=requests.get(url).content
-c=pd.read_csv(io.StringIO(s.decode('utf-8')))
+
+c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/exporter-and-importer-activity.csv")
 tidy = pd.merge(tidy, c, how = 'left', left_on = 'Import/Export', right_on = 'Label')
 tidy.columns = ['Export and Import Activity' if x=='Notation' else x for x in tidy.columns]
 
-# -
-
-r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/turnover-size-bands.csv').read().decode('utf8').split("\n")
-reader = csv.reader(r)
-url="https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/turnover-size-bands.csv"
-s=requests.get(url).content
-c=pd.read_csv(io.StringIO(s.decode('utf-8')))
+c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/turnover-size-bands.csv")
 tidy = pd.merge(tidy, c, how = 'left', left_on = 'turnover', right_on = 'Label')
 tidy.columns = ['Turnover' if x=='Notation' else x for x in tidy.columns]
-r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/employment-size-bands.csv').read().decode('utf8').split("\n")
-reader = csv.reader(r)
-url="https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/employment-size-bands.csv"
-s=requests.get(url).content
-c=pd.read_csv(io.StringIO(s.decode('utf-8')))
+
+c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/employment-size-bands.csv")
 tidy = pd.merge(tidy, c, how = 'left', left_on = 'employees', right_on = 'Label')
 tidy.columns = ['Employment' if x=='Notation' else x for x in tidy.columns]
+
+tidy.head()
+# -
+
+tidy
 
 tidy = tidy[['Age of Business', 'Export and Import Activity','Measure Type','Value',
              'Country of Ownership','ONS ABS Trade','Turnover','Year','Employment','Unit']]
 
 # +
+# Use pathify to match csv values as per new style
+for col in ["ONS ABS Trade"]:
+    tidy[col] = tidy[col].apply(pathify)
+
 out = Path('out')
 out.mkdir(exist_ok=True, parents=True)
 
 tidy.to_csv(out / ('observations.csv'), index = False)
-# -
 
+tidy
+
+# +
 scraper.dataset.family = 'trade'
 scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
                                                           'Importers and exporters of trade goods and services')
 from gssutils.metadata import THEME
 scraper.dataset.theme = THEME['business-industry-trade-energy']
-with open(out / 'dataset.trig', 'wb') as metadata:
+
+destinationFolder = Path('out')
+destinationFolder.mkdir(exist_ok=True, parents=True)
+
+with open(destinationFolder / f'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+            
+schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+schema.create(destinationFolder / f'observations.csv', destinationFolder / f'observations.csv-schema.json')
