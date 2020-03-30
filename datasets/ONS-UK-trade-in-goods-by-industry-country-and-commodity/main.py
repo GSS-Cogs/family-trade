@@ -30,6 +30,8 @@ def run_script(s):
 observations = pd.concat(
     run_script(s) for s in ['exports', 'imports']
 ).drop_duplicates()
+
+observations["ONS Partner Geography"] = observations["ONS Partner Geography"].str.replace("RS", "XS")
 # -
 
 from pathlib import Path
