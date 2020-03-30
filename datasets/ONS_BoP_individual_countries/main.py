@@ -394,32 +394,52 @@ Final_table.head()
 
 Final_table.tail()
 
+# + {"endofcell": "--"}
+from gssutils import *
+from gssutils.metadata import *
+import json
+from dateutil.parser import parse
+from urllib.parse import urljoin
+
+info = json.load(Path('info.json').open())
+ds = PMDDataset()
+ds.theme = THEME['business-industry-trade-energy']
+ds.family = 'Trade'
+ds.title = info['title']
+ds.description = info['description']
+ds.issued = parse(info['published']).date()
+ds.landingPage = info['landingPage']
+ds.contactPoint = 'mailto:bop@ons.gsi.gov.uk'
+ds.publisher = GOV['office-for-national-statistics']
+ds.rights = "https://www.uktradeinfo.com/AboutUs/Pages/TermsAndConditions.aspx"
+ds.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+
+ds_id = pathify(os.environ.get('JOB_NAME', 'ONS_BoP_individual_countries'))
+ds_base = 'http://gss-data.org.uk'
+
+ds.uri = urljoin(ds_base, f'data/{ds_id}')
+ds.graph = urljoin(ds_base, f'graph/{ds_id}/metadata')
+ds.inGraph = urljoin(ds_base, f'graph/{ds_id}')
+ds.sparqlEndpoint = urljoin(ds_base, '/sparql')
+ds.modified = datetime.now()
+display(ds)
+
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
+     metadata.write(ds.as_quads().serialize(format='trig'))
+
+# -
+
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+
+# --
+
 # +
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
 Final_table.to_csv(destinationFolder / ('observations.csv'), index = False)
-
-# +
-# metadata
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-
-modified_date = pd.to_datetime('now').tz_localize('Europe/London').isoformat()
-
-from string import Template
-with open(Path('metadata') / 'dataset.trig.template', 'r') as metadata_template_file:
-    metadata_template = Template(metadata_template_file.read())
-    with open(destinationFolder / 'observations.csv-metadata.trig', 'w') as metadata_file:
-        metadata_file.write(metadata_template.substitute(modified=modified_date))
-
-# +
-# generate schema
-out = Path('out')
-out.mkdir(exist_ok=True, parents=True)
-
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # -
+
 
 
