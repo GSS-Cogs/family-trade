@@ -108,18 +108,17 @@ destinationFolder.mkdir(exist_ok=True, parents=True)
 
 TITLE = 'Balance of Payments: Transactions with non-EU countries'
 OBS_ID = pathify(TITLE)
-GROUP_ID = 'ons-uk-ecconomic-accounts-balance-of-payments'
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 # -
 
-print(OBS_ID)
+GROUP_ID = 'ons-uk-ecconomic-accounts-balance-of-payments-current-account'
 
 # +
 from gssutils.metadata import THEME
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(f'gss_data/trade/{GROUP_ID}/{OBS_ID}')
-scraper.dataset.title = TITLE
+scraper.dataset.title = f'{TITLE}'
 
 scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
