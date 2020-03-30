@@ -28,6 +28,9 @@ tables.append(new_table)
 # In[3]:
 
 
+tidy = tidy.replace({'ONE Partner Geography' : {
+    'RS' : 'XS'}})
+
 from pathlib import Path
 out = Path('out')
 out.mkdir(exist_ok=True)
