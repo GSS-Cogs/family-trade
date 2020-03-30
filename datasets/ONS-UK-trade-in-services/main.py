@@ -28,13 +28,16 @@ tables.append(new_table)
 # In[3]:
 
 
-tidy = tidy.replace({'ONE Partner Geography' : {
-    'RS' : 'XS'}})
+
 
 from pathlib import Path
 out = Path('out')
 out.mkdir(exist_ok=True)
 tidy = pd.concat(tables).drop_duplicates()
+
+tidy = tidy.replace({'ONE Partner Geography' : {
+    'RS' : 'XS'}})
+
 tidy.to_csv(out / 'observations.csv', index = False)
 
 
