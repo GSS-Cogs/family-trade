@@ -401,6 +401,11 @@ import json
 from dateutil.parser import parse
 from urllib.parse import urljoin
 
+out = Path('out')
+out.mkdir(exist_ok=True, parents=True)
+
+Final_table.to_csv(out / ('observations.csv'), index = False)
+
 info = json.load(Path('info.json').open())
 ds = PMDDataset()
 ds.theme = THEME['business-industry-trade-energy']
@@ -435,10 +440,7 @@ csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # --
 
 # +
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
 
-Final_table.to_csv(destinationFolder / ('observations.csv'), index = False)
 # -
 
 
