@@ -23,6 +23,7 @@ from gssutils import *
 
 
 # +
+
 def run_script(s):
     %run "$s"
     return table
@@ -31,6 +32,7 @@ observations = pd.concat(
     run_script(s) for s in ['exports', 'imports']
 ).drop_duplicates()
 
+# Temporary repacment of RS for XS code (EU do something odd with serbia for trade)
 observations["ONS Partner Geography"] = observations["ONS Partner Geography"].str.replace("RS", "XS")
 # -
 

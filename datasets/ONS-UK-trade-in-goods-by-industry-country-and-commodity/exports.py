@@ -4,8 +4,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.4.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -16,8 +16,19 @@
 
 # +
 from gssutils import *
+import json
 
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityexports')
+# We need two landing pages for this recipe, they should be virtually identical (save ending either in imports or exports) 
+# so im going to hard code but include a sanity check (in case they change on airtables at some point in the future)
+export_url = "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityexports"
+
+with open("info.json", "r") as f:
+    base_url = json.load(f)["landingPage"].rstrip("imports").rstrip("exports")
+          
+if base_url not in export_url:
+    raise Exception("Aborting. Hard coded url no longer in sync with airtables landing page.")
+
+scraper = Scraper(export_url)
 scraper
 # -
 
