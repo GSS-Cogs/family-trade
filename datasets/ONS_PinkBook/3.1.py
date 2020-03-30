@@ -42,8 +42,7 @@ Dimensions = [
             HDim(Year,'Year', DIRECTLY,ABOVE),
             HDim(Code,'CDID',DIRECTLY,LEFT),
             HDimConst('Unit', '£ Million'), 
-            HDimConst('Measure Type','GBP Total'),                 
-            HDim(Services, 'Product', DIRECTLY, LEFT),
+            HDimConst('Measure Type','GBP Total'),
             HDim(Transactions,'Flow',CLOSEST, ABOVE)           
     
 ]

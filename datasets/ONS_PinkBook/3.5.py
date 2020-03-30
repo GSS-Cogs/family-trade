@@ -44,8 +44,6 @@ Dimensions = [
             HDim(Code,'CDID',DIRECTLY,LEFT),
             HDimConst('Unit','£ Million'),
             HDimConst('Measure Type','GBP Total'),
-            HDim(Revenue, 'Product', DIRECTLY, LEFT),
-            HDim(Financialservices, 'Services', CLOSEST, ABOVE),
             HDim(Commerce,'Flow', CLOSEST, ABOVE)    
 ]
 
@@ -97,3 +95,5 @@ new_table[new_table.cdid.isnull() == True]['CDID'].unique()
 new_table = new_table[['Geography','Year','CDID','Pink Book Services','Flow','Measure Type','Value','Unit']]
 
 new_table['Value'] = new_table['Value'].astype(int)
+
+
