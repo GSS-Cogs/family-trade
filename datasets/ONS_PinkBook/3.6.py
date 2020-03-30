@@ -56,7 +56,6 @@ new_table['Flow'] = new_table['Flow'].map(lambda cell:cell.replace('Balances', '
 
 new_table['Year'] = new_table['Year'].map(lambda cell:cell.replace('.0', ''))
 
-new_table['Product'] = new_table['Product'].str.strip()
 new_table['Year'] = new_table['Year'].str.strip()
 new_table['Geography'] = new_table['Geography'].str.strip()
 new_table['CDID'] = new_table['CDID'].str.strip()

@@ -51,12 +51,6 @@ c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 
 new_table = c1.topandas()
 
-new_table['Services'] = new_table['Services'].map(lambda x: x.rstrip('123'))
-
-new_table['Product'] = new_table['Product'].fillna('')
-
-new_table['Product'] = new_table['Product'].map(lambda x: x.rstrip('1234'))
-
 new_table['Flow'] = new_table['Flow'].map(lambda cell:cell.replace('Exports (Credits)', 'Exports'))
 
 new_table['Flow'] = new_table['Flow'].map(lambda cell:cell.replace('Imports (Debits)', 'Imports'))
@@ -64,22 +58,12 @@ new_table['Flow'] = new_table['Flow'].map(lambda cell:cell.replace('Balances', '
 
 new_table['Year'] = new_table['Year'].map(lambda cell:cell.replace('.0', ''))
 
-new_table['Services'] = new_table['Services'].map(lambda cell:cell.replace
-                                                  ('Explicitly charged and other financial services (non-FISIM2)',
-                                                   'Non-FISIM'))
-
-new_table['Services'] = new_table['Services'].map(lambda cell:cell.replace
-                                                  ('Financial intermediation services indirectly measured (FISIM2)', 
-                                                   'FISIM'))
-
-new_table['Product'] = new_table['Product'].str.strip()
 new_table['Year'] = new_table['Year'].str.strip()
 new_table['Geography'] = new_table['Geography'].str.strip()
 new_table['CDID'] = new_table['CDID'].str.strip()
 new_table['Flow'] = new_table['Flow'].str.strip()
 new_table['Unit'] = new_table['Unit'].str.strip()
 new_table['Measure Type'] = new_table['Measure Type'].str.strip()
-new_table['Services'] = new_table['Services'].str.strip()
 
 new_table.rename(index= str, columns= {'OBS':'Value'}, inplace = True)
 
