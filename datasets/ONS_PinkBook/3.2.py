@@ -51,10 +51,7 @@ Dimensions = [
             HDim(Year,'Year', DIRECTLY,ABOVE),
             HDim(Code,'CDID',DIRECTLY,LEFT),
             HDimConst('Unit', '£ Million'), 
-            HDimConst('Measure Type','GBP Total'),            
-            HDim(Typeoftransport, 'Product', DIRECTLY, LEFT),
-            HDim(Services, 'Type of Services', CLOSEST, ABOVE),
-            HDim(Modeoftransport, 'Mode of Transport', CLOSEST, ABOVE),
+            HDimConst('Measure Type','GBP Total'),
             HDim(Commerce, 'Flow', CLOSEST, ABOVE)
     
 ]
@@ -68,30 +65,19 @@ new_table['TIME'] = new_table['Year'].map(lambda cell:cell.replace('.0', ''))
 
 new_table = new_table.drop('Year', axis=1)
 
-new_table['Mode of Transport'] = new_table['Mode of Transport'].map(lambda x: x.rstrip('12'))
-
 new_table.rename(index= str, columns= {'OBS':'Value'}, inplace = True)
 new_table = new_table[new_table['Value'] != '']
 
 new_table.rename(index= str, columns= {'TIME':'Year'}, inplace = True)
 
-new_table['Product'] = new_table['Product'].str.strip()
 new_table['Year'] = new_table['Year'].str.strip()
 new_table['Geography'] = new_table['Geography'].str.strip()
 new_table['CDID'] = new_table['CDID'].str.strip()
 new_table['Flow'] = new_table['Flow'].str.strip()
-new_table['Type of Services'] = new_table['Type of Services'].str.strip()
-new_table['Mode of Transport'] = new_table['Mode of Transport'].str.strip()
 
 new_table['Flow'] = new_table['Flow'].map(lambda cell:cell.replace('Exports (Credits)', 'Exports'))
 new_table['Flow'] = new_table['Flow'].map(lambda cell:cell.replace('Imports (Debits)', 'Imports'))
 new_table['Flow'] = new_table['Flow'].map(lambda cell:cell.replace('Balances', 'Balance'))
-
-new_table['Services'] = new_table['Type of Services'].map(str)+'-'+new_table['Mode of Transport']
-
-new_table['Services'] = new_table['Services'].map(lambda cell:cell.replace('Total-Total', 'Total'))
-
-new_table = new_table[['Geography','Year','CDID','Product','Flow','Services','Measure Type','Value','Unit','DATAMARKER']]
 
 new_table.fillna('NA', inplace = True)
 
