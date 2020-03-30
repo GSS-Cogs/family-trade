@@ -93,3 +93,4 @@ Service Destination Geography,service_destination_geography,qb:dimension,http://
 Vintage,vintage,qb:dimension,http://gss-data.org.uk/def/dimension/gdp-vintage,http://reference.data.gov.uk/id/{+vintage},string,,,
 Publication,publication,qb:dimension,http://gss-data.org.uk/def/dimension/gdp-publication,http://reference.data.gov.uk/id/{+publication},string,,,
 GDP Estimate Type,gdp_estimate_type,qb:dimension,http://gss-data.org.uk/def/dimension/gdp-estimate-type,http://gss-data.org.uk/def/concept/gdp-estimate-type/{gdp_estimate_type},string,,,
+CDID,cdid,qb:dimension,http://gss-data.org.uk/def/dimension/cdid,http://gss-data.org.uk/def/concept/cdid/{cdid},string,,,
