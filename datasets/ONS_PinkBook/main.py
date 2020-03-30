@@ -63,7 +63,7 @@ next_table['Marker'] = next_table['DATAMARKER'].map(
 
 next_table['Flow'] = next_table['Flow'].map(pathify)
 
-next_table = next_table[['Geography','Year','Pink Book Services','Flow','Measure Type','Value','Unit','Marker']]
+next_table = next_table[['Geography','Year','CDID','Pink Book Services','Flow','Measure Type','Value','Unit','Marker']]
 
 from pathlib import Path
 import numpy as np
