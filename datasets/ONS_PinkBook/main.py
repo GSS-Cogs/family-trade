@@ -63,7 +63,9 @@ next_table['Marker'] = next_table['DATAMARKER'].map(
 
 next_table['Flow'] = next_table['Flow'].map(pathify)
 
-next_table = next_table[['Geography','Year','CDID','Pink Book Services','Flow','Measure Type','Value','Unit','Marker']]
+next_table['Period'] = 'year/' + next_table['Year']
+
+next_table = next_table[['Geography','Period','CDID','Pink Book Services','Flow','Measure Type','Value','Unit','Marker']]
 
 from pathlib import Path
 import numpy as np
@@ -79,3 +81,5 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+
+
