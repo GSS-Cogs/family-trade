@@ -343,9 +343,10 @@ for name, details in outputs.items():
         d["Parent Notation"].append("")
         d["Sort Priority"].append("")
         d["Description"].append("")
+        
+    pd.DataFrame().from_dict(d).to_csv("./out/mrets-countries.csv", index=False)
     """
     
-    pd.DataFrame().from_dict(d).to_csv("./out/mrets-countries.csv", index=False)
     details["data"] = details["data"].drop("Basis", axis=1)
     details["data"].to_csv(out / f'{OBS_ID}.csv', index = False)
 
