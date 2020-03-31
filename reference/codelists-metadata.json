@@ -60,7 +60,7 @@
         {
             "url": "codelists/mrets-trade-area.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
-            "rdfs:label": "Trade Area",
+            "rdfs:label": "Trade Area"
         },
         {
             "url": "codelists/bpm6-services.csv",
