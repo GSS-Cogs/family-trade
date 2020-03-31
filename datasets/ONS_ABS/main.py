@@ -17,8 +17,12 @@
 
 # +
 from gssutils import *
+import json
 
-scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/business/businessservices/datasets/annualbusinesssurveyimportersandexporters')
+with open("info.json") as f:
+    info = json.load(f)
+    
+scraper = Scraper(info["landingPage"])
 scraper
 # -
 
