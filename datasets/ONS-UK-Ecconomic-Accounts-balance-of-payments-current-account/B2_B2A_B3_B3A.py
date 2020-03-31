@@ -94,7 +94,6 @@ for tab in tabs:
         tidied_sheets.append(tidy_sheet.topandas())
 
 
-# +
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
 df['Quarter'] = df['Quarter'].astype(str)
 df['Quarter'] = df['Quarter'].map(lambda x: '-Q1' if 'Q1' in x else('-Q2' if 'Q2' in x else ('-Q3' if 'Q3' in x else ('-Q4' if 'Q4' in x else ''))))
@@ -105,12 +104,11 @@ df['Flow Directions'] = df['Flow Directions'].map(lambda x: x.split()[0])
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted' : 'NSA' }})
 df['Product'] = df['Product'].str.lstrip()
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
-
-
+df['Marker'].replace(' -', 'unknown', inplace=True)
 
 
 # +
-tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Measure Type', 'Unit']]
+tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
 for column in tidy:
     if column in ('Flow Directions', 'Product', 'Services', 'Account Type'):
         tidy[column] = tidy[column].str.lstrip()
@@ -129,6 +127,8 @@ tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False
 # -
 
 GROUP_ID = 'ons-uk-ecconomic-accounts-balance-of-payments-current-account'
+
+print(OBS_ID)
 
 # +
 from gssutils.metadata import THEME
