@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -126,7 +126,7 @@ assert not remaining_cdids, 'Not all CDIDs defined: ' + str(remaining_cdids)
 
 # +
 cdids['AREA'].cat.categories = cdids['AREA'].cat.categories.map(
-    lambda x: f'legacy/{x}'
+    lambda x: f'legacy-{x}'
 )
 SECTION_RE = re.compile(r'[A-S]')
 DIVISION_RE = re.compile(r'[0-9]{1,2}')
