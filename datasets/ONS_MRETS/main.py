@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.4
+#       jupytext_version: 1.4.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -14,10 +14,16 @@
 # ---
 
 # +
-from gssutils import *
+import json
+from os import environ
 
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/'
-                  'tradeingoodsmretsallbopeu2013timeseriesspreadsheet')
+from gssutils import *
+from gssutils.metadata import THEME
+
+with open("info.json") as f:
+    info = json.load(f)
+    
+scraper = Scraper(info["landingPage"])
 scraper
 # -
 
@@ -281,12 +287,78 @@ product_observations.replace(
     {'product': {'-t': 'total-goods'}}, inplace=True)
 
 # +
+
+"""
+Note - spoke with Alex, to start with we're going to concentrate on the product data
+
+so once we're up and running, we need to add the effective_eri_observations and exchange_currency_observations
+dataframes to the outputs dict below
+"""
+outputs = {
+    "Product": {
+        "data": product_observations,
+        "rename_columns": {
+            "period": "Period",
+            "country": "Country",
+            "product": "Product",
+            "direction": "Flow",
+            "basis": "Basis",
+            "unit": "Unit",
+            "adjustment": "Seasonal Adjustment",
+            "value": "Value"
+            }
+    }
+}
+
 out = Path('out')
 out.mkdir(exist_ok=True)
 
-product_observations.to_csv(out / 'product-observations.csv', index=False)
-effective_eri_observations.to_csv(out / 'effective-eri-observations.csv', index=False)
-exchange_currency_observations.to_csv(out / 'exchange-currency-observations.csv', index=False)
+for name, details in outputs.items():
+    
+    TITLE = info["title"] + ": " + name
+    OBS_ID = pathify(TITLE)
+
+    details["data"] = details["data"].rename(columns=details["rename_columns"])
+    
+    """
+    Code to generate Country codelist. Gonna leave these here for now
+    
+    d = {
+        "Label":[],
+        "Notation":[],
+        "Parent Notation":[],
+        "Sort Priority":[],
+        "Description":[]
+    }
+    for country in details["data"]["Country"].unique():
+        if country == "ww":
+            d["Label"].append("Whole World")
+        elif country == "rw":
+            d["Label"].append("Rwanda")
+        elif country == "emu-19":
+            d["Label"].append("Economic and Monetary Union (19)")
+        else:
+            d["Label"].append(country.replace("-", " ").capitalize())
+        d["Notation"].append(country)
+        d["Parent Notation"].append("")
+        d["Sort Priority"].append("")
+        d["Description"].append("")
+    """
+    
+    pd.DataFrame().from_dict(d).to_csv("./out/mrets-countries.csv", index=False)
+    details["data"] = details["data"].drop("Basis", axis=1)
+    details["data"].to_csv(out / f'{OBS_ID}.csv', index = False)
+
+    scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
+    scraper.dataset.title = f'{TITLE}'
+    scraper.dataset.family = 'trade'
+
+    with open(out / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
+        metadata.write(scraper.generate_trig())
+
+        schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+        schema.create(out / f'{OBS_ID}.csv', out / f'{OBS_ID}.csv-schema.json')
+    
 # -
 
 currency_label
