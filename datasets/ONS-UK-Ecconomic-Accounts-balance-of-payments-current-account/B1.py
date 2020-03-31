@@ -16,10 +16,11 @@
 
 # ## Balance of Payments Current Account: Summary B1
 
+# +
 from gssutils import *
-from gssutils.metadata import THEME
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/datasets/unitedkingdomeconomicaccountsbalanceofpaymentscurrentaccount')
-#scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/datasets/unitedkingdomeconomicaccountsbalanceofpaymentscurrentaccount/current')
+import json
+
+scraper = Scraper(json.load(open('info.json'))['landingPage'])
 scraper
 
 # +

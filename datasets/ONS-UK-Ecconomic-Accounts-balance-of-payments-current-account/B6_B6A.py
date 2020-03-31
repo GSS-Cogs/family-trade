@@ -16,9 +16,11 @@
 
 # ## Balance of Payments Current Account: Transactions with the EU and EMU B6, B6A
 
+# +
 from gssutils import *
-from gssutils.metadata import THEME
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/datasets/unitedkingdomeconomicaccountsbalanceofpaymentscurrentaccount')
+import json
+
+scraper = Scraper(json.load(open('info.json'))['landingPage'])
 scraper
 
 # +

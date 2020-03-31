@@ -23,7 +23,3 @@ for i in py_files:
     if file.startswith("'main") == True:
         continue
     %run $file
-
-# -
-
-

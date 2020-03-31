@@ -16,9 +16,11 @@
 
 # ## Balance of Payments Current Account: Trade in goods and services B2, B3 
 
+# +
 from gssutils import *
-from gssutils.metadata import THEME
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/datasets/unitedkingdomeconomicaccountsbalanceofpaymentscurrentaccount')
+import json
+
+scraper = Scraper(json.load(open('info.json'))['landingPage'])
 scraper
 
 # +
@@ -127,8 +129,6 @@ tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False
 # -
 
 GROUP_ID = 'ons-uk-ecconomic-accounts-balance-of-payments-current-account'
-
-print(OBS_ID)
 
 # +
 from gssutils.metadata import THEME
