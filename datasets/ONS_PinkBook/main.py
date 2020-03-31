@@ -61,11 +61,11 @@ next_table['Marker'] = next_table['DATAMARKER'].map(
                '-' : 'nil-or-less-than-a-million'
         }.get(x, x))
 
-next_table['Flow'] = next_table['Flow'].map(pathify)
+next_table['Flow Directions'] = next_table['Flow'].map(pathify)
 
 next_table['Period'] = 'year/' + next_table['Year']
 
-next_table = next_table[['Geography','Period','CDID','Pink Book Services','Flow','Measure Type','Value','Unit','Marker']]
+next_table = next_table[['Geography','Period','CDID','Pink Book Services','Flow Directions','Measure Type','Value','Unit','Marker']]
 
 from pathlib import Path
 import numpy as np
@@ -81,5 +81,3 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
-
-
