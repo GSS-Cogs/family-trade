@@ -30,8 +30,6 @@ next_table = pd.DataFrame()
 # +
 # %%capture
 
-# %run "3.1.py"
-next_table = pd.concat([next_table, new_table])
 # %run "3.2.py"
 next_table = pd.concat([next_table, new_table])
 # %run "3.3.py"
@@ -57,9 +55,11 @@ next_table['Unit'] = next_table['Unit'].map(
         }.get(x, x))
 
 next_table['Marker'] = next_table['DATAMARKER'].map(
-    lambda x: { '..' : 'not-available' ,
+    lambda x: { 'NA' : 'not-available' ,
                '-' : 'nil-or-less-than-a-million'
         }.get(x, x))
+
+next_table['Pink Book Services'] = next_table['Pink Book Services'].astype(str)
 
 next_table['Flow Directions'] = next_table['Flow'].map(pathify)
 
