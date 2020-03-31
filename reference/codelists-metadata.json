@@ -58,6 +58,11 @@
             "rdfs:comment": "GDP-183, accounting basis"
         },
         {
+            "url": "codelists/mrets-trade-area.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Trade Area",
+        },
+        {
             "url": "codelists/bpm6-services.csv",
             "tableSchema": "schemas/bpm6-schema.json",
             "rdfs:label": "BPM6 Services",

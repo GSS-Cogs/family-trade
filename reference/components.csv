@@ -77,3 +77,4 @@ Service Destination Geography,,Dimension,http://gss-data.org.uk/def/concept-sche
 GDP Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-estimate-type
 GDP Vintage,Available reference point,Dimension,
 GDP Publication,The revision to a given reference point for a time series can be identified in a real-time database as the change in value from an earlier vintage of estimates to a later vintage,Dimension,
+Trade Area,,Dimension,http://gss-data.org.uk/def/concept-scheme/trade-area
