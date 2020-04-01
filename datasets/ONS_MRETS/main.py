@@ -320,6 +320,10 @@ for name, details in outputs.items():
 
     details["data"] = details["data"].rename(columns=details["rename_columns"])
     
+    # Correct casing to match codelists
+    if "Seasonal Adjustment" in details["data"].columns.values:
+        details["data"] = details["data"].str.upper()
+    
     """
     Code to generate Country codelist. Gonna leave these here for now
     
