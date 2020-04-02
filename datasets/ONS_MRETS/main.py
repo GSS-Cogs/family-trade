@@ -324,8 +324,6 @@ for name, details in outputs.items():
     if "Seasonal Adjustment" in details["data"].columns.values:
         details["data"]["Seasonal Adjustment"] = details["data"]["Seasonal Adjustment"].str.upper()
         
-    details["data"]["Seasonal Adjustment"] = details["data"]["Seasonal Adjustment"]
-
     details["data"] = details["data"].drop("Basis", axis=1)
     details["data"].to_csv(out / f'{OBS_ID}.csv', index = False)
 
