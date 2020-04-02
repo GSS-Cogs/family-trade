@@ -52,14 +52,12 @@ from pathlib import Path
 import numpy as np
 out = Path('out')
 out.mkdir(exist_ok=True)
-#slice_size = 100000
+slice_size = 100000
 
-#for i in np.arange(len(observations) // slice_size):
-    #dest_file = out / f'observations_{i:04}.csv'
-    #observations.iloc[i * slice_size : i * slice_size + slice_size - 1].to_csv(dest_file, index=False)
+for i in np.arange(len(observations) // slice_size):
+    dest_file = out / f'observations_{i:04}.csv'
+    observations.iloc[i * slice_size : i * slice_size + slice_size - 1].to_csv(dest_file, index=False)
 # -
-
-observations.drop_duplicates().to_csv(out / ('observations.csv'), index = False)
 
 # Fix up title and description as we're combining the data into one Data Cube dataset
 
@@ -77,8 +75,7 @@ with open(out / 'dataset.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
         
 csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
-#csvw.create(out / 'observations_0000.csv', out / 'observations.csv-schema.json')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+csvw.create(out / 'observations_0000.csv', out / 'observations.csv-schema.json')
 # -
 
 
