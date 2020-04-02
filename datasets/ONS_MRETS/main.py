@@ -299,8 +299,8 @@ outputs = {
         "data": product_observations,
         "rename_columns": {
             "period": "Period",
-            "country": "Country",
-            "product": "Product",
+            "country": "Trade Area",
+            "product": "MRETS Product",
             "direction": "Flow",
             "basis": "Basis",
             "unit": "Unit",
@@ -322,35 +322,10 @@ for name, details in outputs.items():
     
     # Correct casing to match codelists
     if "Seasonal Adjustment" in details["data"].columns.values:
-        details["data"] = details["data"].str.upper()
-    
-    """
-    Code to generate Country codelist. Gonna leave these here for now
-    
-    d = {
-        "Label":[],
-        "Notation":[],
-        "Parent Notation":[],
-        "Sort Priority":[],
-        "Description":[]
-    }
-    for country in details["data"]["Country"].unique():
-        if country == "ww":
-            d["Label"].append("Whole World")
-        elif country == "rw":
-            d["Label"].append("Rwanda")
-        elif country == "emu-19":
-            d["Label"].append("Economic and Monetary Union (19)")
-        else:
-            d["Label"].append(country.replace("-", " ").capitalize())
-        d["Notation"].append(country)
-        d["Parent Notation"].append("")
-        d["Sort Priority"].append("")
-        d["Description"].append("")
+        details["data"]["Seasonal Adjustment"] = details["data"]["Seasonal Adjustment"].str.upper()
         
-    pd.DataFrame().from_dict(d).to_csv("./out/mrets-countries.csv", index=False)
-    """
-    
+    details["data"]["Seasonal Adjustment"] = details["data"]["Seasonal Adjustment"]
+
     details["data"] = details["data"].drop("Basis", axis=1)
     details["data"].to_csv(out / f'{OBS_ID}.csv', index = False)
 
