@@ -149,6 +149,10 @@ scraper.dataset.theme = THEME['business-industry-trade-energy']
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+#csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+
+
+
 
