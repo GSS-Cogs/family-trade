@@ -78,4 +78,4 @@ GDP Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-estim
 GDP Vintage,Available reference point,Dimension,
 GDP Publication,The revision to a given reference point for a time series can be identified in a real-time database as the change in value from an earlier vintage of estimates to a later vintage,Dimension,
 Trade Area,,Dimension,http://gss-data.org.uk/def/concept-scheme/trade-area
-MRETS Product,"",Dimension,http://gss-data.org.uk/def/concept-scheme/mrets-product
+MRETS Product,,Dimension,http://gss-data.org.uk/def/concept-scheme/mrets-product
