@@ -15,54 +15,65 @@ scraper
 
 # %%
 try:
+    #for i in scraper.distributions:
+        #if i.title == 'Trade in goods: country-by-commodity imports':
+            #print(i.title)
+            #sheet = i
+            #break
     sheet = scraper.distributions[1]
 except Exception as e:
-    sheet = scraper.distributions[0]
+        print(str(e))
 
 # %%
-#data = sheet.as_pandas(dtype={
-#    'COMMODITY': 'category',
-#    'COUNTRY': 'category',
-#    'DIRECTION': 'category'
-#}, na_values=['','N/A'], keep_default_na=False)
-       
-data = sheet.as_pandas() 
+data = sheet.as_pandas(dtype={
+    'COMMODITY': 'category',
+    'COUNTRY': 'category',
+    'DIRECTION': 'category'
+}, na_values=['','N/A'], keep_default_na=False)
+#data = sheet.as_databaker()
+#data = pd.DataFrame(data
+#data.head()
+                    
+#data = sheet.as_pandas() 
 
 
 # %%
 data.head()
 
 # %%
+
+
 table = data.drop(columns='DIRECTION')
 table.rename(columns={
     'COMMODITY': 'CORD SITC',
     'COUNTRY': 'ONS Partner Geography'}, inplace=True)
 table = pd.melt(table, id_vars=['CORD SITC','ONS Partner Geography'], var_name='Period', value_name='Value')
-#table['Period'] = table['Period'].astype('category')
+table['Period'] = table['Period'].astype('category')
 #table['Value'] = table['Value'].astype(int)
-table.head()
 
 
 # %%
-# Fix up category strings
-#table['ONS Partner Geography'].unique()
 
-# %%
-#table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split(' ')[0])
-#table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
+
 #display(table['CORD SITC'].cat.categories)
 #display(table['ONS Partner Geography'].cat.categories)
-table['CORD SITC'] = table['CORD SITC'].str.split(" ", n = 1, expand = True)[0]
-table['ONS Partner Geography'] = table['ONS Partner Geography'].str.split(" ", n = 1, expand = True)[0]
-table.head()
 
 
-# %%
-table['Period'] = table['Period'].str.strip('\'')
-table['Period'] = table['Period'].str[4:] + '/' + table['Period'].str[:4]
+# Fix up category strings
 table.head()
 
 # %%
+
+
+table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split(' ')[0])
+table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
+#display(table['CORD SITC'].cat.categories)
+#display(table['ONS Partner Geography'].cat.categories)
+
+
+# %%
+
+
 import re
 YEAR_RE = re.compile(r'[0-9]{4}')
 YEAR_MONTH_RE = re.compile(r'([0-9]{4})(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)')
@@ -91,40 +102,39 @@ def time2period(t):
     else:
         print(f"no match for {t}")
 
-#table['Period'].cat.categories = table['Period'].cat.categories.map(time2period)
+table['Period'].cat.categories = table['Period'].cat.categories.map(time2period)
 
 
 # %%
-#table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
-#table['Measure Type'] = pd.Series('GBP Total', index=table.index, dtype='category')
-#table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
-#table['Flow'] = pd.Series('imports', index=table.index, dtype='category')
 
-table['Seasonal Adjustment'] = 'NSA'
-table['Measure Type'] = 'GBP Total'
-table['Unit'] = 'gbp-million'
-table['Flow'] = 'imports'
+
+table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
+table['Measure Type'] = pd.Series('GBP Total', index=table.index, dtype='category')
+table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
+table['Flow'] = pd.Series('imports', index=table.index, dtype='category')
 
 
 # %%
+
+
 #table.memory_usage()
-table.head()
 
 
 # %%
+
+
 table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'Seasonal Adjustment', 'Measure Type','Value','Unit' ]]
 #table
 
 
 # %%
+
+
 #table.count()
 
 
 # %%
-table = pd.DataFrame(table)
 
 
-# %%
 #table.dtypes
 
-# %%
