@@ -243,7 +243,7 @@ def dim_val(t):
 
 
 # +
-TradeObservation = namedtuple('TradeObservation', ('period',) + TradeInProduct._fields + ('value',))
+TradeObservation = namedtuple('TradeObservation', ('period',) + TradeInProduct._fields + ('value','decimals',))
 SterlingEffectiveERIObservation = namedtuple('SterlingEffectiveERIObservation', 'period rate measure base')
 ExchangeRateObservation = namedtuple('ExchangeRateCountryObservation', 'period currency rate')
 
@@ -270,7 +270,7 @@ for csid, slice_list in slices.items():
             p = period(s['header'].periodicity, s['struct'].year_start, i)
             if isinstance(dim_vals, TradeInProduct):
                 product_data.append(TradeObservation._make(
-                    (p,) + dim_vals + (v, )))
+                    (p,) + dim_vals + (v, s['struct'].decimals)))
             elif isinstance(dim_vals, SterlingEffectiveERI):
                 effective_exchange_data.append(SterlingEffectiveERIObservation(
                     p, v, dim_vals.measure, dim_vals.base))
