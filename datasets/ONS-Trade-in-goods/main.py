@@ -39,7 +39,7 @@ obsIMP = run_script('imports')
 obsEXP = run_script('exports')
 
 # +
-#observations = pd.concat([obsIMP, obsEXP])
+observations = pd.concat([obsIMP, obsEXP])
 #print(type(obsIMP))
 #print(type(obsEXP))
 
@@ -59,48 +59,28 @@ out.mkdir(exist_ok=True)
     #observations.iloc[i * slice_size : i * slice_size + slice_size - 1].to_csv(dest_file, index=False)
 # -
 
-from gssutils.metadata import THEME
-scraper.dataset.family = 'trade'
-scraper.dataset.theme = THEME['business-industry-trade-energy']
+observations.drop_duplicates().to_csv(out / ('observations.csv'), index = False)
 
 # Fix up title and description as we're combining the data into one Data Cube dataset
 
 # +
-import numpy as np
-from os import environ
+from gssutils.metadata import THEME
+scraper.dataset.family = 'Trade'
+scraper.dataset.theme = THEME['business-industry-trade-energy']
+scraper.dataset.title = scraper.dataset.title.replace('imports', 'imports and exports')
+scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and export')
 
-title = 'Imports'
-obsIMP.drop_duplicates().to_csv(out / (f'observations{title}.csv'), index = False)
-scraper.dataset.title = f'ONS Trade in Goods - {title}'
-scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{title}')
-with open(out / (f'observations{title}.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / (f'observations{title}.csv'), out / ((f'observations{title}.csv') + '-schema.json'))
-
-title = 'Exports'
-obsEXP.drop_duplicates().to_csv(out / (f'observations{title}.csv'), index = False)
-scraper.dataset.title = f'ONS Trade in Goods - {title}'
-scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{title}')
-with open(out / (f'observations{title}.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / (f'observations{title}.csv'), out / ((f'observations{title}.csv') + '-schema.json'))
+scraper.dataset
 
 # +
-#from gssutils.metadata import THEME
-#scraper.dataset.family = 'Trade'
-#scraper.dataset.theme = THEME['business-industry-trade-energy']
-#scraper.dataset.title = scraper.dataset.title.replace('imports', 'imports and exports')
-#scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and export')
-
-#scraper.dataset
-
-# +
-#with open(out / 'dataset.trig', 'wb') as metadata:
- #    metadata.write(scraper.generate_trig())
+with open(out / 'dataset.trig', 'wb') as metadata:
+     metadata.write(scraper.generate_trig())
         
-#csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
 #csvw.create(out / 'observations_0000.csv', out / 'observations.csv-schema.json')
-#csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # -
+
+
 
 
