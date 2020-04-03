@@ -1,76 +1,57 @@
 #!/usr/bin/env python
 # coding: utf-8
-# %%
-
+# %% [markdown]
 # # Country by commodity exports
 
 # %%
 from gssutils import *
-import time
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityexports')
+import json
+
+landingPage = json.load(open('info.json'))['landingPage']
+display(landingPage)
+
+scraper = Scraper(landingPage)
 scraper
 
 
 # %%
-try:
-    #for i in scraper.distributions:
-        #if i.title == 'Trade in goods: country-by-commodity imports':
-            #print(i.title)
-            #sheet = i
-            #break
-    sheet = scraper.distributions[1]
-except Exception as e:
-        print(str(e))
+from zipfile import ZipFile
+from io import BytesIO
+
+distribution = scraper.distribution(mediaType='application/zip', latest=True)
+
+with ZipFile(BytesIO(scraper.session.get(distribution.downloadURL).content)) as zip:
+    assert(len(zip.namelist()) == 1)
+    with zip.open(zip.namelist()[0]) as excelFile:
+        buffered_fobj = BytesIO(excelFile.read())
+        data = pd.read_excel(buffered_fobj,
+                             sheet_name=1, dtype={
+                                 'COMMODITY': 'category',
+                                 'COUNTRY': 'category',
+                                 'DIRECTION': 'category'
+                             }, na_values=['','N/A'], keep_default_na=False)
+data
+
 
 # %%
-#data = sheet.as_pandas(dtype={
-#    'COMMODITY': 'category',
-#    'COUNTRY': 'category',
-#    'DIRECTION': 'category'
-#}, na_values=['','N/A'], keep_default_na=False)
-
-data = sheet.as_pandas()
-
-# %%
-data.head()
-
-# %%
-#pd.set_option('display.float_format', lambda x: '%.0f' % x)
+pd.set_option('display.float_format', lambda x: '%.0f' % x)
 
 table = data.drop(columns='DIRECTION')
 table.rename(columns={
     'COMMODITY': 'CORD SITC',
     'COUNTRY': 'ONS Partner Geography'}, inplace=True)
 table = pd.melt(table, id_vars=['CORD SITC','ONS Partner Geography'], var_name='Period', value_name='Value')
-#table['Period'] = table['Period'].astype('category')
+table['Period'] = table['Period'].astype('category')
 #table['Value'] = table.apply(lambda x: int(x['Value']) if x['Value'] != 'N/A' else x['Value'], axis = 1)
 #table['Value'] = table['Value'].astype(int)
 
 
 # %%
-
-
+table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split(' ')[0])
+table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
 #display(table['CORD SITC'].cat.categories)
 #display(table['ONS Partner Geography'].cat.categories)
 
-
-# Fix up category strings
-table.head()
-
-# %%
-#table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split(' ')[0])
-#table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
-#display(table['CORD SITC'].cat.categories)
-#display(table['ONS Partner Geography'].cat.categories)
-table['CORD SITC'] = table['CORD SITC'].str.split(" ", n = 1, expand = True)[0]
-table['ONS Partner Geography'] = table['ONS Partner Geography'].str.split(" ", n = 1, expand = True)[0]
-table.head()
-
-
-# %%
-table['Period'] = table['Period'].str.strip('\'')
-table['Period'] = table['Period'].str[4:] + '/' + table['Period'].str[:4]
-table.head()
 
 # %%
 import re
@@ -101,40 +82,17 @@ def time2period(t):
     else:
         print(f"no match for {t}")
 
-#table['Period'].cat.categories = table['Period'].cat.categories.map(time2period)
+table['Period'].cat.categories = table['Period'].cat.categories.map(time2period)
 
 
 # %%
-#table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
-#table['Measure Type'] = pd.Series('GBP Total', index=table.index, dtype='category')
-#table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
-#table['Flow'] = pd.Series('exports', index=table.index, dtype='category')
-
-table['Seasonal Adjustment'] = 'NSA'
-table['Measure Type'] = 'GBP Total'
-table['Unit'] = 'gbp-million'
-table['Flow'] = 'exports'
-
-
-# %%
-#table.memory_usage()
+table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
+table['Measure Type'] = pd.Series('GBP Total', index=table.index, dtype='category')
+table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
+table['Flow'] = pd.Series('exports', index=table.index, dtype='category')
 
 
 # %%
 table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'Seasonal Adjustment', 'Measure Type','Value','Unit' ]]
 table
-
-
-# %%
-#table.count()
-
-
-# %%
-#table.dtypes
-
-
-# %%
-table = pd.DataFrame(table)
-
-# %%
 
