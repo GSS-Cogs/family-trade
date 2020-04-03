@@ -33,36 +33,22 @@ def run_script(s):
 observations = pd.concat(
     run_script(s) for s in ['exports', 'imports']
 ).drop_duplicates()
-
-# +
-from pathlib import Path
-import numpy as np
-out = Path('out')
-out.mkdir(exist_ok=True)
-slice_size = 100000
-
-for i in np.arange(len(observations) // slice_size):
-    dest_file = out / f'observations_{i:04}.csv'
-    observations.iloc[i * slice_size : i * slice_size + slice_size - 1].to_csv(dest_file, index=False)
 # -
 
-# Fix up title and description as we're combining the data into one Data Cube dataset
+out = Path('out')
+out.mkdir(exist_ok=True)
+table.to_csv(out / 'observations.csv', index = False)
 
 # +
 from gssutils.metadata import THEME
 scraper.dataset.family = 'Trade'
 scraper.dataset.theme = THEME['business-industry-trade-energy']
+
 scraper.dataset.title = scraper.dataset.title.replace('imports', 'imports and exports')
 scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and export')
 
-scraper.dataset
+with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
 
-# +
-with open(out / 'dataset.trig', 'wb') as metadata:
-     metadata.write(scraper.generate_trig())
-        
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
-csvw.create(out / 'observations_0000.csv', out / 'observations.csv-schema.json')
-# -
-
-
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
