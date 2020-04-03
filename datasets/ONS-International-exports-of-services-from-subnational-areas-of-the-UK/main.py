@@ -67,8 +67,8 @@ nuts = next_table[next_table['Service Origin Geography'].str.contains('nuts')]
 not_nuts = next_table[~next_table['Service Origin Geography'].str.contains('nuts')]
 nuts = nuts.rename(columns={'Service Origin Geography':'NUTS Geography'})
 not_nuts['Service Origin Geography'] = not_nuts['Service Origin Geography'].apply(pathify)
-#nuts
-not_nuts
+nuts
+#not_nuts
 
 from pathlib import Path
 import numpy as np
@@ -81,14 +81,14 @@ from os import environ
 tit1 = 'ONS International exports of services from the UK by NUTS area, Industry and destination'
 tit2 = 'ONS International exports of services from the UK by Joint Authority, Industry and destination'
 
-fn1 = 'observationsNUTS.csv'
-fn2 = 'observationsJointAuthority.csv'
+fn1 = 'observationsNUTS'
+fn2 = 'observationsJointAuthority'
 
 scraper.dataset.family = 'trade'
 from gssutils.metadata import THEME
 scraper.dataset.theme = THEME['business-industry-trade-energy']
 
-nuts.drop_duplicates().to_csv(out / fn1, index = False)
+nuts.drop_duplicates().to_csv(out / (fn1 + '.csv'), index = False)
 scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{fn1}')
 
 comDesc = """
@@ -100,10 +100,10 @@ scraper.dataset.description = comDesc
 
 with open(out / (fn1 + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / (fn1), out / ((fn1) + '-schema.json'))
+csvw.create(out / (fn1 + '.csv'), out / ((fn1 + '.csv') + '-schema.json'))
 
 
-not_nuts.drop_duplicates().to_csv(out / fn2, index = False)
+not_nuts.drop_duplicates().to_csv(out / (fn2 + '.csv'), index = False)
 scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{fn2}')
 
 comDesc = """
@@ -115,7 +115,7 @@ scraper.dataset.description = comDesc
 
 with open(out / (fn2 + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / (fn2), out / ((fn2) + '-schema.json'))
+csvw.create(out / (fn2 + '.csv'), out / ((fn2 + '.csv') + '-schema.json'))
 
 
 # +
