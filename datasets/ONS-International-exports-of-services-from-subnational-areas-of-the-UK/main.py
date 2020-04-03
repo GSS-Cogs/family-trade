@@ -46,12 +46,14 @@ next_table = pd.concat([next_table, new_table])
 # -
 
 next_table['Product'] = next_table['Product'].apply(pathify)
+next_table
 
-next_table['Service Origin Geography'] = next_table['Service Origin'].apply(pathify)
+next_table['Service Origin Geography'] = next_table['Service Origin']#.apply(pathify)
 next_table['Service Destination Geography'] = next_table['Service Destination'].apply(pathify)
 next_table['Service Destination Geography'] = next_table['Service Destination Geography'].map(
     lambda x: { 'total' : 'all', 'row' :'rest-of-world'        
         }.get(x, x))
+next_table
 
 next_table['Marker'] = next_table['Marker'].map(
     lambda x: { '..' : 'suppressed'     
@@ -64,7 +66,8 @@ next_table['Flow'] = next_table['Flow'].map(pathify)
 nuts = next_table[next_table['Service Origin Geography'].str.contains('nuts')]
 not_nuts = next_table[~next_table['Service Origin Geography'].str.contains('nuts')]
 nuts = nuts.rename(columns={'Service Origin Geography':'NUTS Geography'})
-nuts
+not_nuts['Service Origin Geography'] = not_nuts['Service Origin Geography'].apply(pathify)
+#nuts
 not_nuts
 
 from pathlib import Path
