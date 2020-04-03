@@ -17,7 +17,7 @@
 #
 # Transform to Tidy Data.
 #
-# The source data is available from https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx in a series of zip files, `RTS web YYYY.zip` for the years 2013 to 2016 currently.
+# The source data is available from https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx in a series of zip files.
 #
 # Each zip file contains fixed-width formatted text files following a layout described in https://www.uktradeinfo.com/Statistics/RTS/Documents/RTS%20Detailed%20data%20information%20pack.pdf. Each row is has two measures: net mass in tonnes and statistical value in £1000's. We're assuming each observation has one measure, so split these  out into separate files.
 
@@ -26,8 +26,28 @@ from gssutils import *
 import json
 
 scraper = Scraper(json.load(open('info.json'))['landingPage'])
+display(scraper.dataset.landingPage)
 scraper
 # -
+
+# zipped data files were linked from https://www.uktradeinfo.com/Statistics/RTS/Pages/RTS-Downloads.aspx, but sometimes this appears to close. If so, look for them directly from https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx
+
+if len(scraper.distributions) == 0:
+    from lxml import html
+    from gssutils.metadata import Distribution
+    from urllib.parse import urljoin
+    from mimetypes import guess_type
+    from urllib import quote
+
+    page_uri = 'https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx'
+    page = scraper.session.get(page_uri)
+    tree = html.fromstring(page.text)
+    for anchor in tree.xpath("//a[contains(@href, 'zip')]"):
+        dist = Distribution(scraper)
+        dist.title = anchor.text.strip()
+        dist.downloadURL = urljoin(page_uri, quote('/%', anchor.get('href')))
+        dist.mediaType, encoding = guess_type(dist.downloadURL)
+        scraper.distributions.append(dist)
 
 for dist in scraper.distributions:
     print(dist.downloadURL)
@@ -104,7 +124,7 @@ csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(
     out / 'observations.csv', out / 'observations.csv-metadata.json', with_transform=True,
     base_url='http://gss-data.org.uk/data/', base_path=dataset_path,
-    dataset_metadata=scraper.dataset.as_quads()
+    dataset_metadata=scraper.dataset.as_quads(), with_external=False
 )
 # -
 
