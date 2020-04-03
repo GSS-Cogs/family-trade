@@ -93,7 +93,7 @@ table['Period'].cat.categories = table['Period'].cat.categories.map(time2period)
 # %%
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
 table['Measure Type'] = pd.Series('GBP Total', index=table.index, dtype='category')
-table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
+table['Unit'] = pd.Series('gbp', index=table.index, dtype='category')
 table['Flow'] = pd.Series('imports', index=table.index, dtype='category')
 
 
