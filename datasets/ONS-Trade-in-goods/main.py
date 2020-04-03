@@ -43,6 +43,9 @@ table.to_csv(out / 'observations.csv', index = False)
 from gssutils.metadata import THEME
 scraper.dataset.family = 'Trade'
 scraper.dataset.theme = THEME['business-industry-trade-energy']
+import os
+
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/trade/' + Path(os.getcwd()).name))
 
 scraper.dataset.title = scraper.dataset.title.replace('imports', 'imports and exports')
 scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and export')
@@ -51,4 +54,8 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+csvw.create(
+    out / 'observations.csv', out / 'observations.csv-metadata.json', with_transform=True,
+    base_url='http://gss-data.org.uk/data/', base_path=dataset_path,
+    dataset_metadata=scraper.dataset.as_quads(), with_external=False
+)
