@@ -76,7 +76,7 @@ for distribution in scraper.distributions:
                 
                 # Output the mass observations for this input file
                 mass = table.drop(columns=['Value'])
-                mass['Measure Type'] = 'Net Mass'
+                mass['Measure Type'] = 'net_mass'
                 mass['Unit'] = 'kg-thousands'
                 mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
                 mass.to_csv(observations_file, header=header, mode='a', index=False)
@@ -85,7 +85,7 @@ for distribution in scraper.distributions:
                 
                 # Output the value observations for this input file
                 value = table.drop(columns=['Netmass'])
-                value['Measure Type'] = 'GBP Total'
+                value['Measure Type'] = 'gbp_total'
                 value['Unit'] = 'gbp-thousands'
                 value.to_csv(observations_file, header=header, mode='a', index=False)
 
@@ -93,9 +93,19 @@ for distribution in scraper.distributions:
 from gssutils.metadata import THEME
 scraper.dataset.family = 'Trade'
 scraper.dataset.theme = THEME['business-industry-trade-energy']
+import os
+
+dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/trade/' + Path(os.getcwd()).name))
 
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+csvw.create(
+    out / 'observations.csv', out / 'observations.csv-metadata.json', with_transform=True,
+    base_url='http://gss-data.org.uk/data/', base_path=dataset_path,
+    dataset_metadata=scraper.dataset.as_quads()
+)
+# -
+
+
