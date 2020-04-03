@@ -51,6 +51,7 @@ ONS Functional Category,ons_func_category,qb:dimension,http://gss-data.org.uk/de
 SIC 2007,sic2007,qb:dimension,http://gss-data.org.uk/def/dimension/sic-industry,http://business.data.gov.uk/companies/def/sic-2007/{sic2007},string,,,
 Marker,marker,qb:attribute,http://purl.org/linked-data/sdmx/2009/attribute#obsStatus,http://gss-data.org.uk/def/concept/marker/{marker},string,,,
 GBP Million,gbp_million,qb:measure,http://gss-data.org.uk/def/measure/gbp-million,,string,,,
+GBP,gbp,qb:measure,http://gss-data.org.uk/def/measure/gbp,,string,,,
 Product Department,product_department,qb:dimension,http://gss-data.org.uk/def/dimension/product-department,http://gss-data.org.uk/def/concept/product-department/{product_department},string,,,
 Product Category,product_category,qb:dimension,http://gss-data.org.uk/def/dimension/product-category,http://gss-data.org.uk/def/concept/product-category/{product_category},string,,,
 Product,product,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/product/{product},string,,,
