@@ -14,7 +14,11 @@
     "transform": {
         "validate": false,
         "airtable": "reclNM0WAApNZVyh4",
-        "main_issue": 12
+        "main_issue": 12,
+        "to_rdf": "csv2rdf"
+    },
+    "load": {
+        "skip": true
     },
     "sizingNotes": "",
     "notes": ""
