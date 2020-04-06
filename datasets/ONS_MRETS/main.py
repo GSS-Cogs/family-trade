@@ -325,6 +325,23 @@ def fix_short_hand_flow(val):
         return "balance"
     else:
         raise Exception("Aborting. Unexpected 'Flow direction' of {} encountered.".format(val))
+    
+
+def measure_type_lookup(val):
+    """
+    We'll use the unit of measure to lookup the measure type
+    """
+    if val == "cvm":
+        return "Chained volume measure"
+    if val == "cp" or val == "av-value-per-ton":
+        return "GBP Million"
+    if val == "idef":
+        return "Implied Deflator"
+    if val == "tons":
+        return "Net Mass"
+    else:
+        raise Exception("Aborting. Cannot find the measure type for {}.".format(val))
+    
 
 for name, details in outputs.items():
     
@@ -347,11 +364,14 @@ for name, details in outputs.items():
     if "Basis" in details["data"].columns.values:
         details["data"] = details["data"].drop("Basis", axis=1)
         
+    details["data"]["Measure Type"] = details["data"]["Unit"].apply(measure_type_lookup)
     details["data"].drop_duplicates().to_csv(out / f'{OBS_ID}.csv', index = False)
 
     scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
     scraper.dataset.title = f'{TITLE}'
     scraper.dataset.family = 'trade'
+    
+    print(details["data"]["Unit"].unique())
 
     with open(out / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
         metadata.write(scraper.generate_trig())
