@@ -39,7 +39,7 @@ for sheet in sheetname:
                 HDimConst('Geography', 'K02000001'),
                 HDim(Year,'Year', DIRECTLY,ABOVE),
                 HDim(code,'CDID',DIRECTLY,LEFT),
-                HDimConst('Unit', 'gbp-miilion'), 
+                HDimConst('Unit', 'gbp-million'), 
                 HDimConst('Measure Type','GBP Total'),
                 HDim(Flow,'Flow',CLOSEST, ABOVE)           
 
@@ -65,6 +65,8 @@ PBclassification_table_url = 'https://drive.google.com/uc?export=download&id=1uN
 temp_table = pd.read_excel(PBclassification_table_url, sheet_name = 0)
 next_table = pd.merge(next_table, temp_table, how = 'left', left_on = 'CDID', right_on = 'cdid')
 next_table.rename(index= str, columns= {'BPM6':'Pink Book Services'}, inplace = True)
+
+temp_table
 
 next_table[next_table.cdid.isnull() == True]['CDID'].unique()
 
