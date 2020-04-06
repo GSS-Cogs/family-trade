@@ -97,6 +97,7 @@ comDesc = """
     """
 scraper.dataset.comment = comDesc
 scraper.dataset.description = comDesc
+scraper.dataset.title = 'International exports of services from subnational areas of the UK'
 
 with open(out / (fn1 + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
@@ -112,6 +113,7 @@ comDesc = """
     """
 scraper.dataset.comment = comDesc
 scraper.dataset.description = comDesc
+scraper.dataset.title = 'International exports of services from joint authority areas of the UK'
 
 with open(out / (fn2 + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
