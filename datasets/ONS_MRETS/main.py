@@ -301,7 +301,7 @@ outputs = {
             "period": "Period",
             "country": "Trade Area",
             "product": "MRETS Product",
-            "direction": "Flow",
+            "direction": "Flow Directions",
             "basis": "Basis",
             "unit": "Unit",
             "adjustment": "Seasonal Adjustment",
@@ -359,7 +359,7 @@ for name, details in outputs.items():
         details["data"]["MRETS Product"] = details["data"]["MRETS Product"].apply(pathify)
         
     if "Flow" in details["data"].columns.values:
-        details["data"]["Flow"] = details["data"]["Flow"].apply(fix_short_hand_flow)
+        details["data"]["Flow Directions"] = details["data"]["Flow Directions"].apply(fix_short_hand_flow)
         
     if "Basis" in details["data"].columns.values:
         details["data"] = details["data"].drop("Basis", axis=1)
