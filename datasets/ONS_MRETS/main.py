@@ -305,7 +305,8 @@ outputs = {
             "basis": "Basis",
             "unit": "Unit",
             "adjustment": "Seasonal Adjustment",
-            "value": "Value"
+            "value": "Value",
+            "decimals": "Decimals"
             }
     }
 }
@@ -313,19 +314,40 @@ outputs = {
 out = Path('out')
 out.mkdir(exist_ok=True)
 
+def fix_short_hand_flow(val):
+    if val in ["imports", "exports", "balance", "terms-of-trade"]:
+        return val
+    elif val == "im":
+        return "imports"
+    elif val == "ex":
+        return "exports"
+    elif val == "bal":
+        return "balance"
+    else:
+        raise Exception("Aborting. Unexpected 'Flow direction' of {} encountered.".format(val))
+
 for name, details in outputs.items():
     
     TITLE = info["title"] + ": " + name
     OBS_ID = pathify(TITLE)
 
-    details["data"] = details["data"].rename(columns=details["rename_columns"])
+    if "rename_columns" in details.keys():
+        details["data"] = details["data"].rename(columns=details["rename_columns"])
     
     # Correct casing to match codelists
     if "Seasonal Adjustment" in details["data"].columns.values:
         details["data"]["Seasonal Adjustment"] = details["data"]["Seasonal Adjustment"].str.upper()
         
-    details["data"] = details["data"].drop("Basis", axis=1)
-    details["data"].to_csv(out / f'{OBS_ID}.csv', index = False)
+    if "MRETS Product" in details["data"].columns.values:
+        details["data"]["MRETS Product"] = details["data"]["MRETS Product"].apply(pathify)
+        
+    if "Flow" in details["data"].columns.values:
+        details["data"]["Flow"] = details["data"]["Flow"].apply(fix_short_hand_flow)
+        
+    if "Basis" in details["data"].columns.values:
+        details["data"] = details["data"].drop("Basis", axis=1)
+        
+    details["data"].drop_duplicates().to_csv(out / f'{OBS_ID}.csv', index = False)
 
     scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
     scraper.dataset.title = f'{TITLE}'
