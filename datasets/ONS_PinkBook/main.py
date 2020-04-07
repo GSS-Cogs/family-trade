@@ -83,6 +83,8 @@ next_table['Pink Book Services'] = next_table['Pink Book Services'].astype(str)
 
 next_table['Flow Directions'] = next_table['Flow'].map(pathify)
 
+next_table['CDID'] = next_table['CDID'].map(pathify)
+
 next_table['Period'] = 'year/' + next_table['Year']
 
 next_table = next_table[['Geography','Period','CDID','Pink Book Services','Flow Directions','Measure Type','Value','Unit','Marker']]
