@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -59,8 +59,11 @@ for name, tab in tabs.items():
     new_table['Flow'] = new_table['Flow'].map(lambda s: s.lower().strip())
     new_table['ONS ABS Trade'] = product(name)
     new_table['Period'] = new_table['Period'].astype(str)
-    new_table = new_table[['ONS Partner Geography', 'Period','Flow','ONS ABS Trade', 'Measure Type','Value','Unit' ]]
-    Final_table = pd.concat([Final_table, new_table])
+    Final_table = pd.concat([Final_table, new_table], sort=False)
+    
+# -
+
+new_table
 
 # +
 import re
@@ -92,6 +95,24 @@ def time2period(t):
 
 Final_table['Period'] = Final_table.Period.str.replace('\.0', '')
 Final_table['Period'] = Final_table['Period'].apply(time2period)
+
+################################################## 
+#serbia country code changed from RS to XS to match current codelist
+#LABEL added to GitHUb card - needs specific dimension/codelist
+#REMOVE comments / change of code when resolved 
+
+Final_table['ONS Partner Geography'].replace('RS', 'XS', inplace=True)
+
+##################################################
+
+Final_table.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
+Final_table['Marker'].replace('N/A', 'not-applicable', inplace=True)
+f4=((Final_table['Value'] ==0))
+Final_table.loc[f4,'Marker'] = 'itis-nil'
+Final_table.loc[f4,'Value'] = ''
+
+Final_table = Final_table[['ONS Partner Geography', 'Period','Flow','ONS ABS Trade', 'Measure Type','Value', 'Marker', 'Unit' ]]
+
 # -
 
 from pathlib import Path
