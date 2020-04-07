@@ -67,7 +67,7 @@ header = True
 
 # For each distribution, open the zipfile and put each source in turn into a dataframe
 # for each source we're looking to create one "value" output, and one "mass" output
-for distribution in scraper.distributions:
+for distribution in scraper.distributions[-1:]:
     with ZipFile(BytesIO(scraper.session.get(distribution.downloadURL).content)) as zip:
         for name in zip.namelist():
             with zip.open(name, 'r') as quarterFile:

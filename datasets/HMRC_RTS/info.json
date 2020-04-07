@@ -17,9 +17,6 @@
         "main_issue": 12,
         "to_rdf": "csv2rdf"
     },
-    "load": {
-        "skip": true
-    },
     "sizingNotes": "",
     "notes": ""
 }

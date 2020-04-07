@@ -1,17 +1,8 @@
-# -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.4.1
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[3]:
+
 
 # # Prepare Sources
 #
@@ -24,6 +15,10 @@
 # Firstly, fetch the source data, in this case from a shared (open) Google drive.
 #
 # We also keep track of the processing and the provenance of the inputs and outputs using W3C Prov.
+
+
+# In[4]:
+
 
 from datetime import datetime
 import json
@@ -58,7 +53,10 @@ for filename, google_id in sources:
     sourceUrl = f'https://drive.google.com/uc?export=download&id={google_id}'
     sourceUrls.append(sourceUrl)
 
-# +
+
+# In[5]:
+
+
 import pandas as pd
 
 table = pd.concat([pd.read_csv(BytesIO(session.get(sourceUrl).content),
@@ -69,9 +67,13 @@ table = pd.concat([pd.read_csv(BytesIO(session.get(sourceUrl).content),
     columns = {'year': 'Year', 'flow': 'Flow', 'comcode': 'CN8',
                'country': 'Foreign Country', 'svalue': 'Value'})
 table
-# -
 
-# Countries are mandated by Eurostat to use the Geonomenclature (GEONOM), which gradually changes over the years. HMRC keeps track of these changes to the country codes and numbers and their data for each year will use the latest GEONOM codes.
+
+# In[9]:
+
+
+# Countries are mandated by Eurostat to use the Geonomenclature (GEONOM), which gradually changes over the years. 
+# HMRC keeps track of these changes to the country codes and numbers and their data for each year will use the latest GEONOM codes.
 #
 # For now, we'll just use a static list that's good enough, but will __need to revisit this__.
 
@@ -82,6 +84,10 @@ geonom['codseq'] = geonom['codseq'].apply(
     lambda x: "%03d" % int(x))
 geonom.drop(columns=['statsw', 'geogsw', 'dutysw'], inplace=True)
 geonom
+
+
+# In[6]:
+
 
 # We'll ignore the miscellaneous codes (e.g. Stores & Provis: deliveries of ship/aircraft stores et seq.)
 
@@ -99,12 +105,12 @@ table
 
 # Need to include the year of the observation in the CN8 code, as the codes are updated for each year.
 
-table['Combined Nomenclature'] = table.apply(lambda row: 'cn_%s#cn8_%s' % (row['Year'], row['CN8']), axis=1)
+table['Combined Nomenclature'] = table.apply(lambda row: 'cn_%s-cn8_%s' % (row['Year'], row['CN8']), axis=1)
 table.drop(columns=['CN8'], inplace=True)
 table
 
 table['Measure Type'] = 'GBP Total'
-table['Unit'] = '£'
+table['Unit'] = 'GBP'
 table['Flow'] = table['Flow'].map(lambda x: {'i': 'imports', 'e': 'exports'}[x])
 table = table[['Year', 'Flow', 'Combined Nomenclature', 'HMRC Partner Geography', 'Measure Type', 'Unit', 'Value']]
 
@@ -115,7 +121,10 @@ table.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
 # Create dataset metadata
 
-# +
+
+# In[7]:
+
+
 from gssutils import *
 from gssutils.metadata import *
 import json
@@ -148,9 +157,10 @@ display(ds)
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
      metadata.write(ds.as_quads().serialize(format='trig'))
 
-# -
+
+# In[8]:
+
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
-
 
