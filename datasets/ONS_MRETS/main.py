@@ -25,7 +25,14 @@ with open("info.json") as f:
     
 scraper = Scraper(info["landingPage"])
 scraper
-# -
+
+# +
+from dateutil import parser
+
+# Convert all issued time to datetime format
+scraper.dataset.issued = parser.parse(str(scraper.dataset.issued))
+for dist in scraper.distributions:
+    dist.issued = parser.parse(str(dist.issued))
 
 dist = scraper.distribution(mediaType='text/prs.ons+csdb', latest=True)
 dist
