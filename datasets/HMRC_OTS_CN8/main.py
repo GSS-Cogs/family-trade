@@ -1,156 +1,151 @@
-# -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.4.1
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
-# # Prepare Sources
-#
-# The HMRC provide overseas trade statistics broken down by country and commoditiy code using the Combined Nomenclature "CN8" 8 digit codes.
-#
-# These statistics have been obtained as a series of CSV files as "Tidy Data".
-#
-# However, some preparation is necessary in order to process these files using the table2qb utility.
-#
-# Firstly, fetch the source data, in this case from a shared (open) Google drive.
-#
-# We also keep track of the processing and the provenance of the inputs and outputs using W3C Prov.
-
-from datetime import datetime
-import json
-from pytz import timezone
-from os import environ
+#!/usr/bin/env python
+# coding: utf-8
+# %%
 from gssutils import *
-
-# + pixiedust={"displayParams": {}}
-import requests
-from pathlib import Path
-from io import BytesIO
-from cachecontrol import CacheControl
-from cachecontrol.caches.file_cache import FileCache
-from cachecontrol.heuristics import LastModified
-
-session = CacheControl(requests.Session(),
-                       cache=FileCache('.cache'),
-                       heuristic=LastModified())
-
-sources = [
-    ('CN8_Non-EU_cod_2012.csv', '1P7YyFF6qXKXWVtR0Vt3kkvFPOjThMQH8'),
-    ('CN8_Non-EU_cod_2013.csv', '1de-Le9ungrbdoGyvWI_RwmEhNpTmR-70'),
-    ('CN8_Non-EU_cod_2014.csv', '1oC3jlItfsUshd54KOR7yn9NxpR83iCbC'),
-    ('CN8_Non-EU_cod_2015.csv', '1H54-FYrCFa1DylCBg38RAPAeCtkGq4la'),
-    ('CN8_Non-EU_cod_2016.csv', '11fLsnoiWzTcA1d3nSDWvyrKQEHwIf6Hz')
-]
-
-sourceUrls = []
-
-for filename, google_id in sources:
-    
-    sourceUrl = f'https://drive.google.com/uc?export=download&id={google_id}'
-    sourceUrls.append(sourceUrl)
-
-# +
+from databaker.framework import *
 import pandas as pd
-
-table = pd.concat([pd.read_csv(BytesIO(session.get(sourceUrl).content),
-                                       dtype={'comcode': str},
-                                       na_values=[], keep_default_na=False)
-                       for sourceUrl in sourceUrls], ignore_index=True).rename(
-    index = str,
-    columns = {'year': 'Year', 'flow': 'Flow', 'comcode': 'CN8',
-               'country': 'Foreign Country', 'svalue': 'Value'})
-table
-# -
-
-# Countries are mandated by Eurostat to use the Geonomenclature (GEONOM), which gradually changes over the years. HMRC keeps track of these changes to the country codes and numbers and their data for each year will use the latest GEONOM codes.
-#
-# For now, we'll just use a static list that's good enough, but will __need to revisit this__.
-
-geonom_2018_excel = 'https://drive.google.com/uc?export=download&id=17Laouuze9gT04xV1Q5M-RZyEqGZUHZJ_'
-geonom = pd.read_excel(BytesIO(session.get(geonom_2018_excel).content),
-                       na_values=[], keep_default_na=False, dtypes=str)
-geonom['codseq'] = geonom['codseq'].apply(
-    lambda x: "%03d" % int(x))
-geonom.drop(columns=['statsw', 'geogsw', 'dutysw'], inplace=True)
-geonom
-
-# We'll ignore the miscellaneous codes (e.g. Stores & Provis: deliveries of ship/aircraft stores et seq.)
-
-geonom = geonom[:geonom[geonom['country'] == 'Stores & Provis.'].index[0]]
-geonom.tail()
-
-table = pd.merge(table, geonom, how='inner', left_on='Foreign Country', right_on='country', validate="m:1")
-table
-
-# We're using a good-enough-for-now list of country codes based on the alpha codes above
-
-table.rename(columns={'codalpha': 'HMRC Partner Geography'}, inplace=True)
-table.drop(columns=['Foreign Country', 'codseq', 'country'], inplace=True)
-table
-
-# Need to include the year of the observation in the CN8 code, as the codes are updated for each year.
-
-table['Combined Nomenclature'] = table.apply(lambda row: 'cn_%s#cn8_%s' % (row['Year'], row['CN8']), axis=1)
-table.drop(columns=['CN8'], inplace=True)
-table
-
-table['Measure Type'] = 'GBP Total'
-table['Unit'] = '£'
-table['Flow'] = table['Flow'].map(lambda x: {'i': 'imports', 'e': 'exports'}[x])
-table = table[['Year', 'Flow', 'Combined Nomenclature', 'HMRC Partner Geography', 'Measure Type', 'Unit', 'Value']]
-
-from pathlib import Path
-out = Path('out')
-out.mkdir(exist_ok=True)
-table.drop_duplicates().to_csv(out / 'observations.csv', index = False)
-
-# Create dataset metadata
-
-# +
-from gssutils import *
+from gssutils.metadata import THEME
 from gssutils.metadata import *
-import json
-from dateutil.parser import parse
-from urllib.parse import urljoin
+import datetime
+from gssutils.metadata import Distribution, GOV
+pd.options.mode.chained_assignment = None
 
-info = json.load(Path('info.json').open())
-ds = PMDDataset()
-ds.theme = THEME['business-industry-trade-energy']
-ds.family = 'Trade'
-ds.title = info['title']
-ds.description = info['description']
-ds.issued = parse(info['published']).date()
-ds.landingPage = info['landingPage']
-ds.contactPoint = 'mailto:uktradeinfo@hmrc.gsi.gov.uk'
-ds.publisher = GOV['hm-revenue-customs']
-ds.rights = "https://www.uktradeinfo.com/AboutUs/Pages/TermsAndConditions.aspx"
-ds.license = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+def left(s, amount):
+    return s[:amount]
 
-ds_id = pathify(os.environ.get('JOB_NAME', 'GSS_data/Trade/HMRC_OTS_CN8'))
-ds_base = 'http://gss-data.org.uk'
+def right(s, amount):
+    return s[-amount:]
 
-ds.uri = urljoin(ds_base, f'data/{ds_id}')
-ds.graph = urljoin(ds_base, f'graph/{ds_id}/metadata')
-ds.inGraph = urljoin(ds_base, f'graph/{ds_id}')
-ds.sparqlEndpoint = urljoin(ds_base, '/sparql')
-ds.modified = datetime.now()
-display(ds)
+def mid(s, offset, amount):
+    return s[offset:offset+amount]
 
-with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-     metadata.write(ds.as_quads().serialize(format='trig'))
+scraper = Scraper('https://www.gov.uk/government/statistical-data-sets/live-tables-on-social-housing-sales')
+dist = scraper.distribution(title=lambda x: x.startswith('Table 678'))
+scraper.dataset.title = dist.title
+#scraper.dataset.description = 'The table provides statistics on the sales of social housing stock – whether owned by local authorities or private registered providers.'    
+dist
 
-# -
 
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+# %%
+
+
+tabs = (t for t in dist.as_databaker())
+
+tidied_sheets = []
+
+for tab in tabs:
+    
+    cell = tab.filter(contains_string('Table 678'))
+
+    remove = cell.expand(DOWN).filter(contains_string('Notes')).shift(0,-2).expand(DOWN).expand(RIGHT)
+
+    period = cell.shift(0,4).expand(DOWN).is_not_blank() - remove
+
+    area = 'E92000001'
+        
+    scheme = cell.shift(0,2).expand(RIGHT).is_not_blank()
+        
+    scheme_type = cell.shift(0,3).expand(RIGHT).is_not_blank()
+
+    observations = period.fill(RIGHT).is_not_blank()
+
+    dimensions = [
+        HDim(period, 'Period', DIRECTLY, LEFT),
+        HDim(scheme, 'scheme', CLOSEST, LEFT),
+        HDim(scheme_type, 'Scheme Type', DIRECTLY, ABOVE),
+        HDimConst('Area', area),
+        HDimConst('Measure Type', 'Count'),
+        HDimConst('Unit', 'Dwellings')
+        ]
+
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    savepreviewhtml(tidy_sheet, fname="Preview.html")
+
+    tidied_sheets.append(tidy_sheet.topandas())
+        
+
+
+# %%
+df = pd.concat(tidied_sheets, ignore_index = True, sort = False).fillna('')
+
+df = df.replace({'Period' : {
+    '2018-195' : '2018-19',}})
+
+df['Period'] = df['Period'].map(lambda x: 'government-year/' + left(x, 4) + '-19' + right(x,2) if '19' in left(x,2) else 'government-year/' + left(x, 4) + '-20' + right(x,2))
+
+df = df.replace({'scheme' : {
+    'Private Registered Provider (PRP) Social Housing Sales6' : 'Private Registered Provider (PRP) Social Housing Sales',},
+                'DATAMARKER' : {
+    '..' : 'not available'
+                },
+                'Scheme Type' : {
+    '(LA, Preserved and Voluntary 2) Right to Buy Sales' : 'Right to Buy Sales',
+    '(Preserved and Voluntary 2,3) Right to Buy Sales' : 'Right to Buy Sales', 
+    'Other Sales to tenants' : 'Other Sales', 
+    'Sales to Private Sector 3,4' : 'Sales to Private Sector', 
+    'Total1' : 'Total'
+                }})
+
+df.rename(columns={'OBS' : 'Value',
+                   'DATAMARKER' : 'Marker',
+                   'scheme' : 'MCHLG Scheme',
+                   'Scheme Type' : 'MCHLG Scheme Type'}, inplace=True)
+
+df.head(50)
+
+
+# %%
+from IPython.core.display import HTML
+for col in df:
+    if col not in ['Value']:
+        df[col] = df[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(df[col].cat.categories)    
+
+
+# %%
+tidy = df[['Area','Period', 'MCHLG Scheme', 'MCHLG Scheme Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
+
+for column in tidy:
+    if column in ('Marker', 'MCHLG Scheme', 'MCHLG Scheme Type'):
+        tidy[column] = tidy[column].map(lambda x: pathify(x))
+
+tidy.head(50)
+
+from IPython.core.display import HTML
+for col in tidy:
+    if col not in ['Value']:
+        tidy[col] = tidy[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(tidy[col].cat.categories)    
+
+
+# %%
+destinationFolder = Path('out')
+destinationFolder.mkdir(exist_ok=True, parents=True)
+
+TAB_NAME = 'observations'
+
+tidy.drop_duplicates().to_csv(destinationFolder / f'{TAB_NAME}.csv', index = False)
+
+scraper.dataset.family = 'affordable-housing'
+scraper.dataset.comment = """
+        The total local authority social housing sales reported in this table differs slightly from the total sales by local authority reported in live table 682. The local authority data is this table is sourced from LAHS and DELTA, whereas the data in live table 682 is sourced entirely from LAHS.
+        Does not include sales from one PRP to another PRP.
+        Further information on other types of social housing sales (such as more detail at a local authority level and on Right to Buy), are available here-
+        https://www.gov.uk/government/collections/social-housing-sales-including-right-to-buy-and-transfersections/social-housing-sales-including-right-to-buy-and-transfers
+        """
+
+with open(destinationFolder / f'{TAB_NAME}.csv-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
+
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-affordable-housing/reference/')
+csvw.create(destinationFolder / f'{TAB_NAME}.csv', destinationFolder / f'{TAB_NAME}.csv-schema.json')
+tidy
+
+
+# %%
+
+
 
 
