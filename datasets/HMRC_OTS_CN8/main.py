@@ -69,10 +69,11 @@ table = pd.concat([pd.read_csv(BytesIO(session.get(sourceUrl).content),
 table
 
 
-# In[6]:
+# In[9]:
 
 
-# Countries are mandated by Eurostat to use the Geonomenclature (GEONOM), which gradually changes over the years. HMRC keeps track of these changes to the country codes and numbers and their data for each year will use the latest GEONOM codes.
+# Countries are mandated by Eurostat to use the Geonomenclature (GEONOM), which gradually changes over the years. 
+# HMRC keeps track of these changes to the country codes and numbers and their data for each year will use the latest GEONOM codes.
 #
 # For now, we'll just use a static list that's good enough, but will __need to revisit this__.
 
@@ -83,6 +84,10 @@ geonom['codseq'] = geonom['codseq'].apply(
     lambda x: "%03d" % int(x))
 geonom.drop(columns=['statsw', 'geogsw', 'dutysw'], inplace=True)
 geonom
+
+
+# In[6]:
+
 
 # We'll ignore the miscellaneous codes (e.g. Stores & Provis: deliveries of ship/aircraft stores et seq.)
 
@@ -100,7 +105,7 @@ table
 
 # Need to include the year of the observation in the CN8 code, as the codes are updated for each year.
 
-table['Combined Nomenclature'] = table.apply(lambda row: 'cn_%s#cn8_%s' % (row['Year'], row['CN8']), axis=1)
+table['Combined Nomenclature'] = table.apply(lambda row: 'cn_%s-cn8_%s' % (row['Year'], row['CN8']), axis=1)
 table.drop(columns=['CN8'], inplace=True)
 table
 
