@@ -358,7 +358,7 @@ for name, details in outputs.items():
     if "MRETS Product" in details["data"].columns.values:
         details["data"]["MRETS Product"] = details["data"]["MRETS Product"].apply(pathify)
         
-    if "Flow" in details["data"].columns.values:
+    if "Flow Directions" in details["data"].columns.values:
         details["data"]["Flow Directions"] = details["data"]["Flow Directions"].apply(fix_short_hand_flow)
         
     if "Basis" in details["data"].columns.values:
