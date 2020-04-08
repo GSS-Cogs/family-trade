@@ -105,7 +105,7 @@ table
 
 # Need to include the year of the observation in the CN8 code, as the codes are updated for each year.
 
-table['Combined Nomenclature'] = table.apply(lambda row: 'cn_%s-cn8_%s' % (row['Year'], row['CN8']), axis=1)
+table['Combined Nomenclature'] = table.apply(lambda row: 'cn_%s#cn8_%s' % (row['Year'], row['CN8']), axis=1)
 table.drop(columns=['CN8'], inplace=True)
 table
 
