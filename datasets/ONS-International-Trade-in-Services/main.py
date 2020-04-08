@@ -144,7 +144,7 @@ observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil'
                                                               }.get(x, x))
 
 observations['Value'] = observations['Value'].round(decimals=2)
-observations["Year"] = observations["Year"].apply(date_time)
+#observations["Year"] = observations["Year"].apply(date_time)
 # -
 
 for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
