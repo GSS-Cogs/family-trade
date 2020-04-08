@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -118,8 +118,8 @@ for (name, direction), sheet in sheets.items():
         obs = left_col.fill(RIGHT) & top_row.fill(DOWN)
     cs = ConversionSegment(obs, dims, includecellxy=True)
     table = cs.topandas()
-    table.drop(table[table['DATAMARKER'].notna()].index, inplace=True)
-    table.drop(columns=['DATAMARKER'], inplace=True)
+#     table.drop(table[table['DATAMARKER'].notna()].index, inplace=True)
+#     table.drop(columns=['DATAMARKER'], inplace=True)
     table.rename(columns={'OBS': 'Value'}, inplace=True)
     table['ONS FDI Area'] = table['ONS FDI Area'].map(lambda x: 'fdi/' + pathify(x.strip()))
     if minor == '1':
@@ -164,6 +164,11 @@ observations = pd.concat(tables, sort=False)
 observations
 # -
 
+observations['Marker'] = observations['DATAMARKER'].map(
+    lambda x: { '..' : 'disclosive',
+               '-' : 'itis-nil'
+        }.get(x, x))
+
 from IPython.core.display import HTML
 for col in observations:
     if col != 'Value':
@@ -175,7 +180,7 @@ observations['Unit'] = 'gbp-million'
 observations['Measure Type'] = 'GBP Total'
 observations = observations[['Investment Direction', 'Year', 'International Trade Basis',
                              'ONS FDI Area', 'FDI Component', 'FDI Industry',
-                             'Value', 'Unit', 'Measure Type',
+                             'Value', 'Unit', 'Measure Type', 'Marker',
                              '__x', '__y', '__tablename']]
 
 # +
@@ -201,6 +206,3 @@ with open(destinationFolder / f'{TAB_NAME}.csv-metadata.trig', 'wb') as metadata
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(destinationFolder / f'{TAB_NAME}.csv', destinationFolder / f'{TAB_NAME}.csv-schema.json')
 observations.head(25)
-# -
-
-
