@@ -375,7 +375,7 @@ for name, details in outputs.items():
     details["data"].drop_duplicates().to_csv(out / f'{OBS_ID}.csv', index = False)
 
     #scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
-    scraper.dataset.title = f'{TITLE}'
+    #scraper.dataset.title = f'{TITLE}'
     scraper.dataset.family = 'trade'
     
     print(details["data"]["Unit"].unique())
