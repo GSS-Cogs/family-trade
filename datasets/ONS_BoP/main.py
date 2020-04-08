@@ -100,6 +100,11 @@ class is_one_of(object):
 
 # %%
 
+"""
+Note - have commented out the manual setting of OBS ID etc so satisfy the single cube pipleline requirments.
+
+If/when we go for the other tables we'll have to bring them back in.
+"""
 for letter in "ABCDEFGHIJK":
     
     tab = [x for x in tabs if x.name[-1] == letter][0]
@@ -158,12 +163,12 @@ for letter in "ABCDEFGHIJK":
     destinationFolder.mkdir(exist_ok=True, parents=True)
     
     TITLE = info["title"] + ": " + table_name_lookup[tab.name[-1]]
-    OBS_ID = pathify(TITLE)
+    OBS_ID = pathify(TITLE)    # for multi cubes
                 
     df.to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
-    scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
-    scraper.dataset.title = f'{TITLE}'
+    #scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
+    #scraper.dataset.title = f'{TITLE}'    # for multi cube
     scraper.dataset.family = 'trade'
 
     with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
