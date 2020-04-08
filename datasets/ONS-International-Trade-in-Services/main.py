@@ -48,7 +48,15 @@ def fix_title(s):
     pos = service.find('-industry-by-product-')
     if pos != -1:
         service = service[:pos + len('-industry')]
-    return service    
+    return service
+
+def date_time(time_value):
+    time_string = str(time_value).replace(".0", "").strip()
+    time_len = len(time_string)
+    if time_len == 4:
+        return "year/" + time_string
+    elif time_len == 7:
+        return "quarter/{}-{}".format(time_string[3:7], time_string[:2])
 
 def fix_area(row):
     area = pathify(row['H2'])
@@ -126,14 +134,18 @@ def process_tab(tab):
                 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
 observations = pd.concat(process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0'])
-# -
 
+# +
 observations.rename(index= str, columns= {'DATAMARKER':'Marker'}, inplace = True)
 observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil',
                                                                '..' : 'disclosive',
                                                                '.' : 'disclosive',
                                                                '...' : 'disclosive'
                                                               }.get(x, x))
+
+observations['Value'] = observations['Value'].round(decimals=2)
+observations["Year"] = observations["Year"].apply(date_time)
+# -
 
 for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     observations[col] = observations[col].astype('category')
@@ -153,6 +165,6 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 
-
+observations
 
 
