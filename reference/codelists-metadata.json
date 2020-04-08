@@ -332,9 +332,9 @@
             "rdfs:label": "GDP Estimate Type"
         },
         {
-            "url": "codelists/cdid.csv",
+            "url": "codelists/pinkbook-cdid.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
-            "rdfs:label": "CDID"
+            "rdfs:label": "Pinkbook CDID"
         },
         {
             "url": "codelists/mrets-product.csv",
