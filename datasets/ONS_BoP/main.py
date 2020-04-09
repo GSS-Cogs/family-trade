@@ -131,7 +131,7 @@ for letter in "ABCDEFGHIJK":
                 HDim(Quarter,'Quarter',DIRECTLY,ABOVE),
                 HDim(Code,'CDID',DIRECTLY,LEFT),
                 HDimConst('Measure Type', 'GBP Total'),
-                HDimConst('Unit','£ Million'),
+                HDimConst('Unit','GBP (Million)'),
                 HDim(Services,'label',CLOSEST, ABOVE),
                 HDim(Trade,'Flow Directions',CLOSEST,ABOVE)
     ]
