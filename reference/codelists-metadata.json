@@ -116,6 +116,12 @@
             "rdfs:comment": "Based upon NUTS1 regions"
         },
         {
+            "url": "codelists/hmrc-trade-statistic-type.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "HMRC Trade Statistic Type",
+            "rdfs:comment": "The type of statistic begin reported"
+        },
+        {
             "url": "codelists/sitc4.csv",
             "tableSchema": "schemas/sitc4-schema.json",
             "rdfs:label": "SITC 4",
