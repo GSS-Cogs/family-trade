@@ -68,7 +68,15 @@ next_table.rename(index= str, columns= {'BPM6':'Pink Book Services'}, inplace = 
 
 temp_table
 
+# Below codes don't have Pink book services codes
+
 next_table[next_table.cdid.isnull() == True]['CDID'].unique()
+
+# Belo codes need to upload in to PMD
+
+next_table = next_table[(next_table['CDID'] != 'FJOW') &
+                       (next_table['CDID'] != 'FJQO') &
+                       (next_table['CDID'] != 'FJSI')]
 
 next_table = next_table[['Geography','Year','CDID','Pink Book Services','Flow','Measure Type','Value','Unit','DATAMARKER']]
 
@@ -82,8 +90,6 @@ next_table['Marker'] = next_table['DATAMARKER'].map(
 next_table['Pink Book Services'] = next_table['Pink Book Services'].astype(str)
 
 next_table['Flow Directions'] = next_table['Flow'].map(pathify)
-
-next_table['CDID'] = next_table['CDID'].map(pathify)
 
 next_table['Period'] = 'year/' + next_table['Year']
 
