@@ -84,3 +84,5 @@ MRETS Product,,Dimension,http://gss-data.org.uk/def/concept-scheme/mrets-product
 Pinkbook CDID,,Dimension,http://gss-data.org.uk/def/concept-scheme/pinkbook-cdid
 Size of Business by no of Employees,Size of a business based on the number of employees,Dimension,http://gss-data.org.uk/def/concept-scheme/employment-size-bands
 HMRC Trade Statistic Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-trade-statistic-type
+HMRC Reporter Region,Location of the trade reporter. Typically a domestic geography. The destination of imports or origin of exports.,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-regions
+HMRC Partner Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-geographies

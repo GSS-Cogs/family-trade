@@ -12,7 +12,7 @@ Year,year,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod
 Foreign Country,foreign_country,qb:dimension,http://gss-data.org.uk/def/dimension/foreign-country,http://gss-data.org.uk/def/concept/countries/{foreign_country},string,slugize,,
 Trade Area,trade_area,qb:dimension,http://gss-data.org.uk/def/dimension/trade-area,http://gss-data.org.uk/def/concept/trade-area/{trade_area},string,slugize,,
 Combined Nomenclature,combined_nomenclature,qb:dimension,http://gss-data.org.uk/def/dimension/product,https://trade.ec.europa.eu/def/{combined_nomenclature},string,,,
-Period,period,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod,http://reference.data.gov.uk/id/{+period},string,,,
+Period,period,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod,http://reference.data.gov.uk/id/{+period},string,,,http://www.w3.org/2006/time#Interval
 CDID,cdid,qb:attribute,http://gss-data.org.uk/def/attribute/cdid,http://gss-data.org.uk/def/cdid/{cdid},string,,,
 BOP Services,bop_services,qb:dimension,http://gss-data.org.uk/def/dimension/bop-services,http://gss-data.org.uk/def/concept/bop-services/{bop_services},string,,,
 ITIS Service,itis_service,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/itis-services/{itis_service},string,,,
@@ -26,8 +26,8 @@ Country of Ownership,country_of_ownership,qb:dimension,http://gss-data.org.uk/de
 CPA 2008,cpa2008,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://stamina-project.org/codes/cpav2008/{cpa2008},string,,,
 Price Classification,price_classification,qb:dimension,http://gss-data.org.uk/def/dimension/price-classification,http://gss-data.org.uk/def/concept/price-classifications/{price_classification},string,,,
 CORD SITC,cord_sitc,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/cord-sitc/{cord_sitc},string,,,
-HMRC Partner Geography,hmrc_partner_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-partner-geography,http://gss-data.org.uk/def/concept/hmrc-geographies/{hmrc_partner_geography},string,,,
-HMRC Reporter Geography,hmrc_reporter_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-reporter-geography,http://statistics.data.gov.uk/id/statistical-geography/{hmrc_reporter_geography},string,,,
+HMRC Partner Geography,hmrc_partner_geography,qb:dimension,http://gss-data.org.uk/def/dimension/hmrc-partner-geography,http://gss-data.org.uk/def/concept/hmrc-partner-geographies/{hmrc_partner_geography},string,,,
+HMRC Reporter Region,hmrc_reporter_region,qb:dimension,http://gss-data.org.uk/def/dimension/hmrc-reporter-geography,http://gss-data.org.uk/def/concept/hmrc-reporter-regions/{hmrc_reporter_region},string,,,
 ONS Partner Geography,ons_partner_geography,qb:dimension,http://gss-data.org.uk/def/dimension/ons-partner-geography,http://gss-data.org.uk/def/concept/ons-partner-geography/{ons_partner_geography},string,,,
 ONS Reporter Geography,ons_reporter_geography,qb:dimension,http://gss-data.org.uk/def/dimension/trade-reporter-geography,http://statistics.data.gov.uk/id/statistical-geography/{ons_reporter_geography},string,,,
 ONS Trade Areas ITIS,ons_trade_geo_itis,qb:dimension,http://gss-data.org.uk/def/dimension/trade-partner-geography,http://gss-data.org.uk/def/concept/ons-trade-areas-itis/{ons_trade_geo_itis},string,,,
@@ -49,7 +49,7 @@ FDI Component,fdi_component,qb:dimension,http://gss-data.org.uk/def/dimension/fd
 FDI Industry,fdi_industry,qb:dimension,http://gss-data.org.uk/def/dimension/fdi-industry,http://gss-data.org.uk/def/concept/fdi-industry/{fdi_industry},string,,,
 ONS Functional Category,ons_func_category,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/ons-functional-category/{ons_func_category},string,,,
 SIC 2007,sic2007,qb:dimension,http://gss-data.org.uk/def/dimension/sic-industry,http://business.data.gov.uk/companies/def/sic-2007/{sic2007},string,,,
-Marker,marker,qb:attribute,http://purl.org/linked-data/sdmx/2009/attribute#obsStatus,http://gss-data.org.uk/def/concept/marker/{marker},string,,,
+Marker,marker,qb:attribute,http://purl.org/linked-data/sdmx/2009/attribute#obsStatus,http://gss-data.org.uk/def/concept/marker/{marker},string,,,http://purl.org/linked-data/sdmx/2009/code#ObsStatus
 GBP Million,gbp_million,qb:measure,http://gss-data.org.uk/def/measure/gbp-million,,string,,,
 GBP,gbp,qb:measure,http://gss-data.org.uk/def/measure/gbp,,string,,,
 Product Department,product_department,qb:dimension,http://gss-data.org.uk/def/dimension/product-department,http://gss-data.org.uk/def/concept/product-department/{product_department},string,,,
