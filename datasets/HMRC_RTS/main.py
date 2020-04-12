@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -96,7 +96,7 @@ for distribution in scraper.distributions[-1:]:
                 
                 # Output the mass observations for this input file
                 mass = table.drop(columns=['Value'])
-                mass['Measure Type'] = 'net_mass'
+                mass['Measure Type'] = 'net-mass'
                 mass['Unit'] = 'kg-thousands'
                 mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
                 mass.to_csv(observations_file, header=header, mode='a', index=False)
@@ -105,7 +105,7 @@ for distribution in scraper.distributions[-1:]:
                 
                 # Output the value observations for this input file
                 value = table.drop(columns=['Netmass'])
-                value['Measure Type'] = 'gbp_total'
+                value['Measure Type'] = 'gbp-total'
                 value['Unit'] = 'gbp-thousands'
                 value.to_csv(observations_file, header=header, mode='a', index=False)
 
