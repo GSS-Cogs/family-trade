@@ -183,11 +183,30 @@ observations = observations[['Investment Direction', 'Year', 'International Trad
                              'Value', 'Unit', 'Measure Type', 'Marker',
                              '__x', '__y', '__tablename']]
 
-# +
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
+observations.drop(columns=['__x', '__y', '__tablename'],axis = 1, inplace = True)
+observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
 
-observations.drop(columns=['__x', '__y', '__tablename']).drop_duplicates(subset=observations.columns.difference(['Value','__x', '__y', '__tablename'])).to_csv(destinationFolder / 'observations.csv', index=False)
+# There are mutiple duplicate values due to empty cells from source data that makes error in Jenkins Those empty cells with no values are removed 
+
+observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+                             'ONS FDI Area', 'FDI Component', 'FDI Industry'
+                              ],keep=False)]
+
+observations_unique = observations.drop_duplicates(['Investment Direction', 'Year', 'International Trade Basis',
+                             'ONS FDI Area', 'FDI Component', 'FDI Industry'
+                              ],keep=False)
+
+observations.shape, observation_duplicate.shape, observations_unique.shape
+
+observations = observation_duplicate[observation_duplicate['Value'] != '']
+
+observations = pd.concat([observations_unique, observations])
+
+observations.shape, observation_duplicate.shape, observations_unique.shape
+
+observations.to_csv(destinationFolder / 'observations.csv', index=False)
 
 # +
 inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
@@ -206,3 +225,5 @@ with open(destinationFolder / f'{TAB_NAME}.csv-metadata.trig', 'wb') as metadata
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(destinationFolder / f'{TAB_NAME}.csv', destinationFolder / f'{TAB_NAME}.csv-schema.json')
 observations.head(25)
+# -
+
