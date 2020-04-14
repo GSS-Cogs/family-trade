@@ -234,6 +234,7 @@ alltbls[size] = alltbls[size] + ' Employees'
 alltbls[size][alltbls[size].str.strip() == '250 +'] = '250'
 alltbls[size] = alltbls[size].apply(pathify)
 alltbls[size][alltbls[size] == ''] = 'all'
+alltbls[size][alltbls[size].str.strip() == '-employees'] = 'all-employees'
 
 alltbls[age][alltbls[age] == '-'] = 'all'
 alltbls[age][alltbls[age].str.strip() == '20 +'] = '20-plus'
