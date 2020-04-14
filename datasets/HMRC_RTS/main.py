@@ -30,6 +30,10 @@ display(scraper.dataset.landingPage)
 scraper
 # -
 
+if scraper.dataset.title.endswith('(RTS'):
+    scraper.dataset.title = scraper.dataset.title + ')'
+scraper.dataset.title
+
 # zipped data files were linked from https://www.uktradeinfo.com/Statistics/RTS/Pages/RTS-Downloads.aspx, but sometimes this appears to close. If so, look for them directly from https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx
 
 if len(scraper.distributions) == 0:
@@ -67,7 +71,7 @@ header = True
 
 # For each distribution, open the zipfile and put each source in turn into a dataframe
 # for each source we're looking to create one "value" output, and one "mass" output
-for distribution in scraper.distributions[-1:]:
+for distribution in scraper.distributions:
     with ZipFile(BytesIO(scraper.session.get(distribution.downloadURL).content)) as zip:
         for name in zip.namelist():
             with zip.open(name, 'r') as quarterFile:
@@ -99,7 +103,7 @@ for distribution in scraper.distributions[-1:]:
                 mass['Measure Type'] = 'net-mass'
                 mass['Unit'] = 'kg-thousands'
                 mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
-                mass.iloc[:1000].to_csv(observations_file, header=header, mode='a', index=False)
+                mass.to_csv(observations_file, header=header, mode='a', index=False)
                 # only output header row the first time
                 header = False
                 
@@ -107,7 +111,7 @@ for distribution in scraper.distributions[-1:]:
                 value = table.drop(columns=['Netmass'])
                 value['Measure Type'] = 'gbp-total'
                 value['Unit'] = 'gbp-thousands'
-                value.iloc[:1000].to_csv(observations_file, header=header, mode='a', index=False)
+                value.to_csv(observations_file, header=header, mode='a', index=False)
 
 # +
 from gssutils.metadata import THEME
