@@ -43,7 +43,7 @@ open('data.xls', 'wb').write(myfile.content)
 # +
 sheets = ['1. Industry Group', '2. Age Group','3. Business Size']
 
-grops = 'HMRC Industry Groups'
+grops = 'HMRC Industry'
 types = 'HMRC Trade Statistic Type'
 flows = 'Flow Directions'
 
@@ -109,7 +109,7 @@ for sh in sheets:
     tbls = tbls[tbls['Value'].str.strip() != '-']
     tbls['Value'][tbls['Value'] == '.'] = '0'
     alltbls.append(tbls)
-    
+
 
 # +
 age = 'Age of Business'
@@ -246,10 +246,11 @@ alltbls[flows] = alltbls[flows].apply(pathify)
 
 alltbls.replace({'Unit': {'number': 'count'}}, inplace=True)
 alltbls['Unit'] = alltbls['Unit'].apply(pathify)
-alltbls.replace({'Unit': {'ps-million': 'gdp-illion', 'ps-millions': 'gbp-million'}}, inplace=True)
+alltbls.replace({'Unit': {'ps-million': 'gdp-million', 'ps-millions': 'gbp-million'}}, inplace=True)
 
-alltbls['Marker'][alltbls['Value'].str.strip() == 'S'] = 'Suppressed'
+alltbls['Marker'][alltbls['Value'].str.strip() == 'S'] = 'suppressed'
 alltbls['Value'][alltbls['Value'].str.strip() == 'S'] = 0
+alltbls['Value'][alltbls['Value'].str.strip() == '.'] = 0
 
 #alltbls.head(60)
 # -
