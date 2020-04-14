@@ -248,7 +248,7 @@ alltbls[flows] = alltbls[flows].apply(pathify)
 
 alltbls.replace({'Unit': {'number': 'count'}}, inplace=True)
 alltbls['Unit'] = alltbls['Unit'].apply(pathify)
-alltbls.replace({'Unit': {'ps-million': 'gdp-million', 'ps-millions': 'gbp-million'}}, inplace=True)
+alltbls.replace({'Unit': {'ps-million': 'gbp-million', 'ps-millions': 'gbp-million'}}, inplace=True)
 
 alltbls['Marker'][alltbls['Value'].str.strip() == 'S'] = 'suppressed'
 alltbls['Value'][alltbls['Value'].str.strip() == 'S'] = 0
