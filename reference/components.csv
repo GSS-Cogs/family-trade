@@ -36,6 +36,7 @@ SIC Industry,The current Standard Industrial Classification (SIC) used in classi
 Marker,Marker for special values,Attribute,http://gss-data.org.uk/def/concept-scheme/marker
 ONS Partner Geography,ONS Partner Geography,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-partner-geography
 GBP Million,GBP Million,Measure,
+Suppressed,Data suppressed,Measure,
 Product Department,Product Department,Dimension,http://gss-data.org.uk/def/concept-scheme/product-department
 Product Category,Product Category,Dimension,http://gss-data.org.uk/def/concept-scheme/product-category
 Flow Directions,Flow Directions,Dimension,http://gss-data.org.uk/def/concept-scheme/flow-directions
