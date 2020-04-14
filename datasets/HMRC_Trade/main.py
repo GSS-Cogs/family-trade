@@ -227,7 +227,7 @@ alltbls = pd.concat([alltbls1, alltbls2])
 alltbls
 
 # +
-alltbls[grops] = (alltbls[grops].str[:8]).apply(pathify)
+aalltbls[grops] = (alltbls[grops].str[:8]).apply(pathify)
 alltbls[grops][alltbls[grops] == 'total'] = 'all'
 
 alltbls[size][alltbls[size] == 0] = '0'
@@ -238,7 +238,7 @@ alltbls[size][alltbls[size] == ''] = 'all'
 alltbls[size][alltbls[size].str.strip() == '-employees'] = 'all-employees'
 
 alltbls[age][alltbls[age] == '-'] = 'all'
-alltbls[age][alltbls[age].str.strip() == '20 +'] = '20'
+alltbls[age][alltbls[age].str.strip() == '20 +'] = '20-plus'
 alltbls[age] = (alltbls[age] + ' Years').apply(pathify)
 alltbls[age][alltbls[age] == 'unknown-years'] = 'unknown'
 alltbls[age][alltbls[age] == 'total-years'] = 'total'
@@ -247,7 +247,7 @@ alltbls[age][alltbls[age] == 'all-years'] = 'total'
 alltbls[types] = alltbls[types].apply(pathify)
 alltbls[flows] = alltbls[flows].apply(pathify)
 
-alltbls.replace({'Unit': {'number': 'count'}}, inplace=True)
+alltbls.replace({'Unit': {'number': 'Count'}}, inplace=True)
 alltbls['Unit'] = alltbls['Unit'].apply(pathify)
 alltbls.replace({'Unit': {'ps-million': 'gbp-million', 'ps-millions': 'gbp-million'}}, inplace=True)
 
