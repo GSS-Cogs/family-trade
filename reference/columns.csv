@@ -6,6 +6,8 @@ Unit,unit,qb:attribute,http://purl.org/linked-data/sdmx/2009/attribute#unitMeasu
 SITC Section,sitc_section,qb:dimension,http://gss-data.org.uk/def/dimension/sitc-section,http://gss-data.org.uk/def/concept/sitc-sections/{sitc_section},string,slugize,,
 Flow,flow,qb:dimension,http://gss-data.org.uk/def/dimension/flow,http://gss-data.org.uk/def/concept/flow-directions/{flow},string,slugize,,
 GBP Total,gbp_total,qb:measure,http://gss-data.org.uk/def/measure/gbp-total,,string,,,
+Employee Count,employee_count,qb:measure,http://gss-data.org.uk/def/measure/employee-count,,string,,,
+Business Count,business_count,qb:measure,http://gss-data.org.uk/def/measure/business-count,,string,,,
 Net Mass,net_mass,qb:measure,http://gss-data.org.uk/def/measure/net-mass,,string,,,
 Value,value,,http://gss-data.org.uk/def/measure/{measure_type},,number,,,
 Year,year,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod,http://reference.data.gov.uk/id/year/{year},string,,,
