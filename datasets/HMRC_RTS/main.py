@@ -99,7 +99,7 @@ for distribution in scraper.distributions[-1:]:
                 mass['Measure Type'] = 'net-mass'
                 mass['Unit'] = 'kg-thousands'
                 mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
-                mass.to_csv(observations_file, header=header, mode='a', index=False)
+                mass.iloc[:1000].to_csv(observations_file, header=header, mode='a', index=False)
                 # only output header row the first time
                 header = False
                 
@@ -107,7 +107,7 @@ for distribution in scraper.distributions[-1:]:
                 value = table.drop(columns=['Netmass'])
                 value['Measure Type'] = 'gbp-total'
                 value['Unit'] = 'gbp-thousands'
-                value.to_csv(observations_file, header=header, mode='a', index=False)
+                value.iloc[:1000].to_csv(observations_file, header=header, mode='a', index=False)
 
 # +
 from gssutils.metadata import THEME
