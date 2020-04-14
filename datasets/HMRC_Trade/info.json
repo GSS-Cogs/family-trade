@@ -3,6 +3,7 @@
     "publisher": "HM Revenue & Customs",
     "description": "Spreadsheets seem to be same data, presented differently (with \"IDBR OTS Country data (expert users)\" being a subset.). Contains estimates of Trade in Goods data matched with registered Businesses from the Inter-Departmental Business Register (IDBR) for Exporters and Importers for 2015",
     "landingPage": "https://www.uktradeinfo.com/Statistics/OverseasTradeStatistics/AboutOverseastradeStatistics/Pages/OTSReports.aspx",
+    "landingPage2": "https://www.gov.uk/government/statistical-data-sets/uk-trade-in-goods-by-business-characteristics-2018-data-tables",
     "datasetNotes": [
         "Data can be found by clicking on the Excel table links titled \"IDBR OTS tables 2015\" and \"IDBR OTS Country data (expert users) 2015\" under the table headed \"Reports\" and produced November 2016. Spreadsheets seem to be same data, presented differently with \"IDBR OTS Country data (expert users)\" being a subset."
     ],
