@@ -255,7 +255,7 @@ alltbls['Value'][alltbls['Value'].str.strip() == 'S'] = 0
 alltbls['Value'][alltbls['Value'].str.strip() == '.'] = 0
 
 alltbls['Measure Type'] = ''
-alltbls['Measure Type'][alltbls['Unit'] == 'gbp-mi''llion'] = 'GBP Total'
+alltbls['Measure Type'][alltbls['Unit'] == 'gbp-million'] = 'GBP Total'
 alltbls['Measure Type'][alltbls['Unit'] == 'employee-count'] = 'count'
 alltbls['Measure Type'][alltbls['Unit'] == 'business-count'] = 'count'
 
