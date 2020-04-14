@@ -256,10 +256,10 @@ alltbls['Value'][alltbls['Value'].str.strip() == '.'] = 0
 
 alltbls['Measure Type'] = ''
 alltbls['Measure Type'][alltbls['Unit'] == 'gbp-million'] = 'GBP Total'
-alltbls['Unit'][alltbls['Unit'] == 'employee-count'] = 'count-of-businesses'
-alltbls['Unit'][alltbls['Unit'] == 'business-count'] = 'count-of-employees'
-alltbls['Measure Type'][alltbls['Unit'] == 'count-of-businesses'] = 'Count'
-alltbls['Measure Type'][alltbls['Unit'] == 'count-of-employees'] = 'Count'
+#alltbls['Unit'][alltbls['Unit'] == 'employee-count'] = 'count-of-businesses'
+#alltbls['Unit'][alltbls['Unit'] == 'business-count'] = 'count-of-employees'
+alltbls['Measure Type'][alltbls['Unit'] == 'business-count'] = 'Count'
+alltbls['Measure Type'][alltbls['Unit'] == 'employee-count'] = 'Count'
 
 alltbls['Period'] = 'year/' + alltbls['Period']
 #alltbls.head(60)
