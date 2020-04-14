@@ -229,8 +229,9 @@ alltbls = pd.concat([alltbls1, alltbls2])
 alltbls[grops] = (alltbls[grops].str[:8]).apply(pathify)
 alltbls[grops][alltbls[grops] == 'total'] = 'all'
 
-alltbls[size][alltbls[size] == 0] = 'zero'
-alltbls[size][alltbls[size].str.strip() == '250 +'] = '250-plus'
+alltbls[size][alltbls[size] == 0] = '0'
+alltbls[size] = alltbls[size] + ' Employees'
+alltbls[size][alltbls[size].str.strip() == '250 +'] = '250'
 alltbls[size] = alltbls[size].apply(pathify)
 alltbls[size][alltbls[size] == ''] = 'all'
 
@@ -298,5 +299,7 @@ with open(out / (fn1 + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(s
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / (fn1 + '.csv'), out / ((fn1 + '.csv') + '-schema.json'))
 # -
+
+
 
 
