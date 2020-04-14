@@ -237,7 +237,7 @@ alltbls[size][alltbls[size] == ''] = 'all'
 alltbls[size][alltbls[size].str.strip() == '-employees'] = 'all-employees'
 
 alltbls[age][alltbls[age] == '-'] = 'all'
-alltbls[age][alltbls[age].str.strip() == '20 +'] = '20-plus'
+alltbls[age][alltbls[age].str.strip() == '20 +'] = '20'
 alltbls[age] = (alltbls[age] + ' Years').apply(pathify)
 alltbls[age][alltbls[age] == 'unknown-years'] = 'unknown'
 alltbls[age][alltbls[age] == 'total-years'] = 'total'
