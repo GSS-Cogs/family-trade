@@ -224,6 +224,7 @@ alltbls2 = pd.concat(tbls)
 # -
 
 alltbls = pd.concat([alltbls1, alltbls2])
+alltbls
 
 # +
 alltbls[grops] = (alltbls[grops].str[:8]).apply(pathify)
@@ -234,7 +235,6 @@ alltbls[size] = alltbls[size] + ' Employees'
 alltbls[size][alltbls[size].str.strip() == '250 +'] = '250'
 alltbls[size] = alltbls[size].apply(pathify)
 alltbls[size][alltbls[size] == ''] = 'all'
-alltbls[size][alltbls[size].str.strip() == '-employees'] = 'all-employees'
 
 alltbls[age][alltbls[age] == '-'] = 'all'
 alltbls[age][alltbls[age].str.strip() == '20 +'] = '20-plus'
@@ -248,16 +248,22 @@ alltbls[flows] = alltbls[flows].apply(pathify)
 
 alltbls.replace({'Unit': {'number': 'count'}}, inplace=True)
 alltbls['Unit'] = alltbls['Unit'].apply(pathify)
-alltbls.replace({'Unit': {'ps-million': 'gbp-million', 'ps-millions': 'gbp-million'}}, inplace=True)
+alltbls.replace({'Unit': {'ps-million': 'gdp-million', 'ps-millions': 'gbp-million'}}, inplace=True)
 
 alltbls['Marker'][alltbls['Value'].str.strip() == 'S'] = 'suppressed'
 alltbls['Value'][alltbls['Value'].str.strip() == 'S'] = 0
 alltbls['Value'][alltbls['Value'].str.strip() == '.'] = 0
 
-#alltbls.head(60)
-# -
+alltbls['Measure Type'] = ''
+alltbls['Measure Type'][alltbls['Unit'] == 'gbp-mi''llion'] = 'GBP Total'
+alltbls['Measure Type'][alltbls['Unit'] == 'employee-count'] = 'count'
+alltbls['Measure Type'][alltbls['Unit'] == 'business-count'] = 'count'
 
-alltbls = alltbls.rename(columns={'Unit': 'Measure Type'})
+#alltbls.head(60)
+
+# +
+#alltbls = alltbls.rename(columns={'Unit': 'Measure Type'})
+# -
 
 from pathlib import Path
 import numpy as np
