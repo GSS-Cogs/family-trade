@@ -171,11 +171,11 @@ for sh in sheets:
             t2 = tbl[[cn[0],cn[1],cn[4]]]
             t2 = t2.rename(columns={cn[4]: 'Value'})
             t2[flows] = 'Exports'
-            t2['Unit'] = 'business count'
+            t2['Unit'] = 'Business Count'
             t3 = tbl[[cn[0],cn[1],cn[5]]]
             t3 = t3.rename(columns={cn[5]: 'Value'})
             t3[flows] = 'Exports'
-            t3['Unit'] = 'employee count'
+            t3['Unit'] = 'Employee Count'
             t4 = tbl[[cn[0],cn[1],cn[7]]]
             t4 = t4.rename(columns={cn[7]: 'Value'})
             t4[flows] = 'Imports'
@@ -183,11 +183,11 @@ for sh in sheets:
             t5 = tbl[[cn[0],cn[1],cn[8]]]
             t5 = t5.rename(columns={cn[8]: 'Value'})
             t5[flows] = 'Imports'
-            t5['Unit'] = 'business count'
+            t5['Unit'] = 'Business Count'
             t6 = tbl[[cn[0],cn[1],cn[9]]]
             t6 = t6.rename(columns={cn[9]: 'Value'})
             t6[flows] = 'Imports'
-            t6['Unit'] = 'employee count'
+            t6['Unit'] = 'Employee Count'
 
             tbl = pd.concat([t1,t2,t3,t4,t5,t6])
             tbl['Marker'] = ''
@@ -224,10 +224,9 @@ alltbls2 = pd.concat(tbls)
 # -
 
 alltbls = pd.concat([alltbls1, alltbls2])
-alltbls
 
 # +
-aalltbls[grops] = (alltbls[grops].str[:8]).apply(pathify)
+alltbls[grops] = (alltbls[grops].str[:8]).apply(pathify)
 alltbls[grops][alltbls[grops] == 'total'] = 'all'
 
 alltbls[size][alltbls[size] == 0] = '0'
@@ -262,11 +261,10 @@ alltbls['Measure Type'][alltbls['Unit'] == 'business-count'] = 'Count of Employe
 alltbls['Unit'][alltbls['Unit'] == 'employee-count'] = 'Count'
 alltbls['Unit'][alltbls['Unit'] == 'business-count'] = 'Count'
 
-alltbls['Period'] = 'year/' + alltbls['Period']
 #alltbls.head(60)
 
 # +
-#alltbls = alltbls.rename(columns={'Unit': 'Measure Type'})
+#lltbls = alltbls.rename(columns={'Unit': 'Measure Type'})
 # -
 
 from pathlib import Path
