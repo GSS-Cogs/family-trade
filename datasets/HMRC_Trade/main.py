@@ -261,6 +261,7 @@ alltbls['Measure Type'][alltbls['Unit'] == 'business-count'] = 'Count of Employe
 alltbls['Unit'][alltbls['Unit'] == 'employee-count'] = 'Count'
 alltbls['Unit'][alltbls['Unit'] == 'business-count'] = 'Count'
 
+alltbls['Period'] = 'year/' + alltbls['Period']
 #alltbls.head(60)
 
 # +
