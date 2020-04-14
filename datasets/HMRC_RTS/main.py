@@ -37,7 +37,7 @@ if len(scraper.distributions) == 0:
     from gssutils.metadata import Distribution
     from urllib.parse import urljoin
     from mimetypes import guess_type
-    from urllib import quote
+    from urllib.parse import quote
 
     page_uri = 'https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx'
     page = scraper.session.get(page_uri)
@@ -45,7 +45,7 @@ if len(scraper.distributions) == 0:
     for anchor in tree.xpath("//a[contains(@href, 'zip')]"):
         dist = Distribution(scraper)
         dist.title = anchor.text.strip()
-        dist.downloadURL = urljoin(page_uri, quote('/%', anchor.get('href')))
+        dist.downloadURL = urljoin(page_uri, quote(anchor.get('href'), safe='/%'))
         dist.mediaType, encoding = guess_type(dist.downloadURL)
         scraper.distributions.append(dist)
 
