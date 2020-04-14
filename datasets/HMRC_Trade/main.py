@@ -101,10 +101,10 @@ for sh in sheets:
         tbls['Unit'] = '£ millions'
     elif sh == sheets[1]:
         tbls['Marker'][tbls['Value'].str.strip() == '.'] = 'not-applicable'
-        tbls['Unit'] = 'count'
+        tbls['Unit'] = 'business count'
     elif sh == sheets[2]:  
         tbls['Marker'][tbls['Value'].str.strip() == '.'] = 'not-applicable'
-        tbls['Unit'] = 'count'
+        tbls['Unit'] = 'employee count'
     
     tbls = tbls[tbls['Value'].str.strip() != '-']
     tbls['Value'][tbls['Value'] == '.'] = '0'
@@ -171,11 +171,11 @@ for sh in sheets:
             t2 = tbl[[cn[0],cn[1],cn[4]]]
             t2 = t2.rename(columns={cn[4]: 'Value'})
             t2[flows] = 'Exports'
-            t2['Unit'] = 'count'
+            t2['Unit'] = 'business count'
             t3 = tbl[[cn[0],cn[1],cn[5]]]
             t3 = t3.rename(columns={cn[5]: 'Value'})
             t3[flows] = 'Exports'
-            t3['Unit'] = 'count'
+            t3['Unit'] = 'employee count'
             t4 = tbl[[cn[0],cn[1],cn[7]]]
             t4 = t4.rename(columns={cn[7]: 'Value'})
             t4[flows] = 'Imports'
@@ -183,11 +183,11 @@ for sh in sheets:
             t5 = tbl[[cn[0],cn[1],cn[8]]]
             t5 = t5.rename(columns={cn[8]: 'Value'})
             t5[flows] = 'Imports'
-            t5['Unit'] = 'count'
+            t5['Unit'] = 'business count'
             t6 = tbl[[cn[0],cn[1],cn[9]]]
             t6 = t6.rename(columns={cn[9]: 'Value'})
             t6[flows] = 'Imports'
-            t6['Unit'] = 'count'
+            t6['Unit'] = 'employee count'
 
             tbl = pd.concat([t1,t2,t3,t4,t5,t6])
             tbl['Marker'] = ''
@@ -259,6 +259,8 @@ alltbls['Measure Type'] = ''
 alltbls['Measure Type'][alltbls['Unit'] == 'gbp-million'] = 'GBP Total'
 alltbls['Measure Type'][alltbls['Unit'] == 'employee-count'] = 'Count of Businesses'
 alltbls['Measure Type'][alltbls['Unit'] == 'business-count'] = 'Count of Employees'
+alltbls['Unit'][alltbls['Unit'] == 'employee-count'] = 'count'
+alltbls['Unit'][alltbls['Unit'] == 'business-count'] = 'count'
 
 alltbls['Period'] = 'year/' + alltbls['Period']
 #alltbls.head(60)
