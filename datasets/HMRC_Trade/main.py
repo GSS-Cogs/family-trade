@@ -259,8 +259,8 @@ alltbls['Measure Type'] = ''
 alltbls['Measure Type'][alltbls['Unit'] == 'gbp-million'] = 'GBP Total'
 alltbls['Measure Type'][alltbls['Unit'] == 'employee-count'] = 'Count of Businesses'
 alltbls['Measure Type'][alltbls['Unit'] == 'business-count'] = 'Count of Employees'
-alltbls['Unit'][alltbls['Unit'] == 'employee-count'] = 'count'
-alltbls['Unit'][alltbls['Unit'] == 'business-count'] = 'count'
+alltbls['Unit'][alltbls['Unit'] == 'employee-count'] = 'Count'
+alltbls['Unit'][alltbls['Unit'] == 'business-count'] = 'Count'
 
 alltbls['Period'] = 'year/' + alltbls['Period']
 #alltbls.head(60)
