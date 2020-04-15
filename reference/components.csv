@@ -77,7 +77,7 @@ Country Transaction,Country Transaction,Dimension,http://gss-data.org.uk/def/con
 Members,Members,Dimension,http://gss-data.org.uk/def/concept-scheme/members
 Service Origin Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/service-origin-geography
 Service Destination Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/service-destination-geography
-GDP Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-estimate-type
+GDP Publication Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-publication-type
 GDP Vintage,Available reference point,Dimension,
 GDP Publication,The revision to a given reference point for a time series can be identified in a real-time database as the change in value from an earlier vintage of estimates to a later vintage,Dimension,
 Trade Area,,Dimension,http://gss-data.org.uk/def/concept-scheme/trade-area

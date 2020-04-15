@@ -59,7 +59,7 @@ for tab in tabs:
         
             dimensions = [
                 HDim(vintage, 'Vintage', DIRECTLY, LEFT),
-                HDim(estimate_type, 'GDP Estimate Type', DIRECTLY, ABOVE),
+                HDim(estimate_type, 'GDP Publication Type', DIRECTLY, ABOVE),
                 HDim(publication, 'Publication', DIRECTLY, ABOVE),
                 #HDim(code, 'CDID', CLOSEST, ABOVE), #dropped for now
                 HDimConst('Seasonal Adjustment', seasonal_adjustment),
@@ -81,7 +81,7 @@ df["Vintage"] = df["Vintage"].apply(date_time)
 df["Publication"] = df["Publication"].apply(date_time)
 df['Marker'].replace('..', 'unknown', inplace=True)
 
-tidy = df[['Vintage','Publication','Value','GDP Estimate Type','Seasonal Adjustment', 'Measure Type','Marker']]
+tidy = df[['Vintage','Publication','Value','GDP Publication Type','Seasonal Adjustment', 'Measure Type','Marker']]
 for column in tidy:
     if column in ('GDP Estimate Type'):
         tidy[column] = tidy[column].str.lstrip()

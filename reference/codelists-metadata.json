@@ -333,9 +333,9 @@
             "rdfs:label": "Service Origin Geography"
         },
         {
-            "url": "codelists/gdp-estimate-type.csv",
+            "url": "codelists/gdp-publication-type.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
-            "rdfs:label": "GDP Estimate Type"
+            "rdfs:label": "GDP Publication Type"
         },
         {
             "url": "codelists/pinkbook-cdid.csv",
