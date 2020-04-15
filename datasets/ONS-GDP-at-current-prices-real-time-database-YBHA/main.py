@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -94,6 +94,14 @@ tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
 # +
 scraper.dataset.family = 'trade'
+
+## Adding short metadata to description
+additional_metadata = """
+
+In July 2018, a new GDP publication model was adopted. Quarterly estimates of GDP have since been published twice a quarter, rather than three times a quarter as happened prior to this.
+"""
+scraper.dataset.description = scraper.dataset.description + additional_metadata
+
 from gssutils.metadata import THEME
 
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
