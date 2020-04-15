@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -34,6 +34,10 @@ observations = pd.concat(
 
 # Temporary repacment of RS for XS code (EU do something odd with serbia for trade)
 observations["ONS Partner Geography"] = observations["ONS Partner Geography"].str.replace("RS", "XS")
+
+# Add seasonal adjustment
+observations["Seasonal Adjustment"] = "SA"
+observations["Price Classifications"] = "CP"
 # -
 
 from pathlib import Path
