@@ -13,7 +13,7 @@ Country of Ownership,Country of Ownership,Dimension,http://gss-data.org.uk/def/c
 Product,Good or service being traded,Dimension,
 Price Classification,Methodology for handling prices,Dimension,http://gss-data.org.uk/def/concept-scheme/price-classification
 Trade Partner Geography,Location of the trade partner. Typically a foreign geography. The destination of exports or origin of imports.,Dimension,http://gss-data.org.uk/def/concept-scheme/ons-trade-areas-cord
-Trade Reporter Geography,Location of the trade reporter. Typically a domestic geography. The destination of imports or origin of exports.,Dimension,
+Trade Reporter Geography,Location of the trade reporter. Typically a domestic geography. The destination of imports or origin of exports.,Dimension,""
 International Trade Basis,The methodological basis on which the trade statistics have been calculated,Dimension,http://gss-data.org.uk/def/concept-scheme/international-trade-basis
 Investment Direction,Direction of foreign direct investment into the UK (inward) or abroad (outward),Dimension,http://gss-data.org.uk/def/concept-scheme/investment-direction
 Export and Import Activity,Whether and how the business is trading internationally,Dimension,
@@ -87,3 +87,4 @@ Size of Business by no of Employees,Size of a business based on the number of em
 HMRC Trade Statistic Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-trade-statistic-type
 HMRC Reporter Region,Location of the trade reporter. Typically a domestic geography. The destination of imports or origin of exports.,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-regions
 HMRC Partner Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-geographies
+CORD SITC,"",Dimension,http://gss-data.org.uk/def/concept-scheme/cord-sitc

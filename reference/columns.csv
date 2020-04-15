@@ -27,7 +27,7 @@ Age of Business,age_of_business,qb:dimension,http://gss-data.org.uk/def/dimensio
 Country of Ownership,country_of_ownership,qb:dimension,http://gss-data.org.uk/def/dimension/country-of-ownership,http://gss-data.org.uk/def/concept/countries-of-ownership/{country_of_ownership},string,slugize,,
 CPA 2008,cpa2008,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://stamina-project.org/codes/cpav2008/{cpa2008},string,,,
 Price Classification,price_classification,qb:dimension,http://gss-data.org.uk/def/dimension/price-classification,http://gss-data.org.uk/def/concept/price-classifications/{price_classification},string,,,
-CORD SITC,cord_sitc,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/cord-sitc/{cord_sitc},string,,,
+CORD SITC,cord_sitc,qb:dimension,http://gss-data.org.uk/def/dimension/cord-sitc,http://gss-data.org.uk/def/concept/cord-sitc/{cord_sitc},string,,,
 HMRC Partner Geography,hmrc_partner_geography,qb:dimension,http://gss-data.org.uk/def/dimension/hmrc-partner-geography,http://gss-data.org.uk/def/concept/hmrc-geographies/{hmrc_partner_geography},string,,,
 HMRC Reporter Region,hmrc_reporter_region,qb:dimension,http://gss-data.org.uk/def/dimension/hmrc-reporter-region,http://gss-data.org.uk/def/concept/hmrc-regions/{hmrc_reporter_region},string,,,
 ONS Partner Geography,ons_partner_geography,qb:dimension,http://gss-data.org.uk/def/dimension/ons-partner-geography,http://gss-data.org.uk/def/concept/ons-partner-geography/{ons_partner_geography},string,,,
