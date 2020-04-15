@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -37,7 +37,7 @@ observations = pd.concat(
 
 out = Path('out')
 out.mkdir(exist_ok=True)
-table.to_csv(out / 'observations.csv', index = False)
+table.sample(n=10000).to_csv(out / 'observations.csv', index = False)
 
 # +
 from gssutils.metadata import THEME
