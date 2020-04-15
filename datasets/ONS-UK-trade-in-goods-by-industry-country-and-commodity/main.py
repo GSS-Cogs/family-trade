@@ -34,10 +34,6 @@ observations = pd.concat(
 
 # Temporary repacment of RS for XS code (EU do something odd with serbia for trade)
 observations["ONS Partner Geography"] = observations["ONS Partner Geography"].str.replace("RS", "XS")
-
-# Add seasonal adjustment
-observations["Seasonal Adjustment"] = "SA"
-observations["Price Classifications"] = "CP"
 # -
 
 from pathlib import Path
