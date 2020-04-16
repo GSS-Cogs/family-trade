@@ -19,11 +19,9 @@ pipeline {
         }
         stage('Transform') {
             agent {
-                agent {
-                    dockerfile {
-                        args "-v ${env.WORKSPACE}:/workspace"
-                        reuseNode true
-                    }
+                dockerfile {
+                    args "-v ${env.WORKSPACE}:/workspace"
+                    reuseNode true
                 }
             }
             steps {
