@@ -50,7 +50,7 @@ for i in list(range(0,len(sheetnames))):
     
     new_table.rename(columns={'OBS': 'Value'}, inplace=True)
     new_table['Period'] = new_table['Period'].astype(str)
-    new_table = new_table[['ONS Partner Geography', 'Period','Flow','Measure Type','Value' ,'Unit' ]]
+    new_table = new_table[['ONS Partner Geography', 'Period','Flow','Measure Type','Value' ,'Unit', 'DATAMARKER']]
     i = i+1
     Final_table = pd.concat([Final_table, new_table])
 
@@ -84,6 +84,8 @@ def time2period(t):
 
 Final_table['Period'] = Final_table.Period.str.replace('\.0', '')
 Final_table['Period'] = Final_table['Period'].apply(time2period)
+Final_table.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
+Final_table['Marker'].replace('N/A', 'not-applicable', inplace=True)
 # -
 
 from pathlib import Path
@@ -98,3 +100,7 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+
+Final_table
+
+
