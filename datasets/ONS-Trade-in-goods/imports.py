@@ -39,23 +39,14 @@ table.rename(columns={
     'COUNTRY': 'ONS Partner Geography'}, inplace=True)
 table = pd.melt(table, id_vars=['CORD SITC','ONS Partner Geography'], var_name='Period', value_name='Value')
 table['Period'] = table['Period'].astype('category')
-#table['Value'] = table['Value'].astype(int)
+table.dropna(subset=['Value'], inplace=True)
+table['Value'] = table['Value'].astype(int)
+table
 
-
-# %%
-
-
-#display(table['CORD SITC'].cat.categories)
-#display(table['ONS Partner Geography'].cat.categories)
-
-
-# Fix up category strings
 
 # %%
 table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split(' ')[0])
 table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
-#display(table['CORD SITC'].cat.categories)
-#display(table['ONS Partner Geography'].cat.categories)
 
 
 # %%
