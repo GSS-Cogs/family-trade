@@ -20,6 +20,7 @@ pipeline {
         stage('Transform') {
             agent {
                 dockerfile {
+                    filename 'reference/sdmx-bop/Dockerfile'
                     args "-v ${env.WORKSPACE}:/workspace"
                     reuseNode true
                 }
