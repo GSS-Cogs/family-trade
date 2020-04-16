@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -57,7 +57,7 @@ for sheet in sheets[1:-1]:
         measure.AddCellValueOverride('Number of 5', 'Count')
         measure.AddCellValueOverride('% 6', 'Proportion of all Business')
         tidy = tidy.append(ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure]).topandas(), sort=True)
-        #savepreviewhtml([breakdown_obs, classifiers, import_export, measure])
+#         savepreviewhtml([breakdown_obs, classifiers, import_export, measure])
         #break
     #break
 
@@ -153,10 +153,14 @@ tidy.columns = ['Employment' if x=='Notation' else x for x in tidy.columns]
 tidy.head()
 # -
 
-tidy
+tidy.head(2)
 
-tidy = tidy[['Age of Business', 'Export and Import Activity','Measure Type','Value',
-             'Country of Ownership','ONS ABS Trade','Turnover','Year','Employment','Unit']]
+tidy.rename(columns={'Turnover': 'Turnover(GBP Thousands)',
+                     'Age of Business': 'Age of Business(Years)'
+                    }, inplace=True)
+
+tidy = tidy[['Age of Business(Years)', 'Export and Import Activity','Measure Type','Value',
+             'Country of Ownership','ONS ABS Trade','Turnover(GBP Thousands)','Year','Employment','Unit']]
 
 # +
 # Use pathify to match csv values as per new style
@@ -185,3 +189,6 @@ with open(destinationFolder / f'observations.csv-metadata.trig', 'wb') as metada
             
 schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 schema.create(destinationFolder / f'observations.csv', destinationFolder / f'observations.csv-schema.json')
+# -
+
+
