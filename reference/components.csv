@@ -57,7 +57,7 @@ Index,,Measure,
 1Y GR,,Measure,
 Index series,,Measure,
 Implied Deflator,,Measure,
-Chained Volume Measure,,Measure,
+Chained volume measure,,Measure,
 Inventory,,Dimension,http://gss-data.org.uk/def/concept-scheme/inventory
 Expenditure Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/expenditure-category
 Analysis,,Dimension,http://gss-data.org.uk/def/concept-scheme/analysis
