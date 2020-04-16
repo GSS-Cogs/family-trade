@@ -58,6 +58,9 @@ Index,,Measure,
 Index series,,Measure,
 Implied Deflator,,Measure,
 Chained volume measure,,Measure,
+Current Price,,Measure,
+Average value per ton,,Measure,
+Net Mass,,Measure,
 Inventory,,Dimension,http://gss-data.org.uk/def/concept-scheme/inventory
 Expenditure Category,,Dimension,http://gss-data.org.uk/def/concept-scheme/expenditure-category
 Analysis,,Dimension,http://gss-data.org.uk/def/concept-scheme/analysis
