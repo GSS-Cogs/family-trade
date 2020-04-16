@@ -98,7 +98,7 @@ Final_table['Period'] = Final_table['Period'].apply(time2period)
 
 ################################################## 
 #serbia country code changed from RS to XS to match current codelist
-#LABEL added to GitHUb card - needs specific dimension/codelist
+#Note made on github card and within the trig file. 
 #REMOVE comments / change of code when resolved 
 
 Final_table['ONS Partner Geography'].replace('RS', 'XS', inplace=True)
@@ -109,7 +109,7 @@ Final_table.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
 Final_table['Marker'].replace('N/A', 'not-applicable', inplace=True)
 f4=((Final_table['Value'] ==0))
 Final_table.loc[f4,'Marker'] = 'itis-nil'
-Final_table.loc[f4,'Value'] = ''
+#Final_table.loc[f4,'Value'] = ''
 
 Final_table = Final_table[['ONS Partner Geography', 'Period','Flow','ONS ABS Trade', 'Measure Type','Value', 'Marker', 'Unit' ]]
 
@@ -125,6 +125,7 @@ Final_table.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 from gssutils.metadata import THEME
 scraper.dataset.family = 'trade'
 scraper.dataset.theme = THEME['business-industry-trade-energy']
+scraper.dataset.comment = scraper.dataset.comment + " Serbia country code has been hard coded in transformation from RS to XS to match current associated code list.  "
 
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
