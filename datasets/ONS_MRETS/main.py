@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -340,8 +340,10 @@ def measure_type_lookup(val):
     """
     if val == "cvm":
         return "Chained volume measure"
-    if val == "cp" or val == "av-value-per-ton":
-        return "GBP Million"
+    if val == "cp":
+        return "Current Price"
+    if val == "av-value-per-ton":
+        return "Average value per ton"
     if val == "idef":
         return "Implied Deflator"
     if val == "tons":
@@ -374,6 +376,13 @@ for name, details in outputs.items():
         details["data"] = details["data"].drop("Basis", axis=1)
         
     details["data"]["Measure Type"] = details["data"]["Unit"].apply(measure_type_lookup)
+
+    df = details["data"]
+    df["Unit"][df["Measure Type"] == "Current Price"] = "gbp-million"
+    df["Unit"][df["Measure Type"] == "Average value per ton"] = "gbp-million"
+    df["Unit"][df["Measure Type"] == "Chained volume measure"] = "gbp-million"
+    df["Unit"][df["Unit"] == "idef"] = "implied-deflator"
+    
     details["data"].drop_duplicates().to_csv(out / f'{OBS_ID}.csv', index = False)
 
     scraper.dataset.family = 'trade'
@@ -393,5 +402,14 @@ for name, details in outputs.items():
 currency_label
 
 product_label
+
+# +
+
+import pandas as pd
+
+df = pd.read_csv("./out/mrets-product.csv")
+df = df[df["Measure Type"] == "GBP Million"]
+df["Unit"].unique()
+# -
 
 
