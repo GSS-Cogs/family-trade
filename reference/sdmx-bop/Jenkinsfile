@@ -1,0 +1,52 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+    stages {
+        stage('Clean') {
+            steps {
+                sh 'rm -rf out'
+            }
+        }
+        stage('Fetch') {
+            steps {
+                script {
+                    def response = httpRequest(httpMode: 'GET',
+                                               url: 'https://registry.sdmx.org/ws/rest/datastructure/IMF/BOP/1.12/?detail=full&references=children&version=2.1'
+                                               outputFile: 'sdmx-bop.xml')
+                }
+            }
+        }
+        stage('Transform') {
+            agent {
+                agent {
+                    dockerfile {
+                        args "-v ${env.WORKSPACE}:/workspace"
+                        reuseNode true
+                    }
+                }
+            }
+            steps {
+                script {
+                    sh "xsltproc -o sdmx-bop.rdf reference/sdmx-bop/sdmx2skos.xslt sdmx-bop.xml"
+                }
+            }
+        }
+	      stage('Add concept scheme') {
+            steps {
+                script {
+                    def pmd = pmdConfig('pmd')
+                    def draftset = pmd.drafter.listDraftsets().find { it['display-name'] == env.JOB_NAME }
+                    if (draftset) {
+                        pmd.drafter.deleteDraftset(draftset.id)
+                    }
+		                String id = pmd.drafter.createDraftset(env.JOB_NAME).id
+		                String graph = 'http://gss-data.org.uk/def/concept-scheme/sdmx-bop'
+		                pmd.drafter.deleteGraph(id, graph)
+		                pmd.drafter.addData(id, "${WORKSPACE}/sdmx-bop.rdf", 'application/rdf+xml', 'UTF-8', graph)
+                    pmd.drafter.publishDraftset(id)
+                }
+            }
+        }
+    }
+}
