@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     def response = httpRequest(httpMode: 'GET',
-                                               url: 'https://registry.sdmx.org/ws/rest/datastructure/IMF/BOP/1.12/?detail=full&references=children&version=2.1'
+                                               url: 'https://registry.sdmx.org/ws/rest/datastructure/IMF/BOP/1.12/?detail=full&references=children&version=2.1',
                                                outputFile: 'sdmx-bop.xml')
                 }
             }
