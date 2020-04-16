@@ -349,7 +349,9 @@ def measure_type_lookup(val):
     else:
         raise Exception("Aborting. Cannot find the measure type for {}.".format(val))
     
-
+    
+from os import environ
+from gssutils.metadata import THEME
 for name, details in outputs.items():
     
     TITLE = info["title"] + ": " + name
@@ -374,9 +376,9 @@ for name, details in outputs.items():
     details["data"]["Measure Type"] = details["data"]["Unit"].apply(measure_type_lookup)
     details["data"].drop_duplicates().to_csv(out / f'{OBS_ID}.csv', index = False)
 
-    #scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
-    #scraper.dataset.title = f'{TITLE}'
     scraper.dataset.family = 'trade'
+    scraper.dataset.theme = THEME['business-industry-trade-energy']
+    scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
     
     print(details["data"]["Unit"].unique())
 
