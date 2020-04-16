@@ -125,7 +125,7 @@ Final_table.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 from gssutils.metadata import THEME
 scraper.dataset.family = 'trade'
 scraper.dataset.theme = THEME['business-industry-trade-energy']
-scraper.dataset.comment = scraper.dataset.comment + " Serbia country code has been hard coded in transformation from RS to XS to match current associated code list.  "
+scraper.dataset.comment = scraper.dataset.comment + " To come in line with the EU the country code for Serbia is now XS for trading purposes not RS which some have been using. "
 
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
