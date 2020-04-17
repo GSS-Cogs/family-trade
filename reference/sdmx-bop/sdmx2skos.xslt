@@ -7,7 +7,7 @@
                 xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:xkos="http://rdf-vocabulary.ddialliance.org/xkos#"
-                xmlns:bop="http://gss-data.org.uk/def/concept-scheme/sdmx-bop#"
+                xmlns:cl_area="http://gss-data.org.uk/def/concept-scheme/sdmx-bop/cl_area/"
                 xmlns:str="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/structure"
                 xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
                 xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common"
@@ -18,15 +18,17 @@
     <rdf:RDF xml:base="http://gss-data.org.uk/def/concept-scheme/sdmx-bop/cl_area">
       <skos:ConceptScheme about="">
         <rdfs:label xml:lang="{com:Name/@xml:lang}"><xsl:value-of select="com:Name"/></rdfs:label>
-        <xsl:apply-templates select="str:Code" mode="gen"/>
       </skos:ConceptScheme>
+      <xsl:apply-templates select="str:Code" mode="gen"/>
     </rdf:RDF>
   </xsl:template>
 
   <xsl:template match="str:Code" mode="gen">
-    <skos:Concept rdf:ID="{@id}">
+    <skos:Concept rdf:about="cl_area/{@id}">
       <rdfs:label xml:lang="{com:Name/@xml:lang}"><xsl:value-of select="com:Name"/></rdfs:label>
-      <rdfs:comment xml:lang="{com:Description/@xml:lang}"><xsl:value-of select="com:Description"/></rdfs:comment>
+      <xsl:if test="com:Description != ''">
+        <rdfs:comment xml:lang="{com:Description/@xml:lang}"><xsl:value-of select="com:Description"/></rdfs:comment>
+      </xsl:if>
       <skos:inScheme rdf:resource=""/>
       <skos:notation><xsl:value-of select="@id"/></skos:notation>
       <skos:topConceptOf rdf:resource=""/>
