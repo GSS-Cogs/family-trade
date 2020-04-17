@@ -96,15 +96,6 @@ def time2period(t):
 Final_table['Period'] = Final_table.Period.str.replace('\.0', '')
 Final_table['Period'] = Final_table['Period'].apply(time2period)
 
-################################################## 
-#serbia country code changed from RS to XS to match current codelist
-#Note made on github card and within the trig file. 
-#REMOVE comments / change of code when resolved 
-
-Final_table['ONS Partner Geography'].replace('RS', 'XS', inplace=True)
-
-##################################################
-
 Final_table.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
 Final_table['Marker'].replace('N/A', 'not-applicable', inplace=True)
 f4=((Final_table['Value'] ==0))
