@@ -387,8 +387,7 @@ for name, details in outputs.items():
     
     # TEMPORARY FOR DEBUGGING
     details["data"] = details["data"].drop("Decimals", axis=1).sample(n=100, random_state=1)
-    details["data"] = details["data"][details["data"]["Measure Type"] != "Net Mass"]
-    details["data"] = details["data"][details["data"]["Measure Type"] != "Implied Deflator"]
+    details["data"] = details["data"][details["data"]["Measure Type"] != "Chained volume measure"]
     
     details["data"].drop_duplicates().to_csv(out / f'{OBS_ID}.csv', index = False)
 
