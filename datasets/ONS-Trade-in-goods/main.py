@@ -37,7 +37,7 @@ observations = pd.concat(
 
 out = Path('out')
 out.mkdir(exist_ok=True)
-table.sample(n=10000).to_csv(out / 'observations.csv', index = False)
+table.to_csv(out / 'observations.csv', index = False)
 
 # +
 from gssutils.metadata import THEME
