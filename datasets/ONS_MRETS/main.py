@@ -383,14 +383,16 @@ for name, details in outputs.items():
     df["Unit"][df["Measure Type"] == "Chained volume measure"] = "gbp-million"
     df["Unit"][df["Unit"] == "idef"] = "implied-deflator"
     
+    print(df["Measure Type"].unique())
+    
     details["data"].drop_duplicates().to_csv(out / f'{OBS_ID}.csv', index = False)
 
     scraper.dataset.family = 'trade'
     scraper.dataset.theme = THEME['business-industry-trade-energy']
-    scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
     
-    print(details["data"]["Unit"].unique())
-
+    # Try without setting id
+    #scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
+    
     with open(out / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
         metadata.write(scraper.generate_trig())
 
@@ -403,13 +405,5 @@ currency_label
 
 product_label
 
-# +
-
-import pandas as pd
-
-df = pd.read_csv("./out/mrets-product.csv")
-df = df[df["Measure Type"] == "GBP Million"]
-df["Unit"].unique()
-# -
 
 
