@@ -37,7 +37,7 @@ observations = pd.concat(
 
 out = Path('out')
 out.mkdir(exist_ok=True)
-table.to_csv(out / 'observations.csv', index = False)
+observations.to_csv(out / 'observations.csv', index = False)
 
 # +
 from gssutils.metadata import THEME
@@ -50,6 +50,10 @@ dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/trade/' + Path(os.ge
 scraper.dataset.title = scraper.dataset.title.replace('imports', 'imports and exports')
 scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and export')
 
+lp1 = scraper.dataset.landingPage
+lp2 = 'exports'.join(lp1.rsplit('imports', 1))
+scraper.dataset.landingPage = [lp1, lp2]
+
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
@@ -59,3 +63,8 @@ csvw.create(
     base_url='http://gss-data.org.uk/data/', base_path=dataset_path,
     dataset_metadata=scraper.dataset.as_quads(), with_external=False
 )
+# -
+
+scraper.dataset.landingPage
+
+
