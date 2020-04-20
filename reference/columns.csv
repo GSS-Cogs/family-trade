@@ -98,7 +98,7 @@ Country Transaction,country_transaction,qb:dimension,http://gss-data.org.uk/def/
 Members,members,qb:dimension,http://gss-data.org.uk/def/dimension/members,http://gss-data.org.uk/def/concept/members/{members},string,slugize,,
 Service Origin Geography,service_origin_geography,qb:dimension,http://gss-data.org.uk/def/dimension/service-origin-geography,http://gss-data.org.uk/def/concept/service-origin-geography/{service_origin_geography},string,,,
 Service Destination Geography,service_destination_geography,qb:dimension,http://gss-data.org.uk/def/dimension/service-destination-geography,http://gss-data.org.uk/def/concept/service-destination-geography/{service_destination_geography},string,,,
-Vintage,vintage,qb:dimension,http://gss-data.org.uk/def/dimension/gdp-vintage,http://reference.data.gov.uk/id/{+vintage},string,,,
+GDP Reference Period,gdp_reference_period,qb:dimension,http://gss-data.org.uk/def/dimension/gdp-reference-period,http://reference.data.gov.uk/id/{+gdp_reference_period},string,,,
 Publication Date,publication_date,qb:dimension,http://gss-data.org.uk/def/dimension/publication-date,http://reference.data.gov.uk/id/{+publication_date},string,,,
 GDP Estimate Type,gdp_estimate_type,qb:dimension,http://gss-data.org.uk/def/dimension/gdp-estimate-type,http://gss-data.org.uk/def/concept/gdp-estimate-type/{gdp_estimate_type},string,,,
 MRETS Product,mrets_product,qb:dimension,http://gss-data.org.uk/def/dimension/mrets-product,http://gss-data.org.uk/def/concept/mrets-product/{mrets_product},string,,,

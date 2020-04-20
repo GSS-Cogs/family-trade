@@ -58,11 +58,11 @@ for tab in tabs:
             observations = publication.fill(DOWN).is_not_blank()
         
             dimensions = [
-                HDim(vintage, 'Vintage', DIRECTLY, LEFT),
+                HDim(vintage, 'GDP Reference Period', DIRECTLY, LEFT),
                 HDim(estimate_type, 'GDP Estimate Type', DIRECTLY, ABOVE),
                 HDim(publication, 'Publication Date', DIRECTLY, ABOVE),
                 #HDim(code, 'CDID', CLOSEST, ABOVE), #dropped for now
-                HDimConst('Seasonal Adjustment', seasonal_adjustment),
+                #HDimConst('Seasonal Adjustment', seasonal_adjustment),
                 HDimConst('Measure Type', 'GBP Million'),
             ]
 
@@ -76,12 +76,12 @@ df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 #df['CDID'] = df['CDID'].map(lambda x: right(x,4)) #dropped for now
 df['Publication Date'].replace('Q3  1990', 'Q3 1990', inplace=True)  #removing space
 df['Publication Date'].replace('Q 2004', 'Q4 2004', inplace=True) #fixing typo
-df['Vintage'].replace('Q2 1010', 'Q2 2010', inplace=True) #fixing typo
-df["Vintage"] = df["Vintage"].apply(date_time)
+df['GDP Reference Period'].replace('Q2 1010', 'Q2 2010', inplace=True) #fixing typo
+df["GDP Reference Period"] = df["GDP Reference Period"].apply(date_time)
 df["Publication Date"] = df["Publication Date"].apply(date_time)
 df['Marker'].replace('..', 'unknown', inplace=True)
 
-tidy = df[['Vintage','Publication Date','Value','GDP Estimate Type','Seasonal Adjustment', 'Measure Type','Marker']]
+tidy = df[['GDP Reference Period','Publication Date','Value','GDP Estimate Type', 'Measure Type','Marker']]
 for column in tidy:
     if column in ('GDP Estimate Type'):
         tidy[column] = tidy[column].str.lstrip()
@@ -96,7 +96,7 @@ tidy.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 scraper.dataset.family = 'trade'
 
 ## Adding short metadata to description
-additional_metadata = """
+additional_metadata = """ All data is seasonally adjusted.
 
 In July 2018, a new GDP publication model was adopted. Quarterly estimates of GDP have since been published twice a quarter, rather than three times a quarter as happened prior to this.
 """
