@@ -72,7 +72,7 @@ for tab in tabs:
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
             HDimConst('Measure Type', 'GBP Total'),
-            HDimConst('Unit', '£ Million'),
+            HDimConst('Unit', 'gbp-million'),
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)        

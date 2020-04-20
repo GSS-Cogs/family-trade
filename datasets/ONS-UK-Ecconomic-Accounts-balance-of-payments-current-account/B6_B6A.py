@@ -62,7 +62,7 @@ for tab in tabs:
             HDim(services, 'Services', CLOSEST, ABOVE),
             HDim(emu_and_services, 'Members', DIRECTLY, LEFT),
             HDimConst('Measure Type', 'GBP Total'),
-            HDimConst('Unit', '£ Million'),
+            HDimConst('Unit', 'gbp-million'),
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)        

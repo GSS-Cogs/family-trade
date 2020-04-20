@@ -58,7 +58,7 @@ for tab in tabs:
             HDim(trade, 'Services', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
             HDimConst('Measure Type', 'GBP Total'),
-            HDimConst('Unit', '£ Million'),
+            HDimConst('Unit', 'gbp-million'),
             
         ]
 
@@ -88,7 +88,7 @@ for tab in tabs:
             HDim(trade, 'Services', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
             HDimConst('Measure Type', 'GBP Total'),
-            HDimConst('Unit', '£ Million'),
+            HDimConst('Unit', 'gbp-million'),
          ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)        
