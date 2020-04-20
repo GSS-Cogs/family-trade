@@ -59,7 +59,7 @@ for tab in tabs:
         
             dimensions = [
                 HDim(vintage, 'Vintage', DIRECTLY, LEFT),
-                HDim(estimate_type, 'GDP Publication Type', DIRECTLY, ABOVE),
+                HDim(estimate_type, 'GDP Estimate Type', DIRECTLY, ABOVE),
                 HDim(publication, 'Publication Date', DIRECTLY, ABOVE),
                 #HDim(code, 'CDID', CLOSEST, ABOVE), #dropped for now
                 HDimConst('Seasonal Adjustment', seasonal_adjustment),
@@ -74,14 +74,14 @@ for tab in tabs:
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 #df['CDID'] = df['CDID'].map(lambda x: right(x,4)) #dropped for now
-df['Publication'].replace('Q3  1990', 'Q3 1990', inplace=True)  #removing space
-df['Publication'].replace('Q 2004', 'Q4 2004', inplace=True) #fixing typo
+df['Publication Date'].replace('Q3  1990', 'Q3 1990', inplace=True)  #removing space
+df['Publication Date'].replace('Q 2004', 'Q4 2004', inplace=True) #fixing typo
 df['Vintage'].replace('Q2 1010', 'Q2 2010', inplace=True) #fixing typo
 df["Vintage"] = df["Vintage"].apply(date_time)
-df["Publication"] = df["Publication"].apply(date_time)
+df["Publication Date"] = df["Publication Date"].apply(date_time)
 df['Marker'].replace('..', 'unknown', inplace=True)
 
-tidy = df[['Vintage','Publication','Value','GDP Publication Type','Seasonal Adjustment', 'Measure Type','Marker']]
+tidy = df[['Vintage','Publication Date','Value','GDP Estimate Type','Seasonal Adjustment', 'Measure Type','Marker']]
 for column in tidy:
     if column in ('GDP Estimate Type'):
         tidy[column] = tidy[column].str.lstrip()
