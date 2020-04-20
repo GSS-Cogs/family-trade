@@ -60,7 +60,7 @@ for tab in tabs:
             dimensions = [
                 HDim(vintage, 'Vintage', DIRECTLY, LEFT),
                 HDim(estimate_type, 'GDP Publication Type', DIRECTLY, ABOVE),
-                HDim(publication, 'Publication', DIRECTLY, ABOVE),
+                HDim(publication, 'Publication Date', DIRECTLY, ABOVE),
                 #HDim(code, 'CDID', CLOSEST, ABOVE), #dropped for now
                 HDimConst('Seasonal Adjustment', seasonal_adjustment),
                 HDimConst('Measure Type', 'GBP Million'),
