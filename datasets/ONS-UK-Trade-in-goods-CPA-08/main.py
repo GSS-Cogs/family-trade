@@ -61,6 +61,8 @@ for tab in tabs:
     
     prod_cat = product.regex('[0-9]{2}\s{1}[^\.]')
     
+    cdid_code = tab.excel_ref('B4').expand(DOWN) #SOME BLANK VALUES 
+    
     observations = product.shift(RIGHT).fill(RIGHT).is_not_blank()
 
     dimensions = [
@@ -69,6 +71,7 @@ for tab in tabs:
         HDim(product, 'Product', CLOSEST, ABOVE),
         HDim(prod_dep, 'Product Department', CLOSEST, ABOVE),
         HDim(prod_cat, 'Product Category', CLOSEST, ABOVE),
+        HDim(cdid_code, 'CDID', DIRECTLY, LEFT),
         HDimConst('Measure Type', 'GBP Total'),
         HDimConst('Unit', 'gbp-million')
         ]
@@ -114,7 +117,7 @@ df = df.replace({'Product' : {
 
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 
-df = df[['Period', 'Flow Directions','Product Department','Product Category','Product','Value','Measure Type','Unit']]
+df = df[['Period', 'Flow Directions','Product Department','Product Category','Product','CDID', 'Value','Measure Type','Unit']]
 
 for column in df:
     if column in ('Flow Directions','Product Department','Product Category','Product','Unit'):
