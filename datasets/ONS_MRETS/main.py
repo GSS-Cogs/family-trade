@@ -385,11 +385,6 @@ for name, details in outputs.items():
     
     print(df["Measure Type"].unique())
     
-    # TEMPORARY FOR DEBUGGING
-    details["data"] = details["data"].drop("Decimals", axis=1).sample(n=100, random_state=1)
-    details["data"] = details["data"][details["data"]["Measure Type"] == "Chained volume measure"]
-    details["data"] = details["data"][:1]
-    
     details["data"].drop_duplicates().to_csv(out / f'{OBS_ID}.csv', index = False)
 
     scraper.dataset.family = 'trade'
