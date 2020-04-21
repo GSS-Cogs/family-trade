@@ -376,6 +376,7 @@ for name, details in outputs.items():
         details["data"] = details["data"].drop("Basis", axis=1)
         
     details["data"]["Measure Type"] = details["data"]["Unit"].apply(measure_type_lookup)
+    details["data"] = details["data"][details["data"]["Measure Type"] == "Chained volume measure"]
 
     df = details["data"]
     df["Unit"][df["Measure Type"] == "Current Price"] = "gbp-million"
