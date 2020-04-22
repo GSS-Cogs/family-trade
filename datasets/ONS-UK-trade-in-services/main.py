@@ -35,9 +35,6 @@ out = Path('out')
 out.mkdir(exist_ok=True)
 tidy = pd.concat(tables).drop_duplicates()
 
-tidy = tidy.replace({'ONS Partner Geography' : {
-    'RS' : 'XS'}})
-
 tidy.to_csv(out / 'observations.csv', index = False)
 
 
