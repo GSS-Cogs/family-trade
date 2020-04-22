@@ -125,9 +125,9 @@ remaining_cdids = set(
 assert not remaining_cdids, 'Not all CDIDs defined: ' + str(remaining_cdids)
 
 # +
-cdids['AREA'].cat.categories = cdids['AREA'].cat.categories.map(
-    lambda x: f'legacy-{x}'
-)
+#cdids['AREA'].cat.categories = cdids['AREA'].cat.categories.map(
+#    lambda x: f'legacy-{x}'
+#)
 SECTION_RE = re.compile(r'[A-S]')
 DIVISION_RE = re.compile(r'[0-9]{1,2}')
 GROUP_RE = re.compile(r'[0-9]{1,2}\.[0-9]')
