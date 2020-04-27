@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -15,11 +15,15 @@
 
 # +
 from gssutils import *
+import json
 
-inward_scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/' \
-                  'foreigndirectinvestmentinvolvingukcompanies2013inwardtables')
-outward_scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/' \
-                  'foreigndirectinvestmentinvolvingukcompaniesoutwardtables')
+info = json.load(open('info.json'))
+landingPages = info['landingPage']
+
+display(landingPages)
+
+inward_scraper = Scraper(next(page for page in landingPages if 'inwardtables' in page))
+outward_scraper = Scraper(next(page for page in landingPages if 'outwardtables' in page))
 
 display(inward_scraper)
 display(outward_scraper)
@@ -212,6 +216,7 @@ observations.to_csv(destinationFolder / 'observations.csv', index=False)
 inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
 inward_scraper.dataset.comment = inward_scraper.dataset.comment.replace(
     'into the UK', 'into the UK and of UK companies abroad')
+inward_scraper.dataset.landingPage = landingPages
 
 from gssutils.metadata import THEME
 inward_scraper.dataset.theme = THEME['business-industry-trade-energy']
