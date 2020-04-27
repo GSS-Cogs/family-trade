@@ -12,28 +12,35 @@
 #     name: python3
 # ---
 
-# #UK trade in goods by industry, country and commodity
+# # UK trade in goods by industry, country and commodity
 #
 # This data is split into two distributions, one for imports and the other for exports:
 # https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityimports
 #
 # https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityexports
 
+# +
 from gssutils import *
+import json
+
+with open("info.json", "r") as f:
+    landing_pages = json.load(f)["landingPage"]
 
 
 # +
-
-def run_script(s):
-    %run "$s"
+def run_script(page):
+    if page.endswith('imports'):
+        %run "imports" {page}
+    else:
+        %run "exports" {page}
     return table
 
 observations = pd.concat(
-    run_script(s) for s in ['exports', 'imports']
+    run_script(page) for page in landing_pages
 ).drop_duplicates()
 
 # Temporary repacment of RS for XS code (EU do something odd with serbia for trade)
-observations["ONS Partner Geography"] = observations["ONS Partner Geography"].str.replace("RS", "XS")
+# observations["ONS Partner Geography"] = observations["ONS Partner Geography"].str.replace("RS", "XS")
 # -
 
 from pathlib import Path
@@ -48,8 +55,9 @@ scraper.dataset.family = 'Trade'
 scraper.dataset.theme = THEME['business-industry-trade-energy']
 scraper.dataset.title = scraper.dataset.title.replace('imports', 'imports and exports')
 scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and export')
+scraper.dataset.landingPage = landing_pages
 
-scraper.dataset
+scraper
 # -
 
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:

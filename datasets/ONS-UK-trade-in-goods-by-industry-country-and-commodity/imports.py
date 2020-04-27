@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -16,19 +16,27 @@
 
 # +
 from gssutils import *
-import json
 
-# We need two landing pages for this recipe, they should be virtually identical (save ending either in imports or exports) 
-# so im going to hard code but include a sanity check (in case they change on airtables at some point in the future)
-import_url = "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityimports"
+if is_interactive():
+    import json
 
-with open("info.json", "r") as f:
-    base_url = json.load(f)["landingPage"].rstrip("imports").rstrip("exports")
-          
-if base_url not in import_url:
-    raise Exception("Aborting. Hard coded url no longer in sync with airtables landing page.")
+    # We need two landing pages for this recipe, they should be virtually identical (save ending either in imports or exports) 
+    # so im going to hard code but include a sanity check (in case they change on airtables at some point in the future)
 
-scraper = Scraper(import_url)
+    with open("info.json", "r") as f:
+        landing_pages = json.load(f)["landingPage"]
+
+    page = next(p for p in landing_pages if p.endswith('imports'))
+
+    if page != "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityimports":
+        raise Exception("Aborting. Hard coded url no longer in sync with airtables landing page.")
+
+else:
+    import sys
+    page = sys.argv[1]
+
+display(page)
+scraper = Scraper(page)
 scraper
 # -
 
