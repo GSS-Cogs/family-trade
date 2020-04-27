@@ -68,17 +68,6 @@ Dimensions = [
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 table = c1.topandas()
 
-# +
-# import numpy as np
-# table['OBS'].replace('', np.nan, inplace=True)
-# table.dropna(subset=['OBS'], inplace=True)
-# if 'Marker' in table.columns:
-#     table.drop(columns=['Marker'], inplace=True)
-# table.rename(columns={'OBS': 'Value'}, inplace=True)
-# table['Value'] = table['Value'].astype(int)
-# table['Value'] = table['Value'].map(lambda x:'' if x == '...' else x )
-# -
-
 table['DATAMARKER'] = table['DATAMARKER'].map(lambda x:'suppressed' if x == '..' else x )
 
 import numpy as np
@@ -92,9 +81,9 @@ for col in table.columns:
         display(col)
         display(table[col].cat.categories)
 
-table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x[:2])
-table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
-table['SIC 2007'].cat.categories = table['SIC 2007'].cat.categories.map(lambda x: x[:2])
+table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split()[0])
+table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x.split()[0])
+table['SIC 2007'].cat.categories = table['SIC 2007'].cat.categories.map(lambda x: x.split()[0])
 display(table['CORD SITC'].cat.categories)
 display(table['ONS Partner Geography'].cat.categories)
 display(table['SIC 2007'].cat.categories)

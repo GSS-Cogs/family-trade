@@ -92,9 +92,9 @@ for col in table.columns:
         display(col)
         display(table[col].cat.categories)
 
-table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x[:2])
-table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
-table['SIC 2007'].cat.categories = table['SIC 2007'].cat.categories.map(lambda x: x[:2])
+table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split()[0])
+table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x.split()[0])
+table['SIC 2007'].cat.categories = table['SIC 2007'].cat.categories.map(lambda x: x.split()[0])
 display(table['CORD SITC'].cat.categories)
 display(table['ONS Partner Geography'].cat.categories)
 display(table['SIC 2007'].cat.categories)
