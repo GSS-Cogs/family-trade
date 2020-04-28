@@ -1,6 +1,7 @@
 # ---
 # jupyter:
 #   jupytext:
+#     formats: ipynb,py:light
 #     text_representation:
 #       extension: .py
 #       format_name: light
@@ -12,13 +13,6 @@
 #     name: python3
 # ---
 
-# # UK trade in goods by industry, country and commodity
-#
-# This data is split into two distributions, one for imports and the other for exports:
-# https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityimports
-#
-# https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityexports
-
 # +
 from gssutils import *
 import json
@@ -28,28 +22,70 @@ with open("info.json", "r") as f:
 
 
 # +
-def run_script(page):
-    if page.endswith('imports'):
-        %run "imports" {page}
-    else:
-        %run "exports" {page}
-    return table
+def tidy(url):
+    scraper = Scraper(url)
+    display(scraper)
+    tabs = scraper.distribution(latest=True).as_databaker()
+    tab = next(t for t in tabs if t.name != 'Contents')
 
-observations = pd.concat(
-    run_script(page) for page in landing_pages
-).drop_duplicates()
+    header = tab.excel_ref('A1').expand(RIGHT)
+    country = header.regex(r'(?i)country').fill(DOWN).is_not_blank()
+    industry = header.regex(r'(?i)industry').fill(DOWN).is_not_blank()
+    direction = header.regex(r'(?i)direction').fill(DOWN).is_not_blank()
+    commodity = header.regex(r'(?i)commodity').fill(DOWN).is_not_blank()
+    years = header.fill(RIGHT).is_number()
+    observations = years.fill(DOWN).is_not_blank()
+    cs = ConversionSegment(observations, [
+        HDim(years, 'Year', DIRECTLY, ABOVE),
+        HDim(country, 'Country', DIRECTLY, LEFT),
+        HDim(industry, 'Industry', DIRECTLY, LEFT),
+        HDim(direction, 'Direction', DIRECTLY, LEFT),
+        HDim(commodity, 'Commodity', DIRECTLY, LEFT)
+    ])
+    return scraper, cs.topandas()
 
-# Temporary repacment of RS for XS code (EU do something odd with serbia for trade)
-# observations["ONS Partner Geography"] = observations["ONS Partner Geography"].str.replace("RS", "XS")
-# -
-
-from pathlib import Path
-import numpy as np
-out = Path('out')
-out.mkdir(exist_ok=True)
-observations.drop_duplicates().to_csv(out / 'observations.csv', index = False)
+scrapers, dfs = zip(* (tidy(url) for url in landing_pages))
+obs = pd.concat(dfs)
+obs.rename(columns={'OBS': 'Value','DATAMARKER' : 'Marker'}, inplace=True)
+obs
 
 # +
+import numpy as np
+from IPython.core.display import HTML
+
+obs['Year'] = pd.to_numeric(obs['Year'], downcast='integer')
+
+for col in obs.columns:
+    if col not in ['Value', 'Year']:
+        obs[col] = obs[col].astype('category')
+        display(HTML(f'<h2>{col}</h2>'))
+        display(obs[col].cat.categories)
+
+# +
+from pathlib import Path
+out = Path('out')
+out.mkdir(exist_ok=True)
+codelists = out / 'codelists'
+codelists.mkdir(exist_ok=True)
+
+for col in ['Industry', 'Country', 'Commodity']:
+    codelist = pd.DataFrame.from_records(
+        obs[col].cat.categories.map(lambda x: x.split(' ', 1)),
+        columns=['Notation', 'Label']
+    )
+    codelist['Parent Notation'] = ''
+    codelist['Sort Priority'] = codelist
+    codelist['Description'] = ''
+    display(HTML(f'<h2>{col}</h2>'))
+    display(codelist)
+    codelist.to_csv(codelists / f'{col.lower()}.csv', index = False)
+    obs[col].cat.categories = obs[col].cat.categories.map(lambda x: x.split()[0])
+
+# +
+obs.drop_duplicates().to_csv(out / 'observations.csv', index = False)
+
+scraper = scrapers[0]
+
 from gssutils.metadata import THEME
 scraper.dataset.family = 'Trade'
 scraper.dataset.theme = THEME['business-industry-trade-energy']
