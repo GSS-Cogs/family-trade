@@ -18,7 +18,7 @@ scraper
 from zipfile import ZipFile
 from io import BytesIO
 
-distribution = scraper.distribution(mediaType='application/x-zip-compressed', latest=True)
+distribution = scraper.distribution(mediaType=lambda x: 'zip' in x, latest=True)
 
 with ZipFile(BytesIO(scraper.session.get(distribution.downloadURL).content)) as zip:
     assert(len(zip.namelist()) == 1)
