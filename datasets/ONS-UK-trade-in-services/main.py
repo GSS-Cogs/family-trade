@@ -68,9 +68,3 @@ csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
             #base_url='http://gss-data.org.uk/data/', base_path='gss_data/trade/ons-uk-trade-in-services',
             #dataset_metadata=scraper.dataset.as_quads())
 
-
-# %%
-
-
-
-
