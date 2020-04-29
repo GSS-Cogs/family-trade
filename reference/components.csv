@@ -87,3 +87,4 @@ HMRC Trade Statistic Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/h
 HMRC Reporter Region,Location of the trade reporter. Typically a domestic geography. The destination of imports or origin of exports.,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-regions
 HMRC Partner Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc-geographies
 CORD SITC,,Dimension,http://gss-data.org.uk/def/concept-scheme/cord-sitc
+2016 Weights,2016 Weights,Attribute,
