@@ -83,12 +83,12 @@ scraper.dataset.theme = THEME['business-industry-trade-energy']
 
 next_table.drop_duplicates().to_csv(out / (file_name + '.csv'), index = False)
 
-desc = """
+com = """
     Experimental estimated value of exports of services for 2017 for NUTS1, NUTS2, NUTS3 and 15 joint authorities, 
     including industry and non-EU and EU split. 
     """
 
-com = """
+desc = """
     The Nomenclature of Territorial Units for Statistics (NUTS) is a hierarchical classification of administrative 
     areas, used across the European Union (EU) for statistical purposes. 
     NUTS1 are major socio-economic regions, while NUTS2 and NUTS3 are progressively smaller regions. 

@@ -96,6 +96,13 @@ new_table['Value'] = pd.to_numeric(new_table['Value'], errors = 'coerce')
 new_table = new_table[['ONS Partner Geography', 'Period','Flow','Pink Book Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
 
 # +
+indexNames = new_table[ new_table['Pink Book Services'].str.contains('NaN', na=True)].index
+new_table.drop(indexNames, inplace = True)
+
+#The 27 April 2020 release added Pink Book Services which dont have Type codes. This causes duplicates as all the various Services without numbers are classed as the same service.
+#This will need further investigation upon review. I did look to see if the most recent pink book publications had any reference to them but I coulnd't find antyhing.
+
+# +
 new_table.rename(columns={'ONS Partner Geography':'CORD Geography',
                           'Flow':'Flow Directions'}, 
                  inplace=True)
