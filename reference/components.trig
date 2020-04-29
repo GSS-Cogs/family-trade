@@ -34,14 +34,6 @@
 		rdfs:subPropertyOf <http://purl.org/linked-data/sdmx/2009/dimension#refPeriod> ;
 		a rdf:Property .
 
-	<http://gss-data.org.uk/def/dimension/product> rdfs:label "Product" ;
-		dcterms:description "Good or service being traded" ;
-		a qb:DimensionProperty ;
-		skos:notation "product" ;
-		rdfs:range <http://gss-data.org.uk/def/Product> ;
-		rdfs:isDefinedBy <http://gss-data.org.uk/def/ontology/components> ;
-		a rdf:Property .
-
 	<http://gss-data.org.uk/def/dimension/cpa> rdfs:label "Product" ;
 		dcterms:description "Classification of Products by Activity" ;
 		a qb:DimensionProperty ;
