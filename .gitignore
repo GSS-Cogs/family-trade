@@ -3,3 +3,6 @@ out
 .ipynb_checkpoints
 .cache
 .DS_Store
+.idea
+family-trade.iml
+**/Preview.html
