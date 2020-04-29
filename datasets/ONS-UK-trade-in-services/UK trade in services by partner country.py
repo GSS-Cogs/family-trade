@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -24,9 +24,9 @@ scraper
 
 # +
 dist = scraper.distribution(latest=True, mediaType = Excel)
-tab = dist.as_pandas(header = None)
+tab = dist.as_pandas(sheet_name = 'Time Series')
 
-tab.rename(columns=tab.iloc[0], inplace=True)
+#tab.rename(columns=tab.iloc[0], inplace=True)
 tab = tab.iloc[1:, :]
 tab = tab.drop(tab.columns[[2,4]], axis = 1)
 tab
@@ -95,14 +95,16 @@ new_table['Value'] = pd.to_numeric(new_table['Value'], errors = 'coerce')
 
 new_table = new_table[['ONS Partner Geography', 'Period','Flow','Pink Book Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
 
+# +
+new_table.rename(columns={'ONS Partner Geography':'CORD Geography',
+                          'Flow':'Flow Directions'}, 
+                 inplace=True)
+
+#ONS Partner geography has been changed since certain codes are missing from Vademecum codelist that it points to, CORD codelists are editable by us
+#Flow has been changed to Flow Direction to differentiate from Migration flow dimension - I believe
+# -
+
 new_table
 
-
-
-# +
-
-
-
-# -
 
 

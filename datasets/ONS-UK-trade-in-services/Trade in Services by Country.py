@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.2.4
+#       format_version: '1.5'
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -20,9 +20,10 @@ from gssutils import *
 
 scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
                   'internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted')
+scraper
+# -
 
 tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType=Excel).as_databaker()} 
-# -
 
 tab = tabs['TiS by country']
 
@@ -81,6 +82,15 @@ new_table = new_table.loc[new_table['ONS Partner Geography'].isin(['AD','AE','AF
                                                                 'WS','XK','YE','ZM','ZW'])]
 
 new_table = new_table[['ONS Partner Geography', 'Period','Flow','Pink Book Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
+
+# +
+new_table.rename(columns={'ONS Partner Geography':'CORD Geography',
+                          'Flow':'Flow Directions'}, 
+                 inplace=True)
+
+#ONS Partner geography has been changed since certain codes are missing from Vademecum codelist that it points to, CORD codelists are editable by us
+#Flow has been changed to Flow Direction to differentiate from Migration flow dimension - I believe
+# -
 
 new_table
 

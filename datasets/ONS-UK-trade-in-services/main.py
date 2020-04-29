@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[1]:
+# %%
 
 
 from gssutils import *
@@ -11,7 +12,7 @@ from gssutils import *
 # 
 # Todo: figure out whether/how to scrape this page directly and how to model it so that the latest data is always fetched. N.B. This is an "experimental" dataset.
 
-# In[2]:
+# %%
 
 
 tables = []
@@ -25,7 +26,7 @@ tables.append(new_table)
 
 # We just combine these two into the same table for now.
 
-# In[3]:
+# %%
 
 
 
@@ -42,7 +43,7 @@ tidy.to_csv(out / 'observations.csv', index = False)
 # 
 # Todo: review titles, etc.
 
-# In[5]:
+# %%
 
 
 from gssutils.metadata import THEME
@@ -56,7 +57,7 @@ csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 
 # Generate alternative output for direct CSVW transformation. Note that these files won't be included in the upload to PMD.
 
-# In[6]:
+# %%
 
 
 #tidy['Measure Type'] = tidy['Measure Type'].astype('category')
@@ -68,7 +69,7 @@ csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
             #dataset_metadata=scraper.dataset.as_quads())
 
 
-# In[ ]:
+# %%
 
 
 
