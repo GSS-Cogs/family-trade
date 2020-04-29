@@ -43,4 +43,12 @@
 		rdfs:isDefinedBy <http://gss-data.org.uk/def/ontology/components> ;
 		a rdf:Property .
 
+	<http://gss-data.org.uk/def/dimension/flow-directions> rdfs:label "Flow" ;
+		dcterms:description "Direction of flow of products (goods/services)" ;
+		a qb:DimensionProperty ;
+		qb:codeList <http://gss-data.org.uk/def/concept-scheme/flow-directions> ;
+		skos:notation "flow-directions" ;
+		rdfs:range <http://gss-data.org.uk/def/FlowDirections> ;
+		rdfs:isDefinedBy <http://gss-data.org.uk/def/ontology/components> ;
+		a rdf:Property .
 }
