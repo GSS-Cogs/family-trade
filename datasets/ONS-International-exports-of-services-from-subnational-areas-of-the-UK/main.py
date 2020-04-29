@@ -63,6 +63,8 @@ next_table = next_table[['Period','Product','Service Origin Geography','Service 
 
 next_table['Flow'] = next_table['Flow'].map(pathify)
 
+next_table["Service Origin Geography"] = next_table["Service Origin Geography"].apply(pathify)
+
 from pathlib import Path
 import numpy as np
 out = Path('out')
