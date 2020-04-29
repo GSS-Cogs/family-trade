@@ -85,6 +85,10 @@
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "ONS Trade Areas CORD",
             "rdfs:comment": "GDP-184"
+        },{
+            "url": "codelists/cord-geographies.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "CORD Geography"
         },
         {
             "url": "codelists/bop-services.csv",
