@@ -4,7 +4,7 @@ Date,date,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod
 Measure Type,measure_type,qb:dimension,http://purl.org/linked-data/cube#measureType,http://gss-data.org.uk/def/measure/{measure_type},string,slugize,,http://purl.org/linked-data/cube#MeasureProperty
 Unit,unit,qb:attribute,http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure,http://gss-data.org.uk/def/concept/measurement-units/{unit},string,unitize,,
 SITC Section,sitc_section,qb:dimension,http://gss-data.org.uk/def/dimension/sitc-section,http://gss-data.org.uk/def/concept/sitc-sections/{sitc_section},string,slugize,,
-Flow,flow,qb:dimension,http://gss-data.org.uk/def/dimension/flow,http://gss-data.org.uk/def/concept/flow-directions/{flow},string,slugize,,
+Flow,flow,qb:dimension,http://gss-data.org.uk/def/dimension/flow-directions,http://gss-data.org.uk/def/concept/flow-directions/{flow},string,slugize,,
 GBP Total,gbp_total,qb:measure,http://gss-data.org.uk/def/measure/gbp-total,,string,,,
 Employee Count,employee_count,qb:measure,http://gss-data.org.uk/def/measure/employee-count,,string,,,
 Business Count,business_count,qb:measure,http://gss-data.org.uk/def/measure/business-count,,string,,,
