@@ -2,7 +2,10 @@
     "title": "Trade in goods: country-by-commodity exports",
     "publisher": "Office for National Statistics",
     "description": "Monthly import country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted.",
-    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityexports",
+    "landingPage": [
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityexports",
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityimports"
+    ],
     "datasetNotes": [
         "Data can be found on the landing page in a zip folder under current "
     ],
