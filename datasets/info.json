@@ -13,6 +13,7 @@
     "pipelines": [
         "HMRC-OVERSEAS-TRADE-STATISTICS",
         "HMRC-RTS-Small-area",
+        "HMRC-alcohol-bulletin",
         "HMRC_OTS_CN8",
         "HMRC_RTS",
         "HMRC_Trade",
