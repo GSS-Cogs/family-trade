@@ -41,6 +41,11 @@ observations = pd.concat(
 
 # Temporary repacment of RS for XS code (EU do something odd with serbia for trade)
 # observations["ONS Partner Geography"] = observations["ONS Partner Geography"].str.replace("RS", "XS")
+
+# +
+observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
 from pathlib import Path
