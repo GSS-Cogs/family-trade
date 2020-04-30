@@ -124,6 +124,11 @@ tidy = tidy[['NUTS Geography','Year','ONS Functional Category','Flow','Measure T
 
 
 # %%
+tidy.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+
+# %%
 from pathlib import Path
 out = Path('out')
 out.mkdir(exist_ok=True)
