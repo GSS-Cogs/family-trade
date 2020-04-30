@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[3]:
+# %%
 
 
 # # Prepare Sources
@@ -17,7 +18,7 @@
 # We also keep track of the processing and the provenance of the inputs and outputs using W3C Prov.
 
 
-# In[4]:
+# %%
 
 
 from datetime import datetime
@@ -54,7 +55,7 @@ for filename, google_id in sources:
     sourceUrls.append(sourceUrl)
 
 
-# In[5]:
+# %%
 
 
 import pandas as pd
@@ -69,7 +70,7 @@ table = pd.concat([pd.read_csv(BytesIO(session.get(sourceUrl).content),
 table
 
 
-# In[9]:
+# %%
 
 
 # Countries are mandated by Eurostat to use the Geonomenclature (GEONOM), which gradually changes over the years. 
@@ -86,9 +87,7 @@ geonom.drop(columns=['statsw', 'geogsw', 'dutysw'], inplace=True)
 geonom
 
 
-# In[6]:
-
-
+# %%
 # We'll ignore the miscellaneous codes (e.g. Stores & Provis: deliveries of ship/aircraft stores et seq.)
 
 geonom = geonom[:geonom[geonom['country'] == 'Stores & Provis.'].index[0]]
@@ -114,6 +113,13 @@ table['Unit'] = 'GBP'
 table['Flow'] = table['Flow'].map(lambda x: {'i': 'imports', 'e': 'exports'}[x])
 table = table[['Year', 'Flow', 'Combined Nomenclature', 'HMRC Partner Geography', 'Measure Type', 'Unit', 'Value']]
 
+
+# %%
+table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+
+# %%
 from pathlib import Path
 out = Path('out')
 out.mkdir(exist_ok=True)
@@ -122,7 +128,9 @@ table.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 # Create dataset metadata
 
 
-# In[7]:
+# %%
+
+# %%
 
 
 from gssutils import *
@@ -158,7 +166,7 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
      metadata.write(ds.as_quads().serialize(format='trig'))
 
 
-# In[8]:
+# %%
 
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
