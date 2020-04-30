@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -86,6 +86,11 @@ Final_table['Period'] = Final_table.Period.str.replace('\.0', '')
 Final_table['Period'] = Final_table['Period'].apply(time2period)
 Final_table.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
 Final_table['Marker'].replace('N/A', 'not-applicable', inplace=True)
+
+# +
+Final_table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
 from pathlib import Path
