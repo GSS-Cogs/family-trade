@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -178,6 +178,13 @@ observations['Unit'] = pd.Series('gbp-million', index=observations.index, dtype=
 observations = observations[['ONS Partner Geography', 'Period', 'CDID', 'International Trade Basis',
                              'Flow', 'CPA 2008', 'Price Classification', 'Seasonal Adjustment',
                              'Measure Type', 'Value', 'Unit']].drop_duplicates()
+
+# +
+observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+# -
+
 observations
 
 from pathlib import Path
