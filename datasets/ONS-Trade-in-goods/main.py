@@ -33,6 +33,11 @@ def run_script(s):
 observations = pd.concat(
     run_script(s) for s in ['exports', 'imports']
 ).drop_duplicates()
+
+# +
+observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
 out = Path('out')
