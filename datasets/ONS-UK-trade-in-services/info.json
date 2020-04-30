@@ -12,6 +12,7 @@
         "stage": "Done"
     },
     "transform": {
+        "validate": false,
         "airtable": "reczFVGkUgwXtzkoH",
         "main_issue": 17
     },
