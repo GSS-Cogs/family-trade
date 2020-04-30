@@ -15,6 +15,7 @@
         "stage": "Candidate"
     },
     "transform": {
+        "validate": false,
         "airtable": "recAD78IoUb406XYO",
         "main_issue": 33
     },
