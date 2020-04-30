@@ -2,11 +2,12 @@
 # ---
 # jupyter:
 #   jupytext:
+#     cell_metadata_json: true
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -394,6 +395,14 @@ Final_table.head()
 
 Final_table.tail()
 
+# +
+Final_table.rename(columns={'ONS Partner Geography':'CORD Geography',
+                          'Flow':'Flow Directions'}, 
+                 inplace=True)
+
+#ONS Partner geography has been changed since certain codes are missing from Vademecum codelist that it points to, CORD codelists are editable by us
+#Flow has been changed to Flow Direction to differentiate from Migration flow dimension - I believe
+
 # + {"endofcell": "--"}
 from gssutils import *
 from gssutils.metadata import *
@@ -439,9 +448,7 @@ csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 
 # --
 
-# +
 
-# -
 
 
 
