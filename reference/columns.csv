@@ -106,4 +106,4 @@ Decimals,decimals,qb:attribute,http://purl.org/linked-data/sdmx/2009/attribute#d
 Pinkbook CDID,pinkbook_cdid,qb:dimension,http://gss-data.org.uk/def/dimension/pinkbook-cdid,http://gss-data.org.uk/def/concept/pinkbook-cdid/{pinkbook_cdid},string,slugize,,
 Size of Business by no of Employees,size_of_business_by_no_of_employees,qb:dimension,http://gss-data.org.uk/def/dimension/size-of-business-by-no-of-employees,http://gss-data.org.uk/def/concept/employment-size-bands/{size_of_business_by_no_of_employees},string,slugize,,
 HMRC Trade Statistic Type,hmrc_trade_statistic_type,qb:dimension,http://gss-data.org.uk/def/dimension/hmrc-trade-statistic-type,http://gss-data.org.uk/def/concept/hmrc-trade-statistic-type/{hmrc_trade_statistic_type},string,slugize,,
-CORD Geography,cord_geography,qb:dimension,http://gss-data.org.uk/def/dimension/cord-geography,http://gss-data.org.uk/def/concept/cord-geography/{cord_geography},string,slugize,,
+CORD Geography,cord_geography,qb:dimension,http://gss-data.org.uk/def/dimension/cord-geography,http://gss-data.org.uk/def/concept/cord-geography/{cord_geography},string,,,
