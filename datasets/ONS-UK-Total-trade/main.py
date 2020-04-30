@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -104,6 +104,11 @@ Final_table.loc[f4,'Marker'] = 'itis-nil'
 
 Final_table = Final_table[['ONS Partner Geography', 'Period','Flow','ONS ABS Trade', 'Measure Type','Value', 'Marker', 'Unit' ]]
 
+
+# +
+Final_table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
 from pathlib import Path
