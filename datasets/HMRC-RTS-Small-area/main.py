@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -59,6 +59,12 @@ table = table.drop_duplicates()
 
 
 table['HMRC Partner Geography'].unique()
+
+# +
+table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+# -
 
 out = Path('out')
 out.mkdir(exist_ok=True)
