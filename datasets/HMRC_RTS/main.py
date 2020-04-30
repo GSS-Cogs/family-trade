@@ -92,11 +92,17 @@ for distribution in scraper.distributions:
                 # Generic changes that apply to both "mass" and "value" outputs
                 table['Period'] = table['Period'].map(lambda x: f'quarter/{x[2:]}-Q{x[0]}')
                 table['Flow'] = table['Flow'].map(lambda x: 'exports' if x == 'E' else 'imports')
+                
                 table['HMRC Partner Geography'] = table.apply(
                     lambda x: x['Codseq'] if x['Codseq'][0] != '#' else x['Codalpha'],
                     axis=1)
                 assert table['SITC Section'].equals(table['SITC 4'].apply(lambda x: x[0]))
                 table.drop(columns=['Codalpha', 'Codseq', 'SITC Section'], inplace=True)
+                
+                table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+                #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+
                 
                 # Output the mass observations for this input file
                 mass = table.drop(columns=['Value'])
