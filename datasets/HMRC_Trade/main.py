@@ -237,7 +237,6 @@ tbls[2][types][tbls[2]['Unit'] == 'Employee Count'] = 'Employee count for busine
 tbls[2][types][tbls[2]['Unit'] == 'Business Count'] = 'Business count for business by Business size and Age of business'
 tbls[2][types][tbls[2]['Unit'] == '£ million'] = 'Value for business by Business size and Age of business'
 
-tbls[2]
 # -
 
 tbls[2]['Unit'].unique()
