@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -100,10 +100,12 @@ out.mkdir(exist_ok=True)
 Final_table.drop_duplicates().to_csv(out / 'observations.csv', index = False)
 
 scraper.dataset.family = 'trade'
+from gssutils.metadata import THEME
+scraper.dataset.theme = THEME['business-industry-trade-energy']
 with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 
-csvw = CSVWMetadata('https://gss-cogs.github.io/ref_trade/')
+csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 
 Final_table
