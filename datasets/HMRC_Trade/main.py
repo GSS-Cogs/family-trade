@@ -112,7 +112,7 @@ for sh in sheets:
 
 
 # +
-age = 'Age of Business'
+age = 'Age of Business(Years)'
 size = 'Size of Business by no of Employees'
 colord = ['Period', grops, age, size, types, flows, 'Unit', 'Value', 'Marker']
 
@@ -201,27 +201,46 @@ for sh in sheets:
         ind2 = ind2 + 1
 
 
+
+
 # +
 tbls[0][size] = 'All'
 tbls[0]['Period'] = yr
-tbls[0][types] = 'Employee count for business by Industry group and Age of business'
+tbls[0][types] = ''
 tbls[0] = tbls[0][colord]
 
 tbls[1]['Period'] = yr
 tbls[1] = tbls[1].rename(columns={age: size})
 tbls[1][age] = 'All'
-tbls[1][types] = 'Employee count for business by Industry group and Business size'
+tbls[1][types] = ''
 tbls[1] = tbls[1][colord]
 
 tbls[2] = tbls[2].rename(columns={grops: size})
 tbls[2]['Period'] = yr
 tbls[2][grops] = 'All'
-tbls[2][types] = 'Employee count for business by Business size and Age of business'
+tbls[2][types] = ''
 tbls[2] = tbls[2][colord]
 
 alltbls2 = pd.concat(tbls)
 #alltbls2.head(60)
+
+# +
+tbls[0][types][tbls[0]['Unit'] == 'Employee Count'] = 'Employee count for business by Industry group and Age of business'
+tbls[0][types][tbls[0]['Unit'] == 'Business Count'] = 'Business count for business by Industry group and Age of business'
+tbls[0][types][tbls[0]['Unit'] == '£ million'] = 'Value for business by Industry group and Age of business'
+
+tbls[1][types][tbls[1]['Unit'] == 'Employee Count'] = 'Employee count for business by Industry group and Business size'
+tbls[1][types][tbls[1]['Unit'] == 'Business Count'] = 'Business count for business by Industry group and Business size'
+tbls[1][types][tbls[1]['Unit'] == '£ million'] = 'Value for business by Industry group and Business size'
+
+tbls[2][types][tbls[2]['Unit'] == 'Employee Count'] = 'Employee count for business by Business size and Age of business'
+tbls[2][types][tbls[2]['Unit'] == 'Business Count'] = 'Business count for business by Business size and Age of business'
+tbls[2][types][tbls[2]['Unit'] == '£ million'] = 'Value for business by Business size and Age of business'
+
+tbls[2]
 # -
+
+tbls[2]['Unit'].unique()
 
 alltbls = pd.concat([alltbls1, alltbls2])
 
