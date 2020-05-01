@@ -87,3 +87,4 @@ HMRC Partner Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc
 CORD SITC,,Dimension,http://gss-data.org.uk/def/concept-scheme/cord-sitc
 2016 Weights,2016 Weights,Attribute,
 CORD Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/cord-geography
+Flow Directions,Flow,Dimension,http://gss-data.org.uk/def/concept-scheme/flow-directions
