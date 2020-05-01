@@ -45,7 +45,7 @@ sheets = ['1. Industry Group', '2. Age Group','3. Business Size']
 
 grops = 'HMRC Industry'
 types = 'HMRC Trade Statistic Type'
-flows = 'Flow Directions'
+flows = 'Flow'
 
 alltbls = []
 # -
