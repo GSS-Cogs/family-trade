@@ -1,43 +1,84 @@
 {
-  "@context": [
-  "http://www.w3.org/ns/csvw",
-  {
-    "@language": "en"
-  }
-],
-  "tables": [
-    {
-      "url": "components.csv",
-      "tableSchema": {
-        "columns": [
-          {
-            "titles": "Label",
-            "required": true,
-            "name": "label",
-            "datatype": "string"
-          }, {
-            "titles": "Description",
-            "required": false,
-            "name": "description",
-            "datatype": "string"
-          }, {
-            "titles": "Component Type",
-            "required": true,
-            "name": "component_type",
-            "datatype": {
-              "format": "^(Dimension|Measure|Attribute)$"
-            }
-          }, {
-            "titles": "Codelist",
-            "required": false,
-            "name": "codelist",
-            "datatype": "anyURI"
-          }
-        ],
-        "primaryKey": [
-          "label"
-        ]
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "@id": "#table",
+  "prov:hadDerivation": {
+    "@id": "http://gss-data.org.uk/def/ontology/components",
+    "@type": "owl:Ontology",
+    "rdfs:label": "Components Ontology",
+    "dc:title": "Components Ontology"
+  },
+  "url": "components.csv",
+  "tableSchema": {
+    "columns": [
+      {
+        "titles": "Label",
+        "required": true,
+        "name": "label",
+        "datatype": "string",
+        "propertyUrl": "rdfs:label"
+      },
+      {
+        "titles": "Description",
+        "required": false,
+        "name": "description",
+        "datatype": "string",
+        "propertyUrl": "dc:description"
+      },
+      {
+        "titles": "Component Type",
+        "required": true,
+        "name": "component_type",
+        "datatype": {
+          "format": "^(Dimension|Measure|Attribute)$"
+        },
+        "suppressOutput": true
+      },
+      {
+        "titles": "Codelist",
+        "required": false,
+        "name": "codelist",
+        "datatype": "anyURI",
+        "propertyUrl": "qb:codeList",
+        "valueUrl": "{codelist}"
+      },
+      {
+        "titles": "Path",
+        "required": false,
+        "name": "path",
+        "datatype": "string",
+        "propertyUrl": "skos:notation"
+      },
+      {
+        "titles": "Range",
+        "required": false,
+        "name": "range",
+        "datatype": "string",
+        "propertyUrl": "rdfs:range",
+        "valueUrl": "http://gss-data.org.uk/def/{+range}"
+      },
+      {
+        "name": "type",
+        "virtual": true,
+        "propertyUrl": "rdf:type",
+        "valueUrl": "http://purl.org/linked-data/cube#{component_type}Property"
+      },
+      {
+        "name": "base_type",
+        "virtual": true,
+        "propertyUrl": "rdf:type",
+        "valueUrl": "rdf:Property"
+      },
+      {
+        "name": "defined_by",
+        "virtual": true,
+        "propertyUrl": "rdfs:isDefinedBy",
+        "valueUrl": "http://gss-data.org.uk/def/ontology/components"
       }
-    }
-  ]
+    ],
+    "primaryKey": [
+      "label"
+    ],
+    "aboutUrl": "http://gss-data.org.uk/def/{+path}"
+  }
 }
+
