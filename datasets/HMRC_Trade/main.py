@@ -13,16 +13,6 @@
 #     name: python3
 # ---
 
-# +
-from gssutils import *
-import json 
-import requests
-
-info = json.load(open('info.json')) 
-landingPage = info['landingPage2']  
-
-scraper = Scraper(landingPage)
-
 idbrs = sorted(
     [dist for dist in scraper.distributions if dist.title.startswith('IDBR')],
     key=lambda d: d.title, reverse=True)
@@ -33,12 +23,26 @@ yr = idbr.title[-4:]
 #tabs.keys()
 print('Year: ' + yr)
 
+# +
+from gssutils import *
+import json 
+import requests
+
+info = json.load(open('info.json')) 
+landingPage = info['landingPage2']  
+
+scraper = Scraper(landingPage)
+
+scraper
 # -
 
-url = idbr.downloadURL
+myfile = scraper.distributions[0].as_pandas(sheet_name=None)
+
+# +
+#url = idbr.downloadURL
 #url = 'https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/847399/IDBR_OTS_tables_2018.XLS'
-myfile = requests.get(url)
-open('data.xls', 'wb').write(myfile.content)
+#myfile = requests.get(url)
+#open('data.xls', 'wb').write(myfile.content)
 
 # +
 sheets = ['1. Industry Group', '2. Age Group','3. Business Size']
@@ -48,11 +52,15 @@ types = 'HMRC Trade Statistic Type'
 flows = 'Flow'
 
 alltbls = []
+
+# +
+#myfile[sheets[0]]
 # -
 
 for sh in sheets:
-    df = pd.read_excel(io='data.xls', sheet_name=sh)
-
+    #df = pd.read_excel(io=myfile, sheet_name=sh)
+    df = myfile[sh]
+    
     df[df.columns[0]][df[df.columns[0]] == 'Total8'] = 'Total'
     df[df.columns[0]][df[df.columns[0]] == 'Unknown7'] = 'Unknown'
     
@@ -301,25 +309,25 @@ from gssutils.metadata import THEME
 scraper.dataset.theme = THEME['business-industry-trade-energy']
 
 alltbls.drop_duplicates().to_csv(out / (fn1 + '.csv'), index = False)
-scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{fn1}')
+#scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{fn1}')
 
-comDesc = """
-    Supporting tables for the UK trade in goods by business characteristics 2018
-    This spreadsheet contains estimates of trade in goods data matched with registered businesses from the 
-    Inter-Departmental Business Register (IDBR) for exporters and importers for 2018.
-    This data is now presented on a 'Special Trade' basis, in line with the change in the compilation method 
-    for the UK Overseas Trade Statistics (OTS).
-    More details on the methodology used to produce these estimates and issues to be aware of when using 
-    the data can be found on the
-    metadata tab.
-    These estimates do not cover all businesses. They do not cover:
-    Unregistered businesses (those not registered for VAT or Economic Operator Registration and Identification (EORI)).
-    Due to these experimental statistics being subject to active disclosure controls the data has been suppressed 
-    according to GSS guidance on disclosure control.  Suppressed cells are shown with an 'S'
-    """
-scraper.dataset.comment = 'Supporting tables for the UK trade in goods by business characteristics 2018'
-scraper.dataset.description = comDesc
-scraper.dataset.title = 'HMRC Trade in Goods'
+#comDesc = """
+#    Supporting tables for the UK trade in goods by business characteristics 2018
+#    This spreadsheet contains estimates of trade in goods data matched with registered businesses from the 
+#    Inter-Departmental Business Register (IDBR) for exporters and importers for 2018.
+#    This data is now presented on a 'Special Trade' basis, in line with the change in the compilation method 
+#    for the UK Overseas Trade Statistics (OTS).
+#    More details on the methodology used to produce these estimates and issues to be aware of when using 
+#    the data can be found on the
+#    metadata tab.
+#    These estimates do not cover all businesses. They do not cover:
+#    Unregistered businesses (those not registered for VAT or Economic Operator Registration and Identification (EORI)).
+#    Due to these experimental statistics being subject to active disclosure controls the data has been suppressed 
+#    according to GSS guidance on disclosure control.  Suppressed cells are shown with an 'S'
+#    """
+#scraper.dataset.comment = 'Supporting tables for the UK trade in goods by business characteristics 2018'
+#scraper.dataset.description = comDesc
+#scraper.dataset.title = 'HMRC Trade in Goods'
 
 with open(out / (fn1 + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
