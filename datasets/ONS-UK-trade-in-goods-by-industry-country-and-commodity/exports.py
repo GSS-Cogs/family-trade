@@ -92,4 +92,7 @@ table['Period'] = 'year/' + table['Period'].astype(str).str[0:4]
 
 table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type','Value','Unit', 'Marker']]
 
+# +
+table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
