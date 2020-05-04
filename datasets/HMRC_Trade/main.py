@@ -13,15 +13,16 @@
 #     name: python3
 # ---
 
-idbrs = sorted(
-    [dist for dist in scraper.distributions if dist.title.startswith('IDBR')],
-    key=lambda d: d.title, reverse=True)
-idbr = idbrs[0]
-display(idbr.title)
-yr = idbr.title[-4:]
+# +
+#idbrs = sorted(
+#    [dist for dist in scraper.distributions if dist.title.startswith('IDBR')],
+#    key=lambda d: d.title, reverse=True)
+#idbr = idbrs[0]
+#display(idbr.title)
+#yr = idbr.title[-4:]
 #tabs = {tab.name: tab for tab in idbr.as_databaker()}
 #tabs.keys()
-print('Year: ' + yr)
+#print('Year: ' + yr)
 
 # +
 from gssutils import *
@@ -32,9 +33,12 @@ info = json.load(open('info.json'))
 landingPage = info['landingPage2']  
 
 scraper = Scraper(landingPage)
-
 scraper
 # -
+
+yr = scraper.title.index("20")
+yr = scraper.title[yr:yr+4]
+yr
 
 myfile = scraper.distributions[0].as_pandas(sheet_name=None)
 
