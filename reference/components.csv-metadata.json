@@ -57,6 +57,14 @@
         "valueUrl": "http://gss-data.org.uk/def/{+range}"
       },
       {
+        "titles": "Parent",
+        "required": false,
+        "name": "parent",
+        "datatype": "anyURI",
+        "propertyUrl": "rdfs:subPropertyOf",
+        "valueUrl": "{parent}"
+      },
+      {
         "name": "type",
         "virtual": true,
         "propertyUrl": "rdf:type",
