@@ -92,3 +92,8 @@ table['Flow'] = pd.Series('imports', index=table.index, dtype='category')
 table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'Seasonal Adjustment', 'Measure Type','Value','Unit' ]]
 table
 
+
+# %%
+table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
