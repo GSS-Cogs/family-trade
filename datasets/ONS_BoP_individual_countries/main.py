@@ -80,12 +80,8 @@ if r.status_code != 200:
     raise ValueError("Aborting operation. Failed to get 2nd (of 2) scrapes of ONS website.")
 
 # It's an adhoc, the first xls link should always contain the spreadsheet we want
-download_url = [x for x in r.text.split("\n") if ".xls" in x][0]
-
-# note - see above sample for what we're doing here
-sourceUrl = "https://www.ons.gov.uk/file?uri=" + download_url.split('href="/file?uri=')[1].split("\">")[0]
-
-sourceUrl
+content = [x for x in r.text.split("\n") if ".xls" in x][0]
+sourceUrl = content.split(" ")[-1].replace('"', '')
 
 # +
 import requests
