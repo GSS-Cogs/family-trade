@@ -15,6 +15,7 @@
         "stage": "Done"
     },
     "transform": {
+        "validate": false,
         "airtable": [
             "rec6SvP3d4MJ3pXYR",
             "recduvpZS53BpXU3W"
