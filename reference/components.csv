@@ -87,4 +87,7 @@ HMRC Partner Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/hmrc
 CORD SITC,,Dimension,http://gss-data.org.uk/def/concept-scheme/cord-sitc,dimension/cord-sitc,CordSitc,
 2016 Weights,2016 Weights,Attribute,,attribute/2016-weights,2016Weights,
 CORD Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/cord-geography,dimension/cord-geography,CordGeography,
-Flow Directions,Flow,Dimension,http://gss-data.org.uk/def/concept-scheme/flow-directions,dimension/flow-directions,FlowDirections,
+Flow,Direction in which trade is measured,Dimension,http://gss-data.org.uk/def/concept-scheme/flow-directions,dimension/flow-directions,FlowDirections,
+Product,Classification of Products by Activity,Dimension,http://stamina-project.org/codes/cpav2008/cpa,dimension/cpa,Cpa,
+Reference Period,Available reference point,Dimension,,dimension/gdp-reference-period,GdpReferencePeriod,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod
+Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-estimate-type,dimension/gdp-estimate-type,GdpEstimateType,

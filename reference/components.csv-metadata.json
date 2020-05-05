@@ -84,7 +84,7 @@
       }
     ],
     "primaryKey": [
-      "label"
+      "path"
     ],
     "aboutUrl": "http://gss-data.org.uk/def/{+path}"
   }
