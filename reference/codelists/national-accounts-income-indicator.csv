@@ -1,7 +1,7 @@
 Label,Notation,Parent Notation,Sort Priority,Description
 Wages and Salaries,wages-and-salaries,,,
 Employers social contributions,employers-social-contributions,,,
-Total,total,,, Includes the operating surplus of financial corporations, private non-financial corporations and public corporations.
+Total,total,,,"Includes the operating surplus of financial corporations, private non-financial corporations and public corporations."
 Private non-financial corporations,private-non-financial-corporations,,, Quarterly alignment adjustment included in this series.
 Of which alignment adjustment,of-which-alignment-adjustment,,,
 Financial corporations,financial-corporations,,,
@@ -10,4 +10,4 @@ Gross value added at factor cost,gross-value-added-at-factor-cost,,,
 Taxes on products & production less subsidies,taxes-on-products-production-less-subsidies,,,
 Statistical discrepancy (income),statistical-discrepancy-income,,,
 Gross domestic product at market prices,gross-domestic-product-at-market-prices,,,
-Other income,other-income,,, Includes mixed income and the operating surplus of the non-corporate sector.
+Other income,other-income,,,Includes mixed income and the operating surplus of the non-corporate sector.
