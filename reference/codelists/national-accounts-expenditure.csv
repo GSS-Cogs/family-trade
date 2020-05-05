@@ -1,17 +1,17 @@
 Label,Notation,Parent Notation,Sort Priority,Description
 Households,households,,,
-Non-profit institutions,non-profit-institutions,,,
+Non-profit institutions,non-profit-institutions,,,Non-profit institutions serving households
 General Government,general-government,,,
 Gross fixed capital formation,gross-fixed-capital-formation,,,
-Changes in inventories,changes-in-inventories,,,
+Changes in inventories,changes-in-inventories,,,Quarterly alignment adjustment included in this series.
 Of which alignment adjustment,of-which-alignment-adjustment,,,
-Acquisitions less disposals of valuables,acquisitions-less-disposals-of-valuables,,,
+Acquisitions less disposals of valuables,acquisitions-less-disposals-of-valuables,,,Acquisitions less disposals of valuables can be a volatile series, due to the inclusion of non-monetary gold, but any volatility is likely to be GDP neutral as this is offset in UK trade figures
 Total,total,,,
 Total exports,total-exports,,,
 Gross final expenditure,gross-final-expenditure,,,
 "less
 Total imports",less-total-imports,,,
-Trade balance,trade-balance,,,
+Trade balance,trade-balance,,,Trade balance is calculated by using exports of goods and services minus imports of goods and services
 Statistical discrepancy (expenditure),statistical-discrepancy-expenditure,,,
 Gross domestic product at market prices,gross-domestic-product-at-market-prices,,,
-Of which business investment,of-which-business-investment,,,
+Of which business investment,of-which-business-investment,,,Further breakdown of business investment can be found in the 'Business investment in the UK' bulletin

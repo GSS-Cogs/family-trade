@@ -3,8 +3,8 @@ Gross domestic product at market prices,gross-domestic-product-at-market-prices,
 Gross value added at basic prices,gross-value-added-at-basic-prices,,,
 Gross national expenditure,gross-national-expenditure,,,
 Market sector gross value added,market-sector-gross-value-added,,,
-less Basic price adjustment,less-basic-price-adjustment,,,
-Gross value added excluding oil & gas,gross-value-added-excluding-oil-gas,,,
-Net income from abroad,net-income-from-abroad,,
-Gross national income at market prices,gross-national-income-at-market-prices,,
-Gross national disposable income at market prices,gross-national-disposable-income-at-market-prices,,
+less Basic price adjustment,less-basic-price-adjustment,,,Taxes on products less subsidies
+Gross value added excluding oil & gas,gross-value-added-excluding-oil-gas,,,Calculated by using gross value added at basic prices minus extraction of crude petroleum and natural gas
+Net income from abroad,net-income-from-abroad,,,Includes employment, entrepreneurial and property income
+Gross national income at market prices,gross-national-income-at-market-prices,,,
+Gross national disposable income at market prices,gross-national-disposable-income-at-market-prices,,,

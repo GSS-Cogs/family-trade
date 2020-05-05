@@ -96,7 +96,8 @@ class LookupMeasure(object):
         
         # Overrides per job
         self.overrides = {
-            "Inventories": self._inventories
+            "Inventories": self._inventories,
+            "GBP per head": self._gbp_per_head
         }
          
         # The following is fall back logic for identifying measure types from column A, we're
@@ -118,12 +119,28 @@ class LookupMeasure(object):
         else:
             self.percentage_override = None
     
-    def _inventories(self):
+    def _inventories(self, cdid):
         return "GBP Million" if "current prices" in self.title else "Index"
+    
+    def _gbp_per_head(self, cdid):
+        # Seem to be redefining what some cdid codes mean, so using deliberately fragile lookup
+        lookup =  {
+        "EBAQ": "people",
+        "YBHA": "current-price",
+        "IHXT": "current-price",
+        "ABMI": "chain-volume-measure",
+        "IHXW": "chain-volume-measure"
+        }
+        try:
+            return lookup[cdid]
+        except Exception as e:
+            raise Exception("Aborting. Encountered issue when using cdid code to find"
+                           "measure for the 'GBP per head' data. Code '{}', lookup dict '{}'."
+                           .format(cdid, json.dumps(lookup)))
               
     def __call__(self, cdid):
         if self.job in self.overrides.keys():
-            return self.overrides[self.job]()
+            return self.overrides[self.job](cdid)
         else:
             try:
                 # Use horrible tab f fallback if we have to
@@ -197,7 +214,7 @@ def format_time(time_value):
     
 class move_rows(object):
     """
-    For if you just want a lookup to the labels that are offset y (vertical index) rows from the cdid row
+    For if you just want a lookup to the labels that are offset y (vertical index) rows from the cdid header row
     """
     def __init__(self, y_offset):
         self.y_offset = y_offset
@@ -332,7 +349,6 @@ def table_b_lookup(cdid_header_row):
                     
     return lookup
 
-
 # filters to pass to databaker
 # a filter can be anything that takes an xyCell and return True or False
 
@@ -435,6 +451,15 @@ jobs = {
         ],
         "pathify": ["Trade Type", "Flow"],
         "clear_footnotes_from": ["Trade Type", "Flow"]
+    },
+    "GDP per head": {
+        "tabs": [x for x in tabs if x.name.startswith("P") and "GDP per head" in x.name],
+        "cdid_header_row": '4',
+        "dimension_looked_up_from_cdid_row": [
+            ("GDP Measure", move_rows(-1))
+        ],
+        "pathify": ["GDP Measure"],
+        "clear_footnotes_from": ["GDP Measure"]
     }
 }
 
@@ -454,6 +479,7 @@ for job_name, job_details in jobs.items():
 
             # Get the CDID header row
             cdid_header_row = tab.excel_ref(job_details["cdid_header_row"]).filter(is_cdid)
+            all_cdids = cdid_header_row.expand(DOWN).filter(is_cdid)
 
             # Get time
             time = tab.excel_ref("A6").fill(DOWN).filter(is_time)
@@ -461,10 +487,11 @@ for job_name, job_details in jobs.items():
             dimensions = [
                 HDim(time, "Period", DIRECTLY, LEFT),
                 HDimConst("Geography", "K02000001"),
+                HDim(all_cdids, "CDID", DIRECTLY, ABOVE),
                 HDim(cdid_header_row.expand(DOWN).filter(is_cdid), "Measure Type", DIRECTLY, ABOVE)
             ]
             
-            # missing CDID's for estiamte type ....
+            # missing CDID's for estimate type ....
             if job_name == "Gross fixed capital formation" or job_name == "Inventories":
                 dimensions.append(
                 HDim(cdid_header_row.shift(0, -4).is_not_blank().is_not_whitespace(), "Estimate Type", CLOSEST, RIGHT, 
@@ -511,6 +538,14 @@ for job_name, job_details in jobs.items():
             for col in job_details.get("pathify", []):
                 df[col] = df[col].apply(pathify) 
                 
+            # Last, we'll pull out any datamarkers
+            df["Marker"] = df["Value"].map(lambda cell: "".join([x for x in str(cell) if not x.isdigit()]))
+            df["Marker"] = df["Marker"].map(lambda x: "-" if x == "-." else "" if x == "." else x)
+            
+            # Now correct the notation of any data markers
+            marker_lookup = {"..": "not-availible", "-": "nil-or-less-than-half-the-final-digit-shown"}
+            df["Marker"] = df["Marker"].map(lambda x: marker_lookup.get(x, x))
+                
             tidy_sheets.append(df)
                 
         destinationFolder = Path('out')
@@ -520,6 +555,8 @@ for job_name, job_details in jobs.items():
         OBS_ID = pathify(TITLE)
         
         df = pd.concat(tidy_sheets).drop_duplicates()
+        
+        print(df["Marker"].unique())
                 
         df.to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
@@ -536,7 +573,6 @@ for job_name, job_details in jobs.items():
     except Exception as e:
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
-
 
 
 # %%

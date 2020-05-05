@@ -296,6 +296,11 @@
             "rdfs:label": "Aggregate"
         },
         {
+            "url": "codelists/national-accounts-gdp-measure.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "GDP Measure"
+        },
+        {
             "url": "codelists/national-accounts-expenditure.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Expenditure"

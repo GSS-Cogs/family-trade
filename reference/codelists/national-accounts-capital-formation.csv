@@ -1,13 +1,13 @@
 Label,Notation,Parent Notation,Sort Priority,Description
-total,total,,,
-general government,general-government,,,
+Total,total,,,
+General government,general-government,,,
 business investment,business-investment,,,
-Public corporations  dwellings,public-corporations-dwellings,,,
-Public corporations  costs of transfer of ownership of non-produced assets,public-corporations-costs-of-transfer-of-ownership-of-non-produced-assets,,,
-Private sector dwellings,private-sector-dwellings,,,
+Public corporations dwellings,public-corporations-dwellings,,,Remaining investment by public non-financial corporations included within business investment. Includes new dwellings and improvements to dwellings.
+Public corporations costs of transfer of ownership of non-produced assets,public-corporations-costs-of-transfer-of-ownership-of-non-produced-assets,,,Remaining investment by public non-financial corporations included within business investment.
+Private sector dwellings,private-sector-dwellings,,,Includes new dwellings and improvements to dwellings.
 Private sector costs of transfer of ownership of non-produced assets,private-sector-costs-of-transfer-of-ownership-of-non-produced-assets,,,
-transport equipment,transport-equipment,,,
-ict equipment and other machinery and equipment,ict-equipment-and-other-machinery-and-equipment,,,
-dwellings,dwellings,,,
-other buildings and structures,other-buildings-and-structures,,,
-intellectual property products,intellectual-property-products,,,
+Transport equipment,transport-equipment,,,
+ICT equipment and other machinery and equipment,ict-equipment-and-other-machinery-and-equipment,,,
+Dwellings,dwellings,,,Includes cultivated biological resources (AN.115) and weapons (AN.114)
+Other buildings and structures,other-buildings-and-structures,,,Including costs associated with the transfer of ownership of buildings, dwellings and non-produced assets
+Intellectual property products,intellectual-property-products,,,
