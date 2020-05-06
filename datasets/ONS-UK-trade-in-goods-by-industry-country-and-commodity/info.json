@@ -40,7 +40,7 @@
                 "variable": "marker",
                 "property": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
-            }
+            },
             "Value": {
                 "unit": "gbp-million",
                 "measure": "GBP Total",
