@@ -1,0 +1,32 @@
+Label,Notation,Parent Notation,Sort Priority
+Total,total,,1
+Total alcohol,total-alcohol,,2
+Total alcohol (production),total-alcohol-production,,3
+Total alcohol (clearances),total-alcohol-clearances,,4
+Total wine,total-wine,,5
+Total wine of fresh grape,total-wine-of-fresh-grape,,6
+Total made wine,total-made-wine,,7
+Total spirits,total-spirits,,8
+Total beer,total-beer,,9
+Total beer clearances,total-beer-clearances,,10
+Total cider,total-cider,,11
+Still,still,,12
+Sparkling,sparkling,,13
+Imported ex-ship,imported-ex-ship,,14
+Imported and other spirit,imported-and-other-spirits,,15
+Ex-warehouse,ex-warehouse,,16
+Ex-warehouse and imports,ex-warehouse-and-imports,,17
+UK registered premises,uk-registered-premises,,18
+Home Produced Whisky - Malt,hpw-malt,,19
+Home Produced Whisky - Grain and Blended,hpw-grain-blended,,20
+Home Produced Whisky - Total,hpw-total,,21
+Spirit Based RTDs,spirit-based-rtds,,22
+Ready-to-Drink (RTD),rtd,,23
+Spirits,spirits,,24
+Beer,beer,,25
+Breweries Producing 5000 Hls Or Less,breweries-5000-less,,26
+Breweries Producing 5000 to 30000 Hls,breweries-5000-30000,,27
+Breweries Producing 30000 to 60000 Hls,breweries-30000-60000,,28
+High Strength Beers,high-strength-beers,,29
+Low Strength Beers,low-strength-beers,,30
+Total cider clearances,total-cider-clearances,,31

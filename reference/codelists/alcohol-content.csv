@@ -1,0 +1,20 @@
+Label,Notation,Parent Notation,Sort Priority
+All,all,,1
+Not exceeding 15%,not-exc-15,,2
+Over 15% ABV,over-15,,3
+Composition by Origin above 5.5% ABV,comp-by-origin-above-5-5,,4
+Above 5.5% ABV but not exceeding 15%,above-5-5-not-exc-15,,5
+Above 1.2% but not exceeding 5.5% ABV,above-1-2-not-exc-5-5,,6
+"Over 1.2%, up to and including 4.0%",over-1-2-up-to-and-incl-4-0,,7
+"Over 1.2%, up to and including 7.5%",over-1-2-up-to-and-incl-7-5,,8
+"Over 4.0%, up to and including 5.5%",over-4-0-up-to-and-incl-5-5,,9
+"Over 5.5%, up to and including 15.0%",over-5-5-up-to-and-incl-15-0,,10
+"Over 15.0%, up to and including 22%",over-15-0-up-to-and-incl-22,,11
+"Over 5.5%, less than 8.5%",over-5-5-less-than-8-5,,12
+"From 8.5%, up to and including 15.0%",from-8-5-up-to-and-incl-15-0,,13
+Unspecified,unspecified,,14
+Pure alcohol,pure-alcohol,,15
+ABV 7.5%,abv-7-5,,16
+1.2% to 2.8%,1-2-to-2-8,,17
+ABV 22%,abv-22,,18
+Over 7.5% but less than 8.5%,over-7-5-less-than-8-5,,19

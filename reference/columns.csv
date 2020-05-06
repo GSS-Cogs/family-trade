@@ -107,3 +107,6 @@ Pinkbook CDID,pinkbook_cdid,qb:dimension,http://gss-data.org.uk/def/dimension/pi
 Size of Business by no of Employees,size_of_business_by_no_of_employees,qb:dimension,http://gss-data.org.uk/def/dimension/size-of-business-by-no-of-employees,http://gss-data.org.uk/def/concept/employment-size-bands/{size_of_business_by_no_of_employees},string,slugize,,
 HMRC Trade Statistic Type,hmrc_trade_statistic_type,qb:dimension,http://gss-data.org.uk/def/dimension/hmrc-trade-statistic-type,http://gss-data.org.uk/def/concept/hmrc-trade-statistic-type/{hmrc_trade_statistic_type},string,slugize,,
 CORD Geography,cord_geography,qb:dimension,http://gss-data.org.uk/def/dimension/cord-geography,http://gss-data.org.uk/def/concept/cord-geography/{cord_geography},string,,,
+Alcohol Duty,alcohol_duty,qb:dimension,http://gss-data.org.uk/def/dimension/alcohol-duty,http://gss-data.org.uk/def/concept/alcohol-duty/{alcohol_duty},string,slugize,,
+Alcohol Category,alcohol_category,qb:dimension,http://gss-data.org.uk/def/dimension/alcohol-category,http://gss-data.org.uk/def/concept/alcohol-category/{alcohol_category},string,slugize,,
+Alcohol Content,alcohol_content,qb:dimension,http://gss-data.org.uk/def/dimension/alcohol-content,http://gss-data.org.uk/def/concept/alcohol-content/{alcohol_content},string,slugize,,
