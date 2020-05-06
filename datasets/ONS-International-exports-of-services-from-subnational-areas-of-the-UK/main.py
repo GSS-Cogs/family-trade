@@ -64,6 +64,7 @@ next_table = next_table[['Period','Product','Service Origin Geography','Service 
 next_table['Flow'] = next_table['Flow'].map(pathify)
 
 next_table["Service Origin Geography"] = next_table["Service Origin Geography"].apply(pathify)
+next_table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 from pathlib import Path
 import numpy as np
@@ -114,14 +115,3 @@ csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / (file_name + '.csv'), out / ((file_name + '.csv') + '-schema.json'))
 
 
-
-# +
-#scraper.dataset.family = 'trade'
-#from gssutils.metadata import THEME
-#scraper.dataset.theme = THEME['business-industry-trade-energy']
-#with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-#    metadata.write(scraper.generate_trig())
-
-# +
-#csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-#csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
