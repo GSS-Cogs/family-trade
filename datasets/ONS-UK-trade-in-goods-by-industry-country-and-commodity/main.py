@@ -74,16 +74,19 @@ for col in ['Industry', 'Country', 'Commodity']:
         columns=['Notation', 'Label']
     )
     codelist['Parent Notation'] = ''
-    codelist['Sort Priority'] = codelist
+    codelist['Sort Priority'] = codelist.index + 1
     codelist['Description'] = ''
     display(HTML(f'<h2>{col}</h2>'))
     display(codelist)
     codelist.to_csv(codelists / f'{col.lower()}.csv', index = False)
     obs[col].cat.categories = obs[col].cat.categories.map(lambda x: x.split()[0])
+# -
+
+obs = obs.drop_duplicates()
+obs.to_csv(out / 'observations.csv', index = False)
+obs
 
 # +
-obs.drop_duplicates().to_csv(out / 'observations.csv', index = False)
-
 scraper = scrapers[0]
 
 from gssutils.metadata import THEME
@@ -100,5 +103,7 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+
+
 
 
