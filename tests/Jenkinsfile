@@ -1,0 +1,24 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+    stages {
+        stage('SPARQL Tests') {
+            agent {
+                docker {
+                    image 'cloudfluff/sparql-test-runner'
+                    reuseNode true
+                    alwaysPull true
+                }
+            }
+            steps {
+                sh 'sparql-test-runner -i -s https://production-drafter-ons-alpha.publishmydata.com/v1/sparql/live'
+            }
+        }
+    }
+    post {
+        always {
+            junit 'reports/**/*.xml'
+        }
+    }
+}

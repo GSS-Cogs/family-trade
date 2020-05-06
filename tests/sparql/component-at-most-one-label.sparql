@@ -1,0 +1,12 @@
+# Components should have at most one label
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT * WHERE {
+  { ?p a qb:DimensionProperty } UNION
+  { ?p a qb:MeasureProperty } UNION
+  { ?p a qb:AttributeProperty }
+  ?p rdfs:label ?l1, ?l2 .
+  FILTER (?l1 != ?l2) .
+}

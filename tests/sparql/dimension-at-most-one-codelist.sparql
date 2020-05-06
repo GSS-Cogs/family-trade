@@ -1,0 +1,9 @@
+# Dimensions (in trade datasets) should have at most one codelist
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+SELECT * WHERE {
+  ?d a qb:DataSet ;
+     qb:structure / qb:component / qb:dimension ?dim .
+  ?dim qb:codeList ?cl1, ?cl2 .
+  FILTER (?cl1 != ?cl2 && regex(str(?d), "trade")) .
+}
