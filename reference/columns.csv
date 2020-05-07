@@ -108,4 +108,4 @@ Alcohol Duty,alcohol_duty,qb:dimension,http://gss-data.org.uk/def/dimension/alco
 Alcohol Category,alcohol_category,qb:dimension,http://gss-data.org.uk/def/dimension/alcohol-category,http://gss-data.org.uk/def/concept/alcohol-category/{alcohol_category},string,slugize,,
 Alcohol Content,alcohol_content,qb:dimension,http://gss-data.org.uk/def/dimension/alcohol-content,http://gss-data.org.uk/def/concept/alcohol-content/{alcohol_content},string,slugize,,
 Revision,revision,qb:dimension,http://gss-data.org.uk/def/dimension/revision,http://gss-data.org.uk/def/concept/revisions/{revision},string,slugize,,
-GDP Measure,gdp_measure,gb:dimension,http://gss-data.org.uk/def/dimension/gdp-measure,http://gss-data.org.uk/def/concept/gdp-measure/{gdp_measure},string,slugize,,
+GDP Measure,gdp_measure,qb:dimension,http://gss-data.org.uk/def/dimension/gdp-measure,http://gss-data.org.uk/def/concept/gdp-measure/{gdp_measure},string,slugize,,
