@@ -1,0 +1,15 @@
+# Dimension qb:codeList should be the same as computed for pmd:codesUsed
+
+PREFIX qb:      <http://purl.org/linked-data/cube#>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+SELECT ?ds ?codelist ?schemeInUse {
+    ?ds qb:structure/qb:component ?comp .
+    FILTER(CONTAINS(STR(?ds),  "/trade/"))
+    ?comp qb:dimension ?dim .
+    ?dim qb:codeList ?codelist .
+    ?comp <http://publishmydata.com/def/qb/codesUsed> ?collection .
+    ?collection skos:member ?concept .
+    ?concept skos:inScheme ?schemeInUse .
+    FILTER(?schemeInUse != ?codelist)
+}
+GROUP BY ?ds ?schemeInUse ?codelist

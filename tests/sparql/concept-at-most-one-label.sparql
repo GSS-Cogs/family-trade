@@ -1,0 +1,9 @@
+# Concepts should have at most one label
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT * {
+  ?c a skos:Concept ;
+     rdfs:label ?l1, ?l2 .
+  FILTER (?l1 != ?l2 && lang(?l1) = lang(?l2))
+}
