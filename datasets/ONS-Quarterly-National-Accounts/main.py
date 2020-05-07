@@ -340,15 +340,14 @@ class gpb_measures_override(object):
     """
     def __init__(self, cdid_header_row, job_details):
         self.lookup = {}
-        for cell in [x for x in cdid_header_row if x.y == job_details[""]]:
+        for cell in [x for x in cdid_header_row if x.y == int(job_details["cdid_header_row"])]:
             lookup_to = cell.shift(0, -2).parent()
-            if lookup_to == "":
+            if lookup_to.value == "":
                 self.lookup[cell.value] = lookup_to.value
             else:
                 self.lookup[cell.value] = "persons"
                 
     def __call__(self, cdid):
-        print(self.lookup)
         return self.lookup[cdid]
     
 
@@ -536,6 +535,7 @@ for job_name, job_details in jobs.items():
             if job_name != "GDP per head":
                 df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
             else:
+                print(pb_measures_override(all_cdids, job_details).lookup)
                 df["Measure Type"] = df["CDID"].apply(gpb_measures_override(all_cdids, job_details))
             
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million") # why?
