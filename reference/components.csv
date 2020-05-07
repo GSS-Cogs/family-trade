@@ -45,14 +45,11 @@ Income Description,Income Description,Dimension,http://gss-data.org.uk/def/conce
 Earnings,Earnings,Dimension,http://gss-data.org.uk/def/concept-scheme/earnings,dimension/earnings,Earnings,
 Sector,Sector,Dimension,http://gss-data.org.uk/def/concept-scheme/sector,dimension/sector,Sector,
 Transaction Type,Transaction Type,Dimension,http://gss-data.org.uk/def/concept-scheme/transaction-type,dimension/transaction-type,TransactionType,
-1Y deflator GR,,Measure,,measure/1y-deflator-gr,1yDeflatorGr,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-4Q deflator GR,,Measure,,measure/4q-deflator-gr,4qDeflatorGr,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Index deflator series,,Measure,,measure/index-deflator-series,IndexDeflatorSeries,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Index,,Measure,,measure/index,Index,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-4Q GR,,Measure,,measure/4q-gr,4qGr,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-1Q GR,,Measure,,measure/1q-gr,1qGr,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-1Q deflator GR,,Measure,,measure/1q-deflator-gr,1qDeflatorGr,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-1Y GR,,Measure,,measure/1y-gr,1yGr,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+Quarter on quarter a year ago,,Measure,,measure/quarter-on-quarter-a-year-ago,QuarterOnQuarterAYearAgo,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+Quarter on quarter,,Measure,,measure/quarter-on-quarter,QuarterOnQuarter,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+Year on year,,Measure,,measure/year-on-year,YearOnYear,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Index series,,Measure,,measure/index-series,IndexSeries,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Implied Deflator,,Measure,,measure/implied-deflator,ImpliedDeflator,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Chained volume measure,,Measure,,measure/chained-volume-measure,ChainedVolumeMeasure,http://purl.org/linked-data/sdmx/2009/measure#obsValue
