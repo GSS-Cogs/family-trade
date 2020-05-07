@@ -31,8 +31,7 @@ tabs = scraper.distribution(downloadURL=lambda x: "quarterlynationalaccounts" in
 #
 # We're going to create a dictionary from the index tab for use in building all the datacubes, this is so we can: 
 #
-# - get the measure types based on CDID and series type.
-# - different better current price and chain volume measure using series description.
+# - different better current price, deflator and chain volume measure using series description.
 
 # %%
 
@@ -44,7 +43,6 @@ if len(tab) != 1:
     
 # Select all values in columns A and D
 a_cells = tab[0].excel_ref('A').is_not_blank().is_not_whitespace()
-d_cells = tab[0].excel_ref('D').is_not_blank().is_not_whitespace()
 b_cells = tab[0].excel_ref('B').is_not_blank().is_not_whitespace()
 
 # Match the vertical offset (.y) of the xyCells to make the dict
@@ -52,15 +50,10 @@ measure_dict = {}
 estimate_type = {}
 for a_cell in a_cells:
     
-    # Get {cdid: measure type}
-    d_cell = [x for x in d_cells if x.y == a_cell.y][0]
-    d_val = "GBP Million" if "£ million" in d_cell.value else d_cell.value
-    measure_dict[a_cell.value] = d_val
-    
     # Get {cdid: GDP Estimate}
     b_cell = [x for x in b_cells if x.y == a_cell.y][0]
     
-    if " cvm " in b_cell.value.lower():
+    if " cvm " in a_cell.value.lower():
         estimate_type[a_cell.value] = "chain-volume-measure"
     elif " cp " in b_cell.value.lower():
         estimate_type[a_cell.value] = "current-price"
@@ -94,35 +87,29 @@ class LookupMeasure(object):
         self.title = [x.value for x in tab.excel_ref("B1")][0]
         self.all_cdids = [x for x in self.tab.filter(is_cdid)]
         
-        # Overrides per job
+        # Overrides per job where the pattern is non standard for whatever reason
         self.overrides = {
             "Inventories": self._inventories,
-            "GBP per head": self._gbp_per_head
+            "GDP per head": self._gdp_per_head
         }
          
-        # The following is fall back logic for identifying measure types from column A, we're
-        # having to use this due to some CDIDs being missing from the index
-        
-        # TODO - half one way half the other is silly. May need to be refactored to
-        # all do it this way (or better yet their data could be correct).
-        
-        if self.job == "Gross fixed capital formation" or self.job == "Income indicators":
-            
-            # Percentage is referenced 3 times in column A, we'll use this to differentiate
-            # the measure type, based on vertical (.y) cell position.
-            percentage_break_points = [x for x in tab.excel_ref("A") if "percent" in str(x.value).lower()]
-            self.percentage_override = {
-                int(percentage_break_points[0].y): "GBP Million",
-                int(percentage_break_points[1].y): "1Y GR",
-                int(percentage_break_points[2].y): "1Q GR"
-            }
-        else:
-            self.percentage_override = None
+        # Default (i.e not a percentage) measures per job/tab
+        self.defaults = {
+            "National Accounts Aggregates": "Index series",
+            "Output indicators": "Index series", 
+            "Expenditure indicators": "GBP Million",
+            "Income indicators": "GBP Million",
+            "Household expenditure indicators": "GBP Million",
+            "Gross fixed capital formation": "GBP Million",
+            "Trade": "GBP Million",
+            "GFCF": "GBP Million",
+            "Income indicators": "GBP Million"   
+        }
     
-    def _inventories(self, cdid):
+    def _inventories(self, val):
         return "GBP Million" if "current prices" in self.title else "Index"
     
-    def _gbp_per_head(self, cdid):
+    def _gdp_per_head(self, val):
         # Seem to be redefining what some cdid codes mean, so using deliberately fragile lookup
         lookup =  {
         "EBAQ": "people",
@@ -132,35 +119,30 @@ class LookupMeasure(object):
         "IHXW": "chain-volume-measure"
         }
         try:
-            return lookup[cdid]
+            return lookup[val]
         except Exception as e:
             raise Exception("Aborting. Encountered issue when using cdid code to find"
                            "measure for the 'GBP per head' data. Code '{}', lookup dict '{}'."
-                           .format(cdid, json.dumps(lookup)))
+                           .format(val, json.dumps(lookup)))
               
-    def __call__(self, cdid):
+    def __call__(self, val):
         if self.job in self.overrides.keys():
-            return self.overrides[self.job](cdid)
+            return self.overrides[self.job](val)
         else:
-            try:
-                # Use horrible tab f fallback if we have to
-                if self.percentage_override is not None:
-
-                    # If a cdid is used more than once if must be on the same vertical (.y) offset
-                    cdid_y_offset_cells = [x for x in self.all_cdids if x.value == cdid]
-                    if len(set([x.y for x in cdid_y_offset_cells])) != 1:
-                           raise Exception("The cdid '{}' appears under multiple measures type - this should not" 
-                                           "be possible and indnicates a critical error in the data.".format(cdid))
-                    
-                    for k, v in self.percentage_override.items():
-                        if int(cdid_y_offset_cells[0].y) < k:
-                            return v
-                    return "4Q GR"
-                
-                else: 
-                    return measure_dict[cdid]
-            except Exception as e:
-                raise Exception("CDID-{}-NOT-FOUND".format(cdid), "tab is", self.tab.name) from e
+            if "seasonally adjusted" in val.lower():
+                try:
+                    return self.defaults[self.job]
+                except Exception as e:
+                    raise Exception("Failed to get default measure type for job {} from this dict {}.".format(self.job, json.dumps(self.defaults))) from e
+            elif "latest year on previous" in val.lower():
+                return "Year on year"
+            elif "latest quarter on previous" in val.lower():
+                return "Quarter on quarter"
+            elif "latest quarter on corresponding quarter" in val.lower():
+                return "Quarter on quarter a year ago"
+            else:
+                raise Exception("Cannot calculate measure from value '{}', tab is {}"
+                            .format(val, self.tab.name))
 
 
 class lookup_from_offset_range(object):
@@ -349,6 +331,27 @@ def table_b_lookup(cdid_header_row):
                     
     return lookup
 
+
+class gpb_measures_override(object):
+    """
+    For ..reasons.. the measure types on the gdp tab are denotated by horixontal columns changes rather than
+    vertical segregation of cells. So we're going to dynamically overrides the CDID values from the CDID header
+    cells to reflect that change.
+    """
+    def __init__(self, cdid_header_row, job_details):
+        self.lookup = {}
+        for cell in [x for x in cdid_header_row if x.y == job_details[""]]:
+            lookup_to = cell.shift(0, -2).parent()
+            if lookup_to == "":
+                self.lookup[cell.value] = lookup_to.value
+            else:
+                self.lookup[cell.value] = "persons"
+                
+    def __call__(self, cdid):
+        print(self.lookup)
+        return self.lookup[cdid]
+    
+
 # filters to pass to databaker
 # a filter can be anything that takes an xyCell and return True or False
 
@@ -360,7 +363,15 @@ def is_cdid(xyCell):
 pattern_time = re.compile("^[0-9]{4}(\.[0-9])?( Q[1-4])?")
 def is_time(xyCell):
     return True if pattern_time.match(str(xyCell.value)) else False
-    
+
+def is_not_time_or_blank(xyCell):
+    if is_time(xyCell):
+        return False
+    else:
+        if xyCell.value is None or xyCell.value == "":
+            return False
+    return True
+
 
 
 # %% [markdown]
@@ -369,7 +380,6 @@ def is_time(xyCell):
 # We're gonna use a dictionary of parameters so we can transform each dataset via the same loop.
 
 # %%
-
 
 jobs = {
     "National Accounts Aggregates": {
@@ -488,7 +498,7 @@ for job_name, job_details in jobs.items():
                 HDim(time, "Period", DIRECTLY, LEFT),
                 HDimConst("Geography", "K02000001"),
                 HDim(all_cdids, "CDID", DIRECTLY, ABOVE),
-                HDim(cdid_header_row.expand(DOWN).filter(is_cdid), "Measure Type", DIRECTLY, ABOVE)
+                HDim(tab.excel_ref('A').filter(is_not_time_or_blank), "Measure Type", CLOSEST, ABOVE)
             ]
             
             # missing CDID's for estimate type ....
@@ -518,11 +528,17 @@ for job_name, job_details in jobs.items():
             elif job_name == "Gross fixed capital formation" or job_name == "Inventories":
                 pass # handled with a dimension
             else:
-                df["Estimate Type"] = df["Measure Type"]
+                df["Estimate Type"] = df["CDID"]
                 df["Estimate Type"] = df["Estimate Type"].map(lambda x: estimate_type[x])
                 
-            df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
-            df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million")
+            # GDP per head uses different measures along the horioztal axis rather than vertical
+            # cell segregaton. Need to account for that.
+            if job_name != "GDP per head":
+                df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
+            else:
+                df["Measure Type"] = df["CDID"].apply(gpb_measures_override(all_cdids, job_details))
+            
+            df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million") # why?
             df = df.rename(columns={"OBS": "Value", "DATAMARKER": "Marker"})
             df.fillna("", inplace=True)
             
@@ -555,8 +571,6 @@ for job_name, job_details in jobs.items():
         OBS_ID = pathify(TITLE)
         
         df = pd.concat(tidy_sheets).drop_duplicates()
-        
-        print(df["Marker"].unique())
                 
         df.to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
@@ -574,7 +588,5 @@ for job_name, job_details in jobs.items():
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
 
-
-# %%
 
 # %%
