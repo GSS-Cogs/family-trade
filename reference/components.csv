@@ -91,3 +91,4 @@ Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-estimate-
 Alcohol Duty,Alcohol Duty,Dimension,http://gss-data.org.uk/def/concept-scheme/alcohol-duty,dimension/alcohol-duty,AlcoholDuty,
 Alcohol Content,Alcohol by volume (ABV),Dimension,http://gss-data.org.uk/def/concept-scheme/alcohol-content,dimension/alcohol-content,AlcoholContent,
 Alcohol Category,Alcohol Category,Dimension,http://gss-data.org.uk/def/concept-scheme/alcohol-category,dimension/alcohol-category,AlcoholCategory,
+GDP Measure,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-measure,dimension/gdp-measure,GDPMeasure,

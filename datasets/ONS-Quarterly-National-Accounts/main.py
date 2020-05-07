@@ -31,7 +31,7 @@ tabs = scraper.distribution(downloadURL=lambda x: "quarterlynationalaccounts" in
 #
 # We're going to create a dictionary from the index tab for use in building all the datacubes, this is so we can: 
 #
-# - different better current price, deflator and chain volume measure using series description.
+# - different betweer current price, deflator and chain volume measure using series description.
 
 # %%
 
@@ -41,9 +41,9 @@ tab = [x for x in tabs if x.name == "Index"]
 if len(tab) != 1:
     raise Exception("Extraction Aborted. The spreadheet should have 1 (and only 1) tab named 'Index'.")
     
-# Select all values in columns A and D
-a_cells = tab[0].excel_ref('A').is_not_blank().is_not_whitespace()
-b_cells = tab[0].excel_ref('B').is_not_blank().is_not_whitespace()
+# Select all values in columns A and B
+a_cells = tab[0].excel_ref('A').is_not_blank().is_not_whitespace() - tab[0].excel_ref("A1")
+b_cells = tab[0].excel_ref('B').is_not_blank().is_not_whitespace() - tab[0].excel_ref("B1")
 
 # Match the vertical offset (.y) of the xyCells to make the dict
 measure_dict = {}
@@ -53,12 +53,18 @@ for a_cell in a_cells:
     # Get {cdid: GDP Estimate}
     b_cell = [x for x in b_cells if x.y == a_cell.y][0]
     
-    if " cvm " in a_cell.value.lower():
-        estimate_type[a_cell.value] = "chain-volume-measure"
+    if " cvm " in b_cell.value.lower():
+        estimate_type[a_cell.value] = "chained-volume-measure"
     elif " cp " in b_cell.value.lower():
         estimate_type[a_cell.value] = "current-price"
-    else:
+    elif " deflator " in b_cell.value.lower():
         estimate_type[a_cell.value] = "deflator"
+    elif " population " in b_cell.value.lower():
+        estimate_type[a_cell.value] = "people"
+    elif "per cent" in b_cell.value.lower() or " percent " in b_cell.value.lower():
+        estimate_type[a_cell.value] = "percentage"
+    else:
+        raise Exception(f'Cannot find estimate type for {b_cell.value}')
 
 
 # %% [markdown]
@@ -77,8 +83,8 @@ for a_cell in a_cells:
 
 class LookupMeasure(object):
     """
-    A class for passing to pandas .apply() to get a measure using the provided index dict (which we made earlier) 
-    for a given CDID code.
+    A class for passing to pandas .apply() to get the measure type. Usually from the databaked "measure type" dimensions,
+    but in at least one case we use the CDID (where measures are declared horizontally not vertically).
     """
     
     def __init__(self, job, tab):
@@ -334,18 +340,22 @@ def table_b_lookup(cdid_header_row):
 
 class gpb_measures_override(object):
     """
-    For ..reasons.. the measure types on the gdp tab are denotated by horixontal columns changes rather than
-    vertical segregation of cells. So we're going to dynamically overrides the CDID values from the CDID header
-    cells to reflect that change.
+    For ..reasons.. the measure types on the gdp tab are denotated by horizontal columns changes rather than
+    vertical segregation of cells. So we're going to dynamically overrides values based on the contents of the CDID 
+    header cells to reflect that change.
     """
     def __init__(self, cdid_header_row, job_details):
         self.lookup = {}
-        for cell in [x for x in cdid_header_row if x.y == int(job_details["cdid_header_row"])]:
-            lookup_to = cell.shift(0, -2).parent()
-            if lookup_to.value == "":
-                self.lookup[cell.value] = lookup_to.value
+        for cell in cdid_header_row.expand(DOWN).filter(is_cdid):
+            lookup_to = [x for x in cdid_header_row if x.x == cell.x][0].shift(0, -2).parent()
+            if lookup_to.value == '':
+                self.lookup[cell.value] = "Persons"
+            elif "chained" in lookup_to.value.lower():
+                self.lookup[cell.value] = "Index"
+            elif "prices" in lookup_to.value.lower():
+                self.lookup[cell.value] = "GBP Million"
             else:
-                self.lookup[cell.value] = "persons"
+                raise Exception(f"Cannot find measure type for {lookup_to.value}")
                 
     def __call__(self, cdid):
         return self.lookup[cdid]
@@ -362,6 +372,7 @@ def is_cdid(xyCell):
 pattern_time = re.compile("^[0-9]{4}(\.[0-9])?( Q[1-4])?")
 def is_time(xyCell):
     return True if pattern_time.match(str(xyCell.value)) else False
+
 
 def is_not_time_or_blank(xyCell):
     if is_time(xyCell):
@@ -531,12 +542,13 @@ for job_name, job_details in jobs.items():
                 df["Estimate Type"] = df["Estimate Type"].map(lambda x: estimate_type[x])
                 
             # GDP per head uses different measures along the horioztal axis rather than vertical
-            # cell segregaton. Need to account for that.
+            # cell segregaton. Need to account for that, also one of them is in 1000's
             if job_name != "GDP per head":
                 df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
             else:
-                print(pb_measures_override(all_cdids, job_details).lookup)
-                df["Measure Type"] = df["CDID"].apply(gpb_measures_override(all_cdids, job_details))
+                print(gpb_measures_override(cdid_header_row, job_details).lookup)
+                df["Measure Type"] = df["CDID"].apply(gpb_measures_override(cdid_header_row, job_details))
+                df["Unit"] = df["Measure Type"].map(lambda x: 1000 if x == "persons" else 1)
             
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million") # why?
             df = df.rename(columns={"OBS": "Value", "DATAMARKER": "Marker"})
@@ -588,5 +600,3 @@ for job_name, job_details in jobs.items():
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
 
-
-# %%
