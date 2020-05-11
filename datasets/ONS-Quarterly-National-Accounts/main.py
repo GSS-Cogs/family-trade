@@ -96,7 +96,6 @@ class LookupMeasure(object):
         # Overrides per job where the pattern is non standard for whatever reason
         self.overrides = {
             "Inventories": self._inventories,
-            "GDP per head": self._gdp_per_head
         }
          
         # Default (i.e not a percentage) measures per job/tab
@@ -109,27 +108,12 @@ class LookupMeasure(object):
             "Gross fixed capital formation": "GBP Million",
             "Trade": "GBP Million",
             "GFCF": "GBP Million",
-            "Income indicators": "GBP Million"   
+            "Income indicators": "GBP Million",
+            "GDP per head": "GBP Million"   # note, we'll override some of these later for horizontal cahnges in measure
         }
-    
+
     def _inventories(self, val):
         return "GBP Million" if "current prices" in self.title else "Index"
-    
-    def _gdp_per_head(self, val):
-        # Seem to be redefining what some cdid codes mean, so using deliberately fragile lookup
-        lookup =  {
-        "EBAQ": "People",
-        "YBHA": "GBP Million",
-        "IHXT": "GBP Million",
-        "ABMI": "Index",
-        "IHXW": "Index"
-        }
-        try:
-            return lookup[val]
-        except Exception as e:
-            raise Exception("Aborting. Encountered issue when using cdid code to find"
-                           "measure for the 'GBP per head' data. Code '{}', lookup dict '{}'."
-                           .format(val, json.dumps(lookup)))
               
     def __call__(self, val):
         if self.job in self.overrides.keys():
@@ -338,27 +322,14 @@ def table_b_lookup(cdid_header_row):
     return lookup
 
 
-class gpb_measures_override(object):
+def gdp_measure_types(df):
     """
-    For ..reasons.. the measure types on the gdp tab are denotated by horizontal columns changes rather than
-    vertical segregation of cells. So we're going to dynamically overrides values based on the contents of the CDID 
-    header cells to reflect that change.
+    For the GDP per head job, the measures types are altered by changes in both the vertical and horizontal axis.
+    We're dealing with this by going with the vertical but modifying for the horizontal changes in post (this function)
     """
-    def __init__(self, cdid_header_row, job_details):
-        self.lookup = {}
-        for cell in cdid_header_row.expand(DOWN).filter(is_cdid):
-            lookup_to = [x for x in cdid_header_row if x.x == cell.x][0].shift(0, -2).parent()
-            if lookup_to.value == '':
-                self.lookup[cell.value] = "Persons"
-            elif "chained" in lookup_to.value.lower():
-                self.lookup[cell.value] = "Index"
-            elif "prices" in lookup_to.value.lower():
-                self.lookup[cell.value] = "GBP Million"
-            else:
-                raise Exception(f"Cannot find measure type for {lookup_to.value}")
-                
-    def __call__(self, cdid):
-        return self.lookup[cdid]
+    df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "people")] = "Person"
+    df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "chained-volume-measure")] = "Index"
+    return df
     
 
 # filters to pass to databaker
@@ -504,11 +475,14 @@ for job_name, job_details in jobs.items():
             # Get time
             time = tab.excel_ref("A6").fill(DOWN).filter(is_time)
             
+            observations = time.waffle(cdid_header_row).is_not_blank().is_not_whitespace()
+            
             dimensions = [
                 HDim(time, "Period", DIRECTLY, LEFT),
                 HDimConst("Geography", "K02000001"),
                 HDim(all_cdids, "CDID", DIRECTLY, ABOVE),
-                HDim(tab.excel_ref('A').filter(is_not_time_or_blank), "Measure Type", CLOSEST, ABOVE)
+                HDim(tab.excel_ref('A').filter(is_not_time_or_blank), "Measure Type", CLOSEST, ABOVE,
+                    cellvalueoverride={"P":"Seasonally adjusted"}) # account for missing header
             ]
             
             # missing CDID's for estimate type ....
@@ -524,9 +498,7 @@ for job_name, job_details in jobs.items():
             for lookup_job in job_details.get("dimension_looked_up_from_cdid_row", []):
                 table_lookup = lookup_job[1](cdid_header_row)
                 dimensions.append(HDim(cdid_header_row, lookup_job[0], DIRECTLY, ABOVE, cellvalueoverride=table_lookup))
-                
-            # Waffle to get obs then create
-            observations = time.waffle(cdid_header_row).is_not_blank().is_not_whitespace()
+
             df = ConversionSegment(tab, dimensions, observations).topandas()
                 
             # Appliable to all jobs
@@ -541,15 +513,11 @@ for job_name, job_details in jobs.items():
                 df["Estimate Type"] = df["CDID"]
                 df["Estimate Type"] = df["Estimate Type"].map(lambda x: estimate_type[x])
                 
-            # GDP per head uses different measures along the horioztal axis rather than vertical
-            # cell segregaton. Need to account for that, also one of them is in 1000's
-            if job_name != "GDP per head":
-                df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
-            else:
-                print(gpb_measures_override(cdid_header_row, job_details).lookup)
-                df["Measure Type"] = df["CDID"].apply(gpb_measures_override(cdid_header_row, job_details))
+            df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
+            if job_name == "GDP per head":
                 df["Unit"] = df["Measure Type"].map(lambda x: 1000 if x == "persons" else 1)
-            
+                df = gdp_measure_types(df)
+                
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million") # why?
             df = df.rename(columns={"OBS": "Value", "DATAMARKER": "Marker"})
             df.fillna("", inplace=True)
@@ -600,3 +568,5 @@ for job_name, job_details in jobs.items():
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
 
+
+# %%
