@@ -354,6 +354,21 @@
             "url": "codelists/trade-group.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Trade Group"
+        },
+        {
+            "url": "codelists/alcohol-duty.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Alcohol Duty"
+        },
+        {
+            "url": "codelists/alcohol-content.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Alcohol Content"
+        },
+        {
+            "url": "codelists/alcohol-category.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Alcohol Category"
         }
     ]
 }
