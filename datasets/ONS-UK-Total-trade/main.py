@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -57,7 +57,7 @@ for name, tab in tabs.items():
     import numpy as np
     new_table.rename(columns={'OBS': 'Value'}, inplace=True)
     new_table['Flow'] = new_table['Flow'].map(lambda s: s.lower().strip())
-    new_table['ONS ABS Trade'] = product(name)
+    new_table['Trade Group'] = product(name)
     new_table['Period'] = new_table['Period'].astype(str)
     Final_table = pd.concat([Final_table, new_table], sort=False)
     
@@ -102,7 +102,7 @@ f4=((Final_table['Value'] ==0))
 Final_table.loc[f4,'Marker'] = 'itis-nil'
 #Final_table.loc[f4,'Value'] = ''
 
-Final_table = Final_table[['ONS Partner Geography', 'Period','Flow','ONS ABS Trade', 'Measure Type','Value', 'Marker', 'Unit' ]]
+Final_table = Final_table[['ONS Partner Geography', 'Period','Flow','Trade Group', 'Measure Type','Value', 'Marker', 'Unit' ]]
 
 
 # +
