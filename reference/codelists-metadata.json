@@ -296,11 +296,6 @@
             "rdfs:label": "Aggregate"
         },
         {
-            "url": "codelists/national-accounts-gdp-measure.csv",
-            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
-            "rdfs:label": "GDP Measure"
-        },
-        {
             "url": "codelists/national-accounts-expenditure.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Expenditure"
@@ -351,19 +346,9 @@
             "rdfs:label": "MRETS Product"
         },
         {
-            "url": "codelists/alcohol-duty.csv",
+            "url": "codelists/trade-services.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
-            "rdfs:label": "Alcohol Duty"
-        },
-        {
-            "url": "codelists/alcohol-content.csv",
-            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
-            "rdfs:label": "Alcohol Content"
-        },
-        {
-            "url": "codelists/alcohol-category.csv",
-            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
-            "rdfs:label": "Alcohol Category"
+            "rdfs:label": "Trade Services"
         }
     ]
 }

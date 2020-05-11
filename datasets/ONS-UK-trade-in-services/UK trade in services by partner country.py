@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -33,10 +33,10 @@ tab
 # -
 
 tab.columns.values[0] = 'Flow'
-tab.columns.values[1] = 'Pink Book Services'
+tab.columns.values[1] = 'Trade Services'
 tab.columns.values[2] = 'ONS Partner Geography'
 
-new_table = pd.melt(tab, id_vars=['Flow','Pink Book Services','ONS Partner Geography'], var_name='Period', value_name='Value')
+new_table = pd.melt(tab, id_vars=['Flow','Trade Services','ONS Partner Geography'], var_name='Period', value_name='Value')
 
 new_table['Period'] = new_table['Period'].astype(str)
 
@@ -93,13 +93,13 @@ new_table['Marker'] = new_table.apply(lambda row: user_perc(row['Value']), axis 
 
 new_table['Value'] = pd.to_numeric(new_table['Value'], errors = 'coerce')
 
-new_table = new_table[['ONS Partner Geography', 'Period','Flow','Pink Book Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
+new_table = new_table[['ONS Partner Geography', 'Period','Flow','Trade Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
 
 # +
-indexNames = new_table[ new_table['Pink Book Services'].str.contains('NaN', na=True)].index
+indexNames = new_table[ new_table['Trade Services'].str.contains('NaN', na=True)].index
 new_table.drop(indexNames, inplace = True)
 
-#The 27 April 2020 release added Pink Book Services which dont have Type codes. This causes duplicates as all the various Services without numbers are classed as the same service.
+#The 27 April 2020 release added Trade Services which dont have Type codes. This causes duplicates as all the various Services without numbers are classed as the same service.
 #This will need further investigation upon review. I did look to see if the most recent pink book publications had any reference to them but I coulnd't find antyhing.
 
 # +
