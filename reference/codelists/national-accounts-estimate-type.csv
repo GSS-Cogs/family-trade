@@ -1,4 +1,5 @@
 Label,Notation,Parent Notation,Sort Priority,Description
 Current price,current-price,,,
-Chain Volume Measure,chain-volume-measure,,,
+Chained Volume Measure,chained-volume-measure,,,
 Deflator,deflator,,,
+People,people,,,
