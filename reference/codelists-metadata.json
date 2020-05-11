@@ -336,6 +336,11 @@
             "rdfs:label": "GDP Estimate Type"
         },
         {
+            "url": "codelists/national-accounts-gdp-measure.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "GDP Measure"
+        },
+        {
             "url": "codelists/pinkbook-cdid.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Pinkbook CDID"
