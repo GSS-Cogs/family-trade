@@ -36,6 +36,12 @@ next_table = pd.concat([next_table, Final_table])
 next_table = pd.concat([next_table, Final_table])
 # -
 
+next_table = next_table.replace({'Measure Type' : { 'quantities-consumption' : 'Quantities Released for Consumption','revenue' : 'Revenue',
+                                    'potable-spirits':'Production of Potable Spirits','net-quantities-spirits':'Net Quantities of Spirits Charged with Duty',
+                                    'uk-beer':'UK Beer Production', 'alcohol-clearences':'Alcohol Clearances',
+                                    'beer-clearences':'Beer Clearances','cider-clearences':'Cider Clearances','rates-of-duty':'Rates of Duty'
+                              }})
+
 next_table
 
 # +
@@ -43,6 +49,9 @@ destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
 next_table.to_csv(destinationFolder / ('observations.csv'), index = False)
+# -
+
+
 
 # +
 scraper.dataset.family = 'trade'
