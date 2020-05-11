@@ -118,11 +118,11 @@ class LookupMeasure(object):
     def _gdp_per_head(self, val):
         # Seem to be redefining what some cdid codes mean, so using deliberately fragile lookup
         lookup =  {
-        "EBAQ": "people",
-        "YBHA": "current-price",
-        "IHXT": "current-price",
-        "ABMI": "chain-volume-measure",
-        "IHXW": "chain-volume-measure"
+        "EBAQ": "People",
+        "YBHA": "GBP Million",
+        "IHXT": "GBP Million",
+        "ABMI": "Index",
+        "IHXW": "Index"
         }
         try:
             return lookup[val]

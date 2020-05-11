@@ -87,7 +87,7 @@ CORD Geography,,Dimension,http://gss-data.org.uk/def/concept-scheme/cord-geograp
 Flow,Direction in which trade is measured,Dimension,http://gss-data.org.uk/def/concept-scheme/flow-directions,dimension/flow-directions,FlowDirections,
 Product,Classification of Products by Activity,Dimension,http://stamina-project.org/codes/cpav2008/cpa,dimension/cpa,Cpa,
 Reference Period,Available reference point,Dimension,,dimension/gdp-reference-period,GdpReferencePeriod,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod
-Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-estimate-type,dimension/gdp-estimate-type,GdpEstimateType,
+GDP Estimate Type,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-estimate-type,dimension/gdp-estimate-type,GdpEstimateType,
 Alcohol Duty,Alcohol Duty,Dimension,http://gss-data.org.uk/def/concept-scheme/alcohol-duty,dimension/alcohol-duty,AlcoholDuty,
 Alcohol Content,Alcohol by volume (ABV),Dimension,http://gss-data.org.uk/def/concept-scheme/alcohol-content,dimension/alcohol-content,AlcoholContent,
 Alcohol Category,Alcohol Category,Dimension,http://gss-data.org.uk/def/concept-scheme/alcohol-category,dimension/alcohol-category,AlcoholCategory,
