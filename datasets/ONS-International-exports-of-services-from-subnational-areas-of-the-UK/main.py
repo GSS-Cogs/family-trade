@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -45,7 +45,7 @@ next_table = pd.concat([next_table, new_table])
 next_table = pd.concat([next_table, new_table])
 # -
 
-next_table['Product'] = next_table['Product'].apply(pathify)
+next_table['Export Services'] = next_table['Product'].apply(pathify)
 next_table
 
 next_table['Service Origin Geography'] = next_table['Service Origin']#.apply(pathify)
@@ -59,7 +59,7 @@ next_table['Marker'] = next_table['Marker'].map(
     lambda x: { '..' : 'suppressed'     
         }.get(x, x))
 
-next_table = next_table[['Period','Product','Service Origin Geography','Service Destination Geography','Flow','Unit','Value','Measure Type', 'Marker']]
+next_table = next_table[['Period','Export Services','Service Origin Geography','Service Destination Geography','Flow','Unit','Value','Measure Type', 'Marker']]
 
 next_table['Flow'] = next_table['Flow'].map(pathify)
 
@@ -113,5 +113,10 @@ scraper.dataset.title = 'International exports of services from subnational area
 with open(out / (file_name + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / (file_name + '.csv'), out / ((file_name + '.csv') + '-schema.json'))
+
+
+# -
+
+next_table['Export Services'].unique()
 
 
