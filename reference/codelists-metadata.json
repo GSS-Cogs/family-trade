@@ -374,6 +374,11 @@
             "url": "codelists/alcohol-category.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Alcohol Category"
+        },
+        {
+            "url": "codelists/export-services.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Export Services"
         }
     ]
 }

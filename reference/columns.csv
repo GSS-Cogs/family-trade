@@ -120,3 +120,4 @@ Cider Clearances,cider_clearances,qb:measure,http://gss-data.org.uk/def/measure/
 Rates of Duty,rates_of_duty,qb:measure,http://gss-data.org.uk/def/measure/rates-of-duty,,string,,,
 Alcohol Clearances,alcohol_clearances,qb:measure,http://gss-data.org.uk/def/measure/alcohol-clearances,,string,,,
 Trade Group,trade_group,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/trade-group/{trade_group},string,,,
+Export Services,export_services,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/export-services/{export_services},string,,,
