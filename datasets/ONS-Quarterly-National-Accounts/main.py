@@ -491,7 +491,7 @@ for job_name, job_details in jobs.items():
                 HDim(cdid_header_row.shift(0, -4).is_not_blank().is_not_whitespace(), "Estimate Type", CLOSEST, RIGHT, 
                      cellvalueoverride={
                          "£ million": "current-price",
-                         "Reference year 2016, £ million": "chain-volume-measure"
+                         "Reference year 2016, £ million": "chained-volume-measure"
                      })
                 )
                 
@@ -568,5 +568,3 @@ for job_name, job_details in jobs.items():
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
 
-
-# %%
