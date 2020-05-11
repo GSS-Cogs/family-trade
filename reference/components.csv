@@ -94,10 +94,10 @@ Alcohol Category,Alcohol Category,Dimension,http://gss-data.org.uk/def/concept-s
 GDP Measure,,Dimension,http://gss-data.org.uk/def/concept-scheme/gdp-measure,dimension/gdp-measure,GDPMeasure,
 Quantities Released for Consumption,Quantities Released for Consumption,Measure,,measure/quantities-released-for-consumption,QuantitiesReleasedforConsumption,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Revenue,Revenue,Measure,,measure/revenue,Revenue,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-Production of Potable Spirits,Production of Potable Spirits,Measure,,measure/production-of-potable spirits,ProductionOfPotableSpirits,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Net Quantities of Spirits Charged with Duty,Net Quantities of Spirits Charged with Duty,Measure,,measure/net-quantities-of-spirits-charged-with-duty,NetQuantitiesOfSpiritsChargedwithDuty,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 UK Beer Production,UK Beer Production,Measure,,measure/uk-beer-production,UKBeerProduction,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Beer Clearances,Beer Clearances,Measure,,measure/beer-clearances,BeerClearances,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Cider Clearances,Cider Clearances,Measure,,measure/cider-cearances,CiderClearances,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-Rates of Duty,Rates of Duty,Measure,,measure/rates-of-duty,RatesOfDuty,Revenue,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-Alcohol Clearances,Alcohol Clearances,Measure,,measure/alcohol-clearances,AlcoholClearances,Revenue,http://purl.org/linked-
+Rates of Duty,Rates of Duty,Measure,,measure/rates-of-duty,RatesOfDuty,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+Alcohol Clearances,Alcohol Clearances,Measure,,measure/alcohol-clearances,AlcoholClearances,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+Production of Potable Spirits,,Measure,,measure/production-of-potable-spirits,ProductionOfPotableSpirits,http://purl.org/linked-data/sdmx/2009/measure#obsValue
