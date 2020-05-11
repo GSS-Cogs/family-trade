@@ -99,5 +99,5 @@ Net Quantities of Spirits Charged with Duty,Net Quantities of Spirits Charged wi
 UK Beer Production,UK Beer Production,Measure,,measure/uk-beer-production,UKBeerProduction,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Beer Clearances,Beer Clearances,Measure,,measure/beer-clearances,BeerClearances,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Cider Clearances,Cider Clearances,Measure,,measure/cider-cearances,CiderClearances,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-Rates of Duty,Rates of Duty,Measure,,rates-of-duty/RatesOfDuty,Revenue,http://purl.org/linked-data/sdmx/2009/measure#obsValue
-Alcohol Clearances,Alcohol Clearances,Measure,
+Rates of Duty,Rates of Duty,Measure,,measure/rates-of-duty,RatesOfDuty,Revenue,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+Alcohol Clearances,Alcohol Clearances,Measure,,measure/alcohol-clearances,AlcoholClearances,Revenue,http://purl.org/linked-
