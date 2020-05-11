@@ -113,7 +113,7 @@ Trade Services,trade_services,qb:dimension,http://gss-data.org.uk/def/dimension/
 Revenue,revenue,qb:measure,http://gss-data.org.uk/def/measure/revenue,,string,,,
 Quantities Released for Consumption,quantities_released_for_consumption,qb:measure,http://gss-data.org.uk/def/measure/quantities-released-for-consumption,,string,,,
 Net Quantities of Spirits Charged with Duty,net_quantities_of_spirits_charged_with_duty,qb:measure,http://gss-data.org.uk/def/measure/net-quantities-of-spirits-charged-with-duty,,string,,,
-Production of Potable Spirits,production_of_potable_spirits,qb:measure,http://gss-data.org.uk/def/measure/production-of-potable spirits,,string,,,
+Production of Potable Spirits,production_of_potable_spirits,qb:measure,http://gss-data.org.uk/def/measure/production-of-potable-spirits,,string,,,
 UK Beer Production,uk_beer_production,qb:measure,http://gss-data.org.uk/def/measure/uk-beer-production,,string,,,
 Beer Clearances,beer_clearances,qb:measure,http://gss-data.org.uk/def/measure/beer-clearances,,string,,,
 Cider Clearances,cider_clearances,qb:measure,http://gss-data.org.uk/def/measure/cider-clearances,,string,,,
