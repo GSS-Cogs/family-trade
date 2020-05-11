@@ -54,10 +54,10 @@ next_table = next_table.replace({'Alcohol Content' : { 'Various': 'all', 'variou
                                                       'Over 5.5%, up to and including 15.0%' : 'over-5-5-up-to-and-incl-15-0',
                                                       'Over 15.0%, up to and including 22%' : 'over-15-0-up-to-and-incl-22',
                                                       'From 8.5%, up to and including 15.0%': 'from-8-5-up-to-and-incl-15-0',
-                                                      'Exceeding 1.2% but less than 6.9% abv' : 'exceeding-1-2-but-less-than-6-9-abv',
-                                                      'At least 6.9% but not exceeding 7.5% abv' : 'at-least-6-9-but-not-exceeding-7-5-abv',
-                                                      'Exceeding 7.5% but less than 8.5% abv' : 'exceeding-7-5-but-less-than-8-5-abv',
-                                                      'Exceeding 5.5% but less than 8.5% abv' : 'exceeding-5-5-but-less-than-8-5-abv'      
+                                                      'Exceeding 1.2% but less than 6.9% abv' : 'exceed-1-2-less-than-6-9-abv',
+                                                      'At least 6.9% but not exceeding 7.5% abv' : 'at-least-6-9-not-exceed-7-5-abv',
+                                                      'Exceeding 7.5% but less than 8.5% abv' : 'exceed-7-5-less-than-8-5-abv',
+                                                      'Exceeding 5.5% but less than 8.5% abv' : 'exceed-5-5-less-than-8-5-abv'      
                                                       
                               }})
 
