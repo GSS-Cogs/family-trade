@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -64,7 +64,7 @@ new_table['Seasonal Adjustment'] =  'NSA'
 
 new_table['Value'] = new_table['Value'].astype(int)
 
-new_table['Pink Book Services'] = '0'
+new_table['Trade Services'] = '0'
 
 # Duplicated observations of different countries in 
 
@@ -81,7 +81,7 @@ new_table = new_table.loc[new_table['ONS Partner Geography'].isin(['AD','AE','AF
                                                                 'TN','TO','TT','TV','TZ','UG','UM','UZ','VA','VC','VG','VI','VN','VU','WF',
                                                                 'WS','XK','YE','ZM','ZW'])]
 
-new_table = new_table[['ONS Partner Geography', 'Period','Flow','Pink Book Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
+new_table = new_table[['ONS Partner Geography', 'Period','Flow','Trade Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
 
 # +
 new_table.rename(columns={'ONS Partner Geography':'CORD Geography',

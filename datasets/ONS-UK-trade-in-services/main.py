@@ -2,8 +2,6 @@
 # coding: utf-8
 # %%
 
-# %%
-
 
 from gssutils import *
 
@@ -13,8 +11,6 @@ from gssutils import *
 # Todo: figure out whether/how to scrape this page directly and how to model it so that the latest data is always fetched. N.B. This is an "experimental" dataset.
 
 # %%
-
-
 tables = []
 
 get_ipython().run_line_magic('run', '"Trade in Services by Country.py"')
@@ -27,10 +23,6 @@ tables.append(new_table)
 # We just combine these two into the same table for now.
 
 # %%
-
-
-
-
 from pathlib import Path
 out = Path('out')
 out.mkdir(exist_ok=True)
@@ -44,8 +36,6 @@ tidy.to_csv(out / 'observations.csv', index = False)
 # Todo: review titles, etc.
 
 # %%
-
-
 from gssutils.metadata import THEME
 scraper.dataset.theme = THEME['business-industry-trade-energy']
 scraper.dataset.family = 'Trade'
@@ -58,8 +48,6 @@ csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # Generate alternative output for direct CSVW transformation. Note that these files won't be included in the upload to PMD.
 
 # %%
-
-
 #tidy['Measure Type'] = tidy['Measure Type'].astype('category')
 #tidy['Measure Type'].cat.categories = tidy['Measure Type'].cat.categories.map(
     #lambda x: pathify(x).replace('-', '_'))
