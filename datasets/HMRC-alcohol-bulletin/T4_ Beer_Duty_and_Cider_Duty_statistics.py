@@ -132,8 +132,6 @@ df = df.replace({'Alcohol Category' : {'Thousand hectolitres' : 'UK Beer Product
                                'Cider Thousand hectolitres' : 'Cider Clearances'
                               }})
 
-
-
 df['Value'] = df['Value'].round(decimals=2)
 df["Period"] = df["Period"].apply(date_time)
 f1=(df['Revision'] =='P')
@@ -145,8 +143,6 @@ df.drop(['Revision'], axis=1)
 df['Alcohol Category'].unique()
 
 Final_table = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Measure Type','Value','Unit', 'Marker']]
-Final_table['Alcohol Category'] = Final_table['Alcohol Category'].map(lambda x: pathify(x))
-Final_table['Alcohol Content'] = Final_table['Alcohol Content'].map(lambda x: pathify(x))
 
 
 

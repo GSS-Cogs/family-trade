@@ -34,14 +34,34 @@ next_table = pd.concat([next_table, Final_table])
 
 # %run 'R2_Historic_alcohol_duty_rates.py'
 next_table = pd.concat([next_table, Final_table])
-# -
 
+# +
 next_table = next_table.replace({'Measure Type' : { 'quantities-consumption' : 'Quantities Released for Consumption','revenue' : 'Revenue',
                                     'potable-spirits':'Production of Potable Spirits','net-quantities-spirits':'Net Quantities of Spirits Charged with Duty',
                                     'uk-beer':'UK Beer Production', 'alcohol-clearences':'Alcohol Clearances',
                                     'beer-clearences':'Beer Clearances','cider-clearences':'Cider Clearances','rates-of-duty':'Rates of Duty'
                               }})
 
+next_table = next_table.replace({'Alcohol Category' : { 'UK Beer Production' : 'total-beer', 'UK Alcohol Production' : 'total-alcohol-production',
+                                                       'Alcohol Clearances' : 'total-alcohol-clearances', 'Cider Clearances' : 'total-cider-clearances', 
+                                                       'Still Wine' : 'still', 'Sparkling Wine' : 'sparkling', 'Ready-to-Drink ' : 'rtd', 'Spirits-Based RTDs' : 'spirit-based-rtds', 
+                                                       'Breweries Producing 5000 Hls Or Less' : 'breweries-5000-less'
+                              }})
+
+next_table = next_table.replace({'Alcohol Content' : { 'Various': 'all','Over 1.2%, up to and including 4.0%' : 'over-1-2-up-to-and-incl-4-0',
+                                                      'Over 4.0%, up to and including 5.5%' : 'over-4-0-up-to-and-incl-5-5',
+                                                      'Over 5.5%, up to and including 15.0%' : 'over-5-5-up-to-and-incl-15-0',
+                                                      'Over 15.0%, up to and including 22.0%' : 'over-15-0-up-to-and-incl-22',
+                                                      'From 8.5%, up to and including 15.0%': 'from-8-5-up-to-and-incl-15-0',
+                                                      
+                                                      
+                              }})
+
+
+# -
+
+next_table['Alcohol Category'] = next_table['Alcohol Category'].map(lambda x: pathify(x))
+next_table['Alcohol Content'] = next_table['Alcohol Content'].map(lambda x: pathify(x))
 next_table
 
 # +
@@ -49,10 +69,6 @@ destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
 next_table.to_csv(destinationFolder / ('observations.csv'), index = False)
-# -
-
-
-
 # +
 scraper.dataset.family = 'trade'
 from gssutils.metadata import THEME
@@ -63,5 +79,3 @@ with open(destinationFolder / 'observations.csv-metadata.trig', 'wb') as metadat
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(destinationFolder / 'observations.csv', destinationFolder / 'observations.csv-schema.json')
-
-

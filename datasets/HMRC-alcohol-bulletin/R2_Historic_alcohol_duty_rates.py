@@ -202,7 +202,7 @@ for tab in tabs:
                 tidy_sheet = ConversionSegment(tab, dimensions, observations)        
                 savepreviewhtml(tidy_sheet, 'Cider Duty (current)' + " Preview.html")
                 tidied_sheets.append(tidy_sheet.topandas())
-                
+
 
 # +
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
@@ -241,7 +241,11 @@ df = df.replace({'Alcohol Content' : {'ABV > 7.5%5 ' : 'ABV 7.5%',
                                    '1.2% < ABV < 2.8%5 ' : '1.2% to 2.8%',
                                    'Beer1 ': 'various',
                                    'Over 7.5% but less than 8.5% 1' : 'Over 7.5% but less than 8.5%',
-                                   'Over 5.5% but less than 8.5% 2' : 'Over 5.5% but less than 8.5%'
+                                   'Over 5.5% but less than 8.5% 2' : 'Over 5.5% but less than 8.5%',
+                                   'Exceeding 1.2% - less than 6.9% abv' : 'Exceeding 1.2% but less than 6.9% abv',
+                                   'At least 6.9% - not exceeding 7.5% abv' : 'At least 6.9% but not exceeding 7.5% abv',
+                                   'Exceeding 7.5%  - less than 8.5% abv' : 'Exceeding 7.5% but less than 8.5% abv', 
+                                   'Exceeding 5.5% - less than 8.5% abv' : 'Exceeding 5.5% but less than 8.5% abv'
                                }})
 
 df = df.replace({'Alcohol Category' : {'Ready-to-Drink (RTD)' : 'Ready-to-Drink',
@@ -264,6 +268,4 @@ df["Period"] = df["Period"].apply(date_time)
 df = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Measure Type','Value', 'Marker', 'Unit','Revision']]
 
 Final_table = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Measure Type','Value','Unit', 'Marker']]
-Final_table['Alcohol Category'] = Final_table['Alcohol Category'].map(lambda x: pathify(x))
-Final_table['Alcohol Content'] = Final_table['Alcohol Content'].map(lambda x: pathify(x))
 Final_table

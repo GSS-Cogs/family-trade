@@ -181,8 +181,7 @@ df = df.replace({'Alcohol Content' : {'Not exceeding 15%' : 'not-exc-15',
 df
 
 Final_table = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Measure Type','Value','Unit', 'Marker']]
-Final_table['Alcohol Category'] = Final_table['Alcohol Category'].map(lambda x: pathify(x))
-Final_table['Alcohol Content'] = Final_table['Alcohol Content'].map(lambda x: pathify(x))
+
 
 
 Final_table
