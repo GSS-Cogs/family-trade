@@ -1,5 +1,5 @@
 Label,Notation,Parent Notation,Sort Priority,Description
 Current price,current-price,,,
-Chained Volume Measure,chained-volume-measure,,,
+Chained Volume Measure,chained-volume-measure,,,series of GDP stats adjusted for inflation to give a real measure of GDP
 Deflator,deflator,,,
 People,people,,,
