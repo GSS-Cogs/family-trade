@@ -39,6 +39,7 @@ Export and Import Activity,export_and_import_activity,qb:dimension,http://gss-da
 Count of Businesses,count_of_businesses,qb:measure,http://gss-data.org.uk/def/measure/count-of-businesses,,string,,,
 Count of Employees,count_of_employees,qb:measure,http://gss-data.org.uk/def/measure/count-of-employees,,string,,,
 Count,count,qb:measure,http://gss-data.org.uk/def/measure/count,,string,,,
+Person,person,qb:measure,http://gss-data.org.uk/def/measure/person,,string,,,
 Proportion of all Business,proportion_of_all_business,qb:measure,http://gss-data.org.uk/def/measure/proportion-of-all-business,,string,,,
 HMRC Industry,hmrc_industry,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/hmrc-industry-groups/{hmrc_industry},string,,,
 Total Turnover,total_turnover,qb:measure,http://gss-data.org.uk/def/measure/total-turnover,,string,,,

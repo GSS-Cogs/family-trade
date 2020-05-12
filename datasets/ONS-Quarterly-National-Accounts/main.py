@@ -31,7 +31,7 @@ tabs = scraper.distribution(downloadURL=lambda x: "quarterlynationalaccounts" in
 #
 # We're going to create a dictionary from the index tab for use in building all the datacubes, this is so we can: 
 #
-# - different betweer current price, deflator and chain volume measure using series description.
+# - differentiate the estimate type using series description.
 
 # %%
 
