@@ -44,14 +44,15 @@ if len(tab) != 1:
 # Select all values in columns A and B
 a_cells = tab[0].excel_ref('A').is_not_blank().is_not_whitespace() - tab[0].excel_ref("A1")
 b_cells = tab[0].excel_ref('B').is_not_blank().is_not_whitespace() - tab[0].excel_ref("B1")
+d_cells = tab[0].excel_ref('D').is_not_blank().is_not_whitespace() - tab[0].excel_ref("D1")
 
 # Match the vertical offset (.y) of the xyCells to make the dict
-measure_dict = {}
 estimate_type = {}
 for a_cell in a_cells:
     
     # Get {cdid: GDP Estimate}
     b_cell = [x for x in b_cells if x.y == a_cell.y][0]
+    d_cell = [x for x in d_cells if x.y == a_cell.y][0]
     
     if " cvm " in b_cell.value.lower():
         estimate_type[a_cell.value] = "chained-volume-measure"
@@ -83,8 +84,7 @@ for a_cell in a_cells:
 
 class LookupMeasure(object):
     """
-    A class for passing to pandas .apply() to get the measure type. Usually from the databaked "measure type" dimensions,
-    but in at least one case we use the CDID (where measures are declared horizontally not vertically).
+    A class for passing to pandas .apply() to get the measure type.
     """
     
     def __init__(self, job, tab):
@@ -93,15 +93,19 @@ class LookupMeasure(object):
         self.title = [x.value for x in tab.excel_ref("B1")][0]
         self.all_cdids = [x for x in self.tab.filter(is_cdid)]
         
+        self._1YGR = "Year on year"
+        self._1QGR = "Quarter on quarter"
+        self._4QGR = "Quarter on quarter a year ago"
+        
         # Overrides per job where the pattern is non standard for whatever reason
         self.overrides = {
             "Inventories": self._inventories,
         }
          
-        # Default (i.e not a percentage) measures per job/tab
+        # Default (i.e the non percentage change measures) depending on job & (optionally) tab
         self.defaults = {
-            "National Accounts Aggregates": "Index series",
-            "Output indicators": "Index series", 
+            "National Accounts Aggregates": {"A1": "Index", "A2": "GBP Million"},
+            "Output indicators": "Index", 
             "Expenditure indicators": "GBP Million",
             "Income indicators": "GBP Million",
             "Household expenditure indicators": "GBP Million",
@@ -109,9 +113,9 @@ class LookupMeasure(object):
             "Trade": "GBP Million",
             "GFCF": "GBP Million",
             "Income indicators": "GBP Million",
-            "GDP per head": "GBP Million"   # note, we'll override some of these later for horizontal cahnges in measure
+            "GDP per head": "GBP Million"   # note, we'll override some of these later for horizontal changes in measure
         }
-
+            
     def _inventories(self, val):
         return "GBP Million" if "current prices" in self.title else "Index"
               
@@ -121,19 +125,26 @@ class LookupMeasure(object):
         else:
             if "seasonally adjusted" in val.lower():
                 try:
+                    default = self.defaults[self.job]
+                    if isinstance(default, dict):
+                        tab_id = self.tab.name.split(" ")[0]
+                        try:
+                            return self.defaults[self.job][tab_id]
+                        except:
+                            raise Exception("Cannot find tab start text '{}' in '{}'.".format(tab_id, self.tab.name))
                     return self.defaults[self.job]
                 except Exception as e:
-                    raise Exception("Failed to get default measure type for job {} from this dict {}.".format(self.job, json.dumps(self.defaults))) from e
+                    raise Exception("Failed to get default measure type for job '{}'' and tab '{}' from this dict '{}'."
+                                    .format(self.job, self.tab.name, json.dumps(self.defaults))) from e
             elif "latest year on previous" in val.lower():
-                return "Year on year"
+                return self._1YGR
             elif "latest quarter on previous" in val.lower():
-                return "Quarter on quarter"
+                return self._1QGR
             elif "latest quarter on corresponding quarter" in val.lower():
-                return "Quarter on quarter a year ago"
+                return self._4QGR
             else:
                 raise Exception("Cannot calculate measure from value '{}', tab is {}"
                             .format(val, self.tab.name))
-
 
 class lookup_from_offset_range(object):
     """
@@ -322,13 +333,14 @@ def table_b_lookup(cdid_header_row):
     return lookup
 
 
-def gdp_measure_types(df):
+def horizontal_measure_overrides(job_name, df):
     """
-    For the GDP per head job, the measures types are altered by changes in both the vertical and horizontal axis.
+    On some tabs the measures types are altered by changes in both the vertical and horizontal axis.
     We're dealing with this by going with the vertical but modifying for the horizontal changes in post (this function)
     """
-    df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "people")] = "Person"
-    df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "chained-volume-measure")] = "Index"
+    if job_name == "GDP per head":
+        df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "people")] = "Person"
+        
     return df
     
 
@@ -501,7 +513,7 @@ for job_name, job_details in jobs.items():
 
             df = ConversionSegment(tab, dimensions, observations).topandas()
                 
-            # Appliable to all jobs
+            # Applicable to all jobs
             df["Period"] = df["Period"].apply(format_time)
             
             # missing CDID's for estimate type ....
@@ -512,11 +524,16 @@ for job_name, job_details in jobs.items():
             else:
                 df["Estimate Type"] = df["CDID"]
                 df["Estimate Type"] = df["Estimate Type"].map(lambda x: estimate_type[x])
-                
+            
             df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
+            
             if job_name == "GDP per head":
                 df["Unit"] = df["Measure Type"].map(lambda x: 1000 if x == "persons" else 1)
-                df = gdp_measure_types(df)
+            else:
+                df["Unit"] = 1
+            
+            # account for horizontal changes in measure type
+            df = horizontal_measure_overrides(job_name, df)
                 
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million") # why?
             df = df.rename(columns={"OBS": "Value", "DATAMARKER": "Marker"})
@@ -567,4 +584,7 @@ for job_name, job_details in jobs.items():
     except Exception as e:
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
+        
 
+
+# %%
