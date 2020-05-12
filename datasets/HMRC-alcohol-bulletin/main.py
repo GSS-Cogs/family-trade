@@ -86,15 +86,11 @@ next_table['Alcohol Content'] = next_table['Alcohol Content'].map(lambda x: path
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
-next_table.to_csv(destinationFolder / ('observations.csv'), index = False)
-# +
-scraper.dataset.family = 'trade'
-from gssutils.metadata import THEME
-
+next_table.drop_duplicates().to_csv(destinationFolder / ('observations.csv'), index = False)
+# -
+scraper.dataset.family = 'Trade'
 with open(destinationFolder / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-# -
-
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(destinationFolder / 'observations.csv', destinationFolder / 'observations.csv-schema.json')
 
