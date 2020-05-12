@@ -339,7 +339,7 @@ def horizontal_measure_overrides(job_name, df):
     We're dealing with this by going with the vertical but modifying for the horizontal changes in post (this function)
     """
     if job_name == "GDP per head":
-        df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "people")] = "Person"
+        df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "people")] = "Count"
         
     return df
     
