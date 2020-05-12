@@ -528,9 +528,9 @@ for job_name, job_details in jobs.items():
             df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
             
             if job_name == "GDP per head":
-                df["Unit"] = df["Measure Type"].map(lambda x: 1000 if x == "persons" else 1)
+                df["Decimals"] = df["Measure Type"].map(lambda x: 1000 if x == "persons" else 1)
             else:
-                df["Unit"] = 1
+                df["Decimals"] = 1
             
             # account for horizontal changes in measure type
             df = horizontal_measure_overrides(job_name, df)
