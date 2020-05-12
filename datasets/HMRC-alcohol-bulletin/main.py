@@ -18,6 +18,13 @@ from gssutils import *
 from gssutils.metadata import THEME
 import pandas as pd
 
+scraper = Scraper("https://www.gov.uk/government/statistics/alcohol-bulletin")
+scraper
+
+dist = scraper.distributions[1]
+tabs = (t for t in dist.as_databaker())
+dist
+
 next_table = pd.DataFrame()
 
 # +
@@ -87,12 +94,15 @@ destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
 next_table.drop_duplicates().to_csv(destinationFolder / ('observations.csv'), index = False)
-# -
+# +
+scraper.set_base_uri('http://gss-data.org.uk')
 scraper.dataset.family = 'Trade'
+
 with open(destinationFolder / 'observations.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(destinationFolder / 'observations.csv', destinationFolder / 'observations.csv-schema.json')
+# -
 
 next_table
 

@@ -45,7 +45,6 @@ def date_time(time_value):
 
 
 # -
-
 # T3: Spirits Duty statistics 
 
 for tab in tabs:               
