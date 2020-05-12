@@ -2,9 +2,9 @@
     "title": "alcohol-bulletin",
     "publisher": "HM Revenue & Customs",
     "description": "All bulletins provide a full historic series of data detailing amounts of goods cleared and amount of duty collected. This information is provided on a monthly, calendar and financial year basis.",
-    "landingPage": "https://www.uktradeinfo.com/Statistics/Pages/TaxAndDutyBulletins.aspx",
+    "landingPage": "https://www.gov.uk/government/statistics/alcohol-bulletin",
     "datasetNotes": [
-        "On landing page scroll down to \"Archived Bulletins\" and click on archive link. This will open a new page with a link to the excel file."
+        "\"UK Alcohol Duty Statistics Tables\" Excel file, latest version on page"
     ],
     "published": "2019-02-28",
     "families": [
