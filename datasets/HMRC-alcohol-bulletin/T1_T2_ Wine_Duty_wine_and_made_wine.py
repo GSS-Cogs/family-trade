@@ -152,13 +152,13 @@ def user_perc6(x):
     else:
         return 'quantities-consumption'
 
-f1=(df['Revision'] =='P')
-df.loc[f1,'Marker'] = 'provisional'
+#f1=(df['Revision'] =='P')
+#df.loc[f1,'Marker'] = 'provisional'
     
 df['Measure Type'] = df.apply(lambda row: user_perc6(row['Alcohol Category']), axis = 1)
 df['Value'] = df['Value'].round(decimals=2)
 df["Period"] = df["Period"].apply(date_time)
-df.drop(['Revision'], axis=1)
+#df.drop(['Revision'], axis=1)
 
 df = df.replace({'Alcohol Category' : {'Over 15% \nABV' : 'total',
                                        'Over 15% ABV': 'total',
@@ -176,13 +176,15 @@ df = df.replace({'Alcohol Content' : {'Not exceeding 15%' : 'not-exc-15',
                                       'Composition by Origin above 5.5% ABV' : 'comp-by-origin-above-5-5',
                                       'Total': 'all',
                                       }})
+                
 # -
 
 df
 
-Final_table = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Measure Type','Value','Unit', 'Marker']]
+Final_table = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Revision', 'Measure Type','Value','Unit', 'Marker']]
 
 
+Final_table['Revision'].unique()
 
 Final_table
 

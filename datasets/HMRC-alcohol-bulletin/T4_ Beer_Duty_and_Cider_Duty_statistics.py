@@ -134,16 +134,18 @@ df = df.replace({'Alcohol Category' : {'Thousand hectolitres' : 'UK Beer Product
 
 df['Value'] = df['Value'].round(decimals=2)
 df["Period"] = df["Period"].apply(date_time)
-f1=(df['Revision'] =='P')
-df.loc[f1,'Marker'] = 'provisional'
-df.drop(['Revision'], axis=1)
+#f1=(df['Revision'] =='P')
+#df.loc[f1,'Marker'] = 'provisional'
+#df.drop(['Revision'], axis=1)
 
 # -
 
 df['Alcohol Category'].unique()
 
-Final_table = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Measure Type','Value','Unit', 'Marker']]
+Final_table = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content', 'Revision', 'Measure Type','Value','Unit', 'Marker']]
 
+
+Final_table['Revision'].unique()
 
 
 Final_table

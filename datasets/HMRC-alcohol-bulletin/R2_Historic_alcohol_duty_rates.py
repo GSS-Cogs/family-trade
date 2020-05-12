@@ -267,5 +267,5 @@ df["Period"] = df["Period"].apply(date_time)
 
 df = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Measure Type','Value', 'Marker', 'Unit','Revision']]
 
-Final_table = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Measure Type','Value','Unit', 'Marker']]
+Final_table = df[['Period','Alcohol Duty','Alcohol Category','Alcohol Content','Revision', 'Measure Type','Value','Unit', 'Marker']]
 Final_table

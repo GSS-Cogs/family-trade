@@ -63,9 +63,21 @@ next_table = next_table.replace({'Alcohol Content' : { 'Various': 'all', 'variou
 
 
 
+next_table['Revision'] = next_table['Revision'].map(
+    lambda x: {
+        'estimated based on previous Periods' : 'estimated', 
+        'estimated based on previous years' : 'estimated',
+        '': 'original-value',
+        'P' : 'provisional',
+        'R' : 'revised'
+       }.get(x, x))
+
+
 # -
 
 next_table['Alcohol Content'].unique()
+
+next_table['Revision'].unique()
 
 next_table['Alcohol Category'] = next_table['Alcohol Category'].map(lambda x: pathify(x))
 next_table['Alcohol Content'] = next_table['Alcohol Content'].map(lambda x: pathify(x))
@@ -85,3 +97,7 @@ with open(destinationFolder / 'observations.csv-metadata.trig', 'wb') as metadat
 
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(destinationFolder / 'observations.csv', destinationFolder / 'observations.csv-schema.json')
+
+next_table
+
+
