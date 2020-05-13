@@ -379,6 +379,12 @@
             "url": "codelists/export-services.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Export Services"
+        },
+        {
+            "url": "codelists/status.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Status",
+            "rdfs:comment": "HMRC RTS to distinguish between Closed datasets and open datasets"
         }
     ]
 }
