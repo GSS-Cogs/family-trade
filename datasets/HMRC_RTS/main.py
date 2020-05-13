@@ -25,6 +25,9 @@
 from gssutils import *
 import json
 
+def left(s, amount):
+    return s[:amount]
+
 scraper = Scraper(json.load(open('info.json'))['landingPage'])
 display(scraper.dataset.landingPage)
 scraper
@@ -35,6 +38,9 @@ if scraper.dataset.title.endswith('(RTS'):
 scraper.dataset.title
 
 # zipped data files were linked from https://www.uktradeinfo.com/Statistics/RTS/Pages/RTS-Downloads.aspx, but sometimes this appears to close. If so, look for them directly from https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx
+
+import datetime
+now = datetime.datetime.now()
 
 if len(scraper.distributions) == 0:
     from lxml import html
@@ -52,12 +58,19 @@ if len(scraper.distributions) == 0:
         dist.downloadURL = urljoin(page_uri, quote(anchor.get('href'), safe='/%'))
         dist.mediaType, encoding = guess_type(dist.downloadURL)
         scraper.distributions.append(dist)
+    for anchor in tree.xpath("//a[contains(@href, 'Rtsweb " + str(int(left(str(now.year),2)) - 1) + "')]"):
+        dist2 = Distribution(scraper)
+        dist2.title = anchor.text.strip()
+        dist2.downloadURL = urljoin(page_uri, quote(anchor.get('href'), safe='/%'))
+        dist2.mediaType, encoding = guess_type(dist2.downloadURL)
+        scraper.distributions.append(dist2)
+        
 
 for dist in scraper.distributions:
     print(dist.downloadURL)
 
 # +
-from zipfile import ZipFile
+from zipfile import ZipFile, is_zipfile
 from io import BytesIO, TextIOWrapper
 
 out = Path('out')
@@ -71,53 +84,105 @@ header = True
 
 # For each distribution, open the zipfile and put each source in turn into a dataframe
 # for each source we're looking to create one "value" output, and one "mass" output
+# since the open files are in text file they are processed differently, should go back and change it to unzip 
+#the closed files and process them all as txt which would be tidier but for now this will work
+
 for distribution in scraper.distributions:
-    with ZipFile(BytesIO(scraper.session.get(distribution.downloadURL).content)) as zip:
-        for name in zip.namelist():
-            with zip.open(name, 'r') as quarterFile:
-                quarterText = TextIOWrapper(quarterFile, encoding='utf-8')
-                table = pd.read_fwf(quarterText, widths=[6, 1, 2, 1, 3, 2, 1, 2, 9, 9], names=[
-                    'Period',
-                    'Flow',
-                    'HMRC Reporter Region',
-                    'HMRC Partner Geography',
-                    'Codalpha',
-                    'Codseq',
-                    'SITC Section',
-                    'SITC 4',
-                    'Value',
-                    'Netmass'
+    if distribution.downloadURL.endswith('zip'):
+        with ZipFile(BytesIO(scraper.session.get(distribution.downloadURL).content)) as zip:
+            for name in zip.namelist():
+                with zip.open(name, 'r') as quarterFile:
+                    quarterText = TextIOWrapper(quarterFile, encoding='utf-8')
+                    table = pd.read_fwf(quarterText, widths=[6, 1, 2, 1, 3, 2, 1, 2, 9, 9], names=[
+                        'Period',
+                        'Flow',
+                        'HMRC Reporter Region',
+                        'HMRC Partner Geography',
+                        'Codalpha',
+                        'Codseq',
+                        'SITC Section',
+                        'SITC 4',
+                        'Value',
+                        'Netmass'
+                    ], dtype=str)
+
+                    # Generic changes that apply to both "mass" and "value" outputs
+                    table['Period'] = table['Period'].map(lambda x: f'quarter/{x[2:]}-Q{x[0]}')
+                    table['Flow'] = table['Flow'].map(lambda x: 'exports' if x == 'E' else 'imports')
+
+                    table['HMRC Partner Geography'] = table.apply(
+                        lambda x: x['Codseq'] if x['Codseq'][0] != '#' else x['Codalpha'],
+                        axis=1)
+                    assert table['SITC Section'].equals(table['SITC 4'].apply(lambda x: x[0]))
+                    table.drop(columns=['Codalpha', 'Codseq', 'SITC Section'], inplace=True)
+
+                    table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+                    table['Status'] = 'closed'
+
+                    #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+
+                    # Output the mass observations for this input file
+                    mass = table.drop(columns=['Value'])
+                    mass['Measure Type'] = 'net-mass'
+                    mass['Unit'] = 'kg-thousands'
+                    mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
+                    mass.to_csv(observations_file, header=header, mode='a', index=False)
+                    # only output header row the first time
+                    header = False
+
+                    # Output the value observations for this input file
+                    value = table.drop(columns=['Netmass'])
+                    value['Measure Type'] = 'gbp-total'
+                    value['Unit'] = 'gbp-thousands'
+                    value.to_csv(observations_file, header=header, mode='a', index=False)
+                                        
+    else:
+        with BytesIO(scraper.session.get(distribution.downloadURL).content) as text:
+            quarterText = TextIOWrapper(text, encoding='utf-8')
+            table = pd.read_fwf(quarterText, widths=[6, 1, 2, 1, 3, 2, 1, 2, 9, 9], names=[
+                'Period',
+                'Flow',
+                'HMRC Reporter Region',
+                'HMRC Partner Geography',
+                'Codalpha',
+                'Codseq',
+                'SITC Section',
+                'SITC 4',
+                'Value',
+                'Netmass'
                 ], dtype=str)
-                
-                # Generic changes that apply to both "mass" and "value" outputs
-                table['Period'] = table['Period'].map(lambda x: f'quarter/{x[2:]}-Q{x[0]}')
-                table['Flow'] = table['Flow'].map(lambda x: 'exports' if x == 'E' else 'imports')
-                
-                table['HMRC Partner Geography'] = table.apply(
-                    lambda x: x['Codseq'] if x['Codseq'][0] != '#' else x['Codalpha'],
-                    axis=1)
-                assert table['SITC Section'].equals(table['SITC 4'].apply(lambda x: x[0]))
-                table.drop(columns=['Codalpha', 'Codseq', 'SITC Section'], inplace=True)
-                
-                table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
-                #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+            # Generic changes that apply to both "mass" and "value" outputs
+            table['Period'] = table['Period'].map(lambda x: f'quarter/{x[2:]}-Q{x[0]}')
+            table['Flow'] = table['Flow'].map(lambda x: 'exports' if x == 'E' else 'imports')
 
-                
-                # Output the mass observations for this input file
-                mass = table.drop(columns=['Value'])
-                mass['Measure Type'] = 'net-mass'
-                mass['Unit'] = 'kg-thousands'
-                mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
-                mass.to_csv(observations_file, header=header, mode='a', index=False)
-                # only output header row the first time
-                header = False
-                
-                # Output the value observations for this input file
-                value = table.drop(columns=['Netmass'])
-                value['Measure Type'] = 'gbp-total'
-                value['Unit'] = 'gbp-thousands'
-                value.to_csv(observations_file, header=header, mode='a', index=False)
+            table['HMRC Partner Geography'] = table.apply(
+            lambda x: x['Codseq'] if x['Codseq'][0] != '#' else x['Codalpha'],
+            axis=1)
+            assert table['SITC Section'].equals(table['SITC 4'].apply(lambda x: x[0]))
+            table.drop(columns=['Codalpha', 'Codseq', 'SITC Section'], inplace=True)
+
+            table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+
+            table['Status'] = 'open'
+
+            #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+
+            # Output the mass observations for this input file
+            mass = table.drop(columns=['Value'])
+            mass['Measure Type'] = 'net-mass'
+            mass['Unit'] = 'kg-thousands'
+            mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
+            mass.to_csv(observations_file, header=header, mode='a', index=False)
+            # only output header row the first time
+            header = False
+
+            # Output the value observations for this input file
+            value = table.drop(columns=['Netmass'])
+            value['Measure Type'] = 'gbp-total'
+            value['Unit'] = 'gbp-thousands'
+            value.to_csv(observations_file, header=header, mode='a', index=False)
 
 # +
 from gssutils.metadata import THEME
