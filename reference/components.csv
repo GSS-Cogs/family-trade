@@ -101,3 +101,4 @@ Cider Clearances,Cider Clearances,Measure,,measure/cider-cearances,CiderClearanc
 Rates of Duty,Rates of Duty,Measure,,measure/rates-of-duty,RatesOfDuty,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Alcohol Clearances,Alcohol Clearances,Measure,,measure/alcohol-clearances,AlcoholClearances,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Production of Potable Spirits,,Measure,,measure/production-of-potable-spirits,ProductionOfPotableSpirits,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+Status,,Dimension,http://gss-data.org.uk/def/concept-scheme/status,dimension/status,Status,
