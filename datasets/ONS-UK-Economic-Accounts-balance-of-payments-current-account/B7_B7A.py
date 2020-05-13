@@ -2,7 +2,7 @@
 # ---
 # jupyter:
 #   jupytext:
-#     formats: ipynb,py
+#     formats: ipynb,py:light
 #     text_representation:
 #       extension: .py
 #       format_name: light
@@ -92,27 +92,31 @@ for column in tidy:
         
 tidy
 
-# +
+# + endofcell="--"
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
 TITLE = 'Balance of Payments: Capital Account'
 OBS_ID = pathify(TITLE)
-
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
-# -
-
 GROUP_ID = 'ons-uk-ecconomic-accounts-balance-of-payments-current-account'
 
-# +
+tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# # +
 from gssutils.metadata import THEME
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(f'gss_data/trade/{GROUP_ID}/{OBS_ID}')
-scraper.dataset.title = f'{TITLE}'
+scraper.dataset.title = TITLE
 
 scraper.dataset.family = 'trade'
 with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+# -
 
 schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
+
+tidy
+
+# --
+
+
