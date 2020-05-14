@@ -14,7 +14,7 @@ Year,year,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod
 Foreign Country,foreign_country,qb:dimension,http://gss-data.org.uk/def/dimension/foreign-country,http://gss-data.org.uk/def/concept/countries/{foreign_country},string,slugize,,
 Trade Area,trade_area,qb:dimension,http://gss-data.org.uk/def/dimension/trade-area,http://gss-data.org.uk/def/concept/trade-area/{trade_area},string,slugize,,
 Combined Nomenclature,combined_nomenclature,qb:dimension,http://gss-data.org.uk/def/dimension/product,https://trade.ec.europa.eu/def/{combined_nomenclature},string,,,
-Period,period,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod,http://reference.data.gov.uk/id/{+period},string,,,http://www.w3.org/2006/time#Interval
+Period,period,qb:dimension,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod,http://reference.data.gov.uk/id/{+period},string,,^(year/[0-9]{4}|gregorian-interval/.*|month/[0-9]{4}-[0-9]{2}|day/[0-9]{4}-[0-9]{2}-[0-9]{2}|quarter/[0-9]{4}-Q[1-4]|government-year/[0-9]{4}-[0-9]{4})$,http://www.w3.org/2006/time#Interval
 CDID,cdid,qb:attribute,http://gss-data.org.uk/def/attribute/cdid,,string,,,
 BOP Services,bop_services,qb:dimension,http://gss-data.org.uk/def/dimension/bop-services,http://gss-data.org.uk/def/concept/bop-services/{bop_services},string,,,
 ITIS Service,itis_service,qb:dimension,http://gss-data.org.uk/def/dimension/product,http://gss-data.org.uk/def/concept/itis-services/{itis_service},string,,,
