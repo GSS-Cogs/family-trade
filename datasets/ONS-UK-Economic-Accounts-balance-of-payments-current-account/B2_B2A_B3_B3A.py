@@ -33,6 +33,33 @@ def left(s, amount):
 def right(s, amount):
     return s[-amount:]
 
+import re
+YEAR_RE = re.compile(r'[0-9]{4}')
+YEAR_MONTH_RE = re.compile(r'([0-9]{4})\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)')
+YEAR_QUARTER_RE = re.compile(r'([0-9]{4})(Q[1-4])')
+
+class Re(object):
+    def __init__(self):
+        self.last_match = None
+    def fullmatch(self,pattern,text):
+        self.last_match = re.fullmatch(pattern,text)
+        return self.last_match
+
+def time2period(t):
+    gre = Re()
+    if gre.fullmatch(YEAR_RE, t):
+        return f"year/{t}"
+    elif gre.fullmatch(YEAR_MONTH_RE, t):
+        year, month = gre.last_match.groups()
+        month_num = {'JAN': '01', 'FEB': '02', 'MAR': '03', 'APR': '04', 'MAY': '05', 'JUN': '06',
+                     'JUL': '07', 'AUG': '08', 'SEP': '09', 'OCT': '10', 'NOV': '11', 'DEC': '12'}.get(month)
+        return f"month/{year}-{month_num}"
+    elif gre.fullmatch(YEAR_QUARTER_RE, t):
+        year, quarter = gre.last_match.groups()
+        return f"quarter/{year}-{quarter}"
+    else:
+        print(f"no match for {t}")
+
 
 # -
 
@@ -97,11 +124,12 @@ for tab in tabs:
 
 
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
-df['Quarter'] = df['Quarter'].astype(str)
-df['Quarter'] = df['Quarter'].map(lambda x: '-Q1' if 'Q1' in x else('-Q2' if 'Q2' in x else ('-Q3' if 'Q3' in x else ('-Q4' if 'Q4' in x else ''))))
-df['Year'] = df['Quarter'].map(lambda x: 'government-quarter/' if '-Q1' in x else('government-quarter/' if '-Q2' in x else('government-quarter/' if '-Q3' in x else('government-quarter/' if '-Q4' in x else 'government-year/'))))
-df['Period'] = df['Year'] + df['Period'].map(lambda x: left(x,4)) + df['Quarter']
-df.drop(['Quarter', 'Year'], axis=1, inplace=True)
+df['Period'] = df.Period.str.replace('\.0', '')
+df['Quarter'] = df['Quarter'].str.lstrip()
+df['Period'] = df['Period'] + df['Quarter']
+df.drop(['Quarter'], axis=1, inplace=True)
+df['Period'] = df['Period'].apply(time2period)
+
 df['Flow Directions'] = df['Flow Directions'].map(lambda x: x.split()[0])
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted' : 'NSA' }})
 df['Product'] = df['Product'].str.lstrip()

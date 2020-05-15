@@ -33,8 +33,36 @@ def left(s, amount):
 def right(s, amount):
     return s[-amount:]
 
+import re
+YEAR_RE = re.compile(r'[0-9]{4}')
+YEAR_MONTH_RE = re.compile(r'([0-9]{4})\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)')
+YEAR_QUARTER_RE = re.compile(r'([0-9]{4})(Q[1-4])')
 
-# +
+class Re(object):
+    def __init__(self):
+        self.last_match = None
+    def fullmatch(self,pattern,text):
+        self.last_match = re.fullmatch(pattern,text)
+        return self.last_match
+
+def time2period(t):
+    gre = Re()
+    if gre.fullmatch(YEAR_RE, t):
+        return f"year/{t}"
+    elif gre.fullmatch(YEAR_MONTH_RE, t):
+        year, month = gre.last_match.groups()
+        month_num = {'JAN': '01', 'FEB': '02', 'MAR': '03', 'APR': '04', 'MAY': '05', 'JUN': '06',
+                     'JUL': '07', 'AUG': '08', 'SEP': '09', 'OCT': '10', 'NOV': '11', 'DEC': '12'}.get(month)
+        return f"month/{year}-{month_num}"
+    elif gre.fullmatch(YEAR_QUARTER_RE, t):
+        year, quarter = gre.last_match.groups()
+        return f"quarter/{year}-{quarter}"
+    else:
+        print(f"no match for {t}")
+
+
+# -
+
 for tab in tabs:
     if (tab.name == 'B6') or (tab.name == 'B6A1'):
         emu_index = [12,14,17,19,21,25,29,31,34,36,38,42,46,48,51,53,55,59]
@@ -68,18 +96,14 @@ for tab in tabs:
         tidy_sheet = ConversionSegment(tab, dimensions, observations)        
         #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
         tidied_sheets.append(tidy_sheet.topandas())
-        
-
-
-
-# -
 
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
-df['Quarter'] = df['Quarter'].astype(str)
-df['Quarter'] = df['Quarter'].map(lambda x: '-Q1' if 'Q1' in x else('-Q2' if 'Q2' in x else ('-Q3' if 'Q3' in x else ('-Q4' if 'Q4' in x else ''))))
-df['Year'] = df['Quarter'].map(lambda x: 'government-quarter/' if '-Q1' in x else('government-quarter/' if '-Q2' in x else('government-quarter/' if '-Q3' in x else('government-quarter/' if '-Q4' in x else 'government-year/'))))
-df['Period'] = df['Year'] + df['Period'].map(lambda x: left(x,4)) + df['Quarter']
-df.drop(['Quarter', 'Year'], axis=1, inplace=True)
+df['Period'] = df.Period.str.replace('\.0', '')
+df['Quarter'] = df['Quarter'].str.lstrip()
+df['Period'] = df['Period'] + df['Quarter']
+df.drop(['Quarter'], axis=1, inplace=True)
+df['Period'] = df['Period'].apply(time2period)
+
 df['Account Type'] = df['Account Type'].map(lambda x: x.split()[0]) + ' ' +  df['Account Type'].map(lambda x: x.split()[1])
 df['Account Type'] = df['Account Type'].str.rstrip(':')
 df['Services'] = df['Services'].str.rstrip('4')
@@ -124,6 +148,7 @@ schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID
 tidy
 
 # --
+
 
 
 
