@@ -14,9 +14,9 @@
 >
   <xsl:output method="xml" indent="yes"/>
 
-  <xsl:template match="/mes:Structure/mes:Structures/str:Codelists/str:Codelist[@id='CL_AREA']">
+  <xsl:template match="/mes:Structure/mes:Structures/str:Codelists/str:Codelist[@id='CL_AREA' and @version='1.6']">
     <rdf:RDF xml:base="http://gss-data.org.uk/def/concept-scheme/sdmx-bop/cl_area">
-      <skos:ConceptScheme about="">
+      <skos:ConceptScheme rdf:about="">
         <rdfs:label xml:lang="{com:Name/@xml:lang}"><xsl:value-of select="com:Name"/></rdfs:label>
       </skos:ConceptScheme>
       <xsl:apply-templates select="str:Code" mode="gen"/>
