@@ -197,7 +197,7 @@
         },
         {
             "url": "codelists/product.csv",
-            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-loose-schema.json",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Product"
         },
         {
