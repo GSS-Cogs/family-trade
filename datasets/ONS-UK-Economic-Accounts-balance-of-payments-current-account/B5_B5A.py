@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -102,6 +102,7 @@ df['Period'] = df['Period'] + df['Quarter']
 df.drop(['Quarter'], axis=1, inplace=True)
 df['Period'] = df['Period'].apply(time2period)
 
+
 df['Income Description'] = df['Income Description'].str.rstrip('2')
 df['Income Description'] = df['Income Description'].str.rstrip('3')
 df['Income Description'] = df['Income Description'].str.lstrip()
@@ -128,13 +129,15 @@ destinationFolder.mkdir(exist_ok=True, parents=True)
 
 TITLE = 'Balance of Payments: Secondary income'
 OBS_ID = pathify(TITLE)
-GROUP_ID = 'ons-uk-ecconomic-accounts-balance-of-payments-current-account'
+import os
+GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/trade/' + Path(os.getcwd()).name))
+
 
 tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 # # +
 from gssutils.metadata import THEME
 scraper.set_base_uri('http://gss-data.org.uk')
-scraper.set_dataset_id(f'gss_data/trade/{GROUP_ID}/{OBS_ID}')
+scraper.set_dataset_id(f'{GROUP_ID}/{OBS_ID}')
 scraper.dataset.title = TITLE
 
 scraper.dataset.family = 'trade'
