@@ -1,0 +1,11 @@
+# Concepts should have at most one ui:sortPriorty
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX ui: <http://www.w3.org/ns/ui#>
+SELECT * WHERE {
+  ?cs a skos:ConceptScheme .
+  ?c a skos:Concept ;
+     skos:inScheme ?cs ;
+     ui:sortPriority ?s1, ?s2 .
+  FILTER (?s1 != ?s2)
+}
