@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="../favicon.png">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>COGS Family Transform Flowcharts</title>
+    <script src="https://cdn.jsdelivr.net/npm/rdflib@1.0.4/dist/rdflib.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dagre-d3@0.6.3/dist/dagre-d3.min.js"></script>
+  </head>
+  <body style="padding-top: 4.5rem;">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #aaf;">
+      <a class="navbar-brand" href="https://github.com/GSS-Cogs/gss-data-docs/wiki">
+        <img src="cogs.svg" alt="COGS" width="72"/>
+      </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://gss-cogs.github.io/gss-data-docs/architecture">Architecture</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="https://gss-cogs.github.io/gss-data-docs/architecture/components.html">Components</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://gss-cogs.github.io/gss-data-docs/architecture/transformation.html">Transformation</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Specifications
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="https://gss-cogs.github.io/family-homelessness/datasets/specmenu.html?">Homelessness</a>
+              <a class="dropdown-item" href="https://gss-cogs.github.io/family-covid-19/datasets/specmenu.html">Covid 19</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+    <svg width="1600" height="1024"><style>
+.node rect {
+  fill: #fff;
+}
+
+.edgePath path {
+  stroke: #333;
+  fill: #333;
+  stroke-width: 1.5px;
+}
+.card-node {
+    width: 18rem;
+}
+.card-header.LandingPage {
+    background-color: #359eee;
+}
+.card-header.Datasets {
+    background-color: #3673a5;
+    color: white;
+}
+.card-header.Sheets {
+    background-color: #63b132;
+}
+.card-header.Columns {
+    background-color: #335061;
+    color: white;
+}
+.card-header.PMD {
+    background-color: #f7c2ae;
+}
+
+    </style></svg>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+      const store = $rdf.graph();
+      const fetcher = new $rdf.Fetcher(store, 5000);
+      //const components_url = new URL("familymappings.ttl", window.location);
+      const process = (window.location.search != '' ? window.location.search.substring(1) : 'familymappings.ttl')
+      const info_url = new URL(process, window.location);
+      const COGS = $rdf.Namespace("http://gss-cogs.uk/def/arch/");
+      const RDF = $rdf.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+      const RDFS = $rdf.Namespace("http://www.w3.org/2000/01/rdf-schema#");
+
+      fetcher.nowOrWhenFetched(info_url.href, function(ok, body, xhr) {
+        if (!ok) {
+          console.log("Error fetching data.");
+        } else {
+          console.log("Ok, parsed.");
+          const packageTypes = new Set(store.each(undefined, RDFS("subClassOf"), COGS("SoftwarePackage")));
+          const packages = new Set();
+          packageTypes.forEach(t => {
+            store.each(undefined, RDF("type"), t).forEach(p => packages.add(p));
+          });
+          console.log(packages);
+          const requires = store.statementsMatching(undefined, COGS('requires'), undefined);
+          const splits = store.statementsMatching(undefined, COGS('splits'), undefined);
+          const transforms = store.statementsMatching(undefined, COGS('transforms'), undefined);
+          const outputs = store.statementsMatching(undefined, COGS('outputs'), undefined);
+          const uploads = store.statementsMatching(undefined, COGS('uploads'), undefined);
+          const joins = store.statementsMatching(undefined, COGS('joins'), undefined);
+          console.log(requires);
+          console.log(splits);
+          console.log(transforms);
+          console.log(outputs)
+          console.log(uploads)
+          console.log(joins)
+          const nodes = new Set();
+          requires.forEach(s => {
+            nodes.add(s.subject);
+            nodes.add(s.object);
+          });
+          splits.forEach(s => {
+            nodes.add(s.subject);
+            nodes.add(s.object);
+          });
+          transforms.forEach(s => {
+            nodes.add(s.subject);
+            nodes.add(s.object);
+          });
+          outputs.forEach(s => {
+            nodes.add(s.subject);
+            nodes.add(s.object);
+          });
+          uploads.forEach(s => {
+            nodes.add(s.subject);
+            nodes.add(s.object);
+          });
+          joins.forEach(s => {
+            nodes.add(s.subject);
+            nodes.add(s.object);
+          });
+          packages.forEach(p => {
+            nodes.add(p);
+          });
+          const g = new dagreD3.graphlib.Graph().setGraph({rankDir: 'LR'});
+          nodes.forEach(n => {
+            const l = store.any(n, RDFS('label'));
+            const c = store.any(n, RDFS('comment'));
+            const t = store.any(n, RDF('type'))
+            const tl = store.any(t, RDFS('label'));
+            let html = '<div class="card card-node">';
+            if (t !== undefined && t.value.startsWith(COGS().value)) {
+              html += '<div class="card-header ' + t.value.substring(COGS().value.length) + '">';
+            } else {
+              html += '<div class="card-header">';
+            }
+            if (tl !== undefined) {
+              html += tl;
+            } else {
+              html += 'Software Package';
+            }
+            html += '</div><div class="card-body"><h4 class="card-title text-wrap">';
+            if (l !== undefined) {
+              html += l.value;
+            } else {
+              html += 'Unknown';
+            }
+            html += '</h3><p class="card-text text-wrap">';
+            if (c !== undefined) {
+              html += c.value;
+            }
+            html += '</p>';
+            //if (n.value.startsWith('https://github.com/')) {
+              //html += '<a href="' + n.value + '"><i class="pull-right fa fa-github"></i></a>';
+            //} else {
+              //html += '<a href="' + n.value + '"><i class="pull-right fa fa-external-link"></i></a>';
+            //}
+            html += '</div></div>';
+            g.setNode(n.value, {
+              labelType: 'html',
+              label: html,
+              padding: 0
+            });
+          });
+          requires.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'requires', curve: d3.curveBasis });
+          });
+          splits.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'splits', curve: d3.curveBasis });
+          });
+          transforms.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'transforms', curve: d3.curveBasis });
+          });
+          outputs.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'outputs', curve: d3.curveBasis });
+          });
+          uploads.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'uploads', curve: d3.curveBasis });
+          });
+          joins.forEach(s => {
+            g.setEdge(s.subject.value, s.object.value, {label: 'joins', curve: d3.curveBasis });
+          });
+          const render = new dagreD3.render();
+          const svg = d3.select("svg"),
+              svgGroup = svg.append("g");
+          render(d3.select("svg g"), g);
+          svgGroup.attr("transform", "translate(20, 20)");
+          svg.attr("height", g.graph().height + 40);
+          svg.attr("width", g.graph().width + 40);
+        }
+      });
+    </script>
+  </body>
+</html>
