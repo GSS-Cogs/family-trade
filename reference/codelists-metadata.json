@@ -385,6 +385,26 @@
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Status",
             "rdfs:comment": "HMRC RTS to distinguish between Closed datasets and open datasets"
+        },
+        {
+            "url": "codelists/alcohol-by-volume.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Alcohol by Volume"
+        },
+        {
+            "url": "codelists/alcohol-type.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Alcohol Type"
+        },
+        {
+            "url": "codelists/alcohol-origin.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Alcohol Origin"
+        },
+        {
+            "url": "codelists/production-and-clearance.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Production and Clearance"
         }
     ]
 }
