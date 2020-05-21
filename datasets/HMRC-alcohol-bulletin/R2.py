@@ -77,7 +77,7 @@ for tab in tabs:
             
                 #general measure type and unit type shared across each sub-section.
                 measure_type = 'GBP per Hectolitre of Product'
-                unit = 'Unit GBP'
+                unit = 'GBP'
                 
                 # Wine Duty (WINE)
                 period = cell_wine_duty_wine.shift(0,6).expand(DOWN).is_not_blank() - cell_wine_duty_made_wine.expand(DOWN)
