@@ -30,80 +30,51 @@ next_table = pd.DataFrame()
 # +
 # %%capture
 
-# %run 'T1_T2_ Wine_Duty_wine_and_made_wine.py' 
-next_table = pd.concat([next_table, Final_table])
+# %run 'T1.py' 
+next_table = pd.concat([next_table, tidy])
 
-# %run "T3_Spirits_Duty_statistics.py"
-next_table = pd.concat([next_table, Final_table])
+# %run 'T2.py'
+next_table = pd.concat([next_table, tidy])
 
-# %run 'T4_ Beer_Duty_and_Cider_Duty_statistics.py'
-next_table = pd.concat([next_table, Final_table])
+# %run 'T3.py'
+next_table = pd.concat([next_table, tidy])
 
-# %run 'R2_Historic_alcohol_duty_rates.py'
-next_table = pd.concat([next_table, Final_table])
+# %run 'T4.py'
+next_table = pd.concat([next_table, tidy])
 
-# +
-next_table = next_table.replace({'Measure Type' : { 'quantities-consumption' : 'Quantities Released for Consumption','revenue' : 'Revenue',
-                                    'potable-spirits':'Production of Potable Spirits','net-quantities-spirits':'Net Quantities of Spirits Charged with Duty',
-                                    'uk-beer':'UK Beer Production', 'alcohol-clearences':'Alcohol Clearances',
-                                    'beer-clearences':'Beer Clearances','cider-clearences':'Cider Clearances','rates-of-duty':'Rates of Duty'
-                              }})
-
-next_table = next_table.replace({'Alcohol Category' : { 'UK Beer Production' : 'total-beer', 'UK Alcohol Production' : 'total-alcohol-production',
-                                                       'Alcohol Clearances' : 'total-alcohol-clearances', 'Cider Clearances' : 'total-cider-clearances', 
-                                                       'Still Wine' : 'still', 'Sparkling Wine' : 'sparkling', 'Ready-to-Drink' : 'rtd', 'Spirits-Based RTDs' : 'spirit-based-rtds', 
-                                                       'Breweries Producing 5000 Hls Or Less' : 'breweries-5000-less', 'Still Cider' : 'Still', 'Sparkling Cider' : 'Sparkling',
-                                                       'Breweries Producing 5000 Hls Or Less2' : 'breweries-5000-less'
-                              }})
-
-next_table = next_table.replace({'Alcohol Content' : { 'Various': 'all', 'various': 'all','Over 1.2%, up to and including 4.0%' : 'over-1-2-up-to-and-incl-4-0',
-                                                      'Over 4.0%, up to and including 5.5%' : 'over-4-0-up-to-and-incl-5-5',
-                                                      'Over 5.5%, up to and including 15.0%' : 'over-5-5-up-to-and-incl-15-0',
-                                                      'Over 15.0%, up to and including 22%' : 'over-15-0-up-to-and-incl-22',
-                                                      'From 8.5%, up to and including 15.0%': 'from-8-5-up-to-and-incl-15-0',
-                                                      'Exceeding 1.2% but less than 6.9% abv' : 'exceed-1-2-less-than-6-9-abv',
-                                                      'At least 6.9% but not exceeding 7.5% abv' : 'at-least-6-9-not-exceed-7-5-abv',
-                                                      'Exceeding 7.5% but less than 8.5% abv' : 'exceed-7-5-less-than-8-5-abv',
-                                                      'Exceeding 5.5% but less than 8.5% abv' : 'exceed-5-5-less-than-8-5-abv'      
-                                                      
-                              }})
-
-
-
-next_table['Revision'] = next_table['Revision'].map(
-    lambda x: {
-        'estimated based on previous Periods' : 'estimated', 
-        'estimated based on previous years' : 'estimated',
-        '': 'original-value',
-        'P' : 'provisional',
-        'R' : 'revised'
-       }.get(x, x))
-
-
-# -
-
-next_table['Alcohol Content'].unique()
-
-next_table['Revision'].unique()
-
-next_table['Alcohol Category'] = next_table['Alcohol Category'].map(lambda x: pathify(x))
-next_table['Alcohol Content'] = next_table['Alcohol Content'].map(lambda x: pathify(x))
+# %run 'R2.py'
 
 # +
+for column in next_table:
+    if column in ('Alcohol by Volume', 'Alcohol Type', 'Alcohol Origin', 'Production and Clearance'):
+        next_table[column] = next_table[column].str.lstrip()
+        next_table[column] = next_table[column].map(lambda x: pathify(x))
+
+next_table['Value'] = next_table['Value'].round(decimals = 2)
+
+# + endofcell="--"
 destinationFolder = Path('out')
 destinationFolder.mkdir(exist_ok=True, parents=True)
 
-next_table.drop_duplicates().to_csv(destinationFolder / ('observations.csv'), index = False)
-# +
-scraper.set_base_uri('http://gss-data.org.uk')
-scraper.dataset.family = 'Trade'
+TITLE = 'HMRC Alcohol Releases, Production and Clearances - NSA'
+OBS_ID = pathify(TITLE)
+import os
+GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/trade/' + Path(os.getcwd()).name))
 
-with open(destinationFolder / 'observations.csv-metadata.trig', 'wb') as metadata:
+next_table.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+# # +
+from gssutils.metadata import THEME
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(f'{GROUP_ID}/{OBS_ID}')
+scraper.dataset.title = TITLE
+
+scraper.dataset.family = 'trade'
+with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(destinationFolder / 'observations.csv', destinationFolder / 'observations.csv-schema.json')
 # -
 
+schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
+
 next_table
-
-
+# --
