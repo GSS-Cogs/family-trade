@@ -387,6 +387,8 @@ def add_datamarkers_for_missing_measures(df):
     ammendments = loop_for_ammendments(df, measures, ckeys)
     ammendments.to_csv("ammend.csv", index=False)
     df = pd.concat([df, ammendments])
+    
+    df = df.drop("CKEYS", axis=1)
 
     return df
 
