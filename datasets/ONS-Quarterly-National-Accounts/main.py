@@ -5,6 +5,9 @@
 #   
 
 # %%
+EXTRACT_PERCENTAGE_CHANGE = True
+
+# %%
 
 import re
 import os
@@ -14,6 +17,7 @@ from gssutils import *
 
 from gssutils.metadata import THEME
 from os import environ
+import numpy as np
 
 with open("info.json") as f:
     info = json.load(f)
@@ -61,7 +65,7 @@ for a_cell in a_cells:
     elif " deflator " in b_cell.value.lower():
         estimate_type[a_cell.value] = "deflator"
     elif " population " in b_cell.value.lower():
-        estimate_type[a_cell.value] = "people"
+        estimate_type[a_cell.value] = "population"
     elif "per cent" in b_cell.value.lower() or " percent " in b_cell.value.lower():
         estimate_type[a_cell.value] = "percentage"
     else:
@@ -85,6 +89,10 @@ for a_cell in a_cells:
 class LookupMeasure(object):
     """
     A class for passing to pandas .apply() to get the measure type.
+    
+    TODO - this has changed so many times now that we probably need a rewrite to account for having both a measure column
+    and a growth column. As an interim we're providing measures in the format <measure type item:growth item> so we can split
+    the column in post.
     """
     
     def __init__(self, job, tab):
@@ -93,31 +101,32 @@ class LookupMeasure(object):
         self.title = [x.value for x in tab.excel_ref("B1")][0]
         self.all_cdids = [x for x in self.tab.filter(is_cdid)]
         
-        self._1YGR = "Year on year"
-        self._1QGR = "Quarter on quarter"
-        self._4QGR = "Quarter on quarter a year ago"
+        self._1YGR = "Percent:year-on-year"
+        self._1QGR = "Percent:quarter-on-quarter"
+        self._4QGR = "Percent:quarter-on-quarter-a-year-ago"
         
         # Overrides per job where the pattern is non standard for whatever reason
         self.overrides = {
-            "Inventories": self._inventories,
+            "Inventories": self._inventories
         }
          
         # Default (i.e the non percentage change measures) depending on job & (optionally) tab
         self.defaults = {
-            "National Accounts Aggregates": {"A1": "Index", "A2": "GBP Million"},
-            "Output indicators": "Index", 
-            "Expenditure indicators": "GBP Million",
-            "Income indicators": "GBP Million",
-            "Household expenditure indicators": "GBP Million",
-            "Gross fixed capital formation": "GBP Million",
-            "Trade": "GBP Million",
-            "GFCF": "GBP Million",
-            "Income indicators": "GBP Million",
-            "GDP per head": "GBP Million"   # note, we'll override some of these later for horizontal changes in measure
+            "National Accounts Aggregates: GDP, GVA  and GDP deflator indices": "Index-not:applicable",
+            "National Accounts Aggregates: GDP and GVA in £ million": "GBP Million:not-application",
+            "Output indicators": "Index:not-applicable", 
+            "Expenditure indicators": "GBP Million:not-applicable",
+            "Income indicators": "GBP Million:not-applicable",
+            "Household expenditure indicators": "GBP Million:not-applicable",
+            "Gross fixed capital formation": "GBP Million:not-applicable",
+            "Trade": "GBP Million:not-applicable",
+            "GFCF": "GBP Million:not-applicable",
+            "Income indicators": "GBP Million:not-applicable",
+            "GDP per head": "GBP Million:not-applicable"   # note, we'll override some of these later for horizontal changes in measure
         }
             
     def _inventories(self, val):
-        return "GBP Million" if "current prices" in self.title else "Index"
+        return "GBP Million:not-applicable" if "current prices" in self.title else "Index:not-applicable"
               
     def __call__(self, val):
         if self.job in self.overrides.keys():
@@ -339,10 +348,48 @@ def horizontal_measure_overrides(job_name, df):
     We're dealing with this by going with the vertical but modifying for the horizontal changes in post (this function)
     """
     if job_name == "GDP per head":
-        df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "people")] = "Count"
+        df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "population")] = "Count"
         
     return df
+
+
+def add_datamarkers_for_missing_measures(df):
+        
+    # Deal with scoping
+    def loop_for_ammendments(df, measures, ckeys):
     
+        for ckey in ckeys:
+            temp_df = df[df["CKEYS"] == ckey]  
+            for missing_measure in [x for x in measures if x not in temp_df["Measure Type"].unique().tolist()]:
+                
+                one_line = temp_df[:1]
+                one_line["Measure Type"] = missing_measure
+                one_line["Value"] = ""
+                one_line["Marker"] = "not-available"
+                
+                nonlocal ammendments
+                ammendments = pd.concat([df, one_line])
+            
+        return ammendments
+        
+    # Get the unique measure types in this dataframe
+    measures = df["Measure Type"].unique().tolist()
+    
+    # Create a composite key
+    df["CKEYS"] = ""
+    for col in [x for x in df.columns.values if x not in ["Value", "Marker", "CDID", "Decimals", "Measure Type"]]:
+        df["CKEYS"] = df["CKEYS"].astype(str) + df[col].astype(str)
+    
+    measures = df["Measure Type"].unique().tolist()
+    ckeys = df["CKEYS"].unique().tolist()
+
+    ammendments = pd.DataFrame(columns=df.columns.values)
+    ammendments = loop_for_ammendments(df, measures, ckeys)
+    ammendments.to_csv("ammend.csv", index=False)
+    df = pd.concat([df, ammendments])
+
+    return df
+
 
 # filters to pass to databaker
 # a filter can be anything that takes an xyCell and return True or False
@@ -375,15 +422,24 @@ def is_not_time_or_blank(xyCell):
 # %%
 
 jobs = {
-    "National Accounts Aggregates": {
-        "tabs": [x for x in tabs if x.name.startswith("A") and "AGGREGATES" in x.name],
+    "National Accounts Aggregates: GDP, GVA  and GDP deflator indices": {
+        "tabs": [x for x in tabs if x.name.startswith("A1") and "AGGREGATES" in x.name],
         "cdid_header_row": '4',
         "dimension_looked_up_from_cdid_row": [
             ("Aggregate", move_rows(-1))
         ],
         "clear_footnotes_from": ["Aggregate"],
         "pathify": ["Aggregate"]
-    },  
+    },
+    "National Accounts Aggregates: GDP and GVA in £ million": {
+        "tabs": [x for x in tabs if x.name.startswith("A2") and "AGGREGATES" in x.name],
+        "cdid_header_row": '4',
+        "dimension_looked_up_from_cdid_row": [
+            ("Aggregate", move_rows(-1))
+        ],
+        "clear_footnotes_from": ["Aggregate"],
+        "pathify": ["Aggregate"]
+    },
     "Output indicators": {
         "tabs": [x for x in tabs if x.name.startswith("B") and "OUTPUT" in x.name],
         "cdid_header_row": '5',
@@ -454,30 +510,37 @@ jobs = {
         ],
         "pathify": ["Trade Type", "Flow"],
         "clear_footnotes_from": ["Trade Type", "Flow"]
-    },
-    "GDP per head": {
-        "tabs": [x for x in tabs if x.name.startswith("P") and "GDP per head" in x.name],
-        "cdid_header_row": '4',
-        "dimension_looked_up_from_cdid_row": [
-            ("GDP Measure", move_rows(-1))
-        ],
-        "pathify": ["GDP Measure"],
-        "clear_footnotes_from": ["GDP Measure"]
     }
 }
 
+
+
+# %% [markdown]
+#
+# # NOTE re jobs (above) 
+#
+# I Dropped this from the above there's an out of place population series that plays hell with the measure types.
+#
+#     "GDP per head": {
+#         "tabs": [x for x in tabs if x.name.startswith("P") and "GDP per head" in x.name],
+#         "cdid_header_row": '4',
+#         "dimension_looked_up_from_cdid_row": [
+#             ("GDP Measure", move_rows(-1))
+#         ],
+#         "pathify": ["GDP Measure"],
+#         "clear_footnotes_from": ["GDP Measure"]
+#  
 
 # %% [markdown]
 # ### Create all the datacubes
 
 # %%
 
-
 for job_name, job_details in jobs.items():
     tidy_sheets = []
         
     try:
-        
+
         for tab in job_details["tabs"]:
 
             # Get the CDID header row
@@ -488,6 +551,10 @@ for job_name, job_details in jobs.items():
             time = tab.excel_ref("A6").fill(DOWN).filter(is_time)
             
             observations = time.waffle(cdid_header_row).is_not_blank().is_not_whitespace()
+            
+            if not EXTRACT_PERCENTAGE_CHANGE:
+                p = tab.excel_ref('A').filter(contains_string('ercentage')).expand(RIGHT).expand(DOWN)
+                observations = observations - p
             
             dimensions = [
                 HDim(time, "Period", DIRECTLY, LEFT),
@@ -519,25 +586,32 @@ for job_name, job_details in jobs.items():
             # missing CDID's for estimate type ....
             if job_name == "Income indicators":
                 df["Estimate Type"] = "current-price"
-            elif job_name == "Gross fixed capital formation" or job_name == "Inventories":
+            elif job_name.startswith("Gross fixed capital formation") or job_name.startswith("Inventories"):
                 pass # handled with a dimension
             else:
                 df["Estimate Type"] = df["CDID"]
                 df["Estimate Type"] = df["Estimate Type"].map(lambda x: estimate_type[x])
             
             df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
-            
-            if job_name == "GDP per head":
-                df["Decimals"] = df["Measure Type"].map(lambda x: 1000 if x == "persons" else 1)
-            else:
-                df["Decimals"] = 1
-            
-            # account for horizontal changes in measure type
-            df = horizontal_measure_overrides(job_name, df)
                 
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million") # why?
             df = df.rename(columns={"OBS": "Value", "DATAMARKER": "Marker"})
             df.fillna("", inplace=True)
+            
+            # Split out the entries for measure type and growth
+            # If there's only one value for growth (i.e na throughout) drop the column
+            df["Growth"] = df["Measure Type"].map(lambda x: x.split(":")[1])
+            df["Measure Type"] = df["Measure Type"].map(lambda x: x.split(":")[0])
+            if len(df["Growth"].unique().tolist()) == 1:
+                df = df.drop("Growth", axis=1)
+                
+            # account for horizontal changes in measure type
+            df = horizontal_measure_overrides(job_name, df)
+                
+            if job_name == "GDP per head":
+                df["Decimals"] = df["Estimate Type"].map(lambda x: 1000 if x == "population" else 1)
+            else:
+                df["Decimals"] = 1
             
             for col in job_details.get("clear_rogue_zeroes", []):
                 df[col] = df[col].astype(str).str.replace(".0", "")
@@ -554,11 +628,12 @@ for job_name, job_details in jobs.items():
             # Last, we'll pull out any datamarkers
             df["Marker"] = df["Value"].map(lambda cell: "".join([x for x in str(cell) if not x.isdigit()]))
             df["Marker"] = df["Marker"].map(lambda x: "-" if x == "-." else "" if x == "." else x)
+            df["Value"] = df["Value"].map(lambda cell: "".join([x.replace("..", ".") for x in str(cell) if x.isdigit() or x =="."]))
             
             # Now correct the notation of any data markers
             marker_lookup = {"..": "not-availible", "-": "nil-or-less-than-half-the-final-digit-shown"}
             df["Marker"] = df["Marker"].map(lambda x: marker_lookup.get(x, x))
-                
+            
             tidy_sheets.append(df)
                 
         destinationFolder = Path('out')
@@ -568,7 +643,11 @@ for job_name, job_details in jobs.items():
         OBS_ID = pathify(TITLE)
         
         df = pd.concat(tidy_sheets).drop_duplicates()
-                
+        
+        # Fill in missing measures
+        df = df.fillna("")
+        df = add_datamarkers_for_missing_measures(df)
+        
         df.to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
         scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
@@ -584,7 +663,8 @@ for job_name, job_details in jobs.items():
     except Exception as e:
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
-        
 
+
+# %%
 
 # %%
