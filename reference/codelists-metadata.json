@@ -306,6 +306,11 @@
             "rdfs:label": "Analysis"
         },
         {
+            "url": "codelists/national-accounts-growth.csv",
+            "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
+            "rdfs:label": "Growth"
+        },
+        {
             "url": "codelists/services.csv",
             "tableSchema": "https://gss-cogs.github.io/ref_common/codelist-schema.json",
             "rdfs:label": "Services"

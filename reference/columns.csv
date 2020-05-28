@@ -130,3 +130,4 @@ Released for Consumption,released_for_consumption,qb:measure,http://gss-data.org
 Clearance,clearance,qb:measure,http://gss-data.org.uk/def/measure/clearance,,string,,,
 GBP per Hectolitre of Product,gbp_per_hectolitre_of_product,qb:measure,http://gss-data.org.uk/def/measure/gbp-per-hectolitre-of-product,,string,,,
 GBP per 1 percent ABV per hectolitre,gbp_per_1_percent_abv_per_hectolitre,qb:measure,http://gss-data.org.uk/def/measure/gbp-per-1-percent-abv-per-hectolitre,,string,,,
+Growth,growth,qb:dimension,http://gss-data.org.uk/def/dimension/growth,http://gss-data.org.uk/def/concept/growth/{growth},string,,,

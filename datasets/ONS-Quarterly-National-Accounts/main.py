@@ -2,7 +2,7 @@
 # coding: utf-8
 # %% [markdown]
 # ### ONS Quarterly National Accounts
-#   
+#
 
 # %%
 EXTRACT_PERCENTAGE_CHANGE = True
@@ -21,7 +21,7 @@ import numpy as np
 
 with open("info.json") as f:
     info = json.load(f)
-    
+
 scraper = Scraper(info["landingPage"])
 dataset_title_prefix = scraper.dataset.title  # for later
 scraper
@@ -33,7 +33,7 @@ tabs = scraper.distribution(downloadURL=lambda x: "quarterlynationalaccounts" in
 # %% [markdown]
 # ### Index
 #
-# We're going to create a dictionary from the index tab for use in building all the datacubes, this is so we can: 
+# We're going to create a dictionary from the index tab for use in building all the datacubes, this is so we can:
 #
 # - differentiate the estimate type using series description.
 
@@ -44,7 +44,7 @@ tabs = scraper.distribution(downloadURL=lambda x: "quarterlynationalaccounts" in
 tab = [x for x in tabs if x.name == "Index"]
 if len(tab) != 1:
     raise Exception("Extraction Aborted. The spreadheet should have 1 (and only 1) tab named 'Index'.")
-    
+
 # Select all values in columns A and B
 a_cells = tab[0].excel_ref('A').is_not_blank().is_not_whitespace() - tab[0].excel_ref("A1")
 b_cells = tab[0].excel_ref('B').is_not_blank().is_not_whitespace() - tab[0].excel_ref("B1")
@@ -53,11 +53,11 @@ d_cells = tab[0].excel_ref('D').is_not_blank().is_not_whitespace() - tab[0].exce
 # Match the vertical offset (.y) of the xyCells to make the dict
 estimate_type = {}
 for a_cell in a_cells:
-    
+
     # Get {cdid: GDP Estimate}
     b_cell = [x for x in b_cells if x.y == a_cell.y][0]
     d_cell = [x for x in d_cells if x.y == a_cell.y][0]
-    
+
     if " cvm " in b_cell.value.lower():
         estimate_type[a_cell.value] = "chained-volume-measure"
     elif " cp " in b_cell.value.lower():
@@ -89,32 +89,32 @@ for a_cell in a_cells:
 class LookupMeasure(object):
     """
     A class for passing to pandas .apply() to get the measure type.
-    
+
     TODO - this has changed so many times now that we probably need a rewrite to account for having both a measure column
     and a growth column. As an interim we're providing measures in the format <measure type item:growth item> so we can split
     the column in post.
     """
-    
+
     def __init__(self, job, tab):
         self.job = job
         self.tab = tab
         self.title = [x.value for x in tab.excel_ref("B1")][0]
         self.all_cdids = [x for x in self.tab.filter(is_cdid)]
-        
+
         self._1YGR = "Percent:year-on-year"
         self._1QGR = "Percent:quarter-on-quarter"
         self._4QGR = "Percent:quarter-on-quarter-a-year-ago"
-        
+
         # Overrides per job where the pattern is non standard for whatever reason
         self.overrides = {
             "Inventories": self._inventories
         }
-         
+
         # Default (i.e the non percentage change measures) depending on job & (optionally) tab
         self.defaults = {
-            "National Accounts Aggregates: GDP, GVA  and GDP deflator indices": "Index-not:applicable",
-            "National Accounts Aggregates: GDP and GVA in £ million": "GBP Million:not-application",
-            "Output indicators": "Index:not-applicable", 
+            "National Accounts Aggregates: GDP, GVA  and GDP deflator indices": "Index-not:not-applicable",
+            "National Accounts Aggregates: GDP and GVA in £ million": "GBP Million:not-applicable",
+            "Output indicators": "Index:not-applicable",
             "Expenditure indicators": "GBP Million:not-applicable",
             "Income indicators": "GBP Million:not-applicable",
             "Household expenditure indicators": "GBP Million:not-applicable",
@@ -124,10 +124,10 @@ class LookupMeasure(object):
             "Income indicators": "GBP Million:not-applicable",
             "GDP per head": "GBP Million:not-applicable"   # note, we'll override some of these later for horizontal changes in measure
         }
-            
+
     def _inventories(self, val):
         return "GBP Million:not-applicable" if "current prices" in self.title else "Index:not-applicable"
-              
+
     def __call__(self, val):
         if self.job in self.overrides.keys():
             return self.overrides[self.job](val)
@@ -159,7 +159,7 @@ class lookup_from_offset_range(object):
     """
     some tables use horrible centered headings we need to untangle. We'll do it by building a
     cellvalueoverride dictionary on the fly.
-    
+
     We'll use some databaker trickery so we "search" the row in question (relative to the cdid row)
     From the left offset, to the right offset (offset being one horizontal/x space) until we get
     a non blank, non whitespace value - which is used to build the {CDID:value} lookup
@@ -169,9 +169,9 @@ class lookup_from_offset_range(object):
         self.left = left
         self.right = right
         self.default = default
-        
+
     def __call__(self, cdid_header_row):
-        
+
         lookup = {}
         target_row = cdid_header_row.shift(0, self.vertical)
         for cdid in cdid_header_row:
@@ -185,13 +185,13 @@ class lookup_from_offset_range(object):
                 except IndexError:
                     # Expected, sometimes we "look" too far to the left or right of our selection
                     pass
-            
+
             if found == False and self.default is not None:
                 lookup[cdid.value] = self.default
-                
+
         return lookup
-    
-    
+
+
 def format_time(time_value):
     """ Does exactly what you'd think """
     time_string = str(time_value).replace(".0", "").strip()
@@ -202,23 +202,23 @@ def format_time(time_value):
         return "quarter/{}-{}".format(time_string[:4], time_string[5:7])
     else:
         raise Exception("Aborting. Time cells should either be 4 or 7 characters in length. We have: '{}'.".format(time_string))
-    
-    
+
+
 class move_rows(object):
     """
     For if you just want a lookup to the labels that are offset y (vertical index) rows from the cdid header row
     """
     def __init__(self, y_offset):
         self.y_offset = y_offset
-        
+
     def __call__(self, cdid_header_row):
         lookup = {}
         for cdid_cell in cdid_header_row:
             new_label_cell = [x for x in tab if x.x == cdid_cell.x and x.y == cdid_cell.y+self.y_offset][0]
             lookup[cdid_cell.value] = new_label_cell.value
         return lookup
-        
-        
+
+
 def table_e_national_or_domestic_lookup(cdid_header_row):
     """
     The first two columns are national, the rest are domestic
@@ -231,51 +231,51 @@ def table_e_national_or_domestic_lookup(cdid_header_row):
         else:
             lookup[cdid_cell.value] = "uk-domestic"
     return lookup
-    
+
 
 def table_e_totals_lookup(cdid_header_row):
     """
     Table E has a nasty habit of overusing the label "Total" (3 times on one tab!).
-    
+
     This lookup will:
     - prefix "Domestic " to any Total to the right of "Net tourism"
     - postfix " goods" to any Total left of "Durable goods" (and lower case that D)
     """
     lookup = {}
     label_row = cdid_header_row.shift(0, -2)   # up 2
-    
+
     # Create basic 1 to 1 lookup with labels as-is
     for cdid_cell in cdid_header_row:
         label_cell = [x for x in label_row if x.x == cdid_cell.x][0]
         lookup[cdid_cell.value] = label_cell.value
-        
+
     # TODO - wrap the following comprehensions somehow, looks nasty
     # TODO - assertion on assumed find of Total cells
-    
+
     # Add domestic prefix
     try:
         net_tourism_cell_x = [x.x for x in label_row if x.value == "Net tourism"][0]
         one_to_the_right = [x for x in label_row if x.x == net_tourism_cell_x+1][0]
         cdid_label = [x for x in cdid_header_row if x.x == net_tourism_cell_x+1][0]
-        lookup[cdid_label.value] = "Domestic " + one_to_the_right.value.lower().strip() 
+        lookup[cdid_label.value] = "Domestic " + one_to_the_right.value.lower().strip()
     except:
         raise Exception("Cannot find a required cell 'to the right of Net tourism' for lookup function "
                        "'table_e_totals_lookup'.")
-        
+
     # Add goods postfix
     try:
         durable_goods_cell_x = [x.x for x in label_row if x.value == "Durable goods"][0]
         one_to_the_left = [x for x in label_row if x.x == durable_goods_cell_x-1][0]
         cdid_label = [x for x in cdid_header_row if x.x == durable_goods_cell_x-1][0]
-        lookup[cdid_label.value] = one_to_the_left.value.lower().strip() + " goods" 
+        lookup[cdid_label.value] = one_to_the_left.value.lower().strip() + " goods"
     except IndexError:
         pass # 'Durable goods' only appears on 1 of 4 tabs, so this will happen
     except:
         raise Exception("Cannot find a required cell 'to the left of Durable goods' for lookup function "
                        "'table_e_totals_lookup'.")
     return lookup
-    
-    
+
+
 def table_c_lookup(cdid_header_row):
     """
     Anything left of "Total exports" is "National expenditure on goods and services at market prices" else "Not specified"
@@ -284,21 +284,21 @@ def table_c_lookup(cdid_header_row):
     total_export_x = [x for x in cdid_header_row.shift(UP) if x.value == "Total exports"]
     if len(total_export_x) != 1:
         raise Exception("Aborted. Cannot find expected header 'Total exports'.")
-    
+
     for cdid in cdid_header_row:
         if cdid.x < total_export_x[0].x:
             lookup[cdid.value] = "National expenditure on goods and services at market prices"
         else:
             lookup[cdid.value] = "Not specified"
-            
+
     return lookup
-    
-    
+
+
 def table_f_lookup(cdid_header_row):
     """
     Table F has recurring sub headings for public and private sector that we need to integrate, into eg:
     "Public corporations Dwellings", "Private sector Dwellings"
-    
+
     We're going to do this by creating an override dict between the CDID row value and the result of pivoting (databaking)
     that relationship.
     """
@@ -312,7 +312,7 @@ def table_f_lookup(cdid_header_row):
     df["post"] = df["post"].map(lambda x: x.strip().replace("  ", " "))
     return pd.Series(df["post"].values,index=df["DATAMARKER"]).to_dict()
 
-    
+
 def table_b_lookup(cdid_header_row):
     """
     Everything is a service industry other than a small number of exceptions.
@@ -321,15 +321,15 @@ def table_b_lookup(cdid_header_row):
     lookup = {}
     for cdid in cdid_header_row:
         lookup[cdid.value] = "Service Industry"
-            
+
     # If it's the tab with production on
     if len([x for x in cdid_header_row.shift(0, -3) if "Production" in x.value]) > 0:
 
         overrides = {
-            "Not Specified":["Agriculture, forestry & fishing", "Construction", 
+            "Not Specified":["Agriculture, forestry & fishing", "Construction",
                          "Gross value added at basic prices", "Gross value added excluding oil & gas"],
             "Production": ["Mining & quarrying including oil and gas extraction", "Manufacturing",
-                          "Electricity, gas, steam and air", "Water supply, sewerage, etc.", 
+                          "Electricity, gas, steam and air", "Water supply, sewerage, etc.",
                            "Total production"]
         }
         for override, header_list in overrides.items():
@@ -338,7 +338,7 @@ def table_b_lookup(cdid_header_row):
                 clean_val = "".join([x for x in label_cell.value if not x.isdigit()]).replace("\n", "").strip()
                 if clean_val in header_list:
                     lookup[cdid.value] = override
-                    
+
     return lookup
 
 
@@ -349,37 +349,37 @@ def horizontal_measure_overrides(job_name, df):
     """
     if job_name == "GDP per head":
         df["Measure Type"][(df["Measure Type"] == "GBP Million") & (df["Estimate Type"] == "population")] = "Count"
-        
+
     return df
 
 
 def add_datamarkers_for_missing_measures(df):
-        
+
     # Deal with scoping
     def loop_for_ammendments(df, measures, ckeys):
-    
+
         for ckey in ckeys:
-            temp_df = df[df["CKEYS"] == ckey]  
+            temp_df = df[df["CKEYS"] == ckey]
             for missing_measure in [x for x in measures if x not in temp_df["Measure Type"].unique().tolist()]:
-                
+
                 one_line = temp_df[:1]
                 one_line["Measure Type"] = missing_measure
                 one_line["Value"] = ""
                 one_line["Marker"] = "not-available"
-                
+
                 nonlocal ammendments
                 ammendments = pd.concat([df, one_line])
-            
+
         return ammendments
-        
+
     # Get the unique measure types in this dataframe
     measures = df["Measure Type"].unique().tolist()
-    
+
     # Create a composite key
     df["CKEYS"] = ""
     for col in [x for x in df.columns.values if x not in ["Value", "Marker", "CDID", "Decimals", "Measure Type"]]:
         df["CKEYS"] = df["CKEYS"].astype(str) + df[col].astype(str)
-    
+
     measures = df["Measure Type"].unique().tolist()
     ckeys = df["CKEYS"].unique().tolist()
 
@@ -517,7 +517,7 @@ jobs = {
 
 # %% [markdown]
 #
-# # NOTE re jobs (above) 
+# # NOTE re jobs (above)
 #
 # I Dropped this from the above there's an out of place population series that plays hell with the measure types.
 #
@@ -529,7 +529,7 @@ jobs = {
 #         ],
 #         "pathify": ["GDP Measure"],
 #         "clear_footnotes_from": ["GDP Measure"]
-#  
+#
 
 # %% [markdown]
 # ### Create all the datacubes
@@ -538,7 +538,7 @@ jobs = {
 
 for job_name, job_details in jobs.items():
     tidy_sheets = []
-        
+
     try:
 
         for tab in job_details["tabs"]:
@@ -549,13 +549,13 @@ for job_name, job_details in jobs.items():
 
             # Get time
             time = tab.excel_ref("A6").fill(DOWN).filter(is_time)
-            
+
             observations = time.waffle(cdid_header_row).is_not_blank().is_not_whitespace()
-            
+
             if not EXTRACT_PERCENTAGE_CHANGE:
                 p = tab.excel_ref('A').filter(contains_string('ercentage')).expand(RIGHT).expand(DOWN)
                 observations = observations - p
-            
+
             dimensions = [
                 HDim(time, "Period", DIRECTLY, LEFT),
                 HDimConst("Geography", "K02000001"),
@@ -563,26 +563,26 @@ for job_name, job_details in jobs.items():
                 HDim(tab.excel_ref('A').filter(is_not_time_or_blank), "Measure Type", CLOSEST, ABOVE,
                     cellvalueoverride={"P":"Seasonally adjusted"}) # account for missing header
             ]
-            
+
             # missing CDID's for estimate type ....
             if job_name == "Gross fixed capital formation" or job_name == "Inventories":
                 dimensions.append(
-                HDim(cdid_header_row.shift(0, -4).is_not_blank().is_not_whitespace(), "Estimate Type", CLOSEST, RIGHT, 
+                HDim(cdid_header_row.shift(0, -4).is_not_blank().is_not_whitespace(), "Estimate Type", CLOSEST, RIGHT,
                      cellvalueoverride={
                          "£ million": "current-price",
                          "Reference year 2016, £ million": "chained-volume-measure"
                      })
                 )
-                
+
             for lookup_job in job_details.get("dimension_looked_up_from_cdid_row", []):
                 table_lookup = lookup_job[1](cdid_header_row)
                 dimensions.append(HDim(cdid_header_row, lookup_job[0], DIRECTLY, ABOVE, cellvalueoverride=table_lookup))
 
             df = ConversionSegment(tab, dimensions, observations).topandas()
-                
+
             # Applicable to all jobs
             df["Period"] = df["Period"].apply(format_time)
-            
+
             # missing CDID's for estimate type ....
             if job_name == "Income indicators":
                 df["Estimate Type"] = "current-price"
@@ -591,63 +591,63 @@ for job_name, job_details in jobs.items():
             else:
                 df["Estimate Type"] = df["CDID"]
                 df["Estimate Type"] = df["Estimate Type"].map(lambda x: estimate_type[x])
-            
+
             df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
-                
+
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million") # why?
             df = df.rename(columns={"OBS": "Value", "DATAMARKER": "Marker"})
             df.fillna("", inplace=True)
-            
+
             # Split out the entries for measure type and growth
             # If there's only one value for growth (i.e na throughout) drop the column
             df["Growth"] = df["Measure Type"].map(lambda x: x.split(":")[1])
             df["Measure Type"] = df["Measure Type"].map(lambda x: x.split(":")[0])
             if len(df["Growth"].unique().tolist()) == 1:
                 df = df.drop("Growth", axis=1)
-                
+
             # account for horizontal changes in measure type
             df = horizontal_measure_overrides(job_name, df)
-                
+
             if job_name == "GDP per head":
                 df["Decimals"] = df["Estimate Type"].map(lambda x: 1000 if x == "population" else 1)
             else:
                 df["Decimals"] = 1
-            
+
             for col in job_details.get("clear_rogue_zeroes", []):
                 df[col] = df[col].astype(str).str.replace(".0", "")
-                    
+
             for col in job_details.get("clear_line_breaks_from", []):
                 df[col] = df[col].map(lambda x: str(x).replace("\n", " ").replace("  ", " "))
 
             for col in job_details.get("clear_footnotes_from", []):
                 df[col] = df[col].map(lambda x: ''.join([i for i in x if not i.isdigit()]).strip())
-        
+
             for col in job_details.get("pathify", []):
-                df[col] = df[col].apply(pathify) 
-                
+                df[col] = df[col].apply(pathify)
+
             # Last, we'll pull out any datamarkers
             df["Marker"] = df["Value"].map(lambda cell: "".join([x for x in str(cell) if not x.isdigit()]))
             df["Marker"] = df["Marker"].map(lambda x: "-" if x == "-." else "" if x == "." else x)
             df["Value"] = df["Value"].map(lambda cell: "".join([x.replace("..", ".") for x in str(cell) if x.isdigit() or x =="."]))
-            
+
             # Now correct the notation of any data markers
             marker_lookup = {"..": "not-availible", "-": "nil-or-less-than-half-the-final-digit-shown"}
             df["Marker"] = df["Marker"].map(lambda x: marker_lookup.get(x, x))
-            
+
             tidy_sheets.append(df)
-                
+
         destinationFolder = Path('out')
         destinationFolder.mkdir(exist_ok=True, parents=True)
-        
+
         TITLE = info["title"] + ", " + dataset_title_prefix + ": " + job_name
         OBS_ID = pathify(TITLE)
-        
+
         df = pd.concat(tidy_sheets).drop_duplicates()
-        
+
         # Fill in missing measures
         df = df.fillna("")
         df = add_datamarkers_for_missing_measures(df)
-        
+
         df.to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
         scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
@@ -656,10 +656,10 @@ for job_name, job_details in jobs.items():
 
         with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
             metadata.write(scraper.generate_trig())
-            
+
         schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
         schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
-    
+
     except Exception as e:
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
