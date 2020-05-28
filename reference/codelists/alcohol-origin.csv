@@ -1,0 +1,33 @@
+Label,Notation,Parent Notation,Sort Priority
+Still,still,,1
+Sparkling,sparkling,,2
+all,all,,3
+Imported ex-ship,imported-ex-ship,,4
+Ex-Warehouse,ex-warehouse,,5
+UK registered premises,uk-registered-premises,,6
+Total wine of fresh grape,total-wine-of-fresh-grape,,7
+Total Wine,total-wine,,8
+Total Alcohol,total-alcohol,,9
+Total,total,,10
+Home Produced Whiskey Malt,home-produced-whiskey-malt,,11
+Home Produced Whiskey Grain and Blended,home-produced-whiskey-grain-and-blended,,12
+Spirit Based RTDs,spirit-based-rtds,,13
+Imported and Other Spirits,imported-and-other-spirits,,14
+Total Spirits,total-spirits,,15
+Thousand Hectolitres - Total,thousand-hectolitres-total,,16
+Thousand Hectolitres of alcohol (production) - Alcohol Production,thousand-hectolitres-of-alcohol-production-alcohol-production,,17
+Ex-warehouse and imports,ex-warehouse-and-imports,,18
+Total beer clearances,total-beer-clearances,,19
+Thousand hectolitres of alcohol (clearances) - Total,thousand-hectolitres-of-alcohol-clearances-total,,20
+Cider Thousand hectolitres - Total,cider-thousand-hectolitres-total,,21
+Total Beer,total-beer,,22
+Total Cider,total-cider,,23
+Ready-to-Drink (RTD),ready-to-drink-rtd,,24
+Wine,wine,,25
+Spirits-Based RTDs,spirits-based-rtds,,26
+Spirits,spirits,,27
+Beer,beer,,28
+Breweries Producing 5000 Hls Or Less2 ,breweries-producing-5000-hls-or-less2,,29
+High Strength Beers ABV > 7.5%,high-strength-beers-abv-7-5,,30
+Low Strength Beers 1.2% < ABV < 2.8%,low-strength-beers-1-2-abv-2-8,,31
+Home Produced Whiskey Total,home-produced-whiskey-total,,32

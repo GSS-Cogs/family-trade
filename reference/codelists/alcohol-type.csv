@@ -1,0 +1,8 @@
+Label,Notation,Parent Notation,Sort Priority
+Wine,wine,,1
+Made-Wine,made-wine,,2
+Spirits,spirits,,3
+Beer and Cider,beer-and-cider,,4
+Beer,beer,,5
+Cider Historic,cider-historic,,6
+Cider Current,cider-current,,7

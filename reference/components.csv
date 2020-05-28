@@ -102,3 +102,11 @@ Rates of Duty,Rates of Duty,Measure,,measure/rates-of-duty,RatesOfDuty,http://pu
 Alcohol Clearances,Alcohol Clearances,Measure,,measure/alcohol-clearances,AlcoholClearances,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Production of Potable Spirits,,Measure,,measure/production-of-potable-spirits,ProductionOfPotableSpirits,http://purl.org/linked-data/sdmx/2009/measure#obsValue
 Status,,Dimension,http://gss-data.org.uk/def/concept-scheme/status,dimension/status,Status,
+Alcohol by Volume,Alcohol by Volume,Dimension,http://gss-data.org.uk/def/concept-scheme/alcohol-by-volume,dimension/alcohol-by-volume,AlcoholByVolume,
+Alcohol Type,Alcohol Type,Dimension,http://gss-data.org.uk/def/concept-scheme/alcohol-type,dimension/alcohol-type,AlcoholType,
+Alcohol Origin,Alcohol Origin,Dimension,http://gss-data.org.uk/def/concept-scheme/alcohol-origin,dimension/alcohol-origin,AlcoholOrigin,
+Production and Clearance,Production and Clearance,Dimension,http://gss-data.org.uk/def/concept-scheme/production-and-clearance,dimension/production-and-clearance,ProductionAndClearance,
+Released for Consumption,Released for Consumption,Measure,,measure/released-for-consumption,ReleasedForConsumption,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+Clearance,Clearances,Measure,,measure/clearance,Clearance,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+GBP per Hectolitre of Product,GBP per Hectolitre of Product,Measure,,measure/gbp-per-hectolitre-of-product,GBPPerHectolitreOfProduct,http://purl.org/linked-data/sdmx/2009/measure#obsValue
+GBP per 1 percent ABV per hectolitre,GBP per 1 percent ABV per hectolitre,Measure,,measure/gbp-per-1-percent-abv-per-hectolitre,GBPPer1PercentABVPerHectolitre,http://purl.org/linked-data/sdmx/2009/measure#obsValue

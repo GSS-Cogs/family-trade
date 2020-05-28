@@ -167,9 +167,30 @@ if (dataset) {
                         "pipelines": collected,
                         "issue_badge_base": `https://img.shields.io/github/issues/detail/state${(new URL(info.github)).pathname}`
                     }));
-                  $('#datasets_table').DataTable({
-                    "paging": false
-                  });
+                    $.fn.dataTable.ext.search.push(
+                        function( settings, data, dataIndex ) {
+                            const all = $('#toggle_all').hasClass('active');
+                            if (all) return true;
+                            let tech_stages = data[4].split(',').map(s => s.trim().toUpperCase());
+                            if ((tech_stages.length === 1) && (tech_stages[0] === '')) {
+                                tech_stages = [];
+                            }
+                            let ba_stages = data[3].split(',').map(s => s.trim().toUpperCase());
+                            if ((ba_stages.length === 1) && (ba_stages[0] === '')) {
+                                ba_stages = [];
+                            }
+                            return !((ba_stages.length === 0) || (tech_stages.indexOf('HOLD') >= 0) ||
+                                (ba_stages.indexOf('NOT REQUIRED') >= 0) ||
+                                (ba_stages.indexOf('CANDIDATE') >= 0));
+                        }
+                    );
+                    let table = $('#datasets_table').DataTable({
+                      "paging": false
+                    });
+                    $('#toggle_all').click(function() {
+                        $(this).button('toggle');
+                        table.draw();
+                    });
                 });
             });
         });
