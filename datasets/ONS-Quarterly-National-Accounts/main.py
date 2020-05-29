@@ -355,23 +355,6 @@ def horizontal_measure_overrides(job_name, df):
 
 def add_datamarkers_for_missing_measures(df):
 
-    # Deal with scoping
-    def loop_for_ammendments(df, measures, ckeys):
-
-        for ckey in ckeys:
-            temp_df = df[df["CKEYS"] == ckey]
-            for missing_measure in [x for x in measures if x not in temp_df["Measure Type"].unique().tolist()]:
-
-                one_line = temp_df[:1]
-                one_line["Measure Type"] = missing_measure
-                one_line["Value"] = ""
-                one_line["Marker"] = "not-available"
-
-                nonlocal ammendments
-                ammendments = pd.concat([df, one_line])
-
-        return ammendments
-
     # Get the unique measure types in this dataframe
     measures = df["Measure Type"].unique().tolist()
 
@@ -382,14 +365,18 @@ def add_datamarkers_for_missing_measures(df):
 
     measures = df["Measure Type"].unique().tolist()
     ckeys = df["CKEYS"].unique().tolist()
-
-    ammendments = pd.DataFrame(columns=df.columns.values)
-    ammendments = loop_for_ammendments(df, measures, ckeys)
-    ammendments.to_csv("ammend.csv", index=False)
-    df = pd.concat([df, ammendments])
     
-    df = df.drop("CKEYS", axis=1)
+    for ckey in ckeys:
+        temp_df = df[df["CKEYS"] == ckey]    
+        for missing_measure in [x for x in measures if x not in temp_df["Measure Type"].unique().tolist()]:
 
+            one_line = temp_df[:1]
+            one_line["Measure Type"] = missing_measure
+            one_line["Value"] = ""
+            one_line["Marker"] = "not-available"
+            df = pd.concat([df, one_line])
+
+    df = df.drop("CKEYS", axis=1)
     return df
 
 
@@ -516,7 +503,6 @@ jobs = {
 }
 
 
-
 # %% [markdown]
 #
 # # NOTE re jobs (above)
@@ -538,12 +524,16 @@ jobs = {
 
 # %%
 
+# Make a directroy so we can dump some previews
+previewsFolder = Path('previews')
+previewsFolder.mkdir(exist_ok=True, parents=True)
+    
 for job_name, job_details in jobs.items():
     tidy_sheets = []
 
     try:
 
-        for tab in job_details["tabs"]:
+        for i, tab in enumerate(job_details["tabs"]):
 
             # Get the CDID header row
             cdid_header_row = tab.excel_ref(job_details["cdid_header_row"]).filter(is_cdid)
@@ -565,6 +555,10 @@ for job_name, job_details in jobs.items():
                 HDim(tab.excel_ref('A').filter(is_not_time_or_blank), "Measure Type", CLOSEST, ABOVE,
                     cellvalueoverride={"P":"Seasonally adjusted"}) # account for missing header
             ]
+            
+            print("not time ot blank")
+            print(tab.excel_ref('A').filter(is_not_time_or_blank))
+            print()
 
             # missing CDID's for estimate type ....
             if job_name == "Gross fixed capital formation" or job_name == "Inventories":
@@ -580,7 +574,9 @@ for job_name, job_details in jobs.items():
                 table_lookup = lookup_job[1](cdid_header_row)
                 dimensions.append(HDim(cdid_header_row, lookup_job[0], DIRECTLY, ABOVE, cellvalueoverride=table_lookup))
 
-            df = ConversionSegment(tab, dimensions, observations).topandas()
+            cs = ConversionSegment(tab, dimensions, observations)
+            savepreviewhtml(cs, fname="previews/{}-{}.html".format(pathify(job_name), str(i)))
+            df = cs.topandas()
 
             # Applicable to all jobs
             df["Period"] = df["Period"].apply(format_time)
@@ -666,7 +662,5 @@ for job_name, job_details in jobs.items():
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
 
-
-# %%
 
 # %%
