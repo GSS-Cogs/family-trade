@@ -650,7 +650,7 @@ for job_name, job_details in jobs.items():
         df = df.fillna("")
         df = add_datamarkers_for_missing_measures(df)
 
-        df.to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
+        df.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
 
         scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
         scraper.dataset.title = f'{TITLE}'
