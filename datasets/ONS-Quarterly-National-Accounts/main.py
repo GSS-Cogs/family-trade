@@ -112,7 +112,7 @@ class LookupMeasure(object):
 
         # Default (i.e the non percentage change measures) depending on job & (optionally) tab
         self.defaults = {
-            "National Accounts Aggregates: GDP, GVA  and GDP deflator indices": "Index-not:not-applicable",
+            "National Accounts Aggregates: GDP, GVA  and GDP deflator indices": "Index:not-applicable",
             "National Accounts Aggregates: GDP and GVA in £ million": "GBP Million:not-applicable",
             "Output indicators": "Index:not-applicable",
             "Expenditure indicators": "GBP Million:not-applicable",
