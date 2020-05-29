@@ -101,9 +101,9 @@ class LookupMeasure(object):
         self.title = [x.value for x in tab.excel_ref("B1")][0]
         self.all_cdids = [x for x in self.tab.filter(is_cdid)]
 
-        self._1YGR = "Percentage:year-on-year"
-        self._1QGR = "Percentage:quarter-on-quarter"
-        self._4QGR = "Percentage:quarter-on-quarter-a-year-ago"
+        self._1YGR = "Percent:year-on-year"
+        self._1QGR = "Percent:quarter-on-quarter"
+        self._4QGR = "Percent:quarter-on-quarter-a-year-ago"
 
         # Overrides per job where the pattern is non standard for whatever reason
         self.overrides = {
