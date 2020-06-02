@@ -555,10 +555,6 @@ for job_name, job_details in jobs.items():
                 HDim(tab.excel_ref('A').filter(is_not_time_or_blank), "Measure Type", CLOSEST, ABOVE,
                     cellvalueoverride={"P":"Seasonally adjusted"}) # account for missing header
             ]
-            
-            print("not time ot blank")
-            print(tab.excel_ref('A').filter(is_not_time_or_blank))
-            print()
 
             # missing CDID's for estimate type ....
             if job_name == "Gross fixed capital formation" or job_name == "Inventories":
@@ -624,13 +620,16 @@ for job_name, job_details in jobs.items():
                 df[col] = df[col].apply(pathify)
 
             # Last, we'll pull out any datamarkers
-            df["Marker"] = df["Value"].map(lambda cell: "".join([x for x in str(cell) if not x.isdigit()]))
-            df["Marker"] = df["Marker"].map(lambda x: "-" if x == "-." else "" if x == "." else x)
-            df["Value"] = df["Value"].map(lambda cell: "".join([x.replace("..", ".") for x in str(cell) if x.isdigit() or x =="."]))
+            try:
+                df["Marker"][df["Measure Type"] != "Percent"] = df["Value"][df["Measure Type"] != "Percent"].map(lambda cell: "".join([x for x in str(cell) if not x.isdigit()]))
+                df["Marker"][df["Measure Type"] != "Percent"] = df["Marker"][df["Measure Type"] != "Percent"].map(lambda x: "-" if x == "-." else "" if x == "." else x)
+                df["Value"] = df["Value"].map(lambda cell: "".join([x.replace("..", ".") for x in str(cell) if x.isdigit() or x =="."]))
 
-            # Now correct the notation of any data markers
-            marker_lookup = {"..": "not-availible", "-": "nil-or-less-than-half-the-final-digit-shown"}
-            df["Marker"] = df["Marker"].map(lambda x: marker_lookup.get(x, x))
+                # Now correct the notation of any data markers
+                marker_lookup = {"..": "not-availible", "-": "nil-or-less-than-half-the-final-digit-shown"}
+                df["Marker"] = df["Marker"].map(lambda x: marker_lookup.get(x, x))
+            except KeyError:
+                pass # expected, not all datasets have Markers
 
             tidy_sheets.append(df)
 
