@@ -80,10 +80,12 @@ for col in ['Industry', 'Country', 'Commodity']:
     display(codelist)
     codelist.to_csv(codelists / f'{col.lower()}.csv', index = False)
     obs[col].cat.categories = obs[col].cat.categories.map(lambda x: x.split()[0])
+
+obs['Marker'].cat.rename_categories({'..': 'suppressed'}, inplace=True)
 # -
 
 obs = obs.drop_duplicates()
-obs.to_csv(out / 'observations.csv', index = False)
+obs.sample(n=1000).to_csv(out / 'observations.csv', index = False)
 obs
 
 # +
@@ -103,6 +105,19 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+
+scraper.set_base_uri('http://gss-data.org.uk')
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / 'observations.csv')
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(scraper.dataset.uri)
+csvw_transform.write(out / 'observations.csv-metadata.json')
+
+# +
+
+scraper.dataset.uri
+# -
+
 
 
 

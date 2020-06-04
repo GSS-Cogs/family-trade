@@ -21,32 +21,28 @@
         ],
         "main_issue": 3,
         "columns": {
-            "Year": {
-                "variable": "year",
-                "property": "sdmx:refPeriod",
+              "Year": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/year/{year}"
-            },
-            "Country": {
-                "variable": "area",
-                "property": "http://gss-data.org.uk/def/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/concept-scheme/sdmx-bop/cl_area/{area}"
-            },
-            "Direction": {
-                "variable": "flow",
-                "property": "http://gss-data.org.uk/def/dimension/flow",
-                "value": "http://gss-data.org.uk/def/concept/flow-directions/{flow}"
-            },
-            "Marker": {
-                "variable": "marker",
-                "property": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+              },
+              "Country": {
+                "dimension": "http://gss-data.org.uk/def/dimension/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/concept-scheme/sdmx-bop/cl_area/{country}"
+              },
+              "Direction": {
+                "dimension": "http://gss-data.org.uk/def/dimension/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow-directions/{direction}"
+              },
+              "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
-            },
-            "Value": {
-                "unit": "gbp-million",
-                "measure": "GBP Total",
-                "datatype": "integer"
+              },
+              "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp",
+                "measure": "http://gss-data.org.uk/def/measure/gbp-total",
+                "datatype": "number"
+              }
             }
-        }
     },
     "sizingNotes": "",
     "notes": ""
