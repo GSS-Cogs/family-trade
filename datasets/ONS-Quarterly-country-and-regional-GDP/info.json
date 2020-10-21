@@ -1,0 +1,18 @@
+{
+    "title": "Quarterly country and regional GDP",
+    "publisher": "Office for National Statistics",
+    "description": "Quarterly economic activity within Wales and the nine English regions (North East, North West, Yorkshire and The Humber, East Midlands, West Midlands, East of England, London, South East, and South West).",
+    "landingPage": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/quarterlycountryandregionalgdp",
+    "published": "2020-07-31",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "CMD"
+    },
+    "transform": {
+        "airtable": "recg15iQbWgNh4nB6"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

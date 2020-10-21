@@ -1,0 +1,21 @@
+{
+    "title": "UK trade in services by business characteristics",
+    "publisher": "Office for National Statistics",
+    "description": "Breakdown of UK trade in services by business characteristics on a balance of payments basis using a new experimental dataset.",
+    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbybusinesscharacteristics",
+    "datasetNotes": [
+        "On landing page scroll to Edition in this dataset and locate the current dataset"
+    ],
+    "published": "2020-03-10",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recvEuJKTaVY6Ft4n"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

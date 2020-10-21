@@ -1,0 +1,21 @@
+{
+    "title": "Regional gross domestic product city regions",
+    "publisher": "Office for National Statistics",
+    "description": "Annual estimates of balanced UK regional gross domestic product (GDP). Current price estimates and chained volume measures for combined authorities and city regions.",
+    "landingPage": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions",
+    "datasetNotes": [
+        "On landing page "
+    ],
+    "published": "2019-12-19",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "rec6Uv3TqFfw9gFLX"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}

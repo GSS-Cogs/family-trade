@@ -1,0 +1,21 @@
+{
+    "title": "DCMS Sectors Economic Estimates [Year]: Trade in services",
+    "publisher": "Department for Digital, Culture, Media & Sport",
+    "description": "Official Statistics used to provide an estimate of the contribution of DCMS Sectors to the UK economy, measured by imports and exports of services.",
+    "landingPage": "https://www.gov.uk/government/statistics/dcms-sectors-economic-estimates-2018-trade-in-services",
+    "datasetNotes": [
+        "On landing page under documents "
+    ],
+    "published": "2020-02-06",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recmp8VQCu6Nya893"
+    },
+    "sizingNotes": "",
+    "notes": ""
+}
