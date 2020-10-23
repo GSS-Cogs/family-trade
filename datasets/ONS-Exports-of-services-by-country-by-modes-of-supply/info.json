@@ -2,7 +2,7 @@
     "title": "Exports of services by country, by modes of supply",
     "publisher": "Office for National Statistics",
     "description": "Country breakdown of trade in services values by mode of supply (exports) for 2018. Countries include only total services data, while regions include top-level extended balance of payments (EBOPs) breakdown.",
-    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply",
     "datasetNotes": [
         "On landing page scroll to latest version "
     ],
@@ -14,7 +14,108 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recc32OyjkAnzrFR3"
+        "airtable": "recc32OyjkAnzrFR3",
+        "transformStage": [
+            {
+                "source_name": "Exports of services by country, by modes of supply",
+                "identifier": "Exports of services by country, by modes of supply||Sheet1||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx": ""
+                    }
+                ],
+                "title": "Sheet1",
+                "preview": "documentation/previews/1930d14d-a691-4521-967b-830f5b63ef15.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Hardcoded as year/2018",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Country": [
+                            "Values taken from cell A2 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Mode": [
+                            "Values taken from cell B2 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Direction": [
+                            "Values taken from cell C2 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Service_Account": [
+                            "Values taken from cell D2 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Exports of services by country, by modes of supply",
+                "identifier": "Exports of services by country, by modes of supply||combined_dataframe||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx : Sheet1",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx": "Sheet1"
+                    }
+                ],
+                "title": "combined_dataframe",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Country": []
+                    },
+                    {
+                        "Mode": []
+                    },
+                    {
+                        "Direction": []
+                    },
+                    {
+                        "Service_Account": []
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            }
+        ]
     },
     "sizingNotes": "",
     "notes": "(needed to define the modes!) https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/modesofsupplyukexperimentalestimates/2018"
