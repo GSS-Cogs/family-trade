@@ -36,7 +36,7 @@ Modes will need to be defined, mode information can be found [here](https://www.
 
 	Rename 'Direction' to 'Flow' and change value to 'exports' and reference back to column (info.json) in ref_common/codelists
 	'Country':
-		codelist needs to be created. Split string and use 2/3 alpha/numerical code for notation and the rest for Label:
+		codelist needs to be created. Split string and use 2/3 alpha/numerical code for value and notation and the rest for Label:
 			Label,       Notation, Parent Notation, Sort Priority
 			World Total, W1,     ,                , 1
 	'Mode':
@@ -47,7 +47,7 @@ Modes will need to be defined, mode information can be found [here](https://www.
 			mode-3: Commercial Presence
 			mode-4: Presence of Natural Persons
 	'Service Account':
-		codelist needs to be created. Split string and use numerical code for notation and the rest for Label:
+		codelist needs to be created. Split string and use numerical code for value and notation and the rest for Label:
 			Label,       Notation, Parent Notation, Sort Priority
 			Total services, 0,     ,                , 1
 
