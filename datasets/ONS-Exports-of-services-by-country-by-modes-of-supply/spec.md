@@ -50,7 +50,8 @@ Modes will need to be defined, mode information can be found [here](https://www.
 		codelist needs to be created. Split string and use numerical code for value and notation and the rest for Label:
 			Label,       Notation, Parent Notation, Sort Priority
 			Total services, 0,     ,                , 1
-
+	'Measure Type': current-prices
+	'Unit': gbp
 
 	Scraper:
 		Dataset-Title: exportsofservicesbycountrybymodesofsupply
