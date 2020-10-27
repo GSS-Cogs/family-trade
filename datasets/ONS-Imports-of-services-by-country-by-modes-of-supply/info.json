@@ -14,7 +14,11 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recqhzqaeCzyEcyal"
+        "airtable": "recqhzqaeCzyEcyal",
+        "stage": [
+            "To Do"
+        ],
+        "main_issue": 88
     },
     "sizingNotes": "",
     "notes": "(needed to define the modes!) https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/modesofsupplyukexperimentalestimates/2018"

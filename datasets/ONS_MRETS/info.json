@@ -15,7 +15,10 @@
     },
     "transform": {
         "airtable": "recJYQCqmFWk7XKKJ",
-        "main_issue": 5
+        "main_issue": 5,
+        "stage": [
+            "To Do"
+        ]
     },
     "sizingNotes": "",
     "notes": ""

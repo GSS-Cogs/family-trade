@@ -11,7 +11,11 @@
         "source": "CMD"
     },
     "transform": {
-        "airtable": "recg15iQbWgNh4nB6"
+        "airtable": "recg15iQbWgNh4nB6",
+        "stage": [
+            "To Do"
+        ],
+        "main_issue": 85
     },
     "sizingNotes": "",
     "notes": ""

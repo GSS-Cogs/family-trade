@@ -2,7 +2,7 @@
     "title": "Exports of services by country, by modes of supply",
     "publisher": "Office for National Statistics",
     "description": "Country breakdown of trade in services values by mode of supply (exports) for 2018. Countries include only total services data, while regions include top-level extended balance of payments (EBOPs) breakdown.",
-    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current",
     "datasetNotes": [
         "On landing page scroll to latest version "
     ],
@@ -115,7 +115,11 @@
                     }
                 ]
             }
-        ]
+        ],
+        "stage": [
+            "To Do"
+        ],
+        "main_issue": 83
     },
     "sizingNotes": "",
     "notes": "(needed to define the modes!) https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/modesofsupplyukexperimentalestimates/2018"

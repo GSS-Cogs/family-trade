@@ -14,7 +14,11 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recvEuJKTaVY6Ft4n"
+        "airtable": "recvEuJKTaVY6Ft4n",
+        "stage": [
+            "To Do"
+        ],
+        "main_issue": 89
     },
     "sizingNotes": "",
     "notes": ""
