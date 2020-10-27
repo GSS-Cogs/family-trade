@@ -33,25 +33,19 @@ Modes will need to be defined, mode information can be found [here](https://www.
 ### Stage 2 - Harmonisation
 
 	I have checked Imports file and agree that they should be joined up. Will ask BAs to possibly join up record in AirTable or record what we are doing. Codelists below will still apply for Imports file.
-
-	Rename 'Direction' to 'Flow' and change value to 'exports' and reference back to column (info.json) in ref_common/codelists
-	'Country':
-		codelist needs to be created. Split string and use 2/3 alpha/numerical code for value and notation and the rest for Label:
-			Label,       Notation, Parent Notation, Sort Priority
-			World Total, W1,     ,                , 1
-	'Mode':
-		codelists needs to be created with the following values
+    Will also create a Trade folder in ref_common and start putting the codelists in there as some of the dimensions in this dataset have also Been used in others
+	'Direction': reference 'Flow' codelist in ref_common/trade
+	'Country': Split string and only use first 2/3 character code. Reference 'Country' codelist in ref_common/trade   
+	'Mode': reference 'Mode' codelist in ref_common/trade 
 			total: Total
 			mode-1: Remote Trade
 			mode-2: Consumption Abroad
 			mode-3: Commercial Presence
 			mode-4: Presence of Natural Persons
-	'Service Account':
-		codelist needs to be created. Split string and use numerical code for value and notation and the rest for Label:
-			Label,       Notation, Parent Notation, Sort Priority
-			Total services, 0,     ,                , 1
+	'Service Account':  Split string and only use initial number(s). Reference 'Service Account' codelist in ref_common/trade           
 	'Measure Type': current-prices
 	'Unit': gbp
+    'Marker': Change not-applicable to suppressed
 
 	Scraper:
 		Dataset-Title: exportsofservicesbycountrybymodesofsupply
@@ -74,4 +68,10 @@ Modes will need to be defined, mode information can be found [here](https://www.
 	
 #### DM Notes
 
-	Country and Service Account codelists will probably be harmonised to a central reference at some point
+	Codelists that need to be created in ref_common:
+
+		Country
+		Mode
+		Flow (Direction)
+		Service Account
+<!-- #endregion -->
