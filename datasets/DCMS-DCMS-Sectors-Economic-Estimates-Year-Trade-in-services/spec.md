@@ -52,8 +52,13 @@
 #### Output dataset
 
 	Replace empty cells in Value column with 0. Some do not have n/a in the Marker column?
-	It is unclear what "-" means but probably is N/A, have asked Dave Hull to clarify. Can you change it to "not-applicable" as this is defined in the Marker file in ref_common/codelists
-	Need to define the following codelists:
+	It is unclear what "-" means but probably is N/A, have asked Dave Hull to clarify. Can you change it to "not-applicable" as this is defined in the Marker file in ref_common/codelists.
+    
+    Have spoken to BAs who have contacted the publisher with the following answer:
+    '-' is used to denote a value that has been suppressed as part of the disclosure control procedure.
+    So can we make the 'Marker' column = 'suppressed' where the 'Value' column is '-' please and change 'Value' to 0?
+	
+    Need to define the following codelists:
 		Country
 		Sector
 		Sector Type (some values have super-script numbers at the end (Crafts4), need to remove)
