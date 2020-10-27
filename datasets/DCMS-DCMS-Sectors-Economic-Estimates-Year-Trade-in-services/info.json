@@ -14,7 +14,233 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "recmp8VQCu6Nya893"
+        "airtable": "recmp8VQCu6Nya893",
+        "columns": {
+            "Period": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "double"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            },
+            "Flow": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "description": ""
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/country",
+                "value": "http://gss-data.org.uk/def/concept/country/{country}",
+                "description": ""
+            }
+        },
+        "transformStage": [
+            {
+                "source_name": "dcms-sectors-economic-estimates-2018-trade-in-services",
+                "identifier": "dcms-sectors-economic-estimates-2018-trade-in-services||Imports||https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863863/Imports_and_exports_of_services_2018.xlsx",
+                "source": [
+                    {
+                        "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863863/Imports_and_exports_of_services_2018.xlsx": ""
+                    }
+                ],
+                "title": "Imports",
+                "preview": "documentation/previews/3afff2b7-1877-4f35-828b-ff8c5d98f01c.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Hardcoded as year/2018",
+                            "Added to dataframe 'import_dataframe'"
+                        ]
+                    },
+                    {
+                        "Flow": [
+                            "Hardcoded as Imports",
+                            "Added to dataframe 'import_dataframe'"
+                        ]
+                    },
+                    {
+                        "Country": [
+                            "Values taken from cell A5 Down",
+                            "Added to dataframe 'import_dataframe'"
+                        ]
+                    },
+                    {
+                        "Sector": [
+                            "Non blank values from cell A3 across",
+                            "Added to dataframe 'import_dataframe'"
+                        ]
+                    },
+                    {
+                        "Sector_Type": [
+                            "Non blank values from cell B4 across ",
+                            "Added to dataframe 'import_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'import_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'import_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Added to dataframe 'import_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "dcms-sectors-economic-estimates-2018-trade-in-services",
+                "identifier": "dcms-sectors-economic-estimates-2018-trade-in-services||import_dataframe||https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863863/Imports_and_exports_of_services_2018.xlsx : Imports",
+                "source": [
+                    {
+                        "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863863/Imports_and_exports_of_services_2018.xlsx": "Imports"
+                    }
+                ],
+                "title": "import_dataframe",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Flow": []
+                    },
+                    {
+                        "Country": []
+                    },
+                    {
+                        "Sector": []
+                    },
+                    {
+                        "Sector_Type": []
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            },
+            {
+                "source_name": "DCMS Sectors Economic Estimates 2018: Trade in services : Exports",
+                "identifier": "DCMS Sectors Economic Estimates 2018: Trade in services : Exports||Exports||https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863863/Imports_and_exports_of_services_2018.xlsx",
+                "source": [
+                    {
+                        "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863863/Imports_and_exports_of_services_2018.xlsx": ""
+                    }
+                ],
+                "title": "Exports",
+                "preview": "documentation/previews/c71fdc21-8d2e-45a3-b7a4-59f875beaec7.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Hardcoded as year/2018",
+                            "Added to dataframe 'exports_dataframe'"
+                        ]
+                    },
+                    {
+                        "Flow": [
+                            "Hardcoded as Exports",
+                            "Added to dataframe 'exports_dataframe'"
+                        ]
+                    },
+                    {
+                        "Country": [
+                            "Values taken from cell A5 Down",
+                            "Added to dataframe 'exports_dataframe'"
+                        ]
+                    },
+                    {
+                        "Sector": [
+                            "Non blank values from cell A3 across",
+                            "Added to dataframe 'exports_dataframe'"
+                        ]
+                    },
+                    {
+                        "Sector_Type": [
+                            "Non blank values from cell B4 across ",
+                            "Added to dataframe 'exports_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'exports_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'exports_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Added to dataframe 'exports_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "DCMS Sectors Economic Estimates 2018: Trade in services : Exports",
+                "identifier": "DCMS Sectors Economic Estimates 2018: Trade in services : Exports||exports_dataframe||https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863863/Imports_and_exports_of_services_2018.xlsx : Exports",
+                "source": [
+                    {
+                        "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863863/Imports_and_exports_of_services_2018.xlsx": "Exports"
+                    }
+                ],
+                "title": "exports_dataframe",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Flow": []
+                    },
+                    {
+                        "Country": []
+                    },
+                    {
+                        "Sector": []
+                    },
+                    {
+                        "Sector_Type": []
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            }
+        ]
     },
     "sizingNotes": "",
     "notes": ""
