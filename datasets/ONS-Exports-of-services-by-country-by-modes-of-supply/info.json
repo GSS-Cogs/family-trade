@@ -32,7 +32,7 @@
             },
             "Direction": {
                 "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
-                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "value": "http://gss-data.org.uk/def/concept/flow/{direction}",
                 "description": ""
             },
             "Country": {
@@ -42,12 +42,12 @@
             },
             "Mode": {
                 "parent": "http://gss-data.org.uk/def/concept-scheme/ons-mode",
-                "value": "http://gss-data.org.uk/def/concept/ons-mode/{ons_mode}",
+                "value": "http://gss-data.org.uk/def/concept/ons-mode/{mode}",
                 "description": ""
             },
             "Service Account": {
                 "parent": "http://gss-data.org.uk/def/concept-scheme/ons-service-account",
-                "value": "http://gss-data.org.uk/def/concept/ons-service-account/{ons_service_account}",
+                "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}",
                 "description": ""
             }
         },
