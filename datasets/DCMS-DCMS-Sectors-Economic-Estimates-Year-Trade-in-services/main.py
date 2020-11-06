@@ -125,7 +125,12 @@ A revised backseries of calculations on the current basis is expected to be prov
 """
 
 comment = "Official Statistics used to provide an estimate of the contribution of DCMS Sectors to the UK economy, measured by imports and exports of services."
+# -
 
+
+del tidy['Measure Type']
+del tidy['Unit']
+tidy = tidy.fillna('')
 
 # +
 csvName = 'observations.csv'
@@ -138,7 +143,9 @@ scraper.dataset.description = description
 scraper.dataset.comment = comment
 scraper.dataset.title = 'Sectors Economic Estimates 2018: Trade in services'
 
-dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name) + '/pcn').lower()
+#dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name) + '/pcn').lower()
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 
@@ -155,3 +162,5 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 tidy
 
 trace.render()
+
+
