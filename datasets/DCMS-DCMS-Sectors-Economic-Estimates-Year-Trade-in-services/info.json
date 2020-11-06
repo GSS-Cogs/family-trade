@@ -36,8 +36,8 @@
                 "description": ""
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/trade/def/concept-scheme/dcms-country",
-                "value": "http://gss-data.org.uk/trade/def/concept/dcms-country/{country}",
+                "parent": "http://gss-data.org.uk/def/concept-scheme/dcms-country",
+                "value": "http://gss-data.org.uk/def/concept/dcms-country/{country}",
                 "description": ""
             }
         },
