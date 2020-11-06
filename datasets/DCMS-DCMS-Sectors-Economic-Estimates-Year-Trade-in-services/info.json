@@ -36,8 +36,8 @@
                 "description": ""
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/country",
-                "value": "http://gss-data.org.uk/def/concept/country/{country}",
+                "parent": "http://gss-data.org.uk/trade/def/concept-scheme/dcms-country",
+                "value": "http://gss-data.org.uk/trade/def/concept/dcms-country/{country}",
                 "description": ""
             }
         },
@@ -51,7 +51,7 @@
                     }
                 ],
                 "title": "Imports",
-                "preview": "documentation/previews/3afff2b7-1877-4f35-828b-ff8c5d98f01c.html",
+                "preview": "documentation/previews/de1c241a-ebbd-4eff-9224-ea936764138c.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
@@ -150,7 +150,7 @@
                     }
                 ],
                 "title": "Exports",
-                "preview": "documentation/previews/c71fdc21-8d2e-45a3-b7a4-59f875beaec7.html",
+                "preview": "documentation/previews/1a2d407e-f459-4595-a7ca-fc1cb7322c28.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
