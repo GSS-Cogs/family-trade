@@ -36,8 +36,8 @@
                 "description": ""
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/country",
-                "value": "http://gss-data.org.uk/def/concept/country/{country}",
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
                 "description": ""
             },
             "Mode": {
