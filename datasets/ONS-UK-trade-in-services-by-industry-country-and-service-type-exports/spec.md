@@ -41,7 +41,7 @@
 		'Country': Split string and only use first 2/3 character code. Reference 'ons-country' codelist in ref_common/trade (pathify)
 		'Industry': Split string and only use initial number(s). Reference 'ons-industry' codelist in ref_common/trade              
 		'Service Account': Split string and only use initial number(s). Reference 'ons-service-account' codelist in ref_common/trade             
-		'Measure Type': count
+		'Measure Type': current-prices
 		'Unit': gbp-million
 		'Marker': Change suppressed-data to suppressed. replace NaNs with empty string and replace empty Values with 0
 
