@@ -6,31 +6,34 @@
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", 
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
-                 "Value": {"unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp", 
-                    "measure": "http://gss-data.org.uk/def/measure/current-prices", 
-                    "datatype": "double"
-                    }, 
-                    "Marker": {
-                        "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus", 
-                        "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"}, 
-                        "Direction": {
-                            "parent": "http://gss-data.org.uk/def/concept-scheme/flow", 
-                            "value": "http://gss-data.org.uk/def/concept/flow/{direction}", 
-                            "description": ""
-                            }, 
-                            "Country": {
-                                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country", 
-                                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}", 
-                                "description": ""
-                                }, 
-                                "Industry": {
-                                    "parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry", 
-                                    "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}", 
-                                    "description": ""
-                                    }, 
-                                    "Service Account": {
-                                        "parent": "http://gss-data.org.uk/def/concept-scheme/ons-service-account", 
-                                        "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}", 
-                                        "description": ""
-                                    }
-                                        }, "stage": ["To Do"], "main_issue": 80}, "sizingNotes": "", "notes": "Ignore the visible macro-powered sheets, and unhide the rest to reveal the observations and reference data.  This dataset has been combined into one dataset in PMDv4 with  UK trade in services by industry, country and service type, imports."}
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp", 
+                "measure": "http://gss-data.org.uk/def/measure/current-prices", 
+                "datatype": "double"
+             }, 
+             "Marker": {
+                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus", 
+                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+             }, 
+             "Direction": {
+                  "parent": "http://gss-data.org.uk/def/concept-scheme/flow", 
+                  "value": "http://gss-data.org.uk/def/concept/flow/{direction}", 
+                  "description": ""
+               }, 
+               "Country": {
+                   "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country", 
+                   "value": "http://gss-data.org.uk/def/concept/ons-country/{country}", 
+                   "description": ""
+               }, 
+               "Industry": {
+                      "parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry", 
+                      "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}", 
+                      "description": ""
+               }, 
+               "Service Account": {
+                       "parent": "http://gss-data.org.uk/def/concept-scheme/ons-service-account", 
+                        "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}", 
+                        "description": ""
+               }
+         }, 
+                                        "stage": ["To Do"], "main_issue": 80}, "sizingNotes": "", "notes": "Ignore the visible macro-powered sheets, and unhide the rest to reveal the observations and reference data.  This dataset has been combined into one dataset in PMDv4 with  UK trade in services by industry, country and service type, imports."}
