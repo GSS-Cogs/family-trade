@@ -59,6 +59,7 @@ df["Country"] = df["Country"].str.split(' ').str[0]
 df['Mode'] = df['Mode'].apply(pathify)
 df["Service Account"] = df["Service Account"].str.split(' ').str[0]
 tidy_exports = df[["Period", "Country", "Mode", "Direction", "Service Account", "Value"]]
+tidy_exports
 
 # Transformation of Imports file to be joined to esports transformation done above 
 
@@ -115,11 +116,11 @@ dimensions = [
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 trace.with_preview(tidy_sheet)
 savepreviewhtml(tidy_sheet, fname= "tidy_sheet.html") 
-trace.store("combined_dataframe", tidy_sheet.topandas())
+trace.store("combined_dataframe_imports", tidy_sheet.topandas())
 
 # -
 
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+df = trace.combine_and_trace(datasetTitle, "combined_dataframe_imports")
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 df = df.replace({'Direction' : {'IM' : 'imports'}})
 df["Country"] = df["Country"].str.split(' ').str[0]
@@ -127,7 +128,9 @@ df["Service Account"] = df["Service Account"].str.split(' ').str[0]
 df['Mode'] = df['Mode'].apply(pathify)
 tidy_imports = df[["Period", "Country", "Mode", "Direction", "Service Account", "Value"]]
 
-tidy = pd.concat([tidy_exports, tidy_imports])
+tidy_imports
+
+tidy = pd.concat([tidy_exports, tidy_imports], ignore_index=True)
 tidy
 
 tidy["Country"] = tidy["Country"].apply(pathify)
