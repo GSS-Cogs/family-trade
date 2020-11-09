@@ -163,6 +163,11 @@ These data are our best estimate of these bilateral UK trade flows. Users should
 """
 
 comment = "Experimental dataset providing a breakdown of UK trade in services by industry, country and service type on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders."
+# -
+
+tidy['Country'] = tidy['Country'].apply(pathify)
+tidy['Marker'][tidy['Marker'] == 'suppressed-data'] = 'suppressed'
+tidy.head(20)
 
 # +
 csvName = 'observations.csv'
@@ -202,3 +207,5 @@ with open("info.json", "w") as jsonFile:
 # -
 
 trace.render()
+
+
