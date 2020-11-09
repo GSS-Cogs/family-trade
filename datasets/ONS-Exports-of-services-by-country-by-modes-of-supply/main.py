@@ -131,6 +131,10 @@ tidy = pd.concat([tidy_exports, tidy_imports])
 tidy
 
 tidy["Country"] = tidy["Country"].apply(pathify)
+tidy["Direction"][tidy["Direction"] == "EX"] = "exports"
+print(tidy['Direction'].count())
+tidy = tidy.drop_duplicates()
+print(tidy['Direction'].count())
 
 # +
 description = f"""
