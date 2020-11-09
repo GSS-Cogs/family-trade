@@ -130,6 +130,8 @@ tidy_imports = df[["Period", "Country", "Mode", "Direction", "Service Account", 
 tidy = pd.concat([tidy_exports, tidy_imports])
 tidy
 
+tidy["Country"] = tidy["Country"].apply(pathify)
+
 # +
 description = f"""
 
