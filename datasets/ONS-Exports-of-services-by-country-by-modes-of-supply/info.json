@@ -54,14 +54,14 @@
         "transformStage": [
             {
                 "source_name": "exportsofservicesbycountrybymodesofsupply",
-                "identifier": "exportsofservicesbycountrybymodesofsupply||Sheet1||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/modesofsupplyimports.xlsx",
+                "identifier": "exportsofservicesbycountrybymodesofsupply||Sheet1||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx",
                 "source": [
                     {
-                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/modesofsupplyimports.xlsx": ""
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx": ""
                     }
                 ],
                 "title": "Sheet1",
-                "preview": "documentation/previews/1d3db404-5ccc-4f52-a6be-7ee9bce0ec17.html",
+                "preview": "documentation/previews/01e8e639-7f62-4ced-92ad-522312f55071.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
@@ -114,10 +114,10 @@
             },
             {
                 "source_name": "exportsofservicesbycountrybymodesofsupply",
-                "identifier": "exportsofservicesbycountrybymodesofsupply||combined_dataframe||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/modesofsupplyimports.xlsx : Sheet1",
+                "identifier": "exportsofservicesbycountrybymodesofsupply||combined_dataframe||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx : Sheet1",
                 "source": [
                     {
-                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/modesofsupplyimports.xlsx": "Sheet1"
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx": "Sheet1"
                     }
                 ],
                 "title": "combined_dataframe",
@@ -160,7 +160,7 @@
                     }
                 ],
                 "title": "Sheet1",
-                "preview": "documentation/previews/e53819e8-ce7b-42ad-be96-c3567142a1b5.html",
+                "preview": "documentation/previews/f47314d8-7bd6-4490-9317-295eff04c648.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
@@ -255,6 +255,9 @@
             "To Do"
         ],
         "main_issue": 83
+    },
+    "load": {
+        "publish": true
     },
     "sizingNotes": "",
     "notes": "(needed to define the modes!) https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/modesofsupplyukexperimentalestimates/2018"
