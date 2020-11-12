@@ -1,1 +1,264 @@
-{"title": "UK trade in services by industry, country and service type, exports", "publisher": "Office for National Statistics", "description": "Experimental dataset providing a breakdown of UK trade in services by industry, country and service type on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders.", "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeexports", "datasetNotes": ["On the landing page "], "published": "2020-02-28", "families": ["Trade"], "extract": {"source": "XLS"}, "transform": {"airtable": "rec8meXy1F5qSS0FJ", "columns": {"Period": {"source": "", "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", "value": "http://reference.data.gov.uk/id/{+period}"}, "Value": {"unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million", "measure": "http://gss-data.org.uk/def/measure/current-prices", "datatype": "double"}, "Marker": {"attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus", "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"}, "Direction": {"parent": "http://gss-data.org.uk/def/concept-scheme/flow", "value": "http://gss-data.org.uk/def/concept/flow/{direction}", "description": ""}, "Country": {"parent": "http://gss-data.org.uk/def/concept-scheme/ons-country", "value": "http://gss-data.org.uk/def/concept/ons-country/{country}", "description": ""}, "Industry": {"parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry", "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}", "description": ""}, "Service Account": {"parent": "http://gss-data.org.uk/def/concept-scheme/ons-service-account", "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}", "description": ""}}, "stage": ["To Do"], "main_issue": 80}, "sizingNotes": "", "notes": "Ignore the visible macro-powered sheets, and unhide the rest to reveal the observations and reference data.  This dataset has been combined into one dataset in PMDv4 with  UK trade in services by industry, country and service type, imports."}
+{
+    "title": "UK trade in services by industry, country and service type, exports",
+    "publisher": "Office for National Statistics",
+    "description": "Experimental dataset providing a breakdown of UK trade in services by industry, country and service type on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders.",
+    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeexports",
+    "datasetNotes": [
+        "On the landing page "
+    ],
+    "published": "2020-02-28",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "rec8meXy1F5qSS0FJ",
+        "columns": {
+            "Period": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "double"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            },
+            "Direction": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow/{direction}",
+                "description": ""
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
+                "description": ""
+            },
+            "Industry": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry",
+                "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}",
+                "description": ""
+            },
+            "Service Account": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-service-account",
+                "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}",
+                "description": ""
+            }
+        },
+        "stage": [
+            "To Do"
+        ],
+        "main_issue": 80,
+        "transformStage": [
+            {
+                "source_name": "uktradeinservicesbyindustrycountryandservicetypeexport",
+                "identifier": "uktradeinservicesbyindustrycountryandservicetypeexport||tis_ind_ex||https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeexports/2016to2018/uktradeinservicesbyindustrycountryandservicetypeexports1.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeexports/2016to2018/uktradeinservicesbyindustrycountryandservicetypeexports1.xlsx": ""
+                    }
+                ],
+                "title": "tis_ind_ex",
+                "preview": "documentation/previews/42442d20-264a-4b1b-9506-9024d942a0ca.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell E1 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Country": [
+                            "Values taken from cell A2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Industry": [
+                            "Values taken from cell B2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Direction": [
+                            "Values taken from cell B2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Service_Account": [
+                            "Values taken from cell B2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "uktradeinservicesbyindustrycountryandservicetypeexport",
+                "identifier": "uktradeinservicesbyindustrycountryandservicetypeexport||combined_dataframe||https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeexports/2016to2018/uktradeinservicesbyindustrycountryandservicetypeexports1.xlsx : tis_ind_ex",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeexports/2016to2018/uktradeinservicesbyindustrycountryandservicetypeexports1.xlsx": "tis_ind_ex"
+                    }
+                ],
+                "title": "combined_dataframe",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Country": []
+                    },
+                    {
+                        "Industry": []
+                    },
+                    {
+                        "Direction": []
+                    },
+                    {
+                        "Service_Account": []
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            },
+            {
+                "source_name": "uktradeinservicesbyindustrycountryandservicetypeimport",
+                "identifier": "uktradeinservicesbyindustrycountryandservicetypeimport||tis_ind_im||https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeimports/2016to2018/uktradeinservicesbyindustrycountryandservicetypeimports1.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeimports/2016to2018/uktradeinservicesbyindustrycountryandservicetypeimports1.xlsx": ""
+                    }
+                ],
+                "title": "tis_ind_im",
+                "preview": "documentation/previews/c958a592-aa00-4d6c-aed6-3163a3ae8307.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell E1 across",
+                            "Added to dataframe 'combined_dataframe_imports'"
+                        ]
+                    },
+                    {
+                        "Country": [
+                            "Values taken from cell A2 across",
+                            "Added to dataframe 'combined_dataframe_imports'"
+                        ]
+                    },
+                    {
+                        "Industry": [
+                            "Values taken from cell B2 across",
+                            "Added to dataframe 'combined_dataframe_imports'"
+                        ]
+                    },
+                    {
+                        "Direction": [
+                            "Values taken from cell B2 across",
+                            "Added to dataframe 'combined_dataframe_imports'"
+                        ]
+                    },
+                    {
+                        "Service_Account": [
+                            "Values taken from cell B2 across",
+                            "Added to dataframe 'combined_dataframe_imports'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_imports'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_imports'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Added to dataframe 'combined_dataframe_imports'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "uktradeinservicesbyindustrycountryandservicetypeimport",
+                "identifier": "uktradeinservicesbyindustrycountryandservicetypeimport||combined_dataframe_imports||https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeimports/2016to2018/uktradeinservicesbyindustrycountryandservicetypeimports1.xlsx : tis_ind_im",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeimports/2016to2018/uktradeinservicesbyindustrycountryandservicetypeimports1.xlsx": "tis_ind_im"
+                    }
+                ],
+                "title": "combined_dataframe_imports",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Country": []
+                    },
+                    {
+                        "Industry": []
+                    },
+                    {
+                        "Direction": []
+                    },
+                    {
+                        "Service_Account": []
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            }
+        ]
+    },
+    "load": {
+        "publish": true
+    },
+    "sizingNotes": "",
+    "notes": "Ignore the visible macro-powered sheets, and unhide the rest to reveal the observations and reference data.  This dataset has been combined into one dataset in PMDv4 with  UK trade in services by industry, country and service type, imports."
+}
