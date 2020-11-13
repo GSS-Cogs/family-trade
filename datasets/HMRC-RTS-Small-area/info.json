@@ -1,23 +1,29 @@
 {
-    "title": "Regional trade in goods statistics disaggregated by smaller geographical areas",
-    "publisher": "HM Revenue & Customs",
-    "description": "HM Revenue & Customs (HMRC) collects the UK\u2019s international trade in goods data, which are published as two National Statistics series - the \u2018Overseas Trade in Goods Statistics (OTS)\u2019 and the \u2018Regional Trade in Goods Statistics (RTS)\u2019. The RTS are published quarterly showing trade at summary product and country level, split by UK regions and devolved administrations. This release provides statistics for 2018 calendar year. It breaks down the RTS into smaller UK geographical areas. RTS data and related products are categorised by partner country and Standard International Trade Classification, Rev.4 (SITC).\n\nIn this release data is analysed mainly at partner country and SITC section (1-digit) level. The collection and publication methodology for the RTS and this release is available on www.uktradeinfo.com.",
-    "landingPage": "https://www.gov.uk/government/collections/uk-regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas",
-    "datasetNotes": [
-        "Data can be found by clicking on the link under current releases "
-    ],
-    "published": "2019-11-07",
-    "families": [
-        "Trade"
-    ],
-    "extract": {
-        "source": "XLS",
-        "stage": "Done"
-    },
-    "transform": {
-        "airtable": "recyJa07EdGj8as91",
-        "main_issue": 16
+  "title": "Regional trade in goods statistics disaggregated by smaller geographical areas",
+  "publisher": "HM Revenue & Customs",
+  "description": "HM Revenue & Customs (HMRC) collects the UK\u2019s international trade in goods data, which are published as two National Statistics series - the \u2018Overseas Trade in Goods Statistics (OTS)\u2019 and the \u2018Regional Trade in Goods Statistics (RTS)\u2019. The RTS are published quarterly showing trade at summary product and country level, split by UK regions and devolved administrations. This release provides statistics for 2018 calendar year. It breaks down the RTS into smaller UK geographical areas. RTS data and related products are categorised by partner country and Standard International Trade Classification, Rev.4 (SITC).\n\nIn this release data is analysed mainly at partner country and SITC section (1-digit) level. The collection and publication methodology for the RTS and this release is available on www.uktradeinfo.com.",
+  "landingPage": "https://www.gov.uk/government/collections/uk-regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas",
+  "datasetNotes": [
+    "Data can be found by clicking on the link under current releases "
+  ],
+  "published": "2019-11-07",
+  "families": [
+    "Trade"
+  ],
+  "extract": {
+    "source": "XLS",
+    "stage": "Done"
+  },
+  "transform": {
+    "airtable": "recyJa07EdGj8as91",
+    "main_issue": 16,
+    "columns": {
+      "Product": {
+        "description": "The Standard international trade classification (SITC), is a product classification of the United Nations (UN) used for external trade statistics (export and Import values and volumes of goods), allowing for international comparisons of commodities and manufactured goods.",
+        "source": "https://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Standard_international_trade_classification_(SITC)"
+      }
     },
     "sizingNotes": "Simple file structure",
     "notes": "Supporting information is available in the PDF on the lading page"
+  }
 }
