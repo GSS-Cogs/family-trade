@@ -18,7 +18,1773 @@
         "stage": [
             "To Do"
         ],
-        "main_issue": 79
+        "columns": {
+            "Year": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+year}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "integer"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            },
+            "Geography Code": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography_code}"
+            },
+            "Area Type": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/geography-level",
+                "value": "http://gss-data.org.uk/def/concept/geography-level/{area_type}",
+                "description": ""
+            }
+        },
+        "codelists": [
+            "GDP Estimate Type"
+        ],
+        "main_issue": 79,
+        "transformStage": [
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 1||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 1",
+                "preview": "documentation/previews/ee204105-d59e-4fe7-8072-1fa1b88b5abf.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 2||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 2",
+                "preview": "documentation/previews/64b7beff-4280-478b-b0a1-8450a4b66010.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 3||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 3",
+                "preview": "documentation/previews/dcad290a-5a5f-4427-a526-15b14114e087.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 4 ||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 4 ",
+                "preview": "documentation/previews/92d115e0-6ef0-43b2-9593-cef44a59a6ef.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 5||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 5",
+                "preview": "documentation/previews/fc6588b9-c34a-470f-a840-adc6c3284ecc.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 6||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 6",
+                "preview": "documentation/previews/5cbe5cac-6153-46d9-9276-77bfb46a4ad9.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 7||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 7",
+                "preview": "documentation/previews/5ac148f3-c24a-4a54-96fe-2c1de8fe2a4d.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 8||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 8",
+                "preview": "documentation/previews/3713189c-3ff3-4283-80c3-c46aa79abb6c.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 9||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 9",
+                "preview": "documentation/previews/ba88d1c1-6bf8-44ee-bee1-fdd21ce15d82.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 10||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 10",
+                "preview": "documentation/previews/4f6c9423-dac0-4833-bbb5-0e8a213ed93c.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 11||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 11",
+                "preview": "documentation/previews/146285a2-966b-49ec-820e-8fce18b28506.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 12||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 12",
+                "preview": "documentation/previews/ef8dbb41-44b5-445d-ae2c-e363df045c41.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 13||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 13",
+                "preview": "documentation/previews/2d77afbf-29bf-486f-9601-2a0b6a57220d.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||combined_dataframe||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 1https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 2https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 3https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 4 https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 5https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 6https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 7https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 8https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 9https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 10https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 11https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 12https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx : Table 13",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 1"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 2"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 3"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 4 "
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 5"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 6"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 7"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 8"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 9"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 10"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 11"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 12"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions/1998to2018/regionalgrossdomesticproductgdpcityregions.xlsx": "Table 13"
+                    }
+                ],
+                "title": "combined_dataframe",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Area_Type": []
+                    },
+                    {
+                        "Geo_Code": []
+                    },
+                    {
+                        "Area_Name": []
+                    },
+                    {
+                        "Dimension_name_unsure": []
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 1||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 1",
+                "preview": "documentation/previews/a78cb941-a10d-47dd-b775-15f421aa471f.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 2||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 2",
+                "preview": "documentation/previews/aa575b8c-d774-4c3e-bee4-597ab1fa28d1.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 3||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 3",
+                "preview": "documentation/previews/77e8dd2f-8a0d-4e3a-99fb-e48b729aa242.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 4 ||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 4 ",
+                "preview": "documentation/previews/2e31eff0-ac6e-4ee5-98c6-ab0c2eeddced.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 5||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 5",
+                "preview": "documentation/previews/ebed6b58-5a2d-4ae8-b3b7-a9862803aca7.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 6||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 6",
+                "preview": "documentation/previews/08c1db86-5e05-47d3-974a-c8187574f41e.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 7||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 7",
+                "preview": "documentation/previews/a783d864-6e41-45f8-8d73-a6d94a7fe5b1.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 8||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 8",
+                "preview": "documentation/previews/e92175e6-28ea-4b16-98b2-b291aeb628ab.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 9||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 9",
+                "preview": "documentation/previews/7fe7dccf-e95a-4e3e-8ca2-d0a511af36e4.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 10||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 10",
+                "preview": "documentation/previews/1909f921-5acd-457f-a7f8-dd080a6d0406.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 11||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 11",
+                "preview": "documentation/previews/568b2e1f-9a02-405b-b948-d64959cba1c0.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 12||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 12",
+                "preview": "documentation/previews/e4b668d9-ee31-4a3c-acbe-73ef1afb2cfd.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||Table 13||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": ""
+                    }
+                ],
+                "title": "Table 13",
+                "preview": "documentation/previews/0938deff-ee12-4d49-a050-f7b6be25516b.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Values taken from cell D2 across",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Type": [
+                            "Values taken from cell A3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Geo_Code": [
+                            "Values taken from cell B3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Area_Name": [
+                            "Values taken from cell C3 Down",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Dimension_name_unsure": [
+                            "Values taken from cell A1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Value taken from cell X1",
+                            "Added to dataframe 'combined_dataframe_2'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "Regional gross domestic product city regions",
+                "identifier": "Regional gross domestic product city regions||combined_dataframe_2||https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 1https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 2https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 3https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 4 https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 5https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 6https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 7https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 8https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 9https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 10https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 11https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 12https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx : Table 13",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 1"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 2"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 3"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 4 "
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 5"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 6"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 7"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 8"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 9"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 10"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 11"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 12"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions/1998to2018/regionalgrossdomesticproductgdpenterpriseregions.xlsx": "Table 13"
+                    }
+                ],
+                "title": "combined_dataframe_2",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Area_Type": []
+                    },
+                    {
+                        "Geo_Code": []
+                    },
+                    {
+                        "Area_Name": []
+                    },
+                    {
+                        "Dimension_name_unsure": []
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            }
+        ]
     },
     "sizingNotes": "",
     "notes": ""

@@ -1,0 +1,14 @@
+Label,Notation,Parent Notation,Sort Priority
+Gross value added (balanced) at current basic prices,gross-value-added-balanced-at-current-basic-prices,,1
+Value added tax (vat) on products,value-added-tax-vat-on-products,,2
+Other taxes on products,other-taxes-on-products,,3
+Subsidies on products,subsidies-on-products,,4
+Gross domestic product (gdp) at current market prices,gross-domestic-product-gdp-at-current-market-prices,,5
+Total resident population numbers,total-resident-population-numbers,,6
+Gross domestic product (gdp) per head at current market prices,gross-domestic-product-gdp-per-head-at-current-market-prices,,7
+Whole economy gva implied deflators,whole-economy-gva-implied-deflators,,8
+Gross domestic product (gdp) chained volume measures (cvm) index,gross-domestic-product-gdp-chained-volume-measures-cvm-index,,9
+Gross domestic product (gdp) chained volume measures (cvm) in 2016 money value,gross-domestic-product-gdp-chained-volume-measures-cvm-in-2016-money-value,,10
+Gross domestic product (gdp) chained volume measures (cvm) per head,gross-domestic-product-gdp-chained-volume-measures-cvm-per-head,,11
+Gross domestic product (gdp) chained volume measures (cvm) annual growth rates,gross-domestic-product-gdp-chained-volume-measures-cvm-annual-growth-rates,,12
+Gross domestic product (gdp) chained volume measures (cvm) per head annual growth rates,gross-domestic-product-gdp-chained-volume-measures-cvm-per-head-annual-growth-rates,,13
