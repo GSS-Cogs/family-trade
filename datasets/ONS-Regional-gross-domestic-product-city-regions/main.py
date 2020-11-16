@@ -400,8 +400,8 @@ try:
     csvName = fn[i]
     out = Path('out')
     out.mkdir(exist_ok=True)
-    join_1_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_1_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+    join_2_df.drop_duplicates().to_csv(out / csvName, index = False)
+    #join_2_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
     
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
@@ -446,8 +446,8 @@ try:
     csvName = fn[i]
     out = Path('out')
     out.mkdir(exist_ok=True)
-    join_1_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_1_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+    join_3_df.drop_duplicates().to_csv(out / csvName, index = False)
+    #join_3_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
     
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
@@ -494,8 +494,8 @@ try:
     csvName = fn[i]
     out = Path('out')
     out.mkdir(exist_ok=True)
-    join_1_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_1_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+    join_4_df.drop_duplicates().to_csv(out / csvName, index = False)
+    #join_4_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
     
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
@@ -543,8 +543,8 @@ try:
     csvName = fn[i]
     out = Path('out')
     out.mkdir(exist_ok=True)
-    join_1_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_1_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+    join_5_df.drop_duplicates().to_csv(out / csvName, index = False)
+    #join_5_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
     
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
@@ -592,8 +592,8 @@ try:
     csvName = fn[i]
     out = Path('out')
     out.mkdir(exist_ok=True)
-    join_1_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_1_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+    join_6_df.drop_duplicates().to_csv(out / csvName, index = False)
+    #join_6_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
     
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
@@ -641,8 +641,8 @@ try:
     csvName = fn[i]
     out = Path('out')
     out.mkdir(exist_ok=True)
-    join_1_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_1_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+    join_7_df.drop_duplicates().to_csv(out / csvName, index = False)
+    #join_7_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
     
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
@@ -690,8 +690,8 @@ try:
     csvName = fn[i]
     out = Path('out')
     out.mkdir(exist_ok=True)
-    join_1_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_1_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+    join_8_df.drop_duplicates().to_csv(out / csvName, index = False)
+    #join_8_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
     
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
