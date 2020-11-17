@@ -14,6 +14,7 @@ scraper
 
 #Distribution 
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
+list(tabs)
 
 # - Tables 1 - 5 : how the calculation of GDP in current prices in tables
 # - Tables 6 - 7 : calculate GDP per head 
@@ -23,9 +24,8 @@ tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 # - Table 12 - 13 - show the annual growth rates of volume GDP and volume GDP per head
 #
 
-# +
 for name, tab in tabs.items():
-    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name:
+    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name: 
         continue
 
     datasetTitle = 'Regional gross domestic product city regions'
@@ -61,15 +61,12 @@ for name, tab in tabs.items():
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     trace.with_preview(tidy_sheet)
-    #savepreviewhtml(tidy_sheet, fname= tab.name + "PREVIEW.html") 
+    savepreviewhtml(tidy_sheet, fname= tab.name + "PREVIEW.html") 
     trace.store("combined_dataframe", tidy_sheet.topandas())
-        
-        
-# -
 
 
 city_regions = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-city_regions
+#city_regions = city_regions.drop_duplicates()
 
 # Transformation of Imports file to be joined to ONS-Regional-gross-domestic-product-enterprise-regions 
 
@@ -93,7 +90,6 @@ scraper
 #Distribution 
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 
-# +
 for name, tab in tabs.items():
     if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name:
         continue
@@ -131,18 +127,17 @@ for name, tab in tabs.items():
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     trace.with_preview(tidy_sheet)
-    #savepreviewhtml(tidy_sheet, fname= tab.name + "PREVIEW.html") 
+    savepreviewhtml(tidy_sheet, fname= tab.name + "PREVIEW.html") 
     trace.store("combined_dataframe_2", tidy_sheet.topandas())
-        
-        
-# -
 
 enterprise_regions = trace.combine_and_trace(datasetTitle, "combined_dataframe_2")
-enterprise_regions
+#enterprise_regions = enterprise_regions.drop_duplicates()
 
 ""
 #concatenating all the distributions togther - Easy to output all data togther once multiple measure types can be handeld
 merged_data = pd.concat([city_regions, enterprise_regions], ignore_index=True)
+
+merged_data['Area Type'].unique()
 
 # +
 #post processing 
@@ -152,12 +147,12 @@ merged_data['Year'] = merged_data['Year'].astype(str).replace('\.0', '', regex=T
 merged_data['Year'] = "year/" + merged_data['Year']
 
 #Greater London Authority = E61000001
-merged_data = merged_data.replace({'Geography Code' : {'Not available' : 'E61000001',}})
+#### merged_data = merged_data.replace({'Geography Code' : {'Not available' : 'E61000001',}})
 #city-region' and 'local-authority'
-merged_data = merged_data.replace({'Area Type' : {'CR' : 'city-region', 'LA' : 'local-authority', 'LEP' : 'local-enterprise-partnerships'}})
+merged_data = merged_data.replace({'Area Type' : {'CR' : 'city-region', 'LA' : 'local-authority', 'LEP' : 'local-enterprise-partnerships', 'ER' : 'enterprise-region'}})
 merged_data = merged_data.replace({'Marker' : {'-' : 'not-applicable',}})
 
-del merged_data['Area Name']
+del merged_data['Geography Code']
 
 merged_data["Table Number for joining"] = merged_data["GDP Estimate Type"].str.split(':').str[0]
 merged_data["GDP Estimate Type"] = merged_data["GDP Estimate Type"].str.split(':').str[2]
@@ -178,12 +173,15 @@ merged_data = merged_data.replace({'GDP Estimate Type' : {'Gross Value Added (Ba
                                         'Gross Domestic Product (GDP)1 chained volume measures (CVM) per head2 annual growth rates' : 'Gross Domestic Product (GDP) chained volume measures (CVM) per head annual growth rates'
                                        }})
 merged_data['GDP Estimate Type'] = merged_data['GDP Estimate Type'].map(lambda x: pathify(x))
+merged_data['Area Name'] = merged_data['Area Name'].map(lambda x: pathify(x))
 #2018 = provisional
 f1=((merged_data['Year'] =='year/2018'))
 merged_data.loc[f1,'Marker'] = 'provisional'
 merged_data = merged_data.replace(np.nan, '', regex=True)
 merged_data
 # -
+
+
 
 merged_data = merged_data.replace({'Table Number for joining' : { 'Table 1' : 'Join 1', 'Table 2' : 'Join 1', 'Table 3' : 'Join 1', 'Table 4' : 'Join 1', 'Table 5' : 'Join 1',
                                                      'Table 6' : 'Join 2',
@@ -192,7 +190,7 @@ merged_data = merged_data.replace({'Table Number for joining' : { 'Table 1' : 'J
                                                      'Table 9' : 'Join 5',
                                                      'Table 10' : 'Join 6',
                                                      'Table 11' : 'Join 7',
-                                                     'Table 12' : 'Join 8', 'Table 13' : 'Join 8'}})
+                                                     'Table 12' : 'Join 8', 'Table 13' : 'Join 8',  }})
 merged_data['Table Number for joining'].unique()
 
 
@@ -251,10 +249,6 @@ join_7_df['Value'] = join_7_df['Value'].astype(int)
 print('Join 8 unit ', join_8_df['Unit'].unique())
 join_8_df['Value']  = pd.to_numeric(join_8_df.Value, errors='coerce')
 #join_8_df.dtypes
-# -
-
-join_1_df = join_1_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
-join_1_df
 
 # +
 
@@ -348,7 +342,7 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 #Join 1 : Measure: cp, Unit: gbp-million, Datatype: integer, dataset_path: dataset_path + /cp
-join_1_df = join_1_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
+join_1_df = join_1_df[["Year", "Area Type", 'Area Name', "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 0
     csvName = fn[i]
@@ -394,7 +388,7 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 #Join 2 Measure: count, Unit: persons, Datatype: integer, dataset_path: dataset_path + /pop
-join_2_df = join_2_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
+join_2_df = join_2_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 1
     csvName = fn[i]
@@ -440,7 +434,7 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 #Join 3 : Measure: amp, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cmp
-join_3_df = join_3_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
+join_3_df = join_3_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 2
     csvName = fn[i]
@@ -488,7 +482,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 4 : Measure: gva, Unit: deflators, Datatype: double, dataset_path: dataset_path + /deflate
 
-join_4_df = join_4_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
+join_4_df = join_4_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 3
     csvName = fn[i]
@@ -537,7 +531,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 5 : Measure: cvm, Unit: index, Datatype: double, dataset_path: dataset_path + /cvmindex
 
-join_5_df = join_5_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
+join_5_df = join_5_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 4
     csvName = fn[i]
@@ -586,7 +580,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 6 : Measure: cvm, Unit: index, Datatype: double, dataset_path: dataset_path + /cvmindex
 
-join_6_df = join_6_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
+join_6_df = join_6_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 5
     csvName = fn[i]
@@ -635,7 +629,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 7 : Measure: cvm, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cvmhead
 
-join_7_df = join_7_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
+join_7_df = join_7_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 6
     csvName = fn[i]
@@ -684,7 +678,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 8 : Measure: cvm, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cvmhead
 
-join_8_df = join_8_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
+join_8_df = join_8_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 7
     csvName = fn[i]
