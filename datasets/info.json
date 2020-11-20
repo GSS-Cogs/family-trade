@@ -1,4 +1,5 @@
 {
+    "$schema": "https://gss-cogs.github.io/family-schemas/pipelines-schema.json",
     "family": "Trade",
     "github": "https://github.com/GSS-Cogs/family-trade",
     "jenkins": {
@@ -8,8 +9,8 @@
             "Trade"
         ]
     },
-    "sparql": "https://production-drafter-ons-alpha.publishmydata.com/v1/sparql/live",
-    "pmd": "http://gss-data.org.uk",
+    "sparql": "https://trade.gss-data.org.uk/sparql",
+    "pmd": "https://trade.gss-data.org.uk",
     "pipelines": [
         "DCMS-DCMS-Sectors-Economic-Estimates-Year-Trade-in-services",
         "HMRC-OVERSEAS-TRADE-STATISTICS",
