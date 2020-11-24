@@ -16,6 +16,30 @@
     },
     "transform": {
         "airtable": "recRRRJmihn12ddNh",
+        "columns": {
+            "GDP Reference Period": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}"
+            },
+            "Publication Date": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+publication_date}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/count",
+                "datatype": "double"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        },
+        "codelists": [
+            "GDP Estimate Type"
+        ],
         "main_issue": 7
     },
     "sizingNotes": "Will probably need a conversation about what it means",
