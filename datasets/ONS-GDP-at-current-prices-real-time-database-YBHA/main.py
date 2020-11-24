@@ -111,18 +111,17 @@ df = df.fillna('')
 
 df['Marker'].unique()
 
-# +
-info = json.load(open('info.json')) 
-codelistcreation = info['transform']['codelists'] 
-print(codelistcreation)
-print("-------------------------------------------------------")
-
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in df.columns:
-        df[cl] = df[cl].str.replace("-"," ")
-        df[cl] = df[cl].str.capitalize()
-        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# info = json.load(open('info.json')) 
+# codelistcreation = info['transform']['codelists'] 
+# print(codelistcreation)
+# print("-------------------------------------------------------")
+#
+# codeclass = CSVCodelists()
+# for cl in codelistcreation:
+#     if cl in df.columns:
+#         df[cl] = df[cl].str.replace("-"," ")
+#         df[cl] = df[cl].str.capitalize()
+#         codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 # +
 tidy = df[['GDP Reference Period','Publication Date','Value','GDP Estimate Type','Marker']]
