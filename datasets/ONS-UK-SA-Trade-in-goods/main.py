@@ -17,42 +17,39 @@
 
 # +
 from gssutils import *
+import json
 
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeallcountriesseasonallyadjusted')
+info = json.load(open('info.json'))
+landingPage = info['landingPage']
+landingPage
+
+scraper = Scraper(landingPage)
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 # -
 
-import numpy as np
-sheetnames = list(tabs)[0:4]
-Final_table = pd.DataFrame()
-i = 0
-for i in list(range(0,len(sheetnames))):
+output = pd.DataFrame()
+
+# -
+
+for name,tab in tabs.items():
     
-    tab = tabs[sheetnames[i]]
     observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
-    Year = tab.excel_ref('C5').expand(RIGHT).is_not_blank().is_not_whitespace()
+    year = tab.excel_ref('C5').expand(RIGHT).is_not_blank().is_not_whitespace()
     geo = tab.excel_ref('A7').expand(DOWN).is_not_blank().is_not_whitespace()
-    Dimensions = [
-            HDim(Year,'Period',DIRECTLY,ABOVE),
-            HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
-            HDimConst('Measure Type', 'GBP Total'),
-            HDimConst('Unit','gbp-million')            
-                ]
-    c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
-    new_table = c1.topandas()
+    dimensions = [HDim(year,'Period',DIRECTLY,ABOVE),
+                  HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
+                  HDimConst('Measure Type', 'GBP Total'),
+                  HDimConst('Unit','gbp-million')]
+    cs = ConversionSegment(observations, dimensions, processTIMEUNIT=True)
+    df = cs.topandas()
     
-    if 'Imports' in sheetnames[i] :
-        new_table['Flow'] = 'imports'
-    elif 'Exports' in sheetnames[i] :
-        new_table['Flow'] = 'exports'
-    else :
-        new_table['Flow'] = 'other'
+    # Take the last word of the tab's name and convert it to lower case, assign as value in Flow column in df
+    df['Flow'] = str(name.split()[-1]).lower()
     
-    new_table.rename(columns={'OBS': 'Value'}, inplace=True)
-    new_table['Period'] = new_table['Period'].astype(str)
-    new_table = new_table[['ONS Partner Geography', 'Period','Flow','Measure Type','Value' ,'Unit', 'DATAMARKER']]
-    i = i+1
-    Final_table = pd.concat([Final_table, new_table])
+    df.rename(columns={'OBS': 'Value'}, inplace=True)
+    df['Period'] = df['Period'].astype(str)
+    df = df[['ONS Partner Geography', 'Period','Flow','Measure Type','Value' ,'Unit', 'DATAMARKER']]
+    output = pd.concat([output, df])
 
 # +
 import re
