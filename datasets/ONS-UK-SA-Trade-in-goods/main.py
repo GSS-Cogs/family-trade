@@ -39,10 +39,15 @@ for name,tab in tabs.items():
     observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
     year = tab.excel_ref('C5').expand(RIGHT).is_not_blank().is_not_whitespace()
     geo = tab.excel_ref('A7').expand(DOWN).is_not_blank().is_not_whitespace()
+    if name.split()[0] == 'Annual':
+        datamarker = ' '.join([tab.excel_ref('A248').value, tab.excel_ref('A249').value])
+    elif name.split()[0] == 'Monthly':
+        datamarker = ' '.join([tab.excel_ref('A249').value, tab.excel_ref('A250').value])
     dimensions = [HDim(year,'Period',DIRECTLY,ABOVE),
                   HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
                   HDimConst('Measure Type', 'GBP Total'),
-                  HDimConst('Unit','gbp-million')]
+                  HDimConst('Unit','gbp-million'),
+                  HDimConst('DATAMARKER', datamarker)]
     cs = ConversionSegment(observations, dimensions, processTIMEUNIT=True)
     df = cs.topandas()
     
@@ -63,7 +68,6 @@ for name,tab in tabs.items():
 #-
 
 output.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
-output['Marker'].replace('N/A', 'not-applicable', inplace=True)
 
 #-
 
