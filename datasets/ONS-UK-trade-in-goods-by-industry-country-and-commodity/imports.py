@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -16,6 +16,7 @@
 
 # +
 from gssutils import *
+import json
 
 if is_interactive():
     import json
@@ -40,11 +41,15 @@ scraper = Scraper(page)
 scraper
 # -
 
-tabs = scraper.distributions[0].as_databaker()
-for i in tabs:
-    print(i.name)
+cubes = Cubes("info.json")
+tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
+list(tabs)
+# tabs = scraper.distributions[0].as_databaker()
+# for i in tabs:
+#     print(i.name)
 
-tab = next(t for t in tabs if t.name =='tig_ind_im_publ')
+# tab = next(t for t in tabs if t.name =='tig_ind_im_publ')
+tab = tabs['tig_ind_im']
 
 country = tab.filter(contains_string('country')).fill(DOWN).is_not_blank().is_not_whitespace()
 
@@ -66,6 +71,7 @@ Dimensions = [
             HDimConst('Flow', 'imports')
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
+# savepreviewhtml(c1, fname=tab.name + "Preview.html")
 table = c1.topandas()
 
 # +
@@ -89,7 +95,6 @@ table['Value'] = pd.to_numeric(table['Value'], errors='coerce')
 for col in table.columns:
     if col not in ['Value', 'Period']:
         table[col] = table[col].astype('category')
-        display(col)
         display(table[col].cat.categories)
 
 table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split()[0])
@@ -107,3 +112,9 @@ table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007',
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+# -
+
+cubes.add_cube(scraper, table, "UK trade in goods by industry, country and commodity, exports")
+# table
+
+
