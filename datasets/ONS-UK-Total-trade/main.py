@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -19,6 +19,7 @@
 from gssutils import *
 import json
 
+cubes = Cubes("info.json")
 scraper = Scraper(json.load(open('info.json'))['landingPage'])
 scraper
 # -
@@ -103,13 +104,13 @@ Final_table.loc[f4,'Marker'] = 'itis-nil'
 #Final_table.loc[f4,'Value'] = ''
 
 Final_table = Final_table[['ONS Partner Geography', 'Period','Flow','Trade Group', 'Measure Type','Value', 'Marker', 'Unit' ]]
-
-
-# +
-Final_table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
-
-#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
+
+
+scraper.dataset.family = "Trade"
+Final_table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+cubes.add_cube(scraper, Final_table, "UK-Total Trade" )
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 
 from pathlib import Path
 import numpy as np
@@ -123,12 +124,10 @@ scraper.dataset.family = 'trade'
 scraper.dataset.theme = THEME['business-industry-trade-energy']
 scraper.dataset.comment = scraper.dataset.comment + " To come in line with the EU the country code for Serbia is now XS for trading purposes not RS which some have been using. "
 
-with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-     metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
+# with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
+#      metadata.write(scraper.generate_trig())
+# csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+# csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
 # -
 
-Final_table
-
-
+cubes.output_all()
