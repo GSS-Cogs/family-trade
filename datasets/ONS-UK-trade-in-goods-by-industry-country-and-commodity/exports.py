@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -16,6 +16,9 @@
 
 # +
 from gssutils import *
+import json
+from urllib.parse import urljoin
+
 
 if is_interactive():
     import json
@@ -37,14 +40,22 @@ else:
 
 display(page)
 scraper = Scraper(page)
+
+# scraper = Scraper("info")
 scraper
+# distribution = scraper.distributions[0]
+# display(distribution)
 # -
 
-tabs = scraper.distributions[0].as_databaker()
-for i in tabs:
-    print(i.name)
+cubes = Cubes("info.json")
+tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
+list(tabs)
+# tabs = scraper.distributions[0].as_databaker()
+# for i in tabs:
+#     print(i.name)
 
-tab = next(t for t in tabs if t.name =='tig_ind_ex_publ')
+# tab = next(t for t in tabs if t.name =='tig_ind_ex_publ')
+tab = tabs['tig_ind_ex']
 
 country = tab.filter(contains_string('country')).fill(DOWN).is_not_blank().is_not_whitespace()
 
@@ -66,6 +77,7 @@ Dimensions = [
             HDimConst('Flow', 'exports')
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
+# savepreviewhtml(c1, fname=tab.name + "Preview.html")
 table = c1.topandas()
 
 table['DATAMARKER'] = table['DATAMARKER'].map(lambda x:'suppressed' if x == '..' else x )
@@ -96,3 +108,10 @@ table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007',
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+# -
+
+table
+# scraper.dataset
+cubes.add_cube(scraper, table, "UK trade in goods by industry, country and commodity, exports")
+
+
