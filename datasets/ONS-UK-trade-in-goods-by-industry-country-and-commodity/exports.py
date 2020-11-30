@@ -41,20 +41,13 @@ else:
 display(page)
 scraper = Scraper(page)
 
-# scraper = Scraper("info")
 scraper
-# distribution = scraper.distributions[0]
-# display(distribution)
 # -
 
 cubes = Cubes("info.json")
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 list(tabs)
-# tabs = scraper.distributions[0].as_databaker()
-# for i in tabs:
-#     print(i.name)
 
-# tab = next(t for t in tabs if t.name =='tig_ind_ex_publ')
 tab = tabs['tig_ind_ex']
 
 country = tab.filter(contains_string('country')).fill(DOWN).is_not_blank().is_not_whitespace()
@@ -77,7 +70,7 @@ Dimensions = [
             HDimConst('Flow', 'exports')
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
-# savepreviewhtml(c1, fname=tab.name + "Preview.html")
+savepreviewhtml(c1, fname=tab.name + "Preview.html")
 table = c1.topandas()
 
 table['DATAMARKER'] = table['DATAMARKER'].map(lambda x:'suppressed' if x == '..' else x )
@@ -111,7 +104,5 @@ table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 # -
 
 table
-# scraper.dataset
-cubes.add_cube(scraper, table, "UK trade in goods by industry, country and commodity, exports")
 
 
