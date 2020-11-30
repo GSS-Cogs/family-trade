@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -23,6 +23,7 @@
 from gssutils import *
 import json
 
+# cubes = Cubes("info.json")
 with open("info.json", "r") as f:
     landing_pages = json.load(f)["landingPage"]
 
@@ -69,5 +70,3 @@ with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
      metadata.write(scraper.generate_trig())
 csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
 csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
-
-
