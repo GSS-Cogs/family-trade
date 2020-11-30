@@ -16,7 +16,6 @@
 
 # +
 from gssutils import *
-import json
 
 if is_interactive():
     import json
@@ -44,9 +43,6 @@ scraper
 cubes = Cubes("info.json")
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 list(tabs)
-# tabs = scraper.distributions[0].as_databaker()
-# for i in tabs:
-#     print(i.name)
 
 # tab = next(t for t in tabs if t.name =='tig_ind_im_publ')
 tab = tabs['tig_ind_im']
@@ -71,19 +67,8 @@ Dimensions = [
             HDimConst('Flow', 'imports')
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
-# savepreviewhtml(c1, fname=tab.name + "Preview.html")
+savepreviewhtml(c1, fname=tab.name + "Preview.html")
 table = c1.topandas()
-
-# +
-# import numpy as np
-# table['OBS'].replace('', np.nan, inplace=True)
-# table.dropna(subset=['OBS'], inplace=True)
-# if 'DATAMARKER' in table.columns:
-#     table.drop(columns=['DATAMARKER'], inplace=True)
-# table.rename(columns={'OBS': 'Value'}, inplace=True)
-# table['Value'] = table['Value'].astype(int)
-# table['Value'] = table['Value'].map(lambda x:'' if x == '...' else x )
-# -
 
 table['DATAMARKER'] = table['DATAMARKER'].map(lambda x:'suppressed' if x == '..' else x )
 
@@ -114,7 +99,6 @@ table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
-cubes.add_cube(scraper, table, "UK trade in goods by industry, country and commodity, exports")
-# table
+table
 
 
