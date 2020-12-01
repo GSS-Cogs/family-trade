@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -19,6 +19,7 @@
 from gssutils import *
 import json
 
+cubes = Cubes("info.json")
 with open("info.json") as f:
     info = json.load(f)
     
@@ -35,7 +36,6 @@ tidy = pd.DataFrame()
 
 for sheet in sheets[1:-1]:
     name_match = tab_name_re.match(sheet.name)
-    #print (sheet.name)
     assert name_match, "sheet name doesn't match regex"
     for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover', 'Age']:
         year = HDimConst('Year', name_match.group(1))
@@ -57,11 +57,6 @@ for sheet in sheets[1:-1]:
         measure.AddCellValueOverride('Number of 5', 'Count')
         measure.AddCellValueOverride('% 6', 'Proportion of all Business')
         tidy = tidy.append(ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure]).topandas(), sort=True)
-#         savepreviewhtml([breakdown_obs, classifiers, import_export, measure])
-        #break
-    #break
-
-##tidy
 # -
 
 # Check for duplicate rows
@@ -72,19 +67,13 @@ assert tidy.duplicated().sum() == 0, 'duplicate rows'
 #
 # Also, the class "250 and over" is repeated in each, so we need to drop the duplicates. However, there appear to be some discrepancies.
 
-# +
 duplicate_label = '250 and over'
 emp_250 = tidy[tidy['Employment'] == duplicate_label].drop(columns=['Employment', 'Detailed employment']).reset_index(drop=True)
 detailed_emp_250 = tidy[tidy['Detailed employment'] == duplicate_label].drop(columns=['Employment', 'Detailed employment']).reset_index(drop=True)
 assert emp_250.size > 0
 assert detailed_emp_250.size > 0
-#assert emp_250.equals(detailed_emp_250)
 merged = emp_250.merge(detailed_emp_250, indicator=True, how='outer')
-
-#display(merged[merged['_merge'] == 'right_only'])
-
 tidy = tidy[tidy['Detailed employment'] != '250 and over'].reset_index(drop=True)
-# -
 
 # We need to merge them and also list their values so that we can create a codelist.
 
@@ -105,7 +94,6 @@ for col in tidy:
         display(HTML(f'<h2>{col}</h2>'))
         display(tidy[col].unique())
 dups = tidy.duplicated()
-#display(dups.sum())
 tidy[dups]
 
 # We need to specify the units of the observations.
@@ -162,33 +150,9 @@ tidy.rename(columns={'Turnover': 'Turnover(GBP Thousands)',
 tidy = tidy[['Age of Business(Years)', 'Export and Import Activity','Measure Type','Value',
              'Country of Ownership','ONS ABS Trade','Turnover(GBP Thousands)','Year','Employment','Unit']]
 
-# +
-# Use pathify to match csv values as per new style
-for col in ["ONS ABS Trade"]:
-    tidy[col] = tidy[col].apply(pathify)
+scraper.dataset.family = "Trade"
+cubes.add_cube(scraper, tidy, "Annual Business Survey Exporters and Importers")
 
-out = Path('out')
-out.mkdir(exist_ok=True, parents=True)
 
-tidy.to_csv(out / ('observations.csv'), index = False)
-
-tidy
-
-# +
-scraper.dataset.family = 'trade'
-scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
-                                                          'Importers and exporters of trade goods and services')
-from gssutils.metadata import THEME
-scraper.dataset.theme = THEME['business-industry-trade-energy']
-
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-
-with open(destinationFolder / f'observations.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-            
-schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-schema.create(destinationFolder / f'observations.csv', destinationFolder / f'observations.csv-schema.json')
-# -
-
+cubes.output_all()
 
