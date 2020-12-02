@@ -13,10 +13,6 @@
 #     name: python3
 # ---
 
-# ###  CPA xlsx to Tidydata
-
-# %cd family-trade/datasets/ONS_CPA
-
 from gssutils import *
 import json 
 
