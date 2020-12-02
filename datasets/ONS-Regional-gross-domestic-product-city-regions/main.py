@@ -61,7 +61,7 @@ for name, tab in tabs.items():
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     trace.with_preview(tidy_sheet)
-    savepreviewhtml(tidy_sheet, fname= tab.name + "PREVIEW.html") 
+    #savepreviewhtml(tidy_sheet, fname= tab.name + "city_PREVIEW.html") 
     trace.store("combined_dataframe", tidy_sheet.topandas())
 
 
@@ -115,8 +115,14 @@ for name, tab in tabs.items():
         
     unit = tab.excel_ref('X1')
     trace.Unit("Value taken from cell X1")
+   
+    if 'Table 6' in name or 'Table 7' in name or 'Table 11' in name or 'Table 12' in name or 'Table 13' in name:
+        cherwell_double = tab.excel_ref('A373').expand(RIGHT)
+        observations = period.fill(DOWN).is_not_blank() - cherwell_double
+        savepreviewhtml(observations, fname= tab.name + "cherwell_double.html") 
+    else:
+        observations = period.fill(DOWN).is_not_blank() 
         
-    observations = period.fill(DOWN).is_not_blank() 
     dimensions = [
         HDim(period, 'Year', DIRECTLY, ABOVE),
         HDim(area_type, 'Area Type', DIRECTLY, LEFT),
@@ -127,7 +133,7 @@ for name, tab in tabs.items():
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     trace.with_preview(tidy_sheet)
-    savepreviewhtml(tidy_sheet, fname= tab.name + "PREVIEW.html") 
+   # savepreviewhtml(tidy_sheet, fname= tab.name + "regional_PREVIEW.html") 
     trace.store("combined_dataframe_2", tidy_sheet.topandas())
 
 enterprise_regions = trace.combine_and_trace(datasetTitle, "combined_dataframe_2")
@@ -180,9 +186,6 @@ merged_data.loc[f1,'Marker'] = 'provisional'
 merged_data = merged_data.replace(np.nan, '', regex=True)
 merged_data
 # -
-
-
-
 merged_data = merged_data.replace({'Table Number for joining' : { 'Table 1' : 'Join 1', 'Table 2' : 'Join 1', 'Table 3' : 'Join 1', 'Table 4' : 'Join 1', 'Table 5' : 'Join 1',
                                                      'Table 6' : 'Join 2',
                                                      'Table 7' : 'Join 3',
@@ -578,7 +581,7 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 # +
-#Join 6 : Measure: cvm, Unit: index, Datatype: double, dataset_path: dataset_path + /cvmindex
+#Join 6 : Measure: cvm, Unit: gbp-million, Datatype: integer, dataset_path: dataset_path + /cvmmoney
 
 join_6_df = join_6_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
@@ -658,6 +661,8 @@ try:
 except Exception as s:
     print(str(s))
 # -
+
+
 
 ""
 #changing measure to cvm, unit to rate and value dtype to double for join8 output 
