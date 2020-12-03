@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -151,6 +151,8 @@ tidy = tidy[['Age of Business(Years)', 'Export and Import Activity','Measure Typ
              'Country of Ownership','ONS ABS Trade','Turnover(GBP Thousands)','Year','Employment','Unit']]
 
 scraper.dataset.family = "Trade"
+scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
+                                                          'Importers and exporters of trade goods and services')
 cubes.add_cube(scraper, tidy, "Annual Business Survey Exporters and Importers")
 
 
