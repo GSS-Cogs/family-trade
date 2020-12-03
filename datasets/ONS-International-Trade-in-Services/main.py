@@ -137,7 +137,7 @@ def process_tab(tab):
     return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry',
                 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
-observations = pd.concat(process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0'])
+observations = pd.concat((process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0']), sort=False)
 cubes.add_cube(scraper, observations, "International trade in services")
 
 # +
@@ -160,5 +160,16 @@ observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
+
+print(observations.info())
+
+# For the entries in "Value" columns with "Nan", the corresponding "Marker" columns. 3402 rows* 2 Columns
+observations.loc[observations['Value'].isnull() & observations['Marker'].notnull(), ['Value', 'Marker']]
+
+# For those entries in "Value columns" with some value, the corresponding "Marker" columns 16576 rows* 2 columns
+observations.loc[observations['Value'].notnull() & observations['Marker'].isnull(), ['Value','Marker']]
+
+# Entries in "Marker Columns" with some values 3402 rows*1 column
+observations.loc[observations['Marker'].notnull(), ['Marker']]
 
 cubes.output_all()
