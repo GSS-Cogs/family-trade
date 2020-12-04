@@ -16,7 +16,42 @@
     },
     "transform": {
         "airtable": "recHVWhF3sVZo2T9I",
-        "main_issue": 4
+        "main_issue": 4,
+        "columns": {
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
+            },
+            "Flow Directions": {
+                "dimension": "http://gss-data.org.uk/def/dimension/trade/flow-directions",
+                "value": "http://gss-data.org.uk/def/concept/trade/flow-directions/{flow_directions}"
+            },
+            "ITIS Industry": {
+                "dimension": "http://gss-data.org.uk/def/dimension/trade/itis-industry",
+                "value": "http://gss-data.org.uk/def/concept/trade/itis-industry/{itis_industry}"
+            },
+            "ITIS Service": {
+                "parent": "http://gss-data.org.uk/def/dimension/trade/product",
+                "value": "http://gss-data.org.uk/def/concept/trade/itis-services/{itis_service}"
+            },
+            "International Trade Basis": {
+                "dimension": "http://gss-data.org.uk/def/dimension/trade/international-trade-basis",
+                "value": "http://gss-data.org.uk/def/concept/trade/international-trade-basis/{international_trade_basis}"
+            },
+            "ONS Trade Areas ITIS": {
+                "dimension": "http://gss-data.org.uk/def/dimension/trade-partner-geography",
+                "value": "http://gss-data.org.uk/def/concept/ons-trade-areas-itis/{ons_trade_areas_itis}"
+            },
+            "Value": {
+                "measure": "http://gss-data.org.uk/def/measure/gbp-total",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "value": "decimal"
+            },
+            "Year": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/year/{year}"
+            }
+        }
     },
     "sizingNotes": "Multiple tabs with multiple small tables and simple structure but some footnotes",
     "notes": ""

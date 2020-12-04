@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       jupytext_version: 1.5.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -160,5 +160,7 @@ observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
+
+observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
 
 cubes.output_all()
