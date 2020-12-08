@@ -161,15 +161,12 @@ observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
-print(observations.info())
-
 # For the entries in "Value" columns with "Nan", the corresponding "Marker" columns. 3402 rows* 2 Columns
 observations.loc[observations['Value'].isnull() & observations['Marker'].notnull(), ['Value', 'Marker']]
 
 # For those entries in "Value columns" with some value, the corresponding "Marker" columns 16576 rows* 2 columns
 observations.loc[observations['Value'].notnull() & observations['Marker'].isnull(), ['Value','Marker']]
 
-# Entries in "Marker Columns" with some values 3402 rows*1 column
-observations.loc[observations['Marker'].notnull(), ['Marker']]
+observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
 
 cubes.output_all()
