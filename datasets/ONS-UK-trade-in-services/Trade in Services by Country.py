@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,6 +17,7 @@
 
 # +
 from gssutils import *
+import json
 
 scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
                   'internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted')
@@ -27,30 +28,29 @@ tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType=Exc
 
 tab = tabs['TiS by country']
 
-d5 = tab.filter('D5').expand(RIGHT)
-
-observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank() - d5
+observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank()
 
 Year = tab.excel_ref('C4').expand(RIGHT).is_not_whitespace()
 
-Flow = tab.excel_ref('B').expand(DOWN).by_index([5,253])
+Flow = tab.excel_ref('B').expand(DOWN).by_index([5,252])
 
-geo1 = tab.excel_ref('A7').expand(DOWN).is_not_blank()
+ons_partner_geography = tab.excel_ref('A7').expand(DOWN).is_not_blank()
 
-Dimensions = [
+dimensions = [
             HDim(Year,'Period',DIRECTLY,ABOVE),
-            HDim(geo1,'ONS Partner Geography',DIRECTLY,LEFT),
+            HDim(ons_partner_geography,'ONS Partner Geography',DIRECTLY,LEFT),
             HDim(Flow, 'Flow',CLOSEST,ABOVE),
             HDimConst('Measure Type', 'GBP Total'),
             HDimConst('Unit','gbp-million'),
             HDimConst('Marker',''),
            ]
 
-c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
+c1 = ConversionSegment(tab, dimensions, observations)
 if is_interactive():
     savepreviewhtml(c1)
 
 new_table = c1.topandas()
+new_table
 
 new_table['Period'] = 'quarter/' + new_table['Period'].astype(str).str[0:4]+ '-' +   new_table['Period'].astype(str).str[-2:]              
 
@@ -93,6 +93,3 @@ new_table.rename(columns={'ONS Partner Geography':'CORD Geography',
 # -
 
 new_table
-
-
-
