@@ -78,6 +78,9 @@
 
 	Join all 6 tables together into one datacube
 
+	Marker
+		Any N/A values put not-collated in cell . Description also explains the reason for this
+
 	Scraper
 		dataset_id: (only one dataset output so will probably not need changing)
 		Title: (only one dataset output so will probably not need changing)
