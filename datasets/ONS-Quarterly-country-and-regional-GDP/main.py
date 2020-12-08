@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.6.0
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,10 +17,6 @@ import json
 import math
 
 info = json.load(open('info.json')) 
-#etl_title = info["Name"] 
-#etl_publisher = info["Producer"][0] 
-#print("Publisher: " + etl_publisher) 
-#print("Title: " + etl_title) 
 
 scraper = Scraper(seed="info.json")   
 scraper 
@@ -767,11 +763,6 @@ for tab in scraper.distributions[dist_num].as_databaker():
     #Each dataframe still contains multiple measures which I expect to break up in stage 2.
     #tab_title still contains superscripts.
 
-# -
-
-
-
-
 # +
 indicies_tabs = []
 percentage_tabs = []
@@ -783,16 +774,17 @@ for sheet in tidied_sheets:
 indicies = pd.concat(indicies_tabs)
 percentage_change = pd.concat(percentage_tabs)
 
+
+
+# +
+#seperating depending on indicies / percentage and post processing. 
+
+# +
 tidied_indicies = indicies[["Period", "Region", "Industry Section", "Value"]]
 tidied_percentage_change = percentage_change[["Period", "Region", "Industry Section", "Change Type", "Value"]]
 
-#select = df['A'].isin(m.keys())
-#df.loc[select, 'C'] = df.loc[select, 'A'].map(m)
-
-#tidied_indicies.loc[len(tidied_indicies["Period"]) == 6, "Period"] = "year/" + tidied_indicies["Period"].astype(str)
-
-#df.loc[df.name.str.len() == 4, 'value'] = 'short_' + df['value'].astype(str)
-#tidied_indicies.loc[tidied_indicies["Period"] == 6] = "year/" + tidied_indicies["Period"].astype(str)
+tidied_indicies['Region'] = tidied_indicies['Region'].map(lambda x: pathify(x))
+tidied_percentage_change['Region'] = tidied_percentage_change['Region'].map(lambda x: pathify(x))
 
 #Format Date/Quarter
 def left(s, amount):
@@ -826,20 +818,18 @@ tidied_percentage_change["Change Type"] =  tidied_percentage_change["Change Type
 to_output = []
 to_output.append([tidied_indicies, "indicies", "ons-quarterly-country-and-regional-gdp/indices", "Quarterly country and regional GDP - Indices", "Indices 2016 = 100.", "/indicies"])
 to_output.append([tidied_percentage_change, "percentage_change", "ons-quarterly-country-and-regional-gdp/percentagechange", "Quarterly country and regional GDP - Percentage change", "Percentage change.", "/percentagechange"])
+# -
 
+
+tidied_percentage_change
+
+tidied_indicies
 
 # +
 from urllib.parse import urljoin
 import os
 
 for i in to_output:
-    
-    #i[0]["Period"] = "year/" + i[0]["Period"].astype(str)
-    #i[0][len(i[0]["Period"]) == 6] = "year/" + i[0]["Period"].astype(str)
-    #i[0][i[0]["Period"] == 6]
-    #i[0]["Q" in i[0]["Period"] != True] = "year/" + i[0]["Period"].astype(str)
-    
-    #i[0]["Period"] = "year/" + format_period(i[0]["Period"])
     
     csvName = i[1] + "_observations.csv"
     out = Path("out")
