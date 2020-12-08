@@ -1,7 +1,5 @@
 # COGS Dataset Specification
 
-[Family Home](https://gss-cogs.github.io/family-trade/datasets/specmenu.html)
-
 [Family Transform Status](https://gss-cogs.github.io/family-trade/datasets/index.html)
 
 ## ONS UK Total Trade
