@@ -16,7 +16,38 @@
     },
     "transform": {
         "airtable": "recMJhku0J2Kbp8du",
-        "main_issue": 6
+        "main_issue": 6,
+        "columns": {
+            "Period": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
+                "description": "Central ONS Country codelist in ref_common"
+            },
+            "Flow": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "description": "Central Flow (Imports/Exports) codelist in ref_common"
+            },
+            "Trade Type": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/trade-type",
+                "value": "http://gss-data.org.uk/def/concept/trade-type/{trade_type}",
+                "description": "Central Trade Type (Goods/Services) codelist in ref_common"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/trade",
+                "datatype": "double"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        },
     },
     "sizingNotes": "Simple file structure, mid size table with non-complex dimensions and some footnotes.",
     "notes": ""
