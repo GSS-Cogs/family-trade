@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,9 +17,10 @@
 
 # +
 from gssutils import *
+import json
 
-scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
-                  'internationaltrade/datasets/uktradeinservicesservicetypebypartnercountrynonseasonallyadjusted')
+info = json.load(open("info.json"))
+scraper = Scraper(seed="info.json")
 scraper
 
 # +
@@ -27,7 +28,7 @@ dist = scraper.distribution(latest=True, mediaType = Excel)
 tab = dist.as_pandas(sheet_name = 'Time Series')
 
 #tab.rename(columns=tab.iloc[0], inplace=True)
-tab = tab.iloc[1:, :]
+tab = tab.iloc[0:, :]
 tab = tab.drop(tab.columns[[2,4]], axis = 1)
 tab
 # -
@@ -112,6 +113,3 @@ new_table.rename(columns={'ONS Partner Geography':'CORD Geography',
 # -
 
 new_table
-
-
-
