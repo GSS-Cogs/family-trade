@@ -16,7 +16,17 @@
     },
     "transform": {
         "airtable": "recPITJGpaxZOcwOo",
-        "main_issue": 34
+        "main_issue": 34,
+        "columns": {
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        },
     },
     "sizingNotes": "",
     "notes": ""
