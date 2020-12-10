@@ -22,53 +22,69 @@ import json
 scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
                   'internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted')
 scraper
+trace = TransformTrace()
 # -
 
 tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType=Excel).as_databaker()} 
 
 tab = tabs['TiS by country']
 
+datasetTitle = "ONS-UK-trade-in-services"
+columns = ["Year", "ONS Partner Geography", "Flow", "Measure Type", "Unit", "Marker", "Footer"]
+trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
+
+trace.obs("Taken from cell C7 across and down which are non blank")
 observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank()
 
-Year = tab.excel_ref('C4').expand(RIGHT).is_not_whitespace()
+trace.Year("Taken from cell C4 across")
+year = tab.excel_ref('C4').expand(RIGHT).is_not_whitespace()
 
+trace.Flow("Taken from cells B5 and B252")
 Flow = tab.excel_ref('B').expand(DOWN).by_index([5,252])
 
-ons_partner_geography = tab.excel_ref('A7').expand(DOWN).is_not_blank()
+trace.Footer("Taken from cells A500 across and down ")
+footer = tab.excel_ref("A500").expand(RIGHT).expand(DOWN)
+
+trace.ONS_Partner_Geography("Taken from cell A7 down")
+ons_partner_geography = tab.excel_ref('A7').expand(DOWN).is_not_blank() - footer
 
 dimensions = [
-            HDim(Year,'Period',DIRECTLY,ABOVE),
-            HDim(ons_partner_geography,'ONS Partner Geography',DIRECTLY,LEFT),
-            HDim(Flow, 'Flow',CLOSEST,ABOVE),
-            HDimConst('Measure Type', 'GBP Total'),
-            HDimConst('Unit','gbp-million'),
-            HDimConst('Marker',''),
+            HDim(year, 'Year', DIRECTLY,ABOVE),
+            HDim(ons_partner_geography, 'ONS_Partner_Geography', DIRECTLY,LEFT),
+            HDim(Flow, 'Flow', CLOSEST,ABOVE),
            ]
 
 c1 = ConversionSegment(tab, dimensions, observations)
-if is_interactive():
-    savepreviewhtml(c1)
+trace.with_preview(c1)
 
 new_table = c1.topandas()
-new_table
+trace.store("combined_dataframe", new_table)
 
-new_table['Period'] = 'quarter/' + new_table['Period'].astype(str).str[0:4]+ '-' +   new_table['Period'].astype(str).str[-2:]              
+df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+trace.Year("Adding quarter and - to values in Period column and converting into string datatype")
+df['Year'] = 'quarter/' + df['Year'].astype(str).str[0:4]+ '-' +   df['Year'].astype(str).str[-2:]              
 
-new_table.head()
+df.head()
 
-new_table.columns = ['Value' if x=='OBS' else x for x in new_table.columns]
+trace.add_column("Renaming OBS column into Value")
+df.columns = ['Value' if x=='OBS' else x for x in new_table.columns]
 
-new_table['Flow'] = new_table['Flow'].map(lambda s: s.lower().strip())
+df['Value'] = df['Value'].astype(int)
 
-new_table['Seasonal Adjustment'] =  'NSA'
+trace.Flow("Converting all values in Flow column to lower case")
+df['Flow'] = df['Flow'].map(lambda s: s.lower().strip())
 
-new_table['Value'] = new_table['Value'].astype(int)
+trace.add_column("Adding a new column Seasonal Adjustment and value as NSA")
+df['Seasonal Adjustment'] =  'NSA'
 
-new_table['Trade Services'] = '0'
+trace.add_column("Adding a new column Trade Services and value as 0")
+df['Trade Services'] = '0'
+
+df["Marker"] = " "
 
 # Duplicated observations of different countries in 
 
-new_table = new_table.loc[new_table['ONS Partner Geography'].isin(['AD','AE','AF','AG','AI','AM','AO','AQ','AS','AW','AZ','BA','BB','BD','BF',	
+df = df.loc[new_table['ONS_Partner_Geography'].isin(['AD','AE','AF','AG','AI','AM','AO','AQ','AS','AW','AZ','BA','BB','BD','BF',	
                                                                 'BH','BI','BJ','BM','BN','BO','BQ','BS','BT','BV','BW','BZ','CC','CD','CF',
                                                                 'CG','CI','CK','CM','CR','CU','CV','CW','CX','D5','DJ','DM','DO','DZ','EC',
                                                                 'ER','ET','FJ','FK','FM','FO','GA','GD','GE','GG','GH','GI','GL','GM','GN',
@@ -81,10 +97,12 @@ new_table = new_table.loc[new_table['ONS Partner Geography'].isin(['AD','AE','AF
                                                                 'TN','TO','TT','TV','TZ','UG','UM','UZ','VA','VC','VG','VI','VN','VU','WF',
                                                                 'WS','XK','YE','ZM','ZW'])]
 
-new_table = new_table[['ONS Partner Geography', 'Period','Flow','Trade Services', 'Seasonal Adjustment', 'Measure Type','Value','Unit','Marker' ]]
+# trace.df("Defining the order of Columns")
+df = df[['ONS_Partner_Geography', 'Year','Flow','Trade Services', 'Seasonal Adjustment', 'Value', 'Marker' ]]
 
 # +
-new_table.rename(columns={'ONS Partner Geography':'CORD Geography',
+trace.multi(["ONS_Partner_Geography", "Flow"], "Renamed columns ONS Partner Geography and Flow into CORD Geography and Flow Directions")
+df.rename(columns={'ONS Partner Geography':'CORD Geography',
                           'Flow':'Flow Directions'}, 
                  inplace=True)
 
@@ -92,4 +110,6 @@ new_table.rename(columns={'ONS Partner Geography':'CORD Geography',
 #Flow has been changed to Flow Direction to differentiate from Migration flow dimension - I believe
 # -
 
-new_table
+trace.render()
+
+df
