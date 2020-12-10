@@ -14,7 +14,115 @@
     "transform": {
         "validate": false,
         "airtable": "reczFVGkUgwXtzkoH",
-        "main_issue": 17
+        "main_issue": 17,
+        "transformStage": [
+            {
+                "source_name": "ONS-UK-trade-in-services",
+                "identifier": "ONS-UK-trade-in-services||TiS by country||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted/current/tradeinservicesbycountry.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted/current/tradeinservicesbycountry.xlsx": ""
+                    }
+                ],
+                "title": "TiS by country",
+                "preview": "documentation/previews/7dca0df1-50cf-4989-8ac2-fc6b91d8de00.html",
+                "observation_selection": "Taken from cell C7 across and down which are non blank",
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Year": [
+                            "Taken from cell C4 across",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "ONS_Partner_Geography": [
+                            "Taken from cell A7 down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Flow": [
+                            "Taken from cells B5 and B252",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Footer": [
+                            "Taken from cells A500 across and down ",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "ONS-UK-trade-in-services",
+                "identifier": "ONS-UK-trade-in-services||combined_dataframe||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted/current/tradeinservicesbycountry.xlsx : TiS by country",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted/current/tradeinservicesbycountry.xlsx": "TiS by country"
+                    }
+                ],
+                "title": "combined_dataframe",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Year": [
+                            "Adding quarter and - to values in Period column and converting into string datatype"
+                        ]
+                    },
+                    {
+                        "ONS_Partner_Geography": [
+                            "Renamed columns ONS Partner Geography and Flow into CORD Geography and Flow Directions"
+                        ]
+                    },
+                    {
+                        "Flow": [
+                            "Converting all values in Flow column to lower case",
+                            "Renamed columns ONS Partner Geography and Flow into CORD Geography and Flow Directions"
+                        ]
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Footer": []
+                    },
+                    {
+                        "Renaming_OBS_column_into_Value": []
+                    },
+                    {
+                        "Adding_a_new_column_Seasonal_Adjustment_and_value_as_NSA": []
+                    },
+                    {
+                        "Adding_a_new_column_Trade_Services_and_value_as_0": []
+                    }
+                ]
+            }
+        ]
     },
     "sizingNotes": "",
     "notes": ""
