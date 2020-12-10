@@ -70,8 +70,8 @@ for name, tab in tabs.items():
     #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
+# -
 
-# +
 #Post Processing 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
@@ -80,7 +80,7 @@ df['Value'] = pd.to_numeric(df.Value, errors='coerce')
 df['Marker'].replace('N/A', 'not-collated', inplace=True)
 trace.Marker("replacing N/A with not-collated")
 df['Flow'] = df['Flow'].map(lambda s: s.lower().strip())
-
+df["Country"] = df["Country"].map(lambda x: pathify(x))
 df['Trade Type'] = df['Trade Type'].apply(lambda x: 'total' if 'Total Trade' in x else 
                                       ('goods' if 'Trade in Goods' in x else 
                                        ('services' if 'Trade in Services' in x else x)))
@@ -89,7 +89,6 @@ df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 trace.Period('Formatingyear values into year/{yr} (year/2020) and quarter values into quarter/{qtr} (quarter/Q1)')
 df['Period'] =  df["Period"].apply(date_time)
 df = df[['Period', 'Country', 'Flow', 'Trade Type', 'Value', 'Marker']]
-# -
 
 #additional scraper info needed
 scraper.dataset.family = 'trade'
@@ -105,7 +104,7 @@ For Trade in Services the data is consistent with UK Trade in services by partne
 """
 scraper.dataset.description = scraper.dataset.description + add_to_des
 
-cubes.add_cube(scraper, df.drop_duplicates(), "UK total trade: all countries, non-seasonally adjusted")
+cubes.add_cube(scraper, df.drop_duplicates(), "ons-uk-total-trade")
 cubes.output_all()
 trace.render("spec_v1.html")
 
