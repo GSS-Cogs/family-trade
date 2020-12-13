@@ -1,3 +1,16 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+#!/usr/bin/env python
+# coding: utf-8
+
+
+# In[2]:
+
+
 # -*- coding: utf-8 -*-
 # ---
 # jupyter:
@@ -14,54 +27,90 @@
 #     name: python3
 # ---
 
+
 # ## Balance of Payments Capital Account B7
 
 # +
+
+# In[3]:
+
+
+import pandas as pd
+import numpy as np
 from gssutils import *
 import json
+from gssutils.metadata import THEME
+from gssutils.metadata import *
+from databaker.framework import *
 
-scraper = Scraper(json.load(open('info.json'))['landingPage'])
+
+# In[4]:
+
+
+cubes = Cubes("info.json")
+
+
+# In[5]:
+
+
+with open ('info.json') as f:
+    info = json.load(f)
+
+
+# In[6]:
+
+
+landingPage = info['landingPage']
+landingPage
+
+
+# In[7]:
+
+
+scraper = Scraper(landingPage)
+scraper.dataset.family = info['families']
 scraper
 
-# +
+
+# In[8]:
+
+
 dist = scraper.distributions[0]
-tabs = (t for t in dist.as_databaker())
-tidied_sheets = []
+dist
+
+
+# In[9]:
+
+
+tabs = scraper.distributions[0].as_databaker()
+
+
+# In[10]:
+
 
 def left(s, amount):
     return s[:amount]
+
+
+# In[11]:
+
+
 def right(s, amount):
     return s[-amount:]
 
-import re
-YEAR_RE = re.compile(r'[0-9]{4}')
-YEAR_MONTH_RE = re.compile(r'([0-9]{4})\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)')
-YEAR_QUARTER_RE = re.compile(r'([0-9]{4})(Q[1-4])')
 
-class Re(object):
-    def __init__(self):
-        self.last_match = None
-    def fullmatch(self,pattern,text):
-        self.last_match = re.fullmatch(pattern,text)
-        return self.last_match
-
-def time2period(t):
-    gre = Re()
-    if gre.fullmatch(YEAR_RE, t):
-        return f"year/{t}"
-    elif gre.fullmatch(YEAR_MONTH_RE, t):
-        year, month = gre.last_match.groups()
-        month_num = {'JAN': '01', 'FEB': '02', 'MAR': '03', 'APR': '04', 'MAY': '05', 'JUN': '06',
-                     'JUL': '07', 'AUG': '08', 'SEP': '09', 'OCT': '10', 'NOV': '11', 'DEC': '12'}.get(month)
-        return f"month/{year}-{month_num}"
-    elif gre.fullmatch(YEAR_QUARTER_RE, t):
-        year, quarter = gre.last_match.groups()
-        return f"quarter/{year}-{quarter}"
-    else:
-        print(f"no match for {t}")
-
+# +
 
 # -
+
+# In[12]:
+
+
+tidied_sheets = []
+
+
+# In[13]:
+
 
 for tab in tabs:
     if 'B7' in tab.name: #Tabs B7 and B7A
@@ -88,29 +137,51 @@ for tab in tabs:
             HDimConst('Measure Type', 'GBP Total'),
             HDimConst('Unit', 'gbp-million'),
         ]
-
         tidy_sheet = ConversionSegment(tab, dimensions, observations)        
        # savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
         tidied_sheets.append(tidy_sheet.topandas()) 
+        
+        df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
 
 
-df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
+# In[14]:
+
+
 df['Period'] = df.Period.str.replace('\.0', '')
-df['Quarter'] = df['Quarter'].str.lstrip()
+df['Quarter'] = df["Quarter"].map(lambda x: x.lstrip() if isinstance(x, str) else x)
 df['Period'] = df['Period'] + df['Quarter']
+df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 df.drop(['Quarter'], axis=1, inplace=True)
-df['Period'] = df['Period'].apply(time2period)
+
+
+# In[15]:
+
 
 df['Account Type'] = df['Account Type'].map(lambda x: x.split()[0]) + ' ' +  df['Account Type'].map(lambda x: x.split()[1])
 df['Account Type'] = df['Account Type'].str.rstrip('1')
 df['Services'] = df['Services'].str.rstrip('2')
 df['Services'] = df['Services'].str.lstrip()
 df = df.replace({'Sector' : {' ' : 'total'}})
+
+
+# In[16]:
+
+
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'].replace(' -', 'unknown', inplace=True)
+
+
+# In[17]:
+
+
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
 
+
 # +
+
+# In[18]:
+
+
 tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
            'Marker','Measure Type', 'Unit']]
 for column in tidy:
@@ -120,32 +191,15 @@ for column in tidy:
         
 tidy
 
+
+# In[19]:
+
+
+cubes.add_cube(scraper, tidy, info['title'])
+
+cubes.output_all()
+
+
 # + endofcell="--"
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-
-TITLE = 'Balance of Payments: Capital Account'
-OBS_ID = pathify(TITLE)
-import os
-GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/trade/' + Path(os.getcwd()).name))
-
-tidy.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
-# # +
-from gssutils.metadata import THEME
-scraper.set_base_uri('http://gss-data.org.uk')
-scraper.set_dataset_id(f'{GROUP_ID}/{OBS_ID}')
-scraper.dataset.title = TITLE
-
-scraper.dataset.family = 'trade'
-with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-# -
-
-schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
-
-tidy
 
 # --
-
-
