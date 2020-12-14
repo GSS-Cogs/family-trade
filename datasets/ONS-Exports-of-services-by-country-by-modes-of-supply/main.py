@@ -1,56 +1,66 @@
 # -*- coding: utf-8 -*-
 # +
-from gssutils import * 
-import json 
-from urllib.parse import urljoin
+from gssutils import *
+import json
+import numpy as np
+
+""
+#changing landing page back to Exports URL (First dataset to run)
+with open("info.json", "r") as read_file:
+    data = json.load(read_file)
+    print("URL: ", data["landingPage"] )
+    data["landingPage"] = "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply" 
+    print("URL changed to: ", data["landingPage"] )
+
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+# -
 
 trace = TransformTrace()
 df = pd.DataFrame()
-# -
-
-info = json.load(open('info.json')) 
-scraper = Scraper(seed="info.json")   
-scraper 
+cubes = Cubes("info.json")
+scraper = Scraper(json.load(open('info.json'))['landingPage'])
+scraper
 
 #Distribution 
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 list(tabs)
 
-# +
-tab = tabs["Sheet1"]
-datasetTitle = 'exportsofservicesbycountrybymodesofsupply'
-columns=["Period", "Country", "Mode", "Direction", "Service Account", "Marker", "Measure Type", "Unit"]
-trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
+for name, tab in tabs.items():
+    datasetTitle = 'exportsofservicesbycountrybymodesofsupply'
+    columns=["Period", "Country", "Mode", "Direction", "Service Account", "Marker", "Measure Type", "Unit"]
+    trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
 
-period = "year/2018" #TAKEN FROM SHEET 
-trace.Period("Hardcoded as year/2018")
+    if 'Index' in name:
+        continue
+    period = "year/2019" #TAKEN FROM SHEET : NOTE "2019 estimates"
+    trace.Period("Hardcoded as year/2019, note these are estimates")
 
-country = tab.excel_ref("A2").expand(DOWN)
-trace.Country("Values taken from cell A2 Down")
+    country = tab.excel_ref("A2").expand(DOWN)
+    trace.Country("Values taken from cell A2 Down")
 
-mode = tab.excel_ref("B2").expand(DOWN)
-trace.Mode("Values taken from cell B2 Down")
+    mode = tab.excel_ref("B2").expand(DOWN)
+    trace.Mode("Values taken from cell B2 Down")
 
-direction = tab.excel_ref("C2").expand(DOWN)
-trace.Direction("Values taken from cell C2 Down")
+    direction = tab.excel_ref("C2").expand(DOWN)
+    trace.Direction("Values taken from cell C2 Down")
 
-service_account = tab.excel_ref("D2").expand(DOWN)
-trace.Service_Account("Values taken from cell D2 Down")
-
-observations = tab.excel_ref("E2").expand(DOWN)
-dimensions = [
-    HDimConst('Period', period),
-    HDim(country, 'Country', DIRECTLY, LEFT),
-    HDim(mode, 'Mode', DIRECTLY, LEFT),
-    HDim(direction, 'Direction', DIRECTLY, LEFT),
-    HDim(service_account, 'Service Account', DIRECTLY, LEFT),
+    service_account = tab.excel_ref("D2").expand(DOWN)
+    trace.Service_Account("Values taken from cell D2 Down")
+    observations = tab.excel_ref("E2").expand(DOWN)
+   
+    dimensions = [
+        HDimConst('Period', period),
+        HDim(country, 'Country', DIRECTLY, LEFT),
+        HDim(mode, 'Mode', DIRECTLY, LEFT),
+        HDim(direction, 'Direction', DIRECTLY, LEFT),
+        HDim(service_account, 'Service Account', DIRECTLY, LEFT),
     ]
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-savepreviewhtml(tidy_sheet, fname= "tidy_sheet.html") 
-trace.store("combined_dataframe", tidy_sheet.topandas())
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)   
+    #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+    trace.with_preview(tidy_sheet)
+    trace.store("combined_dataframe", tidy_sheet.topandas())
 
-# -
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
@@ -61,7 +71,13 @@ df["Service Account"] = df["Service Account"].str.split(' ').str[0]
 tidy_exports = df[["Period", "Country", "Mode", "Direction", "Service Account", "Value"]]
 tidy_exports
 
-# Transformation of Imports file to be joined to esports transformation done above 
+#
+#
+#
+#
+#
+#
+# \|Transformation of Imports file to be joined to esports transformation done above 
 
 # +
 ""
@@ -85,13 +101,13 @@ tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 list(tabs)
 
 # +
-tab = tabs["Sheet1"]
+tab = tabs["Modes 1, 2 and 4"]
 datasetTitle = 'importsofservicesbycountrybymodesofsupply'
 columns=["Period", "Country", "Mode", "Direction", "Service Account", "Marker", "Measure Type", "Unit"]
 trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
 
-period = "year/2018" #TAKEN FROM SHEET 
-trace.Period("Hardcoded as year/2018")
+period = "year/2019" #TAKEN FROM SHEET : NOTE "2019 estimates"
+trace.Period("Hardcoded as year/2019")
 
 country = tab.excel_ref("A2").expand(DOWN)
 trace.Country("Values taken from cell A2 Down")
@@ -115,7 +131,7 @@ dimensions = [
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 trace.with_preview(tidy_sheet)
-savepreviewhtml(tidy_sheet, fname= "tidy_sheet.html") 
+#savepreviewhtml(tidy_sheet, fname= "tidy_sheet.html") 
 trace.store("combined_dataframe_imports", tidy_sheet.topandas())
 
 # -
@@ -131,13 +147,17 @@ tidy_imports = df[["Period", "Country", "Mode", "Direction", "Service Account", 
 tidy_imports
 
 tidy = pd.concat([tidy_exports, tidy_imports], ignore_index=True)
-tidy
+tidy['Marker'] = 'estimated'
+tidy['Mode'].unique()
 
 tidy["Country"] = tidy["Country"].apply(pathify)
 tidy["Direction"][tidy["Direction"] == "EX"] = "exports"
-print(tidy['Direction'].count())
-tidy = tidy.drop_duplicates()
-print(tidy['Direction'].count())
+#print(tidy['Direction'].count())
+#tidy = tidy.drop_duplicates()
+#print(tidy['Direction'].count())
+
+tidy['Direction'].unique()
+tidy
 
 # +
 description = f"""
@@ -153,46 +173,16 @@ To increase the information available to users on how UK trade in services is co
 See report and methodology here:
 https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/modesofsupplyukexperimentalestimates/latest
 
-
 """
 
 comment = "Country breakdown of trade in services values by mode of supply (imports/exports) for 2018. Countries include only total services data, while regions include top-level extended balance of payments (EBOPs) breakdown."
-
-# +
-csvName = 'observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / csvName, index = False)
-
 scraper.dataset.family = 'trade'
 scraper.dataset.description = description
 scraper.dataset.comment = comment
 scraper.dataset.title = 'Imports and Exports of services by country, by modes of supply'
 
-dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name) + '/pcn').lower()
-scraper.set_base_uri('http://gss-data.org.uk')
-scraper.set_dataset_id(dataset_path)
-
-csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / csvName)
-csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-csvw_transform.write(out / f'{csvName}-metadata.json')
-
-with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-
-# +
-""
-#changing landing page back to Exports URL
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("URL: ", data["landingPage"] )
-    data["landingPage"] = "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply" 
-    print("URL changed to: ", data["landingPage"] )
-
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
 # -
 
-trace.render()
+cubes.add_cube(scraper, tidy.drop_duplicates(), "ons-uk-total-trade")
+cubes.output_all()
+trace.render("spec_v1.html")

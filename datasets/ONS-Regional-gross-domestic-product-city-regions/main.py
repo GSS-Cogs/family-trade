@@ -4,8 +4,12 @@ import json
 import numpy as np 
 from urllib.parse import urljoin
 
+
+cubes = Cubes("info.json")
 trace = TransformTrace()
 df = pd.DataFrame()
+out = Path('out')
+out.mkdir(exist_ok=True)
 # -
 
 info = json.load(open('info.json')) 
@@ -346,35 +350,22 @@ with open("info.json", "r") as read_file:
     data["transform"]["columns"]["Value"]["datatype"] = "integer"
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
+# +
 #Join 1 : Measure: cp, Unit: gbp-million, Datatype: integer, dataset_path: dataset_path + /cp
 join_1_df = join_1_df[["Year", "Area Type", 'Area Name', "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 0
     csvName = fn[i]
-    out = Path('out')
-    out.mkdir(exist_ok=True)
-    join_1_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_1_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-    
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
     scraper.dataset.comment = co[i]
     scraper.dataset.title = ti[i]
 
-    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + pa[i]
-    scraper.set_base_uri('http://gss-data.org.uk')
-    scraper.set_dataset_id(dataset_path)
+    cubes.add_cube(scraper, join_1_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
 
-    csvw_transform = CSVWMapping()
-    csvw_transform.set_csv(out / csvName)
-    csvw_transform.set_mapping(data)
-    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-    csvw_transform.write(out / f'{csvName}-metadata.json')
-
-    with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-        metadata.write(scraper.generate_trig())
 except Exception as s:
     print(str(s))
+# -
 
 ""
 #changing measure to count, unit to persons and value dtype to integer for join2 output 
@@ -392,35 +383,22 @@ with open("info.json", "r") as read_file:
     data["transform"]["columns"]["Value"]["datatype"] = "integer"
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
+# +
 #Join 2 Measure: count, Unit: persons, Datatype: integer, dataset_path: dataset_path + /pop
 join_2_df = join_2_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 1
     csvName = fn[i]
-    out = Path('out')
-    out.mkdir(exist_ok=True)
-    join_2_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_2_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-    
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
     scraper.dataset.comment = co[i]
     scraper.dataset.title = ti[i]
 
-    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + pa[i]
-    scraper.set_base_uri('http://gss-data.org.uk')
-    scraper.set_dataset_id(dataset_path)
+    cubes.add_cube(scraper, join_2_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
 
-    csvw_transform = CSVWMapping()
-    csvw_transform.set_csv(out / csvName)
-    csvw_transform.set_mapping(data)
-    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-    csvw_transform.write(out / f'{csvName}-metadata.json')
-
-    with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-        metadata.write(scraper.generate_trig())
 except Exception as s:
     print(str(s))
+# -
 
 ""
 #changing measure to cmp, unit to gbp and value dtype to integer for join3 output 
@@ -438,35 +416,22 @@ with open("info.json", "r") as read_file:
     data["transform"]["columns"]["Value"]["datatype"] = "integer"
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
+# +
 #Join 3 : Measure: amp, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cmp
 join_3_df = join_3_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 2
     csvName = fn[i]
-    out = Path('out')
-    out.mkdir(exist_ok=True)
-    join_3_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_3_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-    
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
     scraper.dataset.comment = co[i]
     scraper.dataset.title = ti[i]
 
-    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + pa[i]
-    scraper.set_base_uri('http://gss-data.org.uk')
-    scraper.set_dataset_id(dataset_path)
+    cubes.add_cube(scraper, join_3_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
 
-    csvw_transform = CSVWMapping()
-    csvw_transform.set_csv(out / csvName)
-    csvw_transform.set_mapping(data)
-    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-    csvw_transform.write(out / f'{csvName}-metadata.json')
-
-    with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-        metadata.write(scraper.generate_trig())
 except Exception as s:
     print(str(s))
+# -
 
 ""
 #changing measure to gva, unit to deflators and value dtype to double for join4 output 
@@ -491,28 +456,13 @@ join_4_df = join_4_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "V
 try:
     i = 3
     csvName = fn[i]
-    out = Path('out')
-    out.mkdir(exist_ok=True)
-    join_4_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_4_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-    
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
     scraper.dataset.comment = co[i]
     scraper.dataset.title = ti[i]
 
-    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + pa[i]
-    scraper.set_base_uri('http://gss-data.org.uk')
-    scraper.set_dataset_id(dataset_path)
+    cubes.add_cube(scraper, join_4_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
 
-    csvw_transform = CSVWMapping()
-    csvw_transform.set_csv(out / csvName)
-    csvw_transform.set_mapping(data)
-    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-    csvw_transform.write(out / f'{csvName}-metadata.json')
-
-    with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-        metadata.write(scraper.generate_trig())
 except Exception as s:
     print(str(s))
 # -
@@ -540,28 +490,13 @@ join_5_df = join_5_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "V
 try:
     i = 4
     csvName = fn[i]
-    out = Path('out')
-    out.mkdir(exist_ok=True)
-    join_5_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_5_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-    
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
     scraper.dataset.comment = co[i]
     scraper.dataset.title = ti[i]
 
-    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + pa[i]
-    scraper.set_base_uri('http://gss-data.org.uk')
-    scraper.set_dataset_id(dataset_path)
+    cubes.add_cube(scraper, join_5_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
 
-    csvw_transform = CSVWMapping()
-    csvw_transform.set_csv(out / csvName)
-    csvw_transform.set_mapping(data)
-    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-    csvw_transform.write(out / f'{csvName}-metadata.json')
-
-    with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-        metadata.write(scraper.generate_trig())
 except Exception as s:
     print(str(s))
 # -
@@ -589,28 +524,13 @@ join_6_df = join_6_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "V
 try:
     i = 5
     csvName = fn[i]
-    out = Path('out')
-    out.mkdir(exist_ok=True)
-    join_6_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_6_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-    
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
     scraper.dataset.comment = co[i]
     scraper.dataset.title = ti[i]
 
-    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + pa[i]
-    scraper.set_base_uri('http://gss-data.org.uk')
-    scraper.set_dataset_id(dataset_path)
+    cubes.add_cube(scraper, join_6_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
 
-    csvw_transform = CSVWMapping()
-    csvw_transform.set_csv(out / csvName)
-    csvw_transform.set_mapping(data)
-    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-    csvw_transform.write(out / f'{csvName}-metadata.json')
-
-    with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-        metadata.write(scraper.generate_trig())
 except Exception as s:
     print(str(s))
 # -
@@ -638,28 +558,13 @@ join_7_df = join_7_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "V
 try:
     i = 6
     csvName = fn[i]
-    out = Path('out')
-    out.mkdir(exist_ok=True)
-    join_7_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_7_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-    
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
     scraper.dataset.comment = co[i]
     scraper.dataset.title = ti[i]
 
-    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + pa[i]
-    scraper.set_base_uri('http://gss-data.org.uk')
-    scraper.set_dataset_id(dataset_path)
+    cubes.add_cube(scraper, join_7_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
 
-    csvw_transform = CSVWMapping()
-    csvw_transform.set_csv(out / csvName)
-    csvw_transform.set_mapping(data)
-    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-    csvw_transform.write(out / f'{csvName}-metadata.json')
-
-    with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-        metadata.write(scraper.generate_trig())
 except Exception as s:
     print(str(s))
 # -
@@ -687,30 +592,18 @@ join_8_df = join_8_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "V
 try:
     i = 7
     csvName = fn[i]
-    out = Path('out')
-    out.mkdir(exist_ok=True)
-    join_8_df.drop_duplicates().to_csv(out / csvName, index = False)
-    #join_8_df.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-    
     scraper.dataset.family = 'trade'
     scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
     scraper.dataset.comment = co[i]
     scraper.dataset.title = ti[i]
 
-    dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + pa[i]
-    scraper.set_base_uri('http://gss-data.org.uk')
-    scraper.set_dataset_id(dataset_path)
+    cubes.add_cube(scraper, join_8_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
 
-    csvw_transform = CSVWMapping()
-    csvw_transform.set_csv(out / csvName)
-    csvw_transform.set_mapping(data)
-    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-    csvw_transform.write(out / f'{csvName}-metadata.json')
-
-    with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-        metadata.write(scraper.generate_trig())
 except Exception as s:
     print(str(s))
+# -
+
+cubes.output_all()
 
 # +
 ""
