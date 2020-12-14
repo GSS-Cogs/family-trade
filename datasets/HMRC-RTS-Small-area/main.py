@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -6,26 +7,31 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
 
+# cd /workspace/family-trade/datasets/HMRC-RTS-Small-area/
+
 # +
 from gssutils import *
 import json
 
-scraper = Scraper(json.load(open('info.json'))['landingPage'])
-scraper
+info = json.load(open('info.json'))
+scraper = Scraper(seed='info.json')  
+cubes = Cubes('info.json')
+scraper 
 # -
 
-scraper.select_dataset(latest=True)
-scraper
+tabs = {tab.name: tab for tab in scraper.catalog.dataset[0].distribution[1].as_databaker()}
+# tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType=Excel).as_databaker()}
+# excel_distro_list = [x for x in scraper.catalog.dataset[0].distribution if x.mediaType == ExcelOpenXML]
+# excel_distro_list = [x for x in scraper.catalog.dataset[0].distribution if x.mediaType == Excel]
 
-tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
-#tabs.keys()
+excel_distro_list = [x for x in scraper.catalog.dataset[0].distribution if x.mediaType == Excel]
 
 year_cell = tabs['Title'].filter('Detailed Data Tables').shift(UP)
 year_cell.assert_one()
@@ -66,19 +72,10 @@ table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
-out = Path('out')
-out.mkdir(exist_ok=True)
-table.to_csv(out / 'observations.csv', index = False)
+cubes.add_cube(scraper, table, info['title'])
+scraper.dataset.family = info['families']
+scraper.catalog.dataset[0].family = info['families']
 
-# +
-from gssutils.metadata import THEME
-scraper.dataset.family = 'Trade'
-scraper.dataset.theme = THEME['business-industry-trade-energy']
+cubes.output_all()
 
-with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
-# -
 
