@@ -21,40 +21,51 @@ import json
 
 info = json.load(open("info.json"))
 scraper = Scraper(seed="info.json")
-scraper
 trace = TransformTrace()
+scraper
 # -
 
 tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType=Excel).as_databaker()}
 
 tab = tabs['Time Series']
 
+datasetTitle = 'UK trade in services by partner country'
+columns=["Period", "Flow", "Trade Services", "ONS Partner Geography", "Marker", "Seasonal Adjustment"]
+trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
+
 observations = tab.excel_ref("F2").expand(RIGHT).expand(DOWN).is_not_blank()
 
-Period = tab.excel_ref("F1").expand(RIGHT).is_not_blank()
+period = tab.excel_ref("F1").expand(RIGHT).is_not_blank()
+trace.Period("Values taken from cell ref F1 across. Contains Year and Quarter values")
 
-Flow = tab.excel_ref("A2").expand(DOWN).is_not_blank()
+flow = tab.excel_ref("A2").expand(DOWN).is_not_blank()
+trace.Flow("Values taken from cell ref A2 across. Contains exports or imports")
 
-Trade_Services = tab.excel_ref("B2").expand(DOWN).is_not_blank()
+trade_services = tab.excel_ref("B2").expand(DOWN).is_not_blank()
+trace.Trade_Services("Values taken from cell ref B2 across")
 
-Ons_Partner_Geography = tab.excel_ref("D2").expand(DOWN).is_not_blank()
+ons_partner_geography = tab.excel_ref("D2").expand(DOWN).is_not_blank()
+trace.ONS_Partner_Geography("Values taken from cell ref D2 down")
 
 dimensions =[
-    HDim(Period, 'Period', DIRECTLY, ABOVE),
-    HDim(Flow, 'Flow', DIRECTLY, LEFT),
-    HDim(Trade_Services, 'Trade_Services', DIRECTLY, LEFT),
-    HDim(Ons_Partner_Geography, 'Ons_Partner_Geography', DIRECTLY, LEFT),
+    HDim(period, 'Period', DIRECTLY, ABOVE),
+    HDim(flow, 'Flow', DIRECTLY, LEFT),
+    HDim(trade_services, 'Trade_Services', DIRECTLY, LEFT),
+    HDim(ons_partner_geography, 'Ons_Partner_Geography', DIRECTLY, LEFT),
 ]
 
 c1 = ConversionSegment(tab, dimensions, observations)
 # savepreviewhtml(c1, "PREVIEW.html")
-new_table = c1.topandas()
+trace.with_preview(c1)
+trace.store("combined_dataframe", c1.topandas())
 
+new_table = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 new_table.rename(columns = {'OBS':'Value', 'DATAMARKER':'Marker'},inplace = True)
 
 new_table['Value'] = pd.to_numeric(new_table['Value'], errors = 'coerce')
 
 new_table = new_table.replace({'Marker' : {'-' : 'itis-nil', '..' : 'disclosive'}})
+trace.Marker("Replcaing - to mean itis-nil and .. to mean disclosive")
 
 
 # +
@@ -74,10 +85,12 @@ def date_time (date):
 
 new_table['Period'] = new_table['Period'].astype(str).replace('\.', '', regex=True)
 new_table['Period'] =  new_table["Period"].apply(date_time)
+trace.Period("Formating to be year/0000 and quarter/2019-01 ")
 # -
 
 new_table['Flow'] = new_table['Flow'].map(lambda s: s.lower().strip())
 
 new_table['Seasonal Adjustment'] =  'NSA'
+trace.Seasonal_Adjustment("Adding in column Seasonal Adjustment with value NSA")
 
-
+trace.render()
