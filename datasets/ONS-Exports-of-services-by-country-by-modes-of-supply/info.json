@@ -2,7 +2,7 @@
     "title": "Exports of services by country, by modes of supply",
     "publisher": "Office for National Statistics",
     "description": "Country breakdown of trade in services values by mode of supply (exports) for 2018. Countries include only total services data, while regions include top-level extended balance of payments (EBOPs) breakdown.",
-    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply",
     "datasetNotes": [
         "On landing page scroll to latest version "
     ],
@@ -28,7 +28,7 @@
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "value": "http://gss-data.org.uk/def/concept/markers/{marker}"
             },
             "Direction": {
                 "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
@@ -49,29 +49,64 @@
                 "parent": "http://gss-data.org.uk/def/concept-scheme/ons-service-account",
                 "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}",
                 "description": ""
-            },
-            "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/markers/{marker}"
             }
         },
         "transformStage": [
             {
                 "source_name": "exportsofservicesbycountrybymodesofsupply",
-                "identifier": "exportsofservicesbycountrybymodesofsupply||Sheet1||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx",
+                "identifier": "exportsofservicesbycountrybymodesofsupply||Index||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx",
                 "source": [
                     {
-                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx": ""
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx": ""
                     }
                 ],
-                "title": "Sheet1",
-                "preview": "documentation/previews/01e8e639-7f62-4ced-92ad-522312f55071.html",
+                "title": "Index",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": []
+                    },
+                    {
+                        "Country": []
+                    },
+                    {
+                        "Mode": []
+                    },
+                    {
+                        "Direction": []
+                    },
+                    {
+                        "Service_Account": []
+                    },
+                    {
+                        "Marker": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            },
+            {
+                "source_name": "exportsofservicesbycountrybymodesofsupply",
+                "identifier": "exportsofservicesbycountrybymodesofsupply||Modes 1, 2 and 4||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx": ""
+                    }
+                ],
+                "title": "Modes 1, 2 and 4",
+                "preview": "documentation/previews/f23f02a4-7f41-460f-a01d-27ec31cbb6b9.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
                     {
                         "Period": [
-                            "Hardcoded as year/2018",
+                            "Hardcoded as year/2019, note these are estimates",
                             "Added to dataframe 'combined_dataframe'"
                         ]
                     },
@@ -118,10 +153,73 @@
             },
             {
                 "source_name": "exportsofservicesbycountrybymodesofsupply",
-                "identifier": "exportsofservicesbycountrybymodesofsupply||combined_dataframe||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx : Sheet1",
+                "identifier": "exportsofservicesbycountrybymodesofsupply||Mode 3||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx",
                 "source": [
                     {
-                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/modesofsupplyexports.xlsx": "Sheet1"
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx": ""
+                    }
+                ],
+                "title": "Mode 3",
+                "preview": "documentation/previews/9cb975d1-c061-488d-b922-8e2901b4ff70.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Period": [
+                            "Hardcoded as year/2019, note these are estimates",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Country": [
+                            "Values taken from cell A2 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Mode": [
+                            "Values taken from cell B2 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Direction": [
+                            "Values taken from cell C2 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Service_Account": [
+                            "Values taken from cell D2 Down",
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Marker": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Added to dataframe 'combined_dataframe'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "exportsofservicesbycountrybymodesofsupply",
+                "identifier": "exportsofservicesbycountrybymodesofsupply||combined_dataframe||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx : Modes 1, 2 and 4https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx : Mode 3",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx": "Modes 1, 2 and 4"
+                    },
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/exportsofservicesbycountrybymodesofsupply/current/mosexports2019.xlsx": "Mode 3"
                     }
                 ],
                 "title": "combined_dataframe",
@@ -157,20 +255,20 @@
             },
             {
                 "source_name": "importsofservicesbycountrybymodesofsupply",
-                "identifier": "importsofservicesbycountrybymodesofsupply||Sheet1||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/modesofsupplyimports.xlsx",
+                "identifier": "importsofservicesbycountrybymodesofsupply||Modes 1, 2 and 4||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/mosimports2019.xlsx",
                 "source": [
                     {
-                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/modesofsupplyimports.xlsx": ""
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/mosimports2019.xlsx": ""
                     }
                 ],
-                "title": "Sheet1",
-                "preview": "documentation/previews/f47314d8-7bd6-4490-9317-295eff04c648.html",
+                "title": "Modes 1, 2 and 4",
+                "preview": "documentation/previews/dd464d21-d2a4-411d-ab05-f99a85a91ee5.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
                     {
                         "Period": [
-                            "Hardcoded as year/2018",
+                            "Hardcoded as year/2019",
                             "Added to dataframe 'combined_dataframe_imports'"
                         ]
                     },
@@ -217,10 +315,10 @@
             },
             {
                 "source_name": "importsofservicesbycountrybymodesofsupply",
-                "identifier": "importsofservicesbycountrybymodesofsupply||combined_dataframe_imports||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/modesofsupplyimports.xlsx : Sheet1",
+                "identifier": "importsofservicesbycountrybymodesofsupply||combined_dataframe_imports||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/mosimports2019.xlsx : Modes 1, 2 and 4",
                 "source": [
                     {
-                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/modesofsupplyimports.xlsx": "Sheet1"
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/mosimports2019.xlsx": "Modes 1, 2 and 4"
                     }
                 ],
                 "title": "combined_dataframe_imports",

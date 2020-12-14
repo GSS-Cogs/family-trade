@@ -147,7 +147,7 @@ tidy_imports = df[["Period", "Country", "Mode", "Direction", "Service Account", 
 tidy_imports
 
 tidy = pd.concat([tidy_exports, tidy_imports], ignore_index=True)
-tidy['Marker'] = 'estimated'
+tidy['Marker'] = 'e'
 tidy['Mode'].unique()
 
 tidy["Country"] = tidy["Country"].apply(pathify)
