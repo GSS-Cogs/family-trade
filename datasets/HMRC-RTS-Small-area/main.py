@@ -14,8 +14,6 @@
 #     name: python3
 # ---
 
-# cd /workspace/family-trade/datasets/HMRC-RTS-Small-area/
-
 # +
 from gssutils import *
 import json
