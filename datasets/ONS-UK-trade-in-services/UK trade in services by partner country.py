@@ -25,56 +25,55 @@ scraper
 trace = TransformTrace()
 # -
 
-dist = scraper.distribution(latest=True, mediaType = Excel)
-tab = dist.as_pandas(name = "Time Series")
-tab
+tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType=Excel).as_databaker()}
 
-datasetTitle = "Trade in service by partner country"
-columns = ['Flow', 'Trade Services', 'ONS Partner Geography']
-trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
+tab = tabs['Time Series']
 
-#tab.rename(columns=tab.iloc[0], inplace=True)
-tab = tab.iloc[0:, :]
-tab = tab.drop(tab.columns[[2,4]], axis = 1)
-tab
+observations = tab.excel_ref("F2").expand(RIGHT).expand(DOWN).is_not_blank()
 
-tab.columns.values[0] = 'Flow'
-tab.columns.values[1] = 'Trade Services'
-tab.columns.values[2] = 'ONS Partner Geography'
+Period = tab.excel_ref("F1").expand(RIGHT).is_not_blank()
 
-new_table = pd.melt(tab, id_vars=['Flow','Trade Services','ONS Partner Geography'], var_name='Period', value_name='Value')
+Flow = tab.excel_ref("A2").expand(DOWN).is_not_blank()
 
-new_table['Period'] = new_table['Period'].astype(str)
+Trade_Services = tab.excel_ref("B2").expand(DOWN).is_not_blank()
+
+Ons_Partner_Geography = tab.excel_ref("D2").expand(DOWN).is_not_blank()
+
+dimensions =[
+    HDim(Period, 'Period', DIRECTLY, ABOVE),
+    HDim(Flow, 'Flow', DIRECTLY, LEFT),
+    HDim(Trade_Services, 'Trade_Services', DIRECTLY, LEFT),
+    HDim(Ons_Partner_Geography, 'Ons_Partner_Geography', DIRECTLY, LEFT),
+]
+
+c1 = ConversionSegment(tab, dimensions, observations)
+# savepreviewhtml(c1, "PREVIEW.html")
+new_table = c1.topandas()
+
+new_table.rename(columns = {'OBS':'Value', 'DATAMARKER':'Marker'},inplace = True)
+
+new_table['Value'] = pd.to_numeric(new_table['Value'], errors = 'coerce')
+
+new_table = new_table.replace({'Marker' : {'-' : 'itis-nil', '..' : 'disclosive'}})
+
 
 # +
-import re
-YEAR_RE = re.compile(r'[0-9]{4}')
-YEAR_MONTH_RE = re.compile(r'([0-9]{4})\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)')
-YEAR_QUARTER_RE = re.compile(r'([0-9]{4})(Q[1-4])')
-
-class Re(object):
-  def __init__(self):
-    self.last_match = None
-  def fullmatch(self,pattern,text):
-    self.last_match = re.fullmatch(pattern,text)
-    return self.last_match
-
-def time2period(t):
-    gre = Re()
-    if gre.fullmatch(YEAR_RE, t):
-        return f"year/{t}"
-    elif gre.fullmatch(YEAR_MONTH_RE, t):
-        year, month = gre.last_match.groups()
-        month_num = {'JAN': '01', 'FEB': '02', 'MAR': '03', 'APR': '04', 'MAY': '05', 'JUN': '06',
-                     'JUL': '07', 'AUG': '08', 'SEP': '09', 'OCT': '10', 'NOV': '11', 'DEC': '12'}.get(month)
-        return f"month/{year}-{month_num}"
-    elif gre.fullmatch(YEAR_QUARTER_RE, t):
-        year, quarter = gre.last_match.groups()
-        return f"quarter/{year}-{quarter}"
+def left(s, amount):
+    return s[:amount]
+def right(s, amount):
+    return s[-amount:]
+def date_time (date):
+    if len(date)  == 5:
+        return 'year/' + left(date, 4)
+    #year/2019
+    elif len(date) == 6:
+        return 'quarter/' + left(date,4) + '-' + right(date,2)
+    #quarter/2019-01
     else:
-        print(f"no match for {t}")
+        return date
 
-new_table['Period'] = new_table['Period'].apply(time2period)
+new_table['Period'] = new_table['Period'].astype(str).replace('\.', '', regex=True)
+new_table['Period'] =  new_table["Period"].apply(date_time)
 # -
 
 new_table['Flow'] = new_table['Flow'].map(lambda s: s.lower().strip())
@@ -82,36 +81,3 @@ new_table['Flow'] = new_table['Flow'].map(lambda s: s.lower().strip())
 new_table['Seasonal Adjustment'] =  'NSA'
 
 
-# +
-def user_perc(x):
-    
-    if (str(x) ==  '-') : 
-        return 'itis-nil'
-    elif ((str(x) == '..')):
-        return 'disclosive'
-    else:
-        return None
-    
-new_table['Marker'] = new_table.apply(lambda row: user_perc(row['Value']), axis = 1)
-# -
-
-new_table['Value'] = pd.to_numeric(new_table['Value'], errors = 'coerce')
-
-new_table = new_table[['ONS Partner Geography', 'Period','Flow','Trade Services', 'Seasonal Adjustment','Value','Marker' ]]
-
-# +
-indexNames = new_table.loc[ new_table['Trade Services'].str.contains('NaN', na=True)].index
-new_table.drop(indexNames, inplace = True)
-
-#The 27 April 2020 release added Trade Services which dont have Type codes. This causes duplicates as all the various Services without numbers are classed as the same service.
-#This will need further investigation upon review. I did look to see if the most recent pink book publications had any reference to them but I coulnd't find antyhing.
-# -
-
-new_table.rename(columns={'ONS Partner Geography':'CORD Geography',
-                          'Flow':'Flow Directions'}, 
-                 inplace=True)
-# new_table.drop(['ONS Partner Geography', 'Flow'], axis = 1, inplace = True)
-#ONS Partner geography has been changed since certain codes are missing from Vademecum codelist that it points to, CORD codelists are editable by us
-#Flow has been changed to Flow Direction to differentiate from Migration flow dimension - I believe
-
-new_table
