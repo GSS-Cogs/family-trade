@@ -84,18 +84,21 @@ df["Marker"] = " "
 
 # Duplicated observations of different countries in 
 
-df = df.loc[new_table['ONS_Partner_Geography'].isin(['AD','AE','AF','AG','AI','AM','AO','AQ','AS','AW','AZ','BA','BB','BD','BF',	
-                                                                'BH','BI','BJ','BM','BN','BO','BQ','BS','BT','BV','BW','BZ','CC','CD','CF',
-                                                                'CG','CI','CK','CM','CR','CU','CV','CW','CX','D5','DJ','DM','DO','DZ','EC',
-                                                                'ER','ET','FJ','FK','FM','FO','GA','GD','GE','GG','GH','GI','GL','GM','GN',
-                                                                'GQ','GS','GT','GU','GW','GY','HM','HN','HT','IM','IO','IQ','JE','JM','JO',
-                                                                'KE','KG','KH','KI','KM','KN','KP','KW','KY','KZ','LA',	'LB','LC','LK','LR',
-                                                                'LS','LY','MD','MG','MH','MK','ML','MM','MN','MO','MP','MR','MS','MU','MV',
-                                                                'MW','MZ','NA','NC','NE','NF','NG','NI','NP','NR','NU','OM','PA','PE','PF',
-                                                                'PG','PN','PS','PW','PY','QA','RW','SB','SC','SD','SH','SL','SM','SN','SO',
-                                                                'SR','SS','ST','SV','SX','SY','SZ','TC','TD','TF','TG','TJ','TK','TL','TM',
-                                                                'TN','TO','TT','TV','TZ','UG','UM','UZ','VA','VC','VG','VI','VN','VU','WF',
-                                                                'WS','XK','YE','ZM','ZW'])]
+# +
+# NOT SURE IF THIS CODE IS REQUIRED
+# df = df.loc[new_table['ONS_Partner_Geography'].isin(['AD','AE','AF','AG','AI','AM','AO','AQ','AS','AW','AZ','BA','BB','BD','BF',	
+#                                                                 'BH','BI','BJ','BM','BN','BO','BQ','BS','BT','BV','BW','BZ','CC','CD','CF',
+#                                                                 'CG','CI','CK','CM','CR','CU','CV','CW','CX','D5','DJ','DM','DO','DZ','EC',
+#                                                                 'ER','ET','FJ','FK','FM','FO','GA','GD','GE','GG','GH','GI','GL','GM','GN',
+#                                                                 'GQ','GS','GT','GU','GW','GY','HM','HN','HT','IM','IO','IQ','JE','JM','JO',
+#                                                                 'KE','KG','KH','KI','KM','KN','KP','KW','KY','KZ','LA',	'LB','LC','LK','LR',
+#                                                                 'LS','LY','MD','MG','MH','MK','ML','MM','MN','MO','MP','MR','MS','MU','MV',
+#                                                                 'MW','MZ','NA','NC','NE','NF','NG','NI','NP','NR','NU','OM','PA','PE','PF',
+#                                                                 'PG','PN','PS','PW','PY','QA','RW','SB','SC','SD','SH','SL','SM','SN','SO',
+#                                                                 'SR','SS','ST','SV','SX','SY','SZ','TC','TD','TF','TG','TJ','TK','TL','TM',
+#                                                                 'TN','TO','TT','TV','TZ','UG','UM','UZ','VA','VC','VG','VI','VN','VU','WF',
+#                                                                 'WS','XK','YE','ZM','ZW'])]
+# -
 
 # trace.df("Defining the order of Columns")
 df = df[['ONS_Partner_Geography', 'Year','Flow','Trade Services', 'Seasonal Adjustment', 'Value', 'Marker' ]]
@@ -111,5 +114,3 @@ df.rename(columns={'ONS Partner Geography':'CORD Geography',
 # -
 
 trace.render()
-
-df
