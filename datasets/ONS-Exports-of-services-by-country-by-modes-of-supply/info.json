@@ -49,6 +49,10 @@
                 "parent": "http://gss-data.org.uk/def/concept-scheme/ons-service-account",
                 "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}",
                 "description": ""
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             }
         },
         "transformStage": [

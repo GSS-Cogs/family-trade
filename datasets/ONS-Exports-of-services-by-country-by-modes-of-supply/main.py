@@ -152,9 +152,6 @@ tidy['Mode'].unique()
 
 tidy["Country"] = tidy["Country"].apply(pathify)
 tidy["Direction"][tidy["Direction"] == "EX"] = "exports"
-#print(tidy['Direction'].count())
-#tidy = tidy.drop_duplicates()
-#print(tidy['Direction'].count())
 
 tidy['Direction'].unique()
 tidy
