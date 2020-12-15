@@ -28,7 +28,7 @@
             },
             "Marker": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/markers/{marker}"
+                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
             },
             "Direction": {
                 "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
