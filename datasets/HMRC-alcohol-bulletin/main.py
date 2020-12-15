@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.5.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -21,7 +21,7 @@ import pandas as pd
 scraper = Scraper("https://www.gov.uk/government/statistics/alcohol-bulletin")
 scraper
 
-dist = scraper.distributions[1]
+dist = scraper.distribution(title=lambda x: x.startswith('Alcohol Bulletin tables'), mediaType=ODS)
 tabs = (t for t in dist.as_databaker())
 dist
 
