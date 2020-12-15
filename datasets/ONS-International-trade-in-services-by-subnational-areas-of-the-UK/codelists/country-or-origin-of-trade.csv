@@ -1,0 +1,4 @@
+Label,Notation,Parent Notation,Sort Priority
+Total,total,"",1
+EU,eu,total,2
+Rest of World,rest-of-world,total,3

@@ -25,7 +25,7 @@
                 "value": "http://reference.data.gov.uk/id/year/{period}"
             },
             "Travel": {
-                "label": "Travel",
+                "label": "Includes Travel",
                 "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/includes-travel/{travel}"
             },
             "Location": {
@@ -34,11 +34,16 @@
             },
             "Industry Grouping": {
                 "label": "Industry Grouping",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/industry-grouping/{industry-grouping}"
+                "source": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/internationaltradeinservicesbysubnationalareasoftheuk/latest#appendix-a-industry-groups",
+                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/industry-groupings/{industry-grouping}"
             },
             "Country or Origin of Trade": {
                 "label": "Country or Origin of Trade",
                 "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/country-or-origin-of-trade/{country-or-origin-of-trade}"
+            },
+            "Flow": {
+                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "description": "Balance refers to the trade balance between exports and imports, calculated using exports minus imports. A positive figure indicates a trade surplus and a negative figure indicates a trade deficit."
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
@@ -46,7 +51,7 @@
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/imports"
+                "measure": "http://gss-data.org.uk/def/measure/trade"
             }
 
         }

@@ -1,5 +1,7 @@
 # ONS International Trade in Services by Subnational Areas of the UK
 
+Very important related document with appendicies: https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/internationaltradeinservicesbysubnationalareasoftheuk/latest
+
 Initial Notes:
 
 * The only key relevant sheets are
@@ -13,6 +15,15 @@ WATCH OUT FOR includes/excludes travel sheets!
 
 * NUTS1 code => Includes travel
 * Anything else => Excludes travel
+
+### SIC07 Codes
+
+`The categories shown above are based upon UK Standard Industrial Classification 2007 (SIC07) sections`.
+
+TODO: USe SIC07 URIs with out code mapping! <http://business.data.gov.uk/companies/def/sic-2007/>
+
+Top categories: 
+sic:S , sic:F , sic:N , sic:D , sic:I , sic:L , sic:K , sic:C , sic:Q , sic:R , sic:99999 , sic:U , sic:H , sic:A , sic:J , sic:B , sic:P , sic:G , sic:O , sic:E , sic:T , sic:M .
 
 ## Footnotes
 
@@ -71,16 +82,19 @@ TODO: Should be in seperate datasets?
 * Add `Marker` column and set to `` if the value cell is `..`.
 * Remove the `Measure Type` and `Unit` column and the untitled row number column (first one).
 * Add a column called `Travel` column.
-  * If the `NUTS Level` is `NUTS1` then the value of `Travel` is the `Travel Included` mapped to the code-list identifier.
-  * Otherwise set the value of `Travel` to `Travel Not Included` mapped to the code-list identifier.
+  * If the `NUTS Level` is `NUTS1` then the value of `Travel` is the `includes-travel`.
+  * Otherwise set the value of `Travel` to `includes-travel`.
 * Remove `NUTS Level` column.
 * Add new column `Location`.
   * Where a row has a valid `NUTS Code` value (i.e. not `N/A`), then populate `Location` with `http://data.europa.eu/nuts/code/{NUTS Code}` - making sure to replace the NUTS code with the value from the appropriate column.
   * Where a row does *not* have a valid `NUTS Code`, and the `NUTS Area Name` column is `United Kingdom` then populate the `Location` with `http://data.europa.eu/nuts/code/UK`.
-  * Else the row represents a City. Populate `Location` with appropirate E47 combined authorities geography URI, e.g. `http://statistics.data.gov.uk/id/statistical-geography/E47000008`. N.B. you must ensure the WHOLE URI is present in the cell.
+  * Else the row represents a City. Populate `Location` with appropirate E47 combined authorities or W42 City Region geography URI, e.g. `http://statistics.data.gov.uk/id/statistical-geography/E47000008`. N.B. you must ensure the WHOLE URI is present in the cell.
+    * Anything with 'combined authority' in the name should be E47 (you may need to remove 'combined authority' to do the name matching)
+    * Most others should be W42. N.B. Some with 'city region' in them are actually combined authorities.
+    * Greater London Authority - `http://statistics.data.gov.uk/id/statistical-geography/E61000001`
+    * Inner/Outer London are E13 codes.
+    * `Sheffield City Region, Inner London, Outer London and the Greater London Authority are not legally classified as Combined Authorities. However, they have been included as they are defined geographic boundaries headed by a Mayor for the purposes of this analysis.`
 * Now remove the `NUTS Code`, `NUTS Area Name` and `NUTS Area Name` columns.
-* Ensure that `Value` is an integer.
-* Map `Industry Grouping`, `Country or Origin of Trade` and `Direction of Trade` to local codelists.
+* Map `Industry Grouping`, `Country or Origin of Trade` to local codelists.
+* Rename `Direction of Trade` to `Flow` and map to the `Flow` codelist [`imports`, `exports`, `balance`].
 * Rename `Year` column to `Period`.
-* Split the dataset on the `Direction of Trade`, i.e. one dataset for `Imports`, another for `Exports` and another for `Balance`.
-* Remove the `Direction of Trade` column from the individual datasets.

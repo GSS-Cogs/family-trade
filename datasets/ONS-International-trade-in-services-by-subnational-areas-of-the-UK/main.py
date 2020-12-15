@@ -13,7 +13,7 @@
 #     name: python3
 # ---
 
-from gssutils import * 
+from gssutils import *
 import json
 import math
 
@@ -621,6 +621,11 @@ trace.render()
 
 tidied = df[["Year", "NUTS Level", "NUTS Code", "NUTS Area Name", "Industry Grouping", "Country or Origin of Trade", "Direction of Trade", "Measure Type", "Unit", "Value"]]
 tidied_sheets.append(tidied)
+
+i = 1
+for sheet in tidied_sheets:
+    sheet.to_csv(f"{i}.csv")
+    i+=1
 
 #pd.set_option("display.max_rows", None, "display.max_columns", None)
 #tidied_sheets[9]
