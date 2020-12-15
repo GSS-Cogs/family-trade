@@ -33,6 +33,15 @@ rts = fetch_api_to_df(url='https://api.uktradeinfo.com/RTS')
 
 
 # %%
+# This data is way too big to process through, so I'll limit it to processing only the most recent MonthId
+rts = rts.loc[rts['MonthId'] == rts['MonthId'].max()]
+
+
+# %%
+rts
+
+
+# %%
 # try:
 #     rts = rts_bku.copy(deep=True)
 # except NameError:
@@ -62,7 +71,7 @@ rts.head()
 # GovRegionId
 # https://api.uktradeinfo.com/Region
 GovRegions = fetch_api_to_df(url='https://api.uktradeinfo.com/Region')
-rts = rts.merge(GovRegions, left_on='GovRegionId', right_on='RegionId')
+rts = rts.merge(GovRegions, left_on='GovRegionId', right_on='RegionId').drop(labels=['RegionId'], axis=1)
 del GovRegions
 rts.head()
 
@@ -81,7 +90,6 @@ rts.head()
 # https://api.uktradeinfo.com/SITC
 SITCs = fetch_api_to_df(url='https://api.uktradeinfo.com/SITC')
 rts = rts.merge(SITCs, left_on='CommoditySitc2Id', right_on='CommoditySitcId').drop(labels=['CommoditySitcId'], axis=1)
-del SITCs
 rts.head()
 
 
