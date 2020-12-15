@@ -26,10 +26,6 @@
                 "measure": "http://gss-data.org.uk/def/measure/current-prices",
                 "datatype": "double"
             },
-            "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
-            },
             "Direction": {
                 "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
                 "value": "http://gss-data.org.uk/def/concept/flow/{direction}",
@@ -49,6 +45,10 @@
                 "parent": "http://gss-data.org.uk/def/concept-scheme/ons-service-account",
                 "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}",
                 "description": ""
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             }
         },
         "transformStage": [
@@ -100,7 +100,7 @@
                     }
                 ],
                 "title": "Modes 1, 2 and 4",
-                "preview": "documentation/previews/f23f02a4-7f41-460f-a01d-27ec31cbb6b9.html",
+                "preview": "documentation/previews/3e45861d-956a-4309-a510-67b0d424a57b.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
@@ -160,7 +160,7 @@
                     }
                 ],
                 "title": "Mode 3",
-                "preview": "documentation/previews/9cb975d1-c061-488d-b922-8e2901b4ff70.html",
+                "preview": "documentation/previews/723c44f0-4da2-4be5-ba69-8e7f80e5dacc.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
@@ -262,7 +262,7 @@
                     }
                 ],
                 "title": "Modes 1, 2 and 4",
-                "preview": "documentation/previews/dd464d21-d2a4-411d-ab05-f99a85a91ee5.html",
+                "preview": "documentation/previews/b43cf0bd-2e0f-4dfb-ac3b-bd7dc6df40f3.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
