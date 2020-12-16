@@ -8,20 +8,28 @@
         "columns": [
           {
             "titles": "Industry Grouping",
-            "name": "grp",
+            "name": "industryGrouping",
             "required": true,
             "datatype": "string"
           },
           {
             "titles": "SIC07 Mapping",
-            "name": "sic07",
-            "required": true,
-            "datatype": "string"
+            "name": "sic07Mapping",
+            "required": true
           }
         ],
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/industry-groupings/{grp}",
+        "foreignKeys": [
+          {
+            "columnReference": "industryGrouping",
+            "reference": {
+              "resource": "industry-groupings.csv",
+              "columnReference": "notation"
+            }
+          }
+        ],
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/industry-groupings/{industryGrouping}",
         "propertyUrl": "skos:narrower",
-        "valueUrl": "http://business.data.gov.uk/companies/def/sic-2007/{sic07}"
+        "valueUrl": "http://business.data.gov.uk/companies/def/sic-2007/{sic07Mapping}"
       }
     },
     {
@@ -88,7 +96,7 @@
       "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/industry-groupings",
         "@type": "skos:ConceptScheme",
-        "rdfs:label": "GDP Estimate Type"
+        "rdfs:label": "Industry Groupings"
       }    
     }
   ]
