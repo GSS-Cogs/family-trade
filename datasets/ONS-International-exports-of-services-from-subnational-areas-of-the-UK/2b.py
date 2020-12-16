@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -20,6 +20,7 @@ from gssutils import *
 
 scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/internationalexportsofservicesfromsubnationalareasoftheuk')
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
+scraper.dataset.family = 'trade'
 # -
 
 list(tabs)
