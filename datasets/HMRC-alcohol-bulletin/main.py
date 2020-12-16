@@ -21,7 +21,7 @@ import pandas as pd
 scraper = Scraper("https://www.gov.uk/government/statistics/alcohol-bulletin")
 scraper
 
-dist = scraper.distributions[1]
+dist = scraper.distribution(title=lambda x: x.startswith('Alcohol Bulletin tables'), mediaType=ODS)
 tabs = (t for t in dist.as_databaker())
 dist
 
