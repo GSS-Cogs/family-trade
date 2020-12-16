@@ -1,4 +1,4 @@
-Label,Notation,Parent Notation,Sort Priority
-Total,total,"",1
-EU,eu,total,2
-Rest of World,rest-of-world,total,3
+Label,Notation,Parent Notation,Sort Priority,Description
+Total,total,,1,
+EU,eu,total,2,"The European Union consists of 28 member countries including the United Kingdom. For trade purposes, this includes all 27 countries other than the UK as well as the European Central Bank and European Institutions."
+Rest of World,rest-of-world,total,3,
