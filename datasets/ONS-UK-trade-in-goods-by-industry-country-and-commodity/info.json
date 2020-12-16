@@ -20,8 +20,46 @@
             "rec6SvP3d4MJ3pXYR",
             "recduvpZS53BpXU3W"
         ],
-        "main_issue": 3
+        "main_issue": 3,
+        "columns": {
+            "Year": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+year}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "double"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            },
+            "Direction": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow/{direction}",
+                "description": ""
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
+                "description": ""
+            },
+            "Industry": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry",
+                "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}",
+                "description": ""
+            },
+            "Commodity": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-commoidty",
+                "value": "http://gss-data.org.uk/def/concept/ons-commodity/{commodity}",
+                "description": ""
+            }
+        }
     },
     "sizingNotes": "",
     "notes": ""
-}
+
+        } 
+  
