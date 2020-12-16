@@ -1,89 +1,42 @@
 # ONS International Trade in Services by Subnational Areas of the UK
 
-Very important related document with appendicies: https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/internationaltradeinservicesbysubnationalareasoftheuk/latest
-
-Initial Notes:
-
-* The only key relevant sheets are
-  * `9. Tidy Format` - Contains (almost) all the information in the other sheets in a tidy format.
-  * `8. Travel` - has a breakdown by Personal/Business travel purposes
-  * `5. NUTS3, destination` - has `Percentage to/from the EU` column. But this can be derived from the existing data.
-
-## It's all NUTS
-
-WATCH OUT FOR includes/excludes travel sheets!
-
-* NUTS1 code => Includes travel
-* Anything else => Excludes travel
-
-### SIC07 Codes
-
-`The categories shown above are based upon UK Standard Industrial Classification 2007 (SIC07) sections`.
-
-TODO: USe SIC07 URIs with out code mapping! <http://business.data.gov.uk/companies/def/sic-2007/>
-
-Top categories: 
-sic:S , sic:F , sic:N , sic:D , sic:I , sic:L , sic:K , sic:C , sic:Q , sic:R , sic:99999 , sic:U , sic:H , sic:A , sic:J , sic:B , sic:P , sic:G , sic:O , sic:E , sic:T , sic:M .
+Very important related document with appendicies: <https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/internationaltradeinservicesbysubnationalareasoftheuk/latest>
 
 ## Footnotes
 
 > An error has been found in the EU and Rest of the World estimates within the International trade in services by subnational areas of the UK: 2018 dataset. Please be aware of this if using this data. We are investigating the reason for this error and will update this notice as we have more information. We apologise for any inconvenience. Please contact Isabel Rogers for more information.
 
-## Measures
-
-* Imports
-* Exports
-* Balance
-* EU Percentage (?)
-
-## Units
-
-* GBP Millions
-
-## Dimensions
-
-* Location
-* NUTS Code
-  * NUTS Codes available in RDF form here - http://nuts.geovocab.org/id/SE1.html
-* NUTS Level - TODO: remove
-* Industry Grouping - TODO: codelist
-* Country or origin of trade - TODO: codelist
-* Direction of Trade - TODO: codelist
-* Including Travel or Not (secret dimension) - TODO: codelist
-  * NUTS1 always includes travel, others always exclude travel
-* Personal or Business Travel -- TODO: codelist
-
-## Attributes
-
 * Add one to represent '..'
   * `The symbol ".." denotes values that have been suppressed for reasons of confidentiality or reliability.`
 
-## Directions for DE
+## Directions for Data Engineer
 
 * Remove all sheets except for `9. Tidy Data` and `8. Travel`.
 
 ### Travel Worksheet
 
-* Add `Marker` column and set to `` if the value cell is `..`.
+* Add `Marker` column and set to `suppressed` if the value cell is `..`.
 * Remove the `Measure Type` and `Unit` column and the untitled row number column (first one).
-* Ensure the `Value` column values are all integers, not decimals/floats/doubles/etc.
-* Add `NUTS Code` column and populate with NUTS code mapped from `NUTS1 Area` text value. Watch out because `NorthWest` is a typo, it should be `North West`.
+* Add new column `Location` with `http://data.europa.eu/nuts/code/{NUTS Code}`.
+  * You will need to map the `NUTS1 Area` to the *NUTS Code*. Watch out because `NorthWest` is a typo, it should be `North West`.
   * Now you can remove the `NUTS1 Area` column.
-* Map `Travel Type` values to local codelist identifiers.
+* Map `Travel Type` values to local codelist identifiers [`total`, `personal`, `business`].
+* Add `Includes Travel` column and set to `includes-travel`.
 * Map `Origin` values to local code list identifiers.
+* Add `Industry Grouping` column and set to `travel-related-trade`.
+* Add `Flow` column and set to `imports`.
 * Rename `Year` column to `Period`.
-
-TODO: Should be in seperate datasets?
-
-<!-- To be joined with the `Imports` data split out from the `9. Tidy Format` sheet. -->
 
 ### Tidy Format Worksheet
 
-* Add `Marker` column and set to `` if the value cell is `..`.
+* Add `Marker` column and set to `suppressed` if the value cell is `..`.
 * Remove the `Measure Type` and `Unit` column and the untitled row number column (first one).
-* Add a column called `Travel` column.
-  * If the `NUTS Level` is `NUTS1` then the value of `Travel` is the `includes-travel`.
-  * Otherwise set the value of `Travel` to `includes-travel`.
+* Add `Travel Type` column.
+  * If the `NUTS Level` is `NUTS1` *AND* the `Industry Grouping` is `Travel` - then the value of `Travel Type` should be `total`.
+  * Else the value of `Travel Type` should be `na`.
+* Add a column called `Includes Travel` column.
+  * If the `NUTS Level` is `NUTS1` then the value of `Includes Travel` is `includes-travel`.
+  * Otherwise set the value of `Travel` to `excludes-travel`.
 * Remove `NUTS Level` column.
 * Add new column `Location`.
   * Where a row has a valid `NUTS Code` value (i.e. not `N/A`), then populate `Location` with `http://data.europa.eu/nuts/code/{NUTS Code}` - making sure to replace the NUTS code with the value from the appropriate column.
@@ -95,6 +48,11 @@ TODO: Should be in seperate datasets?
     * Inner/Outer London are E13 codes.
     * `Sheffield City Region, Inner London, Outer London and the Greater London Authority are not legally classified as Combined Authorities. However, they have been included as they are defined geographic boundaries headed by a Mayor for the purposes of this analysis.`
 * Now remove the `NUTS Code`, `NUTS Area Name` and `NUTS Area Name` columns.
-* Map `Industry Grouping`, `Country or Origin of Trade` to local codelists.
+* Map `Industry Grouping` to local codelist.
+* Rename `Country or Origin of Trade` to `Origin` to local codelist.
 * Rename `Direction of Trade` to `Flow` and map to the `Flow` codelist [`imports`, `exports`, `balance`].
 * Rename `Year` column to `Period`.
+
+## Joins
+
+Join the Travel & Tidy Format outputs together.

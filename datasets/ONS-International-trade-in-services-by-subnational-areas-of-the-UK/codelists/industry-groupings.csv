@@ -1,6 +1,6 @@
 Label,Notation,Parent Notation,Sort Priority,Description
 Primary and utilities,primary-utilities,,1,
-Manufacturing,manufacturing,,2,
+Manufacturing,manufacturing,,2,"Service imports by the manufacturing industry can be directly linked to manufacturing, such as the installation of machinery, as well as other services that may be performed by manufacturers, such as 0% financing or offering extended warranties. It does not refer to the exports of manufactured goods."
 Construction ,construction,,3,
 Wholesale and motor trade,wholesale-motor-trade,,4,
 Retail (excluding motor trades),retail-excl-motor-trade,,5,
