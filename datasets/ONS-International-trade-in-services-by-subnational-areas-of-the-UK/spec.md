@@ -2,13 +2,6 @@
 
 Very important related document with appendicies: <https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/internationaltradeinservicesbysubnationalareasoftheuk/latest>
 
-## Footnotes
-
-> An error has been found in the EU and Rest of the World estimates within the International trade in services by subnational areas of the UK: 2018 dataset. Please be aware of this if using this data. We are investigating the reason for this error and will update this notice as we have more information. We apologise for any inconvenience. Please contact Isabel Rogers for more information.
-
-* Add one to represent '..'
-  * `The symbol ".." denotes values that have been suppressed for reasons of confidentiality or reliability.`
-
 ## Directions for Data Engineer
 
 * Remove all sheets except for `9. Tidy Data` and `8. Travel`.
@@ -53,6 +46,6 @@ Very important related document with appendicies: <https://www.ons.gov.uk/busine
 * Rename `Direction of Trade` to `Flow` and map to the `Flow` codelist [`imports`, `exports`, `balance`].
 * Rename `Year` column to `Period`.
 
-## Joins
+### Joins
 
 Join the Travel & Tidy Format outputs together.
