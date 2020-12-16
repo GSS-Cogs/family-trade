@@ -14,7 +14,7 @@
 		Flow: rows 7 to 251 are Exports and rows 255 to 499 are Imports
 		Trade Type: total
 
-		Measure type = trade
+		Measure type = current-prices
 		Unit = gbp-millions
 
 #### Sheet: 2 Total Trade by Country - Q
@@ -25,7 +25,7 @@
 		Flow: rows 7 to 251 are Exports and rows 255 to 499 are Imports
 		Trade Type: total
 
-		Measure type = trade
+		Measure type = current-prices
 		Unit = gbp-millions
 
 #### Sheet: 3 TIG by Country - A
@@ -36,7 +36,7 @@
 		Flow: rows 7 to 251 are Exports and rows 255 to 499 are Imports
 		Trade Type: goods
 
-		Measure type = trade
+		Measure type = current-prices
 		Unit = gbp-millions
 
 #### Sheet: 3 TIG by Country - Q
@@ -47,7 +47,7 @@
 		Flow: rows 7 to 251 are Exports and rows 255 to 499 are Imports
 		Trade Type: goods
 
-		Measure type = trade
+		Measure type = current-prices
 		Unit = gbp-millions
 
 #### Sheet: 3 TIS by Country - A
@@ -58,7 +58,7 @@
 		Flow: rows 7 to 251 are Exports and rows 255 to 499 are Imports
 		Trade Type: services
 
-		Measure type = trade
+		Measure type = current-prices
 		Unit = gbp-millions
 
 #### Sheet: 3 TIS by Country - Q
@@ -69,7 +69,7 @@
 		Flow: rows 7 to 251 are Exports and rows 255 to 499 are Imports
 		Trade Type: services
 
-		Measure type = trade
+		Measure type = current-prices
 		Unit = gbp-millions
 
 #### Join

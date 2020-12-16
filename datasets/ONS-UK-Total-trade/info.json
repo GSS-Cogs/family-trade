@@ -40,7 +40,7 @@
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/trade",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
                 "datatype": "double"
             },
             "Marker": {
