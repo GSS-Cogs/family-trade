@@ -74,3 +74,4 @@ cubes.add_cube(scraper, next_table, "ONS-International-exports-of-services-from-
 # -
 
 cubes.output_all()
+# trace.render("spec_v1.html")

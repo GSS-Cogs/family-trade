@@ -21,17 +21,26 @@ from gssutils import *
 scraper = Scraper('https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/internationalexportsofservicesfromsubnationalareasoftheuk')
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 scraper.dataset.family = 'trade'
+trace = TransformTrace()
 # -
 
 tab = tabs['4b']
 
+datasetTitle = 'Total value of service exports from the UK by Joint Authority and industry, 2017'
+columns=['Product', 'Service Destination', 'Service Origin', 'Flow', 'Unit', 'Measure Type', 'Period', 'Value', 'Marker']
+trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
+
 # +
+footer = tab.excel_ref("A18").expand(RIGHT).expand(DOWN)
 cell = tab.excel_ref('A5')
-industry = cell.fill(DOWN).is_not_blank().is_not_whitespace()
-origin = cell.shift(0,-1).fill(RIGHT).is_not_blank().is_not_whitespace()  
+industry = cell.fill(DOWN).is_not_blank().is_not_whitespace() - footer
+trace.Product("Taken from cell A6 to A17 which are not blank")
+origin = cell.shift(0,-1).fill(RIGHT).is_not_blank().is_not_whitespace()
+trace.Service_Origin("Taken from cell BC4 across which are not blank")
 destination = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
-observations = destination.fill(DOWN).is_not_blank().is_not_whitespace() 
-Dimensions = [
+trace.Service_Destination("Taken from cell B5 across which are not blank")
+observations = destination.fill(DOWN).is_not_blank().is_not_whitespace()
+dimensions = [
             HDim(industry,'Product',DIRECTLY,LEFT),
             HDim(destination, 'Service Destination',DIRECTLY,ABOVE),
             HDim(origin, 'Service Origin',CLOSEST,LEFT),
@@ -41,7 +50,15 @@ Dimensions = [
             HDimConst('Period','gregorian-interval/2016-03-31T00:00:00/P1Y')
     
 ]  
-c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
-new_table = c1.topandas()
-import numpy as np
+c1 = ConversionSegment(tab, dimensions, observations)
+trace.with_preview(c1)
+trace.store("combined_dataframe", c1.topandas())
+# -
+
+new_table = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+
 new_table.rename(columns={'OBS': 'Value','DATAMARKER': 'Marker'}, inplace=True)
+trace.multi(["Value", "Marker"], "Rename databaker columns OBS and DATAMARKER columns to value and Marker respectively")
+
+trace.render("spec_v1.html")
+new_table
