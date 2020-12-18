@@ -45,7 +45,7 @@
       },
       {
         "titles": "Parent Property",
-        "required": true,
+        "required": false,
         "name": "parent_property",
         "datatype": "anyURI",
         "propertyUrl": "rdfs:subPropertyOf",
@@ -61,11 +61,18 @@
       },
       {
         "titles": "Range",
-        "required": false,
+        "required": true,
         "name": "range",
         "datatype": "anyURI",
         "propertyUrl": "rdfs:range",
         "valueUrl": "{range}"
+      },
+      {
+        "titles": "Comment",
+        "required": false,
+        "name": "comment",
+        "datatype": "string",
+        "propertyUrl": "rdfs:comment"
       }
     ],
     "primaryKey": [

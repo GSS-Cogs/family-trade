@@ -1,5 +1,4 @@
 Namespace,Path,Label,Comment,Source,Parent,Range
-trade,count,Count,The total number of items,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,measure/gbp-total,GBP Total,Net Mass explain me better,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,measure/net-mass,Net Mass,Whether the time-series has been adjusted to remove cyclical components,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,measure/count-of-businesses,Count of Businesses,The total number of employees,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
