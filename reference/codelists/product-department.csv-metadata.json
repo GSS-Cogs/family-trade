@@ -1,5 +1,3 @@
-
-
 {
   "@context": "http://www.w3.org/ns/csvw",
   "@id": "#table",
@@ -18,7 +16,7 @@
         "name": "notation",
         "datatype": {
           "base": "string",
-          "format": "^-?[\w\.\/]+(-[\w\.\/]+)*$"
+          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
         },
         "required": true,
         "propertyUrl": "skos:notation"
@@ -28,11 +26,11 @@
         "name": "parent_notation",
         "datatype": {
           "base": "string",
-          "format": "^(-?[\w\.\/]+(-[\w\.\/]+)*|)$"
+          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/concept/product-department/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept/product-department/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -56,17 +54,15 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/concept-scheme/product-department"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/product-department"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/concept/product-department/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/product-department/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/def/concept-scheme/product-department",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/product-department",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Country"
   }
 }
-
-    

@@ -1,5 +1,3 @@
-
-
 {
   "@context": "http://www.w3.org/ns/csvw",
   "@id": "#table",
@@ -18,7 +16,7 @@
         "name": "notation",
         "datatype": {
           "base": "string",
-          "format": "^-?[\w\.\/]+(-[\w\.\/]+)*$"
+          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
         },
         "required": true,
         "propertyUrl": "skos:notation"
@@ -28,11 +26,11 @@
         "name": "parent_notation",
         "datatype": {
           "base": "string",
-          "format": "^(-?[\w\.\/]+(-[\w\.\/]+)*|)$"
+          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/concept/production-and-clearance/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept/production-and-clearance/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -56,17 +54,15 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/concept-scheme/production-and-clearance"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/concept/production-and-clearance/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/production-and-clearance/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/def/concept-scheme/production-and-clearance",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Country"
   }
 }
-
-    
