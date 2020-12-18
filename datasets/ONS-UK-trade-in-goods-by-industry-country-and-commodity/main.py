@@ -57,10 +57,3 @@ scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and 
 scraper.dataset.landingPage = landing_pages
 
 cubes.output_all()
-scraper.dataset.family = 'Commodity'
-codelistcreation = ['Commodity']
-df = df
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in df.columns:
-        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists2', scraper.dataset.family, Path(os.getcwd()).name.lower())
