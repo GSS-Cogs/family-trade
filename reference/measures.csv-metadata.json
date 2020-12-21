@@ -1,0 +1,81 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/csvw",
+    {
+      "@language": "en"
+    }
+  ],
+  "@id": "#table",
+  "prov:hadDerivation": {
+    "@id": "http://gss-data.org.uk/def/trade/ontology/measures",
+    "@type": "owl:Ontology",
+    "rdfs:label": "GSS Trade Measures"
+  },
+  "url": "measures.csv",
+  "tableSchema": {
+    "columns": [
+      {
+        "titles": "Namespace",
+        "required": true,
+        "name": "namespace",
+        "datatype": "string",
+        "suppressOutput": true
+      },
+      {
+        "titles": "Path",
+        "required": true,
+        "name": "path",
+        "datatype": "string",
+        "suppressOutput": true
+      },
+      {
+        "titles": "Label",
+        "required": true,
+        "name": "label",
+        "datatype": "string",
+        "propertyUrl": "rdfs:label"
+      },
+      {
+        "titles": "Comment",
+        "required": false,
+        "name": "comment",
+        "datatype": "string",
+        "propertyUrl": "rdfs:comment"
+      },
+      {
+        "titles": "Source",
+        "required": false,
+        "name": "source",
+        "datatype": "anyURI",
+        "propertyUrl": "rdfs:isDefinedBy",
+        "valueUrl": "{source}"
+      },
+      {
+        "titles": "Parent",
+        "required": false,
+        "name": "parent",
+        "datatype": "anyURI",
+        "propertyUrl": "rdfs:subPropertyOf",
+        "valueUrl": "{parent}"
+      },
+      {
+        "titles": "Range",
+        "required": false,
+        "name": "range",
+        "datatype": "anyURI",
+        "propertyUrl": "rdfs:range",
+        "valueUrl": "{range}"
+      },
+      {
+        "name": "type",
+        "virtual": true,
+        "propertyUrl": "rdf:type",
+        "valueUrl": "http://purl.org/linked-data/cube#MeasureProperty"
+      }
+    ],
+    "primaryKey": [
+      "path"
+    ],
+    "aboutUrl": "http://gss-data.org.uk/def/{+namespace}/measure/{+path}"
+  }
+}
