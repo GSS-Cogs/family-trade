@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
-  "url": "cord-sitc.csv",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata",
+  "url": "hmrc-geographies-wikidata.csv",
   "tableSchema": {
     "columns": [
       {
@@ -12,11 +12,19 @@
         "propertyUrl": "rdfs:label"
       },
       {
+        "titles": "Wikidata ID",
+        "name": "wikidata_id",
+        "datatype": "string",
+        "required": false,
+        "propertyUrl": "owl:sameAs",
+        "valueUrl": "http://www.wikidata.org/entity/{wikidata_id}"
+      },
+      {
         "titles": "Notation",
         "name": "notation",
         "datatype": {
           "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+          "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
         },
         "required": true,
         "propertyUrl": "skos:notation"
@@ -26,11 +34,11 @@
         "name": "parent_notation",
         "datatype": {
           "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+          "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/cord-sitc/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,15 +62,15 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-sitc"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/cord-sitc/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-sitc",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Country"
+    "rdfs:label": "Hmrc Geographies Wikidata"
   }
 }

@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-abs-trades",
   "url": "ons-abs-trades.csv",
   "tableSchema": {
     "columns": [
@@ -16,7 +16,7 @@
         "name": "notation",
         "datatype": {
           "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+          "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
         },
         "required": true,
         "propertyUrl": "skos:notation"
@@ -26,11 +26,11 @@
         "name": "parent_notation",
         "datatype": {
           "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+          "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-abs-trades/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-abs-trades/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -58,11 +58,11 @@
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-abs-trades/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-abs-trades/{notation}"
   },
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-abs-trades",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Country"
+    "rdfs:label": "Ons Abs Trades"
   }
 }

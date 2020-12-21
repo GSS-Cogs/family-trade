@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands",
-  "url": "turnover-size-bands.csv",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8",
+  "url": "cn8.csv",
   "tableSchema": {
     "columns": [
       {
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,15 +54,15 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Turnover Size Bands"
+    "rdfs:label": "Cn8"
   }
 }
