@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area",
   "url": "ons-fdi-area.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-fdi-area/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -58,7 +58,7 @@
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-fdi-area/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area/{notation}"
   },
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area",

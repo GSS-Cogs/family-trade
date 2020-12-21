@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4",
   "url": "sitc4.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/sitc4/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -58,7 +58,7 @@
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/sitc4/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4/{notation}"
   },
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4",

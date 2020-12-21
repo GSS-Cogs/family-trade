@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure-category",
   "url": "national-accounts-expenditure-category.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-expenditure-category/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure-category/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -58,7 +58,7 @@
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-expenditure-category/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure-category/{notation}"
   },
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure-category",

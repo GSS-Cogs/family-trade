@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-duty",
   "url": "alcohol-duty.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/alcohol-duty/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-duty/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -58,7 +58,7 @@
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/alcohol-duty/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-duty/{notation}"
   },
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-duty",

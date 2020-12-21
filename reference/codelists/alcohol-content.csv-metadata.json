@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-content",
   "url": "alcohol-content.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/alcohol-content/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-content/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -58,7 +58,7 @@
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/alcohol-content/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-content/{notation}"
   },
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-content",

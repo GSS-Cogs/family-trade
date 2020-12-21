@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-household-expenditure",
   "url": "national-accounts-household-expenditure.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-household-expenditure/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-household-expenditure/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -58,7 +58,7 @@
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-household-expenditure/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-household-expenditure/{notation}"
   },
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-household-expenditure",

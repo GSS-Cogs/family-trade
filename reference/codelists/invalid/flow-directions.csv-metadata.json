@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/account-type",
-  "url": "account-type.csv",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+  "url": "flow-directions.csv",
   "tableSchema": {
     "columns": [
       {
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/account-type/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,14 +54,14 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/account-type"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/account-type/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/account-type",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
     "@type": "skos:ConceptScheme",
     "rdfs:label": "Country"
   }

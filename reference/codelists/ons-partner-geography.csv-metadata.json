@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
   "url": "ons-partner-geography.csv",
   "tableSchema": {
     "columns": [
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -58,7 +58,7 @@
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography/{notation}"
   },
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
