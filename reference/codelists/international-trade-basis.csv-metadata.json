@@ -16,7 +16,7 @@
         "name": "notation",
         "datatype": {
           "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+          "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
         },
         "required": true,
         "propertyUrl": "skos:notation"
@@ -26,7 +26,7 @@
         "name": "parent_notation",
         "datatype": {
           "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+          "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
         },
         "required": false,
         "propertyUrl": "skos:broader",
