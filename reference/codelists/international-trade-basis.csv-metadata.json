@@ -63,6 +63,6 @@
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/international-trade-basis",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Country"
+    "rdfs:label": "International Trade Basis"
   }
 }

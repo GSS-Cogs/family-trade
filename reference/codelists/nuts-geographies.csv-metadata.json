@@ -63,6 +63,6 @@
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Country"
+    "rdfs:label": "Nuts Geographies"
   }
 }

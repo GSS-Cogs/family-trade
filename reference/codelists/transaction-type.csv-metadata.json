@@ -63,6 +63,6 @@
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/transaction-type",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Country"
+    "rdfs:label": "Transaction Type"
   }
 }

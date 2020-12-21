@@ -63,6 +63,6 @@
   "prov:hadDerivation": {
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/exporter-and-importer-activity",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Country"
+    "rdfs:label": "Exporter And Importer Activity"
   }
 }
