@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
-  "url": "cord-geographies.csv",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/marker",
+  "url": "marker.csv",
   "tableSchema": {
     "columns": [
       {
@@ -16,7 +16,7 @@
         "name": "notation",
         "datatype": {
           "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+          "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
         },
         "required": true,
         "propertyUrl": "skos:notation"
@@ -26,11 +26,11 @@
         "name": "parent_notation",
         "datatype": {
           "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+          "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/cord-geographies/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/marker/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,15 +54,15 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/marker"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/cord-geographies/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/marker/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/marker",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Country"
+    "rdfs:label": "Marker"
   }
 }

@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.6.0
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -74,12 +74,8 @@ trace.Record_Lowest_Value("Selected as all values from cell ref K8 down minus th
 record_lowest_date = tab.excel_ref("K8").expand(DOWN).filter(contains_string("Q")).is_not_blank()
 trace.Record_Lowest_Date("Selected as all values from cell ref K8 down where the value contains the string 'Q'.")
 
-measure_type = tab.excel_ref("A8:A56") - account_type
+trade_type = tab.excel_ref("A8:A56") - account_type
 trace.Measure_Type("Selected as all cells between cell refs A8 and A56 down minus the cells already used by account_type")
-
-unit = "£ Billions"
-trace.Unit("Hardcoded but could have been taken from cell K2 - Added '£' symbol.")
-
 
 observations = tab.excel_ref("C8").expand(DOWN).is_not_blank()
 
@@ -91,8 +87,8 @@ dimensions = [
     HDim(record_highest_date, "Record Highest Date", CLOSEST, BELOW),
     HDim(record_lowest_value, "Record Lowest Value", CLOSEST, ABOVE),
     HDim(record_lowest_date, "Record Lowest Date", CLOSEST, BELOW),
-    HDim(measure_type, "Measure Type", CLOSEST, ABOVE),
-    HDimConst("Unit", unit)
+    HDim(trade_type, "Trade Type", CLOSEST, ABOVE),
+
 ]
 
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -105,10 +101,9 @@ df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 trace.render()
 
-tidied = df[["Period", "Account Type", "Record Since", "Record Highest Value", "Record Highest Date", "Record Lowest Value", "Record Lowest Date", "Measure Type", "Unit", "Value"]]
+tidied = df[["Period", "Account Type", "Trade Type", "Record Since", "Record Highest Value", "Record Highest Date", "Record Lowest Value", "Record Lowest Date", "Value"]]
 tidied_sheets.append(tidied)
         
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
 tidied_sheets[0]
 
 
@@ -159,9 +154,7 @@ dimensions = [
     HDim(adjustment_type, "Adjustment Type", CLOSEST, ABOVE),
     HDim(income_type, "Income Type", CLOSEST, ABOVE),
     HDim(payment_type, "Payment Type", CLOSEST, ABOVE),
-    HDim(code, "Code", DIRECTLY, LEFT),
-    HDim(measure_type, "Measure Type", CLOSEST, ABOVE),
-    HDim(unit, "Unit", CLOSEST, ABOVE)
+    HDim(code, "CDID", DIRECTLY, LEFT),
 ]
 
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -174,16 +167,10 @@ df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 trace.render()
 
-tidied = df[["Year", "Quarter", "Account Type", "Income Type", "Payment Type", "Adjustment Type", "Code", "Measure Type", "Unit", "Value"]]
+tidied = df[["Year", "Quarter", "Account Type", "Income Type", "Payment Type", "Adjustment Type", "CDID", "Value"]]
 tidied_sheets.append(tidied)
         
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
 tidied_sheets[1]
-
-#Table could probably be split at Financial Account (B55) and remove columns account and adjustment type as they appear to not apply.
-
-
-#### TAB 3a
 # +
 tab = all_tabs["Table B"]
 
@@ -321,7 +308,7 @@ trace.render()
 tidied = df[["Year", "Quarter", "Balance Type", "Income Type", "Adjustment Type", "Code", "Measure Type", "Unit", "Value"]]
 tidied_sheets.append(tidied)
 
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
+#pd.set_option("display.max_rows", None, "display.max_columns", Nxsone)
 tidied_sheets[3]
 
 #Notes - Need to remove super from Balance Type
@@ -370,7 +357,7 @@ dimensions = [
 
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet)
+savepreviewhtml(tidy_sheet)
 trace.store("combined_" + tab_title, tidy_sheet.topandas())
 
 
@@ -515,5 +502,8 @@ tidied_sheets[6]
     #info.json has been modified to remove "/current" from the landing page URL
     #notes on tabs (Table A, Table D) indicate sign should be reversed if  was obtained from the Pink Book dataset
 # -
-
+#Records 
+tidied_sheets[0]
+#Table A
+tidied_sheets[1]
 

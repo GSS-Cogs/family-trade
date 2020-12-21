@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "#table",
-  "url": "pink-book-services.csv",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+  "url": "flow-directions.csv",
   "tableSchema": {
     "columns": [
       {
@@ -16,7 +16,7 @@
         "name": "notation",
         "datatype": {
           "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+          "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
         },
         "required": true,
         "propertyUrl": "skos:notation"
@@ -26,11 +26,11 @@
         "name": "parent_notation",
         "datatype": {
           "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+          "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,15 +54,15 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Country"
+    "rdfs:label": "Flow Directions"
   }
 }
