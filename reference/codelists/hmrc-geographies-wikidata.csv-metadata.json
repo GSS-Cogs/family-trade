@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata",
-  "url": "cord-geographies-wikidata.csv",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata",
+  "url": "hmrc-geographies-wikidata.csv",
   "tableSchema": {
     "columns": [
       {
@@ -10,6 +10,14 @@
         "datatype": "string",
         "required": true,
         "propertyUrl": "rdfs:label"
+      },
+      {
+        "titles": "Wikidata ID",
+        "name": "wikidata_id",
+        "datatype": "string",
+        "required": false,
+        "propertyUrl": "owl:sameAs",
+        "valueUrl": "http://www.wikidata.org/entity/{wikidata_id}"
       },
       {
         "titles": "Notation",
@@ -30,7 +38,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,15 +62,15 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata"
       }
     ],
     "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata/{notation}"
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Cord Geographies Wikidata"
+    "rdfs:label": "Hmrc Geographies Wikidata"
   }
 }

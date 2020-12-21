@@ -1,7 +1,7 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata",
-  "url": "hmrc-geographies-wikidata.csv",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies",
+  "url": "cord-geographies.csv",
   "tableSchema": {
     "columns": [
       {
@@ -30,7 +30,7 @@
         },
         "required": false,
         "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata/{parent_notation}"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/{parent_notation}"
       },
       {
         "titles": "Sort Priority",
@@ -54,15 +54,18 @@
       {
         "virtual": true,
         "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata"
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies"
       }
     ],
-    "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata/{notation}"
+    "primaryKey": [
+      "notation",
+      "parent_notation"
+    ],
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/{notation}"
   },
   "prov:hadDerivation": {
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies",
     "@type": "skos:ConceptScheme",
-    "rdfs:label": "Hmrc Geographies Wikidata"
+    "rdfs:label": "Cord Geographies"
   }
 }
