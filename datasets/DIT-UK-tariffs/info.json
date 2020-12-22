@@ -1,0 +1,26 @@
+{
+    "title": "UK tariffs",
+    "publisher": "Department for International Trade",
+    "description": "Use this service to check the UK Global Tariff that will apply to goods you import from 1 January 2021. You can also check the difference between what you pay now and what you\u2019ll pay from 1 January 2021.",
+    "landingPage": "https://www.gov.uk/guidance/uk-tariffs-from-1-january-2021",
+    "datasetNotes": [
+        "On the landing page scroll to how to check the tariff and click on the link 'You can download the full UKGT (csv: 2.5mb)'."
+    ],
+    "published": "2020-12-02",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "CSV",
+        "stage": "Prioritized"
+    },
+    "transform": {
+        "stage": [
+            "Priority"
+        ],
+        "airtable": "recUav7dFdgezEsgJ",
+        "main_issue": 114
+    },
+    "sizingNotes": "1 CSV, stage 1 trasnsform required however discussion will be required to determine dimensions etc. as this is not a statisical dataset.",
+    "notes": "Guidance to using the tool can be found here:\nhttps://www.gov.uk/guidance/using-the-trade-tariff-tool-to-find-a-commodity-code"
+}

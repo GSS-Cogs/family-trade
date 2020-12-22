@@ -152,11 +152,9 @@ tidy['Mode'].unique()
 
 tidy["Country"] = tidy["Country"].apply(pathify)
 tidy["Direction"][tidy["Direction"] == "EX"] = "exports"
-#print(tidy['Direction'].count())
-#tidy = tidy.drop_duplicates()
-#print(tidy['Direction'].count())
 
-tidy['Direction'].unique()
+tidy['Country'].unique()
+
 tidy
 
 # +
@@ -183,6 +181,6 @@ scraper.dataset.title = 'Imports and Exports of services by country, by modes of
 
 # -
 
-cubes.add_cube(scraper, tidy.drop_duplicates(), "ons-uk-total-trade")
+cubes.add_cube(scraper, tidy.drop_duplicates(), "ons-exports-of-services-by-country-by-modes-of-supply")
 cubes.output_all()
 trace.render("spec_v1.html")
