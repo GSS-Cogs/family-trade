@@ -1,0 +1,79 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata",
+  "url": "cord-geographies-wikidata.csv",
+  "tableSchema": {
+    "columns": [
+      {
+        "titles": "Label",
+        "name": "label",
+        "datatype": "string",
+        "required": true,
+        "propertyUrl": "rdfs:label"
+      },
+      {
+        "titles": "Wikidata ID",
+        "name": "wikidata_id",
+        "datatype": "string",
+        "required": false,
+        "propertyUrl": "owl:sameAs",
+        "valueUrl": "http://www.wikidata.org/entity/{wikidata_id}"
+      },
+      {
+        "titles": "Notation",
+        "name": "notation",
+        "datatype": {
+          "base": "string",
+          "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+        },
+        "required": true,
+        "propertyUrl": "skos:notation"
+      },
+      {
+        "titles": "Parent Notation",
+        "name": "parent_notation",
+        "datatype": {
+          "base": "string",
+          "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+        },
+        "required": false,
+        "propertyUrl": "skos:broader",
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata/{parent_notation}"
+      },
+      {
+        "titles": "Sort Priority",
+        "name": "sort",
+        "datatype": "integer",
+        "required": false,
+        "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+      },
+      {
+        "titles": "Description",
+        "name": "description",
+        "datatype": "string",
+        "required": false,
+        "propertyUrl": "rdfs:comment"
+      },
+      {
+        "virtual": true,
+        "propertyUrl": "rdf:type",
+        "valueUrl": "skos:Concept"
+      },
+      {
+        "virtual": true,
+        "propertyUrl": "skos:inScheme",
+        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata"
+      }
+    ],
+    "primaryKey": [
+      "notation",
+      "parent_notation"
+    ],
+    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata/{notation}"
+  },
+  "prov:hadDerivation": {
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata",
+    "@type": "skos:ConceptScheme",
+    "rdfs:label": "Cord Geographies Wikidata"
+  }
+}
