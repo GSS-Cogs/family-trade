@@ -304,7 +304,7 @@ def create_metadata_shell_for_csv(csv_file_path: str) -> str:
     table_schema: Dict = metadata["tableSchema"]
     columns: List[Dict] = table_schema["columns"]
 
-    with open("account-type.csv", newline="") as csv_file:
+    with open(csv_file_path, newline="") as csv_file:
         reader = csv.reader(csv_file, delimiter=",", quotechar="\"")
         column_names: List[str] = next(reader)
 
