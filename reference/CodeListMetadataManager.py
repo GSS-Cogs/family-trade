@@ -388,7 +388,7 @@ def generate_schema_for_column(column_name: str, concept_scheme_uri: str) -> Dic
             "propertyUrl": "rdfs:comment"
         })
     else:
-        print(f"WARNING: Column '{column_name}' is not standard and so has not been fully mapped. "
+        print(f"WARNING: Column '{column_name}' is not standard and so has not been fully mapped. " +
               "Please configure manually.")
 
     return column
