@@ -2,7 +2,7 @@
     "title": "UK tariffs",
     "publisher": "Department for International Trade",
     "description": "Use this service to check the UK Global Tariff that will apply to goods you import from 1 January 2021. You can also check the difference between what you pay now and what you\u2019ll pay from 1 January 2021.",
-    "dataURL" : "https://www.check-future-uk-trade-tariffs.service.gov.uk/api/global-uk-tariff.csv",
+    "dataURL": "https://www.check-future-uk-trade-tariffs.service.gov.uk/api/global-uk-tariff.csv",
     "landingPage": "https://www.gov.uk/guidance/uk-tariffs-from-1-january-2021",
     "datasetNotes": [
         "On the landing page scroll to how to check the tariff and click on the link 'You can download the full UKGT (csv: 2.5mb)'."
