@@ -1,68 +1,109 @@
 {
-  "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure",
-  "url": "national-accounts-gdp-measure.csv",
-  "tableSchema": {
-    "columns": [
-      {
-        "titles": "Label",
-        "name": "label",
-        "datatype": "string",
-        "required": true,
-        "propertyUrl": "rdfs:label"
-      },
-      {
-        "titles": "Notation",
-        "name": "notation",
-        "datatype": {
-          "base": "string",
-          "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
-        },
-        "required": true,
-        "propertyUrl": "skos:notation"
-      },
-      {
-        "titles": "Parent Notation",
-        "name": "parent_notation",
-        "datatype": {
-          "base": "string",
-          "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
-        },
-        "required": false,
-        "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure/{parent_notation}"
-      },
-      {
-        "titles": "Sort Priority",
-        "name": "sort",
-        "datatype": "integer",
-        "required": false,
-        "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-      },
-      {
-        "titles": "Description",
-        "name": "description",
-        "datatype": "string",
-        "required": false,
-        "propertyUrl": "rdfs:comment"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "rdf:type",
-        "valueUrl": "skos:Concept"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure"
-      }
-    ],
-    "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure/{notation}"
-  },
-  "prov:hadDerivation": {
+    "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure",
-    "@type": "skos:ConceptScheme",
-    "rdfs:label": "National Accounts Gdp Measure"
-  }
+    "url": "national-accounts-gdp-measure.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#DatasetContents"
+        ]
+    },
+    "rdfs:label": "National Accounts Gdp Measure",
+    "dc:title": "National Accounts Gdp Measure",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "rdfs:label": "Dataset representing National Accounts Gdp Measure code list",
+            "dc:title": "Dataset representing National Accounts Gdp Measure code list",
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "dc:title": "National Accounts Gdp Measure Catalog Record",
+            "rdfs:label": "National Accounts Gdp Measure Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T11:58:58.123175"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T11:58:58.123175"
+            },
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-gdp-measure/dataset"
+            }
+        }
+    ]
 }

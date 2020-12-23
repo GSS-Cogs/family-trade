@@ -1,68 +1,109 @@
 {
-  "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups",
-  "url": "hmrc-industry-groups.csv",
-  "tableSchema": {
-    "columns": [
-      {
-        "titles": "Label",
-        "name": "label",
-        "datatype": "string",
-        "required": true,
-        "propertyUrl": "rdfs:label"
-      },
-      {
-        "titles": "Notation",
-        "name": "notation",
-        "datatype": {
-          "base": "string",
-          "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
-        },
-        "required": true,
-        "propertyUrl": "skos:notation"
-      },
-      {
-        "titles": "Parent Notation",
-        "name": "parent_notation",
-        "datatype": {
-          "base": "string",
-          "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
-        },
-        "required": false,
-        "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups/{parent_notation}"
-      },
-      {
-        "titles": "Sort Priority",
-        "name": "sort",
-        "datatype": "integer",
-        "required": false,
-        "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-      },
-      {
-        "titles": "Description",
-        "name": "description",
-        "datatype": "string",
-        "required": false,
-        "propertyUrl": "rdfs:comment"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "rdf:type",
-        "valueUrl": "skos:Concept"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups"
-      }
-    ],
-    "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups/{notation}"
-  },
-  "prov:hadDerivation": {
+    "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups",
-    "@type": "skos:ConceptScheme",
-    "rdfs:label": "Hmrc Industry Groups"
-  }
+    "url": "hmrc-industry-groups.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#DatasetContents"
+        ]
+    },
+    "rdfs:label": "Hmrc Industry Groups",
+    "dc:title": "Hmrc Industry Groups",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "rdfs:label": "Dataset representing Hmrc Industry Groups code list",
+            "dc:title": "Dataset representing Hmrc Industry Groups code list",
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "dc:title": "Hmrc Industry Groups Catalog Record",
+            "rdfs:label": "Hmrc Industry Groups Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T11:58:58.157953"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T11:58:58.157953"
+            },
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups/dataset"
+            }
+        }
+    ]
 }

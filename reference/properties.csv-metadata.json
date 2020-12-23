@@ -1,83 +1,124 @@
 {
-  "@context": [
-    "http://www.w3.org/ns/csvw",
-    {
-      "@language": "en"
-    }
-  ],
-  "@id": "#table",
-  "prov:hadDerivation": {
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {
+            "@language": "en"
+        }
+    ],
     "@id": "http://gss-data.org.uk/def/trade/ontology/properties",
-    "@type": "owl:Ontology",
-    "rdfs:label": "GSS Trade Properties"
-  },
-  "url": "properties.csv",
-  "tableSchema": {
-    "columns": [
-      {
-        "titles": "Namespace",
-        "required": true,
-        "name": "namespace",
-        "datatype": "string",
-        "suppressOutput": true
-      },
-      {
-        "titles": "Label",
-        "required": true,
-        "name": "label",
-        "datatype": "string",
-        "propertyUrl": "rdfs:label"
-      },
-      {
-        "titles": "Path",
-        "required": true,
-        "name": "path",
-        "datatype": "string",
-        "suppressOutput": true
-      },
-      {
-        "titles": "Qb Property Type",
-        "required": true,
-        "name": "qb_property_type",
-        "datatype": "string",
-        "propertyUrl": "rdf:type",
-        "valueUrl": "{qb_property_type}"
-      },
-      {
-        "titles": "Parent Property",
-        "required": false,
-        "name": "parent_property",
-        "datatype": "anyURI",
-        "propertyUrl": "rdfs:subPropertyOf",
-        "valueUrl": "{parent_property}"
-      },
-      {
-        "titles": "Source",
-        "required": false,
-        "name": "source",
-        "datatype": "anyURI",
-        "propertyUrl": "rdfs:isDefinedBy",
-        "valueUrl": "{source}"
-      },
-      {
-        "titles": "Range",
-        "required": true,
-        "name": "range",
-        "datatype": "anyURI",
-        "propertyUrl": "rdfs:range",
-        "valueUrl": "{range}"
-      },
-      {
-        "titles": "Comment",
-        "required": false,
-        "name": "comment",
-        "datatype": "string",
-        "propertyUrl": "rdfs:comment"
-      }
-    ],
-    "primaryKey": [
-      "path"
-    ],
-    "aboutUrl": "http://gss-data.org.uk/def/{+namespace}/property/{+path}"
-  }
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/def/trade/ontology/properties",
+        "@type": [
+            "owl:Ontology",
+            "http://publishmydata.com/pmdcat#DatasetContents"
+        ]
+    },
+    "url": "properties.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Namespace",
+                "required": true,
+                "name": "namespace",
+                "datatype": "string",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Label",
+                "required": true,
+                "name": "label",
+                "datatype": "string",
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Path",
+                "required": true,
+                "name": "path",
+                "datatype": "string",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Qb Property Type",
+                "required": true,
+                "name": "qb_property_type",
+                "datatype": "string",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "{qb_property_type}"
+            },
+            {
+                "titles": "Parent Property",
+                "required": false,
+                "name": "parent_property",
+                "datatype": "anyURI",
+                "propertyUrl": "rdfs:subPropertyOf",
+                "valueUrl": "{parent_property}"
+            },
+            {
+                "titles": "Source",
+                "required": false,
+                "name": "source",
+                "datatype": "anyURI",
+                "propertyUrl": "rdfs:isDefinedBy",
+                "valueUrl": "{source}"
+            },
+            {
+                "titles": "Range",
+                "required": true,
+                "name": "range",
+                "datatype": "anyURI",
+                "propertyUrl": "rdfs:range",
+                "valueUrl": "{range}"
+            },
+            {
+                "titles": "Comment",
+                "required": false,
+                "name": "comment",
+                "datatype": "string",
+                "propertyUrl": "rdfs:comment"
+            }
+        ],
+        "primaryKey": [
+            "path"
+        ],
+        "aboutUrl": "http://gss-data.org.uk/def/{+namespace}/property/{+path}"
+    },
+    "rdfs:label": "GSS Trade Properties",
+    "dc:title": "GSS Trade Properties",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/def/trade/ontology/properties/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/def/trade/ontology/properties"
+            },
+            "rdfs:label": "Dataset representing GSS Trade Properties code list",
+            "dc:title": "Dataset representing GSS Trade Properties code list"
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/ontology/properties/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/def/trade/ontology/properties/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/ontology/properties/dataset"
+            },
+            "dc:title": "GSS Trade Properties Catalog Record",
+            "rdfs:label": "GSS Trade Properties Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T16:40:50.886568"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T16:40:50.886568"
+            }
+        }
+    ]
 }
