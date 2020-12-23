@@ -127,7 +127,7 @@ def populate_dataset_node(
             },
             {
                 "name": "dcat:downloadURL",
-                "input_request": "Direct Download URL: ",
+                "input_request": "Direct Download URL",
                 "to_value": lambda input_value: {"@id": input_value}
             },
             {
@@ -328,6 +328,9 @@ def create_metadata_shell_for_csv(csv_file_path: str) -> str:
             "primaryKey": "notation",
             "aboutUrl": concept_scheme_uri + "/{notation}"
         })
+    else:
+        print("WARNING: could not determine primary key. As a result, `aboutUrl` property is not specified and "
+              "so each row will not have a true URI. This is basically required. Manual configuration required.")
 
     with open(metadata_file, 'w+') as file:
         file.write(json.dumps(metadata, indent=4))
