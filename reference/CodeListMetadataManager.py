@@ -335,7 +335,7 @@ def create_metadata_shell_for_csv(csv_file_path: str) -> str:
     with open(metadata_file, 'w+') as file:
         file.write(json.dumps(metadata, indent=4))
 
-    return metadata_file
+    return str(metadata_file)
 
 
 def generate_schema_for_column(column_name: str, concept_scheme_uri: str) -> Dict:
