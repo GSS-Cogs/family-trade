@@ -84,7 +84,9 @@
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
-            "dcat:record": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type/catalog-record"
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type/catalog-record"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type/catalog-record",
@@ -93,11 +95,11 @@
             "rdfs:label": "National Accounts Trade Type Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:13:58.577053"
+                "@value": "2020-12-23T11:58:58.163509"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:13:58.577053"
+                "@value": "2020-12-23T11:58:58.163509"
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type/dataset"

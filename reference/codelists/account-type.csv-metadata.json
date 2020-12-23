@@ -84,7 +84,9 @@
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
-            "dcat:record": "http://gss-data.org.uk/def/trade/concept-scheme/account-type/catalog-record"
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/account-type/catalog-record"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/account-type/catalog-record",
@@ -93,14 +95,14 @@
             "rdfs:label": "Account Type Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:23:24.810151"
-            },
-            "dc:modified": {
-                "@type": "dateTime",
-                "@value": "2020-12-23T11:23:24.810151"
+                "@value": "2020-12-23T11:58:58.120533"
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/account-type/dataset"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T11:59:10.942836"
             }
         }
     ]

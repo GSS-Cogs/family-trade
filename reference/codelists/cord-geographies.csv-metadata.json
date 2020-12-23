@@ -87,7 +87,9 @@
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
-            "dcat:record": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/catalog-record"
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/catalog-record"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/catalog-record",
@@ -96,11 +98,11 @@
             "rdfs:label": "Cord Geographies Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:13:58.532481"
+                "@value": "2020-12-23T11:58:58.129811"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:13:58.532481"
+                "@value": "2020-12-23T11:58:58.129811"
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/dataset"

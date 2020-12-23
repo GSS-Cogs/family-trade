@@ -84,7 +84,9 @@
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
-            "dcat:record": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-duty/catalog-record"
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-duty/catalog-record"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-duty/catalog-record",
@@ -93,11 +95,11 @@
             "rdfs:label": "Alcohol Duty Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:13:58.572538"
+                "@value": "2020-12-23T11:58:58.159713"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:13:58.572538"
+                "@value": "2020-12-23T11:58:58.159713"
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-duty/dataset"

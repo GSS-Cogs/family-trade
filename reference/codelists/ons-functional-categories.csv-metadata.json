@@ -84,7 +84,9 @@
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
-            "dcat:record": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories/catalog-record"
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories/catalog-record"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories/catalog-record",
@@ -93,11 +95,11 @@
             "rdfs:label": "Ons Functional Categories Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:13:58.524073"
+                "@value": "2020-12-23T11:58:58.122255"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:13:58.524073"
+                "@value": "2020-12-23T11:58:58.122255"
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories/dataset"
