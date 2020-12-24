@@ -66,7 +66,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/account-type",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:seeAlso": [

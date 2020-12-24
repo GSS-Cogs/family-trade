@@ -10,7 +10,7 @@
         "@id": "http://gss-data.org.uk/def/trade/ontology/properties",
         "@type": [
             "owl:Ontology",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#GraphDatasetContents"
         ]
     },
     "url": "properties.csv",

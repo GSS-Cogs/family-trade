@@ -205,15 +205,19 @@ def populate_required_dcat_metadata(
     existing_type: Union[str, List[str]] = prov_derivation_object["@type"]
 
     pmdcat_dataset_contents = "http://publishmydata.com/pmdcat#DatasetContents"
+    pmdcat_concept_scheme = "http://publishmydata.com/pmdcat#ConceptScheme"
     if isinstance(existing_type, str):
-        if existing_type != pmdcat_dataset_contents:
+        if existing_type != pmdcat_concept_scheme:
             prov_derivation_object["@type"] = [
                 existing_type,
-                pmdcat_dataset_contents
+                pmdcat_concept_scheme
             ]
     elif isinstance(existing_type, list):
-        if not find(existing_type, lambda x: x == pmdcat_dataset_contents):
-            existing_type.append(pmdcat_dataset_contents)
+        if pmdcat_concept_scheme not in existing_type:
+            existing_type.append(pmdcat_concept_scheme)
+
+        if pmdcat_dataset_contents in existing_type:
+            existing_type.remove(pmdcat_dataset_contents)
     else:
         raise Exception(
             f"Unexpected datatype found for '@types': {type(existing_type)}")
