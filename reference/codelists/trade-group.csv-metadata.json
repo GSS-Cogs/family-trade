@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Trade Group code list",
-            "dc:title": "Dataset representing Trade Group code list",
+            "rdfs:label": "Trade Group",
+            "dc:title": "Trade Group",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Trade Group' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

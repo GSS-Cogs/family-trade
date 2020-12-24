@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Hmrc Industry Groups code list",
-            "dc:title": "Dataset representing Hmrc Industry Groups code list",
+            "rdfs:label": "Hmrc Industry Groups",
+            "dc:title": "Hmrc Industry Groups",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-industry-groups"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Hmrc Industry Groups' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

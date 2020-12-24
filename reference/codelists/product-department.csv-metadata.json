@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Product Department code list",
-            "dc:title": "Dataset representing Product Department code list",
+            "rdfs:label": "Product Department",
+            "dc:title": "Product Department",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/product-department"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Product Department' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
