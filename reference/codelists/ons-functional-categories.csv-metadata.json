@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Ons Functional Categories code list",
-            "dc:title": "Dataset representing Ons Functional Categories code list",
+            "rdfs:label": "Ons Functional Categories",
+            "dc:title": "Ons Functional Categories",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Ons Functional Categories' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

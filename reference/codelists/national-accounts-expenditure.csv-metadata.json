@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing National Accounts Expenditure code list",
-            "dc:title": "Dataset representing National Accounts Expenditure code list",
+            "rdfs:label": "National Accounts Expenditure",
+            "dc:title": "National Accounts Expenditure",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'National Accounts Expenditure' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

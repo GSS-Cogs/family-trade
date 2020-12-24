@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Countries Of Ownership code list",
-            "dc:title": "Dataset representing Countries Of Ownership code list",
+            "rdfs:label": "Countries Of Ownership",
+            "dc:title": "Countries Of Ownership",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Countries Of Ownership' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

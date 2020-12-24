@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Status code list",
-            "dc:title": "Dataset representing Status code list",
+            "rdfs:label": "Status",
+            "dc:title": "Status",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/status"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Status' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

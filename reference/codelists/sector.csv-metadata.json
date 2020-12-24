@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Sector code list",
-            "dc:title": "Dataset representing Sector code list",
+            "rdfs:label": "Sector",
+            "dc:title": "Sector",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sector"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Sector' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
