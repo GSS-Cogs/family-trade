@@ -1,0 +1,96 @@
+{
+    "title": "Overseas Trade Statistics",
+    "publisher": "HM Revenue & Customs",
+    "description": "OTS are compiled monthly, quarterly and annually from trade declarations made using commodity codes from the UN Tariff (HS Nomenclature) and its EU derivative, the Intrastat Classification Nomenclature. These provide an eight-digit numeric codification for all products traded around the world. For each commodity declared, businesses must provide details of the quantity and statistical value in GB Pounds Sterling, the destination country (exports) and country of despatch (imports), and for some codes, a second quantity (supplementary unit).",
+    "landingPage": "https://www.uktradeinfo.com/trade-data/overseas/",
+    "published": "2018-03-08",
+    "dataURL": "https://api.uktradeinfo.com/OTS?fake=.csv",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "application/json",
+        "stage": "Prioritized"
+    },
+    "transform": {
+        "airtable": "recvSzMgbU9mqu7ln",
+        "main_issue": 14
+    },
+    "api": {
+        "endpoint": "https://api.uktradeinfo.com/OTS",
+        "payload": {
+            "MonthId": {
+                "dtype": "int",
+                "type":"literal",
+                "content": "period"
+            },
+            "FlowTypeId": {
+                "dtype": "int",
+                "type": "key",
+                "content": "attribute",
+                "source": "https://api.uktradeinfo.com/FlowType",
+                "foreignKey":"FlowTypeId"
+            },
+            "SuppressionIndex": {
+                "dtype": "int",
+                "type": "key",
+                "content": "marker",
+                "values": {
+                    "1": "Complete suppression, where no information is published.",
+                    "2": "Suppression of countries and ports, where only the overall total value (£ sterling) and quantity (kg) are published.",
+                    "3": "Suppression of countries, ports and total trade quantity, where only the overall total value is published.",
+                    "4": "Suppression of quantity for countries and ports, where the overall total value and quantity are published, but where a country and port breakdown is only available for value.",
+                    "5": "Suppression of quantity for countries, ports and total trade, where no information on quantity is published, but a full breakdown of value is available."
+                }
+            },
+            "CommodityId": {
+                "dtype": "int",
+                "type": "key",
+                "content": "attribute",
+                "source": "https://api.uktradeinfo.com/Commodity",
+                "foreignKey": "CommodityId"
+            },
+            "CommoditySitcId": {
+                "dtype": "int",
+                "type": "key",
+                "content": "attribute",
+                "source": "https://api.uktradeinfo.com/SITC",
+                "foreignKey": "CommoditySitcId"
+            },
+            "CountryId": {
+                "dtype": "int",
+                "type": "key",
+                "content": "attribute",
+                "source": "https://api.uktradeinfo.com/Country",
+                "foreignKey": "CountryId"
+            },
+            "PortId": {
+                "dtype": "int",
+                "type": "key",
+                "content": "attribute",
+                "source": "https://api.uktradeinfo.com/Port",
+                "foreignKey": "PortId"
+            },
+            "Value": {
+                "dtype": "float",
+                "type": "literal",
+                "content": "value"
+            },
+            "NetMass": {
+                "dtype": "float",
+                "type": "literal",
+                "content": "value"
+            },
+            "SuppUnit": {
+                "dtype": "float",
+                "type": "literal",
+                "content": "value"
+            }
+        }
+    },
+    "sizingNotes": "",
+    "notes": "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/",
+    "datasetNotes": [
+        "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/, Suppression Index key/value pairs are part of the OTS definition on the api documentation page https://www.uktradeinfo.com/api-documentation/."
+    ]
+}
