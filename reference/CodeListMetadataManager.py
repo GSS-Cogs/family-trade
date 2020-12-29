@@ -122,14 +122,9 @@ def populate_dataset_node(
                 "to_value": lambda input_value: {"@id": input_value}
             },
             {
-                "name": "dcat:accessURL",
-                "input_request": "Access URL (user landing for Download)",
-                "to_value": lambda creator_uri: {"@id": creator_uri}
-            },
-            {
-                "name": "dcat:downloadURL",
-                "input_request": "Direct Download URL",
-                "to_value": lambda input_value: {"@id": input_value}
+                "name": "dcat:landingPage",
+                "input_request": "Landing Page URL (user landing for Download)",
+                "to_value": lambda landing_uri: {"@id": landing_uri}
             },
             {
                 "name": "dc:issued",
