@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-type",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Alcohol Type",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Alcohol Type code list",
-            "dc:title": "Dataset representing Alcohol Type code list",
+            "rdfs:label": "Alcohol Type",
+            "dc:title": "Alcohol Type",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-type"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Alcohol Type' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

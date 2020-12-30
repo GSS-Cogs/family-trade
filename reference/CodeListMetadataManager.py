@@ -18,6 +18,7 @@ import csv
 
 T = TypeVar("T")
 reference_data_base_uri = "http://gss-data.org.uk/def"
+pmdcat_base_uri = "http://publishmydata.com/pmdcat#"
 
 
 def find(xs: List[T], predicate: Callable[[T], bool]) -> Optional[T]:
@@ -80,21 +81,21 @@ def populate_dataset_node(
 ):
     print(f"Processing '{existing_label}' code list ({csv_url})")
 
-    dataset_label = f"Dataset representing {existing_label} code list"
     override(dataset_node, {
         "@id": dataset_uri,
         "@type": [
             "dcat:Dataset",
-            "http://publishmydata.com/pmdcat#Dataset"
+            f"{pmdcat_base_uri}Dataset"
         ],
-        "http://publishmydata.com/pmdcat#datasetContents": {
+        f"{pmdcat_base_uri}datasetContents": {
             "@id": concept_root_uri
         }
     })
 
     supplement(dataset_node, {
-        "rdfs:label": dataset_label,
-        "dc:title": dataset_label,
+        "rdfs:label": existing_label,
+        "dc:title": existing_label,
+        "rdfs:comment": f"Dataset representing the '{existing_label}' code list."
     })
 
     if allow_human_input:
@@ -121,14 +122,9 @@ def populate_dataset_node(
                 "to_value": lambda input_value: {"@id": input_value}
             },
             {
-                "name": "dcat:accessURL",
-                "input_request": "Access URL (user landing for Download)",
-                "to_value": lambda creator_uri: {"@id": creator_uri}
-            },
-            {
-                "name": "dcat:downloadURL",
-                "input_request": "Direct Download URL",
-                "to_value": lambda input_value: {"@id": input_value}
+                "name": "dcat:landingPage",
+                "input_request": "Landing Page URL (user landing for Download)",
+                "to_value": lambda landing_uri: {"@id": landing_uri}
             },
             {
                 "name": "dc:issued",
@@ -141,6 +137,14 @@ def populate_dataset_node(
                 "input_request": "Date modified (YYYY-mm-dd)",
                 "to_value": lambda input_value: {"@type": "dateTime",
                                                  "@value": datetime.strptime(input_value, "%Y-%m-%d").isoformat()}
+            },
+            {
+                "name": f"{pmdcat_base_uri}markdownDescription",
+                "input_request": "Markdown Description of Dataset",
+                "to_value": lambda input_value: {
+                    "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                    "@value": input_value
+                }
             }
         ]
 
@@ -204,16 +208,20 @@ def populate_required_dcat_metadata(
     # Ensure that the skos:ConceptScheme is also of type pmdcat:DatasetContents
     existing_type: Union[str, List[str]] = prov_derivation_object["@type"]
 
-    pmdcat_dataset_contents = "http://publishmydata.com/pmdcat#DatasetContents"
+    pmdcat_dataset_contents = f"{pmdcat_base_uri}DatasetContents"
+    pmdcat_concept_scheme = f"{pmdcat_base_uri}ConceptScheme"
     if isinstance(existing_type, str):
-        if existing_type != pmdcat_dataset_contents:
+        if existing_type != pmdcat_concept_scheme:
             prov_derivation_object["@type"] = [
                 existing_type,
-                pmdcat_dataset_contents
+                pmdcat_concept_scheme
             ]
     elif isinstance(existing_type, list):
-        if not find(existing_type, lambda x: x == pmdcat_dataset_contents):
-            existing_type.append(pmdcat_dataset_contents)
+        if pmdcat_concept_scheme not in existing_type:
+            existing_type.append(pmdcat_concept_scheme)
+
+        if pmdcat_dataset_contents in existing_type:
+            existing_type.remove(pmdcat_dataset_contents)
     else:
         raise Exception(
             f"Unexpected datatype found for '@types': {type(existing_type)}")
@@ -296,7 +304,7 @@ def create_metadata_shell_for_csv(csv_file_path: str) -> str:
             "@id": concept_scheme_uri,
             "@type": [
                 "skos:ConceptScheme",
-                "http://publishmydata.com/pmdcat#DatasetContents"
+                f"{pmdcat_base_uri}DatasetContents"
             ]
         }
     }

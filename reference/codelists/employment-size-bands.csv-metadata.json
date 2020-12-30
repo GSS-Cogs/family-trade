@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Employment Size Bands",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Employment Size Bands code list",
-            "dc:title": "Dataset representing Employment Size Bands code list",
+            "rdfs:label": "Employment Size Bands",
+            "dc:title": "Employment Size Bands",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Employment Size Bands' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

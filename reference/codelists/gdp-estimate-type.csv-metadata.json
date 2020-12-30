@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/gdp-estimate-type",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Gdp Estimate Type",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Gdp Estimate Type code list",
-            "dc:title": "Dataset representing Gdp Estimate Type code list",
+            "rdfs:label": "Gdp Estimate Type",
+            "dc:title": "Gdp Estimate Type",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/gdp-estimate-type"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Gdp Estimate Type' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

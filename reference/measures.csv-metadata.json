@@ -8,10 +8,7 @@
     "@id": "http://gss-data.org.uk/def/trade/ontology/measures",
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/ontology/measures",
-        "@type": [
-            "owl:Ontology",
-            "http://publishmydata.com/pmdcat#DatasetContents"
-        ]
+        "@type": "owl:Ontology"
     },
     "url": "measures.csv",
     "tableSchema": {
@@ -81,42 +78,5 @@
         "aboutUrl": "http://gss-data.org.uk/def/{+namespace}/measure/{+path}"
     },
     "rdfs:label": "GSS Trade Measures",
-    "dc:title": "GSS Trade Measures",
-    "rdfs:seeAlso": [
-        {
-            "@id": "http://gss-data.org.uk/def/trade/ontology/measures/dataset",
-            "@type": [
-                "dcat:Dataset",
-                "http://publishmydata.com/pmdcat#Dataset"
-            ],
-            "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/ontology/measures"
-            },
-            "rdfs:label": "Dataset representing GSS Trade Measures code list",
-            "dc:title": "Dataset representing GSS Trade Measures code list"
-        },
-        {
-            "@id": "http://gss-data.org.uk/catalog/vocabularies",
-            "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/ontology/measures/catalog-record"
-            }
-        },
-        {
-            "@id": "http://gss-data.org.uk/def/trade/ontology/measures/catalog-record",
-            "@type": "dcat:CatalogRecord",
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/ontology/measures/dataset"
-            },
-            "dc:title": "GSS Trade Measures Catalog Record",
-            "rdfs:label": "GSS Trade Measures Catalog Record",
-            "dc:issued": {
-                "@type": "dateTime",
-                "@value": "2020-12-23T16:40:50.887157"
-            },
-            "dc:modified": {
-                "@type": "dateTime",
-                "@value": "2020-12-23T16:40:50.887157"
-            }
-        }
-    ]
+    "dc:title": "GSS Trade Measures"
 }

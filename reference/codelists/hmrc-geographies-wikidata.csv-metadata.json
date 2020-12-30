@@ -72,7 +72,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Hmrc Geographies Wikidata",
@@ -84,11 +84,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Hmrc Geographies Wikidata code list",
-            "dc:title": "Dataset representing Hmrc Geographies Wikidata code list",
+            "rdfs:label": "Hmrc Geographies Wikidata",
+            "dc:title": "Hmrc Geographies Wikidata",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies-wikidata"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Hmrc Geographies Wikidata' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

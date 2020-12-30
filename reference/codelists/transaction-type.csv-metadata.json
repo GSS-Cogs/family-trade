@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/transaction-type",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Transaction Type",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Transaction Type code list",
-            "dc:title": "Dataset representing Transaction Type code list",
+            "rdfs:label": "Transaction Type",
+            "dc:title": "Transaction Type",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/transaction-type"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Transaction Type' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

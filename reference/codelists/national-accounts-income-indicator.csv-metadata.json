@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-income-indicator",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "National Accounts Income Indicator",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing National Accounts Income Indicator code list",
-            "dc:title": "Dataset representing National Accounts Income Indicator code list",
+            "rdfs:label": "National Accounts Income Indicator",
+            "dc:title": "National Accounts Income Indicator",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-income-indicator"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'National Accounts Income Indicator' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

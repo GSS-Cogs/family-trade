@@ -8,10 +8,7 @@
     "@id": "http://gss-data.org.uk/def/trade/ontology/properties",
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/ontology/properties",
-        "@type": [
-            "owl:Ontology",
-            "http://publishmydata.com/pmdcat#DatasetContents"
-        ]
+        "@type": "owl:Ontology"
     },
     "url": "properties.csv",
     "tableSchema": {
@@ -83,42 +80,5 @@
         "aboutUrl": "http://gss-data.org.uk/def/{+namespace}/property/{+path}"
     },
     "rdfs:label": "GSS Trade Properties",
-    "dc:title": "GSS Trade Properties",
-    "rdfs:seeAlso": [
-        {
-            "@id": "http://gss-data.org.uk/def/trade/ontology/properties/dataset",
-            "@type": [
-                "dcat:Dataset",
-                "http://publishmydata.com/pmdcat#Dataset"
-            ],
-            "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/ontology/properties"
-            },
-            "rdfs:label": "Dataset representing GSS Trade Properties code list",
-            "dc:title": "Dataset representing GSS Trade Properties code list"
-        },
-        {
-            "@id": "http://gss-data.org.uk/catalog/vocabularies",
-            "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/ontology/properties/catalog-record"
-            }
-        },
-        {
-            "@id": "http://gss-data.org.uk/def/trade/ontology/properties/catalog-record",
-            "@type": "dcat:CatalogRecord",
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/ontology/properties/dataset"
-            },
-            "dc:title": "GSS Trade Properties Catalog Record",
-            "rdfs:label": "GSS Trade Properties Catalog Record",
-            "dc:issued": {
-                "@type": "dateTime",
-                "@value": "2020-12-23T16:40:50.886568"
-            },
-            "dc:modified": {
-                "@type": "dateTime",
-                "@value": "2020-12-23T16:40:50.886568"
-            }
-        }
-    ]
+    "dc:title": "GSS Trade Properties"
 }

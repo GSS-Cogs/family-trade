@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-growth",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "National Accounts Growth",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing National Accounts Growth code list",
-            "dc:title": "Dataset representing National Accounts Growth code list",
+            "rdfs:label": "National Accounts Growth",
+            "dc:title": "National Accounts Growth",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-growth"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'National Accounts Growth' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

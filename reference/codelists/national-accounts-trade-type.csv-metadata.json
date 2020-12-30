@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "National Accounts Trade Type",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing National Accounts Trade Type code list",
-            "dc:title": "Dataset representing National Accounts Trade Type code list",
+            "rdfs:label": "National Accounts Trade Type",
+            "dc:title": "National Accounts Trade Type",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'National Accounts Trade Type' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

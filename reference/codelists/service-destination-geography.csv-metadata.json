@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/service-destination-geography",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Service Destination Geography",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Service Destination Geography code list",
-            "dc:title": "Dataset representing Service Destination Geography code list",
+            "rdfs:label": "Service Destination Geography",
+            "dc:title": "Service Destination Geography",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/service-destination-geography"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Service Destination Geography' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

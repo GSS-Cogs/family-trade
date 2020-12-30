@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-industrial-sector",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "National Accounts Industrial Sector",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing National Accounts Industrial Sector code list",
-            "dc:title": "Dataset representing National Accounts Industrial Sector code list",
+            "rdfs:label": "National Accounts Industrial Sector",
+            "dc:title": "National Accounts Industrial Sector",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-industrial-sector"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'National Accounts Industrial Sector' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

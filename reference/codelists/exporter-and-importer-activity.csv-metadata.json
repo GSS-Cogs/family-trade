@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/exporter-and-importer-activity",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Exporter And Importer Activity",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Exporter And Importer Activity code list",
-            "dc:title": "Dataset representing Exporter And Importer Activity code list",
+            "rdfs:label": "Exporter And Importer Activity",
+            "dc:title": "Exporter And Importer Activity",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/exporter-and-importer-activity"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Exporter And Importer Activity' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

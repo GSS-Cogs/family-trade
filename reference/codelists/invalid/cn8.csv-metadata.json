@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Cn8",
@@ -79,8 +79,9 @@
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
             },
-            "rdfs:label": "Dataset representing Cn8 code list",
-            "dc:title": "Dataset representing Cn8 code list"
+            "rdfs:label": "Cn8",
+            "dc:title": "Cn8",
+            "rdfs:comment": "Dataset representing the 'Cn8' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/product-category",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Product Category",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Product Category code list",
-            "dc:title": "Dataset representing Product Category code list",
+            "rdfs:label": "Product Category",
+            "dc:title": "Product Category",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/product-category"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Product Category' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

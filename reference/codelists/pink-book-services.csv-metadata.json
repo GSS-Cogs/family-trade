@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Pink Book Services",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Pink Book Services code list",
-            "dc:title": "Dataset representing Pink Book Services code list",
+            "rdfs:label": "Pink Book Services",
+            "dc:title": "Pink Book Services",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Pink Book Services' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

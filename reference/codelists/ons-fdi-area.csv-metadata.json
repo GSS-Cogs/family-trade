@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Ons Fdi Area",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Ons Fdi Area code list",
-            "dc:title": "Dataset representing Ons Fdi Area code list",
+            "rdfs:label": "Ons Fdi Area",
+            "dc:title": "Ons Fdi Area",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Ons Fdi Area' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

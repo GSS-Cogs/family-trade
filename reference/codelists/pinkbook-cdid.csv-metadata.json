@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pinkbook-cdid",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Pinkbook Cdid",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Pinkbook Cdid code list",
-            "dc:title": "Dataset representing Pinkbook Cdid code list",
+            "rdfs:label": "Pinkbook Cdid",
+            "dc:title": "Pinkbook Cdid",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pinkbook-cdid"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Pinkbook Cdid' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

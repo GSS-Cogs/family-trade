@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/service-origin-geography",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Service Origin Geography",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Service Origin Geography code list",
-            "dc:title": "Dataset representing Service Origin Geography code list",
+            "rdfs:label": "Service Origin Geography",
+            "dc:title": "Service Origin Geography",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/service-origin-geography"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Service Origin Geography' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

@@ -64,7 +64,7 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
     "rdfs:label": "Eu Rw Ww",
@@ -76,11 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Dataset representing Eu Rw Ww code list",
-            "dc:title": "Dataset representing Eu Rw Ww code list",
+            "rdfs:label": "Eu Rw Ww",
+            "dc:title": "Eu Rw Ww",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww"
-            }
+            },
+            "rdfs:comment": "Dataset representing the 'Eu Rw Ww' code list."
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
