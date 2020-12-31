@@ -153,7 +153,7 @@ cell = tab.excel_ref("A4")
 trace.Export_Services("Hard coded as all services")
 
 origin = cell.fill(DOWN).is_not_blank().is_not_whitespace()
-trace.Service_Origin_Geography("")
+trace.Service_Origin_Geography("Defined from cell ref A4 down")
 
 destination = cell.shift(1,0).fill(RIGHT).is_not_blank().is_not_whitespace() \
             .filter(lambda x: type(x.value) != 'Percentage' not in x.value)
