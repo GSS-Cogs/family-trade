@@ -19,6 +19,9 @@ from gssutils.metadata import THEME
 from os import environ
 import numpy as np
 
+cubes = Cubes("info.json")
+trace = TransformTrace()
+
 with open("info.json") as f:
     info = json.load(f)
 
@@ -528,36 +531,51 @@ jobs = {
 previewsFolder = Path('previews')
 previewsFolder.mkdir(exist_ok=True, parents=True)
     
+
 for job_name, job_details in jobs.items():
-    tidy_sheets = []
 
     try:
 
         for i, tab in enumerate(job_details["tabs"]):
+            
+            columns = ["Period", "CDID", "Geography", "Area", "Measure Type", "Decimals"]
+            trace.start(job_name, tab, columns, scraper.distributions[0].downloadURL)
 
             # Get the CDID header row
+            trace.CDID("Selected CDID codes from row(s) {}".format(job_details["cdid_header_row"]))
             cdid_header_row = tab.excel_ref(job_details["cdid_header_row"]).filter(is_cdid)
             all_cdids = cdid_header_row.expand(DOWN).filter(is_cdid)
 
             # Get time
-            time = tab.excel_ref("A6").fill(DOWN).filter(is_time)
+            trace.Period("Get period value from column A")
+            period = tab.excel_ref("A6").fill(DOWN).filter(is_time)
 
-            observations = time.waffle(cdid_header_row).is_not_blank().is_not_whitespace()
+            trace.obs("Get observation values as the cells inline with both Period and CDID")
+            observations = period.waffle(cdid_header_row).is_not_blank().is_not_whitespace()
 
             if not EXTRACT_PERCENTAGE_CHANGE:
                 p = tab.excel_ref('A').filter(contains_string('ercentage')).expand(RIGHT).expand(DOWN)
                 observations = observations - p
 
+            trace.Area("Hard code area to K02000001")
+            area = "K02000001"
+            
+            mtype = tab.excel_ref('A').filter(is_not_time_or_blank)
+            trace.Measure_Type("Select non-blank cells from column A that are not blank")
+                
             dimensions = [
-                HDim(time, "Period", DIRECTLY, LEFT),
-                HDimConst("Geography", "K02000001"),
+                HDim(period, "Period", DIRECTLY, LEFT),
+                HDimConst("Area", area),
                 HDim(all_cdids, "CDID", DIRECTLY, ABOVE),
-                HDim(tab.excel_ref('A').filter(is_not_time_or_blank), "Measure Type", CLOSEST, ABOVE,
+                HDim(mtype, "Measure Type", CLOSEST, ABOVE,
                     cellvalueoverride={"P":"Seasonally adjusted"}) # account for missing header
             ]
 
             # missing CDID's for estimate type ....
             if job_name == "Gross fixed capital formation" or job_name == "Inventories":
+                trace.add_column("Estimate Type")
+                trace.Estimate_Type("Get estimate type as either current-price or chained-volume-measure" \
+                                   + " from top right of sheet.")
                 dimensions.append(
                 HDim(cdid_header_row.shift(0, -4).is_not_blank().is_not_whitespace(), "Estimate Type", CLOSEST, RIGHT,
                      cellvalueoverride={
@@ -575,6 +593,7 @@ for job_name, job_details in jobs.items():
             df = cs.topandas()
 
             # Applicable to all jobs
+            trace.Period("Format time to have a /quarter or /year prefix")
             df["Period"] = df["Period"].apply(format_time)
 
             # missing CDID's for estimate type ....
@@ -586,6 +605,7 @@ for job_name, job_details in jobs.items():
                 df["Estimate Type"] = df["CDID"]
                 df["Estimate Type"] = df["Estimate Type"].map(lambda x: estimate_type[x])
 
+            trace.Measure_Type("Lookup the measure types based on the name of the tab")
             df["Measure Type"] = df["Measure Type"].apply(LookupMeasure(job_name, tab))
 
             df["Measure Type"] = df["Measure Type"].str.replace("('GBP Million',)", "GBP Million") # why?
@@ -598,10 +618,14 @@ for job_name, job_details in jobs.items():
             df["Measure Type"] = df["Measure Type"].map(lambda x: x.split(":")[0])
             if len(df["Growth"].unique().tolist()) == 1:
                 df = df.drop("Growth", axis=1)
+            else:
+                trace.add_column("Growth")
+                trace.Growth("Create a growth column, values are dependent on the tab name")
 
             # account for horizontal changes in measure type
             df = horizontal_measure_overrides(job_name, df)
 
+            trace.Decimals('Set to 1 unless we\'re extracting population and GDP per head, in which case set to 1000')
             if job_name == "GDP per head":
                 df["Decimals"] = df["Estimate Type"].map(lambda x: 1000 if x == "population" else 1)
             else:
@@ -628,38 +652,40 @@ for job_name, job_details in jobs.items():
                 # Now correct the notation of any data markers
                 marker_lookup = {"..": "not-availible", "-": "nil-or-less-than-half-the-final-digit-shown"}
                 df["Marker"] = df["Marker"].map(lambda x: marker_lookup.get(x, x))
+                
+                trace.add_column("Marker")
+                trace.Marker('Set ".."" to "not-availible" and "-"" to "nil-or-less-than-half-the-final-digit-shown"')
             except KeyError:
                 pass # expected, not all datasets have Markers
 
-            tidy_sheets.append(df)
+            trace.store(job_name, df)
 
         destinationFolder = Path('out')
         destinationFolder.mkdir(exist_ok=True, parents=True)
 
         TITLE = info["title"] + ", " + dataset_title_prefix + ": " + job_name
-        OBS_ID = pathify(TITLE)
 
-        df = pd.concat(tidy_sheets).drop_duplicates()
+        df = trace.combine_and_trace(job_name, job_name)
+        
+        trace.all("Drop all duplicate rows")
+        df = df.drop_duplicates()
 
         # Fill in missing measures
         df = df.fillna("")
+        
+        trace.Measure_Type("Where we have sparsity in the measures, add a data marker")
         df = add_datamarkers_for_missing_measures(df)
-
-        df.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
-
-        scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
-        scraper.dataset.title = f'{TITLE}'
-        scraper.dataset.family = 'trade'
-
-        with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
-            metadata.write(scraper.generate_trig())
-
-        schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-        schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
+        
+        scraper.family = "Trade"
+        scraper.dataset.family = "Trade"
+        cubes.add_cube(scraper, df.drop_duplicates(), TITLE)
 
     except Exception as e:
         raise Exception("Error encountered on tab '{}' of job '{}'. See earlier trace for specifics"
                         .format(tab.name, job_name)) from e
 
+
+# %%
+cubes.output_all()
 
 # %%
