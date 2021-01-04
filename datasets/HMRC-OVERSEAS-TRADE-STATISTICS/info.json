@@ -8,7 +8,7 @@
         "Trade"
     ],
     "extract": {
-        "source": "API",
+        "source": "JSON",
         "stage": "Not Required"
     },
     "transform": {
