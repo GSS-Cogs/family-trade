@@ -11,7 +11,8 @@
         "Trade"
     ],
     "extract": {
-        "source": "XLS"
+        "source": "XLS",
+        "stage": "Not Required"
     },
     "transform": {
         "airtable": "rec1LjZkS2cR310Az",
@@ -21,5 +22,5 @@
         "main_issue": 78
     },
     "sizingNotes": "",
-    "notes": ""
+    "notes": "This is a duplicate dataset with Github issue #1 and is therefore not required.  ONS Bop undated to Balance of Payments"
 }
