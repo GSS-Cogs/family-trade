@@ -40,7 +40,7 @@ scraper = Scraper(page)
 scraper
 # -
 
-cubes = Cubes("info.json")
+# cubes = Cubes("info.json")
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 list(tabs)
 
