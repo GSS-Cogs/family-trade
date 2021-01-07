@@ -1,5 +1,5 @@
 
-<!-- #region -->\
+<!-- #region -->
 # COGS Dataset Specification
 
 # ONS UK trade in services by business characteristics
@@ -25,10 +25,10 @@ Exports (£) and Imports (£) should be combined into a dimension and the values
 I think these six data tabs can be combined into a single cube: 2016, 2016 Industry Totals, 2017, 2017 Industry Totals, 2018, 2018 Industry Totals.
 
 A possible dataset structure would be:
-Business size // Ownership // Industry // Direction // Data Marking // Value
+Business size // Ownership // Industry // Flow // Data Marking // Value
 
-The Industry Totals tabs have Ownership and Industry breakdowns and should have \'91Total\'92 for Business size.
-The year totals have Ownership and Business size breakdowns and should have \'91Total\'92 for Industry.
+The Industry Totals tabs have Ownership and Industry breakdowns and should have Total for Business size.
+The year totals have Ownership and Business size breakdowns and should have Total for Industry.
 
 
 #### DM Notes
