@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.5.1
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -137,7 +137,7 @@ def process_tab(tab):
     return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry',
                 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
-observations = pd.concat(process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0'])
+observations = pd.concat((process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0']), sort=False)
 cubes.add_cube(scraper, observations, "International trade in services")
 
 # +
