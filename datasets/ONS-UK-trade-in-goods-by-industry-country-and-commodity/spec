@@ -1,11 +1,13 @@
 ###data spec for data engineers ####
 
+#title- UK trade in goods by industry, country and commodity
+
 # join export and imports on commodity/indsutry columnns
 #create marker columnn for supressed data 
 #combine direction columnm to use both export and import 
 #create flow column to capture values by year using commodity as a filter
 #data is gbp million (current prices)
-#code list for industry and commodity ?
+#code list for industry and commodity
 #creation of value column to sum export/import by year 
 #creation of year column 
 #two letter country code required to match pmd4 country codelist 
