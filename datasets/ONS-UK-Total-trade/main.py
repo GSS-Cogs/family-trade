@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -103,6 +103,7 @@ For Trade in Goods the data is consistent with UK Trade: August 2020 publication
 For Trade in Services the data is consistent with UK Trade in services by partner country: April to June 2020 publication on 4th November 2020
 """
 scraper.dataset.description = scraper.dataset.description + add_to_des
+
 
 cubes.add_cube(scraper, df.drop_duplicates(), "ons-uk-total-trade")
 cubes.output_all()
