@@ -1,39 +1,20 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
-#!/usr/bin/env python
-# coding: utf-8
-
-
-# In[2]:
-
-
-# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
-#     formats: ipynb,py:light
 #     text_representation:
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.6.0
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
 
-
 # ## Balance of Payments Capital Account B7
 
 # +
-
-# In[3]:
-
 
 import pandas as pd
 import numpy as np
@@ -43,56 +24,30 @@ from gssutils.metadata import THEME
 from gssutils.metadata import *
 from databaker.framework import *
 
-
-# In[4]:
-
-
 cubes = Cubes("info.json")
-
-
-# In[5]:
-
 
 with open ('info.json') as f:
     info = json.load(f)
 
-
-# In[6]:
-
-
 landingPage = info['landingPage']
 landingPage
 
-
-# In[7]:
-
+title = 'Balance of Payments: Capital Account'
 
 scraper = Scraper(landingPage)
 scraper.dataset.family = info['families']
 scraper
 
-
-# In[8]:
-
-
-dist = scraper.distributions[0]
-dist
-
-
-# In[9]:
-
+# +
+# dist = scraper.distributions[0]
+# dist
+# -
 
 tabs = scraper.distributions[0].as_databaker()
 
 
-# In[10]:
-
-
 def left(s, amount):
     return s[:amount]
-
-
-# In[11]:
 
 
 def right(s, amount):
@@ -101,16 +56,8 @@ def right(s, amount):
 
 # +
 
-# -
-
-# In[12]:
-
-
+# +
 tidied_sheets = []
-
-
-# In[13]:
-
 
 for tab in tabs:
     if 'B7' in tab.name: #Tabs B7 and B7A
@@ -140,12 +87,9 @@ for tab in tabs:
         tidy_sheet = ConversionSegment(tab, dimensions, observations)        
        # savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
         tidied_sheets.append(tidy_sheet.topandas()) 
-        
-        df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
+# -
 
-
-# In[14]:
-
+df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
 
 df['Period'] = df.Period.str.replace('\.0', '')
 df['Quarter'] = df["Quarter"].map(lambda x: x.lstrip() if isinstance(x, str) else x)
@@ -153,52 +97,32 @@ df['Period'] = df['Period'] + df['Quarter']
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 df.drop(['Quarter'], axis=1, inplace=True)
 
-
-# In[15]:
-
-
 df['Account Type'] = df['Account Type'].map(lambda x: x.split()[0]) + ' ' +  df['Account Type'].map(lambda x: x.split()[1])
 df['Account Type'] = df['Account Type'].str.rstrip('1')
 df['Services'] = df['Services'].str.rstrip('2')
 df['Services'] = df['Services'].str.lstrip()
 df = df.replace({'Sector' : {' ' : 'total'}})
 
-
-# In[16]:
-
-
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'].replace(' -', 'unknown', inplace=True)
 
-
-# In[17]:
-
-
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
-
 
 # +
 
-# In[18]:
-
-
+# +
 tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
            'Marker','Measure Type', 'Unit']]
 for column in tidy:
-    if column in ('Flow Directions', 'Services', 'Account Type', 'Sector'):
+    if column in ['Flow Directions', 'Services', 'Account Type', 'Sector']:
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
         
 tidy
+# -
 
-
-# In[19]:
-
-
-cubes.add_cube(scraper, tidy, info['title'])
-
+cubes.add_cube(scraper, tidy, title)
 cubes.output_all()
-
 
 # + endofcell="--"
 
