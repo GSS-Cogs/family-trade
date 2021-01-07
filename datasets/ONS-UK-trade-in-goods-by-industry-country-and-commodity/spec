@@ -1,20 +1,26 @@
 ###data spec for data engineers ####
 
+#title- UK trade in goods by industry, country and commodity
+
+# join export and imports on commodity/indsutry columnns
 #create marker columnn for supressed data 
 #combine direction columnm to use both export and import 
-#create flow column
+#create flow column to capture values by year using commodity as a filter
 #data is gbp million (current prices)
-#code list for industry and commodity ?
-#creation of value column to sum export sums by year 
+#code list for industry and commodity
+#creation of value column to sum export/import by year 
 #creation of year column 
 #two letter country code required to match pmd4 country codelist 
 #two letter industry code lists to match pmd4 industry codelist 
-#
 
+#engineers should note the data comprises both import and export data 
+
+#title- UK trade in goods by industry, country and commodity
 
 ##description 
 #Users should note the following:	
 Industry data has been produced using Standard Industrial Classification 2007 (SIC07).	
+#data contains UK imports and exports by country and commodity
 	
 Commodity data has been produced using Standard International Trade Classification (SITC).	
 	
