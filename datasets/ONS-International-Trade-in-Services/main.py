@@ -137,10 +137,11 @@ def process_tab(tab):
     return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry',
                 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
-observations = pd.concat(process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0'])
+observations = pd.concat((process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0']), sort=False)
 cubes.add_cube(scraper, observations, "International trade in services")
 
-# +
+# -
+
 observations.rename(index= str, columns= {'DATAMARKER':'Marker'}, inplace = True)
 observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil',
                                                                '..' : 'disclosive',
@@ -149,7 +150,6 @@ observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil'
                                                               }.get(x, x))
 
 observations['Value'] = observations['Value'].round(decimals=2)
-# -
 
 for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     observations[col] = observations[col].astype('category')
