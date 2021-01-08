@@ -45,11 +45,17 @@ The year totals have Ownership and Business size breakdowns and should have All 
 Codelists:
 
 Period: 
+
 Business size: Change notation to '1-to-49', '11-to-249', '250-and-over', unknown-employees (also 'any' to represent total). Use codelist family-trade/reference/codelists/employment-size-bands
+
 Ownership: Need to update family-trade/reference/codelists/countries-of-ownership.csv code list
+
 Industry: 
+
 Flow: add 'exports' and 'imports' as per instructions above and use codelist family-trade/reference/codelists/flow-directions
+
 Value:
+
 Marker: Change '..' to 'suppressed' and use codelist ref_common/markers
 
 #### DM Notes
