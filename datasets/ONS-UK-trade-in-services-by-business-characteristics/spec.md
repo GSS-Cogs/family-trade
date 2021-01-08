@@ -42,11 +42,11 @@ This way all the data have the same dimensions and can be combined
 The Industry Totals tabs have Ownership and Industry breakdowns and should have All for Business size.
 The year totals have Ownership and Business size breakdowns and should have All for Industry.
 
-Codelists:
+###Codelists:
 
-Period: 
+#Period:#
 
-Business size: Change notation to '1-to-49', '11-to-249', '250-and-over', unknown-employees (also 'any' to represent total). Use codelist family-trade/reference/codelists/employment-size-bands
+#Business size:# Change notation to '1-to-49', '11-to-249', '250-and-over', unknown-employees (also 'any' to represent total). Use codelist family-trade/reference/codelists/employment-size-bands
 
 Ownership: Need to update family-trade/reference/codelists/countries-of-ownership.csv code list
 
