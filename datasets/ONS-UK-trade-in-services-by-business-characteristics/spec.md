@@ -11,9 +11,9 @@
 
 Transform notes
 
-#### Table Structure
+#### Table Structure (proposed by DM)
 
-		Columns go here
+		Period // Business size // Ownership // Industry // Flow // // Value // Marker
 
 #### DE Stage one notes
 Notes go here.
@@ -24,13 +24,13 @@ I think these six data tabs can be combined into a single cube: 2016, 2016 Indus
 Exports (£) and Imports (£) should be combined into a 'Flow' dimension and the values should go in the 'Value' column.
 
 A possible dataset structure would be:
-Time // Business size // Ownership // Industry // Flow // Data Marking // Value
+Period // Business size // Ownership // Industry // Flow // // Value // Marker
 
 The year tabs (2016, 2017 and 2018 at present) have one structure and the Industry Totals tabs another.
 
 The year tabs have three summary tables on top of each other. Each is missing a dimension.
 The first needs a 'Country' dimension with 'World' (i.e. all).
-The second needs a 'Business size' dimension with 'All'.
+The second needs a 'Business size' dimension with 'any'.
 The third needs an 'Ownership' dimension with 'All'.
 
 The Industry totals tabs have two tables alongside each other.
@@ -42,6 +42,15 @@ This way all the data have the same dimensions and can be combined
 The Industry Totals tabs have Ownership and Industry breakdowns and should have All for Business size.
 The year totals have Ownership and Business size breakdowns and should have All for Industry.
 
+Codelists:
+
+Period: 
+Business size: Change notation to '1-to-49', '11-to-249', '250-and-over', unknown-employees (also 'any' to represent total). Use codelist family-trade/reference/codelists/employment-size-bands
+Ownership: Need to update family-trade/reference/codelists/countries-of-ownership.csv code list
+Industry: 
+Flow: add 'exports' and 'imports' as per instructions above and use codelist family-trade/reference/codelists/flow-directions
+Value:
+Marker: Change '..' to 'suppressed' and use codelist ref_common/markers
 
 #### DM Notes
 
