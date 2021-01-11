@@ -62,6 +62,37 @@ add 'exports' and 'imports' as per instructions above and use codelist family-tr
 #### Marker: 
 Change '..' to 'suppressed' and use codelist ref_common/markers
 
+### Scraper:
+
+Dataset-title: uktradeingoodsbybusinesscharacteristics
+Title: UK trade in goods by business characteristics
+Comment: Trade in goods data, including breakdown of imports and exports by Standard Industrial Classification, region (EU and non-EU), business size and by domestic and foreign ownership.
+Description: Trade in goods data, including breakdown of imports and exports by Standard Industrial Classification, region (EU and non-EU), business size and by domestic and foreign ownership.
+Users should note the following:
+Industry data has been produced using Standard Industrial Classification 2007 (SIC07).
+
+Business size is defined using the following employment size bands:
+   Small - 0-49 employees
+   Medium - 50-249 employees
+   Large - 250+ employees
+   Unknown - number of employees cannot be determined via IDBR
+
+Ownership status is defined as:
+   Domestic - ultimate controlling parent company located in the UK
+   Foreign - ultimate controlling parent company located outside the UK
+   Unknown - location of ultimate controlling parent company cannot be determined via IDBR
+
+Some data cells have been suppressed to protect confidentiality so that individual traders cannot be identified.
+
+Data
+All data is in £ million, current prices
+
+Rounding
+Some of the totals within this release (e.g. EU, Non EU and world total) may not exactly match data published via other trade releases due to small rounding differences.
+
+Trade Asymmetries 
+These data are our best estimate of these bilateral UK trade flows. Users should note that alternative estimates are available, in some cases, via the statistical agencies for bilateral countries or through central databases such as UN Comtrade
+
 #### DM Notes
 
 Nothing here yet.
