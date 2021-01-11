@@ -92,22 +92,39 @@ for name, tab in tabs.items():
     savepreviewhtml(tidy_sheet, fname = tab.name+ "Preview.html")
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
-    df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df
 
-trace.render("spec_v1.html")
+df.rename(columns={'OBS' : 'Value', 'Flow':'Flow Direction', 'Period' : 'Year', 'DATAMARKER' : 'Marker'}, inplace=True)
+
+df['Flow Direction'] = df['Flow Direction'].apply(pathify)
+
+df['Country'] = df['Country'].apply(pathify)
+
+df['Zone'] = df['Zone'].apply(pathify)
+
+df['Business Size'] = df['Business Size'].apply(pathify)
+
+df['Age'] = df['Age'].apply(pathify)
+
+df['Industry Group'] = df['Industry Group'].apply(pathify) 
+
+
+def left(s,amount):
+    return s[:amount]
+def right(s,amount):
+    return s[-amount:]
+def date_time(date):
+    if len(date) == 5:
+        return 'year/' + left(date, 4)
+    #year/2019
+df['Year'] = df['Year'].astype(str).replace('\.', '', regex=True)
+df['Year'] = df['Year'].apply(date_time)
+
+with pd.option_context('float_format', '{:f}'.format):
+    print(df)
 
 cubes.add_cube(scraper, df.drop_duplicates(), "uk-trade-in-goods-by-business-characteristics-2019")
 cubes.output_all()
 
-df.count()
-
-
-df.info()
-
-df.dtypes
-
-df['Flow']
-
-with pd.option_context('float_format', '{:f}'.format):
-    print(df)
+trace.render("spec_v1.html")
