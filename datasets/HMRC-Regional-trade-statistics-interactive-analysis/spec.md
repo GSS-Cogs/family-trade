@@ -74,7 +74,7 @@
 		
 #### Table Structure
 
-	Year, Region, Country, Flow, Measure Type, Unit, Marker, Value
+	Period, Region, Country, Flow, Measure Type, Unit, Marker, Value
 
 #### Join
 
