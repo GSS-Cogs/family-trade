@@ -22,32 +22,33 @@
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{period}"
+                "value": "http://reference.data.gov.uk/id/year/{period}",
+                "codelist": false
             },
             "Includes Travel": {
-                "label": "Includes Travel",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/includes-travel/{includes_travel}"
+                "label": "Includes Travel"
             },
             "Travel Type": {
-                "label": "Travel Type",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/travel-tyle/{travel_type}"
+                "label": "Travel Type"
             },
             "Location": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "{location}"
+                "value": "{location}",
+                "codelist": false
             },
             "Industry Grouping": {
                 "label": "Industry Grouping",
-                "source": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/internationaltradeinservicesbysubnationalareasoftheuk/latest#appendix-a-industry-groups",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/industry-groupings/{industry-grouping}"
+                "source": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/internationaltradeinservicesbysubnationalareasoftheuk/latest#appendix-a-industry-groups"
             },
             "Origin": {
                 "label": "Country or Origin of Trade",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/country-or-origin-of-trade/{country-or-origin-of-trade}"
+                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/country-or-origin-of-trade/{country-or-origin-of-trade}",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade",
             },
             "Flow": {
                 "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
-                "description": "Balance refers to the trade balance between exports and imports, calculated using exports minus imports. A positive figure indicates a trade surplus and a negative figure indicates a trade deficit."
+                "description": "Balance refers to the trade balance between exports and imports, calculated using exports minus imports. A positive figure indicates a trade surplus and a negative figure indicates a trade deficit.",
+                "codelist": "http://gss-data.org.uk/def/concept-scheme/"
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
