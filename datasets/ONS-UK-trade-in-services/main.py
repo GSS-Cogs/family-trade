@@ -4,38 +4,31 @@
 from gssutils import *
 import json
 
-cubes = Cubes("info.json")
-scraper_1 = Scraper('https://www.ons.gov.uk/businessindustryandtrade/' + \
-                  'internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted')
-scraper_1
+#Landing page URL in info.json for UK trade in services: all countries, non-seasonally adjusted
+with open("info.json", "r") as read_file:
+    data = json.load(read_file)
+    data["landingPage"] = "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/uktradeinservicesallcountriesnonseasonallyadjusted" 
+
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+    
+
+# %%
+scraper = Scraper(seed="info.json")
+distribution = scraper.distribution(latest=True)
+
 trace = TransformTrace()
+cubes = Cubes("info.json")
 
-# %%
-info = json.load(open("info.json"))
-scraper_1.dataset.family = info["families"]
-
-# %%
-dist_1 = scraper_1.distributions[0]
-dist_1
-
-# %%
-first_url = dist_1.downloadURL
-first_url
-
-# %%
-tabs = {tab.name: tab for tab in scraper_1.distribution(latest=True, mediaType=Excel).as_databaker()}
-
-
-# %%
-tab = tabs["TiS by country"]
+tabs = {tab.name: tab for tab in distribution.as_databaker()}
 
 # %%
 tab = tabs['TiS by country']
-datasetTitle = "ONS-UK-trade-in-services"
+datasetTitle = distribution.title
 columns = ["Period", "ONS Partner Geography", "Flow", "Trade Services", "Measure Type", "Unit", "Marker"]
 
 # %%
-trace.start(datasetTitle, tab, columns, first_url)
+trace.start(datasetTitle, tab, columns, distribution.downloadURL)
 
 # trace.obs("Taken from cell C7 across and down which are non blank")
 observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank()
@@ -65,32 +58,25 @@ trace.with_preview(tidy_sheet)
 trace.store("combined_dataframe", tidy_sheet.topandas())
 
 # %%
-#scraped second landing page
-from gssutils import *
-import json
+#Landing page URL in info.json for UK trade in services: service type by partner country, non-seasonally adjusted
+with open("info.json", "r") as read_file:
+    data = json.load(read_file)
+    data["landingPage"] = "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/uktradeinservicesservicetypebypartnercountrynonseasonallyadjusted" 
+
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
 
 # %%
-info = json.load(open("info.json"))
-scraper_2 = Scraper(seed="info.json")
-scraper_2
-
-# %%
-dist_2 = scraper_2.distributions[0]
-dist_2
-
-# %%
-second_url = dist_2.downloadURL
-second_url
-
-# %%
-tabs = {tab.name: tab for tab in scraper_2.distribution(latest=True, mediaType=Excel).as_databaker()}
+scraper = Scraper(seed="info.json")
+distribution = scraper.distribution(latest=True)
+tabs = {tab.name: tab for tab in distribution.as_databaker()}
 
 # %%
 tab = tabs['Time Series']
 
-datasetTitle = 'UK trade in services by partner country'
+datasetTitle = distribution.title
 columns=["Period", "Flow", "Trade Services", "ONS Partner Geography", "Marker", "Seasonal Adjustment"]
-trace.start(datasetTitle, tab, columns, second_url)
+trace.start(datasetTitle, tab, columns, distribution.downloadURL)
 
 observations = tab.excel_ref("F2").expand(RIGHT).expand(DOWN).is_not_blank()
 
@@ -173,24 +159,8 @@ tidy = tidy.drop_duplicates()
 tidy
 
 # %%
-cubes.add_cube(scraper_1, tidy, "ONS UK trade in services by country" )
-cubes.add_cube(scraper_2, tidy, "ONS UK trade in services by partner country")
+cubes.add_cube(scraper, tidy, "ONS UK trade in services by country and partner country" )
 cubes.output_all()
 
 # %%
 trace.render("spec_v1.html")
-
-# %%
-# NOT SURE IF THIS CODE IS REQUIRED
-# new_table = new_table.loc[new_table['ONS_Partner_Geography'].isin(['AD','AE','AF','AG','AI','AM','AO','AQ','AS','AW','AZ','BA','BB','BD','BF',	
-#                                                                 'BH','BI','BJ','BM','BN','BO','BQ','BS','BT','BV','BW','BZ','CC','CD','CF',
-#                                                                 'CG','CI','CK','CM','CR','CU','CV','CW','CX','D5','DJ','DM','DO','DZ','EC',
-#                                                                 'ER','ET','FJ','FK','FM','FO','GA','GD','GE','GG','GH','GI','GL','GM','GN',
-#                                                                 'GQ','GS','GT','GU','GW','GY','HM','HN','HT','IM','IO','IQ','JE','JM','JO',
-#                                                                 'KE','KG','KH','KI','KM','KN','KP','KW','KY','KZ','LA',	'LB','LC','LK','LR',
-#                                                                 'LS','LY','MD','MG','MH','MK','ML','MM','MN','MO','MP','MR','MS','MU','MV',
-#                                                                 'MW','MZ','NA','NC','NE','NF','NG','NI','NP','NR','NU','OM','PA','PE','PF',
-#                                                                 'PG','PN','PS','PW','PY','QA','RW','SB','SC','SD','SH','SL','SM','SN','SO',
-#                                                                 'SR','SS','ST','SV','SX','SY','SZ','TC','TD','TF','TG','TJ','TK','TL','TM',
-#                                                                 'TN','TO','TT','TV','TZ','UG','UM','UZ','VA','VC','VG','VI','VN','VU','WF',
-#                                                                 'WS','XK','YE','ZM','ZW'])]
