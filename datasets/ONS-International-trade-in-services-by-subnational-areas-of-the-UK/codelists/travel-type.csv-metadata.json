@@ -1,69 +1,143 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#schema",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type",
     "url": "travel-type.csv",
     "tableSchema": {
-      "columns": [
-        {
-          "titles": "Label",
-          "name": "label",
-          "datatype": "string",
-          "required": true,
-          "propertyUrl": "rdfs:label"
-        },
-        {
-          "titles": "Notation",
-          "name": "notation",
-          "datatype": {
-            "base": "string",
-            "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
-          },
-          "required": true,
-          "propertyUrl": "skos:notation"
-        },
-        {
-          "titles": "Parent Notation",
-          "name": "parent_notation",
-          "datatype": {
-            "base": "string",
-            "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
-          },
-          "required": false,
-          "propertyUrl": "skos:broader",
-          "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/travel-type/{parent_notation}"
-        },
-        {
-          "titles": "Sort Priority",
-          "name": "sort",
-          "datatype": "integer",
-          "required": false,
-          "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-        },
-        {
-          "titles": "Description",
-          "name": "description",
-          "datatype": "string",
-          "required": false,
-          "propertyUrl": "rdfs:comment"
-        },
-        {
-          "virtual": true,
-          "propertyUrl": "rdf:type",
-          "valueUrl": "skos:Concept"
-        },
-        {
-          "virtual": true,
-          "propertyUrl": "skos:inScheme",
-          "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type"
-        }
-      ],
-      "primaryKey": "notation",
-      "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/travel-type/{notation}"
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/travel-type/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/travel-type/{notation}"
     },
     "prov:hadDerivation": {
-      "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type",
-      "@type": "skos:ConceptScheme",
-      "rdfs:label": "GDP Estimate Type"
-    }
-  }
-  
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:label": "GDP Estimate Type",
+    "dc:title": "GDP Estimate Type",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type"
+            },
+            "rdfs:label": "GDP Estimate Type",
+            "dc:title": "GDP Estimate Type",
+            "rdfs:comment": "Dataset representing the 'GDP Estimate Type' code list.",
+            "dc:license": {
+                "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+            },
+            "dc:creator": {
+                "@id": "https://www.ons.gov.uk/"
+            },
+            "dc:publisher": {
+                "@id": "https://www.ons.gov.uk/"
+            },
+            "dcat:contactPoint": {
+                "@id": "mailto:isabel.rogers@ons.gov.uk"
+            },
+            "dcat:landingPage": {
+                "@id": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-09-10T00:00:00"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-09-10T00:00:00"
+            },
+            "http://publishmydata.com/pmdcat#markdownDescription": {
+                "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                "@value": "Codelist generated by COGS from values found in dataset."
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/travel-type"
+            },
+            "dc:title": "GDP Estimate Type Catalog Record",
+            "rdfs:label": "GDP Estimate Type Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-01-12T10:44:56.633112"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-12T10:44:56.633112"
+            }
+        }
+    ]
+}
