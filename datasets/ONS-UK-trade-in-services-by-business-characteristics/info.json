@@ -1,0 +1,59 @@
+{
+    "title": "UK trade in services by business characteristics",
+    "publisher": "Office for National Statistics",
+    "description": "Breakdown of UK trade in services by business characteristics on a balance of payments basis using a new experimental dataset.",
+    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbybusinesscharacteristics",
+    "datasetNotes": [
+        "On landing page scroll to Edition in this dataset and locate the current dataset"
+    ],
+    "published": "2020-03-10",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recvEuJKTaVY6Ft4n",
+        "columns": {
+            "Period": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Business size": {
+                "parent": "http://gss-data.org.uk/def/family-trade/concept-scheme/employment-size-bands",
+                "value": "http://gss-data.org.uk/def/family-trade/concept-scheme/employment-size-bands/{business-size}"
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/family-trade/concept-scheme/eu-rw-ww",
+                "value": "http://gss-data.org.uk/def/family-trade/concept-scheme/eu-rw-ww/{country}"
+            },
+            "Industry": {
+                "parent": "http://gss-data.org.uk/vocabs/sic-industry",
+                "value": "http://gss-data.org.uk/vocabs/sic-industry/{industry}"
+            },
+            "Flow": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "description": ""
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "integer"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+ 
+        },
+        "stage": [
+            "To Do"
+        ],
+        "main_issue": 89
+    },
+    "sizingNotes": "",
+    "notes": ""
+}
