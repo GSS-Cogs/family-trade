@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,13 +17,46 @@ import glob
 from gssutils import *
 from gssutils.metadata import THEME
 import pandas as pd
+import pyexcel
+import messytables
+from io import BytesIO
 
-scraper = Scraper("https://www.gov.uk/government/statistics/alcohol-bulletin")
+# +
+# scraper = Scraper("https://www.gov.uk/government/statistics/alcohol-bulletin")
+# scraper
+
+scraper = Scraper(seed="info.json")
+scraper.distributions = [x for x in scraper.distributions if hasattr(x, "mediaType")]
 scraper
 
-dist = scraper.distribution(title=lambda x: x.startswith('Alcohol Bulletin tables'), mediaType=ODS)
-tabs = (t for t in dist.as_databaker())
-dist
+# +
+# dist = scraper.distribution(title=lambda x: x.startswith('Alcohol Bulletin tables'), mediaType=ODS)
+# tabs = (t for t in dist.as_databaker())
+# dist
+
+original_tabs = scraper.distributions[0]
+
+with original_tabs.open() as ods_obj:
+    excel_obj = BytesIO()
+    book = pyexcel.get_book(file_type = 'ods', file_content = ods_obj, library = 'pyexcel-ods3')
+    old_tab_names = book.sheet_names()
+    
+    for old_tab in old_tab_names:
+        if len(old_tab) > 31:
+            new_tab_names = book.sheet_names()
+            find_index = new_tab_names.index(old_tab)
+            book.remove_sheet(book.sheet_names()[find_index])
+            
+    book.save_to_memory(file_type = 'xls', stream = excel_obj)
+    tableset = messytables.excel.XLSTableSet(fileobj = excel_obj)
+    tabs = list(xypath.loader.get_sheets(tableset, "*"))
+
+
+tab = tabs[0]
+print(tab)
+# -
+
+tab = tabs[1]
 
 next_table = pd.DataFrame()
 
