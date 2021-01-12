@@ -100,6 +100,7 @@
 ##### DM Notes
 
 	Have created local codelists as their are some extra bits in the Region and Country columns (Stores and Provisions, Unallocated known). Have to start deciding how we are going to take care of this as the Country codelist would probably match up with the ONS Country codes and the Region codelist could have ONS Geography codes assigned. 
+	Will ask BAs to get some definition of what Sotres and Provisions is in this context
 	Might get rid of the Flow column and maybe alter some of the Measure Type wording, will have a look when the data gets onto PMD4 as a draft
 	Make sure to test for duplicate data
 	Will sort the comments and description when we know how many output datasets we are going to have
