@@ -85,19 +85,36 @@ UN Comtrade (https://comtrade.un.org/).
 Some data for countries have been marked with N/A. This is because Trade in Goods do not collate data from these countries.
 """
 
-#dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
-#scraper.set_base_uri('http://gss-data.org.uk')
-#scraper.set_dataset_id(dataset_path)
-
+output['Value'] = pd.to_numeric(output['Value'], downcast='integer')
 # -
 
 # -
 
-cubes.add_cube(scraper, output, info['title'])
+#cubes.add_cube(scraper, output, info['title'])
 
 #-
-cubes.output_all()
+#cubes.output_all()
 
+import os
+from urllib.parse import urljoin
+
+csvName = 'observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+output.drop_duplicates().to_csv(out / csvName, index = False)
+output.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
 
 
 
