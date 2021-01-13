@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[646]:
+
+
 # -*- coding: utf-8 -*-
 # ---
 # jupyter:
@@ -16,17 +22,20 @@
 from gssutils import *
 import json
 import math
+cubes = Cubes("info.json")
+info = json.load(open('info.json'))
+#etl_title = info["Name"]
+#etl_publisher = info["Producer"][0]
+#print("Publisher: " + etl_publisher)
+#print("Title: " + etl_title)
 
-info = json.load(open('info.json')) 
-#etl_title = info["Name"] 
-#etl_publisher = info["Producer"][0] 
-#print("Publisher: " + etl_publisher) 
-#print("Title: " + etl_title) 
-
-scraper = Scraper(seed="info.json")   
+scraper = Scraper(seed="info.json")
 scraper
 
-# +
+
+# In[647]:
+
+
 tidied_sheets = []
 trace = TransformTrace()
 df = pd.DataFrame()
@@ -34,7 +43,8 @@ df = pd.DataFrame()
 all_tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 
 
-# -
+# In[648]:
+
 
 def cell_to_string(cell):
     s = str(cell)
@@ -44,7 +54,10 @@ def cell_to_string(cell):
     return substring
 
 
-# +
+# In[649]:
+
+
+"""
 tab = all_tabs["1. NUTS1, industry"]
 
 tab_title = "1_nuts1_industry"
@@ -89,13 +102,19 @@ trace.render()
 
 tidied = df[["Year", "NUTS1 Area", "Industry", "Measure Type", "Unit", "Value"]]
 tidied_sheets.append(tidied)
-        
+
 #pd.set_option("display.max_rows", None, "display.max_columns", None)
 #tidied_sheets[0]
 
 #Notes:
     #Will need a datamarker column for values ".."
-# +
+"""
+
+
+# In[650]:
+
+
+"""
 tab = all_tabs["2. NUTS1, industry, destination"]
 
 tab_title = "2_nuts1_industry_destination"
@@ -150,9 +169,13 @@ tidied_sheets.append(tidied)
 
 #Notes:
     #Will need a datamarker column for values ".."
+"""
 
 
-# +
+# In[651]:
+
+
+"""
 tab = all_tabs["3. NUTS2, industry"]
 
 tab_title = "3_nuts2_industry"
@@ -201,14 +224,19 @@ trace.render()
 
 tidied = df[["Year", "NUTS2", "NUTS2 Area", "Industry", "Measure Type", "Unit", "Value"]]
 tidied_sheets.append(tidied)
-        
+
 #pd.set_option("display.max_rows", None, "display.max_columns", None)
 #tidied_sheets[2]
 
 #Notes:
     #Will need a datamarker column for values ".."
+"""
 
-# +
+
+# In[652]:
+
+
+""""
 tab = all_tabs["4. NUTS2, industry, destination"]
 
 tab_title = "4_nuts2_industry_destination"
@@ -267,8 +295,13 @@ tidied_sheets.append(tidied)
 
 #Notes:
     #Will need a datamarker column for values ".."
+"""
 
-# +
+
+# In[653]:
+
+
+"""
 tab = all_tabs["5. NUTS3, destination"]
 
 tab_title = "5_nuts3_destination_trade_value"
@@ -323,8 +356,13 @@ tidied_sheets.append(tidied)
 
 #Notes:
     #Will need a datamarker column for values ".."
+"""
 
-# +
+
+# In[654]:
+
+
+"""
 tab = all_tabs["5. NUTS3, destination"]
 
 tab_title = "5_nuts3_destination_percentage"
@@ -379,8 +417,13 @@ tidied_sheets.append(tidied)
 
 #Notes:
     #Will need a datamarker column for values ".."
+"""
 
-# +
+
+# In[655]:
+
+
+"""
 tab = all_tabs["6. City Region, industry"]
 
 tab_title = "6_city_region_industry"
@@ -425,14 +468,19 @@ trace.render()
 
 tidied = df[["Year", "City Region Name", "Industry", "Measure Type", "Unit", "Value"]]
 tidied_sheets.append(tidied)
-        
+
 #pd.set_option("display.max_rows", None, "display.max_columns", None)
 #tidied_sheets[6]
 
 #Notes:
     #Will need a datamarker column for values ".."
+"""
 
-# +
+
+# In[656]:
+
+
+"""
 tab = all_tabs["7. City Region, industry, dest."]
 
 tab_title = "7_city_region_dest"
@@ -487,8 +535,12 @@ tidied_sheets.append(tidied)
 
 #Notes:
     #Will need a datamarker column for values ".."
+"""
 
-# +
+
+# In[657]:
+
+
 tab = all_tabs["8. Travel"]
 
 tab_title = "8_travel"
@@ -535,20 +587,58 @@ df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 trace.render()
 
-tidied = df[["Year", "NUTS1 Area", "Travel Type", "Origin", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
+df = df[["Year", "NUTS1 Area", "Travel Type", "Origin", "Value"]]
 
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[8]
+df = df.replace({'NUTS1 Area' : {'North East' : 'http://statistics.data.gov.uk/id/statistical-geography/UKC',
+                                'NorthWest' : 'http://statistics.data.gov.uk/id/statistical-geography/UKD',
+                                'Yorkshire and The Humber' : 'http://statistics.data.gov.uk/id/statistical-geography/UKE',
+                                'East Midlands' : 'http://statistics.data.gov.uk/id/statistical-geography/UKF',
+                                'West Midlands' : 'http://statistics.data.gov.uk/id/statistical-geography/UKG',
+                                'East of England' : 'http://statistics.data.gov.uk/id/statistical-geography/UKH',
+                                'London' : 'http://statistics.data.gov.uk/id/statistical-geography/UKI',
+                                'South East' : 'http://statistics.data.gov.uk/id/statistical-geography/UKJ',
+                                'South West ' : 'http://statistics.data.gov.uk/id/statistical-geography/UKK',
+                                'Wales' : 'http://statistics.data.gov.uk/id/statistical-geography/UKL',
+                                'Scotland' : 'http://statistics.data.gov.uk/id/statistical-geography/UKM',
+                                'Northern Ireland' : 'http://statistics.data.gov.uk/id/statistical-geography/UKN',
+                                'UK' : 'http://statistics.data.gov.uk/id/statistical-geography/UK'},
+                 'Travel Type' : {'Business travel-related' : 'Business',
+                                  'Personal travel-related' : 'Personal',
+                                  'Total travel-related' : 'Total'}})
 
-#Notes:
-    #Will need a datamarker column for values ".."
+df = df.rename(columns={'NUTS1 Area' : 'Location', 'Year' : 'Period'})
 
-# +
+df['Period'] = df.apply(lambda x: 'year/' + x['Period'], axis = 1)
+
+df['Includes Travel'] = 'Includes Travel'
+
+df['Industry Grouping'] = 'Travel Related Trade'
+
+df['Flow'] = 'Imports'
+
+df['Marker'] = ''
+
+COLUMNS_TO_NOT_PATHIFY = ['Value', 'Location']
+
+for col in df.columns.values.tolist():
+	if col in COLUMNS_TO_NOT_PATHIFY:
+		continue
+	try:
+		df[col] = df[col].apply(pathify)
+	except Exception as err:
+		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+
+dfTravel = df[['Period', 'Location', 'Industry Grouping', 'Origin', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
+dfTravel
+
+
+# In[658]:
+
+
 tab = all_tabs["9. Tidy format"]
 
 tidy_sheet_list = []
-cs_list = [] 
+cs_list = []
 
 tab_title = "8_tidy_format"
 tab_columns = ["Year", "NUTS Level", "NUTS Code", "NUTS Area Name", "Industry Grouping", "Country or Origin of Trade", "Direction of Trade", "Measure Type", "Unit"]
@@ -557,29 +647,29 @@ trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
 tab_length = len(tab.excel_ref('B')) # number of rows of data
 batch_number = 10 # iterates over this many rows at a time
 number_of_iterations = math.ceil(tab_length/batch_number) # databaking will iterate this many times
-            
+
 for i in range(0, number_of_iterations):
     Min = str(5 + batch_number * i)
     Max = str(int(Min) + batch_number - 1)
 
     year = "2018"
-    
+
     nuts_level = tab.excel_ref("A"+Min+":A"+Max).is_not_blank()
-    
+
     nuts_code = tab.excel_ref("B"+Min+":B"+Max).is_not_blank()
-    
+
     nuts_area_name = tab.excel_ref("C"+Min+":C"+Max).is_not_blank()
-    
+
     industry_grouping = tab.excel_ref("D"+Min+":D"+Max).is_not_blank()
-    
+
     trade_country_or_origin = tab.excel_ref("E"+Min+":E"+Max).is_not_blank()
-    
+
     direction_of_trade = tab.excel_ref("F"+Min+":F"+Max).is_not_blank()
-    
+
     measure_type = "Trade in Services Total Value"
-    
+
     unit = "£ millions"
-    
+
 
     observations = tab.excel_ref("G"+Min+":G"+Max).is_not_blank()
 
@@ -600,7 +690,7 @@ for i in range(0, number_of_iterations):
         tidy_sheet_iteration = cs_iteration.topandas() # turning conversionsegment into a pandas dataframe
         cs_list.append(cs_iteration) # add to list
         tidy_sheet_list.append(tidy_sheet_iteration) # add to list
-                    
+
 tidy_sheet = pd.concat(tidy_sheet_list, sort=False) # dataframe for the whole tab
 
 trace.Year("Hardcoded but could have been taken from tab title (cell A1)")
@@ -616,28 +706,92 @@ trace.Unit("Hardcoded but could have been taken from cell A2")
 trace.store("combined_" + tab_title, tidy_sheet)
 
 df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
+df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
+
+df = df[["Year", "NUTS Level", "NUTS Code", "NUTS Area Name", "Industry Grouping", "Country or Origin of Trade", "Direction of Trade", "Value", "Marker"]].fillna('')
+
+df['Travel Type'] = df.apply(lambda x: 'Total' if (x['NUTS Level'] == 'NUTS1' and x['Industry Grouping'] == 'Travel') else 'NA', axis = 1)
+
+df['Includes Travel'] = df.apply(lambda x: 'Includes Travel' if x['NUTS Level'] == 'NUTS1' else 'Excludes Travel', axis = 1)
+
+df['Year'] = df.apply(lambda x: 'year/' + x['Year'], axis = 1)
+
+df = df.rename(columns={'NUTS Code' : 'Location', 'Direction of Trade' : 'Flow', 'Year' : 'Period', 'Country or Origin of Trade' : 'Origin'})
+
+df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1)
+df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
+
+df['Location'] = df.apply(lambda x: x['NUTS Area Name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
+
+df = df.replace({'Marker' : {'..' : 'Suppressed'},
+                 'Location' : {'Cambridgeshire and Peterborough Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000008',
+                               'Aberdeen City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/S12000033', #NOTE DOWN
+                               'Cardiff Capital Region' : 'http://statistics.data.gov.uk/id/statistical-geography/W42000001',
+                               'Edinburgh and South East Scotland City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/S11000003', #NOTE DOWN
+                               'Glasgow City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/S12000049', #NOTE DOWN
+                               'Greater Manchester Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000001',
+                               'Inner London' : 'http://statistics.data.gov.uk/id/statistical-geography/E13000001',
+                               'Liverpool City Region Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000004',
+                               'North of Tyne Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000011',
+                               'Outer London' : 'http://statistics.data.gov.uk/id/statistical-geography/E13000002',
+                               'Sheffield City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000002',
+                               'Swansea Bay City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/W42000004',
+                               'Tees Valley Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000006',
+                               'West Midlands Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000007',
+                               'West of England Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000009'}})
+
+df = df.drop(['NUTS Level', 'NUTS Area Name'], axis=1)
+
+COLUMNS_TO_NOT_PATHIFY = ['Value', 'Location']
+
+for col in df.columns.values.tolist():
+	if col in COLUMNS_TO_NOT_PATHIFY:
+		continue
+	try:
+		df[col] = df[col].apply(pathify)
+	except Exception as err:
+		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+
+dfTidy = df[['Period', 'Location', 'Industry Grouping', 'Origin', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
+dfTidy
+
+
+# In[659]:
+
+
+df = pd.concat([dfTravel, dfTidy])
+df
+
+
+# In[660]:
+
+
+from IPython.core.display import HTML
+for col in df:
+    if col not in ['Value']:
+        df[col] = df[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(df[col].cat.categories)
+
+
+# In[661]:
+
+
+csvName = 'observations'
+
+cubes.add_cube(scraper, df.drop_duplicates(), csvName)
+
 trace.render()
+cubes.output_all()
 
-tidied = df[["Year", "NUTS Level", "NUTS Code", "NUTS Area Name", "Industry Grouping", "Country or Origin of Trade", "Direction of Trade", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
 
-i = 1
-for sheet in tidied_sheets:
-    sheet.to_csv(f"{i}.csv")
-    i+=1
+# In[662]:
 
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[9]
-
-#Notes:
-    #Will need a datamarker column for values ".."
-# -
 
 #Outputs:
     #tidied_sheets[0] = Total value of trade in services (including travel) in the UK by NUTS1 area and industry, 2018
     #tidied_sheets[1] = Total value of trade in services (including travel) in the UK by NUTS1 area, industry and destination, 2018
-    #tidied_sheets[2] = Total value of trade in services (excluding travel) in Great Britain by NUTS2 area and industry group, 2018 
+    #tidied_sheets[2] = Total value of trade in services (excluding travel) in Great Britain by NUTS2 area and industry group, 2018
     #tidied_sheets[3] = Total value of trade in services (excluding travel) in Great Britain by NUTS2 area, broad industry group and destination, 2018
     #tidied_sheets[4] = Total value of trade in services (excluding travel) in Great Britain by NUTS3 area and destination, 2018 - Trade Value
     #tidied_sheets[5] = Total value of trade in services (excluding travel) in Great Britain by NUTS3 area and destination, 2018 - EU Trade Percentage
@@ -645,3 +799,10 @@ for sheet in tidied_sheets:
     #tidied_sheets[7] = Total value of trade in services (excluding travel) in Great Britain by City Region, industry and destination, 2018
     #tidied_sheets[8] = Total value of travel-related service imports to the UK by NUTS1 area and country of origin, 2018
     #tidied_sheets[9] = Total value of trade in services in tidy format, 2018
+
+
+# In[662]:
+
+
+
+
