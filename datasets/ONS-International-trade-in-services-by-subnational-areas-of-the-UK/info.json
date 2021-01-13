@@ -43,7 +43,7 @@
             "Origin": {
                 "label": "Country or Origin of Trade",
                 "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/country-or-origin-of-trade/{country-or-origin-of-trade}",
-                "codelist": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade"
             },
             "Flow": {
                 "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
@@ -56,7 +56,8 @@
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/trade"
+                "measure": "http://gss-data.org.uk/def/measure/trade",
+                "datatype": "double"
             }
         }
     },
