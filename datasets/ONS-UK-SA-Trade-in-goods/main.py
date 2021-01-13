@@ -54,7 +54,7 @@ for name,tab in tabs.items():
     
     
     # Take the last word of the tab's name and convert it to lower case, assign as value in Flow column in df
-    df['Flow Directions'] = str(name.split()[-1]).lower()
+    df['Flow'] = str(name.split()[-1]).lower()
     
     df.rename(columns={'OBS': 'Value'}, inplace=True)
     if name.split()[0] == 'Annual':
@@ -67,7 +67,7 @@ for name,tab in tabs.items():
         raise ValueError('Unexpected period')
 
     output = pd.concat([output, df])
-
+    output['ONS Partner Geography'] = output['ONS Partner Geography'].apply(pathify)
 # -
 
 output.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
