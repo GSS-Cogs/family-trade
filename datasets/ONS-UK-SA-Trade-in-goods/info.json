@@ -24,9 +24,9 @@
                 "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
                 "description": ""
             },
-            "Country": {
+            "ONS Partner Geography": {
                 "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
-                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{ons-partner-geography}",
                 "description": ""
             },
             "Value": {
