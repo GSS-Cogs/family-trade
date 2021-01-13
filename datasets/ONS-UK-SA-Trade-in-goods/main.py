@@ -73,8 +73,7 @@ for name,tab in tabs.items():
 output.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
 output['Marker'].fillna('', inplace=True)
 output.loc[(output['Marker'] == 'N/A'),'Marker'] = 'not-applicable'
-
-output = output.drop_duplicates()
+output.loc[(output['Marker'] == 'not-applicable'),'Value'] = 0
 
 # +
 scraper.dataset.family = 'trade'
@@ -85,7 +84,8 @@ UN Comtrade (https://comtrade.un.org/).
 Some data for countries have been marked with N/A. This is because Trade in Goods do not collate data from these countries.
 """
 
-output['Value'] = pd.to_numeric(output['Value'], downcast='integer')
+output['Value'] = output['Value'].astype(int)
+
 # -
 
 # -
