@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -44,10 +44,11 @@ for name,tab in tabs.items():
     elif name.split()[0] == 'Monthly':
         datamarker = ' '.join([tab.excel_ref('A249').value, tab.excel_ref('A250').value])
     dimensions = [HDim(year,'Period',DIRECTLY,ABOVE),
-                  HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
-                  HDimConst('Measure Type', 'GBP Total'),
-                  HDimConst('Unit','gbp-million'),
-                  HDimConst('DATAMARKER', datamarker)]
+                  HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT)
+                  #HDimConst('Measure Type', 'GBP Total'),
+                  #HDimConst('Unit','gbp-million'),
+                  #HDimConst('DATAMARKER', datamarker)
+                  ]
     cs = ConversionSegment(observations, dimensions, processTIMEUNIT=True)
     df = cs.topandas()
     
@@ -57,22 +58,47 @@ for name,tab in tabs.items():
     
     df.rename(columns={'OBS': 'Value'}, inplace=True)
     if name.split()[0] == 'Annual':
-        df['Period'] = pd.to_datetime(df['Period'].str[:4], format='%Y').dt.strftime('/id/year/%Y')
+        #df['Period'] = pd.to_datetime(df['Period'].str[:4], format='%Y').dt.strftime('/id/year/%Y')
+        df['Period'] = pd.to_datetime(df['Period'].str[:4], format='%Y').dt.strftime('year/%Y')
     elif name.split()[0] == 'Monthly':
-        df['Period'] = pd.to_datetime(df['Period'], format='%Y%b').dt.strftime('/id/month/%Y-%m')
+        #df['Period'] = pd.to_datetime(df['Period'], format='%Y%b').dt.strftime('/id/month/%Y-%m')
+        df['Period'] = pd.to_datetime(df['Period'], format='%Y%b').dt.strftime('month/%Y-%m')
     else:
         raise ValueError('Unexpected period')
 
     output = pd.concat([output, df])
 
-#-
+# -
 
 output.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
+output['Marker'].fillna('', inplace=True)
+output.loc[(output['Marker'] == 'N/A'),'Marker'] = 'not-applicable'
 
-#-
+output = output.drop_duplicates()
+
+# +
+scraper.dataset.family = 'trade'
+scraper.dataset.description = scraper.dataset.description + """
+These data are our best estimate of these bilateral UK trade flows. Users should note that alternative estimates are available, in some cases, via the statistical agencies for bilateral countries or through central databases such as 
+UN Comtrade (https://comtrade.un.org/).
+
+Some data for countries have been marked with N/A. This is because Trade in Goods do not collate data from these countries.
+"""
+
+#dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+#scraper.set_base_uri('http://gss-data.org.uk')
+#scraper.set_dataset_id(dataset_path)
+
+# -
+
+# -
 
 cubes.add_cube(scraper, output, info['title'])
 
 #-
 cubes.output_all()
+
+
+
+
 

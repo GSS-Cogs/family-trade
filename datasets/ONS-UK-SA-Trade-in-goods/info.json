@@ -13,6 +13,31 @@
     },
     "transform": {
         "airtable": "rec2vZJEjUBsBay90",
+        "columns": {
+            "Period": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Flow": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "description": ""
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
+                "description": ""
+            },
+            "Value": {
+              "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+              "measure": "http://gss-data.org.uk/def/measure/trade-in-goods",
+              "datatype": "double"
+            },
+            "Marker": {
+              "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+              "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            },
         "main_issue": 2
     },
     "sizingNotes": "",
