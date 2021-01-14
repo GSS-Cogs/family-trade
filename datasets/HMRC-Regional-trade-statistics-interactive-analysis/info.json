@@ -15,6 +15,27 @@
     },
     "transform": {
         "airtable": "recnn01TX4QsvpukQ",
+        "columns": {
+            "Period": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Flow": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "description": ""
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/count",
+                "measure": "http://gss-data.org.uk/def/measure/trade-in-goods",
+                "datatype": "integer"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        },
         "stage": [
             "To Do"
         ],
