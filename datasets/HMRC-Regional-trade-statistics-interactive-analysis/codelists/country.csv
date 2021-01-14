@@ -1,0 +1,104 @@
+Label,Notation,Parent Notation,Sort Priority
+France,france,,1
+Netherlands,netherlands,,2
+Germany,germany,,3
+Italy,italy,,4
+Irish republic,irish-republic,,5
+Denmark,denmark,,6
+Greece,greece,,7
+Portugal,portugal,,8
+Spain,spain,,9
+Belgium,belgium,,10
+Luxembourg,luxembourg,,11
+Iceland,iceland,,12
+Norway,norway,,13
+Sweden,sweden,,14
+Finland,finland,,15
+Austria,austria,,16
+Switzerland,switzerland,,17
+Gibraltar,gibraltar,,18
+Malta,malta,,19
+Turkey,turkey,,20
+Estonia,estonia,,21
+Latvia,latvia,,22
+Lithuania,lithuania,,23
+Poland,poland,,24
+Czech republic,czech-republic,,25
+Slovakia,slovakia,,26
+Hungary,hungary,,27
+Romania,romania,,28
+Bulgaria,bulgaria,,29
+Ukraine,ukraine,,30
+Russia,russia,,31
+Georgia,georgia,,32
+Azerbaijan,azerbaijan,,33
+Kazakhstan,kazakhstan,,34
+Slovenia,slovenia,,35
+Croatia,croatia,,36
+Fyr macedonia,fyr-macedonia,,37
+Serbia,serbia,,38
+Morocco,morocco,,39
+Algeria,algeria,,40
+Egypt,egypt,,41
+Senegal,senegal,,42
+Ivory coast,ivory-coast,,43
+Ghana,ghana,,44
+Nigeria,nigeria,,45
+Cameroon,cameroon,,46
+Equat guinea,equat-guinea,,47
+Congo (republic),congo-republic,,48
+Angola,angola,,49
+Ethiopia,ethiopia,,50
+Kenya,kenya,,51
+Tanzania,tanzania,,52
+Mauritius,mauritius,,53
+South africa,south-africa,,54
+Usa,usa,,55
+Canada,canada,,56
+Mexico,mexico,,57
+Guatemala,guatemala,,58
+Honduras,honduras,,59
+Costa rica,costa-rica,,60
+Panama,panama,,61
+Dominican rep,dominican-rep,,62
+Trinidad:tobago,trinidad-tobago,,63
+Colombia,colombia,,64
+Venezuela,venezuela,,65
+Ecuador,ecuador,,66
+Peru,peru,,67
+Brazil,brazil,,68
+Chile,chile,,69
+Uruguay,uruguay,,70
+Argentina,argentina,,71
+Falkland islands,falkland-islands,,72
+Cyprus,cyprus,,73
+Lebanon,lebanon,,74
+Iraq,iraq,,75
+Israel,israel,,76
+Jordan,jordan,,77
+Saudi arabia,saudi-arabia,,78
+Kuwait,kuwait,,79
+Bahrain,bahrain,,80
+Qatar,qatar,,81
+Uae,uae,,82
+Oman,oman,,83
+Pakistan,pakistan,,84
+India,india,,85
+Bangladesh,bangladesh,,86
+Sri lanka,sri-lanka,,87
+Thailand,thailand,,88
+Vietnam,vietnam,,89
+Indonesia,indonesia,,90
+Malaysia,malaysia,,91
+Singapore,singapore,,92
+China,china,,93
+South korea,south-korea,,94
+Japan,japan,,95
+Taiwan,taiwan,,96
+Hong kong,hong-kong,,97
+Australia,australia,,98
+New zealand,new-zealand,,99
+Stores and provisions,stores-and-provisions,,100
+Total eu,total-eu,,101
+Total non eu,total-non-eu,,102
+Total world,total-world,,103

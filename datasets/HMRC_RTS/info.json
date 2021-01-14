@@ -2,13 +2,13 @@
     "title": "REGIONAL TRADE STATISTICS",
     "publisher": "HM Revenue & Customs",
     "description": "",
-    "landingPage": "https://www.uktradeinfo.com/Statistics/RTS/Pages/default.aspx",
+    "landingPage": "https://www.uktradeinfo.com/trade-data/regional/",
     "published": "2019-12-05",
     "families": [
         "Trade"
     ],
     "extract": {
-        "source": "XLS",
+        "source": "JSON",
         "stage": "Done"
     },
     "transform": {
@@ -18,5 +18,8 @@
         "to_rdf": "csv2rdf"
     },
     "sizingNotes": "",
-    "notes": ""
+    "notes": "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/",
+    "datasetNotes": [
+        "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/"
+    ]
 }

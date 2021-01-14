@@ -22,7 +22,42 @@
             "reclbpcTgt5imCd6y",
             "recoIg2XstRRBKPfL"
         ],
-        "main_issue": 28
+        "main_issue": 28,
+        "columns": {
+            "Investment Direction": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow/{direction}"
+            },
+            "Year": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/year/{year}"
+            },
+            "International Trade Basis": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/international-trade-basis/{international_trade_basis}"
+            },
+            "FDI Area": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-fdi-area",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area/{fdi_area}"
+            },
+            "FDI Component": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/fdi-component"
+            },
+            "FDI Industry": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",                
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/fdi-industry/{fdi_industry}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/{unit}",
+                "measure": "http://gss-data.org.uk/def/trade/measure/gbp-million",
+                "datatype": "double"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        }
     },
     "sizingNotes": "",
     "notes": "Published in PMD combined with FDI: outward"

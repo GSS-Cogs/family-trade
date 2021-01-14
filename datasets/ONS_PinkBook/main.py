@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -18,94 +18,114 @@
 
 # +
 from gssutils import *
+import numpy as np
 
-scraper = Scraper('https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/3tradeinservicesthepinkbook2016')
-tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
+cubes = Cubes("info.json")
+trace = TransformTrace()
+
+scraper = Scraper(seed="info.json")
+scraper
 # -
 
+tabs = { tab.name: tab for tab in scraper.distribution(latest=True).as_databaker() }
 list(tabs)
 
 sheetname = ['3.2','3.3','3.4','3.5','3.6','3.7','3.8','3.9','3.10']
 
-next_table = pd.DataFrame()
-for sheet in sheetname:
-    tab = tabs[sheet]
-    cell = tab.excel_ref('B3')
-    code = cell.shift(1,0).fill(DOWN).is_not_blank().is_not_whitespace()
-    Year = cell.fill(RIGHT).is_not_blank().is_not_whitespace()            
-    observations = Year.fill(DOWN).is_not_blank().is_not_whitespace() 
-    Flow = cell.fill(DOWN).one_of(['Exports (Credits)', 'Imports (Debits)', 'Balances'])
-    Dimensions = [
-                HDimConst('Geography', 'K02000001'),
-                HDim(Year,'Year', DIRECTLY,ABOVE),
-                HDim(code,'CDID',DIRECTLY,LEFT),
-                HDimConst('Unit', 'gbp-million'), 
-                HDimConst('Measure Type','GBP Total'),
-                HDim(Flow,'Flow',CLOSEST, ABOVE)           
+# +
+
+tabs = [x for x in scraper.distribution(latest=True).as_databaker() if x.name in sheetname]
+for tab in tabs:
+    
+    columns=["Geography", "Period", "CDID", "Pink Book Services", "Flow Directions", "Value", "Marker"]
+    trace.start(tab.name, tab, columns, scraper.distributions[0].downloadURL)
+    
+    anchor = tab.excel_ref('B3')
+    
+    cdid = anchor.shift(1,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.CDID("Selected cdids from column B")
+        
+    flow = anchor.fill(DOWN).one_of(['Exports (Credits)', 'Imports (Debits)', 'Balances'])
+    trace.Flow_Directions("Set as one of 'Exports (Credits)', 'Imports (Debits)', 'Balances'")
+    period = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()            
+    
+    observations = period.fill(DOWN).is_not_blank().is_not_whitespace() 
+    
+    trace.Geography('Hard code geography to "K02000001"')
+    geography = "K02000001"
+    
+    dimensions = [
+                HDimConst('Geography', geography),
+                HDim(period,'Period', DIRECTLY,ABOVE),
+                HDim(cdid,'CDID', DIRECTLY,LEFT),
+                HDim(flow, 'Flow Directions', CLOSEST, ABOVE)           
 
     ]
-    c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
-    new_table = c1.topandas()
-    new_table['Year'] = new_table['Year'].map(lambda cell:cell.replace('.0', ''))
-    new_table['Year'] = new_table['Year'].str.strip()
-    new_table['Geography'] = new_table['Geography'].str.strip()
-    new_table['CDID'] = new_table['CDID'].str.strip()
-    new_table['Flow'] = new_table['Flow'].str.strip()
-    import numpy as np
-    new_table['OBS'].replace('', np.nan, inplace=True)
-    new_table.rename(index= str, columns={'OBS': 'Value'}, inplace=True)
-    new_table['Flow'] = new_table['Flow'].map(
+    c1 = ConversionSegment(tab, dimensions, observations)
+    
+    df = c1.topandas()
+    df['Period'] = df['Period'].map(lambda cell: cell.replace('.0', '').strip())
+    df['CDID'] = df['CDID'].str.strip()
+    df['OBS'].replace('', np.nan, inplace=True)
+    df['Flow Directions'] = df['Flow Directions'].map(
         lambda x: {
             'Exports (Credits)': 'Exports',
             'Imports (Debits)': 'Imports',
             'Balances': 'Balance'}.get(x, x))
-    next_table = pd.concat([next_table, new_table])
+    
+    df.rename(index= str, columns={'OBS': 'Value'}, inplace=True)
+    trace.store("pinkbook combined dataframe", df)
+
+df = trace.combine_and_trace("pinkbook combined dataframe", "pinkbook combined dataframe")
+df
+# -
 
 PBclassification_table_url = 'https://drive.google.com/uc?export=download&id=1uNwmZHgq7ERqD5wcND4W2sGHXRJyP2CR'
-temp_table = pd.read_excel(PBclassification_table_url, sheet_name = 0)
-next_table = pd.merge(next_table, temp_table, how = 'left', left_on = 'CDID', right_on = 'cdid')
-next_table.rename(index= str, columns= {'BPM6':'Pink Book Services'}, inplace = True)
+classifications_table = pd.read_excel(PBclassification_table_url, sheet_name = 0)
+df = pd.merge(df, classifications_table, how = 'left', left_on = 'CDID', right_on = 'cdid')
+df = df.rename(columns={'BPM6':'Pink Book Services'})
 
-temp_table
+classifications_table
 
 # Below codes don't have Pink book services codes
 
-next_table[next_table.cdid.isnull() == True]['CDID'].unique()
+df[df.cdid.isnull() == True]['CDID'].unique()
 
 # Belo codes need to upload in to PMD
 
-next_table = next_table[(next_table['CDID'] != 'FJOW') &
-                       (next_table['CDID'] != 'FJQO') &
-                       (next_table['CDID'] != 'FJSI')]
+trace.CDID("Remove CDIDs FJOW, FJQO, FJSI")
+df = df[(df['CDID'] != 'FJOW') &
+                       (df['CDID'] != 'FJQO') &
+                       (df['CDID'] != 'FJSI')]
 
-next_table = next_table[['Geography','Year','CDID','Pink Book Services','Flow','Measure Type','Value','Unit','DATAMARKER']]
+# Order columns
+df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions','Value','DATAMARKER']]
 
-next_table = next_table[next_table['Pink Book Services'].isnull() == False]
+print(df['Pink Book Services'].unique())
+df = df[df['Pink Book Services'].isnull() == False]
 
-next_table['Marker'] = next_table['DATAMARKER'].map(
+df['Marker'] = df['DATAMARKER'].map(
     lambda x: { 'NA' : 'not-available' ,
                ' -' : 'nil-or-less-than-a-million'
         }.get(x, x))
 
-next_table['Pink Book Services'] = next_table['Pink Book Services'].astype(str)
+df['Pink Book Services'] = df['Pink Book Services'].astype(str)
+df["Flow Directions"].unique()
 
-next_table['Flow Directions'] = next_table['Flow'].map(pathify)
+trace.Flow_Directions('Pathify the "Flow Directions" column')
+df['Flow Directions'] = df['Flow Directions'].str.strip().map(
+        lambda x: {
+            'Exports (Credits)': 'exports',
+            'Imports (Debits)': 'imports',
+            'Balances': 'balance'}.get(x, x)
+        )
 
-next_table['Period'] = 'year/' + next_table['Year']
+df['Period'] = 'year/' + df['Period']
 
-next_table = next_table[['Geography','Period','CDID','Pink Book Services','Flow Directions','Measure Type','Value','Unit','Marker']]
+df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
 
-from pathlib import Path
-import numpy as np
-out = Path('out')
-out.mkdir(exist_ok=True)
-next_table.drop_duplicates().to_csv(out / 'observations.csv', index = False)
+cubes.add_cube(scraper, df.drop_duplicates(), "03 Trade in services, The Pink Book")
+cubes.output_all()
+trace.render("spec_v1.html")
 
-scraper.dataset.family = 'trade'
-from gssutils.metadata import THEME
-scraper.dataset.theme = THEME['business-industry-trade-energy']
-with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
 
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')

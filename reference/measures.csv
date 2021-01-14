@@ -1,0 +1,34 @@
+Namespace,Path,Label,Comment,Source,Parent,Range
+trade,gbp-total,GBP Total,Net Mass explain me better,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,net-mass,Net Mass,Whether the time-series has been adjusted to remove cyclical components,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,count-of-businesses,Count of Businesses,The total number of employees,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,count-of-employees,Count of Employees,The total number of items,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,count,Count,The proportion of all businesses that match the specified criteria,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,proportion-of-all-business,Proportion of all Business,The total value of turnover,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,total-turnover,Total Turnover,Standard International Trade Classification Revision 4,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,gbp-million,GBP Million,percent,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,percent,Percent,Data suppressed,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,suppressed,Suppressed,Product Department,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,index-deflator-series,Index deflator series,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,index,Index,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,quarter-on-quarter-a-year-ago,Quarter on quarter a year ago,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,quarter-on-quarter,Quarter on quarter,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,year-on-year,Year on year,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,index-series,Index series,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,implied-deflator,Implied Deflator,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,chained-volume-measure,Chained volume measure,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,current-price,Current Price,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,average-value-per-ton,Average value per ton,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,quantities-released-for-consumption,Quantities Released for Consumption,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,revenue,Revenue,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,net-quantities-of-spirits-charged-with-duty,Net Quantities of Spirits Charged with Duty,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,uk-beer-production,UK Beer Production,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,beer-clearances,Beer Clearances,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,cider-cearances,Cider Clearances,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,rates-of-duty,Rates of Duty,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,alcohol-clearances,Alcohol Clearances,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,production-of-potable-spirits,Production of Potable Spirits,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,released-for-consumption,Released for Consumption,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,clearance,Clearance,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,gbp-per-hectolitre-of-product,GBP per Hectolitre of Product,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,gbp-per-1-percent-abv-per-hectolitre,GBP per 1 percent ABV per hectolitre,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal

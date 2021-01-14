@@ -1,11 +1,11 @@
 {
-    "title": "UK Trade in Goods Statistics by Business Characteristics 2018",
+    "title": "UK Trade in Goods Statistics by Business Characteristics",
     "publisher": "HM Revenue & Customs",
-    "description": "Spreadsheets seem to be same data, presented differently (with \"IDBR OTS Country data (expert users)\" being a subset.). Contains estimates of Trade in Goods data matched with registered Businesses from the Inter-Departmental Business Register (IDBR) for Exporters and Importers for 2015",
-    "landingPage": "https://www.gov.uk/government/statistical-data-sets/uk-trade-in-goods-by-business-characteristics-2018-data-tables",
+    "description": "Supporting tables for the UK trade in goods by business characteristics",
+    "landingPage": "https://www.gov.uk/government/collections/uk-trade-in-goods-statistics-by-business-characteristics",
     "landingPage2": "https://www.gov.uk/government/statistical-data-sets/uk-trade-in-goods-by-business-characteristics-2018-data-tables",
     "datasetNotes": [
-        "Data can be found by clicking on the Excel table links titled \"IDBR OTS tables 2015\" and \"IDBR OTS Country data (expert users) 2015\" under the table headed \"Reports\" and produced November 2016. Spreadsheets seem to be same data, presented differently with \"IDBR OTS Country data (expert users)\" being a subset."
+        "Data can be found by clicking on the most recent link to named 'UK trade in goods by business characteristics xxxx - data tables' where xxxx is the year.   Only 'IDBR detailed overseas trade in goods statistics by country data tables' is required as this contains all the information contained in the 'IDBR detailed overseas trade in goods statistics tables'"
     ],
     "published": "2016-11-24",
     "families": [
@@ -20,5 +20,5 @@
         "main_issue": 8
     },
     "sizingNotes": "Non-simple file structure but with multiple table within tabs, multiple dimensions, subdimensions and footnotes.",
-    "notes": "Supporting information is available in the PDF on the lading page"
+    "notes": "Supporting information is available in the PDF on the lading page .  This is an annual publication and a decision is yet to be taken on how this should be recorded i.e. each publication overwritten by the newest, each publication published seperately, a timeseries created etc."
 }
