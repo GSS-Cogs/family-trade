@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[213]:
+# %%
 
 
 # -*- coding: utf-8 -*-
@@ -55,7 +56,7 @@ def cell_to_string(cell):
     return substring
 
 
-# In[214]:
+# %%
 
 
 from pandas import ExcelWriter
@@ -82,7 +83,7 @@ for table in scraper.distributions:
     counter += 1
 
 
-# In[215]:
+# %%
 
 
 counter = 0
@@ -391,7 +392,7 @@ for table in all_tabs:
     counter += 1
 
 
-# In[216]:
+# %%
 
 
 #Outputs:
@@ -407,31 +408,31 @@ for table in all_tabs:
     #data0.xls = relevant tabs from distribution 4 : Imports using whole number count method
 
 
-# In[217]:
+# %%
 
 
 #tidied_sheets[10] #Data2.xls Database(Regional Year)
 
 
-# In[218]:
+# %%
 
 
 #tidied_sheets[11] #Data2.xls Database(Regional Qtr)
 
 
-# In[219]:
+# %%
 
 
 #tidied_sheets[14] #Data3.xls Database(Regional Year)
 
 
-# In[220]:
+# %%
 
 
 #tidied_sheets[15] #Data0.xls Database(Regional Qtr)
 
 
-# In[221]:
+# %%
 
 
 df = pd.concat([tidied_sheets[0],tidied_sheets[1],tidied_sheets[4],tidied_sheets[5]], sort = True)
@@ -485,7 +486,7 @@ cubes.add_cube(scraper, df.drop_duplicates(), csvName, info_json_dict=data, grap
 df
 
 
-# In[222]:
+# %%
 
 
 df = pd.concat([tidied_sheets[2],tidied_sheets[3],tidied_sheets[6],tidied_sheets[7]], sort = True)
@@ -586,7 +587,7 @@ scraper.dataset.title = 'Regional trade statistics interactive analysis - export
 cubes.add_cube(scraper, valueOfExports.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
 
-# In[223]:
+# %%
 
 
 df = pd.concat([tidied_sheets[8],tidied_sheets[9],tidied_sheets[12],tidied_sheets[13]], sort = True)
@@ -642,7 +643,7 @@ cubes.add_cube(scraper, df.drop_duplicates(), csvName, info_json_dict=data, grap
 df
 
 
-# In[224]:
+# %%
 
 
 df = pd.concat([tidied_sheets[10],tidied_sheets[11],tidied_sheets[14],tidied_sheets[15]], sort = True)
@@ -743,7 +744,7 @@ scraper.dataset.title = 'Regional trade statistics interactive analysis - import
 cubes.add_cube(scraper, valueOfImports.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
 
-# In[225]:
+# %%
 
 
 from IPython.core.display import HTML
@@ -754,9 +755,11 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[226]:
+# %%
 
 
 cubes.output_all()
 trace.render()
 
+
+# %%
