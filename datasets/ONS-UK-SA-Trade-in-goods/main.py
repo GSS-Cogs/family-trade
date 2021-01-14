@@ -67,7 +67,7 @@ for name,tab in tabs.items():
         raise ValueError('Unexpected period')
 
     output = pd.concat([output, df])
-    output['ONS Partner Geography'] = output['ONS Partner Geography'].apply(pathify)
+    #output['ONS Partner Geography'] = output['ONS Partner Geography'].apply(pathify)
 # -
 
 output.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
