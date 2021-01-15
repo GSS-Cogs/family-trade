@@ -20,13 +20,13 @@
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Flow": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
-                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
                 "description": ""
             },
             "ONS Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
-                "value": "http://gss-data.org.uk/def/concept/ons-country/{ons_partner_geography}",
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/concept/ons-partner-geography/{ons_partner_geography}",
                 "description": ""
             },
             "Value": {
