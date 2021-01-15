@@ -22,20 +22,24 @@
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Business size": {
-                "parent": "http://gss-data.org.uk/def/family-trade/concept-scheme/employment-size-bands",
-                "value": "http://gss-data.org.uk/def/family-trade/concept-scheme/employment-size-bands/{business-size}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands/{business-size}"
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/family-trade/concept-scheme/eu-rw-ww",
-                "value": "http://gss-data.org.uk/def/family-trade/concept-scheme/eu-rw-ww/{country}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/eu-rw-ww",
+                "value": "http://gss-data.org.uk/def/trade/property/dimension/eu-rw-ww/{country}"
+            },
+            "Ownership": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/country-of-ownership",
+                "value": "http://gss-data.org.uk/def/trade/property/dimension/country-of-ownership/{ownership}"
             },
             "Industry": {
-                "parent": "http://gss-data.org.uk/vocabs/sic-industry",
-                "value": "http://gss-data.org.uk/vocabs/sic-industry/{industry}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sic-industry",
+                "value": "http://gss-data.org.uk/def/trade/property/dimension/sic-industry/{industry}"
             },
             "Flow": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
-                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions/{flow}",
                 "description": ""
             },
             "Value": {
