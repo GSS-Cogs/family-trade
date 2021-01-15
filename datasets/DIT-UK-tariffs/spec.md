@@ -29,13 +29,55 @@
 
 ### Stage 2 - Harmonisation
     
-    Upon investigating the .csv data commodity should be the observation value for the data set. 
-
     This is not a statisical dataset so this is a limited data to transform. it is simply meant for business to check tarffis of goods imported into the UK. 
 
-    I believe the table for the dataset can remain the same. As the remaining variables would explain the users to the tariff charges on goods being exported to the UK. 
+    Upon investigation the dataset need to be split into two. based on the duty rate variables:
+     cet_duty_rate                                                ukgt_duty_rate 
+    both these duty rates need to be flattned so that a new dimension can be added called 'duty rate type' which will denote what the rate is e.g. cet or ukgt. 
 
-     codelist will be required for commidity observation value. 
+    ##instructions for dataset1 duty rate type##
+    measure type = duty rate change
+    unit = % 
+
+    ##instructions for dataset2 currency conversion##
+
+    measure type = currency conversion 
+    unit = tbc 
+
+
+    #### Table construction ####
+    I would suggest the table takes the following format: 
+    commodity, duty rate type (new dimension), 
+    change,	
+    trade_remedy_applies,	
+    cet_applies_until_trade_remedy_transition_reviews_concluded,
+    suspension_applies,	
+    atq_applies
+
+    ######codelists########
+    
+   Commodity Codelist detailing the individual commodity codes
+
+   description Codelist detailing the descriptions of each commodity
+
+    A new codelist needs to be created for the change column cotaining the fields:
+    'simpilified'
+    'no change' 
+
+    codelist duty rate type which will contain the different rate fields:
+    cet_duty_rate,	
+    ukgt_duty_rate
+
+    addtional codeslists will need to be generated for 
+    columns:
+    trade_remedy_applies	cet_applies_until_trade_remedy_transition_reviews_concluded	suspension_applies	
+    atq_applies
+
+
+
+
+
+   
 
 
 #### DM Notes
