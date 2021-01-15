@@ -20,7 +20,46 @@
             "Priority"
         ],
         "airtable": "recUav7dFdgezEsgJ",
-        "main_issue": 114
+        "main_issue": 114,
+        "columns": {
+            "Change": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+year}"
+            },
+            "Duty Range Type": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "double"
+            },
+           
+            "trade_remedy_applies": {
+                "parent": "",
+                "value": "",
+                "description": "True or False statement"
+            },
+            "cet_applies_until_trade_remedy_transition_reviews_concluded": {
+                "parent": "",
+                "value": "",
+                "description": "True or False statement"
+            },
+            "suspension_applies": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry",
+                "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}",
+                "description": ""
+            },
+            "atg_applies": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry",
+                "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}",
+                "description": "aTrue or False statement"
+            },
+            "Commodity": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-commoidty",
+                "value": "http://gss-data.org.uk/def/concept/ons-commodity/{commodity}",
+                "description": ""
+            }
+        }  
+
     },
     "sizingNotes": "1 CSV, stage 1 trasnsform required however discussion will be required to determine dimensions etc. as this is not a statisical dataset.",
     "notes": "Guidance to using the tool can be found here:\nhttps://www.gov.uk/guidance/using-the-trade-tariff-tool-to-find-a-commodity-code"
