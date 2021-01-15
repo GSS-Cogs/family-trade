@@ -44,14 +44,14 @@
                 "description": "True or False statement"
             },
             "suspension_applies": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry",
-                "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}",
+                "parent": "",
+                "value": "",
                 "description": ""
             },
             "atg_applies": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry",
-                "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}",
-                "description": "aTrue or False statement"
+                "parent": "",
+                "value": "",
+                "description": "True or False statement"
             },
             "Commodity": {
                 "parent": "http://gss-data.org.uk/def/concept-scheme/ons-commoidty",
