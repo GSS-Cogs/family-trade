@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -7,12 +6,14 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       jupytext_version: 1.9.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
+
+# cd /workspace/family-trade/datasets/HMRC-RTS-Small-area/
 
 # +
 from gssutils import *
@@ -24,12 +25,9 @@ cubes = Cubes('info.json')
 scraper 
 # -
 
-tabs = {tab.name: tab for tab in scraper.catalog.dataset[0].distribution[1].as_databaker()}
-# tabs = {tab.name: tab for tab in scraper.distribution(latest=True, mediaType=Excel).as_databaker()}
-# excel_distro_list = [x for x in scraper.catalog.dataset[0].distribution if x.mediaType == ExcelOpenXML]
-# excel_distro_list = [x for x in scraper.catalog.dataset[0].distribution if x.mediaType == Excel]
+scraper.select_dataset(latest=True)
 
-excel_distro_list = [x for x in scraper.catalog.dataset[0].distribution if x.mediaType == Excel]
+tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
 
 year_cell = tabs['Title'].filter('Detailed Data Tables').shift(UP)
 year_cell.assert_one()
