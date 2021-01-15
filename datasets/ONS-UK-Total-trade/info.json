@@ -1,12 +1,9 @@
 {
-    "title": "UK total trade: all countries, non-seasonally adjusted",
+    "title": "Trade in goods: all countries, seasonally adjusted",
     "publisher": "Office for National Statistics",
-    "description": "Quarterly estimates of total trade, trade in goods and trade in services by country, non-seasonally adjusted.",
-    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/uktotaltradeallcountriesnonseasonallyadjusted",
-    "datasetNotes": [
-        "Data is located on landing page under your download options"
-    ],
-    "published": "2020-01-22",
+    "description": "The annual and monthly goods export and import figures for all countries with the UK.",
+    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeallcountriesseasonallyadjusted",
+    "published": "2020-02-11",
     "families": [
         "Trade"
     ],
@@ -15,40 +12,35 @@
         "stage": "Done"
     },
     "transform": {
-        "airtable": "recMJhku0J2Kbp8du",
-        "main_issue": 6,
+        "airtable": "rec2vZJEjUBsBay90",
         "columns": {
             "Period": {
                 "source": "",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
-            "Country": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
-                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
-                "description": "Central ONS Country codelist in ref_common"
-            },
             "Flow": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
-                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
-                "description": "Central Flow (Imports/Exports) codelist in ref_common"
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{flow}",
+                "description": ""
             },
-            "Trade Type": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/trade-type",
-                "value": "http://gss-data.org.uk/def/concept/trade-type/{trade_type}",
-                "description": "Central Trade Type (Goods/Services) codelist in ref_common"
+            "ONS Partner Geography": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography/{ons_partner_geography}",
+                "description": ""
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/current-prices",
-                "datatype": "double"
+              "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+              "measure": "http://gss-data.org.uk/def/measure/current-prices",
+              "datatype": "integer"
             },
             "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
-            }
+              "attribute":"http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+              "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            },
+        "main_issue": "2"
         }
     },
-    "sizingNotes": "Simple file structure, mid size table with non-complex dimensions and some footnotes.",
+    "sizingNotes": "",
     "notes": ""
 }

@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/flow-directions/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,17 +58,20 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/flow-directions/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
-        ]
+        ],
+        "skos:hasTopConcept": {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/all"
+        }
     },
-    "rdfs:label": "Flow Directions",
-    "dc:title": "Flow Directions",
+    "rdfs:label": "ONS Partner Geography",
+    "dc:title": "ONS Partner Geography",
     "rdfs:seeAlso": [
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/dataset",
@@ -76,12 +79,23 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Flow Directions",
-            "dc:title": "Flow Directions",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
-            "rdfs:comment": "Dataset representing the 'Flow Directions' code list."
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
+            },
+            "rdfs:label": "ONS Partner Geography",
+            "dc:title": "ONS Partner Geography",
+            "rdfs:comment": "Dataset representing the 'ONS Partner Geography' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": ""
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": ""
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
@@ -92,18 +106,21 @@
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Flow Directions Catalog Record",
-            "rdfs:label": "Flow Directions Catalog Record",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
+            },
+            "dc:title": "ONS Partner Geography Catalog Record",
+            "rdfs:label": "ONS Partner Geography Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.151355"
+                "@value": "2020-12-23T11:58:58.156727"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.151355"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/dataset"
+                "@value": "2020-12-23T11:58:58.156727"
             }
         }
     ]
