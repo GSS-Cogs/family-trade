@@ -30,7 +30,7 @@
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
                 "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}",
                 "description": "",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography"
             },
             "Value": {
               "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
