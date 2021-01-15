@@ -46,7 +46,7 @@
             "suspension_applies": {
                 "parent": "",
                 "value": "",
-                "description": ""
+                "description": "True or False statement"
             },
             "atg_applies": {
                 "parent": "",
