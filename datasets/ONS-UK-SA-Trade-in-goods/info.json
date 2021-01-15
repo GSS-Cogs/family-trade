@@ -24,13 +24,13 @@
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
                 "description": "",
-                "codelist": "false"
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "ONS Partner Geography": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
                 "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}",
                 "description": "",
-                "codelist": "false"
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "Value": {
               "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
