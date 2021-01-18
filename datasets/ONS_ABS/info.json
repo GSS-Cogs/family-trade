@@ -37,7 +37,7 @@
             },
             "Country of Ownership": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership",
-                "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{country-of-ownership}",
+                "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{country_of_ownership}",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership",
                 "description": ""
             },
