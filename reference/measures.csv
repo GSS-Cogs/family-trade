@@ -33,4 +33,4 @@ trade,clearance,Clearance,,,http://purl.org/linked-data/sdmx/2009/measure#obsVal
 trade,gbp-per-hectolitre-of-product,GBP per Hectolitre of Product,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,gbp-per-1-percent-abv-per-hectolitre,GBP per 1 percent ABV per hectolitre,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,gdp-current-prices,GDP at Current Market Prices,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
-trade,trade-in-services,"","","",http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,trade-in-services,Trade in Services,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
