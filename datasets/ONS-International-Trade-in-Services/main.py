@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -29,7 +30,7 @@ tabs = {tab.name: tab for tab in scraper.distribution(latest = True, mediaType =
 
 distribution = scraper.distribution(latest = True)
 datasetTitle = distribution.title
-columns = ["Period", "Flow", "Continent", "Country", "Industry Origin", "Industry", "Industry Total", "Marker"]
+columns = ["Period", "Flow", "Continent", "Country", "Industry Origin", "Industry", "Industry Total", "Marker", "Flow Directions"]
 
 for name, tab in tabs.items():
     if 'Table A0' in tab.name or 'Table B1' in tab.name or 'Table B3' in tab.name or 'Table D1' in tab.name or 'Table D2' in tab.name:
@@ -202,6 +203,45 @@ for name, tab in tabs.items():
 trace.store("combined_dataframe", tidy_sheet.topandas())
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+
+# post processing
+df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
+
+ df['Marker'] = df['Marker'].map(lambda x: {'-':'itis-nil or less than £500000', '..':'disclosive'}.get(x, x))
+
+
+def left(s, amount):
+   return s[:amount]
+def date_time (date):
+   if len(date)  == 5:
+       return 'year/' + left(date, 4)
+df['Period'] = df['Period'].astype(str).replace('\.','',regex = True)
+df['Period'] = df['Period'].apply(date_time)
+
+# +
+# with pd.option_context('display.max_rows', None):
+#     print(df)
+# -
+
+df.rename(columns = {'Flow':'Flow Directions'}, inplace = True)
+
+df['Flow Directions'] = df['Flow Directions'].str.lower()
+trace.Flow_Directions("Converted values of Flow Directionsto lower")
+
+df['Continent'] = df['Continent'].str.lower()
+trace.Continent("Converted values of continent to lower case")
+
+df['Country'] = df['Country'].str.lower()
+trace.Country("Converted values of country to lower case")
+
+df['Industry Origin'] = df['Industry Origin'].str.lower()
+trace.Industry_Origin("Converted values of Industry Origin to lower case")
+
+df['Industry'] = df['Industry'].str.lower()
+trace.Industry("Converted values of Industry to lower case")
+
+df['Industry Total'] = df['Industry Total'].str.lower()
+trace.Industry_Total("Converted values of Industry Total to lower case")
 df
 
 cubes.add_cube(scraper, df, datasetTitle)
