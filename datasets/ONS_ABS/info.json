@@ -36,11 +36,11 @@
             },
             "Trade Group": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/trade-group",
-                "value": "http://gss-data.org.uk/def/trade/concept/trade-group/{trade_group}",
+                "value": "http://gss-data.org.uk/def/trade/concept/trade-group/{trade_group}"
             },
             "Turnover": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/turnover-size-bands",
-                "value": "http://gss-data.org.uk/def/trade/concept/turnover-size-bands/{turnover}",
+                "value": "http://gss-data.org.uk/def/trade/concept/turnover-size-bands/{turnover}"
             },
             "Employees": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
