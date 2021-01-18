@@ -1,7 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[646]:
+# In[91]:
+
+
+#!/usr/bin/env python
+# coding: utf-8
+
+
+# In[92]:
+
 
 
 # -*- coding: utf-8 -*-
@@ -33,7 +41,8 @@ scraper = Scraper(seed="info.json")
 scraper
 
 
-# In[647]:
+# In[93]:
+
 
 
 tidied_sheets = []
@@ -43,7 +52,8 @@ df = pd.DataFrame()
 all_tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 
 
-# In[648]:
+# In[94]:
+
 
 
 def cell_to_string(cell):
@@ -54,7 +64,7 @@ def cell_to_string(cell):
     return substring
 
 
-# In[649]:
+# In[95]:
 
 
 """
@@ -111,7 +121,8 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[650]:
+# In[96]:
+
 
 
 """
@@ -172,7 +183,8 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[651]:
+# In[97]:
+
 
 
 """
@@ -233,7 +245,8 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[652]:
+# In[98]:
+
 
 
 """"
@@ -298,7 +311,8 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[653]:
+# In[99]:
+
 
 
 """
@@ -359,7 +373,8 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[654]:
+# In[100]:
+
 
 
 """
@@ -420,7 +435,8 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[655]:
+# In[101]:
+
 
 
 """
@@ -477,7 +493,8 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[656]:
+# In[102]:
+
 
 
 """
@@ -538,13 +555,14 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[657]:
+# In[103]:
+
 
 
 tab = all_tabs["8. Travel"]
 
 tab_title = "8_travel"
-tab_columns = ["Year", "NUTS1 Area", "Travel Type", "Origin", "Measure Type", "Unit"]
+tab_columns = ["Year", "NUTS1 Area", "Travel Type", "Country or Origin of Trade", "Measure Type", "Unit"]
 trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
 
 
@@ -558,7 +576,7 @@ travel_type = tab.excel_ref("B3").expand(RIGHT).is_not_blank()
 trace.Travel_Type("Selected as all non-blank values from cell ref B3 going right/across.")
 
 origin = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
-trace.Origin("Selected as all non-blank values from cell ref B4 going right/across.")
+trace.Country_or_Origin_of_Trade("Selected as all non-blank values from cell ref B4 going right/across.")
 
 measure_type = "Travel-Related Service Imports Value"
 trace.Measure_Type("Hardcoded but could have been taken from cell A1")
@@ -573,7 +591,7 @@ dimensions = [
     HDimConst("Year", year),
     HDim(nuts1_area, "NUTS1 Area", CLOSEST, ABOVE),
     HDim(travel_type, "Travel Type", CLOSEST, LEFT),
-    HDim(origin, "Origin", DIRECTLY, ABOVE),
+    HDim(origin, "Country or Origin of Trade", DIRECTLY, ABOVE),
     HDimConst("Measure Type", measure_type),
     HDimConst("Unit", unit)
 ]
@@ -587,7 +605,7 @@ df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 trace.render()
 
-df = df[["Year", "NUTS1 Area", "Travel Type", "Origin", "Value"]]
+df = df[["Year", "NUTS1 Area", "Travel Type", "Country or Origin of Trade", "Value"]]
 
 df = df.replace({'NUTS1 Area' : {'North East' : 'http://statistics.data.gov.uk/id/statistical-geography/UKC',
                                 'NorthWest' : 'http://statistics.data.gov.uk/id/statistical-geography/UKD',
@@ -628,11 +646,12 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-dfTravel = df[['Period', 'Location', 'Industry Grouping', 'Origin', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
+dfTravel = df[['Period', 'Location', 'Industry Grouping', 'Country or Origin of Trade', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
 dfTravel
 
 
-# In[658]:
+# In[104]:
+
 
 
 tab = all_tabs["9. Tidy format"]
@@ -716,7 +735,7 @@ df['Includes Travel'] = df.apply(lambda x: 'Includes Travel' if x['NUTS Level'] 
 
 df['Year'] = df.apply(lambda x: 'year/' + x['Year'], axis = 1)
 
-df = df.rename(columns={'NUTS Code' : 'Location', 'Direction of Trade' : 'Flow', 'Year' : 'Period', 'Country or Origin of Trade' : 'Origin'})
+df = df.rename(columns={'NUTS Code' : 'Location', 'Direction of Trade' : 'Flow', 'Year' : 'Period'})
 
 df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1)
 df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
@@ -752,11 +771,12 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-dfTidy = df[['Period', 'Location', 'Industry Grouping', 'Origin', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
+dfTidy = df[['Period', 'Location', 'Industry Grouping', 'Country or Origin of Trade', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
 dfTidy
 
 
-# In[659]:
+# In[105]:
+
 
 
 df = pd.concat([dfTravel, dfTidy])
@@ -774,7 +794,8 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[661]:
+# In[106]:
+
 
 
 csvName = 'observations'
@@ -785,7 +806,8 @@ trace.render()
 cubes.output_all()
 
 
-# In[662]:
+# In[107]:
+
 
 
 #Outputs:
@@ -801,7 +823,8 @@ cubes.output_all()
     #tidied_sheets[9] = Total value of trade in services in tidy format, 2018
 
 
-# In[662]:
+# In[107]:
+
 
 
 
