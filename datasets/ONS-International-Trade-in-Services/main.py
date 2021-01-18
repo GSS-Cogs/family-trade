@@ -20,147 +20,191 @@ import json
 info = json.load(open("info.json"))
 scraper = Scraper(seed = "info.json")
 cubes = Cubes("info.json")
-scraper.dataset.family = info["families"]
+trace = TransformTrace()
+
 scraper
 # -
 
-tabs = scraper.distributions[0].as_databaker()
-str([tab.name for tab in tabs])
+tabs = {tab.name: tab for tab in scraper.distribution(latest = True, mediaType = Excel).as_databaker()}
 
+distribution = scraper.distribution(latest = True)
+datasetTitle = distribution.title
+columns = ["Period", "Flow", "Continent", "Country", "Industry Origin", "Industry", "Industry Total", "Marker"]
 
-# +
-def fix_service(row):
-    service = pathify(row['H2'])
-    group = pathify(row['H1'])
-    if service == '':
-        if group == 'total-international-trade-in-services':
-            service = 'all'
-        elif group.startswith('total-'):
-            service = group[len('total-'):]
-        else:
-            assert False, 'Service label is empty, expecting some "total" grouping.'
-    elif not group.startswith('total-'):
-        service = group + '-' + service
-    return service
+for name, tab in tabs.items():
+    if 'Table A0' in tab.name or 'Table B1' in tab.name or 'Table B3' in tab.name or 'Table D1' in tab.name or 'Table D2' in tab.name:
+#         continue
+#         print(tab.name)
+        trace.start(datasetTitle, tab, columns,distribution.downloadURL)
+        cell = tab.excel_ref("A5")
+        
+        observations = cell.shift(4, 0).expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
 
-def fix_title(s):
-    service = pathify(s)
-    pos = service.find('-analysed-by-')
-    if pos != -1:
-        service = service[:pos]
-    # one title doesn't use "analysed by"
-    pos = service.find('-industry-by-product-')
-    if pos != -1:
-        service = service[:pos + len('-industry')]
-    return service
+        period = cell.shift(0, -1).expand(RIGHT).is_not_blank().is_not_whitespace()
+        trace.Period("Defined from cell ref E4 right which is not blank")
 
-def date_time(time_value):
-    time_string = str(time_value).replace(".0", "").strip()
-    time_len = len(time_string)
-    if time_len == 4:
-        return "year/" + time_string
-    elif time_len == 7:
-        return "quarter/{}-{}".format(time_string[3:7], time_string[:2])
+        flow = cell.shift(0, -2).expand(RIGHT).is_not_blank().is_not_whitespace()
+        trace.Flow("Defined from cell ref E3 right which is not blank")
+        
+        continent = cell.expand(DOWN).is_not_blank().is_not_whitespace()
+        trace.Continent("Defined form cell ref A5 and down which is not blank")
 
-def fix_area(row):
-    area = pathify(row['H2'])
-    if area == '':
-        area = pathify(row['H1'])
-    if area == 'total-international-trade-in-services':
-        area = 'world'
-    elif area.startswith('total-'):
-        area = area[len('total-'):]
-    return f"itis/{area}"
-
-def process_tab(tab):
-    tab_group = tab.name.strip()[:len('Table XX')][-2:]
-    tab_title = tab.excel_ref('A1').fill(RIGHT).is_not_blank().by_index(1).value.strip()
-    display(f"Processing '{tab.name}' ({tab_group}) '{tab_title}'")
-    # not doing C0 which is a bit different
-    top_left = tab.excel_ref('A1').fill(DOWN).is_not_blank().by_index(1)
-    if tab_group[0] == 'C':
-        bottom_left = tab.filter('Total International Trade in Services')
-    else:
-        bottom_left = tab.filter('TOTAL INTERNATIONAL TRADE IN SERVICES')
-    bottom_left.assert_one()
-    h1_labels = (top_left.expand(DOWN) & bottom_left.expand(UP)).filter(lambda c: c.value.strip() != '') | \
-        (top_left.shift(RIGHT).expand(DOWN) & bottom_left.shift(RIGHT).expand(UP)).filter(lambda c: c.value.strip() != '')
-    h2_labels = (top_left.expand(DOWN) & bottom_left.expand(UP)).shift(RIGHT).shift(RIGHT)
-    year = top_left.shift(UP).fill(RIGHT).is_not_blank()
-    # some flow labels are in a strange place as cells have been merged inconsistently
-    flow = top_left.shift(UP).shift(UP).fill(RIGHT).is_not_blank()
-    observations = (h2_labels.fill(RIGHT) & year.fill(DOWN)).is_not_blank()
-    h1_dim = HDim(h1_labels, 'H1', CLOSEST, ABOVE) # can this be DIRECTLY?
-    h1_dim.AddCellValueOverride('Total European Union', 'Total European Union (EU)')
-    h1_dim.AddCellValueOverride('Total Information Services', 'Total Telecommunication Computer and Information Services Information Services')
-    h1_dim.AddCellValueOverride('Total Construction Goods and Services', 'Total Construction Services')
-    h1_dim.AddCellValueOverride('Total Australasia,Oceania and Total Unallocated', 'Total Australasia and Oceania and Total Unallocated')
-    h2_dim = HDim(h2_labels, 'H2', DIRECTLY, LEFT)
-    h2_dim.AddCellValueOverride('Other techincal services', 'Other technical services')
-    cs = ConversionSegment(observations, [
-        HDim(year, 'Year', DIRECTLY, ABOVE),
-        h1_dim,
-        h2_dim,
-        HDim(flow, 'Flow', CLOSEST, LEFT),
-    ])
-    obs = cs.topandas()
-    obs['Value'] = pd.to_numeric(obs['OBS'])
-#     obs.dropna(subset=['Value'], inplace=True)
-    obs.drop(columns=['OBS'], inplace=True)
-#     if 'Marker' in obs:
-#         obs.drop(columns=['Marker'], inplace=True)  
-    obs['Year'] = obs['Year'].apply(lambda y: int(float(y)))
-    if tab_group[0] in ['A', 'B']:
-        obs['ITIS Industry'] = 'all'
-        obs['ITIS Service'] = fix_title(tab_title)
-        obs['ONS Trade Areas ITIS'] = obs.apply(fix_area, axis='columns')
-    elif tab_group[0] == 'C':
-        if tab_group == 'C1':
-            obs['ITIS Industry'] = 'all'
-        else:
-            obs['ITIS Industry'] = fix_title(tab_title)
-        obs['ITIS Service'] = obs.apply(fix_service, axis='columns')
-        obs['ONS Trade Areas ITIS'] = 'itis/world'
-    else:
-        # Table D2 has 'Exports' in the wrong place
-        if tab_group == 'D2':
-            obs['Flow'].fillna('exports', inplace=True)
-        obs['ITIS Industry'] = fix_title(tab_title)
-        obs['ITIS Service'] = 'total-international-trade-in-services'
-        obs['ONS Trade Areas ITIS'] = obs.apply(fix_area, axis='columns')
-    obs.drop(columns=['H1', 'H2'], inplace=True)
-    obs['Flow'] = obs['Flow'].apply(lambda x: pathify(x.strip()))
-    obs['International Trade Basis'] = 'BOP'
-    obs['Measure Type'] = 'GBP Total'
-    obs['Unit'] = 'gbp-million'
-    return obs
-    return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry',
-                'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
-
-observations = pd.concat((process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0']), sort=False)
-cubes.add_cube(scraper, observations, "International trade in services")
-
-# -
-
-observations.rename(index= str, columns= {'DATAMARKER':'Marker'}, inplace = True)
-observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil',
-                                                               '..' : 'disclosive',
-                                                               '.' : 'disclosive',
-                                                               '...' : 'disclosive'
-                                                              }.get(x, x))
-
-observations['Value'] = observations['Value'].round(decimals=2)
-
-for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
-    observations[col] = observations[col].astype('category')
-    display(observations[col].cat.categories)
+        country = cell.shift (2, 0).expand(DOWN).is_not_blank()
+        trace.Country("Defined from cell ref C7 and down which is not blank")
+        
+        dimensions =[
+            HDim(period, "Period", DIRECTLY, ABOVE),
+            HDim(flow, "Flow", CLOSEST, LEFT),
+            HDim(continent, "Continent", CLOSEST, ABOVE),
+            HDim(country, "Country", CLOSEST, ABOVE),
+        ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
+        trace.with_preview(tidy_sheet)
+trace.store("combined_dataframe", tidy_sheet.topandas())
 
 # +
-observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+tab = tabs["Table B2"]
+trace.start(datasetTitle, tab, columns,distribution.downloadURL)
 
-#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+cell = tab.excel_ref("A5")
+
+observations = cell.shift(3, 0).expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
+
+period = cell.shift(0, -1).expand(RIGHT).is_not_blank().is_not_whitespace()
+trace.Period("Defined from cell ref E4 right which is not blank")
+
+flow = cell.shift(0, -2).expand(RIGHT).is_not_blank().is_not_whitespace()
+trace.Flow("Defined from cell ref E3 right which is not blank")
+
+continent = cell.expand(DOWN).is_not_blank().is_not_whitespace()   
+trace.Continent("Defined form cell ref A5 and down which is not blank")
+
+country = cell.shift (2, 0).expand(DOWN).is_not_blank()
+trace.Country("Defined from cell ref C7 and down which is not blank")
+        
+dimensions =[
+    HDim(period, "Period", DIRECTLY, ABOVE),
+    HDim(flow, "Flow", CLOSEST, LEFT),
+    HDim(continent, "Continent", CLOSEST, ABOVE),
+    HDim(country, "Country", CLOSEST, ABOVE),
+]
+tidy_sheet = ConversionSegment(tab, dimensions, observations)
+savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
+trace.with_preview(tidy_sheet)
+trace.store("combined_dataframe", tidy_sheet.topandas())
 # -
 
-observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
+for name, tab in tabs.items():
+    if 'Table C1 2009-2012'in name or 'Table C1 2013-2018' \
+    in name or'Table C2 2009-2012' in name or 'Table C2 2013-2018' \
+    in name or 'Table C3 2009-2012' in name or 'Table C3 2013-2018'\
+    in name or 'Table C4 2009-2012' in name or 'Table C5 2009-2012'\
+    in name or 'Table C6 2009-2012' in name or 'Table C7 2009-2012' in name:
+        
+            trace.start(datasetTitle, tab, columns,distribution.downloadURL)
+            cell = tab.excel_ref("A5")
+
+            observations = cell.shift(4, 0).expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
+
+            period = cell.shift(0, -1).expand(RIGHT).is_not_blank().is_not_whitespace()
+            trace.Period("Defined from cell ref E4 right which is not blank")
+
+            flow = cell.shift(0, -2).expand(RIGHT).is_not_blank().is_not_whitespace()
+            trace.Flow("Defined from cell ref E3 right which is not blank")
+
+            industry_origin = cell.expand(DOWN).is_not_blank().is_not_whitespace()
+            trace.Industry_Origin("Defined form cell ref A5 and down which is not blank")
+
+            industry = cell.shift (2, 0).expand(DOWN).is_not_blank()
+            trace.Industry("Defined from cell ref C7 and down which is not blank")
+
+            industry_total = cell.shift(1, 0).expand(DOWN).is_not_blank()
+            trace.Industry_Total("Defined from cell ref B2 and down")
+
+            dimensions =[
+                HDim(period, "Period", DIRECTLY, ABOVE),
+                HDim(flow, "Flow", CLOSEST, LEFT),
+                HDim(industry_origin, "Industry Origin", CLOSEST, ABOVE),
+                HDim(industry, "Industry", CLOSEST, ABOVE),
+                HDim(industry_total, "Industry Total", CLOSEST, ABOVE),
+            ]
+            tidy_sheet = ConversionSegment(tab, dimensions, observations)
+            savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
+            trace.with_preview(tidy_sheet)
+trace.store("combined_dataframe", tidy_sheet.topandas())
+
+for name, tab in tabs.items():
+    print(name)
+
+# +
+tab = tabs["Table C0"]
+trace.start(datasetTitle, tab, columns,distribution.downloadURL)
+
+cell = tab.excel_ref("C3")
+
+observations = cell.shift(1, 2).expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
+
+period = cell.shift(1, 1).expand(RIGHT).is_not_blank().is_not_whitespace()
+trace.Period("Defined from cell ref D4 right which is not blank")
+
+flow = cell.shift(1, 0).expand(RIGHT).is_not_blank().is_not_whitespace()
+trace.Flow("Defined from cell ref D3 right which is not blank")
+
+industry = cell.fill(DOWN).is_not_blank().is_not_whitespace()   
+trace.Industry("Defined form cell ref C5 and down which is not blank")
+
+dimensions =[
+    HDim(period, "Period", DIRECTLY, ABOVE),
+    HDim(flow, "Flow", CLOSEST, LEFT),
+    HDim(industry, "Industry", CLOSEST, ABOVE),
+]
+tidy_sheet = ConversionSegment(tab, dimensions, observations)
+savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
+trace.with_preview(tidy_sheet)
+trace.store("combined_dataframe", tidy_sheet.topandas())
+# -
+
+for name, tab in tabs.items():
+    if 'Table C4 2013-2018'in name or 'Table C5 2013-2018' \
+    in name or'Table C6 2013-2018' in name or 'Table C7 2013-2018' in name:
+        
+            trace.start(datasetTitle, tab, columns,distribution.downloadURL)
+            cell = tab.excel_ref("A5")
+
+            observations = cell.shift(3, 0).expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
+
+            period = cell.shift(0, -1).expand(RIGHT).is_not_blank().is_not_whitespace()
+            trace.Period("Defined from cell ref E4 right which is not blank")
+
+            flow = cell.shift(0, -2).expand(RIGHT).is_not_blank().is_not_whitespace()
+            trace.Flow("Defined from cell ref E3 right which is not blank")
+
+            industry_origin = cell.expand(DOWN).is_not_blank().is_not_whitespace()
+            trace.Industry_Origin("Defined form cell ref A5 and down which is not blank")
+
+            industry = cell.shift (2, 0).expand(DOWN).is_not_blank()
+            trace.Industry("Defined from cell ref C7 and down which is not blank")
+
+            industry_total = cell.shift(1, 0).expand(DOWN).is_not_blank()
+            trace.Industry_Total("Defined from cell ref B2 and down")
+
+            dimensions =[
+                HDim(period, "Period", DIRECTLY, ABOVE),
+                HDim(flow, "Flow", CLOSEST, LEFT),
+                HDim(industry_origin, "Industry Origin", CLOSEST, ABOVE),
+                HDim(industry, "Industry", CLOSEST, ABOVE),
+                HDim(industry_total, "Industry Total", CLOSEST, ABOVE),
+            ]
+            tidy_sheet = ConversionSegment(tab, dimensions, observations)
+            savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
+            trace.with_preview(tidy_sheet)
+trace.store("combined_dataframe", tidy_sheet.topandas())
+
+df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+df
+
+cubes.add_cube(scraper, df, datasetTitle)
+trace.render("spec_v1.html")
 
 cubes.output_all()
