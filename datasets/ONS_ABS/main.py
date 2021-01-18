@@ -205,20 +205,43 @@ scraper.dataset.family = "trade"
 scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
                                                           'Importers and exporters of trade goods and services')
 #cubes.add_cube(scraper, tidy, "Annual Business Survey Exporters and Importers")
-cubes.add_cube(scraper, cntdat, "Annual Business Survey Exporters and Importers - Business count")
+#cubes.add_cube(scraper, cntdat, "Annual Business Survey Exporters and Importers - Business count")
 #cubes.add_cube(scraper, prodat, "Annual Business Survey Exporters and Importers - Business proportion")
 
 
-cubes.output_all()
-
-tidy.head(1)
+# +
+#cubes.output_all()
 
 # +
-#for c in tidy.columns:
-#    if c != "Value":
-#        print(c)
-#        print(tidy[c].unique())
-#        print("########################")
+import os
+from urllib.parse import urljoin
+
+
+csvName = 'count_observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+tidy.drop_duplicates().to_csv(out / csvName, index = False)
+tidy.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+
+scraper.dataset.title = scraper.dataset.title + ' - Business count'
+
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
 # -
+
+tidy.head(10)
+
+
+
 
 
