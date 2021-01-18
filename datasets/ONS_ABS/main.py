@@ -164,7 +164,7 @@ tidy = tidy[['Year','Age of Business', 'Business Activity','Country of Ownership
              ,'Employees','Unit','Measure Type', 'Value']]
 
 # +
-tidy['Value'] = pd.to_numeric(tidy['Value'], downcast='integer')
+tidy['Value'] = tidy['Value'].astype(int)
 
 cntdat = tidy[tidy['Unit'] == 'businesses']
 prodat = tidy[tidy['Unit'] == 'percent']
@@ -240,6 +240,8 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 # -
 
 tidy.head(10)
+
+
 
 
 
