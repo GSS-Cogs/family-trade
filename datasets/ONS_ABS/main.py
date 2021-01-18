@@ -163,10 +163,14 @@ tidy.columns = ['Employment' if x=='Notation' else x for x in tidy.columns]
 tidy = tidy[['Year','Age of Business', 'Business Activity','Country of Ownership','Trade Group','Turnover'
              ,'Employees','Unit','Measure Type', 'Value']]
 
-del tidy['Measure Type']
-del tidy['Unit']
+# +
 cntdat = tidy[tidy['Unit'] == 'businesses']
 prodat = tidy[tidy['Unit'] == 'percent']
+
+del cntdat['Measure Type']
+del cntdat['Unit']
+del prodat['Measure Type']
+del prodat['Unit']
 #print(cntdat.count())
 #print(prodat.count())
 
