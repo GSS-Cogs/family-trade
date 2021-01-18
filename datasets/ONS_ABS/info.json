@@ -17,35 +17,60 @@
     "transform": {
         "airtable": "rec6SF5JMLyIYm8z9",
         "columns": {
-            "Period": {
+            "Year": {
                 "source": "",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}",
+                "value": "http://reference.data.gov.uk/id/{+year}",
                 "codelist": "false"
             },
-            "Flow": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
-                "description": "",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
+            "Age of Business": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/age-of-business",
+                "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/age-of-business",
+                "description": ""
             },
-            "ONS Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}",
-                "description": "",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography"
+            "Business Activity": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/business-activity",
+                "value": "http://gss-data.org.uk/def/trade/concept/business-activity/{business_activity}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/business-activity",
+                "description": ""
+            },
+            "Country of Ownership": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership",
+                "value": "http://gss-data.org.uk/def/trade/concept/country-of-ownership/{country-of-ownership}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership",
+                "description": ""
+            },
+            "Trade Group": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group",
+                "value": "http://gss-data.org.uk/def/trade/concept/trade-group/{trade_group}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group",
+                "description": ""
+            },
+            "Turnover": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/concept/turnover-size-bands/{turnover}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands",
+                "description": ""
+            },
+            "Employees": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{employees}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands",
+                "description": ""
             },
             "Value": {
-              "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-              "measure": "http://gss-data.org.uk/def/measure/current-prices",
+              "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
+              "measure": "http://gss-data.org.uk/def/measure/count",
               "datatype": "integer"
             },
             "Marker": {
               "attribute":"http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
               "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             },
-        "main_issue": 32
+        "main_issue": "32"
     },
     "sizingNotes": "",
     "notes": ""
+    }
 }
