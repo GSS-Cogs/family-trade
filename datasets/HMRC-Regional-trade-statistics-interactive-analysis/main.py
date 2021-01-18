@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[98]:
+# In[15]:
 
 
 # -*- coding: utf-8 -*-
@@ -55,7 +55,7 @@ def cell_to_string(cell):
     return substring
 
 
-# In[99]:
+# In[16]:
 
 
 from pandas import ExcelWriter
@@ -82,7 +82,7 @@ for table in scraper.distributions:
     counter += 1
 
 
-# In[100]:
+# In[17]:
 
 
 counter = 0
@@ -391,14 +391,14 @@ for table in all_tabs:
     counter += 1
 
 
-# In[101]:
+# In[18]:
 
 
 countries = []
 region = []
 
 
-# In[102]:
+# In[19]:
 
 
 df = pd.concat([tidied_sheets[0],tidied_sheets[1],tidied_sheets[8],tidied_sheets[9]], sort = True)
@@ -454,7 +454,7 @@ region.append(df['Region'].unique().tolist())
 df
 
 
-# In[103]:
+# In[20]:
 
 
 df = pd.concat([tidied_sheets[2],tidied_sheets[3],tidied_sheets[10],tidied_sheets[11]], sort = True)
@@ -513,7 +513,7 @@ region.append(averagePerTrade['Region'].unique().tolist())
 averagePerTrade
 
 
-# In[104]:
+# In[21]:
 
 
 #Data included in non regional tabs
@@ -544,7 +544,7 @@ averagePerTrade
 #trade
 
 
-# In[105]:
+# In[22]:
 
 
 valueOfTrade = df[df['Unit'] == 'gbp-billions']
@@ -579,7 +579,7 @@ region.append(valueOfTrade['Region'].unique().tolist())
 valueOfTrade
 
 
-# In[126]:
+# In[23]:
 
 
 df = pd.concat([tidied_sheets[4],tidied_sheets[5],tidied_sheets[12],tidied_sheets[13]], sort = True)
@@ -598,7 +598,7 @@ df = df[df['Country'] != '0.0']
 df['Marker'] = df.apply(lambda x: 'suppressed' if x['Value'] == '' else '', axis = 1)
 df['Value'] = df.apply(lambda x: 0 if x['Marker'] == 'suppressed' else x['Value'], axis = 1)
 
-COLUMNS_TO_NOT_PATHIFY = ['Value', 'Country']
+COLUMNS_TO_NOT_PATHIFY = ['Value']
 
 for col in df.columns.values.tolist():
 	if col in COLUMNS_TO_NOT_PATHIFY:
@@ -640,7 +640,7 @@ region.append(df['Region'].unique().tolist())
 df
 
 
-# In[107]:
+# In[24]:
 
 
 df = pd.concat([tidied_sheets[6],tidied_sheets[7],tidied_sheets[14],tidied_sheets[15]], sort = True)
@@ -700,7 +700,7 @@ region.append(averagePerTrade['Region'].unique().tolist())
 averagePerTrade
 
 
-# In[108]:
+# In[25]:
 
 
 #Data included in Non Regional Tabs
@@ -731,7 +731,7 @@ averagePerTrade
 #trades
 
 
-# In[109]:
+# In[26]:
 
 
 valueOfTrades = df[df['Unit'] == 'gbp-billions']
@@ -766,7 +766,7 @@ region.append(valueOfTrades['Region'].unique().tolist())
 valueOfTrades
 
 
-# In[110]:
+# In[27]:
 
 
 from IPython.core.display import HTML
@@ -777,7 +777,7 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[ ]:
+# In[28]:
 
 
 cubes.output_all()
