@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -84,9 +84,11 @@ tidy = tidy.drop(columns=['Employment', 'Detailed employment'])
 
 # Fill NaN with top values.
 
-tidy.fillna(value={'Age': 'Any', 'Ownership': 'Any', 'Turnover': 'Any', 'employees': 'Any' }, inplace=True)
+tidy.fillna(value={'Age': 'All', 'Ownership': 'All', 'Turnover': 'All', 'employees': 'All' }, inplace=True)
 
 # Show the range of the codes and check for duplicated rows.
+
+
 
 from IPython.core.display import HTML
 for col in tidy:
@@ -99,12 +101,23 @@ tidy[dups]
 # We need to specify the units of the observations.
 
 # +
+tidy['Age'].loc[(tidy['Age'] == "<2")] = "0-2"
+tidy['Age'] = tidy['Age'].str.replace("<","")
+tidy['Age'] = tidy['Age'].str.replace("+","plus")
+
 tidy['Unit'] = tidy['Measure Type'].map(lambda x: 'Businesses' if x == 'Count' else 'Percent')
 
 
 tidy = tidy.replace({'Import/Export' : {
     'both Exporter and Importer'   : 'Exporter and Importer',
-    'either Exporter and/or Importer 7' : 'Exporter and/or Importer'}})
+    'either Exporter and/or Importer 7' : 'Exporter and-or Importer'}})
+
+tidy = tidy.replace({'Turnover' : {'<1000'   : '0-1000'}})
+tidy['Turnover'] = tidy['Turnover'].str.replace(",","")
+tidy['Turnover'] = tidy['Turnover'].apply(pathify)
+
+tidy['employees'] = tidy['employees'].apply(pathify)
+
 # -
 
 # And rename some columns.
@@ -143,12 +156,10 @@ tidy.head()
 
 tidy.head(2)
 
-tidy.rename(columns={'Turnover': 'Turnover(GBP Thousands)',
-                     'Age of Business': 'Age of Business(Years)'
-                    }, inplace=True)
 
-tidy = tidy[['Age of Business(Years)', 'Export and Import Activity','Measure Type','Value',
-             'Country of Ownership','ONS ABS Trade','Turnover(GBP Thousands)','Year','Employment','Unit']]
+
+tidy = tidy[['Age of Business', 'Export and Import Activity','Measure Type','Value',
+             'Country of Ownership','ONS ABS Trade','Turnover','Year','Employment','Unit']]
 
 scraper.dataset.family = "Trade"
 scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
@@ -157,4 +168,8 @@ cubes.add_cube(scraper, tidy, "Annual Business Survey Exporters and Importers")
 
 
 cubes.output_all()
+
+
+
+
 

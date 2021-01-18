@@ -81,7 +81,14 @@
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands"
             },
-            "rdfs:comment": "Dataset representing the 'Turnover Size Bands' code list."
+            "rdfs:comment": "Dataset representing the 'Turnover Size Bands' code list.",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-15T00:00:00"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
@@ -104,6 +111,9 @@
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands"
             }
         }
     ]
