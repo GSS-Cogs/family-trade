@@ -164,6 +164,8 @@ tidy = tidy[['Year','Age of Business', 'Business Activity','Country of Ownership
              ,'Employees','Unit','Measure Type', 'Value']]
 
 # +
+tidy['Value'] = pd.to_numeric(tidy['Value'], downcast='integer')
+
 cntdat = tidy[tidy['Unit'] == 'businesses']
 prodat = tidy[tidy['Unit'] == 'percent']
 
@@ -171,8 +173,6 @@ del cntdat['Measure Type']
 del cntdat['Unit']
 del prodat['Measure Type']
 del prodat['Unit']
-#print(cntdat.count())
-#print(prodat.count())
 
 # +
 scraper.dataset.description = scraper.dataset.description + """
