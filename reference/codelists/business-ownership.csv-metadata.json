@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/business-ownership/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/business-ownership/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/business-ownership/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/business-ownership/{notation}"
     },
     "rdfs:label": "Account Type",
     "dc:title": "Account Type",
