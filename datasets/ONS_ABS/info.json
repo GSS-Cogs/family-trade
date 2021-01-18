@@ -23,28 +23,34 @@
                 "codelist": false
             },
             "Age of Business": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/age-of-business",
-                "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}"
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/age-of-business",
+                "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/age-of-business"
             },
             "Business Activity": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/business-activity",
-                "value": "http://gss-data.org.uk/def/trade/concept/business-activity/{business_activity}"
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/business-activity",
+                "value": "http://gss-data.org.uk/def/trade/concept/business-activity/{business_activity}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/business-activity"
             },
             "Country of Ownership": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/countries-of-ownership",
-                "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{country_of_ownership}"
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership",
+                "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{country_of_ownership}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership"
             },
             "Trade Group": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/trade-group",
-                "value": "http://gss-data.org.uk/def/trade/concept/trade-group/{trade_group}"
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group",
+                "value": "http://gss-data.org.uk/def/trade/concept/trade-group/{trade_group}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group"
             },
             "Turnover": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/turnover-size-bands",
-                "value": "http://gss-data.org.uk/def/trade/concept/turnover-size-bands/{turnover}"
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/concept/turnover-size-bands/{turnover}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands"
             },
             "Employees": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
-                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{employees}"
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{employees}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands"
             },
             "Value": {
               "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
