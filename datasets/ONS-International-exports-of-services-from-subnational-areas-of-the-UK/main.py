@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -66,10 +66,15 @@ next_table['Flow'] = next_table['Flow'].map(pathify)
 next_table["Service Origin Geography"] = next_table["Service Origin Geography"].apply(pathify)
 next_table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
-from pathlib import Path
-import numpy as np
-out = Path('out')
-out.mkdir(exist_ok=True)
+# +
+#from pathlib import Path
+#import numpy as np
+#out = Path('out')
+#out.mkdir(exist_ok=True)
+# -
+
+del next_table["Measure Type"]
+del next_table["Unit"]
 
 # +
 from os import environ
@@ -82,7 +87,7 @@ scraper.dataset.family = 'trade'
 from gssutils.metadata import THEME
 scraper.dataset.theme = THEME['business-industry-trade-energy']
 
-next_table.drop_duplicates().to_csv(out / (file_name + '.csv'), index = False)
+#next_table.drop_duplicates().to_csv(out / (file_name + '.csv'), index = False)
 
 com = """
     Experimental estimated value of exports of services for 2017 for NUTS1, NUTS2, NUTS3 and 15 joint authorities, 
@@ -110,13 +115,37 @@ scraper.dataset.comment = com
 scraper.dataset.description = desc
 scraper.dataset.title = 'International exports of services from subnational areas of the UK'
 
-with open(out / (file_name + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / (file_name + '.csv'), out / ((file_name + '.csv') + '-schema.json'))
+#with open(out / (file_name + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
+#csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
+#csvw.create(out / (file_name + '.csv'), out / ((file_name + '.csv') + '-schema.json'))
 
 
+# +
+import os
+from urllib.parse import urljoin
+import json
+
+csvName = 'observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+next_table.drop_duplicates().to_csv(out / csvName, index = False)
+next_table.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
 # -
 
-next_table['Export Services'].unique()
+next_table['Marker'].unique()
+
+next_table.head(10)
 
 
