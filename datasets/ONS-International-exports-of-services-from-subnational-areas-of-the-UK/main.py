@@ -73,8 +73,9 @@ next_table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 #out.mkdir(exist_ok=True)
 # -
 
-del next_table["Measure Type"]
-del next_table["Unit"]
+#del next_table["Measure Type"]
+#del next_table["Unit"]
+next_table['Marker'] = next_table['Marker'].fillna(value="")
 
 # +
 from os import environ
@@ -147,5 +148,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 next_table['Marker'].unique()
 
 next_table.head(10)
+
+
 
 

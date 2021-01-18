@@ -35,7 +35,7 @@
             "Service Origin Geography": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/service-origin-geography",
                 "value": "http://gss-data.org.uk/def/trade/concept/service-origin-geography/{service-origin-geography}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography"
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/ons-origin-geography"
             },
            "Service Destination Geography": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/service-destination-geography",
