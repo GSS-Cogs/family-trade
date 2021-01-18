@@ -5,7 +5,7 @@ trade,count-of-businesses,Count of Businesses,The total number of employees,,htt
 trade,count-of-employees,Count of Employees,The total number of items,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,count,Count,The proportion of all businesses that match the specified criteria,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,proportion-of-all-business,Proportion of all Business,The total value of turnover,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
-trade,total-turnover,Total Turnover,Standard International Trade Classification Revision 4,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,total-turnover,Total Turnover,"Standard International Trade Classification Revision 4",,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,gbp-million,GBP Million,percent,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,percent,Percent,Data suppressed,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,suppressed,Suppressed,Product Department,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
