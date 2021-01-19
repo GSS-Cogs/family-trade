@@ -15,6 +15,44 @@
     },
     "transform": {
         "airtable": "recvEuJKTaVY6Ft4n",
+        "columns": {
+            "Period": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
+            "Business size": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands/{business_size}"
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/eu-rw-ww",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww/{country}"
+            },
+            "Ownership": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/country-of-ownership",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership/{ownership}"
+            },
+            "Industry": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sic-industry",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/sic-industry/{industry}"
+            },
+            "Flow": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{flow}",
+                "description": ""
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "integer"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+ 
+        },
         "stage": [
             "To Do"
         ],
