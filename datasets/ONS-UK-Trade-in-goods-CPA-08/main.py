@@ -22,7 +22,7 @@ import pandas as pd
 from gssutils import *
 from databaker.framework import *
 
-pd.options.mode.chained_assignment = None #check if it's required
+pd.options.mode.chained_assignment = None 
 # -
 
 cubes = Cubes("info.json")
@@ -59,8 +59,7 @@ for tab in tabs:
         continue   
     print(tab.name)
 
-    trace.start(title, tab, columns, scraper.distributions[0].downloadURL)
-#     trace.start(title, tab, columns, distribution.downloadURL)
+    trace.start(title, tab, columns, distribution.downloadURL)
   
     cell = tab.excel_ref("A5").expand(DOWN).is_not_blank()
     
@@ -73,8 +72,15 @@ for tab in tabs:
     trace.Product_Category("Selected from cells A as sub-sectors or sub-industry")
     prod_cat = cell.regex('[0-9]{2}\s{1}[^\.]')
     
+    prod_cat = prod_dep | prod_cat
+    
     trace.Product("Selected from cells A as all items excluding: sectors and sub-sectors")
-    product = cell - prod_dep - prod_cat
+    product = cell      
+    
+    prod_override = {}
+    for xy_cell in product:
+        if xy_cell in prod_cat & xy_cell in prod_dep:
+            prod_override[xy_cell.value] = 'all'
         
     cdid_code = tab.excel_ref('B5').expand(DOWN).is_not_blank() | tab.excel_ref("B194") # Adding a blank value  
     
@@ -88,15 +94,19 @@ for tab in tabs:
         HDim(period, 'Period', DIRECTLY, ABOVE), #directly, left
         
         HDim(prod_dep, 'Product Department', CLOSEST, ABOVE),
-        HDim(prod_cat, 'Product Category', CLOSEST, ABOVE), ### ClosestRight
-        HDim(product, 'Product', CLOSEST, ABOVE), ### ClosestBelow and DirectLeft
+        HDim(prod_cat, 'Product Category', CLOSEST, ABOVE),
+        HDim(product, 'Product', DIRECTLY, LEFT, cellvalueoverride = prod_override), 
         
         HDim(cdid_code, 'CDID', CLOSEST, ABOVE)   
         ]
    
     cs = ConversionSegment(tab, dimensions, observations)
     tidy_sheet = cs.topandas()
-    trace.store("combined_dataframe", tidy_sheet)    
+    
+    tidy_sheet["Product Category"][tidy_sheet["Product Category"] == tidy_sheet["Product Department"]] = "all"  
+    
+    trace.store("combined_dataframe", tidy_sheet)  
+print(prod_override)
 # -
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x) #check if req
