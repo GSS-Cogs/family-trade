@@ -67,8 +67,8 @@
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Nuts Geographies",
-    "dc:title": "Nuts Geographies",
+    "rdfs:label": "NUTS Geographies",
+    "dc:title": "NUTS Geographies",
     "rdfs:seeAlso": [
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies/dataset",
@@ -76,12 +76,15 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Nuts Geographies",
-            "dc:title": "Nuts Geographies",
+            "rdfs:label": "NUTS Geographies",
+            "dc:title": "NUTS Geographies",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies"
             },
-            "rdfs:comment": "Dataset representing the 'Nuts Geographies' code list."
+            "rdfs:comment": "Dataset representing the 'NUTS Geographies' code list.",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
@@ -92,18 +95,21 @@
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Nuts Geographies Catalog Record",
-            "rdfs:label": "Nuts Geographies Catalog Record",
+            "dc:title": "NUTS Geographies Catalog Record",
+            "rdfs:label": "NUTS Geographies Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.146485"
+                "@value": "2020-12-23T11:58:58.163998"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.146485"
+                "@value": "2020-12-23T11:58:58.163998"
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies"
             }
         }
     ]
