@@ -174,5 +174,5 @@ observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
 observations
 
-cubes.add_cube(scraper, observations.drop_duplicates(), "International trade in serices")
+cubes.add_cube(scraper, observations.drop_duplicates(), "International trade in services")
 cubes.output_all()
