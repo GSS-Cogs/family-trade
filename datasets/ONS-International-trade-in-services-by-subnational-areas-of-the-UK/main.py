@@ -1,18 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 # %%
-
-# %%
-
-
 #!/usr/bin/env python
 # coding: utf-8
 
 
 # %%
-
-
-
 # -*- coding: utf-8 -*-
 # ---
 # jupyter:
@@ -33,19 +26,13 @@ import json
 import math
 cubes = Cubes("info.json")
 info = json.load(open('info.json'))
-#etl_title = info["Name"]
-#etl_publisher = info["Producer"][0]
-#print("Publisher: " + etl_publisher)
-#print("Title: " + etl_title)
+
 
 scraper = Scraper(seed="info.json")
 scraper
 
 
 # %%
-
-
-
 tidied_sheets = []
 trace = TransformTrace()
 df = pd.DataFrame()
@@ -54,9 +41,6 @@ all_tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 
 
 # %%
-
-
-
 def cell_to_string(cell):
     s = str(cell)
     start = s.find("'") + len("'")
@@ -66,500 +50,6 @@ def cell_to_string(cell):
 
 
 # %%
-
-
-"""
-tab = all_tabs["1. NUTS1, industry"]
-
-tab_title = "1_nuts1_industry"
-tab_columns = ["Year", "NUTS1 Area", "Industry", "Measure Type", "Unit"]
-trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-
-
-year = "2018"
-trace.Year("Hardcoded but could have been taken from tab title (cell A1)")
-
-nuts1_area = tab.excel_ref("A4:A42").is_not_blank()
-trace.NUTS1_Area("Selected as all non-blank values between cell refs A4 and A42")
-
-industry = tab.excel_ref("C3").expand(RIGHT).is_not_blank()
-trace.Industry("Selected as all non-blank values from cell ref C3 going right/across.")
-
-measure_type = tab.excel_ref("B4").expand(DOWN).is_not_blank()
-trace.Measure_Type("Selected as all non-blank values from cell ref B4 down.")
-
-unit = "£ millions"
-trace.Unit("Hardcoded but could have been taken from cell A2")
-
-
-observations = tab.excel_ref("C4").expand(RIGHT).expand(DOWN).is_not_blank()
-
-dimensions = [
-    HDimConst("Year", year),
-    HDim(nuts1_area, "NUTS1 Area", CLOSEST, ABOVE),
-    HDim(industry, "Industry", DIRECTLY, ABOVE),
-    HDim(measure_type, "Measure Type", DIRECTLY, LEFT),
-    HDimConst("Unit", unit)
-]
-
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet)
-trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-trace.render()
-
-tidied = df[["Year", "NUTS1 Area", "Industry", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
-
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[0]
-
-#Notes:
-    #Will need a datamarker column for values ".."
-"""
-
-
-# %%
-
-
-
-"""
-tab = all_tabs["2. NUTS1, industry, destination"]
-
-tab_title = "2_nuts1_industry_destination"
-tab_columns = ["Year", "NUTS1 Area", "Industry", "Destination", "Measure Type", "Unit"]
-trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-
-
-year = "2018"
-trace.Year("Hardcoded but could have been taken from tab title (cell A1)")
-
-nuts1_area = tab.excel_ref("A5:A43").is_not_blank()
-trace.NUTS1_Area("Selected as all non-blank values between cell refs A5 and A43")
-
-industry = tab.excel_ref("C3").expand(RIGHT).is_not_blank()
-trace.Industry("Selected as all non-blank values from cell ref C3 going right/across.")
-
-destination = tab.excel_ref("C4").expand(RIGHT).is_not_blank()
-trace.Destination("Selected as all non-blank values from cell ref C4 going right/across.")
-
-measure_type = tab.excel_ref("B5").expand(DOWN).is_not_blank()
-trace.Measure_Type("Selected as all non-blank values from cell ref B5 down.")
-
-unit = "£ millions"
-trace.Unit("Hardcoded but could have been taken from cell A2")
-
-
-observations = tab.excel_ref("C5").expand(RIGHT).expand(DOWN).is_not_blank()
-
-dimensions = [
-    HDimConst("Year", year),
-    HDim(nuts1_area, "NUTS1 Area", CLOSEST, ABOVE),
-    HDim(industry, "Industry", CLOSEST, LEFT),
-    HDim(destination, "Destination", DIRECTLY, ABOVE),
-    HDim(measure_type, "Measure Type", DIRECTLY, LEFT),
-    HDimConst("Unit", unit)
-]
-
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet)
-trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-trace.render()
-
-tidied = df[["Year", "NUTS1 Area", "Industry", "Destination", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
-
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[1]
-
-#Notes:
-    #Will need a datamarker column for values ".."
-"""
-
-
-# %%
-
-
-
-"""
-tab = all_tabs["3. NUTS2, industry"]
-
-tab_title = "3_nuts2_industry"
-tab_columns = ["Year", "NUTS2", "NUTS2 Area", "Industry", "Measure Type", "Unit"]
-trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-
-
-year = "2018"
-trace.Year("Hardcoded but could have been taken from tab title (cell A1)")
-
-nuts2 = tab.excel_ref("A4:A123").is_not_blank()
-trace.NUTS2("Selected as all non-blank values between cell refs A4 and A123")
-
-nuts2_area = tab.excel_ref("B4").expand(DOWN).is_not_blank()
-trace.NUTS2_Area("Selected as all non-blank values from cell ref B4 down.")
-
-industry = tab.excel_ref("D3").expand(RIGHT).is_not_blank()
-trace.Industry("Selected as all non-blank values from cell ref D3 going right/across.")
-
-measure_type = tab.excel_ref("C4").expand(DOWN).is_not_blank()
-trace.Measure_Type("Selected as all non-blank values from cell ref C4 down.")
-
-unit = "£ millions"
-trace.Unit("Hardcoded but could have been taken from cell A2")
-
-
-observations = tab.excel_ref("D4").expand(RIGHT).expand(DOWN).is_not_blank()
-
-dimensions = [
-    HDimConst("Year", year),
-    HDim(nuts2, "NUTS2", CLOSEST, ABOVE),
-    HDim(nuts2_area, "NUTS2 Area", CLOSEST, ABOVE),
-    HDim(industry, "Industry", DIRECTLY, ABOVE),
-    HDim(measure_type, "Measure Type", DIRECTLY, LEFT),
-    HDimConst("Unit", unit)
-]
-
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet)
-trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-trace.render()
-
-tidied = df[["Year", "NUTS2", "NUTS2 Area", "Industry", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
-
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[2]
-
-#Notes:
-    #Will need a datamarker column for values ".."
-"""
-
-
-# %%
-
-
-
-""""
-tab = all_tabs["4. NUTS2, industry, destination"]
-
-tab_title = "4_nuts2_industry_destination"
-tab_columns = ["Year", "NUTS2", "NUTS2 Area", "Industry", "Destination", "Measure Type", "Unit"]
-trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-
-
-year = "2018"
-trace.Year("Hardcoded but could have been taken from tab title (cell A1)")
-
-nuts2 = tab.excel_ref("A5:A124").is_not_blank()
-trace.NUTS2("Selected as all non-blank values between cell refs A5 and A124")
-
-nuts2_area = tab.excel_ref("B5").expand(DOWN).is_not_blank()
-trace.NUTS2_Area("Selected as all non-blank values from cell ref B5 down.")
-
-industry = tab.excel_ref("D3").expand(RIGHT).is_not_blank()
-trace.Industry("Selected as all non-blank values from cell ref D3 going right/across.")
-
-destination = tab.excel_ref("D4").expand(RIGHT).is_not_blank()
-trace.Destination("Selected as all non-blank values from cell ref D4 going right/across.")
-
-measure_type = tab.excel_ref("C5").expand(DOWN).is_not_blank()
-trace.Measure_Type("Selected as all non-blank values from cell ref C5 down.")
-
-unit = "£ millions"
-trace.Unit("Hardcoded but could have been taken from cell A2")
-
-
-observations = tab.excel_ref("D5").expand(RIGHT).expand(DOWN).is_not_blank()
-
-dimensions = [
-    HDimConst("Year", year),
-    HDim(nuts2, "NUTS2", CLOSEST, ABOVE),
-    HDim(nuts2_area, "NUTS2 Area", CLOSEST, ABOVE),
-    HDim(industry, "Industry", CLOSEST, LEFT),
-    HDim(destination, "Destination", DIRECTLY, ABOVE),
-    HDim(measure_type, "Measure Type", DIRECTLY, LEFT),
-    HDimConst("Unit", unit)
-]
-
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet)
-trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-trace.render()
-
-tidied = df[["Year", "NUTS2", "NUTS2 Area", "Industry", "Destination", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
-
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[3]
-
-#Notes:
-    #Will need a datamarker column for values ".."
-"""
-
-
-# %%
-
-
-
-"""
-tab = all_tabs["5. NUTS3, destination"]
-
-tab_title = "5_nuts3_destination_trade_value"
-tab_columns = ["Year", "NUTS3", "NUTS3 Area", "Destination", "Measure Type", "Unit"]
-trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-
-
-year = "2018"
-trace.Year("Hardcoded but could have been taken from tab title (cell A1)")
-
-nuts3 = tab.excel_ref("A4:A507").is_not_blank()
-trace.NUTS3("Selected as all non-blank values between cell refs A4 and A507")
-
-nuts3_area = tab.excel_ref("B4").expand(DOWN).is_not_blank()
-trace.NUTS3_Area("Selected as all non-blank values from cell ref B4 down.")
-
-destination = tab.excel_ref("E3:G3").is_not_blank()
-trace.Destination("Selected as all non-blank values between cell ref E3 and G3 going right/across.")
-
-measure_type = tab.excel_ref("D4").expand(DOWN).is_not_blank()
-trace.Measure_Type("Selected as all non-blank values from cell ref D4 down.")
-
-unit = "£ millions"
-trace.Unit("Hardcoded but could have been taken from cell A2")
-
-
-observations = tab.excel_ref("E4:G4").expand(DOWN).is_not_blank()
-
-dimensions = [
-    HDimConst("Year", year),
-    HDim(nuts3, "NUTS3", CLOSEST, ABOVE),
-    HDim(nuts3_area, "NUTS3 Area", CLOSEST, ABOVE),
-    HDim(destination, "Destination", DIRECTLY, ABOVE),
-    HDim(measure_type, "Measure Type", DIRECTLY, LEFT),
-    HDimConst("Unit", unit)
-]
-
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet)
-trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-trace.render()
-
-tidied = df[["Year", "NUTS3", "NUTS3 Area", "Destination", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
-
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[4]
-
-#Notes:
-    #Will need a datamarker column for values ".."
-"""
-
-
-# %%
-
-
-
-"""
-tab = all_tabs["5. NUTS3, destination"]
-
-tab_title = "5_nuts3_destination_percentage"
-tab_columns = ["Year", "NUTS3", "NUTS3 Area", "Import Export", "Measure Type", "Unit"]
-trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-
-
-year = "2018"
-trace.Year("Hardcoded but could have been taken from tab title (cell A1)")
-
-nuts3 = tab.excel_ref("A4:A507").is_not_blank()
-trace.NUTS3("Selected as all non-blank values between cell refs A4 and A507")
-
-nuts3_area = tab.excel_ref("B4").expand(DOWN).is_not_blank()
-trace.NUTS3_Area("Selected as all non-blank values from cell ref B5 down.")
-
-imp_exp = tab.excel_ref("D4").expand(DOWN).is_not_blank()
-trace.Import_Export("Selected as all non-blank values from cell ref D4 down.")
-
-measure_type = tab.excel_ref("H3")
-trace.Measure_Type("Selected as all non-blank values from cell ref D4 down.")
-
-unit = "Percentage (%)"
-trace.Unit("Hardcoded but could have been taken from cell A2")
-
-
-observations = tab.excel_ref("H4").expand(DOWN).is_not_blank()
-
-dimensions = [
-    HDimConst("Year", year),
-    HDim(nuts3, "NUTS3", CLOSEST, ABOVE),
-    HDim(nuts3_area, "NUTS3 Area", CLOSEST, ABOVE),
-    HDim(imp_exp, "Import/Export", DIRECTLY, LEFT),
-    HDim(measure_type, "Measure Type", DIRECTLY, ABOVE),
-    HDimConst("Unit", unit)
-]
-
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet)
-trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-trace.render()
-
-tidied = df[["Year", "NUTS3", "NUTS3 Area", "Import/Export", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
-
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[5]
-
-#Notes:
-    #Will need a datamarker column for values ".."
-"""
-
-
-# %%
-
-
-
-"""
-tab = all_tabs["6. City Region, industry"]
-
-tab_title = "6_city_region_industry"
-tab_columns = ["Year", "City_Region_Name", "Industry", "Measure Type", "Unit"]
-trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-
-
-year = "2018"
-trace.Year("Hardcoded but could have been taken from tab title (cell A1)")
-
-city_region_name = tab.excel_ref("A4:A48").is_not_blank()
-trace.City_Region_Name("Selected as all non-blank values between cell refs A4 and A48")
-
-industry = tab.excel_ref("C3").expand(RIGHT).is_not_blank()
-trace.Industry("Selected as all non-blank values from cell ref C3 going right/across.")
-
-measure_type = tab.excel_ref("B4").expand(DOWN).is_not_blank()
-trace.Measure_Type("Selected as all non-blank values from cell ref B4 down.")
-
-unit = "£ millions"
-trace.Unit("Hardcoded but could have been taken from cell A2")
-
-
-observations = tab.excel_ref("C4").expand(RIGHT).expand(DOWN).is_not_blank()
-
-dimensions = [
-    HDimConst("Year", year),
-    HDim(city_region_name, "City Region Name", CLOSEST, ABOVE),
-    HDim(industry, "Industry", DIRECTLY, ABOVE),
-    HDim(measure_type, "Measure Type", DIRECTLY, LEFT),
-    HDimConst("Unit", unit)
-]
-
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet)
-trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-trace.render()
-
-tidied = df[["Year", "City Region Name", "Industry", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
-
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[6]
-
-#Notes:
-    #Will need a datamarker column for values ".."
-"""
-
-
-# %%
-
-
-
-"""
-tab = all_tabs["7. City Region, industry, dest."]
-
-tab_title = "7_city_region_dest"
-tab_columns = ["Year", "City Region Name", "Industry", "Destination", "Measure Type", "Unit"]
-trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-
-
-year = "2018"
-trace.Year("Hardcoded but could have been taken from tab title (cell A1)")
-
-city_region_name = tab.excel_ref("A5:A49").is_not_blank()
-trace.City_Region_Name("Selected as all non-blank values between cell refs A5 and A48")
-
-industry = tab.excel_ref("C3").expand(RIGHT).is_not_blank()
-trace.Industry("Selected as all non-blank values from cell ref C3 going right/across.")
-
-destination = tab.excel_ref("C4").expand(RIGHT).is_not_blank()
-trace.Destination("Selected as all non-blank values from cell ref C4 going right/across.")
-
-measure_type = tab.excel_ref("B5").expand(DOWN).is_not_blank()
-trace.Measure_Type("Selected as all non-blank values from cell ref B5 down.")
-
-unit = "£ millions"
-trace.Unit("Hardcoded but could have been taken from cell A2")
-
-
-observations = tab.excel_ref("C5").expand(RIGHT).expand(DOWN).is_not_blank()
-
-dimensions = [
-    HDimConst("Year", year),
-    HDim(city_region_name, "City Region Name", CLOSEST, ABOVE),
-    HDim(industry, "Industry", CLOSEST, LEFT),
-    HDim(destination, "Destination", DIRECTLY, ABOVE),
-    HDim(measure_type, "Measure Type", DIRECTLY, LEFT),
-    HDimConst("Unit", unit)
-]
-
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-#savepreviewhtml(tidy_sheet)
-trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-trace.render()
-
-tidied = df[["Year", "City Region Name", "Industry", "Destination", "Measure Type", "Unit", "Value"]]
-tidied_sheets.append(tidied)
-
-#pd.set_option("display.max_rows", None, "display.max_columns", None)
-#tidied_sheets[7]
-
-#Notes:
-    #Will need a datamarker column for values ".."
-"""
-
-
-# %%
-
-
-
 tab = all_tabs["8. Travel"]
 
 tab_title = "8_travel"
@@ -607,7 +97,7 @@ df.rename(columns={'OBS' : 'Value'}, inplace=True)
 trace.render()
 
 df = df[["Year", "NUTS1 Area", "Travel Type", "Country or Origin of Trade", "Value"]]
-
+"""
 df = df.replace({'NUTS1 Area' : {'North East' : 'http://statistics.data.gov.uk/id/statistical-geography/UKC',
                                 'NorthWest' : 'http://statistics.data.gov.uk/id/statistical-geography/UKD',
                                 'Yorkshire and The Humber' : 'http://statistics.data.gov.uk/id/statistical-geography/UKE',
@@ -621,6 +111,23 @@ df = df.replace({'NUTS1 Area' : {'North East' : 'http://statistics.data.gov.uk/i
                                 'Scotland' : 'http://statistics.data.gov.uk/id/statistical-geography/UKM',
                                 'Northern Ireland' : 'http://statistics.data.gov.uk/id/statistical-geography/UKN',
                                 'UK' : 'http://statistics.data.gov.uk/id/statistical-geography/UK'},
+                 'Travel Type' : {'Business travel-related' : 'Business',
+                                  'Personal travel-related' : 'Personal',
+                                  'Total travel-related' : 'Total'}})
+"""
+
+df = df.replace({'NUTS1 Area' : {'North East' : 'UKC',
+                                'NorthWest' : 'UKD',
+                                'Yorkshire and The Humber' : 'UKE',
+                                'East Midlands' : 'UKF',
+                                'West Midlands' : 'UKG',
+                                'East of England' : 'UKH',
+                                'London' : 'UKI',
+                                'South East' : 'UKJ',
+                                'South West ' : 'UKK',
+                                'Wales' : 'UKL',
+                                'Scotland' : 'UKM',
+                                'Northern Ireland' : 'UKN'},
                  'Travel Type' : {'Business travel-related' : 'Business',
                                   'Personal travel-related' : 'Personal',
                                   'Total travel-related' : 'Total'}})
@@ -640,15 +147,15 @@ df['Marker'] = ''
 COLUMNS_TO_NOT_PATHIFY = ['Value', 'Location']
 
 for col in df.columns.values.tolist():
-	if col in COLUMNS_TO_NOT_PATHIFY:
-		continue
-	try:
-		df[col] = df[col].apply(pathify)
-	except Exception as err:
-		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+    if col in COLUMNS_TO_NOT_PATHIFY:
+        continue
+    try:
+        df[col] = df[col].apply(pathify)
+    except Exception as err:
+        raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
 dfTravel = df[['Period', 'Location', 'Industry Grouping', 'Country or Origin of Trade', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
-dfTravel
+#dfTravel
 
 
 # %%
@@ -738,11 +245,18 @@ df['Year'] = df.apply(lambda x: 'year/' + x['Year'], axis = 1)
 
 df = df.rename(columns={'NUTS Code' : 'Location', 'Direction of Trade' : 'Flow', 'Year' : 'Period'})
 
-df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1)
-df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
+#df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1)
+#df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
+
+#df['Location'] = df.apply(lambda x: x['NUTS Area Name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
+
+df['Location'] = df.apply(lambda x: 'UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
 
 df['Location'] = df.apply(lambda x: x['NUTS Area Name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
 
+
+df = df.replace({'Marker' : {'..' : 'Suppressed'}})
+"""
 df = df.replace({'Marker' : {'..' : 'Suppressed'},
                  'Location' : {'Cambridgeshire and Peterborough Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000008',
                                'Aberdeen City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/S12000033', #NOTE DOWN
@@ -759,18 +273,19 @@ df = df.replace({'Marker' : {'..' : 'Suppressed'},
                                'Tees Valley Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000006',
                                'West Midlands Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000007',
                                'West of England Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000009'}})
+"""
 
 df = df.drop(['NUTS Level', 'NUTS Area Name'], axis=1)
 
 COLUMNS_TO_NOT_PATHIFY = ['Value', 'Location']
 
 for col in df.columns.values.tolist():
-	if col in COLUMNS_TO_NOT_PATHIFY:
-		continue
-	try:
-		df[col] = df[col].apply(pathify)
-	except Exception as err:
-		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+    if col in COLUMNS_TO_NOT_PATHIFY:
+    continue
+    try:
+        df[col] = df[col].apply(pathify)
+    except Exception as err:
+raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
 dfTidy = df[['Period', 'Location', 'Industry Grouping', 'Country or Origin of Trade', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
 dfTidy
@@ -778,10 +293,29 @@ dfTidy
 
 # %%
 
-
-
+# %%
 df = pd.concat([dfTravel, dfTidy])
-df
+
+cityregs =  [
+    'Cambridgeshire and Peterborough Combined Authority', 
+    'Aberdeen City Region',
+    'Cardiff Capital Region',
+    'Edinburgh and South East Scotland City Region',
+    'Glasgow City Region',
+    'Greater Manchester Combined Authority',
+    'Inner London',
+    'Liverpool City Region Combined Authority',
+    'North of Tyne Combined Authority',
+    'Outer London',
+    'Sheffield City Region',
+    'Swansea Bay City Region',
+    'Tees Valley Combined Authority',
+    'West Midlands Combined Authority',
+    'West of England Combined Authority',]
+
+df = df[~df.Location.isin(cityregs)]
+df = df.rename(columns={"Location":"NUTS Location"})
+df.head(10)
 
 
 # %%
@@ -796,9 +330,6 @@ for col in df:
 
 
 # %%
-
-
-
 csvName = 'observations'
 
 cubes.add_cube(scraper, df.drop_duplicates(), csvName)
@@ -808,9 +339,6 @@ cubes.output_all()
 
 
 # %%
-
-
-
 #Outputs:
     #tidied_sheets[0] = Total value of trade in services (including travel) in the UK by NUTS1 area and industry, 2018
     #tidied_sheets[1] = Total value of trade in services (including travel) in the UK by NUTS1 area, industry and destination, 2018
@@ -825,11 +353,18 @@ cubes.output_all()
 
 
 # %%
+
+# %%
 #for c in df.columns:
-#    if (c != "Value") & (c != "Location"):
+#    #if (c != "Value") & (c != "Location"):
+#    if c != "Value":
 #        print(c)
-#        print(df[c].unique())
+#        print(list(df[c].unique()))
 #        print("##############################")
 
+
+# %%
+
+# %%
 
 # %%
