@@ -1,15 +1,22 @@
-Label,Notation,Parent Notation,Sort Priority,Description
-Primary and utilities,primary-utilities,,1,
-Manufacturing,manufacturing,,2,"Service imports by the manufacturing industry can be directly linked to manufacturing, such as the installation of machinery, as well as other services that may be performed by manufacturers, such as 0% financing or offering extended warranties. It does not refer to the exports of manufactured goods."
-Construction ,construction,,3,
-Wholesale and motor trade,wholesale-motor-trade,,4,
-Retail (excluding motor trades),retail-excl-motor-trade,,5,
-Transportation and storage,transportation-and-storage,,6,
-Accommodation and food service activities,accommodation-food-service,,7,
-Information and communication,information-communication,,8,
-Financial and insurance activities,financial-insurance,,9,
-Real estate activities,real-estate,,10,
-"Professional, scientific and technical activities",professional-scientific-technical,,11,
-Administrative and support service activities,administrative-support-service,,12,
-Other service industries,other-service-industries,,13,Also accounts for unknown/unallocated
-Travel-related trade,travel-related-trade,,14,
+Label,Notation,Parent Notation,Sort Priority
+travel related trade,travel-related-trade,,1
+primary and utilities,primary-and-utilities,,2
+manufacturing,manufacturing,,3
+construction,construction,,4
+transportation and storage,transportation-and-storage,,5
+accommodation and food service activities,accommodation-and-food-service-activities,,6
+information and communication,information-and-communication,,7
+financial and insurance activities,financial-and-insurance-activities,,8
+real estate activities,real-estate-activities,,9
+professional scientific and technical activities,professional-scientific-and-technical-activities,,10
+administrative and support service activities,administrative-and-support-service-activities,,11
+other service industries,other-service-industries,,12
+wholesale and motor trades,wholesale-and-motor-trades,,13
+retail excluding motor trades,retail-excluding-motor-trades,,14
+travel,travel,,15
+all industries,all-industries,,16
+non manufacturing,non-manufacturing,,17
+real estate professional scientific and technical activities,real-estate-professional-scientific-and-technical-activities,,18
+production a f,production-a-f,,19
+business based professional services l n,business-based-professional-services-l-n,,20
+other services g k o s,other-services-g-k-o-s,,21

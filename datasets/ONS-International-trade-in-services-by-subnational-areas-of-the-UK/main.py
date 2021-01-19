@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[91]:
+# %%
 
 
 #!/usr/bin/env python
 # coding: utf-8
 
 
-# In[92]:
+# %%
 
 
 
@@ -41,7 +42,7 @@ scraper = Scraper(seed="info.json")
 scraper
 
 
-# In[93]:
+# %%
 
 
 
@@ -52,7 +53,7 @@ df = pd.DataFrame()
 all_tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 
 
-# In[94]:
+# %%
 
 
 
@@ -64,7 +65,7 @@ def cell_to_string(cell):
     return substring
 
 
-# In[95]:
+# %%
 
 
 """
@@ -121,7 +122,7 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[96]:
+# %%
 
 
 
@@ -183,7 +184,7 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[97]:
+# %%
 
 
 
@@ -245,7 +246,7 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[98]:
+# %%
 
 
 
@@ -311,7 +312,7 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[99]:
+# %%
 
 
 
@@ -373,7 +374,7 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[100]:
+# %%
 
 
 
@@ -435,7 +436,7 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[101]:
+# %%
 
 
 
@@ -493,7 +494,7 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[102]:
+# %%
 
 
 
@@ -555,7 +556,7 @@ tidied_sheets.append(tidied)
 """
 
 
-# In[103]:
+# %%
 
 
 
@@ -650,7 +651,7 @@ dfTravel = df[['Period', 'Location', 'Industry Grouping', 'Country or Origin of 
 dfTravel
 
 
-# In[104]:
+# %%
 
 
 
@@ -775,7 +776,7 @@ dfTidy = df[['Period', 'Location', 'Industry Grouping', 'Country or Origin of Tr
 dfTidy
 
 
-# In[105]:
+# %%
 
 
 
@@ -783,7 +784,7 @@ df = pd.concat([dfTravel, dfTidy])
 df
 
 
-# In[660]:
+# %%
 
 
 from IPython.core.display import HTML
@@ -794,7 +795,7 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[106]:
+# %%
 
 
 
@@ -806,7 +807,7 @@ trace.render()
 cubes.output_all()
 
 
-# In[107]:
+# %%
 
 
 
@@ -823,9 +824,20 @@ cubes.output_all()
     #tidied_sheets[9] = Total value of trade in services in tidy format, 2018
 
 
-# In[107]:
+# %%
+for c in df.columns:
+    if (c != "Value") & (c != "Location"):
+        print(c)
+        print(df[c].unique())
+        print("##############################")
 
 
+# %%
+scraper.dataset.family = 'trade'
+codelistcreation = ['Country or Origin of Trade','Industry Grouping', 'Travel Type','Includes Travel'] 
+codeclass = CSVCodelists()
+for cl in codelistcreation:
+    if cl in df.columns:
+        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
-
-
+# %%
