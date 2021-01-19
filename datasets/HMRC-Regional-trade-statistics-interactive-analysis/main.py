@@ -446,7 +446,7 @@ csvName = 'prop-count-trades-observations'
 scraper.dataset.family = 'trade'
 scraper.dataset.title = 'Regional trade statistics interactive analysis - exporters, exporters - proportional business count method'
 
-cubes.add_cube(scraper, df.drop_duplicates(), csvName, info_json_dict=data)#, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, df.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
 countries.append(df['Country'].unique().tolist())
 region.append(df['Region'].unique().tolist())
@@ -505,7 +505,7 @@ csvName = 'prop-avg-val-per-trade-observations'
 scraper.dataset.family = 'trade'
 scraper.dataset.title = 'Regional trade statistics interactive analysis - exporters, importers - Average Value per Trade - Proportional Count Method'
 
-cubes.add_cube(scraper, averagePerTrade.drop_duplicates(), csvName, info_json_dict=data)#, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, averagePerTrade.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
 countries.append(averagePerTrade['Country'].unique().tolist())
 region.append(averagePerTrade['Region'].unique().tolist())
@@ -571,7 +571,7 @@ csvName = 'prop-value-of-trades-observations'
 scraper.dataset.family = 'trade'
 scraper.dataset.title = 'Regional trade statistics interactive analysis - exporters, importers - Value of Trade - Proportional Count Method'
 
-cubes.add_cube(scraper, valueOfTrade.drop_duplicates(), csvName, info_json_dict=data)#, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, valueOfTrade.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
 countries.append(valueOfTrade['Country'].unique().tolist())
 region.append(valueOfTrade['Region'].unique().tolist())
@@ -632,7 +632,7 @@ csvName = 'whole-count-trades-observations'
 scraper.dataset.family = 'trade'
 scraper.dataset.title = 'Regional trade statistics interactive analysis - importers, exporters - whole number count method'
 
-cubes.add_cube(scraper, df.drop_duplicates(), csvName, info_json_dict=data)#, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, df.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
 countries.append(df['Country'].unique().tolist())
 region.append(df['Region'].unique().tolist())
@@ -692,7 +692,7 @@ csvName = 'whole-avg-val-per-trade-observations'
 scraper.dataset.family = 'trade'
 scraper.dataset.title = 'Regional trade statistics interactive analysis - importers, exporters - Average Value per Trade - Whole number count method'
 
-cubes.add_cube(scraper, averagePerTrade.drop_duplicates(), csvName, info_json_dict=data)#, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, averagePerTrade.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
 countries.append(averagePerTrade['Country'].unique().tolist())
 region.append(averagePerTrade['Region'].unique().tolist())
@@ -758,7 +758,7 @@ csvName = 'whole-value-of-trades-observations'
 scraper.dataset.family = 'trade'
 scraper.dataset.title = 'Regional trade statistics interactive analysis - importers, exporters - Value of Trades - Whole number count method'
 
-cubes.add_cube(scraper, valueOfTrades.drop_duplicates(), csvName, info_json_dict=data)#, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, valueOfTrades.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
 countries.append(valueOfTrades['Country'].unique().tolist())
 region.append(valueOfTrades['Region'].unique().tolist())
