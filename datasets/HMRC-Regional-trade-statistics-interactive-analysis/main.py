@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[15]:
+# In[1]:
 
 
 # -*- coding: utf-8 -*-
@@ -55,7 +55,7 @@ def cell_to_string(cell):
     return substring
 
 
-# In[16]:
+# In[2]:
 
 
 from pandas import ExcelWriter
@@ -82,7 +82,7 @@ for table in scraper.distributions:
     counter += 1
 
 
-# In[17]:
+# In[3]:
 
 
 counter = 0
@@ -391,14 +391,14 @@ for table in all_tabs:
     counter += 1
 
 
-# In[18]:
+# In[4]:
 
 
 countries = []
 region = []
 
 
-# In[19]:
+# In[5]:
 
 
 df = pd.concat([tidied_sheets[0],tidied_sheets[1],tidied_sheets[8],tidied_sheets[9]], sort = True)
@@ -427,11 +427,11 @@ for col in df.columns.values.tolist():
 with open("info.json", "r") as read_file:
     data = json.load(read_file)
     print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/trade"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/proportional-count"
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/proportional-count"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -454,7 +454,7 @@ region.append(df['Region'].unique().tolist())
 df
 
 
-# In[20]:
+# In[6]:
 
 
 df = pd.concat([tidied_sheets[2],tidied_sheets[3],tidied_sheets[10],tidied_sheets[11]], sort = True)
@@ -486,11 +486,11 @@ averagePerTrade = df[df['Unit'] == 'gbp-thousands']
 with open("info.json", "r") as read_file:
     data = json.load(read_file)
     print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/average-value-per-trade"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-thousands"
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-thousands"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/average-value-per-trade"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -513,7 +513,7 @@ region.append(averagePerTrade['Region'].unique().tolist())
 averagePerTrade
 
 
-# In[21]:
+# In[7]:
 
 
 #Data included in non regional tabs
@@ -544,7 +544,7 @@ averagePerTrade
 #trade
 
 
-# In[22]:
+# In[8]:
 
 
 valueOfTrade = df[df['Unit'] == 'gbp-billions']
@@ -552,11 +552,11 @@ valueOfTrade = df[df['Unit'] == 'gbp-billions']
 with open("info.json", "r") as read_file:
     data = json.load(read_file)
     print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/value-of-trade"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-billions"
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-billions"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/value-of-trade"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -579,7 +579,7 @@ region.append(valueOfTrade['Region'].unique().tolist())
 valueOfTrade
 
 
-# In[23]:
+# In[9]:
 
 
 df = pd.concat([tidied_sheets[4],tidied_sheets[5],tidied_sheets[12],tidied_sheets[13]], sort = True)
@@ -611,11 +611,11 @@ for col in df.columns.values.tolist():
 with open("info.json", "r") as read_file:
     data = json.load(read_file)
     print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/trade"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/count"
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/count"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -640,7 +640,7 @@ region.append(df['Region'].unique().tolist())
 df
 
 
-# In[24]:
+# In[10]:
 
 
 df = pd.concat([tidied_sheets[6],tidied_sheets[7],tidied_sheets[14],tidied_sheets[15]], sort = True)
@@ -673,11 +673,11 @@ averagePerTrade = df[df['Unit'] == 'gbp-thousands']
 with open("info.json", "r") as read_file:
     data = json.load(read_file)
     print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/average-value-per-trade"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-thousands"
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-thousands"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/average-value-per-trade"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -700,7 +700,7 @@ region.append(averagePerTrade['Region'].unique().tolist())
 averagePerTrade
 
 
-# In[25]:
+# In[11]:
 
 
 #Data included in Non Regional Tabs
@@ -731,7 +731,7 @@ averagePerTrade
 #trades
 
 
-# In[26]:
+# In[12]:
 
 
 valueOfTrades = df[df['Unit'] == 'gbp-billions']
@@ -739,11 +739,11 @@ valueOfTrades = df[df['Unit'] == 'gbp-billions']
 with open("info.json", "r") as read_file:
     data = json.load(read_file)
     print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/value-of-imports"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-billions"
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-billions"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/value-of-imports"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -766,7 +766,7 @@ region.append(valueOfTrades['Region'].unique().tolist())
 valueOfTrades
 
 
-# In[27]:
+# In[13]:
 
 
 from IPython.core.display import HTML
@@ -777,7 +777,7 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[28]:
+# In[14]:
 
 
 cubes.output_all()
