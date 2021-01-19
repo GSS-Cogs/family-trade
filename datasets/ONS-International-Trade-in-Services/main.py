@@ -204,11 +204,14 @@ trace.store("combined_dataframe", tidy_sheet.topandas())
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 
+# +
 # post processing
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 
- df['Marker'] = df['Marker'].map(lambda x: {'-':'itis-nil or less than £500000', '..':'disclosive'}.get(x, x))
+df['Marker'] = df['Marker'].map(lambda x: {'-':'itis-nil or less than £500000', '..':'disclosive'}.get(x, x))
 
+
+# -
 
 def left(s, amount):
    return s[:amount]
@@ -217,11 +220,7 @@ def date_time (date):
        return 'year/' + left(date, 4)
 df['Period'] = df['Period'].astype(str).replace('\.','',regex = True)
 df['Period'] = df['Period'].apply(date_time)
-
-# +
-# with pd.option_context('display.max_rows', None):
-#     print(df)
-# -
+trace.Period("added a prefix called year to values in period column")
 
 df.rename(columns = {'Flow':'Flow Directions'}, inplace = True)
 
@@ -244,7 +243,7 @@ df['Industry Total'] = df['Industry Total'].str.lower()
 trace.Industry_Total("Converted values of Industry Total to lower case")
 df
 
-cubes.add_cube(scraper, df, datasetTitle)
+cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 trace.render("spec_v1.html")
 
 cubes.output_all()
