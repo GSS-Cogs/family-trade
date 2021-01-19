@@ -825,19 +825,11 @@ cubes.output_all()
 
 
 # %%
-for c in df.columns:
-    if (c != "Value") & (c != "Location"):
-        print(c)
-        print(df[c].unique())
-        print("##############################")
+#for c in df.columns:
+#    if (c != "Value") & (c != "Location"):
+#        print(c)
+#        print(df[c].unique())
+#        print("##############################")
 
-
-# %%
-scraper.dataset.family = 'trade'
-codelistcreation = ['Country or Origin of Trade','Industry Grouping', 'Travel Type','Includes Travel'] 
-codeclass = CSVCodelists()
-for cl in codelistcreation:
-    if cl in df.columns:
-        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 # %%
