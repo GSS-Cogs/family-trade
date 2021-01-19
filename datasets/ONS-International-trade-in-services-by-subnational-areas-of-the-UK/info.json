@@ -40,7 +40,7 @@
             "Flow": {
                 "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
                 "description": "Balance refers to the trade balance between exports and imports, calculated using exports minus imports. A positive figure indicates a trade surplus and a negative figure indicates a trade deficit.",
-                "parent": "http://gss-data.org.uk/def/concept-scheme/flow"
+                "codelist": "http://gss-data.org.uk/def/concept-scheme/"
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
