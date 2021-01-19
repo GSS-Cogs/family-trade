@@ -225,7 +225,7 @@ cntdat.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compress
 
 scraper.dataset.title = scraper.dataset.title + ' - Business count'
 
-dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + "/business-count"
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
 
@@ -237,11 +237,37 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+
+# +
+csvName = 'proportion_observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+prodat.drop_duplicates().to_csv(out / csvName, index = False)
+prodat.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+
+scraper.dataset.title = scraper.dataset.title + ' - Business proportion Split'
+
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + "/business-proportion"
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+
+j = json.load(open('info.json'))
+j["transform"]["columns"]["Value"]["measure"] = "percentage"
+
+csvw_transform.set_mapping(j)
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
+    
+
+# +
+#tidy.head(10)
 # -
-
-tidy.head(10)
-
-
 
 
 
