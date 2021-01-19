@@ -21,11 +21,7 @@ import numpy as np
 
 cubes = Cubes("info.json")
 trace = TransformTrace()
-
-with open("info.json") as f:
-    info = json.load(f)
-
-scraper = Scraper(info["landingPage"])
+scraper = Scraper(seed="info.json")
 dataset_title_prefix = scraper.dataset.title  # for later
 scraper
 
@@ -526,8 +522,7 @@ jobs = {
 # ### Create all the datacubes
 
 # %%
-
-# Make a directroy so we can dump some previews
+###### # Make a directroy so we can dump some previews
 previewsFolder = Path('previews')
 previewsFolder.mkdir(exist_ok=True, parents=True)
     
@@ -619,7 +614,7 @@ for job_name, job_details in jobs.items():
             if len(df["Growth"].unique().tolist()) == 1:
                 df = df.drop("Growth", axis=1)
             else:
-                trace.add_column("Growth")
+                trace.add_column("Growth")q
                 trace.Growth("Create a growth column, values are dependent on the tab name")
 
             # account for horizontal changes in measure type
@@ -663,7 +658,7 @@ for job_name, job_details in jobs.items():
         destinationFolder = Path('out')
         destinationFolder.mkdir(exist_ok=True, parents=True)
 
-        TITLE = info["title"] + ", " + dataset_title_prefix + ": " + job_name
+        TITLE = scraper.dataset.title + dataset_title_prefix + ": " + job_name
 
         df = trace.combine_and_trace(job_name, job_name)
         
