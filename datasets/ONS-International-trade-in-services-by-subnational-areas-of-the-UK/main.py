@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -5,7 +6,7 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
+#       format_version: '1.4'
 #       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
@@ -237,10 +238,10 @@ df['Year'] = df.apply(lambda x: 'year/' + x['Year'], axis = 1)
 
 df = df.rename(columns={'NUTS Code' : 'Location', 'Direction of Trade' : 'Flow', 'Year' : 'Period'})
 
-#df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1)
-#df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
+# df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1)
+# df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
 
-#df['Location'] = df.apply(lambda x: x['NUTS Area Name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
+# df['Location'] = df.apply(lambda x: x['NUTS Area Name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
 
 df['Location'] = df.apply(lambda x: 'UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
 
@@ -273,7 +274,7 @@ COLUMNS_TO_NOT_PATHIFY = ['Value', 'Location']
 
 for col in df.columns.values.tolist():
     if col in COLUMNS_TO_NOT_PATHIFY:
-    continue
+        continue
     try:
         df[col] = df[col].apply(pathify)
     except Exception as err:
@@ -347,7 +348,7 @@ cubes.output_all()
 # %%
 
 # %%
-#for c in df.columns:
+# for c in df.columns:
 #    #if (c != "Value") & (c != "Location"):
 #    if c != "Value":
 #        print(c)
