@@ -431,7 +431,7 @@ with open("info.json", "r") as read_file:
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade-proportional-count"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -490,7 +490,7 @@ with open("info.json", "r") as read_file:
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/average-value-per-trade"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/average-value-per-trade-proportional-count"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -556,7 +556,7 @@ with open("info.json", "r") as read_file:
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/value-of-trade"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/value-of-trade-proportional-count"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -615,7 +615,7 @@ with open("info.json", "r") as read_file:
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade-whole-count"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -677,7 +677,7 @@ with open("info.json", "r") as read_file:
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/average-value-per-trade"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/average-value-per-trade-whole-count"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
@@ -743,7 +743,7 @@ with open("info.json", "r") as read_file:
     print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
     print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/value-of-imports"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/value-of-imports-whole-count"
     print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
     print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
