@@ -216,12 +216,12 @@ scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporte
 import os
 from urllib.parse import urljoin
 
-
+#### ONLY OUTPUTTING THE BUSINESS COUNT FOR NOW
 csvName = 'count_observations.csv'
 out = Path('out')
 out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / csvName, index = False)
-tidy.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+cntdat.drop_duplicates().to_csv(out / csvName, index = False)
+cntdat.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
 
 scraper.dataset.title = scraper.dataset.title + ' - Business count'
 

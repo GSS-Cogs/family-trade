@@ -81,7 +81,14 @@
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
             },
-            "rdfs:comment": "Dataset representing the 'Export Services' code list."
+            "rdfs:comment": "Dataset representing the 'Export Services' code list.",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-19T00:00:00"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
@@ -104,6 +111,9 @@
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
             }
         }
     ]
