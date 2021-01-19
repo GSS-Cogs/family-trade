@@ -1,22 +1,22 @@
 Label,Notation,Parent Notation,Sort Priority
-travel related trade,travel-related-trade,,1
-primary and utilities,primary-and-utilities,,2
-manufacturing,manufacturing,,3
-construction,construction,,4
-transportation and storage,transportation-and-storage,,5
-accommodation and food service activities,accommodation-and-food-service-activities,,6
-information and communication,information-and-communication,,7
-financial and insurance activities,financial-and-insurance-activities,,8
-real estate activities,real-estate-activities,,9
-professional scientific and technical activities,professional-scientific-and-technical-activities,,10
-administrative and support service activities,administrative-and-support-service-activities,,11
-other service industries,other-service-industries,,12
-wholesale and motor trades,wholesale-and-motor-trades,,13
-retail excluding motor trades,retail-excluding-motor-trades,,14
-travel,travel,,15
-all industries,all-industries,,16
-non manufacturing,non-manufacturing,,17
-real estate professional scientific and technical activities,real-estate-professional-scientific-and-technical-activities,,18
-production a f,production-a-f,,19
-business based professional services l n,business-based-professional-services-l-n,,20
-other services g k o s,other-services-g-k-o-s,,21
+Travel related trade,travel-related-trade,,1
+Primary and Utilities,primary-and-utilities,,2
+Manufacturing,manufacturing,,3
+Construction,construction,,4
+Transportation and Storage,transportation-and-storage,,5
+Accommodation and Food service activities,accommodation-and-food-service-activities,,6
+Information and Communication,information-and-communication,,7
+Financial and Insurance activities,financial-and-insurance-activities,,8
+Real estate activities,real-estate-activities,,9
+Professional Scientific and Technical activities,professional-scientific-and-technical-activities,,10
+Administrative and Support service activities,administrative-and-support-service-activities,,11
+Other Service industries,other-service-industries,,12
+Wholesale and Motor trades,wholesale-and-motor-trades,,13
+Retail excluding Motor trades,retail-excluding-motor-trades,,14
+Travel,travel,,15
+All Industries,all-industries,,16
+Non Manufacturing,non-manufacturing,,17
+Real Estate Professional Scientific and Technical activities,real-estate-professional-scientific-and-technical-activities,,18
+Production A - F,production-a-f,,19
+Business based Professional services L - N,business-based-professional-services-l-n,,20
+"Other Services G, K, O, S",other-services-g-k-o-s,,21

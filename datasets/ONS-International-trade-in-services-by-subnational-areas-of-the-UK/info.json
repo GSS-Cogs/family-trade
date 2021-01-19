@@ -22,25 +22,20 @@
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{period}",
+                "value": "http://reference.data.gov.uk/id/{period}",
                 "codelist": false
             },
-            "Location": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "{location}",
-                "codelist": false
-            },
-            "Industry Grouping": {
-                "source": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/internationaltradeinservicesbysubnationalareasoftheuk/latest#appendix-a-industry-groups"
-            },
-            "Country or Origin of Trade": {
-                "value": "http://gss-data.org.uk/def/concept/trade/country-or-origin-of-trade/{country-or-origin-of-trade}",
-                "codelist": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk/country-or-origin-of-trade"
+            "NUTS Location": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies",
+                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_location}",
+                "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies"
             },
             "Flow": {
-                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
                 "description": "Balance refers to the trade balance between exports and imports, calculated using exports minus imports. A positive figure indicates a trade surplus and a negative figure indicates a trade deficit.",
-                "codelist": "http://gss-data.org.uk/def/concept-scheme/"
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
