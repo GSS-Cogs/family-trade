@@ -278,7 +278,7 @@ for col in df.columns.values.tolist():
     try:
         df[col] = df[col].apply(pathify)
     except Exception as err:
-raise Exception('Failed to pathify column "{}".'.format(col)) from err
+        raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
 dfTidy = df[['Period', 'Location', 'Industry Grouping', 'Country or Origin of Trade', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
 dfTidy
