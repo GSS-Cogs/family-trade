@@ -457,60 +457,60 @@ df
 # In[20]:
 
 
-#df = pd.concat([tidied_sheets[2],tidied_sheets[3],tidied_sheets[10],tidied_sheets[11]], sort = True)
+df = pd.concat([tidied_sheets[2],tidied_sheets[3],tidied_sheets[10],tidied_sheets[11]], sort = True)
 
-#df = df.rename(columns={'Year' : 'Period'})
+df = df.rename(columns={'Year' : 'Period'})
 
-#df['Period'] = df.apply(lambda x: 'year/' + left(str(x['Period']), 4) if 'Q' not in str(x['Quarter']) else 'quarter/' + left(x['Period'], 4) + '-' + x['Quarter'], axis = 1)
+df['Period'] = df.apply(lambda x: 'year/' + left(str(x['Period']), 4) if 'Q' not in str(x['Quarter']) else 'quarter/' + left(x['Period'], 4) + '-' + x['Quarter'], axis = 1)
 
-#df['Unit'] = df.apply(lambda x: 'gbp thousands' if 'thousands' in x['Measure Type'] else x['Unit'], axis = 1)
-#df['Unit'] = df.apply(lambda x: 'gbp billions' if 'billions' in x['Measure Type'] else x['Unit'], axis = 1)
-#df['Unit'] = df.apply(lambda x: 'count' if 'Number' in x['Measure Type'] else x['Unit'], axis = 1)
+df['Unit'] = df.apply(lambda x: 'gbp thousands' if 'thousands' in x['Measure Type'] else x['Unit'], axis = 1)
+df['Unit'] = df.apply(lambda x: 'gbp billions' if 'billions' in x['Measure Type'] else x['Unit'], axis = 1)
+df['Unit'] = df.apply(lambda x: 'count' if 'Number' in x['Measure Type'] else x['Unit'], axis = 1)
 
-#df = df.drop(['Code', 'Quarter'], axis=1)
+df = df.drop(['Code', 'Quarter'], axis=1)
 
-#df['Flow'] = df.apply(lambda x: 'exports' if 'export' in x['Measure Type'] else ('imports' if 'import' in x['Measure Type'] else 'ERROR'), axis = 1)
+df['Flow'] = df.apply(lambda x: 'exports' if 'export' in x['Measure Type'] else ('imports' if 'import' in x['Measure Type'] else 'ERROR'), axis = 1)
 
-#COLUMNS_TO_NOT_PATHIFY = ['Value']
+COLUMNS_TO_NOT_PATHIFY = ['Value']
 
-#for col in df.columns.values.tolist():
-#	if col in COLUMNS_TO_NOT_PATHIFY:
-#		continue
-#	try:
-#		df[col] = df[col].apply(pathify)
-#	except Exception as err:
-#		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+for col in df.columns.values.tolist():
+	if col in COLUMNS_TO_NOT_PATHIFY:
+		continue
+	try:
+		df[col] = df[col].apply(pathify)
+	except Exception as err:
+		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-#averagePerTrade = df[df['Unit'] == 'gbp-thousands']
+averagePerTrade = df[df['Unit'] == 'gbp-thousands']
 
-#with open("info.json", "r") as read_file:
-#    data = json.load(read_file)
-#    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-#    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/average-value-per-trade"
-#    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
+with open("info.json", "r") as read_file:
+    data = json.load(read_file)
+    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/average-value-per-trade"
+    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
-#    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-#    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-thousands"
-#    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
+    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-thousands"
+    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
-#    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-#    data["transform"]["columns"]["Value"]["datatype"] = "double"
-#    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
+    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
+    data["transform"]["columns"]["Value"]["datatype"] = "double"
+    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
-#averagePerTrade = averagePerTrade.drop(['Measure Type', 'Unit'], axis=1)
+averagePerTrade = averagePerTrade.drop(['Measure Type', 'Unit'], axis=1)
 
-#averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value']]
+averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value']]
 
-#csvName = 'prop-avg-val-per-trade-observations'
-#scraper.dataset.family = 'trade'
-#scraper.dataset.title = 'Regional trade statistics interactive analysis - exporters, importers - Average Value per Trade - Proportional Count Method'
+csvName = 'prop-avg-val-per-trade-observations'
+scraper.dataset.family = 'trade'
+scraper.dataset.title = 'Regional trade statistics interactive analysis - exporters, importers - Average Value per Trade - Proportional Count Method'
 
-#cubes.add_cube(scraper, averagePerTrade.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, averagePerTrade.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
-#countries.append(averagePerTrade['Country'].unique().tolist())
-#region.append(averagePerTrade['Region'].unique().tolist())
+countries.append(averagePerTrade['Country'].unique().tolist())
+region.append(averagePerTrade['Region'].unique().tolist())
 
-#averagePerTrade
+averagePerTrade
 
 
 # In[21]:
@@ -547,36 +547,36 @@ df
 # In[22]:
 
 
-#valueOfTrade = df[df['Unit'] == 'gbp-billions']
+valueOfTrade = df[df['Unit'] == 'gbp-billions']
 
-#with open("info.json", "r") as read_file:
-#    data = json.load(read_file)
-#    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-#    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/value-of-trade"
-#    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
+with open("info.json", "r") as read_file:
+    data = json.load(read_file)
+    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/value-of-trade"
+    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
-#    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-#    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-billions"
-#    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
+    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-billions"
+    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
-#    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-#    data["transform"]["columns"]["Value"]["datatype"] = "double"
-#    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
+    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
+    data["transform"]["columns"]["Value"]["datatype"] = "double"
+    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
-#valueOfTrade = valueOfTrade.drop(['Measure Type', 'Unit'], axis=1)
+valueOfTrade = valueOfTrade.drop(['Measure Type', 'Unit'], axis=1)
 
-#valueOfTrade = valueOfTrade[['Period', 'Country', 'Region', 'Flow', 'Value']]
+valueOfTrade = valueOfTrade[['Period', 'Country', 'Region', 'Flow', 'Value']]
 
-#csvName = 'prop-value-of-trades-observations'
-#scraper.dataset.family = 'trade'
-#scraper.dataset.title = 'Regional trade statistics interactive analysis - exporters, importers - Value of Trade - Proportional Count Method'
+csvName = 'prop-value-of-trades-observations'
+scraper.dataset.family = 'trade'
+scraper.dataset.title = 'Regional trade statistics interactive analysis - exporters, importers - Value of Trade - Proportional Count Method'
 
-#cubes.add_cube(scraper, valueOfTrade.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, valueOfTrade.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
-#countries.append(valueOfTrade['Country'].unique().tolist())
-#region.append(valueOfTrade['Region'].unique().tolist())
+countries.append(valueOfTrade['Country'].unique().tolist())
+region.append(valueOfTrade['Region'].unique().tolist())
 
-#valueOfTrade
+valueOfTrade
 
 
 # In[23]:
@@ -643,61 +643,61 @@ df
 # In[24]:
 
 
-#df = pd.concat([tidied_sheets[6],tidied_sheets[7],tidied_sheets[14],tidied_sheets[15]], sort = True)
+df = pd.concat([tidied_sheets[6],tidied_sheets[7],tidied_sheets[14],tidied_sheets[15]], sort = True)
 
-#df = df.rename(columns={'Year' : 'Period'})
+df = df.rename(columns={'Year' : 'Period'})
 
-#df['Period'] = df.apply(lambda x: 'year/' + left(str(x['Period']), 4) if 'Q' not in str(x['Quarter']) else 'quarter/' + left(x['Period'], 4) + '-' + x['Quarter'], axis = 1)
+df['Period'] = df.apply(lambda x: 'year/' + left(str(x['Period']), 4) if 'Q' not in str(x['Quarter']) else 'quarter/' + left(x['Period'], 4) + '-' + x['Quarter'], axis = 1)
 
-#df['Unit'] = df.apply(lambda x: 'gbp thousands' if 'thousands' in x['Measure Type'] else x['Unit'], axis = 1)
-#df['Unit'] = df.apply(lambda x: 'gbp billions' if 'billions' in x['Measure Type'] else x['Unit'], axis = 1)
-#df['Unit'] = df.apply(lambda x: 'count' if 'Number' in x['Measure Type'] else x['Unit'], axis = 1)
+df['Unit'] = df.apply(lambda x: 'gbp thousands' if 'thousands' in x['Measure Type'] else x['Unit'], axis = 1)
+df['Unit'] = df.apply(lambda x: 'gbp billions' if 'billions' in x['Measure Type'] else x['Unit'], axis = 1)
+df['Unit'] = df.apply(lambda x: 'count' if 'Number' in x['Measure Type'] else x['Unit'], axis = 1)
 
-#df = df.drop(['Code', 'Quarter'], axis=1)
-#df = df[df['Country'] != '0.0']
+df = df.drop(['Code', 'Quarter'], axis=1)
+df = df[df['Country'] != '0.0']
 
-#df['Flow'] = df.apply(lambda x: 'exports' if 'export' in x['Measure Type'] else ('imports' if 'import' in x['Measure Type'] else 'ERROR'), axis = 1)
+df['Flow'] = df.apply(lambda x: 'exports' if 'export' in x['Measure Type'] else ('imports' if 'import' in x['Measure Type'] else 'ERROR'), axis = 1)
 
-#COLUMNS_TO_NOT_PATHIFY = ['Value']
+COLUMNS_TO_NOT_PATHIFY = ['Value']
 
-#for col in df.columns.values.tolist():
-#	if col in COLUMNS_TO_NOT_PATHIFY:
-#		continue
-#	try:
-#		df[col] = df[col].apply(pathify)
-#	except Exception as err:
-#		raise Exception('Failed to pathify column "{}".'.format(col)) from err
+for col in df.columns.values.tolist():
+	if col in COLUMNS_TO_NOT_PATHIFY:
+		continue
+	try:
+		df[col] = df[col].apply(pathify)
+	except Exception as err:
+		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-#averagePerTrade = df[df['Unit'] == 'gbp-thousands']
+averagePerTrade = df[df['Unit'] == 'gbp-thousands']
 
-#with open("info.json", "r") as read_file:
-#    data = json.load(read_file)
-#    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-#    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/average-value-per-trade"
-#    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
+with open("info.json", "r") as read_file:
+    data = json.load(read_file)
+    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/average-value-per-trade"
+    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
-#    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-#    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-thousands"
-#    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
+    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-thousands"
+    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
-#    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-#    data["transform"]["columns"]["Value"]["datatype"] = "double"
-#    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
+    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
+    data["transform"]["columns"]["Value"]["datatype"] = "double"
+    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
-#averagePerTrade = averagePerTrade.drop(['Measure Type', 'Unit'], axis=1)
+averagePerTrade = averagePerTrade.drop(['Measure Type', 'Unit'], axis=1)
 
-#averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value']]
+averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value']]
 
-#csvName = 'whole-avg-val-per-trade-observations'
-#scraper.dataset.family = 'trade'
-#scraper.dataset.title = 'Regional trade statistics interactive analysis - importers, exporters - Average Value per Trade - Whole number count method'
+csvName = 'whole-avg-val-per-trade-observations'
+scraper.dataset.family = 'trade'
+scraper.dataset.title = 'Regional trade statistics interactive analysis - importers, exporters - Average Value per Trade - Whole number count method'
 
-#cubes.add_cube(scraper, averagePerTrade.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, averagePerTrade.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
-#countries.append(averagePerTrade['Country'].unique().tolist())
-#region.append(averagePerTrade['Region'].unique().tolist())
+countries.append(averagePerTrade['Country'].unique().tolist())
+region.append(averagePerTrade['Region'].unique().tolist())
 
-#averagePerTrade
+averagePerTrade
 
 
 # In[25]:
@@ -734,36 +734,36 @@ df
 # In[26]:
 
 
-#valueOfTrades = df[df['Unit'] == 'gbp-billions']
+valueOfTrades = df[df['Unit'] == 'gbp-billions']
 
-#with open("info.json", "r") as read_file:
-#    data = json.load(read_file)
-#    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-#    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/value-of-imports"
-#    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
+with open("info.json", "r") as read_file:
+    data = json.load(read_file)
+    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/value-of-imports"
+    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
 
-#    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-#    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-billions"
-#    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
+    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-billions"
+    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
 
-#    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-#    data["transform"]["columns"]["Value"]["datatype"] = "double"
-#    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
+    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
+    data["transform"]["columns"]["Value"]["datatype"] = "double"
+    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
-#valueOfTrades = valueOfTrades.drop(['Measure Type', 'Unit'], axis=1)
+valueOfTrades = valueOfTrades.drop(['Measure Type', 'Unit'], axis=1)
 
-#valueOfTrades = valueOfTrades[['Period', 'Country', 'Region', 'Flow', 'Value']]
+valueOfTrades = valueOfTrades[['Period', 'Country', 'Region', 'Flow', 'Value']]
 
-#csvName = 'whole-value-of-trades-observations'
-#scraper.dataset.family = 'trade'
-#scraper.dataset.title = 'Regional trade statistics interactive analysis - importers, exporters - Value of Trades - Whole number count method'
+csvName = 'whole-value-of-trades-observations'
+scraper.dataset.family = 'trade'
+scraper.dataset.title = 'Regional trade statistics interactive analysis - importers, exporters - Value of Trades - Whole number count method'
 
-#cubes.add_cube(scraper, valueOfTrades.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
+cubes.add_cube(scraper, valueOfTrades.drop_duplicates(), csvName, info_json_dict=data, graph="HMRC-Regional-trade-statistics-interactive-analysis")
 
-#countries.append(valueOfTrades['Country'].unique().tolist())
-#region.append(valueOfTrades['Region'].unique().tolist())
+countries.append(valueOfTrades['Country'].unique().tolist())
+region.append(valueOfTrades['Region'].unique().tolist())
 
-#valueOfTrades
+valueOfTrades
 
 
 # In[27]:
