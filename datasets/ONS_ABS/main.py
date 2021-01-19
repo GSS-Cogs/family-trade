@@ -223,7 +223,7 @@ out.mkdir(exist_ok=True)
 cntdat.drop_duplicates().to_csv(out / csvName, index = False)
 cntdat.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
 
-scraper.dataset.title = scraper.dataset.title + ' - Business count'
+scraper.dataset.title = 'Annual Business Survey exporters and importers - Business count'
 
 dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + "/business-count"
 scraper.set_base_uri('http://gss-data.org.uk')
@@ -245,7 +245,7 @@ out.mkdir(exist_ok=True)
 prodat.drop_duplicates().to_csv(out / csvName, index = False)
 prodat.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
 
-scraper.dataset.title = scraper.dataset.title + ' - Business proportion Split'
+scraper.dataset.title = 'Annual Business Survey exporters and importers - Business proportion Split'
 
 dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + "/business-proportion"
 scraper.set_base_uri('http://gss-data.org.uk')
@@ -263,7 +263,7 @@ csvw_transform.write(out / f'{csvName}-metadata.json')
 
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-    
+
 
 # +
 #tidy.head(10)
