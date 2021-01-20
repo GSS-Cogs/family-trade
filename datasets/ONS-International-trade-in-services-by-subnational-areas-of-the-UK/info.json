@@ -26,8 +26,8 @@
                 "codelist": false
             },
             "Location": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies",
-                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{location}",
+                "parent": "",
+                "value": "",
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
                 "codelist": false
             },
