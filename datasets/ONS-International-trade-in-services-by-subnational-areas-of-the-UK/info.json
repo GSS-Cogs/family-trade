@@ -25,9 +25,9 @@
                 "value": "http://reference.data.gov.uk/id/{period}",
                 "codelist": false
             },
-            "NUTS Location": {
+            "Location": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies",
-                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_location}",
+                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{location}",
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
                 "codelist": false
             },
