@@ -29,7 +29,7 @@
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies",
                 "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_location}",
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies"
+                "codelist": false
             },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",

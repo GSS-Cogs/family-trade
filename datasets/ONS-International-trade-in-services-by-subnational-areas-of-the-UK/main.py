@@ -89,6 +89,7 @@ df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 trace.render()
 
+# +
 df = df[["Year", "NUTS1 Area", "Travel Type", "Country or Origin of Trade", "Value"]]
 """
 df = df.replace({'NUTS1 Area' : {'North East' : 'http://statistics.data.gov.uk/id/statistical-geography/UKC',
@@ -109,6 +110,26 @@ df = df.replace({'NUTS1 Area' : {'North East' : 'http://statistics.data.gov.uk/i
                                   'Total travel-related' : 'Total'}})
 """
 
+df = df.replace({'NUTS1 Area' : {'North East' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKC',
+                                'NorthWest' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKD',
+                                'Yorkshire and The Humber' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKE',
+                                'East Midlands' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKF',
+                                'West Midlands' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKG',
+                                'East of England' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKH',
+                                'London' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKI',
+                                'South East' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKJ',
+                                'South West ' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKK',
+                                'Wales' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKL',
+                                'Scotland' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKM',
+                                'Northern Ireland' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKN',
+                                'UK' : 'http://opendatacommunities.org/id/geography/administration/nuts/UK'},
+                 'Travel Type' : {'Business travel-related' : 'Business',
+                                  'Personal travel-related' : 'Personal',
+                                  'Total travel-related' : 'Total'}})
+
+# -
+
+"""
 df = df.replace({'NUTS1 Area' : {'North East' : 'UKC',
                                 'NorthWest' : 'UKD',
                                 'Yorkshire and The Humber' : 'UKE',
@@ -124,6 +145,8 @@ df = df.replace({'NUTS1 Area' : {'North East' : 'UKC',
                  'Travel Type' : {'Business travel-related' : 'Business',
                                   'Personal travel-related' : 'Personal',
                                   'Total travel-related' : 'Total'}})
+"""
+
 
 df = df.rename(columns={'NUTS1 Area' : 'Location', 'Year' : 'Period'})
 
@@ -149,10 +172,6 @@ for col in df.columns.values.tolist():
 
 dfTravel = df[['Period', 'Location', 'Industry Grouping', 'Country or Origin of Trade', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
 #dfTravel
-
-
-# %%
-
 
 
 tab = all_tabs["9. Tidy format"]
@@ -232,11 +251,20 @@ df = df[["Year", "NUTS Level", "NUTS Code", "NUTS Area Name", "Industry Grouping
 
 df['Travel Type'] = df.apply(lambda x: 'Total' if (x['NUTS Level'] == 'NUTS1' and x['Industry Grouping'] == 'Travel') else 'NA', axis = 1)
 
+df['NUTS Level'].unique()
+
 df['Includes Travel'] = df.apply(lambda x: 'Includes Travel' if x['NUTS Level'] == 'NUTS1' else 'Excludes Travel', axis = 1)
 
 df['Year'] = df.apply(lambda x: 'year/' + x['Year'], axis = 1)
 
 df = df.rename(columns={'NUTS Code' : 'Location', 'Direction of Trade' : 'Flow', 'Year' : 'Period'})
+
+# +
+df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1) 
+df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
+
+df['Location'] = df.apply(lambda x: x['NUTS Area Name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
+# -
 
 # df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1)
 # df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['NUTS Area Name'] == 'United Kingdom') else x['Location'], axis = 1)
@@ -248,8 +276,9 @@ df['Location'] = df.apply(lambda x: 'UK' if (x['Location'] == 'N/A' and x['NUTS 
 df['Location'] = df.apply(lambda x: x['NUTS Area Name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
 
 
+# +
 df = df.replace({'Marker' : {'..' : 'Suppressed'}})
-"""
+
 df = df.replace({'Marker' : {'..' : 'Suppressed'},
                  'Location' : {'Cambridgeshire and Peterborough Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000008',
                                'Aberdeen City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/S12000033', #NOTE DOWN
@@ -266,7 +295,8 @@ df = df.replace({'Marker' : {'..' : 'Suppressed'},
                                'Tees Valley Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000006',
                                'West Midlands Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000007',
                                'West of England Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000009'}})
-"""
+
+# -
 
 df = df.drop(['NUTS Level', 'NUTS Area Name'], axis=1)
 
@@ -306,9 +336,11 @@ cityregs =  [
     'West Midlands Combined Authority',
     'West of England Combined Authority',]
 
-df = df[~df.Location.isin(cityregs)]
-df = df.rename(columns={"Location":"NUTS Location"})
-df.head(10)
+# +
+#df = df[~df.Location.isin(cityregs)]
+#df = df.rename(columns={"Location":"NUTS Location"})
+#df.head(10)
+# -
 
 
 # %%
@@ -345,19 +377,4 @@ cubes.output_all()
     #tidied_sheets[9] = Total value of trade in services in tidy format, 2018
 
 
-# %%
 
-# %%
-# for c in df.columns:
-#    #if (c != "Value") & (c != "Location"):
-#    if c != "Value":
-#        print(c)
-#        print(list(df[c].unique()))
-#        print("##############################")
-
-
-# %%
-
-# %%
-
-# %%
