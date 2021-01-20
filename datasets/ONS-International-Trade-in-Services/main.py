@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -5,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.5.1
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -20,11 +21,11 @@ import json
 info = json.load(open("info.json"))
 scraper = Scraper(seed = "info.json")
 cubes = Cubes("info.json")
-scraper.dataset.family = info["families"]
 scraper
-# -
 
-tabs = scraper.distributions[0].as_databaker()
+# +
+
+tabs = scraper.distribution(latest = True, mediaType = Excel).as_databaker()
 str([tab.name for tab in tabs])
 
 
@@ -137,8 +138,7 @@ def process_tab(tab):
     return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry',
                 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
-observations = pd.concat(process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0'])
-cubes.add_cube(scraper, observations, "International trade in services")
+observations = pd.concat((process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0']), sort = False)
 
 # +
 observations.rename(index= str, columns= {'DATAMARKER':'Marker'}, inplace = True)
@@ -149,7 +149,17 @@ observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil'
                                                               }.get(x, x))
 
 observations['Value'] = observations['Value'].round(decimals=2)
+
+
 # -
+
+def left(s, amount):
+   return s[:amount]
+def date_time (date):
+   if len(date)  == 4:
+       return 'year/' + left(date, 4)
+observations['Year'] = observations['Year'].astype(str).replace('\.','',regex = True)
+observations['Year'] = observations['Year'].apply(date_time)
 
 for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     observations[col] = observations[col].astype('category')
@@ -162,5 +172,7 @@ observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 # -
 
 observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
+observations
 
+cubes.add_cube(scraper, observations.drop_duplicates(), "International trade in services")
 cubes.output_all()
