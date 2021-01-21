@@ -15,10 +15,9 @@
         "airtable": "rec2vZJEjUBsBay90",
         "columns": {
             "Period": {
-                "source": "",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}",
-                "codelist": "false"
+                "codelist": false
             },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
@@ -29,13 +28,12 @@
             "ONS Partner Geography": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
                 "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}",
-                "description": "",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography"
             },
             "Seasonal Adjustment": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments",
                 "value": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments/{seasonal_adjustment}",
-                "codelist": false
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
             },
             "Value": {
               "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",

@@ -119,7 +119,7 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 output.head(10)
 
-
+output['Marker'].unique()
 
 
 

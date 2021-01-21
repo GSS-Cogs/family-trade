@@ -157,6 +157,15 @@ tidy = new_table[['ONS Partner Geography', 'Period','Flow','Trade Services', 'Se
 # %%
 tidy.loc[(tidy['Trade Services'] == 'all'),'Trade Services'] = '0'
 tidy.loc[(tidy['Trade Services'] == '0.0'),'Trade Services'] = '0'
+tidy.loc[(tidy['Trade Services'] == '1.0'),'Trade Services'] = '1'
+tidy.loc[(tidy['Trade Services'] == '2.0'),'Trade Services'] = '2'
+tidy.loc[(tidy['Trade Services'] == '3.0'),'Trade Services'] = '3'
+tidy.loc[(tidy['Trade Services'] == '4.0'),'Trade Services'] = '4'
+tidy.loc[(tidy['Trade Services'] == '5.0'),'Trade Services'] = '5'
+tidy.loc[(tidy['Trade Services'] == '6.0'),'Trade Services'] = '6'
+tidy.loc[(tidy['Trade Services'] == '7.0'),'Trade Services'] = '7'
+tidy.loc[(tidy['Trade Services'] == '8.0'),'Trade Services'] = '8'
+tidy.loc[(tidy['Trade Services'] == '9.0'),'Trade Services'] = '9'
 tidy.loc[(tidy['Marker'] == 'disclosive'),'Value'] = 0
 tidy['Value'] = tidy['Value'].astype(int)
 tidy['Marker'].fillna('', inplace=True)
@@ -175,5 +184,7 @@ trace.render("spec_v1.html")
 
 # %%
 tidy.head(10)
+
+# %%
 
 # %%
