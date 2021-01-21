@@ -1,120 +1,143 @@
 {
-  "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/data.gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade",
-  "url": "country-or-origin-of-trade.csv",
-  "tableSchema": {
-    "columns": [
-      {
-        "titles": "Label",
-        "name": "label",
-        "datatype": "string",
-        "required": true,
-        "propertyUrl": "rdfs:label"
-      },
-      {
-        "titles": "Notation",
-        "name": "notation",
-        "datatype": {
-          "base": "string",
-          "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
-        },
-        "required": true,
-        "propertyUrl": "skos:notation"
-      },
-      {
-        "titles": "Parent Notation",
-        "name": "parent_notation",
-        "datatype": {
-          "base": "string",
-          "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
-        },
-        "required": false,
-        "propertyUrl": "skos:broader",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/country-or-origin-of-trade/{parent_notation}"
-      },
-      {
-        "titles": "Sort Priority",
-        "name": "sort",
-        "datatype": "integer",
-        "required": false,
-        "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-      },
-      {
-        "titles": "Description",
-        "name": "description",
-        "datatype": "string",
-        "required": false,
-        "propertyUrl": "rdfs:comment"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "rdf:type",
-        "valueUrl": "skos:Concept"
-      },
-      {
-        "virtual": true,
-        "propertyUrl": "skos:inScheme",
-        "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade"
-      }
-    ],
-    "primaryKey": "notation",
-    "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/country-or-origin-of-trade/{notation}"
-  },
-  "prov:hadDerivation": {
+    "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade",
-    "@type": [
-        "skos:ConceptScheme",
-        "http://publishmydata.com/pmdcat#ConceptScheme"
-    ]
-},
-"rdfs:label": "Country or Origin of Trade",
-"dc:title": "Country or Origin of Trade",
-"rdfs:seeAlso": [
-    {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade/dataset",
-        "@type": [
-            "dcat:Dataset",
-            "http://publishmydata.com/pmdcat#Dataset"
+    "url": "country-or-origin-of-trade.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/country-or-origin-of-trade/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade"
+            }
         ],
-        "rdfs:label": "Country or Origin of Trade",
-        "dc:title": "Country or Origin of Trade",
-        "http://publishmydata.com/pmdcat#datasetContents": {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade"
-        },
-        "rdfs:comment": "Dataset representing the 'Country or Origin of Trade' code list.",
-        "http://publishmydata.com/pmdcat#graph": {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade"
-        },
-        "dc:modified": {
-          "@type": "dateTime",
-          "@value": "2021-01-19T00:00:00.000000"
-        }
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/country-or-origin-of-trade/{notation}"
     },
-    {
-        "@id": "http://gss-data.org.uk/catalog/vocabularies",
-        "dcat:record": {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade/catalog-record"
-        }
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
     },
-    {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade/catalog-record",
-        "@type": "dcat:CatalogRecord",
-        "dc:title": "Country or Origin of Trade Catalog Record",
-        "rdfs:label": "Country or Origin of Trade Catalog Record",
-        "dc:issued": {
-            "@type": "dateTime",
-            "@value": "2021-01-19T00:00:00.000000"
+    "rdfs:label": "Country or Origin of Trade",
+    "dc:title": "Country or Origin of Trade",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade"
+            },
+            "rdfs:label": "Country or Origin of Trade",
+            "dc:title": "Country or Origin of Trade",
+            "rdfs:comment": "Dataset representing the 'Country or Origin of Trade' code list.",
+            "dc:license": {
+                "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+            },
+            "dc:creator": {
+                "@id": "https://www.ons.gov.uk"
+            },
+            "dc:publisher": {
+                "@id": "https://www.ons.gov.uk"
+            },
+            "dcat:contactPoint": {
+                "@id": "mailto:isabel.rogers@ons.gov.uk"
+            },
+            "dcat:landingPage": {
+                "@id": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-09-10T00:00:00"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-09-10T00:00:00"
+            },
+            "http://publishmydata.com/pmdcat#markdownDescription": {
+                "@type": "https://www.w3.org/ns/iana/media-types/text/markdown#Resource",
+                "@value": "Codelist generated by COGS from values found in dataset."
+            }
         },
-        "dc:modified": {
-            "@type": "dateTime",
-            "@value": "2021-01-19T00:00:00.000000"
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade/catalog-record"
+            }
         },
-        "foaf:primaryTopic": {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade/dataset"
-        },
-        "http://publishmydata.com/pmdcat#metadataGraph": {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade"
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/country-or-origin-of-trade"
+            },
+            "dc:title": "Country or Origin of Trade Catalog Record",
+            "rdfs:label": "Country or Origin of Trade Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-01-12T10:39:20.908866"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-12T10:39:20.908866"
+            }
         }
-    }
-]
+    ]
 }

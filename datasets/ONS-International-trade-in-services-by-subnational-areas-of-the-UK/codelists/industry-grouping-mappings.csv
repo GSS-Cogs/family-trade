@@ -1,22 +1,22 @@
 Industry Grouping,SIC07 Mapping
-Primary utilities,A
-Primary utilities,B
-Primary utilities,D
-Primary utilities,E
-Manufacturing,C
-Construction,F
-Wholesale motor trade,45
-Wholesale motor trade,46
-Retail excl motor trade,47
-Transportation and storage,H
-Accommodation food service,I
-Information communication,J
-Financial insurance,K
-Real estate,L
-Professional scientific technical,M
-Administrative support service,N
-Other-service-industries,O
-Other-service-industries,P
-Other-service-industries,Q
-Other-service-industries,R
-Other-service-industries,S
+primary-utilities,A
+primary-utilities,B
+primary-utilities,D
+primary-utilities,E
+manufacturing,C
+construction,F
+wholesale-motor-trade,45
+wholesale-motor-trade,46
+retail-excl-motor-trade,47
+transportation-and-storage,H
+accommodation-food-service,I
+information-communication,J
+financial-insurance,K
+real-estate,L
+professional-scientific-technical,M
+administrative-support-service,N
+other-service-industries,O
+other-service-industries,P
+other-service-industries,Q
+other-service-industries,R
+other-service-industries,S
