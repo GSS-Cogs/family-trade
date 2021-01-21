@@ -16,30 +16,30 @@
         "airtable": "reczFVGkUgwXtzkoH",
         "main_issue": 17,
         "columns": {
-            "ONS Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}",
-                "codelist": false
-            },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}",
                 "codelist": false
             },
+            "ONS Partner Geography": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography"
+            },
             "Flow": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
-                "codelist": false
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "Trade Services": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/trade-services",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/trade-services/{trade_services}",
-                "codelist": false
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/trade-services",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/{trade_services}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/trade-services"
             },
             "Seasonal Adjustment": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments/{seasonal_adjustment}",
-                "codelist": false
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/{seasonal_adjustment}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
