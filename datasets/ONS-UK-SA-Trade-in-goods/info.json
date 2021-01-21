@@ -32,6 +32,11 @@
                 "description": "",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography"
             },
+            "Seasonal Adjustment": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments/{seasonal_adjustment}",
+                "codelist": false
+            },
             "Value": {
               "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
               "measure": "http://gss-data.org.uk/def/measure/current-prices",
