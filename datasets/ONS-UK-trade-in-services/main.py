@@ -11,7 +11,7 @@ with open("info.json", "r") as read_file:
 
 with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
-    
+
 
 # %%
 scraper = Scraper(seed="info.json")
@@ -155,8 +155,13 @@ new_table['Flow'] = new_table['Flow'].apply(pathify)
 tidy = new_table[['ONS Partner Geography', 'Period','Flow','Trade Services', 'Seasonal Adjustment', 'Value', 'Marker' ]]
 
 # %%
+tidy.loc[(tidy['Marker'] == 'disclosive'),'Value'] = 0
+tidy['Value'] = tidy['Value'].astype(int)
+tidy['Marker'].fillna('', inplace=True)
+
+# %%
 tidy = tidy.drop_duplicates()
-tidy
+tidy.head(10)
 
 # %%
 cubes.add_cube(scraper, tidy, "ONS UK trade in services by country and partner country" )
@@ -164,3 +169,8 @@ cubes.output_all()
 
 # %%
 trace.render("spec_v1.html")
+
+# %%
+tidy.head(10)
+
+# %%
