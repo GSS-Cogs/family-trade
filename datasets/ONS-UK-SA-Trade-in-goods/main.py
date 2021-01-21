@@ -5,7 +5,7 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
+#       format_version: '1.4'
 #       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
@@ -68,12 +68,15 @@ for name,tab in tabs.items():
 
     output = pd.concat([output, df])
     #output['ONS Partner Geography'] = output['ONS Partner Geography'].apply(pathify)
-# -
 
+# +
 output.rename(columns={'DATAMARKER': 'Marker'}, inplace=True)
 output['Marker'].fillna('', inplace=True)
 output.loc[(output['Marker'] == 'N/A'),'Marker'] = 'not-applicable'
 output.loc[(output['Marker'] == 'not-applicable'),'Value'] = 0
+
+output.insert(loc=2, column='Seasonal Adjustment', value="SA")
+output = output[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Marker", "Value"]]
 
 # +
 scraper.dataset.family = 'trade'
@@ -86,14 +89,12 @@ Some data for countries have been marked with N/A. This is because Trade in Good
 
 output['Value'] = output['Value'].astype(int)
 
-# -
 
-# -
-
+# +
 #cubes.add_cube(scraper, output, info['title'])
 
-#-
 #cubes.output_all()
+# -
 
 import os
 from urllib.parse import urljoin
@@ -115,6 +116,10 @@ csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._datas
 csvw_transform.write(out / f'{csvName}-metadata.json')
 with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
+
+output.head(10)
+
+
 
 
 
