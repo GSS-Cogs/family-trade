@@ -155,9 +155,11 @@ new_table['Flow'] = new_table['Flow'].apply(pathify)
 tidy = new_table[['ONS Partner Geography', 'Period','Flow','Trade Services', 'Seasonal Adjustment', 'Value', 'Marker' ]]
 
 # %%
+tidy.loc[(tidy['Trade Services'] == 'all'),'Trade Services'] = '0'
 tidy.loc[(tidy['Marker'] == 'disclosive'),'Value'] = 0
 tidy['Value'] = tidy['Value'].astype(int)
 tidy['Marker'].fillna('', inplace=True)
+tidy['Trade Services'].unique()
 
 # %%
 tidy = tidy.drop_duplicates()
