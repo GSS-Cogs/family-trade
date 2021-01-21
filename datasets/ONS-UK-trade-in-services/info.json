@@ -14,7 +14,7 @@
     "transform": {
         "validate": false,
         "airtable": "reczFVGkUgwXtzkoH",
-        "main_issue": 17,
+        "main_issue": "17",
         "columns": {
             "ONS Partner Geography": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
@@ -28,7 +28,7 @@
             },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow/{flow}",
                 "codelist": false
             },
             "Trade Services": {
