@@ -171,9 +171,9 @@ tidy['Value'] = tidy['Value'].astype(int)
 tidy['Marker'].fillna('', inplace=True)
 
 # %%
-tidy['Trade Services'] = tidy['Trade Services'].apply(pathify)
+#tidy['Trade Services'] = tidy['Trade Services'].apply(pathify)
 tidy = tidy.drop_duplicates()
-tidy['Trade Services'].unique()
+#tidy['Trade Services'].unique()
 
 # %%
 trace.render("spec_v1.html")
