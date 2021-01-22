@@ -35,6 +35,7 @@
                 "description": "Balance refers to the trade balance between exports and imports, calculated using exports minus imports. A positive figure indicates a trade surplus and a negative figure indicates a trade deficit.",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
+            "Measure Type": false,
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
@@ -55,7 +56,7 @@
                     }
                 ],
                 "title": "8. Travel",
-                "preview": "documentation/previews/e0438671-20a6-4575-9f09-95e572c41f6d.html",
+                "preview": "documentation/previews/8f7e081e-69a9-4a4c-b65e-908958f6489b.html",
                 "observation_selection": null,
                 "columns": [],
                 "postTransformNotes": [
