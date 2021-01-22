@@ -26,11 +26,11 @@ scraper = Scraper(seed = 'info.json')
 scraper
 # -
 
-tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
-list(tabs)
+distribution = scraper.distribution(latest = True)
+tabs = {tab.name: tab for tab in distribution.as_databaker()}
 
-data_download = scraper.distributions[0].downloadURL
-datasetTitle = "International exports of services from subnational areas of the UK"
+data_download = distribution.downloadURL
+datasetTitle = distribution.title
 columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker']
 
 # +
@@ -277,7 +277,7 @@ tidy = df[['Period','Export Services','Service Origin Geography','Service Destin
 tidy
 
 #output cube and spec
-cubes.add_cube(scraper, tidy.drop_duplicates(), "ONS-International-exports-of-services-from-subnational-areas-of-the-UK" )
+cubes.add_cube(scraper, tidy.drop_duplicates(), distribution.title)
 cubes.output_all()
 trace.render("spec_v1.html")
 
