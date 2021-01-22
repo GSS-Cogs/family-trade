@@ -32,20 +32,24 @@ scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = Tru
 scraper
 scraper.dataset.family = info["families"]
 
-dist = scraper.distributions[1].downloadURL
-dist
+datasetTitle = scraper.title
+datasetTitle
+
+distribution = scraper.distribution(latest = True).downloadURL
+distribution
 
 tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
 list(tabs)
+# tabs = {tab.name: tab for tab in distribution.as_databaker}
 
 for name, tab in tabs.items():
     if 'Notes and Contents' in name or '5. Metadata' in name :
         continue
-    datasetTitle = "uk-trade-in-goods-by-business-characteristics-2019"
+    datasetTitle = scraper.title
     columns = ["Flow", "Period", "Country", "Zone", "Business Size", "Age", "Industry Group", "Value", 
                "Business Count", "Employee Count", "Flow Directions", "Year", "Marker"]
 
-    trace.start(datasetTitle, tab, columns, dist) 
+    trace.start(datasetTitle, tab, columns, distribution) 
 
     cell = tab.excel_ref("A1")
     
@@ -131,7 +135,7 @@ trace.Year("Formating to be year/2019")
 with pd.option_context('float_format', '{:f}'.format):
     print(df)
 
-cubes.add_cube(scraper, df.drop_duplicates(), "uk-trade-in-goods-by-business-characteristics-2019")
+cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
 
 trace.render("spec_v1.html")
