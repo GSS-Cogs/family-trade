@@ -38,9 +38,9 @@
                 "codelist": false
             },
             "Seasonal Adjustment": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
-                "value": "http://gss-data.org.uk/def/trade/concept/easonal-adjustments/{seasonal_adjustment}",
-                "codelist": false
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustments}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
