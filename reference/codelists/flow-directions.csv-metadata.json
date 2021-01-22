@@ -87,7 +87,15 @@
             },
             "rdfs:label": "Flow Directions",
             "dc:title": "Flow Directions",
-            "rdfs:comment": "Dataset representing the 'Flow Directions' code list."
+            "rdfs:comment": "Dataset representing the 'Flow Directions' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-01-01T00:00:00"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-01-01T00:00:00"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
