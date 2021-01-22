@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/trade-group/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/trade-group/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group",
@@ -81,7 +81,14 @@
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group"
             },
-            "rdfs:comment": "Dataset representing the 'Trade Group' code list."
+            "rdfs:comment": "Dataset representing the 'Trade Group' code list.",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-15T00:00:00"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
@@ -104,6 +111,9 @@
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group"
             }
         }
     ]

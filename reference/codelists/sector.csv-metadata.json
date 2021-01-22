@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/sector/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/sector/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/sector/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/sector/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sector",
@@ -81,7 +81,10 @@
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sector"
             },
-            "rdfs:comment": "Dataset representing the 'Sector' code list."
+            "rdfs:comment": "Dataset representing the 'Sector' code list.",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sector"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
@@ -104,6 +107,9 @@
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sector/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sector"
             }
         }
     ]

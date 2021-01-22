@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership",
@@ -81,7 +81,14 @@
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership"
             },
-            "rdfs:comment": "Dataset representing the 'Countries Of Ownership' code list."
+            "rdfs:comment": "Dataset representing the 'Countries Of Ownership' code list.",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-18T00:00:00"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
@@ -104,6 +111,9 @@
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership"
             }
         }
     ]

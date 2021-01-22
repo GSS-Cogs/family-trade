@@ -125,7 +125,6 @@ trace.Export_Services("Defined from cell ref C4 across")
 
 destination = cell.shift(1,0).fill(RIGHT).is_not_blank().is_not_whitespace()
 trace.Service_Destination("Defined from cell ref B5 across")
-
 origin = cell.fill(DOWN).is_not_blank().is_not_whitespace()
 trace.Service_Origin_Geography("Defined from cell ref B5 down")
 
@@ -140,7 +139,6 @@ savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
 trace.with_preview(tidy_sheet)
 #store 2b and appending to combined_dataframe
 trace.store("combined_dataframe", tidy_sheet.topandas())
-
 # +
 #tab 3
 tab = tabs['3'] #start tracer for tab 3
@@ -155,7 +153,6 @@ trace.Service_Origin_Geography("Defined from cell ref A4 down")
 destination = cell.shift(1,0).fill(RIGHT).is_not_blank().is_not_whitespace() \
             .filter(lambda x: type(x.value) != 'Percentage' not in x.value)
 trace.Service_Destination("Defined from cell ref B4 across excluding percentage values")
-
 observations = destination.fill(DOWN).is_not_blank().is_not_whitespace()
 dimensions = [
     HDimConst('Export Services', 'all services'),
@@ -168,7 +165,6 @@ savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
 trace.with_preview(tidy_sheet)
 #stor 3 and appending to combined_dataframe
 trace.store("combined_dataframe", tidy_sheet.topandas())
-
 # +
 # tab 4a
 tab = tabs['4a'] #set tab as tab 4a
@@ -180,7 +176,6 @@ trace.Export_Services("Defined from cell ref A4 down")
 
 geography = cell.fill(RIGHT).is_not_blank().is_not_whitespace()
 trace.Service_Origin_Geography("Defined from cell ref across")
-
 trace.Service_Destination("Hardcoded as all")
 
 observations = geography.fill(DOWN).is_not_blank().is_not_whitespace() 
@@ -253,6 +248,7 @@ df.loc[f1,'Service Origin Geography'] = 'nuts2/' + df.loc[f1,'Service Origin Geo
 
 f1=(df['NUTS'] =='nuts3/')
 df.loc[f1,'Service Origin Geography'] = 'nuts3/' + df.loc[f1,'Service Origin Geography']
+
 
 df['Period'] = "year/2017"
 trace.Period("Hard coded as year/2017")

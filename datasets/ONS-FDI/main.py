@@ -15,6 +15,7 @@
 
 # +
 from gssutils import *
+from IPython.display import display
 import json
 
 cubes = Cubes("info.json")
@@ -87,7 +88,7 @@ for (name, direction), tab in tabs.items():
     display(f'Processing tab {name}: {direction}')
     
     # Add transformTrace
-    columns = ["Investment Direction", "Year", "International Trade Basis", "ONS FDI Area", "FDI Component", "FDI Industry"]
+    columns = ["Investment Direction", "Year", "International Trade Basis", "FDI Area", "FDI Component", "FDI Industry"]
     trace.start("{}:{}".format(name, direction), tab, columns, inward_scraper.distribution(latest=True).downloadURL if direction == "inward" else outward_scraper.distribution(latest=True).downloadURL)
     
     # Set anchors for header row
@@ -124,16 +125,16 @@ for (name, direction), tab in tabs.items():
         ('OTHER ASIAN', 'COUNTRIES')
     ])
     
-    trace.ONS_FDI_Area('Take from lefthand side of tab')
+    trace.FDI_Area('Take from lefthand side of tab')
     if to_remove:
         left_col = left_col - to_remove
-        trace.ONS_FDI_Area('Removing unwanted text')
-    left_dim = HDim(left_col, 'ONS FDI Area', CLOSEST, UP)
+        trace.FDI_Area('Removing unwanted text')
+    left_dim = HDim(left_col, 'FDI Area', CLOSEST, UP)
     
     for cell, replace in overrides:
         left_dim.AddCellValueOverride(cell, replace)
     # Also, "IRELAND" should be "IRISH REPUBLIC"
-    trace.ONS_FDI_Area('Overrid any occurances of "IRELAND" to "IRISH REPUBLIC".')
+    trace.FDI_Area('Overrid any occurances of "IRELAND" to "IRISH REPUBLIC".')
     left_dim.AddCellValueOverride('IRELAND', 'IRISH REPUBLIC')
     dims.append(left_dim)
     
@@ -151,8 +152,8 @@ for (name, direction), tab in tabs.items():
 
     # Post processing
     table.rename(columns={'OBS': 'Value'}, inplace=True)
-    trace.ONS_FDI_Area('Add "fdi/" prefix then pathify')
-    table['ONS FDI Area'] = table['ONS FDI Area'].map(lambda x: 'fdi/' + pathify(x.strip()))
+    trace.FDI_Area('Add "fdi/" prefix then pathify')
+    table['FDI Area'] = table['FDI Area'].map(lambda x: 'fdi/' + pathify(x.strip()))
     if minor == '1':
         # top header row is year
         table.rename(columns={'top': 'Year'}, inplace=True)
@@ -222,13 +223,9 @@ trace.add_column("Unit")
 trace.Unit('Set as "gbp-million".')
 observations['Unit'] = 'gbp-million'
 
-trace.add_column("Measure_Type")
-trace.Measure_Type('Set as "GBP Total".')
-observations['Measure Type'] = 'GBP Total'
-
 observations = observations[['Investment Direction', 'Year', 'International Trade Basis',
-                             'ONS FDI Area', 'FDI Component', 'FDI Industry',
-                             'Value', 'Unit', 'Measure Type', 'Marker',
+                             'FDI Area', 'FDI Component', 'FDI Industry',
+                             'Value', 'Unit', 'Marker',
                              '__x', '__y', '__tablename']]
 # -
 
@@ -240,11 +237,11 @@ observations.drop_duplicates(subset=observations.columns.difference(['Value']), 
 # There are mutiple duplicate values due to empty cells from source data that makes error in Jenkins Those empty cells with no values are removed 
 
 observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
-                             'ONS FDI Area', 'FDI Component', 'FDI Industry'
+                             'FDI Area', 'FDI Component', 'FDI Industry'
                               ],keep=False)]
 
 observations_unique = observations.drop_duplicates(['Investment Direction', 'Year', 'International Trade Basis',
-                             'ONS FDI Area', 'FDI Component', 'FDI Industry'
+                             'FDI Area', 'FDI Component', 'FDI Industry'
                               ],keep=False)
 
 observations.shape, observation_duplicate.shape, observations_unique.shape
