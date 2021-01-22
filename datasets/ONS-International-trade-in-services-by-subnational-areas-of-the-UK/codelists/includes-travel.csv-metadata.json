@@ -67,8 +67,8 @@
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "GDP Estimate Type",
-    "dc:title": "GDP Estimate Type",
+    "rdfs:label": "Includes Travel",
+    "dc:title": "Includes Travel",
     "rdfs:seeAlso": [
         {
             "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/includes-travel/dataset",
