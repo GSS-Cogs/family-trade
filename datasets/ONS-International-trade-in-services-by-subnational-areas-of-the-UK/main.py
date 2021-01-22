@@ -277,6 +277,8 @@ df['Location'] = df.apply(lambda x: x['NUTS Area Name'] if x['Location'] == 'N/A
 
 
 # +
+df = df.replace({'Country or Origin of Trade' : {'rest-of-the-world' : 'rest-of-world'}})
+
 df = df.replace({'Marker' : {'..' : 'Suppressed'}})
 
 df = df.replace({'Marker' : {'..' : 'Suppressed'},
