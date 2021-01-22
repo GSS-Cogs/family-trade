@@ -39,7 +39,7 @@
             },
             "Seasonal Adjustment": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustments}",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
             },
             "Value": {
