@@ -84,10 +84,6 @@
             "rdfs:comment": "Dataset representing the 'Seasonal Adjustments' code list.",
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
-            },
-            "dc:modified": {
-                "@type": "dateTime",
-                "@value": "2021-01-21T00:00:00"
             }
         },
         {
@@ -103,11 +99,11 @@
             "rdfs:label": "Seasonal Adjustments Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.164551"
+                "@value": "2020-12-23T11:58:58.163998"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.164551"
+                "@value": "2020-12-23T11:58:58.163998"
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments/dataset"

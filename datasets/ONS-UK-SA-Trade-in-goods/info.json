@@ -22,7 +22,6 @@
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
-                "description": "",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "ONS Partner Geography": {
