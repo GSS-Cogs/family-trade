@@ -28,7 +28,7 @@
                     }
                 ],
                 "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/industry-grouping/{industryGrouping}",
-                "propertyUrl": "skos:narrower",
+                "propertyUrl": "rdfs:seeAlso",
                 "valueUrl": "http://business.data.gov.uk/companies/def/sic-2007/{sic07Mapping}"
             }
         },
