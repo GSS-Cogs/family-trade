@@ -348,12 +348,12 @@ cityregs =  [
 # %%
 
 
-# from IPython.core.display import HTML
+from IPython.core.display import HTML
 for col in df:
     if col not in ['Value']:
         df[col] = df[col].astype('category')
-        # display(HTML(f"<h2>{col}</h2>"))
-        # display(df[col].cat.categories)
+        display(HTML(f"<h2>{col}</h2>"))
+        display(df[col].cat.categories)
 
 
 # %%
