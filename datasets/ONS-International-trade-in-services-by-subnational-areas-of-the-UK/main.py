@@ -322,6 +322,8 @@ df = pd.concat([dfTravel, dfTidy])
 df = df.replace({'Country or Origin of Trade' : {'total': 'all-countries',
                                                  'rest-of-the-world': 'rest-of-world'}})
 
+df = df.replace({'Industry Grouping' : {'travel': 'travel-related-trade'}})
+
 cityregs =  [
     'Cambridgeshire and Peterborough Combined Authority', 
     'Aberdeen City Region',
@@ -349,12 +351,12 @@ cityregs =  [
 # %%
 
 
-from IPython.core.display import HTML
+# from IPython.core.display import HTML
 for col in df:
     if col not in ['Value']:
         df[col] = df[col].astype('category')
-        display(HTML(f"<h2>{col}</h2>"))
-        display(df[col].cat.categories)
+        # display(HTML(f"<h2>{col}</h2>"))
+        # display(df[col].cat.categories)
 
 
 # %%
