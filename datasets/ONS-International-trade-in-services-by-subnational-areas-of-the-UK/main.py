@@ -110,19 +110,19 @@ df = df.replace({'NUTS1 Area' : {'North East' : 'http://statistics.data.gov.uk/i
                                   'Total travel-related' : 'Total'}})
 """
 
-df = df.replace({'NUTS1 Area' : {'North East' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKC',
-                                'NorthWest' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKD',
-                                'Yorkshire and The Humber' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKE',
-                                'East Midlands' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKF',
-                                'West Midlands' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKG',
-                                'East of England' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKH',
-                                'London' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKI',
-                                'South East' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKJ',
-                                'South West ' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKK',
-                                'Wales' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKL',
-                                'Scotland' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKM',
-                                'Northern Ireland' : 'http://opendatacommunities.org/id/geography/administration/nuts/UKN',
-                                'UK' : 'http://opendatacommunities.org/id/geography/administration/nuts/UK'},
+df = df.replace({'NUTS1 Area' : {'North East' : 'http://data.europa.eu/nuts/code/UKC',
+                                'NorthWest' : 'http://data.europa.eu/nuts/code/UKD',
+                                'Yorkshire and The Humber' : 'http://data.europa.eu/nuts/code/UKE',
+                                'East Midlands' : 'http://data.europa.eu/nuts/code/UKF',
+                                'West Midlands' : 'http://data.europa.eu/nuts/code/UKG',
+                                'East of England' : 'http://data.europa.eu/nuts/code/UKH',
+                                'London' : 'http://data.europa.eu/nuts/code/UKI',
+                                'South East' : 'http://data.europa.eu/nuts/code/UKJ',
+                                'South West ' : 'http://data.europa.eu/nuts/code/UKK',
+                                'Wales' : 'http://data.europa.eu/nuts/code/UKL',
+                                'Scotland' : 'http://data.europa.eu/nuts/code/UKM',
+                                'Northern Ireland' : 'http://data.europa.eu/nuts/code/UKN',
+                                'UK' : 'http://data.europa.eu/nuts/code/UK'},
                  'Travel Type' : {'Business travel-related' : 'Business',
                                   'Personal travel-related' : 'Personal',
                                   'Total travel-related' : 'Total'}})
@@ -346,12 +346,12 @@ cityregs =  [
 # %%
 
 
-from IPython.core.display import HTML
+# from IPython.core.display import HTML
 for col in df:
     if col not in ['Value']:
         df[col] = df[col].astype('category')
-        display(HTML(f"<h2>{col}</h2>"))
-        display(df[col].cat.categories)
+        # display(HTML(f"<h2>{col}</h2>"))
+        # display(df[col].cat.categories)
 
 
 # %%
