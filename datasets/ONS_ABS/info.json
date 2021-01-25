@@ -16,8 +16,54 @@
     },
     "transform": {
         "airtable": "rec6SF5JMLyIYm8z9",
-        "main_issue": 32
+        "columns": {
+            "Year": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+year}",
+                "codelist": false
+            },
+            "Age of Business": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/age-of-business",
+                "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/age-of-business"
+            },
+            "Business Activity": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/business-activity",
+                "value": "http://gss-data.org.uk/def/trade/concept/business-activity/{business_activity}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/business-activity"
+            },
+            "Country of Ownership": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership",
+                "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{country_of_ownership}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership"
+            },
+            "Trade Group": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group",
+                "value": "http://gss-data.org.uk/def/trade/concept/trade-group/{trade_group}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group"
+            },
+            "Turnover": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/concept/turnover-size-bands/{turnover}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands"
+            },
+            "Employees": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{employees}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands"
+            },
+            "Value": {
+              "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
+              "measure": "http://gss-data.org.uk/def/measure/count",
+              "datatype": "integer"
+            },
+            "Marker": {
+              "attribute":"http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+              "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            },
+        "main_issue": "32"
     },
     "sizingNotes": "",
     "notes": ""
+    }
 }

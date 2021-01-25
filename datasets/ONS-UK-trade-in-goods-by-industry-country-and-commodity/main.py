@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -23,6 +23,7 @@
 from gssutils import *
 import json
 
+cubes = Cubes("info.json")
 with open("info.json", "r") as f:
     landing_pages = json.load(f)["landingPage"]
 
@@ -41,33 +42,18 @@ observations = pd.concat(
 
 # Temporary repacment of RS for XS code (EU do something odd with serbia for trade)
 # observations["ONS Partner Geography"] = observations["ONS Partner Geography"].str.replace("RS", "XS")
-
-# +
-observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
-
-#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
-from pathlib import Path
-import numpy as np
-out = Path('out')
-out.mkdir(exist_ok=True)
-observations.drop_duplicates().to_csv(out / 'observations.csv', index = False)
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+cubes.add_cube(scraper, observations, "UK trade in goods by industry,\
+               country and commodity, exports and imports")
 
-# +
+
 from gssutils.metadata import THEME
-scraper.dataset.family = 'Trade'
-scraper.dataset.theme = THEME['business-industry-trade-energy']
+scraper.dataset.family = 'trade'
 scraper.dataset.title = scraper.dataset.title.replace('imports', 'imports and exports')
 scraper.dataset.comment = scraper.dataset.comment.replace('import', 'import and export')
 scraper.dataset.landingPage = landing_pages
 
-scraper
-# -
-
-with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-     metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
-
-
+cubes.output_all()

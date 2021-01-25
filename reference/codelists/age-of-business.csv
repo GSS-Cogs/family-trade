@@ -1,9 +1,9 @@
 Label,Notation,Parent Notation,Sort Priority,Description
-0 to 2 years,-2,,1,
+0 to 2 years,0-2,,1,
 2 to 4 years,2-4,,2,
 4 to 10 years,4-10,,3,
 10 to 20 years,10-20,,4,
-20+ years,20-above,,5,
+20+ years,20plus,,5,
 Any,any,,6,
 0 to 1 years,0-to-1-years,,7,
 2 to 3 years,2-to-3-years,,8,

@@ -6,26 +6,28 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.9.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
 
+# cd /workspace/family-trade/datasets/HMRC-RTS-Small-area/
+
 # +
 from gssutils import *
 import json
 
-scraper = Scraper(json.load(open('info.json'))['landingPage'])
-scraper
+info = json.load(open('info.json'))
+scraper = Scraper(seed='info.json')  
+cubes = Cubes('info.json')
+scraper 
 # -
 
 scraper.select_dataset(latest=True)
-scraper
 
 tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
-#tabs.keys()
 
 year_cell = tabs['Title'].filter('Detailed Data Tables').shift(UP)
 year_cell.assert_one()
@@ -66,19 +68,13 @@ table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
-out = Path('out')
-out.mkdir(exist_ok=True)
-table.to_csv(out / 'observations.csv', index = False)
+scraper.dataset.family = 'trade'
+cube_split = {'Count of Businesses': 'HMRC-RTS-Small-area_business_cnt',
+              'GBP Total': 'HMRC-RTS-Small-area_gbp'}
+for measure, file_name in cube_split.items():
+    cubes.add_cube(scraper, table.loc[table['Measure Type'] == measure].reset_index(drop=True).drop_duplicates(), file_name, graph='HMRC-RTS-Small-area')    
 
-# +
-from gssutils.metadata import THEME
-scraper.dataset.family = 'Trade'
-scraper.dataset.theme = THEME['business-industry-trade-energy']
 
-with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
+cubes.output_all()
 
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
-# -
 

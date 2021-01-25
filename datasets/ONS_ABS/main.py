@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -5,8 +6,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -19,6 +20,7 @@
 from gssutils import *
 import json
 
+cubes = Cubes("info.json")
 with open("info.json") as f:
     info = json.load(f)
     
@@ -35,7 +37,6 @@ tidy = pd.DataFrame()
 
 for sheet in sheets[1:-1]:
     name_match = tab_name_re.match(sheet.name)
-    #print (sheet.name)
     assert name_match, "sheet name doesn't match regex"
     for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover', 'Age']:
         year = HDimConst('Year', name_match.group(1))
@@ -57,11 +58,6 @@ for sheet in sheets[1:-1]:
         measure.AddCellValueOverride('Number of 5', 'Count')
         measure.AddCellValueOverride('% 6', 'Proportion of all Business')
         tidy = tidy.append(ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure]).topandas(), sort=True)
-#         savepreviewhtml([breakdown_obs, classifiers, import_export, measure])
-        #break
-    #break
-
-##tidy
 # -
 
 # Check for duplicate rows
@@ -72,19 +68,13 @@ assert tidy.duplicated().sum() == 0, 'duplicate rows'
 #
 # Also, the class "250 and over" is repeated in each, so we need to drop the duplicates. However, there appear to be some discrepancies.
 
-# +
 duplicate_label = '250 and over'
 emp_250 = tidy[tidy['Employment'] == duplicate_label].drop(columns=['Employment', 'Detailed employment']).reset_index(drop=True)
 detailed_emp_250 = tidy[tidy['Detailed employment'] == duplicate_label].drop(columns=['Employment', 'Detailed employment']).reset_index(drop=True)
 assert emp_250.size > 0
 assert detailed_emp_250.size > 0
-#assert emp_250.equals(detailed_emp_250)
 merged = emp_250.merge(detailed_emp_250, indicator=True, how='outer')
-
-#display(merged[merged['_merge'] == 'right_only'])
-
 tidy = tidy[tidy['Detailed employment'] != '250 and over'].reset_index(drop=True)
-# -
 
 # We need to merge them and also list their values so that we can create a codelist.
 
@@ -95,9 +85,11 @@ tidy = tidy.drop(columns=['Employment', 'Detailed employment'])
 
 # Fill NaN with top values.
 
-tidy.fillna(value={'Age': 'Any', 'Ownership': 'Any', 'Turnover': 'Any', 'employees': 'Any' }, inplace=True)
+tidy.fillna(value={'Age': 'All', 'Ownership': 'All', 'Turnover': 'All', 'employees': 'All' }, inplace=True)
 
 # Show the range of the codes and check for duplicated rows.
+
+
 
 from IPython.core.display import HTML
 for col in tidy:
@@ -105,35 +97,52 @@ for col in tidy:
         display(HTML(f'<h2>{col}</h2>'))
         display(tidy[col].unique())
 dups = tidy.duplicated()
-#display(dups.sum())
 tidy[dups]
 
 # We need to specify the units of the observations.
 
 # +
+tidy['Age'].loc[(tidy['Age'] == "<2")] = "0-2"
+tidy['Age'] = tidy['Age'].str.replace("<","")
+tidy['Age'] = tidy['Age'].str.replace("+","plus")
+
 tidy['Unit'] = tidy['Measure Type'].map(lambda x: 'Businesses' if x == 'Count' else 'Percent')
 
 
 tidy = tidy.replace({'Import/Export' : {
     'both Exporter and Importer'   : 'Exporter and Importer',
-    'either Exporter and/or Importer 7' : 'Exporter and/or Importer'}})
+    'either Exporter and/or Importer 7' : 'Exporter and-or Importer'}})
+
+tidy = tidy.replace({'Turnover' : {'<1000': '0-1000'}})
+tidy['Turnover'] = tidy['Turnover'].str.replace(",","")
+tidy['Turnover'] = tidy['Turnover'].apply(pathify)
+
+tidy['employees'] = tidy['employees'].apply(pathify)
+tidy["Year"] = "year/" + tidy["Year"].astype(str)
 # -
 
 # And rename some columns.
 
-tidy.rename(columns={'Turnover': 'turnover',
+# +
+tidy.rename(columns={
                      'Ownership': 'Country of Ownership',
                      'OBS': 'Value',
-                     'Trade': 'ONS ABS Trade'
+                     'Trade': 'Trade Group',
+                     "Age": "Age of Business", 
+                     "Import/Export": "Business Activity",
+                     "employees": "Employees"
                     }, inplace=True)
+
+tidy = tidy.replace({'Business Activity' : {'Businesses': 'all'}})
+# -
 
 # Update labels as according to Ref_trade codelist
 
-tidy['Country of Ownership'] = tidy['Country of Ownership'].str.lower()
-tidy
+for c in tidy.columns:
+    if (c != "Value") & (c != "Year"):
+        tidy[c] = tidy[c].apply(pathify)
 
-# +
-
+"""
 c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/age-of-business.csv")
 tidy = pd.merge(tidy, c, how = 'left', left_on = 'Age', right_on = 'Label')
 tidy.columns = ['Age of Business' if x=='Notation' else x for x in tidy.columns]
@@ -149,46 +158,120 @@ tidy.columns = ['Turnover' if x=='Notation' else x for x in tidy.columns]
 c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/employment-size-bands.csv")
 tidy = pd.merge(tidy, c, how = 'left', left_on = 'employees', right_on = 'Label')
 tidy.columns = ['Employment' if x=='Notation' else x for x in tidy.columns]
+"""
 
-tidy.head()
+tidy = tidy[['Year','Age of Business', 'Business Activity','Country of Ownership','Trade Group','Turnover'
+             ,'Employees','Unit','Measure Type', 'Value']]
+
+# +
+tidy['Value'] = tidy['Value'].astype(int)
+
+cntdat = tidy[tidy['Unit'] == 'businesses']
+prodat = tidy[tidy['Unit'] == 'percent']
+
+del cntdat['Measure Type']
+del cntdat['Unit']
+del prodat['Measure Type']
+del prodat['Unit']
+
+# +
+scraper.dataset.description = scraper.dataset.description + """
+Users should note that an Annual Business Survey (ABS) sample re-optimisation has been included in the estimates from 2016 onwards. This was last carried out in 2016 and occurs every five years to improve the efficiency of the ABS sample, estimation and reduce sample variability as part of the regular process to improve estimates.
+This re-optimisation has led to a discontinuity between 2015 and 2016 within small and medium sized businesses (those with fewer than 250 employment). Therefore users should not make year-on-year comparisons between 2015 and 2016.
+
+The questions and methodology used to compute these statistics are in their infancy. At this stage the estimates should be considered 
+    :experimental official statistics - https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/guidetoexperimentalstatistics
+
+Notes
+
+1. This spreadsheet contains Annual Business Survey (ABS) final estimates on exporters and importers for 2016, revised estimates for 2017 and provisional estimates for 2018.
+2. More details on the methodology used to produce these estimates and the things to be aware of when using the data can be found in the: 
+    Exporters and Importers in Great Britain, 2014 Information Paper - http://www.ons.gov.uk/ons/guide-method/method-quality/specific/business-and-energy/annual-business-survey/quality-and-methods/information-paper--annual-business-survey--abs---exporters-and-importers-in-great-britain--2014.pdf
+3. These estimates do not cover all businesses. They do not cover:
+    • Businesses in Northern Ireland, only those in Great Britain.
+    • Businesses in the Insurance and reinsurance industries – Section K (65.1 and 65.2)
+    • The majority of the agriculture sector.
+    • Unregistered businesses (those not registered for PAYE or VAT).
+    As coverage of the ABS estimates is not for all businesses it may be more appropriate for users to focus on the percentages rather than the levels. "
+4. The export figures plus the import figures will not sum to the total proportion of businesses trading internationally as some businesses do both import and export. This overlap is provided in the tables (labelled both Exporter and Importer). Further, the goods figures plus the services figures do not sum to the goods and/or services figures as some businesses undertake trade in both goods and services. The Information Note provides more detail of how to interpret the data in these tables.
+5. It is intended that this import and export breakdown will be published each November alongside the standard ABS release, with the next update available in November 2020 and containing information for 2019. Future outputs will be available on the ONS website via the:
+ ABS webpage - https://www.ons.gov.uk/businessindustryandtrade/business/businessservices/bulletins/uknonfinancialbusinesseconomy/previousReleases
+"""
+
+scraper.set_base_uri('http://gss-data.org.uk')
 # -
 
-tidy.head(2)
-
-tidy.rename(columns={'Turnover': 'Turnover(GBP Thousands)',
-                     'Age of Business': 'Age of Business(Years)'
-                    }, inplace=True)
-
-tidy = tidy[['Age of Business(Years)', 'Export and Import Activity','Measure Type','Value',
-             'Country of Ownership','ONS ABS Trade','Turnover(GBP Thousands)','Year','Employment','Unit']]
-
-# +
-# Use pathify to match csv values as per new style
-for col in ["ONS ABS Trade"]:
-    tidy[col] = tidy[col].apply(pathify)
-
-out = Path('out')
-out.mkdir(exist_ok=True, parents=True)
-
-tidy.to_csv(out / ('observations.csv'), index = False)
-
-tidy
-
-# +
-scraper.dataset.family = 'trade'
+scraper.dataset.family = "trade"
 scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
                                                           'Importers and exporters of trade goods and services')
-from gssutils.metadata import THEME
-scraper.dataset.theme = THEME['business-industry-trade-energy']
+#cubes.add_cube(scraper, tidy, "Annual Business Survey Exporters and Importers")
+#cubes.add_cube(scraper, cntdat, "Annual Business Survey Exporters and Importers - Business count")
+#cubes.add_cube(scraper, prodat, "Annual Business Survey Exporters and Importers - Business proportion")
 
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
 
-with open(destinationFolder / f'observations.csv-metadata.trig', 'wb') as metadata:
+# +
+#cubes.output_all()
+
+# +
+import os
+from urllib.parse import urljoin
+
+#### ONLY OUTPUTTING THE BUSINESS COUNT FOR NOW
+csvName = 'count_observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+cntdat.drop_duplicates().to_csv(out / csvName, index = False)
+cntdat.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+
+#scraper.dataset.title = 'Annual Business Survey exporters and importers - Business count'
+
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() 
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
     metadata.write(scraper.generate_trig())
-            
-schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-schema.create(destinationFolder / f'observations.csv', destinationFolder / f'observations.csv-schema.json')
 # -
+
+"""
+csvName = 'proportion_observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+prodat.drop_duplicates().to_csv(out / csvName, index = False)
+prodat.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+
+scraper.dataset.title = 'Annual Business Survey exporters and importers - Business proportion Split'
+
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + "/business-proportion"
+scraper.set_base_uri('http://gss-data.org.uk')
+scraper.set_dataset_id(dataset_path)
+
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+
+j = json.load(open('info.json'))
+j["transform"]["columns"]["Value"]["measure"] = "percentage"
+
+csvw_transform.set_mapping(j)
+csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper.generate_trig())
+"""
+
+
+# +
+#tidy.head(10)
+# -
+
+
+
 
 
