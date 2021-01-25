@@ -76,3 +76,4 @@ trade,Alcohol Origin,dimension/alcohol-origin,qb:DimensionProperty,,,http://gss-
 trade,Production and Clearance,dimension/production-and-clearance,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance,Production and Clearance
 trade,Growth,dimension/growth,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/growth,growth
 trade,Trade Services,dimension/trade-services,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/trade-services,
+trade,Industry Section,dimension/industry-section,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/industry-section,
