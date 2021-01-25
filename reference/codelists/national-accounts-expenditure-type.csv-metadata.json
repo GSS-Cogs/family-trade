@@ -81,7 +81,10 @@
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure-type"
             },
-            "rdfs:comment": "Dataset representing the 'National Accounts Expenditure Type' code list."
+            "rdfs:comment": "Dataset representing the 'National Accounts Expenditure Type' code list.",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure-type"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
@@ -104,6 +107,9 @@
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure-type/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure-type"
             }
         }
     ]

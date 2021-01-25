@@ -1,0 +1,4 @@
+Label,Notation,Parent Notation,Sort Priority
+All,all,,1
+UK,uk,all,2
+Foreign,foreign,all,3

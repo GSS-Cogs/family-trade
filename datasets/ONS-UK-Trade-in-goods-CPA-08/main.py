@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
+
+# In[1]:
+
+
+#!/usr/bin/env python
+# coding: utf-8
 # %%
 from gssutils import *
 from databaker.framework import *
@@ -7,11 +13,21 @@ import pandas as pd
 from gssutils.metadata import THEME
 from gssutils.metadata import *
 import datetime
-from gssutils.metadata import Distribution, GOV
+#from gssutils.metadata import Distribution, GOV
 pd.options.mode.chained_assignment = None
 import json
 import inspect
 import re
+
+
+# In[2]:
+
+
+cubes = Cubes("info.json")
+
+
+# In[3]:
+
 
 def left(s, amount):
     return s[:amount]
@@ -22,102 +38,157 @@ def right(s, amount):
 def mid(s, offset, amount):
     return s[offset:offset+amount]
 
-info = json.load(open('info.json'))
 
-scraper = Scraper(info['landingPage'])
+# In[4]:
+
+
+with open ('info.json') as f:
+    info = json.load(f)
+    
+landingPage = info['landingPage']
+landingPage
+
+
+# In[5]:
+
+
+scraper = Scraper(landingPage)
+scraper.dataset.family = info['families']
 scraper
 
 
 # %%
 
-
-dist = scraper.distributions[0]
-dist
-
-
 # %%
 
+# In[6]:
 
-tabs = (t for t in dist.as_databaker())
+
+tabs = scraper.distributions[0].as_databaker()
+
+
+# In[8]:
+
 
 tidied_sheets = []
 
-for tab in tabs:
-    
-    if tab.name in ('Index', 'Contact'):
+for tab in tabs:  
+    if tab.name in ['Index', 'Contact']:
         continue
         
     print(tab.name)
     
-    cell = tab.filter(contains_string('Total'))
+    cell = tab.filter('Total')
     
     flow_direction = tab.name
-
-    period = cell.shift(2,-1).expand(RIGHT).is_not_blank()
-    
-    product = cell.expand(DOWN).is_not_blank()
-    
+    period = tab.excel_ref("C4").expand(RIGHT).is_not_blank()
+    product = tab.excel_ref("A5").expand(DOWN).is_not_blank()
+   
     prod_dep = product.regex('[^0-9]+')
     
     prod_cat = product.regex('[0-9]{2}\s{1}[^\.]')
     
-    cdid_code = tab.excel_ref('B4').expand(DOWN) #SOME BLANK VALUES 
+    cdid_code = tab.excel_ref('B5').expand(DOWN).is_not_blank() | tab.excel_ref("B194") # Adding a blank value  
     
-    observations = product.shift(RIGHT).fill(RIGHT).is_not_blank()
-
+    observations = tab.excel_ref('C5').expand(DOWN).expand(RIGHT).is_not_blank()
+    
     dimensions = [
-        HDim(period, 'Period', DIRECTLY, ABOVE),
         HDimConst('Flow Directions', flow_direction),
-        HDim(product, 'Product', CLOSEST, ABOVE),
-        HDim(prod_dep, 'Product Department', CLOSEST, ABOVE),
-        HDim(prod_cat, 'Product Category', CLOSEST, ABOVE),
-        HDim(cdid_code, 'CDID', DIRECTLY, LEFT),
         HDimConst('Measure Type', 'GBP Total'),
-        HDimConst('Unit', 'gbp-million')
+        HDimConst('Unit', 'GBP-million'),
+        
+        HDim(period, 'Period', DIRECTLY, ABOVE),
+        HDim(product, 'Product',  CLOSEST, ABOVE),
+        HDim(prod_dep, 'Product Department', CLOSEST, ABOVE), 
+        HDim(prod_cat, 'Product Category', CLOSEST, ABOVE),
+        HDim(cdid_code, 'CDID', CLOSEST, UP)   
         ]
-
-    tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    savepreviewhtml(tidy_sheet, fname="Preview.html")
-
-    tidied_sheets.append(tidy_sheet.topandas())
-    
+   
+    cs = ConversionSegment(tab, dimensions, observations)
+    tidy_sheet = cs.topandas()
+    #savepreviewhtml(tidy_sheet, fname="Preview.html")
+    tidied_sheets.append(tidy_sheet) # datacube
         
 
 
 # %%
 
+# In[10]:
+
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
 
+
+# In[11]:
+
+
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False).fillna('')
+
+
+# In[12]:
+
 
 indexNames = df[ df['Product Department'] == 'Residual seasonal adjustment' ].index
 df.drop(indexNames, inplace = True)
 
+
+# In[13]:
+
+
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
+
+# In[14]:
+
+
 df['Flow Directions'] = df['Flow Directions'].map(lambda x: right(x, len(x) - 2))
+
+
+# In[15]:
+
+
 df['Product Department'] = df['Product Department'].map(lambda x: right(x, len(x) - 2) if 'Total' not in x else x)
 
-df['Product'] = df['Product'].map(lambda x: '' if ('.' not in left(x, 5) and mid(x, 2, 1) == ' ') else x)
-df['Product'] = df['Product'].map(lambda x: 'All' if x == '' else x)
+
+# In[16]:
+
 
 df['Product Category'] = df['Product Category'].map(lambda x: 'All' if x == '' else x)
 df['Product Category'] = df['Product Category'].map(lambda x: right(x, len(x) - 3) if left(x, 2).isnumeric() == True else x)
 
+
+# In[17]:
+
+
+df['Product'] = df['Product'].map(lambda x: '' if ('.' not in left(x, 5) and mid(x, 2, 1) == ' ') else x)
+df['Product'] = df['Product'].map(lambda x: 'All' if x == '' else x)
 df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 8) if mid(x, 2, 5) == 'OTHER' else x)
 df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 5).strip() if '.' in x else (right(x, len(x) - 4) if left(x, 2).isnumeric() == True else x))
 
-df = df.replace({'Product' : {
-    '3 Processed and preserved fish, crustaceans, molluscs, fruit and vegetables' : 'Processed and preserved fish, crustaceans, molluscs, fruit and vegetables', 
-    '-6 Alcoholic beverages' : 'Alcoholic beverages', 
-    '6 Manufacture of cement, lime, plaster and articles of concrete, cement and plaster' : 'Manufacture of cement, lime, plaster and articles of concrete, cement and plaster',
-    '3 Basic iron and steel' : 'Basic iron and steel', 
-    '5 Other basic metals and casting' : 'Other basic metals and casting'}})
+
+# In[18]:
+
+
+import string
+
+df['Product'] = [x.lstrip('-') for x in df['Product']]
+df['Product'] = df['Product'].str.lstrip(string.digits)
+
+
+# In[21]:
+
 
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 
+
+# In[22]:
+
+
 df = df[['Period', 'Flow Directions','Product Department','Product Category','Product','CDID', 'Value','Measure Type','Unit']]
+
+
+# In[23]:
+
 
 for column in df:
     if column in ('Flow Directions','Product Department','Product Category','Product','Unit'):
@@ -139,37 +210,24 @@ df['Product'].unique().tolist()
 
 # %%
 
-
-from IPython.core.display import HTML
-for col in df:
-    if col not in ['Value']:
-        df[col] = df[col].astype('category')
-        display(HTML(f"<h2>{col}</h2>"))
-        display(df[col].cat.categories) 
+# In[24]:
 
 
-# %%
+cubes.add_cube(scraper, df, info['title'])
+cubes.output_all()
 
 
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
+# In[54]:
 
-TAB_NAME = 'observations'
 
-df.drop_duplicates().to_csv(destinationFolder / f'{TAB_NAME}.csv', index = False)
-
-scraper.dataset.family = 'trade'
-
-with open(destinationFolder / f'{TAB_NAME}.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(destinationFolder / f'{TAB_NAME}.csv', destinationFolder / f'{TAB_NAME}.csv-schema.json')
-df.head(25)
+# from IPython.core.display import HTML
+# for col in df:
+#     if col not in ['Value']:
+#         df[col] = df[col].astype('category')
+#         display(HTML(f"<h2>{col}</h2>"))
+#         display(df[col].cat.categories) 
 
 
 # %%
 
-
-
-
+# %%

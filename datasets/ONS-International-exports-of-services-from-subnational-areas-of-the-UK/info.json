@@ -16,6 +16,42 @@
     },
     "transform": {
         "airtable": "rec4OsmnfMCd6wRMj",
+        "columns": {
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
+            },
+            "Flow Directions": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow-directions}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
+            },
+            "Export Services": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/export-services",
+                "value": "http://gss-data.org.uk/def/trade/concept/export-services/{export-services}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
+            },
+            "Service Origin Geography": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/service-origin-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/service-origin-geography/{service-origin-geography}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/ons-origin-geography"
+            },
+           "Service Destination Geography": {
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/service-destination-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/service-destination-geography/{service-destination-geography}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/ons-destination-geography"
+            },
+            "Value": {
+              "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+              "measure": "http://gss-data.org.uk/def/measure/gbp-total",
+              "datatype": "integer"
+            },
+            "Marker": {
+              "attribute":"http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+              "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        },
         "main_issue": 24
     },
     "sizingNotes": "",

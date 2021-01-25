@@ -92,7 +92,10 @@
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata"
             },
-            "rdfs:comment": "Dataset representing the 'Cord Geographies Wikidata' code list."
+            "rdfs:comment": "Dataset representing the 'Cord Geographies Wikidata' code list.",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
@@ -115,6 +118,9 @@
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata"
             }
         }
     ]
