@@ -88,8 +88,6 @@ for tab in tabs:
     
     dimensions = [
         HDimConst('Flow Directions', flow_direction),
-        HDimConst('Measure Type', 'GBP Total'),
-        HDimConst('Unit', 'GBP-million'),
         
         HDim(period, 'Period', DIRECTLY, ABOVE),
         HDim(prod_dep, 'Product Department', CLOSEST, ABOVE),
