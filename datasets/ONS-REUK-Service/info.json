@@ -25,15 +25,18 @@
             },
             "Year": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{year}"
+                "value": "http://reference.data.gov.uk/id/year/{year}",
+                "codelist": false
             },
             "ONS Function": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-categories",
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-functional-categories/{ons_function}"               
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-functional-categories/{ons_function}",         
+                "codelist": false      
             },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
