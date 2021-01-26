@@ -614,7 +614,7 @@ for job_name, job_details in jobs.items():
             if len(df["Growth"].unique().tolist()) == 1:
                 df = df.drop("Growth", axis=1)
             else:
-                trace.add_column("Growth")q
+                trace.add_column("Growth")
                 trace.Growth("Create a growth column, values are dependent on the tab name")
 
             # account for horizontal changes in measure type
