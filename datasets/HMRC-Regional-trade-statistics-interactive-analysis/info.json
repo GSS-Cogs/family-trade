@@ -18,19 +18,22 @@
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}",
-                "codelist": false
+                "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Flow": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow/{flow}",
-                "description": "Balance refers to the trade balance between exports and imports, calculated using exports minus imports. A positive figure indicates a trade surplus and a negative figure indicates a trade deficit.",
-                "codelist": false
+                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "Measure Type": {
         		"dimension": "http://purl.org/linked-data/cube#measureType",
         		"value": "http://gss-data.org.uk/def/measure/{measure_type}",
-        		"types": ["value-of-imports-whole-count", "average-value-per-trade-whole-count","trade-whole-count","value-of-trade-proportional-count","average-value-per-trade-proportional-count","trade-proportional-count"]
+                "types": [
+                    "value-of-imports", "value-of-exports", 
+                    "number-of-exporters", "number-of-importers", 
+                    "average-value-per-importer", "average-value-per-exporter",
+                    "value-of-exports", "value-of-imports"
+                ]
       		},
       		"Unit": {
         		"attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
