@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[35]:
+# %%
 
 
 # -*- coding: utf-8 -*-
@@ -55,7 +56,7 @@ def cell_to_string(cell):
     return substring
 
 
-# In[36]:
+# %%
 
 
 from pandas import ExcelWriter
@@ -82,7 +83,7 @@ for table in scraper.distributions:
     counter += 1
 
 
-# In[37]:
+# %%
 
 
 counter = 0
@@ -391,14 +392,14 @@ for table in all_tabs:
     counter += 1
 
 
-# In[38]:
+# %%
 
 
 formatted_sheets = []
 
 
-# In[39]:
-
+# %%
+# Regional Trade in goods statistics - Business Count (Exports, proportion method)
 
 df = pd.concat([tidied_sheets[0],tidied_sheets[1],tidied_sheets[8],tidied_sheets[9]], sort = True)
 
@@ -423,20 +424,19 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-df['Measure Type'] = 'trade-proportional-count'
-df['Unit'] = 'proportional-count'
+df['Measure Type'] = 'number-of-exporters'
+df['Unit'] = 'businesses'
+df['Method'] = 'proportion'
 
-df = df[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
+df = df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Measure Type', 'Unit']]
 
 df['Value'] = df['Value'].astype(int)
-
+# Adding Business counts for PROPORTION method for both IMPORTS and EXPORTS
 formatted_sheets.append(df)
 
-df
 
-
-# In[40]:
-
+# %%
+# Regional Trade in goods statistics - Regional Comparison (Exports, proportion method)
 
 df = pd.concat([tidied_sheets[2],tidied_sheets[3],tidied_sheets[10],tidied_sheets[11]], sort = True)
 
@@ -462,25 +462,36 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-df[df['Unit'] == 'gbp-billions']
+#df[df['Unit'] == 'gbp-billions']
 
 
-# In[41]:
+# %%
+df['Measure Type'] = df['Measure Type'].str.replace('-ps-thousands','')
+df['Measure Type'] = df['Measure Type'].str.replace('-ps-billions','')
+df['Unit'] = df['Unit'].str.replace('count','businesses')
+df['Method'] = 'proportion'
+print(df['Measure Type'].unique())
+print(df['Unit'].unique())
+df.head(5)
+
+formatted_sheets.append(df)
+
+# %%
+# Adding Regional Comparisons for PROPORTION method for both IMPORTS and EXPORTS for 
+
+#averagePerTrade = df[df['Unit'] == 'gbp-thousands']
+
+#averagePerTrade['Measure Type'] = 'average-value-per-trade-proportional-count'
+#averagePerTrade['Unit'] = 'gbp-thousands'
+
+#averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Measure Type', 'Unit']]
+
+#formatted_sheets.append(averagePerTrade)
+
+#averagePerTrade
 
 
-averagePerTrade = df[df['Unit'] == 'gbp-thousands']
-
-averagePerTrade['Measure Type'] = 'average-value-per-trade-proportional-count'
-averagePerTrade['Unit'] = 'gbp-thousands'
-
-averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
-
-formatted_sheets.append(averagePerTrade)
-
-averagePerTrade
-
-
-# In[42]:
+# %%
 
 
 #Data included in non regional tabs
@@ -511,23 +522,23 @@ averagePerTrade
 #trade
 
 
-# In[43]:
+# %%
 
 
-valueOfTrade = df[df['Unit'] == 'gbp-billions']
+#valueOfTrade = df[df['Unit'] == 'gbp-billions']
 
-valueOfTrade['Measure Type'] = 'value-of-trade-proportional-count'
-valueOfTrade['Unit'] = 'gbp-billions'
+#valueOfTrade['Measure Type'] = 'value-of-trade-proportional-count'
+#valueOfTrade['Unit'] = 'gbp-billions'
 
-valueOfTrade = valueOfTrade[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
+#valueOfTrade = valueOfTrade[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Measure Type', 'Unit']]
 
-formatted_sheets.append(valueOfTrade)
+#formatted_sheets.append(valueOfTrade)
 
-valueOfTrade
+#valueOfTrade
 
 
-# In[44]:
-
+# %%
+# Regional Trade in goods statistics - Business Count (Exports, whole number method)
 
 df = pd.concat([tidied_sheets[4],tidied_sheets[5],tidied_sheets[12],tidied_sheets[13]], sort = True)
 
@@ -555,20 +566,23 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-df['Measure Type'] = 'trade-whole-count'
-df['Unit'] = 'count'
-
-df = df[['Period', 'Country', 'Region', 'Flow', 'Value', 'Marker', 'Measure Type', 'Unit']]
-
 df['Value'] = df['Value'].astype(int)
 
+#df.head(2)
+
+
+# %%
+df['Measure Type'] = 'number-of-exporters'
+df['Unit'] = 'businesses'
+df['Method'] = 'whole-number'
+print(df['Measure Type'].unique())
+print(df['Unit'].unique())
+df.head(5)
+df = df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Marker', 'Measure Type', 'Unit']]
 formatted_sheets.append(df)
 
-df
-
-
-# In[45]:
-
+# %%
+# Regional Trade in goods statistics - Regional Comparisons (Exports, whole number method)
 
 df = pd.concat([tidied_sheets[6],tidied_sheets[7],tidied_sheets[14],tidied_sheets[15]], sort = True)
 
@@ -595,25 +609,36 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-df
 
 
-# In[46]:
+# %%
+df['Measure Type'] = df['Measure Type'].str.replace('-ps-thousands','')
+df['Measure Type'] = df['Measure Type'].str.replace('-ps-billions','')
+df['Unit'] = df['Unit'].str.replace('count','businesses')
+df['Method'] = 'whole-number'
+print(df['Measure Type'].unique())
+print(df['Unit'].unique())
+print(df['Flow'].unique())
+df.head(5)
+
+formatted_sheets.append(df)
+
+# %%
 
 
-averagePerTrade = df[df['Unit'] == 'gbp-thousands']
+#averagePerTrade = df[df['Unit'] == 'gbp-thousands']
 
-averagePerTrade['Measure Type'] = 'average-value-per-trade-whole-count'
-averagePerTrade['Unit'] = 'gbp-thousands'
+#averagePerTrade['Measure Type'] = 'average-value-per-trade-whole-count'
+#averagePerTrade['Unit'] = 'gbp-thousands'
 
-averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
+#averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
 
-formatted_sheets.append(averagePerTrade)
+#formatted_sheets.append(averagePerTrade)
 
-averagePerTrade
+#averagePerTrade
 
 
-# In[47]:
+# %%
 
 
 #Data included in Non Regional Tabs
@@ -644,40 +669,43 @@ averagePerTrade
 #trades
 
 
-# In[48]:
+# %%
 
 
-valueOfTrades = df[df['Unit'] == 'gbp-billions']
+#valueOfTrades = df[df['Unit'] == 'gbp-billions']
 
-valueOfTrades['Measure Type'] = 'value-of-imports-whole-count'
-valueOfTrades['Unit'] = 'gbp-billions'
+#valueOfTrades['Measure Type'] = 'value-of-imports-whole-count'
+#valueOfTrades['Unit'] = 'gbp-billions'
 
-valueOfTrades = valueOfTrades[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
+#valueOfTrades = valueOfTrades[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
 
-formatted_sheets.append(valueOfTrades)
+#formatted_sheets.append(valueOfTrades)
 
-valueOfTrades
-
-
-# In[53]:
+#valueOfTrades
 
 
+# %%
+print("Number of dataframes in List: " + str(len(formatted_sheets)))
 formatted_df = pd.concat(formatted_sheets, sort = True).fillna('')
 
-formatted_df = formatted_df[['Period', 'Country', 'Region', 'Flow', 'Value', 'Marker', 'Measure Type', 'Unit']]
+print(formatted_df['Period'].count())
+formatted_df = formatted_df.drop_duplicates()
+print(formatted_df['Period'].count())
+print(formatted_df.columns)
+formatted_df = formatted_df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
-formatted_df
+formatted_df.head(5)
 
 
-# In[54]:
+# %%
 
 
 csvName = "Regional trade statistics interactive analysis - Importers, Exporters"
 cubes.add_cube(scraper, formatted_df.drop_duplicates(), csvName)
 
 
-# In[ ]:
-
+# %%
+df = formatted_df
 
 from IPython.core.display import HTML
 for col in df:
@@ -687,9 +715,11 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[55]:
+# %%
 
 
 cubes.output_all()
 trace.render()
 
+
+# %%
