@@ -52,7 +52,7 @@ tabs = distribution.as_databaker()
 # +
 trace = TransformTrace()
 title = distribution.title
-columns = ['Period', 'Flow Directions','Product Department','Product Category','Product','CDID', 'Value','Measure Type','Unit']
+columns = ['Period', 'Flow Directions','Product Department','Product Category','Product','CDID', 'Value']
 
 for tab in tabs:  
     if tab.name in ['Index', 'Contact']:
