@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/method",
-    "url": "region.csv",
+    "url": "method.csv",
     "rdfs:label": "method",
     "dc:title": "Method",
     "tableSchema": {
