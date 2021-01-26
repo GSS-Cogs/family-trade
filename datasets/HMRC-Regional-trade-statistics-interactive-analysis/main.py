@@ -472,7 +472,9 @@ df['Unit'] = df['Unit'].str.replace('count','businesses')
 df['Method'] = 'proportion'
 print(df['Measure Type'].unique())
 print(df['Unit'].unique())
-df.head(5)
+
+# Remove businesses as numbers are rounded differently for some numbers compared to the whole coun method meaning we get duplicate keys in Jenkins
+df = df[df['Unit'] != 'businesses']
 
 formatted_sheets.append(df)
 
@@ -619,7 +621,9 @@ df['Method'] = 'whole-number'
 print(df['Measure Type'].unique())
 print(df['Unit'].unique())
 print(df['Flow'].unique())
-df.head(5)
+
+# Remove businesses as numbers are rounded differently for some numbers compared to the whole coun method meaning we get duplicate keys in Jenkins
+df = df[df['Unit'] != 'businesses']
 
 formatted_sheets.append(df)
 
