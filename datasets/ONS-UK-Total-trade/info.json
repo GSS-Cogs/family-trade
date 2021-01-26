@@ -1,9 +1,12 @@
 {
-    "title": "Trade in goods: all countries, seasonally adjusted",
+    "title": "UK total trade: all countries, non-seasonally adjusted",
     "publisher": "Office for National Statistics",
-    "description": "The annual and monthly goods export and import figures for all countries with the UK.",
-    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeallcountriesseasonallyadjusted",
-    "published": "2020-02-11",
+    "description": "Quarterly estimates of total trade, trade in goods and trade in services by country, non-seasonally adjusted.",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/uktotaltradeallcountriesnonseasonallyadjusted",
+    "datasetNotes": [
+        "Data is located on landing page under your download options"
+    ],
+    "published": "2020-01-22",
     "families": [
         "Trade"
     ],
@@ -40,6 +43,6 @@
         "main_issue": 6
         }
     },
-    "sizingNotes": "",
-    "notes": ""
+    "sizingNotes": "Simple file structure, mid size table with non-complex dimensions and some footnotes.",
+    "notes": "Data is located on landing page under your download options"
 }
