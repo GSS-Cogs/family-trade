@@ -27,8 +27,7 @@
             },
             "Location": {
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
-                "value": "{location}",
-                "codelist": false
+                "value": "{location}"
             },
             "Flow": {
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
