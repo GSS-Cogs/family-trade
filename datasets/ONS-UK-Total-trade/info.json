@@ -12,7 +12,7 @@
         "stage": "Done"
     },
     "transform": {
-        "airtable": "rec2vZJEjUBsBay90",
+        "airtable": "recMJhku0J2Kbp8du",
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
@@ -37,7 +37,7 @@
               "attribute":"http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
               "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             },
-        "main_issue": "2"
+        "main_issue": 6
         }
     },
     "sizingNotes": "",
