@@ -12,7 +12,7 @@
         "stage": "Done"
     },
     "transform": {
-        "airtable": "rec2vZJEjUBsBay90",
+        "airtable": "recMJhku0J2Kbp8du",
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
