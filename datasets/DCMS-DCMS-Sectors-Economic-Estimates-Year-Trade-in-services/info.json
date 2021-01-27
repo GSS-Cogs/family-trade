@@ -36,7 +36,7 @@
                 "codelist": false
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/dcms-country",
+                "parent": "http://gss-data.org.uk/def/dimension/dcms-country",
                 "value": "http://gss-data.org.uk/def/concept/dcms-country/{country}",
                 "codelist": false
         },
