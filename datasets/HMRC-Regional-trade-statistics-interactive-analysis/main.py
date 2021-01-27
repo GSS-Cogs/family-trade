@@ -689,6 +689,64 @@ formatted_sheets.append(df)
 
 
 # %%
+notes = """
+Data source
+
+This is additional analysis using the HMRC Regional Trade in Goods Statistics. 
+
+How to interpret the data
+
+Business Count: This data shows the number of businesses importing or exporting goods. This is broken down by their UK region and partner countries.
+Regional comparisons: This data shows import or export data within a particular quarter or year for UK regions alongside the same data for the UK. This is based on three metrics; the number of importing or exporting businesses , the value of trade, and the average value per business.
+
+Businesses can appear in more than one quarter and can trade with more than one destination. Therefore users should not add up across quarters or partner countries. 
+
+1. Methodology for allocating businesses to UK regions
+
+As a result of the HMRC RTS methodology consultation the way businesses are allocated to UK region and country has changed. The previous methodology allocated trade to a region based on where the headquarters of a business is located, supplemented by survey data to allow better allocation of multi-site businesses. 
+This survey data is out of date and HMRC decided to develop a new methodology.
+In the current methodology the trade value of a multi-site business is allocated to different regions based on a proportion of their employees in each region (based on linked information from the Inter Departmental Business Register). 
+Data on the number of traders is shown in two different way in the RTS release tables:
+Whole Number Method (does not add up to UK total): A business will be counted as one in every region they have employees. This represents the actual count of businesses in any region. However, it will mean the sum of the business count for each region will be greater than that for the UK. 
+
+Proportion Method (adds up to UK total): A business will be counted as a fraction in each region they trade based on the proportion of their employees in each region. An individual business counts as one business in the UK. The sum of businesses (whole and fractions) gives the total business count for a region.
+The data in this analysis uses both methods. Please refer to the correct output for each methodology and flow.
+
+2. The number of businesses importing or exporting
+
+Business counts are a count of all VAT Registered businesses exporting and importing. 
+Aside from the EU/non-EU split (published as part of the RTS) there is no disaggregation of businesses not required to submit full EU declarations (below threshold traders) by EU partner country. The supplementary analysis provided here does split the number of businesses by EU partner country but these do not include the below threshold traders.
+
+Exclusions
+This dataset excludes businesses that cannot be allocated to a region due to lack of information about the business (unallocated - unknown). It does include businesses where details are known, but cannot be allocated due to the type of business (unallocated - known).  Further information can be found in the 
+
+RTS Methodology paper.
+
+This analysis also excludes 'unallocated - unknown' in the UK value totals, in order to make ratios (exports per exporter) and comparisons valid. Where information is known about a business but it is not possible to allocate to a specific region it is classed as 'unallocated - known'. These 'unallocated - known' businesses are included in both the value and count for UK totals.
+RTS data excludes trade in non-monetary gold, whereas HMRC OTS data does include this from 2005 onwards. RTS data also excludes non-response estimates. Therefore, it matches the 'total reported trade' figures in the OTS with the exception of non-monetary gold. More information can be found in section 3.20 of the RTS Methodology Paper.
+
+Suppressions
+A very small number of cells in the Business Counts tab have been suppressed under our statistical disclosure policy. These are shown a ‘S’ under the business count. Due to a review of disclosure, some data previously suppressed under the output produce by Department for International Trade (Exports proportion method only) may now be shown.
+Further information on trade in goods by UK region
+HMRC publish quarterly data on trade by UK region in Regional Trade in Goods Statistics. This includes information on the number of exporters to the EU and Non-EU.
+https://www.uktradeinfo.com/Statistics/RTS/Pages/default.aspx
+
+Detail on trade value by UK region, trade partner and commodity is available in Build Your Own Tables:
+https://www.uktradeinfo.com/Statistics/BuildYourOwnTables/Pages/Home.aspx
+
+2020 data is provisional and subject to update.
+"""
+
+# %%
+scraper.dataset.title = ""
+scraper.dataset.comment = "These spreadsheets provide supplementary data to that in the release of the HM Revenue & Customs Regional trade in goods statistics."
+scraper.dataset.description = notes
+
+print(scraper.dataset.title)
+print(scraper.dataset.comment)
+print(scraper.dataset.description)
+
+# %%
 print("Number of dataframes in List: " + str(len(formatted_sheets)))
 formatted_df = pd.concat(formatted_sheets, sort = True).fillna('')
 
