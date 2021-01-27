@@ -1,7 +1,7 @@
 {
     "title": "International trade in services by subnational areas of the UK",
     "publisher": "Office for National Statistics",
-    "description": "Experimental estimated value of exports and imports of services for 2018 for NUTS1, NUTS2, NUTS3 and 15 city regions, including industry and non-EU and EU split. An error has been found in the EU and Rest of the World estimates within the International trade in services by subnational areas of the UK: 2018 dataset. Please be aware of this if using this data. We are investigating the reason for this error and will update this notice as we have more information. We apologise for any inconvenience. Smaller geographic breakdowns may not sum exactly to aggregated totals due to rounding. The estimates in this dataset are experimental.",
+    "description": "Experimental estimated value of exports and imports of services for 2018 for NUTS1, NUTS2, NUTS3 and 15 city regions, including industry and non-EU and EU split.",
     "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk",
     "datasetNotes": [
         "On landing page"
@@ -27,8 +27,7 @@
             },
             "Location": {
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
-                "value": "{location}",
-                "codelist": false
+                "value": "{location}"
             },
             "Flow": {
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",

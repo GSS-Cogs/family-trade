@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments",
-    "url": "seasonal-adjustments.csv",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section",
+    "url": "income.csv",
     "tableSchema": {
         "columns": [
             {
@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/industry-section/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -54,70 +54,62 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/industry-section/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments",
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Seasonal Adjustments",
-    "dc:title": "Seasonal Adjustments",
+    "rdfs:label": "Industry Section",
+    "dc:title": "Industry Section",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments/dataset",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Seasonal Adjustments",
-            "dc:title": "Seasonal Adjustments",
+            "rdfs:label": "Industry Section",
+            "dc:title": "Industry Section",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
             },
-            "rdfs:comment": "Dataset representing the 'Seasonal Adjustments' code list.",
+            "rdfs:comment": "Dataset representing the 'Industry Section' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
-            },
-            "dc:issued": {
-                "@type": "dateTime",
-                "@value": "2020-01-26T00:00:00"
-            },
-            "dc:modified": {
-                "@type": "dateTime",
-                "@value": "2020-01-26T00:00:00"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments/catalog-record"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments/catalog-record",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Seasonal Adjustments Catalog Record",
-            "rdfs:label": "Seasonal Adjustments Catalog Record",
+            "dc:title": "Industry Section Catalog Record",
+            "rdfs:label": "Industry Section Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.163998"
+                "@value": "2020-12-23T11:58:58.130416"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.163998"
+                "@value": "2020-12-23T11:58:58.130416"
             },
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments/dataset"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
             }
         }
     ]

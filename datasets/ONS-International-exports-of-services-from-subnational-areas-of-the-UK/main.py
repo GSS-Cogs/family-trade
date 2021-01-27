@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -31,7 +31,7 @@ tabs = {tab.name: tab for tab in distribution.as_databaker()}
 
 data_download = distribution.downloadURL
 datasetTitle = distribution.title
-columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker']
+columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination Geography', 'Marker']
 
 # +
 # tab 1a
@@ -139,7 +139,7 @@ savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
 trace.with_preview(tidy_sheet)
 #store 2b and appending to combined_dataframe
 trace.store("combined_dataframe", tidy_sheet.topandas())
-# +
+# # +
 #tab 3
 tab = tabs['3'] #start tracer for tab 3
 trace.start(datasetTitle, tab, columns, data_download)
@@ -165,7 +165,7 @@ savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
 trace.with_preview(tidy_sheet)
 #stor 3 and appending to combined_dataframe
 trace.store("combined_dataframe", tidy_sheet.topandas())
-# +
+# # +
 # tab 4a
 tab = tabs['4a'] #set tab as tab 4a
 trace.start(datasetTitle, tab, columns, data_download) #start traer for tab 4a
@@ -289,3 +289,6 @@ trace.render("spec_v1.html")
 # 'tees-valley', 'west-of-england', 'cardiff-capital-region',
 # 'swansea-bay', 'aberdeen-and-aberdeenshire',
 # 'edinburgh-and-south-east-scotland', 'glasgow-city-region'
+# -
+
+

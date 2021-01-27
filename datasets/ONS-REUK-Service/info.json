@@ -16,7 +16,33 @@
     },
     "transform": {
         "airtable": "recUOST414AWXRJbi",
-        "main_issue": 25
+        "main_issue": 25,
+        "columns": {
+            "NUTS Geography": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://data.europa.eu/nuts/code/{nuts_geography}",
+                "codelist": false
+            },
+            "Year": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/year/{year}",
+                "codelist": false
+            },
+            "ONS Functional Category": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-categories",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-functional-categories/{ons_functional_category}",
+                "codelist": false
+            },
+            "Flow Directions": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "codelist": false
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total"
+            }
+        }
     },
     "sizingNotes": "",
     "notes": ""

@@ -22,6 +22,7 @@ import pandas as pd
 import numpy as np
 from gssutils import *
 from databaker.framework import *
+from IPython.core.display import display
 
 cubes = Cubes("info.json")
 
@@ -113,19 +114,19 @@ for col in tidy.columns:
         display(tidy[col].cat.categories)
 
 tidy['NUTS Geography'] = tidy['Area'].cat.rename_categories({
-    'East Midlands' : 'nuts1/UKF', 
-    'East of England': 'nuts1/UKH', 
-    'London' : 'nuts1/UKI', 
-    'North East' : 'nuts1/UKC',
-    'North West' : 'nuts1/UKD', 
-    'Scotland' : 'nuts1/UKM', 
-    'South East' : 'nuts1/UKJ', 
-    'South West' : 'nuts1/UKK',
-     'Total for functional category' : 'nuts1/all', 
-    'Wales' : 'nuts1/UKL', 
-    'West Midlands' : 'nuts1/UKG',
-    'Yorkshire and The Humber' : 'nuts1/UKE',
-    'Northern Ireland' : 'nuts1/UKN'
+    'East Midlands' : 'UKF', 
+    'East of England': 'UKH', 
+    'London' : 'UKI', 
+    'North East' : 'UKC',
+    'North West' : 'UKD', 
+    'Scotland' : 'UKM', 
+    'South East' : 'UKJ', 
+    'South West' : 'UKK',
+     'Total for functional category' : 'all', 
+    'Wales' : 'UKL', 
+    'West Midlands' : 'UKG',
+    'Yorkshire and The Humber' : 'UKE',
+    'Northern Ireland' : 'UKN'
 })
 tidy['ONS Functional Category'] = tidy['Functional category'].cat.rename_categories({
     'Administrative and support services' : 'administrative-support' , 
@@ -149,7 +150,7 @@ tidy['Value'] = tidy['Value'].map(lambda x:''
                             else int(x))
 tidy = tidy[tidy['Value'] != '']
 
-tidy = tidy[['NUTS Geography','Year','ONS Functional Category','Flow','Measure Type','Value','Unit']]
+tidy = tidy[['NUTS Geography','Year','ONS Functional Category','Flow','Value']]
 
 tidy.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 tidy
