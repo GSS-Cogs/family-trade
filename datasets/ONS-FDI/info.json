@@ -30,8 +30,9 @@
                 "codelist": false
             },
             "Year": {
-                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{year}"
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/year/{year}",
+                "codelist": false
             },
             "International Trade Basis": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
@@ -40,7 +41,8 @@
             },
             "FDI Area": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-fdi-area",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area/{fdi_area}"
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area/{fdi_area}",
+                "codelist": false
             },
             "FDI Component": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",
@@ -53,7 +55,7 @@
                 "codelist": false
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/{unit}",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/trade/measure/gbp-million",
                 "datatype": "double"
             },
