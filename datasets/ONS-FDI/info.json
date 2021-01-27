@@ -26,7 +26,8 @@
         "columns": {
             "Investment Direction": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow",
-                "value": "http://gss-data.org.uk/def/concept/flow/{direction}"
+                "value": "http://gss-data.org.uk/def/concept/flow/{direction}",
+                "codelist": false
             },
             "Year": {
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
@@ -34,7 +35,8 @@
             },
             "International Trade Basis": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/international-trade-basis/{international_trade_basis}"
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/international-trade-basis/{international_trade_basis}",
+                "codelist": false
             },
             "FDI Area": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-fdi-area",
@@ -42,11 +44,13 @@
             },
             "FDI Component": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/fdi-component"
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/fdi-component",
+                "codelist": false
             },
             "FDI Industry": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/fdi-industry/{fdi_industry}"
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/fdi-industry/{fdi_industry}",
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/{unit}",
