@@ -42,7 +42,7 @@ trade,Income Category,dimension/income-category,qb:DimensionProperty,,,http://gs
 trade,Industrial Sector,dimension/industrial-sector,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/industrial-sector,
 trade,Estimate Type,dimension/estimate-type,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/estimate-type,
 trade,Expenditure,dimension/expenditure,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/expenditure,
-trade,Trade Type,dimension/trade-type,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/trade-type,
+trade,Trade Type,dimension/trade-type,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type,
 trade,Income Indicator,dimension/income-indicator,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/income-indicator,
 trade,Expenditure Type,dimension/expenditure-type,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/expenditure-type,
 trade,Industry,dimension/industry,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/industry,

@@ -22,20 +22,25 @@
                 "value": "http://reference.data.gov.uk/id/{+period}",
                 "codelist": false
             },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/dimension/ons-country",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
+                "codelist": false
+            },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{flow}",
-                "description": ""
+                "codelist": false
             },
-            "ONS Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography/{ons_partner_geography}",
-                "description": ""
+            "Trade Type": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/trade-type",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type/{trade_type}",
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/measure/current-prices",
-                "datatype": "integer"
+                "datatype": "decimal"
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
