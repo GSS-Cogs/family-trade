@@ -294,7 +294,7 @@ for i in to_output:
     csvw_transform = CSVWMapping()
     csvw_transform.set_csv(out / csvName)
     csvw_transform.set_mapping(json.load(open('info.json')))
-    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+    csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/gss_data/trade/{scraper._dataset_id}'))
     csvw_transform.write(out / f'{csvName}-metadata.json')
 
     with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
