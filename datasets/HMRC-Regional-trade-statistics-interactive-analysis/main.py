@@ -738,7 +738,6 @@ https://www.uktradeinfo.com/Statistics/BuildYourOwnTables/Pages/Home.aspx
 """
 
 # %%
-scraper.dataset.title = ""
 scraper.dataset.comment = "These spreadsheets provide supplementary data to that in the release of the HM Revenue & Customs Regional trade in goods statistics."
 scraper.dataset.description = notes
 
