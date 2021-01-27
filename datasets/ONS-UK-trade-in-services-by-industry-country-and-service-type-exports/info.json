@@ -31,24 +31,24 @@
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             },
             "Direction": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
-                "value": "http://gss-data.org.uk/def/concept/flow/{direction}",
-                "description": ""
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/concept/trade/flow-directions/{flow}",
+                "codelist": false
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
+                "parent": "http://gss-data.org.uk/def/dimension/ons-country",
                 "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
-                "description": ""
+                "codelist": false
             },
             "Industry": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-industry",
+                "parent": "http://gss-data.org.uk/def/dimension/ons-industry",
                 "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}",
-                "description": ""
+                "codelist": false
             },
             "Service Account": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-service-account",
+                "parent": "http://gss-data.org.uk/def/dimension/ons-service-account",
                 "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}",
-                "description": ""
+                "codelist": false
             }
         },
         "stage": [
