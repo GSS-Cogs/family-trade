@@ -31,7 +31,7 @@ tabs = {tab.name: tab for tab in distribution.as_databaker()}
 
 data_download = distribution.downloadURL
 datasetTitle = distribution.title
-columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination Geography', 'Marker']
+columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker']
 
 # +
 # tab 1a
