@@ -54,8 +54,8 @@
                 "value": "http://gss-data.org.uk/def/concept/ons-commodity/{commodity}",
                 "description": ""
             }
-        }    
-        },
+        }
+    },
     "sizingNotes": "Large table simple format",
     "notes": "The data set is located in a Zip folder"
 }

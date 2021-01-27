@@ -39,18 +39,18 @@
             },
             "Product Department": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/product-department",
-                "value": "http://gss-data.org.uk/def/trade/concept/product-department/{product_department}",         
-                "codelist": false      
+                "value": "http://gss-data.org.uk/def/trade/concept/product-department/{product_department}",
+                "codelist": false
             },
             "Product Category": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/product-category",
-                "value": "http://gss-data.org.uk/def/trade/concept/product-category/{product_category}",         
-                "codelist": false      
+                "value": "http://gss-data.org.uk/def/trade/concept/product-category/{product_category}",
+                "codelist": false
             },
             "Product": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
-                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}",         
-                "codelist": false      
+                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}",
+                "codelist": false
             }
         }
     },
