@@ -96,7 +96,7 @@ def format_period(period):
 # +
 #### Distribution 1: Quarterly country and regional GDP - Most Recently Published
 
-distribution_date = scraper.distributions[0].issued
+distribution_date = str(scraper.distributions[0].issued)
 
 for tab in scraper.distributions[0].as_databaker():
     
