@@ -25,8 +25,8 @@
         "main_issue": 28,
         "columns": {
             "Investment Direction": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow",
-                "value": "http://gss-data.org.uk/def/concept/flow/{direction}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/concept/trade/flow-directions/{investment_direction}",
                 "codelist": false
             },
             "Year": {
