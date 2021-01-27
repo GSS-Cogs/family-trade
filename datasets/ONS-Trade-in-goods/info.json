@@ -23,9 +23,39 @@
             "recWLO6lMVlcBiBiz",
             "recrQBCo8oII5TUpF"
         ],
-        "main_issue": 9,
-        "to_rdf": "csv2rdf"
-    },
+        "main_issue": 3,
+        "columns": {
+            "Year": {
+                "source": "",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+year}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "double"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            },
+            "Direction": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
+                "value": "http://gss-data.org.uk/def/concept/flow/{direction}",
+                "description": ""
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
+                "description": ""
+            },
+            "Commodity": {
+                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-commoidty",
+                "value": "http://gss-data.org.uk/def/concept/ons-commodity/{commodity}",
+                "description": ""
+            }
+        }    
+        },
     "sizingNotes": "Large table simple format",
     "notes": "The data set is located in a Zip folder"
 }
