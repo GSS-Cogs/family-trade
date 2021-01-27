@@ -32,7 +32,8 @@
             },
             "ITIS Service": {
                 "parent": "http://gss-data.org.uk/def/dimension/trade/product",
-                "value": "http://gss-data.org.uk/def/concept/trade/itis-services/{itis_service}"
+                "value": "http://gss-data.org.uk/def/concept/trade/itis-services/{itis_service}",
+                "codelist": false
             },
             "International Trade Basis": {
                 "dimension": "http://gss-data.org.uk/def/dimension/trade/international-trade-basis",
@@ -49,7 +50,8 @@
             },
             "Year": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{year}"
+                "value": "http://reference.data.gov.uk/id/year/{year}",
+                "codelist": false
             }
         }
     },
