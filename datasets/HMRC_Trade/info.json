@@ -60,8 +60,8 @@
                 "attribute": "http://gss-data.org.uk/def/trade/property/attribute/business-count"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp",
+                "measure": "http://gss-data.org.uk/def/measure/trade",
                 "datatype": "integer"
             },
             "Marker": {
