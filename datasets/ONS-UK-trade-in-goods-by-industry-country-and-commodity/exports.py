@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       jupytext_version: 1.6.0
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -14,95 +14,84 @@
 
 # UK trade in goods by industry, country and commodity, exports
 
-# +
-from gssutils import *
+import pandas as pd
 import json
-from urllib.parse import urljoin
+from gssutils import *
 
-
-if is_interactive():
-    import json
-
-    # We need two landing pages for this recipe, they should be virtually identical (save ending either in imports or exports) 
-    # so im going to hard code but include a sanity check (in case they change on airtables at some point in the future)
-
-    with open("info.json", "r") as f:
-        landing_pages = json.load(f)["landingPage"]
-
-    page = next(p for p in landing_pages if p.endswith('exports'))
-    
-    if page != "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityexports":
-        raise Exception("Aborting. Hard coded url no longer in sync with airtables landing page.")
-
-else:
-    import sys
-    page = sys.argv[1]
-
-display(page)
-scraper = Scraper(page)
-
-scraper
-# -
+pd.options.mode.chained_assignment = None 
 
 cubes = Cubes("info.json")
-tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
-list(tabs)
-
-tab = tabs['tig_ind_ex']
-
-country = tab.filter(contains_string('country')).fill(DOWN).is_not_blank().is_not_whitespace()
-
-industry = tab.filter(contains_string('industry')).fill(DOWN).is_not_blank().is_not_whitespace()
-
-commodity = tab.filter(contains_string('commodity')).fill(DOWN).is_not_blank().is_not_whitespace()
-
-year = tab.excel_ref('A1').fill(RIGHT).is_not_blank().is_not_whitespace().is_number()
-
-observations = year.fill(DOWN).is_not_blank().is_not_whitespace()
-
-Dimensions = [
-            HDim(year,'Period',DIRECTLY,ABOVE),
-            HDim(country,'ONS Partner Geography',DIRECTLY,LEFT),
-            HDim(commodity,'CORD SITC',DIRECTLY,LEFT),
-            HDim(industry,'SIC 2007',DIRECTLY,LEFT),
-            HDimConst('Measure Type', 'GBP Total'),
-            HDimConst('Unit', 'gbp-million'),
-            HDimConst('Flow', 'exports')
-            ]
-c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
-savepreviewhtml(c1, fname=tab.name + "Preview.html")
-table = c1.topandas()
-
-table['DATAMARKER'] = table['DATAMARKER'].map(lambda x:'suppressed' if x == '..' else x )
-
-import numpy as np
-table['OBS'].replace('', np.nan, inplace=True)
-table.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-table['Value'] = pd.to_numeric(table['Value'], errors='coerce')
-
-for col in table.columns:
-    if col not in ['Value', 'Period']:
-        table[col] = table[col].astype('category')
-        display(col)
-        display(table[col].cat.categories)
-
-table['CORD SITC'].cat.categories = table['CORD SITC'].cat.categories.map(lambda x: x.split()[0])
-table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x.split()[0])
-table['SIC 2007'].cat.categories = table['SIC 2007'].cat.categories.map(lambda x: x.split()[0])
-display(table['CORD SITC'].cat.categories)
-display(table['ONS Partner Geography'].cat.categories)
-display(table['SIC 2007'].cat.categories)
-
-table['Period'] = 'year/' + table['Period'].astype(str).str[0:4]
-
-table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type','Value','Unit', 'Marker']]
 
 # +
-table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+with open ('info.json') as file:
+    info = json.load(file)
 
-#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+landingPage = info['landingPage'][0]
+landingPage
 # -
 
+scraper = Scraper(landingPage)
+scraper.dataset.family = info['families']
+scraper
+
+distribution = scraper.distribution(latest=True)
+distribution
+
+tabs = distribution.as_databaker()
+tab = tabs[1]  
+print(tab.name)
+
+trace = TransformTrace()
+title = distribution.title
+columns = ['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type','Value','Unit', 'Marker']
+trace.start(title, tab, columns, distribution.downloadURL)
+
+# +
+if tab.name == 'tig_ind_ex':
+    flow = 'exports'
+elif tab.name == 'tig_ind_im':
+    flow = 'imports'
+print(flow)   
+    
+country = tab.filter('country').fill(DOWN).is_not_blank()
+industry = tab.filter('industry').fill(DOWN).is_not_blank()
+commodity = tab.filter('commodity').fill(DOWN).is_not_blank()
+year = tab.excel_ref('E1').expand(RIGHT).is_not_blank()
+   
+observations = year.fill(DOWN).is_not_blank()
+
+dimensions = [
+            HDimConst('Measure Type', 'GBP Total'),
+            HDimConst('Unit', 'gbp-million'),
+            HDimConst('Flow', flow),
+    
+            HDim(year,'Period', DIRECTLY,ABOVE),
+            HDim(country,'ONS Partner Geography', DIRECTLY,LEFT),
+            HDim(commodity,'CORD SITC', DIRECTLY,LEFT),
+            HDim(industry,'SIC 2007', DIRECTLY,LEFT)       
+            ]
+cs = ConversionSegment(tab, dimensions, observations)
+tidy_sheet = cs.topandas()
+trace.store("combined_dataframe", tidy_sheet) 
+
+table = trace.combine_and_trace(title, "combined_dataframe").fillna('')
+# -
+
+pd.set_option('display.float_format', lambda x: '%.1f' % x) 
+
+# +
+table = table[table['OBS'] != 0]
+table.loc[table['DATAMARKER'].astype(str) == '..', 'DATAMARKER'] = 'suppressed'
+table.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
+
+table['CORD SITC'] = table['CORD SITC'].str[:1]
+table['ONS Partner Geography'] = table['ONS Partner Geography'].str[:2]
+table['SIC 2007'] = table['SIC 2007'].str[:2]
 table
+# -
 
+table['Period'] = 'year/' + table['Period'].str[0:4]
 
+table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type', 'Value', 'Unit', 'Marker']]
+
+trace.render("spec_v1.html")
