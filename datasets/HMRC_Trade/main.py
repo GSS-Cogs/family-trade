@@ -149,7 +149,7 @@ df['Zone'] = df['Zone'].map({
     'eu': 'legacy-B5', 'non-eu': 'D5', 'world': 'W1'
 })
 
-df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age":" Age of Business"})
+df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age": "Age of Business"})
 
 df['Flow'].loc[(df['Flow'] == 'import')] = 'imports'
 df['Flow'].loc[(df['Flow'] == 'export')] = 'exports'
