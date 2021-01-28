@@ -33,6 +33,11 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{country}",
                 "codelist": false
             },
+            "Zone": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{zone}",
+                "codelist": false
+            },
             "Number of Employees": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
                 "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{number_of_employees}",
