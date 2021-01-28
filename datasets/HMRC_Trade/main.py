@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -132,6 +131,30 @@ df['Year'] = df['Year'].astype(str).replace('\.', '', regex=True)
 df['Year'] = df['Year'].apply(date_time)
 trace.Year("Formating to be year/2019")
 
+# +
+df['Country'] = df['Country'].map({
+    'belgium': 'BE', 'czech-republic': 'CZ', 'denmark': 'DK', 'france': 'FR',
+    'germany': 'DE', 'republic-of-ireland': 'IE', 'italy': 'IT', 'netherlands': 'NL',
+    'poland': 'PL', 'spain': 'ES', 'sweden': 'SE', 'algeria': 'DZ', 
+    'australia': 'AU', 'bangladesh': 'BD', 'brazil': 'BR', 'canada': 'CA', 
+    'china': 'CN', 'hong-kong': 'HK', 'india': 'IN', 'israel': 'IL', 
+    'japan': 'JP', 'malaysia': 'MY', 'mexico': 'MX', 'nigeria': 'NG', 
+    'norway': 'NO', 'qatar': 'QA', 'russia': 'RU', 'saudi-arabia': 'SA',
+    'singapore': 'SG', 'south-africa': 'ZA', 'south-korea': 'KP', 'sri-lanka': 'LK',
+    'switzerland': 'CH', 'taiwan': 'TW', 'thailand': 'TH', 'turkey': 'TR', 
+    'uae': 'AE', 'united-states': 'US', 'vietnam': 'VN', 'eu': 'legacy-B5', 
+    'non-eu': 'D5', 'world': 'W1'
+})
+df['Zone'] = df['Zone'].map({ 
+    'eu': 'legacy-B5', 'non-eu': 'D5', 'world': 'W1'
+})
+
+df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees"})
+
+df['Flow'].loc[(df['Flow'] == 'import')] = 'imports'
+df['Flow'].loc[(df['Flow'] == 'export')] = 'exports'
+# -
+
 with pd.option_context('float_format', '{:f}'.format):
     print(df)
 
@@ -139,3 +162,16 @@ cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
 
 trace.render("spec_v1.html")
+
+# +
+#for c in df.columns:
+#    if (c not in ['Business Count','Employee Count','Value']):
+#        print(c)
+#        print(df[c].unique())
+#        print("###############################################################")
+# -
+
+
+
+
+
