@@ -153,6 +153,8 @@ df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of E
 
 df['Flow'].loc[(df['Flow'] == 'import')] = 'imports'
 df['Flow'].loc[(df['Flow'] == 'export')] = 'exports'
+df['Value'].loc[(df['Value'] == '')] = 0
+df['Value'] = df['Value'].astype(int)
 # -
 
 with pd.option_context('float_format', '{:f}'.format):
@@ -170,6 +172,12 @@ trace.render("spec_v1.html")
 #        print(df[c].unique())
 #        print("###############################################################")
 # -
+
+
+
+
+
+
 
 
 
