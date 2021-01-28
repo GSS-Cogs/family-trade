@@ -18,9 +18,9 @@
     "transform": {
         "airtable": "recVDI0VC5iKZCd2r",
         "columns": {
-            "Period": {
+            "Year": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}",
+                "value": "http://reference.data.gov.uk/id/{+year}",
                 "codelist": false
             },
             "Flow": {
@@ -47,6 +47,12 @@
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/high-level-industry-groups",
                 "value": "http://gss-data.org.uk/def/trade/concept/high-level-industry-groups/{industry_group}",
                 "codelist": false
+            },
+            "Employee Count": {
+                "attribute": "http://gss-data.org.uk/def/trade/property/attribute/employee-count"
+            },
+            "Business Count": {
+                "attribute": "http://gss-data.org.uk/def/trade/property/attribute/business-count"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",

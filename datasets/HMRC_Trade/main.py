@@ -165,15 +165,13 @@ cubes.output_all()
 
 trace.render("spec_v1.html")
 
-# +
-#for c in df.columns:
-#    if (c not in ['Business Count','Employee Count','Value']):
-#        print(c)
-#        print(df[c].unique())
-#        print("###############################################################")
-# -
+for c in df.columns:
+    if (c not in ['Business Count','Employee Count','Value']):
+        print(c)
+        print(df[c].unique())
+        print("###############################################################")
 
-
+scraper.dataset.title
 
 
 
