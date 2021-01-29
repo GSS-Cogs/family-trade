@@ -113,7 +113,7 @@ table['Industry'] = table['Industry'].str.strip()
 table['Commodity'] = table['Commodity'].str.strip()
 del table['Measure Type']
 del table['Unit']
-df['Value'].loc[(df['Value'] == '')] = 0
+table['Value'].loc[(table['Value'] == '')] = 0
 table['Value'] = table['Value'].astype(int)
 table.head(10)
 # -
