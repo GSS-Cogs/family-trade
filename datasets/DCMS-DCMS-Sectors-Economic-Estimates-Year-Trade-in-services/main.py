@@ -21,7 +21,7 @@ list(tabs)
 # +
 tab = tabs["Imports"]
 datasetTitle = 'dcms-sectors-economic-estimates-2018-trade-in-services'
-columns=["Period", "Flow", "Country", "Sector", "Sector Type", "Marker", "Measure Type", "Unit"]
+columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
 trace.start(datasetTitle, tab, columns, scraper.distributions[1].downloadURL)
 
 flow = "imports"
@@ -37,7 +37,7 @@ sector = tab.excel_ref("A3").expand(RIGHT).is_not_blank()
 trace.Sector("Non blank values from cell A3 across")
 
 sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
-trace.Sector_Type("Non blank values from cell B4 across ")
+trace.Subsector("Non blank values from cell B4 across ")
 
 observations = country.waffle(sector_tpe).is_not_blank() 
 dimensions = [
@@ -45,7 +45,7 @@ dimensions = [
     HDimConst('Flow', flow),
     HDim(country, 'Country', DIRECTLY, LEFT),
     HDim(sector, 'Sector', CLOSEST, LEFT),
-    HDim(sector_tpe, 'Sector Type', DIRECTLY, ABOVE),
+    HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 trace.with_preview(tidy_sheet)
@@ -58,7 +58,7 @@ df_imports = trace.combine_and_trace(datasetTitle, "import_dataframe")
 # +
 tab = tabs["Exports"]
 datasetTitle = 'DCMS Sectors Economic Estimates 2018: Trade in services : Exports'
-columns=["Period", "Flow", "Country", "Sector", "Sector Type", "Marker", "Measure Type", "Unit"]
+columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
 trace.start(datasetTitle, tab, columns, scraper.distributions[1].downloadURL)
 
 flow = "exports"
@@ -74,7 +74,7 @@ sector = tab.excel_ref("A3").expand(RIGHT).is_not_blank()
 trace.Sector("Non blank values from cell A3 across")
 
 sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
-trace.Sector_Type("Non blank values from cell B4 across ")
+trace.Subsector("Non blank values from cell B4 across ")
 
 observations = country.waffle(sector_tpe).is_not_blank()  
 dimensions = [
@@ -82,7 +82,7 @@ dimensions = [
     HDimConst('Flow', flow),
     HDim(country, 'Country', DIRECTLY, LEFT),
     HDim(sector, 'Sector', CLOSEST, LEFT),
-    HDim(sector_tpe, 'Sector Type', DIRECTLY, ABOVE),
+    HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 trace.with_preview(tidy_sheet)
@@ -96,7 +96,7 @@ tidy = pd.concat([df_exports, df_imports])
 tidy.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 tidy = tidy.replace({'Marker' : {'-' : 'suppressed'}})
 tidy['Value'] = tidy.apply(lambda x: 0 if x['Marker']== "suppressed" else x['Value'], axis=1)
-tidy = tidy.replace({'Sector Type' : {'Crafts4' : 'Crafts'}})
+tidy = tidy.replace({'Subsector' : {'Crafts4' : 'Cultural Crafts'}})
 
 tidy['Unit'] = "gbp-million"
 tidy['Measure Type'] = "count"
@@ -104,9 +104,26 @@ tidy['Measure Type'] = "count"
 # -
 
 tidy['Country'] = tidy['Country'].apply(pathify)
+
+
+
 tidy['Sector'] = tidy['Sector'].apply(pathify)
-tidy['Sector Type'] = tidy['Sector Type'].apply(pathify)
-tidy = tidy[['Period', 'Country', 'Sector', 'Sector Type', 'Flow', 'Measure Type', 'Unit', 'Value', 'Marker']]
+tidy['Sector'].replace({
+    "creative-industries-sub-sectors": "creative-industries", 
+    "digital-sector-sub-sectors": "digital-sector",
+    "culture-sector-sub-sector": "cultural-sector",
+    "all-uk-service-exports-2018-pink-book-estimate": "all-uk-2018-pink-book-estimate",
+    "all-uk-service-imports-2018-pink-book-estimate": "all-uk-2018-pink-book-estimate"
+    }, inplace=True)
+
+tidy['Subsector'] = tidy['Subsector'].apply(pathify)
+tidy['Subsector'].replace({
+    "all_exports": "all-uk-2018-pink-book-estimate", 
+    "all_imports": "all-uk-2018-pink-book-estimate",
+    "dcms-total": "dcms-sectors-exc-tourism-and-civil-society"
+    }, inplace=True)
+    
+tidy = tidy[['Period', 'Country', 'Sector', 'Subsector', 'Flow', 'Measure Type', 'Unit', 'Value', 'Marker']]
 
 
 # +
@@ -126,7 +143,6 @@ A revised backseries of calculations on the current basis is expected to be prov
 
 comment = "Official Statistics used to provide an estimate of the contribution of DCMS Sectors to the UK economy, measured by imports and exports of services."
 # -
-
 
 del tidy['Measure Type']
 del tidy['Unit']
