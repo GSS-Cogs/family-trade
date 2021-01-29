@@ -244,14 +244,15 @@ trace.store("combined_dataframe", tidy_sheet.topandas())
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df
 
-unprefixed_values = df.loc[(df['Sheet'] == '4b'), 'Service Origin Geography']
-print(unprefixed_values)
+unprefixed_values = df.loc[(df['Sheet'] == '4a')]
+# print(unprefixed_values)
+with pd.option_context('display.max_rows()', None):
+    print(unprefixed_values)
 
-# +
 # print(df.loc[df['B'].isin(['one','three'])])
 required_values = df.loc[df['Sheet'].isin(['1a', '1b', '2a', '2b', '3', '4a']), 'Service Origin Geography']
 print(type(required_values))
-required_values = required_values.map(
+required_values = required_values.apply(
     lambda x: {  
 'United Kingdom':'nuts1/all',
 'North East ':'nuts1/UKC',
@@ -267,7 +268,7 @@ required_values = required_values.map(
 'Scotland':'nuts1/UKM',
 'Northern Ireland':'nuts1/UKN'      
         }.get(x, x))
-print(required_values)
+print(required_values.unique())
 
 with pd.option_context('display.max_rows()', None):
     print(required_values)
