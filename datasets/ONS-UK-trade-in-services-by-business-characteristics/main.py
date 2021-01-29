@@ -141,16 +141,10 @@ df["Ownership"] = df["Ownership"].map(lambda x: "uk" if x == "Domestic"
 df['Country'] = df['Country'].apply(lambda x: 'WW' if 'World' in x else 
                                       ('RW' if 'Non-EU' in x else 
                                        ('EU' if 'Total EU28' in x else x)))
+
+df['Value'] = pd.to_numeric(df['Value'], errors='coerce').astype('Int64')
 df = df[['Period', 'Business size', 'Country', 'Ownership', 'Industry', 'Flow', 'Value', 'Marker']]
 # -
-
-df["Business size"].unique()
-
-df["Ownership"].unique()
-
-df['Country'].unique()
-
-df['Industry'].unique()
 
 #additional scraper info needed
 comment = "Trade in goods data, including breakdown of imports and exports by Standard Industrial Classification, region (EU and non-EU), business size and by domestic and foreign ownership."
@@ -192,3 +186,5 @@ scraper.dataset.title = datasetTitle
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
 trace.render("spec_v1.html")
+
+df
