@@ -121,7 +121,7 @@ table.head(10)
 table['Period'] = 'year/' + table['Period'].str[0:4]
 
 #table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type', 'Value', 'Unit', 'Marker']]
-table = table[['ONS Partner Geography', 'Period','Flow','Commodity', 'Industry', 'Measure Type', 'Value', 'Unit', 'Marker']]
+table = table[['ONS Partner Geography', 'Period','Flow','Commodity', 'Industry', 'Value', 'Marker']]
 
 
 cubes.add_cube(scraper1, table, title)
