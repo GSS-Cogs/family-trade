@@ -106,6 +106,8 @@ table['ONS Partner Geography'] = table['ONS Partner Geography'].str[:2]
 table['SIC 2007'] = table['SIC 2007'].str[:2]
 
 # LPerryman - changing names back to what is in the spreadsheet, can't remember why they were changed
+# Some values have a space on the end and deleting Measure type and Unit coluns as these can be defined in the info.json
+# Converting Value to integer
 table = table.rename(columns={"CORD SITC": "Commodity", 'SIC 2007': 'Industry'})
 table['Industry'] = table['Industry'].str.strip()
 table['Commodity'] = table['Commodity'].str.strip()
