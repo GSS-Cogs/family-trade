@@ -31,7 +31,7 @@ tabs = {tab.name: tab for tab in distribution.as_databaker()}
 
 data_download = distribution.downloadURL
 datasetTitle = distribution.title
-columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker']
+columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker', 'City Region']
 
 # +
 # tab 1a
@@ -199,8 +199,8 @@ cell = tab.excel_ref('A5')
 industry = cell.fill(DOWN).is_not_blank().is_not_whitespace()
 trace.Export_Services("Defined from cell ref A5 down")
 
-origin = cell.shift(0,-1).fill(RIGHT).is_not_blank().is_not_whitespace()  
-trace.Service_Origin_Geography("Defined from cell ref A6 across")
+city_region = cell.shift(0,-1).fill(RIGHT).is_not_blank().is_not_whitespace()  
+trace.City_Region("Defined from cell ref A6 across")
 
 destination = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
 trace.Service_Destination("Defined from cell ref A5 across")
@@ -209,7 +209,7 @@ observations = destination.fill(DOWN).is_not_blank().is_not_whitespace()
 dimensions = [
             HDim(industry,'Export Services',DIRECTLY,LEFT),
             HDim(destination, 'Service Destination',DIRECTLY,ABOVE),
-            HDim(origin, 'Service Origin Geography',CLOSEST,LEFT),    
+            HDim(city_region, 'City_Region',CLOSEST,LEFT),    
 ]  
 tidy_sheet = ConversionSegment(tab, dimensions, observations)   
 savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
@@ -221,6 +221,14 @@ trace.store("combined_dataframe", tidy_sheet.topandas())
 #post processing
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df
+
+# +
+df.loc[df['foo'].isnull(),'foo'] = df['bar']
+
+df.Service Origin Geography.fillna(df.City_Region, inplace = True)
+del df['City_Region']
+df
+# -
 
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 
