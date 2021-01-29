@@ -244,14 +244,44 @@ trace.store("combined_dataframe", tidy_sheet.topandas())
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df
 
+unprefixed_values = df.loc[(df['Sheet'] == '4b'), 'Service Origin Geography']
+print(unprefixed_values)
+
+# +
+# print(df.loc[df['B'].isin(['one','three'])])
+required_values = df.loc[df['Sheet'].isin(['1a', '1b', '2a', '2b', '3', '4a']), 'Service Origin Geography']
+print(type(required_values))
+required_values = required_values.map(
+    lambda x: {  
+'United Kingdom':'nuts1/all',
+'North East ':'nuts1/UKC',
+'North West':'nuts1/UKD',
+'Yorkshire and The Humber':'nuts1/UKE',
+'East Midlands':'nuts1/UKF',
+'West Midlands':'nuts1/UKG',
+'East of England':'nuts1/UKH',
+'London':'nuts1/UKI',
+'South East':'nuts1/UKJ',
+'South West':'nuts1/UKK',
+'Wales':'nuts1/UKL',
+'Scotland':'nuts1/UKM',
+'Northern Ireland':'nuts1/UKN'      
+        }.get(x, x))
+print(required_values)
+
+with pd.option_context('display.max_rows()', None):
+    print(required_values)
+
+# +
 # with pd.option_context("display.max_rows", None):
 #     print(df['Sheet'])
 #     print(df['Service Origin Geography'])
 # with pd.option_context("display.max_rows", None):
-df[["Service Origin Geography", "Sheet"]]
+# df[["Service Origin Geography", "Sheet"]]
 
-with pd.option_context("display.max_rows", None):
-    print(df)
+# +
+# with pd.option_context("display.max_rows", None):
+#     print(df)
 
 # +
 # df.loc[df['foo'].isnull(),'foo'] = df['bar']
@@ -305,10 +335,8 @@ trace.Period("Hard coded as year/2017")
 df['Export Services'] = df['Export Services'].apply(pathify)
 df
 
-# +
-# for x in df["Service Origin Geography"]:
-#     print(x)
-# -
+for x in df["Service Origin Geography"]:
+    print(x)
 
 df["Service Origin Geography"] = df["Service Origin Geography"].apply(pathify)
 
