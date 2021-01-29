@@ -143,6 +143,8 @@ df['Country'] = df['Country'].apply(lambda x: 'WW' if 'World' in x else
                                        ('EU' if 'Total EU28' in x else x)))
 
 df['Value'] = pd.to_numeric(df['Value'], errors='coerce').astype('Int64')
+df['Industry'] = df['Industry'].apply(lambda x: 'all' if 'all' in x else x[0:2] )
+
 df = df[['Period', 'Business size', 'Country', 'Ownership', 'Industry', 'Flow', 'Value', 'Marker']]
 # -
 
@@ -181,10 +183,8 @@ scraper.dataset.description = des
 scraper.dataset.comment = comment
 scraper.dataset.title = datasetTitle
 
-
-
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
 trace.render("spec_v1.html")
 
-df
+
