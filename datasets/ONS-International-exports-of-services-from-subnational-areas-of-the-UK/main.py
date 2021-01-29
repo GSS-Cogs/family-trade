@@ -31,7 +31,7 @@ tabs = {tab.name: tab for tab in distribution.as_databaker()}
 
 data_download = distribution.downloadURL
 datasetTitle = distribution.title
-columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker', 'City Region']
+columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker', 'Sheet Name']
 
 # +
 # tab 1a
@@ -47,11 +47,14 @@ trace.Service_Origin_Geography("Defined from cell ref A4 and right")
 
 trace.Service_Destination("Hardcoded as all")
 
+sheet = tab.name
+
 observations = geography.fill(DOWN).is_not_blank().is_not_whitespace()
 dimensions = [
     HDim(industry, 'Export Services', DIRECTLY, LEFT),
     HDim(geography, 'Service Origin Geography', DIRECTLY, ABOVE),
-    HDimConst('Service Destination', 'all')
+    HDimConst('Service Destination', 'all'),
+    HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 savepreviewhtml(tidy_sheet,fname = tab.name+ "Preview.html")
@@ -75,11 +78,14 @@ trace.Service_Origin_Geography("Defined from cell ref A4 across")
 destination = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
 trace.Service_Destination("Defined from cell A5 across")
 
+sheet = tab.name
+
 observations = destination.fill(DOWN).is_not_blank().is_not_whitespace() 
 dimensions = [
             HDim(industry,'Export Services',DIRECTLY,LEFT),
             HDim(destination, 'Service Destination',DIRECTLY,ABOVE),
             HDim(origin, 'Service Origin Geography',CLOSEST,LEFT),
+            HDimConst("Sheet", tab.name)
 ]  
 tidy_sheet = ConversionSegment(tab, dimensions, observations)   
 savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
@@ -101,12 +107,15 @@ trace.Service_Origin_Geography("Defined from cell ref A5 down")
 
 trace.Service_Destination("Hardcoded as all")
 
+sheet = tab.name
+
 observations = industry.fill(DOWN).is_not_blank().is_not_whitespace() 
 dimensions = [
             HDim(industry,'Export Services',DIRECTLY,ABOVE),
             HDim(geography, 'Service Origin Geography',DIRECTLY,LEFT),
             HDimConst('Service Destination','all'),
-            HDimConst('NUTS','nuts2/'),  # geography in this tab represents nuts2, defining constant to append to front of Service Origin Geography column once in df 
+            HDimConst('NUTS','nuts2/'),  # geography in this tab represents nuts2, defining constant to append to front of Service Origin Geography column once in df
+            HDimConst("Sheet", tab.name)
 ]  
 tidy_sheet = ConversionSegment(tab, dimensions, observations)   
 savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
@@ -128,11 +137,14 @@ trace.Service_Destination("Defined from cell ref B5 across")
 origin = cell.fill(DOWN).is_not_blank().is_not_whitespace()
 trace.Service_Origin_Geography("Defined from cell ref B5 down")
 
+sheet = tab.name
+
 observations = destination.fill(DOWN).is_not_blank().is_not_whitespace()
 dimensions = [
     HDim(industry, "Export Services", CLOSEST, LEFT),
     HDim(destination, "Service Destination", DIRECTLY, ABOVE),
     HDim(origin, "Service Origin Geography", DIRECTLY, LEFT),
+    HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
@@ -153,12 +165,16 @@ trace.Service_Origin_Geography("Defined from cell ref A4 down")
 destination = cell.shift(1,0).fill(RIGHT).is_not_blank().is_not_whitespace() \
             .filter(lambda x: type(x.value) != 'Percentage' not in x.value)
 trace.Service_Destination("Defined from cell ref B4 across excluding percentage values")
+
+sheet = tab.name
+
 observations = destination.fill(DOWN).is_not_blank().is_not_whitespace()
 dimensions = [
     HDimConst('Export Services', 'all services'),
     HDim(origin, 'Service Origin Geography', DIRECTLY, LEFT),
     HDim(destination, 'Service Destination', DIRECTLY, ABOVE),
     HDimConst('NUTS', 'nuts3/'), #geography in this tab represents nuts3, definig constant to append to front of Service Origin Geography column once in df
+    HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
@@ -178,11 +194,14 @@ geography = cell.fill(RIGHT).is_not_blank().is_not_whitespace()
 trace.Service_Origin_Geography("Defined from cell ref across")
 trace.Service_Destination("Hardcoded as all")
 
+sheet = tab.name
+
 observations = geography.fill(DOWN).is_not_blank().is_not_whitespace() 
 dimensions = [
     HDim(industry, 'Export Services', DIRECTLY, LEFT ),
     HDim(geography, 'Service Origin Geography', DIRECTLY, ABOVE),
     HDimConst('Service Destination', 'all'),
+    HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions,observations)
 savepreviewhtml(tidy_sheet, fname = tab.name + 'Preview.html')
@@ -199,17 +218,20 @@ cell = tab.excel_ref('A5')
 industry = cell.fill(DOWN).is_not_blank().is_not_whitespace()
 trace.Export_Services("Defined from cell ref A5 down")
 
-city_region = cell.shift(0,-1).fill(RIGHT).is_not_blank().is_not_whitespace()  
-trace.City_Region("Defined from cell ref A6 across")
+origin = cell.shift(0,-1).fill(RIGHT).is_not_blank().is_not_whitespace()  
+trace.Service_Origin_Geography("Defined from cell ref A6 across")
 
 destination = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
 trace.Service_Destination("Defined from cell ref A5 across")
+
+sheet = tab.name
 
 observations = destination.fill(DOWN).is_not_blank().is_not_whitespace() 
 dimensions = [
             HDim(industry,'Export Services',DIRECTLY,LEFT),
             HDim(destination, 'Service Destination',DIRECTLY,ABOVE),
-            HDim(city_region, 'City_Region',CLOSEST,LEFT),    
+            HDim(origin, 'Service Origin Geography',CLOSEST,LEFT), 
+            HDimConst("Sheet", tab.name)
 ]  
 tidy_sheet = ConversionSegment(tab, dimensions, observations)   
 savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
@@ -222,12 +244,31 @@ trace.store("combined_dataframe", tidy_sheet.topandas())
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df
 
-# +
-df.loc[df['foo'].isnull(),'foo'] = df['bar']
+# with pd.option_context("display.max_rows", None):
+#     print(df['Sheet'])
+#     print(df['Service Origin Geography'])
+# with pd.option_context("display.max_rows", None):
+df[["Service Origin Geography", "Sheet"]]
 
-df.Service Origin Geography.fillna(df.City_Region, inplace = True)
-del df['City_Region']
-df
+with pd.option_context("display.max_rows", None):
+    print(df)
+
+# +
+# df.loc[df['foo'].isnull(),'foo'] = df['bar']
+
+# df.Service Origin Geography.fillna(df.City_Region, inplace = True)
+# del df['City_Region']
+# df
+
+# +
+# df['Sheet Name'].unique()
+# required_sheet = df[df['Sheet'] == "1a", "1b", "2a", "2b", "3", "4a"]
+# value = required_sheet.Sheet.item()
+# print(value)
+
+# for tab ,name in tabs.items():
+# #     print(tab)
+#     if tab in df["Sheet"]:
 # -
 
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
@@ -263,6 +304,11 @@ trace.Period("Hard coded as year/2017")
 
 df['Export Services'] = df['Export Services'].apply(pathify)
 df
+
+# +
+# for x in df["Service Origin Geography"]:
+#     print(x)
+# -
 
 df["Service Origin Geography"] = df["Service Origin Geography"].apply(pathify)
 
