@@ -17,61 +17,53 @@
 # +
 
 import pandas as pd
-import numpy as np
 from gssutils import *
-import json
-from gssutils.metadata import THEME
-from gssutils.metadata import *
 from databaker.framework import *
 
 cubes = Cubes("info.json")
 
-with open ('info.json') as file:
-    info = json.load(file)
-
-landingPage = info['landingPage']
-landingPage
-
-title = 'Balance of Payments: Trade in goods and services'
-
-scraper = Scraper(landingPage)
-scraper.dataset.family = info['families']
+scraper = Scraper(seed='info.json')
 scraper
 
+distribution = scraper.distribution(latest=True)
+distribution
+
+tabs = distribution.as_databaker()
+
+
 # +
-
-# +
-# dist = scraper.distributions[0]
-# dist
-# -
-
-tabs = scraper.distributions[0].as_databaker()
-
-
 def left(s, amount):
     return s[:amount]
-
 
 def right(s, amount):
     return s[-amount:]
 
 
-# -
+# +
 
 # +
-tidied_sheets = []
+trace = TransformTrace()
+title = 'Trade in goods and services'
+columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
 
 for tab in tabs:
     if 'B2' in tab.name: #Tabs B2 and B2A
+        print(tab.name)
+        
+        trace.start(title, tab, columns, distribution.downloadURL)
+        
+        trace.Flow_Directions("Selected as Exports, Imports and Balances")
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
+        
+        trace.Product("Selected as products from cell B and removing flow directions, trade and seasonal adjustment")
         product = tab.excel_ref('B').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
+        
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
         year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
         quarter = tab.excel_ref('D5').expand(RIGHT)
         seasonal_adjustment = tab.excel_ref('B2')
         trade = tab.excel_ref('B1')
         observations = quarter.fill(DOWN).is_not_blank()
-        #savepreviewhtml(observations)
         
         dimensions = [
             HDim(year, 'Period', DIRECTLY, ABOVE),
@@ -86,11 +78,14 @@ for tab in tabs:
             HDimConst('Unit', 'gbp-million')   
         ]
         
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)        
-        #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-        tidied_sheets.append(tidy_sheet.topandas())
+        cs = ConversionSegment(tab, dimensions, observations) 
+        tidy_sheet = cs.topandas() 
+        trace.store('combined_dataframe', tidy_sheet)
         
     elif 'B3' in tab.name: #Tabs B3 and B3A
+        print(tab.name)
+        
+        trace.start(title, tab, columns, distribution.downloadURL)
         
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,22,37]) - tab.excel_ref('B51').expand(DOWN)
         product = tab.excel_ref('B').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
@@ -100,7 +95,6 @@ for tab in tabs:
         seasonal_adjustment = tab.excel_ref('B2')
         trade = tab.excel_ref('B1')
         observations = quarter.fill(DOWN).is_not_blank()
-        #savepreviewhtml(flow)
         
         dimensions = [
             HDim(year, 'Period', DIRECTLY, ABOVE),
@@ -115,12 +109,12 @@ for tab in tabs:
             HDimConst('Unit', 'gbp-million'),
          ]
         
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)        
-       # savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-        tidied_sheets.append(tidy_sheet.topandas())     
+        cs = ConversionSegment(tab, dimensions, observations)
+        tidy_sheet = cs.topandas() 
+        trace.store('combined_dataframe', tidy_sheet)
 # -
 
-df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
+df = trace.combine_and_trace(title, "combined_dataframe")    
 
 df['Period'] = df.Period.str.replace('\.0', '')
 df['Quarter'] = df['Quarter'].str.lstrip()
@@ -139,15 +133,11 @@ df['Marker'].replace(' -', 'unknown', inplace=True)
 # +
 tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
 for column in tidy:
-    if column in ['Flow Directions', 'Product', 'Services', 'Account Type']:
+    if column in ('Flow Directions', 'Product', 'Services', 'Account Type'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
         
 tidy
-# -
-
-cubes.add_cube(scraper, tidy, title)
-cubes.output_all()
 
 # + endofcell="--"
 

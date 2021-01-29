@@ -17,51 +17,41 @@
 # +
 
 import pandas as pd
-import numpy as np
 from gssutils import *
-import json
-from gssutils.metadata import THEME
-from gssutils.metadata import *
 from databaker.framework import *
+
+pd.options.mode.chained_assignment = None 
 
 cubes = Cubes("info.json")
 
-with open ('info.json') as f:
-    info = json.load(f)
-
-landingPage = info['landingPage']
-landingPage
-
-title = 'Balance of Payments: Transactions with the EU and EMU'
-
-scraper = Scraper(landingPage)
-scraper.dataset.family = info['families']
+scraper = Scraper(seed='info.json')
 scraper
 
+distribution = scraper.distribution(latest=True)
+distribution
+
+tabs = distribution.as_databaker()
+
+
 # +
-# dist = scraper.distributions[0]
-# dist
-
-# +
-
-tabs = scraper.distributions[0].as_databaker()
-
-
 def left(s, amount):
     return s[:amount]
-
 
 def right(s, amount):
     return s[-amount:]
 
 
-# -
-
 # +
-tidied_sheets = []
+
+trace = TransformTrace()
+title = 'Transactions with the EU and EMU'
+columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 
+           'CDID', 'Value', 'Measure Type', 'Unit']
 
 for tab in tabs:
     if (tab.name == 'B6') or (tab.name == 'B6A'):
+        trace.start(title, tab, columns, distribution.downloadURL)
+        
         emu_index = [12,14,17,19,21,25,29,31,34,36,38,42,46,48,51,53,55,59]
         flow = tab.excel_ref('B').expand(DOWN).by_index([10,27,44]) - tab.excel_ref('B60').expand(DOWN)
         emu_only = tab.excel_ref('B').expand(DOWN).by_index(emu_index) - tab.excel_ref('B60').expand(DOWN)
@@ -90,12 +80,11 @@ for tab in tabs:
             HDimConst('Unit', 'gbp-million'),
         ]
         
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)        
-        #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-        tidied_sheets.append(tidy_sheet.topandas())
-# -
+        cs = ConversionSegment(tab, dimensions, observations)
+        tidy_sheet = cs.topandas() 
+        trace.store('combined_dataframe', tidy_sheet)
 
-df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
+df = trace.combine_and_trace(title, "combined_dataframe")
 
 df['Period'] = df.Period.str.replace('\.0', '')
 df['Quarter'] = df['Quarter'].map(lambda x: x.lstrip() if isinstance(x, str) else x)
@@ -110,21 +99,18 @@ df['Members'] = df['Members'].map(lambda x: 'of which EMU members' if '     of w
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
 
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
+df['Marker'].replace(' -', 'unknown', inplace=True)
 
 # +
 
 tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 
-           'CDID', 'Value', 'Measure Type', 'Unit']]
-tidy
+           'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
 
 for column in tidy:
     if column in ['Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members']:
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))       
 tidy
-
-cubes.add_cube(scraper, tidy, title)
-cubes.output_all()
 
 # + endofcell="--"
 

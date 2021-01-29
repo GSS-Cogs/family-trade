@@ -17,40 +17,25 @@
 # +
 
 import pandas as pd
-import numpy as np
 from gssutils import *
-import json
-from gssutils.metadata import THEME
-from gssutils.metadata import *
 from databaker.framework import *
 
 cubes = Cubes("info.json")
 
-with open ('info.json') as file:
-    info = json.load(file)
-
-landingPage = info['landingPage']
-landingPage
-
-title = 'Balance of Payments: Summary'
-
-scraper = Scraper(landingPage)
-scraper.dataset.family = info['families']
+scraper = Scraper(seed='info.json')
 scraper
 
+distribution = scraper.distribution(latest=True)
+distribution
+
+tabs = distribution.as_databaker()
+
+
 # +
 
 # +
-# dist = scraper.distributions[0]
-# dist
-# -
-
-tabs = scraper.distributions[0].as_databaker()
-
-
 def left(s, amount):
     return s[:amount]
-
 
 def right(s, amount):
     return s[-amount:]
@@ -58,23 +43,40 @@ def right(s, amount):
 
 # -
 
-# +
-tidied_sheets = []
+# -
+
+trace = TransformTrace()
+title = 'Balance of Payments: Summary' # Distribution.title
+columns = ['Period','Flow Directions','Services','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
+           'Measure Type', 'Unit']
 
 for tab in tabs:
-    if 'B1' in tab.name: #Tabsz B1
+    if 'B1' in tab.name: #Tab B1
+        
+        trace.start(title, tab, columns, distribution.downloadURL)
+        
+        ## "Removing records of 'Balances as a % of GDP' & 'Current balance as a % of GDP' information")
         remove_percentage = tab.excel_ref('A30').expand(RIGHT).expand(DOWN) - tab.excel_ref('A41').expand(RIGHT).expand(DOWN)
-        account_Type = tab.excel_ref('B').expand(DOWN).by_index([9,44,66]) - tab.excel_ref('B76').expand(DOWN)
+        
+        trace.Account_Type("Selects current account and financial account")
+        account_type = tab.excel_ref('B').expand(DOWN).by_index([9,44,66]) - tab.excel_ref('B76').expand(DOWN)
+        
+        trace.Seasonal_Adjustment("Selects Seasonally Adjusted or Non-seasonally Adjusted")
         seasonal_adjustment = tab.excel_ref('B').expand(DOWN).by_index([7,42]) - tab.excel_ref('B76').expand(DOWN)
+        
         flow = tab.excel_ref('B2')
-        services = tab.excel_ref('B10').expand(DOWN).is_not_blank() - account_Type - seasonal_adjustment - remove_percentage
+        
+        trace.Services("Selects trade activities as cell 'B' and removes percentage, \
+            account type and seasonal ajuestment")
+        services = tab.excel_ref('B10').expand(DOWN).is_not_blank() - remove_percentage - account_type - seasonal_adjustment 
+        
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
         year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
         quarter = tab.excel_ref('D5').expand(RIGHT)
         observations = quarter.fill(DOWN).is_not_blank() - remove_percentage
         
         dimensions = [
-            HDim(account_Type, 'Account Type', CLOSEST, ABOVE),
+            HDim(account_type, 'Account Type', CLOSEST, ABOVE),
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, ABOVE),
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
             HDim(services, 'Services', DIRECTLY, LEFT),
@@ -85,12 +87,10 @@ for tab in tabs:
             HDimConst('Unit', 'gbp-million')
         ]
         
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)        
-        #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-        tidied_sheets.append(tidy_sheet.topandas())  
-# -
-
-df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
+        cs = ConversionSegment(tab, dimensions, observations)        
+        tidy_sheet = cs.topandas() 
+        trace.store('dataframe', tidy_sheet)
+        df = trace.combine_and_trace(title, 'dataframe')
 
 df['Period'] = df.Period.str.replace('\.0', '')
 df['Quarter'] = df['Quarter'].str.lstrip()
@@ -112,13 +112,10 @@ df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
            'Measure Type', 'Unit']]
 for column in tidy:
-    if column in ['Flow Directions', 'Services', 'Account Type']:
+    if column in ('Flow Directions', 'Services', 'Account Type'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
 tidy
-
-cubes.add_cube(scraper, tidy, title)
-cubes.output_all()
 
 # + endofcell="--"
 

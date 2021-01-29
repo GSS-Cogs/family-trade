@@ -17,52 +17,40 @@
 # +
 
 import pandas as pd
-import numpy as np
 from gssutils import *
-import json
-from gssutils.metadata import THEME
-from gssutils.metadata import *
 from databaker.framework import *
 
 cubes = Cubes("info.json")
 
-with open ('info.json') as file:
-    info = json.load(file)
-
-landingPage = info['landingPage']
-landingPage
-
-title = 'Balance of Payments: Primary income'
-
-scraper = Scraper(landingPage)
-scraper.dataset.family = info['families']
+scraper = Scraper(seed='info.json')
 scraper
 
+distribution = scraper.distribution(latest=True)
+distribution
+
+tabs = distribution.as_databaker()
+
+
 # +
-
-# +
-# dist = scraper.distributions[0]
-# dist
-# -
-
-tabs = scraper.distributions[0].as_databaker()
-
-
 def left(s, amount):
     return s[:amount]
-
 
 def right(s, amount):
     return s[-amount:]
 
 
-# -
-
 # +
-tidied_sheets = []
+
+trace = TransformTrace()
+title = 'Primary income'
+columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 
+           'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
 
 for tab in tabs:
     if 'B4' in tab.name: 
+        
+        trace.start(title, tab, columns, distribution.downloadURL)
+        
         income = tab.excel_ref('B10').expand(DOWN).is_not_blank()  
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
         year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
@@ -72,14 +60,14 @@ for tab in tabs:
         observations = quarter.fill(DOWN).is_not_blank()
         
         if tab.name == 'B4B':
-            flow = tab.excel_ref('B').expand(DOWN).by_index([7,18,29]) - tab.excel_ref('B72').expand(DOWN)
-            earning_type = tab.excel_ref('B').expand(DOWN).by_index([9,20,31]) - tab.excel_ref('B72').expand(DOWN)
+            flow = tab.excel_ref('B').expand(DOWN).by_index([7,18,29]) - tab.excel_ref('B40').expand(DOWN)
+            earning_type = tab.excel_ref('B').expand(DOWN).by_index([9,20,31]) - tab.excel_ref('B40').expand(DOWN)
         if tab.name == 'B4':
             earning_type = tab.excel_ref('B').expand(DOWN).by_index([9,31,52]) - tab.excel_ref('B72').expand(DOWN)
             flow = tab.excel_ref('B').expand(DOWN).by_index([7,29,50]) - tab.excel_ref('B72').expand(DOWN)
         if tab.name == 'B4A':
-            earning_type = tab.excel_ref('B').expand(DOWN).by_index([9,31,51]) - tab.excel_ref('B72').expand(DOWN)
-            flow = tab.excel_ref('B').expand(DOWN).by_index([7,29,50]) - tab.excel_ref('B72').expand(DOWN)
+            earning_type = tab.excel_ref('B').expand(DOWN).by_index([9,31,51]) - tab.excel_ref('B70').expand(DOWN)
+            flow = tab.excel_ref('B').expand(DOWN).by_index([7,29,50]) - tab.excel_ref('B70').expand(DOWN)
                 
         dimensions = [
             HDim(year, 'Period', DIRECTLY, ABOVE),
@@ -95,16 +83,14 @@ for tab in tabs:
             HDimConst('Unit', 'gbp-million'),
         ]
         
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)        
-       # savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-        tidied_sheets.append(tidy_sheet.topandas())
-# -
+        cs = ConversionSegment(tab, dimensions, observations)
+        tidy_sheet = cs.topandas() 
+        trace.store('combined_dataframe', tidy_sheet)
 
-df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
+df = trace.combine_and_trace(title, "combined_dataframe")
 
 df['Period'] = df.Period.str.replace('\.0', '')
 df['Quarter'] = df['Quarter'].str.lstrip()
-
 df['Period'] = df['Period'] + df['Quarter']
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 df.drop(['Quarter'], axis=1, inplace=True)
@@ -126,16 +112,12 @@ df = df.replace({'Earnings' : { '' : 'Net earnings',
 tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 
            'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
 for column in tidy:
-    if column in ['Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type']:
+    if column in ('Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].str.rstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
         
 tidy
-# -
-
-cubes.add_cube(scraper, tidy, title)
-cubes.output_all()
 
 # + endofcell="--"
 

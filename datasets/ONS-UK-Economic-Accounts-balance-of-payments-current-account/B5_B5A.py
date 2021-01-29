@@ -17,52 +17,39 @@
 # +
 
 import pandas as pd
-import numpy as np
 from gssutils import *
-import json
-from gssutils.metadata import THEME
-from gssutils.metadata import *
 from databaker.framework import *
 
 cubes = Cubes("info.json")
 
-with open ('info.json') as f:
-    info = json.load(f)
-
-landingPage = info['landingPage']
-landingPage
-
-title = 'Balance of Payments: Secondary income'
-
-scraper = Scraper(landingPage)
-scraper.dataset.family = info['families']
+scraper = Scraper(seed='info.json')
 scraper
 
+distribution = scraper.distribution(latest=True)
+distribution
+
+tabs = distribution.as_databaker()
+
+
 # +
-
-# +
-# dist = scraper.distributions[0]
-# dist
-# -
-
-tabs = scraper.distributions[0].as_databaker()
-
-
 def left(s, amount):
     return s[:amount]
-
 
 def right(s, amount):
     return s[-amount:]
 
 
-# -
-
 # +
-tidied_sheets = []
+
+trace = TransformTrace()
+title = 'Secondary income'
+columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 
+           'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
 
 for tab in tabs:
     if (tab.name == 'B5') or (tab.name == 'B5A'):
+        
+        trace.start(title, tab, columns, distribution.downloadURL)
         
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,24,43]) - tab.excel_ref('B51').expand(DOWN)
         sector = tab.excel_ref('B').expand(DOWN).by_index([8,14,25,34,44,45]) - tab.excel_ref('B51').expand(DOWN)
@@ -73,7 +60,6 @@ for tab in tabs:
         seasonal_adjustment = tab.excel_ref('B2')
         income_type = tab.excel_ref('B1')
         observations = quarter.fill(DOWN).is_not_blank()
-        #savepreviewhtml(income)
         
         dimensions = [
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
@@ -88,12 +74,11 @@ for tab in tabs:
             HDimConst('Measure Type', 'GBP Total'),
             HDimConst('Unit', 'gbp-million'),
         ]
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)        
-        #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-        tidied_sheets.append(tidy_sheet.topandas())
-# -
+        cs = ConversionSegment(tab, dimensions, observations)
+        tidy_sheet = cs.topandas() 
+        trace.store('combined_dataframe', tidy_sheet)
 
-df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
+df = trace.combine_and_trace(title, "combined_dataframe")
 
 df['Period'] = df.Period.str.replace('\.0', '')
 df['Quarter'] = df["Quarter"].str.lstrip()
@@ -119,15 +104,11 @@ df['Marker'].replace(' -', 'unknown', inplace=True)
 tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 
            'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
 for column in tidy:
-    if column in ['Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type']:
+    if column in ('Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type'):
         tidy[column] = tidy[column].str.lstrip()
         tidy[column] = tidy[column].map(lambda x: pathify(x))
         
 tidy
-# -
-
-cubes.add_cube(scraper, tidy, title)
-cubes.output_all()
 
 # + endofcell="--"
 
