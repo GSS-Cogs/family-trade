@@ -109,6 +109,9 @@ table['SIC 2007'] = table['SIC 2007'].str[:2]
 table = table.rename(columns={"CORD SITC": "Commodity", 'SIC 2007': 'Industry'})
 table['Industry'] = table['Industry'].str.strip()
 table['Commodity'] = table['Commodity'].str.strip()
+del table['Measure Type']
+del table['Unit']
+table['Value'] = table['Value'].astype(int)
 table.head(10)
 # -
 
@@ -126,3 +129,5 @@ trace.render("spec_v1.html")
 table['Industry'].unique()
 
 table['Commodity'].unique()
+
+
