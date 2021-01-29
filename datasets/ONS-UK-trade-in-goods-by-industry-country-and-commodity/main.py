@@ -4,8 +4,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.6.0
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -100,18 +100,29 @@ table = trace.combine_and_trace(title, "combined_dataframe").fillna('')
 table = table[table['OBS'] != 0]
 table.loc[table['DATAMARKER'].astype(str) == '..', 'DATAMARKER'] = 'suppressed'
 table.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-
-table['CORD SITC'] = table['CORD SITC'].str[:1]
+# LPerryman - changed indice to 2 rather than 1
+table['CORD SITC'] = table['CORD SITC'].str[:2]
 table['ONS Partner Geography'] = table['ONS Partner Geography'].str[:2]
 table['SIC 2007'] = table['SIC 2007'].str[:2]
-table
+
+# LPerryman - changing names back to what is in the spreadsheet, can't remember why they were changed
+table = table.rename(columns={"CORD SITC": "Commodity", 'SIC 2007': 'Industry'})
+table['Industry'] = table['Industry'].str.strip()
+table['Commodity'] = table['Commodity'].str.strip()
+table.head(10)
 # -
 
 table['Period'] = 'year/' + table['Period'].str[0:4]
 
-table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type', 'Value', 'Unit', 'Marker']]
+#table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type', 'Value', 'Unit', 'Marker']]
+table = table[['ONS Partner Geography', 'Period','Flow','Commodity', 'Industry', 'Measure Type', 'Value', 'Unit', 'Marker']]
+
 
 cubes.add_cube(scraper1, table, title)
 cubes.output_all()
 
 trace.render("spec_v1.html")
+
+table['Industry'].unique()
+
+table['Commodity'].unique()

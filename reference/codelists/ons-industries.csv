@@ -1,0 +1,88 @@
+Label,Notation,Parent Notation,Sort Priority
+ Manufacture of beverages,11,,1
+ Manufacture of tobacco products,12,,2
+" Manufacture of computer, electronic and optical products",26,,3
+ Manufacture of electrical equipment,27,,4
+ Manufacture of machinery and equipment n.e.c.,28,,5
+ Other manufacturing,32,,6
+ Repair and installation of machinery and equipment,33,,7
+" Wholesale trade, except of motor vehicles and motorcycles",46,,8
+" Retail trade, except of motor vehicles and motorcycles",47,,9
+ Warehousing and support activities for transportation,52,,10
+ Activities of head offices; management consultancy activities,70,,11
+" Travel agency, tour operator and other reservation service and related activities",79,,12
+" Crop and animal production, hunting and related service activities",01,,13
+ Fishing and aquaculture,03,,14
+ Extraction of crude petroleum and natural gas,06,,15
+ Other mining and quarrying,08,,16
+ Mining support service activities,09,,17
+ Manufacture of food products,10,,18
+ Manufacture of textiles,13,,19
+ Manufacture of wearing apparel,14,,20
+ Manufacture of leather and related products,15,,21
+" Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",16,,22
+ Manufacture of paper and paper products,17,,23
+ Printing and reproduction of recorded media,18,,24
+ Manufacture of coke and refined petroleum products,19,,25
+ Manufacture of chemicals and chemical products,20,,26
+ Manufacture of basic pharmaceutical products and pharmaceutical preparations,21,,27
+ Manufacture of rubber and plastic products,22,,28
+ Manufacture of other non-metallic mineral products,23,,29
+ Manufacture of basic metals,24,,30
+" Manufacture of fabricated metal products, except machinery and equipment",25,,31
+" Manufacture of motor vehicles, trailers and semi-trailers",29,,32
+ Manufacture of other transport equipment,30,,33
+ Manufacture of furniture,31,,34
+" Electricity, gas, steam and air conditioning supply",35,,35
+" Water collection, treatment and supply",36,,36
+ Sewerage,37,,37
+" Waste collection, treatment and disposal activities; materials recovery",38,,38
+ Remediation activities and other waste management services.,39,,39
+ Construction of buildings,41,,40
+ Civil engineering,42,,41
+ Specialised construction activities,43,,42
+ Wholesale and retail trade and repair of motor vehicles and motorcycles,45,,43
+ Land transport and transport via pipelines,49,,44
+ Water transport,50,,45
+ Air transport,51,,46
+ Postal and courier activities,53,,47
+ Accommodation,55,,48
+ Food and beverage service activities,56,,49
+ Publishing activities,58,,50
+" Motion picture, video and television programme production, sound recording and music publishing activities",59,,51
+ Programming and broadcasting activities,60,,52
+ Telecommunications,61,,53
+" Computer programming, consultancy and related activities",62,,54
+ Information service activities,63,,55
+" Financial service activities, except insurance and pension funding",64,,56
+ Activities auxiliary to financial services and insurance activities,66,,57
+ Real estate activities,68,,58
+ Legal and accounting activities,69,,59
+ Architectural and engineering activities; technical testing and analysis,71,,60
+ Scientific research and development,72,,61
+ Advertising and market research,73,,62
+" Other professional, scientific and technical activities",74,,63
+ Veterinary activities,75,,64
+ Rental and leasing activities,77,,65
+ Employment activities,78,,66
+ Security and investigation activities,80,,67
+ Services to buildings and landscape activities,81,,68
+" Office administrative, office support and other business support activities",82,,69
+ Public administration and defence; compulsory social security,84,,70
+ Education,85,,71
+" Creative, arts and entertainment activities",90,,72
+" Libraries, archives, museums and other cultural activities",91,,73
+ Gambling and betting activities,92,,74
+ Sports activities and amusement and recreation activities,93,,75
+ Activities of membership organisations,94,,76
+ Repair of computers and personal and household goods,95,,77
+ Other personal service activities,96,,78
+Unknown industry,U ,,79
+ Social work activities without accommodation,88,,80
+ Mining of metal ores,07,,81
+ Human health activities,86,,82
+ Forestry and logging,02,,83
+ Mining of coal and lignite,05,,84
+ Residential care activities,87,,85
+" Insurance, reinsurance and pension funding, except compulsory social security",65,,86
+Total,T,,87
