@@ -130,10 +130,10 @@ These data are our best estimate of these bilateral UK trade flows. Users should
 UN Comtrade.
 """
 
-scraper1.dataste.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
-scraper2.dataste.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
-scraper1.dataset.comment = descr
-scraper2.dataset.comment = descr
+scraper1.dataset.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
+scraper2.dataset.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
+scraper1.dataset.description = descr
+scraper2.dataset.description = descr
 
 # +
 table = table[table['OBS'] != 0]
@@ -168,11 +168,15 @@ cubes.output_all()
 
 trace.render("spec_v1.html")
 
-table['Industry'].unique()
+# +
+#table['Industry'].unique()
 
-table['Commodity'].unique()
+# +
+#table['Commodity'].unique()
 
-print(scraper1.dataset.title)
-print(scraper2.dataset.comment)
+# +
+#print(scraper1.dataset.title)
+#print(scraper2.dataset.comment)
+# -
 
 
