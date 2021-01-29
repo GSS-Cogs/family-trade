@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.6.0
+#       jupytext_version: 1.9.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -18,13 +18,13 @@ import json
 
 # + tags=["outputPrepend"]
 info = json.load(open('info.json'))
-scraper = Scraper(seed='info.json')  
+scraper = Scraper(seed='info.json')
 cubes = Cubes('info.json')
 scraper.dataset.family = info['families']
-scraper 
+
 # -
 
-df = scraper.distributions[0].as_pandas(header=None, na_values=[], keep_default_na=False, index_col=0)
+df = scraper.distribution(latest=True).as_pandas(header=None, na_values=[], keep_default_na=False, index_col=0)
 
 
 # +
@@ -58,11 +58,15 @@ df['Period'].loc[df['Period'].str.len() == 4] = df['Period'].apply(lambda x:'/id
 df['Next release'] = pd.to_datetime(df['Next release'], format='%d %B %Y').dt.strftime('/id/day/%Y-%m-%d')
 df['Release Date'] = pd.to_datetime(df['Release Date'], format='%d-%m-%Y').dt.strftime('/id/day/%Y-%m-%d')
 
+df
+
 # We don't use the data within these cells
 df.drop(labels=['Title'], axis=1, inplace=True)
 
 # Add dataframe is in the cube
-cubes.add_cube(scraper, df, info['title'])
+cubes.add_cube(scraper, df, scraper.distribution(latest=True).title)
 
 # Write cube
 cubes.output_all()
+
+
