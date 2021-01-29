@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -96,6 +97,44 @@ pd.set_option('display.float_format', lambda x: '%.1f' % x)
 
 table = trace.combine_and_trace(title, "combined_dataframe").fillna('')
 
+descr = """
+Experimental dataset providing a breakdown of UK trade in goods by industry, country and commodity on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders.
+
+Users should note the following:
+Industry data has been produced using Standard Industrial Classification 2007 (SIC07).
+
+Commodity data has been produced using Standard International Trade Classification (SITC).
+
+Due to risks around disclosing data related to individual firms we are only able to provide data for certain combinations of the dimensions included, i.e. country, commodity and industry. This dataset therefore provides the following two combinations:
+    Industry (SIC07 2 digit), by Commodity (SITC 2 digit), by geographic region (worldwide, EU and non-EU)
+    Industry (SIC07 2 digit), by Commodity total, by individual country
+
+Some data has been suppressed to protect confidentiality so that individual traders cannot be identified.
+
+Methodology improvements
+Within this latest experimental release improvements have been made to the methodology that has resulted in some revisions when compared to our previous release in April 2019.
+These changes include; improvements to the data linking methodology and a targeted allocation of some of the Balance of Payments (BoP) adjustments to industry.
+The data linking improvements were required due to subtleties in both the HMRC data and IDBR not previously recognised within Trade.
+
+While we are happy with the quality of the data in this experimental release we have noticed some data movements, specifically in 2018.
+We will continue to review the movements seen in both the HMRC microdata and the linking methodology and, where appropriate, will further develop the methodology for Trade in Goods by Industry for future releases. 
+
+Data
+All data is in £ million, current prices.
+
+Rounding
+Some of the totals within this release (e.g. EU, Non EU and worldwide) may not exactly match data published via other trade releases due to small rounding differences.
+
+Trade Asymmetries
+These data are our best estimate of these bilateral UK trade flows. Users should note that alternative estimates are available, in some cases, via the statistical agencies for bilateral countries or through central databases such as UN Comtrade.
+UN Comtrade.
+"""
+
+scraper1.dataste.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
+scraper2.dataste.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
+scraper1.dataset.comment = descr
+scraper2.dataset.comment = descr
+
 # +
 table = table[table['OBS'] != 0]
 table.loc[table['DATAMARKER'].astype(str) == '..', 'DATAMARKER'] = 'suppressed'
@@ -132,5 +171,8 @@ trace.render("spec_v1.html")
 table['Industry'].unique()
 
 table['Commodity'].unique()
+
+print(scraper1.dataset.title)
+print(scraper2.dataset.comment)
 
 
