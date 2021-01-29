@@ -20,6 +20,25 @@
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/dimension/dcms-country",
+                "value": "http://gss-data.org.uk/def/concept/dcms-country/{country}",
+                "codelist": false
+            },
+            "Sector": {
+                "description": "DCMS Trade Sector Classification",
+                "value": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#concept/trade-sectors/{sector}",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#scheme/trade-sectors"
+            },
+            "Subsector": {
+                "description": "DCMS Trade Subsector Classification",
+                "value": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#concept/trade-sectors/{subsector}",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#scheme/trade-sectors"
+            },
+            "Flow": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/concept/trade/flow-directions/{flow}"
+            },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/measure/count",
@@ -28,15 +47,6 @@
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
-            },
-            "Flow": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/concept/trade/flow-directions/{flow}"
-            },
-            "Country": {
-                "parent": "http://gss-data.org.uk/def/dimension/dcms-country",
-                "value": "http://gss-data.org.uk/def/concept/dcms-country/{country}",
-                "codelist": false
             }
         },
         "transformStage": [
