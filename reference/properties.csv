@@ -42,7 +42,7 @@ trade,Income Category,dimension/income-category,qb:DimensionProperty,,,http://gs
 trade,Industrial Sector,dimension/industrial-sector,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/industrial-sector,
 trade,Estimate Type,dimension/estimate-type,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/estimate-type,
 trade,Expenditure,dimension/expenditure,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/expenditure,
-trade,Trade Type,dimension/trade-type,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/trade-type,
+trade,Trade Type,dimension/trade-type,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type,
 trade,Income Indicator,dimension/income-indicator,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/income-indicator,
 trade,Expenditure Type,dimension/expenditure-type,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/expenditure-type,
 trade,Industry,dimension/industry,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/industry,
@@ -58,7 +58,7 @@ trade,Trade Area,dimension/trade-area,qb:DimensionProperty,,,http://gss-data.org
 trade,MRETS Product,dimension/mrets-product,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/mrets-product,
 trade,Size of Business by no of Employees,dimension/size-of-business-by-no-of-employees,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands,Size of a business based on the number of employees
 trade,HMRC Trade Statistic Type,dimension/hmrc-trade-statistic-type,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/hmrc-trade-statistic-type,
-trade,HMRC Reporter Region,dimension/hmrc-reporter-region,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/hmrc-regions,Location of the trade reporter. Typically a domestic geography. The destination of imports or origin of exports.
+trade,HMRC Reporter Region,dimension/hmrc-reporter-region,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/hmrc-regions,Location of the trade reporter Typically a domestic geography The destination of imports or origin of exports
 trade,HMRC Partner Geography,dimension/hmrc-partner-geography,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies,
 trade,CORD SITC,dimension/cord-sitc,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/cord-sitc,
 trade,CORD Geography,dimension/cord-geography,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/cord-geography,
@@ -75,3 +75,5 @@ trade,Alcohol Type,dimension/alcohol-type,qb:DimensionProperty,,,http://gss-data
 trade,Alcohol Origin,dimension/alcohol-origin,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/alcohol-origin,Alcohol Origin
 trade,Production and Clearance,dimension/production-and-clearance,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance,Production and Clearance
 trade,Growth,dimension/growth,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/growth,growth
+trade,Trade Services,dimension/trade-services,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/trade-services,
+trade,Industry Section,dimension/industry-section,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/industry-section,

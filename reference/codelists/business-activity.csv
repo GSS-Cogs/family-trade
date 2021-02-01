@@ -1,0 +1,6 @@
+Label,Notation,Parent Notation,Sort Priority,Description
+Exporters,exporters,,1,
+Importers,importers,,2,
+Exporter and Importer,exporter-and-importer,,3,
+Exporter and/or Importer,exporter-and-or-importer,,4,
+All,all,,5,

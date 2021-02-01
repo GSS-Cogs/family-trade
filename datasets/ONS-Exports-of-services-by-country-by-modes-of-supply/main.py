@@ -18,7 +18,7 @@ with open("info.json", "w") as jsonFile:
 
 trace = TransformTrace()
 df = pd.DataFrame()
-cubes = Cubes("info.json")
+cubes = Cubes("info.json", job_name='')
 scraper = Scraper(json.load(open('info.json'))['landingPage'])
 scraper
 

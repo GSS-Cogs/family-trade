@@ -6,300 +6,185 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.6.0
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
 
-from gssutils import * 
+# +
+from gssutils import *
 import json
-import math
+import numpy as np
 
-info = json.load(open('info.json')) 
-#etl_title = info["Name"] 
-#etl_publisher = info["Producer"][0] 
-#print("Publisher: " + etl_publisher) 
-#print("Title: " + etl_title) 
-
-scraper = Scraper(seed="info.json")   
-scraper 
-
-tidied_sheets = []
 trace = TransformTrace()
 df = pd.DataFrame()
-
-for tab in scraper.distributions[0].as_databaker():
-    
-    if tab.name == "Contents":
-        continue
-        
-    elif len(tab.name) > 4:
-        tab_title = tab.name + "_ownership"
-        
-        tab_columns = ["Period", "Industry", "Ownership", "Measure Type", "Unit"]
-        trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-        
-        
-        period = tab.name[0:4]
-        trace.Period("Selected from the tab title")
-        
-        industry = tab.excel_ref("A1").expand(DOWN).is_not_blank()
-        trace.Industry("Selected as all non-blank values from cell ref A1 down.")
-        
-        ownership = tab.excel_ref("B1").expand(DOWN).is_not_blank()
-        trace.Ownership("Selected as all non-blank values from cell ref B1 down.")
-        
-        measure_type = tab.excel_ref("C1:D1")
-        trace.Measure_Type("Selected as the two values in cells C1 and D1")
-        
-        unit = "£m"
-        trace.Unit("Hardcoded value but could have been taken from the measure types or from the contents page.")
-        
-        observations = tab.excel_ref("C2:D271").is_not_blank()
-        
-        dimensions = [
-            HDimConst("Period", period),
-            HDim(industry, "Industry", CLOSEST, ABOVE),
-            HDim(ownership, "Ownership", DIRECTLY, LEFT),
-            HDim(measure_type, "Measure Type", DIRECTLY, ABOVE),
-            HDimConst("Unit", unit)
-        ]
-        
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
-        #savepreviewhtml(tidy_sheet)
-        trace.store("combined_" + tab_title, tidy_sheet.topandas())
-        
-        df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-        df.rename(columns={'OBS' : 'Value'}, inplace=True)
-        trace.render()
-        
-        tidied = df[["Period", "Industry", "Ownership", "Measure Type", "Unit", "Value"]]
-        tidied_sheets.append(tidied)
-    
-    else:
-        markers = [["1", "8"], ["10", "19"], ["21", "33"]]
-        
-        for table in markers:
-            if table == markers[0]:
-                
-                tab_title = tab.name + "_business_size_and_ownership"
-            
-                tab_columns = ["Period", "Business Size", "Ownership", "Measure Type", "Unit"]
-                trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-                
-                
-                period = tab.name[0:4]
-                trace.Period("Selected from the tab title")
-                
-                business_size = tab.excel_ref("A"+table[0]+":A"+table[1]).is_not_blank()
-                trace.Business_Size("Selected as all non-blank values between the cell refs using markers from the list.")
-                
-                ownership = tab.excel_ref("A"+table[0]+":A"+table[1]).is_not_blank()
-                trace.Ownership("Selected as all non-blank values between the cell refs using markers from the list.")
-                
-                measure_type = tab.excel_ref("C1:D1")
-                trace.Measure_Type("Selected as the two values in cells C1 and D1")
-                
-                unit = "£m"
-                trace.Unit("Hardcoded value but could have been taken from the measure types or from the contents page.")
-                
-                observations = tab.excel_ref("C"+str(int(table[0])+1)+":D"+table[1]).is_not_blank()
-
-
-                dimensions = [
-                    HDimConst("Period", period),
-                    HDim(business_size, "Business Size", CLOSEST, ABOVE),
-                    HDim(ownership, "Ownership", DIRECTLY, LEFT),
-                    HDim(measure_type, "Measure Type", DIRECTLY, ABOVE),
-                    HDimConst("Unit", unit)
-                ]
-
-                tidy_sheet = ConversionSegment(tab, dimensions, observations)
-                trace.with_preview(tidy_sheet)
-                #savepreviewhtml(tidy_sheet)
-                trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-                df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-                df.rename(columns={'OBS' : 'Value'}, inplace=True)
-                trace.render()
-
-                tidied = df[["Period", "Business Size", "Ownership", "Measure Type", "Unit", "Value"]]
-                tidied_sheets.append(tidied)
-                
-            elif table == markers[1]:
-                
-                tab_title = tab.name + "_country_and_ownership"
-                
-                tab_columns = ["Period", "Country", "Ownership", "Measure Type", "Unit"]
-                trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-                
-                
-                period = tab.name[0:4]
-                trace.Period("Selected from the tab title")
-                
-                country = tab.excel_ref("A"+table[0]+":A"+table[1]).is_not_blank()
-                trace.Country("Selected as all non-blank values between the cell refs using markers from the list.")
-                
-                ownership = tab.excel_ref("A"+table[0]+":A"+table[1]).is_not_blank()
-                trace.Ownership("Selected as all non-blank values between the cell refs using markers from the list.")
-                
-                measure_type = tab.excel_ref("C1:D1")
-                trace.Measure_Type("Selected as the two values in cells C1 and D1")
-                
-                unit = "£m"
-                trace.Unit("Hardcoded value but could have been taken from the measure types or from the contents page.")
-                
-                observations = tab.excel_ref("C"+str(int(table[0])+1)+":D"+table[1]).is_not_blank()
-                
-                
-                dimensions = [
-                    HDimConst("Period", period),
-                    HDim(country, "Country", CLOSEST, ABOVE),
-                    HDim(ownership, "Ownership", DIRECTLY, LEFT),
-                    HDim(measure_type, "Measure Type", DIRECTLY, ABOVE),
-                    HDimConst("Unit", unit)
-                ]
-
-                tidy_sheet = ConversionSegment(tab, dimensions, observations)
-                trace.with_preview(tidy_sheet)
-                #savepreviewhtml(tidy_sheet)
-                trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-                df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-                df.rename(columns={'OBS' : 'Value'}, inplace=True)
-                trace.render()
-
-                tidied = df[["Period", "Country", "Ownership", "Measure Type", "Unit", "Value"]]
-                tidied_sheets.append(tidied)
-                
-            elif table == markers[2]:
-                tab_title = tab.name + "_country_and_business_size"
-                
-                tab_columns = ["Period", "Country", "Business Size", "Measure Type", "Unit"]
-                trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-                
-                
-                period = tab.name[0:4]
-                trace.Period("Selected from the tab title")
-                
-                country = tab.excel_ref("A"+table[0]+":A"+table[1]).is_not_blank()
-                trace.Country("Selected as all non-blank values between the cell refs using markers from the list.")
-                
-                business_size = tab.excel_ref("A"+table[0]+":A"+table[1]).is_not_blank()
-                trace.Business_Size("Selected as all non-blank values between the cell refs using markers from the list.")
-                
-                measure_type = tab.excel_ref("C1:D1")
-                trace.Measure_Type("Selected as the two values in cells C1 and D1")
-                
-                unit = "£m"
-                trace.Unit("Hardcoded value but could have been taken from the measure types or from the contents page.")
-                
-                observations = tab.excel_ref("C"+str(int(table[0])+1)+":D"+table[1]).is_not_blank()
-                
-                
-                dimensions = [
-                    HDimConst("Period", period),
-                    HDim(country, "Country", CLOSEST, ABOVE),
-                    HDim(business_size, "Business Size", CLOSEST, ABOVE),
-                    HDim(measure_type, "Measure Type", DIRECTLY, ABOVE),
-                    HDimConst("Unit", unit)
-                ]
-
-                tidy_sheet = ConversionSegment(tab, dimensions, observations)
-                trace.with_preview(tidy_sheet)
-                #savepreviewhtml(tidy_sheet)
-                trace.store("combined_" + tab_title, tidy_sheet.topandas())
-
-                df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-                df.rename(columns={'OBS' : 'Value'}, inplace=True)
-                trace.render()
-
-                tidied = df[["Period", "Country", "Business Size", "Measure Type", "Unit", "Value"]]
-                tidied_sheets.append(tidied)
-
-
-# +
-for tab in scraper.distributions[0].as_databaker():
-    
-    if tab.name == "Contents":
-        continue
-        
-    elif len(tab.name) > 4:
-        tab_title = tab.name + "_business_size"
-        
-        tab_columns = ["Period", "Industry", "Business Size", "Measure Type", "Unit"]
-        trace.start(tab_title, tab, tab_columns, scraper.distributions[0].downloadURL)
-       
-    
-        period = tab.name[0:4]
-        trace.Period("Selected from the tab title")
-        
-        industry = tab.excel_ref("F1").expand(DOWN).is_not_blank()
-        trace.Industry("Selected as all non-blank values from cell ref F1 down.")
-        
-        business_size = tab.excel_ref("G1").expand(DOWN).is_not_blank()
-        trace.Business_Size("Selected as all non-blank values from cell ref G1 down.")
-        
-        measure_type = tab.excel_ref("H1:I1")
-        trace.Measure_Type("Selected as the two values in cells H1 and I1")
-        
-        unit = "£m"
-        trace.Unit("Hardcoded value but could have been taken from the measure types or from the contents page.")
-        
-        observations = tab.excel_ref("H2:I361").is_not_blank()
-        
-        dimensions = [
-            HDimConst("Period", period),
-            HDim(industry, "Industry", CLOSEST, ABOVE),
-            HDim(business_size, "Business Size", DIRECTLY, LEFT),
-            HDim(measure_type, "Measure Type", DIRECTLY, ABOVE),
-            HDimConst("Unit", unit)
-        ]
-        
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
-        #savepreviewhtml(tidy_sheet)
-        trace.store("combined_" + tab_title, tidy_sheet.topandas())
-        
-        df = trace.combine_and_trace(tab_title, "combined_" + tab_title)
-        df.rename(columns={'OBS' : 'Value'}, inplace=True)
-        trace.render()
-        
-        tidied = df[["Period", "Industry", "Business Size", "Measure Type", "Unit", "Value"]]
-        tidied_sheets.append(tidied)
-    
-
-
-# +
-#Outputs:
-    #tidied_sheets[0] \
-    #tidied_sheets[4]  --> Industry totals: attribute = Ownership
-    #tidied_sheets[8] /
-    
-    #tidied_sheets[12] \
-    #tidied_sheets[13]  --> Industry totals: attribute = Business Size
-    #tidied_sheets[14] /
-    
-    #tidied_sheets[1] \
-    #tidied_sheets[5]  --> Year: attributes = Business Size + Ownership
-    #tidied_sheets[9] /
-    
-    #tidied_sheets[2] \
-    #tidied_sheets[6]  --> Year: attributes = Country + Ownership
-    #tidied_sheets[10] /
-    
-    #tidied_sheets[3] \
-    #tidied_sheets[7]  --> Year: attributes = Country + Business Size
-    #tidied_sheets[11] /
-    
-
-#Notes:
-    #Multiple measures still present in all tables but should be very easy to separate as they alternate (exports/imports).
+cubes = Cubes("info.json")
+info = json.load(open('info.json'))
+scraper = Scraper(seed = 'info.json')
+scraper
 # -
 
+distribution = scraper.distribution(latest = True)
+title = distribution.title
+tabs = { tab.name: tab for tab in distribution.as_databaker() }
+
+for name, tab in tabs.items():
+    datasetTitle = title
+    columns=['Period','Business Size','Ownership', 'Country','Industry', 'Flow', 'Measure type', 'Unit', 'Marker']
+    trace.start(datasetTitle, tab, columns, distribution.downloadURL)
+    
+    period = tab.name[0:4]
+    trace.Period("Taken from tab name")
+        
+    if 'Contents' in name:
+        continue   
+    elif len(tab.name) > 4:
+        
+        country = 'World'
+        trace.Country("Hardcodded as World")
+        
+        #Ownership
+        industry = tab.excel_ref('A2').expand(DOWN)
+        trace.Industry("Taken from columnns with title Industry down. A2 Down")
+        flow = tab.excel_ref('C1').expand(RIGHT) - tab.excel_ref('E1').expand(RIGHT) 
+        trace.Flow("Taken from headers Exports £m or Imports £m")
+        ownership = tab.filter(contains_string('Ownership')).shift(0,1).expand(DOWN)
+        trace.Ownership("Ownership taken from colum headed Ownership down")
+        business_size = 'all'
+        trace.Business_Size("Hardcodded as All")
+        observations_ownership = (tab.excel_ref('C1').expand(RIGHT) - tab.excel_ref('E1').expand(RIGHT)).fill(DOWN).is_not_blank()
+        
+        dimensions = [
+            HDimConst("Period", period),
+            HDimConst("Business size", business_size),
+            HDimConst("Country", country),
+            HDim(industry,'Industry',DIRECTLY,LEFT),
+            HDim(flow, 'Flow',CLOSEST,LEFT),
+            HDim(ownership,'Ownership',DIRECTLY,LEFT),
+        ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations_ownership)   
+        trace.with_preview(tidy_sheet)
+        trace.store("combined_dataframe", tidy_sheet.topandas())
+        
+        #Business Size
+        industry = tab.excel_ref('F2').expand(DOWN)
+        trace.Industry("Taken from columnns with title Industry down. F2 Down")
+        flow = tab.excel_ref('H1').expand(RIGHT)
+        trace.Flow("Taken from headers Exports £m or Imports £m")
+        business_size = tab.filter(contains_string('Business Size')).shift(0,1).expand(DOWN)
+        trace.Business_Size("Taken from colum headed Business Size down")
+        ownership = 'any'
+        trace.Ownership("Hardcodded as Any")
+        observations_business_size = (tab.excel_ref('H1').expand(RIGHT)).fill(DOWN).is_not_blank()
+        dimensions = [
+            HDimConst("Period", period),
+            HDimConst("Ownership", ownership),
+            HDimConst("Country", country),
+            HDim(industry,'Industry',DIRECTLY,LEFT),
+            HDim(flow, 'Flow',DIRECTLY,ABOVE),
+            HDim(business_size,'Business size',DIRECTLY,LEFT),
+        ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations_business_size)   
+        trace.with_preview(tidy_sheet)
+        trace.store("combined_dataframe", tidy_sheet.topandas())
+        
+    elif len(tab.name) == 4:
+        country = tab.filter(contains_string('Country')).shift(0,1).expand(DOWN).is_not_blank()
+        trace.Country("Taken from columns with header Country : A11 Down. The first box in tab will have world as country value.")
+        business_size = tab.filter(contains_string('Business Size')).shift(0,1).expand(DOWN) - country
+        trace.Business_Size("Taken from columns with header Buiness Size :B2 Down and B11 Down. The second second box on the tab will have any as the business size value")            
+        ownership = tab.filter(contains_string('Ownership')).shift(0,1).expand(DOWN) - business_size
+        trace.Ownership("Taken from columns with header Ownership :A2 Down and B21 Down. The second 3rd box on the tab will have any as the Ownership value")            
+        flow = tab.expand(DOWN).one_of(['Exports £m','Imports £m'])
+        trace.Flow("Taken from headers Exports £m or Imports £m")
+        industry = "all"
+        trace.Industry("Hardcodded as all")
+        observations = flow.fill(DOWN).is_not_blank() - flow
+        
+        dimensions = [
+            HDimConst("Period", period),
+            HDimConst("Industry", industry),
+            HDim(flow, 'Flow',DIRECTLY,ABOVE),
+            HDim(business_size, 'Business size',CLOSEST,ABOVE),
+            HDim(ownership, 'Ownership',CLOSEST,ABOVE),
+            HDim(country, 'Country',CLOSEST,ABOVE),
+        ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        trace.with_preview(tidy_sheet)
+        trace.store("combined_dataframe", tidy_sheet.topandas())
+    else:   
+        continue
+
+
+# +
+#Post Processing 
+df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
+df['Marker'].replace('..', 'suppressed-data', inplace=True)
+trace.Marker("Formatting .. to equal suppressed-data")
+df['Period'] =  'year/' + df['Period']
+trace.Period("Formatting to year/0000")
+df['Business size'].replace('Country', 'any', inplace=True)
+df['Ownership'].replace('Business Size', 'any', inplace=True)
+df['Country'].replace(np.nan, 'World', inplace=True)
+df["Flow"] = df["Flow"].map(lambda x: "exports" if x == "Exports £m" else ("imports" if x == "Imports £m" else "unknown"))
+df["Business size"] = df["Business size"].map(lambda x: "0-to-49" if x == "Small (0-49)" 
+                                              else ("50-to-249" if x == "Medium (50-249)" 
+                                                    else ("250" if x == "Large (250+)" 
+                                                          else ("unknown-employees" if x == "Unknown" else "any"))))   
+df["Ownership"] = df["Ownership"].map(lambda x: "uk" if x == "Domestic" 
+                                                         else ("foreign" if x == "Foreign" 
+                                                               else ("unknown" if x == "Unknown" else "any")))                                                          
+
+df['Country'] = df['Country'].apply(lambda x: 'WW' if 'World' in x else 
+                                      ('RW' if 'Non-EU' in x else 
+                                       ('EU' if 'Total EU28' in x else x)))
+
+df['Value'] = pd.to_numeric(df['Value'], errors='coerce').astype('Int64')
+df = df[['Period', 'Business size', 'Country', 'Ownership', 'Industry', 'Flow', 'Value', 'Marker']]
+# -
+
+#additional scraper info needed
+comment = "Trade in goods data, including breakdown of imports and exports by Standard Industrial Classification, region (EU and non-EU), business size and by domestic and foreign ownership."
+des = """
+Trade in goods data, including breakdown of imports and exports by Standard Industrial Classification, region (EU and non-EU), business size and by domestic and foreign ownership.
+
+Users should note the following:
+Industry data has been produced using Standard Industrial Classification 2007 (SIC07).
+
+Business size is defined using the following employment size bands:
+   Small - 0-49 employees
+   Medium - 50-249 employees
+   Large - 250+ employees
+   Unknown - number of employees cannot be determined via IDBR
+   
+Ownership status is defined as:
+   Domestic - ultimate controlling parent company located in the UK
+   Foreign - ultimate controlling parent company located outside the UK
+   Unknown - location of ultimate controlling parent company cannot be determined via IDBR
+
+Some data cells have been suppressed to protect confidentiality so that individual traders cannot be identified.
+
+Data
+All data is in £ million, current prices
+
+Rounding
+Some of the totals within this release (e.g. EU, Non EU and world total) may not exactly match data published via other trade releases due to small rounding differences.
+
+Trade Asymmetries 
+These data are our best estimate of these bilateral UK trade flows. Users should note that alternative estimates are available, in some cases, via the statistical agencies for bilateral countries or through central databases such as UN Comtrade
+
+"""
+scraper.dataset.description = des
+scraper.dataset.comment = comment
+scraper.dataset.title = datasetTitle
 
 
 
+cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
+cubes.output_all()
+trace.render("spec_v1.html")
+
+df

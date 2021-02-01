@@ -1,4 +1,4 @@
 Label,Notation,Parent Notation,Sort Priority,Description
-Seasonally Adjusted,SA,,,
-Not Seasonally Adjusted,NSA,,,
-Sector analysis,sector-analysis,,,
+Seasonally Adjusted,SA,,1,
+Not Seasonally Adjusted,NSA,,2,
+Sector analysis,sector-analysis,,3,

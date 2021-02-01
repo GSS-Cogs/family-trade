@@ -6,3 +6,5 @@ out
 .idea
 family-trade.iml
 **/Preview.html
+Pipfile
+Pipfile.lock
