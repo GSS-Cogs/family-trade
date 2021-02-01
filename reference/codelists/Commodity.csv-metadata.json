@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/commodity/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/commodity/{notation}"
     },
     "rdfs:label": "Commodity",
     "dc:title": "Commodity",
