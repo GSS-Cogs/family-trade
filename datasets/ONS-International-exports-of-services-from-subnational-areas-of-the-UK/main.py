@@ -18,6 +18,7 @@
 # +
 from gssutils import *
 import json
+import numpy as np 
 
 cubes = Cubes("info.json")
 trace = TransformTrace()
@@ -54,6 +55,7 @@ dimensions = [
     HDim(industry, 'Export Services', DIRECTLY, LEFT),
     HDim(geography, 'Service Origin Geography', DIRECTLY, ABOVE),
     HDimConst('Service Destination', 'all'),
+    HDimConst('NUTS','nuts1/'),
     HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -85,6 +87,7 @@ dimensions = [
             HDim(industry,'Export Services',DIRECTLY,LEFT),
             HDim(destination, 'Service Destination',DIRECTLY,ABOVE),
             HDim(origin, 'Service Origin Geography',CLOSEST,LEFT),
+            HDimConst('NUTS','nuts1/'),
             HDimConst("Sheet", tab.name)
 ]  
 tidy_sheet = ConversionSegment(tab, dimensions, observations)   
@@ -144,6 +147,7 @@ dimensions = [
     HDim(industry, "Export Services", CLOSEST, LEFT),
     HDim(destination, "Service Destination", DIRECTLY, ABOVE),
     HDim(origin, "Service Origin Geography", DIRECTLY, LEFT),
+    HDimConst('NUTS','nuts2/'),
     HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -242,211 +246,15 @@ trace.store("combined_dataframe", tidy_sheet.topandas())
 
 #post processing
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-df
-
-unprefixed_values = df.loc[(df['Sheet'] == '4a')]
-# print(unprefixed_values)
-with pd.option_context('display.max_rows()', None):
-    print(unprefixed_values)
-
-# +
-# print(df.loc[df['B'].isin(['one','three'])])
-# required_values = df.loc[df['Sheet'].isin(['1a', '1b', '2a', '2b', '3', '4a']), 'Service Origin Geography']
-# print(type(required_values))
-# required_values = required_values.apply(
-#     lambda x: {  
-# 'United Kingdom':'nuts1/all',
-# 'North East ':'nuts1/UKC',
-# 'North West':'nuts1/UKD',
-# 'Yorkshire and The Humber':'nuts1/UKE',
-# 'East Midlands':'nuts1/UKF',
-# 'West Midlands':'nuts1/UKG',
-# 'East of England':'nuts1/UKH',
-# 'London':'nuts1/UKI',
-# 'South East':'nuts1/UKJ',
-# 'South West':'nuts1/UKK',
-# 'Wales':'nuts1/UKL',
-# 'Scotland':'nuts1/UKM',
-# 'Northern Ireland':'nuts1/UKN'      
-#         }.get(x, x))
-# print(required_values.unique())
-
-# +
-# with pd.option_context('display.max_rows()', None):
-#     print(required_values)
-# -
-
-df['Service Origin Geography'].unique()
-
-# +
-# df[(df.iloc[3].isin(['North East ', 'North West', 'Yorkshire and The Humber',
-#        'East Midlands', 'West Midlands', 'East of England', 'London',
-#        'South East', 'South West', 'Wales', 'Scotland',
-#        'Northern Ireland', 'United Kingdom']))] & df[(df.Sheet.isin(['1a', '1b', '2a', '2b', '3']))]
-# -
-
-for sheet, service in zip('Sheet', 'Service Origin Geography'):
-    if sheet == '4a':
-        print(service)
-
-
-# +
-# print(df.groupby(['Service Origin Geography', 'Sheet']).count())
-
-# +
-# if df.loc[(df['Sheet'] == '4a')]:
-#      return df['Service Origin Geography'].map(
-#             lambda x: {
-#             'United Kingdom':'nuts1/all',
-#             'North East ':'nuts1/UKC',
-#             'North West':'nuts1/UKD',
-#             'Yorkshire and The Humber':'nuts1/UKE',
-#             'East Midlands':'nuts1/UKF',
-#             'West Midlands':'nuts1/UKG',
-#             'East of England':'nuts1/UKH',
-#             'London':'nuts1/UKI',
-#             'South East':'nuts1/UKJ',
-#             'South West':'nuts1/UKK',
-#             'Wales':'nuts1/UKL',
-#             'Scotland':'nuts1/UKM',
-#             'Northern Ireland':'nuts1/UKN'
-#         }.get(x, x))
-# -
-
-def nuts_conversion(values):
-    if df['Sheet'].isin(['1a', '1b', '2a', '2b', '3']):
-        return df['Service Origin Geography'].map(
-            lambda x: {
-            'United Kingdom':'nuts1/all',
-            'North East ':'nuts1/UKC',
-            'North West':'nuts1/UKD',
-            'Yorkshire and The Humber':'nuts1/UKE',
-            'East Midlands':'nuts1/UKF',
-            'West Midlands':'nuts1/UKG',
-            'East of England':'nuts1/UKH',
-            'London':'nuts1/UKI',
-            'South East':'nuts1/UKJ',
-            'South West':'nuts1/UKK',
-            'Wales':'nuts1/UKL',
-            'Scotland':'nuts1/UKM',
-            'Northern Ireland':'nuts1/UKN'
-        }.get(x, x))
-    elif df['Sheet'].isin(['4a', '4b']):
-        return df["Service Origin Geography"].map(pathify)
-df['New Service Origin Geography'] = df.apply(nuts_conversion, axis = 1)
-
-if df.loc[df['Sheet'].isin(['1a', '1b', '2a', '2b', '3']), 'Service Origin Geography']:
-    df['Service Origin Geography'] = df['Service Origin Geography'].map(
-        lambda x: {
-            'United Kingdom':'nuts1/all',
-            'North East ':'nuts1/UKC',
-            'North West':'nuts1/UKD',
-            'Yorkshire and The Humber':'nuts1/UKE',
-            'East Midlands':'nuts1/UKF',
-            'West Midlands':'nuts1/UKG',
-            'East of England':'nuts1/UKH',
-            'London':'nuts1/UKI',
-            'South East':'nuts1/UKJ',
-            'South West':'nuts1/UKK',
-            'Wales':'nuts1/UKL',
-            'Scotland':'nuts1/UKM',
-            'Northern Ireland':'nuts1/UKN'
-        }.get(x, x))
-elif df.loc[df['Sheet'].isin(['4a', '4b']), 'Service Origin Geography']:
-    df['Service Origin Geography'] = df["Service Origin Geography"].map(pathify)
-
-# +
-# if df.loc[df['Sheet'].isin(['1a', '1b', '2a', '2b', '3']), 'Service Origin Geography']:
-#     df['Service Origin Geography'] = df['Service Origin Geography'].map(
-#         lambda x: {
-#             'United Kingdom':'nuts1/all',
-#             'North East ':'nuts1/UKC',
-#             'North West':'nuts1/UKD',
-#             'Yorkshire and The Humber':'nuts1/UKE',
-#             'East Midlands':'nuts1/UKF',
-#             'West Midlands':'nuts1/UKG',
-#             'East of England':'nuts1/UKH',
-#             'London':'nuts1/UKI',
-#             'South East':'nuts1/UKJ',
-#             'South West':'nuts1/UKK',
-#             'Wales':'nuts1/UKL',
-#             'Scotland':'nuts1/UKM',
-#             'Northern Ireland':'nuts1/UKN'
-#         }.get(x, x))
-# elif df.loc[df['Sheet'].isin(['4a', '4b']), 'Service Origin Geography']:
-#     df["Service Origin Geography"] = df["Service Origin Geography"].map(pathify)
-
-# +
-# with pd.option_context("display.max_rows", None):
-#     print(df['Sheet'])
-#     print(df['Service Origin Geography'])
-# with pd.option_context("display.max_rows", None):
-# df[["Service Origin Geography", "Sheet"]]
-
-# +
-# with pd.option_context("display.max_rows", None):
-#     print(df)
-
-# +
-# df.loc[df['foo'].isnull(),'foo'] = df['bar']
-
-# df.Service Origin Geography.fillna(df.City_Region, inplace = True)
-# del df['City_Region']
-# df
-
-# +
-# df['Sheet Name'].unique()
-# required_sheet = df[df['Sheet'] == "1a", "1b", "2a", "2b", "3", "4a"]
-# value = required_sheet.Sheet.item()
-# print(value)
-
-# for tab ,name in tabs.items():
-# #     print(tab)
-#     if tab in df["Sheet"]:
-# -
 
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 
-# +
-# #mapping Service Origin Geography outputs to nuts1 codes 
-# trace.Service_Origin_Geography("mapping Service Origin Geography outputs to nuts1 nuts2 and nuts3 codes ")
-# df['Service Origin Geography'] = df['Service Origin Geography'].map(
-#     lambda x: {  
-# 'United Kingdom':'nuts1/all',
-# 'North East ':'nuts1/UKC',
-# 'North West':'nuts1/UKD',
-# 'Yorkshire and The Humber':'nuts1/UKE',
-# 'East Midlands':'nuts1/UKF',
-# 'West Midlands':'nuts1/UKG',
-# 'East of England':'nuts1/UKH',
-# 'London':'nuts1/UKI',
-# 'South East':'nuts1/UKJ',
-# 'South West':'nuts1/UKK',
-# 'Wales':'nuts1/UKL',
-# 'Scotland':'nuts1/UKM',
-# 'Northern Ireland':'nuts1/UKN'      
-#         }.get(x, x))
-# -
-
-f1=(df['NUTS'] =='nuts2/')
-df.loc[f1,'Service Origin Geography'] = 'nuts2/' + df.loc[f1,'Service Origin Geography']
-
-f1=(df['NUTS'] =='nuts3/')
-df.loc[f1,'Service Origin Geography'] = 'nuts3/' + df.loc[f1,'Service Origin Geography']
-
+df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 
 df['Period'] = "year/2017"
 trace.Period("Hard coded as year/2017")
 
 df['Export Services'] = df['Export Services'].apply(pathify)
-df
-
-for x in df["Service Origin Geography"]:
-    print(x)
-
-# +
-# df["Service Origin Geography"] = df["Service Origin Geography"].apply(pathify)
-# -
 
 df["Service Destination"] = df["Service Destination"].apply(pathify)
 
@@ -458,6 +266,36 @@ df['Marker'] = df['Marker'].map(lambda x: { '..' : 'suppressed' }.get(x, x))
 df['Flow Directions'] = 'exports'
 trace.Flow_Directions("Adding Flow directions column to dataframe with value exports")
 
+#Changing notation for nuts 1 values one. (Tabs 1a and 1b)
+f1=((df['NUTS'] =='nuts1/'))
+df.loc[f1,'Service Origin Geography'] = df.loc[f1,'Service Origin Geography'].map(
+    lambda x: {  
+        'United Kingdom':'all',
+        'North East ':'UKC',
+        'North West':'UKD',
+        'Yorkshire and The Humber':'UKE',
+        'East Midlands':'UKF',
+        'West Midlands':'UKG',
+        'East of England':'UKH',
+        'London':'UKI',
+        'South East':'UKJ',
+        'South West':'UKK',
+        'Wales':'UKL',
+        'Scotland':'UKM',
+        'Northern Ireland':'UKN'      
+         }.get(x, x))
+
+df['Service Origin Geography'].unique()
+
+#adding in the nuts?/ notation to each value in Service Origin Geography
+df['NUTS'].replace(np.nan, '', inplace=True)
+
+df['Service Origin Geography'] = df['NUTS'] + df['Service Origin Geography']
+
+df['Service Origin Geography'] = df['Service Origin Geography'].apply(pathify)
+
+df['Service Origin Geography'].unique()
+
 #define the column order output into dataframe called tidy
 tidy = df[['Period','Export Services','Service Origin Geography','Service Destination', 'Flow Directions', 'Value','Marker']]
 tidy
@@ -466,16 +304,3 @@ tidy
 cubes.add_cube(scraper, tidy.drop_duplicates(), distribution.title)
 cubes.output_all()
 trace.render("spec_v1.html")
-
-# +
-#  Keeping for reference
-#  Unit = gbp-million
-#  , Measure Type = GBP Total
-#
-# Note the following do not have a NUTS code 
-# cambridgeshire-and-peterborough',
-# 'greater-manchester', 'liverpool-city-region', 'inner-london',
-# 'outer-london', 'north-of-tyne', 'sheffield-city-region',
-# 'tees-valley', 'west-of-england', 'cardiff-capital-region',
-# 'swansea-bay', 'aberdeen-and-aberdeenshire',
-# 'edinburgh-and-south-east-scotland', 'glasgow-city-region'
