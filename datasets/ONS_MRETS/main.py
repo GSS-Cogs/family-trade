@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.9.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -20,11 +20,11 @@ from os import environ
 from gssutils import *
 from gssutils.metadata import THEME
 
-with open("info.json") as f:
-    info = json.load(f)
-    
-scraper = Scraper(info["landingPage"])
-scraper
+infoFileName = 'info.json'
+
+info    = json.load(open(infoFileName))
+scraper = Scraper(seed=infoFileName)
+cubes   = Cubes(infoFileName)
 
 # +
 from dateutil import parser
@@ -37,7 +37,7 @@ for dist in scraper.distributions:
 dist = scraper.distribution(mediaType='text/prs.ons+csdb', latest=True)
 dist
 
-# +
+# + tags=["outputPrepend"]
 from io import TextIOWrapper
 from itertools import accumulate, zip_longest
 from collections import namedtuple, defaultdict
@@ -293,33 +293,13 @@ exchange_currency_observations = pd.DataFrame(data=exchange_currency_data)
 product_observations.replace(
     {'product': {'-t': 'total-goods'}}, inplace=True)
 
-# +
-
 """
 Note - spoke with Alex, to start with we're going to concentrate on the product data
 
 so once we're up and running, we need to add the effective_eri_observations and exchange_currency_observations
 dataframes to the outputs dict below
 """
-outputs = {
-    "Product": {
-        "data": product_observations,
-        "rename_columns": {
-            "period": "Period",
-            "country": "Trade Area",
-            "product": "MRETS Product",
-            "direction": "Flow Directions",
-            "basis": "Basis",
-            "unit": "Unit",
-            "adjustment": "Seasonal Adjustment",
-            "value": "Value",
-            "decimals": "Decimals"
-            }
-    }
-}
 
-out = Path('out')
-out.mkdir(exist_ok=True)
 
 def fix_short_hand_flow(val):
     if val in ["imports", "exports", "balance", "terms-of-trade"]:
@@ -332,7 +312,7 @@ def fix_short_hand_flow(val):
         return "balance"
     else:
         raise Exception("Aborting. Unexpected 'Flow direction' of {} encountered.".format(val))
-    
+
 
 def measure_type_lookup(val):
     """
@@ -351,60 +331,56 @@ def measure_type_lookup(val):
     else:
         raise Exception("Aborting. Cannot find the measure type for {}.".format(val))
     
-    
+
+
 from os import environ
 from gssutils.metadata import THEME
-for name, details in outputs.items():
-    
-    TITLE = info["title"] + ": " + name
-    OBS_ID = pathify(TITLE)
 
-    if "rename_columns" in details.keys():
-        details["data"] = details["data"].rename(columns=details["rename_columns"])
-    
-    # Correct casing to match codelists
-    if "Seasonal Adjustment" in details["data"].columns.values:
-        details["data"]["Seasonal Adjustment"] = details["data"]["Seasonal Adjustment"].str.upper()
-        
-    if "MRETS Product" in details["data"].columns.values:
-        details["data"]["MRETS Product"] = details["data"]["MRETS Product"].apply(pathify)
-        
-    if "Flow Directions" in details["data"].columns.values:
-        details["data"]["Flow Directions"] = details["data"]["Flow Directions"].apply(fix_short_hand_flow)
-        
-    if "Basis" in details["data"].columns.values:
-        details["data"] = details["data"].drop("Basis", axis=1)
-        
-    details["data"]["Measure Type"] = details["data"]["Unit"].apply(measure_type_lookup)
-    details["data"] = details["data"][details["data"]["Measure Type"] == "Chained volume measure"]
+# Rename columns
+rename_columns = {"period": "Period",
+                  "country": "Trade Area",
+                  "product": "MRETS Product",
+                  "direction": "Flow Directions",
+                  "basis": "Basis",
+                  "unit": "Unit",
+                  "adjustment": "Seasonal Adjustment",
+                  "value": "Value",
+                  "decimals": "Decimals"}
+product_observations.rename(rename_columns, axis=1, inplace=True)
 
-    df = details["data"]
-    df["Unit"][df["Measure Type"] == "Current Price"] = "gbp-million"
-    df["Unit"][df["Measure Type"] == "Average value per ton"] = "gbp-million"
-    df["Unit"][df["Measure Type"] == "Chained volume measure"] = "gbp-million"
-    df["Unit"][df["Unit"] == "idef"] = "implied-deflator"
+# +
+# Correct casing to match codelists
+if "Seasonal Adjustment" in product_observations.columns.values:
+    product_observations["Seasonal Adjustment"] = product_observations["Seasonal Adjustment"].str.upper()
     
-    print(df["Measure Type"].unique())
+if "MRETS Product" in product_observations.columns.values:
+    product_observations["MRETS Product"] = product_observations["MRETS Product"].apply(pathify)
     
-    details["data"].drop_duplicates().to_csv(out / f'{OBS_ID}.csv', index = False)
-
-    scraper.dataset.family = 'trade'
-    scraper.dataset.theme = THEME['business-industry-trade-energy']
+if "Flow Directions" in product_observations.columns.values:
+    product_observations["Flow Directions"] = product_observations["Flow Directions"].apply(fix_short_hand_flow)
     
-    # Try without setting id
-    #scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{OBS_ID}')
+if "Basis" in product_observations.columns.values:
+    product_observations = product_observations.drop("Basis", axis=1)
     
-    with open(out / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
-        metadata.write(scraper.generate_trig())
-
-        schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-        schema.create(out / f'{OBS_ID}.csv', out / f'{OBS_ID}.csv-schema.json')
-    
+product_observations["Measure Type"] = product_observations["Unit"].apply(measure_type_lookup)
+product_observations = product_observations[product_observations["Measure Type"] == "Chained volume measure"]
 # -
 
-currency_label
+product_observations
 
-product_label
+# +
+df = product_observations
+df["Unit"][df["Measure Type"] == "Current Price"] = "gbp-million"
+df["Unit"][df["Measure Type"] == "Average value per ton"] = "gbp-million"
+df["Unit"][df["Measure Type"] == "Chained volume measure"] = "gbp-million"
+df["Unit"][df["Unit"] == "idef"] = "implied-deflator"
+
+df["Measure Type"].value_counts()
+# -
+
+cubes.add_cube(scraper, df, scraper.title)
+
+cubes.output_all()
 
 
 
