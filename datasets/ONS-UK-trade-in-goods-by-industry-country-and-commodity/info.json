@@ -38,8 +38,8 @@
                 "codelist": false
             },
             "Commodity": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/Commodity",
-                "value": "http://gss-data.org.uk/def/trade/concept/Commodity/{commodity}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
+                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}",
                 "codelist": false
             },
             "Industry": {
