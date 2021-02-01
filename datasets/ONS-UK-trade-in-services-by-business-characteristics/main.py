@@ -143,7 +143,7 @@ df['Country'] = df['Country'].apply(lambda x: 'WW' if 'World' in x else
                                        ('EU' if 'Total EU28' in x else x)))
 
 df['Value'] = pd.to_numeric(df['Value'], errors='coerce').astype('Int64')
-df['Industry'] = df['Industry'].apply(lambda x: 'all' if 'all' in x else x[0:2] )
+df['Industry']= df['Industry'].str.split(" ", n = 1, expand = True) 
 
 df = df[['Period', 'Business size', 'Country', 'Ownership', 'Industry', 'Flow', 'Value', 'Marker']]
 # -
@@ -187,4 +187,27 @@ cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
 trace.render("spec_v1.html")
 
-
+import pandas as pd
+df = pd.read_csv("out/uk-trade-in-services-by-business-characteristics.csv")
+df["all_dimensions_concatenated"] = ""
+for col in df.columns.values:
+    if col != "Value":
+        df["all_dimensions_concatenated"] = df["all_dimensions_concatenated"]+df[col].astype(str)
+found = []
+bad_combos = []
+for item in df["all_dimensions_concatenated"]:
+    if item not in found:
+        found.append(item)
+    else:
+        bad_combos.append(item)
+df = df[df["all_dimensions_concatenated"].map(lambda x: x in bad_combos)]
+drop_these_cols = []
+for col in df.columns.values:
+    if col != "all_dimensions_concatenated" and col != "Value":
+        drop_these_cols.append(col)
+for dtc in drop_these_cols:
+    df = df.drop(dtc, axis=1)
+df = df[["all_dimensions_concatenated", "Value"]]
+df = df.sort_values(by=['all_dimensions_concatenated'])
+df.to_csv("duplicates_with_values.csv", index=False)
+print("DONE")
