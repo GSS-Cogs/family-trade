@@ -60,15 +60,15 @@
         "primaryKey": "notation",
         "aboutUrl": "http://gss-data.org.uk/def/trade/concept/commodity/{notation}"
     },
-    "rdfs:label": "Commodity",
-    "dc:title": "Commodity",
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/",
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
+    "rdfs:label": "Commodity",
+    "dc:title": "Commodity",
     "rdfs:seeAlso": [
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/dataset",
@@ -99,14 +99,14 @@
             "rdfs:label": "Commodity Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-01-25T11:58:58.120533"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/dataset"
+                "@value": "2020-12-25T11:58:58.163998"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:59:10.942836"
+                "@value": "2020-12-25T11:58:58.163998"
+            },
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity"
