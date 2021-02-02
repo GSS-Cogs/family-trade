@@ -17,30 +17,34 @@
         "airtable": "recvEuJKTaVY6Ft4n",
         "columns": {
             "Period": {
-                "source": "",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}"
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
             },
             "Business size": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands/{business_size}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{business_size}",
+                "codelist": false
             },
             "Country": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/eu-rw-ww",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww/{country}"
+                "value": "http://gss-data.org.uk/def/trade/concept/eu-rw-ww/{country}",
+                "codelist": false
             },
             "Ownership": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/country-of-ownership",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership/{ownership}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/countries-of-ownership",
+                "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{ownership}",
+                "codelist": false
             },
             "Industry": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sic-industry",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/sic-industry/{industry}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-industries",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-industries/{industry}",
+                "codelist": false
             },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{flow}",
-                "description": ""
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
@@ -51,7 +55,6 @@
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             }
- 
         },
         "stage": [
             "To Do"

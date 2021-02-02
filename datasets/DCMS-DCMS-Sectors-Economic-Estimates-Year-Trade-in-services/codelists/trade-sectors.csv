@@ -1,0 +1,37 @@
+Label,Notation,Parent Notation,Sort Priority
+DCMS Sectors Excluding Tourism and Civil Society,dcms-sectors-exc-tourism-and-civil-society,,1
+Audio Visual,audio-visual,dcms-sectors-exc-tourism-and-civil-society,2
+Creative Industries,creative-industries,dcms-sectors-exc-tourism-and-civil-society,3
+Cultural Sector,cultural-sector,dcms-sectors-exc-tourism-and-civil-society,4
+Digital Sector,digital-sector,dcms-sectors-exc-tourism-and-civil-society,5
+Gambling,gambling,dcms-sectors-exc-tourism-and-civil-society,6
+Sport,sport,dcms-sectors-exc-tourism-and-civil-society,7
+Telecoms,telecoms,dcms-sectors-exc-tourism-and-civil-society,8
+Advertising and Marketing,advertising-and-marketing,creative-industries,9
+Architecture,architecture,creative-industries,10
+Crafts,crafts,creative-industries,11
+Design and Designer Fashion,design-and-designer-fashion,creative-industries,12
+"Film, TV, Radio and Photography",film-tv-radio-and-photography,creative-industries,13
+IT Software and Computer Services,it-software-and-computer-services,creative-industries,14
+Museums Galleries and Libraries,museums-galleries-and-libraries,creative-industries,15
+Music Performing and Visual Arts,music-performing-and-visual-arts,creative-industries,16
+Publishing,publishing,creative-industries,17
+Arts,arts,cultural-sector,18
+Crafts,cultural-crafts,cultural-sector,19
+Cultural Education,cultural-education,cultural-sector,20
+"Film,TV and Music",film-tv-and-music,cultural-sector,21
+Library and Archives,library-and-archives,cultural-sector,22
+Museums and Galleries,museums-and-galleries,cultural-sector,23
+Operation of Historical Sites and Similar Visitor Attractions,operation-of-historical-sites-and-similar-visitor-attractions,cultural-sector,24
+Photography,photography,cultural-sector,25
+Radio,radio,cultural-sector,26
+Computer programming Consultancy and Related Activities,computer-programming-consultancy-and-related-activities,digital-sector,27
+"Film, TV, Video, Radio and Music",film-tv-video-radio-and-music,digital-sector,28
+Information Service Activities,information-service-activities,digital-sector,29
+Manufacturing of Electronics and computers,manufacturing-of-electronics-and-computers,digital-sector,30
+Publishing Excluding Translation and Interpretation Activities,publishing-excluding-translation-and-interpretation-activities,digital-sector,31
+Repair of Computers and Communication Equipment,repair-of-computers-and-communication-equipment,digital-sector,32
+Software Publishing,software-publishing,digital-sector,33
+Telecommunications,telecommunications,digital-sector,34
+Wholesale of Computers and Electronics,wholesale-of-computers-and-electronics,digital-sector,35
+"All UK Pink Book Estimate, 2018",all-uk-2018-pink-book-estimate,,36

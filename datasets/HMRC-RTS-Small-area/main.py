@@ -26,7 +26,6 @@ scraper
 # -
 
 scraper.select_dataset(latest=True)
-scraper.dataset.family = 'trade'
 
 tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
 
@@ -52,27 +51,31 @@ table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] ==
 sorted(table)
 table = table[(table['Marker'] != 'residual-trade')]
 table = table[(table['Marker'] != 'below-threshold-traders')]
+table["Measure Type"] = table["Measure Type"].apply(pathify)
 table = table.drop_duplicates()
 
-#table.count()
-#t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
-#t = table[(table['HMRC Partner Geography'] == 'EU')]
-
-# -
-
-
-table['HMRC Partner Geography'].unique()
-
-# +
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
-#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
-cube_split = {'Count of Businesses': 'HMRC-RTS-Small-area_business_cnt',
-              'GBP Total': 'HMRC-RTS-Small-area_gbp'}
-for measure, file_name in cube_split.items():
-    cubes.add_cube(scraper, table.loc[table['Measure Type'] == measure].reset_index(drop=True).drop_duplicates(), file_name, graph='HMRC-RTS-Small-area')    
+scraper.dataset.family = 'trade'
+measures = {
+    'count-of-businesses': {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
+                "measure": "http://gss-data.org.uk/def/trade/measure/count",
+                "datatype": "double"
+            },
+    'gbp-total': {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/trade/measure/value",
+                "datatype": "double"
+            }
+}
+for measure, value_map in measures.items():
+    info["transform"]["columns"]["Value"] = value_map
+    table_wanted = table.loc[table['Measure Type'].str.strip() == measure].reset_index(drop=True).drop_duplicates()
+    cubes.add_cube(scraper, table_wanted, measure, info_json_dict=info, graph='HMRC-RTS-Small-area')   
 
 cubes.output_all()
 

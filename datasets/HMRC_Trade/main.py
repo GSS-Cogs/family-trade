@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -132,6 +132,94 @@ df['Year'] = df['Year'].astype(str).replace('\.', '', regex=True)
 df['Year'] = df['Year'].apply(date_time)
 trace.Year("Formating to be year/2019")
 
+# +
+df['Country'] = df['Country'].map({
+    'belgium': 'BE', 'czech-republic': 'CZ', 'denmark': 'DK', 'france': 'FR',
+    'germany': 'DE', 'republic-of-ireland': 'IE', 'italy': 'IT', 'netherlands': 'NL',
+    'poland': 'PL', 'spain': 'ES', 'sweden': 'SE', 'algeria': 'DZ', 
+    'australia': 'AU', 'bangladesh': 'BD', 'brazil': 'BR', 'canada': 'CA', 
+    'china': 'CN', 'hong-kong': 'HK', 'india': 'IN', 'israel': 'IL', 
+    'japan': 'JP', 'malaysia': 'MY', 'mexico': 'MX', 'nigeria': 'NG', 
+    'norway': 'NO', 'qatar': 'QA', 'russia': 'RU', 'saudi-arabia': 'SA',
+    'singapore': 'SG', 'south-africa': 'ZA', 'south-korea': 'KP', 'sri-lanka': 'LK',
+    'switzerland': 'CH', 'taiwan': 'TW', 'thailand': 'TH', 'turkey': 'TR', 
+    'uae': 'AE', 'united-states': 'US', 'vietnam': 'VN', 'eu': 'legacy-B5', 
+    'non-eu': 'D5', 'world': 'W1'
+})
+df['Zone'] = df['Zone'].map({ 
+    'eu': 'legacy-B5', 'non-eu': 'D5', 'world': 'W1'
+})
+
+df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age": "Age of Business"})
+
+df['Flow'].loc[(df['Flow'] == 'import')] = 'imports'
+df['Flow'].loc[(df['Flow'] == 'export')] = 'exports'
+df['Value'].loc[(df['Value'] == '')] = 0
+df['Value'] = df['Value'].astype(int)
+# -
+
+desc = """
+HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). 
+These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. 
+This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK. 
+These experimental releases are also accessible at www.uktradeinfo.com
+
+Disclaimer
+The methodology used to compute these statistics is still under development. 
+All data should be considered experimental official statistics: https://webarchive.nationalarchives.gov.uk/20160106005532/http://www.ons.gov.uk/ons/guide-method/method-quality/general-methodology/guide-to-experimental-statistics/index.html
+
+Notes
+
+1. This data contains estimates of Trade in Goods data matched with registered businesses from the Inter-Departmental Business Register (IDBR) for exporters and importers in 2019 for a selection of countries (see Metadata tab for more information).
+2. This data is now presented on a 'Special Trade' basis, in line with the change in the compilation method  for the UK Overseas Trade Statistics (OTS) - See section 3.1.1 in OTS Methodology: https://www.gov.uk/government/statistics/overseas-trade-statistics-methodologies
+3. More details on the methodology used to produce these estimates and issues to be aware of when using the data can be found on the metadata tab.
+4. These estimates do not cover all businesses. They do not cover:
+    • Unregistered businesses (those not registered for VAT or Economic Operator Registration and Identification (EORI)).
+5. Due to these experimental statistics being subject to active disclosure controls the data has been suppressed according to GSS guidance on disclosure control. 
+    Suppressed cells are shown as 'Suppressed'.
+7. The industry groups are based on UK Standard Industrial Classification 2007 (UK SIC 2007)
+8. Information about trade in goods statistics can be found here - https://www.uktradeinfo.com/trade-data/help-with-using-our-data/help
+    Information about trade the Inter-Departmental Business Register (IDBR) can be found here - https://www.ons.gov.uk/aboutus/whatwedo/paidservices/interdepartmentalbusinessregisteridbr		the ONS IDBR webpages
+    Information about UK Standard Industrial Classification 2007 (UK SIC 2007) can be found here - https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007
+
+Copyright
+© Crown copyright 2020
+This publication is licensed under the terms of the Open Government Licence v3.0
+except where otherwise stated. To view this licence, visit:
+nationalarchives.gov.uk/doc/open-government-licence/version/3
+
+You may re-use this document/publication free of charge in any format for research,
+private study or internal circulation within an organisation. You must re-use it accurately
+and not use it in a misleading context. The material must be acknowledged as Crown
+copyright and you must give the title of the source document / publication.
+
+Where we have identified any third party copyright information you will need to obtain
+permission from the copyright holders concerned.
+
+Any enquiries regarding this publication should be sent to:
+uktradeinfo@hmrc.gov.uk
+
+Contact Details
+
+HM Revenue and Customs
+Alexander House
+21 Victoria Avenue
+Southend on Sea
+SS99 1AA
+
+Email: uktradeinfo@hmrc.gov.uk
+
+Telephone: +44 (0) 3000 594250
+"""
+
+scraper.dataset.description = ""
+scraper.dataset.comment = """
+HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). 
+These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. 
+This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK. 
+These experimental releases are also accessible at www.uktradeinfo.com
+"""
+
 with pd.option_context('float_format', '{:f}'.format):
     print(df)
 
@@ -139,3 +227,23 @@ cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
 
 trace.render("spec_v1.html")
+
+# +
+#for c in df.columns:
+#    if (c not in ['Business Count','Employee Count','Value']):
+#        print(c)
+#        print(df[c].unique())
+#        print("###############################################################")
+
+# +
+#'UK trade in goods by business characteristics 2019 - data tables'
+# -
+
+
+
+
+
+
+
+
+

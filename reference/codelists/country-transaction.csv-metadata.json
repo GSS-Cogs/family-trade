@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/country-transaction/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/country-transaction/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/country-transaction/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/country-transaction/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-transaction",
@@ -84,6 +84,10 @@
             "rdfs:comment": "Dataset representing the 'Country Transaction' code list.",
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-transaction"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-28T00:00:00"
             }
         },
         {

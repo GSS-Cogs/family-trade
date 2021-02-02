@@ -1,9 +1,12 @@
 {
-    "title": "Trade in goods: all countries, seasonally adjusted",
+    "title": "UK total trade: all countries, non-seasonally adjusted",
     "publisher": "Office for National Statistics",
-    "description": "The annual and monthly goods export and import figures for all countries with the UK.",
-    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeallcountriesseasonallyadjusted",
-    "published": "2020-02-11",
+    "description": "Quarterly estimates of total trade, trade in goods and trade in services by country, non-seasonally adjusted.",
+    "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/uktotaltradeallcountriesnonseasonallyadjusted",
+    "datasetNotes": [
+        "Data is located on landing page under your download options"
+    ],
+    "published": "2020-01-22",
     "families": [
         "Trade"
     ],
@@ -12,34 +15,40 @@
         "stage": "Done"
     },
     "transform": {
-        "airtable": "rec2vZJEjUBsBay90",
+        "airtable": "recMJhku0J2Kbp8du",
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}"
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/dimension/ons-country",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
+                "codelist": false
             },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{flow}",
-                "description": ""
+                "codelist": false
             },
-            "ONS Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/ons-partner-geography/{ons_partner_geography}",
-                "description": ""
+            "Trade Type": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/trade-type",
+                "value": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type/{trade_type}",
+                "codelist": false
             },
             "Value": {
-              "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-              "measure": "http://gss-data.org.uk/def/measure/current-prices",
-              "datatype": "integer"
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "decimal"
             },
             "Marker": {
-              "attribute":"http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-              "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
-            },
-        "main_issue": "2"
-        }
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        },
+        "main_issue": 6
     },
-    "sizingNotes": "",
+    "sizingNotes": "Simple file structure, mid size table with non-complex dimensions and some footnotes.",
     "notes": ""
 }

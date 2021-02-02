@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[35]:
+# %%
 
 
 # -*- coding: utf-8 -*-
@@ -55,7 +56,7 @@ def cell_to_string(cell):
     return substring
 
 
-# In[36]:
+# %%
 
 
 from pandas import ExcelWriter
@@ -82,7 +83,7 @@ for table in scraper.distributions:
     counter += 1
 
 
-# In[37]:
+# %%
 
 
 counter = 0
@@ -391,14 +392,14 @@ for table in all_tabs:
     counter += 1
 
 
-# In[38]:
+# %%
 
 
 formatted_sheets = []
 
 
-# In[39]:
-
+# %%
+# Regional Trade in goods statistics - Business Count (Exports, proportion method)
 
 df = pd.concat([tidied_sheets[0],tidied_sheets[1],tidied_sheets[8],tidied_sheets[9]], sort = True)
 
@@ -423,20 +424,19 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-df['Measure Type'] = 'trade-proportional-count'
-df['Unit'] = 'proportional-count'
+df['Measure Type'] = 'number-of-exporters'
+df['Unit'] = 'businesses'
+df['Method'] = 'proportion'
 
-df = df[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
+df = df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Measure Type', 'Unit']]
 
 df['Value'] = df['Value'].astype(int)
-
+# Adding Business counts for PROPORTION method for both IMPORTS and EXPORTS
 formatted_sheets.append(df)
 
-df
 
-
-# In[40]:
-
+# %%
+# Regional Trade in goods statistics - Regional Comparison (Exports, proportion method)
 
 df = pd.concat([tidied_sheets[2],tidied_sheets[3],tidied_sheets[10],tidied_sheets[11]], sort = True)
 
@@ -462,25 +462,38 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-df[df['Unit'] == 'gbp-billions']
+#df[df['Unit'] == 'gbp-billions']
 
 
-# In[41]:
+# %%
+df['Measure Type'] = df['Measure Type'].str.replace('-ps-thousands','')
+df['Measure Type'] = df['Measure Type'].str.replace('-ps-billions','')
+df['Unit'] = df['Unit'].str.replace('count','businesses')
+df['Method'] = 'proportion'
+print(df['Measure Type'].unique())
+print(df['Unit'].unique())
+
+# Remove businesses as numbers are rounded differently for some numbers compared to the whole coun method meaning we get duplicate keys in Jenkins
+df = df[df['Unit'] != 'businesses']
+
+formatted_sheets.append(df)
+
+# %%
+# Adding Regional Comparisons for PROPORTION method for both IMPORTS and EXPORTS for 
+
+#averagePerTrade = df[df['Unit'] == 'gbp-thousands']
+
+#averagePerTrade['Measure Type'] = 'average-value-per-trade-proportional-count'
+#averagePerTrade['Unit'] = 'gbp-thousands'
+
+#averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Measure Type', 'Unit']]
+
+#formatted_sheets.append(averagePerTrade)
+
+#averagePerTrade
 
 
-averagePerTrade = df[df['Unit'] == 'gbp-thousands']
-
-averagePerTrade['Measure Type'] = 'average-value-per-trade-proportional-count'
-averagePerTrade['Unit'] = 'gbp-thousands'
-
-averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
-
-formatted_sheets.append(averagePerTrade)
-
-averagePerTrade
-
-
-# In[42]:
+# %%
 
 
 #Data included in non regional tabs
@@ -511,23 +524,23 @@ averagePerTrade
 #trade
 
 
-# In[43]:
+# %%
 
 
-valueOfTrade = df[df['Unit'] == 'gbp-billions']
+#valueOfTrade = df[df['Unit'] == 'gbp-billions']
 
-valueOfTrade['Measure Type'] = 'value-of-trade-proportional-count'
-valueOfTrade['Unit'] = 'gbp-billions'
+#valueOfTrade['Measure Type'] = 'value-of-trade-proportional-count'
+#valueOfTrade['Unit'] = 'gbp-billions'
 
-valueOfTrade = valueOfTrade[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
+#valueOfTrade = valueOfTrade[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Measure Type', 'Unit']]
 
-formatted_sheets.append(valueOfTrade)
+#formatted_sheets.append(valueOfTrade)
 
-valueOfTrade
+#valueOfTrade
 
 
-# In[44]:
-
+# %%
+# Regional Trade in goods statistics - Business Count (Exports, whole number method)
 
 df = pd.concat([tidied_sheets[4],tidied_sheets[5],tidied_sheets[12],tidied_sheets[13]], sort = True)
 
@@ -555,20 +568,23 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-df['Measure Type'] = 'trade-whole-count'
-df['Unit'] = 'count'
-
-df = df[['Period', 'Country', 'Region', 'Flow', 'Value', 'Marker', 'Measure Type', 'Unit']]
-
 df['Value'] = df['Value'].astype(int)
 
+#df.head(2)
+
+
+# %%
+df['Measure Type'] = 'number-of-exporters'
+df['Unit'] = 'businesses'
+df['Method'] = 'whole-number'
+print(df['Measure Type'].unique())
+print(df['Unit'].unique())
+df.head(5)
+df = df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Marker', 'Measure Type', 'Unit']]
 formatted_sheets.append(df)
 
-df
-
-
-# In[45]:
-
+# %%
+# Regional Trade in goods statistics - Regional Comparisons (Exports, whole number method)
 
 df = pd.concat([tidied_sheets[6],tidied_sheets[7],tidied_sheets[14],tidied_sheets[15]], sort = True)
 
@@ -595,25 +611,38 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-df
 
 
-# In[46]:
+# %%
+df['Measure Type'] = df['Measure Type'].str.replace('-ps-thousands','')
+df['Measure Type'] = df['Measure Type'].str.replace('-ps-billions','')
+df['Unit'] = df['Unit'].str.replace('count','businesses')
+df['Method'] = 'whole-number'
+print(df['Measure Type'].unique())
+print(df['Unit'].unique())
+print(df['Flow'].unique())
+
+# Remove businesses as numbers are rounded differently for some numbers compared to the whole coun method meaning we get duplicate keys in Jenkins
+df = df[df['Unit'] != 'businesses']
+
+formatted_sheets.append(df)
+
+# %%
 
 
-averagePerTrade = df[df['Unit'] == 'gbp-thousands']
+#averagePerTrade = df[df['Unit'] == 'gbp-thousands']
 
-averagePerTrade['Measure Type'] = 'average-value-per-trade-whole-count'
-averagePerTrade['Unit'] = 'gbp-thousands'
+#averagePerTrade['Measure Type'] = 'average-value-per-trade-whole-count'
+#averagePerTrade['Unit'] = 'gbp-thousands'
 
-averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
+#averagePerTrade = averagePerTrade[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
 
-formatted_sheets.append(averagePerTrade)
+#formatted_sheets.append(averagePerTrade)
 
-averagePerTrade
+#averagePerTrade
 
 
-# In[47]:
+# %%
 
 
 #Data included in Non Regional Tabs
@@ -644,40 +673,100 @@ averagePerTrade
 #trades
 
 
-# In[48]:
+# %%
 
 
-valueOfTrades = df[df['Unit'] == 'gbp-billions']
+#valueOfTrades = df[df['Unit'] == 'gbp-billions']
 
-valueOfTrades['Measure Type'] = 'value-of-imports-whole-count'
-valueOfTrades['Unit'] = 'gbp-billions'
+#valueOfTrades['Measure Type'] = 'value-of-imports-whole-count'
+#valueOfTrades['Unit'] = 'gbp-billions'
 
-valueOfTrades = valueOfTrades[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
+#valueOfTrades = valueOfTrades[['Period', 'Country', 'Region', 'Flow', 'Value', 'Measure Type', 'Unit']]
 
-formatted_sheets.append(valueOfTrades)
+#formatted_sheets.append(valueOfTrades)
 
-valueOfTrades
-
-
-# In[53]:
+#valueOfTrades
 
 
+# %%
+notes = """
+Data source
+
+This is additional analysis using the HMRC Regional Trade in Goods Statistics. 
+
+How to interpret the data
+
+Business Count: This data shows the number of businesses importing or exporting goods. This is broken down by their UK region and partner countries.
+Regional comparisons: This data shows import or export data within a particular quarter or year for UK regions alongside the same data for the UK. This is based on three metrics; the number of importing or exporting businesses , the value of trade, and the average value per business.
+
+Businesses can appear in more than one quarter and can trade with more than one destination. Therefore users should not add up across quarters or partner countries. 
+
+1. Methodology for allocating businesses to UK regions
+
+As a result of the HMRC RTS methodology consultation the way businesses are allocated to UK region and country has changed. The previous methodology allocated trade to a region based on where the headquarters of a business is located, supplemented by survey data to allow better allocation of multi-site businesses. 
+This survey data is out of date and HMRC decided to develop a new methodology.
+In the current methodology the trade value of a multi-site business is allocated to different regions based on a proportion of their employees in each region (based on linked information from the Inter Departmental Business Register). 
+Data on the number of traders is shown in two different way in the RTS release tables:
+Whole Number Method (does not add up to UK total): A business will be counted as one in every region they have employees. This represents the actual count of businesses in any region. However, it will mean the sum of the business count for each region will be greater than that for the UK. 
+
+Proportion Method (adds up to UK total): A business will be counted as a fraction in each region they trade based on the proportion of their employees in each region. An individual business counts as one business in the UK. The sum of businesses (whole and fractions) gives the total business count for a region.
+The data in this analysis uses both methods. Please refer to the correct output for each methodology and flow.
+
+2. The number of businesses importing or exporting
+
+Business counts are a count of all VAT Registered businesses exporting and importing. 
+Aside from the EU/non-EU split (published as part of the RTS) there is no disaggregation of businesses not required to submit full EU declarations (below threshold traders) by EU partner country. The supplementary analysis provided here does split the number of businesses by EU partner country but these do not include the below threshold traders.
+
+Exclusions
+This dataset excludes businesses that cannot be allocated to a region due to lack of information about the business (unallocated - unknown). It does include businesses where details are known, but cannot be allocated due to the type of business (unallocated - known).  Further information can be found in the 
+
+RTS Methodology paper.
+
+This analysis also excludes 'unallocated - unknown' in the UK value totals, in order to make ratios (exports per exporter) and comparisons valid. Where information is known about a business but it is not possible to allocate to a specific region it is classed as 'unallocated - known'. These 'unallocated - known' businesses are included in both the value and count for UK totals.
+RTS data excludes trade in non-monetary gold, whereas HMRC OTS data does include this from 2005 onwards. RTS data also excludes non-response estimates. Therefore, it matches the 'total reported trade' figures in the OTS with the exception of non-monetary gold. More information can be found in section 3.20 of the RTS Methodology Paper.
+
+Suppressions
+A very small number of cells in the Business Counts tab have been suppressed under our statistical disclosure policy. These are shown a ‘S’ under the business count. Due to a review of disclosure, some data previously suppressed under the output produce by Department for International Trade (Exports proportion method only) may now be shown.
+Further information on trade in goods by UK region
+HMRC publish quarterly data on trade by UK region in Regional Trade in Goods Statistics. This includes information on the number of exporters to the EU and Non-EU.
+https://www.uktradeinfo.com/Statistics/RTS/Pages/default.aspx
+
+Detail on trade value by UK region, trade partner and commodity is available in Build Your Own Tables:
+https://www.uktradeinfo.com/Statistics/BuildYourOwnTables/Pages/Home.aspx
+
+2020 data is provisional and subject to update.
+"""
+
+# %%
+scraper.dataset.comment = "These spreadsheets provide supplementary data to that in the release of the HM Revenue & Customs Regional trade in goods statistics."
+scraper.dataset.description = notes
+
+print(scraper.dataset.title)
+print(scraper.dataset.comment)
+print(scraper.dataset.description)
+
+# %%
+print("Number of dataframes in List: " + str(len(formatted_sheets)))
 formatted_df = pd.concat(formatted_sheets, sort = True).fillna('')
 
-formatted_df = formatted_df[['Period', 'Country', 'Region', 'Flow', 'Value', 'Marker', 'Measure Type', 'Unit']]
+print(formatted_df['Period'].count())
+formatted_df = formatted_df.drop_duplicates()
+print(formatted_df['Period'].count())
+print(formatted_df.columns)
+formatted_df = formatted_df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
-formatted_df
+formatted_df.head(5)
 
 
-# In[54]:
+# %%
 
 
 csvName = "Regional trade statistics interactive analysis - Importers, Exporters"
 cubes.add_cube(scraper, formatted_df.drop_duplicates(), csvName)
 
 
-# In[ ]:
-
+# %%
+df = formatted_df
 
 from IPython.core.display import HTML
 for col in df:
@@ -687,9 +776,11 @@ for col in df:
         display(df[col].cat.categories)
 
 
-# In[55]:
+# %%
 
 
 cubes.output_all()
 trace.render()
 
+
+# %%
