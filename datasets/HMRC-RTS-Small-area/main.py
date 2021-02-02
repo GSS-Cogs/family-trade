@@ -51,22 +51,22 @@ table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] ==
 sorted(table)
 table = table[(table['Marker'] != 'residual-trade')]
 table = table[(table['Marker'] != 'below-threshold-traders')]
+table["Measure Type"] = table["Measure Type"].apply(pathify)
 table = table.drop_duplicates()
 
-#table.count()
-#t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
-#t = table[(table['HMRC Partner Geography'] == 'EU')]
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 # -
 
 scraper.dataset.family = 'trade'
 measures = {
-    'Count of Businesses': {
+    'count-of-businesses': {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
                 "measure": "http://gss-data.org.uk/def/trade/measure/count",
                 "datatype": "double"
             },
-    'GBP Total': {
+    'gbp-total': {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/trade/measure/value",
                 "datatype": "double"
