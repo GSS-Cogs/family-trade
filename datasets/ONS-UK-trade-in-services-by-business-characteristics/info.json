@@ -23,27 +23,27 @@
             },
             "Business size": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands/{business_size}",
+                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{business_size}",
                 "codelist": false
             },
             "Country": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/eu-rw-ww",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww/{country}",
+                "value": "http://gss-data.org.uk/def/trade/concept/eu-rw-ww/{country}",
                 "codelist": false
             },
             "Ownership": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/countries-of-ownership",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership/{ownership}",
+                "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{ownership}",
                 "codelist": false
             },
             "Industry": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-industries",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/{industry}",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-industries/{industry}",
                 "codelist": false
             },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{flow}",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
                 "codelist": false
             },
             "Value": {
