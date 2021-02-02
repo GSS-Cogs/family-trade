@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -122,8 +122,8 @@ for name, tab in tabs.items():
 #Post Processing 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
-df['Marker'].replace('..', 'suppressed-data', inplace=True)
-trace.Marker("Formatting .. to equal suppressed-data")
+df['Marker'].replace('..', 'suppressed', inplace=True)
+trace.Marker("Formatting .. to equal suppressed")
 df['Period'] =  'year/' + df['Period']
 trace.Period("Formatting to year/0000")
 df['Business size'].replace('Country', 'any', inplace=True)
@@ -183,6 +183,13 @@ scraper.dataset.description = des
 scraper.dataset.comment = comment
 scraper.dataset.title = datasetTitle
 
+df.head(10)
+for c in df.columns:
+    if c != "Value":
+        print(c)
+        print(df[c].unique())
+        print("########################################################")
+
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
 trace.render("spec_v1.html")
@@ -211,3 +218,5 @@ df = df[["all_dimensions_concatenated", "Value"]]
 df = df.sort_values(by=['all_dimensions_concatenated'])
 df.to_csv("duplicates_with_values.csv", index=False)
 print("DONE")
+
+

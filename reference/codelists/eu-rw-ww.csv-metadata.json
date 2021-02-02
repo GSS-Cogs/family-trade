@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/eu-rw-ww/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/eu-rw-ww/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww",
@@ -84,6 +84,10 @@
             "rdfs:comment": "Dataset representing the 'Eu Rw Ww' code list.",
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-02T00:00:00"
             }
         },
         {
