@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -212,7 +212,6 @@ savepreviewhtml(tidy_sheet, fname = tab.name + 'Preview.html')
 trace.with_preview(tidy_sheet)
 # store 4a and appending to combined_dataframe
 trace.store("combined_dataframe", tidy_sheet.topandas())
-
 # +
 # tab 4b
 tab = tabs['4b'] #set tab as tab 4b
@@ -304,8 +303,6 @@ tidy
 cubes.add_cube(scraper, tidy.drop_duplicates(), distribution.title)
 cubes.output_all()
 trace.render("spec_v1.html")
-<<<<<<< HEAD
-=======
 
 # +
 #  Keeping for reference
@@ -319,7 +316,4 @@ trace.render("spec_v1.html")
 # 'tees-valley', 'west-of-england', 'cardiff-capital-region',
 # 'swansea-bay', 'aberdeen-and-aberdeenshire',
 # 'edinburgh-and-south-east-scotland', 'glasgow-city-region'
-# -
 
-
->>>>>>> master
