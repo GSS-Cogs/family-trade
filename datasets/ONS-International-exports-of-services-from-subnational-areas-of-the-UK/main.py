@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -155,7 +155,7 @@ savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
 trace.with_preview(tidy_sheet)
 #store 2b and appending to combined_dataframe
 trace.store("combined_dataframe", tidy_sheet.topandas())
-# +
+# # +
 #tab 3
 tab = tabs['3'] #start tracer for tab 3
 trace.start(datasetTitle, tab, columns, data_download)
@@ -185,7 +185,7 @@ savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
 trace.with_preview(tidy_sheet)
 #stor 3 and appending to combined_dataframe
 trace.store("combined_dataframe", tidy_sheet.topandas())
-# +
+# # +
 # tab 4a
 tab = tabs['4a'] #set tab as tab 4a
 trace.start(datasetTitle, tab, columns, data_download) #start traer for tab 4a
@@ -304,3 +304,22 @@ tidy
 cubes.add_cube(scraper, tidy.drop_duplicates(), distribution.title)
 cubes.output_all()
 trace.render("spec_v1.html")
+<<<<<<< HEAD
+=======
+
+# +
+#  Keeping for reference
+#  Unit = gbp-million
+#  , Measure Type = GBP Total
+#
+# Note the following do not have a NUTS code 
+# cambridgeshire-and-peterborough',
+# 'greater-manchester', 'liverpool-city-region', 'inner-london',
+# 'outer-london', 'north-of-tyne', 'sheffield-city-region',
+# 'tees-valley', 'west-of-england', 'cardiff-capital-region',
+# 'swansea-bay', 'aberdeen-and-aberdeenshire',
+# 'edinburgh-and-south-east-scotland', 'glasgow-city-region'
+# -
+
+
+>>>>>>> master

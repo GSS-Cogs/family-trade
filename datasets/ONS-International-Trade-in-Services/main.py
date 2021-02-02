@@ -15,6 +15,7 @@
 
 # +
 from gssutils import *
+from IPython.core.display import display
 import json
 
 

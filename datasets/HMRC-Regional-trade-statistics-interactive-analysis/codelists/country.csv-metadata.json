@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "#table",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/country",
     "url": "country.csv",
+    "rdfs:label": "Country",
+    "dc:title": "Country",
     "tableSchema": {
         "columns": [
             {
@@ -16,7 +18,7 @@
                 "name": "notation",
                 "datatype": {
                     "base": "string",
-                    "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
                 },
                 "required": true,
                 "propertyUrl": "skos:notation"
@@ -26,7 +28,7 @@
                 "name": "parent_notation",
                 "datatype": {
                     "base": "string",
-                    "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
@@ -34,17 +36,10 @@
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-            },
-            {
-                "titles": "Description",
-                "name": "description",
-                "datatype": "string",
-                "required": false,
-                "propertyUrl": "rdfs:comment"
             },
             {
                 "virtual": true,
@@ -65,65 +60,72 @@
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
-        ],
-        "skos:hasTopConcept": {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#concept/country/all"
-        }
+        ]
     },
-    "rdfs:label": "Country",
-    "dc:title": "Country",
     "rdfs:seeAlso": [
         {
-            "@id": "#table/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/country/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "#table"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/country"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "#table"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/country"
             },
             "rdfs:label": "Country",
             "dc:title": "Country",
             "rdfs:comment": "Dataset representing the 'Country' code list.",
+            "dc:license": {
+                "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+            },
+            "dc:creator": {
+                "@id": "https://www.gov.uk/government/organisations/hm-revenue-customs"
+            },
+            "dc:publisher": {
+                "@id": "https://www.gov.uk/government/organisations/hm-revenue-customs"
+            },
+            "dcat:contactPoint": {
+                "@id": "mailto:cogs@ons.gov.uk"
+            },
+            "dcat:landingPage": {
+                "@id": "https://www.gov.uk/government/statistical-data-sets/hmrc-regional-trade-statistics-interactive-analysis-second-quarter-2020"
+            },
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-01-11T09:00:00.000000"
+                "@value": "2021-01-25T00:00:00"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-01-11T09:00:00.000000"
-            },
-            "dcat:landingPage": {
-                "@id": "https://www.gov.uk/government/statistical-data-sets/regional-trade-statistics-interactive-analysis-second-quarter-2020"
+                "@value": "2021-01-25T00:00:00"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "#table/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/country/catalog-record"
             }
         },
         {
-            "@id": "#table/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/country/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "#table/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/country/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "#table"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/country"
             },
             "dc:title": "Country Catalog Record",
             "rdfs:label": "Country Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "22020-09-17T09:00:00.000000"
+                "@value": "2021-01-25T09:58:32.892695"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-09-17T09:00:00.000000"
+                "@value": "2021-01-25T09:58:32.892695"
             }
         }
     ]

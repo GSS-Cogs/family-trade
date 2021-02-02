@@ -17,8 +17,7 @@
         "airtable": "recmp8VQCu6Nya893",
         "columns": {
             "Period": {
-                "source": "",
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Value": {
@@ -31,14 +30,13 @@
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             },
             "Flow": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
-                "value": "http://gss-data.org.uk/def/concept/flow/{flow}",
-                "description": ""
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/concept/trade/flow-directions/{flow}"
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/dcms-country",
+                "parent": "http://gss-data.org.uk/def/dimension/dcms-country",
                 "value": "http://gss-data.org.uk/def/concept/dcms-country/{country}",
-                "description": ""
+                "codelist": false
             }
         },
         "transformStage": [

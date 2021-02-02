@@ -219,13 +219,9 @@ for col in observations:
 
 # +
 
-trace.add_column("Unit")
-trace.Unit('Set as "gbp-million".')
-observations['Unit'] = 'gbp-million'
-
 observations = observations[['Investment Direction', 'Year', 'International Trade Basis',
                              'FDI Area', 'FDI Component', 'FDI Industry',
-                             'Value', 'Unit', 'Marker',
+                             'Value', 'Marker',
                              '__x', '__y', '__tablename']]
 # -
 

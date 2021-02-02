@@ -23,22 +23,30 @@
             },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow/{flow}",
-                "description": "Balance refers to the trade balance between exports and imports, calculated using exports minus imports. A positive figure indicates a trade surplus and a negative figure indicates a trade deficit.",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
                 "codelist": false
             },
             "Measure Type": {
-        		"dimension": "http://purl.org/linked-data/cube#measureType",
-        		"value": "http://gss-data.org.uk/def/measure/{measure_type}",
-        		"types": ["value-of-imports-whole-count", "average-value-per-trade-whole-count","trade-whole-count","value-of-trade-proportional-count","average-value-per-trade-proportional-count","trade-proportional-count"]
-      		},
-      		"Unit": {
-        		"attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-        		"value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
-      		},
-      		"Value": {
-        		"datatype": "double"
-      		},
+                "dimension": "http://purl.org/linked-data/cube#measureType",
+                "value": "http://gss-data.org.uk/def/measure/{measure_type}",
+                "types": [
+                    "value-of-imports",
+                    "value-of-exports",
+                    "number-of-exporters",
+                    "number-of-importers",
+                    "average-value-per-importer",
+                    "average-value-per-exporter",
+                    "value-of-exports",
+                    "value-of-imports"
+                ]
+            },
+            "Unit": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
+            },
+            "Value": {
+                "datatype": "double"
+            },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"

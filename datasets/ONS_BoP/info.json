@@ -1,23 +1,29 @@
 {
-    "title": "Balance of Payments",
+    "title": "Balance of payments",
     "publisher": "Office for National Statistics",
-    "description": "Quarterly summary of balance of payments accounts including the current account, capital transfers, transactions and levels of UK external assets and liabilities.",
-    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/balanceofpaymentsstatisticalbulletintables",
-    "datasetNotes": [
-        "On landing page, link to latest release page, Link to \"View all data in this statistical bulletin, Balance of Payments time Series"
+    "description": "Quarterly summary of balance of payments accounts including the current account, capital transfers, transactions, and levels of UK external assets and liabilities.",
+    "landingPage": [
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/balanceofpaymentsstatisticalbulletintables",
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/balanceofpaymentsstatisticalbulletintables/current"
     ],
-    "published": "2019-12-20",
+    "datasetNotes": [
+        "On landing page, latest version"
+    ],
+    "published": "2020-09-30",
     "families": [
         "Trade"
     ],
     "extract": {
-        "source": "CSV, XLS",
-        "stage": "Prioritized"
+        "source": "XLS",
+        "stage": "Not Required"
     },
     "transform": {
-        "airtable": "rec01iOHi8PJSYkiB",
+        "airtable": [
+            "rec01iOHi8PJSYkiB",
+            "rec1LjZkS2cR310Az"
+        ],
         "main_issue": 1
     },
     "sizingNotes": "",
-    "notes": ""
+    "notes": "This is a duplicate dataset with Github issue #1 and is therefore not required.  ONS Bop undated to Balance of Payments"
 }
