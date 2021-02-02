@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.7.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -18,6 +18,7 @@
 # +
 from gssutils import *
 import json
+import numpy as np 
 
 cubes = Cubes("info.json")
 trace = TransformTrace()
@@ -31,7 +32,7 @@ tabs = {tab.name: tab for tab in distribution.as_databaker()}
 
 data_download = distribution.downloadURL
 datasetTitle = distribution.title
-columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker']
+columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker', 'Sheet Name']
 
 # +
 # tab 1a
@@ -47,11 +48,15 @@ trace.Service_Origin_Geography("Defined from cell ref A4 and right")
 
 trace.Service_Destination("Hardcoded as all")
 
+sheet = tab.name
+
 observations = geography.fill(DOWN).is_not_blank().is_not_whitespace()
 dimensions = [
     HDim(industry, 'Export Services', DIRECTLY, LEFT),
     HDim(geography, 'Service Origin Geography', DIRECTLY, ABOVE),
-    HDimConst('Service Destination', 'all')
+    HDimConst('Service Destination', 'all'),
+    HDimConst('NUTS','nuts1/'),
+    HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 savepreviewhtml(tidy_sheet,fname = tab.name+ "Preview.html")
@@ -75,11 +80,15 @@ trace.Service_Origin_Geography("Defined from cell ref A4 across")
 destination = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
 trace.Service_Destination("Defined from cell A5 across")
 
+sheet = tab.name
+
 observations = destination.fill(DOWN).is_not_blank().is_not_whitespace() 
 dimensions = [
             HDim(industry,'Export Services',DIRECTLY,LEFT),
             HDim(destination, 'Service Destination',DIRECTLY,ABOVE),
             HDim(origin, 'Service Origin Geography',CLOSEST,LEFT),
+            HDimConst('NUTS','nuts1/'),
+            HDimConst("Sheet", tab.name)
 ]  
 tidy_sheet = ConversionSegment(tab, dimensions, observations)   
 savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
@@ -101,12 +110,15 @@ trace.Service_Origin_Geography("Defined from cell ref A5 down")
 
 trace.Service_Destination("Hardcoded as all")
 
+sheet = tab.name
+
 observations = industry.fill(DOWN).is_not_blank().is_not_whitespace() 
 dimensions = [
             HDim(industry,'Export Services',DIRECTLY,ABOVE),
             HDim(geography, 'Service Origin Geography',DIRECTLY,LEFT),
             HDimConst('Service Destination','all'),
-            HDimConst('NUTS','nuts2/'),  # geography in this tab represents nuts2, defining constant to append to front of Service Origin Geography column once in df 
+            HDimConst('NUTS','nuts2/'),  # geography in this tab represents nuts2, defining constant to append to front of Service Origin Geography column once in df
+            HDimConst("Sheet", tab.name)
 ]  
 tidy_sheet = ConversionSegment(tab, dimensions, observations)   
 savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
@@ -128,11 +140,15 @@ trace.Service_Destination("Defined from cell ref B5 across")
 origin = cell.fill(DOWN).is_not_blank().is_not_whitespace()
 trace.Service_Origin_Geography("Defined from cell ref B5 down")
 
+sheet = tab.name
+
 observations = destination.fill(DOWN).is_not_blank().is_not_whitespace()
 dimensions = [
     HDim(industry, "Export Services", CLOSEST, LEFT),
     HDim(destination, "Service Destination", DIRECTLY, ABOVE),
     HDim(origin, "Service Origin Geography", DIRECTLY, LEFT),
+    HDimConst('NUTS','nuts2/'),
+    HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
@@ -153,12 +169,16 @@ trace.Service_Origin_Geography("Defined from cell ref A4 down")
 destination = cell.shift(1,0).fill(RIGHT).is_not_blank().is_not_whitespace() \
             .filter(lambda x: type(x.value) != 'Percentage' not in x.value)
 trace.Service_Destination("Defined from cell ref B4 across excluding percentage values")
+
+sheet = tab.name
+
 observations = destination.fill(DOWN).is_not_blank().is_not_whitespace()
 dimensions = [
     HDimConst('Export Services', 'all services'),
     HDim(origin, 'Service Origin Geography', DIRECTLY, LEFT),
     HDim(destination, 'Service Destination', DIRECTLY, ABOVE),
     HDimConst('NUTS', 'nuts3/'), #geography in this tab represents nuts3, definig constant to append to front of Service Origin Geography column once in df
+    HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 savepreviewhtml(tidy_sheet, fname = tab.name + "Preview.html")
@@ -178,18 +198,20 @@ geography = cell.fill(RIGHT).is_not_blank().is_not_whitespace()
 trace.Service_Origin_Geography("Defined from cell ref across")
 trace.Service_Destination("Hardcoded as all")
 
+sheet = tab.name
+
 observations = geography.fill(DOWN).is_not_blank().is_not_whitespace() 
 dimensions = [
     HDim(industry, 'Export Services', DIRECTLY, LEFT ),
     HDim(geography, 'Service Origin Geography', DIRECTLY, ABOVE),
     HDimConst('Service Destination', 'all'),
+    HDimConst("Sheet", tab.name)
 ]
 tidy_sheet = ConversionSegment(tab, dimensions,observations)
 savepreviewhtml(tidy_sheet, fname = tab.name + 'Preview.html')
 trace.with_preview(tidy_sheet)
 # store 4a and appending to combined_dataframe
 trace.store("combined_dataframe", tidy_sheet.topandas())
-
 # +
 # tab 4b
 tab = tabs['4b'] #set tab as tab 4b
@@ -205,11 +227,14 @@ trace.Service_Origin_Geography("Defined from cell ref A6 across")
 destination = cell.fill(RIGHT).is_not_blank().is_not_whitespace() 
 trace.Service_Destination("Defined from cell ref A5 across")
 
+sheet = tab.name
+
 observations = destination.fill(DOWN).is_not_blank().is_not_whitespace() 
 dimensions = [
             HDim(industry,'Export Services',DIRECTLY,LEFT),
             HDim(destination, 'Service Destination',DIRECTLY,ABOVE),
-            HDim(origin, 'Service Origin Geography',CLOSEST,LEFT),    
+            HDim(origin, 'Service Origin Geography',CLOSEST,LEFT), 
+            HDimConst("Sheet", tab.name)
 ]  
 tidy_sheet = ConversionSegment(tab, dimensions, observations)   
 savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
@@ -220,43 +245,15 @@ trace.store("combined_dataframe", tidy_sheet.topandas())
 
 #post processing
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-df
 
 df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 
-#mapping Service Origin Geography outputs to nuts1 codes 
-trace.Service_Origin_Geography("mapping Service Origin Geography outputs to nuts1 nuts2 and nuts3 codes ")
-df['Service Origin Geography'] = df['Service Origin Geography'].map(
-    lambda x: {  
-'United Kingdom':'nuts1/all',
-'North East ':'nuts1/UKC',
-'North West':'nuts1/UKD',
-'Yorkshire and The Humber':'nuts1/UKE',
-'East Midlands':'nuts1/UKF',
-'West Midlands':'nuts1/UKG',
-'East of England':'nuts1/UKH',
-'London':'nuts1/UKI',
-'South East':'nuts1/UKJ',
-'South West':'nuts1/UKK',
-'Wales':'nuts1/UKL',
-'Scotland':'nuts1/UKM',
-'Northern Ireland':'nuts1/UKN'      
-        }.get(x, x))
-
-f1=(df['NUTS'] =='nuts2/')
-df.loc[f1,'Service Origin Geography'] = 'nuts2/' + df.loc[f1,'Service Origin Geography']
-
-f1=(df['NUTS'] =='nuts3/')
-df.loc[f1,'Service Origin Geography'] = 'nuts3/' + df.loc[f1,'Service Origin Geography']
-
+df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 
 df['Period'] = "year/2017"
 trace.Period("Hard coded as year/2017")
 
 df['Export Services'] = df['Export Services'].apply(pathify)
-df
-
-df["Service Origin Geography"] = df["Service Origin Geography"].apply(pathify)
 
 df["Service Destination"] = df["Service Destination"].apply(pathify)
 
@@ -267,6 +264,36 @@ df['Marker'] = df['Marker'].map(lambda x: { '..' : 'suppressed' }.get(x, x))
 
 df['Flow Directions'] = 'exports'
 trace.Flow_Directions("Adding Flow directions column to dataframe with value exports")
+
+#Changing notation for nuts 1 values one. (Tabs 1a and 1b)
+f1=((df['NUTS'] =='nuts1/'))
+df.loc[f1,'Service Origin Geography'] = df.loc[f1,'Service Origin Geography'].map(
+    lambda x: {  
+        'United Kingdom':'all',
+        'North East ':'UKC',
+        'North West':'UKD',
+        'Yorkshire and The Humber':'UKE',
+        'East Midlands':'UKF',
+        'West Midlands':'UKG',
+        'East of England':'UKH',
+        'London':'UKI',
+        'South East':'UKJ',
+        'South West':'UKK',
+        'Wales':'UKL',
+        'Scotland':'UKM',
+        'Northern Ireland':'UKN'      
+         }.get(x, x))
+
+df['Service Origin Geography'].unique()
+
+#adding in the nuts?/ notation to each value in Service Origin Geography
+df['NUTS'].replace(np.nan, '', inplace=True)
+
+df['Service Origin Geography'] = df['NUTS'] + df['Service Origin Geography']
+
+df['Service Origin Geography'] = df['Service Origin Geography'].apply(pathify)
+
+df['Service Origin Geography'].unique()
 
 #define the column order output into dataframe called tidy
 tidy = df[['Period','Export Services','Service Origin Geography','Service Destination', 'Flow Directions', 'Value','Marker']]
@@ -289,6 +316,4 @@ trace.render("spec_v1.html")
 # 'tees-valley', 'west-of-england', 'cardiff-capital-region',
 # 'swansea-bay', 'aberdeen-and-aberdeenshire',
 # 'edinburgh-and-south-east-scotland', 'glasgow-city-region'
-# -
-
 
