@@ -94,6 +94,12 @@ for tab in tabs:
         df['Period'] = df['Period'] + df['Quarter']
         df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
         df.drop(['Quarter'], axis=1, inplace=True)
+        
+        if 'CDID' in df.columns:
+            df.drop('CDID', axis=1, inplace=True)
+        
+        df['OBS'].loc[(df['OBS'] == '')] = '0'
+        df['OBS'] = df['OBS'].astype(int)
 
         df['Account Type'] = df['Account Type'].map(lambda x: x.split()[0]) + ' ' +  df['Account Type'].map(lambda x: x.split()[1])
         df['Account Type'] = df['Account Type'].str.rstrip('1')
@@ -104,7 +110,9 @@ for tab in tabs:
         df['Flow Directions'] = df['Flow Directions'].map(lambda x: x.split()[0])
         df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
-        tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
+        #tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
+        #  'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'Account Type', 'Value', 
           'Measure Type', 'Unit']]
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type'):
@@ -116,7 +124,8 @@ for tab in tabs:
     if 'B2' in tab.name: 
 
         title = distribution.title + ' :Trade in goods and services'
-        columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
+        #columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
+        columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
 
         trace.Flow_Directions("Selected as Exports, Imports and Balances")
@@ -186,13 +195,20 @@ for tab in tabs:
         df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
         df.drop(['Quarter'], axis=1, inplace=True)
         
+        if 'CDID' in df.columns:
+            df.drop('CDID', axis=1, inplace=True)
+        
+        df['OBS'].loc[(df['OBS'] == '')] = '0'
+        df['OBS'] = df['OBS'].astype(int)
+        
         df['Flow Directions'] = df['Flow Directions'].map(lambda x: x.split()[0])
         df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted' : 'NSA' }})
         df['Product'] = df['Product'].str.lstrip()
         df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
         df['Marker'].replace(' -', 'unknown', inplace=True)
         
-        tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
+        #tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
         for column in tidy:
             if column in ('Flow Directions', 'Product', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
@@ -202,7 +218,9 @@ for tab in tabs:
     #B4, B4A & B4B
     if 'B4' in tab.name: 
         title = distribution.title + ' :Primary income'
-        columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
+        #columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
+        columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']
+        
         trace.start(title, tab, columns, distribution.downloadURL)   
         
         income = tab.excel_ref('B10').expand(DOWN).is_not_blank()  
@@ -248,6 +266,12 @@ for tab in tabs:
         df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
         df.drop(['Quarter'], axis=1, inplace=True)
         
+        if 'CDID' in df.columns:
+            df.drop('CDID', axis=1, inplace=True)
+        
+        df['OBS'].loc[(df['OBS'] == '')] = '0'
+        df['OBS'] = df['OBS'].astype(int)
+        
         df.rename(columns={'OBS' : 'Value'}, inplace=True)
 
         df['Income Description'] = df['Income Description'].str.lstrip()
@@ -260,7 +284,8 @@ for tab in tabs:
                                    ' (Foreign earnings on investment in UK)' : 'Foreign earnings on investment in the UK',
                                    ' (Foreign earnings on investment in the UK)' : 'Foreign earnings on investment in the UK'}})
     
-        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
+        #tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']]
         
         for column in tidy:
             if column in ('Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type'):
@@ -272,8 +297,10 @@ for tab in tabs:
     # Tabs B5 and B5A    
     if (tab.name == 'B5') or (tab.name == 'B5A'):
         title = distribution.title + ' :Secondary income'
+        #columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 
+        #   'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 
-           'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
+           'Value', 'Marker', 'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
         
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,24,43]) - tab.excel_ref('B51').expand(DOWN)
@@ -311,6 +338,12 @@ for tab in tabs:
         df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
         df.drop(['Quarter'], axis=1, inplace=True)
         
+        if 'CDID' in df.columns:
+            df.drop('CDID', axis=1, inplace=True)
+        
+        df['OBS'].loc[(df['OBS'] == '')] = '0'
+        df['OBS'] = df['OBS'].astype(int)
+        
         df['Income Description'] = df['Income Description'].str.rstrip('2')
         df['Income Description'] = df['Income Description'].str.rstrip('3')
         df['Income Description'] = df['Income Description'].str.lstrip()
@@ -322,7 +355,8 @@ for tab in tabs:
         
         df.rename(columns={'OBS' : 'Value', 'DATAMAKER' : 'Marker'}, inplace=True)
         
-        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
+        #tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']]
         
         for column in tidy:
             if column in ('Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type'):
@@ -333,7 +367,9 @@ for tab in tabs:
     
     if (tab.name == 'B6') or (tab.name == 'B6A'):
         title = distribution.title + ' :Transactions with the EU and EMU'
-        columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']
+        #columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']
+        columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']
+        
         trace.start(title, tab, columns, distribution.downloadURL)
         
         emu_index = [12,14,17,19,21,25,29,31,34,36,38,42,46,48,51,53,55,59]
@@ -374,7 +410,13 @@ for tab in tabs:
         df['Period'] = df['Period'] + df['Quarter']
         df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
         df.drop(['Quarter'], axis=1, inplace=True)
-
+        
+        if 'CDID' in df.columns:
+            df.drop('CDID', axis=1, inplace=True)
+        
+        df['OBS'].loc[(df['OBS'] == '')] = '0'
+        df['OBS'] = df['OBS'].astype(int)
+        
         df['Account Type'] = df['Account Type'].map(lambda x: x.split()[0]) + ' ' +  df['Account Type'].map(lambda x: x.split()[1])
         df['Account Type'] = df['Account Type'].str.rstrip(':')
         df['Services'] = df['Services'].str.rstrip('4')
@@ -384,15 +426,25 @@ for tab in tabs:
         df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
         df['Marker'].replace(' -', 'unknown', inplace=True)
         
-        tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
+        df['Flow Directions'] = df['Flow Directions'].str.strip().apply(pathify)
+        df['Account Type'] = df['Account Type'].str.strip().apply(pathify)
+        df['Transaction Type'] = df['Transaction Type'].str.strip().apply(pathify)
+        df['Services'] = df['Services'].str.strip().apply(pathify)
+        df['Members'] = df['Members'].str.strip().apply(pathify)
+        
+        #tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']]
+        
         cubes.add_cube(scraper, tidy, title)
     
     
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
     if (tab.name == 'B6B') or (tab.name == 'B6B_2') or (tab.name == 'B6B_3') or (tab.name == 'B6C') or (tab.name == 'B6C_2') or (tab.name == 'B6C_3'):
         title = distribution.title + ' :Transactions with non-EU countries'
+        #columns = ['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 
+        #   'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 
-           'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
+           'Value', 'Marker', 'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
        
         account_Type = tab.excel_ref('B1')
@@ -441,6 +493,12 @@ for tab in tabs:
         df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' +                                 right(x,2))
         df.drop(['Quarter'], axis=1, inplace=True)
         
+        if 'CDID' in df.columns:
+            df.drop('CDID', axis=1, inplace=True)
+        
+        df['OBS'].loc[(df['OBS'] == '')] = '0'
+        df['OBS'] = df['OBS'].astype(int)
+        
         df['Account Type'] = df['Account Type'].map(lambda x: x.split()[0]) + ' ' +  df['Account Type'].map(lambda x: x.split()[1])
         df['Account Type'] = df['Account Type'].str.rstrip(':')
         df['Transaction Type'] = df['Transaction Type'].str.rstrip('1')
@@ -449,7 +507,9 @@ for tab in tabs:
         
         df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
         
-        tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
+        #tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']]
+        
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction'):
                 tidy[column] = tidy[column].str.lstrip()
@@ -460,7 +520,9 @@ for tab in tabs:
     # # Tabs B7_B7A
     if 'B7' in tab.name: 
         title = distribution.title + ' :Capital Account'
-        columns = ['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
+        #columns = ['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
+        #   'Marker','Measure Type', 'Unit']
+        columns = ['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'Account Type', 'Value', 
            'Marker','Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
         
@@ -500,6 +562,9 @@ for tab in tabs:
         
         if 'CDID' in df.columns:
             df.drop('CDID', axis=1, inplace=True)
+
+        df['OBS'].loc[(df['OBS'] == '')] = '0'
+        df['OBS'] = df['OBS'].astype(int)
             
         df['Account Type'] = df['Account Type'].map(lambda x: x.split()[0]) + ' ' +  df['Account Type'].map(lambda x: x.split()[1])
         df['Account Type'] = df['Account Type'].str.rstrip('1')
@@ -526,11 +591,5 @@ cubes.output_all()
 
 trace.render("spec_v1.html")
 
-# +
-
-# # + endofcell="--"
-
-# --
-# -
 
 
