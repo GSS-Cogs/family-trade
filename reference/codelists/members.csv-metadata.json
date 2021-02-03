@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/members/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/members/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/members/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/members/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/members",
@@ -84,14 +84,6 @@
             "rdfs:comment": "Dataset representing the 'Members' code list.",
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/members"
-            },
-            "dc:modified": {
-                "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.175319"
-            },
-            "dc:issued": {
-                "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.175319"
             }
         },
         {

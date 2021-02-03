@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.6.0
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -498,6 +498,9 @@ for tab in tabs:
         df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
         df.drop(['Quarter'], axis=1, inplace=True)
         
+        if 'CDID' in df.columns:
+            df.drop('CDID', axis=1, inplace=True)
+            
         df['Account Type'] = df['Account Type'].map(lambda x: x.split()[0]) + ' ' +  df['Account Type'].map(lambda x: x.split()[1])
         df['Account Type'] = df['Account Type'].str.rstrip('1')
         df['Services'] = df['Services'].str.rstrip('2')
@@ -508,7 +511,9 @@ for tab in tabs:
         df['Marker'].replace(' -', 'unknown', inplace=True)
         
         df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
-        tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
+        #tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
+        #   'Marker','Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'Account Type', 'Value', 
            'Marker','Measure Type', 'Unit']]
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Sector'):
@@ -523,6 +528,9 @@ trace.render("spec_v1.html")
 
 # +
 
-# + endofcell="--"
+# # + endofcell="--"
 
 # --
+# -
+
+
