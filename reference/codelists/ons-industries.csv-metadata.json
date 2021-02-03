@@ -87,7 +87,15 @@
             },
             "rdfs:label": "ONS Industries",
             "dc:title": "ONS Industries",
-            "rdfs:comment": "Dataset representing the 'ONS Industries' code list."
+            "rdfs:comment": "Dataset representing the 'ONS Industries' code list.",
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:59:33.474759"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:59:33.474759"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
