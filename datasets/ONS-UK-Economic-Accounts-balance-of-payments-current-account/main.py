@@ -80,7 +80,7 @@ for tab in tabs:
             HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDimConst('Measure Type', 'GBP Total'),
+            HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million')
         ]
         
@@ -150,7 +150,7 @@ for tab in tabs:
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(trade, 'Services', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
-            HDimConst('Measure Type', 'GBP Total'),
+            HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million')   
         ]
 
@@ -180,7 +180,7 @@ for tab in tabs:
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(trade, 'Services', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
-            HDimConst('Measure Type', 'GBP Total'),
+            HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million'),
          ]
 
@@ -251,7 +251,7 @@ for tab in tabs:
             HDim(earning_type, 'Earnings', CLOSEST, ABOVE),
             HDim(income_type, 'Income', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
-            HDimConst('Measure Type', 'GBP Total'),
+            HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million'),
         ]
         
@@ -323,7 +323,7 @@ for tab in tabs:
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(income_type, 'Income', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
-            HDimConst('Measure Type', 'GBP Total'),
+            HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million'),
         ]
         
@@ -396,7 +396,7 @@ for tab in tabs:
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
             HDim(services, 'Services', CLOSEST, ABOVE),
             HDim(emu_and_services, 'Members', DIRECTLY, LEFT),
-            HDimConst('Measure Type', 'GBP Total'),
+            HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million'),
         ]
         
@@ -478,7 +478,7 @@ for tab in tabs:
             HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDimConst('Measure Type', 'GBP Total'),
+            HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million'),
         ]
         
@@ -546,7 +546,7 @@ for tab in tabs:
             HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDimConst('Measure Type', 'GBP Total'),
+            HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million'),
         ]
         cs = ConversionSegment(tab, dimensions, observations)
