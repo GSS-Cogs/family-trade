@@ -84,6 +84,14 @@
             "rdfs:comment": "Dataset representing the 'National Accounts Expenditure Type' code list.",
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure-type"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.161069"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.161069"
             }
         },
         {
