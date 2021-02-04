@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.6.0
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -16,7 +16,6 @@
 # ## Balance of Payments: Current Account and Capital Accounts
 
 # +
-
 import pandas as pd
 from gssutils import *
 from databaker.framework import *
@@ -26,12 +25,12 @@ cubes = Cubes("info.json")
 pd.options.mode.chained_assignment = None 
 
 scraper = Scraper(seed='info.json')
-scraper
 
 distribution = scraper.distribution(latest=True)
-distribution
 
 mainDescr = scraper.dataset.description
+mainDescr
+# -
 
 tabs = distribution.as_databaker()
 
@@ -49,7 +48,7 @@ trace = TransformTrace()
 
 for tab in tabs:
     if 'B1' in tab.name:      
-        title = distribution.title + ': Summary of balance of payments' 
+        title = distribution.title + ' - Summary of balance of payments' 
         columns = ['Period','Flow Directions','Services','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
            'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL) 
@@ -61,6 +60,7 @@ for tab in tabs:
         Financial Accounts: when downloading data from the UKEA dataset users should reverse the sign of series that have an identifier that is prefixed with a minus sign.
         Net errors and omossions: This series represents net errors and omissions in the balance of payments accounts. It is the converse of the not seasonally adjusted current and capital balances (HBOG and FKMJ) and net financial account transactions (HBNT) and is required to balance these three accounts.
         """
+        
         ## "Removing records of 'Balances as a percentage of GDP' & 'Current balance as a % of GDP' information")
         remove_percentage = tab.excel_ref('A30').expand(RIGHT).expand(DOWN) - tab.excel_ref('A41').expand(RIGHT).expand(DOWN)
         
@@ -126,7 +126,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, title)
+        cubes.add_cube(scraper, tidy, scraper.dataset.title)
     
     # B2 B2A B3B3A
     if 'B2' in tab.name: 
@@ -225,7 +225,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Product', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, title)
+        cubes.add_cube(scraper, tidy, scraper.dataset.title)
         
     #B4, B4A & B4B
     if 'B4' in tab.name: 
@@ -311,7 +311,7 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].str.rstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, title)
+        cubes.add_cube(scraper, tidy, scraper.dataset.title)
         
     # Tabs B5 and B5A    
     if (tab.name == 'B5') or (tab.name == 'B5A'):
@@ -389,7 +389,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, title)
+        cubes.add_cube(scraper, tidy, scraper.dataset.title)
      
     
     if (tab.name == 'B6') or (tab.name == 'B6A'):
@@ -471,7 +471,7 @@ for tab in tabs:
         #tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
         tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']]
         
-        cubes.add_cube(scraper, tidy, title)
+        cubes.add_cube(scraper, tidy, scraper.dataset.title)
     
     
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
@@ -556,7 +556,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, title)
+        cubes.add_cube(scraper, tidy, scraper.dataset.title)
      
     
     # # Tabs B7_B7A
@@ -595,7 +595,7 @@ for tab in tabs:
             HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDimConst('Measure Type', 'bop-current-account'),
+            HDimConst('Measure Type', 'bop-capital-account'),
             HDimConst('Unit', 'gbp-million'),
         ]
         cs = ConversionSegment(tab, dimensions, observations)
@@ -633,7 +633,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Sector'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, title)
+        cubes.add_cube(scraper, tidy, scraper.dataset.title)
 # -
 
 cubes.output_all()
@@ -642,9 +642,3 @@ trace.render("spec_v1.html")
 
 # +
 #scraper.dataset.description
-# -
-
-
-
-
-
