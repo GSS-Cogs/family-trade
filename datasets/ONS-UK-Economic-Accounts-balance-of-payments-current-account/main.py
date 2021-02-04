@@ -31,6 +31,8 @@ scraper
 distribution = scraper.distribution(latest=True)
 distribution
 
+mainDescr = scraper.dataset.description
+
 tabs = distribution.as_databaker()
 
 
@@ -52,7 +54,14 @@ for tab in tabs:
            'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL) 
         
-        
+        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Summary of balance of payments"
+        scraper.dataset.comment = "Contents of the balance of payments: Current Account. Summary of balance of payments - Quarterly transactions"
+        scraper.dataset.description = scraper.dataset.comment  + 
+        """
+        Current balance as a percentage of GDP: using series YBHA: GDP at current market prices
+        Financial Accounts: when downloading data from the UKEA dataset users should reverse the sign of series that have an identifier that is prefixed with a minus sign.
+        Net errors and omossions: This series represents net errors and omissions in the balance of payments accounts. It is the converse of the not seasonally adjusted current and capital balances (HBOG and FKMJ) and net financial account transactions (HBNT) and is required to balance these three accounts.
+        """
         ## "Removing records of 'Balances as a percentage of GDP' & 'Current balance as a % of GDP' information")
         remove_percentage = tab.excel_ref('A30').expand(RIGHT).expand(DOWN) - tab.excel_ref('A41').expand(RIGHT).expand(DOWN)
         
@@ -128,6 +137,10 @@ for tab in tabs:
         columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
 
+        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Trade in goods and services"
+        scraper.dataset.comment = "Contents of the balance of payments: Trade in goods and services - Quarterly transactions"
+        scraper.dataset.description = scraper.dataset.comment
+        
         trace.Flow_Directions("Selected as Exports, Imports and Balances")
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
 
@@ -221,6 +234,14 @@ for tab in tabs:
         #columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']
         
+        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Primary Income"
+        scraper.dataset.comment = "Contents of the balance of payments: Primary Income - Quarterly transactions"
+        scraper.dataset.description = scraper.dataset.comment +
+        """
+        Other primary income: includes taxes and subsidies on products and production was previously classified to secondary income.
+        Monetary financial institutions:  Banks and building societies
+        """
+        
         trace.start(title, tab, columns, distribution.downloadURL)   
         
         income = tab.excel_ref('B10').expand(DOWN).is_not_blank()  
@@ -303,6 +324,15 @@ for tab in tabs:
            'Value', 'Marker', 'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
         
+        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Secondary Income"
+        scraper.dataset.comment = "Contents of the balance of payments: Secondary Income - Quarterly transactions"
+        scraper.dataset.description = scraper.dataset.comment +
+        """
+         Taxes and subsidies on products and production are now classified to other primary income within the primary income account.
+         Social fund: receipts by local goverment are included up to 2005 Q4. From 2006 Q1 they are included in general government other EU receipts.
+         GNI own resource and adjustments: Includes VAT-based third EU own resource and GNI-based fourth own resource.
+        """
+        
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,24,43]) - tab.excel_ref('B51').expand(DOWN)
         sector = tab.excel_ref('B').expand(DOWN).by_index([8,14,25,34,44,45]) - tab.excel_ref('B51').expand(DOWN)
         income = tab.excel_ref('B10').expand(DOWN).is_not_blank() - tab.excel_ref('B51').expand(DOWN)
@@ -371,6 +401,16 @@ for tab in tabs:
         columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']
         
         trace.start(title, tab, columns, distribution.downloadURL)
+        
+        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Transactions with the EU and EMU"
+        scraper.dataset.comment = "Contents of the balance of payments: Transactions with the EU and EMU - Quarterly transactions"
+        scraper.dataset.description = scraper.dataset.comment +
+        """
+        Includes transactions with European Union institutions.
+        Transactions with non-EU countries continue to be shown in tables B6B and B6C.
+        EMU members : Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Irish Republic, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Portugal, Slovakia, Slovenia and Spain.
+        Of which EMU members: Lithuania became a member of the EMU on 1 January 2015. The table presents EMU19 figures for 2014Q1 to 2015Q1 and EMU18 figures for 1999Q1 to 2013Q4. ONS will publish EMU19 figures for the full time series within the 2015Q2 publication in September 2015.
+        """
         
         emu_index = [12,14,17,19,21,25,29,31,34,36,38,42,46,48,51,53,55,59]
         flow = tab.excel_ref('B').expand(DOWN).by_index([10,27,44]) - tab.excel_ref('B60').expand(DOWN)
@@ -447,6 +487,13 @@ for tab in tabs:
            'Value', 'Marker', 'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
        
+        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Transactions with non-EU countries"
+        scraper.dataset.comment = "Contents of the balance of payments: Transactions with non-EU countries - Quarterly transactions"
+        scraper.dataset.description = scraper.dataset.comment +
+        """
+        Includes transactions with international organisations other than European Union institutions.
+        """
+    
         account_Type = tab.excel_ref('B1')
         seasonal_adjustment = tab.excel_ref('B3')
         transaction_type = tab.excel_ref('B8')
@@ -526,6 +573,14 @@ for tab in tabs:
            'Marker','Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
         
+        scraper.dataset.title = "UK Economic Accounts: balance of payments - Capital Account"
+        scraper.dataset.comment = "Contents of the balance of payments: Capital Account"
+        scraper.dataset.description = scraper.dataset.comment +
+        """
+        Under the Balance of Payments Manual edition 6 there is no longer a record of migrant transfers within the Capital Account.
+        Total debt forgiveness: this series also appears in the Financial Account (see Table B12 in spreadsheet publication)
+        """
+        
         sector_index = [9,14,16,22,32,37,46,54,59,64]
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,30,52]) - tab.excel_ref('B70').expand(DOWN)
         sector_only = tab.excel_ref('B').expand(DOWN).by_index(sector_index) - tab.excel_ref('B70').expand(DOWN)
@@ -590,6 +645,12 @@ for tab in tabs:
 cubes.output_all()
 
 trace.render("spec_v1.html")
+
+# +
+#scraper.dataset.description
+# -
+
+
 
 
 
