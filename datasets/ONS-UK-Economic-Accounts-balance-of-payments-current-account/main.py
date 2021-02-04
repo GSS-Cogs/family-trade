@@ -29,6 +29,8 @@ scraper = Scraper(seed='info.json')
 distribution = scraper.distribution(latest=True)
 
 mainDescr = scraper.dataset.description
+mainDescr
+# -
 
 tabs = distribution.as_databaker()
 
