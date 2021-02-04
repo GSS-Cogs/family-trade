@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -5,8 +6,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -212,7 +213,7 @@ savepreviewhtml(tidy_sheet, fname = tab.name + 'Preview.html')
 trace.with_preview(tidy_sheet)
 # store 4a and appending to combined_dataframe
 trace.store("combined_dataframe", tidy_sheet.topandas())
-# +
+# # +
 # tab 4b
 tab = tabs['4b'] #set tab as tab 4b
 trace.start(datasetTitle, tab, columns, data_download) #start tracer for tab 4b
@@ -284,27 +285,95 @@ df.loc[f1,'Service Origin Geography'] = df.loc[f1,'Service Origin Geography'].ma
         'Northern Ireland':'UKN'      
          }.get(x, x))
 
-df['Service Origin Geography'].unique()
+# +
+#df['Service Origin Geography'].unique()
+# -
 
 #adding in the nuts?/ notation to each value in Service Origin Geography
 df['NUTS'].replace(np.nan, '', inplace=True)
 
 df['Service Origin Geography'] = df['NUTS'] + df['Service Origin Geography']
 
-df['Service Origin Geography'] = df['Service Origin Geography'].apply(pathify)
+# +
+#df['Service Origin Geography'] = df['Service Origin Geography'].apply(pathify)
 
-df['Service Origin Geography'].unique()
+# +
+#df['Service Origin Geography'].unique()
+
+# +
+df = df.replace({'Service Origin Geography' : {
+    'nuts1/all': 'http://data.europa.eu/nuts/code/UK',
+    'nuts1/' : 'http://data.europa.eu/nuts/code/', 
+    'nuts2/' : 'http://data.europa.eu/nuts/code/', 
+    'nuts3/' : 'http://data.europa.eu/nuts/code/',}},regex=True)
+
+df = df.replace({'Service Origin Geography' : {
+    'Cambridgeshire and Peterborough' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000008',
+    'Aberdeen and Aberdeenshire' : 'http://statistics.data.gov.uk/id/statistical-geography/S11000001', #Using strategic development plan code as this includes Aberdeen and the Shire
+    'Cardiff Capital Region' : 'http://statistics.data.gov.uk/id/statistical-geography/W42000001',
+    'Edinburgh and South East Scotland' : 'http://statistics.data.gov.uk/id/statistical-geography/S11000003', #NOTE DOWN
+    'Glasgow City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/S12000049', #No code on geog site for city region just Glasgow City
+    'Greater Manchester' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000001',
+    'Inner London' : 'http://statistics.data.gov.uk/id/statistical-geography/E13000001',
+    'Liverpool City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000004',
+    'North of Tyne' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000011',
+    'Outer London' : 'http://statistics.data.gov.uk/id/statistical-geography/E13000002',
+    'Sheffield City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000002',
+    'Swansea Bay' : 'http://statistics.data.gov.uk/id/statistical-geography/W42000004',
+    'Tees Valley' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000006',
+    'West Midlands' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000007',
+    'West of England' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000009' }})
+
+#df['Service Origin Geography'].unique()
+# -
+
+df['Value'].loc[(df['Value'] == '')] = '0'
+df['Value'] = df['Value'].astype(int)
 
 #define the column order output into dataframe called tidy
 tidy = df[['Period','Export Services','Service Origin Geography','Service Destination', 'Flow Directions', 'Value','Marker']]
-tidy
+tidy.head(5)
+
+#scraper.dataset.title
+#scraper.dataset.comment
+scraper.dataset.description = scraper.dataset.description + """
+
+Sources: UK Balance of Payments - The Pink Book; International Trade in Services; UK Trade in services by industry, country and service type: 2016 to 2017
+
+Background:
+The estimates shown in this workbook are experimental. While we have made some important changes (please refer to the article),
+the basic concepts and methodology underpinning this analysis is still largely similar to the methods used in our original article
+"Estimating the value of service exports abroad from different parts of the UK: 2011 to 2014" published on 8 July 2016 at:
+www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/estimatingthevalueofserviceexportsabroadfromdifferentpartsoftheuk/2011to2014
+
+Contents of this workbook:
+Coverage: United Kingdom
+Lowest geography: NUTS3 or Joint Authority
+Variable(s): Values of service exports in £ million
+Breakdown(s): NUTS1, NUTS2, NUTS3, Joint Authority, industry, destination (EU or rest of world)
+Age group(s): n/a
+Sex: n/a
+
+Link to related publications:
+www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/estimatingthevalueofserviceexportsabroadfromdifferentpartsoftheuk/previousReleases
+www.gov.uk/government/statistics/regional-trade-in-goods-statistics-dis-aggregated-by-smaller-geographical-areas-2017
+www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/uktradeinservicesbyindustrycountryandservicetype/2016to2017
+
+The Nomenclature of Territorial Units for Statistics (NUTS) is a hierarchical classification of administrative areas, used across the European Union (EU) for statistical purposes.
+NUTS1 are major socio-economic regions, while NUTS2 and NUTS3 are progressively smaller regions. In the context of the UK, the NUTS1 areas are Wales, Scotland, Northern Ireland and the nine regions of England.
+Smaller geographic breakdowns may not sum exactly to aggregated totals due to rounding.
+The European Union consists of 28 member countries including the United Kingdom. For trade purposes, this includes all 27 countries other than the UK as well as the European Central Bank and European Institutions.
+The industrial groups presented in this analysis are based on the UK Standard Industrial Classification 2007, although some changes have been made.
+Primary and utilities represents SIC07 section A, B, D and E; section G has been split into two parts (Wholesale and motor trades, and Retail); Other services comprises of O, P, Q, R, S and unknown/unallocated industries
+For further information about the industrial classification, please see:
+www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007
+"""
 
 #output cube and spec
 cubes.add_cube(scraper, tidy.drop_duplicates(), distribution.title)
 cubes.output_all()
 trace.render("spec_v1.html")
 
-# +
 #  Keeping for reference
 #  Unit = gbp-million
 #  , Measure Type = GBP Total
