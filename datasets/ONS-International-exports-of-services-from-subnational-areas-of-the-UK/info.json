@@ -43,7 +43,7 @@
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/gbp-total",
+                "measure": "http://gss-data.org.uk/def/measure/exports-of-services",
                 "datatype": "double"
             },
             "Marker": {
