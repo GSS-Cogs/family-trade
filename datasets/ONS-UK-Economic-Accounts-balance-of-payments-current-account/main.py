@@ -236,8 +236,7 @@ for tab in tabs:
         
         scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Primary Income"
         scraper.dataset.comment = "Contents of the balance of payments: Primary Income - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment +
-        """
+        scraper.dataset.description = scraper.dataset.comment + """
         Other primary income: includes taxes and subsidies on products and production was previously classified to secondary income.
         Monetary financial institutions:  Banks and building societies
         """
@@ -326,8 +325,7 @@ for tab in tabs:
         
         scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Secondary Income"
         scraper.dataset.comment = "Contents of the balance of payments: Secondary Income - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment +
-        """
+        scraper.dataset.description = scraper.dataset.comment + """
          Taxes and subsidies on products and production are now classified to other primary income within the primary income account.
          Social fund: receipts by local goverment are included up to 2005 Q4. From 2006 Q1 they are included in general government other EU receipts.
          GNI own resource and adjustments: Includes VAT-based third EU own resource and GNI-based fourth own resource.
@@ -404,8 +402,7 @@ for tab in tabs:
         
         scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Transactions with the EU and EMU"
         scraper.dataset.comment = "Contents of the balance of payments: Transactions with the EU and EMU - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment +
-        """
+        scraper.dataset.description = scraper.dataset.comment + """
         Includes transactions with European Union institutions.
         Transactions with non-EU countries continue to be shown in tables B6B and B6C.
         EMU members : Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Irish Republic, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Portugal, Slovakia, Slovenia and Spain.
@@ -489,8 +486,7 @@ for tab in tabs:
        
         scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Transactions with non-EU countries"
         scraper.dataset.comment = "Contents of the balance of payments: Transactions with non-EU countries - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment +
-        """
+        scraper.dataset.description = scraper.dataset.comment + """
         Includes transactions with international organisations other than European Union institutions.
         """
     
@@ -575,8 +571,7 @@ for tab in tabs:
         
         scraper.dataset.title = "UK Economic Accounts: balance of payments - Capital Account"
         scraper.dataset.comment = "Contents of the balance of payments: Capital Account"
-        scraper.dataset.description = scraper.dataset.comment +
-        """
+        scraper.dataset.description = scraper.dataset.comment + """
         Under the Balance of Payments Manual edition 6 there is no longer a record of migrant transfers within the Capital Account.
         Total debt forgiveness: this series also appears in the Financial Account (see Table B12 in spreadsheet publication)
         """
