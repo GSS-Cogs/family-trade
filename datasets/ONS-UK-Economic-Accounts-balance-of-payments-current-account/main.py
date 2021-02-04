@@ -56,8 +56,7 @@ for tab in tabs:
         
         scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Summary of balance of payments"
         scraper.dataset.comment = "Contents of the balance of payments: Current Account. Summary of balance of payments - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment  + 
-        """
+        scraper.dataset.description = scraper.dataset.comment  + """
         Current balance as a percentage of GDP: using series YBHA: GDP at current market prices
         Financial Accounts: when downloading data from the UKEA dataset users should reverse the sign of series that have an identifier that is prefixed with a minus sign.
         Net errors and omossions: This series represents net errors and omissions in the balance of payments accounts. It is the converse of the not seasonally adjusted current and capital balances (HBOG and FKMJ) and net financial account transactions (HBNT) and is required to balance these three accounts.
