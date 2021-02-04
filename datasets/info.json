@@ -2,6 +2,7 @@
     "$schema": "https://gss-cogs.github.io/family-schemas/pipelines-schema.json",
     "family": "Trade",
     "github": "https://github.com/GSS-Cogs/family-trade",
+    "project": "https://github.com/orgs/GSS-Cogs/projects/14",
     "jenkins": {
         "base": "https://ci.floop.org.uk",
         "path": [
@@ -9,10 +10,12 @@
             "Trade"
         ]
     },
-    "sparql": "https://trade.gss-data.org.uk/sparql",
-    "pmd": "https://trade.gss-data.org.uk",
+    "sparql": "https://staging.gss-data.org.uk/sparql",
+    "pmd": "http://staging.gss-data.org.uk",
     "pipelines": [
         "DCMS-DCMS-Sectors-Economic-Estimates-Year-Trade-in-services",
+        "DIT-UK-tariffs",
+        "HMRC-COVID-19-Commodity-Codes-List",
         "HMRC-OVERSEAS-TRADE-STATISTICS",
         "HMRC-RTS-Small-area",
         "HMRC-Regional-trade-statistics-interactive-analysis",
@@ -20,7 +23,6 @@
         "HMRC_OTS_CN8",
         "HMRC_RTS",
         "HMRC_Trade",
-        "ONS-Balance-of-payments",
         "ONS-Exports-of-services-by-country-by-modes-of-supply",
         "ONS-FDI",
         "ONS-GDP-at-current-prices-real-time-database-YBHA",

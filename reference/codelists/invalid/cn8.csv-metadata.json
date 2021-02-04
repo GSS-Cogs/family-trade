@@ -1,0 +1,124 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8",
+    "url": "cn8.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:label": "Cn8",
+    "dc:title": "Cn8",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
+            },
+            "rdfs:label": "Cn8",
+            "dc:title": "Cn8",
+            "rdfs:comment": "Dataset representing the 'Cn8' code list.",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.210121"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.210121"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/dataset"
+            },
+            "dc:title": "Cn8 Catalog Record",
+            "rdfs:label": "Cn8 Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T16:29:43.370444"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T16:29:43.370444"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
+            }
+        }
+    ]
+}

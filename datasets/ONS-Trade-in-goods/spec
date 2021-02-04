@@ -1,0 +1,43 @@
+###data spec for data engineers ####
+# data is in a similliar format to the ons trade in goods by country and commododity so would suggest the table construction follows the same method as previous
+
+#table construction#
+#create marker columnn for supressed data 
+#combine direction columnm to use both export and import 
+#create flow column
+#data is gbp million (current prices)
+#code list for commodity 
+#creation of value column to sum export sums by year 
+#creation of year/month column - as this data is also month and year will there need to be a month column also? 
+#two letter country code required to match pmd4 country codelist 
+#
+
+
+
+##description #
+
+## i have lifted this description from commodities and country, as there the only description for this dataset is included in the info.json ##
+#
+Users should note the following:	
+Industry data has been produced using Standard Industrial Classification 2007 (SIC07).	
+	
+Commodity data has been produced using Standard International Trade Classification (SITC).	
+	
+Due to risks around disclosing data related to individual firms we are only able to provide data for certain combinations of the dimensions included, i.e. country, commodity and industry. This dataset therefore provides the following two combinations:	
+	Industry (SIC07 2 digit), by Commodity (SITC 2 digit), by geographic region (worldwide, EU and non-EU)
+	Industry (SIC07 2 digit), by Commodity total, by individual country
+
+# methdology
+Methodology improvements
+Within this latest experimental release improvements have been made to the methodology that has resulted in some revisions when compared to our previous release in April 2019.
+These changes include; improvements to the data linking methodology and a targeted allocation of some of the Balance of Payments (BoP) adjustments to industry.
+The data linking improvements were required due to subtleties in both the HMRC data and IDBR not previously recognised within Trade.
+
+While we are happy with the quality of the data in this experimental release we have noticed some data movements, specifically in 2018.
+We will continue to review the movements seen in both the HMRC microdata and the linking methodology and, where appropriate, will further develop the methodology for Trade in Goods by Industry for future releases. 
+
+
+
+
+ 
+

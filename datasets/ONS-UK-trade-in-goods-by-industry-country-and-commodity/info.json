@@ -20,7 +20,43 @@
             "rec6SvP3d4MJ3pXYR",
             "recduvpZS53BpXU3W"
         ],
-        "main_issue": 3
+        "main_issue": 3,
+        "columns": {
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
+            },
+            "Flow": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
+                "codelist": false
+            },
+            "ONS Partner Geography": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}",
+                "codelist": false
+            },
+            "Commodity": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
+                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}",
+                "codelist": false
+            },
+            "Industry": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-industries",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-industries/{industry}",
+                "codelist": false
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "integer"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        }
     },
     "sizingNotes": "",
     "notes": ""

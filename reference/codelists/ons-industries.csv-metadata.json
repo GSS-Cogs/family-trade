@@ -1,0 +1,127 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries",
+    "url": "ons-industries.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-industries/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-industries/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ],
+        "skos:hasTopConcept": {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/total"
+        }
+    },
+    "rdfs:label": "ONS Industries",
+    "dc:title": "ONS Industries",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries"
+            },
+            "rdfs:label": "ONS Industries",
+            "dc:title": "ONS Industries",
+            "rdfs:comment": "Dataset representing the 'ONS Industries' code list.",
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:59:33.474759"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:59:33.474759"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries"
+            },
+            "dc:title": "ONS Industries Catalog Record",
+            "rdfs:label": "ONS Industries Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2020-12-29T11:58:58.151355"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-12-29T11:58:58.151355"
+            }
+        }
+    ]
+}

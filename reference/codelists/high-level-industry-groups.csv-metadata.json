@@ -1,0 +1,124 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups",
+    "url": "high-level-industry-groups.csv",
+    "rdfs:label": "High Level Industry Groups",
+    "dc:title": "High Level Industry Groups",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/high-level-industry-groups/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort_priority",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/high-level-industry-groups/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups"
+            },
+            "rdfs:label": "High Level Industry Groups",
+            "dc:title": "High Level Industry Groups",
+            "rdfs:comment": "Dataset representing the 'High Level Industry Groups' code list.",
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-28T00:00:00"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-01-28T00:00:00"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/high-level-industry-groups"
+            },
+            "dc:title": "High Level Industry Groups Catalog Record",
+            "rdfs:label": "High Level Industry Groups Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-01-28T11:58:47.072743"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-01-28T11:58:47.072743"
+            }
+        }
+    ]
+}

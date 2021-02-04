@@ -8,188 +8,77 @@
 
 [Landing Page](https://www.gov.uk/government/statistics/alcohol-bulletin/)
 
-[Transform Flowchart](https://gss-cogs.github.io/family-trade/datasets/specflowcharts.html?HMRC-alcohol-bulletin/flowchart.ttl)
+### Sheets: Wine_statistics & Made_wine_statistics
 
-### Dataset One
+	Rename date column as "Period" and format as:
+		Data by financial year (A) - format to financial year (forgot what the format is!)
+		Data by calendar year (A) - format as year/{yr}
+		Data by month (A) - format as month/{yr}-{mth} (remove provisional in last few rows and put in Marker column)
 
-#### Output Dataset Name:
+	"Bulletin Type" (row 6, columns B to J) (codelist/pathify) - remove (hectolitres), (£ millions) as this will be the unit. N/As change to 0 and put not-applicable in Marker column
+	Add column "Alcohol Type" 
+		Value "wine" for Wine sheet 
+		Value: All for column J (same on all sheets so only pull in one)
+		Value "made-wine" for Made wine sheet (ignore column J as same as all other sheets)
 
-	HMRC Alcohol Releases, Production and Clearances - NSA
+	Measures:
+		Measure Type: clearances (cols B to H), duty-receipts (cols I)
+		Unit: hectolitres (cols B to H), gbp-million (cols I and J)
 
-#### Table Structure
+	Table Structure:
+		Period, Bulletin Type, Alcohol Type, Marker, Value
 
-		Period, Alcohol by Volume, Alcohol Type, Alcohol Origin, Production and Clearance, Measure Type, Unit, Marker, Value
+	Columns J and K are the same for both sheets so check for duplicates
 
-#### Sheet: T1 Wine Duty (wine) statistics - Historic quantities released for consumption and revenue received
+### Sheet: Spirits_statistics
 
-		B - Date - change to Period and format as required (Financial, Calendar and Monthly)
-		E7, N7 - Statistic Type (Not needed)
-			Quantities released for consumption
-			Revenue
-		D8, H8, G9 - Alcohol by Volume
-			Not Exceeding 15%
-			Over 15% ABV
-			Composition by Origin above 5,5% ABV (This includes L9 as well, which is the total)
-		E9:F9, H9:O9 - Alcohol Origin
-			Still
-			Sparkling
-			Imported ex-ship
-			Ex-Warehouse
-			UK registered premises
-			Total wine of fresh grape
-			Total Wine
-			Total Alcohol
-		Add Alcohol Type column with value Wine
-		Add Production and Clearances column with value N/A
-		Add Measure Type column with value Released for Consumption
-		Add Unit column with value Hectolitre and GBP Million
+	Rename date column as "Period" and format as:
+		Data by financial year (A) - format to financial year (forgot what the format is!)
+		Data by calendar year (A) - format as year/{yr}
+		Data by month (A) - format as month/{yr}-{mth} (remove provisional in last few rows and put in Marker column)
 
-#### Sheet: T2 Wine Duty (made-wine) statistics - Historic quantities released for consumption and revenue
+	"Bulletin Type" (row 6, columns B to J) (codelist/pathify) - remove (hectolitres of alcohol), (£ millions) as these will be the units. N/As change to 0 and put not-applicable in Marker column
+	Add column "Alcohol Type" 
+		Value "spirits" (ignore J column)
 
-		B - Date - change to Period and format as required (Financial, Calendar and Monthly)
-		E7, T7 - Statistic Type (Not needed)
-			Quantities released for consumption
-			Revenue
-		E9, G8, K9, M9, R9 - Alcohol by Volume
-			Above 1.2% but not exceeding 5.5% ABV
-			Above 5.5% ABV but not exceeding 15%
-			Over 15% ABV
-			Composition by Origin above 5,5% ABV
-			Total made wine
-		G9:H9, M9:P9 - Alcohol Origin
-			Still
-			Sparkling
-			Imported ex-ship
-			Ex-Warehouse
-			UK registered premises
-			Total Wine
-			Total Alcohol
-		Add Alcohol Type column with value Made-Wine
-		Add Production and Clearances column with value N/A
-		Add Measure Type column with value Released for Consumption
-		Add Unit column with value Hectolitre and GBP Million
+	Measures:
+		Measure Type: production (col B) clearances (cols C to H), duty-receipts (cols I)
+		Unit: hectolitres-of-alcohol (cols, B to H), gbp-million (cols I)
 
-#### Sheet: T3 Spirits Duty Statistics - Historic quantities released for consumption and revenue
-
-		B - Date - change to Period and format as required (Financial, Calendar and Monthly)
-		E7, T7 - Statistic Type (Not needed)
-			Production and Quantities
-			Revenue
-		E8, G8 - Production and Clearances
-			Production of Potable Spirits
-			Net Quantities of Spirits Charged with Duty
-		E10:P10 - Alcohol Origin
-			Total
-			Home Produced Whiskey Malt
-			Home produced Whiskey Grain and Blended
-			Home Produced Whiskey Total
-			Spirits Based RTDs
-			Imported and Other Spirits
-			Total
-			Total Sprits
-			Total Alcohol
-		Add Alcohol by Volume column with value All
-		Add Alcohol Type column with value Spirits
-		Add Measure Type column with value Released for Consumption
-		Add Unit column with value Hectolitres of Pure Alcohol and GBP Million
+	Table Structure:
+		Period, Bulletin Type, Alcohol Type, Marker, Value
 
 
-#### Sheet: T4 Beer Duty and Cider Duty statistics - Historic clearances and revenue
+### Sheet: Beer_and_Cider_statistics
 
-		B - Date - change to Period and format as required (Financial, Calendar and Monthly)
-		D7:M7 - Production and Clearances
-			UK Beer Production
-			Beer Clearances 
-			Cider Clearances
-		E9:R9 - Alcohol Origin
-					Thousand Hectolitres - Total
-					Thousand Hectolitres of alcohol (production) - Alcohol Production
-					Uk Registered Premises
-					Ex-warehouse and imports
-					Total Beer Clearances
-					Thousand hectolitres of alcohol (clearances) - Total
-					Cider Thousand hectolitres - Total
-					Total Beer
-					Total Cider
-					Total Alcohol
-		Add Alcohol by Volume column with value All
-		Add Alcohol Type column with value Beer and Cider 
-		Add Measure Type column with value Clearances
-		Add Unit column with value Thousand Hectolitres and GBP Million
+	Rename date column as "Period" and format as:
+		Data by financial year (A) - format to financial year (forgot what the format is!)
+		Data by calendar year (A) - format as year/{yr}
+		Data by month (A) - format as month/{yr}-{mth} (remove provisional in last few rows and put in Marker column)
 
+	"Bulletin Type" (row 6, columns B to J) (codelist/pathify) - remove (hectolitres of alcohol), (£ millions) as these will be the units. N/As change to 0 and put not-applicable in Marker column
+	Add column "Alcohol Type" 
+		Value "beer-and-cider" (ignore K column)
 
-### Dataset Two
+	Measures:
+		Measure Type: production (col B and C) clearances (cols D to H), duty-receipts (cols I)
+		Unit: hectolitres (col B, D, E, F, H) hectolitres-of-alcohol (cols C, G), gbp-million (cols I and J)
 
-#### Output Dataset Name:
+	Table Structure:
+		Period, Bulletin Type, Alcohol Type, Marker, Value
+	
 
-	HMRC Alcohol Duty Rates
+### SCRAPER
+	Family: trade
+	Title: Alcohol Bulletin
+	Comment: Monthly statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs.
+	Description:
+	ALL METADATA FROM EACH SHEET NEEDS TO BE PULLED TOGETHER AND REWRITTEN.
+	I WILL DO THIS SOON
 
-#### Table Structure
-
-		Period, Alcohol Origin, Alcohol Type, Measure Type, Unit, Marker, Value
-
-#### Sheet: R2 Historic alcohol duty rates
-
-##### For all tables add following columns
-
-		Measure Type with value GBP per Hectolitre of Product
-		Unit GBP
-
-##### Wine Duty (wine)
-
-		B13:B39 - Date of Change - change to Period and format as required
-		E7, J7 - Alcohol Origin
-		D8:K8 - Alcohol by Volume
-		Add Alcohol Type column with value Wine 
-		Add Measure Type with value GBP per Hectolitre of Product
-		Add Unit column with value GBP
-
-##### Wine Duty (made-wine)
-
-		B53:B79 - Date of Change - change to Period and format as required
-		D47, G47, J47 - Alcohol Origin
-		D49:K49 - Alcohol by Volume
-		Add Alcohol Type column with value Made-Wine 
-		Add Measure Type with value GBP per Hectolitre of Product
-		Add Unit column with value GBP
-
-##### Spirits Duty
-
-		B94:B128 - Date of Change - change to Period and format as required
-		D91, E91 - Alcohol Origin
-		Add Alcohol by Volume column with value All
-		Add Alcohol Type column with value Spirits 
-		Add Measure Type with value GBP per Hectolitre of Product
-		Add Unit column with value GBP
-
-##### Beer Duty
-
-		B141:B168 - Date of Change - change to Period and format as required
-		D137:K138 - Alcohol Origin
-		Add Alcohol by Volume column with value All
-		Add Alcohol Type column with value Beer
-		Add Measure Type with value GBP per 1% ABV per Hectolitre
-		Add Unit column with value GBP
-
-#### Cider Duty (Historic)
-
-		B193:B221 - Date of Change - change to Period and format as required
-		D187, G187 - Alcohol Origin
-		D189:G190 - Alcohol by Volume
-		Add Alcohol Type column with value Cider Historic
-		Add Measure Type with value GBP per Hectolitre of Product
-		Add Unit column with value GBP
-
-#### Cider Duty (Current)
-
-		B234:B234 - Date of Change - change to Period and format as required
-		D228, I228 - Alcohol Origin
-		D230:I232 - Alcohol by Volume
-		Add Alcohol Type column with value Cider Current
-		Add Measure Type with value GBP per Hectolitre of Product
-		Add Unit column with value GBP
-							
+### THIS IS A MULTI MEASURE CUBE
+						
 ##### Footnotes
 
-		Shed loads of Metadata in this spreadsheet. Sheets R1 and R3 hold loads of information. Not sure how this much information can de added. 
+	Made-wine is any other drink that has alcohol made by fermentation apart from cider, not by distillation or any other process. For example, mead is a made-wine. Beer may be classed as made-wine if it's mixed with other products and has an ABV greater than 5.5%. In this guide, 'wine' refers to both wine and made-wine.
 

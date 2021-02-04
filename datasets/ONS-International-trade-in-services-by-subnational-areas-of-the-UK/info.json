@@ -18,7 +18,229 @@
         "stage": [
             "To Do"
         ],
-        "main_issue": 84
+        "main_issue": 84,
+        "columns": {
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{period}",
+                "codelist": false
+            },
+            "Location": {
+                "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
+                "value": "{location}"
+            },
+            "Flow": {
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
+                "description": "Balance refers to the trade balance between exports and imports, calculated using exports minus imports. A positive figure indicates a trade surplus and a negative figure indicates a trade deficit.",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/trade",
+                "datatype": "double"
+            }
+        },
+        "transformStage": [
+            {
+                "source_name": "8_travel",
+                "identifier": "8_travel||8. Travel||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk/2018/2018internationaltradeinservicesdatatables.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk/2018/2018internationaltradeinservicesdatatables.xlsx": ""
+                    }
+                ],
+                "title": "8. Travel",
+                "preview": "documentation/previews/cb16169f-df4c-4d1f-87c7-a409b3144727.html",
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Year": [
+                            "Hardcoded but could have been taken from tab title (cell A1)",
+                            "Added to dataframe 'combined_8_travel'"
+                        ]
+                    },
+                    {
+                        "NUTS1_Area": [
+                            "Selected as all non-blank values between cell refs A5 and A17",
+                            "Added to dataframe 'combined_8_travel'"
+                        ]
+                    },
+                    {
+                        "Travel_Type": [
+                            "Selected as all non-blank values from cell ref B3 going right/across.",
+                            "Added to dataframe 'combined_8_travel'"
+                        ]
+                    },
+                    {
+                        "Country_or_Origin_of_Trade": [
+                            "Selected as all non-blank values from cell ref B4 going right/across.",
+                            "Added to dataframe 'combined_8_travel'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Hardcoded but could have been taken from cell A1",
+                            "Added to dataframe 'combined_8_travel'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Hardcoded but could have been taken from cell A2",
+                            "Added to dataframe 'combined_8_travel'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "8_travel",
+                "identifier": "8_travel||combined_8_travel||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk/2018/2018internationaltradeinservicesdatatables.xlsx : 8. Travel",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk/2018/2018internationaltradeinservicesdatatables.xlsx": "8. Travel"
+                    }
+                ],
+                "title": "combined_8_travel",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Year": []
+                    },
+                    {
+                        "NUTS1_Area": []
+                    },
+                    {
+                        "Travel_Type": []
+                    },
+                    {
+                        "Country_or_Origin_of_Trade": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            },
+            {
+                "source_name": "8_tidy_format",
+                "identifier": "8_tidy_format||9. Tidy format||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk/2018/2018internationaltradeinservicesdatatables.xlsx",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk/2018/2018internationaltradeinservicesdatatables.xlsx": ""
+                    }
+                ],
+                "title": "9. Tidy format",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Year": [
+                            "Hardcoded but could have been taken from tab title (cell A1)",
+                            "Added to dataframe 'combined_8_tidy_format'"
+                        ]
+                    },
+                    {
+                        "NUTS_Level": [
+                            "Selected as all non-blank values between cell refs A5 and A7693",
+                            "Added to dataframe 'combined_8_tidy_format'"
+                        ]
+                    },
+                    {
+                        "NUTS_Code": [
+                            "Selected as all non-blank values from cell ref B5 going down.",
+                            "Added to dataframe 'combined_8_tidy_format'"
+                        ]
+                    },
+                    {
+                        "NUTS_Area_Name": [
+                            "Selected as all non-blank values from cell ref C5 going down.",
+                            "Added to dataframe 'combined_8_tidy_format'"
+                        ]
+                    },
+                    {
+                        "Industry_Grouping": [
+                            "Selected as all non-blank values from cell ref D5 going down.",
+                            "Added to dataframe 'combined_8_tidy_format'"
+                        ]
+                    },
+                    {
+                        "Country_or_Origin_of_Trade": [
+                            "Selected as all non-blank values from cell ref E5 going down.",
+                            "Added to dataframe 'combined_8_tidy_format'"
+                        ]
+                    },
+                    {
+                        "Direction_of_Trade": [
+                            "Selected as all non-blank values from cell ref F5 going down.",
+                            "Added to dataframe 'combined_8_tidy_format'"
+                        ]
+                    },
+                    {
+                        "Measure_Type": [
+                            "Hardcoded but could have been taken from cell A1",
+                            "Added to dataframe 'combined_8_tidy_format'"
+                        ]
+                    },
+                    {
+                        "Unit": [
+                            "Hardcoded but could have been taken from cell A2",
+                            "Added to dataframe 'combined_8_tidy_format'"
+                        ]
+                    }
+                ]
+            },
+            {
+                "source_name": "8_tidy_format",
+                "identifier": "8_tidy_format||combined_8_tidy_format||https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk/2018/2018internationaltradeinservicesdatatables.xlsx : 9. Tidy format",
+                "source": [
+                    {
+                        "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/internationaltrade/datasets/internationaltradeinservicesbysubnationalareasoftheuk/2018/2018internationaltradeinservicesdatatables.xlsx": "9. Tidy format"
+                    }
+                ],
+                "title": "combined_8_tidy_format",
+                "preview": null,
+                "observation_selection": null,
+                "columns": [],
+                "postTransformNotes": [
+                    {
+                        "Year": []
+                    },
+                    {
+                        "NUTS_Level": []
+                    },
+                    {
+                        "NUTS_Code": []
+                    },
+                    {
+                        "NUTS_Area_Name": []
+                    },
+                    {
+                        "Industry_Grouping": []
+                    },
+                    {
+                        "Country_or_Origin_of_Trade": []
+                    },
+                    {
+                        "Direction_of_Trade": []
+                    },
+                    {
+                        "Measure_Type": []
+                    },
+                    {
+                        "Unit": []
+                    }
+                ]
+            }
+        ]
     },
     "sizingNotes": "",
     "notes": ""

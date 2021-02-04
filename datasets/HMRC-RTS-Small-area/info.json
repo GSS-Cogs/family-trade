@@ -19,12 +19,19 @@
         "main_issue": 16,
         "columns": {
             "Product": {
+                "label": "SITC",
                 "description": "The Standard international trade classification (SITC), is a product classification of the United Nations (UN) used for external trade statistics (export and Import values and volumes of goods), allowing for international comparisons of commodities and manufactured goods.",
                 "source": "https://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Standard_international_trade_classification_(SITC)"
+            },
+            "Trade Reporter Geography": {
+                "description": "The NUTS classification (Nomenclature of territorial units for statistics) is a hierarchical system for dividing up the economic territory of the EU and the UK.",
+                "source": "https://ec.europa.eu/eurostat/web/nuts/background"
+            },
+            "HMRC partner Geography": {
+                "description": "Partner country is the country the UK region exports the goods to or imports the goods from.",
+                "source": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/843903/Local_Area_Commentary_2018.pdf"
             }
-        },
-        "sizingNotes": "Simple file structure",
-        "notes": "Supporting information is available in the PDF on the lading page"
+        }
     },
     "sizingNotes": "Simple file structure",
     "notes": "Supporting information is available in the PDF on the lading page"
