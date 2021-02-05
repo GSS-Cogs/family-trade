@@ -25,32 +25,32 @@
             },
             "Flow Diecrtions": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{flow_directions}",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
                 "codelist": false
             },
             "Seasonal Adjustment": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments/{seasonal_adjustment}",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
                 "codelist": false
             },
             "Services": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/services",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/services/{services}",
+                "value": "http://gss-data.org.uk/def/trade/concept/services/{services}",
                 "codelist": false
             },
             "Sector": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/sector",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/sector/{sector}",
+                "value": "http://gss-data.org.uk/def/trade/concept/sector/{sector}",
                 "codelist": false
             },
             "Account Type": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/account-type",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/account-type/{account_type}",
+                "value": "http://gss-data.org.uk/def/trade/concept/account-type/{account_type}",
                 "codelist": false
             },
             "Income": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/income",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/income/{income}",
+                "value": "http://gss-data.org.uk/def/trade/concept/income/{income}",
                 "codelist": false
             },
             "Income Description": {
