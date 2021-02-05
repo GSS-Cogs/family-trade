@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.6.0
+#       jupytext_version: 1.9.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -16,6 +16,7 @@
 # ## Balance of Payments: Current Account and Capital Accounts
 
 # +
+import copy 
 import pandas as pd
 from gssutils import *
 from databaker.framework import *
@@ -126,20 +127,19 @@ for tab in tabs:
             if column in ('Flow Directions', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, scraper.dataset.title)
+        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
     
+   
     # B2 B2A B3B3A
+    title = distribution.title + ' :Trade in goods and services'
+    #columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
+    columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
+    scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Trade in goods and services"
+    scraper.dataset.comment = "Contents of the balance of payments: Trade in goods and services - Quarterly transactions"
+    scraper.dataset.description = scraper.dataset.comment
+    
     if 'B2' in tab.name: 
-
-        title = distribution.title + ' :Trade in goods and services'
-        #columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
-        columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
-
-        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Trade in goods and services"
-        scraper.dataset.comment = "Contents of the balance of payments: Trade in goods and services - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment
-        
         trace.Flow_Directions("Selected as Exports, Imports and Balances")
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
 
@@ -225,7 +225,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Product', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, scraper.dataset.title)
+        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
         
     #B4, B4A & B4B
     if 'B4' in tab.name: 
@@ -311,7 +311,7 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].str.rstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, scraper.dataset.title)
+        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
         
     # Tabs B5 and B5A    
     if (tab.name == 'B5') or (tab.name == 'B5A'):
@@ -389,7 +389,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, scraper.dataset.title)
+        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
      
     
     if (tab.name == 'B6') or (tab.name == 'B6A'):
@@ -471,7 +471,7 @@ for tab in tabs:
         #tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
         tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']]
         
-        cubes.add_cube(scraper, tidy, scraper.dataset.title)
+        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
     
     
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
@@ -556,7 +556,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, scraper.dataset.title)
+        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
      
     
     # # Tabs B7_B7A
@@ -633,7 +633,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Sector'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(scraper, tidy, scraper.dataset.title)
+        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
 # -
 
 cubes.output_all()
