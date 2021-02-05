@@ -28,7 +28,7 @@
             },
             "Direction": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions/",
-                "value": "http://gss-data.org.uk/def/trade/trade/flow-directions/{direction}",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{direction}",
                 "codelist": false
             },
             "Country": {
