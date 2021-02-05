@@ -18,40 +18,44 @@
         "airtable": "recHVWhF3sVZo2T9I",
         "main_issue": 4,
         "columns": {
-            "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
+            "Year": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/year/{year}",
+                "codelist": false
             },
             "Flow Directions": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "codelist": false
             },
             "ITIS Industry": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
-                "value": "http://gss-data.org.uk/def/trade/concept/itis-industry/{itis_industry}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
+                "value": "http://gss-data.org.uk/def/trade/concept/itis-industry/{itis_industry}",
+                "codelist": false
             },
             "ITIS Service": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/itis-services",
                 "value": "http://gss-data.org.uk/def/trade/concept/itis-services/{itis_service}",
                 "codelist": false
             },
             "International Trade Basis": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
-                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
+                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}",
+                "codelist": false
             },
             "ONS Trade Areas ITIS": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/trade-partner-geography",
-                "value": "http://gss-data.org.uk/def/concept/ons-trade-areas-itis/{ons_trade_areas_itis}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/concept/ons-partner-geography/{ons_trade_areas_itis}",
+                "codelist": false
             },
             "Value": {
                 "measure": "http://gss-data.org.uk/def/measure/gbp-total",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "value": "decimal"
             },
-            "Year": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{year}",
-                "codelist": false
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
             }
         }
     },
