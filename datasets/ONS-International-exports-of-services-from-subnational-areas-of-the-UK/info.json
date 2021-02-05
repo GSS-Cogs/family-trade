@@ -24,13 +24,13 @@
             },
             "Flow Directions": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/concept/trade/flow-directions/{flow_directions}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "codelist": false
             },
             "Export Services": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/export-services",
-                "value": "http://gss-data.org.uk/def/concept/trade/export-services/{export_services}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
+                "value": "http://gss-data.org.uk/def/trade/concept/export-services/{export_services}",
+                "codelist": false
             },
             "Service Origin Geography": {
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
@@ -38,8 +38,8 @@
             },
             "Service Destination": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/service-destination-geography",
-                "value": "http://gss-data.org.uk/def/concept/trade/service-destination-geography/{service_destination_geography}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/service-destination"
+                "value": "http://gss-data.org.uk/def/trade/concept/service-destination-geography/{service_destination_geography}",
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
