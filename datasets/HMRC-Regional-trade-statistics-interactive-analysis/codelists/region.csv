@@ -1,0 +1,17 @@
+Label,Notation,Parent Notation,Sort Priority
+East,east,,1
+East midlands,east-midlands,,2
+London,london,,3
+North east,north-east,,4
+Northern ireland,northern-ireland,,5
+North west,north-west,,6
+Scotland,scotland,,7
+South east,south-east,,8
+South west,south-west,,9
+Wales,wales,,10
+West midlands,west-midlands,,11
+Yorkshire and the humber,yorkshire-and-the-humber,,12
+Unallocated known,unallocated-known,,13
+United kingdom,united-kingdom,,14
+England,england,,15
+UK Excluding Unknown Region,uk-excl-unknown-region,,16

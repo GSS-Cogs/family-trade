@@ -2,13 +2,13 @@
     "title": "OVERSEAS TRADE STATISTICS",
     "publisher": "HM Revenue & Customs",
     "description": "",
-    "landingPage": "https://www.uktradeinfo.com/Statistics/OverseasTradeStatistics/Pages/OTS.aspx",
+    "landingPage": "https://www.uktradeinfo.com/trade-data/overseas/",
     "published": "2020-02-11",
     "families": [
         "Trade"
     ],
     "extract": {
-        "source": "XLS",
+        "source": "JSON",
         "stage": "Not Required"
     },
     "transform": {
@@ -16,5 +16,8 @@
         "main_issue": 10
     },
     "sizingNotes": "",
-    "notes": ""
+    "notes": "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/",
+    "datasetNotes": [
+        "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/"
+    ]
 }

@@ -313,7 +313,7 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.rstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
-        
+
     # Tabs B5 and B5A    
     if (tab.name == 'B5') or (tab.name == 'B5A'):
         title = distribution.title + ' :Secondary income'
@@ -391,8 +391,8 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
-     
-    
+       
+      
     if (tab.name == 'B6') or (tab.name == 'B6A'):
         title = distribution.title + ' :Transactions with the EU and EMU'
         #columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']
@@ -473,8 +473,8 @@ for tab in tabs:
         tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']]
         
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
-    
-    
+
+        
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
     if (tab.name == 'B6B') or (tab.name == 'B6B_2') or (tab.name == 'B6B_3') or (tab.name == 'B6C') or (tab.name == 'B6C_2') or (tab.name == 'B6C_3'):
         title = distribution.title + ' :Transactions with non-EU countries'
@@ -558,7 +558,7 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
-     
+
     
     # # Tabs B7_B7A
     if 'B7' in tab.name: 

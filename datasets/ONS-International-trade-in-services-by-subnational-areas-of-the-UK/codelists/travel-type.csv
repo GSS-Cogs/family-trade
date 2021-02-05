@@ -1,0 +1,5 @@
+Label,Notation,Parent Notation,Sort Priority,Description
+Total travel-related,total,,1,
+Personal travel-related,personal,total,2,
+Business travel-related,business,total,3,
+Not Applicable,na,,4,Used where the observation does not represent travel-related trade.

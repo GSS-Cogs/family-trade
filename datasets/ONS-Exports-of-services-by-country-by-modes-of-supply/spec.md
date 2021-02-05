@@ -74,4 +74,10 @@ Modes will need to be defined, mode information can be found [here](https://www.
 		Mode
 		Flow (Direction)
 		Service Account
+        
+#### DE Notes 16/12/20
+    note new release has changed the structure, changes to note:
+    - Values now represent estimates for 2019 therfore the Marker column is populated with 'Estimated'
+    - There are additional values for dimension Mode: total-modes-1-2-and-4 which is reflected as modes 1 2 4 and mode 3
+    - unit = GBP Million
 <!-- #endregion -->
