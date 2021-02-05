@@ -129,7 +129,7 @@ for tab in tabs:
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
     
-   
+    
     # B2 B2A B3B3A
     title = distribution.title + ' :Trade in goods and services'
     #columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
@@ -139,6 +139,7 @@ for tab in tabs:
     scraper.dataset.description = scraper.dataset.comment
     
     if 'B2' in tab.name: 
+
         trace.start(title, tab, columns, distribution.downloadURL)
         trace.Flow_Directions("Selected as Exports, Imports and Balances")
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
@@ -636,9 +637,15 @@ for tab in tabs:
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
 # -
 
+for cube in cubes.cubes:
+    print(cube.scraper.title)
+
 cubes.output_all()
 
 trace.render("spec_v1.html")
 
 # +
 #scraper.dataset.description
+# -
+
+
