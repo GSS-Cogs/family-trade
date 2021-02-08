@@ -19,6 +19,7 @@
 import copy 
 import pandas as pd
 from gssutils import *
+import json
 from databaker.framework import *
 
 cubes = Cubes("info.json")
@@ -43,6 +44,14 @@ def left(s, amount):
 def right(s, amount):
     return s[-amount:]
 
+
+# -
+
+ with open("info.json", "r") as jsonFile:
+            data = json.load(jsonFile)
+        data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bob-current-account"
+        with open("info.json", "w") as jsonFile:
+            json.dump(data, jsonFile, indent = 2)
 
 # +
 trace = TransformTrace()
@@ -121,12 +130,12 @@ for tab in tabs:
 
         #tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
         #  'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'Account Type', 'Value', 
-          'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'Account Type', 'Value']]
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
+
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
     
     
@@ -162,11 +171,11 @@ for tab in tabs:
             HDim(product, 'Product', DIRECTLY, LEFT),
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(trade, 'Services', CLOSEST, LEFT),
-            HDimConst('Account Type', 'Current Account'),
-            HDimConst('Measure Type', 'bop-current-account'),
-            HDimConst('Unit', 'gbp-million')   
+            HDimConst('Account Type', 'Current Account')#,
+            #HDimConst('Measure Type', 'bop-current-account'),
+            #HDimConst('Unit', 'gbp-million')   
         ]
-
+        
         cs = ConversionSegment(tab, dimensions, observations) 
         tidy_sheet = cs.topandas() 
         trace.store('combined_dataframeB23', tidy_sheet)
@@ -221,11 +230,12 @@ for tab in tabs:
         df['Marker'].replace(' -', 'unknown', inplace=True)
         
         #tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker']]
         for column in tidy:
             if column in ('Flow Directions', 'Product', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
+
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
         
     #B4, B4A & B4B
@@ -305,13 +315,14 @@ for tab in tabs:
                                    ' (Foreign earnings on investment in the UK)' : 'Foreign earnings on investment in the UK'}})
     
         #tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value']]
         
         for column in tidy:
             if column in ('Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].str.rstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
+
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
 
     # Tabs B5 and B5A    
@@ -384,12 +395,13 @@ for tab in tabs:
         df.rename(columns={'OBS' : 'Value', 'DATAMAKER' : 'Marker'}, inplace=True)
         
         #tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'Value']]
         
         for column in tidy:
             if column in ('Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
+
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
        
       
@@ -470,8 +482,8 @@ for tab in tabs:
         df['Members'] = df['Members'].str.strip().apply(pathify)
         
         #tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']]
-        
+        tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Marker']]
+
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
 
         
@@ -551,7 +563,7 @@ for tab in tabs:
         df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
         
         #tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 'Value']]
         
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction'):
@@ -628,12 +640,18 @@ for tab in tabs:
         df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
         #tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
         #   'Marker','Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'Account Type', 'Value', 
-           'Marker','Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'Account Type', 'Value', 'Marker']]
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Sector'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
+
+        with open("info.json", "r") as jsonFile:
+            data = json.load(jsonFile)
+        data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bob-capital-account"
+        with open("info.json", "w") as jsonFile:
+            json.dump(data, jsonFile, indent = 2)
+    
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
 # -
 
@@ -647,5 +665,7 @@ trace.render("spec_v1.html")
 # +
 #scraper.dataset.description
 # -
+
+
 
 
