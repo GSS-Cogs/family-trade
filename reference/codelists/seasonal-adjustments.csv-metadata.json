@@ -85,13 +85,13 @@
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
             },
-            "dc:issued": {
-                "@type": "dateTime",
-                "@value": "2020-01-26T00:00:00"
-            },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-01-26T00:00:00"
+                "@value": "2021-02-03T11:35:22.869971"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T11:35:22.869971"
             }
         },
         {

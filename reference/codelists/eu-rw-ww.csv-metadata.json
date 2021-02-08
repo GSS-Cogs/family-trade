@@ -88,6 +88,10 @@
             "dc:modified": {
                 "@type": "dateTime",
                 "@value": "2021-02-02T00:00:00"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.174611"
             }
         },
         {

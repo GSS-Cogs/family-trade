@@ -93,7 +93,7 @@ trace.render()
 df = df[["Year", "NUTS1 Area", "Travel Type", "Country or Origin of Trade", "Value"]]
 """
 df = df.replace({'NUTS1 Area' : {'North East' : 'http://statistics.data.gov.uk/id/statistical-geography/UKC',
-                                'NorthWest' : 'http://statistics.data.gov.uk/id/statistical-geography/UKD',
+                                'North West' : 'http://statistics.data.gov.uk/id/statistical-geography/UKD',
                                 'Yorkshire and The Humber' : 'http://statistics.data.gov.uk/id/statistical-geography/UKE',
                                 'East Midlands' : 'http://statistics.data.gov.uk/id/statistical-geography/UKF',
                                 'West Midlands' : 'http://statistics.data.gov.uk/id/statistical-geography/UKG',
@@ -111,7 +111,7 @@ df = df.replace({'NUTS1 Area' : {'North East' : 'http://statistics.data.gov.uk/i
 """
 
 df = df.replace({'NUTS1 Area' : {'North East' : 'http://data.europa.eu/nuts/code/UKC',
-                                'NorthWest' : 'http://data.europa.eu/nuts/code/UKD',
+                                'North West' : 'http://data.europa.eu/nuts/code/UKD',
                                 'Yorkshire and The Humber' : 'http://data.europa.eu/nuts/code/UKE',
                                 'East Midlands' : 'http://data.europa.eu/nuts/code/UKF',
                                 'West Midlands' : 'http://data.europa.eu/nuts/code/UKG',
@@ -131,7 +131,7 @@ df = df.replace({'NUTS1 Area' : {'North East' : 'http://data.europa.eu/nuts/code
 
 """
 df = df.replace({'NUTS1 Area' : {'North East' : 'UKC',
-                                'NorthWest' : 'UKD',
+                                'North West' : 'UKD',
                                 'Yorkshire and The Humber' : 'UKE',
                                 'East Midlands' : 'UKF',
                                 'West Midlands' : 'UKG',
