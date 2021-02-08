@@ -47,11 +47,11 @@ def right(s, amount):
 
 # -
 
- with open("info.json", "r") as jsonFile:
-            data = json.load(jsonFile)
-        data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bob-current-account"
-        with open("info.json", "w") as jsonFile:
-            json.dump(data, jsonFile, indent = 2)
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bob-current-account"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile, indent = 2)
 
 # +
 trace = TransformTrace()
@@ -650,7 +650,7 @@ for tab in tabs:
             data = json.load(jsonFile)
         data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bob-capital-account"
         with open("info.json", "w") as jsonFile:
-            json.dump(data, jsonFile, indent = 2)
+            json.dump(data, jsonFile)
     
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
 # -
