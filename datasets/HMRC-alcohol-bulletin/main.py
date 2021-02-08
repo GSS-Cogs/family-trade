@@ -54,13 +54,23 @@ with original_tabs.open() as ods_obj:
     tabs = list(xypath.loader.get_sheets(tableset, "*"))
 # -
 
-tab = tabs[1]
 distribution = scraper.distribution(latest = True)
 datasetTitle = distribution.title
 columns = ["Period", "Marker", "Bulletin_Type", "Alcohol_Type", "Measure", "Unit"]
 
-trace.start(datasetTitle, tab, columns, distribution.downloadURL)
-if tab.name == "Wine_statistics":
+# The selections are ..almost..identicial so process in a loop
+tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics"]
+for tab_name in tabs_names_to_process:
+
+    # Raise an exception if one of our required tabs is missing
+    if tab_name not in [x.name for x in tabs]:
+        raise ValueError(f'Aborting. A tab named {tab_name} required but not found')
+
+    # Select the tab in question
+    tab = [x for x in tabs if x.name == tab_name][0]
+    
+    trace.start(datasetTitle, tab, columns, distribution.downloadURL)
+
     period = tab.excel_ref("A7").expand(DOWN).is_not_blank().is_not_whitespace()
     trace.Period("Defined from cell ref A6 Down")
 
@@ -70,134 +80,46 @@ if tab.name == "Wine_statistics":
     alcohol_type = tab.name
     trace.Alcohol_Type("Name of tabs in XLS sheet")
     
-    measure = "clearances_duty-receipts"
-    trace.Measure("Measure is different for diferent columns")
-
-    unit = "hectolitres_gbp-million"
-    trace.Unit("Unit is different for different columns")
-    
-    observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()  
-        
-    dimensions = [
-        HDim(period, 'Period', DIRECTLY, LEFT),
-        HDim(bulletin_type, 'Bulletin_Type', DIRECTLY, ABOVE),
-        HDimConst("Alcohol_Type", tab.name),
-        HDimConst("Measure", measure),
-        HDimConst("Unit", unit)
-        ]
-    tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-    trace.with_preview(tidy_sheet)
-    trace.store("combined_dataframe", tidy_sheet.topandas())
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-
-# distribution = scraper.distribution(latest = True)
-# datasetTitle = distribution.title
-# columns = ["Period", "Marker", "Bulletin_Type", "Alcohol_Type", "Measure", "Unit"]
-trace.start(datasetTitle, tab, columns, distribution.downloadURL)
-tab = tabs[2]
-if tab.name == "Made_wine_statistics":
-        ref_cell = tab.excel_ref("A6")
-
-        period = tab.excel_ref("A7").expand(DOWN).is_not_blank().is_not_whitespace()
-        trace.Period("Defined from cell ref A6 Down")
-
-        bulletin_type = tab.excel_ref("B6").expand(RIGHT).is_not_blank().is_not_whitespace()
-        trace.Bulletin_Type("Defined from cell ref B6 and across")
-
-        alcohol_type = tab.name
-        trace.Alcohol_Type("Name of tabs in XLS sheet")
-
+    if tab_name == "Wine_statistics":
         measure = "clearances_duty-receipts"
-        trace.Measure("Measure is different for diferent columns")
-
         unit = "hectolitres_gbp-million"
-        trace.Unit("Unit is different for different columns")
+        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
 
+    elif tab_name == "Made_wine_statistics":
+        measure = "clearances_duty-receipts"
+        unit = "hectolitres_gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)-tab.excel_ref("K6").expand(DOWN)
-
-        dimensions = [
-            HDim(period, 'Period', DIRECTLY, LEFT),
-            HDim(bulletin_type, 'Bulletin_Type', DIRECTLY, ABOVE),
-            HDimConst("Alcohol_Type", tab.name),
-            HDimConst("Measure", measure),
-            HDimConst("Unit", unit)
-        ]
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-        trace.with_preview(tidy_sheet)
-        trace.store("combined_dataframe", tidy_sheet.topandas())
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-
-trace.start(datasetTitle, tab, columns, distribution.downloadURL)
-tab = tabs[3]
-if tab.name == "Spirits_statistics" :   
-        ref_cell = tab.excel_ref("A6")
-        period = tab.excel_ref("A7").expand(DOWN).is_not_blank().is_not_whitespace()
-        trace.Period("Defined from cell ref A6 Down")
-
-        bulletin_type = tab.excel_ref("B6").expand(RIGHT).is_not_blank().is_not_whitespace()
-        trace.Bulletin_Type("Defined from cell ref B6 and across")
-
-        alcohol_type = tab.name
-        trace.Alcohol_Type("Name of tabs in XLS sheet")
-
+    
+    elif tab_name == "Spirits_statistics":
         measure = "production_clearances_duty-receipts"
-        trace.Measure("Measure is different for diferent columns")
-
         unit = "hectolitres_of_alcohol_gbp-million"
-        trace.Unit("Unit is different for different columns")
-
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)
 
-        dimensions = [
-            HDim(period, 'Period', DIRECTLY, LEFT),
-            HDim(bulletin_type, 'Bulletin_Type', DIRECTLY, ABOVE),
-            HDimConst("Alcohol_Type", tab.name),
-            HDimConst("Measure", measure),
-            HDimConst("Unit", unit)
-        ]
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-        trace.with_preview(tidy_sheet)
-        trace.store("combined_dataframe", tidy_sheet.topandas())
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+    elif tab_name == "Beer_and_cider_statistics":
+        measure = "production_clearances_duty-receipts"
+        unit = "hectolitres_of_alcohol_gbp-million"
+        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)
+    
+    else:
+        raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
 
-trace.start(datasetTitle, tab, columns, distribution.downloadURL)
-tab = tabs[4]
-if tab.name == "Beer_and_cider_statistics":  
-    ref_cell = tab.excel_ref("A6")
-    period = tab.excel_ref("A7").expand(DOWN).is_not_blank().is_not_whitespace()
-    trace.Period("Defined from cell ref A6 Down")
-    
-    bulletin_type = tab.excel_ref("B6").expand(RIGHT).is_not_blank().is_not_whitespace()
-    trace.Bulletin_Type("Defined from cell ref B6 and across")
-    
-    alcohol_type = tab.name
-    trace.Alcohol_Type("Name of tabs in XLS sheet")
-
-    measure = "production_clearances_duty-receipts"
-    trace.Measure("Measure is different for diferent columns")
-    
-    unit = "hectolitres_of_alcohol_gbp-million"
+    trace.Measure("Measure is different for different columns")
     trace.Unit("Unit is different for different columns")
-    
-    observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)
-    
+ 
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
         HDim(bulletin_type, 'Bulletin_Type', DIRECTLY, ABOVE),
         HDimConst("Alcohol_Type", tab.name),
         HDimConst("Measure", measure),
         HDimConst("Unit", unit)
-    ]
+        ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+
 df
 
 # Period column - requirements satisfied
