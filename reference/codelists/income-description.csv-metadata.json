@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/conceptincome-description/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/income-description/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/income-description",
