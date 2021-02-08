@@ -78,9 +78,14 @@
         "value": "http://gss-data.org.uk/def/trade/concept/members/{members}",
         "codelist": false
       },
+      "Country Transaction": {
+        "parent": "http://gss-data.org.uk/def/trade/property/dimension/country-transaction",
+        "value": "http://gss-data.org.uk/def/trade/concept/country-transaction/{country_transaction}",
+        "codelist": false
+      },
       "Value": {
         "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-        "measure": "http://gss-data.org.uk/def/measure/bob-current-account",
+        "measure": "http://gss-data.org.uk/def/measure/bob-capital-account",    
         "datatype": "integer"
       },
       "Marker": {
