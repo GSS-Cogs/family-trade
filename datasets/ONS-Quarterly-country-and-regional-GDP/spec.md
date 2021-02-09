@@ -97,3 +97,16 @@
 
 		Industry section should eventually reference an all encompassing SITC4 hierarchical codelist
 
+## TODO NEW:
+
+* Map region column to NUTS codes.
+ * todo: enumerate values for sheets.
+* Delete `Unit` column.
+* Rename `Measure Type` column to `Unit`.
+  * Rename all `percentage-change` values to `percentage`.
+  * Leave `indices` as they are.
+* Rename `Change Type` column to `Measure Type`. The following measures should be in place:   
+  * Rename all `not-applicable` values to `gdp-from-gva`
+  * Rename all `quarter-on-previous-quarter` values to `q-on-q-delta-gdp-from-gva`
+  * Rename all `quarter-on-same-quarter-a-year-ago` values to `q-on-last-year-q-delta-gdp-from-gva`
+  * Rename all `year-on-year` values to `y-on-y-delta-gdp-from-gva`
