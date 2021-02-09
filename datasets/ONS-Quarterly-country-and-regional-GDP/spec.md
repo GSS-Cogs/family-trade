@@ -100,7 +100,18 @@
 ## TODO NEW:
 
 * Map region column to NUTS codes.
- * todo: enumerate values for sheets.
+  * http://data.europa.eu/nuts/code/UK - United Kingdom
+  * http://data.europa.eu/nuts/code/UKF - EAST MIDLANDS (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKG - WEST MIDLANDS (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKE - YORKSHIRE AND THE HUMBER
+  * http://data.europa.eu/nuts/code/UKC - NORTH EAST (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKD - NORTH WEST (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKZ - EXTRA-REGIO NUTS 1
+  * http://data.europa.eu/nuts/code/UKK - SOUTH WEST (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKL - WALES
+  * http://data.europa.eu/nuts/code/UKJ - SOUTH EAST (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKH - EAST OF ENGLAND
+  * http://data.europa.eu/nuts/code/UKI - LONDON
 * Delete `Unit` column.
 * Rename `Measure Type` column to `Unit`.
   * Rename all `percentage-change` values to `percentage`.
