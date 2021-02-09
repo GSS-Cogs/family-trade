@@ -1,11 +1,11 @@
 {
-    "title": "UK Trade in Goods Statistics by Business Characteristics 2018",
+    "title": "UK Trade in Goods Statistics by Business Characteristics",
     "publisher": "HM Revenue & Customs",
-    "description": "Spreadsheets seem to be same data, presented differently (with \"IDBR OTS Country data (expert users)\" being a subset.). Contains estimates of Trade in Goods data matched with registered Businesses from the Inter-Departmental Business Register (IDBR) for Exporters and Importers for 2015",
-    "landingPage": "https://www.gov.uk/government/statistical-data-sets/uk-trade-in-goods-by-business-characteristics-2018-data-tables",
+    "description": "Supporting tables for the UK trade in goods by business characteristics",
+    "landingPage": "https://www.gov.uk/government/collections/uk-trade-in-goods-statistics-by-business-characteristics",
     "landingPage2": "https://www.gov.uk/government/statistical-data-sets/uk-trade-in-goods-by-business-characteristics-2018-data-tables",
     "datasetNotes": [
-        "Data can be found by clicking on the Excel table links titled \"IDBR OTS tables 2015\" and \"IDBR OTS Country data (expert users) 2015\" under the table headed \"Reports\" and produced November 2016. Spreadsheets seem to be same data, presented differently with \"IDBR OTS Country data (expert users)\" being a subset."
+        "Data can be found by clicking on the most recent link to named 'UK trade in goods by business characteristics xxxx - data tables' where xxxx is the year.   Only 'IDBR detailed overseas trade in goods statistics by country data tables' is required as this contains all the information contained in the 'IDBR detailed overseas trade in goods statistics tables'"
     ],
     "published": "2016-11-24",
     "families": [
@@ -17,8 +17,60 @@
     },
     "transform": {
         "airtable": "recVDI0VC5iKZCd2r",
+        "columns": {
+            "Year": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+year}",
+                "codelist": false
+            },
+            "Flow": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
+                "codelist": false
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{country}",
+                "codelist": false
+            },
+            "Zone": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{zone}",
+                "codelist": false
+            },
+            "Number of Employees": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{number_of_employees}",
+                "codelist": false
+            },
+            "Age of Business": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/age-of-business",
+                "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}",
+                "codelist": false
+            },
+            "Industry Group": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/high-level-industry-groups",
+                "value": "http://gss-data.org.uk/def/trade/concept/high-level-industry-groups/{industry_group}",
+                "codelist": false
+            },
+            "Employee Count": {
+                "attribute": "http://gss-data.org.uk/def/trade/property/attribute/employee-count"
+            },
+            "Business Count": {
+                "attribute": "http://gss-data.org.uk/def/trade/property/attribute/business-count"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp",
+                "measure": "http://gss-data.org.uk/def/measure/trade",
+                "datatype": "integer"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        },
         "main_issue": 8
     },
     "sizingNotes": "Non-simple file structure but with multiple table within tabs, multiple dimensions, subdimensions and footnotes.",
-    "notes": "Supporting information is available in the PDF on the lading page"
+    "notes": "Supporting information is available in the PDF on the lading page .  This is an annual publication and a decision is yet to be taken on how this should be recorded i.e. each publication overwritten by the newest, each publication published seperately, a timeseries created etc."
 }

@@ -16,7 +16,43 @@
     },
     "transform": {
         "airtable": "recvtVrl03bBWW552",
-        "main_issue": 15
+        "main_issue": 15,
+        "columns": {
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total"
+            },
+            "CDID": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}",
+                "codelist": false
+            },
+            "Flow Directions": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "codelist": false
+            },
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{period}",
+                "codelist": false
+            },
+            "Product Department": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product-department",
+                "value": "http://gss-data.org.uk/def/trade/concept/product-department/{product_department}",
+                "codelist": false
+            },
+            "Product Category": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product-category",
+                "value": "http://gss-data.org.uk/def/trade/concept/product-category/{product_category}",
+                "codelist": false
+            },
+            "Product": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}",
+                "codelist": false
+            }
+        }
     },
     "sizingNotes": "",
     "notes": ""

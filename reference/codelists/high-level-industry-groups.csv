@@ -1,0 +1,13 @@
+Label,Notation,Parent Notation,Sort Priority,Description
+Agriculture and Food,group1,all,1,"SIC 2007 - A, 10 - 17"
+"Mining, Petroleum products and Waste",group2,all,2,"SIC 2007 - B, 19, 24, D, E"
+Chemicals,group3,all,3,"SIC 2007 - 20"
+Pharmaceuticals,group4,all,4,"SIC 2007 - 21"
+Electronic and Electrical equipment,group5,all,5,"SIC 2007 - 26, 27"
+Machinery and equipment (not elsewhere specified),group6,all,6,"SIC 2007 - 28"
+"Motor vehicles, transport equipment (excl.aerospace)",group7,all,7,"SIC 2007 - 29, 30 (excluding 30.3)"
+Aerospace and related machinery,group8,all,8,"SIC 2007 - 30.3"
+Other manufacturing,group9,all,9,"SIC 2007 - 18, 22, 23, 25, 31, 32"
+Services,group10,all,10,"SIC 2007 - 33, F - U"
+Unknown,unknown,all,11,
+All,all,,12,

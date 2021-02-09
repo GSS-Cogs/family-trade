@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -14,329 +14,235 @@
 # ---
 
 # +
-#idbrs = sorted(
-#    [dist for dist in scraper.distributions if dist.title.startswith('IDBR')],
-#    key=lambda d: d.title, reverse=True)
-#idbr = idbrs[0]
-#display(idbr.title)
-#yr = idbr.title[-4:]
-#tabs = {tab.name: tab for tab in idbr.as_databaker()}
-#tabs.keys()
-#print('Year: ' + yr)
-
-# +
 from gssutils import *
 import json 
 import requests
+import pandas as pd
 
-info = json.load(open('info.json')) 
-landingPage = info['landingPage2']  
+info = json.load(open('info.json'))
 
-scraper = Scraper(landingPage)
+scraper = Scraper(seed = 'info.json')
 scraper
+
+trace = TransformTrace()
+cubes = Cubes('info.json')
 # -
 
-yr = scraper.title.index("20")
-yr = scraper.title[yr:yr+4]
-yr
+scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
+scraper
+scraper.dataset.family = info["families"]
 
-myfile = scraper.distributions[0].as_pandas(sheet_name=None)
+datasetTitle = scraper.title
+datasetTitle
+
+distribution = scraper.distribution(latest = True).downloadURL
+distribution
+
+tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
+list(tabs)
+# tabs = {tab.name: tab for tab in distribution.as_databaker}
+
+for name, tab in tabs.items():
+    if 'Notes and Contents' in name or '5. Metadata' in name :
+        continue
+    datasetTitle = scraper.title
+    columns = ["Flow", "Period", "Country", "Zone", "Business Size", "Age", "Industry Group", "Value", 
+               "Business Count", "Employee Count", "Flow Directions", "Year", "Marker"]
+
+    trace.start(datasetTitle, tab, columns, distribution) 
+
+    cell = tab.excel_ref("A1")
+    
+    flow = cell.fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Flow("Defined from cell ref A1 down")
+    
+    year = cell.shift(1,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Period("Defined form cell ref B1 down")
+    
+    country = cell.shift(2,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Country("Defined form cell ref C1 down")
+    
+    zone = cell.shift(3,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Zone("Defined form cell ref D1 down")
+    
+    business_size = cell.shift(4,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Business_Size("Defined form cell ref E1 down")
+    
+    age = cell.shift(5,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Age("Defined form cell ref F1 down")
+    
+    industry_group = cell.shift(6,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Industry_Group("Defined form cell ref G1 down")
+    
+    observations = cell.shift(7,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    
+    business_count = cell.shift(8,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Business_Count("Defined form cell ref I1 down")
+    
+    employee_count = cell.shift(9,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Employee_Count("Defined form cell ref J1 down")
+
+    dimensions = [
+        HDim(flow, 'Flow', DIRECTLY, LEFT),
+        HDim(year, 'Period', DIRECTLY, LEFT),
+        HDim(country, 'Country', DIRECTLY, LEFT),
+        HDim(zone, 'Zone', DIRECTLY, LEFT),
+        HDim(business_size, 'Business Size', DIRECTLY, LEFT),
+        HDim(age, 'Age', DIRECTLY, LEFT),
+        HDim(industry_group, 'Industry Group', DIRECTLY, LEFT),
+        HDim(business_count, 'Business Count', DIRECTLY, RIGHT),
+        HDim(employee_count, 'Employee Count', DIRECTLY, RIGHT),
+    ]
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    savepreviewhtml(tidy_sheet, fname = tab.name+ "Preview.html")
+    trace.with_preview(tidy_sheet)
+    trace.store("combined_dataframe", tidy_sheet.topandas())
+df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+df
+
+df.rename(columns= {'OBS':'Value', 'Period':'Year', 'Flow':'Flow Directions', 'DATAMARKER':'Marker'}, inplace = True)
+
+df['Flow Directions'] = df['Flow Directions'].apply(pathify)
+trace.Flow_Directions("Renamed Flow to Flow Directions")
+
+df['Country'] = df['Country'].apply(pathify)
+trace.Country("Pathified Country")
+
+df['Zone'] =df['Zone'].apply(pathify)
+trace.Zone("Pathified Zone")
+
+df['Business Size'] = df['Business Size'].apply(pathify)
+trace.Business_Size("Pathified Business_Size")
+
+df['Age'] = df['Age'].apply(pathify)
+trace.Age("Pathified Age")
+
+df['Industry Group'] = df['Industry Group'].apply(pathify)
+trace.Industry_Group("Pathified Industry Group")
+
+
+def left(s,amount):
+    return s[:amount]
+def right(s,amount):
+    return s[-amount:]
+def date_time(date):
+    if len(date) == 5:
+        return 'year/' + left(date, 4)
+df['Year'] = df['Year'].astype(str).replace('\.', '', regex=True)
+df['Year'] = df['Year'].apply(date_time)
+trace.Year("Formating to be year/2019")
 
 # +
-#url = idbr.downloadURL
-#url = 'https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/847399/IDBR_OTS_tables_2018.XLS'
-#myfile = requests.get(url)
-#open('data.xls', 'wb').write(myfile.content)
+df['Country'] = df['Country'].map({
+    'belgium': 'BE', 'czech-republic': 'CZ', 'denmark': 'DK', 'france': 'FR',
+    'germany': 'DE', 'republic-of-ireland': 'IE', 'italy': 'IT', 'netherlands': 'NL',
+    'poland': 'PL', 'spain': 'ES', 'sweden': 'SE', 'algeria': 'DZ', 
+    'australia': 'AU', 'bangladesh': 'BD', 'brazil': 'BR', 'canada': 'CA', 
+    'china': 'CN', 'hong-kong': 'HK', 'india': 'IN', 'israel': 'IL', 
+    'japan': 'JP', 'malaysia': 'MY', 'mexico': 'MX', 'nigeria': 'NG', 
+    'norway': 'NO', 'qatar': 'QA', 'russia': 'RU', 'saudi-arabia': 'SA',
+    'singapore': 'SG', 'south-africa': 'ZA', 'south-korea': 'KP', 'sri-lanka': 'LK',
+    'switzerland': 'CH', 'taiwan': 'TW', 'thailand': 'TH', 'turkey': 'TR', 
+    'uae': 'AE', 'united-states': 'US', 'vietnam': 'VN', 'eu': 'legacy-B5', 
+    'non-eu': 'D5', 'world': 'W1'
+})
+df['Zone'] = df['Zone'].map({ 
+    'eu': 'legacy-B5', 'non-eu': 'D5', 'world': 'W1'
+})
 
-# +
-sheets = ['1. Industry Group', '2. Age Group','3. Business Size']
+df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age": "Age of Business"})
 
-grops = 'HMRC Industry'
-types = 'HMRC Trade Statistic Type'
-flows = 'Flow'
-
-alltbls = []
-
-# +
-#myfile[sheets[0]]
+df['Flow'].loc[(df['Flow'] == 'import')] = 'imports'
+df['Flow'].loc[(df['Flow'] == 'export')] = 'exports'
+df['Value'].loc[(df['Value'] == '')] = 0
+df['Value'] = df['Value'].astype(int)
 # -
 
-for sh in sheets:
-    #df = pd.read_excel(io=myfile, sheet_name=sh)
-    df = myfile[sh]
-    
-    df[df.columns[0]][df[df.columns[0]] == 'Total8'] = 'Total'
-    df[df.columns[0]][df[df.columns[0]] == 'Unknown7'] = 'Unknown'
-    
-    # Save the notes in a separate var and remove from main var
-    notesind = list(df.index[df[df.columns[0]] == 'Notes:'])
-    notes = df.loc[notesind[0]:,]
-    df = df.loc[0:notesind[0]-1,]
+desc = """
+HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). 
+These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. 
+This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK. 
+These experimental releases are also accessible at www.uktradeinfo.com
 
-    df = df.fillna('-')
-    # Get the Row numbers of instances of Exports dn Total, which define where the tables are
-    expind = list(df.index[df[df.columns[2]] == 'Exports'])
-    totind = list(df.index[df[df.columns[0]] == 'Total'])
+Disclaimer
+The methodology used to compute these statistics is still under development. 
+All data should be considered experimental official statistics: https://webarchive.nationalarchives.gov.uk/20160106005532/http://www.ons.gov.uk/ons/guide-method/method-quality/general-methodology/guide-to-experimental-statistics/index.html
 
-    print(sh + ' - Row Numbers for Exports: ' + str(expind))
-    print(sh + ' - Row Numbers for Total: ' + str(totind))
-    
-    tbls = []
-    ind2 = 0
-    for ind1 in expind:
-        try:
-            tbl = df.loc[ind1+3:totind[ind2]]
-            tbl[tbl.columns[1]] = df.iloc[ind1 - 1,0]
-            tbl['Unit'] = df.iloc[ind1 - 1,4]
-            tbl.columns = [grops, types, 'Exports', 'Spare', 'Imports', 'Unit']
-            
-            t1 = tbl[[grops, types, 'Exports', 'Unit']]
-            t1 = t1.rename(columns={'Exports': 'Value'})
-            t1[flows] = 'Exports'
-            t2 = tbl[[grops, types, 'Imports', 'Unit']]
-            t2 = t2.rename(columns={'Imports': 'Value'})
-            t2[flows] = 'Imports'
-            tbl = pd.concat([t1,t2])
-            tbls.append(tbl)
-            
-        except Exception as e:
-            print('Error creating table: ' + str(e))
-        ind2 = ind2 + 1
-    
-    tbls = pd.concat(tbls)
-    
-    tbls['Period'] = yr
-    tbls['Marker'] = ''
-    
-    if sh == sheets[0]:
-        tbls['Marker'][tbls['Value'].str.strip() == '.'] = 'unknown'
-        tbls['Unit'] = '£ millions'
-    elif sh == sheets[1]:
-        tbls['Marker'][tbls['Value'].str.strip() == '.'] = 'not-applicable'
-        tbls['Unit'] = 'business count'
-    elif sh == sheets[2]:  
-        tbls['Marker'][tbls['Value'].str.strip() == '.'] = 'not-applicable'
-        tbls['Unit'] = 'employee count'
-    
-    tbls = tbls[tbls['Value'].str.strip() != '-']
-    tbls['Value'][tbls['Value'] == '.'] = '0'
-    alltbls.append(tbls)
+Notes
 
+1. This data contains estimates of Trade in Goods data matched with registered businesses from the Inter-Departmental Business Register (IDBR) for exporters and importers in 2019 for a selection of countries (see Metadata tab for more information).
+2. This data is now presented on a 'Special Trade' basis, in line with the change in the compilation method  for the UK Overseas Trade Statistics (OTS) - See section 3.1.1 in OTS Methodology: https://www.gov.uk/government/statistics/overseas-trade-statistics-methodologies
+3. More details on the methodology used to produce these estimates and issues to be aware of when using the data can be found on the metadata tab.
+4. These estimates do not cover all businesses. They do not cover:
+    • Unregistered businesses (those not registered for VAT or Economic Operator Registration and Identification (EORI)).
+5. Due to these experimental statistics being subject to active disclosure controls the data has been suppressed according to GSS guidance on disclosure control. 
+    Suppressed cells are shown as 'Suppressed'.
+7. The industry groups are based on UK Standard Industrial Classification 2007 (UK SIC 2007)
+8. Information about trade in goods statistics can be found here - https://www.uktradeinfo.com/trade-data/help-with-using-our-data/help
+    Information about trade the Inter-Departmental Business Register (IDBR) can be found here - https://www.ons.gov.uk/aboutus/whatwedo/paidservices/interdepartmentalbusinessregisteridbr		the ONS IDBR webpages
+    Information about UK Standard Industrial Classification 2007 (UK SIC 2007) can be found here - https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007
 
-# +
-age = 'Age of Business(Years)'
-size = 'Size of Business by no of Employees'
-colord = ['Period', grops, age, size, types, flows, 'Unit', 'Value', 'Marker']
+Copyright
+© Crown copyright 2020
+This publication is licensed under the terms of the Open Government Licence v3.0
+except where otherwise stated. To view this licence, visit:
+nationalarchives.gov.uk/doc/open-government-licence/version/3
 
-alltbls[0][age] = 'All'
-alltbls[0][size] = 'All'
-alltbls[0] = alltbls[0][colord]
+You may re-use this document/publication free of charge in any format for research,
+private study or internal circulation within an organisation. You must re-use it accurately
+and not use it in a misleading context. The material must be acknowledged as Crown
+copyright and you must give the title of the source document / publication.
 
-alltbls[1] = alltbls[1].rename(columns={grops: age})
-alltbls[1][grops] = 'All'
-alltbls[1][size] = 'All'
-alltbls[1] = alltbls[1][colord]
+Where we have identified any third party copyright information you will need to obtain
+permission from the copyright holders concerned.
 
-alltbls[2] = alltbls[2].rename(columns={grops: size})
-alltbls[2][grops] = 'All'
-alltbls[2][age] = 'All'
-alltbls[2] = alltbls[2][colord]
+Any enquiries regarding this publication should be sent to:
+uktradeinfo@hmrc.gov.uk
 
-alltbls1 = pd.concat(alltbls)
-#alltbls1.head(60)
-# -
+Contact Details
 
-del df
-sheets = ['4. Industry_Age', '5. Industry_BusinessSize', '6. BusinessSize_Age']
+HM Revenue and Customs
+Alexander House
+21 Victoria Avenue
+Southend on Sea
+SS99 1AA
 
-tbls = []
-for sh in sheets:
-    df = pd.read_excel(io='data.xls', sheet_name=sh)
-    
-    df[df.columns[0]][df[df.columns[0]] == 'Grand Total7'] = 'Total'
-    df[df.columns[0]][df[df.columns[0]] == 'Grand Total8'] = 'Total'
-    
-    # Save the notes in a separate var and remove from main var
-    notesind = list(df.index[df[df.columns[0]] == 'Notes:'])
-    notes = df.loc[notesind[0]:,]
-    df = df.loc[0:notesind[0]-1,]
-    
-    # Get the Row numbers of instances of Exports dn Total, which define where the tables are
-    expind = list(df.index[df[df.columns[3]] == 'Exports'])
-    totind = list(df.index[df[df.columns[0]] == 'Total'])
-    
-    df[df.columns[0]].fillna(value = pd.np.nan, inplace = True)
-    df[df.columns[0]] = df[df.columns[0]].ffill()
-    df = df.fillna('-')
-    
-    print(sh + ' - Row Numbers for Exports: ' + str(expind))
-    print(sh + ' - Row Numbers for Total: ' + str(totind))
-    ind2 = 0
-    for ind1 in expind:
-        try:
-            tbl = df.loc[ind1+3:totind[ind2]]
-            cn = list(tbl.columns)
-            t1 = tbl[[cn[0],cn[1],cn[3]]]
-            t1 = t1.rename(columns={cn[3]: 'Value'})
-            t1[flows] = 'Exports'
-            t1['Unit'] = '£ million'
-            t2 = tbl[[cn[0],cn[1],cn[4]]]
-            t2 = t2.rename(columns={cn[4]: 'Value'})
-            t2[flows] = 'Exports'
-            t2['Unit'] = 'Business Count'
-            t3 = tbl[[cn[0],cn[1],cn[5]]]
-            t3 = t3.rename(columns={cn[5]: 'Value'})
-            t3[flows] = 'Exports'
-            t3['Unit'] = 'Employee Count'
-            t4 = tbl[[cn[0],cn[1],cn[7]]]
-            t4 = t4.rename(columns={cn[7]: 'Value'})
-            t4[flows] = 'Imports'
-            t4['Unit'] = '£ million'
-            t5 = tbl[[cn[0],cn[1],cn[8]]]
-            t5 = t5.rename(columns={cn[8]: 'Value'})
-            t5[flows] = 'Imports'
-            t5['Unit'] = 'Business Count'
-            t6 = tbl[[cn[0],cn[1],cn[9]]]
-            t6 = t6.rename(columns={cn[9]: 'Value'})
-            t6[flows] = 'Imports'
-            t6['Unit'] = 'Employee Count'
+Email: uktradeinfo@hmrc.gov.uk
 
-            tbl = pd.concat([t1,t2,t3,t4,t5,t6])
-            tbl['Marker'] = ''
-            tbl['Marker'][tbl['Value'].str.strip() == '.'] = 'not-applicable'
-            tbl.columns = [grops, age, 'Value', flows, 'Unit', 'Marker']
-            tbl = tbl[tbl['Value'].str.strip() != '-']
-            tbls.append(tbl)
-            #print(tbls)
-        except Exception as e:
-            print('Error creating table: ' + str(e))
-        ind2 = ind2 + 1
+Telephone: +44 (0) 3000 594250
+"""
 
+scraper.dataset.description = ""
+scraper.dataset.comment = """
+HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). 
+These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. 
+This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK. 
+These experimental releases are also accessible at www.uktradeinfo.com
+"""
 
+with pd.option_context('float_format', '{:f}'.format):
+    print(df)
 
+cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
+cubes.output_all()
+
+trace.render("spec_v1.html")
 
 # +
-tbls[0][size] = 'All'
-tbls[0]['Period'] = yr
-tbls[0][types] = ''
-tbls[0] = tbls[0][colord]
-
-tbls[1]['Period'] = yr
-tbls[1] = tbls[1].rename(columns={age: size})
-tbls[1][age] = 'All'
-tbls[1][types] = ''
-tbls[1] = tbls[1][colord]
-
-tbls[2] = tbls[2].rename(columns={grops: size})
-tbls[2]['Period'] = yr
-tbls[2][grops] = 'All'
-tbls[2][types] = ''
-tbls[2] = tbls[2][colord]
-
-#alltbls2.head(60)
+#for c in df.columns:
+#    if (c not in ['Business Count','Employee Count','Value']):
+#        print(c)
+#        print(df[c].unique())
+#        print("###############################################################")
 
 # +
-tbls[0][types][tbls[0]['Unit'] == 'Employee Count'] = 'Employee count for business by Industry group and Age of business'
-tbls[0][types][tbls[0]['Unit'] == 'Business Count'] = 'Business count for business by Industry group and Age of business'
-tbls[0][types][tbls[0]['Unit'] == '£ million'] = 'Value for business by Industry group and Age of business'
-
-tbls[1][types][tbls[1]['Unit'] == 'Employee Count'] = 'Employee count for business by Industry group and Business size'
-tbls[1][types][tbls[1]['Unit'] == 'Business Count'] = 'Business count for business by Industry group and Business size'
-tbls[1][types][tbls[1]['Unit'] == '£ million'] = 'Value for business by Industry group and Business size'
-
-tbls[2][types][tbls[2]['Unit'] == 'Employee Count'] = 'Employee count for business by Business size and Age of business'
-tbls[2][types][tbls[2]['Unit'] == 'Business Count'] = 'Business count for business by Business size and Age of business'
-tbls[2][types][tbls[2]['Unit'] == '£ million'] = 'Value for business by Business size and Age of business'
-alltbls2 = pd.concat(tbls)
-# -
-
-tbls[2]['Unit'].unique()
-
-alltbls = pd.concat([alltbls1, alltbls2])
-
-# +
-alltbls[grops] = (alltbls[grops].str[:8]).apply(pathify)
-alltbls[grops][alltbls[grops] == 'total'] = 'all'
-
-alltbls[size][alltbls[size] == 0] = '0'
-alltbls[size] = alltbls[size] + ' Employees'
-alltbls[size][alltbls[size].str.strip() == '250 +'] = '250'
-alltbls[size] = alltbls[size].apply(pathify)
-alltbls[size][alltbls[size] == ''] = 'all'
-alltbls[size][alltbls[size].str.strip() == '-employees'] = 'all-employees'
-
-alltbls[age][alltbls[age] == '-'] = 'all'
-alltbls[age][alltbls[age].str.strip() == '20 +'] = '20'
-alltbls[age] = (alltbls[age] + ' Years').apply(pathify)
-alltbls[age][alltbls[age] == 'unknown-years'] = 'unknown'
-alltbls[age][alltbls[age] == 'total-years'] = 'total'
-alltbls[age][alltbls[age] == 'all-years'] = 'total'
-
-alltbls[types] = alltbls[types].apply(pathify)
-alltbls[flows] = alltbls[flows].apply(pathify)
-
-alltbls.replace({'Unit': {'number': 'Count'}}, inplace=True)
-alltbls['Unit'] = alltbls['Unit'].apply(pathify)
-alltbls.replace({'Unit': {'ps-million': 'gbp-million', 'ps-millions': 'gbp-million'}}, inplace=True)
-
-alltbls['Marker'][alltbls['Value'].str.strip() == 'S'] = 'suppressed'
-alltbls['Value'][alltbls['Value'].str.strip() == 'S'] = 0
-alltbls['Value'][alltbls['Value'].str.strip() == '.'] = 0
-
-alltbls['Measure Type'] = ''
-alltbls['Measure Type'][alltbls['Unit'] == 'gbp-million'] = 'GBP Total'
-alltbls['Unit'][alltbls['Unit'] == 'employee-count'] = 'businesses'
-alltbls['Unit'][alltbls['Unit'] == 'business-count'] = 'employees'
-alltbls['Measure Type'][alltbls['Unit'] == 'businesses'] = 'Count'
-alltbls['Measure Type'][alltbls['Unit'] == 'employees'] = 'Count'
-
-alltbls['Period'] = 'year/' + alltbls['Period']
-#alltbls.head(60)
+#'UK trade in goods by business characteristics 2019 - data tables'
 # -
 
 
 
-from pathlib import Path
-import numpy as np
-out = Path('out')
-out.mkdir(exist_ok=True)
 
-# +
-from os import environ
 
-tit1 = 'ONS International exports of services from the UK by NUTS area, Industry and destination'
-
-fn1 = 'observations'
-
-scraper.dataset.family = 'trade'
-from gssutils.metadata import THEME
-scraper.dataset.theme = THEME['business-industry-trade-energy']
-
-alltbls.drop_duplicates().to_csv(out / (fn1 + '.csv'), index = False)
-#scraper.set_dataset_id(f'{pathify(environ.get("JOB_NAME", ""))}/{fn1}')
-
-#comDesc = """
-#    Supporting tables for the UK trade in goods by business characteristics 2018
-#    This spreadsheet contains estimates of trade in goods data matched with registered businesses from the 
-#    Inter-Departmental Business Register (IDBR) for exporters and importers for 2018.
-#    This data is now presented on a 'Special Trade' basis, in line with the change in the compilation method 
-#    for the UK Overseas Trade Statistics (OTS).
-#    More details on the methodology used to produce these estimates and issues to be aware of when using 
-#    the data can be found on the
-#    metadata tab.
-#    These estimates do not cover all businesses. They do not cover:
-#    Unregistered businesses (those not registered for VAT or Economic Operator Registration and Identification (EORI)).
-#    Due to these experimental statistics being subject to active disclosure controls the data has been suppressed 
-#    according to GSS guidance on disclosure control.  Suppressed cells are shown with an 'S'
-#    """
-#scraper.dataset.comment = 'Supporting tables for the UK trade in goods by business characteristics 2018'
-#scraper.dataset.description = comDesc
-#scraper.dataset.title = 'HMRC Trade in Goods'
-
-with open(out / (fn1 + '.csv-metadata.trig'), 'wb') as metadata:metadata.write(scraper.generate_trig())
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / (fn1 + '.csv'), out / ((fn1 + '.csv') + '-schema.json'))
-# -
 
 
 

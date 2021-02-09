@@ -15,6 +15,47 @@
     },
     "transform": {
         "airtable": "recvEuJKTaVY6Ft4n",
+        "columns": {
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
+            },
+            "Business size": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
+                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{business_size}",
+                "codelist": false
+            },
+            "Country": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/eu-rw-ww",
+                "value": "http://gss-data.org.uk/def/trade/concept/eu-rw-ww/{country}",
+                "codelist": false
+            },
+            "Ownership": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/countries-of-ownership",
+                "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{ownership}",
+                "codelist": false
+            },
+            "Industry": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-industries",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-industries/{industry}",
+                "codelist": false
+            },
+            "Flow": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
+                "codelist": false
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "datatype": "integer"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        },
         "stage": [
             "To Do"
         ],

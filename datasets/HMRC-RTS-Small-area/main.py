@@ -6,26 +6,28 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.9.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
 
+# cd /workspace/family-trade/datasets/HMRC-RTS-Small-area/
+
 # +
 from gssutils import *
 import json
 
-scraper = Scraper(json.load(open('info.json'))['landingPage'])
-scraper
+info = json.load(open('info.json'))
+scraper = Scraper(seed='info.json')  
+cubes = Cubes('info.json')
+scraper 
 # -
 
 scraper.select_dataset(latest=True)
-scraper
 
 tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
-#tabs.keys()
 
 year_cell = tabs['Title'].filter('Detailed Data Tables').shift(UP)
 year_cell.assert_one()
@@ -49,36 +51,32 @@ table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] ==
 sorted(table)
 table = table[(table['Marker'] != 'residual-trade')]
 table = table[(table['Marker'] != 'below-threshold-traders')]
+table["Measure Type"] = table["Measure Type"].apply(pathify)
 table = table.drop_duplicates()
 
-#table.count()
-#t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
-#t = table[(table['HMRC Partner Geography'] == 'EU')]
-
-# -
-
-
-table['HMRC Partner Geography'].unique()
-
-# +
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
-#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
-out = Path('out')
-out.mkdir(exist_ok=True)
-table.to_csv(out / 'observations.csv', index = False)
+scraper.dataset.family = 'trade'
+measures = {
+    'count-of-businesses': {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
+                "measure": "http://gss-data.org.uk/def/trade/measure/count",
+                "datatype": "double"
+            },
+    'gbp-total': {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/trade/measure/value",
+                "datatype": "double"
+            }
+}
+for measure, value_map in measures.items():
+    info["transform"]["columns"]["Value"] = value_map
+    table_wanted = table.loc[table['Measure Type'].str.strip() == measure].reset_index(drop=True).drop_duplicates()
+    cubes.add_cube(scraper, table_wanted, measure, info_json_dict=info, graph='HMRC-RTS-Small-area')   
 
-# +
-from gssutils.metadata import THEME
-scraper.dataset.family = 'Trade'
-scraper.dataset.theme = THEME['business-industry-trade-energy']
+cubes.output_all()
 
-with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(out / 'observations.csv', out / 'observations.csv-schema.json')
-# -
 
