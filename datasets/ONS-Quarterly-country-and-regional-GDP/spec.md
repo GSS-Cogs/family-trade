@@ -97,3 +97,27 @@
 
 		Industry section should eventually reference an all encompassing SITC4 hierarchical codelist
 
+## TODO NEW:
+
+* Map region column to the following codes:
+  * http://statistics.data.gov.uk/id/statistical-geography/E92000001 - England
+  * http://data.europa.eu/nuts/code/UKF - EAST MIDLANDS (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKG - WEST MIDLANDS (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKE - YORKSHIRE AND THE HUMBER
+  * http://data.europa.eu/nuts/code/UKC - NORTH EAST (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKD - NORTH WEST (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKZ - EXTRA-REGIO NUTS 1
+  * http://data.europa.eu/nuts/code/UKK - SOUTH WEST (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKL - WALES
+  * http://data.europa.eu/nuts/code/UKJ - SOUTH EAST (ENGLAND)
+  * http://data.europa.eu/nuts/code/UKH - EAST OF ENGLAND
+  * http://data.europa.eu/nuts/code/UKI - LONDON
+* Delete `Unit` column.
+* Rename `Measure Type` column to `Unit`.
+  * Rename all `percentage-change` values to `percentage`.
+  * Leave `indices` as they are.
+* Rename `Change Type` column to `Measure Type`. The following measures should be in place:   
+  * Rename all `not-applicable` values to `gdp-from-gva`
+  * Rename all `quarter-on-previous-quarter` values to `q-on-q-delta-gdp-from-gva`
+  * Rename all `quarter-on-same-quarter-a-year-ago` values to `q-on-last-year-q-delta-gdp-from-gva`
+  * Rename all `year-on-year` values to `y-on-y-delta-gdp-from-gva`
