@@ -70,6 +70,22 @@ for tab_name in tabs_names_to_process:
     
     trace.start(datasetTitle, tab, columns, distribution.downloadURL)
 
+<<<<<<< HEAD
+=======
+# The selections are ..almost..identicial so process in a loop
+tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics"]
+for tab_name in tabs_names_to_process:
+
+    # Raise an exception if one of our required tabs is missing
+    if tab_name not in [x.name for x in tabs]:
+        raise ValueError(f'Aborting. A tab named {tab_name} required but not found')
+
+    # Select the tab in question
+    tab = [x for x in tabs if x.name == tab_name][0]
+    
+    trace.start(datasetTitle, tab, columns, distribution.downloadURL)
+
+>>>>>>> 64641f2cdf98fadccbbd9a907f9617de1b4bdcc0
     period = tab.excel_ref("A7").expand(DOWN).is_not_blank().is_not_whitespace()
     trace.Period("Defined from cell ref A6 Down")
 
@@ -80,31 +96,53 @@ for tab_name in tabs_names_to_process:
     trace.Alcohol_Type("Name of tabs in XLS sheet")
     
     if tab_name == "Wine_statistics":
+<<<<<<< HEAD
         measure_type = "clearances_duty-receipts"
+=======
+        measure = "clearances_duty-receipts"
+>>>>>>> 64641f2cdf98fadccbbd9a907f9617de1b4bdcc0
         unit = "hectolitres_gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
 
     elif tab_name == "Made_wine_statistics":
+<<<<<<< HEAD
         measure_type = "clearances_duty-receipts"
+=======
+        measure = "clearances_duty-receipts"
+>>>>>>> 64641f2cdf98fadccbbd9a907f9617de1b4bdcc0
         unit = "hectolitres_gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)-tab.excel_ref("K6").expand(DOWN)
     
     elif tab_name == "Spirits_statistics":
+<<<<<<< HEAD
         measure_type = "production_clearances_duty-receipts"
+=======
+        measure = "production_clearances_duty-receipts"
+>>>>>>> 64641f2cdf98fadccbbd9a907f9617de1b4bdcc0
         unit = "hectolitres_of_alcohol_gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)
 
     elif tab_name == "Beer_and_cider_statistics":
+<<<<<<< HEAD
         measure_type = "production_clearances_duty-receipts"
+=======
+        measure = "production_clearances_duty-receipts"
+>>>>>>> 64641f2cdf98fadccbbd9a907f9617de1b4bdcc0
         unit = "hectolitres_of_alcohol_gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)
     
     else:
         raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
 
+<<<<<<< HEAD
     trace.Measure_Type("Measure is different for different columns")
     trace.Unit("Unit is different for different columns")
     
+=======
+    trace.Measure("Measure is different for different columns")
+    trace.Unit("Unit is different for different columns")
+ 
+>>>>>>> 64641f2cdf98fadccbbd9a907f9617de1b4bdcc0
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
         HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
@@ -118,6 +156,7 @@ for tab_name in tabs_names_to_process:
     trace.store("combined_dataframe", tidy_sheet.topandas())
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+
 df
 
 # Period column - requirements satisfied
