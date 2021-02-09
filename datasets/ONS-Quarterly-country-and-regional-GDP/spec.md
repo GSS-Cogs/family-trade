@@ -99,8 +99,8 @@
 
 ## TODO NEW:
 
-* Map region column to NUTS codes.
-  * http://data.europa.eu/nuts/code/UK - United Kingdom
+* Map region column to the following codes:
+  * http://statistics.data.gov.uk/id/statistical-geography/E92000001 - England
   * http://data.europa.eu/nuts/code/UKF - EAST MIDLANDS (ENGLAND)
   * http://data.europa.eu/nuts/code/UKG - WEST MIDLANDS (ENGLAND)
   * http://data.europa.eu/nuts/code/UKE - YORKSHIRE AND THE HUMBER
