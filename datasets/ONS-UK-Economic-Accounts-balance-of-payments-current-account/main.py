@@ -49,7 +49,7 @@ def right(s, amount):
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bob-current-account"
+data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bop-current-account"
 with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile, indent = 2)
 
@@ -648,7 +648,7 @@ for tab in tabs:
 
         with open("info.json", "r") as jsonFile:
             data = json.load(jsonFile)
-        data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bob-capital-account"
+        data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bop-capital-account"
         with open("info.json", "w") as jsonFile:
             json.dump(data, jsonFile)
     
