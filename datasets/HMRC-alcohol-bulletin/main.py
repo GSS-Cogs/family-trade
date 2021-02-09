@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.9.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -102,8 +102,8 @@ for tab_name in tabs_names_to_process:
     else:
         raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
 
-    trace.Measure_Type("Measure is different for different columns")
-    trace.Unit("Unit is different for different columns")
+    trace.Measure_Type("Measure is different for different values")
+    trace.Unit("Unit is different for different values")
     
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
@@ -120,6 +120,8 @@ for tab_name in tabs_names_to_process:
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
+df['Marker'].unique() 
+
 # +
 #check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
 df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
@@ -128,25 +130,49 @@ df.loc[(df['Bulletin Type']).str.contains('receipts'),'Measure Type']='duty-rece
 #check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
 df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='production'
 
-#Setting the Unit basded on Measure Type Column 
+#Setting the Unit based on Measure Type Column 
 df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
                                     ("gbp-million" if x == "duty-receipts" else 
                                      ("hectolitres-of-alcohol" if x == "production" else "U")))
-df
 # -
 
-df['Measure Type'].unique()
+f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
+df.loc[f1,'Alcohol Type'] = 'all'
 
-df['Unit'].unique()
+df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == "Wine_statistics" else 
+                                    ("made-wine" if x == "Made_wine_statistics" else 
+                                     ("spirits" if x == "Spirits_statistics" else
+                                      ("beer-and-cider" if x == "Beer_and_cider_statistics" else x))))
 
 # +
-# Period column - requirements satisfied
+df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres)", expand = True)
+df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(£ million)", expand = True)
+df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres of alcohol)", expand = True)
+
+df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
+# -
+
+#N/As change to 0 and put not-applicable in Marker column
+df['Marker'].replace('N/A', 'not-applicable', inplace=True)
+f1=(df['Marker'] =='not-applicable')
+df.loc[f1,'Value'] = 0
+
+# +
+# Marker column - requirements satisfied
 df['Marker'][df.Period == 'Aug-20 provisional'] = 'provisional'
 df['Marker'][df.Period == 'Sep-20 provisional'] = "provisional"
 df['Marker'][df.Period == 'Oct-20 provisional'] = "provisional"
-df['Marker'].unique()
 
-#Some of marker noations below might need changed ? 
+# As the value 2815(estimate) and 2460(estimate) in the spread sheet is not picked up by databaker properly
+# A quick fix is done to resolve the issue
+df['Value'][df.Marker == ',815 (estimate)'] = 2815
+df['Value'][df.Marker == ',460 (estimate)'] = 2460
+
+# replacing string in the marker column with string "estimate"
+df['Marker'].replace({',815 (estimate)':'estimate', ',460 (estimate)': 'estimate' }, inplace = True)
+df['Marker'].unique() 
+
+
 # -
 
 #Period column 
@@ -177,10 +203,7 @@ df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999
                             'Oct-20 provisional': 'month/2020-10'}})
 
 
-df['Period'].unique()
-
-df.dtypes
-
+df['Marker'].unique()
 df
 
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
