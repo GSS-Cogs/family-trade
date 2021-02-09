@@ -85,7 +85,7 @@
       },
       "Value": {
         "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-        "measure": "http://gss-data.org.uk/def/measure/bob-capital-account",  
+        "measure": "http://gss-data.org.uk/def/measure/bop-current-account",  
         "datatype": "integer"
       },
       "Marker": {
