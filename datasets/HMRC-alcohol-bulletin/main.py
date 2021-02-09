@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -78,25 +78,25 @@ for tab_name in tabs_names_to_process:
 
     alcohol_type = tab.name
     trace.Alcohol_Type("Name of tabs in XLS sheet")
-    
+
     if tab_name == "Wine_statistics":
-        measure_type = "clearances_duty-receipts"
-        unit = "hectolitres_gbp-million"
+        measure_type = "clearances duty-receipts"
+        unit = "hectolitres gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
 
     elif tab_name == "Made_wine_statistics":
-        measure_type = "clearances_duty-receipts"
-        unit = "hectolitres_gbp-million"
+        measure_type = "clearances duty-receipts"
+        unit = "hectolitres gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)-tab.excel_ref("K6").expand(DOWN)
     
     elif tab_name == "Spirits_statistics":
-        measure_type = "production_clearances_duty-receipts"
-        unit = "hectolitres_of_alcohol_gbp-million"
+        measure_type = "production clearances duty-receipts"
+        unit = "hectolitres-of-alcohol gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)
 
     elif tab_name == "Beer_and_cider_statistics":
-        measure_type = "production_clearances_duty-receipts"
-        unit = "hectolitres_of_alcohol_gbp-million"
+        measure_type = "production clearances duty-receipts"
+        unit = "hectolitres-of-alcohol gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)
     
     else:
@@ -118,81 +118,70 @@ for tab_name in tabs_names_to_process:
     trace.store("combined_dataframe", tidy_sheet.topandas())
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-df
-
-# Period column - requirements satisfied
-df['DATAMARKER'][df.Period == 'Aug-20 provisional'] = 'provisional'
-df['DATAMARKER'][df.Period == 'Sep-20 provisional'] = "provisional"
-df['DATAMARKER'][df.Period == 'Oct-20 provisional'] = "provisional"
-
-df["Measure Type"].unique()
-
+df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
 # +
-#Period column - requirements not satisfied
+#check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
+df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
+#check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
+df.loc[(df['Bulletin Type']).str.contains('receipts'),'Measure Type']='duty-receipts'
+#check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
+df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='production'
+
+#Setting the Unit basded on Measure Type Column 
+df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
+                                    ("gbp-million" if x == "duty-receipts" else 
+                                     ("hectolitres-of-alcohol" if x == "production" else "U")))
+df
+# -
+
+df['Measure Type'].unique()
+
+df['Unit'].unique()
+
+# +
+# Period column - requirements satisfied
+df['Marker'][df.Period == 'Aug-20 provisional'] = 'provisional'
+df['Marker'][df.Period == 'Sep-20 provisional'] = "provisional"
+df['Marker'][df.Period == 'Oct-20 provisional'] = "provisional"
+df['Marker'].unique()
+
+#Some of marker noations below might need changed ? 
+# -
+
+#Period column 
 def left(s, amount):
     return s[:amount]
 def right(s, amount):
     return s[-amount:]
 def date_time (date):
     if len(date)  == 4:
+        #year/{yr}
         return 'year/' + left(date, 4)
-    elif len(date) == 5:
+    if len(date)  == 6:
+        #year/{yr}
         return 'year/' + left(date, 4)
-#     elif len(date) == 18:
-#         return 'month/' + 
-#     elif len(date) == 5:
-#         return 'year/'+left(date, 4)
-#     elif len(date) == 7:
-#         return 'year/'+left(date, 7)
-#     elif len(date) == 10:
-#         return strftime(%Y-%b-%d)
-    #year/2019
-#     elif len(date) == 6:
-#         return 'quarter/' + left(date,4) + '-' + right(date,2)
-#     #quarter/2019-01
+    if len(date)  == 7:
+        #government-year/{year1}-{year2}
+        return 'government-year/' + left(date, 4) + '-' + left(date, 2) + right(date, 2)
+    elif len(date) == 10:
+        #month/{yr}-{mth}
+        return 'month/' + left(date, 7) 
     else:
         return date
-
-df['Period'] = df['Period'].astype(str).replace('\.', '', regex=True)
 df['Period'] =  df["Period"].apply(date_time)
-trace.Period("Formating to be year/0000")
+#quick fix for odd values 
+df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000', 
+                             'Aug-20 provisional': 'month/2020-08',
+                            'Sep-20 provisional': 'month/2020-09',
+                            'Oct-20 provisional': 'month/2020-10'}})
 
-# +
-# df['Period'].unique()
-# -
 
-df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres)", expand = True)
-df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(£ million)", expand = True)
-df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres of alcohol)", expand = True)
-
-# +
-# df['Measure Type'] = df['Measure Type'].apply(lambda x: 'clearances' if x['Bulletin Type'] != 'Total Wine Duty receipts' in x 
-#                                               else 'duty-receipts' if 'production_clearances_duty-receipts' in x else x)
-
-# +
-# for x in df['Bulletin Type']:
-#     for y in df['Alcohol Type']:
-#         if x != "Total Wine Duty receipts":
-#             if y == "Wine_statistics":                    
-# -
-
-df.columns
-
-# +
-# with pd.option_context("display.max_rows", None):
-#     print(df["OBS"])
-# -
-
-with pd.option_context("display.max_rows", None):
-    print(df['Measure Type'])
-
-df['Measure Type'].unique()
-
-df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
-df
+df['Period'].unique()
 
 df.dtypes
+
+df
 
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
