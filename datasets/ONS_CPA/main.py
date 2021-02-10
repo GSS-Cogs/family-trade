@@ -39,7 +39,7 @@ df = df.iloc[8:]
 series = df.unstack()
 
 # Name the series in the dataset, which helps when converting back to a dataframe
-series.name = 'Marker'
+series.name = 'Trade in Goods'
 
 
 # +
@@ -61,12 +61,10 @@ df['Release Date'] = pd.to_datetime(df['Release Date'], format='%d-%m-%Y').dt.st
 df
 
 # We don't use the data within these cells
-df.drop(labels=['Title'], axis=1, inplace=True)
+df.drop(labels=['Title', 'PreUnit', 'Unit', 'Important Notes'], axis=1, inplace=True)
 
 # Add dataframe is in the cube
 cubes.add_cube(scraper, df, scraper.distribution(latest=True).title)
 
 # Write cube
 cubes.output_all()
-
-
