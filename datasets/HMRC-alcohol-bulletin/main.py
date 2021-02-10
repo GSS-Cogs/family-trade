@@ -22,6 +22,7 @@ import pyexcel
 import messytables
 from io import BytesIO
 import numpy as np
+import json
 import copy 
 
 # +
@@ -226,7 +227,7 @@ df
 # Splitting data into 3 and changing scraper values based on output data
 cubes = Cubes("info.json")
 tchange = ['Clearances','Duty Receipts','Production']
-uchange = ['hectolitres' 'gbp-million' 'hectolitres-of-alcohol']
+uchange = ['hectolitres', 'gbp-million', 'hectolitres-of-alcohol']
 scraper.dataset.family = 'trade'
 for x in range(3):
     dat = df[df['Measure Type'] == pathify(tchange[x])]
@@ -238,16 +239,16 @@ for x in range(3):
         scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic wine, made wine, spirits, beer and cider {tchange[x]}'
     print(str(x) + " - " + scraper.dataset.title + " - " + pathify(tchange[x]))
     
-    #with open("info.json", "r") as jsonFile:
-    #    data = json.load(jsonFile)
-    #data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/{pathify(tchange[x])}"
-    #data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/{uchange[x]}"
-    #with open("info.json", "w") as jsonFile:
-    #    json.dump(data, jsonFile)
-    
+    with open("info.json", "r") as jsonFile:
+        data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/{pathify(tchange[x])}"
+    data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/{uchange[x]}"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+    del data
     cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
 
-del df
+#del df
 cubes.output_all()
 
 # +
