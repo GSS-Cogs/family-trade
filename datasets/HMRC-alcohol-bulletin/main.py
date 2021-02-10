@@ -6,7 +6,7 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
+#       format_version: '1.4'
 #       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
@@ -245,13 +245,13 @@ for x in range(3):
 
 del df
 cubes.output_all()
-# -
 
-for c in df.columns:
-    if (c != 'Value') & (c != 'Period'):
-        print(c)
-        print(df[c].unique())
-        print("###################################")
+# +
+#for c in df.columns:
+#    if (c != 'Value') & (c != 'Period'):
+#        print(c)
+#        print(df[c].unique())
+#        print("###################################")
 
 # +
 #scraper.dataset.family = 'trade'
