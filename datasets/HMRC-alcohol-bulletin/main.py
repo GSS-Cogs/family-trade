@@ -145,6 +145,9 @@ df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == "Wine_stati
                                      ("spirits" if x == "Spirits_statistics" else
                                       ("beer-and-cider" if x == "Beer_and_cider_statistics" else x))))
 
+df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
+df['Bulletin Type'].unique()
+
 # +
 df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres)", expand = True)
 df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(£ million)", expand = True)
@@ -252,15 +255,14 @@ cubes.output_all()
 #        print(c)
 #        print(df[c].unique())
 #        print("###################################")
-
-# +
-#scraper.dataset.family = 'trade'
-#codelistcreation = ['Bulletin Type','Alcohol Type'] 
-#df = df
-#codeclass = CSVCodelists()
-#for cl in codelistcreation:
-#    if cl in df.columns:
-#        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 # -
+
+#scraper.dataset.family = 'trade'
+codelistcreation = ['Bulletin Type'] 
+df = df
+codeclass = CSVCodelists()#
+for cl in codelistcreation:
+    if cl in df.columns:
+        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 

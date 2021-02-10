@@ -1,29 +1,30 @@
 Label,Notation,Parent Notation,Sort Priority
-Still clearances up to 15% abv,still-clearances-up-to-15-abv,,1
-Sparkling clearances up to 15% abv,sparkling-clearances-up-to-15-abv,,2
-Clearances over 15% abv,clearances-over-15-abv,,3
-Ex ship clearances over 5.5% abv,ex-ship-clearances-over-5-5-abv,,4
-Ex warehouse clearances over 5.5% abv,ex-warehouse-clearances-over-5-5-abv,,5
-UK origin clearances over 5.5% abv,uk-origin-clearances-over-5-5-abv,,6
-Total wine clearances,total-wine-clearances,,7
-Total wine duty receipts,total-wine-duty-receipts,,8
-Total alcohol duty receipts,total-alcohol-duty-receipts,,9
+still clearances up to 15% abv,still-clearances-up-to-15-abv,,1
+sparkling clearances up to 15% abv,sparkling-clearances-up-to-15-abv,,2
+clearances over 15%abv,clearances-over-15-abv,,3
+ex ship clearances over 5.5% abv,ex-ship-clearances-over-5-5-abv,,4
+ex warehouse clearances over 5.5% abv,ex-warehouse-clearances-over-5-5-abv,,5
+uk origin clearances over 5.5% abv,uk-origin-clearances-over-5-5-abv,,6
+total wine clearances,total-wine-clearances,,7
+total wine duty receipts,total-wine-duty-receipts,,8
+total alcohol duty receipts,total-alcohol-duty-receipts,,9
 1.2% to 5.5% abv clearances,1-2-to-5-5-abv-clearances,,10
-Still 5.5% to 15% abv clearances,still-5-5-to-15-abv-clearances,,11
-Sparkling 5.5% to 15% abv clearances,sparkling-5-5-to-15-abv-clearances,,12
-Total made wine clearances,total-made-wine-clearances,,13
-UK potable spirits production,uk-potable-spirits-production,,14
-uk malt whiskey clearances,uk-malt-whiskey-clearances,,15
-UK grain and blend whiskey clearances,uk-grain-and-blend-whiskey-clearances,,16
-Total uk whiskey clearances,total-uk-whiskey-clearances,,17
-Spirit based rtds clearances,spirit-based-rtds-clearances,,18
-Ex ship and other clearances,ex-ship-and-other-clearances,,19
-Total spirits clearances,total-spirits-clearances,,20
-Total spirits duty receipts,total-spirits-duty-receipts,,21
-UK beer production,uk-beer-production,,22
-UK registered clearances,uk-registered-clearances,,23
-Ex warehouse and ex ship clearances,ex-warehouse-and-ex-ship-clearances,,24
-Total beer clearances,total-beer-clearances,,25
-Cider clearances,cider-clearances,,26
-Total beer duty receipts,total-beer-duty-receipts,,27
-Total cider duty receipts,total-cider-duty-receipts,,28
+still 5.5% to 15% abv clearances,still-5-5-to-15-abv-clearances,,11
+sparkling 5.5% to 15% abv clearances,sparkling-5-5-to-15-abv-clearances,,12
+total made wine clearances,total-made-wine-clearances,,13
+uk potable spirits production,uk-potable-spirits-production,,14
+uk malt whiskey clearances (alcohol),uk-malt-whiskey-clearances-alcohol,,15
+uk grain and blend whiskey clearances (alcohol),uk-grain-and-blend-whiskey-clearances-alcohol,,16
+total uk whiskey clearances (alcohol),total-uk-whiskey-clearances-alcohol,,17
+spirit based rtds clearances (alcohol),spirit-based-rtds-clearances-alcohol,,18
+ex ship and other clearances alcohol,ex-ship-and-other-clearances-alcohol,,19
+total spirits clearances (alcohol),total-spirits-clearances-alcohol,,20
+total spirits duty receipts,total-spirits-duty-receipts,,21
+uk beer production,uk-beer-production,,22
+uk registered clearances,uk-registered-clearances,,23
+ex warehouse and ex ship clearances,ex-warehouse-and-ex-ship-clearances,,24
+total beer clearances,total-beer-clearances,,25
+total beer clearances (alcohol),total-beer-clearances-alcohol,,26
+cider clearances,cider-clearances,,27
+total beer duty receipts,total-beer-duty-receipts,,28
+total cider duty receipts,total-cider-duty-receipts,,29
