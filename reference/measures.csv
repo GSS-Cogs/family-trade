@@ -34,7 +34,11 @@ trade,gbp-per-hectolitre-of-product,GBP per Hectolitre of Product,,,http://purl.
 trade,gbp-per-1-percent-abv-per-hectolitre,GBP per 1 percent ABV per hectolitre,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,gdp-current-prices,GDP at Current Market Prices,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,trade-in-services,Trade in Services,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,trade-in-goods,Trade in Goods,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,gdp-from-gva,GDP (based on GVA),Quarterly Gross Domestic Product (GDP) based on Gross Value Added (GVA). ,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,q-on-q-delta-gdp-from-gva,Quarter on Quarter Change in GDP,Change in Gross Domestic Product (GDP) compared to previous quarter where the GDP is calculated based on the Gross Value Added (GVA).,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,q-on-last-year-q-delta-gdp-from-gva,Quarter on Last Year’s Quarter Change in GDP,Change in Gross Domestic Product (GDP) between this quarter and the same quarter in the previous year where the GDP is calculated based on the Gross Value Added (GVA).,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,y-on-y-delta-gdp-from-gva,Year-on-Year Change in GDP,Change in Gross Domestic Product (GDP) compared to previous year where the GDP is calculated based on the Gross Value Added (GVA).,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,clearances,Clearance,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,duty-receipts,Duty Receipts,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
+trade,production,Production,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
