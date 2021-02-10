@@ -2,12 +2,12 @@
 # ---
 # jupyter:
 #   jupytext:
-#     formats: ipynb,py
+#     formats: ipynb,py:light
 #     text_representation:
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -22,6 +22,7 @@ import pyexcel
 import messytables
 from io import BytesIO
 import numpy as np
+import copy 
 
 # +
 # # scraper = Scraper("https://www.gov.uk/government/statistics/alcohol-bulletin")
@@ -206,11 +207,60 @@ df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999
 df['Marker'].unique()
 df
 
-cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
-cubes.output_all()
+# +
+#cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
+#cubes.output_all()
 
 # +
-trace.render("spec_v1.html")
+#trace.render("spec_v1.html")
 
 # The multimeasures for this dataset is yet to be defined by DMs.
 # The way to proceed with cubes class for multimeasures is yet to be finalized.
+
+# +
+# This is a multi-unit and multi-measure dataset so splitting up for now as not sure what is going on with anything anymore! :-(
+# Splitting data into 3 and changing scraper values based on output data
+cubes = Cubes("info.json")
+tchange = ['Clearances','Duty Receipts','Production']
+uchange = ['hectolitres' 'gbp-million' 'hectolitres-of-alcohol']
+scraper.dataset.family = 'trade'
+for x in range(3):
+    dat = df[df['Measure Type'] == pathify(tchange[x])]
+    scraper.dataset.title = f"Alcohol Bulletin - {tchange[x]}"
+    scraper.dataset.comment = f"Monthly {tchange[x]} statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs"
+    if x == 2:
+        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, beer and cider {tchange[x]}'  
+    else :
+        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic wine, made wine, spirits, beer and cider {tchange[x]}'
+    print(str(x) + " - " + scraper.dataset.title + " - " + pathify(tchange[x]))
+    
+    #with open("info.json", "r") as jsonFile:
+    #    data = json.load(jsonFile)
+    #data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/{pathify(tchange[x])}"
+    #data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/{uchange[x]}"
+    #with open("info.json", "w") as jsonFile:
+    #    json.dump(data, jsonFile)
+    
+    cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
+
+del df
+cubes.output_all()
+# -
+
+for c in df.columns:
+    if (c != 'Value') & (c != 'Period'):
+        print(c)
+        print(df[c].unique())
+        print("###################################")
+
+# +
+#scraper.dataset.family = 'trade'
+#codelistcreation = ['Bulletin Type','Alcohol Type'] 
+#df = df
+#codeclass = CSVCodelists()
+#for cl in codelistcreation:
+#    if cl in df.columns:
+#        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# -
+
+

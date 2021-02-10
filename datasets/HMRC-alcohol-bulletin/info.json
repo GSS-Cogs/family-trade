@@ -16,6 +16,33 @@
     },
     "transform": {
         "airtable": "recys4OhEtE0gE14P",
+        "columns": {
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
+            },
+            "Measure Type": {
+                "dimension": "http://purl.org/linked-data/cube#measureType",
+                "value": "http://gss-data.org.uk/def/measure/{measure_type}",
+                "types": [
+                    "clearances",
+                    "duty-receipts",
+                    "production"
+                ]
+            },
+            "Unit": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
+            },
+            "Value": {
+                "datatype": "double"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        },
         "main_issue": 67
     },
     "sizingNotes": "",
