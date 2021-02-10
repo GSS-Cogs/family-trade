@@ -146,6 +146,7 @@ df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == "Wine_stati
                                       ("beer-and-cider" if x == "Beer_and_cider_statistics" else x))))
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
+df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
 df['Bulletin Type'].unique()
 
 # +
@@ -265,5 +266,7 @@ cubes.output_all()
 #    if cl in df.columns:
 #        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 # -
+
+
 
 
