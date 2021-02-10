@@ -255,14 +255,15 @@ cubes.output_all()
 #        print(c)
 #        print(df[c].unique())
 #        print("###################################")
-# -
 
+# +
 #scraper.dataset.family = 'trade'
-codelistcreation = ['Bulletin Type'] 
-df = df
-codeclass = CSVCodelists()#
-for cl in codelistcreation:
-    if cl in df.columns:
-        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+#codelistcreation = ['Bulletin Type'] 
+#df = df
+#codeclass = CSVCodelists()#
+#for cl in codelistcreation:
+#    if cl in df.columns:
+#        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# -
 
 
