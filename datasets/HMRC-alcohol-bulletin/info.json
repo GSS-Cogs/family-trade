@@ -29,7 +29,7 @@
             },
             "Bulletin Type": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/bulletin-type",
-                "value": "http://gss-data.org.uk/def/trade/concept/bulletin-type/{bulletin-type}",
+                "value": "http://gss-data.org.uk/def/trade/concept/bulletin-type/{bulletin_type}",
                 "codelist": false
             },
             "Value": {
