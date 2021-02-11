@@ -23,8 +23,9 @@
                 "codelist": false
             },
             "Alcohol Type": {
-                "parent": "http://gss-data.org.uk/def/trade/hmrc-alcohol-bulletin/property/dimension/alcohol-type",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/hmrc-alcohol-bulletin/concept/alcohol-type/{alcohol_type}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/alcohol-type",
+                "value": "http://gss-data.org.uk/def/trade/concept/alcohol-type/{alcohol_type}",
+                "codelist": false
             },
             "Bulletin Type": {
                 "parent": "http://gss-data.org.uk/def/trade/hmrc-alcohol-bulletin/property/dimension/bulletin-type",
