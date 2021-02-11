@@ -12,14 +12,10 @@
 #     name: python3
 # ---
 
-# +
 import string
 import pandas as pd
 from gssutils import *
-from databaker.framework import *
-
 pd.options.mode.chained_assignment = None 
-# -
 
 cubes = Cubes("info.json")
 
@@ -41,8 +37,6 @@ scraper = Scraper(seed='info.json')
 distribution = scraper.distribution(latest=True)
 distribution
 
-
-
 # +
 tabs = (t for t in distribution.as_databaker())
 trace = TransformTrace()
@@ -62,10 +56,6 @@ for tab in tabs:
     
     product = cell.expand(DOWN).is_not_blank()
     
-    prod_dep = product.regex('[^0-9]+')
-    
-    prod_cat = product.regex('[0-9]{2}\s{1}[^\.]')
-    
     cdid_code = tab.excel_ref('B5').expand(DOWN)
     
     observations = product.shift(RIGHT).fill(RIGHT).is_not_blank()
@@ -75,8 +65,6 @@ for tab in tabs:
         HDim(cdid_code, 'CDID', DIRECTLY, LEFT),  
         HDimConst('Flow Directions', flow_direction),
         HDim(product, 'Product', CLOSEST, ABOVE),
-        HDim(prod_dep, 'Product Department', CLOSEST, ABOVE),
-        HDim(prod_cat, 'Product Category', CLOSEST, ABOVE),
         ]
 
     tidy_sheet = ConversionSegment(tab, dimensions, observations)   
@@ -88,30 +76,25 @@ for tab in tabs:
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
 df = trace.combine_and_trace(title, "combined_dataframe").fillna('')
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
-indexNames = df[ df['Product Department'] == 'Residual seasonal adjustment' ].index
+indexNames = df[ df['Product'] == 'Residual seasonal adjustment' ].index
 df.drop(indexNames, inplace = True)
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 df['Flow Directions'] = df['Flow Directions'].map(lambda x: right(x, len(x) - 2))
 
-df['Product Department'] = df['Product Department'].map(lambda x: right(x, len(x) - 2) if 'Total' not in x else x)
-
 df['Product'] = df['Product'].map(lambda x: '' if ('.' not in left(x, 5) and mid(x, 2, 1) == ' ') else x)
 df['Product'] = df['Product'].map(lambda x: 'All' if x == '' else x)
-
-df['Product Category'] = df['Product Category'].map(lambda x: 'All' if x == '' else x)
-df['Product Category'] = df['Product Category'].map(lambda x: right(x, len(x) - 3) if left(x, 2).isnumeric() == True else x)
 
 df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 8) if mid(x, 2, 5) == 'OTHER' else x)
 df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 5).strip() if '.' in x else (right(x, len(x) - 4) if left(x, 2).isnumeric() == True else x))
 
 # +
+#how it was previously done 
 df = df.replace({'Product' : {
     '3 Processed and preserved fish, crustaceans, molluscs, fruit and vegetables' : 'Processed and preserved fish, crustaceans, molluscs, fruit and vegetables', 
     '-6 Alcoholic beverages' : 'Alcoholic beverages', 
     '6 Manufacture of cement, lime, plaster and articles of concrete, cement and plaster' : 'Manufacture of cement, lime, plaster and articles of concrete, cement and plaster',
     '3 Basic iron and steel' : 'Basic iron and steel', 
     '5 Other basic metals and casting' : 'Other basic metals and casting'}})
-
 
 for column in df:
     if column in ('Flow Directions','Product Department','Product Category','Product'):
@@ -128,17 +111,36 @@ df = df.replace({'Product' : {
     'r-arts-entertainment-recreation' : 'arts-entertainment-recreation',
     's-other-services' : 'other-services'}})
 
-
-
 # +
-#Standard across all sheets
-df['Price Classification'] = 'CP'
-df['International Trade Basis'] = 'BOP'
-df['Seasonal Adjustment'] = 'SA'
+from IPython.display import display, HTML
+from io import BytesIO
+def fetch_table(t):
+    return BytesIO(scraper.session.get('https://github.com/ONS-OpenData/Ref_CDID/raw/master/lookup/' + t).content)
+cdids = pd.concat((
+    pd.read_csv(fetch_table(f'{k}.csv'),
+                       na_values=[''], keep_default_na=False, index_col=[0,7],
+                       dtype={'AREA': str, 'DIRECTION': str, 'BASIS': str,
+                              'PRICE': str, 'SEASADJ': str,
+                              'PRODUCT': str, 'COUNTRY': str},
+                       converters={'COMMODITY': lambda x: str(x).strip()})
+    for k in ['tig_cpa']), sort=False)
+for col in cdids:
+    cdids[col] = cdids[col].astype('category')
+cdids.index = cdids.index.get_level_values('cdid')
 
-df = df[[ 'Period', 'CDID', 'International Trade Basis', 'Flow Directions', 'Product Department','Product Category','Product', 'Price Classification', 'Seasonal Adjustment','Value',]].drop_duplicates()
-df
+cdids.rename(columns={
+    'AREA': 'ONS Partner Geography',
+    'PRICE': 'Price Classification',
+    'SEASADJ': 'Seasonal Adjustment',
+    'BASIS': 'International Trade Basis'
+}, inplace=True)
+df = pd.merge(df, cdids, how = 'left', left_on = 'CDID', right_on = 'cdid')
+df = df.drop(columns=['PRODUCT', 'DIRECTION'])
+
 # -
+
+df = df[[ 'Period', 'CDID', 'International Trade Basis', 'Flow Directions','Product', 'Price Classification', 'Seasonal Adjustment','Value',]].drop_duplicates()
+df
 
 cubes.add_cube(scraper, df.drop_duplicates(), title)
 cubes.output_all()
