@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -6,201 +5,63 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.9.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
 
-# ## HMRC Regional Trade Statistics
-#
-# Transform to Tidy Data.
-#
-# The source data is available from https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx in a series of zip files.
-#
-# Each zip file contains fixed-width formatted text files following a layout described in https://www.uktradeinfo.com/Statistics/RTS/Documents/RTS%20Detailed%20data%20information%20pack.pdf. Each row is has two measures: net mass in tonnes and statistical value in £1000's. We're assuming each observation has one measure, so split these  out into separate files.
-
 # +
-from gssutils import *
+import logging
 import json
+import pandas as pd
 
-def left(s, amount):
-    return s[:amount]
-
-scraper = Scraper(json.load(open('info.json'))['landingPage'])
-display(scraper.dataset.landingPage)
-scraper
-# -
-
-if scraper.dataset.title.endswith('(RTS'):
-    scraper.dataset.title = scraper.dataset.title + ')'
-scraper.dataset.title
-
-# zipped data files were linked from https://www.uktradeinfo.com/Statistics/RTS/Pages/RTS-Downloads.aspx, but sometimes this appears to close. If so, look for them directly from https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx
-
-import datetime
-now = datetime.datetime.now()
-
-if len(scraper.distributions) == 0:
-    from lxml import html
-    from gssutils.metadata import Distribution
-    from urllib.parse import urljoin
-    from mimetypes import guess_type
-    from urllib.parse import quote
-
-    page_uri = 'https://www.uktradeinfo.com/Statistics/RTS/Documents/Forms/AllItems.aspx'
-    page = scraper.session.get(page_uri)
-    tree = html.fromstring(page.text)
-    for anchor in tree.xpath("//a[contains(@href, 'zip')]"):
-        dist = Distribution(scraper)
-        dist.title = anchor.text.strip()
-        dist.downloadURL = urljoin(page_uri, quote(anchor.get('href'), safe='/%'))
-        dist.mediaType, encoding = guess_type(dist.downloadURL)
-        scraper.distributions.append(dist)
-    for anchor in tree.xpath("//a[contains(@href, 'Rtsweb " + str(int(left(str(now.year),2)) - 1) + "')]"):
-        dist2 = Distribution(scraper)
-        dist2.title = anchor.text.strip()
-        dist2.downloadURL = urljoin(page_uri, quote(anchor.get('href'), safe='/%'))
-        dist2.mediaType, encoding = guess_type(dist2.downloadURL)
-        scraper.distributions.append(dist2)
-        
-
-for dist in scraper.distributions:
-    print(dist.downloadURL)
+from gssutils import *
 
 # +
-from zipfile import ZipFile, is_zipfile
-from io import BytesIO, TextIOWrapper
+infoFileName = 'info.json'
 
-out = Path('out')
-out.mkdir(exist_ok=True, parents=True)
-extracted_files = []
-
-observations_file = out / 'observations.csv'
-if observations_file.exists():
-    observations_file.unlink()
-header = True
-
-# For each distribution, open the zipfile and put each source in turn into a dataframe
-# for each source we're looking to create one "value" output, and one "mass" output
-# since the open files are in text file they are processed differently, should go back and change it to unzip 
-#the closed files and process them all as txt which would be tidier but for now this will work
-
-for distribution in scraper.distributions:
-    if distribution.downloadURL.endswith('zip'):
-        with ZipFile(BytesIO(scraper.session.get(distribution.downloadURL).content)) as zip:
-            for name in zip.namelist():
-                with zip.open(name, 'r') as quarterFile:
-                    quarterText = TextIOWrapper(quarterFile, encoding='utf-8')
-                    table = pd.read_fwf(quarterText, widths=[6, 1, 2, 1, 3, 2, 1, 2, 9, 9], names=[
-                        'Period',
-                        'Flow',
-                        'HMRC Reporter Region',
-                        'HMRC Partner Geography',
-                        'Codalpha',
-                        'Codseq',
-                        'SITC Section',
-                        'SITC 4',
-                        'Value',
-                        'Netmass'
-                    ], dtype=str)
-
-                    # Generic changes that apply to both "mass" and "value" outputs
-                    table['Period'] = table['Period'].map(lambda x: f'quarter/{x[2:]}-Q{x[0]}')
-                    table['Flow'] = table['Flow'].map(lambda x: 'exports' if x == 'E' else 'imports')
-
-                    table['HMRC Partner Geography'] = table.apply(
-                        lambda x: x['Codseq'] if x['Codseq'][0] != '#' else x['Codalpha'],
-                        axis=1)
-                    assert table['SITC Section'].equals(table['SITC 4'].apply(lambda x: x[0]))
-                    table.drop(columns=['Codalpha', 'Codseq', 'SITC Section'], inplace=True)
-
-                    table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
-
-                    table['Status'] = 'closed'
-
-                    #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
-
-                    # Output the mass observations for this input file
-                    mass = table.drop(columns=['Value'])
-                    mass['Measure Type'] = 'net-mass'
-                    mass['Unit'] = 'kg-thousands'
-                    mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
-                    mass.to_csv(observations_file, header=header, mode='a', index=False)
-                    # only output header row the first time
-                    header = False
-
-                    # Output the value observations for this input file
-                    value = table.drop(columns=['Netmass'])
-                    value['Measure Type'] = 'gbp-total'
-                    value['Unit'] = 'gbp-thousands'
-                    value.to_csv(observations_file, header=header, mode='a', index=False)
-                                        
-    else:
-        with BytesIO(scraper.session.get(distribution.downloadURL).content) as text:
-            quarterText = TextIOWrapper(text, encoding='utf-8')
-            table = pd.read_fwf(quarterText, widths=[6, 1, 2, 1, 3, 2, 1, 2, 9, 9], names=[
-                'Period',
-                'Flow',
-                'HMRC Reporter Region',
-                'HMRC Partner Geography',
-                'Codalpha',
-                'Codseq',
-                'SITC Section',
-                'SITC 4',
-                'Value',
-                'Netmass'
-                ], dtype=str)
-
-            # Generic changes that apply to both "mass" and "value" outputs
-            table['Period'] = table['Period'].map(lambda x: f'quarter/{x[2:]}-Q{x[0]}')
-            table['Flow'] = table['Flow'].map(lambda x: 'exports' if x == 'E' else 'imports')
-
-            table['HMRC Partner Geography'] = table.apply(
-            lambda x: x['Codseq'] if x['Codseq'][0] != '#' else x['Codalpha'],
-            axis=1)
-            assert table['SITC Section'].equals(table['SITC 4'].apply(lambda x: x[0]))
-            table.drop(columns=['Codalpha', 'Codseq', 'SITC Section'], inplace=True)
-
-            table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
-
-            table['Status'] = 'open'
-
-            #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
-
-            # Output the mass observations for this input file
-            mass = table.drop(columns=['Value'])
-            mass['Measure Type'] = 'net-mass'
-            mass['Unit'] = 'kg-thousands'
-            mass.rename(columns={'Netmass': 'Value'}, inplace=True, index=str)
-            mass.to_csv(observations_file, header=header, mode='a', index=False)
-            # only output header row the first time
-            header = False
-
-            # Output the value observations for this input file
-            value = table.drop(columns=['Netmass'])
-            value['Measure Type'] = 'gbp-total'
-            value['Unit'] = 'gbp-thousands'
-            value.to_csv(observations_file, header=header, mode='a', index=False)
-
-# +
-from gssutils.metadata import THEME
-scraper.dataset.family = 'Trade'
-scraper.dataset.theme = THEME['business-industry-trade-energy']
-import os
-
-dataset_path = pathify(os.environ.get('JOB_NAME', 'gss_data/trade/' + Path(os.getcwd()).name))
-
-with open(out / 'observations.csv-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-
-csvw = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-csvw.create(
-    out / 'observations.csv', out / 'observations.csv-metadata.json', with_transform=True,
-    base_url='http://gss-data.org.uk/data/', base_path=dataset_path,
-    dataset_metadata=scraper.dataset.as_quads(), with_external=False
-)
+info    = json.load(open(infoFileName))
+scraper = Scraper(seed=infoFileName)
+cubes   = Cubes(infoFileName)
+distro  = scraper.distribution(latest=True)
 # -
+
+scraper.dataset.family = info['families']
+
+# Get API Chunks
+api_chunks = distro.get_odata_api_chunks()
+logging.debug(f'The chunks found on api are {api_chunks}')
+
+# Get PMD Chunks
+pmd_chunks = distro.get_pmd_chunks()
+logging.debug(f'The chunks found on api are {pmd_chunks}')
+
+# Get next period to download
+if len(pmd_chunks) == 0:
+    fetch_chunk = min(api_chunks)
+else:
+    # Quarter conversion f(x)=3(x-1)=1, so f(1)=1, f(2)=4, f(3)=7, f(4)-10
+    # Year is y[-6:-2], Quarter is y[-1]
+    tmp = list()
+    for y in pmd_chunks:
+        y = str(y)
+        year = y[-6:-2]
+        qrtr = ('0'+str(3*(int(y[-1])-1)+1))[-2:]
+        tmp.append(year+qrtr)
+    pmd_chunks = tmp
+    fetch_chunk = min(set(api_chunks)-set(pmd_chunks))
+logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
+
+df = distro.as_pandas(chunks_wanted=fetch_chunk)
+
+# Quarter conversion g(x) = x//3+1, so g(1)=1, g(4)=2, g(7)=3, g(10)=4
+df['Period'] = [f"/id/quarter/{str(x)[:4]}-{str(int(str(x)[-2])//3+1)}" for x in df['MonthId']]
+
+cubes.add_cube(scraper, df, scraper.title)
+
+# Write cube
+cubes.output_all()
 
 
