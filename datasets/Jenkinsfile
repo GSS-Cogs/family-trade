@@ -1,3 +1,5 @@
 @Library('pmd@family-pmd4') _
 
-familyTransformPipeline {}
+familyTransformPipeline {
+  databaker = 'gsscogs/databaker:1.6'
+}
