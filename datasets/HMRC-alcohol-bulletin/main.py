@@ -226,7 +226,7 @@ df['Marker'].unique()
 # Splitting data into 3 and changing scraper values based on output data
 cubes = Cubes("info.json")
 tchange = ['Clearances','Duty Receipts','Production']
-uchange = ['hectolitres', 'gbp-million', 'hectolitres-of-alcohol']
+uchange = ['hectolitres', 'gbp-million', 'hectolitres']
 scraper.dataset.family = 'trade'
 for x in range(3): 
     dat = df[df['Measure Type'] == pathify(tchange[x])]
