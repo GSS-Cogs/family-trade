@@ -18,18 +18,41 @@
         "airtable": "recyJa07EdGj8as91",
         "main_issue": 16,
         "columns": {
-            "Product": {
-                "label": "SITC",
-                "description": "The Standard international trade classification (SITC), is a product classification of the United Nations (UN) used for external trade statistics (export and Import values and volumes of goods), allowing for international comparisons of commodities and manufactured goods.",
-                "source": "https://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Standard_international_trade_classification_(SITC)"
+            "Year": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/year/{year}"
             },
-            "Trade Reporter Geography": {
-                "description": "The NUTS classification (Nomenclature of territorial units for statistics) is a hierarchical system for dividing up the economic territory of the EU and the UK.",
-                "source": "https://ec.europa.eu/eurostat/web/nuts/background"
+            "NUTS Geography": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/nuts-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_geography}"
             },
             "HMRC partner Geography": {
+                "label": "Partner geography",
                 "description": "Partner country is the country the UK region exports the goods to or imports the goods from.",
-                "source": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/843903/Local_Area_Commentary_2018.pdf"
+                "source": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/843903/Local_Area_Commentary_2018.pdf",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-partner-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-partner-geographies/{hmrc_partner_geography}"
+            },
+            "Flow Directions": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+            },
+            "SITC 4": {
+                "label": "Product",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc-4/{sitc_4}"
+            },
+            "Measure type": {
+                "dimension": "http://purl.org/linked-data/cube#measureType",
+                "value": "http://gss-data.org.uk/def/measure/{measure_type}",
+                "types": ["businesses", "gbp-total"]
+            },
+            "Unit": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
+            },
+            "Value": {
+                "datatype": "decimal"
             }
         }
     },
