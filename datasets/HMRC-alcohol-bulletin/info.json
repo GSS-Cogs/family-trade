@@ -28,8 +28,9 @@
                 "codelist": false
             },
             "Bulletin Type": {
-                "parent": "http://gss-data.org.uk/def/trade/hmrc-alcohol-bulletin/property/dimension/bulletin-type",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/hmrc-alcohol-bulletin/concept/bulletin-type/{bulletin_type}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/bulletin-type",
+                "value": "http://gss-data.org.uk/def/trade/concept/bulletin-type/{bulletin-type}",
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/hectolitres",
