@@ -37,12 +37,11 @@ scraper = Scraper(seed='info.json')
 distribution = scraper.distribution(latest=True)
 distribution
 
-# +
 tabs = (t for t in distribution.as_databaker())
 trace = TransformTrace()
 title = distribution.title
 columns = ['Period', 'Flow Directions','Product Department','Product Category','Product','CDID', 'Value']
-
+tidied_sheets = []
 for tab in tabs:
     if tab.name in ('Index', 'Contact'):
         continue   
@@ -68,13 +67,16 @@ for tab in tabs:
         ]
 
     tidy_sheet = ConversionSegment(tab, dimensions, observations)   
-    savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+    #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
     trace.with_preview(tidy_sheet)
-    trace.store("combined_dataframe", tidy_sheet.topandas())
+    tidied_sheets.append(tidy_sheet.topandas())
+
+    #trace.store("combined_dataframe", tidy_sheet.topandas())
 
 # +
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
-df = trace.combine_and_trace(title, "combined_dataframe").fillna('')
+#df = trace.combine_and_trace(title, "combined_dataframe").fillna('')
+df = pd.concat(tidied_sheets, ignore_index = True, sort = False).fillna('')
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 indexNames = df[ df['Product'] == 'Residual seasonal adjustment' ].index
 df.drop(indexNames, inplace = True)
@@ -146,4 +148,6 @@ cubes.add_cube(scraper, df.drop_duplicates(), title)
 cubes.output_all()
 
 trace.render("spec_v1.html")
+
+
 
