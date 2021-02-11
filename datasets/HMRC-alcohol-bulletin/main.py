@@ -229,7 +229,7 @@ cubes = Cubes("info.json")
 tchange = ['Clearances','Duty Receipts','Production']
 uchange = ['hectolitres', 'gbp-million', 'hectolitres-of-alcohol']
 scraper.dataset.family = 'trade'
-for x in range(3):
+for x in range(3): 
     dat = df[df['Measure Type'] == pathify(tchange[x])]
     scraper.dataset.title = f"Alcohol Bulletin - {tchange[x]}"
     scraper.dataset.comment = f"Monthly {tchange[x]} statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs"
@@ -246,9 +246,15 @@ for x in range(3):
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
     del data
+    
+    if 'Measure Type' in dat.columns:
+        del dat['Measure Type']
+    if 'Unit' in dat.columns:
+        del dat['Unit']
+    
     cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
 
-#del df
+del df
 cubes.output_all()
 
 # +
