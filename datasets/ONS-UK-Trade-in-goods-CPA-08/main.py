@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.6.0
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -13,10 +13,6 @@
 # ---
 
 # +
-# #!/usr/bin/env python
-# coding: utf-8
-# %%
-
 import string
 import pandas as pd
 from gssutils import *
@@ -42,99 +38,83 @@ def mid(s, offset, amount):
 # -
 
 scraper = Scraper(seed='info.json')
-scraper
-
 distribution = scraper.distribution(latest=True)
 distribution
 
-tabs = distribution.as_databaker()
+
 
 # +
+tabs = (t for t in distribution.as_databaker())
 trace = TransformTrace()
 title = distribution.title
 columns = ['Period', 'Flow Directions','Product Department','Product Category','Product','CDID', 'Value']
 
-for tab in tabs:  
-    if tab.name in ['Index', 'Contact']:
+for tab in tabs:
+    if tab.name in ('Index', 'Contact'):
         continue   
-    print(tab.name)
-
+    
     trace.start(title, tab, columns, distribution.downloadURL)
-  
-    cell = tab.excel_ref("A5").expand(DOWN).is_not_blank()
+    cell = tab.filter(contains_string('Total'))
     
     flow_direction = tab.name
-    period = tab.excel_ref("C4").expand(RIGHT).is_not_blank()
+
+    period = cell.shift(2,-1).expand(RIGHT).is_not_blank()
     
-    trace.Product_Department("Selected as cells A5 & A194 and as other cells from 'A' as industry or sector")
-    prod_dep = cell.regex('[^0-9]+')
+    product = cell.expand(DOWN).is_not_blank()
     
-    trace.Product_Category("Selected from cells A as sub-sectors or sub-industry")
-    prod_cat = cell.regex('[0-9]{2}\s{1}[^\.]')
+    prod_dep = product.regex('[^0-9]+')
     
-    prod_cat = prod_dep | prod_cat
+    prod_cat = product.regex('[0-9]{2}\s{1}[^\.]')
     
-    trace.Product("Selected from cells A as all items excluding: sectors and sub-sectors")
-    product = cell      
+    cdid_code = tab.excel_ref('B5').expand(DOWN)
     
-    prod_override = {}
-    for xy_cell in product:
-        if xy_cell in prod_cat & xy_cell in prod_dep:
-            prod_override[xy_cell.value] = 'all'
-        
-    cdid_code = tab.excel_ref('B5').expand(DOWN).is_not_blank() | tab.excel_ref("B194") # Adding a blank value  
-    
-    observations = tab.excel_ref('C5').expand(DOWN).expand(RIGHT).is_not_blank()
-    
+    observations = product.shift(RIGHT).fill(RIGHT).is_not_blank()
+
     dimensions = [
-        HDimConst('Flow Directions', flow_direction),
-        
         HDim(period, 'Period', DIRECTLY, ABOVE),
+        HDim(cdid_code, 'CDID', DIRECTLY, LEFT),  
+        HDimConst('Flow Directions', flow_direction),
+        HDim(product, 'Product', CLOSEST, ABOVE),
         HDim(prod_dep, 'Product Department', CLOSEST, ABOVE),
         HDim(prod_cat, 'Product Category', CLOSEST, ABOVE),
-        HDim(product, 'Product', DIRECTLY, LEFT, cellvalueoverride = prod_override), 
-        
-        HDim(cdid_code, 'CDID', CLOSEST, ABOVE)   
         ]
-   
-    cs = ConversionSegment(tab, dimensions, observations)
-    tidy_sheet = cs.topandas()
-    
-    tidy_sheet["Product Category"][tidy_sheet["Product Category"] == tidy_sheet["Product Department"]] = "all"  
-    
-    trace.store("combined_dataframe", tidy_sheet)  
-print(prod_override)
-# -
 
-pd.set_option('display.float_format', lambda x: '%.0f' % x) #check if req
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)   
+    savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+    trace.with_preview(tidy_sheet)
+    trace.store("combined_dataframe", tidy_sheet.topandas())
 
+# +
+pd.set_option('display.float_format', lambda x: '%.0f' % x)
 df = trace.combine_and_trace(title, "combined_dataframe").fillna('')
-
+df.rename(columns={'OBS' : 'Value'}, inplace=True)
 indexNames = df[ df['Product Department'] == 'Residual seasonal adjustment' ].index
 df.drop(indexNames, inplace = True)
-
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
-
 df['Flow Directions'] = df['Flow Directions'].map(lambda x: right(x, len(x) - 2))
 
 df['Product Department'] = df['Product Department'].map(lambda x: right(x, len(x) - 2) if 'Total' not in x else x)
 
+df['Product'] = df['Product'].map(lambda x: '' if ('.' not in left(x, 5) and mid(x, 2, 1) == ' ') else x)
+df['Product'] = df['Product'].map(lambda x: 'All' if x == '' else x)
+
 df['Product Category'] = df['Product Category'].map(lambda x: 'All' if x == '' else x)
 df['Product Category'] = df['Product Category'].map(lambda x: right(x, len(x) - 3) if left(x, 2).isnumeric() == True else x)
 
-df['Product'] = df['Product'].map(lambda x: '' if ('.' not in left(x, 5) and mid(x, 2, 1) == ' ') else x)
-df['Product'] = df['Product'].map(lambda x: 'All' if x == '' else x)
 df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 8) if mid(x, 2, 5) == 'OTHER' else x)
 df['Product'] = df['Product'].map(lambda x: right(x, len(x) - 5).strip() if '.' in x else (right(x, len(x) - 4) if left(x, 2).isnumeric() == True else x))
 
-df['Product'] = [x.lstrip('-') for x in df['Product']]
-df['Product'] = df['Product'].str.lstrip(string.digits)
-
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-
 # +
+df = df.replace({'Product' : {
+    '3 Processed and preserved fish, crustaceans, molluscs, fruit and vegetables' : 'Processed and preserved fish, crustaceans, molluscs, fruit and vegetables', 
+    '-6 Alcoholic beverages' : 'Alcoholic beverages', 
+    '6 Manufacture of cement, lime, plaster and articles of concrete, cement and plaster' : 'Manufacture of cement, lime, plaster and articles of concrete, cement and plaster',
+    '3 Basic iron and steel' : 'Basic iron and steel', 
+    '5 Other basic metals and casting' : 'Other basic metals and casting'}})
+
+
 for column in df:
-    if column in ('Flow Directions','Product Department','Product Category','Product','Unit'):
+    if column in ('Flow Directions','Product Department','Product Category','Product'):
         df[column] = df[column].map(lambda x: pathify(x))
         
 df = df.replace({'Product' : {
@@ -147,11 +127,20 @@ df = df.replace({'Product' : {
     'm-professional-scientific-technical-services' : 'professional-scientific-technical-services',
     'r-arts-entertainment-recreation' : 'arts-entertainment-recreation',
     's-other-services' : 'other-services'}})
-        
-df['Product'].unique().tolist()
+
+
+
+# +
+#Standard across all sheets
+df['Price Classification'] = 'CP'
+df['International Trade Basis'] = 'BOP'
+df['Seasonal Adjustment'] = 'SA'
+
+df = df[[ 'Period', 'CDID', 'International Trade Basis', 'Flow Directions', 'Product Department','Product Category','Product', 'Price Classification', 'Seasonal Adjustment','Value',]].drop_duplicates()
+df
 # -
 
-cubes.add_cube(scraper, df, title)
+cubes.add_cube(scraper, df.drop_duplicates(), title)
 cubes.output_all()
 
 trace.render("spec_v1.html")
