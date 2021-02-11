@@ -23,15 +23,15 @@
                 "codelist": false
             },
             "Alcohol Type": {
-                "parent": "http://gss-data.org.uk/data/gss_data/trade/hmrc-alcohol-bulletin/concept-scheme/alcohol-type",
+                "parent": "http://gss-data.org.uk/def/trade/hmrc-alcohol-bulletin/property/dimension/alcohol-type",
                 "value": "http://gss-data.org.uk/data/gss_data/trade/hmrc-alcohol-bulletin/concept/alcohol-type/{alcohol_type}"
             },
             "Bulletin Type": {
-                "parent": "http://gss-data.org.uk/data/gss_data/trade/hmrc-alcohol-bulletin/concept-scheme/bulletin-type",
+                "parent": "http://gss-data.org.uk/def/trade/hmrc-alcohol-bulletin/property/dimension/bulletin-type",
                 "value": "http://gss-data.org.uk/data/gss_data/trade/hmrc-alcohol-bulletin/concept/bulletin-type/{bulletin_type}"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/hectolitres-of-alcohol",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/hectolitres",
                 "measure": "http://gss-data.org.uk/def/measure/production",
                 "datatype": "double"
             },
