@@ -63,8 +63,8 @@ for tab in tabs:
     dimensions = [
         HDim(period, 'Period', DIRECTLY, ABOVE),
         HDim(cdid_code, 'CDID', DIRECTLY, LEFT),  
+        HDim(product, 'Product', DIRECTLY, LEFT),
         HDimConst('Flow Directions', flow_direction),
-        HDim(product, 'Product', CLOSEST, ABOVE),
         ]
 
     tidy_sheet = ConversionSegment(tab, dimensions, observations)   
