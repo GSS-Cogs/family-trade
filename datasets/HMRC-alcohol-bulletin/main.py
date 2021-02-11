@@ -148,12 +148,12 @@ df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == "Wine_stati
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
-df['Bulletin Type'].unique()
+df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
 
 # +
 df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres)", expand = True)
 df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(£ million)", expand = True)
-df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres of alcohol)", expand = True)
+#df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres of alcohol)", expand = True)
 
 df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
 # -
@@ -210,7 +210,6 @@ df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999
 
 
 df['Marker'].unique()
-df
 
 # +
 #cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
