@@ -67,16 +67,12 @@ for tab in tabs:
         ]
 
     tidy_sheet = ConversionSegment(tab, dimensions, observations)   
-    #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
     trace.with_preview(tidy_sheet)
-    tidied_sheets.append(tidy_sheet.topandas())
-
-    #trace.store("combined_dataframe", tidy_sheet.topandas())
+    trace.store("combined_dataframe", tidy_sheet.topandas())
 
 # +
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
-#df = trace.combine_and_trace(title, "combined_dataframe").fillna('')
-df = pd.concat(tidied_sheets, ignore_index = True, sort = False).fillna('')
+df = trace.combine_and_trace(title, "combined_dataframe").fillna('')
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 indexNames = df[ df['Product'] == 'Residual seasonal adjustment' ].index
 df.drop(indexNames, inplace = True)
@@ -148,6 +144,3 @@ cubes.add_cube(scraper, df.drop_duplicates(), title)
 cubes.output_all()
 
 trace.render("spec_v1.html")
-
-
-
