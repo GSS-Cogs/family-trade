@@ -1,4 +1,5 @@
 {
+    "id": "hmrc-alcohol-bulletin",
     "title": "alcohol-bulletin",
     "publisher": "HM Revenue & Customs",
     "description": "All bulletins provide a full historic series of data detailing amounts of goods cleared and amount of duty collected. This information is provided on a monthly, calendar and financial year basis.",

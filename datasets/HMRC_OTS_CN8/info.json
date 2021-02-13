@@ -1,5 +1,6 @@
 {
-    "title": "Overseas Trade Statistics (CN8)",
+    "id": "hmrc_ots_cn8",
+    "title": "Overseas Trade Statistics",
     "publisher": "HM Revenue & Customs",
     "description": "OTS are compiled monthly, quarterly and annually from trade declarations made using commodity codes from the UN Tariff (HS Nomenclature) and its EU derivative, the Intrastat Classification Nomenclature. These provide an eight-digit numeric codification for all products traded around the world. For each commodity declared, businesses must provide details of the quantity and statistical value in GB Pounds Sterling, the destination country (exports) and country of despatch (imports), and for some codes, a second quantity (supplementary unit).",
     "landingPage": "https://www.uktradeinfo.com/trade-data/overseas/",
