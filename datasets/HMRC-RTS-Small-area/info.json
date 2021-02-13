@@ -32,7 +32,8 @@
                 "description": "Partner country is the country the UK region exports the goods to or imports the goods from.",
                 "source": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/843903/Local_Area_Commentary_2018.pdf",
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-partner-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-partner-geographies/{hmrc_partner_geography}"
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-partner-geographies/{hmrc_partner_geography}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies"
             },
             "Flow Directions": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
@@ -41,9 +42,10 @@
             "SITC 4": {
                 "label": "Product",
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}"
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4"
             },
-            "Measure type": {
+            "Measure Type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
                 "value": "http://gss-data.org.uk/def/measure/{measure_type}",
                 "types": [
@@ -57,6 +59,10 @@
             },
             "Value": {
                 "datatype": "decimal"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
             }
         }
     },
