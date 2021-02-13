@@ -20,12 +20,13 @@
         "main_issue": 34,
         "columns": {
             "Geography": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography}"
             },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}"
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
             },
             "CDID": false,
             "Pink Book Services": {
