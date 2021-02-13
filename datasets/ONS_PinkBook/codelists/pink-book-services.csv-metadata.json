@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services",
-    "url": "codelists/pink-book-services.csv",
+    "url": "pink-book-services.csv",
     "rdfs:label": "Pink Book Services",
     "dc:title": "Pink Book Services",
     "tableSchema": {
