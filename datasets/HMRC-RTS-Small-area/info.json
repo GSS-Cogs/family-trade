@@ -1,4 +1,5 @@
 {
+    "id": "hmrc-rts-small-area",
     "title": "Regional trade in goods statistics disaggregated by smaller geographical areas",
     "publisher": "HM Revenue & Customs",
     "description": "HM Revenue & Customs (HMRC) collects the UK\u2019s international trade in goods data, which are published as two National Statistics series - the \u2018Overseas Trade in Goods Statistics (OTS)\u2019 and the \u2018Regional Trade in Goods Statistics (RTS)\u2019. The RTS are published quarterly showing trade at summary product and country level, split by UK regions and devolved administrations. This release provides statistics for 2018 calendar year. It breaks down the RTS into smaller UK geographical areas. RTS data and related products are categorised by partner country and Standard International Trade Classification, Rev.4 (SITC).\n\nIn this release data is analysed mainly at partner country and SITC section (1-digit) level. The collection and publication methodology for the RTS and this release is available on www.uktradeinfo.com.",
@@ -26,7 +27,7 @@
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/nuts-geography",
                 "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_geography}"
             },
-            "HMRC partner Geography": {
+            "HMRC Partner Geography": {
                 "label": "Partner geography",
                 "description": "Partner country is the country the UK region exports the goods to or imports the goods from.",
                 "source": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/843903/Local_Area_Commentary_2018.pdf",
@@ -40,12 +41,15 @@
             "SITC 4": {
                 "label": "Product",
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc-4/{sitc_4}"
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}"
             },
             "Measure type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
                 "value": "http://gss-data.org.uk/def/measure/{measure_type}",
-                "types": ["businesses", "gbp-total"]
+                "types": [
+                    "businesses",
+                    "gbp-total"
+                ]
             },
             "Unit": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
