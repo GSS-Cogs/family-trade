@@ -26,7 +26,7 @@
             },
             "Flow Directions": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
             "ITIS Industry": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
