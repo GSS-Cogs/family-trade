@@ -40,29 +40,8 @@
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
             },
             {
-                "titles": "This item includes",
-                "name": "this_item_includes",
-                "datatype": "string",
-                "required": false,
-                "propertyUrl": "rdfs:comment"
-            },
-            {
-                "titles": "This item also includes",
-                "name": "this_item_also_includes",
-                "datatype": "string",
-                "required": false,
-                "propertyUrl": "rdfs:comment"
-            }, 
-            {
-                "titles": "This item excludes",
-                "name": "this_item_excludes",
-                "datatype": "string",
-                "required": false,
-                "propertyUrl": "rdfs:comment"
-            },
-            {
-                "titles": "Rulings",
-                "name": "rulings",
+                "titles": "Description",
+                "name": "description",
                 "datatype": "string",
                 "required": false,
                 "propertyUrl": "rdfs:comment"
