@@ -44,8 +44,13 @@
                 "endpoint": "https://api.uktradeinfo.com/SITC",
                 "primaryKey": "CommoditySitcId",
                 "foreignKey": "CommoditySitc2Id"
+<<<<<<< HEAD
+            } 
+          } 
+=======
             }
         }
+>>>>>>> master
     },
     "sizingNotes": "",
     "notes": "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/",
