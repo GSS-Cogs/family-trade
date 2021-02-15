@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,7 +17,7 @@ from gssutils import *
 import json 
 import re
 
-# + tags=["outputPrepend"]
+# # + tags=["outputPrepend"]
 info = json.load(open('info.json'))
 scraper = Scraper(seed='info.json')
 cubes = Cubes('info.json')
