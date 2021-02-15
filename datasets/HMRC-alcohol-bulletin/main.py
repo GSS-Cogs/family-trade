@@ -2,12 +2,12 @@
 # ---
 # jupyter:
 #   jupytext:
-#     formats: ipynb,py
+#     formats: ipynb,py:light
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -21,19 +21,22 @@ import pandas as pd
 import pyexcel
 import messytables
 from io import BytesIO
+import numpy as np
+import json
+import copy 
 
 # +
-# scraper = Scraper("https://www.gov.uk/government/statistics/alcohol-bulletin")
-# scraper
+# # scraper = Scraper("https://www.gov.uk/government/statistics/alcohol-bulletin")
+# # scraper
 
 scraper = Scraper(seed="info.json")
 scraper.distributions = [x for x in scraper.distributions if hasattr(x, "mediaType")]
 scraper
+trace = TransformTrace()
+cubes = Cubes("info.json")
 
 # +
-# dist = scraper.distribution(title=lambda x: x.startswith('Alcohol Bulletin tables'), mediaType=ODS)
-# tabs = (t for t in dist.as_databaker())
-# dist
+# Conversion of ODS to XLS
 
 original_tabs = scraper.distributions[0]
 
@@ -53,108 +56,223 @@ with original_tabs.open() as ods_obj:
     tabs = list(xypath.loader.get_sheets(tableset, "*"))
 # -
 
-# tab = tabs[1]
-tidy_sheets = []
-for tab in tabs:
-    if 'Document_contents' in tab.name:
-        continue
+distribution = scraper.distribution(latest = True)
+datasetTitle = distribution.title
+columns = ["Period", "Marker", "Bulletin Type", "Alcohol Type", "Measure Type", "Unit"]
+
+tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
+for tab_name in tabs_names_to_process:
+
+    # Raise an exception if one of our required tabs is missing
+    if tab_name not in [x.name for x in tabs]:
+        raise ValueError(f'Aborting. A tab named {tab_name} required but not found')
+
+    # Select the tab in question
+    tab = [x for x in tabs if x.name == tab_name][0]
+    
+    trace.start(datasetTitle, tab, columns, distribution.downloadURL)
+
     period = tab.excel_ref("A7").expand(DOWN).is_not_blank().is_not_whitespace()
-    alcohol_origin = tab.excel_ref("B6").expand(RIGHT).is_not_blank().is_not_whitespace()
-    observations = alcohol_origin.fill(DOWN).is_not_blank().is_not_whitespace()
+    trace.Period("Defined from cell ref A6 Down")
+
+    bulletin_type = tab.excel_ref("B6").expand(RIGHT).is_not_blank().is_not_whitespace()
+    trace.Bulletin_Type("Defined from cell ref B6 and across")
+
+    alcohol_type = tab.name
+    trace.Alcohol_Type("Name of tabs in XLS sheet")
+
+    if tab_name == "Wine_statistics":
+        measure_type = "clearances duty-receipts"
+        unit = "hectolitres gbp-million"
+        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
+
+    elif tab_name == "Made_wine_statistics":
+        measure_type = "clearances duty-receipts"
+        unit = "hectolitres gbp-million"
+        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)-tab.excel_ref("K6").expand(DOWN)
+    
+    elif tab_name == "Spirits_statistics":
+        measure_type = "production clearances duty-receipts"
+        unit = "hectolitres-of-alcohol gbp-million"
+        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)
+
+    elif tab_name == "Beer_and_cider_statistics":
+        measure_type = "production clearances duty-receipts"
+        unit = "hectolitres-of-alcohol gbp-million"
+        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)
+    
+    else:
+        raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
+
+    trace.Measure_Type("Measure is different for different values")
+    trace.Unit("Unit is different for different values")
+    
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
-        HDim(alcohol_origin, 'Alcohol Origin', DIRECTLY, ABOVE),
-    ]
+        HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
+        HDimConst("Alcohol Type", tab.name),
+        HDimConst("Measure Type", measure_type),
+        HDimConst("Unit", unit)
+        ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-    tidy_sheets.append(tidy_sheet.topandas())
-    df = pd.concat(tidy_sheets)
-df
+    trace.with_preview(tidy_sheet)
+    trace.store("combined_dataframe", tidy_sheet.topandas())
+
+df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
+
+df['Marker'].unique() 
 
 # +
-# with pd.option_context('display.max_rows', None):
-#     df['Alcohol Origin'] == 'Total Wine Duty receipts(£ million)'
+#check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
+df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
+#check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
+df.loc[(df['Bulletin Type']).str.contains('receipts'),'Measure Type']='duty-receipts'
+#check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
+df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='production'
 
+#Setting the Unit based on Measure Type Column 
+df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
+                                    ("gbp-million" if x == "duty-receipts" else 
+                                     ("hectolitres-of-alcohol" if x == "production" else "U")))
+# -
 
-# # with pd.option_context('display.max_rows', None):
-# #     print(df)
+f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
+df.loc[f1,'Alcohol Type'] = 'all'
 
-# import functools
+df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == "Wine_statistics" else 
+                                    ("made-wine" if x == "Made_wine_statistics" else 
+                                     ("spirits" if x == "Spirits_statistics" else
+                                      ("beer-and-cider" if x == "Beer_and_cider_statistics" else x))))
 
-
-# f1 = df['Alcohol Origin'] == 'Total Wine Duty receipts(£ million)'
-# f2 = df['Alcohol Origin'] == 'Total alcohol duty receipts(£ million)'
-
-# cond_list = [f1, f2]
-# all_cond = functools.reduce(lambda x,y:x & y, cond_list)
-# df[all_cond]
-
-# df.loc[df['Alcohol Origin'].isin(['Total Wine Duty receipts(£ million)']), 'OBS']
-
-# new = df['Alcohol Origin'].isin(['Total Wine Duty receipts(£ million)'])
-# df[new]
-
-# +
-# f2=(df['Alcohol by Volume'] =='£ million')
-# df.loc[f2,'Unit'] = 'GBP Million'
-
-f1 = (df['Alcohol Origin'] == 'Total Wine Duty receipts(£ million)')
-df.loc[f1, 'Unit'] = 'GBP Million'
-# df
-# with pd.option_context('display.max_rows', None):
-#     print(df)
-df.info()
+df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
+df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
+df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
 
 # +
-# next_table = pd.Dataframe()
+df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres)", expand = True)
+df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(£ million)", expand = True)
+#df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres of alcohol)", expand = True)
+
+df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
+# -
+
+#N/As change to 0 and put not-applicable in Marker column
+df['Marker'].replace('N/A', 'not-applicable', inplace=True)
+f1=(df['Marker'] =='not-applicable')
+df.loc[f1,'Value'] = 0
 
 # +
-# # %%capture
+# Marker column - requirements satisfied
+df['Marker'][df.Period == 'Aug-20 provisional'] = 'provisional'
+df['Marker'][df.Period == 'Sep-20 provisional'] = "provisional"
+df['Marker'][df.Period == 'Oct-20 provisional'] = "provisional"
 
-# # %run 'T1.py' 
-# next_table = pd.concat([next_table, tidy])
+# As the value 2815(estimate) and 2460(estimate) in the spread sheet is not picked up by databaker properly
+# A quick fix is done to resolve the issue
+df['Value'][df.Marker == ',815 (estimate)'] = 2815
+df['Value'][df.Marker == ',460 (estimate)'] = 2460
 
-# # %run 'T2.py'
-# next_table = pd.concat([next_table, tidy])
+# replacing string in the marker column with string "estimate"
+df['Marker'].replace({',815 (estimate)':'estimate', ',460 (estimate)': 'estimate' }, inplace = True)
+df['Marker'].unique() 
 
-# # %run 'T3.py'
-# next_table = pd.concat([next_table, tidy])
 
-# # %run 'T4.py'
-# next_table = pd.concat([next_table, tidy])
+# -
 
-# # %run 'R2.py'
+#Period column 
+def left(s, amount):
+    return s[:amount]
+def right(s, amount):
+    return s[-amount:]
+def date_time (date):
+    if len(date)  == 4:
+        #year/{yr}
+        return 'year/' + left(date, 4)
+    if len(date)  == 6:
+        #year/{yr}
+        return 'year/' + left(date, 4)
+    if len(date)  == 7:
+        #government-year/{year1}-{year2}
+        return 'government-year/' + left(date, 4) + '-' + left(date, 2) + right(date, 2)
+    elif len(date) == 10:
+        #month/{yr}-{mth}
+        return 'month/' + left(date, 7) 
+    else:
+        return date
+df['Period'] =  df["Period"].apply(date_time)
+#quick fix for odd values 
+df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000', 
+                             'Aug-20 provisional': 'month/2020-08',
+                            'Sep-20 provisional': 'month/2020-09',
+                            'Oct-20 provisional': 'month/2020-10'}})
+
+
+df['Marker'].unique()
 
 # +
-# for column in next_table:
-#     if column in ('Alcohol by Volume', 'Alcohol Type', 'Alcohol Origin', 'Production and Clearance'):
-#         next_table[column] = next_table[column].str.lstrip()
-#         next_table[column] = next_table[column].map(lambda x: pathify(x))
-
-# next_table['Value'] = next_table['Value'].round(decimals = 2)
+#cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
+#cubes.output_all()
 
 # +
-# destinationFolder = Path('out')
-# destinationFolder.mkdir(exist_ok=True, parents=True)
+#trace.render("spec_v1.html")
 
-# TITLE = 'HMRC Alcohol Releases, Production and Clearances - NSA'
-# OBS_ID = pathify(TITLE)
-# import os
-# GROUP_ID = pathify(os.environ.get('JOB_NAME', 'gss_data/trade/' + Path(os.getcwd()).name))
+# The multimeasures for this dataset is yet to be defined by DMs.
+# The way to proceed with cubes class for multimeasures is yet to be finalized.
 
-# next_table.drop_duplicates().to_csv(destinationFolder / f'{OBS_ID}.csv', index = False)
-# # # +
-# from gssutils.metadata import THEME
-# scraper.set_base_uri('http://gss-data.org.uk')
-# scraper.set_dataset_id(f'{GROUP_ID}/{OBS_ID}')
-# scraper.dataset.title = TITLE
+# +
+# This is a multi-unit and multi-measure dataset so splitting up for now as not sure what is going on with anything anymore! :-(
+# Splitting data into 3 and changing scraper values based on output data
+cubes = Cubes("info.json")
+tchange = ['Clearances','Duty Receipts','Production']
+uchange = ['hectolitres', 'gbp-million', 'hectolitres']
+scraper.dataset.family = 'trade'
+for x in range(3): 
+    dat = df[df['Measure Type'] == pathify(tchange[x])]
+    scraper.dataset.title = f"Alcohol Bulletin - {tchange[x]}"
+    scraper.dataset.comment = f"Monthly {tchange[x]} statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs"
+    if x == 2:
+        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, beer and cider {tchange[x]}'  
+    else :
+        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic wine, made wine, spirits, beer and cider {tchange[x]}'
+    print(str(x) + " - " + scraper.dataset.title + " - " + pathify(tchange[x]))
+    
+    with open("info.json", "r") as jsonFile:
+        data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/{pathify(tchange[x])}"
+    data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/{uchange[x]}"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+    del data
+    
+    if 'Measure Type' in dat.columns:
+        del dat['Measure Type']
+    if 'Unit' in dat.columns:
+        del dat['Unit']
+    
+    cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
 
-# scraper.dataset.family = 'trade'
-# with open(destinationFolder / f'{OBS_ID}.csv-metadata.trig', 'wb') as metadata:
-#     metadata.write(scraper.generate_trig())
-# # -
+del df
+cubes.output_all()
 
-# schema = CSVWMetadata('https://gss-cogs.github.io/family-trade/reference/')
-# schema.create(destinationFolder / f'{OBS_ID}.csv', destinationFolder / f'{OBS_ID}.csv-schema.json')
+# +
+#for c in df.columns:
+#    if (c != 'Value') & (c != 'Period'):
+#        print(c)
+#        print(df[c].unique())
+#        print("###################################")
 
-# next_table
+# +
+#scraper.dataset.family = 'trade'
+#codelistcreation = ['Bulletin Type'] 
+#df = df
+#codeclass = CSVCodelists()#
+#for cl in codelistcreation:
+#    if cl in df.columns:
+#        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# -
+
+
+
+

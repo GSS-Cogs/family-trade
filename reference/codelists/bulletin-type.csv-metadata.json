@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity",
-    "url": "commodity.csv",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type",
+    "url": "bulletin-type.csv",
     "tableSchema": {
         "columns": [
             {
@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/bulletin-type/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -54,62 +54,70 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/commodity"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/bulletin-type/{notation}"
     },
-    "rdfs:label": "Commodity",
-    "dc:title": "Commodity",
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/",
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
+    "rdfs:label": "Bulletin Type",
+    "dc:title": "Bulletin Type",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/dataset",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Commodity",
-            "dc:title": "Commodity",
+            "rdfs:label": "Bulletin Type",
+            "dc:title": "Bulletin Type",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type"
             },
-            "rdfs:comment": "Dataset representing the 'Commodity' code list.",
+            "rdfs:comment": "Dataset representing the 'Bulletin Type' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.132405"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.132405"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/catalog-record"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/catalog-record",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Commodity Catalog Record",
-            "rdfs:label": "Commodity Catalog Record",
+            "dc:title": "Bulletin Type Catalog Record",
+            "rdfs:label": "Bulletin Type Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-01-25T11:58:58.120533"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/dataset"
+                "@value": "2020-12-23T11:58:58.120065"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:59:10.942836"
+                "@value": "2020-12-23T11:58:58.120065"
+            },
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type"
             }
         }
     ]

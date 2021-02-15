@@ -1,4 +1,5 @@
 {
+    "id": "ons_abs",
     "title": "Annual Business Survey exporters and importers",
     "publisher": "Office for National Statistics",
     "description": "Exporters and importers of goods and services in Great Britain by employment size, turnover size, ownership and age.",
@@ -23,34 +24,34 @@
                 "codelist": false
             },
             "Age of Business": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/age-of-business",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/age-of-business",
                 "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/age-of-business"
+                "codelist": false
             },
             "Business Activity": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/business-activity",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/business-activity",
                 "value": "http://gss-data.org.uk/def/trade/concept/business-activity/{business_activity}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/business-activity"
+                "codelist": false
             },
             "Country of Ownership": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/countries-of-ownership",
                 "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{country_of_ownership}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/countries-of-ownership"
+                "codelist": false
             },
             "Trade Group": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/trade-group",
                 "value": "http://gss-data.org.uk/def/trade/concept/trade-group/{trade_group}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/trade-group"
+                "codelist": false
             },
             "Turnover": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/turnover-size-bands",
                 "value": "http://gss-data.org.uk/def/trade/concept/turnover-size-bands/{turnover}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands"
+                "codelist": false
             },
             "Employees": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
                 "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{employees}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/employment-size-bands"
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",

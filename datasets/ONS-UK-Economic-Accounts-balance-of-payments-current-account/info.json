@@ -1,4 +1,5 @@
 {
+    "id": "ons-uk-economic-accounts-balance-of-payments-current-account",
     "title": "UK Economic Accounts; balance of payments - current account",
     "publisher": "Office for National Statistics",
     "description": "Quarterly transactions in trade in goods and services, primary, secondary and investment income, transactions with EU and non-EU countries and capital account.",
@@ -16,7 +17,83 @@
     },
     "transform": {
         "airtable": "recjQpn5tEyJFRjmL",
-        "main_issue": 11
+        "main_issue": 11,
+        "columns": {
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
+            },
+            "Flow Directions": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "codelist": false
+            },
+            "Seasonal Adjustment": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
+                "codelist": false
+            },
+            "Services": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/services",
+                "value": "http://gss-data.org.uk/def/trade/concept/services/{services}",
+                "codelist": false
+            },
+            "Sector": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sector",
+                "value": "http://gss-data.org.uk/def/trade/concept/sector/{sector}",
+                "codelist": false
+            },
+            "Account Type": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/account-type",
+                "value": "http://gss-data.org.uk/def/trade/concept/account-type/{account_type}",
+                "codelist": false
+            },
+            "Income": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/income",
+                "value": "http://gss-data.org.uk/def/trade/concept/income/{income}",
+                "codelist": false
+            },
+            "Income Description": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/income-description",
+                "value": "http://gss-data.org.uk/def/trade/concept/income-description/{income_description}",
+                "codelist": false
+            },
+            "Earnings": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/earnings",
+                "value": "http://gss-data.org.uk/def/trade/concept/earnings/{earnings}",
+                "codelist": false
+            },
+            "Product": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}",
+                "codelist": false
+            },
+            "Transaction Type": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/transaction-type",
+                "value": "http://gss-data.org.uk/def/trade/concept/transaction-type/{transaction_type}",
+                "codelist": false
+            },
+            "Members": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/members",
+                "value": "http://gss-data.org.uk/def/trade/concept/members/{members}",
+                "codelist": false
+            },
+            "Country Transaction": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/country-transaction",
+                "value": "http://gss-data.org.uk/def/trade/concept/country-transaction/{country_transaction}",
+                "codelist": false
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "measure": "http://gss-data.org.uk/def/measure/bop-current-account",
+                "datatype": "integer"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        }
     },
     "sizingNotes": "",
     "notes": ""

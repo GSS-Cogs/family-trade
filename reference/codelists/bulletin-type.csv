@@ -1,0 +1,31 @@
+Label,Notation,Parent Notation,Sort Priority
+Still clearances up to 15% ABV ,still-clearances-up-to-15-abv,,1
+Sparkling clearances up to 15% ABV ,sparkling-clearances-up-to-15-abv,,2
+Clearances over 15% ABV ,clearances-over-15-abv,,3
+Ex ship clearances over 5.5% ABV ,ex-ship-clearances-over-5-5-abv,,4
+Ex warehouse clearances over 5.5% ABV ,ex-warehouse-clearances-over-5-5-abv,,5
+UK origin clearances over 5.5% ABV ,uk-origin-clearances-over-5-5-abv,,6
+Total wine clearances ,total-wine-clearances,,7
+Total Wine Duty receipts ,total-wine-duty-receipts,,8
+Total alcohol duty receipts ,total-alcohol-duty-receipts,,9
+1.2% to 5.5% ABV clearances ,1-2-to-5-5-abv-clearances,,10
+Still 5.5% to 15% ABV clearances ,still-5-5-to-15-abv-clearances,,11
+Sparkling 5.5% to 15% ABV clearances ,sparkling-5-5-to-15-abv-clearances,,12
+Total made wine clearances ,total-made-wine-clearances,,13
+UK potable spirits production (alcohol),uk-potable-spirits-production-alcohol,,14
+UK malt whiskey clearances (alcohol),uk-malt-whiskey-clearances-alcohol,,15
+UK grain and blend whiskey clearances (alcohol),uk-grain-and-blend-whiskey-clearances-alcohol,,16
+Total UK whiskey clearances (alcohol),total-uk-whiskey-clearances-alcohol,,17
+Spirit based RTDs clearances (alcohol),spirit-based-rtds-clearances-alcohol,,18
+Ex ship and other clearances (alcohol),ex-ship-and-other-clearances-alcohol,,19
+Total spirits clearances (alcohol),total-spirits-clearances-alcohol,,20
+Total Spirits Duty receipts ,total-spirits-duty-receipts,,21
+UK beer production ,uk-beer-production,,22
+UK beer production (alcohol),uk-beer-production-alcohol,,23
+UK registered clearances ,uk-registered-clearances,,24
+Ex warehouse and ex ship clearances ,ex-warehouse-and-ex-ship-clearances,,25
+Total beer clearances ,total-beer-clearances,,26
+Total beer clearances (alcohol),total-beer-clearances-alcohol,,27
+Cider clearances ,cider-clearances,,28
+Total Beer Duty receipts ,total-beer-duty-receipts,,29
+Total Cider Duty receipts ,total-cider-duty-receipts,,30

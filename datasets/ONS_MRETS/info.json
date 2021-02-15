@@ -1,4 +1,5 @@
 {
+    "id": "ons_mrets",
     "title": "UK Trade Trade Time Series",
     "publisher": "Office for National Statistics",
     "description": "Monthly value of UK exports and imports of goods and services by current price, chained volume measures and implied deflators.",

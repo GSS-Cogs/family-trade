@@ -1,4 +1,5 @@
 {
+    "id": "ons-international-trade-in-services",
     "title": "International trade in services",
     "publisher": "Office for National Statistics",
     "description": "Detailed breakdown of annual trade in UK services estimates, analysing data by country, product and industry.",
@@ -18,40 +19,40 @@
         "airtable": "recHVWhF3sVZo2T9I",
         "main_issue": 4,
         "columns": {
-            "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
-            },
-            "Flow Directions": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/concept/trade/flow-directions/{flow_directions}"
-            },
-            "ITIS Industry": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
-                "value": "http://gss-data.org.uk/def/concept/trade/itis-industry/{itis_industry}"
-            },
-            "ITIS Service": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
-                "value": "http://gss-data.org.uk/def/concept/trade/itis-services/{itis_service}",
-                "codelist": false
-            },
-            "International Trade Basis": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
-                "value": "http://gss-data.org.uk/def/concept/trade/international-trade-basis/{international_trade_basis}"
-            },
-            "ONS Trade Areas ITIS": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/trade-partner-geography",
-                "value": "http://gss-data.org.uk/def/concept/ons-trade-areas-itis/{ons_trade_areas_itis}"
-            },
-            "Value": {
-                "measure": "http://gss-data.org.uk/def/measure/gbp-total",
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "value": "decimal"
-            },
             "Year": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/year/{year}",
                 "codelist": false
+            },
+            "Flow Directions": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+            },
+            "ITIS Industry": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
+                "value": "http://gss-data.org.uk/def/trade/concept/itis-industry/{itis_industry}"
+            },
+            "ITIS Service": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-service",
+                "value": "http://gss-data.org.uk/def/trade/concept/itis-services/{itis_service}"
+            },
+            "International Trade Basis": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
+                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
+            },
+            "ONS Trade Areas ITIS": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/concept/ons-partner-geography/{ons_trade_areas_itis}",
+                "codelist": false
+            },
+            "Value": {
+                "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "datatype": "decimal"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
             }
         }
     },

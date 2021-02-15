@@ -6,14 +6,12 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.10.0
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
-
-# cd /workspace/family-trade/datasets/HMRC-RTS-Small-area/
 
 # +
 from gssutils import *
@@ -38,7 +36,7 @@ dataset_year = int(year_cell.value)
 # %%capture
 
 def process_tab(t):
-    %run "$t"
+    # %run "$t"
     return tidy
 
 table = pd.concat(process_tab(f'{t}.py') for t in ['T1','T2','T3','T4','T5'])
@@ -51,30 +49,16 @@ table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] ==
 sorted(table)
 table = table[(table['Marker'] != 'residual-trade')]
 table = table[(table['Marker'] != 'below-threshold-traders')]
+table["Measure Type"] = table["Measure Type"].apply(pathify)
 table = table.drop_duplicates()
 
-#table.count()
-#t = table[(table['NUTS Geography'] == 'nuts2/ea-other') & (table['HMRC Partner Geography'] == 'C') & (table['Value'] == 127)]
-#t = table[(table['HMRC Partner Geography'] == 'EU')]
-
-# -
-
-
-table['HMRC Partner Geography'].unique()
-
-# +
+#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
-#Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
 
 scraper.dataset.family = 'trade'
-cube_split = {'Count of Businesses': 'HMRC-RTS-Small-area_business_cnt',
-              'GBP Total': 'HMRC-RTS-Small-area_gbp'}
-for measure, file_name in cube_split.items():
-    cubes.add_cube(scraper, table.loc[table['Measure Type'] == measure].reset_index(drop=True).drop_duplicates(), file_name, graph='HMRC-RTS-Small-area')    
-
-
+cubes.add_cube(scraper, table, "HMRC RTS Small area")
 cubes.output_all()
 
 

@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/service-destination-geography/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/service-destination-geography/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/service-destination-geography/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/service-destination-geography/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/service-destination-geography",
@@ -87,7 +87,11 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-01-19T00:00:00"
+                "@value": "2021-02-03T08:27:38.165716"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.165716"
             }
         },
         {

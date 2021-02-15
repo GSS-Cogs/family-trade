@@ -87,7 +87,15 @@
             },
             "rdfs:label": "ONS Partner Geography",
             "dc:title": "ONS Partner Geography",
-            "rdfs:comment": "Dataset representing the 'ONS Partner Geography' code list."
+            "rdfs:comment": "Dataset representing the 'ONS Partner Geography' code list.",
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.198393"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.198393"
+            }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",

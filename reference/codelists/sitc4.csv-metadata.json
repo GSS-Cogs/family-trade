@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/sitc4/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/sitc4/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4",
@@ -84,6 +84,14 @@
             "rdfs:comment": "Dataset representing the 'Sitc4' code list.",
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-13T14:10:00.819824"
+            },
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:27:38.158887"
             }
         },
         {

@@ -1,4 +1,5 @@
 {
+    "id": "ons-uk-trade-in-services",
     "title": "UK trade in services: service type by partner country, non-seasonally adjusted",
     "publisher": "Office for National Statistics",
     "description": "",
@@ -38,9 +39,9 @@
                 "codelist": false
             },
             "Seasonal Adjustment": {
-                "parent": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
                 "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/seasonal-adjustments"
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",

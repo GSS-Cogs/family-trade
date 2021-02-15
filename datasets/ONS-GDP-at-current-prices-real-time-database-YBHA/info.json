@@ -1,4 +1,5 @@
 {
+    "id": "ons-gdp-at-current-prices-real-time-database-ybha",
     "title": "GDP at current prices - real time database (YBHA)",
     "publisher": "Office for National Statistics",
     "description": "Quarterly levels for UK gross domestic product (GDP) at current market prices",
@@ -20,16 +21,18 @@
             "GDP Reference Period": {
                 "source": "",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}"
+                "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}",
+                "codelist": false
             },
             "Publication Date": {
                 "source": "",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+publication_date}"
+                "value": "http://reference.data.gov.uk/id/{+publication_date}",
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/trade/gdp-current-prices",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
                 "datatype": "double"
             },
             "Marker": {

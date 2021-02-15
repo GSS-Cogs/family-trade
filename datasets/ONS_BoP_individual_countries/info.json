@@ -1,4 +1,5 @@
 {
+    "id": "ons_bop_individual_countries",
     "title": "Individual country data (goods) on a monthly basis",
     "publisher": "Office for National Statistics",
     "description": "Exports and imports goods data by individual country for UK trade in goods.",

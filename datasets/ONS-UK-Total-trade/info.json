@@ -1,4 +1,5 @@
 {
+    "id": "ons-uk-total-trade",
     "title": "UK total trade: all countries, non-seasonally adjusted",
     "publisher": "Office for National Statistics",
     "description": "Quarterly estimates of total trade, trade in goods and trade in services by country, non-seasonally adjusted.",
@@ -23,18 +24,18 @@
                 "codelist": false
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/dimension/ons-country",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-country",
                 "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
                 "codelist": false
             },
             "Flow": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions/{flow}",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
                 "codelist": false
             },
             "Trade Type": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/trade-type",
-                "value": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-trade-type/{trade_type}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-trade-type",
+                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-trade-type/{trade_type}",
                 "codelist": false
             },
             "Value": {
