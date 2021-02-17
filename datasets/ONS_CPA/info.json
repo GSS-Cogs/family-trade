@@ -56,10 +56,6 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}",
                 "codelist": false
             },
-            "Trade in Goods": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/trade/measure/trade-in-goods"
-            },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-millions",
                 "measure": "http://gss-data.org.uk/def/measure/trade-in-goods",
