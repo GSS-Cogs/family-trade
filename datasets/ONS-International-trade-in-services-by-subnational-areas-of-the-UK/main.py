@@ -6,8 +6,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.10.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -30,7 +30,12 @@ tidied_sheets = []
 trace = TransformTrace()
 df = pd.DataFrame()
 
-all_tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
+last_modified = max([x.modified for x in scraper.distributions])
+distro = scraper.distribution(modified=last_modified)
+distro
+
+last_modified = max([x.modified for x in scraper.distributions])
+all_tabs = { tab.name: tab for tab in distro.as_databaker() }
 
 
 # %%
@@ -315,8 +320,6 @@ dfTidy
 
 
 # %%
-
-# %%
 df = pd.concat([dfTravel, dfTidy])
 
 df = df.replace({'Country or Origin of Trade' : {'total': 'all-countries',
@@ -348,7 +351,6 @@ cityregs =  [
 # -
 
 
-# %%
 
 
 # from IPython.core.display import HTML
