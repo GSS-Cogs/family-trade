@@ -41,12 +41,12 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/classification-of-products-by-activity/{cpa_2008}",
                 "codelist": false
             },
-            "Price Classifications": {
+            "Price Classification": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/price-classifications",
-                "value": "http://gss-data.org.uk/def/trade/concept/price-classifications/{price_classifications}",
+                "value": "http://gss-data.org.uk/def/trade/concept/price-classifications/{price_classification}",
                 "codelist": false
             },
-            "Seasonal Adjustments": {
+            "Seasonal Adjustment": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
                 "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
                 "codelist": false
