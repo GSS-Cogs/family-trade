@@ -53,7 +53,7 @@
             },
             "International Trade Basis": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
-                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international-trade-basis}",
+                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}",
                 "codelist": false
             },
             "Trade in Goods": {
