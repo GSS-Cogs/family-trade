@@ -48,7 +48,7 @@
             },
             "Seasonal Adjustments": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustments}",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
                 "codelist": false
             },
             "International Trade Basis": {
@@ -59,6 +59,15 @@
             "Trade in Goods": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/trade/measure/trade-in-goods"
+            },
+            "Value": {
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-millions",
+                "measure": "http://gss-data.org.uk/def/measure/trade-in-goods",
+                "datatype": "integer"
+            },
+            "Marker": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             }
         }
     },
