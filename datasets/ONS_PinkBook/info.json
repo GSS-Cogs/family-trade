@@ -1,4 +1,5 @@
 {
+    "id": "ons_pinkbook",
     "title": "03 Trade in services, The Pink Book",
     "publisher": "Office for National Statistics",
     "description": "Detailed annual statistics on trade in services including transport, travel, insurance and pensions, financial, telecommunication and computer, cultural and recreational, and government.",
@@ -18,9 +19,27 @@
         "airtable": "recPITJGpaxZOcwOo",
         "main_issue": 34,
         "columns": {
+            "Geography": {
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography}"
+            },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}"
+                "value": "http://reference.data.gov.uk/id/{+period}",
+                "codelist": false
+            },
+            "CDID": false,
+            "Pink Book Services": {
+                "label": "Service"
+            },
+            "Flow Directions": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+            },
+            "Value": {
+                "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "datatype": "decimal"
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",

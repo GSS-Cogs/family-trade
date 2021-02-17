@@ -13,7 +13,7 @@ trade,Trade Reporter Geography,dimension/trade-reporter-geography,qb:DimensionPr
 trade,International Trade Basis,dimension/international-trade-basis,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/international-trade-basis,The methodological basis on which the trade statistics have been calculated
 trade,Investment Direction,dimension/investment-direction,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/investment-direction,Direction of foreign direct investment into the UK (inward) or abroad (outward)
 trade,Export and Import Activity,dimension/export-and-import-activity,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/export-and-import-activity,Whether and how the business is trading internationally
-trade,SITC 4,dimension/sitc-4,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/sitc-4,Standard International Trade Classification Revision 4
+trade,SITC 4,dimension/sitc-4,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/sitc4,Standard International Trade Classification Revision 4
 trade,ONS FDI Area,dimension/ons-fdi-area,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area,Area from which foreign direct investment (FDI) flows into/out of the UK
 trade,FDI Component,dimension/fdi-component,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/fdi-component,Foreign direct investment (FDI) component being measured
 trade,FDI Industry,dimension/fdi-industry,qb:DimensionProperty,,,http://gss-data.org.uk/def/trade/concept-scheme/fdi-industry,High level industry groupings based on SIC 2007

@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,7 +17,7 @@ from gssutils import *
 import json 
 import re
 
-# + tags=["outputPrepend"]
+# # + tags=["outputPrepend"]
 info = json.load(open('info.json'))
 scraper = Scraper(seed='info.json')
 cubes = Cubes('info.json')
@@ -135,10 +135,30 @@ merged = pd.merge(df, cdids, on='cdid', how='left').drop_duplicates()
 merged.rename(columns={'cdid' : 'CDID'}, inplace=True)
 merged = merged[['ONS Partner Geography', 'Period', 'CDID', 'International Trade Basis',
                              'Flow Directions', 'CPA 2008', 'Price Classification', 'Seasonal Adjustment','Value',]].drop_duplicates()
-merged
+merged.head(10)
+
+# Have set up the CPA codelist to just include the code, so removeing prefix
+merged['CPA 2008'] = merged['CPA 2008'].str.replace('group/','')
+merged['CPA 2008'] = merged['CPA 2008'].str.replace('division/','')
+merged['CPA 2008'] = merged['CPA 2008'].str.replace('section/','')
+merged['CPA 2008'] = merged['CPA 2008'].str.replace('class/','')
+merged['CPA 2008'].unique()
+
+# +
+#d = merged[merged['CPA 2008'] == 'ons/TOTAL']
+#d.head(60)
+#d['Flow Directions'].unique()
+# -
 
 # Add dataframe is in the cube
 cubes.add_cube(scraper, merged, scraper.distribution(latest=True).title)
+
+# +
+#print(scraper.dataset.family)
+#print(scraper.dataset.title)
+#print(scraper.dataset.comment)
+#print(scraper.dataset.description)
+# -
 
 # Write cube
 cubes.output_all()

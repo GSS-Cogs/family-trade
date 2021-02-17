@@ -37,12 +37,11 @@ scraper = Scraper(seed='info.json')
 distribution = scraper.distribution(latest=True)
 distribution
 
-# +
 tabs = (t for t in distribution.as_databaker())
 trace = TransformTrace()
 title = distribution.title
 columns = ['Period', 'Flow Directions','Product Department','Product Category','Product','CDID', 'Value']
-
+tidied_sheets = []
 for tab in tabs:
     if tab.name in ('Index', 'Contact'):
         continue   
@@ -68,7 +67,6 @@ for tab in tabs:
         ]
 
     tidy_sheet = ConversionSegment(tab, dimensions, observations)   
-    savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
 
@@ -146,4 +144,3 @@ cubes.add_cube(scraper, df.drop_duplicates(), title)
 cubes.output_all()
 
 trace.render("spec_v1.html")
-

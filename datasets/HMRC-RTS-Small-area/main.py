@@ -6,14 +6,12 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.10.0
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
-
-# cd /workspace/family-trade/datasets/HMRC-RTS-Small-area/
 
 # +
 from gssutils import *
@@ -38,7 +36,7 @@ dataset_year = int(year_cell.value)
 # %%capture
 
 def process_tab(t):
-    %run "$t"
+    # %run "$t"
     return tidy
 
 table = pd.concat(process_tab(f'{t}.py') for t in ['T1','T2','T3','T4','T5'])
@@ -60,23 +58,7 @@ table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 # -
 
 scraper.dataset.family = 'trade'
-measures = {
-    'count-of-businesses': {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
-                "measure": "http://gss-data.org.uk/def/trade/measure/count",
-                "datatype": "double"
-            },
-    'gbp-total': {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/trade/measure/value",
-                "datatype": "double"
-            }
-}
-for measure, value_map in measures.items():
-    info["transform"]["columns"]["Value"] = value_map
-    table_wanted = table.loc[table['Measure Type'].str.strip() == measure].reset_index(drop=True).drop_duplicates()
-    cubes.add_cube(scraper, table_wanted, measure, info_json_dict=info, graph='HMRC-RTS-Small-area')   
-
+cubes.add_cube(scraper, table, "HMRC RTS Small area")
 cubes.output_all()
 
 

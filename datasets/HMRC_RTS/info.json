@@ -1,4 +1,5 @@
 {
+    "id": "hmrc_rts",
     "title": "REGIONAL TRADE STATISTICS",
     "publisher": "HM Revenue & Customs",
     "description": "",
@@ -33,7 +34,7 @@
                 "endpoint": "https://api.uktradeinfo.com/Region",
                 "primaryKey": "RegionId",
                 "foreignKey": "GovRegionId"
-            }, 
+            },
             "Country": {
                 "endpoint": "https://api.uktradeinfo.com/Country",
                 "primaryKey": "CountryId",
@@ -43,12 +44,17 @@
                 "endpoint": "https://api.uktradeinfo.com/SITC",
                 "primaryKey": "CommoditySitcId",
                 "foreignKey": "CommoditySitc2Id"
+<<<<<<< HEAD
             } 
           } 
+=======
+            }
+        }
+>>>>>>> master
     },
     "sizingNotes": "",
     "notes": "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/",
     "datasetNotes": [
         "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/"
     ]
-  }
+}

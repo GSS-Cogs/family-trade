@@ -1,4 +1,5 @@
 {
+    "id": "ons-international-trade-in-services",
     "title": "International trade in services",
     "publisher": "Office for National Statistics",
     "description": "Detailed breakdown of annual trade in UK services estimates, analysing data by country, product and industry.",
@@ -24,24 +25,20 @@
                 "codelist": false
             },
             "Flow Directions": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
             "ITIS Industry": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
-                "value": "http://gss-data.org.uk/def/trade/concept/itis-industry/{itis_industry}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
+                "value": "http://gss-data.org.uk/def/trade/concept/itis-industry/{itis_industry}"
             },
             "ITIS Service": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/itis-services",
-                "value": "http://gss-data.org.uk/def/trade/concept/itis-services/{itis_service}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-service",
+                "value": "http://gss-data.org.uk/def/trade/concept/itis-services/{itis_service}"
             },
             "International Trade Basis": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
-                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
+                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
             },
             "ONS Trade Areas ITIS": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
@@ -49,9 +46,9 @@
                 "codelist": false
             },
             "Value": {
-                "measure": "http://gss-data.org.uk/def/measure/gbp-total",
+                "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "value": "decimal"
+                "datatype": "decimal"
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",

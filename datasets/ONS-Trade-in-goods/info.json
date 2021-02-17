@@ -1,4 +1,5 @@
 {
+    "id": "ons-trade-in-goods",
     "title": "Trade in goods: country-by-commodity exports",
     "publisher": "Office for National Statistics",
     "description": "Monthly import country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted.",
@@ -28,7 +29,8 @@
             "Year": {
                 "source": "",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+year}"
+                "value": "http://reference.data.gov.uk/id/{+year}",
+                "codelist": false
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
@@ -40,19 +42,22 @@
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             },
             "Direction": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/flow",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow",
                 "value": "http://gss-data.org.uk/def/concept/flow/{direction}",
                 "description": ""
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-country",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-country",
                 "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
-                "description": ""
+                "description": "",
+                "codelist":false
+
             },
             "Commodity": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/ons-commoidty",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-commoidty",
                 "value": "http://gss-data.org.uk/def/concept/ons-commodity/{commodity}",
-                "description": ""
+                "description": "",
+                "codelist":false
             }
         }
     },
