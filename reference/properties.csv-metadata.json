@@ -71,7 +71,7 @@
                 "required": true,
                 "name": "codelist",
                 "datatype": "anyURI",
-                "propertyUrl": "qb:codelist",
+                "propertyUrl": "qb:codeList",
                 "valueUrl": "{codelist}"
             },
             {
