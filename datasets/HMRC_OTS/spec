@@ -1,0 +1,20 @@
+HMRC OTS data spec for initial conversion 
+
+following the process of the RTS data flow i believe everything can be dropped bar the following:
+
+FLowType differantes between EU and Non EU imports/Exports
+OTS is the statistical list of all oversees trade
+OTS Commodity - is a more indepth breakdown of commodities afor oversees trade compared with the SITC used for RTS.
+Port - would need to be included idenitfy OTS countries point of origin 
+Country - required to indentify OTS countries
+SITC - required to idenitfy OTS and provide a more broader commodity code to aggregrate up to.
+Creation of unit field to denote the numeric column alinged to 
+
+statistical value is gbp thousands 
+if the DE could return a list of the OTS commodity list as this would be handy to create a codelist for future use
+
+create OTS codelist is more detailed that the SITC codelist used for RTS and is slightly different to the commodoity codelist used by ONS datasets
+
+link to metadata so users can understand how these data are classifed https://www.uktradeinfo.com/trade-data/help-with-using-our-data/ 
+
+
