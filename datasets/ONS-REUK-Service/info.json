@@ -30,11 +30,7 @@
             },
             "ONS Functional Category": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-category",
-<<<<<<< HEAD
                 "value": "http://gss-data.org.uk/def/trade/concept/ons-functional-category/{ons_functional_category}"
-=======
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-functional-categories/{ons_functional_category}"
->>>>>>> d1429b24ba192a2c137659a87e6fdbbda2459f43
             },
             "Flow Directions": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
