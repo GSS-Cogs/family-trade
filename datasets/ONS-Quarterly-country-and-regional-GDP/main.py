@@ -71,9 +71,8 @@ for name, tab in tabs.items():
             HDim(period, "Period", DIRECTLY, LEFT),
             HDim(region, "Region", DIRECTLY, ABOVE),
             HDim(industry_section, "Industry Section", DIRECTLY, ABOVE),
-            HDim(indicies_or_percentage, "Change Type", CLOSEST, ABOVE),
             HDim(indicies_or_percentage, "Measure Type", CLOSEST, ABOVE),
-            HDimConst("Unit", "gdp")
+            HDim(indicies_or_percentage, "Unit", CLOSEST, ABOVE),
         ]
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
@@ -82,32 +81,45 @@ for name, tab in tabs.items():
         dimensions = [
             HDim(period, "Period", DIRECTLY, LEFT),
             HDimConst("Region", region),
-            #HDim(sector, "Sector", DIRECTLY, ABOVE),
             HDim(industry_section, "Industry Section", DIRECTLY, ABOVE),
-            HDim(indicies_or_percentage, "Change Type", CLOSEST, ABOVE),
             HDim(indicies_or_percentage, "Measure Type", CLOSEST, ABOVE),
-            HDimConst("Unit", "gdp")
+            HDim(indicies_or_percentage, "Unit", CLOSEST, ABOVE),
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
         trace.with_preview(tidy_sheet)
         trace.store("combined_dataframe", tidy_sheet.topandas())
 
+map_regions = {
+        "North East":"http://data.europa.eu/nuts/code/UKC ",
+        "North West":"http://data.europa.eu/nuts/code/UKD ",
+        "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
+        "East Midlands":"http://data.europa.eu/nuts/code/UKF",
+        "West Midlands":"http://data.europa.eu/nuts/code/UKG",
+        "East of England":"http://data.europa.eu/nuts/code/UKH",
+        "London":"http://data.europa.eu/nuts/code/UKI",
+        "South East":"http://data.europa.eu/nuts/code/UKJ",
+        "South West":"http://data.europa.eu/nuts/code/UKK",
+        "England":"http://statistics.data.gov.uk/id/statistical-geography/E92000001",
+        "Wales":"http://data.europa.eu/nuts/code/UKL",
+        "Extra-Regio":"http://data.europa.eu/nuts/code/UKZ ",
+}
+
 #Post Processing 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
-df['Region'] = df['Region'].map(lambda x: pathify(x))
+df["Region"] = df["Region"].map(lambda x: map_regions[x])
 df['Industry Section'] = df['Industry Section'].map(lambda x: pathify(x))
 df["Period"] =  df["Period"].apply(date_time)
-df['Change Type'] = df['Change Type'].str.rstrip()
-df['Change Type'] = df['Change Type'].apply(lambda x: 'year-on-year' if 'Percentage change, year on year' in x else 
-                                      ('quarter-on-previous-quarter' if 'Percentage change, quarter on previous quarter' in x else 
-                                       ('quarter-on-same-quarter-a-year-ago' if 'Percentage change, quarter on same quarter a year ago' in x else 'not-applicable')))
-df['Measure Type']= df['Measure Type'].str.split(" ", n = 1, expand = True) 
-df['Measure Type']= df['Measure Type'].apply(lambda x: 'percentage-change' if 'Percentage' in x else 
+df['Measure Type'] = df['Measure Type'].str.rstrip()
+df['Measure Type'] = df['Measure Type'].apply(lambda x: 'y-on-y-delta-gdp-from-gva' if 'Percentage change, year on year' in x else 
+                                      ('q-on-q-delta-gdp-from-gva' if 'Percentage change, quarter on previous quarter' in x else 
+                                       ('q-on-last-year-q-delta-gdp-from-gva' if 'Percentage change, quarter on same quarter a year ago' in x else 'gdp-from-gva')))
+df['Unit']= df['Unit'].str.split(" ", n = 1, expand = True) 
+df['Unit']= df['Unit'].apply(lambda x: 'percentage' if 'Percentage' in x else 
                                       ('indices' if 'Indices' in x else x ))
-df = df[['Period', 'Region', 'Industry Section', 'Change Type', 'Measure Type', 'Unit', 'Value']]
+df = df[['Period', 'Region', 'Industry Section', 'Measure Type', 'Unit', 'Value']]
 df
 
 #additional scraper info needed
