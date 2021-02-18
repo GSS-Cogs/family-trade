@@ -67,6 +67,14 @@
                 "valueUrl": "{range}"
             },
             {
+                "titles": "Codelist",
+                "required": true,
+                "name": "codelist",
+                "datatype": "anyURI",
+                "propertyUrl": "qb:codelist",
+                "valueUrl": "{codelist}"
+            },
+            {
                 "titles": "Comment",
                 "required": false,
                 "name": "comment",
