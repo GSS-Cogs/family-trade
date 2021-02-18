@@ -28,6 +28,7 @@
                 "value": "{region}"
             },
             "Industry Section": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/industry-section",
                 "value": "http://gss-data.org.uk/def/trade/concept/industry-section/{industry_section}",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
             },
