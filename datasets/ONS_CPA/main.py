@@ -142,12 +142,10 @@ merged['CPA 2008'] = merged['CPA 2008'].str.replace('group/','')
 merged['CPA 2008'] = merged['CPA 2008'].str.replace('division/','')
 merged['CPA 2008'] = merged['CPA 2008'].str.replace('section/','')
 merged['CPA 2008'] = merged['CPA 2008'].str.replace('class/','')
+merged['CPA 2008'] = merged['CPA 2008'].str.replace('ons/TOTAL','total')
 merged['CPA 2008'].unique()
 
-# +
-# REMOVING CDIDS UNTIL WE HAVE A PROPER SOLUTION FOR THEM. SLICES?
-del merged['CDID']
-# -
+
 
 # Add dataframe is in the cube
 cubes.add_cube(scraper, merged, scraper.distribution(latest=True).title)

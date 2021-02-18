@@ -59,7 +59,55 @@
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid",
         "@type": [
             "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#DatasetContents"
+            "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
-    }
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
+            },
+            "rdfs:label": "Cdid",
+            "dc:title": "Cdid",
+            "rdfs:comment": "Dataset representing the 'Cdid' code list.",
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-18T00:00:00"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
+            },
+            "dc:title": "Cdid Catalog Record",
+            "rdfs:label": "Cdid Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-18T12:52:46.220803"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-18T12:52:46.220803"
+            }
+        }
+    ]
 }
