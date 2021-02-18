@@ -91,8 +91,8 @@ for name, tab in tabs.items():
         trace.store("combined_dataframe", tidy_sheet.topandas())
 
 map_regions = {
-        "North East":"http://data.europa.eu/nuts/code/UKC ",
-        "North West":"http://data.europa.eu/nuts/code/UKD ",
+        "North East":"http://data.europa.eu/nuts/code/UKC",
+        "North West":"http://data.europa.eu/nuts/code/UKD",
         "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
         "East Midlands":"http://data.europa.eu/nuts/code/UKF",
         "West Midlands":"http://data.europa.eu/nuts/code/UKG",
@@ -102,7 +102,7 @@ map_regions = {
         "South West":"http://data.europa.eu/nuts/code/UKK",
         "England":"http://statistics.data.gov.uk/id/statistical-geography/E92000001",
         "Wales":"http://data.europa.eu/nuts/code/UKL",
-        "Extra-Regio":"http://data.europa.eu/nuts/code/UKZ ",
+        "Extra-Regio":"http://data.europa.eu/nuts/code/UKZ"
 }
 
 #Post Processing 
