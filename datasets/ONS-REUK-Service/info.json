@@ -20,9 +20,8 @@
         "main_issue": 25,
         "columns": {
             "NUTS Geography": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://data.europa.eu/nuts/code/{nuts_geography}",
-                "codelist": false
+                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://data.europa.eu/nuts/code/{nuts_geography}"
             },
             "Year": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
@@ -30,14 +29,12 @@
                 "codelist": false
             },
             "ONS Functional Category": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-categories",
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-functional-categories/{ons_functional_category}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-categories",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-functional-categories/{ons_functional_category}"
             },
             "Flow Directions": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
