@@ -29,7 +29,7 @@
                 "codelist": false
             },
             "ONS Functional Category": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-categories",
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-category",
                 "value": "http://gss-data.org.uk/def/trade/concept/ons-functional-categories/{ons_functional_category}"
             },
             "Flow Directions": {
