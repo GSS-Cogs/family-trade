@@ -1,61 +1,24 @@
 #!/usr/bin/env python
 # coding: utf-8
 # %%
-import pandas as pd
-import numpy as np
 from gssutils import *
 import json
-from gssutils.metadata import THEME
-from os import environ
+import numpy as np
 
-
-# %%
-with open("info.json") as f:
-    info = json.load(f)
+trace = TransformTrace()
+df = pd.DataFrame()
 cubes = Cubes("info.json")
-
-
-# %%
-landingPage = info["landingPage"]
-landingPage
-
+info = json.load(open('info.json')) 
+scraper = Scraper(seed="info.json")   
+scraper 
 
 # %%
-scraper = Scraper(landingPage)
-scraper.dataset.family = info['families']
-scraper
-
+dist  = scraper.distribution(latest=True)
+tabs = dist.as_databaker()
 
 # %%
-tabs = scraper.distributions[0].as_databaker()
-
 
 # %%
-# Create a dictionary of dataset names from 'Index' tab
-index_tab = [x for x in tabs if x.name.lower().strip() == 'index']
-if len(index_tab) != 1:
-    raise Exception("Aborting extraction. The data source must but does not have a tab called 'index'")
-
-
-# %%
-a_cells = index_tab[0].excel_ref("A").is_not_blank().is_not_whitespace()
-b_cells = index_tab[0].excel_ref("B").is_not_blank().is_not_whitespace()
-
-
-# %%
-table_name_lookup = {}
-for b_cell in b_cells:
-    a_cell = [x for x in a_cells if x.y == b_cell.y][0]
-    table_name_lookup[a_cell.value] = b_cell.value
-
-
-# %%
-#table_name_lookup
-# # BOP Services<br>
-# <br>
-# Data from the table: https://drive.google.com/uc?export=download&id=1jzQaLafdqfWUAlTt07gnLBZ02tdTMEnl<br>
-# <br>
-# Putting it inline instead (we're not using dict.get() so it'll blow up if anything's amiss).
 bop_services = {
         "Total":"0",
         "Manufacturing and maintenance services":"1+2",
@@ -99,72 +62,80 @@ class is_one_of(object):
 
 # ## Extract and Transform
 output = pd.DataFrame()
-for letter in "ABCDEFGHIJK":
+for letter in "ABCDEFGHIJKX":#BCDEFGHIJKX":
     tab = [tab for tab in tabs if tab.name[-1] == letter][0]
-
-    # TODO - how many tables do we want?
-    #if letter != "F":     # commented to check relevance 
-        #continue  # commented to check relevance
-
     # Quick grabs
-    Code = tab.excel_ref('C').is_not_blank().is_not_whitespace()
-    Year = tab.excel_ref('4').is_not_blank().is_not_whitespace()
+    Code = tab.excel_ref('C').is_not_blank().is_not_blank()
+    Year = tab.excel_ref('4').is_not_blank().is_not_blank()
     Quarter = tab.excel_ref('5')
-    Trade = tab.excel_ref('B').filter(is_one_of(["Imports", "Exports", "Balances"]))
-    
-    Services = tab.excel_ref('B').is_not_blank().is_not_whitespace() - Trade
+    Trade = tab.excel_ref('B1').expand(DOWN).filter(is_one_of(["Imports", "Exports", "Balances", "Credits", "Debits", "Balances (net transactions)"]))
+    seasonal = tab.excel_ref('B').filter(is_one_of(["Seasonally adjusted", "Not seasonally adjusted"]))
+    account_type = tab.excel_ref('B1').is_not_blank()
+    Services = tab.excel_ref('B').is_not_blank().is_not_blank() - Trade
     Services = Services - tab.excel_ref('B1').expand(UP)
     Currency = tab.excel_ref('N3')
-    observations = Services.waffle(Year).is_not_blank().is_not_whitespace()
+
+    if letter == 'B' or letter == 'X':
+        observations = Services.waffle(Year).is_not_blank().is_not_blank() - tab.excel_ref('B67').expand(RIGHT).expand(DOWN)
+    else:
+        observations = Services.waffle(Year).is_not_blank().is_not_blank()
+    
     dimensions = [
                 HDimConst('Geography', 'K02000001'),
+               # HDimConst('Letter', letter),
                 HDim(Year,'TIME',DIRECTLY,ABOVE),
                 HDim(Quarter,'Quarter',DIRECTLY,ABOVE),
                 HDim(Code,'CDID',DIRECTLY,LEFT),
-                HDimConst('Measure Type', 'GBP Total'),
-                HDimConst('Unit','GBP (Million)'),
                 HDim(Services,'label',CLOSEST, ABOVE),
+                HDim(account_type,'Account Type',CLOSEST, ABOVE),
+                HDim(seasonal,'Seasonal Adjustment',CLOSEST, ABOVE),
                 HDim(Trade,'Flow Directions',CLOSEST,ABOVE)
     ]
     cs = ConversionSegment(observations, dimensions, processTIMEUNIT=True)
-    #savepreviewhtml(cs, fname= tab.name + "PREVIEW.html") 
+   # savepreviewhtml(cs, fname= letter + "PREVIEW.html") 
     df = cs.topandas()
-    
-    # Clean up whitespace
-    for col in df.columns.values:
-        try:
-            df[col] = df[col].str.strip()
-        except AttributeError:
-            pass # not everything is a sting
-    
-    #Lookup BOP service dimension from the labels
-    df["label"].replace(bop_services, inplace=True) 
-    df.rename(columns={"label" : "BOP Services"}, inplace=True)
-    
-    # Lookup BOP service dimension from the labels
-    #df["BOP Services"] = df["label"].map(lambda x: bop_services[x])
-    
-    # Sort out time
-    df["Period"] = df["TIME"].astype(float).astype(int).astype(str) + "-" + df["Quarter"].astype(str)
-    df["Period"] = df["Period"].map(format_time)
-    df.drop(columns = ['TIME', "Quarter"], inplace=True)
-    df.rename(columns={"OBS": "Value"}, inplace=True)
-    df = df[['Geography','Period','CDID','BOP Services','Flow Directions','Measure Type','Value','Unit']]
     output = pd.concat([output, df], sort=False)
 
 
 # %%
-output["Flow Directions"].fillna('not-applicable', inplace=True)
-output["Flow Directions"] = output["Flow Directions"].str.strip().apply(pathify)
-output['Flow Directions'].unique()
+#Lookup BOP service dimension from the labels
+#df["label"].replace(bop_services, inplace=True) 
+output.rename(columns={"label" : "BOP Services"}, inplace=True)
+output['TIME'] = output['TIME'].str.strip()
+output['Quarter'] = output['Quarter'].str.strip()
+output['CDID'] = output['CDID'].str.strip()
+# Sort out time
+output["Period"] = output["TIME"].astype(float).astype(int).astype(str) + "-" + output["Quarter"].astype(str)
+output["Period"] = output["Period"].map(format_time)
+output.drop(columns = ['TIME', "Quarter"], inplace=True)
+output.rename(columns={"OBS": "Value", 'DATAMARKER' : 'Marker'}, inplace=True)
 
 # %%
+output["Flow Directions"].fillna('not-applicable', inplace=True)
+output["Flow Directions"] = output["Flow Directions"].str.strip().apply(pathify)
+output["Account Type"] = output["Account Type"].str.strip().apply(pathify)
+output = output.replace({'Flow Directions' : {'balances-net-transactions' : 'balances' }})
+output["BOP Services"] = output["BOP Services"].str.strip().apply(pathify)
+output = output.replace({'Marker' : {'-' : 'unknown'}})
+output = output.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'sa', ' Not seasonally adjusted' : 'nsa' }})
+output["Seasonal Adjustment"].fillna('nsa', inplace=True)
+
+# %%
+output = output[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Account Type', 'Marker' ,'Value',]].drop_duplicates()
 output
 
 # %%
+output['Account Type'].unique()
 
+# %%
+output['Flow Directions'].unique()
+
+# %%
+output['Seasonal Adjustment'].unique()
+
+# %%
 output['BOP Services'].unique()
 
 # %%
-cubes.add_cube(scraper, output, info['title'])
+cubes.add_cube(scraper, output.drop_duplicates(), dist.title)
 cubes.output_all()
