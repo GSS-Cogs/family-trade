@@ -110,6 +110,14 @@ for name, tab in tabs.items():
 #Post Processing
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
+
+for col in df.columns.values:
+    if col in ('Account Type', 'Flow Directions', 'BOP Services'):
+        try:
+            df[col] = df[col].str.strip().apply(pathify)
+        except AttributeError:
+            pass 
+
 df['Year'] = df['Year'].astype(str).replace('\.0', '', regex=True)
 df['Year'] = df['Year'].str.strip()
 df['Quarter'] = df['Quarter'].str.strip()
@@ -117,17 +125,13 @@ df['Period'] = df['Year'] + df['Quarter']
 df["Period"] =  df["Period"].apply(date_time)
 df["Flow Directions"].fillna('not-applicable', inplace=True)
 df = df.replace({'Flow Directions' : {'balances-net-transactions' : 'balances' }})
-df = df.replace({'Marker' : {'-' : 'unknown'}})
+df = df.replace({'Marker' : {' -' : 'unknown'}})
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'sa', ' Not seasonally adjusted' : 'nsa' }})
 df["Seasonal Adjustment"].fillna('nsa', inplace=True)
 
-for column in df:
-    if column in ('Account Type', 'Flow Directions', 'BOP Services'):
-        df[column] = df[column].str.strip()
-        df[column] = df[column].map(lambda x: pathify(x))
-
 # %%
 df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Account Type', 'Marker' ,'Value',]].drop_duplicates()
+
 df
 
 # %%
