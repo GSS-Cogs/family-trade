@@ -145,9 +145,8 @@ merged['CPA 2008'] = merged['CPA 2008'].str.replace('class/','')
 merged['CPA 2008'].unique()
 
 # +
-#d = merged[merged['CPA 2008'] == 'ons/TOTAL']
-#d.head(60)
-#d['Flow Directions'].unique()
+# REMOVING CDIDS UNTIL WE HAVE A PROPER SOLUTION FOR THEM. SLICES?
+del merged['CDID']
 # -
 
 # Add dataframe is in the cube
