@@ -35,14 +35,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-quarterly-country-and-regional-gdp#scheme/location"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-quarterly-country-and-regional-gdp#scheme/region"
             }
         ],
         "primaryKey": "uri",
         "aboutUrl": "{uri}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-quarterly-country-and-regional-gdp#scheme/location",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-quarterly-country-and-regional-gdp#scheme/region",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
