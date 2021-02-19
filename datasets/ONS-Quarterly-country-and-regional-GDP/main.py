@@ -75,7 +75,7 @@ for name, tab in tabs.items():
             HDim(indicies_or_percentage, "Unit", CLOSEST, ABOVE),
         ]
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
+        # trace.with_preview(tidy_sheet)
         trace.store("combined_dataframe", tidy_sheet.topandas())
     else:                
         dimensions = [
@@ -87,7 +87,7 @@ for name, tab in tabs.items():
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
+        # trace.with_preview(tidy_sheet)
         trace.store("combined_dataframe", tidy_sheet.topandas())
 
 map_regions = {
