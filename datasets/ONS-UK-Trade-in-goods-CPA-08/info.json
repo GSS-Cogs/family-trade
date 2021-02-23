@@ -21,37 +21,24 @@
         "columns": {
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total"
+                "measure": "http://gss-data.org.uk/def/trade/measure/trade-in-goods"
             },
             "CDID": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
-                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
             },
             "Flow Directions": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{period}",
                 "codelist": false
             },
-            "Product Department": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product-department",
-                "value": "http://gss-data.org.uk/def/trade/concept/product-department/{product_department}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/product-department"
-            },
-            "Product Category": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product-category",
-                "value": "http://gss-data.org.uk/def/trade/concept/product-category/{product_category}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/product-category"
-            },
             "Product": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
-                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/product"
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}"
             }
         }
     },
