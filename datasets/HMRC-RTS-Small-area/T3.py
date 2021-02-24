@@ -102,8 +102,8 @@ tidy['Value'] = tidy['Value'].map(lambda x:''
 for col in tidy.columns:
     if col not in ['Value', 'Year']:
         tidy[col] = tidy[col].astype('category')
-        display(col)
-        display(tidy[col].cat.categories)
+        #display(col)
+        #display(tidy[col].cat.categories)
 
 # +
 tidy['Geography'] = tidy['Geography'].map(
@@ -163,12 +163,7 @@ import csv
 import io
 import requests
 
-r = request.urlopen('https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/nuts-geographies.csv').read().decode('utf8').split("\n")
-reader = csv.reader(r)
-url="https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/nuts-geographies.csv"
-s=requests.get(url).content
-c=pd.read_csv(io.StringIO(s.decode('utf-8')))
-
+c = pd.read_csv('https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/nuts-geographies.csv')
 tidy = pd.merge(tidy, c, how = 'left', left_on = 'Geography', right_on = 'Label')
 
 tidy.columns = ['NUTS Geography' if x=='Notation' else x for x in tidy.columns]
@@ -188,6 +183,5 @@ import numpy
 
 #tidy[(tidy['Marker'] == 'below-threshold-traders') & (tidy['Value'].notna())].count()
 tidy = tidy[(tidy['Marker'] != 'below-threshold-traders') & (tidy['Value'].notna())]
-
 
 tidy
