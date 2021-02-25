@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories",
-    "url": "ons-functional-categories.csv",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007",
+    "url": "standard-industrial-classification-2007.csv",
     "tableSchema": {
         "columns": [
             {
@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-functional-categories/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/standard-industrial-classification-2007/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -54,70 +54,70 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-functional-categories/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/standard-industrial-classification-2007/{notation}"
     },
+    "rdfs:label": "Standard Industrial Classification 2007 (SIC)",
+    "dc:title": "Standard Industrial Classification 2007 (SIC)",
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories",
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Ons Functional Categories",
-    "dc:title": "Ons Functional Categories",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories/dataset",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Ons Functional Categories",
-            "dc:title": "Ons Functional Categories",
+            "rdfs:label": "Standard Industrial Classification 2007 (SIC)",
+            "dc:title": "Standard Industrial Classification 2007 (SIC)",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007"
             },
-            "rdfs:comment": "Dataset representing the 'Ons Functional Categories' code list.",
+            "rdfs:comment": "Dataset representing the 'Standard Industrial Classification 2007 (SIC)' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.140435"
+                "@value": "2021-02-22T11:58:58.120533"
             },
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.140435"
+                "@value": "2021-02-22T11:58:58.120533"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories/catalog-record"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories/catalog-record",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Ons Functional Categories Catalog Record",
-            "rdfs:label": "Ons Functional Categories Catalog Record",
+            "dc:title": "Standard Industrial Classification 2007 (SIC) Catalog Record",
+            "rdfs:label": "Standard Industrial Classification 2007 (SIC) Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.122255"
+                "@value": "2021-02-22T11:58:58.120533"
+            },
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007/dataset"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.122255"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories/dataset"
+                "@value": "2021-02-22T11:59:10.942836"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-categories"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/standard-industrial-classification-2007"
             }
         }
     ]

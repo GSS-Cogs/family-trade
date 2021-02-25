@@ -28,6 +28,11 @@ tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tabl
 #tab = tabs['T5 NUTS3'] #Old tab name from 2017
 tab = tabs['T5 NUTS2 Partner Country'] #Current releases 
 
+# Get the relevant year
+year_cell = tabs['Title'].filter('Detailed Data Tables').shift(UP)
+year_cell.assert_one()
+dataset_year = int(year_cell.value)
+
 tidy = pd.DataFrame()
 
 flow = tab.filter('Flow').fill(DOWN).is_not_blank().is_not_whitespace()
@@ -44,7 +49,7 @@ Dimensions = [
             HDimConst('SITC 4', 'all'),
             HDimConst('Measure Type', 'GBP Total'),
             HDimConst('Unit', 'gbp-million'),
-            HDimConst('Year', '2018')
+            HDimConst('Year', dataset_year)
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 table1 = c1.topandas()
@@ -64,7 +69,7 @@ Dimensions = [
             HDimConst('SITC 4', 'all'),
             HDimConst('Measure Type', 'Count of Businesses'),
             HDimConst('Unit', 'businesses'),
-            HDimConst('Year', '2018')
+            HDimConst('Year', dataset_year)
             ]
 c2 = ConversionSegment(observations1, Dimensions, processTIMEUNIT=True)
 table2 = c2.topandas()

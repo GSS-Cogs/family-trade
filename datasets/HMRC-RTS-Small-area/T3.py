@@ -25,6 +25,11 @@ scraper
 
 tabs = {tab.name: tab for tab in scraper.distribution(title=lambda t: 'Data Tables' in t).as_databaker()}
 
+# Get the relevant year
+year_cell = tabs['Title'].filter('Detailed Data Tables').shift(UP)
+year_cell.assert_one()
+dataset_year = int(year_cell.value)
+
 #tab = tabs['T3 NUTS2 SITC Section'] #Old tab name from 2017
 tab = tabs['T3 NUTS3'] #Current releases 
 
@@ -46,7 +51,7 @@ Dimensions = [
             HDimConst('SITC 4', 'all'),
             HDimConst('Measure Type', 'GBP Total'),
             HDimConst('Unit', 'gbp-million'),
-            HDimConst('Year', '2018')
+            HDimConst('Year', dataset_year)
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
 table1 = c1.topandas()
@@ -66,7 +71,7 @@ Dimensions = [
             HDimConst('SITC 4', 'all'),
             HDimConst('Measure Type', 'Count of Businesses'),
             HDimConst('Unit', 'businesses'),
-            HDimConst('Year', '2018')
+            HDimConst('Year', dataset_year)
             ]
 c2 = ConversionSegment(observations1, Dimensions, processTIMEUNIT=True)
 table2 = c2.topandas()
@@ -97,8 +102,8 @@ tidy['Value'] = tidy['Value'].map(lambda x:''
 for col in tidy.columns:
     if col not in ['Value', 'Year']:
         tidy[col] = tidy[col].astype('category')
-        display(col)
-        display(tidy[col].cat.categories)
+        #display(col)
+        #display(tidy[col].cat.categories)
 
 # +
 tidy['Geography'] = tidy['Geography'].map(
@@ -158,12 +163,7 @@ import csv
 import io
 import requests
 
-r = request.urlopen('https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/nuts-geographies.csv').read().decode('utf8').split("\n")
-reader = csv.reader(r)
-url="https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/nuts-geographies.csv"
-s=requests.get(url).content
-c=pd.read_csv(io.StringIO(s.decode('utf-8')))
-
+c = pd.read_csv('https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/nuts-geographies.csv')
 tidy = pd.merge(tidy, c, how = 'left', left_on = 'Geography', right_on = 'Label')
 
 tidy.columns = ['NUTS Geography' if x=='Notation' else x for x in tidy.columns]
@@ -183,6 +183,5 @@ import numpy
 
 #tidy[(tidy['Marker'] == 'below-threshold-traders') & (tidy['Value'].notna())].count()
 tidy = tidy[(tidy['Marker'] != 'below-threshold-traders') & (tidy['Value'].notna())]
-
 
 tidy

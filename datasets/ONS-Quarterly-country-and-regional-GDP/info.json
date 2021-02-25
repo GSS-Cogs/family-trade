@@ -23,11 +23,12 @@
                 "value": "http://reference.data.gov.uk/id/{period}",
                 "codelist": false
             },
-            "Region": {
+            "Reference Area": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "{region}"
+                "value": "{reference_area}"
             },
             "Industry Section": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/industry-section",
                 "value": "http://gss-data.org.uk/def/trade/concept/industry-section/{industry_section}",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
             },

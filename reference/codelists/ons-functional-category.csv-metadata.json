@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section",
-    "url": "industry-section.csv",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category",
+    "url": "ons-functional-category.csv",
     "tableSchema": {
         "columns": [
             {
@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/industry-section/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-functional-category/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -54,70 +54,70 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/industry-section/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-functional-category/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section",
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Industry Section",
-    "dc:title": "Industry Section",
+    "rdfs:label": "Ons Functional Categories",
+    "dc:title": "Ons Functional Categories",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section/dataset",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Industry Section",
-            "dc:title": "Industry Section",
+            "rdfs:label": "Ons Functional Categories",
+            "dc:title": "Ons Functional Categories",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category"
             },
-            "rdfs:comment": "Dataset representing the 'Industry Section' code list.",
+            "rdfs:comment": "Dataset representing the 'Ons Functional Categories' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.201884"
+                "@value": "2021-02-03T08:27:38.140435"
             },
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.201884"
+                "@value": "2021-02-03T08:27:38.140435"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section/catalog-record"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section/catalog-record",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Industry Section Catalog Record",
-            "rdfs:label": "Industry Section Catalog Record",
+            "dc:title": "Ons Functional Categories Catalog Record",
+            "rdfs:label": "Ons Functional Categories Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.130416"
+                "@value": "2020-12-23T11:58:58.122255"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.130416"
+                "@value": "2020-12-23T11:58:58.122255"
             },
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section/dataset"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/industry-section"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-functional-category"
             }
         }
     ]
