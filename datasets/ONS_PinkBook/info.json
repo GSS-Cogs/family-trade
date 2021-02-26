@@ -19,10 +19,6 @@
         "airtable": "recPITJGpaxZOcwOo",
         "main_issue": 34,
         "columns": {
-            "Geography": {
-                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography}"
-            },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}",
@@ -36,10 +32,14 @@
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
+            "Seasonal Adjustment": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
+            },
             "Value": {
                 "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "datatype": "decimal"
+                "datatype": "integer"
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",

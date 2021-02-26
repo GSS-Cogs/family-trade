@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -6,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -47,7 +46,7 @@ for tab in tabs:
         
     flow = anchor.fill(DOWN).one_of(['Exports (Credits)', 'Imports (Debits)', 'Balances'])
     trace.Flow_Directions("Set as one of 'Exports (Credits)', 'Imports (Debits)', 'Balances'")
-    period = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()            
+    period = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()         
     
     observations = period.fill(DOWN).is_not_blank().is_not_whitespace() 
     
@@ -77,7 +76,7 @@ for tab in tabs:
     trace.store("pinkbook combined dataframe", df)
 
 df = trace.combine_and_trace("pinkbook combined dataframe", "pinkbook combined dataframe")
-df
+df.head(60)
 # -
 
 PBclassification_table_url = 'https://drive.google.com/uc?export=download&id=1uNwmZHgq7ERqD5wcND4W2sGHXRJyP2CR'
@@ -97,17 +96,20 @@ trace.CDID("Remove CDIDs FJOW, FJQO, FJSI")
 df = df[(df['CDID'] != 'FJOW') &
                        (df['CDID'] != 'FJQO') &
                        (df['CDID'] != 'FJSI')]
+# Temp remove CWVK & CWVL as we do not have a reference code for it, have asked BAs to look into it (appeared in 2019 publication)
+df = df[(df['CDID'] != 'CWVK') & (df['CDID'] != 'CWVL')]
 
 # Order columns
-df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions','Value','DATAMARKER']]
+df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'SEASADJ','Value','DATAMARKER']]
 
 print(df['Pink Book Services'].unique())
-df = df[df['Pink Book Services'].isnull() == False]
+#df = df[df['Pink Book Services'].isnull() == False]
 
 df['Marker'] = df['DATAMARKER'].map(
     lambda x: { 'NA' : 'not-available' ,
                ' -' : 'nil-or-less-than-a-million'
         }.get(x, x))
+df = df.rename(columns={'SEASADJ':'Seasonal Adjustment'})
 
 df['Pink Book Services'] = df['Pink Book Services'].astype(str)
 df["Flow Directions"].unique()
@@ -120,12 +122,42 @@ df['Flow Directions'] = df['Flow Directions'].str.strip().map(
             'Balances': 'balance'}.get(x, x)
         )
 
-df['Period'] = 'year/' + df['Period']
+df['Period'] = 'year/' + df['Period'].astype(str)
+df['Value'] = df['Value'].astype(int)
 
-df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
+#df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
+df = df[['Period','CDID','Pink Book Services','Flow Directions', 'Seasonal Adjustment', 'Value','Marker']]
 
 cubes.add_cube(scraper, df.drop_duplicates(), "03 Trade in services, The Pink Book")
 cubes.output_all()
-trace.render("spec_v1.html")
+#trace.render("spec_v1.html")
+
+"""
+a = pd.DataFrame(pd.read_csv('cdid.csv'))
+a = a['Label']
+d = pd.DataFrame(df['CDID'].unique(), df['CDID'].unique())
+d = d.rename(columns={0:'Label'})
+d.reset_index(drop=True, inplace=True)
+d = d['Label']
+print('A Size: ' + str(a.count()))
+print('D Size: ' + str(d.count()))
+b = pd.DataFrame(pd.concat([a,d]))
+print('B Size: ' + str(b.count()))
+b = b.drop_duplicates()
+print('B Size: ' + str(b.count()))
+b.columns = ['Label']
+b['Notation'] = b['Label']
+b['Parent Notation'] = ''
+b = b.assign(Sort=add('', np.arange(1, len(b) + 1).astype(str)))
+b = b.rename(columns={'Sort':'Sort Priority'})
+b.drop_duplicates().to_csv('cdidnew.csv', index = False)
+b
+"""
+
+
+
+
+
+
 
 
