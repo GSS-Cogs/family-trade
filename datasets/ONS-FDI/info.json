@@ -47,7 +47,7 @@
             },
             "FDI Component": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",
-                "value": "http://gss-data.org.uk/def/trade/concept/fdi-component",
+                "value": "http://gss-data.org.uk/def/trade/concept/fdi-component/{fdi_component}",
                 "codelist": false
             },
             "FDI Industry": {
