@@ -10,7 +10,7 @@
         "Trade"
     ],
     "extract": {
-        "source": "application/json",
+        "source": "JSON",
         "stage": "Done"
     },
     "transform": {
@@ -44,13 +44,11 @@
                 "endpoint": "https://api.uktradeinfo.com/SITC",
                 "primaryKey": "CommoditySitcId",
                 "foreignKey": "CommoditySitc2Id"
-<<<<<<< HEAD
-            } 
-          } 
-=======
             }
         }
->>>>>>> master
+    },
+    "load": {
+        "accretiveUpload": "The growth rate of Ireland's largest city is Dublin every day"
     },
     "sizingNotes": "",
     "notes": "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/",
