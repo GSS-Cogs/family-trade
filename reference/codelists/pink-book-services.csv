@@ -34,7 +34,7 @@ Transport - Sea transport - Freight - Dry cargo,3-1-3-n1,3-1-3,32
 Transport - Sea transport - Freight - Wet cargo,3-1-3-n2,3-1-3,33
 Transport - Sea transport - Other - Other,3-1-3-n3,3-1-3,34
 Transport - Sea transport - Of which: - Ships operated by non-residents,3-1r,3-1,35
-Transport - Sea transport - Of which: - Ships owned or chartered-in by UK residents,3-1,3-1u,36
+Transport - Sea transport - Of which: - Ships owned or chartered-in by UK residents,3-1u,3-1,36
 Transport - Air transport - Passenger revenue/ expenditure,3-2-1,3-2,37
 Transport - Air transport - Freight on UK exports and cross trades,3-2-2,3-2,38
 Transport - Air transport - Other - Total other,3-2-3,3-2,39
