@@ -129,6 +129,10 @@ df['Period'] = 'year/' + df['Period'].astype(str)
 #df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
 df = df[['Period','CDID','Pink Book Services','Flow Directions', 'Seasonal Adjustment', 'Value','Marker']]
 
+scraper.dataset.title = 'The Pink Book, Trade in Services'
+#scraper.dataset.comment
+#scraper.dataset.description
+
 cubes.add_cube(scraper, df.drop_duplicates(), "ONS Pink Book")
 cubes.output_all()
 #trace.render("spec_v1.html")
