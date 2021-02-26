@@ -39,7 +39,7 @@
             "Value": {
                 "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "datatype": "integer"
+                "datatype": "decimal"
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",

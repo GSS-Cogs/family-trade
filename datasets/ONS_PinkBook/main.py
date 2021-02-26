@@ -123,7 +123,7 @@ df['Flow Directions'] = df['Flow Directions'].str.strip().map(
         )
 
 df['Period'] = 'year/' + df['Period'].astype(str)
-df['Value'] = df['Value'].astype(int)
+#df['Value'] = df['Value'].astype(int)
 
 #df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
 df = df[['Period','CDID','Pink Book Services','Flow Directions', 'Seasonal Adjustment', 'Value','Marker']]
