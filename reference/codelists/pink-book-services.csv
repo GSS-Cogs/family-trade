@@ -1,5 +1,5 @@
 Label,Notation,Parent Notation,Sort Priority
-Trade in services - Total,0,nan,1
+Trade in services - Total,0,,1
 Trade in services - Manufacturing on physical inputs owned by others,1,0,2
 Trade in services - Maintenance and repair,2,0,3
 Trade in services - Transport,3,0,4
@@ -33,20 +33,20 @@ Transport - Sea transport - Disbursements in the UK,3-1-3,3-1,31
 Transport - Sea transport - Freight - Dry cargo,3-1-3-n1,3-1-3,32
 Transport - Sea transport - Freight - Wet cargo,3-1-3-n2,3-1-3,33
 Transport - Sea transport - Other - Other,3-1-3-n3,3-1-3,34
-Transport - Sea transport - Of which: - Ships operated by non-residents,3-1rw,nan,35
-Transport - Sea transport - Of which: - Ships owned or chartered-in by UK residents,3-1uk,nan,36
+Transport - Sea transport - Of which: - Ships operated by non-residents,3-1,3-1r,35
+Transport - Sea transport - Of which: - Ships owned or chartered-in by UK residents,3-1,3-1u,36
 Transport - Air transport - Passenger revenue/ expenditure,3-2-1,3-2,37
 Transport - Air transport - Freight on UK exports and cross trades,3-2-2,3-2,38
 Transport - Air transport - Other - Total other,3-2-3,3-2,39
 Transport - Air transport - Other - Disbursements in UK export/ foreign imports,3-2-3-n1,3-2-3,40
 Transport - Air transport - Other - Other revenue,3-2-3-n2,3-2-3,41
-Transport - Other transport - Rail - Passenger,3-6-1,3-3-1,42
-Transport - Other transport - Rail - Freight,3-6-2,3-3-2,43
-Transport - Other transport - Rail - Total rail,3-6-3,3-3-3,44
-Transport - Other transport - Road - Passenger,3-7-1,3-3-1,45
-Transport - Other transport - Road - Freight,3-7-2,3-3-2,46
-Transport - Other transport - Road - Total road,3-7-3,3-3-3,47
-Transport - Other transport - Pipeline transport,3-9-3-10-n1,nan,48
+Transport - Other transport - Rail - Passenger,3-6-1,,42
+Transport - Other transport - Rail - Freight,3-6-2,,43
+Transport - Other transport - Rail - Total rail,3-6-3,,44
+Transport - Other transport - Road - Passenger,3-7-1,3-7,45
+Transport - Other transport - Road - Freight,3-7-2,3-7,46
+Transport - Other transport - Road - Total road,3-7-3,3-7,47
+Transport - Other transport - Pipeline transport,3-9-3-10-n1,,48
 Travel - Total business travel,4-1,4,49
 Travel - Business - Expenditure by seasonal & border workers,4-1-1,4-1,50
 Travel - Business - Travel business other,4-1-2,4-1,51
@@ -78,8 +78,8 @@ Financial services - Financial intermediation services indirectly measured (FISI
 Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on deposits - of which: £,7-2-n131,7-2-n13,77
 Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on loans,7-2-n21,7-2-n2,78
 Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on deposits,7-2-n22,7-2-n2,79
-Financial services - Financial intermediation services indirectly measured (FISIM) - Total FISIM,7f,nan,80
-Financial services - Total non-FISIM,7xf,nan,81
+Financial services - Financial intermediation services indirectly measured (FISIM) - Total FISIM,7f,7,80
+Financial services - Total non-FISIM,7xf,7x,81
 Intellectual property - Franchise and trademarks,8-1,8,82
 Intellectual property - Outcomes of research and development,8-2,8,83
 Intellectual property - Distribution of computer software,8-3,8,84
@@ -121,7 +121,7 @@ Government services - Expenditure by US forces in UK,12-2-n1,12-2,119
 Government services - Other military units and agencies,12-2-n2,12-2,120
 Government services - Other government EU institutions,12-3-n1,12-3,121
 Government services - Other non-EU government services,12-3-n2,12-3,122
-Government services - Other government goods and services,12-n3,nan,123
+Government services - Other government goods and services,12-n3,12-n,123
 Construction - Construction abroad,5-1,5,124
 Construction - Construction in the reporting economy,5-2,5,125
 Financial services - Financial intermediation services indirectly measured (FISIM),7-2,7,126
