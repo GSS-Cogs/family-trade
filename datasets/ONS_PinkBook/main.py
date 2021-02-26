@@ -129,7 +129,7 @@ df['Period'] = 'year/' + df['Period'].astype(str)
 #df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
 df = df[['Period','CDID','Pink Book Services','Flow Directions', 'Seasonal Adjustment', 'Value','Marker']]
 
-cubes.add_cube(scraper, df.drop_duplicates(), "UK Trade in services 03, The Pink Book")
+cubes.add_cube(scraper, df.drop_duplicates(), "ONS Pink Book")
 cubes.output_all()
 #trace.render("spec_v1.html")
 
