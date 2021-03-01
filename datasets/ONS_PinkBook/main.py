@@ -158,13 +158,13 @@ b = b.rename(columns={'Sort':'Sort Priority'})
 b.drop_duplicates().to_csv('cdidnew.csv', index = False)
 b
 """
-p = pd.DataFrame(pd.read_csv('pink-book-services.csv'))
-p['Notation'] = p['Notation'].replace('-','.', regex=False)
-p['Parent Notation'] = ''
+#p = pd.DataFrame(pd.read_csv('pink-book-services.csv'))
+#p['Notation'] = p['Notation'].replace('-','.', regex=False)
+#p['Parent Notation'] = ''
 #p['Notation'] = p['Notation'].astype(str).apply(pathify)
 #p['Parent Notation'] = p['Parent Notation'].astype(str).apply(pathify)
-p.drop_duplicates().to_csv('pink-book-services.csv', index = False)
-p
+#p.drop_duplicates().to_csv('pink-book-services.csv', index = False)
+#p
 
 
 
