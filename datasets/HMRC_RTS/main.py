@@ -141,7 +141,7 @@ df.columns = [pathify(x) for x in df.columns]
 
 # Final formatting - measure-types
 df['measure-type'] = df['measure-type'].astype('category')
-df['measure-type'].cat.rename_categories({'Value': 'value', 'NetMass': 'new-mass'}, inplace=True)
+df['measure-type'].cat.rename_categories({'Value': 'value', 'NetMass': 'net-mass'}, inplace=True)
 
 # -
 
