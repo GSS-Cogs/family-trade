@@ -36,6 +36,10 @@
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
                 "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
             },
+            "Pink Book Services": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/pink-book-services",
+                "value": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{pink_book_services}"
+            },
             "Value": {
                 "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
