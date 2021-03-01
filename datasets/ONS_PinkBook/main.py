@@ -166,7 +166,7 @@ b
 #p.drop_duplicates().to_csv('pink-book-services.csv', index = False)
 #p
 
-df['Seasonal Adjustment'].unique()
+
 
 
 
