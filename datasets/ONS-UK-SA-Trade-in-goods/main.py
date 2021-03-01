@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.10.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -27,7 +27,7 @@ scraper = Scraper(seed = 'info.json')
 
 distribution = scraper.distribution(latest = True)
 datasetTitle = distribution.title
-tabs = { tab.name: tab for tab in distribution.as_databaker() }
+tabs = distribution.as_databaker()
 
 
 # +
@@ -39,32 +39,37 @@ def right(s, amount):
     return s[-amount:]
 
 def date_time(date):
-    if len(date)  == 4:
-        return 'year/' + date
+    # Various ways they're representing a 4 digit year
+    if isinstance(date, float) or len(date) == 6 and date.endswith(".0") or len(date) == 4:
+        return f'year/{str(date).replace(".0", "")}'
+    # Montha and year
     elif len(date) == 7:
         date = pd.to_datetime(date, format='%Y%b')
         return date.strftime('month/%Y-%m')
     else:
-        return "Date Formatting Error"
+        raise Exception(f'Aborting, failing to convert value "{date}" to period')
 
 
 # -
 
-for name, tab in tabs.items():
+for tab in tabs:
     columns=["Period", "Geography", "Seasonal Adjustment", "Flow", "Marker"]
     trace.start(datasetTitle, tab, columns, distribution.downloadURL)
     
-    flow = str(name.split()[-1]).lower()
+    flow = str(tab.name.split()[-1]).lower()
     trace.Flow("Taken from tab title")
     observations = tab.excel_ref('C7').expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
     year = tab.excel_ref('C5').expand(RIGHT).is_not_blank().is_not_whitespace()
     trace.Period("Taken from cell c5 across")
     geo = tab.excel_ref('A7').expand(DOWN).is_not_blank().is_not_whitespace()
     trace.Geography("Taken from cell ref A7 across")
+    
+    trace.Seasonal_Adjustment("Hardcoded as SA")
     dimensions = [
         HDim(year,'Period',DIRECTLY,ABOVE),
         HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
         HDimConst("Flow", flow),
+        HDimConst("Seasonal Adjustment", "SA")
     ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     trace.with_preview(tidy_sheet)
@@ -73,12 +78,11 @@ for name, tab in tabs.items():
 # +
 #Post Processing 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
+df.rename(columns={'OBS' : 'Value', 'DATAMARKER': "Marker"}, inplace=True)
 df["Period"] =  df["Period"].apply(date_time)
-trace.Seasonal_Adjustment("Hardcoded as SA")
-df.insert(loc=2, column='Seasonal Adjustment', value="SA")
-    
-df = df[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Value"]]
+df = df.fillna('')
+
+df = df[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Value", "Marker"]]
 
 # +
 scraper.dataset.family = 'trade'
@@ -89,7 +93,8 @@ UN Comtrade (https://comtrade.un.org/).
 Some data for countries have been marked with N/A. This is because Trade in Goods do not collate data from these countries.
 """
 
-df['Value'] = df['Value'].astype(int)
+df["Value"] = df["Value"].map(lambda x: int(x) if isinstance(x, float) else x)
+df["Marker"] = df["Marker"].str.replace("N/A", "not-applicable")
 # -
 
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)

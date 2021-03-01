@@ -19,22 +19,26 @@
         "airtable": "recPITJGpaxZOcwOo",
         "main_issue": 34,
         "columns": {
-            "Geography": {
-                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography}"
-            },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}",
                 "codelist": false
             },
-            "CDID": false,
-            "Pink Book Services": {
-                "label": "Service"
+            "CDID": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
             },
             "Flow Directions": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+            },
+            "Seasonal Adjustment": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
+            },
+            "Pink Book Services": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/pink-book-services",
+                "value": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{pink_book_services}"
             },
             "Value": {
                 "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",

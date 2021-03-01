@@ -21,17 +21,17 @@
                 "codelist": false
             },
             "Flow": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
                 "codelist": false
             },
             "ONS Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
                 "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}",
                 "codelist": false
             },
             "Seasonal Adjustment": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
                 "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
                 "codelist": false
             },

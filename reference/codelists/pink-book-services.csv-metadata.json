@@ -1,9 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services",
     "url": "pink-book-services.csv",
-    "rdfs:label": "Pink Book Services",
-    "dc:title": "Pink Book Services",
     "tableSchema": {
         "columns": [
             {
@@ -32,14 +30,21 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#concept/pink-book-services/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort_priority",
+                "name": "sort",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
             },
             {
                 "virtual": true,
@@ -49,14 +54,16 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#concept/pink-book-services/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{notation}"
     },
+    "rdfs:label": "Pink Book Services",
+    "dc:title": "Pink Book Services",
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services",
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -64,68 +71,53 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services/dataset",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
+            "rdfs:label": "Pink Book Services",
+            "dc:title": "Pink Book Services",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services"
             },
+            "rdfs:comment": "Dataset representing the 'Pink Book Services' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-13T14:02:29.971860"
+                "@value": "2021-02-03T11:35:22.815540"
             },
-            "rdfs:label": "Pink Book Services",
-            "dc:title": "Pink Book Services",
-            "rdfs:comment": "Dataset representing the 'Pink Book Services' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-13T14:02:29.971860"
-            },
-            "dc:license": {
-                "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-            },
-            "dc:creator": {
-                "@id": "mailto:pinkbook@ons.gov.uk"
-            },
-            "dc:publisher": {
-                "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
-            },
-            "dcat:contactPoint": {
-                "@id": "mailto:pinkbook@ons.gov.uk"
-            },
-            "dcat:landingPage": {
-                "@id": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/3tradeinservicesthepinkbook2016"
+                "@value": "2021-02-03T11:35:22.815540"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services/catalog-record"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services/catalog-record",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services/dataset"
-            },
-            "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_pinkbook#scheme/pink-book-services"
-            },
             "dc:title": "Pink Book Services Catalog Record",
             "rdfs:label": "Pink Book Services Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-13T14:02:29.971860"
+                "@value": "2020-12-23T11:58:58.120533"
+            },
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services/dataset"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-13T14:02:29.971860"
+                "@value": "2020-12-23T11:59:10.942836"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/pink-book-services"
             }
         }
     ]
