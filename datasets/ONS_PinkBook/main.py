@@ -100,7 +100,7 @@ df = df[(df['CDID'] != 'FJOW') &
 df = df[(df['CDID'] != 'CWVK') & (df['CDID'] != 'CWVL')]
 
 # Order columns
-df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'SEASADJ','Value','DATAMARKER']]
+df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions','Value','DATAMARKER']]
 
 #df['Pink Book Services'] = df['Pink Book Services'].astype(str).apply(pathify)
 print(df['Pink Book Services'].unique())
@@ -110,7 +110,7 @@ df['Marker'] = df['DATAMARKER'].map(
     lambda x: { 'NA' : 'not-available' ,
                ' -' : 'nil-or-less-than-a-million'
         }.get(x, x))
-df = df.rename(columns={'SEASADJ':'Seasonal Adjustment'})
+#df = df.rename(columns={'SEASADJ':'Seasonal Adjustment'})
 
 df['Pink Book Services'] = df['Pink Book Services'].astype(str)
 df["Flow Directions"].unique()
@@ -127,11 +127,11 @@ df['Period'] = 'year/' + df['Period'].astype(str)
 #df['Value'] = df['Value'].astype(int)
 
 #df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
-df = df[['Period','CDID','Pink Book Services','Flow Directions', 'Seasonal Adjustment', 'Value','Marker']]
+df = df[['Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
 
 scraper.dataset.title = 'The Pink Book, Trade in Services'
 #scraper.dataset.comment
-#scraper.dataset.description
+scraper.dataset.description = scraper.dataset.description + '\n Non Seasonally Adjusted'
 
 cubes.add_cube(scraper, df.drop_duplicates(), "ONS Pink Book")
 cubes.output_all()
@@ -166,7 +166,7 @@ b
 #p.drop_duplicates().to_csv('pink-book-services.csv', index = False)
 #p
 
-
+df['Seasonal Adjustment'].unique()
 
 
 
