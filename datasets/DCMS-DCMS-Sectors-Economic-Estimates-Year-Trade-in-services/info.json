@@ -22,7 +22,7 @@
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Country": {
-                "dimenion": "http://gss-data.org.uk/def/dimension/dcms-country",
+                "dimension": "http://gss-data.org.uk/def/dimension/dcms-country",
                 "value": "http://gss-data.org.uk/def/concept/dcms-country/{country}"
             },
             "Sector": {
