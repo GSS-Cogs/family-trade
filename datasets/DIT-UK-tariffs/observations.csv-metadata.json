@@ -1,0 +1,136 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/observations",
+    "url": "observations.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "commodity",
+                "name": "commodity",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/commodity",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/commodity{commodity}"
+            },
+            {
+                "titles": "description",
+                "name": "description",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/description",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/description{description}"
+            },
+            {
+                "titles": "cet_duty_rate",
+                "name": "cet_duty_rate",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/cet_duty_rate",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/cet_duty_rate{cet_duty_rate}"
+            },
+            {
+                "titles": "ukgt_duty_rate",
+                "name": "ukgt_duty_rate",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/ukgt_duty_rate",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/ukgt_duty_rate{ukgt_duty_rate}"
+            },
+            {
+                "titles": "change",
+                "name": "change",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/change",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/change{chnage}"
+            },
+            {
+                "titles": "trade_remedy_applies",
+                "name": "trade_remedy_applies",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/trade_remedy_applies",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/trade_remedy_applies{trade_remedy_applies}"
+            },
+            {
+                "titles": "cet_applies_until_trade_remedy_transition_reviews_concluded",
+                "name": "cet_applies_until_trade_remedy_transition_reviews_concluded",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/cet_applies_until_trade_remedy_transition_reviews_concluded",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/cet_applies_until_trade_remedy_transition_reviews_concluded{cet_applies_until_trade_remedy_transition_reviews_concluded}"
+            },    
+            {
+                "titles": "suspension_applies",
+                "name": "suspension_applies",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/suspension_applies",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/suspension_applies{suspension_applies}"
+            },
+            {
+                "titles": "atg_applies",
+                "name": "atg_applies",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/atg_applies",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs#dimension/atg_applies{atg_applies}"            }
+            
+        ],
+        "primaryKey": "observations",
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/observations/{commodity}"
+    },
+    "rdfs:label": "observations",
+    "dc:title": "observations",
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "rdfs:label": "Commodity",
+            "dc:title": "Commodity",
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity"
+            },
+            "rdfs:comment": "Dataset representing DIT-Tariff .csv lookup",
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/commodity"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/observations/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/observations/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "dc:title": "Observations Catalog Record",
+            "rdfs:label": "Observations Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-01-25T11:58:58.120533"
+            },
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/observations/dataset"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T11:59:10.942836"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/observations"
+            }
+        }
+    ]
+}
