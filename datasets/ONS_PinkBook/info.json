@@ -25,23 +25,27 @@
                 "codelist": false
             },
             "CDID": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
-                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}",
+                "codelist": false
             },
             "Flow Directions": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "codelist": false
             },
             "Seasonal Adjustment": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
+                "codelist": false
             },
             "Pink Book Services": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/pink-book-services",
-                "value": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{pink_book_services}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/pink-book-services",
+                "value": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{pink_book_services}",
+                "codelist": false
             },
             "Value": {
-                "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
+                "measure": "http://gss-data.org.uk/def/trade/measure/trade-in-services",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "datatype": "decimal"
             },
