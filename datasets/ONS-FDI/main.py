@@ -154,6 +154,7 @@ for (name, direction), tab in tabs.items():
     table.rename(columns={'OBS': 'Value'}, inplace=True)
     trace.FDI_Area('Add "fdi/" prefix then pathify')
     table['FDI Area'] = table['FDI Area'].map(lambda x: 'fdi/' + pathify(x.strip()))
+    table['FDI Area'] = table['FDI Area'].replace({"other-european", "other-european-countries"})
     if minor == '1':
         # top header row is year
         table.rename(columns={'top': 'Year'}, inplace=True)
