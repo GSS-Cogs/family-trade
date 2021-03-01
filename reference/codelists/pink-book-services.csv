@@ -17,36 +17,36 @@ Transport - Air transport - Total air transport,3.2,,15
 Transport - Other transport - Total other transport,3.3,,16
 Transport - Postal and courier services,3.4,,17
 Transport - Sea transport - Passenger,3.1.1,,18
-Transport - Sea transport - Passenger - Passenger revenue/ expenditure,3.1.1.n1,,19
-Transport - Sea transport - Passenger - Time charter payments/ receipts,3.1.1.n2,,20
+Transport - Sea transport - Passenger - Passenger revenue/ expenditure,3.1.1.N1,,19
+Transport - Sea transport - Passenger - Time charter payments/ receipts,3.1.1.N2,,20
 Transport - Sea transport - Freight - Total Freight,3.1.2,,21
-Transport - Sea transport - Freight - Dry cargo,3.1.2.n1,,22
-Transport - Sea transport - Freight - Dry cargo - Freight on UK imports/ exports,3.1.2.n11,,23
-Transport - Sea transport - Freight - Dry cargo - Freight on cross-trades,3.1.2.n12,,24
-Transport - Sea transport - Freight - Dry cargo - Time charter payments/ receipts,3.1.2.n13,,25
-Transport - Sea transport - Freight - Wet cargo,3.1.2.n2,,26
-Transport - Sea transport - Freight - Wet cargo - Freight on UK imports/ exports,3.1.2.n21,,27
-Transport - Sea transport - Freight - Wet cargo - Freight on cross-trades,3.1.2.n22,,28
-Transport - Sea transport - Freight - Wet cargo - Time charter payments/ receipts,3.1.2.n23,,29
-Transport - Sea transport - Freight - Freight on UK coastal routes,3.1.2.n3,,30
+Transport - Sea transport - Freight - Dry cargo,3.1.2.N1,,22
+Transport - Sea transport - Freight - Dry cargo - Freight on UK imports/ exports,3.1.2.N11,,23
+Transport - Sea transport - Freight - Dry cargo - Freight on cross-trades,3.1.2.N12,,24
+Transport - Sea transport - Freight - Dry cargo - Time charter payments/ receipts,3.1.2.N13,,25
+Transport - Sea transport - Freight - Wet cargo,3.1.2.N2,,26
+Transport - Sea transport - Freight - Wet cargo - Freight on UK imports/ exports,3.1.2.N21,,27
+Transport - Sea transport - Freight - Wet cargo - Freight on cross-trades,3.1.2.N22,,28
+Transport - Sea transport - Freight - Wet cargo - Time charter payments/ receipts,3.1.2.N23,,29
+Transport - Sea transport - Freight - Freight on UK coastal routes,3.1.2.N3,,30
 Transport - Sea transport - Disbursements in the UK,3.1.3,,31
-Transport - Sea transport - Freight - Dry cargo,3.1.3.n1,,32
-Transport - Sea transport - Freight - Wet cargo,3.1.3.n2,,33
-Transport - Sea transport - Other - Other,3.1.3.n3,,34
+Transport - Sea transport - Freight - Dry cargo,3.1.3.N1,,32
+Transport - Sea transport - Freight - Wet cargo,3.1.3.N2,,33
+Transport - Sea transport - Other - Other,3.1.3.N3,,34
 Transport - Sea transport - Of which: - Ships operated by non-residents,3.1r,,35
 Transport - Sea transport - Of which: - Ships owned or chartered-in by UK residents,3.1u,,36
 Transport - Air transport - Passenger revenue/ expenditure,3.2.1,,37
 Transport - Air transport - Freight on UK exports and cross trades,3.2.2,,38
 Transport - Air transport - Other - Total other,3.2.3,,39
-Transport - Air transport - Other - Disbursements in UK export/ foreign imports,3.2.3.n1,,40
-Transport - Air transport - Other - Other revenue,3.2.3.n2,,41
+Transport - Air transport - Other - Disbursements in UK export/ foreign imports,3.2.3.N1,,40
+Transport - Air transport - Other - Other revenue,3.2.3.N2,,41
 Transport - Other transport - Rail - Passenger,3.6.1,,42
 Transport - Other transport - Rail - Freight,3.6.2,,43
 Transport - Other transport - Rail - Total rail,3.6.3,,44
 Transport - Other transport - Road - Passenger,3.7.1,,45
 Transport - Other transport - Road - Freight,3.7.2,,46
 Transport - Other transport - Road - Total road,3.7.3,,47
-Transport - Other transport - Pipeline transport,3.9.3.10.n1,,48
+Transport - Other transport - Pipeline transport,3.9.3.10.N1,,48
 Travel - Total business travel,4.1,,49
 Travel - Business - Expenditure by seasonal & border workers,4.1.1,,50
 Travel - Business - Travel business other,4.1.2,,51
@@ -62,22 +62,22 @@ Insurance and pension services - Reinsurance,6.2,,60
 Insurance and pension services - Auxiliary insurance services,6.3,,61
 Insurance and pension services - Pensions and standardised guarantees,6.4,,62
 Financial services - Total non-FISIM,7.1,,63
-Financial services - Explicitly charged and other financial services (non-FISIM) - Fund managers,7.1.n1,,64
-Financial services - Explicitly charged and other financial services (non-FISIM) - Securities dealers,7.1.n2,,65
-Financial services - Explicitly charged and other financial services (non-FISIM) - Securities dealers - Commissions and fees,7.1.n21,,66
-Financial services - Explicitly charged and other financial services (non-FISIM) - Securities dealers - Spread earnings,7.1.n22,,67
-Financial services - Explicitly charged and other financial services (non-FISIM) - Baltic Exchange,7.1.n3,,68
-Financial services - Explicitly charged and other financial services (non-FISIM) - Monetary financial institutions,7.1.n4,,69
-Financial services - Explicitly charged and other financial services (non-FISIM) - Monetary financial institutions,7.1.n41,,70
-Financial services - Explicitly charged and other financial services (non-FISIM) - Monetary financial institutions - Commissions and fees,7.1.n411,,71
-Financial services - Explicitly charged and other financial services (non-FISIM) - Monetary financial institutions - Spread earnings,7.1.n412,,72
-Financial services - Explicitly charged and other financial services (non-FISIM) - Other financial institutions,7.1.n5,,73
-Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on loans,7.2.n12,,74
-Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on loans - of which: £,7.2.n121,,75
-Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on deposits,7.2.n13,,76
-Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on deposits - of which: £,7.2.n131,,77
-Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on loans,7.2.n21,,78
-Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on deposits,7.2.n22,,79
+Financial services - Explicitly charged and other financial services (non-FISIM) - Fund managers,7.1.N1,,64
+Financial services - Explicitly charged and other financial services (non-FISIM) - Securities dealers,7.1.N2,,65
+Financial services - Explicitly charged and other financial services (non-FISIM) - Securities dealers - Commissions and fees,7.1.N21,,66
+Financial services - Explicitly charged and other financial services (non-FISIM) - Securities dealers - Spread earnings,7.1.N22,,67
+Financial services - Explicitly charged and other financial services (non-FISIM) - Baltic Exchange,7.1.N3,,68
+Financial services - Explicitly charged and other financial services (non-FISIM) - Monetary financial institutions,7.1.N4,,69
+Financial services - Explicitly charged and other financial services (non-FISIM) - Monetary financial institutions,7.1.N41,,70
+Financial services - Explicitly charged and other financial services (non-FISIM) - Monetary financial institutions - Commissions and fees,7.1.N411,,71
+Financial services - Explicitly charged and other financial services (non-FISIM) - Monetary financial institutions - Spread earnings,7.1.N412,,72
+Financial services - Explicitly charged and other financial services (non-FISIM) - Other financial institutions,7.1.N5,,73
+Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on loans,7.2.N12,,74
+Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on loans - of which: £,7.2.N121,,75
+Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on deposits,7.2.N13,,76
+Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on deposits - of which: £,7.2.N131,,77
+Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on loans,7.2.N21,,78
+Financial services - Financial intermediation services indirectly measured (FISIM) - Monetary financial institutions - FISIM on deposits,7.2.N22,,79
 Financial services - Financial intermediation services indirectly measured (FISIM) - Total FISIM,7f,,80
 Financial services - Total non-FISIM,7xf,,81
 Intellectual property - Franchise and trademarks,8.1,,82
@@ -92,10 +92,10 @@ Other business services - Professional and management consulting services - Tota
 "Other business services - Professional and management consulting services - Legal, accounting and management consulting - Legal services",10.2.1.1,,91
 "Other business services - Professional and management consulting services - Legal, accounting and management consulting - Accounting, auditing, book-keeping and tax consulting",10.2.1.2,,92
 "Other business services - Professional and management consulting services - Legal, accounting and management consulting - Business management and management consulting",10.2.1.3,,93
-"Other business services - Professional and management consulting services - Legal, accounting and management consulting - Legal services",10.2.1.n11,,94
-"Other business services - Professional and management consulting services - Legal, accounting and management consulting - Law society",10.2.1.n12,,95
-"Other business services - Professional and management consulting services - Legal, accounting and management consulting - Commercial bar association",10.2.1.n13,,96
-"Other business services - Professional and management consulting services - Legal, accounting and management consulting - Business management and management consulting - of which: Recruitment",10.2.1.n37,,97
+"Other business services - Professional and management consulting services - Legal, accounting and management consulting - Legal services",10.2.1.N11,,94
+"Other business services - Professional and management consulting services - Legal, accounting and management consulting - Law society",10.2.1.N12,,95
+"Other business services - Professional and management consulting services - Legal, accounting and management consulting - Commercial bar association",10.2.1.N13,,96
+"Other business services - Professional and management consulting services - Legal, accounting and management consulting - Business management and management consulting - of which: Recruitment",10.2.1.N37,,97
 Other business services - Professional and management consulting services - Advertising and market research,10.2.2,,98
 "Other business services - Technical, trade-related and other business services - Total technical, trade-related, and other business services",10.3,,99
 "Other business services - Technical, trade-related and other business services - Architectural, engineering and other technical services",10.3.1,,100
@@ -106,22 +106,22 @@ Other business services - Professional and management consulting services - Adve
 "Other business services - Technical, trade-related and other business services - Operational leasing services",10.3.3,,105
 "Other business services - Technical, trade-related and other business services - Trade related services",10.3.4,,106
 "Other business services - Technical, trade-related and other business services - Other business services",10.3.5,,107
-"Other business services - Technical, trade-related and other business services - Trade related services",10.3.n41,,108
-"Other business services - Technical, trade-related and other business services - Other business services - of which: Other business services traded by UK banks",10.3.n55,,109
-"Other business services - Technical, trade-related and other business services - Other business services - of which: Other business services imported by Security dealers",10.3.n57,,110
-"Other business services - Technical, trade-related and other business services - Other business services - of which: Services between affiliated enterprises, n.i.e.",10.3.n59,,111
+"Other business services - Technical, trade-related and other business services - Trade related services",10.3.N41,,108
+"Other business services - Technical, trade-related and other business services - Other business services - of which: Other business services traded by UK banks",10.3.N55,,109
+"Other business services - Technical, trade-related and other business services - Other business services - of which: Other business services imported by Security dealers",10.3.N57,,110
+"Other business services - Technical, trade-related and other business services - Other business services - of which: Services between affiliated enterprises, n.i.e.",10.3.N59,,111
 "Personal, cultural and recreational services - Audiovisual and related services",11.1,,112
 "Personal, cultural and recreational services - Audiovisual and related services - Film and television",11.1.1,,113
 "Personal, cultural and recreational services - Audiovisual and related services - Other audiovisual and related services",11.1.2,,114
 "Personal, cultural and recreational services - Other personal, cultural and recreational services",11.2,,115
-"Personal, cultural and recreational services - Other personal, cultural and recreational services - of which: Remote gambling service charge",11.2.3.n1,,116
+"Personal, cultural and recreational services - Other personal, cultural and recreational services - of which: Remote gambling service charge",11.2.3.N1,,116
 Government services - Embassies and consulates,12.1,,117
 Government services - Military units and agencies,12.2,,118
-Government services - Expenditure by US forces in UK,12.2.n1,,119
-Government services - Other military units and agencies,12.2.n2,,120
-Government services - Other government EU institutions,12.3.n1,,121
-Government services - Other non-EU government services,12.3.n2,,122
-Government services - Other government goods and services,12.n3,,123
+Government services - Expenditure by US forces in UK,12.2.N1,,119
+Government services - Other military units and agencies,12.2.N2,,120
+Government services - Other government EU institutions,12.3.N1,,121
+Government services - Other non-EU government services,12.3.N2,,122
+Government services - Other government goods and services,12.N3,,123
 Construction - Construction abroad,5.1,,124
 Construction - Construction in the reporting economy,5.2,,125
 Financial services - Financial intermediation services indirectly measured (FISIM),7.2,,126
