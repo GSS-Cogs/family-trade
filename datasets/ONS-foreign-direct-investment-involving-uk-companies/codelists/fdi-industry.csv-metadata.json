@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry",
     "url": "fdi-industry.csv",
     "rdfs:label": "Fdi Industry",
     "dc:title": "Fdi Industry",
@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#concept/fdi-industry/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#concept/fdi-industry/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -56,14 +56,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#concept/fdi-industry/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#concept/fdi-industry/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -71,16 +71,16 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry"
             },
             "dc:modified": {
                 "@type": "dateTime",
@@ -97,17 +97,17 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies-inward#scheme/fdi-industry"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/foreign-direct-investment-involving-uk-companies#scheme/fdi-industry"
             },
             "dc:title": "Fdi Industry Catalog Record",
             "rdfs:label": "Fdi Industry Catalog Record",
