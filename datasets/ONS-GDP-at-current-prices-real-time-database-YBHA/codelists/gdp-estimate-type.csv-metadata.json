@@ -1,6 +1,6 @@
 {
   "@context": "http://www.w3.org/ns/csvw",
-  "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-gdp-at-current-prices-real-time-database-ybha#schema",
+  "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-gdp-at-current-prices-real-time-database-ybha#scheme",
   "url": "gdp-estimate-type.csv",
   "tableSchema": {
     "columns": [
