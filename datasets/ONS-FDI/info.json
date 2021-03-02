@@ -40,21 +40,6 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}",
                 "codelist": false
             },
-            "FDI Area": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-fdi-area",
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-fdi-area/{fdi_area}",
-                "codelist": false
-            },
-            "FDI Component": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",
-                "value": "http://gss-data.org.uk/def/trade/concept/fdi-component/{fdi_component}",
-                "codelist": false
-            },
-            "FDI Industry": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/fdi-industry",
-                "value": "http://gss-data.org.uk/def/trade/concept/fdi-industry/{fdi_industry}",
-                "codelist": false
-            },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
