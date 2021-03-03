@@ -131,6 +131,8 @@ for column in tidy:
         tidy[column] = tidy[column].str.rstrip()
         tidy[column] = tidy[column].apply(pathify)
 
+tidy['GDP Estimate Type'] = tidy['GDP Estimate Type'].replace({"m1": "M1", "m2": "M2", "qna": "QNA"})
+
 cubes.add_cube(scraper, tidy, "GDP at current prices – real-time database (YBHA)")
 tidy
 # -
