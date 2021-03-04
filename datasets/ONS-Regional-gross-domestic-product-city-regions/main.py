@@ -352,7 +352,7 @@ with open("info.json", "r") as read_file:
 
 # +
 #Join 1 : Measure: cp, Unit: gbp-million, Datatype: integer, dataset_path: dataset_path + /cp
-join_1_df = join_1_df[["Year", 'Area Name', "GDP Estimate Type", "Value", "Marker"]]
+join_1_df = join_1_df[["Year", "Area Type", 'Area Name', "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 0
     csvName = fn[i]
@@ -385,7 +385,7 @@ with open("info.json", "r") as read_file:
 
 # +
 #Join 2 Measure: count, Unit: persons, Datatype: integer, dataset_path: dataset_path + /pop
-join_2_df = join_2_df[["Year", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_2_df = join_2_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 1
     csvName = fn[i]
@@ -418,7 +418,7 @@ with open("info.json", "r") as read_file:
 
 # +
 #Join 3 : Measure: amp, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cmp
-join_3_df = join_3_df[["Year", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_3_df = join_3_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 2
     csvName = fn[i]
@@ -452,7 +452,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 4 : Measure: gva, Unit: deflators, Datatype: double, dataset_path: dataset_path + /deflate
 
-join_4_df = join_4_df[["Year", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_4_df = join_4_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 3
     csvName = fn[i]
@@ -486,7 +486,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 5 : Measure: cvm, Unit: index, Datatype: double, dataset_path: dataset_path + /cvmindex
 
-join_5_df = join_5_df[["Year", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_5_df = join_5_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 4
     csvName = fn[i]
@@ -520,7 +520,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 6 : Measure: cvm, Unit: index, Datatype: double, dataset_path: dataset_path + /cvmindex
 
-join_6_df = join_6_df[["Year", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_6_df = join_6_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 5
     csvName = fn[i]
@@ -554,7 +554,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 7 : Measure: cvm, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cvmhead
 
-join_7_df = join_7_df[["Year", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_7_df = join_7_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 6
     csvName = fn[i]
@@ -588,7 +588,7 @@ with open("info.json", "r") as read_file:
 # +
 #Join 8 : Measure: cvm, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cvmhead
 
-join_8_df = join_8_df[["Year", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_8_df = join_8_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 7
     csvName = fn[i]
@@ -615,6 +615,6 @@ with open("info.json", "r") as read_file:
     print("URL changed to: ", data["landingPage"] )
 
 with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile, indent=4)
+    json.dump(data, jsonFile)
 # -
 trace.render()
