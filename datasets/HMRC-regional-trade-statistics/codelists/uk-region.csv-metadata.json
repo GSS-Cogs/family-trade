@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region",
     "url": "uk-region.csv",
     "rdfs:label": "UK Region",
     "dc:title": "UK Region",
@@ -47,14 +47,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region"
             }
         ],
         "primaryKey": "uri",
         "aboutUrl": "{uri}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -62,16 +62,16 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region"
             },
             "dc:modified": {
                 "@type": "dateTime",
@@ -88,17 +88,17 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/uk-region"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region"
             },
             "dc:title": "UK Region Catalog Record",
             "rdfs:label": "UK Region Catalog Record",

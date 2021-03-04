@@ -120,7 +120,7 @@ df['Country'] = df['CountryId'].astype(str)
 # # SITC Codes
 # Need to go via strings
 
-df['SITC Code'] = df['Sitc1Code'].astype(str) + df['Sitc2Code'].astype(str)
+df['SITC Code'] = df['Sitc2Code'].astype(str)
 df['SITC Code'] = df['SITC Code'].astype('category')
 
 # Bring Value and NetMass into a single column

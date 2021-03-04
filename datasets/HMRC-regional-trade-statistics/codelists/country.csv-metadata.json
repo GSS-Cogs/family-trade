@@ -29,7 +29,7 @@
             {
                 "titles": "CountryCodeAlpha",
                 "name": "countrycodealpha",
-                "propertyUrl": "skos:notation"
+                "suppressOutput": true
 
             },
             {
@@ -136,17 +136,17 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/country/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/country/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/country/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/country"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country"
             },
             "dc:title": "Country Catalog Record",
             "rdfs:label": "Country Catalog Record",

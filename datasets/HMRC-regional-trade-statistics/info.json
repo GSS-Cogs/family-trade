@@ -31,7 +31,8 @@
             "UK Region Code": false,
             "UK Region": {
                 "label": "UK Region",
-                "value": "{uk_region}"
+                "value": "{uk_region}",
+                "codelist": 
             },
             "Country": {
                 "label": "Country",
