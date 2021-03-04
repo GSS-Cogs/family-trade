@@ -32,7 +32,7 @@
             "UK Region": {
                 "label": "UK Region",
                 "value": "{uk_region}",
-                "codelist": 
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region"
             },
             "Country": {
                 "label": "Country",
