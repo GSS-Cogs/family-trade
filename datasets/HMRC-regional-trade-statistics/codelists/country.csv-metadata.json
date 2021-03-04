@@ -1,0 +1,163 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country",
+    "url": "country.csv",
+    "rdfs:label": "Country",
+    "dc:title": "Country",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "CountryId",
+                "name": "countryid",
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "CountryCodeNumeric",
+                "name": "countrycodenumeric",
+                "suppressOutput": true
+            },
+            {
+                "titles": "RegionId",
+                "name": "regionid",
+                "suppressOutput": true
+            },
+            {
+                "titles": "CountryName",
+                "name": "countryname",
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "CountryCodeAlpha",
+                "name": "countrycodealpha",
+                "propertyUrl": "skos:notation"
+
+            },
+            {
+                "titles": "Area1",
+                "name": "area1",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Area2",
+                "name": "area2",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Area3",
+                "name": "area3",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Area4",
+                "name": "area4",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Area5",
+                "name": "area5",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Area1a",
+                "name": "area1a",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Area2a",
+                "name": "area2a",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Area3a",
+                "name": "area3a",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Area4a",
+                "name": "area4a",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Area5a",
+                "name": "area5a",
+                "suppressOutput": true
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country"
+            }
+        ],
+        "aboutUrl": "https://api.uktradeinfo.com/Country/{countryid}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-04T08:30:07.796818"
+            },
+            "rdfs:label": "Country",
+            "dc:title": "Country",
+            "rdfs:comment": "Dataset representing the 'Country' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-04T08:29:36.997022"
+            },
+            "dc:publisher": {
+                "@id": "https://www.gov.uk/government/organisations/hm-revenue-customs"
+            },
+            "dcat:landingPage": {
+                "@id": "https://api.uktradeinfo.com/Country"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/country/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/country/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/country/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/country"
+            },
+            "dc:title": "Country Catalog Record",
+            "rdfs:label": "Country Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-04T08:29:36.997022"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-04T08:29:36.997022"
+            }
+        }
+    ]
+}

@@ -1,0 +1,115 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region",
+    "url": "region.csv",
+    "rdfs:label": "Region",
+    "dc:title": "Region",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "URI",
+                "name": "uri",
+                "datatype": "string",
+                "required": true,
+                "suppressOutput": true
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": "string",
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Parent URI",
+                "name": "parent_uri",
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "{parent_uri}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort_priority",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region"
+            }
+        ],
+        "primaryKey": "uri",
+        "aboutUrl": "{uri}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-04T11:26:43.718525"
+            },
+            "rdfs:label": "Region",
+            "dc:title": "Region",
+            "rdfs:comment": "Dataset representing the 'Region' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-04T11:26:43.718525"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-statistics#scheme/region"
+            },
+            "dc:title": "Region Catalog Record",
+            "rdfs:label": "Region Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-04T11:26:43.718525"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-04T11:26:43.718525"
+            }
+        }
+    ]
+}

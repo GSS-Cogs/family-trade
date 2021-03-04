@@ -95,31 +95,30 @@ regions = {
     'Wales': 'http://statistics.data.gov.uk/id/statistical-geography/W92000004',
     'Scotland': 'http://statistics.data.gov.uk/id/statistical-geography/S92000003'
 }
+
+region_codes = {
+    'North East': 'E12000001',
+    'North West': 'E12000002',
+    'Yorkshire and The Humber': 'E12000003',
+    'East Midlands': 'E12000004',
+    'West Midlands': 'E12000005',
+    'South West': 'E12000009',
+    'East': 'E12000006', # Formally 'East of England'
+    'South East': 'E12000008',
+    'London': 'E12000007',
+    'Unallocated - Known': 'unallocated-known',
+    'Unallocated - Unknown': 'unallocated-unknown',
+    'Northern Ireland': 'N92000002',
+    'Wales': 'W92000004',
+    'Scotland': 'S92000003'
+}
 df['UK Region'] = df['RegionName'].cat.rename_categories(regions)
+df['UK Region Code'] = df['RegionName'].cat.rename_categories(region_codes)
 
-# # Country Codes
-# Our goal here is to use the ISO-3166 Alpha-2 codes http://gss-data.org.uk/def/trade/concept/international-country-codes/{CountryCodeAlpha} but if there isn't a country code, then use
-# http://gss-data.org.uk/data/gss_data/trade/HMRC_RTS#concept/country/{CountryName} (patified)
-#
-# The destination column will be `Country`.
-#
-# And since we're working with categorical variables (which makes for things like mapping faster), we need to format these two columns seperately, combine the categories as strings, and then reconvert to categories.
-
-# CountryCodes
-df['CountryCodeAlpha'].cat.rename_categories(lambda x: f"http://gss-data.org.uk/def/trade/concept/international-country-codes/{x}", inplace=True)
-
-# CountryNames 
-df['CountryName'].cat.rename_categories(lambda x: f"http://gss-data.org.uk/data/gss_data/trade/HMRC_RTS#concept/country/{pathify(x)}", inplace=True)
-
-# Combine the two columns as strings, preferring CountryCodes over CountryNames
-df['Country'] = df['CountryCodeAlpha'].astype(str)
-df.loc[df['Country'] == 'nan', 'Country'] = df.loc[df['Country'] == 'nan', 'CountryName'].astype(str)
-
-# Return Country to categories
-df['Country'] = df['Country'].astype('category')
+df['Country'] = df['CountryId'].astype(str)
 
 # # SITC Codes
-# Need to go via strings again like Country Codes
+# Need to go via strings
 
 df['SITC Code'] = df['Sitc1Code'].astype(str) + df['Sitc2Code'].astype(str)
 df['SITC Code'] = df['SITC Code'].astype('category')
@@ -127,21 +126,16 @@ df['SITC Code'] = df['SITC Code'].astype('category')
 # Bring Value and NetMass into a single column
 new_df = pd.DataFrame()
 for measure in ['Value', 'NetMass']:
-    temp_df = df[['Period', 'Flow Type', 'UK Region', 'Country', 'SITC Code', measure]]
+    temp_df = df[['Period', 'Flow Type', 'UK Region Code', 'UK Region', 'Country', 'SITC Code', measure]]
     temp_df.rename({measure: 'Value'}, axis=1, inplace=True)
-    temp_df['measure type'] = measure
+    temp_df['Measure Type'] = measure
     new_df = pd.concat([new_df, temp_df], axis=0)
 df = new_df
 del temp_df, new_df
 
-
-# +
-# Final formatting - Columns
-df.columns = [pathify(x) for x in df.columns]
-
 # Final formatting - measure-types
-df['measure-type'] = df['measure-type'].astype('category')
-df['measure-type'].cat.rename_categories({'Value': 'value', 'NetMass': 'net-mass'}, inplace=True)
+df['Measure Type'] = df['Measure Type'].astype('category')
+df['Measure Type'].cat.rename_categories({'Value': 'value', 'NetMass': 'net-mass'}, inplace=True)
 
 # -
 
@@ -150,4 +144,15 @@ cubes.add_cube(scraper, df, scraper.title)
 # Write cube
 cubes.output_all()
 
+# Change the aboutUrl in the -metadata.json so we don't get URIs within URIs.
+metadata_json = open("./out/regional-trade-statistics.csv-metadata.json", "r")
+metadata = json.load(metadata_json)
+metadata_json.close()
 
+metadata["tables"][0]["tableSchema"]["aboutUrl"] = (
+    metadata["tables"][0]["tableSchema"]["aboutUrl"].replace("{uk_region}", "{uk_region_code}")
+)
+
+metadata_json = open("./out/regional-trade-statistics.csv-metadata.json", "w")
+json.dump(metadata, metadata_json, indent=4)
+metadata_json.close()

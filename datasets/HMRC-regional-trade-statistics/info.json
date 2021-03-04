@@ -1,5 +1,5 @@
 {
-    "id": "hmrc_rts",
+    "id": "hmrc-regional-trade-statistics",
     "title": "REGIONAL TRADE STATISTICS",
     "publisher": "HM Revenue & Customs",
     "description": "",
@@ -17,7 +17,42 @@
         "validate": false,
         "airtable": "reclNM0WAApNZVyh4",
         "main_issue": 12,
-        "to_rdf": "csv2rdf"
+        "to_rdf": "csv2rdf",
+        "columns": {
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/year/{period}",
+                "codelist": false
+            },
+            "Flow Type": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_type}"
+            },
+            "UK Region Code": false,
+            "UK Region": {
+                "label": "UK Region",
+                "value": "{uk_region}"
+            },
+            "Country": {
+                "label": "Country",
+                "value": "https://api.uktradeinfo.com/Country/{country}"
+            },
+            "SITC Code": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_code}"
+            },
+            "Value": {
+                "datatype": "double"
+            },
+            "Measure Type": {
+                "dimension": "http://purl.org/linked-data/cube#measureType",
+                "value": "http://gss-data.org.uk/def/measure/{measure_type}",
+                "types": [
+                    "value",
+                    "net-mass"
+                ]
+            }
+        }
     },
     "odataConversion": {
         "publishedLocation": "https://staging.gss-data.org.uk/sparql",
