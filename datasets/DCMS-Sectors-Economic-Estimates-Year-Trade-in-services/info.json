@@ -21,11 +21,6 @@
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
-            "Country": {
-                "parent": "http://gss-data.org.uk/def/dimension/dcms-country",
-                "value": "http://gss-data.org.uk/def/concept/dcms-country/{country}",
-                "codelist": false
-            },
             "Sector": {
                 "description": "DCMS Trade Sector Classification",
                 "value": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#concept/trade-sectors/{sector}",

@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.10.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -79,12 +79,13 @@ df = trace.combine_and_trace("pinkbook combined dataframe", "pinkbook combined d
 df.head(60)
 # -
 
-PBclassification_table_url = 'https://drive.google.com/uc?export=download&id=1uNwmZHgq7ERqD5wcND4W2sGHXRJyP2CR'
-classifications_table = pd.read_excel(PBclassification_table_url, sheet_name = 0)
+classifications_table = pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/Ref_CDID/master/lookup/pinkbook_pbclassifications.csv")
+classifications_table.loc[-1] = ['CWVK', 'EX', '10.3.N510', 'CP', 'NSA']
+classifications_table.loc[-2] = ['CWVL', 'IM', '10.3.N510', 'CP', 'NSA']
 df = pd.merge(df, classifications_table, how = 'left', left_on = 'CDID', right_on = 'cdid')
 df = df.rename(columns={'BPM6':'Pink Book Services'})
 
-classifications_table
+classifications_table.tail()
 
 # Below codes don't have Pink book services codes
 
@@ -97,7 +98,7 @@ df = df[(df['CDID'] != 'FJOW') &
                        (df['CDID'] != 'FJQO') &
                        (df['CDID'] != 'FJSI')]
 # Temp remove CWVK & CWVL as we do not have a reference code for it, have asked BAs to look into it (appeared in 2019 publication)
-df = df[(df['CDID'] != 'CWVK') & (df['CDID'] != 'CWVL')]
+#df = df[(df['CDID'] != 'CWVK') & (df['CDID'] != 'CWVL')]
 
 # Order columns
 df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions','Value','DATAMARKER']]

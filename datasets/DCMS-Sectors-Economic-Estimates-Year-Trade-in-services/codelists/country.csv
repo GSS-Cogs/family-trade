@@ -1,0 +1,60 @@
+Label,Notation,Parent Notation,Sort Priority
+World,world,,1
+Europe,europe,,2
+European Union,european-union,,3
+Austria,austria,,4
+Belgium,belgium,,5
+Bulgaria,bulgaria,,6
+Croatia,croatia,,7
+Cyprus,cyprus,,8
+Czech Republic,czech-republic,,9
+Denmark,denmark,,10
+Estonia,estonia,,11
+Finland,finland,,12
+France,france,,13
+Germany,germany,,14
+Gibraltar,gibraltar,,15
+Greece,greece,,16
+Hungary,hungary,,17
+Ireland,ireland,,18
+Italy,italy,,19
+Latvia,latvia,,20
+Lithuania,lithuania,,21
+Luxembourg,luxembourg,,22
+Malta,malta,,23
+Netherlands,netherlands,,24
+Poland,poland,,25
+Portugal,portugal,,26
+Romania,romania,,27
+Slovakia,slovakia,,28
+Slovenia,slovenia,,29
+Spain,spain,,30
+Sweden,sweden,,31
+EU Institutions,eu-institutions,,32
+Rest of Europe,rest-of-europe,,33
+Iceland,iceland,,34
+Liechtenstein,liechtenstein,,35
+Norway,norway,,36
+Switzerland,switzerland,,37
+Americas,americas,,38
+NAFTA,nafta,,39
+Canada,canada,,40
+Mexico,mexico,,41
+USA,usa,,42
+Latin America & Caribbean,latin-america-caribbean,,43
+Chile,chile,,44
+Peru,peru,,45
+Asia,asia,,46
+Gulf,gulf,,47
+Brunei,brunei,,48
+China,china,,49
+India,india,,50
+Japan,japan,,51
+Malaysia,malaysia,,52
+Singapore,singapore,,53
+South Korea,south-korea,,54
+Vietnam,vietnam,,55
+Oceania,oceania,,56
+Australia,australia,,57
+New Zealand,new-zealand,,58
+Africa,africa,,59

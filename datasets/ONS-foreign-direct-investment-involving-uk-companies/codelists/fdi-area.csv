@@ -1,0 +1,69 @@
+Label,Notation,Parent Notation,Sort Priority
+Europe,europe,world-total,1
+EU,eu,europe,2
+Austria,austria,eu,3
+Belgium,belgium,eu,4
+Bulgaria,bulgaria,eu,5
+Cyprus,cyprus,eu,6
+Czech Republic,czech-republic,eu,7
+Denmark,denmark,eu,8
+Estonia,estonia,eu,9
+Finland,finland,eu,10
+France,france,eu,11
+Germany,germany,eu,12
+Greece,greece,eu,13
+Hungary,hungary,eu,14
+Irish Republic,irish-republic,eu,15
+Italy,italy,eu,16
+Latvia,latvia,eu,17
+Lithuania,lithuania,eu,18
+Luxembourg,luxembourg,eu,19
+Malta,malta,eu,20
+Netherlands,netherlands,eu,21
+Poland,poland,eu,22
+Portugal,portugal,eu,23
+Romania,romania,eu,24
+Slovakia,slovakia,eu,25
+Slovenia,slovenia,eu,26
+Spain,spain,eu,27
+Sweden,sweden,eu,28
+EFTA,efta,europe,29
+Norway,norway,efta,30
+Switzerland,switzerland,efta,31
+Other European Countries,other-european-countries,europe,32
+Russia,russia,other-european-countries,33
+Brazil,brazil,the-americas,34
+Canada,canada,the-americas,35
+Usa,usa,the-americas,36
+Asia,asia,world-total,37
+China,china,other-asian-countries,38
+Hong Kong,hong-kong,other-asian-countries,39
+India,india,other-asian-countries,40
+Japan,japan,other-asian-countries,41
+Singapore,singapore,other-asian-countries,42
+South Korea,south-korea,other-asian-countries,43
+Australia,australia,australasia-oceania,44
+New Zealand,new-zealand,australasia-oceania,45
+South Africa,south-africa,africa,46
+OECD,oecd,world-total,47
+UK Offshore Islands,uk-offshore-islands,other-european-countries,48
+The Americas,the-americas,world-total,49
+Near & Middle East Countries,near-middle-east-countries,asia,50
+Other Asian Countries,other-asian-countries,asia,51
+Australasia & Oceania,australasia-oceania,world-total,52
+Africa,africa,world-total,53
+World Total,world-total,,54
+Central & Eastern Europe,central-eastern-europe,world-total,55
+Croatia,croatia,eu,56
+Bermuda,bermuda,the-americas,57
+Chile,chile,the-americas,58
+Colombia,colombia,the-americas,59
+Mexico,mexico,the-americas,60
+Panama,panama,the-americas,61
+Indonesia,indonesia,other-asian-countries,62
+Malaysia,malaysia,other-asian-countries,63
+Gulf Arabian Countries,gulf-arabian-countries,near-middle-east-countries,64
+Thailand,thailand,other-asian-countries,65
+Kenya,kenya,africa,66
+Nigeria,nigeria,africa,67
+Zimbabwe,zimbabwe,africa,68

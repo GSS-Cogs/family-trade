@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       jupytext_version: 1.10.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -153,7 +153,8 @@ for (name, direction), tab in tabs.items():
     # Post processing
     table.rename(columns={'OBS': 'Value'}, inplace=True)
     trace.FDI_Area('Add "fdi/" prefix then pathify')
-    table['FDI Area'] = table['FDI Area'].map(lambda x: 'fdi/' + pathify(x.strip()))
+    table['FDI Area'] = table['FDI Area'].map(lambda x: pathify(x.strip()))
+    table['FDI Area'] = table['FDI Area'].replace({"other-european", "other-european-countries"})
     if minor == '1':
         # top header row is year
         table.rename(columns={'top': 'Year'}, inplace=True)
@@ -248,6 +249,25 @@ observations = pd.concat([observations_unique, observations])
 
 observations.shape, observation_duplicate.shape, observations_unique.shape
 
+# --- Force Consistant labels ---:
+# The data producer is using different labels for the same thing within the same dataset
+# We need to force them to same
+fix = {
+    "other-european": "other-european-countries",
+    "other-europen-countries": "other-european-countries",
+    "other": "other-european-countries",
+    "uk-offshore":"uk-offshore-islands",
+    "near-middle-east": "near-middle-east-countries",
+    "near-middle": "near-middle-east-countries",
+    "australasia": "australasia-oceania",
+    "central-eastern": "central-eastern-europe",
+    "central": "central-eastern-europe",
+    "gulf-arabian": "gulf-arabian-countries",
+    "other-asian": "other-asian-countries"
+}
+observations["FDI Area"] = observations["FDI Area"].map(lambda x: fix.get(x, x))
+
+
 # +
 
 inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
@@ -259,8 +279,10 @@ from gssutils.metadata import THEME
 inward_scraper.dataset.theme = THEME['business-industry-trade-energy']
 inward_scraper.dataset.family = 'trade'
 
-cubes.add_cube(inward_scraper, observations, inward_scraper.dataset.title)
+cubes.add_cube(inward_scraper, observations.drop_duplicates(), inward_scraper.dataset.title)
 cubes.output_all()
 
 # -
 trace.render("spec_v1.html")
+
+

@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area",
-    "url": "ons-fdi-area.csv",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component",
+    "url": "fdi-component.csv",
+    "rdfs:label": "FDI Component",
+    "dc:title": "FDI Component",
     "tableSchema": {
         "columns": [
             {
@@ -30,11 +32,11 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-fdi-area/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#concept/fdi-component/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -54,70 +56,68 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-fdi-area/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#concept/fdi-component/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Ons Fdi Area",
-    "dc:title": "Ons Fdi Area",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Ons Fdi Area",
-            "dc:title": "Ons Fdi Area",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component"
             },
-            "rdfs:comment": "Dataset representing the 'Ons Fdi Area' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.177448"
+                "@value": "2021-03-02T20:22:06.432126"
             },
+            "rdfs:label": "FDI Component",
+            "dc:title": "FDI Component",
+            "rdfs:comment": "Dataset representing the 'FDI Component' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.177448"
+                "@value": "2021-03-02T20:22:06.432126"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Ons Fdi Area Catalog Record",
-            "rdfs:label": "Ons Fdi Area Catalog Record",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component"
+            },
+            "dc:title": "FDI Component Catalog Record",
+            "rdfs:label": "FDI Component Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.143357"
+                "@value": "2021-03-02T20:22:06.432126"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.143357"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area/dataset"
-            },
-            "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-fdi-area"
+                "@value": "2021-03-02T20:22:06.432126"
             }
         }
     ]

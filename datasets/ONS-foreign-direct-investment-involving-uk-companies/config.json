@@ -1,0 +1,17 @@
+[
+{ "file": "out/fdi-area.csv-metadata.json", "opType": "CSV2RDF", "arguments": [ "out/fdi-area.csv-metadata.json.ttl" ] },
+{ "file": "out/fdi-area.csv-metadata.json.ttl", "opType": "SPARQL Update", "arguments": [ "/gss-build/sparql/add-skos-narrower.sparql" ] },
+{ "file": "out/fdi-area.csv-metadata.json.ttl", "opType": "SPARQL Update", "arguments": [ "/gss-build/sparql/add-skos-top-concept.sparql" ] }
+,
+{ "file": "out/fdi-component.csv-metadata.json", "opType": "CSV2RDF", "arguments": [ "out/fdi-component.csv-metadata.json.ttl" ] },
+{ "file": "out/fdi-component.csv-metadata.json.ttl", "opType": "SPARQL Update", "arguments": [ "/gss-build/sparql/add-skos-narrower.sparql" ] },
+{ "file": "out/fdi-component.csv-metadata.json.ttl", "opType": "SPARQL Update", "arguments": [ "/gss-build/sparql/add-skos-top-concept.sparql" ] }
+,
+{ "file": "out/fdi-industry.csv-metadata.json", "opType": "CSV2RDF", "arguments": [ "out/fdi-industry.csv-metadata.json.ttl" ] },
+{ "file": "out/fdi-industry.csv-metadata.json.ttl", "opType": "SPARQL Update", "arguments": [ "/gss-build/sparql/add-skos-narrower.sparql" ] },
+{ "file": "out/fdi-industry.csv-metadata.json.ttl", "opType": "SPARQL Update", "arguments": [ "/gss-build/sparql/add-skos-top-concept.sparql" ] }
+,
+{ "file": "out/foreign-direct-investment-involving-uk-companies-directional.csv-metadata.json", "opType": "CSV2RDF", "arguments": [ "out/foreign-direct-investment-involving-uk-companies-directional.csv-metadata.json.ttl" ] },
+{ "file": "out/foreign-direct-investment-involving-uk-companies-directional.csv-metadata.json.ttl", "opType": "SPARQL Update", "arguments": [ "/gss-build/sparql/add-skos-narrower.sparql" ] },
+{ "file": "out/foreign-direct-investment-involving-uk-companies-directional.csv-metadata.json.ttl", "opType": "SPARQL Update", "arguments": [ "/gss-build/sparql/add-skos-top-concept.sparql" ] }
+]

@@ -122,7 +122,7 @@ tidy['NUTS Geography'] = tidy['Area'].cat.rename_categories({
     'Scotland' : 'UKM', 
     'South East' : 'UKJ', 
     'South West' : 'UKK',
-     'Total for functional category' : 'all', 
+    'Total for functional category' : 'UK', 
     'Wales' : 'UKL', 
     'West Midlands' : 'UKG',
     'Yorkshire and The Humber' : 'UKE',
