@@ -23,9 +23,14 @@
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/year/{year}"
             },
-            "HMRC-Small-Area": {
+            "NUTS Geography": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{hmrc_small_area}"
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{nuts_geography}"
+          
+            },
+            "HMRC Partner Geography": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{hmrc_partner_geography}"
           
             },
             "Flow Directions": {
@@ -35,8 +40,7 @@
             "SITC 4": {
                 "label": "Product",
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}",
-                "dimension": "http://purl.org/linked-data/cube#sitc4"
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}"
             },
             "Measure Type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
