@@ -23,17 +23,10 @@
                 "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/year/{year}"
             },
-            "NUTS Geography": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/nuts-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_geography}"
-            },
-            "HMRC Partner Geography": {
-                "label": "Partner geography",
-                "description": "Partner country is the country the UK region exports the goods to or imports the goods from.",
-                "source": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/843903/Local_Area_Commentary_2018.pdf",
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-partner-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-partner-geographies/{hmrc_partner_geography}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies"
+            "HMRC-Small-Area": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{hmrc_small_area}"
+          
             },
             "Flow Directions": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
@@ -43,7 +36,7 @@
                 "label": "Product",
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
                 "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4"
+                "dimension": "http://purl.org/linked-data/cube#sitc4"
             },
             "Measure Type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
