@@ -34,8 +34,8 @@
                 "codelist": false
             },
             "Country of Ownership": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/countries-of-ownership",
-                "value": "http://gss-data.org.uk/def/trade/concept/countries-of-ownership/{country_of_ownership}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/country-of-ownership",
+                "value": "http://gss-data.org.uk/def/trade/concept/country-of-ownership/{country_of_ownership}",
                 "codelist": false
             },
             "Trade Group": {
@@ -49,7 +49,7 @@
                 "codelist": false
             },
             "Employees": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-band",
                 "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{employees}",
                 "codelist": false
             },

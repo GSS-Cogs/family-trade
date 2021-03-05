@@ -44,8 +44,8 @@
                 "codelist": false
             },
             "Industry": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-industries",
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-industries/{industry}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-industry",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-industry/{industry}",
                 "codelist": false
             },
             "Value": {

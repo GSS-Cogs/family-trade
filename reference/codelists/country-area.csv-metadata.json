@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries",
-    "url": "ons-industries.csv",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-area",
+    "url": "country-area.csv",
     "tableSchema": {
         "columns": [
             {
@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-industries/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/country-area/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -54,73 +54,70 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/country-area"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-industries/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/country-area/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries",
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-area",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
-        ],
-        "skos:hasTopConcept": {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/total"
-        }
+        ]
     },
-    "rdfs:label": "ONS Industries",
-    "dc:title": "ONS Industries",
+    "rdfs:label": "Country Area",
+    "dc:title": "Country Area",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/dataset",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-area/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
+            "rdfs:label": "Country Area",
+            "dc:title": "Country Area",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-area"
             },
+            "rdfs:comment": "Dataset representing the 'Country Area' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-area"
             },
-            "rdfs:label": "ONS Industries",
-            "dc:title": "ONS Industries",
-            "rdfs:comment": "Dataset representing the 'ONS Industries' code list.",
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:59:33.474759"
+                "@value": "2021-02-02T00:00:00"
             },
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:59:33.474759"
+                "@value": "2021-02-03T08:27:38.174611"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/catalog-record"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-area/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/catalog-record",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-area/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries/dataset"
-            },
-            "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industries"
-            },
-            "dc:title": "ONS Industries Catalog Record",
-            "rdfs:label": "ONS Industries Catalog Record",
+            "dc:title": "Country Area Catalog Record",
+            "rdfs:label": "Country Area Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-29T11:58:58.151355"
+                "@value": "2020-12-23T11:58:58.141364"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-29T11:58:58.151355"
+                "@value": "2020-12-23T11:58:58.141364"
+            },
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-area/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-area"
             }
         }
     ]

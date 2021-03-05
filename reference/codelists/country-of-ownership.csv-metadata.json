@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww",
-    "url": "eu-rw-ww.csv",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership",
+    "url": "country-of-ownership.csv",
     "tableSchema": {
         "columns": [
             {
@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/eu-rw-ww/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/country-of-ownership/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -54,70 +54,70 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/eu-rw-ww/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/country-of-ownership/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww",
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Eu Rw Ww",
-    "dc:title": "Eu Rw Ww",
+    "rdfs:label": "country Of Ownership",
+    "dc:title": "country Of Ownership",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww/dataset",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Eu Rw Ww",
-            "dc:title": "Eu Rw Ww",
+            "rdfs:label": "country Of Ownership",
+            "dc:title": "country Of Ownership",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership"
             },
-            "rdfs:comment": "Dataset representing the 'Eu Rw Ww' code list.",
+            "rdfs:comment": "Dataset representing the 'country Of Ownership' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-02T00:00:00"
+                "@value": "2021-02-03T08:27:38.172679"
             },
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.174611"
+                "@value": "2021-02-03T08:27:38.172679"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww/catalog-record"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww/catalog-record",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Eu Rw Ww Catalog Record",
-            "rdfs:label": "Eu Rw Ww Catalog Record",
+            "dc:title": "country Of Ownership Catalog Record",
+            "rdfs:label": "country Of Ownership Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.141364"
+                "@value": "2020-12-23T11:58:58.140188"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.141364"
+                "@value": "2020-12-23T11:58:58.140188"
             },
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww/dataset"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/eu-rw-ww"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership"
             }
         }
     ]

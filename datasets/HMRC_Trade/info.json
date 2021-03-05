@@ -40,7 +40,7 @@
                 "codelist": false
             },
             "Number of Employees": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-bands",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-band",
                 "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{number_of_employees}",
                 "codelist": false
             },
