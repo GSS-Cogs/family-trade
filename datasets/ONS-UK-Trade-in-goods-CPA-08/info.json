@@ -28,7 +28,7 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
             },
-            "Flow Directions": {
+            "Flow Direction": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
