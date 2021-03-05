@@ -21,7 +21,7 @@
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{period}",
+                "value": "http://reference.data.gov.uk/{period}",
                 "codelist": false
             },
             "Flow Type": {
@@ -55,7 +55,7 @@
             },
             "Units": {
         		"attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-        		"value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
+        		"value": "http://gss-data.org.uk/def/concept/measurement-units/{units}"
       		}
         }
     },
