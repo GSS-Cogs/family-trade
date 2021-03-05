@@ -135,7 +135,9 @@ del temp_df, new_df
 
 # Final formatting - measure-types
 df['Measure Type'] = df['Measure Type'].astype('category')
-df['Measure Type'].cat.rename_categories({'Value': 'value', 'NetMass': 'net-mass'}, inplace=True)
+df['Measure Type'].cat.rename_categories({'Value': 'gbp-million', 'NetMass': 'net-mass'}, inplace=True)
+
+df["Units"] = df["Measure Type"].map(lambda x: x.strip().replace("net-mass", "tonnes"))
 
 # -
 
