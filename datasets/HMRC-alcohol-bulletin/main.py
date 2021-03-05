@@ -6,8 +6,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.10.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,6 +17,7 @@
 # import glob
 from gssutils import *
 from gssutils.metadata import THEME
+from gssutils.metadata.mimetype import ODS
 import pandas as pd
 import pyexcel
 import messytables
@@ -26,19 +27,17 @@ import json
 import copy 
 
 # +
-# # scraper = Scraper("https://www.gov.uk/government/statistics/alcohol-bulletin")
-# # scraper
+trace = TransformTrace()
+cubes = Cubes("info.json")
 
 scraper = Scraper(seed="info.json")
 scraper.distributions = [x for x in scraper.distributions if hasattr(x, "mediaType")]
 scraper
-trace = TransformTrace()
-cubes = Cubes("info.json")
 
 # +
 # Conversion of ODS to XLS
 
-original_tabs = scraper.distributions[0]
+original_tabs = scraper.distribution(latest=True, mediaType=ODS)
 
 with original_tabs.open() as ods_obj:
     excel_obj = BytesIO()
@@ -56,9 +55,10 @@ with original_tabs.open() as ods_obj:
     tabs = list(xypath.loader.get_sheets(tableset, "*"))
 # -
 
-distribution = scraper.distribution(latest = True)
+distribution = scraper.distribution(latest = True, mediaType=ODS)
 datasetTitle = distribution.title
 columns = ["Period", "Marker", "Bulletin Type", "Alcohol Type", "Measure Type", "Unit"]
+distribution.downloadURL
 
 tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
 for tab_name in tabs_names_to_process:
@@ -71,12 +71,14 @@ for tab_name in tabs_names_to_process:
     tab = [x for x in tabs if x.name == tab_name][0]
     
     trace.start(datasetTitle, tab, columns, distribution.downloadURL)
+    
+    anchor = tab.excel_ref('A').filter(contains_string("Data by financial year")).assert_one()
 
-    period = tab.excel_ref("A7").expand(DOWN).is_not_blank().is_not_whitespace()
-    trace.Period("Defined from cell ref A6 Down")
+    period = anchor.expand(DOWN).is_not_blank().is_not_whitespace()
+    trace.Period("Taken from column A")
 
-    bulletin_type = tab.excel_ref("B6").expand(RIGHT).is_not_blank().is_not_whitespace()
-    trace.Bulletin_Type("Defined from cell ref B6 and across")
+    bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
+    trace.Bulletin_Type("Defined from column B obvious header and across")
 
     alcohol_type = tab.name
     trace.Alcohol_Type("Name of tabs in XLS sheet")
@@ -216,7 +218,7 @@ df['Marker'].unique()
 #cubes.output_all()
 
 # +
-#trace.render("spec_v1.html")
+trace.render()
 
 # The multimeasures for this dataset is yet to be defined by DMs.
 # The way to proceed with cubes class for multimeasures is yet to be finalized.
