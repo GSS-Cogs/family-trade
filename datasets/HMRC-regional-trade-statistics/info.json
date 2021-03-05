@@ -1,6 +1,6 @@
 {
     "id": "hmrc-regional-trade-statistics",
-    "title": "REGIONAL TRADE STATISTICS",
+    "title": "HMRC Regional Trade Statistics",
     "publisher": "HM Revenue & Customs",
     "description": "",
     "landingPage": "https://www.uktradeinfo.com/trade-data/regional/",
@@ -47,12 +47,16 @@
             },
             "Measure Type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
-                "value": "http://gss-data.org.uk/def/measure/{measure_type}",
+                "value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
                 "types": [
-                    "value",
+                    "gbp-million",
                     "net-mass"
                 ]
-            }
+            },
+            "Units": {
+        		"attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+        		"value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
+      		}
         }
     },
     "odataConversion": {
