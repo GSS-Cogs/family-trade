@@ -1,4 +1,4 @@
-Label,Notation,Parent Notation,Sort Priority,
+Label,Notation,Parent Notation,Sort Priority,Description
 NUTS 1,nuts1/all,nuts1/all,1,
 East,nuts1/UKH,nuts1/all,2,
 East Midlands,nuts1/UKF,nuts1/all,3,
