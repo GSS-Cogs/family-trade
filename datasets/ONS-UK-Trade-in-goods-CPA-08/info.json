@@ -30,7 +30,7 @@
             },
             "Flow Direction": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_direction}",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "Period": {
