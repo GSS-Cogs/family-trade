@@ -25,11 +25,13 @@
             },
             "CDID": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
-                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
             },
             "Flow Directions": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
@@ -38,7 +40,8 @@
             },
             "Product": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/product",
-                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}"
+                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/product"
             }
         }
     },
