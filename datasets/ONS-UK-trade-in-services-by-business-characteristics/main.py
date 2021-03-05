@@ -112,8 +112,6 @@ for name, tab in tabs.items():
             HDim(country, 'Country',CLOSEST,ABOVE),
         ]
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        trace.with_preview(tidy_sheet)
-        trace.store("combined_dataframe", tidy_sheet.topandas())
     else:   
         continue
 
@@ -216,7 +214,7 @@ for dtc in drop_these_cols:
     df = df.drop(dtc, axis=1)
 df = df[["all_dimensions_concatenated", "Value"]]
 df = df.sort_values(by=['all_dimensions_concatenated'])
-df.to_csv("duplicates_with_values.csv", index=False)
+df.to_csv("./out/duplicates_with_values.csv", index=False)
 print("DONE")
 
 
