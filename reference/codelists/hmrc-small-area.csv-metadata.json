@@ -60,6 +60,8 @@
         "primaryKey": "notation",
         "aboutUrl": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{notation}"
     },
+    "rdfs:label": "HMRC Small Area",
+    "dc:title": "HMRC Small Area",
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-small-area",
         "@type": [
@@ -67,8 +69,6 @@
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Hmrc Small Area",
-    "dc:title": "Hmrc Small Area",
     "rdfs:seeAlso": [
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-small-area/dataset",
@@ -76,22 +76,22 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Hmrc Small Area",
-            "dc:title": "Hmrc Small Area",
+            "rdfs:label": "HMRC Small Area",
+            "dc:title": "HMRC Small Area",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-small-area"
             },
-            "rdfs:comment": "Dataset representing the 'Hmrc Small Area' code list.",
+            "rdfs:comment": "Dataset representing the 'HMRC Small Area' code list.",
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-small-area"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.180980"
+                "@value": "2021-02-03T11:35:22.815540"
             },
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.180980"
+                "@value": "2021-02-03T11:35:22.815540"
             }
         },
         {
@@ -103,18 +103,18 @@
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-small-area/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Hmrc Small Area Catalog Record",
-            "rdfs:label": "Hmrc Small Area Catalog Record",
+            "dc:title": "HMRC Small Area Catalog Record",
+            "rdfs:label": "HMRC Small Area Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.145819"
-            },
-            "dc:modified": {
-                "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.145819"
+                "@value": "2020-12-23T11:58:58.120533"
             },
             "foaf:primaryTopic": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-small-area/dataset"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2020-12-23T11:59:10.942836"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-small-area"
