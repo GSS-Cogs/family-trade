@@ -84,6 +84,8 @@ df['Value'] = df['Value'].astype(int)
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 df['Product'] = df['Product'].map(lambda x: x.split(' ', 1)[0])
 
+df['CDID'] = df['CDID'].map(lambda x: x if len(x.strip()) > 0 else 'not-applicable')
+
 df = df[['Period', 'Flow Direction', 'Product', 'CDID', 'Value']]
 df['Flow Direction'] = df['Flow Direction'].apply(pathify)
 df
