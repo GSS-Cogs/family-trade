@@ -147,7 +147,7 @@ cubes.add_cube(scraper, df, scraper.title)
 cubes.output_all()
 
 # Change the aboutUrl in the -metadata.json so we don't get URIs within URIs.
-metadata_json = open("./out/regional-trade-statistics.csv-metadata.json", "r")
+metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "r")
 metadata = json.load(metadata_json)
 metadata_json.close()
 
@@ -155,6 +155,6 @@ metadata["tables"][0]["tableSchema"]["aboutUrl"] = (
     metadata["tables"][0]["tableSchema"]["aboutUrl"].replace("{uk_region}", "{uk_region_code}")
 )
 
-metadata_json = open("./out/regional-trade-statistics.csv-metadata.json", "w")
+metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "w")
 json.dump(metadata, metadata_json, indent=4)
 metadata_json.close()
