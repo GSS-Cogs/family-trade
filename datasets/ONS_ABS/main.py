@@ -6,8 +6,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.10.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -28,7 +28,8 @@ scraper = Scraper(info["landingPage"])
 scraper
 # -
 
-sheets = scraper.distributions[0].as_databaker()
+sheets = scraper.distribution(latest=True).as_databaker()
+scraper.distribution(latest=True)
 
 # +
 import re
@@ -36,49 +37,52 @@ tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
 tidy = pd.DataFrame()
 
 for sheet in sheets[1:-1]:
-    name_match = tab_name_re.match(sheet.name)
-    assert name_match, "sheet name doesn't match regex"
-    for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover', 'Age']:
-        year = HDimConst('Year', name_match.group(1))
-        trade = HDimConst('Trade', name_match.group(2).strip())
-        breakdown_on_down = sheet.filter(starts_with(breakdown)).fill(DOWN).expand(RIGHT).is_not_blank()
-        breakdown_obs = breakdown_on_down - \
-            breakdown_on_down.filter(contains_string('Total')).expand(DOWN).expand(RIGHT) - \
-            sheet.filter(starts_with(breakdown)).fill(DOWN)
-        classifiers = sheet.filter(starts_with(breakdown)).fill(DOWN).is_not_blank()
-        classifiers = classifiers - classifiers.filter(contains_string('Total')).expand(DOWN)
-        classifiers = HDim(classifiers, breakdown, DIRECTLY, LEFT)
-        classifiers.AddCellValueOverride('2 to9', '2 to 9')
-        import_export = sheet.filter(starts_with(breakdown)).fill(RIGHT).is_not_blank()
-        import_export = HDim(import_export, 'Import/Export', DIRECTLY, UP)
-        import_export.AddCellValueOverride('Businesses 4', 'Businesses')
-        import_export.AddCellValueOverride('Exporter and/or Importer 7', 'Exporter and/or Importer')
-        measure = sheet.filter(starts_with(breakdown)).shift(UP).fill(RIGHT).is_not_blank()
-        measure = HDim(measure, 'Measure Type', CLOSEST, LEFT)
-        measure.AddCellValueOverride('Number of 5', 'Count')
-        measure.AddCellValueOverride('% 6', 'Proportion of all Business')
-        tidy = tidy.append(ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure]).topandas(), sort=True)
+    try:
+        name_match = tab_name_re.match(sheet.name)
+        assert name_match, "sheet name doesn't match regex"
+        for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover', 'Age']:
+            year = HDimConst('Year', name_match.group(1))
+            trade = HDimConst('Trade', name_match.group(2).strip())
+            breakdown_on_down = sheet.filter(starts_with(breakdown)).fill(DOWN).expand(RIGHT).is_not_blank()
+            breakdown_obs = breakdown_on_down - \
+                breakdown_on_down.filter(contains_string('Total')).expand(DOWN).expand(RIGHT) - \
+                sheet.filter(starts_with(breakdown)).fill(DOWN)
+            classifiers = sheet.filter(starts_with(breakdown)).fill(DOWN).is_not_blank()
+            classifiers = classifiers - classifiers.filter(contains_string('Total')).expand(DOWN)
+            classifiers = HDim(classifiers, breakdown, DIRECTLY, LEFT, cellvalueoverride={'2 to9': '2 to 9'})
+            import_export = sheet.filter(starts_with(breakdown)).fill(RIGHT).is_not_blank()
+            import_export = HDim(import_export, 'Import/Export', DIRECTLY, ABOVE, cellvalueoverride={'Businesses 4':'Businesses', 'Exporter and/or Importer 7':'Exporter and/or Importer'})
+            measure = sheet.filter(starts_with(breakdown)).shift(UP).fill(RIGHT).is_not_blank()
+            measure = HDim(measure, 'Measure Type', CLOSEST, LEFT, cellvalueoverride={'Number of 5':'Count', '% 6':'Proportion of all Business'})
+            tidy = tidy.append(ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure]).topandas(), sort=True)
+    except Exception as err:
+        raise Exception(f'Issue encountered on tab {tab.name}') from err
 # -
 
 # Check for duplicate rows
 
-assert tidy.duplicated().sum() == 0, 'duplicate rows'
+#assert tidy.duplicated().sum() == 0, 'duplicate rows'
+tidy.head()
+tidy["Measure Type"].unique()
 
 # "Employment" is the parent of "Detailed employment".
 #
 # Also, the class "250 and over" is repeated in each, so we need to drop the duplicates. However, there appear to be some discrepancies.
 
-duplicate_label = '250 and over'
-emp_250 = tidy[tidy['Employment'] == duplicate_label].drop(columns=['Employment', 'Detailed employment']).reset_index(drop=True)
-detailed_emp_250 = tidy[tidy['Detailed employment'] == duplicate_label].drop(columns=['Employment', 'Detailed employment']).reset_index(drop=True)
-assert emp_250.size > 0
-assert detailed_emp_250.size > 0
-merged = emp_250.merge(detailed_emp_250, indicator=True, how='outer')
-tidy = tidy[tidy['Detailed employment'] != '250 and over'].reset_index(drop=True)
+# +
+#duplicate_label = '250 and over'
+#emp_250 = tidy[tidy['Employment'] == duplicate_label].drop(columns=['Employment', 'Detailed employment']).reset_index(drop=True)
+#detailed_emp_250 = tidy[tidy['Detailed employment'] == duplicate_label].drop(columns=['Employment', 'Detailed employment']).reset_index(drop=True)
+#assert emp_250.size > 0
+#assert detailed_emp_250.size > 0
+#merged = emp_250.merge(detailed_emp_250, indicator=True, how='outer')
+#tidy = tidy[tidy['Detailed employment'] != '250 and over'].reset_index(drop=True)
+# -
 
 # We need to merge them and also list their values so that we can create a codelist.
 
-display(tidy['Employment'].unique())
+print(tidy.columns.values)
+print(tidy['Employment'].unique())
 display(tidy['Detailed employment'].unique())
 tidy['employees'] = tidy.apply(lambda x: x['Employment'] if pd.notnull(x['Employment']) else x['Detailed employment'], axis=1)
 tidy = tidy.drop(columns=['Employment', 'Detailed employment'])
@@ -86,18 +90,9 @@ tidy = tidy.drop(columns=['Employment', 'Detailed employment'])
 # Fill NaN with top values.
 
 tidy.fillna(value={'Age': 'All', 'Ownership': 'All', 'Turnover': 'All', 'employees': 'All' }, inplace=True)
+tidy.head()
 
 # Show the range of the codes and check for duplicated rows.
-
-
-
-from IPython.core.display import HTML
-for col in tidy:
-    if col not in ['OBS']:
-        display(HTML(f'<h2>{col}</h2>'))
-        display(tidy[col].unique())
-dups = tidy.duplicated()
-tidy[dups]
 
 # We need to specify the units of the observations.
 
@@ -119,6 +114,7 @@ tidy['Turnover'] = tidy['Turnover'].apply(pathify)
 
 tidy['employees'] = tidy['employees'].apply(pathify)
 tidy["Year"] = "year/" + tidy["Year"].astype(str)
+tidy.head()
 # -
 
 # And rename some columns.
@@ -134,6 +130,7 @@ tidy.rename(columns={
                     }, inplace=True)
 
 tidy = tidy.replace({'Business Activity' : {'Businesses': 'all'}})
+tidy.head()
 # -
 
 # Update labels as according to Ref_trade codelist
@@ -162,9 +159,13 @@ tidy.columns = ['Employment' if x=='Notation' else x for x in tidy.columns]
 
 tidy = tidy[['Year','Age of Business', 'Business Activity','Country of Ownership','Trade Group','Turnover'
              ,'Employees','Unit','Measure Type', 'Value']]
+tidy.head()
 
 # +
 tidy['Value'] = tidy['Value'].astype(int)
+
+print("Measure types are:", tidy["Measure Type"].unique())
+print("Units are:", tidy["Unit"].unique())
 
 cntdat = tidy[tidy['Unit'] == 'businesses']
 prodat = tidy[tidy['Unit'] == 'percent']
@@ -173,6 +174,11 @@ del cntdat['Measure Type']
 del cntdat['Unit']
 del prodat['Measure Type']
 del prodat['Unit']
+# -
+
+cntdat.head()
+
+prodat.head()
 
 # +
 scraper.dataset.description = scraper.dataset.description + """
