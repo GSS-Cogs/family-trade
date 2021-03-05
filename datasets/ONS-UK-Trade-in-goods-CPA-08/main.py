@@ -64,9 +64,7 @@ for tab in tabs:
             HDim(period, 'Period', DIRECTLY, ABOVE),
             HDim(product, 'Product', DIRECTLY, LEFT),
             HDim(cdid, 'CDID', CLOSEST, ABOVE),  
-            HDimConst('Flow Direction', flow_direction),
-            HDimConst('Measure Type', 'gbp total'),
-            HDimConst('Unit', 'gbp-million')
+            HDimConst('Flow Direction', flow_direction)
             ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)   
@@ -86,7 +84,7 @@ df['Value'] = df['Value'].astype(int)
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 df['Product'] = df['Product'].map(lambda x: x.split(' ', 1)[0])
 
-df = df[['Period', 'Flow Direction', 'Product', 'CDID', 'Measure Type', 'Unit', 'Value']]
+df = df[['Period', 'Flow Direction', 'Product', 'CDID', 'Value']]
 df['Flow Direction'] = df['Flow Direction'].apply(pathify)
 df
 
