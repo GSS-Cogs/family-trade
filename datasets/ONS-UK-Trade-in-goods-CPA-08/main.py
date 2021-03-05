@@ -57,13 +57,13 @@ for tab in tabs:
         
         period = tab.excel_ref("C4").expand(RIGHT).is_not_blank()
         product = tab.excel_ref("A5").expand(DOWN).is_not_blank() 
-        cdid = tab.excel_ref('B5').expand(DOWN).is_not_blank()
+        cdid = tab.excel_ref('B5').expand(DOWN)
         observations = tab.excel_ref('C5').expand(DOWN).expand(RIGHT).is_not_blank() 
 
         dimensions = [
             HDim(period, 'Period', DIRECTLY, ABOVE),
             HDim(product, 'Product', DIRECTLY, LEFT),
-            HDim(cdid, 'CDID', CLOSEST, ABOVE),  
+            HDim(cdid, 'CDID', DIRECTLY, LEFT),
             HDimConst('Flow Direction', flow_direction)
             ]
 
