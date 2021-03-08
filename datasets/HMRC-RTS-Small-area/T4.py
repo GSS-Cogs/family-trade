@@ -49,8 +49,8 @@ Dimensions = [
             HDim(geography,'HMRC Partner Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDim(sitc,'SITC 4',DIRECTLY,LEFT),
-            HDimConst('Measure Type', 'GBP Total'),
-            HDimConst('Unit', 'gbp-million'),
+            HDimConst('Measure Type', 'Statistical Value'),
+            HDimConst('Unit', 'statistical-value'),
             HDimConst('Year', dataset_year)
             ]
 c1 = ConversionSegment(observations, Dimensions, processTIMEUNIT=True)
