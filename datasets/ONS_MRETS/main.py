@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -16,6 +16,7 @@
 # +
 import json
 from os import environ
+import copy 
 
 from gssutils import *
 from gssutils.metadata import THEME
@@ -37,7 +38,7 @@ for dist in scraper.distributions:
 dist = scraper.distribution(mediaType='text/prs.ons+csdb', latest=True)
 dist
 
-# + tags=["outputPrepend"]
+# # + tags=["outputPrepend"]
 from io import TextIOWrapper
 from itertools import accumulate, zip_longest
 from collections import namedtuple, defaultdict
@@ -124,8 +125,8 @@ slices[header.identifier].append({
     'struct': struct,
     'observations': observations
 })
-with open("./wtf.json", "w") as f:
-    json.dump(slices, f, default=lambda x: str(x))
+#with open("./wtf.json", "w") as f:
+#    json.dump(slices, f, default=lambda x: str(x))
 
 
 
@@ -369,24 +370,51 @@ if "Basis" in product_observations.columns.values:
     product_observations = product_observations.drop("Basis", axis=1)
     
 product_observations["Measure Type"] = product_observations["Unit"].apply(measure_type_lookup)
-product_observations = product_observations[product_observations["Measure Type"] == "Chained volume measure"]
+
+try:
+    del product_observations['product_label']
+except:
+    print("No product label column")
+
+product_observations_cvm = product_observations[product_observations["Measure Type"] == "Chained volume measure"]
+product_observations_cp = product_observations[product_observations["Measure Type"] == "Current Price"]
+product_observations_avg = product_observations[product_observations["Measure Type"] == "Average value per ton"]
+product_observations_def = product_observations[product_observations["Measure Type"] == "implied-deflator"]
+product_observations_cvm["Measure Type"] = 'cvm'
+product_observations_cp["Measure Type"] = 'cp'
+product_observations_avg["Measure Type"] = 'avg-per-ton'
+product_observations_def["Measure Type"] = 'implied-deflator'
 # -
 
-product_observations
+"""
+Measure Type
+'Current Price', 'Chained volume measure', 'Net Mass','Implied Deflator', 'Average value per ton'
+"""
+#product_observations_cvm['Trade Area'].unique()
+product_observations_cvm.head(10)
 
 # +
-df = product_observations
-df["Unit"][df["Measure Type"] == "Current Price"] = "gbp-million"
-df["Unit"][df["Measure Type"] == "Average value per ton"] = "gbp-million"
-df["Unit"][df["Measure Type"] == "Chained volume measure"] = "gbp-million"
-df["Unit"][df["Unit"] == "idef"] = "implied-deflator"
+#### CHAINE VOLUME MEASURES
+scraper.dataset.title = 'UK trade time series - Chained Value Measures'
+scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
+scraper.dataset.description = scraper.dataset.comment
+print(scraper.dataset.title)
+print(scraper.dataset.comment)
+print(scraper.dataset.description)
 
-df["Measure Type"].value_counts()
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
+data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+
+cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
 # -
 
-cubes.add_cube(scraper, df, scraper.title)
-
 cubes.output_all()
+
+
 
 
 
