@@ -2,7 +2,7 @@
     "id": "hmrc-regional-trade-statistics",
     "title": "HMRC Regional Trade Statistics",
     "publisher": "HM Revenue & Customs",
-    "description": "",
+    "description": "International trade in goods data at summary product and country level, by UK regions and devolved administrations.",
     "landingPage": "https://www.uktradeinfo.com/trade-data/regional/",
     "published": "2019-12-05",
     "dataURL": "https://api.uktradeinfo.com/RTS",
@@ -21,7 +21,7 @@
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/{period}",
+                "value": "http://reference.data.gov.uk{period}",
                 "codelist": false
             },
             "Flow Type": {
