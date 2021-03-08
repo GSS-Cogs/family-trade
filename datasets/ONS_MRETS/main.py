@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.10.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -124,9 +124,9 @@ slices[header.identifier].append({
     'struct': struct,
     'observations': observations
 })
+with open("./wtf.json", "w") as f:
+    json.dump(slices, f, default=lambda x: str(x))
 
-for l in sorted(all_labels):
-    print(l)
 
 
 # +
@@ -149,7 +149,7 @@ UNIT = set(['cp', 'cvm', 'tons', 'idef', 'av-value-per-ton'])
 TIG = 'Trade in Goods'
 TT = 'total trade'
 
-TradeInProduct = namedtuple('TradeInProduct', 'country, product, direction, basis, unit, adjustment')
+TradeInProduct = namedtuple('TradeInProduct', 'country, product, product_label, direction, basis, unit, adjustment')
 SterlingEffectiveERI = namedtuple('SterlingEffectiveERI', 'measure base')
 ExchangeRate = namedtuple('ExchangeRate', 'currency')
 
@@ -192,7 +192,7 @@ def dim_val(t):
                 product = 'T'
             product_label[product] = labels[2]
             return TradeInProduct(
-                country=dims[1], product=product,
+                country=dims[1], product=product, product_label=labels[2],
                 direction=dims[3], basis=dims[4], unit=dims[5], adjustment=dims[6])
         elif dims[2] in COUNTRIES and dims[3] in DIRECTION and dims[4] in BASIS and dims[5] in UNIT and dims[6] in ADJUST:
             country_label[dims[2]] = labels[2]
@@ -201,13 +201,13 @@ def dim_val(t):
                 raise(Exception(labels[1]))
             product_label[product] = labels[1]
             return TradeInProduct(
-                country=dims[2], product=product,
+                country=dims[2], product=product, product_label=labels[1],
                 direction=dims[3], basis=dims[4], unit=dims[5], adjustment=dims[6])
         # ['trade-in-goods', 'emu-19', 'balance', 'bop', 'cp', 'sa']
         elif dims[1] in COUNTRIES and dims[2] in DIRECTION and dims[3] in BASIS and dims[4] in UNIT and dims[5] in ADJUST:
             country_label[dims[1]] = label[1]
             return TradeInProduct(
-                country=dims[1], product='T', direction=dims[2],
+                country=dims[1], product='T', product_label=label[1], direction=dims[2],
                 basis=dims[3], unit=dims[4], adjustment=dims[5])
         else:
             raise(Exception(dims))
@@ -218,7 +218,7 @@ def dim_val(t):
         product_label[product] = labels[0]
         country_label[dims[1]] = labels[1]
         return TradeInProduct(
-            country=dims[1], product=product, direction=dims[2],
+            country=dims[1], product=product, product_label=labels[1], direction=dims[2],
             basis=dims[3], unit=dims[4], adjustment=dims[5])
     elif dims[0] == 'trade-in-services-ts' and dims[1] == 'ww' and dims[2] in DIRECTION and dims[3] in BASIS and dims[4] in UNIT and dims[5] in ADJUST:
         product = prod_code(labels[0])
@@ -227,7 +227,7 @@ def dim_val(t):
         product_label[product] = labels[0]
         country_label[dims[1]] = labels[1]
         return TradeInProduct(
-            country=dims[1], product=product, direction=dims[2], basis=dims[3],
+            country=dims[1], product=product, product_label=labels[1] ,direction=dims[2], basis=dims[3],
             unit=dims[4], adjustment=dims[5])
     elif dims[0] in set(['eu-2004', 'non-eu-2004']) and dims[1] in BASIS and dims[2] in DIRECTION and dims[5].startswith('sitc'):
         country_label[dims[0]] = labels[0]
@@ -235,14 +235,14 @@ def dim_val(t):
         product_label[product] = labels[4]
         sitc[product] = dims[5]
         return TradeInProduct(
-            country=dims[0], product=product, direction=dims[2], basis=dims[1], adjustment=dims[3], unit='cp')
+            country=dims[0], product=product, product_label=labels[4], direction=dims[2], basis=dims[1], adjustment=dims[3], unit='cp')
     # ['bop', 'ex', 'sa', 'ships-and-aircraft-sna', 'sitc-792-793']
     elif dims[0] in BASIS and dims[1] in DIRECTION and dims[2] in ADJUST and dims[4].startswith('sitc'):
         product = labels[4].replace(' ', '_')
         sitc[product] = dims[4]
         product_label[product] = labels[3]
         return TradeInProduct(
-            country='ww', product=product, direction=dims[1], basis=dims[0], unit='cp',
+            country='ww', product=product, product_label=labels[3], direction=dims[1], basis=dims[0], unit='cp',
             adjustment=dims[2])
     else:
         raise(Exception(dims))
@@ -293,13 +293,12 @@ exchange_currency_observations = pd.DataFrame(data=exchange_currency_data)
 product_observations.replace(
     {'product': {'-t': 'total-goods'}}, inplace=True)
 
-"""
-Note - spoke with Alex, to start with we're going to concentrate on the product data
 
-so once we're up and running, we need to add the effective_eri_observations and exchange_currency_observations
-dataframes to the outputs dict below
-"""
-
+# ## Note - spoke with Alex, to start with we're going to concentrate on the product data
+#
+# so once we're up and running, we need to add the effective_eri_observations and exchange_currency_observations
+# dataframes to the outputs dict below
+#
 
 def fix_short_hand_flow(val):
     if val in ["imports", "exports", "balance", "terms-of-trade"]:
@@ -330,7 +329,14 @@ def measure_type_lookup(val):
         return "Net Mass"
     else:
         raise Exception("Aborting. Cannot find the measure type for {}.".format(val))
-    
+
+
+# +
+
+# Tidy up the product labels to just be the labels
+product_observations["product_label"] = product_observations["product_label"].map(lambda x: x.split("(")[0].strip())
+product_observations.head()
+# -
 
 
 from os import environ
