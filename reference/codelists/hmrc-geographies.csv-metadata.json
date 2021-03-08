@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/hmrc-geographies/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/hmrc-geographies/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-geographies",

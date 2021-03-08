@@ -25,8 +25,8 @@
                 "codelist": false 
             },
             "NUTS Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{nuts_geography}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-geography/{nuts_geography}",
                 "codelist": false 
             },
             "HMRC Partner Geography": {
