@@ -18,7 +18,7 @@ tabs = { tab.name: tab for tab in distribution.as_databaker() }
 distribution
 
 # %%
-#grouping tabs into their topics to iterate through. 
+#grouping tab into topics to iterate through by their names
 national_account_aggregates = ['A1 AGGREGATES', 'A2 AGGREGATES']
 output_indicators = ['B1 CVM OUTPUT', 'B2 CVM OUTPUT']
 expenditure_indicators = ['C1 EXPENDITURE', 'C2 EXPENDITURE']
@@ -28,9 +28,9 @@ gross_fixed_capitol = ['F1 GFCF', 'F2 GFCF']
 inventories = ['G1 INVENTORIES', 'G2 INVENTORIES']
 trade = ['H1 TRADE', 'H2 TRADE']
 
+tidied_sheets = []
 
 # %%
-tidied_sheets = []
 for name, tab in tabs.items():
     #shared dimensions across all tabs
     seasonal_adjustment = tab.excel_ref('A5').expand(DOWN).filter(contains_string('Seasonally'))
