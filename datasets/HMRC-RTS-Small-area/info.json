@@ -25,13 +25,13 @@
                 "codelist": false 
             },
             "NUTS Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-geography/{nuts_geography}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{nuts_geography}",
                 "codelist": false 
             },
             "HMRC Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{hmrc_partner_geography}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-geographies",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-geographies/{hmrc_partner_geography}",
                 "codelist": false 
             },
             "Flow Directions": {
@@ -48,7 +48,7 @@
                 "value": "http://gss-data.org.uk/def/measure/{measure_type}",
                 "types": [
                     "businesses",
-                    "gbp-total"
+                    "statistical-value"
                 ]
             },
             "Unit": {
