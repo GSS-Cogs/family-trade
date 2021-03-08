@@ -122,8 +122,8 @@ tidy['NUTS Geography'] = tidy['NUTS Geography'].cat.rename_categories({
     'Yorkshire and the Humber' : 'nuts1/UKE',
     'Northern Ireland' : 'nuts1/UKN',
     'East of England' : 'nuts1/UKH', 
-    'Unallocated-Known' : 'nuts1/unk', 
-    'Unallocated-Unknown' : 'nuts1/unu'
+    'Unallocated-Known' : 'nuts1/UNK', 
+    'Unallocated-Unknown' : 'nuts1/UNU'
 })
 tidy['HMRC Partner Geography'] = tidy['HMRC Partner Geography'].cat.rename_categories({
         'EU'   : 'C',
