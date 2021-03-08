@@ -68,7 +68,7 @@ for col in df.columns:
         df[col] = df[col].astype('category')
 
 # Quarter conversion g(x) = x//3+1, so g(1)=1, g(4)=2, g(7)=3, g(10)=4
-df['Period'] = [f"/id/quarter/{str(x)[:4]}-{str(int(str(x)[-2])//3+1)}" for x in df['MonthId']]
+df['Period'] = [f"/id/quarter/{str(x)[:4]}-Q{str(int(str(x)[-2])//3+1)}" for x in df['MonthId']]
 
 df.head()
 
