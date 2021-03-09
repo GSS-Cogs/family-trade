@@ -45,10 +45,6 @@
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/age-of-business",
                 "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}"
             },
-            "Industry Group": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/high-level-industry-groups",
-                "value": "http://gss-data.org.uk/def/trade/concept/high-level-industry-groups/{industry_group}"
-            },
             "Employee Count": {
                 "attribute": "http://gss-data.org.uk/def/trade/property/attribute/employee-count"
             },
