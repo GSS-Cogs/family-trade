@@ -1,9 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country",
-    "url": "country.csv",
-    "rdfs:label": "Country",
-    "dc:title": "Country",
+    "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country",
+    "url": "hmrc-country.csv",
+    "rdfs:label": "HMRC Country",
+    "dc:title": "HMRC Country",
     "tableSchema": {
         "columns": [
             {
@@ -90,13 +90,13 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country"
+                "valueUrl": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country"
             }
         ],
         "aboutUrl": "https://api.uktradeinfo.com/Country/{countryid}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country",
+        "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -104,24 +104,24 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country/dataset",
+            "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country"
+                "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country"
+                "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country"
             },
             "dc:modified": {
                 "@type": "dateTime",
                 "@value": "2021-03-04T08:30:07.796818"
             },
-            "rdfs:label": "Country",
-            "dc:title": "Country",
-            "rdfs:comment": "Dataset representing the 'Country' code list.",
+            "rdfs:label": "HMRC Country",
+            "dc:title": "HMRC Country",
+            "rdfs:comment": "Dataset representing the 'HMRC Country' code list.",
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2021-03-04T08:29:36.997022"
@@ -136,20 +136,20 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country/catalog-record"
+                "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country/catalog-record",
+            "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country/dataset"
+                "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/country"
+                "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country"
             },
-            "dc:title": "Country Catalog Record",
-            "rdfs:label": "Country Catalog Record",
+            "dc:title": "HMRC Country Catalog Record",
+            "rdfs:label": "HMRC Country Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2021-03-04T08:29:36.997022"
