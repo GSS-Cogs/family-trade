@@ -423,4 +423,8 @@ cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset
 
 cubes.output_all()
 
+# +
+#product_observations_cvm['Trade Area'].unique()
+# -
+
 
