@@ -33,7 +33,7 @@
             },
             "Seasonal Adjustment": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
             },
             "MRETS Product": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/mrets-product",
