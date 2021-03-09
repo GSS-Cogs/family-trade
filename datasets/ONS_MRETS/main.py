@@ -399,7 +399,7 @@ del product_observations_cvm['Unit']
 Measure Type
 'Current Price', 'Chained volume measure', 'Net Mass','Implied Deflator', 'Average value per ton'
 """
-#product_observations_cvm['Trade Area'].unique()
+product_observations_cvm['Trade Area'] = product_observations_cvm['Trade Area'].str.upper()
 product_observations_cvm.head(10)
 
 # +
@@ -426,5 +426,8 @@ cubes.output_all()
 # +
 #product_observations_cvm['Trade Area'].unique()
 # -
+
+
+
 
 

@@ -29,8 +29,8 @@
                 "codelist": false
             },
             "Trade Area": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-geographies",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-geographies/{trade_area}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/country-area",
+                "value": "http://gss-data.org.uk/def/trade/concept/country-area/{trade_area}",
                 "codelist": false
             },
             "Seasonal Adjustment": {
