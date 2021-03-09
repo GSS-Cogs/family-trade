@@ -106,11 +106,9 @@ df['Flow Directions'] = df['Flow Directions'].apply(pathify)
 trace.Flow_Directions("Renamed Flow to Flow Directions")
 
 df['Country'] = df['Country'].apply(pathify)
-df['Country'] = df['Country'].str.replace("legacy-B5", "B5")
 trace.Country("Pathified Country")
 
 df['Zone'] = df['Zone'].apply(pathify)
-df['Zone'] = df['Zone'].str.replace("legacy-B5", "B5")
 trace.Zone("Pathified Zone")
 
 df['Business Size'] = df['Business Size'].apply(pathify)
@@ -145,11 +143,11 @@ df['Country'] = df['Country'].map({
     'norway': 'NO', 'qatar': 'QA', 'russia': 'RU', 'saudi-arabia': 'SA',
     'singapore': 'SG', 'south-africa': 'ZA', 'south-korea': 'KP', 'sri-lanka': 'LK',
     'switzerland': 'CH', 'taiwan': 'TW', 'thailand': 'TH', 'turkey': 'TR', 
-    'uae': 'AE', 'united-states': 'US', 'vietnam': 'VN', 'eu': 'legacy-B5', 
+    'uae': 'AE', 'united-states': 'US', 'vietnam': 'VN', 'eu': 'B5', 
     'non-eu': 'D5', 'world': 'W1'
 })
 df['Zone'] = df['Zone'].map({ 
-    'eu': 'legacy-B5', 'non-eu': 'D5', 'world': 'W1'
+    'eu': 'B5', 'non-eu': 'D5', 'world': 'W1'
 })
 
 df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age": "Age of Business"})
