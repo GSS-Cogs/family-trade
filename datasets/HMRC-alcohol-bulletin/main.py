@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -25,6 +25,7 @@ from io import BytesIO
 import numpy as np
 import json
 import copy 
+import datetime
 
 # +
 trace = TransformTrace()
@@ -164,24 +165,22 @@ df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
 df['Marker'].replace('N/A', 'not-applicable', inplace=True)
 f1=(df['Marker'] =='not-applicable')
 df.loc[f1,'Value'] = 0
+df['Period'] = df['Period'].str.strip()
 
-# +
 # Marker column - requirements satisfied
-df['Marker'][df.Period == 'Aug-20 provisional'] = 'provisional'
-df['Marker'][df.Period == 'Sep-20 provisional'] = "provisional"
-df['Marker'][df.Period == 'Oct-20 provisional'] = "provisional"
-
+df['Marker'][df['Period'].str.contains("provisional")] = 'provisional'
+df['Period'] = df['Period'].str.replace('provisional','')
+df['Marker'][df['Period'].str.contains("revised")] = 'revised'
+df['Period'] = df['Period'].str.replace('revised','')
+df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
+df['Period'] = df['Period'].str.strip()
 # As the value 2815(estimate) and 2460(estimate) in the spread sheet is not picked up by databaker properly
 # A quick fix is done to resolve the issue
 df['Value'][df.Marker == ',815 (estimate)'] = 2815
 df['Value'][df.Marker == ',460 (estimate)'] = 2460
+df = df.replace(np.nan, '', regex=True)
+df.loc[df['Marker'].str.contains('estimate'), 'Marker'] = 'estimate'
 
-# replacing string in the marker column with string "estimate"
-df['Marker'].replace({',815 (estimate)':'estimate', ',460 (estimate)': 'estimate' }, inplace = True)
-df['Marker'].unique() 
-
-
-# -
 
 #Period column 
 def left(s, amount):
@@ -190,26 +189,23 @@ def right(s, amount):
     return s[-amount:]
 def date_time (date):
     if len(date)  == 4:
-        #year/{yr}
         return 'year/' + left(date, 4)
     if len(date)  == 6:
-        #year/{yr}
-        return 'year/' + left(date, 4)
+        month_name = left(date, 3)
+        month_number = datetime.datetime.strptime(month_name, '%b').month
+        month_number = '{:02}'.format(month_number)
+        return 'month/' + '20' + right(date, 2) + '-' + str(month_number) 
     if len(date)  == 7:
-        #government-year/{year1}-{year2}
         return 'government-year/' + left(date, 4) + '-' + left(date, 2) + right(date, 2)
     elif len(date) == 10:
-        #month/{yr}-{mth}
         return 'month/' + left(date, 7) 
     else:
         return date
 df['Period'] =  df["Period"].apply(date_time)
-#quick fix for odd values 
-df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000', 
-                             'Aug-20 provisional': 'month/2020-08',
-                            'Sep-20 provisional': 'month/2020-09',
-                            'Oct-20 provisional': 'month/2020-10'}})
 
+
+#quick fix for odd values 
+df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000'}})
 
 df['Marker'].unique()
 
@@ -273,8 +269,3 @@ cubes.output_all()
 #for cl in codelistcreation:
 #    if cl in df.columns:
 #        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
-# -
-
-
-
-
