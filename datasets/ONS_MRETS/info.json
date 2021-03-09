@@ -40,7 +40,7 @@
             },
             "MRETS Product": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/mrets-product",
-                "value": "http://gss-data.org.uk/def/trade/concept/mret-product/{mrets_product}",
+                "value": "http://gss-data.org.uk/def/trade/concept/mrets-product/{mrets_product}",
                 "codelist": false
             },
             "Value": {
