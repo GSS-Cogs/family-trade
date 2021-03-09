@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups",
-    "url": "industry-groups.csv",
+    "url": "industry-group.csv",
     "rdfs:label": "High Level Industry Groups",
     "dc:title": "High Level Industry Groups",
     "tableSchema": {
