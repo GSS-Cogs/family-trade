@@ -375,6 +375,12 @@ try:
     del product_observations['product_label']
 except:
     print("No product label column")
+    
+try:
+    del product_observations['Decimals']
+except:
+    print("No Decimals column")
+    
 
 product_observations_cvm = product_observations[product_observations["Measure Type"] == "Chained volume measure"]
 product_observations_cp = product_observations[product_observations["Measure Type"] == "Current Price"]
@@ -385,6 +391,9 @@ product_observations_cp["Measure Type"] = 'cp'
 product_observations_avg["Measure Type"] = 'avg-per-ton'
 product_observations_def["Measure Type"] = 'implied-deflator'
 # -
+
+del product_observations_cvm['Measure Type']
+del product_observations_cvm['Unit']
 
 """
 Measure Type
@@ -397,7 +406,7 @@ product_observations_cvm.head(10)
 #### CHAINE VOLUME MEASURES
 scraper.dataset.title = 'UK trade time series - Chained Value Measures'
 scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
-scraper.dataset.description = scraper.dataset.comment
+scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
 print(scraper.dataset.title)
 print(scraper.dataset.comment)
 print(scraper.dataset.description)
@@ -413,8 +422,5 @@ cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset
 # -
 
 cubes.output_all()
-
-
-
 
 
