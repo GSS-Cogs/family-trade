@@ -67,8 +67,8 @@
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "country Of Ownership",
-    "dc:title": "country Of Ownership",
+    "rdfs:label": "Country Of Ownership",
+    "dc:title": "Country Of Ownership",
     "rdfs:seeAlso": [
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership/dataset",
@@ -76,12 +76,12 @@
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "country Of Ownership",
-            "dc:title": "country Of Ownership",
+            "rdfs:label": "Country Of Ownership",
+            "dc:title": "Country Of Ownership",
             "http://publishmydata.com/pmdcat#datasetContents": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership"
             },
-            "rdfs:comment": "Dataset representing the 'country Of Ownership' code list.",
+            "rdfs:comment": "Dataset representing the 'Country Of Ownership' code list.",
             "http://publishmydata.com/pmdcat#graph": {
                 "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership"
             },
@@ -103,8 +103,8 @@
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/country-of-ownership/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "country Of Ownership Catalog Record",
-            "rdfs:label": "country Of Ownership Catalog Record",
+            "dc:title": "Country Of Ownership Catalog Record",
+            "rdfs:label": "Country Of Ownership Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2020-12-23T11:58:58.140188"
