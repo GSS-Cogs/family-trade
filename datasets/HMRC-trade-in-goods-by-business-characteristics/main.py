@@ -106,7 +106,7 @@ df['Flow Directions'] = df['Flow Directions'].apply(pathify)
 trace.Flow_Directions("Renamed Flow to Flow Directions")
 
 df['Country'] = df['Country'].apply(pathify)
-df['Country'] = df['Country'].str.replace({"legacy-B5": "B5"}
+df['Country'] = df['Country'].str.replace({"legacy-B5": "B5"})
 trace.Country("Pathified Country")
 
 df['Zone'] = df['Zone'].apply(pathify)
