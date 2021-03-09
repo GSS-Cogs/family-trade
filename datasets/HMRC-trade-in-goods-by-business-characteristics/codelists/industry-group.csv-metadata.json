@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group",
     "url": "industry-group.csv",
     "rdfs:label": "Industry Groups",
     "dc:title": "Industry Groups",
@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-groups/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-group/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -56,14 +56,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-groups/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-group/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -71,16 +71,16 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group"
             },
             "dc:modified": {
                 "@type": "dateTime",
@@ -97,17 +97,17 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group"
             },
             "dc:title": "Industry Groups Catalog Record",
             "rdfs:label": "Industry Groups Catalog Record",
