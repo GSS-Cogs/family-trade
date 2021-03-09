@@ -1,9 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups",
     "url": "industry-group.csv",
-    "rdfs:label": "High Level Industry Groups",
-    "dc:title": "High Level Industry Groups",
+    "rdfs:label": "Industry Groups",
+    "dc:title": "Industry Groups",
     "tableSchema": {
         "columns": [
             {
@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#concept/high-level-industry-groups/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-groups/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -56,14 +56,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#concept/high-level-industry-groups/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-groups/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -71,24 +71,24 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups"
             },
             "dc:modified": {
                 "@type": "dateTime",
                 "@value": "2021-03-09T13:44:37.357997"
             },
-            "rdfs:label": "High Level Industry Groups",
-            "dc:title": "High Level Industry Groups",
-            "rdfs:comment": "Dataset representing the 'High Level Industry Groups' code list.",
+            "rdfs:label": "Industry Groups",
+            "dc:title": "Industry Groups",
+            "rdfs:comment": "Dataset representing the 'Industry Groups' code list.",
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2021-03-09T13:44:10.717162"
@@ -97,20 +97,20 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-statistics-by-business-characteristics#scheme/high-level-industry-groups"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-groups"
             },
-            "dc:title": "High Level Industry Groups Catalog Record",
-            "rdfs:label": "High Level Industry Groups Catalog Record",
+            "dc:title": "Industry Groups Catalog Record",
+            "rdfs:label": "Industry Groups Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2021-03-09T13:44:10.717162"
