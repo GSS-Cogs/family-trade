@@ -72,6 +72,7 @@ trade,Status,dimension/status,qb:DimensionProperty,,,skos:Concept,http://gss-dat
 trade,Alcohol by Volume,dimension/alcohol-by-volume,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/alcohol-by-volume,Alcohol by Volume
 trade,Alcohol Type,dimension/alcohol-type,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/alcohol-type,Alcohol Type
 trade,Alcohol Origin,dimension/alcohol-origin,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/alcohol-origin,Alcohol Origin
+trade,Alcohol Bulletin Type,dimension/bulletin-type,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/bulletin-type,Alcohol Bulletin Type
 trade,Production and Clearance,dimension/production-and-clearance,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance,Production and Clearance
 trade,Growth,dimension/growth,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/growth,growth
 trade,Trade Services,dimension/trade-services,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/trade-services,
