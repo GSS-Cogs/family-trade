@@ -22,7 +22,7 @@ trade,ONS Functional Category,dimension/ons-functional-category,qb:DimensionProp
 trade,ONS Trade Areas ITIS,dimension/ons-trade-areas-itis,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/ons-trade-areas-itis,ONS Trade Areas ITIS
 trade,ITIS Service,dimension/itis-service,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/itis-services,ITIS Service
 trade,ITIS Industry,dimension/itis-industry,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/itis-industry,ITIS Industry
-trade,SIC Industry,dimension/sic-industry,qb:DimensionProperty,,,skos:Concept,http://business.data.gov.uk/companies/def/sic-2007/scheme,The current Standard Industrial Classification (SIC) used in classifying business establishments and other statistical units by the type of economic activity in which they are engaged.
+trade,Standard Industrial Classification,dimension/sic-2007,qb:DimensionProperty,,,skos:Concept,http://business.data.gov.uk/companies/def/sic-2007/scheme,The current Standard Industrial Classification (SIC) used in classifying business establishments and other statistical units by the type of economic activity in which they are engaged.
 trade,Marker,attribute/marker,qb:AttributeProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/marker,Marker for special values
 trade,ONS Partner Geography,dimension/ons-partner-geography,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/sdmx-bop/cl_area,ONS Partner Geography
 trade,Product Department,dimension/product-department,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/product-department,Product Department

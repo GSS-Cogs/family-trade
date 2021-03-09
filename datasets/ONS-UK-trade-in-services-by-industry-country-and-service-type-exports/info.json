@@ -32,24 +32,20 @@
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             },
             "Direction": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{direction}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{direction}"
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/dimension/ons-country",
-                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/dimension/ons-country",
+                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}"
             },
             "Industry": {
-                "parent": "http://gss-data.org.uk/def/dimension/ons-industry",
-                "value": "http://gss-data.org.uk/def/concept/ons-industry/{industry}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sic-2007",
+                "value": "http://business.data.gov.uk/companies/def/sic-2007/{industry}"
             },
             "Service Account": {
-                "parent": "http://gss-data.org.uk/def/dimension/ons-service-account",
-                "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/dimension/ons-service-account",
+                "value": "http://gss-data.org.uk/def/concept/ons-service-account/{service_account}"
             }
         },
         "stage": [
