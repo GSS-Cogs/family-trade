@@ -24,7 +24,7 @@ trade,ITIS Service,dimension/itis-service,qb:DimensionProperty,,,skos:Concept,ht
 trade,ITIS Industry,dimension/itis-industry,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/itis-industry,ITIS Industry
 trade,Standard Industrial Classification,dimension/sic-2007,qb:DimensionProperty,,,skos:Concept,http://business.data.gov.uk/companies/def/sic-2007/scheme,The current Standard Industrial Classification (SIC) used in classifying business establishments and other statistical units by the type of economic activity in which they are engaged.
 trade,Marker,attribute/marker,qb:AttributeProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/marker,Marker for special values
-trade,ONS Partner Geography,dimension/ons-partner-geography,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/sdmx-bop/cl_area,ONS Partner Geography
+trade,ONS Partner Geography,dimension/ons-partner-geography,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/concept-scheme/cl-area,ONS Partner Geography
 trade,Product Department,dimension/product-department,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/product-department,Product Department
 trade,Product Category,dimension/product-category,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/product-category,Product Category
 trade,Trades,dimension/trades,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/trades,Trades
@@ -80,3 +80,4 @@ trade,Industry Section,dimension/industry-section,qb:DimensionProperty,,,skos:Co
 trade,CDID,dimension/cdid,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/cdid,
 trade,ONS Industry Classification,dimension/ons-industry,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/ons-industry,
 trade,Country Area,dimension/country-area,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/country-area,
+trade,Commodity,dimension/commodity,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/commodity,
