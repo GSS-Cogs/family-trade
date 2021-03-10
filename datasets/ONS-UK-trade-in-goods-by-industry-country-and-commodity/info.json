@@ -34,7 +34,7 @@
             },
             "ONS Partner Geography": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}"
+                "value": "http://gss-data.org.uk/def/concept/cl-area/{ons_partner_geography}"
             },
             "Commodity": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
