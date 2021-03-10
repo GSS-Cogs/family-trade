@@ -428,21 +428,21 @@ cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset
 
 # +
 #### CURRENT PRICES
-scraper.dataset.title = 'UK trade time series - Current Prices'
-scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
-scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
-print(scraper.dataset.title)
-print(scraper.dataset.comment)
-print(scraper.dataset.description)
+#scraper.dataset.title = 'UK trade time series - Current Prices'
+#scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
+#scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
+#print(scraper.dataset.title)
+3print(scraper.dataset.comment)
+#print(scraper.dataset.description)
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cp"
-data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
+#with open("info.json", "r") as jsonFile:
+#    data = json.load(jsonFile)
+#data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cp"
+#data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#with open("info.json", "w") as jsonFile:
+#    json.dump(data, jsonFile)
 
-cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+#cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
 # -
 
 cubes.output_all()
