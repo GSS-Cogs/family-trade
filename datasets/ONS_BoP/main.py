@@ -72,10 +72,10 @@ for name, tab in tabs.items():
     quarter = tab.excel_ref('D5').expand(RIGHT)
     trace.Period("Taken from Year and Quarter ; rows 4 and 5")
     
-    flow = tab.excel_ref('B1').expand(DOWN).filter(is_one_of(["Imports", "Exports", "Balances", "Credits", "Debits", "Balances (net transactions)"]))
+    flow = tab.excel_ref('B1').expand(DOWN).filter(is_one_of(["Imports", "Exports", "Balances", "Credits", "Debits", "Balances (net transactions)"])) | tab.excel_ref('A1')
     trace.Flow_Directions("flow taken from tab values in column B as one of: Imports, Exports, Balances, Credits, Debits, Balances (net transactions) ")   
     
-    seasonal_adjustment = tab.excel_ref('B').filter(is_one_of(["Seasonally adjusted", "Not seasonally adjusted"]))
+    seasonal_adjustment = tab.excel_ref('B').filter(is_one_of(["Seasonally adjusted", "Not seasonally adjusted"])) | tab.excel_ref('A1')
     trace.Seasonal_Adjustment("Taken from column B as one of the following values: Seasonally Adjusted , Not Seasonally Adjusted")
     
     account_type = tab.excel_ref('B1').is_not_blank()
@@ -100,7 +100,7 @@ for name, tab in tabs.items():
                 HDim(flow,'Flow Directions',CLOSEST,ABOVE)
     ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    #savepreviewhtml(tidy_sheet, fname= name + "PREVIEW.html")
+    savepreviewhtml(tidy_sheet, fname= name + "PREVIEW.html")
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
     
@@ -116,15 +116,16 @@ df['Quarter'] = df['Quarter'].str.strip()
 df['Period'] = df['Year'] + df['Quarter']
 df["Period"] =  df["Period"].apply(date_time)
 df["Flow Directions"].fillna('not-applicable', inplace=True)
-df = df.replace({'Flow Directions' : {'balances-net-transactions' : 'balances' }})
-df = df.replace({'Marker' : {'-' : 'unknown'}})
-df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'sa', ' Not seasonally adjusted' : 'nsa' }})
-df["Seasonal Adjustment"].fillna('nsa', inplace=True)
-
 for column in df:
     if column in ('Account Type', 'Flow Directions', 'BOP Services'):
         df[column] = df[column].str.strip()
         df[column] = df[column].map(lambda x: pathify(x))
+df = df.replace({'Flow Directions' : {'balances-net-transactions' : 'balances', 'd' : 'not-applicable', 'j' : 'not-applicable', 'k' : 'not-applicable' }})
+df = df.replace({'Marker' : {'-' : 'unknown'}})
+df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'sa', ' Not seasonally adjusted' : 'nsa', ' K' : 'nsa' }})
+df["Seasonal Adjustment"].fillna('nsa', inplace=True)
+
+
 
 # %%
 df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Account Type', 'Marker' ,'Value',]].drop_duplicates()
@@ -149,3 +150,5 @@ df['BOP Services'].unique()
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
 trace.render("spec_v1.html")
+
+# %%
