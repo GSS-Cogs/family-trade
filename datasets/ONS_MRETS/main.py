@@ -432,7 +432,7 @@ cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset
 #scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
 #scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
 #print(scraper.dataset.title)
-3print(scraper.dataset.comment)
+#print(scraper.dataset.comment)
 #print(scraper.dataset.description)
 
 #with open("info.json", "r") as jsonFile:
