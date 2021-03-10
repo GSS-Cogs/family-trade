@@ -105,6 +105,10 @@ for col in tidy.columns:
         #display(col)
         #display(tidy[col].cat.categories)
 
+# Maps to nuts-geographies later, which has Eilean Siar (Western Isles) not Na h-Eileanan Siar
+tidy['Geography'].replace('Na h-Eileanan Siar', 'Eilean Siar (Western Isles)',inplace=True)
+list(tidy['Geography'].unique())
+
 # +
 tidy['Geography'] = tidy['Geography'].map(
     lambda x: {
