@@ -1,0 +1,7 @@
+Label,Notation,Parent Notation,Sort Priority
+Total,total,,1
+Remote Trade (mode 1),mode-1,total,2
+Consumption Abroad (mode 2),mode-2,total,3
+Commercial Presence (mode 3),mode-3,total,4
+Presence of Natural Persons (code 4),mode-4,total,5
+Total of Remote Trade and Consumption Abroad and Presence of Natural Persons (modes 1 2 4),total-modes-1-2-and-4,total,6

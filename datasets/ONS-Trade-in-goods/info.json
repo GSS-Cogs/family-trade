@@ -47,11 +47,9 @@
                 "description": ""
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-country",
-                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
-                "description": "",
-                "codelist":false
-
+                "description": "Country",
+                "value": "http://gss-data.org.uk/def/concept/cl-area/{country}",
+                "codelist": "http://gss-data.org.uk/def/concept-scheme/cl-area"
             },
             "Commodity": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-commoidty",

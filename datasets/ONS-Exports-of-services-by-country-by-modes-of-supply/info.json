@@ -28,19 +28,14 @@
                 "datatype": "double"
             },
             "Direction": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions/",
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions/",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{direction}",
                 "codelist": false
             },
             "Country": {
-                "parent": "http://gss-data.org.uk/def/dimension/ons-country",
-                "value": "http://gss-data.org.uk/def/concept/ons-country/{country}",
-                "codelist": false
-            },
-            "Mode": {
-                "parent": "http://gss-data.org.uk/def/dimension/ons-mode",
-                "value": "http://gss-data.org.uk/def/concept/ons-mode/{mode}",
-                "codelist": false
+                "description": "Country",
+                "value": "http://gss-data.org.uk/def/concept/cl-area/{country}",
+                "codelist": "http://gss-data.org.uk/def/concept-scheme/cl-area"
             },
             "Service Account": {
                 "parent": "http://gss-data.org.uk/def/dimension/ons-service-account",

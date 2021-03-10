@@ -29,22 +29,19 @@
                 "codelist": false
             },
             "Flow": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
             },
             "ONS Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}"
             },
             "Commodity": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
-                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
+                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}"
             },
             "Industry": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sic",
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sic-2007",
                 "value": "http://business.data.gov.uk/companies/def/sic-2007/{industry}"
             },
             "Value": {
