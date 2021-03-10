@@ -390,20 +390,26 @@ product_observations_cvm["Measure Type"] = 'cvm'
 product_observations_cp["Measure Type"] = 'cp'
 product_observations_avg["Measure Type"] = 'avg-per-ton'
 product_observations_def["Measure Type"] = 'implied-deflator'
-# -
 
+# +
 del product_observations_cvm['Measure Type']
 del product_observations_cvm['Unit']
+product_observations_cvm['Trade Area'] = product_observations_cvm['Trade Area'].str.upper()
 
+del product_observations_cp['Measure Type']
+del product_observations_cp['Unit']
+product_observations_cp['Trade Area'] = product_observations_cp['Trade Area'].str.upper()
+
+# +
 """
 Measure Type
 'Current Price', 'Chained volume measure', 'Net Mass','Implied Deflator', 'Average value per ton'
 """
-product_observations_cvm['Trade Area'] = product_observations_cvm['Trade Area'].str.upper()
-product_observations_cvm.head(10)
+
+product_observations_cp.head(10)
 
 # +
-#### CHAINE VOLUME MEASURES
+#### CHAINED VOLUME MEASURES
 scraper.dataset.title = 'UK trade time series - Chained Value Measures'
 scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
 scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
@@ -419,15 +425,24 @@ with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
 cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+
+# +
+#### CURRENT PRICES
+scraper.dataset.title = 'UK trade time series - Current Prices'
+scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
+scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
+print(scraper.dataset.title)
+print(scraper.dataset.comment)
+print(scraper.dataset.description)
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cp"
+data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+
+cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
 # -
 
 cubes.output_all()
-
-# +
-#product_observations_cvm['Trade Area'].unique()
-# -
-
-
-
-
-
