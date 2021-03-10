@@ -1,7 +1,7 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8",
-    "url": "cn8.csv",
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021",
+    "url": "combined-nomenclature-8-2021.csv",
     "tableSchema": {
         "columns": [
             {
@@ -30,7 +30,15 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/combined-nomenclature-8/2021/{parent_notation}"
+            },
+            {
+                "titles": "CNMapping",
+                "name": "cn_mapping",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "owl:sameAs",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature/2021/{cn_mapping}"
             },
             {
                 "titles": "Sort Priority",
@@ -54,70 +62,73 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/combined-nomenclature-8/2021/{notation}"
     },
+    "rdfs:label": "Combined Nomenclature 8, 2021",
+    "dc:title": "Combined Nomenclature 8, 2021",
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8",
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Cn8",
-    "dc:title": "Cn8",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/dataset",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
+            "rdfs:label": "Combined Nomenclature 8, 2021",
+            "dc:title": "Combined Nomenclature 8, 2021",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021"
             },
-            "rdfs:label": "Cn8",
-            "dc:title": "Cn8",
-            "rdfs:comment": "Dataset representing the 'Cn8' code list.",
+            "rdfs:comment": "The Combined Nomenclature (CN) is a tool for classifying goods, set up to meet the requirements both of the Common Customs Tariff and of the EU's external trade statistics. The CN is also used in intra-EU trade statistics.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.210121"
+                "@value": "2021-03-09T12:30:31.629895"
             },
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.210121"
+                "@value": "2015-01-01T10:00:00.000000"
+            },
+            "dcat:landingPage": {
+                "@id": "https://ec.europa.eu/taxation_customs/business/calculation-customs-duties/what-is-common-customs-tariff/combined-nomenclature-8_en"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/catalog-record"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/catalog-record",
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8/dataset"
-            },
-            "dc:title": "Cn8 Catalog Record",
-            "rdfs:label": "Cn8 Catalog Record",
+            "dc:title": "Combined Nomenclature 8, 2021 Catalog Record",
+            "rdfs:label": "Combined Nomenclature 8, 2021 Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T16:29:43.370444"
+                "@value": "2021-02-15T10:00:00.000000"
+            },
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021/dataset"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T16:29:43.370444"
+                "@value": "2021-02-15T10:00:00.000000"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cn8"
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021"
             }
         }
     ]
