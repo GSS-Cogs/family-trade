@@ -80,7 +80,7 @@ df['Value'] = pd.to_numeric(df.Value, errors='coerce')
 df['Marker'].replace('N/A', 'not-collated', inplace=True)
 trace.Marker("replacing N/A with not-collated")
 df['Flow'] = df['Flow'].map(lambda s: s.lower().strip())
-df["Country"] = df["Country"].map(lambda x: pathify(x))
+df["Country"] = df["Country"].map(lambda x: pathify(x).upper())
 df['Trade Type'] = df['Trade Type'].apply(lambda x: 'total' if 'Total Trade' in x else 
                                       ('goods' if 'Trade in Goods' in x else 
                                        ('services' if 'Trade in Services' in x else x)))

@@ -1,9 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name",
-    "url": "area-name.csv",
-    "rdfs:label": "Area Name",
-    "dc:title": "Area Name",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services",
+    "url": "trade-services.csv",
+    "rdfs:label": "Trade Services",
+    "dc:title": "Trade Services",
     "tableSchema": {
         "columns": [
             {
@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#concept/area-name/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#concept/trade-services/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -49,14 +49,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#concept/area-name/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#concept/trade-services/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -64,53 +64,53 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-11T11:20:11.103004"
+                "@value": "2021-03-11T09:28:55.036473"
             },
-            "rdfs:label": "Area Name",
-            "dc:title": "Area Name",
-            "rdfs:comment": "Dataset representing the 'Area Name' code list.",
+            "rdfs:label": "Trade Services",
+            "dc:title": "Trade Services",
+            "rdfs:comment": "Dataset representing the 'Trade Services' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-11T11:20:11.103004"
+                "@value": "2021-03-11T09:28:55.036473"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/area-name"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services"
             },
-            "dc:title": "Area Name Catalog Record",
-            "rdfs:label": "Area Name Catalog Record",
+            "dc:title": "Trade Services Catalog Record",
+            "rdfs:label": "Trade Services Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-11T11:20:11.103004"
+                "@value": "2021-03-11T09:28:55.036473"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-11T11:20:11.103004"
+                "@value": "2021-03-11T09:28:55.036473"
             }
         }
     ]

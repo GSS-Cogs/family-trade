@@ -386,8 +386,8 @@ product_observations_cvm = product_observations[product_observations["Measure Ty
 product_observations_cp = product_observations[product_observations["Measure Type"] == "Current Price"]
 product_observations_avg = product_observations[product_observations["Measure Type"] == "Average value per ton"]
 product_observations_def = product_observations[product_observations["Measure Type"] == "implied-deflator"]
-product_observations_cvm["Measure Type"] = 'cvm'
-product_observations_cp["Measure Type"] = 'cp'
+product_observations_cvm["Measure Type"] = 'chained-volume-measure'
+product_observations_cp["Measure Type"] = 'current-price'
 product_observations_avg["Measure Type"] = 'avg-per-ton'
 product_observations_def["Measure Type"] = 'implied-deflator'
 
@@ -413,36 +413,51 @@ product_observations_cp.head(10)
 scraper.dataset.title = 'UK trade time series - Chained Value Measures'
 scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
 scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
-print(scraper.dataset.title)
-print(scraper.dataset.comment)
-print(scraper.dataset.description)
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
+data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/trade/measure/chained-value-measure"
 data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
 with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
+cubes = Cubes(infoFileName)
 cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+cubes.output_all()
 
 # +
 #### CURRENT PRICES
-#scraper.dataset.title = 'UK trade time series - Current Prices'
-#scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
-#scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
-#print(scraper.dataset.title)
-#print(scraper.dataset.comment)
-#print(scraper.dataset.description)
+scraper.dataset.title = 'UK trade time series - Current Prices'
+scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
+scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
 
-#with open("info.json", "r") as jsonFile:
-#    data = json.load(jsonFile)
-#data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cp"
-#data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-#with open("info.json", "w") as jsonFile:
-#    json.dump(data, jsonFile)
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/trade/measure/current-price"
+data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
 
-#cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+cubes = Cubes(infoFileName)
+cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+cubes.output_all()
 # -
 
-cubes.output_all()
+
+
+# +
+import os
+import pandas as pd
+
+def find_concepts(codes):
+    try:
+        
+        
+        print('Current Directory: ' + os.getcwd() + '\n')
+    except Exception as e:
+        print(e)
+# -
+
+find_concepts(product_observations_cvm['Trade Area'])
+
+

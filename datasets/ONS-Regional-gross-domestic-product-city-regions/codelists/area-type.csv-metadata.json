@@ -1,0 +1,88 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type",
+    "url": "area-type.csv",
+    "rdfs:label": "Area Type",
+    "dc:title": "Area Type",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Area.Type",
+                "name": "area.type"
+            },
+            {
+                "titles": "n",
+                "name": "n"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type"
+            }
+        ]
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-11T11:45:37.219259"
+            },
+            "rdfs:label": "Area Type",
+            "dc:title": "Area Type",
+            "rdfs:comment": "Dataset representing the 'Area Type' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-11T11:45:37.219259"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-gross-domestic-product-city-regions#scheme/area-type"
+            },
+            "dc:title": "Area Type Catalog Record",
+            "rdfs:label": "Area Type Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-11T11:45:37.219259"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-11T11:45:37.219259"
+            }
+        }
+    ]
+}

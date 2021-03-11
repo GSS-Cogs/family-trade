@@ -38,11 +38,6 @@
             "Geography Code": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "value": "http://statistics.data.gov.uk/id/statistical-geography/{geography_code}"
-            },
-            "Area Type": {
-                "parent": "http://gss-data.org.uk/def/concept-scheme/geography-level",
-                "value": "http://gss-data.org.uk/def/concept/geography-level/{area_type}",
-                "description": ""
             }
         },
         "codelists": [
