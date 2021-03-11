@@ -67,7 +67,7 @@ Dimensions = [
             HDim(geography,'Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDimConst('SITC 4', 'all'),
-            HDimConst('Measure Type', 'Count of Businesses'),
+            HDimConst('Measure Type', 'Businesses'),
             HDimConst('Unit', 'businesses'),
             HDimConst('Year', dataset_year)
             ]
