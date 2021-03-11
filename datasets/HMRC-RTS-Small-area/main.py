@@ -51,6 +51,8 @@ table = table[(table['Marker'] != 'residual-trade')]
 table = table[(table['Marker'] != 'below-threshold-traders')]
 table["Measure Type"] = table["Measure Type"].apply(pathify)
 table = table.drop_duplicates()
+table['Unit'] = 'gbp-million'
+#unit is being changed to gbp million this is not technically correct but its the only way i can see to deal with the missing URI
 
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
