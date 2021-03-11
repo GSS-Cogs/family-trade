@@ -413,9 +413,6 @@ product_observations_cp.head(10)
 scraper.dataset.title = 'UK trade time series - Chained Value Measures'
 scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
 scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
-print(scraper.dataset.title)
-print(scraper.dataset.comment)
-print(scraper.dataset.description)
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
@@ -424,16 +421,15 @@ data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/conc
 with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
+cubes = Cubes(infoFileName)
 cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+cubes.output_all()
 
 # +
 #### CURRENT PRICES
 scraper.dataset.title = 'UK trade time series - Current Prices'
 scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
 scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
-print(scraper.dataset.title)
-print(scraper.dataset.comment)
-print(scraper.dataset.description)
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
@@ -442,11 +438,26 @@ data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/conc
 with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
+cubes = Cubes(infoFileName)
 cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+cubes.output_all()
 # -
 
-cubes.output_all()
 
 
+# +
+import os
+import pandas as pd
+
+def find_concepts(codes):
+    try:
+        
+        
+        print('Current Directory: ' + os.getcwd() + '\n')
+    except Exception as e:
+        print(e)
+# -
+
+find_concepts(product_observations_cvm['Trade Area'])
 
 
