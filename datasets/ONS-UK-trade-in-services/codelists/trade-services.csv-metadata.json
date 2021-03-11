@@ -1,0 +1,117 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services",
+    "url": "trade-services.csv",
+    "rdfs:label": "Trade Services",
+    "dc:title": "Trade Services",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#concept/trade-services/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort_priority",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#concept/trade-services/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-11T09:28:55.036473"
+            },
+            "rdfs:label": "Trade Services",
+            "dc:title": "Trade Services",
+            "rdfs:comment": "Dataset representing the 'Trade Services' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-11T09:28:55.036473"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/trade-services"
+            },
+            "dc:title": "Trade Services Catalog Record",
+            "rdfs:label": "Trade Services Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-11T09:28:55.036473"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-11T09:28:55.036473"
+            }
+        }
+    ]
+}
