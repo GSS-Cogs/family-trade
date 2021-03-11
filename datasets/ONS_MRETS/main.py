@@ -386,8 +386,8 @@ product_observations_cvm = product_observations[product_observations["Measure Ty
 product_observations_cp = product_observations[product_observations["Measure Type"] == "Current Price"]
 product_observations_avg = product_observations[product_observations["Measure Type"] == "Average value per ton"]
 product_observations_def = product_observations[product_observations["Measure Type"] == "implied-deflator"]
-product_observations_cvm["Measure Type"] = 'cvm'
-product_observations_cp["Measure Type"] = 'cp'
+product_observations_cvm["Measure Type"] = 'chained-volume-measure'
+product_observations_cp["Measure Type"] = 'current-price'
 product_observations_avg["Measure Type"] = 'avg-per-ton'
 product_observations_def["Measure Type"] = 'implied-deflator'
 
@@ -446,3 +446,7 @@ cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset
 # -
 
 cubes.output_all()
+
+
+
+
