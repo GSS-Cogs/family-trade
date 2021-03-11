@@ -1,8 +1,8 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#schema",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme",
     "url": "area-name.csv",
-    "tableSchema": {
+    "tablescheme": {
         "columns": [
             {
                 "titles": "Label",
@@ -71,16 +71,16 @@
     "dc:title": "Area Name",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#schema/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#schema"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#schema"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme"
             },
             "dc:modified": {
                 "@type": "dateTime",
@@ -97,17 +97,17 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#schema/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#schema/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#schema/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#schema"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme"
             },
             "dc:title": "Area Name Catalog Record",
             "rdfs:label": "Area Name Catalog Record",
