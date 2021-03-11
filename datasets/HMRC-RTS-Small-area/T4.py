@@ -71,7 +71,7 @@ Dimensions = [
             HDim(geography,'HMRC Partner Geography',DIRECTLY,LEFT),
             HDim(nut,'NUTS Geography',DIRECTLY,LEFT),
             HDim(sitc,'SITC 4',DIRECTLY,LEFT),
-            HDimConst('Measure Type', 'Count of Businesses'),
+            HDimConst('Measure Type', 'Businesses'),
             HDimConst('Unit', 'businesses'),
             HDimConst('Year', dataset_year)
             ]
