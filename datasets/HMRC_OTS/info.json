@@ -14,7 +14,52 @@
     },
     "transform": {
         "airtable": "recvSzMgbU9mqu7ln",
-        "main_issue": 14
+        "main_issue": 14,
+        "columns": {
+            "FlowTypeId": {
+                "label": "Flow Type",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flowtypeid}"
+            },
+            "CountryId": {
+                "label": "Country",
+                "codelist": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country",
+                "value": "https://api.uktradeinfo.com/Country/{countryid}"
+            },
+            "Cn8Code": {
+                "label": "Commodity",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021",
+                "value": "http://gss-data.org.uk/def/trade/concept/combined-nomenclature-8/2021/{cn8code}"
+            },
+            "PortCodeNumeric": {
+                "label": "Port",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC_TC#scheme/port",
+                "value": "https://api.uktradeinfo.com/Port/{portcodenumeric}"
+            },
+            "Period": {
+                "label": "Month",
+                "codelist": false,
+                "value": "http://reference.data.gov.uk{period}"
+            },
+            "Measure Type": {
+                "dimension": "http://purl.org/linked-data/cube#measureType",
+                "value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
+                "types": [
+                    "net-mass",
+                    "monetary-value"
+                ]
+            },
+            "Unit": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                "value": "{unit}"
+            },
+            "Value": {
+                "datatype": "decimal"
+            },
+            "SuppressionIndex": {
+                "attribute": "http://gss-data.org.uk/def/trade/concept-scheme/marker/{suppressionindex}"
+            }
+        }
     },
     "odataConversion": {
         "publishedLocation": "https://staging.gss-data.org.uk/sparql",

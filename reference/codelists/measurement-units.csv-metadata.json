@@ -1,0 +1,142 @@
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {
+            "@language": "en"
+        }
+    ],
+    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units",
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "url": "measurement-units.csv",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Path",
+                "required": true,
+                "name": "path",
+                "datatype": "string",
+                "suppressOutput": true
+            },
+            {
+                "titles": "Label",
+                "required": true,
+                "name": "label",
+                "datatype": "string",
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "required": false,
+                "name": "notation",
+                "datatype": "string",
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Description",
+                "required": false,
+                "name": "description",
+                "datatype": "string",
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "titles": "Parent",
+                "required": false,
+                "name": "parent",
+                "datatype": "string",
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/measurement-units/{+parent}"
+            },
+            {
+                "titles": "Source",
+                "required": false,
+                "name": "source",
+                "datatype": "anyURI",
+                "propertyUrl": "rdfs:isDefinedBy",
+                "valueUrl": "{source}"
+            },
+            {
+                "titles": "Sort Priority",
+                "required": false,
+                "name": "sort",
+                "datatype": "integer",
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "name": "type",
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "name": "in_scheme",
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units"
+            }
+        ],
+        "primaryKey": [
+            "path"
+        ],
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/measurement-units/{+path}"
+    },
+    "rdfs:label": "GSS Trade measurement units",
+    "dc:title": "GSS Trade measurement units",
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T15:13:25.192779"
+            },
+            "rdfs:label": "GSS Trade measurement units",
+            "dc:title": "GSS Trade measurement units",
+            "rdfs:comment": "Dataset representing the 'GSS Trade measurement units' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:41:31.826544"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/measurement-units"
+            },
+            "dc:title": "GSS Trade measurement units Catalog Record",
+            "rdfs:label": "GSS Trade measurement units Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:41:31.826544"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-02-03T08:41:31.826544"
+            }
+        }
+    ]
+}
