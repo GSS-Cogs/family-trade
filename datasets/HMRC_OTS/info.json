@@ -49,9 +49,9 @@
                     "monetary-value"
                 ]
             },
-            "Unit": {
+            "Unit Type": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "{unit}"
+                "value": "{unit_type}"
             },
             "Value": {
                 "datatype": "decimal"
