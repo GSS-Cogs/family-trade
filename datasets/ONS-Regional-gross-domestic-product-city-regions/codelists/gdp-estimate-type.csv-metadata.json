@@ -1,8 +1,10 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/gdp-estimate-type",
     "url": "gdp-estimate-type.csv",
-    "tablescheme": {
+    "rdfs:label": "Gdp Estimate Type",
+    "dc:title": "Gdp Estimate Type",
+    "tableSchema": {
         "columns": [
             {
                 "titles": "Label",
@@ -16,7 +18,7 @@
                 "name": "notation",
                 "datatype": {
                     "base": "string",
-                    "format": "^-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*$"
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
                 },
                 "required": true,
                 "propertyUrl": "skos:notation"
@@ -26,7 +28,7 @@
                 "name": "parent_notation",
                 "datatype": {
                     "base": "string",
-                    "format": "^(-?[\\w\\.\\/]+(-[\\w\\.\\/]+)*|)$"
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
@@ -34,7 +36,7 @@
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -60,57 +62,55 @@
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "GDP Estimate Type",
-    "dc:title": "GDP Estimate Type",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/gdp-estimate-type/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/gdp-estimate-type"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/gdp-estimate-type"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-04T22:01:11.435270"
+                "@value": "2021-03-11T11:21:10.410075"
             },
-            "rdfs:label": "GDP Estimate Type",
-            "dc:title": "GDP Estimate Type",
-            "rdfs:comment": "Dataset representing the 'GDP Estimate Type' code list.",
+            "rdfs:label": "Gdp Estimate Type",
+            "dc:title": "Gdp Estimate Type",
+            "rdfs:comment": "Dataset representing the 'Gdp Estimate Type' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-04T18:57:35.127894"
+                "@value": "2021-03-11T11:21:10.410075"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/gdp-estimate-type/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/gdp-estimate-type/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/gdp-estimate-type/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-regional-gross-domestic-product-city-regions#scheme/gdp-estimate-type"
             },
-            "dc:title": "GDP Estimate Type Catalog Record",
-            "rdfs:label": "GDP Estimate Type Catalog Record",
+            "dc:title": "Gdp Estimate Type Catalog Record",
+            "rdfs:label": "Gdp Estimate Type Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-04T18:57:35.127894"
+                "@value": "2021-03-11T11:21:10.410075"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-04T18:57:35.127894"
+                "@value": "2021-03-11T11:21:10.410075"
             }
         }
     ]
