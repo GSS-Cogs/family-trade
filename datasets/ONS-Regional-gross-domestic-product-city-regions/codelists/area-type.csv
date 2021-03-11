@@ -1,5 +1,5 @@
-Area.Type,n
-city-region,525
-enterprise-region,126
-local-authority,7938
-local-enterprise-partnerships,798
+Label,Notation,Parent Notation,Sort Priority
+City Region,city-region,,1
+Enterprise Region,enterprise-region,,2
+Local Authority,local-authority,,3
+Local Enterprise Partnership,local-enterprise-partnership,,4
