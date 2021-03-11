@@ -18,10 +18,12 @@ create OTS codelist is more detailed that the SITC codelist used for RTS and is 
 link to metadata so users can understand how these data are classifed https://www.uktradeinfo.com/trade-data/help-with-using-our-data/ 
 
 
-# Rob stuff
+# Rob's recommendations
 
 Contact Point: <mailto:uktradeinfo@hmrc.gov.uk>
 
+Description something along the lines of:
+> The Overseas Trade in Goods Statistics (OTS) are a detailed dataset covering the UK's trade in goods at a disaggregated country and product level. They are published monthly, quarterly and annually from trade declarations, providing access to both aggregated and detailed data for over 9,000 commodities and 250 partner countries.The detailed data are suitable for trend analysis and for comparing the relative magnitude of components.
 > Port data is only available for UK trade with non-EU countries. <https://www.uktradeinfo.com/trade-data/help-with-using-our-data/>
 
 ## Helpful Links
