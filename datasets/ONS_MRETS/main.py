@@ -441,7 +441,7 @@ cubes.output_all()
 #    json.dump(data, jsonFile)
 
 #cubes = Cubes(infoFileName)
-#cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+#cubes.add_cube(copy.deepcopy(scraper), product_observations_cp, scraper.dataset.title)
 #cubes.output_all()
 # -
 
