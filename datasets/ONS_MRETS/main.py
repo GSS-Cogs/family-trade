@@ -407,6 +407,8 @@ Measure Type
 """
 
 product_observations_cp.head(10)
+product_observations_cp['Trade Area'].unique()
+#product_observations_cvm['Trade Area'].unique()
 
 # +
 #### CHAINED VOLUME MEASURES
@@ -427,37 +429,24 @@ cubes.output_all()
 
 # +
 #### CURRENT PRICES
-scraper.dataset.title = 'UK trade time series - Current Prices'
-scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
-scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
+#scraper.dataset.title = 'UK trade time series - Current Prices'
+#scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
+#scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/trade/measure/current-price"
-data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
+#with open("info.json", "r") as jsonFile:
+#    data = json.load(jsonFile)
+#data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/trade/measure/current-price"
+#data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#with open("info.json", "w") as jsonFile:
+#    json.dump(data, jsonFile)
 
-cubes = Cubes(infoFileName)
-cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
-cubes.output_all()
+#cubes = Cubes(infoFileName)
+#cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+#cubes.output_all()
 # -
 
 
 
-# +
-import os
-import pandas as pd
 
-def find_concepts(codes):
-    try:
-        
-        
-        print('Current Directory: ' + os.getcwd() + '\n')
-    except Exception as e:
-        print(e)
-# -
-
-find_concepts(product_observations_cvm['Trade Area'])
 
 
