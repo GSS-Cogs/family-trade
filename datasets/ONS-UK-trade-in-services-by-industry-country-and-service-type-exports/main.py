@@ -132,15 +132,11 @@ df["Country"] = df["Country"].str.split(' ').str[0]
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Service Account"] = df["Service Account"].str.split(' ').str[0]
 df["Industry"] = df["Industry"].str.split(' ').str[0]
-df["Industry"] = df["Industry"].map(lambda x: pathify(x))
 df['Period'] = "year/" + df['Period']
 tidy_imports = df[["Period", "Country", "Industry", "Direction", "Service Account", "Value", "Marker"]]
 tidy_imports
 
-df["Industry"].unique()
-
 tidy = pd.concat([tidy_exports, tidy_imports])
-tidy
 
 # +
 description = f"""
