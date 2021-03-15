@@ -89,11 +89,11 @@ df = df.melt(id_vars=['SuppressionIndex', 'CountryId', 'FlowTypeDescription', 'C
 
 # Units, Measures, and dictionaries, oh my!
 df.loc[df['variable'] == 'Value', 'meausre-type'] = 'monetary-value'
-df.loc[df['variable'] == 'Value', 'unit-type'] = 'http://gss-data.org.uk/def/concept/measurement-units/gbp'
+df.loc[df['variable'] == 'Value', 'Unit Type'] = 'http://gss-data.org.uk/def/concept/measurement-units/gbp'
 df.loc[df['variable'] == 'NetMass', 'meausre-type'] = 'net-mass'
-df.loc[df['variable'] == 'NetMass', 'unit-type'] = 'http://qudt.org/vocab/unit/KiloGM'
+df.loc[df['variable'] == 'NetMass', 'Unit Type'] = 'http://qudt.org/vocab/unit/KiloGM'
 df.drop('variable', axis=1, inplace=True)
-df['unit-type'] = df['unit-type'].astype('category')
+df['Unit Type'] = df['Unit Type'].astype('category')
 df['meausre-type'] = df['meausre-type'].astype('category')
 
 # Rename columns
