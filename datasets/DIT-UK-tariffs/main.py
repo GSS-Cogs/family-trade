@@ -15,7 +15,7 @@
 
 # +
 from gssutils import *
-
+from IPython.core.display import HTML, display 
 scraper = Scraper(seed="info.json")
 scraper.distributions[0].title = "UK tariffs"
 scraper
@@ -27,7 +27,7 @@ display(distribution)
 link = distribution.downloadURL
 tariffs_data = pd.read_csv(link)
 
-from IPython.core.display import HTML
+
 for col in tariffs_data:
     if col not in ['Value']:
         tariffs_data[col] = tariffs_data[col].astype('category')
@@ -35,6 +35,7 @@ for col in tariffs_data:
         display(tariffs_data[col].cat.categories) 
 
 tariffs_data.dtypes
+
 
 # +
 #outputting for DM
