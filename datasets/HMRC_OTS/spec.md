@@ -42,8 +42,10 @@ Description something along the lines of:
   * `PortCodeNumeric`
   * `Period`
 * Map the `FlowTypeId` in the following fashion (<https://api.uktradeinfo.com/TradeType>)
-  * `1` => `imports`
-  * `2` => `exports`
+  * 1, EU Imports => eu-imports
+  * 2, EU Exports => eu-exports                             
+  * 3, Non-EU Imports => non-eu-imports                               
+  * 4, Non-EU Exports => non-eu-exports                                       
 * Add a `Measure Type` and `Unit Type` column. 
 * Pivot the data so that every row now has two rows - one for each of these measures. (observed values for the measure go into the column called `Value`)
   * One row for the `Value` field which should have `Measure Type = monetary-value` and `Unit Type = http://gss-data.org.uk/def/concept/measurement-units/gbp` the value should end up in a column named `Value`
@@ -53,3 +55,10 @@ Description something along the lines of:
   * `1` => `complete-suppression`
   * `2` => `suppression-of-country-and-port`
   * `3` => `suppression-of-country-port-and-total-trade-quantity`
+  
+
+## Corrections
+
+Please can you remove the `cn8_code` column and ensure that the `commodity_sitc_id` column is left in its place.
+
+N.B. The new `commodity_sitc_id` column contains values of the form `43121` but these need to be mapped so that the final two digits are stuck behind a decimal point, e.g. `431.21`. Also note that any trailing zeros after the decimal point need to be removed, e.g. `431.2` NOT `431.20`.
