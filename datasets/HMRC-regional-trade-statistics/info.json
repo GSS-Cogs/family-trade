@@ -62,9 +62,9 @@
     },
     "odataConversion": {
         "publishedLocation": "https://staging.gss-data.org.uk/sparql",
-        "datasetIdentifier": "http://gss-data.org.uk/data/gss_data/trade/hmrc-ots#dataset",
+        "datasetIdentifier": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#dataset",
         "chunkColumn": "MonthId",
-        "chunkDimension": "dim:refPeriod",
+        "chunkDimension": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#dimension/period",
         "supplementalEndpoints": {
             "FlowType": {
                 "endpoint": "https://api.uktradeinfo.com/FlowType",
