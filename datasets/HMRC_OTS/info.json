@@ -16,42 +16,42 @@
         "airtable": "recvSzMgbU9mqu7ln",
         "main_issue": 14,
         "columns": {
-            "flow-type": {
+            "flow_type": {
                 "label": "Flow Type",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow-type}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_type}"
             },
-            "country-id": {
+            "country_id": {
                 "label": "Country",
                 "codelist": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country",
-                "value": "https://api.uktradeinfo.com/Country/{country-id}"
+                "value": "https://api.uktradeinfo.com/Country/{country_id}"
             },
-            "cn8-code": {
+            "cn8_code": {
                 "label": "Commodity",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021",
-                "value": "http://gss-data.org.uk/def/trade/concept/combined-nomenclature-8/2021/{cn8-code}"
+                "value": "http://gss-data.org.uk/def/trade/concept/combined-nomenclature-8/2021/{cn8_code}"
             },
-            "port-code": {
+            "port_code": {
                 "label": "Port",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC_TC#scheme/port",
-                "value": "https://api.uktradeinfo.com/Port/{port-code}"
+                "value": "https://api.uktradeinfo.com/Port/{port_code}"
             },
             "period": {
                 "label": "Month",
                 "codelist": false,
                 "value": "http://reference.data.gov.uk{period}"
             },
-            "measure-type": {
+            "measure_type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
-                "value": "http://gss-data.org.uk/def/trade/measure/{measure-type}",
+                "value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
                 "types": [
                     "net-mass",
                     "monetary-value"
                 ]
             },
-            "Unit Type": {
+            "unit_type": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "{Unit_Type}"
+                "value": "{unit_type}"
             },
             "value": {
                 "datatype": "decimal"
