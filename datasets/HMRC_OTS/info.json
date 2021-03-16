@@ -41,9 +41,9 @@
                 "codelist": false,
                 "value": "http://reference.data.gov.uk{period}"
             },
-            "meausre-type": {
+            "measure-type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
-                "value": "http://gss-data.org.uk/def/trade/measure/{meausre-type}",
+                "value": "http://gss-data.org.uk/def/trade/measure/{measure-type}",
                 "types": [
                     "net-mass",
                     "monetary-value"
