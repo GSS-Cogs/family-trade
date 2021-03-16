@@ -6,12 +6,10 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.10.2
 #   kernelspec:
-#     display_name: 'Python 3.8.7 64-bit (''gss-utils'': pipenv)'
-#     metadata:
-#       interpreter:
-#         hash: f2b0bb78cbb17f9579fa5e62801b4f61ba0bc1633b5d43780d3380efce1f0d9c
+#     display_name: Python 3
+#     language: python
 #     name: python3
 # ---
 
@@ -21,9 +19,6 @@ import json
 import pandas as pd
 
 from gssutils import *
-
-# +
-# logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 # +
 infoFileName = 'info.json'
@@ -54,18 +49,68 @@ else:
     fetch_chunk = min(set(api_chunks)-set(pmd_chunks))
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
+# Download the chonky dataframe
 df = distro.as_pandas(chunks_wanted=fetch_chunk)
 
-df
+# Drop all columns not specified
+df.drop([x for x in df.columns if x not in ['MonthId','FlowTypeDescription', 'SuppressionIndex', 'CountryId', 'Cn8Code', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
 
+# Convert columns to categorical if categorical
+for col in df.columns:
+    if col not in ['Value', 'NetMass', 'MonthId']:
+        df[col] = df[col].astype('category')
+
+# Period column
 df['Period'] = pd.to_datetime(df['MonthId'], format="%Y%m").dt.strftime('/id/month/%Y-%m')
+df.drop('MonthId', inplace=True, axis=1)
+df['Period'] = df['Period'].astype('category')
 
-df['Period'].value_counts()
+# SuppressionIndex is a datamaker
+# We use an empty string for suppression index of 0 because a np.nan value isn't acceptable in categorical data
+suppression = {
+    0: '',
+    1: 'Complete suppression, where no information is published.',
+    2: 'Suppression of countries and ports, where only the overall total value (£ sterling) and quantity (kg) are published.',
+    3: 'Suppression of countries, ports and total trade quantity, where only the overall total value is published.',
+    4: 'Suppression of quantity for countries and ports, where the overall total value and quantity are published, but where a country and port breakdown is only available for value.',
+    5: 'Suppression of quantity for countries, ports and total trade, where no information on quantity is published, but a full breakdown of value is available.'
+}
+df['SuppressionIndex'].cat.rename_categories(suppression, inplace=True)
+df['SuppressionIndex'].cat.rename_categories(lambda x: pathify(x), inplace=True)
+
+
+# FlowTypeDescription
+df['FlowTypeDescription'].cat.rename_categories(lambda x: pathify(x), inplace=True)
+
+df.columns
+
+# The melty magic to take two values in the same row and create unique records for these values, the source column name becomes the 'variable' column, the column value stays in ends up in the 'value' column.
+df = df.melt(id_vars=['SuppressionIndex', 'CountryId', 'FlowTypeDescription', 'Cn8Code', 'PortCodeNumeric', 'Period'], value_vars=['Value', 'NetMass'])
+
+# Units, Measures, and dictionaries, oh my!
+df.loc[df['variable'] == 'Value', 'measure_type'] = 'monetary-value'
+df.loc[df['variable'] == 'Value', 'unit_type'] = 'http://gss-data.org.uk/def/concept/measurement-units/gbp'
+df.loc[df['variable'] == 'NetMass', 'measure_type'] = 'net-mass'
+df.loc[df['variable'] == 'NetMass', 'unit_type'] = 'http://qudt.org/vocab/unit/KiloGM'
+df.drop('variable', axis=1, inplace=True)
+df['unit_type'] = df['unit_type'].astype('category')
+df['measure_type'] = df['measure_type'].astype('category')
+
+# Rename columns
+col_names = {
+    'SuppressionIndex': 'marker',
+    'CountryId': 'country_id',
+    'FlowTypeDescription': 'flow_type',
+    'Cn8Code': 'cn8_code',
+    'PortCodeNumeric': 'port_code',
+    'Period': 'period'
+}
+df.rename(col_names, axis=1, inplace=True)
 
 # Add dataframe is in the cube
 cubes.add_cube(scraper, df, scraper.title)
 
-# + tags=["outputPrepend"]
+# + tags=[]
 # Write cube
 cubes.output_all()
 # -

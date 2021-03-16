@@ -1,0 +1,184 @@
+Label,Notation,Parent Notation,Sort Priority
+Estimates (NRE),-1,,1
+Not Collected (PNC),0,,2
+London (inc Tilbury) (LON),1,,3
+Colchester (COL),2,,4
+Thamesport (THP),3,,5
+Medway (MED),4,,6
+Whitstable (WTS),5,,7
+Ramsgate (RMG),6,,8
+Dover (DOV),7,,9
+Folkestone (FOL),8,,10
+Thames Europort (TEP),9,,11
+London Gateway (LGP),10,,12
+Newhaven (NHV),26,,13
+Shoreham (SHO),27,,14
+Portsmouth (PTM),28,,15
+Southampton (STN),29,,16
+Cowes (COW),30,,17
+Poole (POO),51,,18
+Weymouth (WEY),52,,19
+Exeter (EXE),53,,20
+Teignmouth (TNM),54,,21
+Plymouth (PLY),55,,22
+Fowey (FOY),56,,23
+Par (PAR),57,,24
+Falmouth (FAL),58,,25
+Penzance (PEN),59,,26
+Watchet (WAT),76,,27
+Avonmouth (AVO),77,,28
+Sharpness (SSS),78,,29
+Newport(Gwent) (NPT),79,,30
+Cardiff (CDF),80,,31
+Port Talbot (PTB),81,,32
+Swansea (SWA),82,,33
+Pembroke  Roro (MIL),101,,34
+Fishguard (FIS),102,,35
+Llandulas (LLA),103,,36
+Holyhead (HLD),104,,37
+Mostyn (inc.Chester) (MOS),105,,38
+Ellesmere Port (ELL),126,,39
+Northwich (NTH),127,,40
+Runcorn (RUN),128,,41
+Manchester (MNC),129,,42
+Liverpool (LIV),131,,43
+Fleetwood (FLE),132,,44
+Heysham (HEY),133,,45
+Barrow-In-Furness (BAR),134,,46
+Whitehaven (WHV),135,,47
+Workington (WOR),136,,48
+Silloth (SIL),137,,49
+Ayr (AYR),151,,50
+Irvine (IRV),152,,51
+Ardrossan (ARD),153,,52
+Greenock (GRK),154,,53
+Glasgow (GLW),155,,54
+Stornoway (STO),157,,55
+Kirkwall (KWL),159,,56
+Lerwick (LER),160,,57
+Inverness (inc.Wick) (INV),161,,58
+Fraserburgh (FRB),162,,59
+Peterhead (PHD),163,,60
+Aberdeen (ABD),164,,61
+Montrose (MON),165,,62
+Dundee (inc.Perth) (DUN),166,,63
+Kirkcaldy (KKD),168,,64
+Grangemouth (GRG),169,,65
+Leith (inc.Granton) (LEI),170,,66
+Rosyth (ROS),171,,67
+Hound Point Terminal (HPT),172,,68
+Blyth (inc.Berwick) (BLY),176,,69
+Tyne (TYN),177,,70
+Sunderland (SUN),178,,71
+Hartlepool (HTP),179,,72
+Teesport (MID),180,,73
+Whitby (WTB),182,,74
+Scarborough (SCA),183,,75
+Invergordon (IVG),184,,76
+Hull (HUL),201,,77
+Goole (GOO),202,,78
+Trent (TRT),203,,79
+Immingham (IMM),204,,80
+Grimsby (GRI),205,,81
+Boston (BOS),226,,82
+Wisbech (WIS),227,,83
+Kings Lynn (KLN),228,,84
+Great Yarmouth (GTY),229,,85
+Lowestoft (LOW),230,,86
+Norwich (NOR),231,,87
+Felixstowe (FXT),251,,88
+Ipswich (IPS),252,,89
+Harwich (HRH),253,,90
+Irvine Rail (IVT),297,,91
+Belfast (BEL),301,,92
+Coleraine (CLR),302,,93
+Londonderry (LDY),303,,94
+Warrenpoint (WPT),304,,95
+Douglas (DGS),326,,96
+Guernsey (GSY),327,,97
+Jersey (JSY),328,,98
+Daventry Rail (DVY),373,,99
+Dagenham Rail (DAG),374,,100
+Irvine Rail (KMK),375,,101
+Scunthorpe Rail (SCP),376,,102
+Widnes Rail (WDN),377,,103
+Dollands Moor (NGO),378,,104
+Ashford Rail (ASD),379,,105
+Barking Rail (LBK),380,,106
+Dover/Eurotunnel (DEU),381,,107
+Eurotunnel (EUT),382,,108
+Killingholme (KIL),383,,109
+Purfleet (PUF),384,,110
+St Pancras (SPC),385,,111
+Ebbsfleet (EBS),387,,112
+Peel (PEL),390,,113
+Ramsey (RSY),392,,114
+Eastleigh (ELW),399,,115
+Glasson Dock (GLD),401,,116
+Channel Fixed Link (CFL),424,,117
+Irish Land Boundary (ILB),425,,118
+Brize Norton Airport (BZN),426,,119
+Belfast Airport (BFS),427,,120
+London Heathrow (LHR),428,,121
+London Gatwick (LGW),429,,122
+Manchester Airport (MAN),430,,123
+Prestwick Airport (PIK),431,,124
+Southend Airport (SEN),432,,125
+Birmingham Airport (BHX),433,,126
+London Stansted (LSA),434,,127
+Ronaldsway Airport (RWY),435,,128
+Luton Airport (LTN),436,,129
+E Midlands Airport (EMA),437,,130
+Bristol Airport (BRS),438,,131
+Cardiff Airport (CWL),439,,132
+Exeter Airport (EXT),440,,133
+Bournemouth Airport (BOH),441,,134
+Stornoway Airport (STY),442,,135
+Norwich Airport (NWI),443,,136
+Liverpool Airport (LPL),444,,137
+Leeds/Bradford A/P (LBA),445,,138
+Newcastle Airport (NCL),446,,139
+Teeside Airport (MME),447,,140
+Edinburgh Airport (EDI),448,,141
+Aberdeen Airport (ABZ),449,,142
+Glasgow Airport (GLA),450,,143
+Lasham Airport (LAS),451,,144
+Oxford Airport (OAK),452,,145
+Cambridge Airport (CBG),453,,146
+Belfast City Airport (BHD),454,,147
+Doncaster Airport (DSA),455,,148
+London City Airport (LCY),456,,149
+Humberside Airport (HUY),457,,150
+Coventry Airport (CVT),458,,151
+Blackpool Airport (BLK),459,,152
+RAF Feltwell (FLT),460,,153
+RAF Moleshill (MLS),461,,154
+RAF Menwith Hill (MWH),462,,155
+RAF Mildenhall (MDH),463,,156
+RAF Lakenheath (LKH),464,,157
+RAF Fairford (FFD),465,,158
+RAF Lyneham (LYH),466,,159
+Gloucester Airport (GLO),467,,160
+Kemble Airport (KEM),468,,161
+RAF bases (RAF),469,,162
+Lydd Airport (LYD),470,,163
+Plymouth Airport (PLH),471,,164
+Shoreham Airport (ESH),472,,165
+Sumburgh Airport (LSI),473,,166
+Biggin Hill Airport (BQH),474,,167
+Filton Aerodrome (FZO),475,,168
+Manston Airport (MSE),476,,169
+Farnborough Airport (FAB),477,,170
+Newquay Airport (NQY),478,,171
+Warton Aerodrome (WAR),479,,172
+Other Scottish A/P (OSA),480,,173
+All Other Airports (AOA),481,,174
+Yeovil Aerodrome (YVL),482,,175
+Cont. Shelf (Uk Pt) (WWW),490,,176
+Low Value Trade (ZYY),492,,177
+Postal Packages (PPP),493,,178
+Freezones (FRZ),494,,179
+Inland Clearance (ZLC),495,,180
+Low Value Trade Eu (QVV),496,,181
+PoC Unknown (XXX),499,,182
+Confidential Port (PSE),987,,183

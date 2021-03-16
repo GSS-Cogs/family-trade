@@ -6,6 +6,7 @@ from urllib.parse import urljoin
 
 trace = TransformTrace()
 df = pd.DataFrame()
+cubes = Cubes("info.json")
 # -
 
 info = json.load(open('info.json')) 
@@ -53,15 +54,15 @@ trace.store("combined_dataframe", tidy_sheet.topandas())
 # -
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df = df.replace({'Direction' : {'EX' : 'exports'}})
+df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker', 'Direction' : 'Flow'}, inplace=True)
+df = df.replace({'Flow' : {'EX' : 'exports'}})
 df = df.replace({'Marker' : {'..' : 'suppressed-data',}})
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Country"] = df["Country"].str.split(' ').str[0]
 df['Period'] = "year/" + df['Period']
 df["Service Account"] = df["Service Account"].str.split(' ').str[0]
 df["Industry"] = df["Industry"].str.split(' ').str[0]
-tidy_exports = df[["Period", "Country", "Industry", "Direction", "Service Account", "Value", "Marker"]]
+tidy_exports = df[["Period", "Country", "Industry", "Flow", "Service Account", "Value", "Marker"]]
 tidy_exports
 
 # Transformation of Imports file to be joined to exports transformation done above 
@@ -124,22 +125,18 @@ trace.store("combined_dataframe_imports", tidy_sheet.topandas())
 # -
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe_imports")
-df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df = df.replace({'Direction' : {'IM' : 'imports'}})
+df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker', 'Direction' : 'Flow'}, inplace=True)
+df = df.replace({'Flow' : {'IM' : 'imports'}})
 df = df.replace({'Marker' : {'..' : 'suppressed-data',}})
 df["Country"] = df["Country"].str.split(' ').str[0]
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Service Account"] = df["Service Account"].str.split(' ').str[0]
 df["Industry"] = df["Industry"].str.split(' ').str[0]
-df["Industry"] = df["Industry"].map(lambda x: pathify(x))
 df['Period'] = "year/" + df['Period']
-tidy_imports = df[["Period", "Country", "Industry", "Direction", "Service Account", "Value", "Marker"]]
+tidy_imports = df[["Period", "Country", "Industry", "Flow", "Service Account", "Value", "Marker"]]
 tidy_imports
 
-df["Industry"].unique()
-
 tidy = pd.concat([tidy_exports, tidy_imports])
-tidy
 
 # +
 description = f"""
@@ -166,35 +163,16 @@ These data are our best estimate of these bilateral UK trade flows. Users should
 """
 
 comment = "Experimental dataset providing a breakdown of UK trade in services by industry, country and service type on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders."
+scraper.dataset.title = 'UK trade in services by industry, country and service type, Imports & Exports'
+scraper.dataset.description = description
 # -
 
 tidy['Country'] = tidy['Country'].apply(pathify)
 tidy['Marker'][tidy['Marker'] == 'suppressed-data'] = 'suppressed'
 tidy.head(20)
 
-# +
-csvName = 'observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / csvName, index = False)
-
-scraper.dataset.family = 'trade'
-scraper.dataset.description = description
-scraper.dataset.comment = comment
-scraper.dataset.title = 'UK trade in services by industry, country and service type, Imports & Exports'
-
-dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name) + '/pcn').lower()
-scraper.set_base_uri('http://gss-data.org.uk')
-scraper.set_dataset_id(dataset_path)
-
-csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / csvName)
-csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-csvw_transform.write(out / f'{csvName}-metadata.json')
-
-with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
+cubes.add_cube(scraper, tidy.drop_duplicates(), scraper.dataset.title)
+cubes.output_all()
 
 # +
 ""

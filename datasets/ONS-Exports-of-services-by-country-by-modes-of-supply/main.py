@@ -18,12 +18,12 @@ with open("info.json", "w") as jsonFile:
 
 trace = TransformTrace()
 df = pd.DataFrame()
-cubes = Cubes("info.json", job_name='')
+cubes = Cubes("info.json")
 scraper = Scraper(json.load(open('info.json'))['landingPage'])
 scraper
 
 #Distribution 
-tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
+tabs = { tab.name: tab for tab in scraper.distribution(latest=True).as_databaker() }
 list(tabs)
 
 for name, tab in tabs.items():
@@ -97,7 +97,7 @@ scraper = Scraper(seed="info.json")
 scraper 
 
 #Distribution 
-tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
+tabs = { tab.name: tab for tab in scraper.distribution(latest=True).as_databaker() }
 list(tabs)
 
 # +
@@ -184,3 +184,5 @@ scraper.dataset.title = 'Imports and Exports of services by country, by modes of
 cubes.add_cube(scraper, tidy.drop_duplicates(), "ons-exports-of-services-by-country-by-modes-of-supply")
 cubes.output_all()
 trace.render("spec_v1.html")
+
+
