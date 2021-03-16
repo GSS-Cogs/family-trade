@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       jupytext_version: 1.10.3
 #   kernelspec:
 #     display_name: Python 3.8.8 64-bit
 #     metadata:
@@ -50,9 +50,9 @@ else:
     tmp = list()
     for y in pmd_chunks:
         y = str(y)
-        year = y[-6:-2]
+        year = y[-7:-3]
         qrtr = ('0'+str(3*(int(y[-1])-1)+1))[-2:]
-        tmp.append(year+qrtr)
+        tmp.append(int(year+qrtr))
     pmd_chunks = tmp
     fetch_chunk = min(set(api_chunks)-set(pmd_chunks))
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
