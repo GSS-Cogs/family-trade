@@ -54,15 +54,15 @@ trace.store("combined_dataframe", tidy_sheet.topandas())
 # -
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df = df.replace({'Direction' : {'EX' : 'exports'}})
+df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker', 'Direction' : 'Flow'}, inplace=True)
+df = df.replace({'Flow' : {'EX' : 'exports'}})
 df = df.replace({'Marker' : {'..' : 'suppressed-data',}})
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Country"] = df["Country"].str.split(' ').str[0]
 df['Period'] = "year/" + df['Period']
 df["Service Account"] = df["Service Account"].str.split(' ').str[0]
 df["Industry"] = df["Industry"].str.split(' ').str[0]
-tidy_exports = df[["Period", "Country", "Industry", "Direction", "Service Account", "Value", "Marker"]]
+tidy_exports = df[["Period", "Country", "Industry", "Flow", "Service Account", "Value", "Marker"]]
 tidy_exports
 
 # Transformation of Imports file to be joined to exports transformation done above 
@@ -125,15 +125,15 @@ trace.store("combined_dataframe_imports", tidy_sheet.topandas())
 # -
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe_imports")
-df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df = df.replace({'Direction' : {'IM' : 'imports'}})
+df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker', 'Direction' : 'Flow'}, inplace=True)
+df = df.replace({'Flow' : {'IM' : 'imports'}})
 df = df.replace({'Marker' : {'..' : 'suppressed-data',}})
 df["Country"] = df["Country"].str.split(' ').str[0]
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Service Account"] = df["Service Account"].str.split(' ').str[0]
 df["Industry"] = df["Industry"].str.split(' ').str[0]
 df['Period'] = "year/" + df['Period']
-tidy_imports = df[["Period", "Country", "Industry", "Direction", "Service Account", "Value", "Marker"]]
+tidy_imports = df[["Period", "Country", "Industry", "Flow", "Service Account", "Value", "Marker"]]
 tidy_imports
 
 tidy = pd.concat([tidy_exports, tidy_imports])
