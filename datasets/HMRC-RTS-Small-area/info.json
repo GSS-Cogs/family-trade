@@ -40,8 +40,8 @@
                 "codelist": false 
             },
             "SITC 4": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc-4/{sitc_4}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc4",
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}"
             },
             "Measure Type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
