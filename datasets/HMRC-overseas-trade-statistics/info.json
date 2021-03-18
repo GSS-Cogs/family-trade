@@ -63,9 +63,9 @@
     },
     "odataConversion": {
         "publishedLocation": "https://staging.gss-data.org.uk/sparql",
-        "datasetIdentifier": "http://gss-data.org.uk/data/gss_data/trade/hmrc-ots#dataset",
+        "datasetIdentifier": "http://gss-data.org.uk/data/gss_data/trade/hmrc-overseas-trade-statistics#dataset",
         "chunkColumn": "MonthId",
-        "chunkDimension": "http://gss-data.org.uk/data/gss_data/trade/hmrc-ots#dimension/period",
+        "chunkDimension": "http://gss-data.org.uk/data/gss_data/trade/hmrc-overseas-trade-statistics#dimension/period",
         "supplementalEndpoints": {
             "FlowType": {
                 "endpoint": "https://api.uktradeinfo.com/FlowType",
