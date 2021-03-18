@@ -13,7 +13,7 @@
     "sparql": "https://staging.gss-data.org.uk/sparql",
     "pmd": "http://staging.gss-data.org.uk",
     "pipelines": [
-        "DCMS-DCMS-Sectors-Economic-Estimates-Year-Trade-in-services",
+        "DCMS-Sectors-Economic-Estimates-Year-Trade-in-services",
         "DIT-UK-tariffs",
         "HMRC-COVID-19-Commodity-Codes-List",
         "HMRC-OVERSEAS-TRADE-STATISTICS",
