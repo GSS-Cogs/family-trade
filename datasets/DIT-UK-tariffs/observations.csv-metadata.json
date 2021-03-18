@@ -77,10 +77,6 @@
         "primaryKey": "observations",
         "aboutUrl": "http://gss-data.org.uk/def/trade/concept/trade-tariffs/{commodity}"
     },
-    "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/commodity": {
-        "rdfs:label": "Commodity",
-        "rdfs:description": "Commodity Name"
-    },
     "rdfs:label": "observations",
     "dc:title": "observations",
     "prov:hadDerivation": {
@@ -91,6 +87,11 @@
         ]
     },
     "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/commodity",
+            "rdfs:label": "Commodity",
+            "rdfs:description": "Commodity Name"
+        },
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs/dataset",
             "@type": [
