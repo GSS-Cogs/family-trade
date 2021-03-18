@@ -1972,3 +1972,5 @@ http://business.data.gov.uk/companies/def/sic-2007/51101,51.10/1,Scheduled passe
 http://business.data.gov.uk/companies/def/sic-2007/51102,51102,Non-scheduled passenger air transport,http://business.data.gov.uk/companies/def/sic-2007/51100,
 http://business.data.gov.uk/companies/def/sic-2007/51102,51.10/2,Non-scheduled passenger air transport,http://business.data.gov.uk/companies/def/sic-2007/51100,
 http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/sic-2007/Total,Total,Total,,
+http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/sic-2007/U,U,Unknown Industry,,
+http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/sic-2007/N,N,No Industry,,

@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry",
     "url": "industry.csv",
     "rdfs:label": "Industry",
     "dc:title": "Industry",
@@ -50,14 +50,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#concept/industry/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/industry/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -65,16 +65,16 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry"
             },
             "dc:modified": {
                 "@type": "dateTime",
@@ -91,17 +91,17 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/industry"
             },
             "dc:title": "Industry Catalog Record",
             "rdfs:label": "Industry Catalog Record",
