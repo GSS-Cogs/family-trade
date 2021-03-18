@@ -80,5 +80,4 @@ trade,Industry Section,dimension/industry-section,qb:DimensionProperty,,,skos:Co
 trade,CDID,dimension/cdid,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/cdid,
 trade,ONS Industry Classification,dimension/ons-industry,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/ons-industry,
 trade,Country Area,dimension/country-area,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/country-area,
-trade,Commodity,dimension/commodity,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/commodity,
-trade,Country,dimension/country,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/concept-scheme/cl-area,Country
+trade,Commodity,dimension/commodity,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/commodity
