@@ -65,7 +65,7 @@
         "publishedLocation": "https://staging.gss-data.org.uk/sparql",
         "datasetIdentifier": "http://gss-data.org.uk/data/gss_data/trade/hmrc-ots#dataset",
         "chunkColumn": "MonthId",
-        "chunkDimension": "dim:refPeriod",
+        "chunkDimension": "http://gss-data.org.uk/data/gss_data/trade/hmrc-ots#dimension/period",
         "supplementalEndpoints": {
             "FlowType": {
                 "endpoint": "https://api.uktradeinfo.com/FlowType",
