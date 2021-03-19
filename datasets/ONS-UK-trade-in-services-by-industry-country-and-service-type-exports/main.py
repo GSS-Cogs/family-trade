@@ -169,7 +169,7 @@ scraper.dataset.title = 'UK trade in services by industry, country and service t
 scraper.dataset.description = description
 # -
 
-tidy['Country'] = tidy['Country'].apply(pathify)
+#tidy['Country'] = tidy['Country'].apply(pathify)
 tidy['Marker'][tidy['Marker'] == 'suppressed-data'] = 'suppressed'
 tidy.head(20)
 
