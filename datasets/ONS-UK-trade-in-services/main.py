@@ -166,6 +166,7 @@ tidy.loc[(tidy['Trade Services'] == '6.0'),'Trade Services'] = '6'
 tidy.loc[(tidy['Trade Services'] == '7.0'),'Trade Services'] = '7'
 tidy.loc[(tidy['Trade Services'] == '8.0'),'Trade Services'] = '8'
 tidy.loc[(tidy['Trade Services'] == '9.0'),'Trade Services'] = '9'
+tidy.loc[(tidy['Trade Services'] == '12.0'),'Trade Services'] = '12'
 tidy.loc[(tidy['Marker'] == 'disclosive'),'Value'] = 0
 tidy['Value'] = tidy['Value'].astype(int)
 tidy['Marker'].fillna('', inplace=True)
@@ -181,8 +182,3 @@ trace.render("spec_v1.html")
 # %%
 cubes.add_cube(scraper, tidy, "ONS UK trade in services by country and partner country" )
 cubes.output_all()
-
-# %%
-#tidy.head(10)
-
-# %%

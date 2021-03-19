@@ -19,7 +19,7 @@
         "columns": {
             "ONS Partner Geography": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{ons_partner_geography}"
+                "value": "http://gss-data.org.uk/def/concept/cl-area/{ons_partner_geography}"
             },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
@@ -31,7 +31,7 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
             },
             "Seasonal Adjustment": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
                 "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
             },
             "Value": {
