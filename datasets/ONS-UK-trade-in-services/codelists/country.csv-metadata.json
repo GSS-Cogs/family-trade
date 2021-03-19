@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country",
     "url": "country.csv",
     "rdfs:label": "Country",
     "dc:title": "Country",
@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#concept/country/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#concept/country/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -49,14 +49,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#concept/country/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#concept/country/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -64,53 +64,53 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-19T14:54:40.663498"
+                "@value": "2021-03-19T15:46:49.475153"
             },
             "rdfs:label": "Country",
             "dc:title": "Country",
             "rdfs:comment": "Dataset representing the 'Country' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-19T14:54:40.663498"
+                "@value": "2021-03-19T15:46:49.475153"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-service-type-by-partner-country-non-seasonally-adjusted#scheme/country"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services#scheme/country"
             },
             "dc:title": "Country Catalog Record",
             "rdfs:label": "Country Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-19T14:54:40.663498"
+                "@value": "2021-03-19T15:46:49.475153"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-19T14:54:40.663498"
+                "@value": "2021-03-19T15:46:49.475153"
             }
         }
     ]
