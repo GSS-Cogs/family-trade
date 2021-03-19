@@ -146,7 +146,7 @@ scraper.dataset.title = 'The Pink Book, Trade in Services'
 scraper.dataset.description = scraper.dataset.description + \
     '\n Non Seasonally Adjusted'
 
-cubes.add_cube(scraper, df.drop_duplicates(), "ONS Pink Book")
+cubes.add_cube(scraper, df.drop_duplicates())
 cubes.output_all()
 # trace.render("spec_v1.html")
 
