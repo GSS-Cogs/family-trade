@@ -35,13 +35,6 @@
                 "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-pink-book-trade-in-services#concept/pink-book-services/{parent_notation}"
             },
             {
-                "titles": "Sort Priority",
-                "name": "sort_priority",
-                "datatype": "integer",
-                "required": false,
-                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-            },
-            {
                 "virtual": true,
                 "propertyUrl": "rdf:type",
                 "valueUrl": "skos:Concept"
@@ -77,7 +70,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-19T12:32:38.903690"
+                "@value": "2021-03-19T14:39:14.766526"
             },
             "rdfs:label": "Pink Book Services",
             "dc:title": "Pink Book Services",
@@ -85,6 +78,9 @@
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2021-03-19T12:32:38.903690"
+            },
+            "dcat:landingPage": {
+                "@id": "https://unstats.un.org/unsd/publication/seriesm/seriesm_86rev1e.pdf"
             }
         },
         {
