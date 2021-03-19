@@ -21,14 +21,14 @@
             {
                 "titles": "cet_duty_rate",
                 "name": "cet_duty_rate",
-                "datatype": "string",
+                "datatype": "decimal",
                 "required": false,
                 "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/cet_duty_rate"
             },
             {
                 "titles": "ukgt_duty_rate",
                 "name": "ukgt_duty_rate",
-                "datatype": "string",
+                "datatype": "decimal",
                 "required": false,
                 "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/ukgt_duty_rate"
             },
@@ -92,6 +92,51 @@
             "rdfs:label": "Commodity",
             "rdfs:description": "Commodity Name"
         },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/description",
+            "rdfs:label": "Description",
+            "rdfs:description": "Commodity Description"
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/cet_duty_rate",
+            "rdfs:label": "Cet_Duty_Rate",
+            "rdfs:description": "Tariff rate"
+        }, 
+        {   
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/ukgt_duty_rate",
+            "rdfs:label": "Ukgt_Duty_Rate",
+            "rdfs:description": "Tariff rate"
+        }, 
+        {   
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/change",
+            "rdfs:label": "Change",
+            "rdfs:description": "Tariff rate change"
+        }, 
+        {   
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/trade_remedy_applies",
+            "rdfs:label": "Trade_Remedy_Applies",
+            "rdfs:description": ""
+        },   
+        {   
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/cet_applies_until_trade_remedy_transition_reviews_concluded",
+            "rdfs:label": "Cet_Applies_Until_Trade_Remedy_Transition_Reviews_Concluded",
+            "rdfs:description": ""
+        },   
+        {   
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/suspension_applies",
+            "rdfs:label": "Suspension_Applies",
+            "rdfs:description": ""
+        },   
+        {   
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/suspension_applies",
+            "rdfs:label": "Suspension_Applies",
+            "rdfs:description": ""
+        },   
+        {   
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/atg_applies",
+            "rdfs:label": "Atg_Applies",
+            "rdfs:description": ""
+        },   
         {
             "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs/dataset",
             "@type": [

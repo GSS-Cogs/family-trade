@@ -1,0 +1,82 @@
+Label,Notation,Parent Notation,Sort Priority
+EU28,B5,,1
+Chile,CL,,2
+Non EU,D5,,3
+France,FR,,4
+Other Europe,PB1,,5
+Other Central American Countries,PB2,,6
+United States inc Puerto Rico,US,,7
+World total,W1,,8
+Netherlands,NL,,9
+Australia,AU,,10
+Belgium,BE,,11
+Switzerland,CH,,12
+Germany,DE,,13
+Denmark,DK,,14
+Ireland,IE,,15
+Poland,PL,,16
+Argentina,AR,,17
+Bulgaria,BG,,18
+Brazil,BR,,19
+Canada,CA,,20
+China,CN,,21
+Colombia,CO,,22
+Cyprus,CY,,23
+Egypt,EG,,24
+Spain,ES,,25
+Greece,GR,,26
+Indonesia,ID,,27
+Israel,IL,,28
+India,IN,,29
+Italy,IT,,30
+South Korea,KR,,31
+Luxembourg,LU,,32
+Mexico,MX,,33
+Malaysia,MY,,34
+Norway,NO,,35
+Other American Countries,PB3,,36
+Residual Gulf Arabian Countries,PB4,,37
+Other Near & Middle Eastern Countries,PB5,,38
+Other Asia,PB6,,39
+Other Australasia & Oceania,PB7,,40
+Other North Africa,PB8,,41
+Other Africa,PB9,,42
+Romania,RO,,43
+Russia,RU,,44
+Saudi Arabia,SA,,45
+Sweden,SE,,46
+Singapore,SG,,47
+Thailand,TH,,48
+Turkey,TR,,49
+South Africa,ZA,,50
+Austria,AT,,51
+Hungary,HU,,52
+Hong Kong,HK,,53
+New Zealand,NZ,,54
+Portugal,PT,,55
+Japan,JP,,56
+Finland,FI,,57
+Czech Republic,CZ,,58
+Pakistan,PK,,59
+Slovenia,SI,,60
+Taiwan,TW,,61
+Ukraine,UA,,62
+Serbia,RS,,63
+Slovakia,SK,,64
+Latvia,LV,,65
+Croatia,HR,,66
+Lithuania,LT,,67
+Malta,MT,,68
+Philippines,PH,,69
+Uruguay,UY,,70
+European Union Institutions (excl. ECB and ESM),4A,,71
+Iran,IR,,72
+Iceland,IS,,73
+Albania,AL,,74
+Estonia,EE,,75
+Morocco,MA,,76
+Liechtenstein,LI,,77
+Montenegro,ME,,78
+Venezuela,VE,,79
+International Organisations,9A,,80
+Belarus,BY,,81

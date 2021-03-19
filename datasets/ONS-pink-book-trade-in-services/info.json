@@ -1,5 +1,5 @@
 {
-    "id": "ons_pinkbook",
+    "id": "ons-pink-book-trade-in-services",
     "title": "03 Trade in services, The Pink Book",
     "publisher": "Office for National Statistics",
     "description": "Detailed annual statistics on trade in services including transport, travel, insurance and pensions, financial, telecommunication and computer, cultural and recreational, and government.",
@@ -25,24 +25,16 @@
                 "codelist": false
             },
             "CDID": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
-                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
             },
             "Flow Directions": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
             "Seasonal Adjustment": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}",
-                "codelist": false
-            },
-            "Pink Book Services": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/pink-book-services",
-                "value": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{pink_book_services}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
             },
             "Value": {
                 "measure": "http://gss-data.org.uk/def/trade/measure/trade-in-services",
