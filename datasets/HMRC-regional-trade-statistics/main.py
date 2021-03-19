@@ -54,7 +54,7 @@ else:
         qrtr = ('0'+str(3*(int(y[-1])-1)+1))[-2:]
         tmp.append(int(year+qrtr))
     pmd_chunks = tmp
-    fetch_chunk = min(set(api_chunks)-set(pmd_chunks))
+    fetch_chunk = max(set(api_chunks)-set(pmd_chunks))
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 df = distro.as_pandas(chunks_wanted=fetch_chunk)
