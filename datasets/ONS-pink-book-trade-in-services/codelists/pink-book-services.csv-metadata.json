@@ -77,14 +77,14 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-ons-19T12:32:38.9ons690"
+                "@value": "2021-03-19T12:32:38.903690"
             },
             "rdfs:label": "Pink Book Services",
             "dc:title": "Pink Book Services",
             "rdfs:comment": "Dataset representing the 'Pink Book Services' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-ons-19T12:32:38.9ons690"
+                "@value": "2021-03-19T12:32:38.903690"
             }
         },
         {
@@ -106,11 +106,11 @@
             "rdfs:label": "Pink Book Services Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-ons-19T12:32:38.9ons690"
+                "@value": "2021-03-19T12:32:38.903690"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-ons-19T12:32:38.9ons690"
+                "@value": "2021-03-19T12:32:38.903690"
             }
         }
     ]
