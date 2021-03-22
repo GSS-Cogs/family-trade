@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -225,4 +225,15 @@ import numpy
 tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == 'residual-trade', tidy['EU - Non-EU'], tidy['HMRC Partner Geography'])
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
-tidy
+# +
+#tidy.to_csv('nancheck.csv')
+
+# +
+#or col in tidy.columns:
+#    if col not in ['Value', 'Year']:
+#        tidy[col] = tidy[col].astype('category')
+#        display(col)
+#        display(tidy[col].cat.categories)
+# -
+
+
