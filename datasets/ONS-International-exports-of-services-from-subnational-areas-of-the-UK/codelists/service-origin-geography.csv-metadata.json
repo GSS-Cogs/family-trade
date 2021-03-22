@@ -1,17 +1,16 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography",
     "url": "service-origin-geography.csv",
-    "rdfs:label": "service-origin-geography",
-    "dc:title": "service-origin-geography",
+    "rdfs:label": "ONS Service Origin Geography",
+    "dc:title": "ONS Service Origin Geography",
     "tableSchema": {
         "columns": [
             {
                 "titles": "URI",
                 "name": "uri",
                 "datatype": "string",
-                "required": true,
-                "suppressOutput": true
+                "required": true
             },
             {
                 "titles": "Notation",
@@ -20,7 +19,7 @@
                     "base": "string",
                     "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
                 },
-                "required": true,
+                "required": false,
                 "propertyUrl": "skos:notation"
             },
             {
@@ -52,14 +51,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography"
             }
         ],
-        "primaryKey": "notation",
+        "primaryKey": "uri",
         "aboutUrl": "{uri}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -67,20 +66,20 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography"
             },
-            "rdfs:label": "Service Origin Geography",
-            "dc:title": "Service Origin Geography",
-            "rdfs:comment": "Dataset representing the 'Service Origin Geography' code list.",
+            "rdfs:label": "ONS Service Origin Geography",
+            "dc:title": "ONS Service Origin Geography",
+            "rdfs:comment": "Dataset representing the 'ONS Service Origin Geography' code list.",
             "dc:license": {
                 "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
             },
@@ -102,20 +101,20 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-International-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/service-origin-geography"
             },
-            "dc:title": "Service Origin Geography Catalog Record",
-            "rdfs:label": "Service Origin Geography Catalog Record",
+            "dc:title": "ONS Service Origin Geography Catalog Record",
+            "rdfs:label": "ONS Service Origin Geography Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2021-01-25T15:47:00.029942"
