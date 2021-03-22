@@ -61,4 +61,4 @@ Description something along the lines of:
 
 Please can you remove the `cn8_code` column and ensure that the `commodity_sitc_id` column is left in its place.
 
-N.B. The new `commodity_sitc_id` column contains values of the form `43121` but these need to be mapped so that the final two digits are stuck behind a decimal point, e.g. `431.21`. Also note that any trailing zeros after the decimal point need to be removed, e.g. `431.2` NOT `431.20`.
+Map the `commodity_sitc_id` in the following way: `[p["SitcCode"].replace("-", "+") for p in data]`
