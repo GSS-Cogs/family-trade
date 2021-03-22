@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications",
-    "url": "price-classifications.csv",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008",
+    "url": "cpa-2008.csv",
+    "rdfs:label": "Cpa 2008",
+    "dc:title": "Cpa 2008",
     "tableSchema": {
         "columns": [
             {
@@ -30,11 +32,11 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/price-classifications/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#concept/cpa-2008/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -54,70 +56,68 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/price-classifications/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#concept/cpa-2008/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Price Classifications",
-    "dc:title": "Price Classifications",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Price Classifications",
-            "dc:title": "Price Classifications",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008"
             },
-            "rdfs:comment": "Dataset representing the 'Price Classifications' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.183548"
+                "@value": "2021-03-20T09:47:32.513776"
             },
+            "rdfs:label": "Cpa 2008",
+            "dc:title": "Cpa 2008",
+            "rdfs:comment": "Dataset representing the 'Cpa 2008' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.183548"
+                "@value": "2021-03-20T09:47:32.513776"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Price Classifications Catalog Record",
-            "rdfs:label": "Price Classifications Catalog Record",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008"
+            },
+            "dc:title": "Cpa 2008 Catalog Record",
+            "rdfs:label": "Cpa 2008 Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.147941"
+                "@value": "2021-03-20T09:47:32.513776"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.147941"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications/dataset"
-            },
-            "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/price-classifications"
+                "@value": "2021-03-20T09:47:32.513776"
             }
         }
     ]

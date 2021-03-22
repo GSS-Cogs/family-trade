@@ -1,0 +1,124 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification",
+    "url": "price-classification.csv",
+    "rdfs:label": "Price Classification",
+    "dc:title": "Price Classification",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#concept/price-classification/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort_priority",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#concept/price-classification/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-20T09:47:46.350661"
+            },
+            "rdfs:label": "Price Classification",
+            "dc:title": "Price Classification",
+            "rdfs:comment": "Dataset representing the 'Price Classification' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-20T09:47:46.350661"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/price-classification"
+            },
+            "dc:title": "Price Classification Catalog Record",
+            "rdfs:label": "Price Classification Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-20T09:47:46.350661"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-20T09:47:46.350661"
+            }
+        }
+    ]
+}
