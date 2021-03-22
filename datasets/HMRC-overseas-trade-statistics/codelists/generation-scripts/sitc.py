@@ -105,14 +105,6 @@ def main():
         "Parent Notation": [get_parent_code(s) for s in unique_sitc_data],
         "Sort Priority": range(1, len(unique_sitc_data) + 1)
     })
-    for row in ports_codelist.iterrows():
-        true_sitc_notation_index = 0
-        label_index = 1
-        notation_index = 2
-
-        if row[1][true_sitc_notation_index] is not None:
-            row[1][label_index] = None
-            row[1][notation_index] = None
 
     parents_required = set([x for x in ports_codelist["Parent Notation"] if x is not None])
     sitc_present = set(ports_codelist["Notation"])
