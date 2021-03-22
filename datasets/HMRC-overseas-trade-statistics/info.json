@@ -28,12 +28,12 @@
             },
             "commodity_sitc_id": {
                 "label": "Commodity",
-                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/sitc",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{commodity_sitc_id}"
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4",
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{commodity_sitc_id}"
             },
             "port_code": {
                 "label": "Port",
-                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC_TC#scheme/port",
                 "value": "https://api.uktradeinfo.com/Port/{port_code}"
             },
             "period": {
@@ -93,6 +93,10 @@
                 "foreignKey": "PortId"
             }
         }
+    },
+    "load": {
+        "accretiveUpload": false,
+        "publish": false
     },
     "sizingNotes": "",
     "notes": "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/",
