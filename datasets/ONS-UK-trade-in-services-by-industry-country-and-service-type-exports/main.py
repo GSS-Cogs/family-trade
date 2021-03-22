@@ -137,6 +137,8 @@ tidy_imports = df[["Period", "Country", "Industry", "Flow", "Service Account", "
 tidy_imports
 
 tidy = pd.concat([tidy_exports, tidy_imports])
+tidy.rename(columns={'Industry' : 'Trade Industry'}, inplace=True)
+
 
 # +
 description = f"""
@@ -167,7 +169,6 @@ scraper.dataset.title = 'UK trade in services by industry, country and service t
 scraper.dataset.description = description
 # -
 
-#tidy['Country'] = tidy['Country'].apply(pathify)
 tidy['Marker'][tidy['Marker'] == 'suppressed-data'] = 'suppressed'
 tidy.head(20)
 
@@ -188,5 +189,3 @@ with open("info.json", "w") as jsonFile:
 # -
 
 trace.render()
-
-

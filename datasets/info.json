@@ -16,12 +16,12 @@
         "DCMS-Sectors-Economic-Estimates-Year-Trade-in-services",
         "DIT-UK-tariffs",
         "HMRC-COVID-19-Commodity-Codes-List",
-        "HMRC-OVERSEAS-TRADE-STATISTICS",
+        "HMRC-overseas-trade-statistics",
         "HMRC-RTS-Small-area",
         "HMRC-Regional-trade-statistics-interactive-analysis",
         "HMRC-alcohol-bulletin",
         "HMRC_OTS_CN8",
-        "HMRC_RTS",
+        "HMRC-regional-trade-statistics",
         "HMRC_Trade",
         "ONS-Exports-of-services-by-country-by-modes-of-supply",
         "ONS-foreign-direct-investment-involving-uk-companies",
@@ -47,9 +47,9 @@
         "ONS-UK-trade-in-services-by-industry-country-and-service-type-imports",
         "ONS_ABS",
         "ONS_BoP",
-        "ONS_BoP_individual_countries",
+        "ONS-BOP-individual-country-data",
         "ONS_CPA",
         "ONS_MRETS",
-        "ONS_PinkBook"
+        "ONS-pink-book-trade-in-services"
     ]
 }

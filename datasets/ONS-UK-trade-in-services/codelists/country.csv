@@ -1,0 +1,252 @@
+Label,Notation,Parent Notation,Sort Priority
+Austria,AT,,1
+Belgium,BE,,2
+Bulgaria,BG,,3
+Croatia,HR,,4
+Cyprus,CY,,5
+Czech Republic,CZ,,6
+Denmark,DK,,7
+Estonia,EE,,8
+Finland,FI,,9
+France,FR,,10
+Germany,DE,,11
+Greece,GR,,12
+Hungary,HU,,13
+Ireland,IE,,14
+Italy,IT,,15
+Latvia,LV,,16
+Lithuania,LT,,17
+Luxembourg,LU,,18
+Malta,MT,,19
+Netherlands,NL,,20
+Poland,PL,,21
+Portugal,PT,,22
+Romania,RO,,23
+Slovak Republic,SK,,24
+Slovenia,SI,,25
+Spain,ES,,26
+Sweden,SE,,27
+European Central Bank,4F,,28
+EU Institutions,4A,,29
+Total EU28,B5,,30
+Afghanistan,AF,,31
+Albania,AL,,32
+Algeria,DZ,,33
+American Samoa,AS,,34
+Andorra,AD,,35
+Angola,AO,,36
+Anguilla,AI,,37
+Antarctica,AQ,,38
+Antigua & Barbuda,AG,,39
+Argentina,AR,,40
+Armenia,AM,,41
+Aruba,AW,,42
+Australia,AU,,43
+Azerbaijan,AZ,,44
+Bahamas,BS,,45
+Bahrain,BH,,46
+Bangladesh,BD,,47
+Barbados,BB,,48
+Belarus,BY,,49
+Belize,BZ,,50
+Benin,BJ,,51
+Bermuda,BM,,52
+Bhutan,BT,,53
+Bolivia,BO,,54
+"Bonaire, Sint Eustatius & Saba",BQ,,55
+Bosnia & Herzegovina,BA,,56
+Botswana,BW,,57
+Bouvet Island,BV,,58
+Brazil,BR,,59
+British Indian Ocean Territory,IO,,60
+British Virgin Islands,VG,,61
+Brunei,BN,,62
+Burkina Faso,BF,,63
+Burundi,BI,,64
+Cambodia,KH,,65
+Cameroon,CM,,66
+Canada,CA,,67
+Cape Verde,CV,,68
+Cayman Islands,KY,,69
+Central African Republic,CF,,70
+Chad,TD,,71
+Chile,CL,,72
+China,CN,,73
+Christmas Island,CX,,74
+Cocos Islands,CC,,75
+Colombia,CO,,76
+Comoros,KM,,77
+Congo (Democratic Republic),CD,,78
+Congo (Republic),CG,,79
+Cook Islands,CK,,80
+Costa Rica,CR,,81
+Cuba,CU,,82
+Curacao,CW,,83
+Djibouti,DJ,,84
+Dominica,DM,,85
+Dominican Republic,DO,,86
+East Timor,TL,,87
+Ecuador,EC,,88
+Egypt,EG,,89
+El Salvador,SV,,90
+Equatorial Guinea,GQ,,91
+Eritrea,ER,,92
+Ethiopia,ET,,93
+Falkland Islands,FK,,94
+Faroe Islands,FO,,95
+Fiji,FJ,,96
+French Polynesia,PF,,97
+French Southern Territories,TF,,98
+FYR Macedonia,MK,,99
+Gabon,GA,,100
+Gambia,GM,,101
+Georgia,GE,,102
+Ghana,GH,,103
+Gibraltar,GI,,104
+Greenland,GL,,105
+Grenada,GD,,106
+Guam,GU,,107
+Guatemala,GT,,108
+Guernsey,GG,,109
+Guinea,GN,,110
+Guinea Bissau,GW,,111
+Guyana,GY,,112
+Haiti,HT,,113
+Heard & McDonald Islands,HM,,114
+Honduras,HN,,115
+Hong Kong,HK,,116
+Iceland,IS,,117
+India,IN,,118
+Indonesia,ID,,119
+Iran,IR,,120
+Iraq,IQ,,121
+Isle of Man,IM,,122
+Israel,IL,,123
+Chile,CI,,124
+Jamaica,JM,,125
+Japan,JP,,126
+Jersey,JE,,127
+Jordan,JO,,128
+Kazakhstan,KZ,,129
+Kenya,KE,,130
+Kiribati,KI,,131
+Kuwait,KW,,132
+Kyrgyz Republic,KG,,133
+Laos,LA,,134
+Lebanon,LB,,135
+Lesotho,LS,,136
+Liberia,LR,,137
+Libya,LY,,138
+Liechtenstein,LI,,139
+Macao,MO,,140
+Madagascar,MG,,141
+Malawi,MW,,142
+Malaysia,MY,,143
+Maldives,MV,,144
+Mali,ML,,145
+Marshall Islands,MH,,146
+Mauritania,MR,,147
+Mauritius,MU,,148
+Mexico,MX,,149
+Micronesia,FM,,150
+Moldova,MD,,151
+Mongolia,MN,,152
+Montenegro,ME,,153
+Montserrat,MS,,154
+Morocco,MA,,155
+Mozambique,MZ,,156
+Myanmar,MM,,157
+Namibia,NA,,158
+Nauru,NR,,159
+Nepal,NP,,160
+New Caledonia,NC,,161
+New Zealand,NZ,,162
+Nicaragua,NI,,163
+Niger,NE,,164
+Nigeria,NG,,165
+Niue Island,NU,,166
+Norfolk Island,NF,,167
+North Korea,KP,,168
+Northern Mariana Islands,MP,,169
+Norway,NO,,170
+Occupied Palestinian Territory,PS,,171
+Oman,OM,,172
+Pakistan,PK,,173
+Palau,PW,,174
+Panama,PA,,175
+Papua New Guinea,PG,,176
+Paraguay,PY,,177
+Peru,PE,,178
+Philippines,PH,,179
+Pitcairn,PN,,180
+Qatar,QA,,181
+Russia,RU,,182
+Rwanda,RW,,183
+Samoa,WS,,184
+San Marino,SM,,185
+Sao Tome & Principe,ST,,186
+Saudi Arabia,SA,,187
+Senegal,SN,,188
+Serbia,RS,,189
+Seychelles,SC,,190
+Sierra Leone,SL,,191
+Singapore,SG,,192
+Sint Maarten,SX,,193
+Solomon Islands,SB,,194
+Somalia,SO,,195
+South Africa,ZA,,196
+South Georgia,GS,,197
+South Korea,KR,,198
+South Sudan,SS,,199
+Sri Lanka,LK,,200
+St Kitts & Nevis,KN,,201
+St Lucia,LC,,202
+St Vincent,VC,,203
+St. Helena,SH,,204
+Sudan,SD,,205
+Suriname,SR,,206
+Swaziland,SZ,,207
+Switzerland,CH,,208
+Syria,SY,,209
+Taiwan,TW,,210
+Tajikistan,TJ,,211
+Tanzania,TZ,,212
+Thailand,TH,,213
+Togo,TG,,214
+Tokelau Islands,TK,,215
+Tonga,TO,,216
+Trinidad & Tobago,TT,,217
+Tunisia,TN,,218
+Turkey,TR,,219
+Turkmenistan,TM,,220
+Turks & Caicos Islands,TC,,221
+Tuvalu,TV,,222
+Uganda,UG,,223
+Ukraine,UA,,224
+United Arab Emirates,AE,,225
+United States inc Puerto Rico,US,,226
+Uruguay,UY,,227
+US Minor Outlying Islands,UM,,228
+US Virgin Islands,VI,,229
+Uzbekistan,UZ,,230
+Vanuatu,VU,,231
+Vatican City,VA,,232
+Venezuela,VE,,233
+Vietnam,VN,,234
+Wallis & Futuna,WF,,235
+Yemen,YE,,236
+Zambia,ZM,,237
+Zimbabwe,ZW,,238
+International Organisations,9A,,239
+Total Extra EU28 (Rest of World),D5,,240
+World Total,W1,,241
+Serbia and Montenegro,CS,,242
+Other Europe,PB1,,243
+Other Central American Countries,PB2,,244
+Other American Countries,PB3,,245
+Residual Gulf Arabian Countries,PB4,,246
+Other Near & Middle Eastern Countries,PB5,,247
+Other Asia,PB6,,248
+Other Australasia & Oceania,PB7,,249
+Other North Africa,PB8,,250
+Other Africa,PB9,,251
