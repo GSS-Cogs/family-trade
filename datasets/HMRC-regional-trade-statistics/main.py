@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.3
+#       jupytext_version: 1.10.2
 #   kernelspec:
 #     display_name: Python 3.8.8 64-bit
 #     metadata:
@@ -21,6 +21,9 @@ import pandas as pd
 import numpy as np
 
 from gssutils import *
+# -
+
+logging.basicConfig(level=logging.DEBUG)
 
 # +
 infoFileName = 'info.json'
@@ -34,7 +37,9 @@ distro  = scraper.distribution(latest=True)
 scraper.dataset.family = info['families']
 
 # Get API Chunks
-api_chunks = distro.get_odata_api_chunks()
+# api_chunks = distro.get_odata_api_chunks()
+# Replace line below with line above once gss-utils issue get_odata_api_chunks() query is malformatted #216 is fixed
+api_chunks = [x["MonthId"] for x in distro._session.get(distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
 logging.debug(f'The chunks found on api are {api_chunks}')
 
 # Get PMD Chunks
@@ -54,10 +59,13 @@ else:
         qrtr = ('0'+str(3*(int(y[-1])-1)+1))[-2:]
         tmp.append(int(year+qrtr))
     pmd_chunks = tmp
-    fetch_chunk = max(set(api_chunks)-set(pmd_chunks))
+    fetch_chunk = sorted(set(api_chunks)-set(pmd_chunks))[-6:]
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
-df = distro.as_pandas(chunks_wanted=fetch_chunk)
+# For a temporary accretive data replacement, instead of fetching a single chunk as the line below
+# df = distro.as_pandas(chunks_wanted=fetch_chunk)
+# We will get 6 in one go.
+df = distro.as_pandas(chunks_wanted=sorted(api_chunks)[-6:])
 
 # Clearing all blank strings
 df = df.replace(r'^\s*$', np.nan, regex=True)
