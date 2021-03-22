@@ -18,7 +18,7 @@
         "airtable": "recmp8VQCu6Nya893",
         "columns": {
             "Period": {
-                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Sector": {
