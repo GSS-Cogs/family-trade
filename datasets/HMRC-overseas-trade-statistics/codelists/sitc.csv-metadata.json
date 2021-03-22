@@ -1,6 +1,6 @@
                                                                            {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/sitc",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/sitc",
     "url": "sitc.csv",
     "tableSchema": {
         "columns": [
@@ -38,7 +38,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#concept/sitc/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -62,16 +62,16 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/sitc"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/sitc"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#concept/sitc/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{notation}"
     },
-    "rdfs:label": "HMRC Ports",
-    "dc:title": "HMRC Ports",
+    "rdfs:label": "HMRC SITC",
+    "dc:title": "HMRC SITC",
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/port",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -79,19 +79,19 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/port/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "HMRC Ports",
-            "dc:title": "HMRC Ports",
+            "rdfs:label": "HMRC SITC",
+            "dc:title": "HMRC SITC",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/port"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port"
             },
-            "rdfs:comment": "Dataset representing the 'HMRC Ports' code list.",
+            "rdfs:comment": "Dataset representing the 'HMRC SITC' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/port"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port"
             },
             "dc:modified": {
                 "@type": "dateTime",
@@ -105,27 +105,27 @@
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/port/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/port/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "HMRC Ports Catalog Record",
-            "rdfs:label": "HMRC Ports Catalog Record",
+            "dc:title": "HMRC SITC Catalog Record",
+            "rdfs:label": "HMRC SITC Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
                 "@value": "2020-12-23T11:58:58.120533"
             },
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/port/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port/dataset"
             },
             "dc:modified": {
                 "@type": "dateTime",
                 "@value": "2020-12-23T11:59:10.942836"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC_OTC#scheme/port"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port"
             }
         }
     ]
