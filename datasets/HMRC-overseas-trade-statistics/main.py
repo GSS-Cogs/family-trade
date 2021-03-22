@@ -52,8 +52,8 @@ logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 # For a temporary accretive data replacement, instead of fetching a single chunk as the line below
 # df = distro.as_pandas(chunks_wanted=fetch_chunk)
-# We will get 18 (6 quarters) in one go.
-df = distro.as_pandas(chunks_wanted=sorted(api_chunks)[-18:])
+# We will get 6 periods in one go.
+df = distro.as_pandas(chunks_wanted=sorted(api_chunks)[-6:])
 
 # Drop all columns not specified
 df.drop([x for x in df.columns if x not in ['MonthId','FlowTypeDescription', 'SuppressionIndex', 'CountryId', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
