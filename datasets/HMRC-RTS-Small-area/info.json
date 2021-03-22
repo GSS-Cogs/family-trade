@@ -25,20 +25,24 @@
                 "codelist": false 
             },
             "Flow Directions": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "codelist: false
             },
              "NUTS Geography": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{nuts_geography}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{nuts_geography}",
+                "codelist: false
             },
             "HMRC Partner Geography": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-geographies",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-geographies/{hmrc_partner_geography}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-geographies",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-geographies/{hmrc_partner_geography}",
+                "codelist: false
             },
             "SITC 4": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}"
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}",
+                "codelist: false
             },
             "Measure Type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
