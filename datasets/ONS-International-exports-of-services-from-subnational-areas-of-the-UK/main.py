@@ -327,8 +327,6 @@ df = df.replace({'Service Origin Geography' : {
 #df['Service Origin Geography'].unique()
 # -
 
-df['Value'] = df['Value'].astype(int)
-
 #define the column order output into dataframe called tidy
 tidy = df[['Period','Export Services','Service Origin Geography','Service Destination', 'Flow Directions', 'Value','Marker']]
 tidy.head(5)
