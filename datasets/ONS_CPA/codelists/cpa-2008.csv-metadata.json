@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008",
     "url": "cpa-2008.csv",
     "rdfs:label": "Cpa 2008",
     "dc:title": "Cpa 2008",
@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#concept/cpa-2008/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#concept/cpa-2008/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -56,14 +56,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#concept/cpa-2008/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#concept/cpa-2008/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -71,53 +71,53 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:47:32.513776"
+                "@value": "2021-03-23T08:33:00.140669"
             },
             "rdfs:label": "Cpa 2008",
             "dc:title": "Cpa 2008",
             "rdfs:comment": "Dataset representing the 'Cpa 2008' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:47:32.513776"
+                "@value": "2021-03-23T08:33:00.140669"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/uk-trade-in-goods-by-classification-of-product-by-activity-time-series#scheme/cpa-2008"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_cpa#scheme/cpa-2008"
             },
             "dc:title": "Cpa 2008 Catalog Record",
             "rdfs:label": "Cpa 2008 Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:47:32.513776"
+                "@value": "2021-03-23T08:33:00.140669"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:47:32.513776"
+                "@value": "2021-03-23T08:33:00.140669"
             }
         }
     ]
