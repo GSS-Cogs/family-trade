@@ -48,8 +48,6 @@ trade,current-account,Current account,,,http://purl.org/linked-data/sdmx/2009/me
 trade,current-account-excluding-precious-metals,Current account excluding precious metals,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,current-account-transactions-with-the-european-union-eu-and-with-non-eu-countries,Current account transactions with the EU and with non-EU countries,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,summary-of-international-investment-position-financial-account-and-investment-income,Summary of international investment position financial account and investment income,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
-trade,trade-in-goods,Trade in goods,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
-trade,trade-in-services,Trade in services,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,primary-income,Primary income,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,secondary-income,Secondary income,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
 trade,capital-account,Capital account,,,http://purl.org/linked-data/sdmx/2009/measure#obsValue,xsd:decimal
