@@ -122,7 +122,7 @@ for column in df:
         df[column] = df[column].map(lambda x: pathify(x))
 df = df.replace({'Flow Directions' : {'balances-net-transactions' : 'balances', 'd' : 'not-applicable', 'j' : 'not-applicable', 'k' : 'not-applicable' }})
 df = df.replace({'Marker' : {'-' : 'unknown'}})
-df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'sa', ' Not seasonally adjusted' : 'nsa', ' K' : 'nsa' }})
+df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted' : 'NSA', ' K' : 'NSA' }})
 df["Seasonal Adjustment"].fillna('nsa', inplace=True)
 df = df.replace({'Measure Type': {
     'financial-account1-2': 'financial-account', 
