@@ -124,8 +124,10 @@ df = df.replace({'Flow Directions' : {'balances-net-transactions' : 'balances', 
 df = df.replace({'Marker' : {'-' : 'unknown'}})
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'sa', ' Not seasonally adjusted' : 'nsa', ' K' : 'nsa' }})
 df["Seasonal Adjustment"].fillna('nsa', inplace=True)
-
-
+df = df.replace({'Account Type': {
+    'financial-account1-2': 'financial-account', 
+    'current-account-excluding-precious-metals1': 'current-account-excluding-precious-metals', 
+    'international-investment-position1': 'international-investment-position'}})
 
 # %%
 df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Account Type', 'Marker' ,'Value',]].drop_duplicates()

@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services",
     "url": "bop-services.csv",
+    "rdfs:label": "Bop Services",
+    "dc:title": "Bop Services",
     "tableSchema": {
         "columns": [
             {
@@ -30,11 +32,11 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#concept/bop-services/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -54,70 +56,68 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#concept/bop-services/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Bop Services",
-    "dc:title": "Bop Services",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Bop Services",
-            "dc:title": "Bop Services",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services"
             },
-            "rdfs:comment": "Dataset representing the 'Bop Services' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.157924"
+                "@value": "2021-03-23T07:39:04.936369"
             },
+            "rdfs:label": "Bop Services",
+            "dc:title": "Bop Services",
+            "rdfs:comment": "Dataset representing the 'Bop Services' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.157924"
+                "@value": "2021-03-23T07:39:04.936369"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services/catalog-record",
             "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services"
+            },
             "dc:title": "Bop Services Catalog Record",
             "rdfs:label": "Bop Services Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.132411"
+                "@value": "2021-03-23T07:39:04.936369"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.132411"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services/dataset"
-            },
-            "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/bop-services"
+                "@value": "2021-03-23T07:39:04.936369"
             }
         }
     ]
