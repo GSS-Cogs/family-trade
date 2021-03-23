@@ -61,7 +61,7 @@ tabs = { tab.name: tab for tab in distribution.as_databaker() }
 
 # %%
 for name, tab in tabs.items():
-    columns=['Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Account Type', 'Marker']
+    columns=['Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Measure Type', 'Marker']
     trace.start(datasetTitle, tab, columns, distribution.downloadURL)
     if 'Index' in name or 'Records' in name or 'Table R1' in name or 'Table R2' in name or 'Table R3' in name:
         continue 
@@ -78,8 +78,8 @@ for name, tab in tabs.items():
     seasonal_adjustment = tab.excel_ref('B').filter(is_one_of(["Seasonally adjusted", "Not seasonally adjusted"])) | tab.excel_ref('A1')
     trace.Seasonal_Adjustment("Taken from column B as one of the following values: Seasonally Adjusted , Not Seasonally Adjusted")
     
-    account_type = tab.excel_ref('B1').is_not_blank()
-    trace.Account_Type("Taken from tab title")
+    measure_type = tab.excel_ref('B1').is_not_blank()
+    trace.Measure_Type("Taken from tab title")
     
     services = tab.excel_ref('B').is_not_blank() - flow
     services = services - tab.excel_ref('B1').expand(UP)
@@ -95,7 +95,7 @@ for name, tab in tabs.items():
                 HDim(quarter,'Quarter',DIRECTLY,ABOVE),
                 HDim(cdid,'CDID',DIRECTLY,LEFT),
                 HDim(services,'BOP Services',CLOSEST, ABOVE),
-                HDim(account_type,'Account Type',CLOSEST, ABOVE),
+                HDim(measure_type,'Measure Type',CLOSEST, ABOVE),
                 HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST, ABOVE),
                 HDim(flow,'Flow Directions',CLOSEST,ABOVE)
     ]
@@ -117,27 +117,27 @@ df['Period'] = df['Year'] + df['Quarter']
 df["Period"] =  df["Period"].apply(date_time)
 df["Flow Directions"].fillna('not-applicable', inplace=True)
 for column in df:
-    if column in ('Account Type', 'Flow Directions', 'BOP Services'):
+    if column in ('Measure Type', 'Flow Directions', 'BOP Services'):
         df[column] = df[column].str.strip()
         df[column] = df[column].map(lambda x: pathify(x))
 df = df.replace({'Flow Directions' : {'balances-net-transactions' : 'balances', 'd' : 'not-applicable', 'j' : 'not-applicable', 'k' : 'not-applicable' }})
 df = df.replace({'Marker' : {'-' : 'unknown'}})
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'sa', ' Not seasonally adjusted' : 'nsa', ' K' : 'nsa' }})
 df["Seasonal Adjustment"].fillna('nsa', inplace=True)
-df = df.replace({'Account Type': {
+df = df.replace({'Measure Type': {
     'financial-account1-2': 'financial-account', 
     'current-account-excluding-precious-metals1': 'current-account-excluding-precious-metals', 
     'international-investment-position1': 'international-investment-position'}})
 
 # %%
-df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Account Type', 'Marker' ,'Value',]].drop_duplicates()
+df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Measure Type', 'Marker' ,'Value',]].drop_duplicates()
 df
 
 # %%
 df['Period'].unique()
 
 # %%
-df['Account Type'].unique()
+df['Measure Type'].unique()
 
 # %%
 df['Flow Directions'].unique()
