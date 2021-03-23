@@ -1,13 +1,117 @@
-Label,Notation,Parent Notation,Sort Priority,Description
-Total,0,,,
-Manufacturing and maintenance services,1+2,0,,
-Transport,3,0,,
-Travel,4,0,,
-Construction,5,0,,
-Insurance and pension services,6,0,,
-Financial,7,0,,
-Intellectual property,8,0,,
-"Telecommunication, computer and information services",9,0,,
-Other business,10,0,,
-"Personal, cultural and recreational services",11,0,,
-Government,12,0,,
+Label,Notation,Sort Priority
+Trade in goods,trade-in-goods,1
+Trade in services,trade-in-services,2
+Total trade,total-trade,3
+Compensation of employees,compensation-of-employees,4
+Investment income,investment-income,5
+Other primary income,other-primary-income,6
+Total primary income,total-primary-income,7
+General government,general-government,8
+Other sectors,other-sectors,9
+Total secondary income,total-secondary-income,10
+Current balance,current-balance,11
+Capital balance,capital-balance,12
+Direct investment,direct-investment,13
+Portfolio investment,portfolio-investment,14
+Financial derivatives net,financial-derivatives-net,15
+Other investment,other-investment,16
+Reserve assets,reserve-assets,17
+Net financial transactions,net-financial-transactions,18
+Net errors and omissions,net-errors-and-omissions,19
+Exports of goods,exports-of-goods,20
+Exports of services,exports-of-services,21
+Total exports of goods and services,total-exports-of-goods-and-services,22
+Central government,central-government,23
+Total,total,24
+Imports of goods,imports-of-goods,25
+Imports of services,imports-of-services,26
+Total imports of goods and services,total-imports-of-goods-and-services,27
+Total trade in goods and services,total-trade-in-goods-and-services,28
+Exports of goods excluding precious metals,exports-of-goods-excluding-precious-metals,29
+Total trade excluding precious metals,total-trade-excluding-precious-metals,30
+Total excluding precious metals,total-excluding-precious-metals,31
+Imports of goods excluding precious metals,imports-of-goods-excluding-precious-metals,32
+Trade in goods excluding precious metals,trade-in-goods-excluding-precious-metals,33
+Current balance excluding precious metals,current-balance-excluding-precious-metals,34
+Exports of goods,exports-of-goods,35
+Exports of services,exports-of-services,36
+Total exports of goods and services,total-exports-of-goods-and-services,37
+Primary income,primary-income,38
+Secondary income,secondary-income,39
+Imports of goods,imports-of-goods,40
+Imports of services,imports-of-services,41
+Total imports of goods and services,total-imports-of-goods-and-services,42
+Trade in goods,trade-in-goods,43
+Trade in services,trade-in-services,44
+Total trade in goods and services,total-trade-in-goods-and-services,45
+Financial derivatives,financial-derivatives,46
+Net investment,net-investment,47
+Net transactions,net-transactions,48
+Net earnings,net-earnings,49
+Food beverages and tobacco,food-beverages-and-tobacco,50
+Basic materials,basic-materials,51
+Oil,oil,52
+Other fuels,other-fuels,53
+Semi manufactured goods,semi-manufactured-goods,54
+Finished manufactured goods,finished-manufactured-goods,55
+Unspecified goods,unspecified-goods,56
+Manufacturing and maintenance services,manufacturing-and-maintenance-services,57
+Transport,transport,58
+Travel,travel,59
+Construction,construction,60
+Insurance and pension services,insurance-and-pension-services,61
+Financial,financial,62
+Intellectual property,intellectual-property,63
+Telecommunication computer and information services,telecommunication-computer-and-information-services,64
+Other business,other-business,65
+Personal cultural and recreational services,personal-cultural-and-recreational-services,66
+Government,government,67
+Earnings on direct investment abroad,earnings-on-direct-investment-abroad,68
+Earnings on equity securities,earnings-on-equity-securities,69
+Earnings on debt securities,earnings-on-debt-securities,70
+Total portfolio investment,total-portfolio-investment,71
+Earnings on other investment abroad,earnings-on-other-investment-abroad,72
+Earnings on reserve assets,earnings-on-reserve-assets,73
+Total investment income,total-investment-income,74
+Foreign earnings on direct investment in the uk,foreign-earnings-on-direct-investment-in-the-uk,75
+Earnings on other investment in the uk,earnings-on-other-investment-in-the-uk,76
+Other eu receipts,other-eu-receipts,77
+Other receipts,other-receipts,78
+Total general government,total-general-government,79
+Social fund,social-fund,80
+Total other sectors,total-other-sectors,81
+Gni own resource,gni-own-resource,82
+Gni adjustments,gni-adjustments,83
+Less abatement,less-abatement,84
+Other,other,85
+Other payments,other-payments,86
+Payments to eu institutions,payments-to-eu-institutions,87
+Of which eu institutions,of-which-eu-institutions,88
+Debt forgiveness,debt-forgiveness,89
+Other capital transfers,other-capital-transfers,90
+Total central government,total-central-government,91
+Regional development fund,regional-development-fund,92
+Agricultural fund for regional development,agricultural-fund-for-regional-development,93
+Total eu institutions,total-eu-institutions,94
+Total capital transfers,total-capital-transfers,95
+Disposal of non produced non financial assets,disposal-of-non-produced-non-financial-assets,96
+Other capital transfers project grants,other-capital-transfers-project-grants,97
+Monetary financial institutions,monetary-financial-institutions,98
+Public corporations,public-corporations,99
+Total debt forgiveness,total-debt-forgiveness,100
+Acquisitions of non produced non financial assets,acquisitions-of-non-produced-non-financial-assets,101
+Non produced non financial assets,non-produced-non-financial-assets,102
+Equity capital other than reinvestment of earnings,equity-capital-other-than-reinvestment-of-earnings,103
+Reinvestment of earnings,reinvestment-of-earnings,104
+Debt instruments,debt-instruments,105
+Total direct investment abroad,total-direct-investment-abroad,106
+Equity and investment fund shares,equity-and-investment-fund-shares,107
+Debt securities,debt-securities,108
+Total portfolio investment abroad,total-portfolio-investment-abroad,109
+Financial derivatives employee stock options,financial-derivatives-employee-stock-options,110
+Other investment abroad,other-investment-abroad,111
+Total direct investment in the uk,total-direct-investment-in-the-uk,112
+Total portfolio investment in the uk,total-portfolio-investment-in-the-uk,113
+Other investment in the uk,other-investment-in-the-uk,114
+Total net direct investment,total-net-direct-investment,115
+Total net portfolio investment,total-net-portfolio-investment,116

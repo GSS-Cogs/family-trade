@@ -24,29 +24,11 @@
                 "propertyUrl": "skos:notation"
             },
             {
-                "titles": "Parent Notation",
-                "name": "parent_notation",
-                "datatype": {
-                    "base": "string",
-                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
-                },
-                "required": false,
-                "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#concept/bop-services/{parent_notation}"
-            },
-            {
                 "titles": "Sort Priority",
                 "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
-            },
-            {
-                "titles": "Description",
-                "name": "description",
-                "datatype": "string",
-                "required": false,
-                "propertyUrl": "rdfs:comment"
             },
             {
                 "virtual": true,
@@ -84,14 +66,14 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-23T07:39:04.936369"
+                "@value": "2021-03-23T12:05:05.761894"
             },
             "rdfs:label": "Bop Services",
             "dc:title": "Bop Services",
             "rdfs:comment": "Dataset representing the 'Bop Services' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-23T07:39:04.936369"
+                "@value": "2021-03-23T12:05:05.761894"
             }
         },
         {
@@ -113,11 +95,11 @@
             "rdfs:label": "Bop Services Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-23T07:39:04.936369"
+                "@value": "2021-03-23T12:05:05.761894"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-23T07:39:04.936369"
+                "@value": "2021-03-23T12:05:05.761894"
             }
         }
     ]

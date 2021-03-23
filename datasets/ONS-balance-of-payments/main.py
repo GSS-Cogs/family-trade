@@ -128,6 +128,19 @@ df = df.replace({'Measure Type': {
     'financial-account1-2': 'financial-account', 
     'current-account-excluding-precious-metals1': 'current-account-excluding-precious-metals', 
     'international-investment-position1': 'international-investment-position'}})
+df = df.replace({"BOP Services": {
+    "net-errors-and-omissions2": "net-errors-and-omissions",
+    "exports-of-services6": "exports-of-services",
+    "exports-of-goods6": "exports-of-goods",
+    "total-exports-of-goods-and-services6": "total-exports-of-goods-and-services",
+    "imports-of-goods6": "imports-of-goods",
+    "imports-of-services6": "imports-of-services",
+    "total-imports-of-goods-and-services6": "total-imports-of-goods-and-services",
+    "trade-in-goods6": "trade-in-goods",
+    "trade-in-services6": "trade-in-services",
+    "total-trade-in-goods-and-services6": "total-trade-in-goods-and-services",
+    "of-which-eu-institutions1": "of-which-eu-institutions"
+}})
 
 # %%
 df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Measure Type', 'Marker' ,'Value',]].drop_duplicates()
