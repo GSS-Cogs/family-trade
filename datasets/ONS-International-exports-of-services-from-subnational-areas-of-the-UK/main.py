@@ -332,38 +332,26 @@ tidy = df[['Period','Export Services','Service Origin Geography','Service Destin
 tidy.head(5)
 
 #scraper.dataset.title
-#scraper.dataset.comment
-scraper.dataset.description = scraper.dataset.description + """
-
+#scraper.dataset.description
+scraper.dataset.comment = scraper.dataset.description + """
 Sources: UK Balance of Payments - The Pink Book; International Trade in Services; UK Trade in services by industry, country and service type: 2016 to 2017
 
-Background:
 The estimates shown in this workbook are experimental. While we have made some important changes (please refer to the article),
 the basic concepts and methodology underpinning this analysis is still largely similar to the methods used in our original article
 "Estimating the value of service exports abroad from different parts of the UK: 2011 to 2014" published on 8 July 2016 at:
 www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/estimatingthevalueofserviceexportsabroadfromdifferentpartsoftheuk/2011to2014
 
-Contents of this workbook:
-Coverage: United Kingdom
-Lowest geography: NUTS3 or Joint Authority
-Variable(s): Values of service exports in £ million
-Breakdown(s): NUTS1, NUTS2, NUTS3, Joint Authority, industry, destination (EU or rest of world)
-Age group(s): n/a
-Sex: n/a
-
 Link to related publications:
-www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/estimatingthevalueofserviceexportsabroadfromdifferentpartsoftheuk/previousReleases
-www.gov.uk/government/statistics/regional-trade-in-goods-statistics-dis-aggregated-by-smaller-geographical-areas-2017
-www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/uktradeinservicesbyindustrycountryandservicetype/2016to2017
+* www.ons.gov.uk/businessindustryandtrade/internationaltrade/articles/estimatingthevalueofserviceexportsabroadfromdifferentpartsoftheuk/previousReleases
+* www.gov.uk/government/statistics/regional-trade-in-goods-statistics-dis-aggregated-by-smaller-geographical-areas-2017
+* www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/articles/uktradeinservicesbyindustrycountryandservicetype/2016to2017
 
-The Nomenclature of Territorial Units for Statistics (NUTS) is a hierarchical classification of administrative areas, used across the European Union (EU) for statistical purposes.
-NUTS1 are major socio-economic regions, while NUTS2 and NUTS3 are progressively smaller regions. In the context of the UK, the NUTS1 areas are Wales, Scotland, Northern Ireland and the nine regions of England.
-Smaller geographic breakdowns may not sum exactly to aggregated totals due to rounding.
-The European Union consists of 28 member countries including the United Kingdom. For trade purposes, this includes all 27 countries other than the UK as well as the European Central Bank and European Institutions.
-The industrial groups presented in this analysis are based on the UK Standard Industrial Classification 2007, although some changes have been made.
-Primary and utilities represents SIC07 section A, B, D and E; section G has been split into two parts (Wholesale and motor trades, and Retail); Other services comprises of O, P, Q, R, S and unknown/unallocated industries
-For further information about the industrial classification, please see:
-www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007
+Footnotes:
+* Smaller geographic breakdowns may not sum exactly to aggregated totals due to rounding.
+* The European Union consists of 28 member countries including the United Kingdom. For trade purposes, this includes all 27 countries other than the UK as well as the European Central Bank and European Institutions.
+* The industrial groups presented in this analysis are based on the UK Standard Industrial Classification 2007, although some changes have been made. Primary and utilities represents SIC07 section A, B, D and E; Non-manufacturing production services represents SIC07 section A, B, D, E and F; section G has been split into two parts (Wholesale and motor trades, and Retail); Other services comprises of O, P, Q, R, S and unknown/unallocated industries. 
+* The broader industry groups consist of production industries (SIC07 A-E), and two groups of services: business-based professional services (SIC07 L-N) and all other services (SIC07 G-K and O-S). 
+* For further information about the industrial classification, please see: https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007
 """
 
 #output cube and spec
