@@ -35,8 +35,8 @@
                 "codelist": false
             },
             "HMRC Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-geographies",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-geographies/{hmrc_partner_geography}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/nuts-geographies",
+                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{hmrc_partner_geography}",
                 "codelist": false
             },
             "SITC 4": {
