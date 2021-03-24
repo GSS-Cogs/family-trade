@@ -1,0 +1,111 @@
+Label,Notation,Parent Notation,Sort Priority
+European Union,C,,1
+Non-European Union,non-eu,,2
+France,FR,,3
+Netherlands,NL,,4
+Germany,DE,,5
+Italy,IT,,6
+Ireland,IE,,7
+Denmark,DK,,8
+Greece,GR,,9
+Portugal,PT,,10
+Spain,ES,,11
+Belgium,BE,,12
+Luxembourg,LU,,13
+Sweden,SE,,14
+Finland,FI,,15
+Austria,AT,,16
+Malta,MT,,17
+Estonia,EE,,18
+Latvia,LV,,19
+Lithuania,LT,,20
+Poland,PL,,21
+Czech Republic,CZ,,22
+Slovakia,SK,,23
+Hungary,HU,,24
+Romania,RO,,25
+Bulgaria,BG,,26
+Slovenia,SI,,27
+Croatia,HR,,28
+Cyprus,CY,,29
+Iceland,IS,,30
+Norway,NO,,31
+Switzerland,CH,,32
+Gibraltar,GI,,33
+Turkey,TR,,34
+Ukraine,UA,,35
+Russian Federation,RU,,36
+Georgia,GE,,37
+Azerbaijan,AZ,,38
+Kazakhstan,KZ,,39
+Republic of North Macedonia,MK,,40
+Serbia,XS,,41
+Morocco,MA,,42
+Algeria,DZ,,43
+Egypt,EG,,44
+Senegal,SN,,45
+Cote d`Ivoire,CI,,46
+Ghana,GH,,47
+Nigeria,NG,,48
+Equatorial Guinea,GQ,,49
+Angola,AO,,50
+Ethiopia,ET,,51
+Kenya,KE,,52
+"Tanzania, United Republic of",TZ,,53
+Mauritius,MU,,54
+South Africa,ZA,,55
+United States,US,,56
+Canada,CA,,57
+Mexico,MX,,58
+Guatemala,GT,,59
+Costa Rica,CR,,60
+Panama,PA,,61
+Dominican Republic,DO,,62
+Trinidad and Tobago,TT,,63
+Colombia,CO,,64
+Ecuador,EC,,65
+Peru,PE,,66
+Brazil,BR,,67
+Chile,CL,,68
+Uruguay,UY,,69
+Argentina,AR,,70
+Falkland Islands (Malvinas),FK,,71
+Lebanon,LB,,72
+Iraq,IQ,,73
+Israel,IL,,74
+Jordan,JO,,75
+Saudi Arabia,SA,,76
+Kuwait,KW,,77
+Bahrain,BH,,78
+Qatar,QA,,79
+United Arab Emirates,AE,,80
+Oman,OM,,81
+Pakistan,PK,,82
+India,IN,,83
+Bangladesh,BD,,84
+Sri Lanka,LK,,85
+Thailand,TH,,86
+Viet Nam,VN,,87
+Indonesia,ID,,88
+Malaysia,MY,,89
+Singapore,SG,,90
+China,CN,,91
+"Korea, Republic of",KR,,92
+Japan,JP,,93
+"Taiwan, Province of China",TW,,94
+"Hong Kong, China",HK,,95
+Australia,AU,,96
+New Zealand,NZ,,97
+Other Asia and Oceania,other-asia-and-oceania,,98
+Other Eastern Europe,other-eastern-europe,,99
+Other latin America and Caribbean,other-latin-america-and-caribbean,,100
+Other middle east and north Africa,other-middle-east-and-north-africa,,101
+Other sub-saharan Africa,other-sub-saharan-africa,,102
+Cameroon,CM,,103
+"Congo, the Democratic Republic of the",CD,,104
+"Venezuela, Bolivarian Republic",VE,,105
+Other Western Europe,other-western-europe,,106
+Honduras,HN,,107
+Namibia,,,108
+Other North AMerica,other-north-america,,109
+Serbia,RS,,110
