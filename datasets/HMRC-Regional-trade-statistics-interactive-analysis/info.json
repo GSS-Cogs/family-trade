@@ -23,9 +23,8 @@
                 "codelist": false
             },
             "Flow": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}",
-                "codelist": false
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
             },
             "Measure Type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
