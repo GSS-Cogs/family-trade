@@ -156,12 +156,15 @@ with open("info.json", "r") as jsonFile:
         json.dump(data, jsonFile)
     
 cubes.add_cube(copy.deepcopy(scraper), businessCount, "hmrc-rts-small-area-business-count")
+cubes.output_all()
 
 # +
 scraper.dataset.family = 'trade'
 scraper.dataset.title = mainTitle + ': Statistical value (£ million)'
 scraper.dataset.comment = scraper.dataset.title + ' - Detailed data tables'
 scraper.dataset.description = descr
+
+cubes = Cubes("info.json")
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
@@ -171,9 +174,10 @@ with open("info.json", "r") as jsonFile:
         json.dump(data, jsonFile)
     
 cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-statistical-value")
+cubes.output_all()
 # -
 
-cubes.output_all()
+
 
 # +
 #help('dmtools')
