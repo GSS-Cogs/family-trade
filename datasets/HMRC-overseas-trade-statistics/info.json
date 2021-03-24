@@ -34,7 +34,7 @@
             },
             "port_code": {
                 "label": "Port",
-                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC_TC#scheme/port",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port",
                 "value": "https://api.uktradeinfo.com/Port/{port_code}"
             },
             "period": {
