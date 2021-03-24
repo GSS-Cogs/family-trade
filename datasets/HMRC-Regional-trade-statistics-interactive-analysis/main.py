@@ -613,7 +613,7 @@ df = df[df['Country'] != '0.0']
 
 df['Flow'] = df.apply(lambda x: 'exports' if 'export' in x['Measure Type'] else ('imports' if 'import' in x['Measure Type'] else 'ERROR'), axis = 1)
 
-COLUMNS_TO_NOT_PATHIFY = ['Value']
+COLUMNS_TO_NOT_PATHIFY = ['Value', 'Period']
 
 for col in df.columns.values.tolist():
 	if col in COLUMNS_TO_NOT_PATHIFY:
