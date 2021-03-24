@@ -29,8 +29,8 @@
             },
             "commodity_sitc_id": {
                 "label": "Commodity",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{commodity_sitc_id}"
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/sitc",
+                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{commodity_sitc_id}"
             },
             "port_code": {
                 "label": "Port",
