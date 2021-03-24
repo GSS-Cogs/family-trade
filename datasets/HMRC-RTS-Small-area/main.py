@@ -83,7 +83,8 @@ table['Value'][table['Marker'].isin(['not-applicable', 'below-threshold-traders'
 
 businessCount = table[table['Measure Type'] == 'businesses']
 businessStats = table[table['Measure Type'] == 'statistical-value']
-
+businessCount = businessCount[businessCount['HMRC Partner Geography'] != 'below-threshold-traders']
+businessStats = businessStats[businessStats['HMRC Partner Geography'] != 'below-threshold-traders']
 #del table
 del businessCount['Measure Type']
 del businessCount['Unit']
@@ -169,9 +170,19 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
     
-cubes.add_cube(copy.deepcopy(scraper), businessCount, "hmrc-rts-small-area-statistical-value")
+cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-statistical-value")
 # -
 
 cubes.output_all()
 
+# +
+#help('dmtools')
 
+# +
+#import dmtools as dm
+#import pandas as pd
+
+#businessCount = pd.read_csv("businessCount.csv")
+#businessStats = pd.read_csv("businessStats.csv")
+
+#dm.check_all_codes_in_codelist(businessCount['HMRC Partner Geography'].unique(), '../../reference/codelists/hmrc-small-area.csv', 'Notation', 'small-area', False)
