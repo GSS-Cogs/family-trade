@@ -85,8 +85,8 @@ businessCount = table[table['Measure Type'] == 'businesses']
 businessStats = table[table['Measure Type'] == 'statistical-value']
 businessCount = businessCount[businessCount['HMRC Partner Geography'] != 'below-threshold-traders']
 businessStats = businessStats[businessStats['HMRC Partner Geography'] != 'below-threshold-traders']
-businessCount['HMRC Partner Geography'][businessCount['HMRC Partner Geography'] == 'europe'] = 'C'
-businessStats['HMRC Partner Geography'][businessStats['HMRC Partner Geography'] == 'europe'] = 'C'
+#businessCount['HMRC Partner Geography'][businessCount['HMRC Partner Geography'] == 'europe'] = 'C'
+#businessStats['HMRC Partner Geography'][businessStats['HMRC Partner Geography'] == 'europe'] = 'C'
 
 #del table
 del businessCount['Measure Type']
@@ -177,5 +177,7 @@ cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-gbp-m
 # -
 
 cubes.output_all()
+
+help('dmtools')
 
 
