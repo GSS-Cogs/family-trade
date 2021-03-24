@@ -62,18 +62,18 @@ import numpy
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'EU', 'C', table['HMRC Partner Geography'])
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'Non-EU', 'non-eu', table['HMRC Partner Geography'])
 sorted(table)
-#table = table[(table['Marker'] != 'residual-trade')]
-#table = table[(table['Marker'] != 'below-threshold-traders')]
+table = table[(table['Marker'] != 'residual-trade')]
+table = table[(table['Marker'] != 'below-threshold-traders')]
 table["Measure Type"] = table["Measure Type"].apply(pathify)
 table = table.drop_duplicates()
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 # +
-#lst = ['not-applicable', 'below-threshold-traders', 'residual-trade']
-#oths = table[table['Marker'].isin(lst)]
-#list(table['Marker'].unique())
-#oldtable = table
-#oths.head(60)
+#table.head(60)
+#d = table[table['NUTS Geography'] == 'nuts2/UKH3']
+#d = d[d['HMRC Partner Geography'] == 'C']
+#d = d[d['Flow Directions'] == 'exports']
+#d.head(60)
 
 # +
 #Set empty Value cells to 0 so you can convert all values to Int but then set same cells back to empty value
