@@ -146,15 +146,16 @@ print('-------------------------------')
 print(scraper.dataset.description)
 # -
 
+
+
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/businesses"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/count"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-cubes = Cubes("info.json")   
+cubes = Cubes("info.json")        
 cubes.add_cube(copy.deepcopy(scraper), businessCount, "hmrc-rts-small-area-business-count")
-cubes.output_all()
 
 # +
 scraper.dataset.family = 'trade'
@@ -168,21 +169,10 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-cubes = Cubes("info.json")  
-cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-statistical-value")
-cubes.output_all()
+        
+cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-gbp-million")
 # -
 
+cubes.output_all()
 
 
-# +
-#help('dmtools')
-
-# +
-#import dmtools as dm
-#import pandas as pd
-
-#businessCount = pd.read_csv("businessCount.csv")
-#businessStats = pd.read_csv("businessStats.csv")
-
-#dm.check_all_codes_in_codelist(businessCount['HMRC Partner Geography'].unique(), '../../reference/codelists/hmrc-small-area.csv', 'Notation', 'small-area', False)
