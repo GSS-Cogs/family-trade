@@ -12,8 +12,8 @@ South West,nuts1/UKK,nuts1/all,10
 Wales,nuts1/UKL,nuts1/all,11
 Scotland,nuts1/UKM,nuts1/all,12
 Northern Ireland,nuts1/UKN,nuts1/all,13
-Unallocated - Known,nuts1/unk,nuts1/all,14
-Unallocated - Unknown,nuts1/unu,nuts1/all,15
+Unallocated - Known,nuts1/UNK,nuts1/all,14
+Unallocated - Unknown,nuts1/UNU,nuts1/all,15
 All NUTS2 areas,nuts2/all,,16
 Bedfordshire and Hertfordshire,nuts2/UKH2,nuts2/all,17
 "Berkshire, Buckinghamshire and Oxfordshire",nuts2/UKJ1,nuts2/all,18
