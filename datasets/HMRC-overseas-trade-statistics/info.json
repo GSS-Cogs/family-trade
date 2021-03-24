@@ -15,6 +15,7 @@
     "transform": {
         "airtable": "recvSzMgbU9mqu7ln",
         "main_issue": 14,
+        "validate": false,
         "columns": {
             "flow_type": {
                 "label": "Flow Type",
