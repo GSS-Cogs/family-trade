@@ -1,6 +1,6 @@
 {
     "id": "ons-balance-of-payments",
-    "title": "Balance of payments",
+    "title": "Balance of Payments",
     "publisher": "Office for National Statistics",
     "description": "Quarterly summary of balance of payments accounts including the current account, capital transfers, transactions, and levels of UK external assets and liabilities.",
     "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/balanceofpaymentsstatisticalbulletintables",
@@ -41,7 +41,7 @@
             },
             "Measure Type": {
         		"dimension": "http://purl.org/linked-data/cube#measureType",
-        		"value": "http://gss-data.org.uk/def/measure/{measure_type}",
+        		"value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
         		"types": [ 
                     "summary-of-balance-of-payments",
                     "current-account",
