@@ -30,13 +30,13 @@
                 "codelist": false
             },
             "NUTS Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area/{nuts_geography}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/nuts-geographies",
+                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_geography}",
                 "codelist": false
             },
             "HMRC Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/nuts-geographies",
-                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{hmrc_partner_geography}",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area-country-codes",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area-country-codes/{hmrc_partner_geography}",
                 "codelist": false
             },
             "SITC 4": {
