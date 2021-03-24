@@ -144,9 +144,7 @@ print('-------------------------------')
 print(scraper.dataset.comment)
 print('-------------------------------')
 print(scraper.dataset.description)
-
-# +
-cubes = Cubes("info.json")
+# -
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
@@ -154,7 +152,7 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/count"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-    
+cubes = Cubes("info.json")   
 cubes.add_cube(copy.deepcopy(scraper), businessCount, "hmrc-rts-small-area-business-count")
 cubes.output_all()
 
@@ -164,15 +162,13 @@ scraper.dataset.title = mainTitle + ': Statistical value (£ million)'
 scraper.dataset.comment = scraper.dataset.title + ' - Detailed data tables'
 scraper.dataset.description = descr
 
-cubes = Cubes("info.json")
-
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/businesses"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-    
+cubes = Cubes("info.json")  
 cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-statistical-value")
 cubes.output_all()
 # -
