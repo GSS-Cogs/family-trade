@@ -68,12 +68,8 @@ table["Measure Type"] = table["Measure Type"].apply(pathify)
 table = table.drop_duplicates()
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
-# +
-#table.head(60)
-#d = table[table['NUTS Geography'] == 'nuts2/UKH3']
-#d = d[d['HMRC Partner Geography'] == 'C']
-#d = d[d['Flow Directions'] == 'exports']
-#d.head(60)
+table.loc[table['HMRC Partner Geography'] == 'europe', 'HMRC Partner Geography'] = 'C'
+table.head(5)
 
 # +
 #Set empty Value cells to 0 so you can convert all values to Int but then set same cells back to empty value
@@ -85,8 +81,6 @@ businessCount = table[table['Measure Type'] == 'businesses']
 businessStats = table[table['Measure Type'] == 'statistical-value']
 businessCount = businessCount[businessCount['HMRC Partner Geography'] != 'below-threshold-traders']
 businessStats = businessStats[businessStats['HMRC Partner Geography'] != 'below-threshold-traders']
-#businessCount['HMRC Partner Geography'][businessCount['HMRC Partner Geography'] == 'europe'] = 'C'
-#businessStats['HMRC Partner Geography'][businessStats['HMRC Partner Geography'] == 'europe'] = 'C'
 
 #del table
 del businessCount['Measure Type']
@@ -141,16 +135,7 @@ scraper.dataset.family = 'trade'
 scraper.dataset.title = mainTitle + ': Business Count'
 scraper.dataset.comment = scraper.dataset.title + ' - Detailed data tables'
 scraper.dataset.description = descr
-
-print(scraper.dataset.title)
-print('-------------------------------')
-print(scraper.dataset.comment)
-print('-------------------------------')
-print(scraper.dataset.description)
 # -
-
-
-
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/businesses"
@@ -158,7 +143,7 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 cubes = Cubes("info.json")        
-cubes.add_cube(copy.deepcopy(scraper), businessCount, "hmrc-rts-small-area-business-count")
+cubes.add_cube(copy.deepcopy(scraper), businessCount, "hmrc-rts-small-area-business-count", 'hmrc-rts-small-area-business-count', data)
 
 # +
 scraper.dataset.family = 'trade'
@@ -173,11 +158,9 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
         
-cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-gbp-million")
+cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-gbp-million", 'hmrc-rts-small-area-gbp-million', data)
 # -
 
 cubes.output_all()
-
-help('dmtools')
 
 
