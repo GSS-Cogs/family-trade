@@ -146,8 +146,8 @@ scraper.dataset.description = descr
 # -
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/businesses"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/count"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/count"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 cubes = Cubes("info.json")        
@@ -161,8 +161,8 @@ scraper.dataset.description = descr
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/businesses"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-million"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
         
