@@ -150,7 +150,6 @@ tidy = pd.concat([tidy_exports, tidy_imports], ignore_index=True)
 tidy['Marker'] = 'estimated'
 tidy['Mode'].unique()
 
-tidy["Country"] = tidy["Country"].apply(pathify)
 tidy["Direction"][tidy["Direction"] == "EX"] = "exports"
 
 tidy['Country'].unique()
