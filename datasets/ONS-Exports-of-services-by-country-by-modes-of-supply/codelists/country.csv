@@ -1,0 +1,86 @@
+Label,Notation,Parent Notation,Sort Priority
+EU Institutions,4A,,1
+European Central Bank,4F,,2
+International Organisations,9A,,3
+Albania,AL,,4
+Argentina,AR,,5
+Austria,AT,,6
+Australia,AU,,7
+Total EU28,B5,,8
+Belgium,BE,,9
+Bulgaria,BG,,10
+Brazil,BR,,11
+Belarus,BY,,12
+Canada,CA,,13
+Switzerland,CH,,14
+Chile,CL,,15
+China,CN,,16
+Colombia,CO,,17
+Cyprus,CY,,18
+Czech Republic,CZ,,19
+Non EU,D5,,20
+Germany,DE,,21
+Denmark,DK,,22
+Estonia,EE,,23
+Egypt,EG,,24
+Spain,ES,,25
+Finland,FI,,26
+France,FR,,27
+Greece,GR,,28
+Hong Kong,HK,,29
+Croatia,HR,,30
+Hungary,HU,,31
+Indonesia,ID,,32
+Ireland,IE,,33
+Israel,IL,,34
+India,IN,,35
+Iran,IR,,36
+Iceland,IS,,37
+Italy,IT,,38
+Japan,JP,,39
+South Korea,KR,,40
+Liechtenstein,LI,,41
+Lithuania,LT,,42
+Luxembourg,LU,,43
+Latvia,LV,,44
+Morocco,MA,,45
+Montenegro,ME,,46
+Malta,MT,,47
+Mexico,MX,,48
+Malaysia,MY,,49
+Netherlands,NL,,50
+Norway,NO,,51
+New Zealand,NZ,,52
+Other Europe,PB1,,53
+Other Central American Countries,PB2,,54
+Other American Countries,PB3,,55
+Residual Gulf Arabian Countries,PB4,,56
+Other Near & Middle Eastern Countries,PB5,,57
+Other Asia,PB6,,58
+Other Australasia & Oceania,PB7,,59
+Other North Africa,PB8,,60
+Other Africa,PB9,,61
+Philippines,PH,,62
+Pakistan,PK,,63
+Poland,PL,,64
+Portugal,PT,,65
+Romania,RO,,66
+Serbia,RS,,67
+Russia,RU,,68
+Saudi Arabia,SA,,69
+Sweden,SE,,70
+Singapore,SG,,71
+Slovenia,SI,,72
+Slovak Republic,SK,,73
+Thailand,TH,,74
+Turkey,TR,,75
+Taiwan,TW,,76
+Ukraine,UA,,77
+United States inc Puerto Rico,US,,78
+Uruguay,UY,,79
+Venezuela,VE,,80
+World total,W1,,81
+South Africa,ZA,,82
+Offshore financial centres,C4,,83
+Nigeria,NI,,84
+Extra EU 27 not allocated,Z8,,86
