@@ -97,8 +97,8 @@ tidy['NUTS Geography'] = tidy['NUTS Geography'].map(
 
 tidy['HMRC Partner Geography'] = tidy['HMRC Partner Geography'].map(
     lambda x: {
-        'Exp' : 'europe',
-        'Imp': 'europe'}.get(x, x))
+        'Exp' : 'WW',
+        'Imp': 'WW'}.get(x, x))
 # -
 
 for col in tidy.columns:
