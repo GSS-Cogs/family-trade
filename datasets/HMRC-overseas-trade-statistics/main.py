@@ -52,9 +52,10 @@ else:
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 # Download the chonky dataframe
-df = distro.as_pandas(chunks_wanted=min(api_chunks))
+df = distro.as_pandas(chunks_wanted=sorted(api_chunks)[-6:])
 
-df = df.sample(n=5000)
+# Sampling to downsize work
+# df = df.sample(n=5000)
 
 # Drop all columns not specified
 df.drop([x for x in df.columns if x not in ['MonthId','FlowTypeDescription', 'SuppressionIndex', 'CountryId', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
