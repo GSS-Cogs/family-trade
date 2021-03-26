@@ -75,26 +75,28 @@ table.head(5)
 #table.to_csv('table.csv')
 # -
 
-#table = pd.read_csv('table.csv')
+table = pd.read_csv('table.csv')
 table['nanTest'] = table['Value']
 table.loc[table['Value'].isna(), 'nanTest'] = '--'
 table.loc[table['nanTest'] == '--', 'Value'] = 0
 table['Value'] = table['Value'].astype(int)
 table.loc[table['nanTest'] == '--', 'Value'] = ''
 table.drop('nanTest', inplace=True, axis=1)
-#table.head(10)
+table.head(10)
+table['HMRC Partner Geography'].unique()
+
+table = table[table['HMRC Partner Geography'] != 'below-threshold-traders']
 
 # +
 businessCount = table[table['Measure Type'] == 'businesses']
 businessStats = table[table['Measure Type'] == 'statistical-value']
-businessCount = businessCount[businessCount['HMRC Partner Geography'] != 'below-threshold-traders']
-businessStats = businessStats[businessStats['HMRC Partner Geography'] != 'below-threshold-traders']
 
-#del table
+del table
 del businessCount['Measure Type']
 del businessCount['Unit']
 del businessStats['Measure Type']
 del businessStats['Unit']
+businessStats['HMRC Partner Geography'].unique()
 
 
 # +
@@ -170,6 +172,9 @@ cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-gbp-m
 # -
 
 cubes.output_all()
+
+import dmtools as dm
+dm.check_all_codes_in_codelist(businessCount['HMRC Partner Geography'].unique(), '/users/leigh/Development/ref_trade/codelists/hmrc-geographies.csv', 'Notation', 'geogs', False)
 
 
 
