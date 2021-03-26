@@ -25,16 +25,24 @@
                 "codelist": false
             },
             "Flow Directions": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "NUTS Geography": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/nuts-geographies",
-                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_geography}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/nuts-geographies",
+                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_geography}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies"
+            },
+            "HMRC Partner Geography": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area-country-codes",
+                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area-country-codes/{hmrc_partner_geography}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-small-area-country-codes"
             },
             "SITC 4": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sitc4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc4",
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
