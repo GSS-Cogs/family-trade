@@ -173,8 +173,10 @@ cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-gbp-m
 
 cubes.output_all()
 
-import dmtools as dm
-dm.check_all_codes_in_codelist(businessCount['HMRC Partner Geography'].unique(), '/users/leigh/Development/ref_trade/codelists/hmrc-geographies.csv', 'Notation', 'geogs', False)
+# +
+#import dmtools as dm
+#dm.check_all_codes_in_codelist(businessCount['HMRC Partner Geography'].unique(), '/users/leigh/Development/ref_trade/codelists/hmrc-geographies.csv', 'Notation', 'geogs', False)
+# -
 
 
 
