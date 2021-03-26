@@ -69,8 +69,9 @@ def main():
                     "SitcCode": item[code_field_name],
                     "SitcDesc": item[desc_field_name],
                     "ParentSitcCodes": [
-                        item[f"Sitc{j}Code"] for j in range(i-1, 0, -1)
+                        item[f"Sitc{j}Code"] for j in range(i, 0, -1)
                         if f"Sitc{j}Code" in item and item[f"Sitc{j}Code"] is not None
+                           and item[f"Sitc{j}Code"] != item[code_field_name]
                     ]
                 })
 
@@ -78,8 +79,9 @@ def main():
             "SitcCode": item["SitcCode"],
             "SitcDesc": item["SitcDesc"],
             "ParentSitcCodes": [
-                item[f"Sitc{i}Code"] for i in range(3, 0, -1)
-                if f"Sitc{i}Code" in item and item[f"Sitc{i}Code"] is not None and item[f"Sitc{i}Code"] != item["SitcCode"]
+                item[f"Sitc{i}Code"] for i in range(4, 0, -1)
+                if f"Sitc{i}Code" in item and item[f"Sitc{i}Code"] is not None
+                   and item[f"Sitc{i}Code"] != item["SitcCode"]
             ]
         })
 
