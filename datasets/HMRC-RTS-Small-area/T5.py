@@ -232,6 +232,6 @@ tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Me
 #tidy.to_csv('nancheck.csv')
 # -
 
-tody.head(20)
+
 
 
