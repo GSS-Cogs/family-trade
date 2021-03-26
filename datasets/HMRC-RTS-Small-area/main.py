@@ -75,7 +75,7 @@ table.head(5)
 #table.to_csv('table.csv')
 # -
 
-table = pd.read_csv('table.csv')
+#table = pd.read_csv('table.csv')
 table['nanTest'] = table['Value']
 table.loc[table['Value'].isna(), 'nanTest'] = '--'
 table.loc[table['nanTest'] == '--', 'Value'] = 0
@@ -83,7 +83,7 @@ table['Value'] = table['Value'].astype(int)
 table.loc[table['nanTest'] == '--', 'Value'] = ''
 table.drop('nanTest', inplace=True, axis=1)
 table.head(10)
-table['HMRC Partner Geography'].unique()
+#table['HMRC Partner Geography'].unique()
 
 table = table[table['HMRC Partner Geography'] != 'below-threshold-traders']
 
@@ -100,8 +100,8 @@ businessStats['HMRC Partner Geography'].unique()
 
 
 # +
-mainTitle = scraper.dataset.title.replace(': 2019', '')
-mainTitle = scraper.dataset.title.replace(': 2020', '')
+mainTitle = scraper.dataset.title.replace('2019', '')
+mainTitle = scraper.dataset.title.replace('2020', '')
 descr = """General: 
 This release uses the same allocation methodology as the Regional Trade Statistics.
 Data is compiled by merging trade data collected by HMRC with employment data from the Interdepartmental Business Register (IDBR). A business’ trade is allocated to a region based on the proportion of its employees employed in that region. Where a trader is not matched with the IDBR, its trade is matched with Office for National Statistics postcode data to obtain the region in which the Head Office of the VAT registered business (importer or exporter) is based.
@@ -142,7 +142,7 @@ For residual 'Other' Areas and trade not allocated to a NUTS1 region (Unallocate
 """
 
 scraper.dataset.family = 'trade'
-scraper.dataset.title = mainTitle + ': Business Count'
+scraper.dataset.title = mainTitle + ' Business Count'
 scraper.dataset.comment = scraper.dataset.title + ' - Detailed data tables'
 scraper.dataset.description = descr
 # -
