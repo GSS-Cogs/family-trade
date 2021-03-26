@@ -24,14 +24,9 @@ def get_api_data(url: str) -> List[dict]:
 
 def main():
     def get_parent_code(record: dict) -> Optional[str]:
-        id = record["SitcCode"]
-
-        if "-" in id:
-            return re.sub("-+", "", id)
-        else:
-            parent_codes = record["ParentSitcCodes"]
-            if len(parent_codes) > 0:
-                return parent_codes[0]
+        parent_codes = record["ParentSitcCodes"]
+        if len(parent_codes) > 0:
+            return parent_codes[0].replace("-", "+")
 
         return None
 
