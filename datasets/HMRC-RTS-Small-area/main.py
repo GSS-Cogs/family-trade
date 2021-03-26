@@ -163,8 +163,8 @@ scraper.dataset.description = descr
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gbp-million"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/value"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
         
