@@ -33,13 +33,15 @@ scraper.dataset.family = info['families']
 distro = scraper.distribution(latest=True)
 # -
 
-# Get OData API Chunks
-api_chunks = distro.get_odata_api_chunks()
-logging.debug(f'The chunks found on api are {api_chunks}')
+# Get API Chunks
+# api_chunks = distro.get_odata_api_chunks()
+# logging.debug(f'The chunks found on api are {pmd_chunks}')
+# Replace line below with line above once gss-utils issue get_odata_api_chunks() query is malformatted #216 is fixed
+api_chunks = [x["MonthId"] for x in distro._session.get(distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
 
 # Get PMD Chunks
 pmd_chunks = distro.get_pmd_chunks()
-logging.debug(f'The chunks found on api are {pmd_chunks}')
+logging.debug(f'The chunks found on pmd are {pmd_chunks}')
 
 # Get next period to download
 if len(pmd_chunks) == 0:
@@ -55,7 +57,7 @@ df = distro.as_pandas(chunks_wanted=min(api_chunks))
 df = df.sample(n=5000)
 
 # Drop all columns not specified
-df.drop([x for x in df.columns if x not in ['MonthId','FlowTypeDescription', 'SuppressionIndex', 'CountryId', 'Cn8Code', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
+df.drop([x for x in df.columns if x not in ['MonthId','FlowTypeDescription', 'SuppressionIndex', 'CountryId', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
 
 # Convert columns to categorical if categorical
 for col in df.columns:
@@ -84,10 +86,11 @@ df['SuppressionIndex'].cat.rename_categories(lambda x: pathify(x), inplace=True)
 # FlowTypeDescription
 df['FlowTypeDescription'].cat.rename_categories(lambda x: pathify(x), inplace=True)
 
-df.columns
+# SitcCode changes
+df['SitcCode'].cat.rename_categories(lambda x: x.replace('-','+'), inplace=True)
 
 # The melty magic to take two values in the same row and create unique records for these values, the source column name becomes the 'variable' column, the column value stays in ends up in the 'value' column.
-df = df.melt(id_vars=['SuppressionIndex', 'CountryId', 'FlowTypeDescription', 'Cn8Code', 'PortCodeNumeric', 'Period'], value_vars=['Value', 'NetMass'])
+df = df.melt(id_vars=['SuppressionIndex', 'CountryId', 'FlowTypeDescription', 'SitcCode', 'PortCodeNumeric', 'Period'], value_vars=['Value', 'NetMass'])
 
 # Units, Measures, and dictionaries, oh my!
 df.loc[df['variable'] == 'Value', 'measure_type'] = 'monetary-value'
@@ -103,11 +106,25 @@ col_names = {
     'SuppressionIndex': 'marker',
     'CountryId': 'country_id',
     'FlowTypeDescription': 'flow_type',
-    'Cn8Code': 'cn8_code',
+    'SitcCode': 'commodity_sitc_id',
     'PortCodeNumeric': 'port_code',
     'Period': 'period'
 }
 df.rename(col_names, axis=1, inplace=True)
+
+
+# +
+# Defaults, get your categorical value series defaults
+def default(series=pd.Series, value=str) -> pd.DataFrame():
+    if value in series.cat.categories:
+        return series.fillna(value)
+    else:
+        return series.cat.add_categories(value).fillna(value)
+
+df['country_id'] = default(series=df['country_id'], value='unknown')
+df['port_code'] = default(series=df['port_code'], value='499')
+df['commodity_sitc_id'] = default(series=df['commodity_sitc_id'], value='unknown')
+# -
 
 # Add dataframe is in the cube
 cubes.add_cube(scraper, df, scraper.title)
