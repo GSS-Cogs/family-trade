@@ -63,7 +63,7 @@ table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] ==
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'Non-EU', 'non-eu', table['HMRC Partner Geography'])
 sorted(table)
 #table = table[(table['Marker'] != 'residual-trade')]
-table = table[(table['Marker'] != 'below-threshold-traders')]
+#table = table[(table['Marker'] != 'below-threshold-traders')]
 table["Measure Type"] = table["Measure Type"].apply(pathify)
 table = table.drop_duplicates()
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
