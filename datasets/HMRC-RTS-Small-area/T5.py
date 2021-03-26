@@ -210,11 +210,11 @@ import csv
 import io
 import requests
 
-#r = request.urlopen('https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/hmrc-geographies.csv').read().decode('utf8').split("\n")
-r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/hmrc-small-area-country-codes.csv').read().decode('utf8').split("\n")
+r = request.urlopen('https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/hmrc-geographies.csv').read().decode('utf8').split("\n")
+#r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/hmrc-small-area-country-codes.csv').read().decode('utf8').split("\n")
 reader = csv.reader(r)
-#url="https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/hmrc-geographies.csv"
-url='https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/hmrc-small-area-country-codes.csv'
+url="https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/hmrc-geographies.csv"
+#url='https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/hmrc-small-area-country-codes.csv'
 s=requests.get(url).content
 c=pd.read_csv(io.StringIO(s.decode('utf-8')))
 
