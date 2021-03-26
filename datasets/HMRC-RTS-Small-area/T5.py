@@ -194,7 +194,8 @@ tidy['Geography'] = tidy['Geography'].cat.rename_categories({
         'OtherLatin America and Caribbean' : 'Other Latin America and Caribbean',
         'Other Middle East and N Africa (excl EU)' : 'Other Middle East and North Africa',
         'Residual Trade - no SITC Section displayed': 'Residual Trade',
-        'Other Eastern Europe (excl EU)': 'other-eastern-europe'
+        #'Other Eastern Europe (excl EU)': 'other-eastern-europe',
+        'Stores and Provisions': 'Stores & Provisions'
  
 })
 tidy['Flow'] = tidy['Flow'].cat.rename_categories({
@@ -229,9 +230,13 @@ tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == '
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
 # +
-#tidy.to_csv('nancheck.csv')
+#tidy.to_csv('t5dataBeforeRenaming.csv')
+
+# +
+#tidy = pd.read_csv('t5dataBeforeRenaming.csv')
+#tidy['Geography'] = tidy['Geography'].astype('category')
+#tidy['NUTS Geography'] = tidy['NUTS Geography'].astype('category')
+#tidy['Flow'] = tidy['Flow'].astype('category')
 # -
-
-
 
 
