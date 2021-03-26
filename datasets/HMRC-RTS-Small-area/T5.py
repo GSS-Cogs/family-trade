@@ -194,7 +194,7 @@ tidy['Geography'] = tidy['Geography'].cat.rename_categories({
         'OtherLatin America and Caribbean' : 'Other Latin America and Caribbean',
         'Other Middle East and N Africa (excl EU)' : 'Other Middle East and North Africa',
         'Residual Trade - no SITC Section displayed': 'Residual Trade',
-        'Other Eastern Europe (excl EU)': 'other-eastern-europe-excl'
+        'Other Eastern Europe (excl EU)': 'other-eastern-europe'
  
 })
 tidy['Flow'] = tidy['Flow'].cat.rename_categories({
