@@ -193,7 +193,9 @@ tidy['Geography'] = tidy['Geography'].cat.rename_categories({
         'Residual Trade - no Partner Country displayed' : 'Residual Trade',
         'OtherLatin America and Caribbean' : 'Other Latin America and Caribbean',
         'Other Middle East and N Africa (excl EU)' : 'Other Middle East and North Africa',
-        'Residual Trade - no SITC Section displayed': 'Residual Trade'
+        'Residual Trade - no SITC Section displayed': 'Residual Trade',
+        #'Other Eastern Europe (excl EU)': 'other-eastern-europe',
+        'Stores and Provisions': 'Stores & Provisions'
  
 })
 tidy['Flow'] = tidy['Flow'].cat.rename_categories({
@@ -210,8 +212,10 @@ import io
 import requests
 
 r = request.urlopen('https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/hmrc-geographies.csv').read().decode('utf8').split("\n")
+#r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/hmrc-small-area-country-codes.csv').read().decode('utf8').split("\n")
 reader = csv.reader(r)
 url="https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/hmrc-geographies.csv"
+#url='https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/hmrc-small-area-country-codes.csv'
 s=requests.get(url).content
 c=pd.read_csv(io.StringIO(s.decode('utf-8')))
 
@@ -226,14 +230,13 @@ tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == '
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
 # +
-#tidy.to_csv('nancheck.csv')
+#tidy.to_csv('t5dataBeforeRenaming.csv')
 
 # +
-#or col in tidy.columns:
-#    if col not in ['Value', 'Year']:
-#        tidy[col] = tidy[col].astype('category')
-#        display(col)
-#        display(tidy[col].cat.categories)
+#tidy = pd.read_csv('t5dataBeforeRenaming.csv')
+#tidy['Geography'] = tidy['Geography'].astype('category')
+#tidy['NUTS Geography'] = tidy['NUTS Geography'].astype('category')
+#tidy['Flow'] = tidy['Flow'].astype('category')
 # -
 
 

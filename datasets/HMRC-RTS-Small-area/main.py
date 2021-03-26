@@ -72,26 +72,36 @@ table.loc[table['HMRC Partner Geography'] == 'europe', 'HMRC Partner Geography']
 table.head(5)
 
 # +
-#Set empty Value cells to 0 so you can convert all values to Int but then set same cells back to empty value
-table['Value'][table['Marker'].isin(['not-applicable', 'below-threshold-traders', 'residual-trade'])] = 0
-table['Value'] = table['Value'].astype(int)
-table['Value'][table['Marker'].isin(['not-applicable', 'below-threshold-traders', 'residual-trade'])] = ''
+#table.to_csv('table.csv')
+# -
 
+#table = pd.read_csv('table.csv')
+table['nanTest'] = table['Value']
+table.loc[table['Value'].isna(), 'nanTest'] = '--'
+table.loc[table['nanTest'] == '--', 'Value'] = 0
+table['Value'] = table['Value'].astype(int)
+table.loc[table['nanTest'] == '--', 'Value'] = ''
+table.drop('nanTest', inplace=True, axis=1)
+table.head(10)
+#table['HMRC Partner Geography'].unique()
+
+table = table[table['HMRC Partner Geography'] != 'below-threshold-traders']
+
+# +
 businessCount = table[table['Measure Type'] == 'businesses']
 businessStats = table[table['Measure Type'] == 'statistical-value']
-businessCount = businessCount[businessCount['HMRC Partner Geography'] != 'below-threshold-traders']
-businessStats = businessStats[businessStats['HMRC Partner Geography'] != 'below-threshold-traders']
 
-#del table
+del table
 del businessCount['Measure Type']
 del businessCount['Unit']
 del businessStats['Measure Type']
 del businessStats['Unit']
+businessStats['HMRC Partner Geography'].unique()
 
 
 # +
-mainTitle = scraper.dataset.title.replace(': 2019', '')
-mainTitle = scraper.dataset.title.replace(': 2020', '')
+mainTitle = scraper.dataset.title.replace('2019', '')
+mainTitle = scraper.dataset.title.replace('2020', '')
 descr = """General: 
 This release uses the same allocation methodology as the Regional Trade Statistics.
 Data is compiled by merging trade data collected by HMRC with employment data from the Interdepartmental Business Register (IDBR). A business’ trade is allocated to a region based on the proportion of its employees employed in that region. Where a trader is not matched with the IDBR, its trade is matched with Office for National Statistics postcode data to obtain the region in which the Head Office of the VAT registered business (importer or exporter) is based.
@@ -132,14 +142,14 @@ For residual 'Other' Areas and trade not allocated to a NUTS1 region (Unallocate
 """
 
 scraper.dataset.family = 'trade'
-scraper.dataset.title = mainTitle + ': Business Count'
+scraper.dataset.title = mainTitle + ' Business Count'
 scraper.dataset.comment = scraper.dataset.title + ' - Detailed data tables'
 scraper.dataset.description = descr
 # -
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/businesses"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/count"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/count"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 cubes = Cubes("info.json")        
@@ -153,7 +163,7 @@ scraper.dataset.description = descr
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/businesses"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/value"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
@@ -162,5 +172,12 @@ cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-gbp-m
 # -
 
 cubes.output_all()
+
+# +
+#import dmtools as dm
+#dm.check_all_codes_in_codelist(businessCount['HMRC Partner Geography'].unique(), '/users/leigh/Development/ref_trade/codelists/hmrc-geographies.csv', 'Notation', 'geogs', False)
+# -
+
+
 
 

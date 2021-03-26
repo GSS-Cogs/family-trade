@@ -1,0 +1,117 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country",
+    "url": "country.csv",
+    "rdfs:label": "Country",
+    "dc:title": "Country",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#concept/country/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort_priority",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#concept/country/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-25T16:15:00.098513"
+            },
+            "rdfs:label": "Country",
+            "dc:title": "Country",
+            "rdfs:comment": "Dataset representing the 'Country' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-25T16:15:00.098513"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-exports-of-services-by-country-by-modes-of-supply#scheme/country"
+            },
+            "dc:title": "Country Catalog Record",
+            "rdfs:label": "Country Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-25T16:15:00.098513"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-25T16:15:00.098513"
+            }
+        }
+    ]
+}

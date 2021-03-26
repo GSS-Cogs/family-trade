@@ -1,112 +1,286 @@
 Label,Notation,Parent Notation,Sort Priority
-European Union,C,,1
-Non-European Union,non-eu,,2
-France,FR,,3
-Netherlands,NL,,4
-Germany,DE,,5
-Italy,IT,,6
-Ireland,IE,,7
-Denmark,DK,,8
-Greece,GR,,9
-Portugal,PT,,10
-Spain,ES,,11
-Belgium,BE,,12
-Luxembourg,LU,,13
-Sweden,SE,,14
-Finland,FI,,15
-Austria,AT,,16
-Malta,MT,,17
-Estonia,EE,,18
-Latvia,LV,,19
-Lithuania,LT,,20
-Poland,PL,,21
-Czech Republic,CZ,,22
-Slovakia,SK,,23
-Hungary,HU,,24
-Romania,RO,,25
-Bulgaria,BG,,26
-Slovenia,SI,,27
-Croatia,HR,,28
-Cyprus,CY,,29
-Iceland,IS,,30
-Norway,NO,,31
-Switzerland,CH,,32
-Gibraltar,GI,,33
-Turkey,TR,,34
-Ukraine,UA,,35
-Russian Federation,RU,,36
-Georgia,GE,,37
-Azerbaijan,AZ,,38
-Kazakhstan,KZ,,39
-Republic of North Macedonia,MK,,40
-Serbia,XS,,41
-Morocco,MA,,42
-Algeria,DZ,,43
-Egypt,EG,,44
-Senegal,SN,,45
-Cote d`Ivoire,CI,,46
-Ghana,GH,,47
-Nigeria,NG,,48
-Equatorial Guinea,GQ,,49
-Angola,AO,,50
-Ethiopia,ET,,51
-Kenya,KE,,52
-"Tanzania, United Republic of",TZ,,53
-Mauritius,MU,,54
-South Africa,ZA,,55
-United States,US,,56
-Canada,CA,,57
-Mexico,MX,,58
-Guatemala,GT,,59
-Costa Rica,CR,,60
-Panama,PA,,61
-Dominican Republic,DO,,62
-Trinidad and Tobago,TT,,63
-Colombia,CO,,64
-Ecuador,EC,,65
-Peru,PE,,66
-Brazil,BR,,67
-Chile,CL,,68
-Uruguay,UY,,69
-Argentina,AR,,70
-Falkland Islands (Malvinas),FK,,71
-Lebanon,LB,,72
-Iraq,IQ,,73
-Israel,IL,,74
-Jordan,JO,,75
-Saudi Arabia,SA,,76
-Kuwait,KW,,77
-Bahrain,BH,,78
-Qatar,QA,,79
-United Arab Emirates,AE,,80
-Oman,OM,,81
-Pakistan,PK,,82
-India,IN,,83
-Bangladesh,BD,,84
-Sri Lanka,LK,,85
-Thailand,TH,,86
-Viet Nam,VN,,87
-Indonesia,ID,,88
-Malaysia,MY,,89
-Singapore,SG,,90
-China,CN,,91
-"Korea, Republic of",KR,,92
-Japan,JP,,93
-"Taiwan, Province of China",TW,,94
-"Hong Kong, China",HK,,95
-Australia,AU,,96
-New Zealand,NZ,,97
-Other Asia and Oceania,other-asia-and-oceania,,98
-Other Eastern Europe,other-eastern-europe,,99
-Other latin America and Caribbean,other-latin-america-and-caribbean,,100
-Other middle east and north Africa,other-middle-east-and-north-africa,,101
-Other sub-saharan Africa,other-sub-saharan-africa,,102
-Cameroon,CM,,103
-"Congo, the Democratic Republic of the",CD,,104
-"Venezuela, Bolivarian Republic",VE,,105
-Other Western Europe,other-western-europe,,106
-Honduras,HN,,107
-Namibia,NA,,108
-Other North AMerica,other-north-america,,109
-Serbia,RS,,110
-World,WW,,111
+European Union,C,,
+France,FR,,
+Netherlands,NL,,
+Germany,DE,,
+Italy,IT,,
+Ireland,IE,,
+Denmark,DK,,
+Greece,GR,,
+Portugal,PT,,
+Spain,ES,,
+Belgium,BE,,
+Luxembourg,LU,,
+Sweden,SE,,
+Finland,FI,,
+Austria,AT,,
+Malta,MT,,
+Estonia,EE,,
+Latvia,LV,,
+Lithuania,LT,,
+Poland,PL,,
+Czech Republic,CZ,,
+Slovakia,SK,,
+Hungary,HU,,
+Romania,RO,,
+Bulgaria,BG,,
+Slovenia,SI,,
+Croatia,HR,,
+Cyprus,CY,,
+Iceland,IS,,
+Norway,NO,,
+Switzerland,CH,,
+Gibraltar,GI,,
+Turkey,TR,,
+Ukraine,UA,,
+Russian Federation,RU,,
+Georgia,GE,,
+Azerbaijan,AZ,,
+Kazakhstan,KZ,,
+Serbia,XS,,
+Morocco,MA,,
+Algeria,DZ,,
+Egypt,EG,,
+Senegal,SN,,
+Ghana,GH,,
+Nigeria,NG,,
+Equatorial Guinea,GQ,,
+Angola,AO,,
+Ethiopia,ET,,
+Kenya,KE,,
+Mauritius,MU,,
+South Africa,ZA,,
+United States,US,,
+Canada,CA,,
+Mexico,MX,,
+Guatemala,GT,,
+Costa Rica,CR,,
+Panama,PA,,
+Dominican Republic,DO,,
+Trinidad and Tobago,TT,,
+Colombia,CO,,
+Ecuador,EC,,
+Peru,PE,,
+Brazil,BR,,
+Chile,CL,,
+Uruguay,UY,,
+Argentina,AR,,
+Falkland Islands,FK,,
+Lebanon,LB,,
+Iraq,IQ,,
+Israel,IL,,
+Jordan,JO,,
+Saudi Arabia,SA,,
+Kuwait,KW,,
+Bahrain,BH,,
+Qatar,QA,,
+United Arab Emirates,AE,,
+Oman,OM,,
+Pakistan,PK,,
+India,IN,,
+Bangladesh,BD,,
+Sri Lanka,LK,,
+Thailand,TH,,
+Indonesia,ID,,
+Malaysia,MY,,
+Singapore,SG,,
+China,CN,,
+Japan,JP,,
+Australia,AU,,
+New Zealand,NZ,,
+Other Asia and Oceania,other-asia-and-oceania,,
+Other Eastern Europe,other-eastern-europe,,
+Other latin America and Caribbean,other-latin-america-and-caribbean,,
+Other middle east and north Africa,other-middle-east-and-north-africa,,
+Other sub-saharan Africa,other-sub-saharan-africa,,
+Cameroon,CM,,
+Venezuela,VE,,
+Other Western Europe,other-western-europe,,
+Honduras,HN,,
+Namibia,NA,,
+Other North AMerica,other-north-america,,
+Serbia,RS,,
+World,WW,,
+Asia and Oceania,A,,
+Eastern Europe (excl. EU),B,,
+Latin America and Caribbean,D,,
+Middle East and North Africa,F,,
+North America,G,,
+Sub-Saharan Africa,H,,
+Western Europe (excl. EU),I,,
+Afghanistan,AF,,
+Albania,AL,,
+American Samoa,AS,,
+Andorra,AD,,
+Anguilla,AI,,
+Antarctica,AQ,,
+Antigua and Barbuda,AG,,
+Armenia,AM,,
+Aruba,AW,,
+Bahamas,BS,,
+Barbados,BB,,
+Belarus,BY,,
+Belize,BZ,,
+Benin,BJ,,
+Bermuda,BM,,
+Bhutan,BT,,
+Bolivia,BO,,
+"Bonaire, Sint Eustatius and Saba",BQ,,
+Bosnia-Herzegovina,BA,,
+Botswana,BW,,
+Bouvet Island,BV,,
+British Indian Ocean Territory,IO,,
+"Virgin Islands, British",VG,,
+Brunei,BN,,
+Burkina Faso,BF,,
+Myanmar,MM,,
+Burundi,BI,,
+Cambodia,KH,,
+Canary Islands,IC,,
+Cape Verde,CV,,
+Cayman Islands,KY,,
+Central Africa Republic,CF,,
+Ceuta,XC,,
+Chad,TD,,
+Christmas Islands,CX,,
+Keeling Islands,CC,,
+Comoros,KM,,
+Congo,CG,,
+Congo (Democratic Republic of the),CD,,
+Cook Islands,CK,,
+Ivory Coast,CI,,
+Cuba,CU,,
+Curacao,CW,,
+Djibouti,DJ,,
+Dominica,DM,,
+El Salvador,SV,,
+Eritrea,ER,,
+Faroe Islands,FO,,
+Fiji,FJ,,
+Fyr Macedonia,MK,,
+French Guiana,GF,,
+French Polynesia,PF,,
+French Southern Territories,TF,,
+Gabon,GA,,
+Gambia,GM,,
+Greenland,GL,,
+Grenada,GD,,
+Guadeloupe,GP,,
+Guam,GU,,
+Guernsey,GG,,
+Guinea,GN,,
+Guinea Bissau,GW,,
+Guyana,GY,,
+Haiti,HT,,
+Heard Island and McDonald Islands,HM,,
+Vatican City State,VA,,
+Hong Kong,HK,,
+Iran (Islamic Republic of),IR,,
+Jamaica,JM,,
+Jersey,JE,,
+Kiribati,KI,,
+North Korea,KP,,
+South Korea,KR,,
+Kosovo,XK,,
+Kyrgyz Republic,KG,,
+Laos,LA,,
+Lesotho,LS,,
+Liberia,LR,,
+Libya,LY,,
+Liechtenstein,LI,,
+Macao,MO,,
+Madagascar,MG,,
+Malawi,MW,,
+Maldives,MV,,
+Mali,ML,,
+Marshall Islands,MH,,
+Martinique,MQ,,
+Mauritania,MR,,
+Mayotte,YT,,
+Melilla,XL,,
+Micronesia (Federated States of),FM,,
+"Moldova, Republic of",MD,,
+Mongolia,MN,,
+Montenegro,ME,,
+Montserrat,MS,,
+Mozambique,MZ,,
+Nauru,NR,,
+Nepal,NP,,
+New Caledonia,NC,,
+Nicaragua,NI,,
+Niger,NE,,
+Niue Island,NU,,
+Norfolk Island,NF,,
+Northern Mariana Islands,MP,,
+Occupied Palestinian Territory,PS,,
+Palau,PW,,
+Papua New Guinea,PG,,
+Paraguay,PY,,
+Philippines,PH,,
+Pitcairn,PN,,
+Reunion,RE,,
+Rwanda,RW,,
+Saint Barthelemy,BL,,
+Samoa,WS,,
+San Marino,SM,,
+Sao Tome and Principe,ST,,
+Seychelles,SC,,
+Sierra Leone,SL,,
+Sint Maarten (Dutch part),SX,,
+Solomon Islands,SB,,
+Somalia,SO,,
+South Georgia and South Sandwich Islands,GS,,
+South Sudan,SS,,
+"St Helena, Ascension and Tristan da Cunha",SH,,
+St Kitts and Nevis,KN,,
+St Lucia,LC,,
+St Pierre and Miquelon,PM,,
+St Vincent and the Grenadines,VC,,
+Stores & Provisions,QR,,
+Stores & Provisions,QS,,
+Sudan,SD,,
+Surinam,SR,,
+Swaziland,SZ,,
+Syrian Arab Republic,SY,,
+Taiwan,TW,,
+Tajikistan,TJ,,
+Tanzania,TZ,,
+Timor-Leste,TL,,
+Togo,TG,,
+Tonga,TO,,
+Tunisia,TN,,
+Turkmenistan,TM,,
+Turks and Caicos Islands,TC,,
+Tuvalu,TV,,
+Uganda,UG,,
+United Kingdom,GB,,
+United States Minor outlying islands,UM,,
+"Virgin Islands, United States",VI,,
+Uzbekistan,UZ,,
+Vanuatu,VU,,
+Vietnam,VN,,
+Wallis and Futuna,WF,,
+Western Sahara,EH,,
+Yemen,YE,,
+Zambia,ZM,,
+Zimbabwe,ZW,,
+Belgian Continental Shelf,ZB,,
+Cyprus Continental Shelf,ZJ,,
+Danish Continental Shelf,ZD,,
+Finnish Continental Shelf,ZK,,
+Fish Flag,FF,,
+French Continental Shelf,ZF,,
+German Continental Shelf,ZG,,
+Greece Continental Shelf,ZC,,
+Irish Continental Shelf,ZE,,
+Low Value Trade,ZY,,
+Netherlands Continental Shelf,ZH,,
+Norwegian Continental Shelf,ZN,,
+Parcel Post,XX,,
+Pseudo Flag,ZZ,,
+Swedish Continental Shelf,ZS,,
+UK Continental Shelf,ZU,,
+Non-EU,non-eu,,
+Europe,europe,,
+Residual Trade,residual-trade,,
+Below Threshold Traders,below-threshold-traders,,

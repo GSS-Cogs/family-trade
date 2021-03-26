@@ -62,3 +62,10 @@ Description something along the lines of:
 Please can you remove the `cn8_code` column and ensure that the `commodity_sitc_id` column is left in its place.
 
 Map the `commodity_sitc_id` in the following way: `[p["SitcCode"].replace("-", "+") for p in data]`
+
+
+## Join Failures
+
+* If the Ports join fails, the default `port_code` should be `499` (PoC Unknown (XXX)).
+* If the SITC join fails, the default `commodity_sitc_id` should be `unknown`.
+* If the Country join fails, the default `country_id` should be `unknown`.
