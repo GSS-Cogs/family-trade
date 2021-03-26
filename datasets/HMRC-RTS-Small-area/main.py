@@ -62,8 +62,8 @@ import numpy
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'EU', 'C', table['HMRC Partner Geography'])
 table['HMRC Partner Geography'] = numpy.where(table['HMRC Partner Geography'] == 'Non-EU', 'non-eu', table['HMRC Partner Geography'])
 sorted(table)
-#table = table[(table['Marker'] != 'residual-trade')]
-#table = table[(table['Marker'] != 'below-threshold-traders')]
+table = table[(table['Marker'] != 'residual-trade')]
+table = table[(table['Marker'] != 'below-threshold-traders')]
 table["Measure Type"] = table["Measure Type"].apply(pathify)
 table = table.drop_duplicates()
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
@@ -82,7 +82,7 @@ table.loc[table['nanTest'] == '--', 'Value'] = 0
 table['Value'] = table['Value'].astype(int)
 table.loc[table['nanTest'] == '--', 'Value'] = ''
 table.drop('nanTest', inplace=True, axis=1)
-#table[table['Value'] == '']
+#table.head(10)
 
 # +
 businessCount = table[table['Measure Type'] == 'businesses']
@@ -170,5 +170,7 @@ cubes.add_cube(copy.deepcopy(scraper), businessStats, "hmrc-rts-small-area-gbp-m
 # -
 
 cubes.output_all()
+
+
 
 
