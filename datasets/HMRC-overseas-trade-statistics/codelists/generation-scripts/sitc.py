@@ -93,21 +93,28 @@ def main():
             code_mappings.add(code)
             unique_sitc_data.append(item)
 
-    ports_codelist = pd.DataFrame({
+    sitc_codelist = pd.DataFrame({
         "TrueSitcNotation": [map_to_standard_sitc(code) if len(code) <= 5 and "-" not in code else None for code in [p["SitcCode"] for p in unique_sitc_data]],
         "Label": [f"{p['SitcDesc']}" for p in unique_sitc_data],
         "Notation": [p["SitcCode"].replace("-", "+") for p in unique_sitc_data],
         "Parent Notation": [get_parent_code(s) for s in unique_sitc_data],
         "Sort Priority": range(1, len(unique_sitc_data) + 1)
     })
+    sitc_codelist = sitc_codelist.append({
+        "TrueSitcNotation": None,
+        "Label": "Unknown",
+        "Notation": "unknown",
+        "Parent Notation": None,
+        "Sort Priority": len(unique_sitc_data) + 1
+    }, ignore_index=True)
 
-    parents_required = set([x for x in ports_codelist["Parent Notation"] if x is not None])
-    sitc_present = set(ports_codelist["Notation"])
+    parents_required = set([x for x in sitc_codelist["Parent Notation"] if x is not None])
+    sitc_present = set(sitc_codelist["Notation"])
     unmatched_sitcs = parents_required - sitc_present
     if len(unmatched_sitcs) > 0:
         raise Exception(f"Could not find SITC values for expected parents: {unmatched_sitcs}")
 
-    ports_codelist.to_csv(out_file, index=False)
+    sitc_codelist.to_csv(out_file, index=False)
 
 
 if __name__ == "__main__":

@@ -261,3 +261,4 @@ CountryId,CountryCodeNumeric,RegionId,CountryName,CountryCodeAlpha,Area1,Area2,A
 1005,,,Other North America,other-north-america,,,,,,North America,,,,
 1006,,,Other Sub-Saharan Africa,other-sub-saharan-africa,,,,,,Sub-Saharan Africa,,,,
 1007,,,Other Western Europe,other-western-europe,,,,,,Western Europe exc EC,,,,
+unknown,,,Unknown,unknown,,,,,,,,,,
