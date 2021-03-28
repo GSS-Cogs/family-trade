@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.1
+#       jupytext_version: 1.11.0
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -30,11 +30,9 @@ tidied_sheets = []
 trace = TransformTrace()
 df = pd.DataFrame()
 
-last_modified = max([x.modified for x in scraper.distributions])
-distro = scraper.distribution(modified=last_modified)
+distro = scraper.distribution(latest=True)
 distro
 
-last_modified = max([x.modified for x in scraper.distributions])
 all_tabs = { tab.name: tab for tab in distro.as_databaker() }
 
 
