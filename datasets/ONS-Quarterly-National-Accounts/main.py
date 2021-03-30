@@ -284,43 +284,78 @@ for name, tab in tabs.items():
 # %%
 import numpy as np
 
+def strip_superscripts(dataset, dimension):
+    try:
+        for x in range(1, 11):
+            comnum = str(x) + ','
+            dataset[dimension] = dataset[dimension].str.replace(comnum, '', regex=False) 
+            dataset[dimension] = dataset[dimension].str.replace(str(x), '', regex=False) 
+            dataset[dimension] = dataset[dimension].str.strip()
+            
+        return dataset
+    except Exception as e:
+        print('strip_superscripts error: ' + str(e))
+        return dataset
+    
+
+def prefix_refperiod(dataset, dimension):
+    try:
+        dataset[dimension] = 'quarter/' + dataset[dimension].astype(str)
+        dataset[dimension] = dataset[dimension].str.replace(' ','-')
+        for x in range(1930, 2030):
+            dataset[dimension].loc[dataset[dimension] == 'quarter/' + str(x) + '.0'] = 'year/' + str(x)
+            
+        return dataset
+    except Exception as e:
+        print('prefix_refperiod: ' + str(e))
+        return dataset
+    
+    
+def convet_dimension_to_int(dataset, dimension):
+    try:
+        dataset[dimension] = dataset[dimension].fillna(-1)
+        dataset[dimension] = dataset[dimension].replace('',-1)
+        dataset[dimension] = dataset[dimension].astype(int)
+        dataset[dimension] = dataset[dimension].astype(str)
+        dataset[dimension] = dataset[dimension].replace('-1', np.nan)
+        return dataset
+    except Exception as e:
+        print('convet_dimension_to_int: ' + str(e))
+        return dataset
+
+
 # %%
 # A2
-ind = 1
+a2 = tidied_sheets[1]
 # Only use the main value data for now
 try:
-    tidied_sheets[ind] = tidied_sheets[ind].loc[tidied_sheets[ind]['Percentage Change'].isna()] 
+    a2 = a2.loc[a2['Percentage Change'].isna()] 
 except:
     ind = ind 
+
+a2 = prefix_refperiod(a2, 'Period')
+
+a2['gross'].loc[a2['CDID'] == 'YBHA'] = 'Gross domestic product at market prices'  
+a2['Indicies'].loc[a2['CDID'] == 'YBHA'] = 'Current prices'
+
+a2 = strip_superscripts(a2, 'gross')
     
-for x in range(1930, 2030):
-    tidied_sheets[ind]['Period'].loc[tidied_sheets[ind]['Period'] == str(x) + '.0'] = str(x)
+a2['Indicies'].loc[a2['Indicies'] == 'Current prices'] = 'current-price'
+a2['Indicies'].loc[a2['Indicies'] == 'Chained Volume Measure (Reference year 2018)'] = 'chained-volume-measure'
 
-tidied_sheets[ind]['gross'].loc[tidied_sheets[ind]['CDID'] == 'YBHA'] = 'Gross domestic product at market prices'  
-tidied_sheets[ind]['Indicies'].loc[tidied_sheets[ind]['CDID'] == 'YBHA'] = 'Current prices'
+a2['gross'] = a2['gross'].apply(pathify)
 
-tidied_sheets[ind]['gross'].loc[tidied_sheets[ind]['gross'] == 'less Basic price adjustment2'] = 'less Basic price adjustment'
-tidied_sheets[ind]['gross'].loc[tidied_sheets[ind]['gross'] == 'Gross value added excluding oil & gas3'] = 'Gross value added excluding oil & gas'
+a2 = a2.rename(columns={'OBS':'Value'})
 
-tidied_sheets[ind]['Indicies'].loc[tidied_sheets[ind]['Indicies'] == 'Current prices'] = 'current-price'
-tidied_sheets[ind]['Indicies'].loc[tidied_sheets[ind]['Indicies'] == 'Chained Volume Measure (Reference year 2018)'] = 'chained-volume-measure'
-
-tidied_sheets[ind]['gross'] = tidied_sheets[ind]['gross'].apply(pathify)
-
-tidied_sheets[ind] = tidied_sheets[ind].rename(columns={'OBS':'Value'})
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].fillna(-1)
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].astype(int)
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].astype(str)
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].replace('-1', np.nan)
+a2 = convet_dimension_to_int(a2, 'Value')
 
 try:
-    tidied_sheets[ind].drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+    a2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
     ind = ind
 
-tidied_sheets[ind] = tidied_sheets[ind].rename(columns={'Indicies':'Estimate Type', 'gross':'Aggregate'})
-tidied_sheets[ind].head(2)
-#tidied_sheets[ind]['Indicies'].unique()
+a2 = a2.rename(columns={'Indicies':'Estimate Type', 'gross':'Aggregate'})
+a2cdids = a2['CDID'].unique()
 
 # %%
 mainTitle = scraper.dataset.title
@@ -337,10 +372,6 @@ Less Basic price adjustment: Taxes on products less subsidies.
 Gross value added excluding oil & gas: Calculated by using gross value added at basic prices minus extraction of crude petroleum and natural gas.
 """
 
-print(scraper.dataset.title)
-print(scraper.dataset.comment)
-print(scraper.dataset.description)
-
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/na-aggregates"
@@ -348,90 +379,85 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 cubes = Cubes("info.json")        
-cubes.add_cube(copy.deepcopy(scraper), businessCount, "gbp–data-tables-aggregates", 'gbp–data-tables-aggregates', data)
+cubes.add_cube(copy.deepcopy(scraper), a2, "gbp–data-tables-aggregates", 'gbp–data-tables-aggregates', data)
+del a2
 
 # %%
 # B1
-ind = 2
+b1 = tidied_sheets[2]
 # Only use the main value data for now, CVMs
 try:
-    tidied_sheets[ind] = tidied_sheets[ind].loc[tidied_sheets[ind]['Percentage Change'].isna()] 
+    b1 = b1.loc[b1['Percentage Change'].isna()] 
 except:
     ind = ind 
     
-tidied_sheets[ind]['Industry'].loc[tidied_sheets[ind]['Industry'] == 'Gross value added at basic prices 4'] = 'Gross value added at basic prices'
-tidied_sheets[ind] = tidied_sheets[ind].loc[tidied_sheets[ind]['CDID'] != 'CGCE']
-tidied_sheets[ind] = tidied_sheets[ind].loc[tidied_sheets[ind]['CDID'] != 'KLH7']
+b1 = strip_superscripts(b1, 'Industry')
 
-tidied_sheets[ind]['Sector'].loc[tidied_sheets[ind]['CDID'].isin(['L2KR'])] = 'Production'
-tidied_sheets[ind]['Sector'].loc[tidied_sheets[ind]['CDID'].isin(['L2KL'])] = 'Agriculture'  
-tidied_sheets[ind]['Sector'].loc[tidied_sheets[ind]['CDID'].isin(['L2N8'])] = 'Construction' 
+b1 = b1.loc[b1['CDID'] != 'CGCE'] # We do not want Gross value added at basic prices as it messes up the cube
+b1 = b1.loc[b1['CDID'] != 'KLH7'] # We do not want Gross value added excluding oil & gas as it messes up the cube
 
-#tidied_sheets[ind]['2018 Weights'] = tidied_sheets[ind]['2018 Weights'].astype(int)
+b1['Sector'].loc[b1['CDID'].isin(['L2KR'])] = 'Production'
+b1['Sector'].loc[b1['CDID'].isin(['L2KL'])] = 'Agriculture'  
+b1['Sector'].loc[b1['CDID'].isin(['L2N8'])] = 'Construction' 
 
-for x in range(1930, 2030):
-    tidied_sheets[ind]['Period'].loc[tidied_sheets[ind]['Period'] == str(x) + '.0'] = str(x)
-
+b1 = prefix_refperiod(b1, 'Period')
+    
 try:
-    tidied_sheets[ind].drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+    b1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
     ind = ind    
 
-tidied_sheets[ind]['Sector'] = tidied_sheets[ind]['Sector'].apply(pathify)
-tidied_sheets[ind]['Industry'] = tidied_sheets[ind]['Industry'].apply(pathify)
+b1['Sector'] = b1['Sector'].apply(pathify)
+b1['Industry'] = b1['Industry'].apply(pathify)
 
-tidied_sheets[ind] = tidied_sheets[ind].rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].fillna(-1)
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].astype(int)
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].astype(str)
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].replace('-1', np.nan)
- 
+b1 = b1.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
+
+b1 = convet_dimension_to_int(b1, 'Value')
+
 
 # %%
 # B2
-ind = 3
+b2 = tidied_sheets[3]
 
 try:
-    tidied_sheets[ind] = tidied_sheets[ind].loc[tidied_sheets[ind]['Percentage Change'].isna()] 
+    b2 = b2.loc[b2['Percentage Change'].isna()] 
 except:
     ind = ind 
     
-tidied_sheets[ind]['Sector'] = 'Service industries'
-tidied_sheets[ind]['Industry'].loc[tidied_sheets[ind]['Industry'] == 'Other services 4'] = 'Other services'
+b2['Sector'] = 'Service industries'
 
-for x in range(1930, 2030):
-    tidied_sheets[ind]['Period'].loc[tidied_sheets[ind]['Period'] == str(x) + '.0'] = str(x)
+b2 = strip_superscripts(b2, 'Industry')
+
+b2 = prefix_refperiod(b2, 'Period')
 
 try:
-    tidied_sheets[ind].drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+    b2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
     ind = ind   
 
-tidied_sheets[ind]['Sector'] = tidied_sheets[ind]['Sector'].apply(pathify)
-tidied_sheets[ind]['Industry'] = tidied_sheets[ind]['Industry'].apply(pathify)
+b2['Sector'] = b2['Sector'].apply(pathify)
+b2['Industry'] = b2['Industry'].apply(pathify)
 
-tidied_sheets[ind] = tidied_sheets[ind].rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].fillna(-1)
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].astype(int)
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].astype(str)
-tidied_sheets[ind]['Value'] = tidied_sheets[ind]['Value'].replace('-1', np.nan)
+b2 = b2.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
+b2 = convet_dimension_to_int(b2, 'Value')
 
 
 # %%
-tidied_sheets[ind].head(20)
-
-# %%
-b1b2 = pd.concat([tidied_sheets[2], tidied_sheets[3]])
+b1b2 = pd.concat([b1, b2])
+b1b2cdids = b1b2['CDID'].unique()
+del b1, b2
 
 # %%
 scraper.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
-scraper.dataset.comment = maincomme. + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) -. Seasonally Adjusted'
+scraper.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
+Estimates cannot be regarded as accurate to the last digit shown.
+Data is Seasonally Adjusted. 
+Reference year is 2018.
+Components of outputs are valued at basic prices, which excludes taxes and includes subsidies on products.
+Weights may not sum to totals due to rounding.
+This is a balanced index of UK GVA, taking into account data from the income and expenditure approaches. Thus it will not necessarily be the weighted sum of the industrial indices.
 """
-
-print(scraper.dataset.title)
-print(scraper.dataset.comment)
-print(scraper.dataset.description)
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
@@ -440,22 +466,177 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 cubes = Cubes("info.json")        
-cubes.add_cube(copy.deepcopy(scraper), businessCount, "gbp–data-tables-aggregates", 'gbp–data-tables-aggregates', data)
+cubes.add_cube(copy.deepcopy(scraper), b1b2, "gbp–data-tables-cvm-output", 'gbp–data-tables-cvm-output', data)
+del b1b2
 
 # %%
-b1b2.head(60)
+# C1
+c1 = tidied_sheets[4]
+
+try:
+    c1 = c1.loc[c1['Percentage Change'].isna()] 
+except:
+    ind = ind 
+
+c1 = c1.loc[c1['CDID'] != 'YBHA'] # This is already in one of the other datasets
+c1['Expenditure'].loc[c1['CDID'].isin(['YBIL','IKBH','ABMF','IKBI','IKBJ','GIXM'])] = 'not-applicable'
+c1['Expenditure'].loc[c1['CDID'].isin(['ABJQ'])] = 'Final consumption expenditure'
+c1['Expenditure'].loc[c1['CDID'].isin(['NPQS','NPEK'])] = 'Gross capital formation'
+
+c1 = strip_superscripts(c1, 'Expendisture Category')
+
+c1 = prefix_refperiod(c1, 'Period')
+
+try:
+    c1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = ind   
+
+c1['Expendisture Category'] = c1['Expendisture Category'].apply(pathify)
+c1['Expenditure'] = c1['Expenditure'].apply(pathify)
+
+c1 = c1.rename(columns={'OBS':'Value','Expendisture Category':'Expenditure Category','Expenditure':'Economic Concept'})
+
+c1 = convet_dimension_to_int(c1, 'Value')
+
+c1['Estimate Type'] = 'current-price'
+c1.head(5)
+
+# %%
+# C2
+c2 = tidied_sheets[5]
+
+try:
+    c2 = c2.loc[c2['Percentage Change'].isna()] 
+except:
+    ind = ind 
+
+c2 = c2.loc[c2['CDID'] != 'ABMI'] # This is already in one of the other datasets
+c2['Expenditure'].loc[c2['CDID'].isin(['YBIM','IKBK','ABMG','IKBL','IKBM','GIXS'])] = 'not-applicable'
+c2['Expenditure'].loc[c2['CDID'].isin(['ABJR'])] = 'Final consumption expenditure'
+c2['Expenditure'].loc[c2['CDID'].isin(['NPQT','NPEL'])] = 'Gross capital formation'
+
+c2 = strip_superscripts(c2, 'Expendisture Category')
+
+c2 = prefix_refperiod(c2, 'Period')
+
+try:
+    c2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = ind   
+
+c2['Expendisture Category'] = c2['Expendisture Category'].apply(pathify)
+c2['Expenditure'] = c2['Expenditure'].apply(pathify)
+
+c2 = c2.rename(columns={'OBS':'Value','Expendisture Category':'Expenditure Category','Expenditure':'Economic Concept'})
+
+c2 = convet_dimension_to_int(c2, 'Value')
+    
+c2['Estimate Type'] = 'chained-volume-measure'
+c2.head(5)
+
+# %%
+c1c2 = pd.concat([c1, c2])
+c1c2cdids = c1c2['CDID'].unique()
+del c1, c2
+
+# %%
+scraper.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
+scraper.dataset.comment = maincomme + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2) - Seasonally Adjusted'
+scraper.dataset.description = maindescr + """
+Data is Seasonally Adjusted. 
+Reference year is 2018.
+Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
+Non-profit institutions: Non-profit institutions serving households.
+Further breakdown of business investment can be found in the 'Business investment in the UK' bulletin
+Changes in inventories: Quarterly alignment adjustment included in this series.
+Acquisitions less disposals of valuables can be a volatile series, due to the inclusion of non-monetary gold, but any volatility is likely to be GDP neutral as this is offset in UK trade figures
+Trade balance is calculated by using exports of goods and services minus imports of goods and services
+Non-profit institutions: There is a small difference between the gross operating surplus of the NPISH sector in the SFA release, compared with the consumption of fixed capital for the NPISH sector published in the GDP release.  This affects 2019Q1 onwards. The latest figures for the affected series can be found in the SFA release.
+"""
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gdp"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+cubes = Cubes("info.json")        
+cubes.add_cube(copy.deepcopy(scraper), c1c2, "gbp–data-tables-expenditure", 'gbp–data-tables-expenditure', data)
+del c1c2
+
+# %%
+# D1
+d1 = tidied_sheets[6]
+
+try:
+    d1 = d1.loc[d1['Percentage Change'].isna()] 
+except:
+    ind = ind 
+
+d1 = d1.loc[d1['CDID'] != 'YBHA'] # This is already in one of the other datasets
+#d1['Expenditure'].loc[d1['CDID'].isin(['YBIM','IKBK','ABMG','IKBL','IKBM','GIXS'])] = 'not-applicable'
+#d1['Expenditure'].loc[d1['CDID'].isin(['ABJR'])] = 'Final consumption expenditure'
+#d1['Expenditure'].loc[d1['CDID'].isin(['NPQT','NPEL'])] = 'Gross capital formation'
+
+d1 = strip_superscripts(d1, 'Category of Income')
+
+d1 = prefix_refperiod(d1, 'Period')
+
+#try:
+#    d1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+#except:
+#    ind = ind   
+
+#d1['Expendisture Category'] = d1['Expendisture Category'].apply(pathify)
+#d1['Expenditure'] = d1['Expenditure'].apply(pathify)
+
+d1 = d1.rename(columns={'OBS':'Value'})
+
+d1 = convet_dimension_to_int(d1, 'Value')
+
+d2cdids = d1['CDID'].unique()
+d1.head(50)
+#list(d1['Value'].unique())
 
 # %%
 cubes.output_all()
 
 # %%
+a2cdids
+b1b2cdids
+c1c2cdids
+d1cdids
+
+# %%
+"""
+cdids = pd.DataFrame(cdids)
+cdids.rename(columns={0:'Label'})
+cdids['Notation'] = cdids[0]
+cdids['Parent Notation'] = ''
+cdids['Sort Priority'] = ''
+print('Count of new CDIDs: ' + str(cdids['Notation'].count()))
+newcdids = pd.DataFrame(pd.read_csv('newcdids.csv'))
+print('Count of CDIDs from file: ' + str(cdids['Notation'].count()))
+newcdids = pd.concat([newcdids, pd.DataFrame(cdids)])
+cdids['Sort Priority'] = ''
+print('Count before duplicate drop: ' + str(newcdids['Notation'].count()))
+newcdids = newcdids.drop_duplicates()
+print('Count after duplicate drop: ' + str(newcdids['Notation'].count()))
+newcdids['Sort Priority'] = np.arange(newcdids.shape[0]) + 1
+newcdids.to_csv('newcdids.csv', index=False)
+"""
+
+# %%
+
+# %%
+
+# %%
+
+# %%
 #import dmtools as dm
 #fldrpth = '/users/leigh/Development/family-trade/reference/codelists/'
 #dm.search_for_codes_using_levenshtein_and_fuzzywuzzy(tidied_sheets[ind]['Sector'].unique(), fldrpth, 'Notation', 'sector', 3, 0.8)
-#dm.search_codelists_for_codes(tidied_sheets[ind]['Sector'].unique(), fldrpth, 'Notation', 'sector')
-
-# %%
-
-# %%
+#dm.search_codelists_for_codes(c1c2['Economic Concept'].unique(), fldrpth, 'Notation', 'Economic Concept')
 
 # %%
