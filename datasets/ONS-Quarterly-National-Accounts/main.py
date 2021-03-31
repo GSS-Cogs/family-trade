@@ -325,6 +325,9 @@ def convet_dimension_to_int(dataset, dimension):
 
 
 # %%
+cubes = Cubes("info.json")
+
+# %%
 # A2
 a2 = tidied_sheets[1]
 # Only use the main value data for now
@@ -366,7 +369,7 @@ scraper.dataset.title = mainTitle + ' - National Accounts aggregates (A2)'
 scraper.dataset.comment = maincomme + ' - National Accounts aggregates (A2) - GDP and GVA in £ million. Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree. 
-Data is Seasonally Adjusted. 
+Data has been Seasonally Adjusted. 
 Reference year is 2018. 
 Less Basic price adjustment: Taxes on products less subsidies. 
 Gross value added excluding oil & gas: Calculated by using gross value added at basic prices minus extraction of crude petroleum and natural gas.
@@ -378,7 +381,7 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-cubes = Cubes("info.json")        
+       
 cubes.add_cube(copy.deepcopy(scraper), a2, "gbp–data-tables-aggregates", 'gbp–data-tables-aggregates', data)
 del a2
 
@@ -452,7 +455,7 @@ scraper.dataset.title = mainTitle + ' - Gross value added chained volume measure
 scraper.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
 Estimates cannot be regarded as accurate to the last digit shown.
-Data is Seasonally Adjusted. 
+Data has been Seasonally Adjusted. 
 Reference year is 2018.
 Components of outputs are valued at basic prices, which excludes taxes and includes subsidies on products.
 Weights may not sum to totals due to rounding.
@@ -465,7 +468,7 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-cubes = Cubes("info.json")        
+      
 cubes.add_cube(copy.deepcopy(scraper), b1b2, "gbp–data-tables-cvm-output", 'gbp–data-tables-cvm-output', data)
 del b1b2
 
@@ -544,7 +547,7 @@ del c1, c2
 scraper.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
 scraper.dataset.comment = maincomme + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
-Data is Seasonally Adjusted. 
+Data has been Seasonally Adjusted. 
 Reference year is 2018.
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
 Non-profit institutions: Non-profit institutions serving households.
@@ -561,7 +564,7 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-cubes = Cubes("info.json")        
+       
 cubes.add_cube(copy.deepcopy(scraper), c1c2, "gbp–data-tables-expenditure", 'gbp–data-tables-expenditure', data)
 del c1c2
 
@@ -575,57 +578,226 @@ except:
     ind = ind 
 
 d1 = d1.loc[d1['CDID'] != 'YBHA'] # This is already in one of the other datasets
-#d1['Expenditure'].loc[d1['CDID'].isin(['YBIM','IKBK','ABMG','IKBL','IKBM','GIXS'])] = 'not-applicable'
-#d1['Expenditure'].loc[d1['CDID'].isin(['ABJR'])] = 'Final consumption expenditure'
-#d1['Expenditure'].loc[d1['CDID'].isin(['NPQT','NPEL'])] = 'Gross capital formation'
+d1['Gross Domestic Product'].loc[d1['CDID'].isin(['CAER'])] = 'Gross operating surplus of corporations'
+d1['Gross Domestic Product'].loc[d1['CDID'].isin(['CGBX','CGCB','CMVL','GIXQ'])] = 'Gross domestic product'
 
 d1 = strip_superscripts(d1, 'Category of Income')
 
 d1 = prefix_refperiod(d1, 'Period')
 
-#try:
-#    d1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-#except:
-#    ind = ind   
+try:
+    d1.drop(['Seasonal Adjustment','Percentage Change','measure','DATAMARKER'], axis=1, inplace=True)
+except:
+    ind = ind   
 
-#d1['Expendisture Category'] = d1['Expendisture Category'].apply(pathify)
-#d1['Expenditure'] = d1['Expenditure'].apply(pathify)
+d1['Gross Domestic Product'] = d1['Gross Domestic Product'].apply(pathify)
+d1['Category of Income'] = d1['Category of Income'].apply(pathify)
 
-d1 = d1.rename(columns={'OBS':'Value'})
+d1 = d1.rename(columns={'OBS':'Value', 'Gross Domestic Product':'Economic Concept'})
 
 d1 = convet_dimension_to_int(d1, 'Value')
 
-d2cdids = d1['CDID'].unique()
-d1.head(50)
-#list(d1['Value'].unique())
+d1cdids = d1['CDID'].unique()
+d1.head(5)
+#d1['Gross Domestic Product'].unique()
+
+# %%
+scraper.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
+scraper.dataset.comment = maincomme + ' - Gross domestic product: by category of income at current prices (D) - Seasonally Adjusted'
+scraper.dataset.description = maindescr + """
+Data has been seasonally adjusted.
+Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
+Private. non-financial corporations: Quarterly alignment adjustment included in this series.
+Gross operating surplus of corporations total includes the operating surplus of financial corporations, private non-financial corporations and public corporations.
+Other income includes mixed income and the operating surplus of the non-corporate sector.
+"""
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gdp"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+       
+cubes.add_cube(copy.deepcopy(scraper), d1, "gbp–data-tables-income", 'gbp–data-tables-income', data)
+del d1
+
+# %%
+# E1
+e1 = tidied_sheets[7]
+
+try:
+    e1 = e1.loc[e1['Percentage Change'].isna()] 
+except:
+    ind = ind 
+
+e1['COICOP'] = 'CP' + e1['COICOP'].astype(str) 
+e1['COICOP'].loc[e1['CDID'].isin(['ABJQ'])] = 'TOTAL'
+e1['COICOP'].loc[e1['COICOP'] == 'CP0.0'] = 'CP00'
+e1['COICOP'].loc[e1['CDID'].isin(['ABTF'])] = 'net-tourism'
+
+e1['Expenditure Category'] = 'uk-national-domestic'
+e1['Expenditure Category'].loc[e1['CDID'].isin(['ABJQ','ABTF'])] = 'uk-national'
+e1['Economic Concept'] = 'current-price'
+
+e1 = prefix_refperiod(e1, 'Period')
+
+try:
+    e1.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
+except:
+    ind = ind   
+
+e1 = e1.rename(columns={'OBS':'Value'})
+
+e1 = convet_dimension_to_int(e1, 'Value')
+
+e1cdids = e1['CDID'].unique()
+e1.head(50)
+
+# %%
+# E2
+e2 = tidied_sheets[8]
+
+try:
+    e2 = e2.loc[e2['Percentage Change'].isna()] 
+except:
+    ind = ind 
+
+#e2['COICOP'] = 'CP' + e2['COICOP'].astype(str) 
+e2 = e2.loc[e2['CDID'] != 'ABJQ']
+e2 = e2.loc[e2['CDID'] != 'ABTF']
+e2 = e2.loc[e2['CDID'] != 'ZAKV']
+
+e2['COICOP'].loc[e2['CDID'].isin(['UTIF'])] = 'total-goods'
+e2['Economic Concept'] = 'current-price'
+
+e2 = prefix_refperiod(e2, 'Period')
+
+try:
+    e2.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
+except:
+    ind = ind   
+
+e2 = e2.rename(columns={'OBS':'Value'})
+
+e2 = convet_dimension_to_int(e2, 'Value')
+
+e2['Expenditure Category'] = 'uk-domestic'
+
+e2cdids = e2['CDID'].unique()
+e2.head(5)
+
+# %%
+# E3
+e3 = tidied_sheets[9]
+
+try:
+    e3 = e3.loc[e3['Percentage Change'].isna()] 
+except:
+    ind = ind 
+
+e3['COICOP'] = 'CP' + e3['COICOP'].astype(str) 
+e3['COICOP'].loc[e3['CDID'].isin(['ABJR'])] = 'TOTAL'
+e3['COICOP'].loc[e3['COICOP'] == 'CP0.0'] = 'CP00'
+e3['COICOP'].loc[e3['CDID'].isin(['ABTH'])] = 'net-tourism'
+
+e3['Expenditure Category'] = 'uk-national-domestic'
+e3['Expenditure Category'].loc[e3['CDID'].isin(['ABJR','ABTH'])] = 'uk-national'
+e3['Economic Concept'] = 'chained-volume-measure'
+
+e3 = prefix_refperiod(e3, 'Period')
+
+try:
+    e3.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
+except:
+    ind = ind   
+
+e3 = e3.rename(columns={'OBS':'Value'})
+
+e3 = convet_dimension_to_int(e3, 'Value')
+
+e3cdids = e3['CDID'].unique()
+e3.head(50)
+
+# %%
+# E4
+e4 = tidied_sheets[8]
+
+try:
+    e4 = e4.loc[e4['Percentage Change'].isna()] 
+except:
+    ind = ind 
+
+#e4['COICOP'] = 'CP' + e4['COICOP'].astype(str) 
+e4 = e4.loc[e4['CDID'] != 'ABJR']
+e4 = e4.loc[e4['CDID'] != 'ABTH']
+e4 = e4.loc[e4['CDID'] != 'ZAKW']
+
+e4['COICOP'].loc[e4['CDID'].isin(['UTIH'])] = 'total-goods'
+e4['Economic Concept'] = 'chained-volume-measure'
+
+e4 = prefix_refperiod(e4, 'Period')
+
+try:
+    e4.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
+except:
+    ind = ind   
+
+e4 = e4.rename(columns={'OBS':'Value'})
+
+e4 = convet_dimension_to_int(e4, 'Value')
+
+e4['Expenditure Category'] = 'uk-domestic'
+
+e4cdids = e4['CDID'].unique()
+e4.head(5)
+
+# %%
+#e1e2e3e4cdids = pd.concat([pd.DataFrame(e1cdids),pd.DataFrame(e2cdids),pd.DataFrame(e3cdids),pd.DataFrame(e4cdids)])
+#del e1cdids, e2cdids, e3cdids, e4cdids
+
+e1e2e3e4 = pd.concat([e1, e2, e3, e4])
+e1e2e3e4.head(10)
+e1e2e3e4['Expenditure Category'].unique()
+
+# %%
+scraper.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
+scraper.dataset.comment = maincomme + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4) - Seasonally Adjusted'
+scraper.dataset.description = maindescr + """
+Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)
+Data has been seasonally adjusted
+COICOP: ESA 10 Classification of Individual Consumption by Purpose.
+UK Domestic: Final consumption expenditure in the UK by UK & foreign households
+UK National: Final consumption by UK Households in the UK & abroad.
+UK National & Domestic: Final consumption expenditure in the UK by UK & foreign households and final consumption by UK Households in the UK & abroad.
+"""
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/hh-final-consumption"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+       
+cubes.add_cube(copy.deepcopy(scraper), e1e2e3e4, "gbp–data-tables-expenditure", 'gbp–data-tables-expenditure', data)
+del e1e2e3e4
 
 # %%
 cubes.output_all()
 
 # %%
-a2cdids
-b1b2cdids
-c1c2cdids
-d1cdids
+#cids = pd.concat([pd.DataFrame(a2cdids),pd.DataFrame(b1b2cdids),pd.DataFrame(c1c2cdids),pd.DataFrame(d1cdids),pd.DataFrame(e1e2e3e4cdids)])
+#print('Before: ' + str(cids[0].count()))
+#cids = cids.drop_duplicates()
+#print('After: ' + str(cids[0].count()))
+#cids = cids.rename(columns={cids.columns[0]:'Label'})
+#cids['Notation'] = cids['Label']
+#cids['Parent Notation'] = ''
+#cids['Sort Priority'] = np.arange(cids.shape[0]) + 6551
+#cids.to_csv('cdids.csv', index=False)
+#cids
 
 # %%
-"""
-cdids = pd.DataFrame(cdids)
-cdids.rename(columns={0:'Label'})
-cdids['Notation'] = cdids[0]
-cdids['Parent Notation'] = ''
-cdids['Sort Priority'] = ''
-print('Count of new CDIDs: ' + str(cdids['Notation'].count()))
-newcdids = pd.DataFrame(pd.read_csv('newcdids.csv'))
-print('Count of CDIDs from file: ' + str(cdids['Notation'].count()))
-newcdids = pd.concat([newcdids, pd.DataFrame(cdids)])
-cdids['Sort Priority'] = ''
-print('Count before duplicate drop: ' + str(newcdids['Notation'].count()))
-newcdids = newcdids.drop_duplicates()
-print('Count after duplicate drop: ' + str(newcdids['Notation'].count()))
-newcdids['Sort Priority'] = np.arange(newcdids.shape[0]) + 1
-newcdids.to_csv('newcdids.csv', index=False)
-"""
 
 # %%
 
@@ -637,6 +809,6 @@ newcdids.to_csv('newcdids.csv', index=False)
 #import dmtools as dm
 #fldrpth = '/users/leigh/Development/family-trade/reference/codelists/'
 #dm.search_for_codes_using_levenshtein_and_fuzzywuzzy(tidied_sheets[ind]['Sector'].unique(), fldrpth, 'Notation', 'sector', 3, 0.8)
-#dm.search_codelists_for_codes(c1c2['Economic Concept'].unique(), fldrpth, 'Notation', 'Economic Concept')
+#dm.search_codelists_for_codes(d1['Category of Income'].unique(), fldrpth, 'Notation', 'Category of Income')
 
 # %%

@@ -791,3 +791,9 @@ Mainly administered prices,APM,AP,789
 Overall index excluding administered prices,TOT_X_AP,,790
 Overall index excluding fully administered prices,TOT_X_APF,,791
 Overall index excluding mainly administered prices,TOT_X_APM,,792
+Net tourism (Not applicable to COICOP),net-tourism,,793
+Durable goods,D,,794
+Semi-durable goods,SD,,795
+Non-durable goods,ND,,796
+Services,S,,797
+Total Goods,total-goods,,798

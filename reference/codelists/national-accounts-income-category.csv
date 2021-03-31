@@ -1,4 +1,5 @@
 Label,Notation,Parent Notation,Sort Priority,Description
-Compensation of employees,compensation-of-employees,,,
-Gross operating surplus of corporations,gross-operating-surplus-of-corporations,,,
-Not specified,not-specified,,,
+Compensation of employees,compensation-of-employees,,1,
+Gross operating surplus of corporations,gross-operating-surplus-of-corporations,,2,
+Gross Domestic Product,gross-domestic-product,,3,
+Not specified,not-specified,,4,
