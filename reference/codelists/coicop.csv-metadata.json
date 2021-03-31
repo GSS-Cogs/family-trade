@@ -47,27 +47,6 @@
                 "propertyUrl": "rdfs:label"
             },
             {
-                "titles": "COICOP Level",
-                "name": "coicop_level",
-                "datatype": "string",
-                "required": false,
-                "propertyUrl": "rdfs:label"
-            },
-            {
-                "titles": "COICOP Code",
-                "name": "coicop_code",
-                "datatype": "string",
-                "required": false,
-                "propertyUrl": "rdfs:label"
-            },
-            {
-                "titles": "COICOP Parent",
-                "name": "coicop_Parent",
-                "datatype": "string",
-                "required": false,
-                "propertyUrl": "rdfs:label"
-            },
-            {
                 "virtual": true,
                 "propertyUrl": "rdf:type",
                 "valueUrl": "skos:Concept"
