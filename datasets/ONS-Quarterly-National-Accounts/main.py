@@ -49,7 +49,7 @@ for name, tab in tabs.items():
         dimensions = [
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
-            HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
+            HDim(p_change, 'Percentage Change',CLOSEST,LEFT),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
             HDim(indicies, 'Indicies',CLOSEST,LEFT),
             HDim(gross, 'gross',DIRECTLY,ABOVE),
