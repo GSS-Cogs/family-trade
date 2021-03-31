@@ -8,6 +8,7 @@
 from gssutils import *
 import json
 import copy 
+import numpy as np
 
 trace = TransformTrace()
 df = pd.DataFrame()
@@ -36,16 +37,14 @@ for name, tab in tabs.items():
     #shared dimensions across all tabs
     seasonal_adjustment = tab.excel_ref('A5').expand(DOWN).filter(contains_string('Seasonally'))
     period = tab.excel_ref('A6').expand(DOWN).is_not_blank() - seasonal_adjustment
-    p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage')) 
     measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
-    
+    p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('A3')
+   
     if name in national_account_aggregates:
-       
-        cdid = tab.excel_ref('B4').expand(RIGHT).is_not_blank() | p_change.shift(0,2).expand(RIGHT).is_not_blank()
+        cdid = tab.excel_ref('B4').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         indicies = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
         gross = tab.excel_ref('C3').expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
-        
         dimensions = [
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
@@ -58,10 +57,11 @@ for name, tab in tabs.items():
         c1 = ConversionSegment(tab, dimensions, observations)  
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
         
     elif name in output_indicators:
-        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(0,1).expand(RIGHT).is_not_blank()
+        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         sector = tab.excel_ref('B2').expand(RIGHT).is_not_blank()
         industry = tab.excel_ref('B3').expand(RIGHT).is_not_blank()
@@ -81,13 +81,15 @@ for name, tab in tabs.items():
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
+        
     elif name in expenditure_indicators:
+        p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('C6')
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank().is_not_number()
         cdid = cdid - cdid.shift(0,1).expand(RIGHT)
         expenditure = tab.excel_ref('C3').expand(RIGHT).is_not_blank()
         expenditure_cat = tab.excel_ref('C4').expand(RIGHT).is_not_blank()
-        
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         dimensions = [
             HDim(period,'Period',DIRECTLY,LEFT),
@@ -101,9 +103,10 @@ for name, tab in tabs.items():
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
     elif name in income_indicators:
-        cdid = tab.excel_ref('B4').expand(RIGHT).is_not_blank() | p_change.shift(0,2).expand(RIGHT).is_not_blank()
+        cdid = tab.excel_ref('B4').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         cat_income = tab.excel_ref('A3').expand(RIGHT).is_not_blank()
         gross = tab.excel_ref('A2').expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank() - cdid
@@ -120,16 +123,18 @@ for name, tab in tabs.items():
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
         
     elif name in household_expenditure_indicators:
         if name in household_expenditure_indicators[0] or name in household_expenditure_indicators[2]:
-            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(0,2).expand(RIGHT).is_not_blank()
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             COICOP = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
             measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         else:
-            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(0,2).expand(RIGHT).is_not_blank()
+            p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('B6')
+            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             COICOP = tab.excel_ref('B7').expand(RIGHT)
             measure = tab.excel_ref('G2').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
@@ -148,9 +153,10 @@ for name, tab in tabs.items():
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
     elif name in gross_fixed_capitol:
-        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(0,2).expand(RIGHT).is_not_blank()
+        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         analysis_by = tab.excel_ref('B2').expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         capitol_formation = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
@@ -166,9 +172,10 @@ for name, tab in tabs.items():
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
     elif name in inventories:
-        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(0,2).expand(RIGHT).is_not_blank()
+        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         sector = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
         level_held_title = tab.excel_ref('A4').is_not_blank() 
@@ -185,14 +192,15 @@ for name, tab in tabs.items():
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
     elif name in trade: 
         if name in trade[0]:
-            cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(0,2).expand(RIGHT).is_not_blank()
+            cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
             flow = tab.excel_ref('B2').expand(RIGHT)#.is_not_blank() 
         else:
-            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(0,1).expand(RIGHT).is_not_blank()
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank()
             measure = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B4').expand(RIGHT).is_not_blank() 
             flow = tab.excel_ref('B3').expand(RIGHT)#.is_not_blank() 
@@ -208,8 +216,9 @@ for name, tab in tabs.items():
             HDim(measure, 'measure',CLOSEST,ABOVE),
         ]
         c1 = ConversionSegment(tab, dimensions, observations)   
-        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
+       # savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
     else:
         continue
