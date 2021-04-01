@@ -32,6 +32,41 @@ trade = ['H1 TRADE', 'H2 TRADE']
 
 tidied_sheets = []
 
+
+# %%
+def with_indices_overrides(indices_dimension):
+    """
+    Adding a cellvalue overrides to each cell within the dimension AFTER
+    it's been defined.
+    So replacing the value of any dimensions cells that are blank with the appropriate index (or indice).
+    """
+    not_blank_cells = [cell for cell in indices_dimension.hbagset if cell.value != '']
+    for cell in indices_dimension.hbagset:
+        # If a dimension cell is blank
+        if cell.value == '': 
+            # Is there a value two cells to the left? if so use that value
+            cell_checked = [cell for cell in not_blank_cells if cell.x == cell.x-2]
+            if len(cell_checked) > 0:
+                indices_dimension.AddCellValueOverride(cell, cell_checked[0].value)
+           
+        # Is there a value one cell to the left? if so use that value
+            cell_checked = [cell for cell in not_blank_cells if cell.x == cell.x-1]
+            if len(cell_checked) > 0:
+                indices_dimension.AddCellValueOverride(cell, cell_checked[0].value)
+                
+            # Is there a value one cells to the right? if so use that value
+            cell_checked = [cell for cell in not_blank_cells if cell.x == cell.x+1]
+            if len(cell_checked) > 0:
+                indices_dimension.AddCellValueOverride(cell, cell_checked[0].value)
+                
+            # Is there a value two cells to the right? if so use that value
+            cell_checked = [cell for cell in not_blank_cells if cell.x == cell.x+1]
+            if len(cell_checked) > 0:
+                indices_dimension.AddCellValueOverride(cell, cell_checked[0].value)
+    
+    return indices_dimension
+
+
 # %%
 for name, tab in tabs.items():
     #shared dimensions across all tabs
@@ -42,18 +77,23 @@ for name, tab in tabs.items():
    
     if name in national_account_aggregates:
         cdid = tab.excel_ref('B4').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
-        indicies = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
         gross = tab.excel_ref('C3').expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
+        gross = tab.excel_ref('C3').expand(RIGHT).is_not_blank()
+        indices = gross.shift(UP)
+        
         dimensions = [
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
-            HDim(indicies, 'Indicies',CLOSEST,LEFT),
+            HDim(indices, 'Indices', DIRECTLY, ABOVE), 
+            HDim(gross, 'Gross', DIRECTLY, ABOVE),
             HDim(gross, 'gross',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
         ]
+        
+        dimensions[0] = with_indices_overrides(dimensions[0])
         c1 = ConversionSegment(tab, dimensions, observations)  
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
@@ -216,7 +256,7 @@ for name, tab in tabs.items():
             HDim(measure, 'measure',CLOSEST,ABOVE),
         ]
         c1 = ConversionSegment(tab, dimensions, observations)   
-       # savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
@@ -348,12 +388,12 @@ except:
 a2 = prefix_refperiod(a2, 'Period')
 
 a2['gross'].loc[a2['CDID'] == 'YBHA'] = 'Gross domestic product at market prices'  
-a2['Indicies'].loc[a2['CDID'] == 'YBHA'] = 'Current prices'
+a2['Indices'].loc[a2['CDID'] == 'YBHA'] = 'Current prices'
 
 a2 = strip_superscripts(a2, 'gross')
     
-a2['Indicies'].loc[a2['Indicies'] == 'Current prices'] = 'current-price'
-a2['Indicies'].loc[a2['Indicies'] == 'Chained Volume Measure (Reference year 2018)'] = 'chained-volume-measure'
+a2['Indices'].loc[a2['Indices'] == 'Current prices'] = 'current-price'
+a2['Indices'].loc[a2['Indices'] == 'Chained Volume Measure (Reference year 2018)'] = 'chained-volume-measure'
 
 a2['gross'] = a2['gross'].apply(pathify)
 
@@ -366,7 +406,7 @@ try:
 except:
     ind = ind
 
-a2 = a2.rename(columns={'Indicies':'Estimate Type', 'gross':'Aggregate'})
+a2 = a2.rename(columns={'Indices':'Estimate Type', 'gross':'Aggregate'})
 a2cdids = a2['CDID'].unique()
 
 # %%
