@@ -9,9 +9,11 @@ Acquisitions less disposals of valuables,acquisitions-less-disposals-of-valuable
 Total,total,,,
 Total exports,total-exports,,,
 Gross final expenditure,gross-final-expenditure,,,
-"less
-Total imports",less-total-imports,,,
+"less Total imports",less-total-imports,,,
 Trade balance,trade-balance,,,Trade balance is calculated by using exports of goods and services minus imports of goods and services
 Statistical discrepancy (expenditure),statistical-discrepancy-expenditure,,,
 Gross domestic product at market prices,gross-domestic-product-at-market-prices,,,
 Of which business investment,of-which-business-investment,,,Further breakdown of business investment can be found in the 'Business investment in the UK' bulletin
+UK National,uk-national,,,Final consumption by UK Households in the UK & abroad.
+UK Domestic,uk-domestic,,,Final consumption expenditure in the UK by UK & foreign households.
+UK National & Domestic,uk-national-domestic,,,Final consumption expenditure in the UK by UK & foreign households and final consumption by UK Households in the UK & abroad.

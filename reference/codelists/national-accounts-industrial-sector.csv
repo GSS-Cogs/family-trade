@@ -1,4 +1,7 @@
-Label,Notation,Parent Notation,Sort Priority,Description
-Not Specified,not-specified,,,
-Production,production,,,
-Service Industry,service-industry,,,
+Label,Notation,Parent Notation,Sort Priority
+Not Specified,not-specified,,1
+Production,production,,2
+Service Industry,service-industry,,3
+Agriculture,agriculture,,4
+Construction,construction,,5
+Service Industry,service-industries,,6

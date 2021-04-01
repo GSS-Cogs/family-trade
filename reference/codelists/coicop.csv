@@ -1,0 +1,799 @@
+Label,Notation,Parent Notation,Sort Priority
+Total,TOTAL,,1
+Total except actual rents,TOT_X_CP041_042,,2
+All-items HICP,CP00,,3
+Food and non-alcoholic beverages,CP01,,4
+Food,CP011,CP01,5
+Bread and cereals,CP0111,CP011,6
+Rice,CP01111,CP0111,7
+Long-grain rice (1 kg),CP01111A,CP01111,8
+Flours and other cereals,CP01112,CP0111,9
+Wheat flour (1 kg),CP01112A,CP01112,10
+Cornflakes (1 kg),CP01112B,CP01112,11
+Bread,CP01113,CP0111,12
+"White bread, loaf (1 kg)",CP01113A,CP01113,13
+Other bakery products,CP01114,CP0111,14
+Pizza and quiche,CP01115,CP0111,15
+"Pizza, frozen (500 g)",CP01115A,CP01115,16
+Pasta products and couscous,CP01116,CP0111,17
+"Pasta, without eggs (1 kg)",CP01116A,CP01116,18
+Breakfast cereals,CP01117,CP0111,19
+Other cereal products,CP01118,CP0111,20
+Meat,CP0112,CP011,21
+Beef and veal,CP01121,CP0112,22
+"Beef, minced (1 kg)",CP01121A,CP01121,23
+Pork,CP01122,CP0112,24
+"Pork, cutlet (""escalope"") (1 kg)",CP01122A,CP01122,25
+"Pork, loin chop (B2) (1 kg)",CP01122B,CP01122,26
+Lamb and goat,CP01123,CP0112,27
+Poultry,CP01124,CP0112,28
+Whole chicken (1 kg),CP01124A,CP01124,29
+"Chicken breast, fillets (1 kg)",CP01124B,CP01124,30
+Other meats,CP01125,CP0112,31
+"Dried, salted or smoked meat and edible meat offal",CP01126_01127,CP0112,32
+Edible offal,CP01126,CP0112,33
+"Dried, salted or smoked meat",CP01127,CP0112,34
+"Sausage, Frankfurter/Wiener (1 kg)",CP01127A,CP01127,35
+"Sausage, salami type (1 kg)",CP01127B,CP01127,36
+Other meat preparations,CP01128,CP0112,37
+Other preserved or processed meat and meat preparations,CP01128A,CP01128,38
+"Other fresh, chilled or frozen edible meat",CP01128B,CP01128,39
+Fish and seafood,CP0113,CP011,40
+"Fresh, chilled or frozen fish",CP01131_01132,CP0113,41
+Fresh or chilled fish,CP01131,CP0113,42
+"Salmon, steak (1 kg)",CP01131A,CP01131,43
+Frozen fish,CP01132,CP0113,44
+"Fresh, chilled or frozen seafood",CP01133_01134,CP0113,45
+Fresh or chilled seafood,CP01133,CP0113,46
+Frozen seafood,CP01134,CP0113,47
+"Dried, smoked or salted fish and seafood",CP01135,CP0113,48
+Other preserved or processed fish and seafood and fish and seafood preparations,CP01136,CP0113,49
+Tinned pink tuna (1 kg/net),CP01136A,CP01136,50
+Fish fingers (500 g),CP01136B,CP01136,51
+"Milk, cheese and eggs",CP0114,CP011,52
+Whole milk,CP01141,CP0114,53
+"Milk, fresh, unskimmed (1 l)",CP01141A,CP01141,54
+Low fat milk,CP01142,CP0114,55
+Preserved milk,CP01143,CP0114,56
+Yoghurt,CP01144,CP0114,57
+Natural yoghurt (1 kg/l),CP01144A,CP01144,58
+Fruit yoghurt (1 kg/l),CP01144B,CP01144,59
+Cheese and curd,CP01145,CP0114,60
+"Cheese, Camembert type (1 kg)",CP01145A,CP01145,61
+"Cheese, Gouda type (1 kg)",CP01145B,CP01145,62
+Cream cheese (200 g),CP01145C,CP01145,63
+Other milk products,CP01146,CP0114,64
+Eggs,CP01147,CP0114,65
+Chicken eggs (10 eggs),CP01147A,CP01147,66
+Oils and fats,CP0115,CP011,67
+Butter,CP01151,CP0115,68
+"Butter, unsalted (250 g)",CP01151A,CP01151,69
+Margarine and other vegetable fats,CP01152,CP0115,70
+Margarine (250 g),CP01152A,CP01152,71
+Olive oil,CP01153,CP0115,72
+Olive oil (1 l),CP01153A,CP01153,73
+Other edible oils,CP01154,CP0115,74
+Vegetable oil (1 l),CP01154A,CP01154,75
+Other edible animal fats,CP01155,CP0115,76
+Fruit,CP0116,CP011,77
+"Citrus fruits (fresh, chilled or frozen)",CP0116A,CP0116,78
+"Bananas (fresh, chilled or frozen)",CP0116B,CP0116,79
+"Apples (fresh, chilled or frozen)",CP0116C,CP0116,80
+"Pears (fresh, chilled or frozen)",CP0116D,CP0116,81
+"Stone fruits (fresh, chilled or frozen)",CP0116E,CP0116,82
+"Berries (fresh, chilled or frozen)",CP0116F,CP0116,83
+"Other fresh, chilled or frozen fruits",CP0116G,CP0116,84
+Fresh or chilled fruit,CP01161,CP0116,85
+Apples (1 kg),CP01161A,CP01161,86
+Fresh bananas (1 kg),CP01161B,CP01161,87
+Frozen fruit,CP01162,CP0116,88
+Dried fruit and nuts,CP01163,CP0116,89
+Preserved fruit and fruit-based products,CP01164,CP0116,90
+Canned fruit (1 kg/net),CP01164A,CP01164,91
+Vegetables,CP0117,CP011,92
+"Leaf and stem vegetables (fresh, chilled or frozen)",CP0117A,CP0117,93
+Cabbages (fresh or chilled),CP0117B,CP0117,94
+"Vegetable grown for their fruit (fresh, chilled or frozen)",CP0117C,CP0117,95
+"Root crops, non-starchy bulbs and mushrooms (fresh, chilled or frozen)",CP0117D,CP0117,96
+Fresh or chilled vegetables other than potatoes and other tubers,CP01171,CP0117,97
+Fresh carrots (1 kg),CP01171A,CP01171,98
+"Fresh tomatoes, round (1 kg)",CP01171B,CP01171,99
+Frozen vegetables other than potatoes and other tubers,CP01172,CP0117,100
+"Dried vegetables, other preserved or processed vegetables",CP01173,CP0117,101
+Tinned sweet corn (500 g/net),CP01173A,CP01173,102
+Dried vegetables,CP01173B,CP01173,103
+Other preserved or processed vegetables,CP01173C,CP01173,104
+Potatoes,CP01174,CP0117,105
+Potatoes (1 kg),CP01174A,CP01174,106
+Frozen French fries (1 kg),CP01174B,CP01174,107
+Crisps,CP01175,CP0117,108
+"Potato crisps, single pack (200 g)",CP01175A,CP01175,109
+Other tubers and products of tuber vegetables,CP01176,CP0117,110
+"Sugar, jam, honey, chocolate and confectionery",CP0118,CP011,111
+Sugar,CP01181,CP0118,112
+White sugar (1 kg),CP01181A,CP01181,113
+"Jams, marmalades and honey",CP01182,CP0118,114
+Jam (1 kg),CP01182A,CP01182,115
+Chocolate,CP01183,CP0118,116
+"Chocolate, milk (1 kg)",CP01183A,CP01183,117
+Confectionery products,CP01184,CP0118,118
+Chewing gum (1 package),CP01184A,CP01184,119
+Edible ices and ice cream,CP01185,CP0118,120
+Ice cream (1 l),CP01185A,CP01185,121
+Artificial sugar substitutes,CP01186,CP0118,122
+Other sugar products,CP01186A,CP01186,123
+Food products n.e.c.,CP0119,CP011,124
+"Sauces, condiments",CP01191,CP0119,125
+Tomato ketchup (1 kg),CP01191A,CP01191,126
+"Salt, spices and culinary herbs",CP01192,CP0119,127
+Mineral salt (1 kg),CP01192A,CP01192,128
+Black pepper (100 g),CP01192B,CP01192,129
+Baby food,CP01193,CP0119,130
+"Baby food, meat base (500 g)",CP01193A,CP01193,131
+Ready-made meals,CP01194,CP0119,132
+Other food products n.e.c.,CP01199,CP0119,133
+"Baker's yeast, dessert preparations, soups",CP01199A,CP01199,134
+Non-alcoholic beverages,CP012,CP01,135
+"Coffee, tea and cocoa",CP0121,CP012,136
+Coffee,CP01211,CP0121,137
+Coffee (1 kg),CP01211A,CP01211,138
+Tea,CP01212,CP0121,139
+Black tea (25 bags),CP01212A,CP01212,140
+Cocoa and powdered chocolate,CP01213,CP0121,141
+"Cocoa instant drink, powder (1 kg)",CP01213A,CP01213,142
+"Mineral waters, soft drinks, fruit and vegetable juices",CP0122,CP012,143
+Mineral or spring waters,CP01221,CP0122,144
+"Mineral water, carbonated (1 l)",CP01221A,CP01221,145
+"Mineral water, still (1 l)",CP01221B,CP01221,146
+Soft drinks,CP01222,CP0122,147
+"Carbonated drink, orange flavoured (1 l)",CP01222A,CP01222,148
+Fruit and vegetables juices,CP01223,CP0122,149
+Fruit juices,CP01223A,CP01223,150
+Orange juice (1 l),CP01223B,CP01223,151
+Vegetable juices,CP01223C,CP01223,152
+"Alcoholic beverages, tobacco and narcotics",CP02,,153
+Alcoholic beverages,CP021,CP02,154
+Spirits,CP0211,CP021,155
+Spirits and liqueurs,CP02111,CP0211,156
+Vodka (1 l),CP02111A,CP02111,157
+Alcoholic soft drinks,CP02112,CP0211,158
+Wine,CP0212,CP021,159
+Wine from grapes,CP02121,CP0212,160
+Red wine (0.75 l),CP02121A,CP02121,161
+White wine (0.75 l),CP02121B,CP02121,162
+Wine from other fruits,CP02122,CP0212,163
+Fortified wines,CP02123,CP0212,164
+Wine-based drinks,CP02124,CP0212,165
+Beer,CP0213,CP021,166
+Lager beer,CP02131,CP0213,167
+Beer (1 l),CP02131A,CP02131,168
+Other alcoholic beer,CP02132,CP0213,169
+Low and non-alcoholic beer,CP02133,CP0213,170
+Beer-based drinks,CP02134,CP0213,171
+Tobacco,CP022,CP02,172
+Tobacco,CP0220,CP022,173
+Cigarettes,CP02201,CP0220,174
+Cigarettes (20 cigarettes),CP02201A,CP02201,175
+Cigars,CP02202,CP0220,176
+Other tobacco products,CP02203,CP0220,177
+Narcotics,CP023,CP02,178
+Narcotics,CP0230,CP023,179
+Narcotics,CP02300,CP0230,180
+Clothing and footwear,CP03,,181
+Clothing,CP031,CP03,182
+Clothing materials,CP0311,CP031,183
+Clothing materials,CP03110,CP0311,184
+Cotton (1 m2),CP03110A,CP03110,185
+Garments,CP0312,CP031,186
+Garments for men,CP03121,CP0312,187
+"Men's suit, wool (1 suit)",CP03121A,CP03121,188
+Men's trousers (1 piece),CP03121B,CP03121,189
+Men's blue jeans (1 piece),CP03121C,CP03121,190
+Men's shirt (1 piece),CP03121D,CP03121,191
+"Men's T-shirt, short sleeves (1 piece)",CP03121E,CP03121,192
+Men's boxer briefs (1 piece),CP03121F,CP03121,193
+Garments for women,CP03122,CP0312,194
+Ladies' top coat (1 piece),CP03122A,CP03122,195
+"Ladies' blazer, woolmix (1 piece)",CP03122B,CP03122,196
+"Ladies' straight trousers, synthetic (1 piece)",CP03122C,CP03122,197
+Ladies' jeans (1 piece),CP03122D,CP03122,198
+Ladies' skirt (1 piece),CP03122E,CP03122,199
+Ladies' blouse (1 piece),CP03122F,CP03122,200
+Ladies' T-shirt (1 piece),CP03122G,CP03122,201
+Ladies' pullover (1 piece),CP03122H,CP03122,202
+"Brassiere, push-up (1 piece)",CP03122I,CP03122,203
+Tights (1 piece),CP03122J,CP03122,204
+Ladies bikini (1 set),CP03122K,CP03122,205
+Garments for infants (0 to 2 years) and children (3 to 13 years),CP03123,CP0312,206
+Children' s jeans trousers (1 piece),CP03123A,CP03123,207
+"Children' T-shirt, long sleeves (1 piece)",CP03123B,CP03123,208
+Girls' skirt (1 piece),CP03123C,CP03123,209
+Girls' tights (1 piece),CP03123D,CP03123,210
+Boys' socks (1 pair),CP03123E,CP03123,211
+Children' socks (1 pair),CP03123F,CP03123,212
+Other articles of clothing and clothing accessories,CP0313,CP031,213
+Other articles of clothing,CP03131,CP0313,214
+Clothing accessories,CP03132,CP0313,215
+"Cleaning, repair and hire of clothing",CP0314,CP031,216
+Cleaning of clothing,CP03141,CP0314,217
+Dry cleaning (1 service),CP03141A,CP03141,218
+Repair and hire of clothing,CP03142,CP0314,219
+Footwear,CP032,CP03,220
+Shoes and other footwear; repair and hire of footwear,CP0321_0322,CP032,221
+Shoes and other footwear,CP0321,CP032,222
+Footwear for men,CP03211,CP0321,223
+Men's lace-up shoes (1 pair),CP03211A,CP03211,224
+Men's street shoes (1 pair),CP03211B,CP03211,225
+Footwear for women,CP03212,CP0321,226
+Ladies' conventional court shoes (1 pair),CP03212A,CP03212,227
+Ladies' long boots (1 pair),CP03212B,CP03212,228
+Footwear for infants and children,CP03213,CP0321,229
+Children's sport shoes (1 pair),CP03213A,CP03213,230
+Repair and hire of footwear,CP0322,CP032,231
+Repair and hire of footwear,CP03220,CP0322,232
+"Services, Cobbler (1 service)",CP03220A,CP03220,233
+"Housing, water, electricity, gas and other fuels",CP04,,234
+Actual rentals for housing,CP041,CP04,235
+Actual rentals paid by tenants; other actual rentals,CP0411_0412,CP041,236
+Actual rentals paid by tenants,CP0411,CP041,237
+Actual rentals paid by tenants,CP04110,CP0411,238
+Other actual rentals,CP0412,CP041,239
+Actual rentals paid by tenants for secondary residences,CP04121,CP0412,240
+Garage rentals and other rentals paid by tenants,CP04122,CP0412,241
+Imputed rentals for housing,CP042,CP04,242
+Imputed rentals of owner-occupiers,CP0421,CP042,243
+Imputed rentals of owner-occupiers,CP04210,CP0421,244
+Other imputed rentals,CP0422,CP042,245
+Other imputed rentals,CP04220,CP0422,246
+Maintenance and repair of the dwelling,CP043,CP04,247
+Materials for the maintenance and repair of the dwelling,CP0431,CP043,248
+Materials for the maintenance and repair of the dwelling,CP04310,CP0431,249
+"Paint, indoor use (10 l)",CP04310A,CP04310,250
+Silicone (300 ml),CP04310B,CP04310,251
+Cement (25 kg),CP04310C,CP04310,252
+Services for the maintenance and repair of the dwelling,CP0432,CP043,253
+Services of plumbers,CP04321,CP0432,254
+Services of electricians,CP04322,CP0432,255
+Maintenance services for heating systems,CP04323,CP0432,256
+Services of painters,CP04324,CP0432,257
+Services of carpenters,CP04325,CP0432,258
+Other services for maintenance and repair of the dwelling,CP04329,CP0432,259
+Water supply and miscellaneous services relating to the dwelling,CP044,CP04,260
+Water supply,CP0441,CP044,261
+Water supply,CP04410,CP0441,262
+Refuse collection,CP0442,CP044,263
+Refuse collection,CP04420,CP0442,264
+Sewerage collection,CP0443,CP044,265
+Sewerage collection,CP04430,CP0443,266
+Other services relating to the dwelling n.e.c.,CP0444,CP044,267
+Maintenance charges in multi-occupied buildings,CP04441,CP0444,268
+Security services,CP04442,CP0444,269
+Other services related to dwelling,CP04449,CP0444,270
+"Electricity, gas and other fuels",CP045,CP04,271
+Electricity,CP0451,CP045,272
+Electricity,CP04510,CP0451,273
+Gas,CP0452,CP045,274
+Natural gas and town gas,CP04521,CP0452,275
+"Liquefied hydrocarbons (butane, propane, etc.)",CP04522,CP0452,276
+Liquid fuels,CP0453,CP045,277
+Liquid fuels,CP04530,CP0453,278
+Solid fuels,CP0454,CP045,279
+Coal,CP04541,CP0454,280
+Other solid fuels,CP04549,CP0454,281
+Heat energy,CP0455,CP045,282
+Heat energy,CP04550,CP0455,283
+"Furnishings, household equipment and routine household maintenance",CP05,,284
+"Furniture and furnishings, carpets and other floor coverings",CP051,CP05,285
+Furniture and furnishings,CP0511,CP051,286
+Household furniture,CP05111,CP0511,287
+"Double bed frame, pressboard (1 piece)",CP05111A,CP05111,288
+Sofa set (1 set),CP05111B,CP05111,289
+Kitchen table (1 piece),CP05111C,CP05111,290
+Kitchen chair (1 piece),CP05111D,CP05111,291
+Pocket spring mattress (1 piece),CP05111E,CP05111,292
+Wardrobe (1 piece),CP05111F,CP05111,293
+Armchair (1 piece),CP05111G,CP05111,294
+Coffee table (1 piece),CP05111H,CP05111,295
+Bookcase (1 piece),CP05111I,CP05111,296
+Garden furniture,CP05112,CP0511,297
+Lighting equipment,CP05113,CP0511,298
+Table lamp (1 piece),CP05113A,CP05113,299
+Other furniture and furnishings,CP05119,CP0511,300
+Carpets and other floor coverings,CP0512,CP051,301
+Carpet and rugs,CP05121,CP0512,302
+Other floor coverings,CP05122,CP0512,303
+Services of laying of fitted carpets and floor coverings,CP05123,CP0512,304
+"Repair of furniture, furnishings and floor coverings",CP0513,CP051,305
+"Repair of furniture, furnishings and floor coverings",CP05130,CP0513,306
+Household textiles,CP052,CP05,307
+Household textiles,CP0520,CP052,308
+Furnishings fabrics and curtains,CP05201,CP0520,309
+Curtain material (1 m2),CP05201A,CP05201,310
+Bed linen,CP05202,CP0520,311
+Duvet (1 piece),CP05202A,CP05202,312
+Bedlinen (1 set),CP05202B,CP05202,313
+Blanket (1 piece),CP05202C,CP05202,314
+Table linen and bathroom linen,CP05203,CP0520,315
+Towel (1 piece),CP05203A,CP05203,316
+Repair of household textiles,CP05204,CP0520,317
+Other household textiles,CP05209,CP0520,318
+Household appliances,CP053,CP05,319
+Major household appliances whether electric or not and small electric household appliances,CP0531_0532,CP053,320
+Major household appliances whether electric or not,CP0531,CP053,321
+"Refrigerators, freezers and fridge-freezers",CP05311,CP0531,322
+"Refrigerator, undercounter, with freezer (1 piece)",CP05311A,CP05311,323
+"Refrigerator, undercounter, with freezer, energy efficiency A/A+ (1 piece)",CP05311A1,CP05311A,324
+"Refrigerator, undercounter, with freezer, energy efficiency A+/A++ (1 piece)",CP05311A2,CP05311A,325
+"Fridge-freezer, energy efficiency A (1 piece)",CP05311B1,CP05311,326
+"Fridge-freezer, energy efficiency A+ (1 piece)",CP05311B2,CP05311,327
+"Clothes washing machines, clothes drying machines and dish washing machines",CP05312,CP0531,328
+"Washing machine, 4.5-5 kg (1 piece)",CP05312A1,CP05312,329
+"Washing machine, 6-7 kg, energy efficiency A/A+ (1 piece)",CP05312A2,CP05312,330
+"Washing machine, 6-7 kg, energy efficiency A++/A+++ (1 piece)",CP05312A3,CP05312,331
+Cookers,CP05313,CP0531,332
+Microwave oven (1 piece),CP05313A,CP05313,333
+"Heaters, air conditioners",CP05314,CP0531,334
+Cleaning equipment,CP05315,CP0531,335
+"Vacuum cleaner, 1400-1600 W (1 piece)",CP05315A1,CP05315,336
+"Vacuum cleaner, 1600-2000 W (1 piece)",CP05315A2,CP05315,337
+"Vacuum cleaner, 1600-2200 W (1 piece)",CP05315A3,CP05315,338
+"Vacuum cleaner, 1400 W (1 piece)",CP05315A4,CP05315,339
+Other major household appliances,CP05319,CP0531,340
+Small electric household appliances,CP0532,CP053,341
+Food processing appliances,CP05321,CP0532,342
+"Coffee machines, tea-makers and similar appliances",CP05322,CP0532,343
+"Kettle, 1.5l (1 piece)",CP05322A1,CP05322,344
+"Kettle, 1.7l (1 piece)",CP05322A2,CP05322,345
+Irons,CP05323,CP0532,346
+Toasters and grills,CP05324,CP0532,347
+Other small electric household appliances,CP05329,CP0532,348
+Repair of household appliances,CP0533,CP053,349
+Repair of household appliances,CP05330,CP0533,350
+"Glassware, tableware and household utensils",CP054,CP05,351
+"Glassware, tableware and household utensils",CP0540,CP054,352
+"Glassware, crystal-ware, ceramic ware and chinaware",CP05401,CP0540,353
+Glass for water (1 piece),CP05401A,CP05401,354
+Flat plate (1 piece),CP05401B,CP05401,355
+Cup and saucer (1 set),CP05401C,CP05401,356
+"Cutlery, flatware and silverware",CP05402,CP0540,357
+Non-electric kitchen utensils and articles,CP05403,CP0540,358
+"Cooking pot, stainless steel (1 set)",CP05403A,CP05403,359
+"Repair of glassware, tableware and household utensils",CP05404,CP0540,360
+Tools and equipment for house and garden,CP055,CP05,361
+Major tools and equipment; small tools and miscellaneous accessories,CP0551_0552,CP055,362
+Major tools and equipment,CP0551,CP055,363
+Motorized major tools and equipment,CP05511,CP0551,364
+"Repair, leasing and rental of major tools and equipment",CP05512,CP0551,365
+Small tools and miscellaneous accessories,CP0552,CP055,366
+Non-motorised small tools,CP05521,CP0552,367
+Miscellaneous small tool accessories,CP05522,CP0552,368
+Battery (1 piece),CP05522A,CP05522,369
+"Light bulb, standard (1 piece)",CP05522B,CP05522,370
+Light bulb energy saving type (1 piece),CP05522C,CP05522,371
+Repair of non-motorised small tools and miscellaneous accessories,CP05523,CP0552,372
+Goods and services for routine household maintenance,CP056,CP05,373
+Non-durable household goods,CP0561,CP056,374
+Cleaning and maintenance products,CP05611,CP0561,375
+Dish washer tablets (10 tablets),CP05611A,CP05611,376
+"Detergent for washing machine, concentrated (1 kg)",CP05611B,CP05611,377
+"Detergent for washing machine, unconcentrated (1 kg)",CP05611C,CP05611,378
+All-purposes household cleaner (1 l),CP05611D,CP05611,379
+Cleaner for WC (1 l),CP05611E,CP05611,380
+Cleaning liquid for windows (1 l),CP05611F,CP05611,381
+"Detergent for washing machine, powder, 70-90 g/wash (1 kg)",CP05611G1,CP05611,382
+"Detergent for washing machine, powder, > 90 g/wash (1 kg)",CP05611G2,CP05611,383
+Other non-durable small household articles,CP05612,CP0561,384
+Scourer sponge (1 piece),CP05612A,CP05612,385
+Domestic services and household services,CP0562,CP056,386
+Domestic services by paid staff,CP05621,CP0562,387
+Cleaning services,CP05622,CP0562,388
+Hire of furniture and furnishings,CP05623,CP0562,389
+Other domestic services and household services,CP05629,CP0562,390
+Health,CP06,,391
+"Medical products, appliances and equipment",CP061,CP06,392
+Pharmaceutical products,CP0611,CP061,393
+Pharmaceutical products,CP06110,CP0611,394
+Acetylsalicylic acid (10 tablets),CP06110A,CP06110,395
+Aciclovir (2 g),CP06110B,CP06110,396
+Alprazolam (10 tablets),CP06110C,CP06110,397
+Atorvastatin (10 tablets),CP06110D,CP06110,398
+Cetirizine (10 tablets),CP06110E,CP06110,399
+Ciprofloxacin (10 tablets),CP06110F,CP06110,400
+Clopidogrel (10 tablets),CP06110G,CP06110,401
+Diclofenac (100 g),CP06110H,CP06110,402
+Enalapril-Hydrochlorothiazide/HCTZ (10 tablets),CP06110I,CP06110,403
+Esomeprazole (10 tablets),CP06110J,CP06110,404
+Latanoprost (10 ml),CP06110K,CP06110,405
+Montelukast (10 tablets),CP06110L,CP06110,406
+Paracetamol (10 tablets),CP06110M,CP06110,407
+Risedronate (10 tablets),CP06110N,CP06110,408
+"Other medical products, therapeutic appliances and equipment",CP0612_0613,CP061,409
+Other medical products,CP0612,CP061,410
+Pregnancy tests and mechanical contraceptive devices,CP06121,CP0612,411
+Pregnancy test (1 piece),CP06121A,CP06121,412
+Condoms (3 pieces),CP06121B,CP06121,413
+Other medical products n.e.c.,CP06129,CP0612,414
+Plaster strips (10 strips),CP06129A,CP06129,415
+Joint bandage (1 m),CP06129B,CP06129,416
+Knee support (1 piece),CP06129C,CP06129,417
+Digital stick thermometer (1 piece),CP06129D,CP06129,418
+Therapeutic appliances and equipment,CP0613,CP061,419
+Corrective eye-glasses and contact lenses,CP06131,CP0613,420
+Hearing aids,CP06132,CP0613,421
+Repair of therapeutic appliances and equipment,CP06133,CP0613,422
+Other therapeutic appliances and equipment,CP06139,CP0613,423
+Out-patient services,CP062,CP06,424
+Medical services and paramedical services,CP0621_0623,CP062,425
+Medical services,CP0621,CP062,426
+General practice,CP06211,CP0621,427
+General practioner (1 service),CP06211A,CP06211,428
+Specialist practice,CP06212,CP0621,429
+"Eye specialist, Ophthalmologist (1 service)",CP06212A,CP06212,430
+Dental services,CP0622,CP062,431
+Dental services,CP06220,CP0622,432
+"Dentist, plastic filling (1 service)",CP06220A,CP06220,433
+Paramedical services,CP0623,CP062,434
+Services of medical analysis laboratories and X-ray centres,CP06231,CP0623,435
+Thorax X-ray (1 service),CP06231A,CP06231,436
+"Thermal-baths, corrective-gymnastic therapy, ambulance and hire of therapeutic equipment",CP06232,CP0623,437
+Other paramedical services,CP06239,CP0623,438
+Hospital services,CP063,CP06,439
+Hospital services,CP0630,CP063,440
+Hospital services,CP06300,CP0630,441
+Transport,CP07,,442
+Purchase of vehicles,CP071,CP07,443
+Motor cars,CP0711,CP071,444
+New motor cars,CP07111,CP0711,445
+Second-hand motor cars,CP07112,CP0711,446
+"Motor cycles, bicycles and animal drawn vehicles",CP0712-0714,CP071,447
+Motor cycles,CP0712,CP071,448
+Motor cycles,CP07120,CP0712,449
+Bicycles,CP0713,CP071,450
+Bicycles,CP07130,CP0713,451
+Animal drawn vehicles,CP0714,CP071,452
+Animal drawn vehicles,CP07140,CP0714,453
+Operation of personal transport equipment,CP072,CP07,454
+Spares parts and accessories for personal transport equipment,CP0721,CP072,455
+Tyres,CP07211,CP0721,456
+Summer tyres (4 tyres),CP07211A,CP07211,457
+Winter tyres (4 tyres),CP07211B,CP07211,458
+Spare parts for personal transport equipment,CP07212,CP0721,459
+Car battery (1 piece),CP07212A,CP07212,460
+Accessories for personal transport equipment,CP07213,CP0721,461
+Fuels and lubricants for personal transport equipment,CP0722,CP072,462
+Diesel,CP07221,CP0722,463
+Petrol,CP07222,CP0722,464
+Other fuels for personal transport equipment,CP07223,CP0722,465
+Lubricants,CP07224,CP0722,466
+Maintenance and repair of personal transport equipment,CP0723,CP072,467
+Maintenance and repair of personal transport equipment,CP07230,CP0723,468
+Replacement of brake pads (1 hour),CP07230A,CP07230,469
+Change of oil (1 service),CP07230B,CP07230,470
+Car wash (1 service),CP07230C,CP07230,471
+Other services in respect of personal transport equipment,CP0724,CP072,472
+"Hire of garages, parking spaces and personal transport equipment",CP07241,CP0724,473
+Car hire (7 days),CP07241A,CP07241,474
+Toll facilities and parking meters,CP07242,CP0724,475
+"Driving lessons, tests, licences and road worthiness tests",CP07243,CP0724,476
+Transport services,CP073,CP07,477
+Passenger transport by railway,CP0731,CP073,478
+Passenger transport by train,CP07311,CP0731,479
+"Rail travel, single ticket (1 ticket)",CP07311A,CP07311,480
+Passenger transport by underground and tram,CP07312,CP0731,481
+Passenger transport by road,CP0732,CP073,482
+Passenger transport by bus and coach,CP07321,CP0732,483
+"Urban bus transport, single ticket (1 ticket)",CP07321A,CP07321,484
+Passenger transport by taxi and hired car with driver,CP07322,CP0732,485
+Taxi (1 trip),CP07322A,CP07322,486
+Passenger transport by air,CP0733,CP073,487
+Domestic flights,CP07331,CP0733,488
+International flights,CP07332,CP0733,489
+Passenger transport by sea and inland waterway,CP0734,CP073,490
+Passenger transport by sea,CP07341,CP0734,491
+Passenger transport by inland waterway,CP07342,CP0734,492
+Combined passenger transport,CP0735,CP073,493
+Combined passenger transport,CP07350,CP0735,494
+Other purchased transport services,CP0736,CP073,495
+"Funicular, cable-car and chair-lift transport",CP07361,CP0736,496
+Removal and storage services,CP07362,CP0736,497
+Other purchased transport services n.e.c.,CP07369,CP0736,498
+Communications,CP08,,499
+Postal services,CP081,CP08,500
+Postal services,CP0810,CP081,501
+Letter handling services,CP08101,CP0810,502
+Other postal services,CP08109,CP0810,503
+Telephone and telefax equipment and services,CP082_083,CP08,504
+Telephone and telefax equipment,CP082,CP08,505
+Telephone and telefax equipment and services,CP0820_0830,CP082,506
+Telephone and telefax equipment,CP0820,CP082,507
+Fixed telephone equipment,CP08201,CP0820,508
+Mobile telephone equipment,CP08202,CP0820,509
+Other equipment of telephone and telefax equipment,CP08203,CP0820,510
+Repair of telephone or telefax equipment,CP08204,CP0820,511
+Telephone and telefax services,CP083,CP08,512
+Telephone and telefax services,CP0830,CP083,513
+Wired telephone services,CP08301,CP0830,514
+Wireless telephone services,CP08302,CP0830,515
+Internet access provision services,CP08303,CP0830,516
+Bundled telecommunication services,CP08304,CP0830,517
+Other information transmission services,CP08305,CP0830,518
+Recreation and culture,CP09,,519
+"Audio-visual, photographic and information processing equipment",CP091,CP09,520
+"Equipment for the reception, recording and reproduction of sound and picture",CP0911,CP091,521
+"Equipment for the reception, recording and reproduction of sound",CP09111,CP0911,522
+"Equipment for the reception, recording and reproduction of sound and vision",CP09112,CP0911,523
+"Television, screen size 32'' (1 piece)",CP09112A1,CP09112,524
+"Television, screen size 42'' (1 piece)",CP09112A2,CP09112,525
+DVD player (1 piece),CP09112B,CP09112,526
+"DVD recorder with hard disc, 160-250 GB (1 piece)",CP09112C1,CP09112,527
+"DVD recorder with hard disc, 200-300 GB (1 piece)",CP09112C2,CP09112,528
+Blu-ray disc player (1 piece),CP09112D,CP09112,529
+Portable sound and vision devices,CP09113,CP0911,530
+"Portable MP3 player, 4 GB (1 piece)",CP09113A1,CP09113,531
+"Portable MP3 player, 16 GB (1 piece)",CP09113A2,CP09113,532
+"Other equipment for the reception, recording and reproduction of sound and picture",CP09119,CP0911,533
+Photographic and cinematographic equipment and optical instruments,CP0912,CP091,534
+Cameras and accessories for photographic and cinematographic equipment,CP09121_09122,CP0912,535
+Cameras,CP09121,CP0912,536
+"Compact digital camera, 12 Mpx (1 piece)",CP09121A,CP09121,537
+"Camcorder, HDD (1 piece)",CP09121B,CP09121,538
+Accessories for photographic and cinematographic equipment,CP09122,CP0912,539
+Optical instruments,CP09123,CP0912,540
+Information processing equipment,CP0913,CP091,541
+Personal computers,CP09131,CP0913,542
+"Laptop, Hard Disc 320 GB, RAM 4 GB (1 piece)",CP09131A1,CP09131,543
+"Laptop, Hard Disc 640 GB, RAM 4 GB (1 piece)",CP09131A2,CP09131,544
+"Laptop, Hard Disc 750 GB, RAM 8 GB (1 piece)",CP09131A3,CP09131,545
+"Laptop, Hard Disc 750 GB - 1 TB, RAM 8 GB (1 piece)",CP09131A4,CP09131,546
+"Monitor, Full HD (1 piece)",CP09131B,CP09131,547
+Accessories for information processing equipment,CP09132,CP0913,548
+Software,CP09133,CP0913,549
+Calculators and other information processing equipment,CP09134,CP0913,550
+Recording media,CP0914,CP091,551
+Pre-recorded recording media,CP09141,CP0914,552
+Music CD - Pop Chart (1 piece),CP09141A,CP09141,553
+Movie DVD (1 piece),CP09141B,CP09141,554
+Unrecorded recording media,CP09142,CP0914,555
+Blank compact disc (CD-R) (1 piece),CP09142A1,CP09142,556
+Blank compact disc (CD-R) (10 pieces),CP09142A2,CP09142,557
+"Blank DVDs (R), slim cases (10 pieces)",CP09142B,CP09142,558
+Other recording media,CP09149,CP0914,559
+"Repair of audio-visual, photographic and information processing equipment",CP0915,CP091,560
+"Repair of audio-visual, photographic and information processing equipment",CP09150,CP0915,561
+Other major durables for recreation and culture,CP092,CP09,562
+Major durables for indoor and outdoor recreation including musical instruments,CP0921_0922,CP092,563
+Major durables for outdoor recreation,CP0921,CP092,564
+"Camper vans, caravans and trailers",CP09211,CP0921,565
+"Aeroplanes, microlight aircraft, gliders, hang-gliders and hot-air balloons",CP09212,CP0921,566
+"Boats, outboard motors and fitting out of boats",CP09213,CP0921,567
+"Horses, ponies and accessories",CP09214,CP0921,568
+Major items for games and sport,CP09215,CP0921,569
+Musical instruments and major durables for indoor recreation,CP0922,CP092,570
+Musical instruments,CP09221,CP0922,571
+Major durables for indoor recreation,CP09222,CP0922,572
+Maintenance and repair of other major durables for recreation and culture,CP0923,CP092,573
+Maintenance and repair of other major durables for recreation and culture,CP09230,CP0923,574
+"Other recreational items and equipment, gardens and pets",CP093,CP09,575
+"Games, toys and hobbies",CP0931,CP093,576
+Games and hobbies,CP09311,CP0931,577
+"Board game, Monopoly (1 piece)",CP09311A,CP09311,578
+"Video game, PlayStation 3 (1 piece)",CP09311B,CP09311,579
+Toys and celebration articles,CP09312,CP0931,580
+"Equipment for sport, camping and open-air recreation",CP0932,CP093,581
+Equipment for sport,CP09321,CP0932,582
+Equipment for camping and open-air recreation,CP09322,CP0932,583
+"Repair of equipment for sport, camping and open-air recreation",CP09323,CP0932,584
+"Gardens, plants and flowers",CP0933,CP093,585
+Garden products,CP09331,CP0933,586
+Potting soil (10 l),CP09331A,CP09331,587
+Plants and flowers,CP09332,CP0933,588
+Pets and related products; veterinary and other services for pets,CP0934_0935,CP093,589
+Pets and related products,CP0934,CP093,590
+Purchase of pets,CP09341,CP0934,591
+Products for pets,CP09342,CP0934,592
+"Dog food, meat (1 kg)",CP09342A,CP09342,593
+Dog food dry (1 kg),CP09342B,CP09342,594
+Veterinary and other services for pets,CP0935,CP093,595
+Veterinary and other services for pets,CP09350,CP0935,596
+Recreational and cultural services,CP094,CP09,597
+Recreational and sporting services,CP0941,CP094,598
+Recreational and sporting services - Attendance,CP09411,CP0941,599
+Recreational and sporting services - Participation,CP09412,CP0941,600
+Cultural services,CP0942,CP094,601
+"Cinemas, theatres, concerts",CP09421,CP0942,602
+Cinema ticket (1 ticket),CP09421A,CP09421,603
+"Museums, libraries, zoological gardens",CP09422,CP0942,604
+"Television and radio licence fees, subscriptions, hire of equipment and accessories for culture",CP09423_09424,CP0942,605
+"Television and radio licence fees, subscriptions",CP09423,CP0942,606
+Hire of equipment and accessories for culture,CP09424,CP0942,607
+Photographic services,CP09425,CP0942,608
+Digital photo print service (30 photos),CP09425A,CP09425,609
+Other cultural services,CP09429,CP0942,610
+Games of chance,CP0943,CP094,611
+Games of chance,CP09430,CP0943,612
+"Newspapers, books and stationery",CP095,CP09,613
+Books,CP0951,CP095,614
+Fiction books,CP09511,CP0951,615
+"Novel, Top 5 (1 book)",CP09511A,CP09511,616
+Educational text books,CP09512,CP0951,617
+Other non-fiction books,CP09513,CP0951,618
+Binding services and E-book downloads,CP09514,CP0951,619
+Newspapers and periodicals,CP0952,CP095,620
+Newspapers,CP09521,CP0952,621
+Daily newspaper (1 piece),CP09521A,CP09521,622
+Magazines and periodicals,CP09522,CP0952,623
+"Magazine, weekly, gossip (1 copy)",CP09522A,CP09522,624
+Miscellaneous printed matter; stationery and drawing materials,CP0953_0954,CP095,625
+Miscellaneous printed matter,CP0953,CP095,626
+Miscellaneous printed matter,CP09530,CP0953,627
+Stationery and drawing materials,CP0954,CP095,628
+Paper products,CP09541,CP0954,629
+"Paper, DIN A4 (500 sheets)",CP09541A,CP09541,630
+Pencil (1 piece),CP09541B,CP09541,631
+Other stationery and drawing materials,CP09549,CP0954,632
+Package holidays,CP096,CP09,633
+Package holidays,CP0960,CP096,634
+Package domestic holidays,CP09601,CP0960,635
+Package international holidays,CP09602,CP0960,636
+Education,CP10,,637
+"Pre-primary and primary, secondary, post-secondary non-tertiary, tertiary education, and education not definable by level",CP101-105,CP10,638
+Pre-primary and primary education,CP101,CP10,639
+"Pre-primary and primary, secondary, post-secondary non-tertiary, tertiary education, and education not definable by level",CP1010-1050,CP101,640
+Pre-primary and primary education,CP1010,CP101,641
+Pre-primary education,CP10101,CP1010,642
+Primary education,CP10102,CP1010,643
+Secondary education,CP102,CP10,644
+Secondary education,CP1020,CP102,645
+Secondary education,CP10200,CP1020,646
+Post-secondary non-tertiary education,CP103,CP10,647
+Post-secondary non-tertiary education,CP1030,CP103,648
+Post-secondary non-tertiary education,CP10300,CP1030,649
+Tertiary education,CP104,CP10,650
+Tertiary education,CP1040,CP104,651
+Tertiary education,CP10400,CP1040,652
+Education not definable by level,CP105,CP10,653
+Education not definable by level,CP1050,CP105,654
+Education not definable by level,CP10500,CP1050,655
+Restaurants and hotels,CP11,,656
+Catering services,CP111,CP11,657
+"Restaurants, cafés and the like",CP1111,CP111,658
+"Restaurants, cafés and dancing establishments",CP11111,CP1111,659
+Menu of the day (1 menu),CP11111A,CP11111,660
+"Red house wine, 0.12 l (1 glass)",CP11111B1,CP11111,661
+"Red house wine, 0.10 l (1 glass)",CP11111B2,CP11111,662
+"Beer (lager), domestic, 0.2-0.35 l (1 glass)",CP11111C1,CP11111,663
+"Beer (lager), domestic, 0.5 l (1 glass)",CP11111C2,CP11111,664
+Cup of coffee (1 cup),CP11111D,CP11111,665
+Fast food and take away food services,CP11112,CP1111,666
+Canteens,CP1112,CP111,667
+Canteens,CP11120,CP1112,668
+Accommodation services,CP112,CP11,669
+Accommodation services,CP1120,CP112,670
+"Hotels, motels, inns and similar accommodation services",CP11201,CP1120,671
+Hotel weekend (1 service),CP11201A,CP11201,672
+"Holiday centres, camping sites, youth hostels and similar accommodation services",CP11202,CP1120,673
+Accommodation services of other establishments,CP11203,CP1120,674
+Miscellaneous goods and services,CP12,,675
+Personal care,CP121,CP12,676
+Hairdressing salons and personal grooming establishments,CP1211,CP121,677
+Hairdressing for men and children,CP12111,CP1211,678
+"Men's scissors cuts, wet (1 service)",CP12111A,CP12111,679
+Hairdressing for women,CP12112,CP1211,680
+Ladies - haircut (1 service),CP12112A,CP12112,681
+Personal grooming treatments,CP12113,CP1211,682
+"Electrical appliances for personal care; other appliances, articles and products for personal care",CP1212_1213,CP121,683
+Electrical appliances for personal care,CP1212,CP121,684
+Electric appliances for personal care,CP12121,CP1212,685
+Electric razor (1 piece),CP12121A,CP12121,686
+Electric toothbrush (1 set),CP12121B,CP12121,687
+Repair of electric appliances for personal care,CP12122,CP1212,688
+"Other appliances, articles and products for personal care",CP1213,CP121,689
+Non-electrical appliances,CP12131,CP1213,690
+"Cartridges for safety razor, men (5 cartridges)",CP12131A,CP12131,691
+"Articles for personal hygiene and wellness, esoteric products and beauty products",CP12132,CP1213,692
+Shampoo (400 ml),CP12132A,CP12132,693
+Tooth paste (100 ml),CP12132B,CP12132,694
+"Toilet soap, liquid (200 ml)",CP12132C,CP12132,695
+Shower gel (300 ml),CP12132D,CP12132,696
+Deodorant (50 ml),CP12132E,CP12132,697
+Tampons (10 pieces),CP12132F,CP12132,698
+Disposable nappies (50 pieces),CP12132G,CP12132,699
+Cotton buds (100 pieces),CP12132H,CP12132,700
+Manual toothbrush (1 piece),CP12132I,CP12132,701
+Toilet paper (10 rolls),CP12132J,CP12132,702
+Prostitution; other services n.e.c.,CP122_127,CP12,703
+Prostitution,CP122,CP12,704
+Prostitution,CP1220,CP122,705
+Prostitution,CP12200,CP1220,706
+Personal effects n.e.c.,CP123,CP12,707
+"Jewellery, clocks and watches",CP1231,CP123,708
+Jewellery,CP12311,CP1231,709
+Clocks and watches,CP12312,CP1231,710
+"Repair of jewellery, clocks and watches",CP12313,CP1231,711
+Other personal effects,CP1232,CP123,712
+Travel goods,CP12321,CP1232,713
+Articles for babies,CP12322,CP1232,714
+Repair of other personal effects,CP12323,CP1232,715
+Other personal effects n.e.c.,CP12329,CP1232,716
+Social protection,CP124,CP12,717
+Social protection,CP1240,CP124,718
+Child care services,CP12401,CP1240,719
+Retirement homes for elderly persons and residences for disabled persons,CP12402,CP1240,720
+Services to maintain people in their private homes,CP12403,CP1240,721
+Counselling,CP12404,CP1240,722
+Insurance,CP125,CP12,723
+Life insurance,CP1251,CP125,724
+Life insurance,CP12510,CP1251,725
+Insurance connected with the dwelling,CP1252,CP125,726
+Insurance connected with the dwelling,CP12520,CP1252,727
+Insurance connected with health,CP1253,CP125,728
+Public insurance connected with health,CP12531,CP1253,729
+Private insurance connected with health,CP12532,CP1253,730
+Insurance connected with transport,CP1254,CP125,731
+Motor vehicle insurance,CP12541,CP1254,732
+Travel insurance,CP12542,CP1254,733
+Other insurance,CP1255,CP125,734
+Other insurance,CP12550,CP1255,735
+Financial services n.e.c.,CP126,CP12,736
+FISIM,CP1261,CP126,737
+FISIM,CP12610,CP1261,738
+Other financial services n.e.c.,CP1262,CP126,739
+Charges by banks and post offices,CP12621,CP1262,740
+"Fees and service charges of brokers, investment counsellors",CP12622,CP1262,741
+Other services n.e.c.,CP127,CP12,742
+Other services n.e.c.,CP1270,CP127,743
+Administrative fees,CP12701,CP1270,744
+Legal services and accountancy,CP12702,CP1270,745
+Funeral services,CP12703,CP1270,746
+Other fees and services,CP12704,CP1270,747
+Goods (overall index excluding services),GD,,748
+Food including alcohol and tobacco,FOOD,,749
+Processed food including alcohol and tobacco,FOOD_P,FOOD,750
+Processed food excluding alcohol and tobacco,FOOD_P_X_ALC_TBC,FOOD,751
+Unprocessed food,FOOD_NP,FOOD,752
+Seasonal food,FOOD_S,FOOD,753
+Industrial goods,IGD,,754
+Non-energy industrial goods,IGD_NNRG,IGD,755
+"Non-energy industrial goods, durables only",IGD_NNRG_D,IGD_NNRG,756
+"Non-energy industrial goods, semi-durables only",IGD_NNRG_SD,IGD_NNRG,757
+"Non-energy industrial goods, non-durables only",IGD_NNRG_ND,IGD_NNRG,758
+Energy,NRG,,759
+"Electricity, gas, solid fuels and heat energy",ELC_GAS,,760
+Liquid fuels and fuels and lubricants for personal transport equipment,FUEL,,761
+Services (overall index excluding goods),SERV,,762
+Services related to communication,SERV_COM,SERV,763
+Services related to housing,SERV_HOUS,SERV,764
+Services - miscellaneous,SERV_MSC,SERV,765
+"Services related to recreation, including repairs and personal care",SERV_REC,SERV,766
+"Services related to recreation and personal care, excluding package holidays and accommodation",SERV_REC_X_HOA,SERV,767
+Services related to package holidays and accommodation,SERV_REC_HOA,SERV,768
+Services related to transport,SERV_TRA,SERV,769
+Energy and unprocessed food,NRG_FOOD_NP,,770
+Energy and seasonal food,NRG_FOOD_S,,771
+"Education, health and social protection",EDUC_HLTH_SPR,,772
+Frequent out-of-pocket purchases,FROOPP,,773
+Overall index excluding seasonal food,TOT_X_FOOD_S,,774
+Overall index excluding alcohol and tobacco,TOT_X_ALC_TBC,,775
+Overall index excluding tobacco,TOT_X_TBC,,776
+Overall index excluding energy,TOT_X_NRG,,777
+"Overall index excluding energy, food, alcohol and tobacco",TOT_X_NRG_FOOD,,778
+Overall index excluding energy and unprocessed food,TOT_X_NRG_FOOD_NP,,779
+Overall index excluding energy and seasonal food,TOT_X_NRG_FOOD_S,,780
+Overall index excluding liquid fuels and lubricants for personal transport equipment,TOT_X_FUEL,,781
+"Overall index excluding housing, water, electricity, gas and other fuels",TOT_X_HOUS,,782
+"Overall index excluding Education, health and social protection",TOT_X_EDUC_HLTH_SPR,,783
+Overall index excluding frequent out-of-pocket purchases,TOT_X_FROOPP,,784
+Administered prices,AP,,785
+"Administered prices, energy",AP_NRG,AP,786
+"Administered prices, non-energy",AP_NNRG,AP,787
+Fully administered prices,APF,AP,788
+Mainly administered prices,APM,AP,789
+Overall index excluding administered prices,TOT_X_AP,,790
+Overall index excluding fully administered prices,TOT_X_APF,,791
+Overall index excluding mainly administered prices,TOT_X_APM,,792
+Net tourism (Not applicable to COICOP),net-tourism,,793
+Durable goods,D,,794
+Semi-durable goods,SD,,795
+Non-durable goods,ND,,796
+Services,S,,797
+Total Goods,total-goods,,798
