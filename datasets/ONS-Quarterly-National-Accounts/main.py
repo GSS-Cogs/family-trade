@@ -430,7 +430,7 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-       
+a2 = a2.drop_duplicates()      
 cubes.add_cube(copy.deepcopy(scraper), a2, "gbp–data-tables-aggregates", 'gbp–data-tables-aggregates', data)
 del a2
 
@@ -517,7 +517,7 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-      
+b1b2 = b1b2.drop_duplicates()     
 cubes.add_cube(copy.deepcopy(scraper), b1b2, "gbp–data-tables-cvm-output", 'gbp–data-tables-cvm-output', data)
 del b1b2
 
@@ -613,7 +613,7 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-       
+c1c2 = c1c2.drop_duplicates()       
 cubes.add_cube(copy.deepcopy(scraper), c1c2, "gbp–data-tables-expenditure", 'gbp–data-tables-expenditure', data)
 del c1c2
 
@@ -667,7 +667,7 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-       
+d1 = d1.drop_duplicates()       
 cubes.add_cube(copy.deepcopy(scraper), d1, "gbp–data-tables-income", 'gbp–data-tables-income', data)
 del d1
 
@@ -827,7 +827,7 @@ with open("info.json", "r") as jsonFile:
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
-       
+e1e2e3e4 = e1e2e3e4.drop_duplicates()       
 cubes.add_cube(copy.deepcopy(scraper), e1e2e3e4, "gbp–data-tables-expenditure", 'gbp–data-tables-expenditure', data)
 del e1e2e3e4
 
