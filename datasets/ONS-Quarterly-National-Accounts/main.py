@@ -832,19 +832,311 @@ cubes.add_cube(copy.deepcopy(scraper), e1e2e3e4, "gbp–data-tables-expenditure"
 del e1e2e3e4
 
 # %%
+# F1
+f1 = tidied_sheets[11]
+
+try:
+    f1 = f1.loc[f1['Percentage Change'].isna()] 
+except:
+    ind = 11 
+
+f1['Capital Formation'].loc[f1['CDID'].isin(['L62R'])] = 'Public Corporations - Dwellings'
+f1['Capital Formation'].loc[f1['CDID'].isin(['L62S'])] = 'Public Corporations - Costs of transfer of ownership of non-produced assests'
+f1['Capital Formation'].loc[f1['CDID'].isin(['L62T'])] = 'Private Sector - Dwellings'
+f1['Capital Formation'].loc[f1['CDID'].isin(['L62U'])] = 'Private Sector - Costs of transfer of ownership of non-produced assests'
+
+f1['analysed by'].loc[f1['CDID'].isin(['NPEK','RPZG'])] = 'Analysis by sector'
+
+f1 = strip_superscripts(f1, 'Capital Formation')
+
+f1['Economic Concept'] = 'current-price'
+
+f1 = prefix_refperiod(f1, 'Period')
+
+try:
+    f1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 11   
+
+f1 = f1.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
+
+f1 = convet_dimension_to_int(f1, 'Value')
+
+f1['Capital Formation'] = f1['Capital Formation'].apply(pathify)
+f1['Analysis'] = f1['Analysis'].apply(pathify)
+
+f1cdids = f1['CDID'].unique()
+f1.head(5)
+
+# %%
+# F2
+f2 = tidied_sheets[12]
+
+try:
+    f2 = f2.loc[f2['Percentage Change'].isna()] 
+except:
+    ind = 12 
+
+f2['Capital Formation'].loc[f2['CDID'].isin(['L634'])] = 'Public Corporations - Dwellings'
+f2['Capital Formation'].loc[f2['CDID'].isin(['L635'])] = 'Public Corporations - Costs of transfer of ownership of non-produced assests'
+f2['Capital Formation'].loc[f2['CDID'].isin(['L636'])] = 'Private Sector - Dwellings'
+f2['Capital Formation'].loc[f2['CDID'].isin(['L637'])] = 'Private Sector - Costs of transfer of ownership of non-produced assests'
+
+f2['analysed by'].loc[f2['CDID'].isin(['NPEL','DLWF'])] = 'Analysis by sector'
+
+f2 = strip_superscripts(f2, 'Capital Formation')
+
+f2['Economic Concept'] = 'chained-volume-measure'
+
+f2 = prefix_refperiod(f2, 'Period')
+
+try:
+    f2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 12   
+
+f2 = f2.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
+
+f2 = convet_dimension_to_int(f2, 'Value')
+
+f2['Capital Formation'] = f2['Capital Formation'].apply(pathify)
+f2['Analysis'] = f2['Analysis'].apply(pathify)
+
+f2cdids = f2['CDID'].unique()
+f2.head(5)
+
+# %%
+f1f2 = pd.concat([f1,f2])
+f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
+f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
+
+# %%
+scraper.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
+scraper.dataset.comment = maincomme + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
+scraper.dataset.description = maindescr + """
+Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)
+Data has been seasonally adjusted
+Business Investment: Not including expenditure on dwellings, land and existing buildings and costs associated with the transfer of ownership of non-produced assets.
+Public Corporations: Remaining investment by public non-financial corporations included within business investment.
+ICT equipment and other machinery and equipment: Includes cultivated biological resources (AN.115) and weapons (AN.114)
+Dwellings: Includes new dwellings and improvements to dwellings.
+Other buildings and structures: Including costs associated with the transfer of ownership of buildings, dwellings and non-produced assets.
+"""
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gfcf"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+f1f2 = f1f2.drop_duplicates()      
+cubes.add_cube(copy.deepcopy(scraper), f1f2, "gbp–data-tables-gfcf", 'gbp–data-tables-gfcf', data)
+del f1f2
+
+# %%
+# G1
+g1 = tidied_sheets[13]
+
+try:
+    g1 = g1.loc[g1['Percentage Change'].isna()] 
+except:
+    ind = 13 
+
+g1 = strip_superscripts(g1, 'Sector')
+
+g1['Sector'].loc[g1['CDID'].isin(['FAGF','FADY','FALR','NZTP'])] = 'Manufacturing - ' + g1['Sector'].loc[g1['CDID'].isin(['FAGF','FADY','FALR','NZTP'])].astype(str)
+g1['Sector'].loc[g1['CDID'].isin(['FBHE','FAHA'])] = 'Distributive trades - ' + g1['Sector'].loc[g1['CDID'].isin(['FBHE','FAHA'])].astype(str)
+g1['Sector'].loc[g1['CDID'].isin(['CAEX'])] = 'Total' 
+
+
+g1['Economic Concept'] = 'current-price'
+
+g1 = prefix_refperiod(g1, 'Period')
+
+try:
+    g1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 13   
+
+g1 = g1.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
+
+g1 = convet_dimension_to_int(g1, 'Value')
+g1['Level of inventories held at end-December 2018'] = g1['Level of inventories held at end-December 2018'].str.replace('.0','')
+
+g1['Sector'] = g1['Sector'].apply(pathify)
+
+g1cdids = g1['CDID'].unique()
+g1.head(5)
+
+# %%
+# G2
+g2 = tidied_sheets[14]
+
+try:
+    g2 = g2.loc[g2['Percentage Change'].isna()] 
+except:
+    ind = 14
+
+g2 = strip_superscripts(g2, 'Sector')
+
+g2['Sector'].loc[g2['CDID'].isin(['FBNF','FBNG','FBNH','DHBM'])] = 'Manufacturing - ' + g2['Sector'].loc[g2['CDID'].isin(['FBNF','FBNG','FBNH','DHBM'])].astype(str)
+g2['Sector'].loc[g2['CDID'].isin(['FAJX','FBYN'])] = 'Distributive trades - ' + g2['Sector'].loc[g2['CDID'].isin(['FAJX','FBYN'])].astype(str)
+g2['Sector'].loc[g2['CDID'].isin(['CAFU'])] = 'Total' 
+
+
+g2['Economic Concept'] = 'chained-volume-measure'
+
+g2 = prefix_refperiod(g2, 'Period')
+
+try:
+    g2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 14  
+
+g2 = g2.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
+
+g2 = convet_dimension_to_int(g2, 'Value')
+g2['Level of inventories held at end-December 2018'] = g2['Level of inventories held at end-December 2018'].str.replace('.0','')
+
+g2['Sector'] = g2['Sector'].apply(pathify)
+
+g2cdids = g2['CDID'].unique()
+g2.head(5)
+
+# %%
+g1g2 = pd.concat([g1,g2])
+g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
+
+# %%
+scraper.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
+scraper.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
+scraper.dataset.description = maindescr + """
+Change in inventories at current prices and chained volume measures (F1, F2)
+Data has been seasonally adjusted
+Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
+Wholesaling and retailing estimates exclude the motor trades.
+Total change in inventories: Quarterly alignment adjustment included in this series.
+Please note, inventories estimates for 2020 Q4 at this stage face additional uncertainty due to the lower data content. 
+"""
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/change-in-inventories"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+g1g2 = g1g2.drop_duplicates()      
+cubes.add_cube(copy.deepcopy(scraper), g1g2, "gbp–data-tables-change-in-inventories", 'gbp–data-tables-change-in-inventories', data)
+del g1g2
+
+# %%
+# H1
+h1 = tidied_sheets[15]
+
+try:
+    h1 = h1.loc[h1['Percentage Change'].isna()] 
+except:
+    ind = 15 
+
+h1['Flow'].loc[h1['CDID'].isin(['BOKG','IKBB','IKBH'])] = 'Exports'
+h1['Flow'].loc[h1['CDID'].isin(['BOKH','IKBC','IKBI'])] = 'Imports'
+h1['Flow'].loc[h1['CDID'].isin(['BOKI','IKBO','IKBJ'])] = 'Balance'
+
+
+h1['Economic Concept'] = 'current-price'
+
+h1 = prefix_refperiod(h1, 'Period')
+
+try:
+    h1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 15  
+
+h1 = h1.rename(columns={'OBS':'Value'})
+
+h1 = convet_dimension_to_int(h1, 'Value')
+
+h1['Goods or Services'] = h1['Goods or Services'].apply(pathify)
+h1['Flow'] = h1['Flow'].apply(pathify)
+
+h1cdids = h1['CDID'].unique()
+h1.head(5)
+
+# %%
+# H2
+h2 = tidied_sheets[16]
+
+try:
+    h2 = h2.loc[h2['Percentage Change'].isna()] 
+except:
+    ind = 16
+
+h2['Flow'].loc[h2['CDID'].isin(['BQKQ','IKBE','IKBK'])] = 'Exports'
+h2['Flow'].loc[h2['CDID'].isin(['BQKO','IKBF','IKBL'])] = 'Imports'
+h2['Flow'].loc[h2['CDID'].isin(['IKBM'])] = 'Balance'
+
+h2['Economic Concept'] = 'chained-volume-measure'
+
+h2 = prefix_refperiod(h2, 'Period')
+
+try:
+    h2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 16
+
+h2 = h2.rename(columns={'OBS':'Value'})
+
+h2 = convet_dimension_to_int(h2, 'Value')
+
+h2['Goods or Services'] = h2['Goods or Services'].apply(pathify)
+h2['Flow'] = h2['Flow'].apply(pathify)
+
+h2cdids = h2['CDID'].unique()
+h2.head(5)
+
+# %%
+h1h2 = pd.concat([h1,h2])
+h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
+
+# %%
+scraper.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
+scraper.dataset.comment = maincomme + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2) - Seasonally Adjusted'
+scraper.dataset.description = maindescr + """
+Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)
+Data has been seasonally adjusted
+Trade balance is calculated by using exports of goods and services minus imports of goods and services
+"""
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+h1h2 = h1h2.drop_duplicates()      
+cubes.add_cube(copy.deepcopy(scraper), h1h2, "gbp–data-tables-change-in-trade", 'gbp–data-tables-change-in-trade', data)
+del h1h2
+
+# %%
 cubes.output_all()
 
 # %%
-#cids = pd.concat([pd.DataFrame(a2cdids),pd.DataFrame(b1b2cdids),pd.DataFrame(c1c2cdids),pd.DataFrame(d1cdids),pd.DataFrame(e1e2e3e4cdids)])
+#cids = pd.concat([pd.DataFrame(f1f2cdids),pd.DataFrame(g1g2cdids),pd.DataFrame(h1h2cdids)])
 #print('Before: ' + str(cids[0].count()))
 #cids = cids.drop_duplicates()
 #print('After: ' + str(cids[0].count()))
 #cids = cids.rename(columns={cids.columns[0]:'Label'})
 #cids['Notation'] = cids['Label']
 #cids['Parent Notation'] = ''
-#cids['Sort Priority'] = np.arange(cids.shape[0]) + 6551
+#cids['Sort Priority'] = np.arange(cids.shape[0]) + 6654
 #cids.to_csv('cdids.csv', index=False)
 #cids
+
+# %%
+
+# %%
+
+# %%
 
 # %%
 
