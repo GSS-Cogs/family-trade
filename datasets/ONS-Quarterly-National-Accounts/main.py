@@ -65,24 +65,15 @@ def with_indices_overrides(indices_dimension):
 
 # %%
 def with_sector_overrides(sector_dimension):
-    """
-    Adding a cellvalue overrides to each cell within the dimension AFTER
-    it's been defined.
-    So replacing the value of any dimensions cells that are blank with the appropriate index (or indice).
-    """
     not_blank_cells = [cell for cell in sector_dimension.hbagset if cell.value != '']
     for cell in sector_dimension.hbagset:
-        # If a dimension cell is blank
         if cell.value == '': 
-            # Is there a value two cells to the left? if so use that value
             cell_checked = [x for x in not_blank_cells if x.x == cell.x-2]
             if len(cell_checked) > 0:
                 sector_dimension.AddCellValueOverride(cell, cell_checked[0].value)
-            # Is there a value two cells to the left? if so use that value
             cell_checked = [x for x in not_blank_cells if x.x == cell.x+2]
             if len(cell_checked) > 0:
                 sector_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
-             # Is there a value 3 cells to the left? if so use that value
             cell_checked = [x for x in not_blank_cells if x.x == cell.x+4]
             if len(cell_checked) > 0:
                 sector_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
@@ -99,6 +90,107 @@ def with_sector_overrides(sector_dimension):
             #Gross value added excluding oil & gas = Service industries 
                 
     return sector_dimension
+
+
+# %%
+def with_expenditure_overrides(expenditure_dimension):
+    not_blank_cells = [cell for cell in expenditure_dimension.hbagset if cell.value != '']
+    for cell in expenditure_dimension.hbagset:
+        if cell.value == '': 
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+2]
+            if len(cell_checked) > 0:
+                expenditure_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+1]
+            if len(cell_checked) > 0:
+                expenditure_dimension.AddCellValueOverride(cell, cell_checked[0].value) 
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-1]
+            if len(cell_checked) > 0:
+                expenditure_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+            
+                
+    return expenditure_dimension
+
+
+# %%
+def with_gross_overrides(gross_dimension):
+    not_blank_cells = [cell for cell in gross_dimension.hbagset if cell.value != '']
+    for cell in gross_dimension.hbagset:
+        if cell.value == '': 
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-2]
+            if len(cell_checked) > 0:
+                gross_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+1]
+            if len(cell_checked) > 0:
+                gross_dimension.AddCellValueOverride(cell, cell_checked[0].value) 
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-1]
+            if len(cell_checked) > 0:
+                gross_dimension.AddCellValueOverride(cell, cell_checked[0].value) 
+    return gross_dimension
+
+
+# %%
+def with_analysis_by_overrides(analysis_by_dimension):
+    not_blank_cells = [cell for cell in analysis_by_dimension.hbagset if cell.value != '']
+    for cell in analysis_by_dimension.hbagset:
+        if cell.value == '': 
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-5]
+            if len(cell_checked) > 0:
+                analysis_by_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-4]
+            if len(cell_checked) > 0:
+                analysis_by_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-3]
+            if len(cell_checked) > 0:
+                analysis_by_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+1]
+            if len(cell_checked) > 0:
+                analysis_by_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+2]
+            if len(cell_checked) > 0:
+                analysis_by_dimension.AddCellValueOverride(cell, cell_checked[0].value) 
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-1]
+            if len(cell_checked) > 0:
+                analysis_by_dimension.AddCellValueOverride(cell, cell_checked[0].value)
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-2]
+            if len(cell_checked) > 0:
+                analysis_by_dimension.AddCellValueOverride(cell, cell_checked[0].value)
+    return analysis_by_dimension
+
+
+# %%
+def with_industry_overrides(industry_dimension):
+    not_blank_cells = [cell for cell in industry_dimension.hbagset if cell.value != '']
+    for cell in industry_dimension.hbagset:
+        if cell.value == '': 
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+2]
+            if len(cell_checked) > 0:
+                industry_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-2]
+            if len(cell_checked) > 0:
+                industry_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-1]
+            if len(cell_checked) > 0:
+                industry_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+1]
+            if len(cell_checked) > 0:
+                industry_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
+            #-3 = Distributive trades
+
+    return industry_dimension
+
+
+# %%
+def with_flow_overrides(flow_dimension):
+    not_blank_cells = [cell for cell in flow_dimension.hbagset if cell.value != '']
+    for cell in flow_dimension.hbagset:
+        if cell.value == '': 
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-1]
+            if len(cell_checked) > 0:
+                flow_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+1]
+            if len(cell_checked) > 0:
+                flow_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
+    return flow_dimension
 
 
 # %%
@@ -150,9 +242,9 @@ for name, tab in tabs.items():
             HDim(measure, 'measure',CLOSEST,ABOVE),
             
         ]
-        dimensions[0] = with_sector_overrides(dimensions[0])
+        dimensions[0] = with_expenditure_overrides(dimensions[0])
         c1 = ConversionSegment(tab, dimensions, observations)   
-        savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
         tidy_sheet['Sector'] = tidy_sheet['Sector'].replace('', 'Service industries')
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
@@ -162,41 +254,47 @@ for name, tab in tabs.items():
         p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('C6')
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank().is_not_number()
         cdid = cdid - cdid.shift(0,1).expand(RIGHT)
-        expenditure = tab.excel_ref('C3').expand(RIGHT).is_not_blank()
         expenditure_cat = tab.excel_ref('C4').expand(RIGHT).is_not_blank()
+        expenditure = expenditure_cat.shift(UP)
+        
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         dimensions = [
+            HDim(expenditure, 'Expenditure',CLOSEST,LEFT),
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
-            HDim(expenditure, 'Expenditure',CLOSEST,LEFT),
             HDim(expenditure_cat, 'Expendisture Category',DIRECTLY,ABOVE),
         ]
+        dimensions[0] = with_expenditure_overrides(dimensions[0])
         c1 = ConversionSegment(tab, dimensions, observations)   
-        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
+       # savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet['Expenditure'] = tidy_sheet['Expenditure'].replace('', 'Gross capital formation')
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
+        
     elif name in income_indicators:
         cdid = tab.excel_ref('B4').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         cat_income = tab.excel_ref('A3').expand(RIGHT).is_not_blank()
-        gross = tab.excel_ref('A2').expand(RIGHT).is_not_blank()
+        gross = cat_income.shift(UP)
         observations = cdid.fill(DOWN).is_not_blank() - cdid
+        
         dimensions = [
+            HDim(gross, 'Gross Domestic Product',DIRECTLY,ABOVE),
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
-            HDim(gross, 'Gross Domestic Product',CLOSEST,LEFT),
             HDim(cat_income, 'Category of Income',DIRECTLY,ABOVE),
-
         ]
+        dimensions[0] = with_gross_overrides(dimensions[0])
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet['Gross Domestic Product'] = tidy_sheet['Gross Domestic Product'].replace('', 'Gross operating surplus of corporations')
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
         
@@ -231,18 +329,20 @@ for name, tab in tabs.items():
         tidied_sheets.append(tidy_sheet)
     elif name in gross_fixed_capitol:
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
-        analysis_by = tab.excel_ref('B2').expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         capitol_formation = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
+        analysis_by = capitol_formation.shift(0,-2)
+        
         dimensions = [
+            HDim(analysis_by, 'Analysed by',DIRECTLY,ABOVE),
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
-            HDim(analysis_by, 'analysed by',CLOSEST,LEFT),
             HDim(capitol_formation, 'Capital Formation',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
         ]
+        dimensions[0] = with_analysis_by_overrides(dimensions[0])
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
@@ -254,7 +354,9 @@ for name, tab in tabs.items():
         sector = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
         level_held_title = tab.excel_ref('A4').is_not_blank() 
         level_held = level_held_title.expand(RIGHT).is_not_blank()
+        industry = sector.shift(UP)
         dimensions = [
+            HDim(industry,'Industry',DIRECTLY,ABOVE),
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
@@ -263,32 +365,35 @@ for name, tab in tabs.items():
             HDim(level_held, 'Level of inventories held at end-December 2018',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
         ]
+        dimensions[0] = with_industry_overrides(dimensions[0])
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet['Industry'] = tidy_sheet['Industry'].replace('', 'Distributive trades')
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
     elif name in trade: 
         if name in trade[0]:
             cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
-            flow = tab.excel_ref('B2').expand(RIGHT)#.is_not_blank() 
+            flow = goods_services.shift(UP) 
         else:
             cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank()
             measure = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B4').expand(RIGHT).is_not_blank() 
-            flow = tab.excel_ref('B3').expand(RIGHT)#.is_not_blank() 
+            flow = goods_services.shift(UP)
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         
         dimensions = [
+            HDim(flow, 'Flow',DIRECTLY,ABOVE),
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
-            HDim(flow, 'Flow',DIRECTLY,ABOVE),
             HDim(goods_services, 'Goods or Services',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
         ]
+        dimensions[0] = with_flow_overrides(dimensions[0])
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
@@ -297,6 +402,9 @@ for name, tab in tabs.items():
     else:
         continue
 
+
+# %%
+ tidied_sheets[14]['Industry'].unique()
 
 # %% [markdown]
 #     Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
@@ -569,7 +677,7 @@ c1['Expenditure'].loc[c1['CDID'].isin(['YBIL','IKBH','ABMF','IKBI','IKBJ','GIXM'
 c1['Expenditure'].loc[c1['CDID'].isin(['ABJQ'])] = 'Final consumption expenditure'
 c1['Expenditure'].loc[c1['CDID'].isin(['NPQS','NPEK'])] = 'Gross capital formation'
 
-c1 = strip_superscripts(c1, 'Expendisture Category')
+c1 = strip_superscripts(c1, 'Expenditure Category')
 
 c1 = prefix_refperiod(c1, 'Period')
 
@@ -578,10 +686,10 @@ try:
 except:
     ind = ind   
 
-c1['Expendisture Category'] = c1['Expendisture Category'].apply(pathify)
+c1['Expenditure Category'] = c1['Expendisture Category'].apply(pathify)
 c1['Expenditure'] = c1['Expenditure'].apply(pathify)
 
-c1 = c1.rename(columns={'OBS':'Value','Expendisture Category':'Expenditure Category','Expenditure':'Economic Concept'})
+c1 = c1.rename(columns={'OBS':'Value','Expenditure Category':'Expenditure Category','Expenditure':'Economic Concept'})
 
 c1 = convet_dimension_to_int(c1, 'Value')
 
@@ -879,7 +987,7 @@ f1['Capital Formation'].loc[f1['CDID'].isin(['L62S'])] = 'Public Corporations - 
 f1['Capital Formation'].loc[f1['CDID'].isin(['L62T'])] = 'Private Sector - Dwellings'
 f1['Capital Formation'].loc[f1['CDID'].isin(['L62U'])] = 'Private Sector - Costs of transfer of ownership of non-produced assests'
 
-f1['analysed by'].loc[f1['CDID'].isin(['NPEK','RPZG'])] = 'Analysis by sector'
+f1['Analysed by'].loc[f1['CDID'].isin(['NPEK','RPZG'])] = 'Analysis by sector'
 
 f1 = strip_superscripts(f1, 'Capital Formation')
 
@@ -892,7 +1000,7 @@ try:
 except:
     ind = 11   
 
-f1 = f1.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
+f1 = f1.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
 
 f1 = convet_dimension_to_int(f1, 'Value')
 
@@ -916,7 +1024,7 @@ f2['Capital Formation'].loc[f2['CDID'].isin(['L635'])] = 'Public Corporations - 
 f2['Capital Formation'].loc[f2['CDID'].isin(['L636'])] = 'Private Sector - Dwellings'
 f2['Capital Formation'].loc[f2['CDID'].isin(['L637'])] = 'Private Sector - Costs of transfer of ownership of non-produced assests'
 
-f2['analysed by'].loc[f2['CDID'].isin(['NPEL','DLWF'])] = 'Analysis by sector'
+f2['Analysed by'].loc[f2['CDID'].isin(['NPEL','DLWF'])] = 'Analysis by sector'
 
 f2 = strip_superscripts(f2, 'Capital Formation')
 
@@ -929,7 +1037,7 @@ try:
 except:
     ind = 12   
 
-f2 = f2.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
+f2 = f2.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
 
 f2 = convet_dimension_to_int(f2, 'Value')
 
@@ -992,7 +1100,7 @@ try:
 except:
     ind = 13   
 
-g1 = g1.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
+g1 = g1.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
 
 g1 = convet_dimension_to_int(g1, 'Value')
 g1['Level of inventories held at end-December 2018'] = g1['Level of inventories held at end-December 2018'].str.replace('.0','')
