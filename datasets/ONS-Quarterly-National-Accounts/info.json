@@ -63,7 +63,7 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-income-indicator/{category_of_income}",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-income-indicator"
             },
-             "COICOP": {
+            "COICOP": {
                 "parent": "http://gss-data.org.uk/def/property/dimension/coicop",
                 "value": "http://gss-data.org.uk/def/concept/coicop/{coicop}",
                 "codelist": "http://gss-data.org.uk/def/concept-scheme/coicop"

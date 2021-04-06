@@ -52,7 +52,7 @@
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-commoidty",
                 "value": "http://gss-data.org.uk/def/concept/ons-commodity/{commodity}",
                 "description": "",
-                "codelist":false
+                "codelist": false
             }
         }
     },

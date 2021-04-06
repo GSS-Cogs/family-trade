@@ -15,16 +15,14 @@
     "pipelines": [
         "DCMS-Sectors-Economic-Estimates-Year-Trade-in-services",
         "DIT-UK-tariffs",
-        "HMRC-COVID-19-Commodity-Codes-List",
-        "HMRC-overseas-trade-statistics",
         "HMRC-RTS-Small-area",
         "HMRC-Regional-trade-statistics-interactive-analysis",
         "HMRC-alcohol-bulletin",
-        "HMRC_OTS_CN8",
+        "HMRC-overseas-trade-statistics",
         "HMRC-regional-trade-statistics",
         "HMRC-trade-in-goods-by-business-characteristics",
+        "ONS-BOP-individual-country-data",
         "ONS-Exports-of-services-by-country-by-modes-of-supply",
-        "ONS-foreign-direct-investment-involving-uk-companies",
         "ONS-GDP-at-current-prices-real-time-database-YBHA",
         "ONS-Imports-of-services-by-country-by-modes-of-supply",
         "ONS-International-Trade-in-Services",
@@ -45,11 +43,11 @@
         "ONS-UK-trade-in-services-by-business-characteristics",
         "ONS-UK-trade-in-services-by-industry-country-and-service-type-exports",
         "ONS-UK-trade-in-services-by-industry-country-and-service-type-imports",
-        "ONS_ABS",
         "ONS-balance-of-payments",
-        "ONS-BOP-individual-country-data",
+        "ONS-foreign-direct-investment-involving-uk-companies",
+        "ONS-pink-book-trade-in-services",
+        "ONS_ABS",
         "ONS_CPA",
-        "ONS_MRETS",
-        "ONS-pink-book-trade-in-services"
+        "ONS_MRETS"
     ]
 }

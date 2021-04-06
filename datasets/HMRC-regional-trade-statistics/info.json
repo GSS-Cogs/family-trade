@@ -1,8 +1,8 @@
 {
     "id": "hmrc-regional-trade-statistics",
-    "title": "HMRC Regional Trade Statistics",
+    "title": "REGIONAL TRADE STATISTICS",
     "publisher": "HM Revenue & Customs",
-    "description": "International trade in goods data at summary product and country level, by UK regions and devolved administrations.",
+    "description": "",
     "landingPage": "https://www.uktradeinfo.com/trade-data/regional/",
     "published": "2019-12-05",
     "dataURL": "https://api.uktradeinfo.com/RTS",
