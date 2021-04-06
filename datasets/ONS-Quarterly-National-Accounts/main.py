@@ -265,7 +265,7 @@ for name, tab in tabs.items():
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
-            HDim(expenditure_cat, 'Expendisture Category',DIRECTLY,ABOVE),
+            HDim(expenditure_cat, 'Expenditure Category',DIRECTLY,ABOVE),
         ]
         dimensions[0] = with_expenditure_overrides(dimensions[0])
         c1 = ConversionSegment(tab, dimensions, observations)   
@@ -686,7 +686,7 @@ try:
 except:
     ind = ind   
 
-c1['Expenditure Category'] = c1['Expendisture Category'].apply(pathify)
+c1['Expenditure Category'] = c1['Expenditure Category'].apply(pathify)
 c1['Expenditure'] = c1['Expenditure'].apply(pathify)
 
 c1 = c1.rename(columns={'OBS':'Value','Expenditure Category':'Expenditure Category','Expenditure':'Economic Concept'})
@@ -710,7 +710,7 @@ c2['Expenditure'].loc[c2['CDID'].isin(['YBIM','IKBK','ABMG','IKBL','IKBM','GIXS'
 c2['Expenditure'].loc[c2['CDID'].isin(['ABJR'])] = 'Final consumption expenditure'
 c2['Expenditure'].loc[c2['CDID'].isin(['NPQT','NPEL'])] = 'Gross capital formation'
 
-c2 = strip_superscripts(c2, 'Expendisture Category')
+c2 = strip_superscripts(c2, 'Expenditure Category')
 
 c2 = prefix_refperiod(c2, 'Period')
 
@@ -719,10 +719,10 @@ try:
 except:
     ind = ind   
 
-c2['Expendisture Category'] = c2['Expendisture Category'].apply(pathify)
+c2['Expenditure Category'] = c2['Expenditure Category'].apply(pathify)
 c2['Expenditure'] = c2['Expenditure'].apply(pathify)
 
-c2 = c2.rename(columns={'OBS':'Value','Expendisture Category':'Expenditure Category','Expenditure':'Economic Concept'})
+c2 = c2.rename(columns={'OBS':'Value','Expenditure Category':'Expenditure Category','Expenditure':'Economic Concept'})
 
 c2 = convet_dimension_to_int(c2, 'Value')
     
@@ -1273,16 +1273,6 @@ cubes.output_all()
 #cids['Sort Priority'] = np.arange(cids.shape[0]) + 6654
 #cids.to_csv('cdids.csv', index=False)
 #cids
-
-# %%
-
-# %%
-
-# %%
-
-# %%
-
-# %%
 
 # %%
 
