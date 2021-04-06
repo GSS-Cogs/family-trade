@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-inventory/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-inventory/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-inventory/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-inventory/{notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-inventory",

@@ -1,11 +1,11 @@
 Label,Notation,Parent Notation,Sort Priority,Description
 Changes in inventories,changes-in-inventories,,,
 Mining and quarrying,mining-and-quarrying,,,
-Materials and fuel,materials-and-fuel,,,
-Work in progress,work-in-progress,,,
-Finished goods,finished-goods,,,
-Total,total,,,
+Manufacturing - Materials and fuel,manufacturing-materials-and-fuel,,,
+Manufacturing - Work in progress,manufacturing-work-in-progress,,,
+Manufacturing - Finished goods,manufacturing-finished-goods,,,
+Manufacturing - Total,manufacturing-total,,,
 "Electricity, gas and water supply",electricity-gas-and-water-supply,,,
-Wholesale,wholesale,,,Wholesaling and retailing estimates exclude the motor trades.
-Retail,retail,,,Wholesaling and retailing estimates exclude the motor trades.
+Distributive trades - Wholesale,distributive-trades-wholesale,,,Wholesaling and retailing estimates exclude the motor trades.
+Distributive trades - Retail,distributive-trades-retail,,,Wholesaling and retailing estimates exclude the motor trades.
 Other industries,other-industries,,,Quarterly alignment adjustment included in this series.
