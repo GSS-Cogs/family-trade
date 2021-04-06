@@ -29,7 +29,6 @@ household_expenditure_indicators = ['E1 EXPENDITURE', 'E2 EXPENDITURE', 'E3 EXPE
 gross_fixed_capitol = ['F1 GFCF', 'F2 GFCF']
 inventories = ['G1 INVENTORIES', 'G2 INVENTORIES']
 trade = ['H1 TRADE', 'H2 TRADE']
-
 tidied_sheets = []
 
 
@@ -44,27 +43,62 @@ def with_indices_overrides(indices_dimension):
     for cell in indices_dimension.hbagset:
         # If a dimension cell is blank
         if cell.value == '': 
-            # Is there a value two cells to the left? if so use that value
-            cell_checked = [cell for cell in not_blank_cells if cell.x == cell.x-2]
+            # Is there a value 1 cells to the left? if so use that value
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-1]
             if len(cell_checked) > 0:
                 indices_dimension.AddCellValueOverride(cell, cell_checked[0].value)
-           
-        # Is there a value one cell to the left? if so use that value
-            cell_checked = [cell for cell in not_blank_cells if cell.x == cell.x-1]
+            # Is there a value 1 cells to the right? if so use that value
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+1]
             if len(cell_checked) > 0:
                 indices_dimension.AddCellValueOverride(cell, cell_checked[0].value)
-                
-            # Is there a value one cells to the right? if so use that value
-            cell_checked = [cell for cell in not_blank_cells if cell.x == cell.x+1]
-            if len(cell_checked) > 0:
-                indices_dimension.AddCellValueOverride(cell, cell_checked[0].value)
-                
             # Is there a value two cells to the right? if so use that value
-            cell_checked = [cell for cell in not_blank_cells if cell.x == cell.x+1]
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-2]
             if len(cell_checked) > 0:
                 indices_dimension.AddCellValueOverride(cell, cell_checked[0].value)
-    
+            # Is there a value two cells to the left? if so use that value
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+2]
+            if len(cell_checked) > 0:
+                indices_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+                
     return indices_dimension
+
+
+# %%
+def with_sector_overrides(sector_dimension):
+    """
+    Adding a cellvalue overrides to each cell within the dimension AFTER
+    it's been defined.
+    So replacing the value of any dimensions cells that are blank with the appropriate index (or indice).
+    """
+    not_blank_cells = [cell for cell in sector_dimension.hbagset if cell.value != '']
+    for cell in sector_dimension.hbagset:
+        # If a dimension cell is blank
+        if cell.value == '': 
+            # Is there a value two cells to the left? if so use that value
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-2]
+            if len(cell_checked) > 0:
+                sector_dimension.AddCellValueOverride(cell, cell_checked[0].value)
+            # Is there a value two cells to the left? if so use that value
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+2]
+            if len(cell_checked) > 0:
+                sector_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+             # Is there a value 3 cells to the left? if so use that value
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+4]
+            if len(cell_checked) > 0:
+                sector_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x+6]
+            if len(cell_checked) > 0:
+                sector_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-4]
+            if len(cell_checked) > 0:
+                sector_dimension.AddCellValueOverride(cell, cell_checked[0].value) 
+            cell_checked = [x for x in not_blank_cells if x.x == cell.x-6]
+            if len(cell_checked) > 0:
+                sector_dimension.AddCellValueOverride(cell, cell_checked[0].value)   
+           #Check cell = "" and not been overriden already then add -8
+            #Gross value added excluding oil & gas = Service industries 
+                
+    return sector_dimension
 
 
 # %%
@@ -77,19 +111,17 @@ for name, tab in tabs.items():
    
     if name in national_account_aggregates:
         cdid = tab.excel_ref('B4').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
-        gross = tab.excel_ref('C3').expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         gross = tab.excel_ref('C3').expand(RIGHT).is_not_blank()
         indices = gross.shift(UP)
         
         dimensions = [
+            HDim(indices, "Indices", DIRECTLY, ABOVE), 
+            HDim(gross, "Gross", DIRECTLY, ABOVE),
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
-            HDim(indices, 'Indices', DIRECTLY, ABOVE), 
-            HDim(gross, 'Gross', DIRECTLY, ABOVE),
-            HDim(gross, 'gross',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
         ]
         
@@ -102,25 +134,27 @@ for name, tab in tabs.items():
         
     elif name in output_indicators:
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank()
-        observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
-        sector = tab.excel_ref('B2').expand(RIGHT).is_not_blank()
         industry = tab.excel_ref('B3').expand(RIGHT).is_not_blank()
         weights = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
+        observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
+        sector = industry.shift(UP)
         
         dimensions = [
+            HDim(sector, 'Sector',DIRECTLY, ABOVE),
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
             HDim(weights, '2018 Weights',DIRECTLY,ABOVE),
-            HDim(sector, 'Sector',CLOSEST,LEFT),
             HDim(industry, 'Industry',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
             
         ]
+        dimensions[0] = with_sector_overrides(dimensions[0])
         c1 = ConversionSegment(tab, dimensions, observations)   
-        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet['Sector'] = tidy_sheet['Sector'].replace('', 'Service industries')
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
         
@@ -387,7 +421,7 @@ except:
 
 a2 = prefix_refperiod(a2, 'Period')
 
-a2['gross'].loc[a2['CDID'] == 'YBHA'] = 'Gross domestic product at market prices'  
+a2['Gross'].loc[a2['CDID'] == 'YBHA'] = 'Gross domestic product at market prices'  
 a2['Indices'].loc[a2['CDID'] == 'YBHA'] = 'Current prices'
 
 a2 = strip_superscripts(a2, 'gross')
@@ -395,7 +429,7 @@ a2 = strip_superscripts(a2, 'gross')
 a2['Indices'].loc[a2['Indices'] == 'Current prices'] = 'current-price'
 a2['Indices'].loc[a2['Indices'] == 'Chained Volume Measure (Reference year 2018)'] = 'chained-volume-measure'
 
-a2['gross'] = a2['gross'].apply(pathify)
+a2['Gross'] = a2['Gross'].apply(pathify)
 
 a2 = a2.rename(columns={'OBS':'Value'})
 
@@ -406,7 +440,7 @@ try:
 except:
     ind = ind
 
-a2 = a2.rename(columns={'Indices':'Estimate Type', 'gross':'Aggregate'})
+a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
 a2cdids = a2['CDID'].unique()
 
 # %%
