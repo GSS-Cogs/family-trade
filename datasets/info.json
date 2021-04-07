@@ -7,11 +7,13 @@
         "base": "https://ci.floop.org.uk",
         "path": [
             "GSS_data",
-            "Trade"
+            "beta.gss-data.org.uk",
+            "family",
+            "trade"
         ]
     },
-    "sparql": "https://staging.gss-data.org.uk/sparql",
-    "pmd": "http://staging.gss-data.org.uk",
+    "sparql": "https://beta.gss-data.org.uk/sparql",
+    "pmd": "http://beta.gss-data.org.uk",
     "pipelines": [
         "DCMS-Sectors-Economic-Estimates-Year-Trade-in-services",
         "DIT-UK-tariffs",
