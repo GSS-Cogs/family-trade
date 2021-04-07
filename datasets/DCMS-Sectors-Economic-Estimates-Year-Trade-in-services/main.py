@@ -122,7 +122,7 @@ tidy['Subsector'].replace({
     "all_imports": "all-uk-2018-pink-book-estimate",
     "dcms-total": "dcms-sectors-exc-tourism-and-civil-society"
     }, inplace=True)
-    
+
 tidy = tidy[['Period', 'Country', 'Sector', 'Subsector', 'Flow', 'Measure Type', 'Unit', 'Value', 'Marker']]
 
 
@@ -160,7 +160,7 @@ scraper.dataset.comment = comment
 scraper.dataset.title = 'Sectors Economic Estimates 2018: Trade in services'
 
 #dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name) + '/pcn').lower()
-dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower()
+dataset_path = pathify(f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name).lower()
 
 scraper.set_base_uri('http://gss-data.org.uk')
 scraper.set_dataset_id(dataset_path)
