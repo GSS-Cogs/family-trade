@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -21,6 +21,16 @@ from gssutils import *
 
 from zipfile import ZipFile
 from io import BytesIO
+
+
+# +
+def left(s, amount):
+    return s[:amount]
+
+def right(s, amount):
+    return s[-amount:]
+
+
 # -
 
 cubes = Cubes("info.json")
@@ -121,8 +131,8 @@ with ZipFile(BytesIO(scraper1.session.get(distribution1.downloadURL).content)) a
                                  'DIRECTION': 'category'
                              }, na_values=['','N/A'], keep_default_na=False)
 
-tidyData1 = yearSum(data1)
-table1 = transform(tidyData1)
+#tidyData1 = yearSum(data1)
+table1 = transform(data1)
 
 '''Country by Commodity Import data'''
 with ZipFile(BytesIO(scraper2.session.get(distribution2.downloadURL).content)) as zip:
@@ -136,14 +146,15 @@ with ZipFile(BytesIO(scraper2.session.get(distribution2.downloadURL).content)) a
                                  'DIRECTION': 'category'
                              }, na_values=['','N/A'], keep_default_na=False)
 
-tidyData2 = yearSum(data2)
-table2 = transform(tidyData2)
+#tidyData2 = yearSum(data2)
+table2 = transform(data2)
 
 table = pd.concat([table1, table2])
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
 
-table['Period'] = table['Period'].astype(str)
+table.loc[table['Period'].str.len() == 7, 'Period'] = pd.to_datetime(table.loc[table['Period'].str.len() == 7, 'Period'], format='%Y%b').astype(str).map(lambda x: 'month/' + left(x,7))
+#table['Period'] = table['Period'].astype(str)
 table.dropna(subset=['Value'], inplace=True)
 table['Value'] = table['Value'].astype(int)
 
@@ -151,8 +162,10 @@ table['Commodity'].cat.categories = table['Commodity'].cat.categories.map(lambda
 table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
 table['Flow'] = table['Flow'].map(lambda x: x.split(' ')[1])
 
-table['Period'] = table['Period'].astype(str)
-table['Period'] = 'year/' + table['Period']
+# +
+#table['Period'] = table['Period'].astype(str)
+#table['Period'] = 'year/' + table['Period']
+# -
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
 table['Measure Type'] = pd.Series('gbp-total', index=table.index, dtype='category') 
@@ -167,5 +180,3 @@ table
 
 cubes.add_cube(scraper1, table, title)
 cubes.output_all()
-
-
