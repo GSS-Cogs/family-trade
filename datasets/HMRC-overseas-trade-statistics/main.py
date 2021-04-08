@@ -21,22 +21,16 @@ import sqlite3
 from gssutils import *
 
 # +
-cn8 = 'info-cn8.json'
-sitc = 'info-sitc.json'
+file = 'info.json'
 
-info_cn8 = json.load(open(cn8))
-info_sitc = json.load(open(sitc))
-scraper_cn8 = Scraper(seed=cn8)
-scraper_sitc = Scraper(seed=sitc)
-cube_cn8 = Cubes(cn8)
-cube_sitc = Cubes(sitc)
+info = json.load(open(file))
+scraper = Scraper(seed=file)
+cube = Cubes(file)
 
-scraper_cn8.dataset.family = info_cn8['families']
-scraper_sitc.dataset.family = info_sitc['families']
-
+scraper.dataset.family = info['families']
 
 # + tags=[]
-distro = scraper_cn8.distribution(latest=True)
+distro = scraper.distribution(latest=True)
 # -
 
 # Get API Chunks
@@ -60,10 +54,10 @@ else:
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 # Download the chonky dataframe
-df = distro.as_pandas(chunks_wanted=sorted(api_chunks)[-1:])
+df = distro.as_pandas(chunks_wanted=fetch_chunk)
 
 # Sampling to downsize work
-df = df.sample(n=5000)
+# df = df.sample(n=5000)
 
 # Drop all columns not specified
 df.drop([x for x in df.columns if x not in ['MonthId', 'FlowTypeDescription', 'SuppressionIndex',
@@ -130,15 +124,6 @@ col_names = {
 }
 df.rename(col_names, axis=1, inplace=True)
 
-# # Reload backuped data
-# df = pd.read_excel('output.xlsx')
-# df = df.iloc[:, 1:]
-# # Convert columns to categorical if categorical
-# for col in df.columns:
-#     if col not in ['value']:
-#         df[col] = df[col].astype('category')
-
-
 # +
 # Defaults, get your categorical value series defaults
 def default(series=pd.Series, value=str) -> pd.DataFrame():
@@ -169,8 +154,8 @@ SELECT marker, country_id, flow_type, cn8_id, port_code, period, value, measure_
 from data
 group by marker, country_id, flow_type, cn8_id, port_code, period, value, measure_type, unit_type
 """
-cube_cn8.add_cube(scraper_cn8, pd.read_sql_query(qry, con), scraper_cn8.title)
-cube_cn8.output_all()
+cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-cn8-{fetch_chunk}")
+
 
 # sitc cube work - aggregate on sitc and discard sn8 values
 qry = """
@@ -178,6 +163,7 @@ SELECT marker, country_id, flow_type, sitc_id, port_code, period, value, measure
 from data
 group by marker, country_id, flow_type, sitc_id, port_code, period, value, measure_type, unit_type
 """
-cube_sitc.add_cube(scraper_sitc, pd.read_sql_query(
-    qry, con), scraper_sitc.title)
-cube_sitc.output_all()
+cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-sitc-{fetch_chunk}")
+
+# Output it!
+cube.output_all()
