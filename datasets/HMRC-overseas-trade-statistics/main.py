@@ -6,26 +6,26 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       jupytext_version: 1.11.1
 #   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
+#     display_name: Python 3.8.9 64-bit
+#     name: python389jvsc74a57bd04cd7ab41f5fca4b9b44701077e38c5ffd31fe66a6cab21e0214b68d958d0e462
 # ---
 
 # +
 import logging
 import json
 import pandas as pd
+import sqlite3
 
 from gssutils import *
 
 # +
-infoFileName = 'info.json'
+file = 'info.json'
 
-info    = json.load(open(infoFileName))
-scraper = Scraper(seed=infoFileName)
-cubes   = Cubes(infoFileName)
+info = json.load(open(file))
+scraper = Scraper(seed=file)
+cube = Cubes(file)
 
 scraper.dataset.family = info['families']
 
@@ -37,7 +37,8 @@ distro = scraper.distribution(latest=True)
 # api_chunks = distro.get_odata_api_chunks()
 # logging.debug(f'The chunks found on api are {pmd_chunks}')
 # Replace line below with line above once gss-utils issue get_odata_api_chunks() query is malformatted #216 is fixed
-api_chunks = [x["MonthId"] for x in distro._session.get(distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
+api_chunks = [x["MonthId"] for x in distro._session.get(
+    distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
 
 # Get PMD Chunks
 pmd_chunks = distro.get_pmd_chunks()
@@ -47,18 +48,20 @@ logging.debug(f'The chunks found on pmd are {pmd_chunks}')
 if len(pmd_chunks) == 0:
     fetch_chunk = min(api_chunks)
 else:
-    pmd_chunks = [int(pd.to_datetime(x, format='/id/month/%Y-%m').strftime('%Y%m')) for x in pmd_chunks]
+    pmd_chunks = [int(pd.to_datetime(
+        x, format='/id/month/%Y-%m').strftime('%Y%m')) for x in pmd_chunks]
     fetch_chunk = min(set(api_chunks)-set(pmd_chunks))
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 # Download the chonky dataframe
-df = distro.as_pandas(chunks_wanted=sorted(api_chunks)[-6:])
+df = distro.as_pandas(chunks_wanted=fetch_chunk)
 
 # Sampling to downsize work
 # df = df.sample(n=5000)
 
 # Drop all columns not specified
-df.drop([x for x in df.columns if x not in ['MonthId','FlowTypeDescription', 'SuppressionIndex', 'CountryId', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
+df.drop([x for x in df.columns if x not in ['MonthId', 'FlowTypeDescription', 'SuppressionIndex',
+        'CountryId', 'CommodityId', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
 
 # Convert columns to categorical if categorical
 for col in df.columns:
@@ -66,7 +69,8 @@ for col in df.columns:
         df[col] = df[col].astype('category')
 
 # Period column
-df['Period'] = pd.to_datetime(df['MonthId'], format="%Y%m").dt.strftime('/id/month/%Y-%m')
+df['Period'] = pd.to_datetime(
+    df['MonthId'], format="%Y%m").dt.strftime('/id/month/%Y-%m')
 df.drop('MonthId', inplace=True, axis=1)
 df['Period'] = df['Period'].astype('category')
 
@@ -81,23 +85,29 @@ suppression = {
     5: 'Suppression of quantity for countries, ports and total trade, where no information on quantity is published, but a full breakdown of value is available.'
 }
 df['SuppressionIndex'].cat.rename_categories(suppression, inplace=True)
-df['SuppressionIndex'].cat.rename_categories(lambda x: pathify(x), inplace=True)
+df['SuppressionIndex'].cat.rename_categories(
+    lambda x: pathify(x), inplace=True)
 
 
 # FlowTypeDescription
-df['FlowTypeDescription'].cat.rename_categories(lambda x: pathify(x), inplace=True)
+df['FlowTypeDescription'].cat.rename_categories(
+    lambda x: pathify(x), inplace=True)
 
 # SitcCode changes
-df['SitcCode'].cat.rename_categories(lambda x: x.replace('-','+'), inplace=True)
+df['SitcCode'].cat.rename_categories(
+    lambda x: x.replace('-', '+'), inplace=True)
 
 # The melty magic to take two values in the same row and create unique records for these values, the source column name becomes the 'variable' column, the column value stays in ends up in the 'value' column.
-df = df.melt(id_vars=['SuppressionIndex', 'CountryId', 'FlowTypeDescription', 'SitcCode', 'PortCodeNumeric', 'Period'], value_vars=['Value', 'NetMass'])
+df = df.melt(id_vars=['SuppressionIndex', 'CountryId', 'FlowTypeDescription',
+             'SitcCode', 'CommodityId', 'PortCodeNumeric', 'Period'], value_vars=['Value', 'NetMass'])
 
 # Units, Measures, and dictionaries, oh my!
 df.loc[df['variable'] == 'Value', 'measure_type'] = 'monetary-value'
-df.loc[df['variable'] == 'Value', 'unit_type'] = 'http://gss-data.org.uk/def/concept/measurement-units/gbp'
+df.loc[df['variable'] == 'Value',
+       'unit_type'] = 'http://gss-data.org.uk/def/concept/measurement-units/gbp'
 df.loc[df['variable'] == 'NetMass', 'measure_type'] = 'net-mass'
-df.loc[df['variable'] == 'NetMass', 'unit_type'] = 'http://qudt.org/vocab/unit/KiloGM'
+df.loc[df['variable'] == 'NetMass',
+       'unit_type'] = 'http://qudt.org/vocab/unit/KiloGM'
 df.drop('variable', axis=1, inplace=True)
 df['unit_type'] = df['unit_type'].astype('category')
 df['measure_type'] = df['measure_type'].astype('category')
@@ -107,12 +117,12 @@ col_names = {
     'SuppressionIndex': 'marker',
     'CountryId': 'country_id',
     'FlowTypeDescription': 'flow_type',
-    'SitcCode': 'commodity_sitc_id',
+    'CommodityId': 'cn8_id',
+    'SitcCode': 'sitc_id',
     'PortCodeNumeric': 'port_code',
     'Period': 'period'
 }
 df.rename(col_names, axis=1, inplace=True)
-
 
 # +
 # Defaults, get your categorical value series defaults
@@ -122,17 +132,38 @@ def default(series=pd.Series, value=str) -> pd.DataFrame():
     else:
         return series.cat.add_categories(value).fillna(value)
 
+
 df['country_id'] = default(series=df['country_id'], value='unknown')
 df['port_code'] = default(series=df['port_code'], value='499')
-df['commodity_sitc_id'] = default(series=df['commodity_sitc_id'], value='unknown')
+df['sitc_id'] = default(series=df['sitc_id'], value='unknown')
+df['cn8_id'] = default(series=df['cn8_id'], value='unknown')
+df['marker'] = default(series=df['marker'], value='')
 # -
 
-# Add dataframe is in the cube
-cubes.add_cube(scraper, df, scraper.title)
+# Null values are inadmissable in the the qb spec, so we'll drop them
+df = df.dropna(subset=['value'])
 
-# + tags=[]
-# Write cube
-cubes.output_all()
-# -
+# Create a SQLite3 database to be able to do the aggregation.
+con = sqlite3.connect('tempdb.db')
+df.to_sql('data', con, if_exists='replace')
+del df
+
+# cn8 cube work - aggregate on cn8 and discard sitc values, pass the resulting dataframe straight into the cube creation
+qry = """
+SELECT marker, country_id, flow_type, cn8_id, port_code, period, value, measure_type, unit_type, sum(value) as value
+from data
+group by marker, country_id, flow_type, cn8_id, port_code, period, value, measure_type, unit_type
+"""
+cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-cn8-{fetch_chunk}")
 
 
+# sitc cube work - aggregate on sitc and discard sn8 values
+qry = """
+SELECT marker, country_id, flow_type, sitc_id, port_code, period, value, measure_type, unit_type, sum(value) as value
+from data
+group by marker, country_id, flow_type, sitc_id, port_code, period, value, measure_type, unit_type
+"""
+cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-sitc-{fetch_chunk}")
+
+# Output it!
+cube.output_all()
