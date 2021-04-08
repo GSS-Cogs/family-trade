@@ -28,7 +28,8 @@
             <td>{{info.transform.stage}}</td>
             <td>
                 {{#if info.transform.main_issue}}
-                    <a href="{{../github}}/issues/{{info.transform.main_issue}}"><img alt="GitHub issue detail" src="{{../issue_badge_base}}/{{info.transform.main_issue}}?style=plastic"></a>
+                    <a href="{{../github}}/issues/{{info.transform.main_issue}}"><img alt="GitHub issue detail" src="https://img.shields.io/github/issues/detail/state{{../github_path}}/{{info.transform.main_issue}}?style=plastic"></a>
+                    <img alt="GitHub issue labels" src="https://img.shields.io/github/issues/detail/label{{../github_path}}/{{info.transform.main_issue}}?style=plastic"/>
                 {{/if}}
             </td>
             <td>
