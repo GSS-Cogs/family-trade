@@ -1,0 +1,108 @@
+{
+    "id": "hmrc-overseas-trade-statistics-cn8",
+    "title": "Overseas Trade Statistics CN8",
+    "publisher": "HM Revenue & Customs",
+    "description": "OTS are compiled monthly, quarterly and annually from trade declarations made using commodity codes from the UN Tariff (HS Nomenclature) and its EU derivative, the Intrastat Classification Nomenclature. These provide an eight-digit numeric codification for all products traded around the world. For each commodity declared, businesses must provide details of the quantity and statistical value in GB Pounds Sterling, the destination country (exports) and country of despatch (imports), and for some codes, a second quantity (supplementary unit).",
+    "landingPage": "https://www.uktradeinfo.com/trade-data/overseas/",
+    "published": "2018-03-08",
+    "dataURL": "https://api.uktradeinfo.com/OTS",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "application/json",
+        "stage": "Prioritized"
+    },
+    "transform": {
+        "airtable": "recvSzMgbU9mqu7ln",
+        "main_issue": 14,
+        "validate": false,
+        "columns": {
+            "flow_type": {
+                "label": "Flow Type",
+                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_type}"
+            },
+            "country_id": {
+                "label": "Country",
+                "codelist": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country",
+                "value": "https://api.uktradeinfo.com/Country/{country_id}"
+            },
+            "cn8_id": {
+                "label": "Commodity",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/cn8",
+                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{cn8_id}"
+            },
+            "port_code": {
+                "label": "Port",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port",
+                "value": "https://api.uktradeinfo.com/Port/{port_code}"
+            },
+            "period": {
+                "label": "Month",
+                "codelist": false,
+                "value": "http://reference.data.gov.uk{period}"
+            },
+            "measure_type": {
+                "dimension": "http://purl.org/linked-data/cube#measureType",
+                "value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
+                "types": [
+                    "net-mass",
+                    "monetary-value"
+                ]
+            },
+            "unit_type": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                "value": "{unit_type}"
+            },
+            "value": {
+                "datatype": "decimal"
+            },
+            "marker": {
+                "attribute": "http://gss-data.org.uk/def/trade/concept-scheme/marker/{marker}"
+            }
+        }
+    },
+    "odataConversion": {
+        "publishedLocation": "https://staging.gss-data.org.uk/sparql",
+        "datasetIdentifier": "http://gss-data.org.uk/data/gss_data/trade/hmrc-overseas-trade-statistics#dataset",
+        "chunkColumn": "MonthId",
+        "chunkDimension": "http://gss-data.org.uk/data/gss_data/trade/hmrc-overseas-trade-statistics#dimension/period",
+        "supplementalEndpoints": {
+            "FlowType": {
+                "endpoint": "https://api.uktradeinfo.com/FlowType",
+                "primaryKey": "FlowTypeId",
+                "foreignKey": "FlowTypeId"
+            },
+            "Commodity": {
+                "endpoint": "https://api.uktradeinfo.com/Commodity",
+                "primaryKey": "CommodityId",
+                "foreignKey": "CommodityId"
+            },
+            "Country": {
+                "endpoint": "https://api.uktradeinfo.com/Country",
+                "primaryKey": "CountryId",
+                "foreignKey": "CountryId"
+            },
+            "SITC": {
+                "endpoint": "https://api.uktradeinfo.com/SITC",
+                "primaryKey": "CommoditySitcId",
+                "foreignKey": "CommoditySitcId"
+            },
+            "Port": {
+                "endpoint": "https://api.uktradeinfo.com/Port",
+                "primaryKey": "PortId",
+                "foreignKey": "PortId"
+            }
+        }
+    },
+    "load": {
+        "accretiveUpload": false,
+        "publish": false
+    },
+    "sizingNotes": "",
+    "notes": "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/",
+    "datasetNotes": [
+        "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/"
+    ]
+}
