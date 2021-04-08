@@ -9,7 +9,7 @@
 #       jupytext_version: 1.11.1
 #   kernelspec:
 #     display_name: Python 3.8.9 64-bit
-#     name: python389jvsc74a57bd04cd7ab41f5fca4b9b44701077e38c5ffd31fe66a6cab21e0214b68d958d0e462
+#     name: python389
 # ---
 
 # +
