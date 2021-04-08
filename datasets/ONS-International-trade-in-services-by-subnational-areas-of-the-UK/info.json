@@ -23,8 +23,7 @@
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{period}",
-                "codelist": false
+                "value": "http://reference.data.gov.uk/id/{period}"
             },
             "Location": {
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
