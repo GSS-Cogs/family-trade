@@ -21,14 +21,12 @@
             "GDP Reference Period": {
                 "source": "",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}",
-                "codelist": false
+                "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}"
             },
             "Publication Date": {
                 "source": "",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+publication_date}",
-                "codelist": false
+                "value": "http://reference.data.gov.uk/id/{+publication_date}"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",

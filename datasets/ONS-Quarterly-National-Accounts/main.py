@@ -843,7 +843,12 @@ e1 = e1.rename(columns={'OBS':'Value'})
 e1 = convet_dimension_to_int(e1, 'Value')
 
 e1cdids = e1['CDID'].unique()
-e1.head(50)
+e1[e1['Expenditure Category'] == 'uk-national-domestic'].head(50)
+e1[e1['CDID'] == 'ABJQ'].head(50)
+
+# %%
+#import dmtools as dm
+#dm.display_dataset_unique_values(e1)
 
 # %%
 # E2
@@ -950,6 +955,7 @@ e4.head(5)
 e1e2e3e4 = pd.concat([e1, e2, e3, e4])
 e1e2e3e4.head(10)
 e1e2e3e4['Expenditure Category'].unique()
+#dm.display_dataset_unique_values(e1e2e3e4)
 
 # %%
 scraper.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'

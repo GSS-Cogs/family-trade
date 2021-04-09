@@ -28,10 +28,15 @@
                 "codelist": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country",
                 "value": "https://api.uktradeinfo.com/Country/{country_id}"
             },
-            "commodity_sitc_id": {
+            "sitc_id": {
                 "label": "Commodity",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/sitc",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{commodity_sitc_id}"
+                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{sitc_id}"
+            },
+            "cn8_id": {
+                "label": "Commodity",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/cn8",
+                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{cn8_id}"
             },
             "port_code": {
                 "label": "Port",

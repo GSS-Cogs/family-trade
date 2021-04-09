@@ -20,8 +20,7 @@
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}",
-                "codelist": false
+                "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Country": {
                 "description": "Country",
