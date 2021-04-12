@@ -402,6 +402,7 @@ for name, tab in tabs.items():
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
+        tidy_sheet['CDID'] = tidy_sheet['CDID'].replace('Total 1', 'Total')
         tidied_sheets.append(tidy_sheet)
     else:
         continue
@@ -1268,7 +1269,10 @@ with open("info.json", "r") as jsonFile:
         json.dump(data, jsonFile)
 h1h2 = h1h2.drop_duplicates()      
 cubes.add_cube(copy.deepcopy(scraper), h1h2, "gbp–data-tables-change-in-trade", 'gbp–data-tables-change-in-trade', data)
+h1h2
 del h1h2
+
+# %%
 
 # %%
 cubes.output_all()
