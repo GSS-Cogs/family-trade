@@ -1115,6 +1115,7 @@ g1 = convet_dimension_to_int(g1, 'Value')
 g1['Level of inventories held at end-December 2018'] = g1['Level of inventories held at end-December 2018'].str.replace('.0','')
 
 g1['Sector'] = g1['Sector'].apply(pathify)
+g1['Industry'] = g1['Industry'].apply(pathify)
 
 g1cdids = g1['CDID'].unique()
 g1.head(5)
@@ -1150,6 +1151,7 @@ g2 = convet_dimension_to_int(g2, 'Value')
 g2['Level of inventories held at end-December 2018'] = g2['Level of inventories held at end-December 2018'].str.replace('.0','')
 
 g2['Sector'] = g2['Sector'].apply(pathify)
+g2['Industry'] = g2['Industry'].apply(pathify)
 
 g2cdids = g2['CDID'].unique()
 g2.head(5)
