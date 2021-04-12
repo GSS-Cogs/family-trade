@@ -15,6 +15,9 @@ df = pd.DataFrame()
 cubes = Cubes("info.json")
 info = json.load(open('info.json'))
 scraper = Scraper(seed = 'info.json')
+scraper
+
+# %%
 distribution = scraper.distribution(latest = True)
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
 distribution
@@ -300,14 +303,14 @@ for name, tab in tabs.items():
         
     elif name in household_expenditure_indicators:
         if name in household_expenditure_indicators[0] or name in household_expenditure_indicators[2]:
-            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             COICOP = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
             measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         else:
             p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('B6')
-            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             COICOP = tab.excel_ref('B7').expand(RIGHT)
+            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
             measure = tab.excel_ref('G2').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
             
@@ -327,6 +330,7 @@ for name, tab in tabs.items():
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
+        
     elif name in gross_fixed_capitol:
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
@@ -403,9 +407,6 @@ for name, tab in tabs.items():
         continue
 
 
-# %%
- tidied_sheets[14]['Industry'].unique()
-
 # %% [markdown]
 #     Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
 #     Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
@@ -471,6 +472,8 @@ for name, tab in tabs.items():
 #      'AF Annex F',
 #      'AG Annex G'
 #      
+
+# %%
 
 # %%
 import numpy as np
@@ -954,7 +957,7 @@ e4.head(5)
 
 e1e2e3e4 = pd.concat([e1, e2, e3, e4])
 e1e2e3e4.head(10)
-e1e2e3e4['Expenditure Category'].unique()
+#e1e2e3e4['Expenditure Category'].unique()
 #dm.display_dataset_unique_values(e1e2e3e4)
 
 # %%
