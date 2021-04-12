@@ -49,10 +49,8 @@
             },
             "Commodity": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
-                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}",
-                "description": "",
-                "codelist": false
-            }
+                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}"
+                }
         }
     },
     "sizingNotes": "Large table simple format",
