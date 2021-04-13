@@ -15,6 +15,9 @@ df = pd.DataFrame()
 cubes = Cubes("info.json")
 info = json.load(open('info.json'))
 scraper = Scraper(seed = 'info.json')
+scraper
+
+# %%
 distribution = scraper.distribution(latest = True)
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
 distribution
@@ -300,14 +303,14 @@ for name, tab in tabs.items():
         
     elif name in household_expenditure_indicators:
         if name in household_expenditure_indicators[0] or name in household_expenditure_indicators[2]:
-            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             COICOP = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
             measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         else:
             p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('B6')
-            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             COICOP = tab.excel_ref('B7').expand(RIGHT)
+            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
             measure = tab.excel_ref('G2').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
             
@@ -327,6 +330,7 @@ for name, tab in tabs.items():
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
+        
     elif name in gross_fixed_capitol:
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
@@ -398,13 +402,11 @@ for name, tab in tabs.items():
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
+        tidy_sheet['CDID'] = tidy_sheet['CDID'].replace('Total 1', 'Total')
         tidied_sheets.append(tidy_sheet)
     else:
         continue
 
-
-# %%
- tidied_sheets[14]['Industry'].unique()
 
 # %% [markdown]
 #     Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
@@ -471,6 +473,8 @@ for name, tab in tabs.items():
 #      'AF Annex F',
 #      'AG Annex G'
 #      
+
+# %%
 
 # %%
 import numpy as np
@@ -917,7 +921,7 @@ e3.head(50)
 
 # %%
 # E4
-e4 = tidied_sheets[8]
+e4 = tidied_sheets[10]
 
 try:
     e4 = e4.loc[e4['Percentage Change'].isna()] 
@@ -954,7 +958,7 @@ e4.head(5)
 
 e1e2e3e4 = pd.concat([e1, e2, e3, e4])
 e1e2e3e4.head(10)
-e1e2e3e4['Expenditure Category'].unique()
+#e1e2e3e4['Expenditure Category'].unique()
 #dm.display_dataset_unique_values(e1e2e3e4)
 
 # %%
@@ -1112,6 +1116,7 @@ g1 = convet_dimension_to_int(g1, 'Value')
 g1['Level of inventories held at end-December 2018'] = g1['Level of inventories held at end-December 2018'].str.replace('.0','')
 
 g1['Sector'] = g1['Sector'].apply(pathify)
+g1['Industry'] = g1['Industry'].apply(pathify)
 
 g1cdids = g1['CDID'].unique()
 g1.head(5)
@@ -1147,6 +1152,7 @@ g2 = convet_dimension_to_int(g2, 'Value')
 g2['Level of inventories held at end-December 2018'] = g2['Level of inventories held at end-December 2018'].str.replace('.0','')
 
 g2['Sector'] = g2['Sector'].apply(pathify)
+g2['Industry'] = g2['Industry'].apply(pathify)
 
 g2cdids = g2['CDID'].unique()
 g2.head(5)
@@ -1263,7 +1269,10 @@ with open("info.json", "r") as jsonFile:
         json.dump(data, jsonFile)
 h1h2 = h1h2.drop_duplicates()      
 cubes.add_cube(copy.deepcopy(scraper), h1h2, "gbp–data-tables-change-in-trade", 'gbp–data-tables-change-in-trade', data)
+h1h2
 del h1h2
+
+# %%
 
 # %%
 cubes.output_all()

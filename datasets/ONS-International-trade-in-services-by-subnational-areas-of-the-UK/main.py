@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.11.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -73,7 +73,7 @@ for name, tab in tabs.items():
                 HDimConst("Flow", flow),
             ]
             tidy_sheet = ConversionSegment(tab, dimensions, observations)
-            savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+            #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
             trace.with_preview(tidy_sheet)
             trace.store("combined_df", tidy_sheet.topandas())
            
@@ -103,7 +103,7 @@ for name, tab in tabs.items():
                 
             ]
             tidy_sheet = ConversionSegment(tab, dimensions, observations)
-            savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+            #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
             trace.with_preview(tidy_sheet)
             tidy_sheet = tidy_sheet.topandas()
             tidy_sheet['Travel Type'] = tidy_sheet.apply(lambda x: 'total' if (x['nuts_level'] == 'NUTS1' and x['Industry Grouping'] == 'Travel') else 'na', axis = 1)
@@ -158,7 +158,7 @@ df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/U
                 'Origin' : {'Total': 'all-countries',
                             'Rest of the World': 'rest-of-world'},
                  
-                'Industry Grouping' : {'travel': 'travel-related-trade'}
+                'Industry Grouping' : {'travel': 'travel-related-trade', 'Travel' : 'travel-related-trade'}
                 })
 
 COLUMNS_TO_NOT_PATHIFY = ['Value', 'Location', 'Period', 'Marker']
@@ -177,5 +177,3 @@ df
 cubes.add_cube(scraper, df.drop_duplicates(), title)
 cubes.output_all()
 trace.render()
-
-
