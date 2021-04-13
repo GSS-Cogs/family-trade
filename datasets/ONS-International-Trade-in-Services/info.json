@@ -32,7 +32,7 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
             },
             "Trade Area": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/itis-geographies",
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-geographies",
                 "value": "http://gss-data.org.uk/def/concept/itis-geographies/{trade_area}"
             },
             "Value": {
