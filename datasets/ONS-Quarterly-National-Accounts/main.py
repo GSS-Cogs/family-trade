@@ -1060,7 +1060,7 @@ f2.head(5)
 
 # %%
 f1f2 = pd.concat([f1,f2])
-f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
+#f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
 f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
 
 # %%
