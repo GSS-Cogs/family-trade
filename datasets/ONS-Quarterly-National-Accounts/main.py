@@ -1159,13 +1159,14 @@ g2.head(5)
 
 # %%
 g1g2 = pd.concat([g1,g2])
+del g1g2['Industry']
 g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
 
 # %%
 scraper.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
-scraper.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
+scraper.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
-Change in inventories at current prices and chained volume measures (F1, F2)
+Change in inventories at current prices and chained volume measures (G1, G2)
 Data has been seasonally adjusted
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
 Wholesaling and retailing estimates exclude the motor trades.
@@ -1181,7 +1182,7 @@ with open("info.json", "r") as jsonFile:
         json.dump(data, jsonFile)
 g1g2 = g1g2.drop_duplicates()      
 cubes.add_cube(copy.deepcopy(scraper), g1g2, "gbp–data-tables-change-in-inventories", 'gbp–data-tables-change-in-inventories', data)
-del g1g2
+#del g1g2
 
 # %%
 # H1
@@ -1290,6 +1291,8 @@ cubes.output_all()
 #cids
 
 # %%
+g1g2.head(6)
+g1g2['Industry'].unique()
 
 # %%
 
