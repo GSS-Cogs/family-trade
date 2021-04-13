@@ -1159,13 +1159,15 @@ g2.head(5)
 
 # %%
 g1g2 = pd.concat([g1,g2])
-g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
+del g1g2['Industry']
+#g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
+#g1g2['Sector'].unique()
 
 # %%
 scraper.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
-scraper.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
+scraper.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
-Change in inventories at current prices and chained volume measures (F1, F2)
+Change in inventories at current prices and chained volume measures (G1, G2)
 Data has been seasonally adjusted
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
 Wholesaling and retailing estimates exclude the motor trades.
