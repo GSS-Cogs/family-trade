@@ -168,8 +168,8 @@ table['Flow'] = table['Flow'].map(lambda x: x.split(' ')[1])
 # -
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
-table['Measure Type'] = pd.Series('gbp million', index=table.index, dtype='category') 
-table['Unit'] = pd.Series('gbp million', index=table.index, dtype='category')
+table['Measure Type'] = pd.Series('gbp-million', index=table.index, dtype='category') 
+table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
 
 table['Marker'] = ' '
 table.loc[(table['Value'] == 0), 'Marker'] = 'suppressed'
