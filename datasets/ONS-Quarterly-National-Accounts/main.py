@@ -1253,6 +1253,8 @@ h2.head(5)
 # %%
 h1h2 = pd.concat([h1,h2])
 h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
+h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
+#h1h2['Goods or Services'].unique()
 
 # %%
 scraper.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
