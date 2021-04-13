@@ -536,7 +536,7 @@ a2 = prefix_refperiod(a2, 'Period')
 a2['Gross'].loc[a2['CDID'] == 'YBHA'] = 'Gross domestic product at market prices'  
 a2['Indices'].loc[a2['CDID'] == 'YBHA'] = 'Current prices'
 
-a2 = strip_superscripts(a2, 'gross')
+a2 = strip_superscripts(a2, 'Gross')
     
 a2['Indices'].loc[a2['Indices'] == 'Current prices'] = 'current-price'
 a2['Indices'].loc[a2['Indices'] == 'Chained Volume Measure (Reference year 2018)'] = 'chained-volume-measure'
@@ -553,7 +553,6 @@ except:
     ind = ind
 
 a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
-a2cdids = a2['CDID'].unique()
 
 # %%
 mainTitle = scraper.dataset.title
