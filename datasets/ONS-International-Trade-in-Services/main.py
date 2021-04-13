@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.7.1
+#       jupytext_version: 1.11.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -167,7 +167,7 @@ for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     display(observations[col].cat.categories)
 
 # +
-observations.rename(columns={'Flow':'Flow Directions'}, inplace=True)
+observations.rename(columns={'Flow':'Flow Directions', 'ONS Trade Areas ITIS' : 'Trade Area'}, inplace=True)
 
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 # -
