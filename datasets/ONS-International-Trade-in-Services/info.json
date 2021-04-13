@@ -27,22 +27,13 @@
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
-            "ITIS Industry": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
-                "value": "http://gss-data.org.uk/def/trade/concept/itis-industry/{itis_industry}"
-            },
-            "ITIS Service": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-service",
-                "value": "http://gss-data.org.uk/def/trade/concept/itis-services/{itis_service}"
-            },
             "International Trade Basis": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
                 "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
             },
-            "ONS Trade Areas ITIS": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/concept/ons-partner-geography/{ons_trade_areas_itis}",
-                "codelist": false
+            "Trade Area": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/itis-geographies",
+                "value": "http://gss-data.org.uk/def/concept/itis-geographies/{trade_area}"
             },
             "Value": {
                 "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
