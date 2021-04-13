@@ -25,7 +25,8 @@
         "columns": {
             "Year": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+year}"
+                "value": "http://reference.data.gov.uk/id/{+year}",
+                "codelist": false
             },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
@@ -38,6 +39,9 @@
             "Commodity": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
                 "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}"
+            },
+            "Industry": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/industry"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
