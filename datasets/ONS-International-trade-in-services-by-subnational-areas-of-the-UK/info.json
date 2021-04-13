@@ -32,7 +32,7 @@
             },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
             },
             "Industry Grouping": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
