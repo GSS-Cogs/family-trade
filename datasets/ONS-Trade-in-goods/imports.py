@@ -75,7 +75,7 @@ table["Period"] = pd.to_datetime(table['Period'], format='%Y%b')
 table["Period"] = 'quarter/' + pd.PeriodIndex(table['Period'], freq='Q').astype(str).str.replace('Q', '-Q')
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
-table['Measure Type'] = pd.Series('gbp-total', index=table.index, dtype='category')
+table['Measure Type'] = pd.Series('gbp million', index=table.index, dtype='category')
 table['Unit'] = pd.Series('gbp', index=table.index, dtype='category')
 table['Flow'] = pd.Series('imports', index=table.index, dtype='category')
 
