@@ -36,8 +36,7 @@
                 "value": "http://reference.data.gov.uk/id/{period}"
             },
             "Product": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
-                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
             }
         }
     },
