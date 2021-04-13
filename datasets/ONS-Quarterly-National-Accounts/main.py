@@ -642,8 +642,10 @@ b2 = convet_dimension_to_int(b2, 'Value')
 
 # %%
 b1b2 = pd.concat([b1, b2])
-b1b2cdids = b1b2['CDID'].unique()
-del b1, b2
+#b1b2cdids = b1b2['CDID'].unique()
+# Delete attribute for now as it is causing problems in PMD4, going into the CDID column!
+del b1b2['Weights 2018']
+b1b2.head(20)
 
 # %%
 scraper.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
