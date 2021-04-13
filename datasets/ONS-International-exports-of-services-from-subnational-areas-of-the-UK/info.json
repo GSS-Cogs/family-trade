@@ -28,9 +28,7 @@
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
             },
             "Export Services": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/export-services",
-                "value": "http://gss-data.org.uk/def/trade/concept/export-services/{export_services}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/export-services"
             },
             "Service Origin Geography": {
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",

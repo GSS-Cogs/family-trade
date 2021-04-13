@@ -119,7 +119,7 @@ col_names = {
     'FlowTypeDescription': 'flow_type',
     'CommodityId': 'cn8_id',
     'SitcCode': 'sitc_id',
-    'PortCodeNumeric': 'port_code',
+    'PortCodeNumeric': 'port',
     'Period': 'period'
 }
 df.rename(col_names, axis=1, inplace=True)
@@ -134,7 +134,7 @@ def default(series=pd.Series, value=str) -> pd.DataFrame():
 
 
 df['country_id'] = default(series=df['country_id'], value='unknown')
-df['port_code'] = default(series=df['port_code'], value='499')
+df['port'] = default(series=df['port'], value='499')
 df['sitc_id'] = default(series=df['sitc_id'], value='unknown')
 df['cn8_id'] = default(series=df['cn8_id'], value='unknown')
 df['marker'] = default(series=df['marker'], value='')
@@ -150,18 +150,18 @@ del df
 
 # cn8 cube work - aggregate on cn8 and discard sitc values, pass the resulting dataframe straight into the cube creation
 qry = """
-SELECT marker, country_id, flow_type, cn8_id, port_code, period, value, measure_type, unit_type, sum(value) as value
+SELECT marker, country_id, flow_type, cn8_id, port, period, value, measure_type, unit_type, sum(value) as value
 from data
-group by marker, country_id, flow_type, cn8_id, port_code, period, value, measure_type, unit_type
+group by marker, country_id, flow_type, cn8_id, port, period, value, measure_type, unit_type
 """
 cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-cn8-{fetch_chunk}")
 
 
 # sitc cube work - aggregate on sitc and discard sn8 values
 qry = """
-SELECT marker, country_id, flow_type, sitc_id, port_code, period, value, measure_type, unit_type, sum(value) as value
+SELECT marker, country_id, flow_type, sitc_id, port, period, value, measure_type, unit_type, sum(value) as value
 from data
-group by marker, country_id, flow_type, sitc_id, port_code, period, value, measure_type, unit_type
+group by marker, country_id, flow_type, sitc_id, port, period, value, measure_type, unit_type
 """
 cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-sitc-{fetch_chunk}")
 

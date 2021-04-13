@@ -18,8 +18,7 @@
         "columns": {
             "CDID": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
-                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
             },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",

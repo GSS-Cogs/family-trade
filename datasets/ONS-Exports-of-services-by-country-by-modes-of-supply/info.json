@@ -21,6 +21,12 @@
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
+            "Country": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+            },
+            "Service Account": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
+            },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/measure/current-prices",

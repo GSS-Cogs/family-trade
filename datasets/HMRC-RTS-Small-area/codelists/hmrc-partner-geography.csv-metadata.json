@@ -1,0 +1,124 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography",
+    "url": "hmrc-partner-geography.csv",
+    "rdfs:label": "Hmrc Partner Geography",
+    "dc:title": "Hmrc Partner Geography",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#concept/hmrc-partner-geography/{parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort_priority",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#concept/hmrc-partner-geography/{notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-20T09:20:25.922805"
+            },
+            "rdfs:label": "Hmrc Partner Geography",
+            "dc:title": "Hmrc Partner Geography",
+            "rdfs:comment": "Dataset representing the 'Hmrc Partner Geography' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-20T09:20:25.922805"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography"
+            },
+            "dc:title": "Hmrc Partner Geography Catalog Record",
+            "rdfs:label": "Hmrc Partner Geography Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-20T09:20:25.922805"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-20T09:20:25.922805"
+            }
+        }
+    ]
+}

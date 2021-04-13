@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -193,9 +193,7 @@ tidy['Geography'] = tidy['Geography'].cat.rename_categories({
         'Residual Trade - no Partner Country displayed' : 'Residual Trade',
         'OtherLatin America and Caribbean' : 'Other Latin America and Caribbean',
         'Other Middle East and N Africa (excl EU)' : 'Other Middle East and North Africa',
-        'Residual Trade - no SITC Section displayed': 'Residual Trade',
-        #'Other Eastern Europe (excl EU)': 'other-eastern-europe',
-        'Stores and Provisions': 'Stores & Provisions'
+        'Residual Trade - no SITC Section displayed': 'Residual Trade'
  
 })
 tidy['Flow'] = tidy['Flow'].cat.rename_categories({
@@ -212,10 +210,8 @@ import io
 import requests
 
 r = request.urlopen('https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/hmrc-geographies.csv').read().decode('utf8').split("\n")
-#r = request.urlopen('https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/hmrc-small-area-country-codes.csv').read().decode('utf8').split("\n")
 reader = csv.reader(r)
 url="https://raw.githubusercontent.com/ONS-OpenData/ref_trade/master/codelists/hmrc-geographies.csv"
-#url='https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/hmrc-small-area-country-codes.csv'
 s=requests.get(url).content
 c=pd.read_csv(io.StringIO(s.decode('utf-8')))
 
@@ -229,14 +225,4 @@ import numpy
 tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == 'residual-trade', tidy['EU - Non-EU'], tidy['HMRC Partner Geography'])
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
 
-# +
-#tidy.to_csv('t5dataBeforeRenaming.csv')
-
-# +
-#tidy = pd.read_csv('t5dataBeforeRenaming.csv')
-#tidy['Geography'] = tidy['Geography'].astype('category')
-#tidy['NUTS Geography'] = tidy['NUTS Geography'].astype('category')
-#tidy['Flow'] = tidy['Flow'].astype('category')
-# -
-
-
+tidy

@@ -226,4 +226,4 @@ output_codelist_data = pd.DataFrame({
 
 output_codelist_data["Parent Notation"] = output_codelist_data["Parent Notation"].map(lambda pn: pn if pn is not None else "Total")
 output_codelist_data.loc[0, "Parent Notation"] = None
-output_codelist_data.to_csv("../../reference/codelists/product.csv", index=False)
+output_codelist_data.to_csv("./codelists/product.csv", index=False)

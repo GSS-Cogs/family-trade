@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -97,8 +97,8 @@ tidy['NUTS Geography'] = tidy['NUTS Geography'].map(
 
 tidy['HMRC Partner Geography'] = tidy['HMRC Partner Geography'].map(
     lambda x: {
-        'Exp' : 'WW',
-        'Imp': 'WW'}.get(x, x))
+        'Exp' : 'europe',
+        'Imp': 'europe'}.get(x, x))
 # -
 
 for col in tidy.columns:

@@ -21,12 +21,17 @@
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
+            "Country": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+            },
             "Sector": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/industry",
                 "description": "DCMS Trade Sector Classification",
                 "value": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#concept/trade-sectors/{sector}",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#scheme/trade-sectors"
             },
             "Subsector": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/industry",
                 "description": "DCMS Trade Subsector Classification",
                 "value": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#concept/trade-sectors/{subsector}",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#scheme/trade-sectors"

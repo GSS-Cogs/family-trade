@@ -21,6 +21,12 @@
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
+            "Country": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+            },
+            "Region": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+            },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"

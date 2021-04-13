@@ -24,33 +24,27 @@
             },
             "Age of Business": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/age-of-business",
-                "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}",
-                "codelist": false
+                "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}"
             },
             "Business Activity": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/business-activity",
-                "value": "http://gss-data.org.uk/def/trade/concept/business-activity/{business_activity}",
-                "codelist": false
+                "value": "http://gss-data.org.uk/def/trade/concept/business-activity/{business_activity}"
             },
             "Country of Ownership": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/country-of-ownership",
-                "value": "http://gss-data.org.uk/def/trade/concept/country-of-ownership/{country_of_ownership}",
-                "codelist": false
+                "value": "http://gss-data.org.uk/def/trade/concept/country-of-ownership/{country_of_ownership}"
             },
             "Trade Group": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/trade-group",
-                "value": "http://gss-data.org.uk/def/trade/concept/trade-group/{trade_group}",
-                "codelist": false
+                "value": "http://gss-data.org.uk/def/trade/concept/trade-group/{trade_group}"
             },
             "Turnover": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/turnover-size-bands",
-                "value": "http://gss-data.org.uk/def/trade/concept/turnover-size-bands/{turnover}",
-                "codelist": false
+                "value": "http://gss-data.org.uk/def/trade/concept/turnover-size-bands/{turnover}"
             },
             "Employees": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-band",
-                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{employees}",
-                "codelist": false
+                "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{employees}"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",

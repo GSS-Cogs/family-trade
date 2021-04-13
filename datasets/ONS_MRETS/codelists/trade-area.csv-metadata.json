@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services",
-    "url": "export-services.csv",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area",
+    "url": "trade-area.csv",
+    "rdfs:label": "Trade Area",
+    "dc:title": "Trade Area",
     "tableSchema": {
         "columns": [
             {
@@ -30,11 +32,11 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/export-services/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#concept/trade-area/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -54,70 +56,68 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/export-services/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#concept/trade-area/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Export Services",
-    "dc:title": "Export Services",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Export Services",
-            "dc:title": "Export Services",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area"
             },
-            "rdfs:comment": "Dataset representing the 'Export Services' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.185664"
+                "@value": "2021-04-13T18:58:23.132271"
             },
+            "rdfs:label": "Trade Area",
+            "dc:title": "Trade Area",
+            "rdfs:comment": "Dataset representing the 'Trade Area' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.185664"
+                "@value": "2021-04-13T18:58:23.132271"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Export Services Catalog Record",
-            "rdfs:label": "Export Services Catalog Record",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/trade-area"
+            },
+            "dc:title": "Trade Area Catalog Record",
+            "rdfs:label": "Trade Area Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.148956"
+                "@value": "2021-04-13T18:58:23.132271"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.148956"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services/dataset"
-            },
-            "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/export-services"
+                "@value": "2021-04-13T18:58:23.132271"
             }
         }
     ]

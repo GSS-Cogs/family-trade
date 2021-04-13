@@ -29,21 +29,17 @@
                 "value": "https://api.uktradeinfo.com/Country/{country_id}"
             },
             "sitc_id": {
-                "label": "Commodity",
-                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/sitc",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{sitc_id}"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "label": "Commodity"
             },
             "cn8_id": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
                 "label": "Commodity",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/cn8",
                 "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{cn8_id}"
             },
-            "port_code": {
-                "label": "Port",
-                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port",
-                "value": "https://api.uktradeinfo.com/Port/{port_code}"
-            },
             "period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "label": "Month",
                 "codelist": false,
                 "value": "http://reference.data.gov.uk{period}"

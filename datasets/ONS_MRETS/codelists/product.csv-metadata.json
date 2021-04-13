@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry",
-    "url": "itis-industry.csv",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product",
+    "url": "product.csv",
+    "rdfs:label": "Product",
+    "dc:title": "Product",
     "tableSchema": {
         "columns": [
             {
@@ -30,11 +32,11 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/itis-industry/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#concept/product/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -54,70 +56,68 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/itis-industry/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#concept/product/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Itis Industry",
-    "dc:title": "Itis Industry",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Itis Industry",
-            "dc:title": "Itis Industry",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product"
             },
-            "rdfs:comment": "Dataset representing the 'Itis Industry' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.193932"
+                "@value": "2021-04-13T18:58:12.365198"
             },
+            "rdfs:label": "Product",
+            "dc:title": "Product",
+            "rdfs:comment": "Dataset representing the 'Product' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.193932"
+                "@value": "2021-04-13T18:58:12.365198"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Itis Industry Catalog Record",
-            "rdfs:label": "Itis Industry Catalog Record",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons_mrets#scheme/product"
+            },
+            "dc:title": "Product Catalog Record",
+            "rdfs:label": "Product Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.153983"
+                "@value": "2021-04-13T18:58:12.365198"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.153983"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry/dataset"
-            },
-            "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/itis-industry"
+                "@value": "2021-04-13T18:58:12.365198"
             }
         }
     ]

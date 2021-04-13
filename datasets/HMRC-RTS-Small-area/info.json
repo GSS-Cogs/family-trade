@@ -23,34 +23,38 @@
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/year/{year}"
             },
-            "Flow Directions": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
-            },
             "NUTS Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/nuts-geographies",
-                "value": "http://gss-data.org.uk/def/trade/concept/nuts-geographies/{nuts_geography}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/nuts-geographies"
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
             },
             "HMRC Partner Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-small-area-country-codes",
-                "value": "http://gss-data.org.uk/def/trade/concept/hmrc-small-area-country-codes/{hmrc_partner_geography}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/hmrc-small-area-country-codes"
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+            },
+            "Flow Directions": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
             "SITC 4": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/sitc4"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}"
+            },
+            "Measure Type": {
+                "dimension": "http://purl.org/linked-data/cube#measureType",
+                "value": "http://gss-data.org.uk/def/measure/{measure_type}",
+                "types": [
+                    "businesses",
+                    "statistical-value"
+                ]
+            },
+            "Unit": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/businesses",
-                "datatype": "integer"
+                "datatype": "decimal"
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
             }
         }
     },

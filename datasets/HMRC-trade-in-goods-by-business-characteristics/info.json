@@ -20,7 +20,7 @@
         "airtable": "recVDI0VC5iKZCd2r",
         "columns": {
             "Year": {
-                "dimension": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+year}"
             },
             "Flow": {
@@ -28,11 +28,13 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
             },
             "Country": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "description": "Country",
                 "value": "http://gss-data.org.uk/def/concept/cl-area/{country}",
                 "codelist": "http://gss-data.org.uk/def/concept-scheme/cl-area"
             },
             "Zone": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "description": "Zone",
                 "value": "http://gss-data.org.uk/def/concept/cl-area/{zone}",
                 "codelist": "http://gss-data.org.uk/def/concept-scheme/cl-area"

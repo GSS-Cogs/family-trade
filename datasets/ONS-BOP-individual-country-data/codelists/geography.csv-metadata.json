@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies",
-    "url": "cord-geographies.csv",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography",
+    "url": "geography.csv",
+    "rdfs:label": "Geography",
+    "dc:title": "Geography",
     "tableSchema": {
         "columns": [
             {
@@ -30,11 +32,11 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#concept/geography/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -54,73 +56,68 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography"
             }
         ],
-        "primaryKey": [
-            "notation",
-            "parent_notation"
-        ],
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/{notation}"
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#concept/geography/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "Cord Geographies",
-    "dc:title": "Cord Geographies",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "Cord Geographies",
-            "dc:title": "Cord Geographies",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography"
             },
-            "rdfs:comment": "Dataset representing the 'Cord Geographies' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.153397"
+                "@value": "2021-04-13T18:46:10.472904"
             },
+            "rdfs:label": "Geography",
+            "dc:title": "Geography",
+            "rdfs:comment": "Dataset representing the 'Geography' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.153397"
+                "@value": "2021-04-13T18:46:10.472904"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "Cord Geographies Catalog Record",
-            "rdfs:label": "Cord Geographies Catalog Record",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography"
+            },
+            "dc:title": "Geography Catalog Record",
+            "rdfs:label": "Geography Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.129811"
+                "@value": "2021-04-13T18:46:10.472904"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.129811"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies/dataset"
-            },
-            "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies"
+                "@value": "2021-04-13T18:46:10.472904"
             }
         }
     ]

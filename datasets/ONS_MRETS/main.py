@@ -346,7 +346,7 @@ from gssutils.metadata import THEME
 # Rename columns
 rename_columns = {"period": "Period",
                   "country": "Trade Area",
-                  "product": "MRETS Product",
+                  "product": "Product",
                   "direction": "Flow Directions",
                   "basis": "Basis",
                   "unit": "Unit",
@@ -360,8 +360,8 @@ product_observations.rename(rename_columns, axis=1, inplace=True)
 if "Seasonal Adjustment" in product_observations.columns.values:
     product_observations["Seasonal Adjustment"] = product_observations["Seasonal Adjustment"].str.upper()
     
-if "MRETS Product" in product_observations.columns.values:
-    product_observations["MRETS Product"] = product_observations["MRETS Product"].apply(pathify)
+if "Product" in product_observations.columns.values:
+    product_observations["Product"] = product_observations["Product"].apply(pathify)
     
 if "Flow Directions" in product_observations.columns.values:
     product_observations["Flow Directions"] = product_observations["Flow Directions"].apply(fix_short_hand_flow)
