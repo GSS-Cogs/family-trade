@@ -240,8 +240,9 @@ for name, tab in tabs.items():
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
-            HDim(cdid, 'CDID',DIRECTLY,ABOVE),
+            # Switched just to get it to work
             HDim(cdid, '2018 Weights',DIRECTLY,ABOVE),
+            HDim(weights, 'CDID',DIRECTLY,ABOVE),
             #HDim(weights, '2018 Weights',DIRECTLY,ABOVE),
             HDim(industry, 'Industry',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
