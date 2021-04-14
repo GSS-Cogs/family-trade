@@ -643,7 +643,8 @@ b2 = convet_dimension_to_int(b2, 'Value')
 b1b2 = pd.concat([b1, b2])
 #b1b2cdids = b1b2['CDID'].unique()
 # Delete attribute for now as it is causing problems in PMD4, going into the CDID column!
-del b1b2['Weights 2018']
+#del b1b2['Weights 2018']
+b1b2 = b1b2[['Period','CDID','Sector','Industry','Value']]
 b1b2.head(20)
 
 # %%
