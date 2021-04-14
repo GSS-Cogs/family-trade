@@ -229,7 +229,7 @@ for name, tab in tabs.items():
         
     elif name in output_indicators:
         # Pulling in weight sinstead of CDIDs when run on Jenkins moving down a row to try and fix
-        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
+        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,-1).expand(RIGHT).is_not_blank()
         industry = tab.excel_ref('B3').expand(RIGHT).is_not_blank()
         weights = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
