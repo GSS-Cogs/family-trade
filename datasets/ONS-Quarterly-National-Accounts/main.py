@@ -240,10 +240,8 @@ for name, tab in tabs.items():
             HDim(period,'Period',DIRECTLY,LEFT),
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
-            # Switched just to get it to work
-            HDim(cdid, '2018 Weights',DIRECTLY,ABOVE),
-            HDim(weights, 'CDID',DIRECTLY,ABOVE),
-            #HDim(weights, '2018 Weights',DIRECTLY,ABOVE),
+            HDim(cdid, 'CDID',DIRECTLY,ABOVE),
+            HDim(weights, '2018 Weights',DIRECTLY,ABOVE),
             HDim(industry, 'Industry',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
             
@@ -647,7 +645,7 @@ b1b2 = pd.concat([b1, b2])
 #b1b2cdids = b1b2['CDID'].unique()
 # Delete attribute for now as it is causing problems in PMD4, going into the CDID column!
 #del b1b2['Weights 2018']
-b1b2 = b1b2[['Period','CDID','Sector','Industry','Value']]
+b1b2 = b1b2[['Period','CDID','Weights 2018','Sector','Industry','Value']]
 b1b2.head(20)
 
 # %%
