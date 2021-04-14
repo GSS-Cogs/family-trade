@@ -21,29 +21,24 @@
         "columns": {
             "Year": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{year}",
-                "codelist": false
+                "value": "http://reference.data.gov.uk/id/{year}"
             },
             "Flow Directions": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
-            "ITIS Industry": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
-                "value": "http://gss-data.org.uk/def/trade/concept/itis-industry/{itis_industry}"
-            },
-            "ITIS Service": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/itis-service",
-                "value": "http://gss-data.org.uk/def/trade/concept/itis-services/{itis_service}"
-            },
             "International Trade Basis": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
                 "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
             },
-            "ONS Trade Areas ITIS": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/concept/ons-partner-geography/{ons_trade_areas_itis}",
-                "codelist": false
+            "ITIS Service": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
+            },
+            "ITIS Industry": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/industry"
+            },
+            "Trade Area": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
             },
             "Value": {
                 "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",

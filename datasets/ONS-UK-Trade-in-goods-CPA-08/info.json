@@ -25,23 +25,18 @@
             },
             "CDID": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
-                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
             },
             "Flow Direction": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_direction}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_direction}"
             },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{period}",
-                "codelist": false
+                "value": "http://reference.data.gov.uk/id/{period}"
             },
             "Product": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/product",
-                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}",
-                "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/product"
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
             }
         }
     },

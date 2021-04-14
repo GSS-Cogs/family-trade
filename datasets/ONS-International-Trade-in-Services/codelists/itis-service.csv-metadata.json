@@ -1,7 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis",
-    "url": "national-accounts-analysis.csv",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service",
+    "url": "itis-service.csv",
+    "rdfs:label": "Itis Service",
+    "dc:title": "Itis Service",
     "tableSchema": {
         "columns": [
             {
@@ -30,11 +32,11 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-analysis/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-service/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
-                "name": "sort",
+                "name": "sort_priority",
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
@@ -54,70 +56,68 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-analysis/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-service/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
         ]
     },
-    "rdfs:label": "National Accounts Analysis",
-    "dc:title": "National Accounts Analysis",
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
-            "rdfs:label": "National Accounts Analysis",
-            "dc:title": "National Accounts Analysis",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service"
             },
-            "rdfs:comment": "Dataset representing the 'National Accounts Analysis' code list.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.187947"
+                "@value": "2021-04-13T17:22:47.240180"
             },
+            "rdfs:label": "Itis Service",
+            "dc:title": "Itis Service",
+            "rdfs:comment": "Dataset representing the 'Itis Service' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.187947"
+                "@value": "2021-04-13T17:22:47.240180"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service/catalog-record",
             "@type": "dcat:CatalogRecord",
-            "dc:title": "National Accounts Analysis Catalog Record",
-            "rdfs:label": "National Accounts Analysis Catalog Record",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service"
+            },
+            "dc:title": "Itis Service Catalog Record",
+            "rdfs:label": "Itis Service Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.150623"
+                "@value": "2021-04-13T17:22:47.240180"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:58:58.150623"
-            },
-            "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis/dataset"
-            },
-            "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-analysis"
+                "@value": "2021-04-13T17:22:47.240180"
             }
         }
     ]

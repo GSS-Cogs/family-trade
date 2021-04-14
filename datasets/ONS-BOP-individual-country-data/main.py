@@ -46,7 +46,7 @@ def right(s, amount):
 # +
 trace = TransformTrace()
 title = distribution.title
-columns = ['CORD Geography','Period','Flow','Measure Type','Value','Unit']
+columns = ['Geography','Period','Flow','Measure Type','Value','Unit']
 
 for tab in tabs:
     if tab.name == 'Notes':
@@ -83,11 +83,11 @@ df.loc[df['Period'].str.len() == 7, 'Period'] = pd.to_datetime(df.loc[df['Period
 df.loc[df['Period'].str.len() == 4, 'Period'] = 'year/' + df.loc[df['Period'].str.len() == 4, 'Period']
 
 df.rename(columns= {'OBS':'Value'}, inplace=True)
-df.rename(columns= {'ONS Partner Geography': 'CORD Geography'}, inplace=True)
+df.rename(columns= {'ONS Partner Geography': 'Geography'}, inplace=True)
 
-df.loc[df['CORD Geography'].str.len() > 2, 'CORD Geography'] = df['CORD Geography'].str[:2]
+df.loc[df['Geography'].str.len() > 2, 'Geography'] = df['Geography'].str[:2]
 
-df = df[['CORD Geography','Period','Flow','Value']]
+df = df[['Geography','Period','Flow','Value']]
 df['Flow'] = df['Flow'].map(lambda x: pathify(x))
 
 cubes.add_cube(scraper, df, title)

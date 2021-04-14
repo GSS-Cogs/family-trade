@@ -68,7 +68,6 @@
             },
             {
                 "titles": "Codelist",
-                "required": true,
                 "name": "codelist",
                 "datatype": "anyURI",
                 "propertyUrl": "qb:codeList",

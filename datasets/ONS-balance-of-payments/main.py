@@ -115,6 +115,7 @@ df['Year'] = df['Year'].str.strip()
 df['Quarter'] = df['Quarter'].str.strip()
 df['Period'] = df['Year'] + df['Quarter']
 df["Period"] =  df["Period"].apply(date_time)
+df['CDID'] = df['CDID'].str.strip()
 df["Flow Directions"].fillna('not-applicable', inplace=True)
 for column in df:
     if column in ('Measure Type', 'Flow Directions', 'BOP Services'):
@@ -160,6 +161,9 @@ df['Seasonal Adjustment'].unique()
 
 # %%
 df['BOP Services'].unique()
+
+# %%
+df['CDID'].unique()
 
 # %%
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)

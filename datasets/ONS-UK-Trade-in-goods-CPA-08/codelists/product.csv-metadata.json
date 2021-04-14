@@ -1,9 +1,9 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid",
-    "url": "cdid.csv",
-    "rdfs:label": "CDID",
-    "dc:title": "CDID",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product",
+    "url": "product.csv",
+    "rdfs:label": "Product",
+    "dc:title": "Product",
     "tableSchema": {
         "columns": [
             {
@@ -17,7 +17,8 @@
                 "titles": "Notation",
                 "name": "notation",
                 "datatype": {
-                    "base": "string"
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
                 },
                 "required": true,
                 "propertyUrl": "skos:notation"
@@ -26,11 +27,12 @@
                 "titles": "Parent Notation",
                 "name": "parent_notation",
                 "datatype": {
-                    "base": "string"
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/cdid/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#concept/product/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -47,14 +49,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/cdid/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#concept/product/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -62,53 +64,53 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
-            },
-            "rdfs:label": "CDID",
-            "dc:title": "CDID",
-            "rdfs:comment": "Dataset representing the 'CDID' code list.",
-            "dc:issued": {
-                "@type": "dateTime",
-                "@value": "2021-02-18T00:00:00"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-18T00:00:00"
+                "@value": "2021-04-13T18:21:43.585698"
+            },
+            "rdfs:label": "Product",
+            "dc:title": "Product",
+            "rdfs:comment": "Dataset representing the 'Product' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-04-13T18:21:43.585698"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-goods-cpa-08#scheme/product"
             },
-            "dc:title": "CDID Catalog Record",
-            "rdfs:label": "CDID Catalog Record",
+            "dc:title": "Product Catalog Record",
+            "rdfs:label": "Product Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-02-18T12:52:46.220803"
+                "@value": "2021-04-13T18:21:43.585698"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-18T12:52:46.220803"
+                "@value": "2021-04-13T18:21:43.585698"
             }
         }
     ]
