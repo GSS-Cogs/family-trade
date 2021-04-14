@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.11.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -365,7 +365,7 @@ if "Product" in product_observations.columns.values:
     
 if "Flow Directions" in product_observations.columns.values:
     product_observations["Flow Directions"] = product_observations["Flow Directions"].apply(fix_short_hand_flow)
-    
+     
 if "Basis" in product_observations.columns.values:
     product_observations = product_observations.drop("Basis", axis=1)
     
@@ -399,33 +399,34 @@ product_observations_cvm['Trade Area'] = product_observations_cvm['Trade Area'].
 del product_observations_cp['Measure Type']
 del product_observations_cp['Unit']
 product_observations_cp['Trade Area'] = product_observations_cp['Trade Area'].str.upper()
+# -
 
-# +
-"""
-Measure Type
-'Current Price', 'Chained volume measure', 'Net Mass','Implied Deflator', 'Average value per ton'
-"""
+# """
+# Measure Type
+# 'Current Price', 'Chained volume measure', 'Net Mass','Implied Deflator', 'Average value per ton'
+# """
+# product_observations_cvm['Trade Area'] = product_observations_cvm['Trade Area'].apply(pathify)
+# product_observations_cvm.head(10)
 
-product_observations_cp.head(10)
-product_observations_cp['Trade Area'].unique()
-#product_observations_cvm['Trade Area'].unique()
+#
+# product_observations_cp['Trade Area'].unique()
+# #product_observations_cvm['Trade Area'].unique()
 
-# +
-#### CHAINED VOLUME MEASURES
-scraper.dataset.title = 'UK trade time series - Chained Value Measures'
-scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
-scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
-
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
-data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
-
-cubes = Cubes(infoFileName)
-cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
-cubes.output_all()
+# #### CHAINED VOLUME MEASURES
+# scraper.dataset.title = 'UK trade time series - Chained Value Measures'
+# scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
+# scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
+#
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+# data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
+# data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+# with open("info.json", "w") as jsonFile:
+#     json.dump(data, jsonFile)
+#
+# cubes = Cubes(infoFileName)
+# cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+# cubes.output_all()
 
 # +
 #### CURRENT PRICES
@@ -449,4 +450,5 @@ cubes.output_all()
 
 
 
+#
 
