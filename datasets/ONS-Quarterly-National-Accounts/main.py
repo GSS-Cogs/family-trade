@@ -378,13 +378,13 @@ for name, tab in tabs.items():
         tidied_sheets.append(tidy_sheet)
     elif name in trade: 
         if name in trade[0]:
-            cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
+            cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - goods_services
             flow = goods_services.shift(UP) 
         else:
-            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank()
-            measure = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B4').expand(RIGHT).is_not_blank() 
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank() - goods_services
+            measure = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
             flow = goods_services.shift(UP)
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         
@@ -402,7 +402,7 @@ for name, tab in tabs.items():
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
-        tidy_sheet['CDID'] = tidy_sheet['CDID'].replace('Total 1', 'Total')
+        tidy_sheet['Goods or Services'] = tidy_sheet['Goods or Services'].replace('Total 1', 'Total')
         tidied_sheets.append(tidy_sheet)
     else:
         continue
@@ -473,8 +473,6 @@ for name, tab in tabs.items():
 #      'AF Annex F',
 #      'AG Annex G'
 #      
-
-# %%
 
 # %%
 import numpy as np
