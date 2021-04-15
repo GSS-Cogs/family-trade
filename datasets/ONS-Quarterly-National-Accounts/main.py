@@ -380,14 +380,13 @@ for name, tab in tabs.items():
         if name in trade[0]:
             cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
-            flow = goods_services.shift(UP)
-            observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
+            flow = goods_services.shift(UP) 
         else:
             cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank()
             measure = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B4').expand(RIGHT).is_not_blank() 
             flow = goods_services.shift(UP)
-            observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace()
+        observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         
         dimensions = [
             HDim(flow, 'Flow',DIRECTLY,ABOVE),
