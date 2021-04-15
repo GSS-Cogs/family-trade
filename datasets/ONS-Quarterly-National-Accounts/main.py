@@ -382,7 +382,7 @@ for name, tab in tabs.items():
             goods_services = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
             flow = goods_services.shift(UP) 
         else:
-            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank()
             measure = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B4').expand(RIGHT).is_not_blank() 
             flow = goods_services.shift(UP)
