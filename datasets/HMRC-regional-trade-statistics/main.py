@@ -60,13 +60,13 @@ else:
         qrtr = ('0'+str(3*(int(y[-1])-1)+1))[-2:]
         tmp.append(int(year+qrtr))
     pmd_chunks = tmp
-    fetch_chunk = sorted(set(api_chunks)-set(pmd_chunks))[-6:]
+    fetch_chunk = max(set(api_chunks)-set(pmd_chunks))
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 # For a temporary accretive data replacement, instead of fetching a single chunk as the line below
 # df = distro.as_pandas(chunks_wanted=fetch_chunk)
 # We will get 6 in one go.
-df = distro.as_pandas(chunks_wanted=sorted(api_chunks)[-6:])
+df = distro.as_pandas(chunks_wanted=fetch_chunk)
 
 # Clearing all blank strings
 df = df.replace(r'^\s*$', np.nan, regex=True)
