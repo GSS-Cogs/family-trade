@@ -126,6 +126,8 @@ df.rename(col_names, axis=1, inplace=True)
 
 # +
 # Defaults, get your categorical value series defaults
+
+
 def default(series=pd.Series, value=str) -> pd.DataFrame():
     if value in series.cat.categories:
         return series.fillna(value)
@@ -154,16 +156,19 @@ SELECT marker, country_id, flow_type, cn8_id, port, period, value, measure_type,
 from data
 group by marker, country_id, flow_type, cn8_id, port, period, value, measure_type, unit_type
 """
-cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-cn8-{fetch_chunk}")
+
+cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-cn8-{fetch_chunk}",
+              override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}/cn8/{fetch_chunk}" if info['load']['accretiveUpload'] else None)
 
 
-# sitc cube work - aggregate on sitc and discard sn8 values
+# sitc cube work - aggregate on sitc and discard cn8 values
 qry = """
 SELECT marker, country_id, flow_type, sitc_id, port, period, value, measure_type, unit_type, sum(value) as value
 from data
 group by marker, country_id, flow_type, sitc_id, port, period, value, measure_type, unit_type
 """
-cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-sitc-{fetch_chunk}")
+cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-sitc-{fetch_chunk}",
+              override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}/sitc/{fetch_chunk}" if info['load']['accretiveUpload'] else None)
 
 # Output it!
 cube.output_all()
