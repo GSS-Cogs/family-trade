@@ -155,7 +155,7 @@ df["Units"] = df["Measure Type"].map(
 
 # -
 
-cubes.add_cube(scraper, df, scraper.title,
+cubes.add_cube(scraper, df, info['id'],
                override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}/{fetch_chunk}" if info['load']['accretiveUpload'] else None)
 
 # Write cube
