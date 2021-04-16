@@ -78,7 +78,7 @@ for col in df.columns:
 
 # Quarter conversion g(x) = x//3+1, so g(1)=1, g(4)=2, g(7)=3, g(10)=4
 df['Period'] = [
-    f"/id/quarter/{str(x)[:4]}-Q{str(int(str(x)[-2:])//3+1)}" for x in df['MonthId']]
+    f"id/quarter/{str(x)[:4]}-Q{str(int(str(x)[-2:])//3+1)}" for x in df['MonthId']]
 
 df.head()
 
@@ -161,15 +161,15 @@ cubes.add_cube(scraper, df, scraper.title,
 # Write cube
 cubes.output_all()
 
-# # Change the aboutUrl in the -metadata.json so we don't get URIs within URIs.
-# metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "r")
-# metadata = json.load(metadata_json)
-# metadata_json.close()
+# Change the aboutUrl in the -metadata.json so we don't get URIs within URIs.
+metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "r")
+metadata = json.load(metadata_json)
+metadata_json.close()
 
-# metadata["tables"][0]["tableSchema"]["aboutUrl"] = (
-#     metadata["tables"][0]["tableSchema"]["aboutUrl"].replace("{uk_region}", "{uk_region_code}")
-# )
+metadata["tables"][0]["tableSchema"]["aboutUrl"] = (
+    metadata["tables"][0]["tableSchema"]["aboutUrl"].replace("{uk_region}", "{uk_region_code}")
+)
 
-# metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "w")
-# json.dump(metadata, metadata_json, indent=4)
-# metadata_json.close()
+metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "w")
+json.dump(metadata, metadata_json, indent=4)
+metadata_json.close()
