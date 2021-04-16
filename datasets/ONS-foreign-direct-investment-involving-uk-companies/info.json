@@ -27,18 +27,21 @@
         "columns": {
             "Investment Direction": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{investment_direction}",
-                "codelist": false
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{investment_direction}"
             },
             "Year": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{year}",
-                "codelist": false
+                "value": "http://reference.data.gov.uk/id/year/{year}"
+            },
+            "FDI Area": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+            },
+            "FDI Industry": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/industry"
             },
             "International Trade Basis": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
-                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}",
-                "codelist": false
+                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
