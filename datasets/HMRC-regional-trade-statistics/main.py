@@ -28,10 +28,10 @@ logging.basicConfig(level=logging.DEBUG)
 # +
 infoFileName = 'info.json'
 
-info    = json.load(open(infoFileName))
+info = json.load(open(infoFileName))
 scraper = Scraper(seed=infoFileName)
-cubes   = Cubes(infoFileName)
-distro  = scraper.distribution(latest=True)
+cubes = Cubes(infoFileName)
+distro = scraper.distribution(latest=True)
 # -
 
 scraper.dataset.family = info['families']
@@ -39,7 +39,8 @@ scraper.dataset.family = info['families']
 # Get API Chunks
 # api_chunks = distro.get_odata_api_chunks()
 # Replace line below with line above once gss-utils issue get_odata_api_chunks() query is malformatted #216 is fixed
-api_chunks = [x["MonthId"] for x in distro._session.get(distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
+api_chunks = [x["MonthId"] for x in distro._session.get(
+    distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
 logging.debug(f'The chunks found on api are {api_chunks}')
 
 # Get PMD Chunks
@@ -76,7 +77,8 @@ for col in df.columns:
         df[col] = df[col].astype('category')
 
 # Quarter conversion g(x) = x//3+1, so g(1)=1, g(4)=2, g(7)=3, g(10)=4
-df['Period'] = [f"/id/quarter/{str(x)[:4]}-Q{str(int(str(x)[-2:])//3+1)}" for x in df['MonthId']]
+df['Period'] = [
+    f"/id/quarter/{str(x)[:4]}-Q{str(int(str(x)[-2:])//3+1)}" for x in df['MonthId']]
 
 df.head()
 
@@ -94,7 +96,8 @@ regions = {
     'East Midlands': 'http://statistics.data.gov.uk/id/statistical-geography/E12000004',
     'West Midlands': 'http://statistics.data.gov.uk/id/statistical-geography/E12000005',
     'South West': 'http://statistics.data.gov.uk/id/statistical-geography/E12000009',
-    'East': 'http://statistics.data.gov.uk/id/statistical-geography/E12000006', # Formally 'East of England'
+    # Formally 'East of England'
+    'East': 'http://statistics.data.gov.uk/id/statistical-geography/E12000006',
     'South East': 'http://statistics.data.gov.uk/id/statistical-geography/E12000008',
     'London': 'http://statistics.data.gov.uk/id/statistical-geography/E12000007',
     'Unallocated - Known': 'http://gss-data.org.uk/data/gss_data/trade/HMRC_RTS#concept/uk-region/unallocated-known',
@@ -111,7 +114,7 @@ region_codes = {
     'East Midlands': 'E12000004',
     'West Midlands': 'E12000005',
     'South West': 'E12000009',
-    'East': 'E12000006', # Formally 'East of England'
+    'East': 'E12000006',  # Formally 'East of England'
     'South East': 'E12000008',
     'London': 'E12000007',
     'Unallocated - Known': 'unallocated-known',
@@ -134,7 +137,8 @@ df['SITC Code'] = df['SITC Code'].astype('category')
 # Bring Value and NetMass into a single column
 new_df = pd.DataFrame()
 for measure in ['Value', 'NetMass']:
-    temp_df = df[['Period', 'Flow Type', 'UK Region Code', 'UK Region', 'Country', 'SITC Code', measure]]
+    temp_df = df[['Period', 'Flow Type', 'UK Region Code',
+                  'UK Region', 'Country', 'SITC Code', measure]]
     temp_df.rename({measure: 'Value'}, axis=1, inplace=True)
     temp_df['Measure Type'] = measure
     new_df = pd.concat([new_df, temp_df], axis=0)
@@ -143,26 +147,29 @@ del temp_df, new_df
 
 # Final formatting - measure-types
 df['Measure Type'] = df['Measure Type'].astype('category')
-df['Measure Type'].cat.rename_categories({'Value': 'gbp-million', 'NetMass': 'net-mass'}, inplace=True)
+df['Measure Type'].cat.rename_categories(
+    {'Value': 'gbp-million', 'NetMass': 'net-mass'}, inplace=True)
 
-df["Units"] = df["Measure Type"].map(lambda x: x.strip().replace("net-mass", "tonnes"))
+df["Units"] = df["Measure Type"].map(
+    lambda x: x.strip().replace("net-mass", "tonnes"))
 
 # -
 
-cubes.add_cube(scraper, df, scraper.title)
+cubes.add_cube(scraper, df, scraper.title,
+               override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}/{fetch_chunk}" if info['load']['accretiveUpload'] else None)
 
 # Write cube
 cubes.output_all()
 
-# Change the aboutUrl in the -metadata.json so we don't get URIs within URIs.
-metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "r")
-metadata = json.load(metadata_json)
-metadata_json.close()
+# # Change the aboutUrl in the -metadata.json so we don't get URIs within URIs.
+# metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "r")
+# metadata = json.load(metadata_json)
+# metadata_json.close()
 
-metadata["tables"][0]["tableSchema"]["aboutUrl"] = (
-    metadata["tables"][0]["tableSchema"]["aboutUrl"].replace("{uk_region}", "{uk_region_code}")
-)
+# metadata["tables"][0]["tableSchema"]["aboutUrl"] = (
+#     metadata["tables"][0]["tableSchema"]["aboutUrl"].replace("{uk_region}", "{uk_region_code}")
+# )
 
-metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "w")
-json.dump(metadata, metadata_json, indent=4)
-metadata_json.close()
+# metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "w")
+# json.dump(metadata, metadata_json, indent=4)
+# metadata_json.close()
