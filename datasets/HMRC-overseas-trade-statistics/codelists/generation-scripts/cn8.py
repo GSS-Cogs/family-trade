@@ -113,14 +113,15 @@ def get_hmrc_commodity_structure(map_code_to_parent: Dict[str, str]) -> (Dict[st
         hmrc_label = c["Cn8LongDescription"] \
             or f"({hmrc_code}) {c['Hs6Description'] or c['Hs4Description'] or c['Hs2Description']}" \
             or hmrc_code
-        hierarchy = [(hmrc_code, hmrc_label)] + \
-                    [(sanitise_notation(c[f"Hs{i}Code"]), get_hs_label(c, i))
-                     for i in range(6, 0, -2)]
 
-        hierarchy = [(a, b) for (a, b) in hierarchy
-                     if a is not None and b is not None
-                     # no dupes of self
-                     and a != hmrc_code]
+        parent_codes = [ (a,b) for (a, b)
+                         in [(sanitise_notation(c[f"Hs{i}Code"]), get_hs_label(c, i)) for i in range(6, 0, -2)]
+                         if a != hmrc_code
+                       ]
+
+        hierarchy = [(hmrc_code, hmrc_label)] + parent_codes
+
+        hierarchy = [(a, b) for (a, b) in hierarchy if a is not None and b is not None]
 
         for (p_code, p_description) in hierarchy:
             if p_code not in map_code_to_description or (p_description and p_description != '-'):
