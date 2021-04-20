@@ -37,11 +37,11 @@ distro = scraper_cn8.distribution(latest=True)
 # -
 
 # Get API Chunks
-# api_chunks = distro.get_odata_api_chunks()
-# logging.debug(f'The chunks found on api are {pmd_chunks}')
+api_chunks = distro.get_odata_api_chunks()
+logging.debug(f'The chunks found on api are {pmd_chunks}')
 # Replace line below with line above once gss-utils issue get_odata_api_chunks() query is malformatted #216 is fixed
-api_chunks = [x["MonthId"] for x in distro._session.get(
-    distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
+# api_chunks = [x["MonthId"] for x in distro._session.get(
+#     distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
 
 # Get PMD Chunks
 pmd_chunks = distro.get_pmd_chunks()
@@ -53,7 +53,7 @@ if len(pmd_chunks) == 0:
 else:
     pmd_chunks = [int(pd.to_datetime(
         x, format='/id/month/%Y-%m').strftime('%Y%m')) for x in pmd_chunks]
-    fetch_chunk = min(set(api_chunks)-set(pmd_chunks))
+    fetch_chunk = max(set(api_chunks)-set(pmd_chunks))
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 # Download the chonky dataframe
