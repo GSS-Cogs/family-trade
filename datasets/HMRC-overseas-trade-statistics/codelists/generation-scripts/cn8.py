@@ -96,11 +96,31 @@ def get_hmrc_commodity_structure(map_code_to_parent: Dict[str, str]) -> (Dict[st
             return notation.replace("-", "+")
         return None
 
+    def get_maybe_hs_label(c: dict) -> Optional[str]:
+        for i in range(6, 0, -2):
+            desc = c[f"Hs{i}Description"]
+            if desc and desc != "-":
+                return desc
+
+        return None
+
+    def get_cn8_label(c: dict) -> str:
+        concept = c["Cn8Code"]
+        desc = c["Cn8LongDescription"]
+        if desc and desc != "-":
+            return desc
+
+        parent_label = get_maybe_hs_label(c)
+        if parent_label:
+            return f"({concept}) {parent_label}"
+
+        return concept
+
     def get_hs_label(c: dict, i: int) -> str:
         concept = c[f"Hs{i}Code"]
         for j in range(i, 0, -2):
             desc = c[f"Hs{j}Description"]
-            if desc:
+            if desc and desc != "-":
                 return desc if j == i else f"({concept}) {desc}"
 
         return concept
@@ -110,13 +130,11 @@ def get_hmrc_commodity_structure(map_code_to_parent: Dict[str, str]) -> (Dict[st
     map_code_to_description = {}
     for c in hmrc_commodity_codes:
         hmrc_code = sanitise_notation(c["Cn8Code"])
-        hmrc_label = c["Cn8LongDescription"] \
-            or f"({hmrc_code}) {c['Hs6Description'] or c['Hs4Description'] or c['Hs2Description']}" \
-            or hmrc_code
+        hmrc_label = get_cn8_label(c)
 
-        parent_codes = [ (a,b) for (a, b)
-                         in [(sanitise_notation(c[f"Hs{i}Code"]), get_hs_label(c, i)) for i in range(6, 0, -2)]
-                         if a != hmrc_code
+        parent_codes = [(a, b) for (a, b)
+                        in [(sanitise_notation(c[f"Hs{i}Code"]), get_hs_label(c, i)) for i in range(6, 0, -2)]
+                        if a != hmrc_code
                        ]
 
         hierarchy = [(hmrc_code, hmrc_label)] + parent_codes
