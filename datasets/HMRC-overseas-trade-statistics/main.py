@@ -38,7 +38,7 @@ distro = scraper_cn8.distribution(latest=True)
 
 # Get API Chunks
 api_chunks = distro.get_odata_api_chunks()
-logging.debug(f'The chunks found on api are {pmd_chunks}')
+logging.debug(f'The chunks found on api are {api_chunks}')
 # Replace line below with line above once gss-utils issue get_odata_api_chunks() query is malformatted #216 is fixed
 # api_chunks = [x["MonthId"] for x in distro._session.get(
 #     distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
