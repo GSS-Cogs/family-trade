@@ -96,6 +96,15 @@ def get_hmrc_commodity_structure(map_code_to_parent: Dict[str, str]) -> (Dict[st
             return notation.replace("-", "+")
         return None
 
+    def get_hs_label(c: dict, i: int) -> str:
+        concept = c[f"Hs{i}Code"]
+        for j in range(i, 0, -2):
+            desc = c[f"Hs{j}Description"]
+            if desc:
+                return desc if j == i else f"({concept}) {desc}"
+
+        return concept
+
     hmrc_commodity_codes = get_api_data(api_url)
 
     map_code_to_description = {}
@@ -105,7 +114,8 @@ def get_hmrc_commodity_structure(map_code_to_parent: Dict[str, str]) -> (Dict[st
             or f"({hmrc_code}) {c['Hs6Description'] or c['Hs4Description'] or c['Hs2Description']}" \
             or hmrc_code
         hierarchy = [(hmrc_code, hmrc_label)] + \
-                    [(sanitise_notation(c[f"Hs{i}Code"]), c[f"Hs{i}Description"]) for i in range(6, 0, -2)]
+                    [(sanitise_notation(c[f"Hs{i}Code"]), get_hs_label(c, i))
+                     for i in range(6, 0, -2)]
 
         for (p_code, p_description) in hierarchy:
             if p_code not in map_code_to_description or (p_description and p_description != '-'):
@@ -165,12 +175,12 @@ def main():
         [r["Notation"] is not None and r["Notation"] != "00" for i, r in merged_data.iterrows()]
     ]
 
-    # # Get rid of data which is in the original CN8 codelist but not in HMRC's codelist.
-    # # This codelist is big enough as it is, we don't need to leave unnecessary nonsense in there.
-    # merged_data = merged_data[
-    #     [not str.isdigit(r["Notation"]) or r["MatchedWithHMRC"] is None or r["MatchedWithHMRC"]
-    #      for i, r in merged_data.iterrows()]
-    # ]
+    # Get rid of data which is in the original CN8 codelist but not in HMRC's codelist.
+    # This codelist is big enough as it is, we don't need to leave unnecessary nonsense in there.
+    merged_data = merged_data[
+        [not str.isdigit(r["Notation"]) or r["MatchedWithHMRC"] is None or r["MatchedWithHMRC"]
+         for i, r in merged_data.iterrows()]
+    ]
 
     merged_data["SortParam"] = merged_data["Notation"].map(define_sort_order)
     merged_data = merged_data.sort_values(by="SortParam")
