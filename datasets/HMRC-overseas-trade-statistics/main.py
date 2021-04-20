@@ -24,12 +24,16 @@ from gssutils import *
 file = 'info.json'
 
 info = json.load(open(file))
-scraper = Scraper(seed=file)
+cube = Cubes(file)
+scraper_cn8 = Scraper(seed=file)
+scraper_sitc = Scraper(seed=file)
 
-scraper.dataset.family = info['families']
+scraper_cn8.dataset.family = info['families']
+scraper_sitc.dataset.family = info['families']
+
 
 # + tags=[]
-distro = scraper.distribution(latest=True)
+distro = scraper_cn8.distribution(latest=True)
 # -
 
 # Get API Chunks
@@ -157,16 +161,15 @@ SELECT marker, country_id, flow_type, cn8_id, port, period, value, measure_type,
 from data
 group by marker, country_id, flow_type, cn8_id, port, period, value, measure_type, unit_type
 """
-scraper.dataset.title = "HMRC Overseas Trade Statistics - Combined Nomenclature 8"
-scraper.set_dataset_id(f"{info['id']}-cn8")
-cube = Cubes(file)
-cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-cn8",
+scraper_cn8.dataset.title = "HMRC Overseas Trade Statistics - Combined Nomenclature 8"
+scraper_cn8.set_dataset_id(f"{info['id']}-cn8")
+
+cube.add_cube(scraper_cn8, pd.read_sql_query(qry, con), f"{info['id']}-cn8",
               override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}-cn8/{fetch_chunk}"
               if info['load']['accretiveUpload'] else None)
 
 # Need to output CN8 dataset with appropriate title before the SITC dataset tries to overwrite the dataset's
 # label/title.
-cube.output_all()
 
 # sitc cube work - aggregate on sitc and discard sn8 values
 qry = """
@@ -174,10 +177,9 @@ SELECT marker, country_id, flow_type, sitc_id, port, period, value, measure_type
 from data
 group by marker, country_id, flow_type, sitc_id, port, period, value, measure_type, unit_type
 """
-scraper.dataset.title = "HMRC Overseas Trade Statistics - SITCv4"
-scraper.set_dataset_id(f"{info['id']}-sitc")
-cube = Cubes(file)
-cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-sitc",
+scraper_sitc.dataset.title = "HMRC Overseas Trade Statistics - SITCv4"
+scraper_sitc.set_dataset_id(f"{info['id']}-sitc")
+cube.add_cube(scraper_sitc, pd.read_sql_query(qry, con), f"{info['id']}-sitc",
               override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}-sitc/{fetch_chunk}"
               if info['load']['accretiveUpload'] else None)
 
