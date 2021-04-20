@@ -61,7 +61,7 @@ df = df.sample(n=5000)
 
 # Drop all columns not specified
 df.drop([x for x in df.columns if x not in ['MonthId', 'FlowTypeDescription', 'SuppressionIndex',
-        'CountryId', 'CommodityId', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
+        'CountryId', 'Cn8Code', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
 
 # Convert columns to categorical if categorical
 for col in df.columns:
@@ -96,10 +96,14 @@ df['FlowTypeDescription'].cat.rename_categories(
 # SitcCode changes
 df['SitcCode'].cat.rename_categories(
     lambda x: x.replace('-', '+'), inplace=True)
+# CN8 changes
+df['Cn8Code'].cat.rename_categories(
+    lambda x: x.replace('-', '+'), inplace=True)
+
 
 # The melty magic to take two values in the same row and create unique records for these values, the source column name becomes the 'variable' column, the column value stays in ends up in the 'value' column.
 df = df.melt(id_vars=['SuppressionIndex', 'CountryId', 'FlowTypeDescription',
-             'SitcCode', 'CommodityId', 'PortCodeNumeric', 'Period'], value_vars=['Value', 'NetMass'])
+             'SitcCode', 'Cn8Code', 'PortCodeNumeric', 'Period'], value_vars=['Value', 'NetMass'])
 
 # Units, Measures, and dictionaries, oh my!
 df.loc[df['variable'] == 'Value', 'measure_type'] = 'monetary-value'
@@ -117,7 +121,7 @@ col_names = {
     'SuppressionIndex': 'marker',
     'CountryId': 'country_id',
     'FlowTypeDescription': 'flow_type',
-    'CommodityId': 'cn8_id',
+    'Cn8Code': 'cn8_id',
     'SitcCode': 'sitc_id',
     'PortCodeNumeric': 'port',
     'Period': 'period'

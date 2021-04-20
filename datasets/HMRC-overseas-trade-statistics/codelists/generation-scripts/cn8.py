@@ -162,12 +162,12 @@ def main():
         [r["Notation"] is not None and r["Notation"] != "00" for i, r in merged_data.iterrows()]
     ]
 
-    # Get rid of data which is in the original CN8 codelist but not in HMRC's codelist.
-    # This codelist is big enough as it is, we don't need to leave unnecessary nonsense in there.
-    merged_data = merged_data[
-        [not str.isdigit(r["Notation"]) or r["MatchedWithHMRC"] is None or r["MatchedWithHMRC"]
-         for i, r in merged_data.iterrows()]
-    ]
+    # # Get rid of data which is in the original CN8 codelist but not in HMRC's codelist.
+    # # This codelist is big enough as it is, we don't need to leave unnecessary nonsense in there.
+    # merged_data = merged_data[
+    #     [not str.isdigit(r["Notation"]) or r["MatchedWithHMRC"] is None or r["MatchedWithHMRC"]
+    #      for i, r in merged_data.iterrows()]
+    # ]
 
     merged_data["SortParam"] = merged_data["Notation"].map(define_sort_order)
     merged_data = merged_data.sort_values(by="SortParam")
