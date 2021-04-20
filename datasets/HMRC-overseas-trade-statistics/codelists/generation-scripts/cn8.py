@@ -170,6 +170,15 @@ def main():
         "MatchedWithHMRC": [None for c in unmatched_cn8_codes]
     }))
 
+    merged_data = merged_data.append(pd.DataFrame({
+        "Label": ["Unknown"],
+        "Notation": ["unknown"],
+        "Parent Notation": [None],
+        "Sort Priority": [len(merged_data["Label"])],
+        "Exact Match": [None],
+        "MatchedWithHMRC": [None]
+    }))
+
     # Get rid of data where there is no Notation specified.
     merged_data = merged_data[
         [r["Notation"] is not None and r["Notation"] != "00" for i, r in merged_data.iterrows()]

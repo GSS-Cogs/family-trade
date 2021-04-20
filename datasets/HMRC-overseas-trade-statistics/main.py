@@ -158,7 +158,7 @@ SELECT marker, country_id, flow_type, cn8_id, port, period, value, measure_type,
 from data
 group by marker, country_id, flow_type, cn8_id, port, period, value, measure_type, unit_type
 """
-scraper.dataset.label = scraper.dataset.title = "HMRC Overseas Trade Statistics - Combined Nomenclature 8"
+scraper.dataset.title = "HMRC Overseas Trade Statistics - Combined Nomenclature 8"
 cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-cn8",
               override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}-cn8/{fetch_chunk}"
               if info['load']['accretiveUpload'] else None)
@@ -170,7 +170,7 @@ SELECT marker, country_id, flow_type, sitc_id, port, period, value, measure_type
 from data
 group by marker, country_id, flow_type, sitc_id, port, period, value, measure_type, unit_type
 """
-scraper.dataset.label = scraper.dataset.title = "HMRC Overseas Trade Statistics - SITCv4"
+scraper.dataset.title = "HMRC Overseas Trade Statistics - SITCv4"
 cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-sitc",
               override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}-sitc/{fetch_chunk}"
               if info['load']['accretiveUpload'] else None)
