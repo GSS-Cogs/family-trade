@@ -57,7 +57,7 @@ logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 df = distro.as_pandas(chunks_wanted=fetch_chunk)
 
 # Sampling to downsize work
-# df = df.sample(n=5000)
+df = df.sample(n=5000)
 
 # Drop all columns not specified
 df.drop([x for x in df.columns if x not in ['MonthId', 'FlowTypeDescription', 'SuppressionIndex',
@@ -154,6 +154,7 @@ SELECT marker, country_id, flow_type, cn8_id, port, period, value, measure_type,
 from data
 group by marker, country_id, flow_type, cn8_id, port, period, value, measure_type, unit_type
 """
+scraper.dataset.label = "HMRC Overseas Trade Statistics - Combined Nomenclature 8"
 cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-cn8-{fetch_chunk}")
 
 
@@ -163,6 +164,7 @@ SELECT marker, country_id, flow_type, sitc_id, port, period, value, measure_type
 from data
 group by marker, country_id, flow_type, sitc_id, port, period, value, measure_type, unit_type
 """
+scraper.dataset.label = "HMRC Overseas Trade Statistics - SITCv4"
 cube.add_cube(scraper, pd.read_sql_query(qry, con), f"{info['id']}-sitc-{fetch_chunk}")
 
 # Output it!

@@ -5,7 +5,7 @@ https://api.uktradeinfo.com/Commodity
 from pathlib import Path
 import requests
 import pandas as pd
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 
 sparql_endpoint = "https://staging.gss-data.org.uk/sparql"
@@ -90,13 +90,19 @@ def merge_labels(merged_data: pd.DataFrame, existing_cn8_commodity_codes, hmrc_c
 
 
 def get_hmrc_commodity_structure(map_code_to_parent: Dict[str, str]) -> (Dict[str, str], Dict[str, str]):
+    def sanitise_notation(notation: Optional[str]) -> Optional[str]:
+        if notation:
+            # Ensure we generate valid URIs. `-` isn't okay in URIs, so replace with `+`.
+            return notation.replace("-", "+")
+        return None
+
     hmrc_commodity_codes = get_api_data(api_url)
 
     map_code_to_description = {}
     for c in hmrc_commodity_codes:
-        hmrc_code = c["Cn8Code"]
+        hmrc_code = sanitise_notation(c["Cn8Code"])
         hierarchy = [(hmrc_code, c["Cn8LongDescription"])] + \
-                    [(c[f"Hs{i}Code"], c[f"Hs{i}Description"]) for i in range(6, 0, -2)]
+                    [(sanitise_notation(c[f"Hs{i}Code"]), c[f"Hs{i}Description"]) for i in range(6, 0, -2)]
 
         for (p_code, p_description) in hierarchy:
             if p_code not in map_code_to_description and p_description and p_description != '-':
@@ -113,9 +119,10 @@ def get_hmrc_commodity_structure(map_code_to_parent: Dict[str, str]) -> (Dict[st
 def define_sort_order(notation: str) -> str:
     if str.isdigit(notation):
         return f"b-{notation}"
-    elif "-" in notation:
+    elif "+" in notation:
         # Stick the special `01---`/'HS2 Below Threshold Trade' elements after the real ones.
-        return f"b-{notation.replace('-', 'z')}"
+        # N.B. we have already replaced all instances of `-` with `+` earlier on.
+        return f"b-{notation.replace('+', 'z')}"
     else:
         return f"a-section-header-{notation}"
 
