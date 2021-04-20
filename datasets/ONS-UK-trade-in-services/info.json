@@ -22,6 +22,12 @@
                 "value": "http://reference.data.gov.uk/id/{+period}",
                 "codelist": false
             },
+            "Country": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+            },
+            "Trade Services": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
+            },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
