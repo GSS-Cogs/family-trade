@@ -45,7 +45,7 @@ logging.debug(f'The chunks found on api are {api_chunks}')
 
 # Get PMD Chunks
 pmd_chunks = distro.get_pmd_chunks()
-logging.debug(f'The chunks found on pmd are {pmd_chunks}')
+logging.debug(f'The chunks found on pmd are {api_chunks}')
 
 # Get next period to download
 if len(pmd_chunks) == 0:
