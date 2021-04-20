@@ -117,6 +117,11 @@ def get_hmrc_commodity_structure(map_code_to_parent: Dict[str, str]) -> (Dict[st
                     [(sanitise_notation(c[f"Hs{i}Code"]), get_hs_label(c, i))
                      for i in range(6, 0, -2)]
 
+        hierarchy = [(a, b) for (a, b) in hierarchy
+                     if a is not None and b is not None
+                     # no dupes of self
+                     and a != hmrc_code]
+
         for (p_code, p_description) in hierarchy:
             if p_code not in map_code_to_description or (p_description and p_description != '-'):
                 map_code_to_description[p_code] = p_description
@@ -164,7 +169,7 @@ def main():
     merged_data = merged_data.append(pd.DataFrame({
         "Label": [hmrc_code_to_description[c] for c in unmatched_cn8_codes],
         "Notation": unmatched_cn8_codes,
-        "Parent Notation": [map_code_to_parent[c] for c in unmatched_cn8_codes],
+        "Parent Notation": [map_code_to_parent.get(c) for c in unmatched_cn8_codes],
         "Sort Priority": [None for c in unmatched_cn8_codes],
         "Exact Match": [None for c in unmatched_cn8_codes],
         "MatchedWithHMRC": [None for c in unmatched_cn8_codes]
