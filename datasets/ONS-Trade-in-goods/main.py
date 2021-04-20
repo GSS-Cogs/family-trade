@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.1
+#       jupytext_version: 1.3.3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -168,13 +168,13 @@ table['Flow'] = table['Flow'].map(lambda x: x.split(' ')[1])
 # -
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
-#table['Measure Type'] = pd.Series('gbp-million', index=table.index, dtype='category') 
-#table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
+table['Measure Type'] = pd.Series('gbp-million', index=table.index, dtype='category') 
+table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
 
 table['Marker'] = ' '
 table.loc[(table['Value'] == 0), 'Marker'] = 'suppressed'
 
-table = table[['ONS Partner Geography','Period','Flow','Commodity','Seasonal Adjustment','Value','Marker']]
+table = table[['ONS Partner Geography','Period','Flow','Commodity','Seasonal Adjustment','Measure Type','Value','Marker','Unit']]
 table['Flow'] = table['Flow'].map(lambda x: pathify(x))
 table
 
