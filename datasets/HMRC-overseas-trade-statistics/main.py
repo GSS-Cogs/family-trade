@@ -60,7 +60,7 @@ logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 df = distro.as_pandas(chunks_wanted=fetch_chunk)
 
 # Sampling to downsize work
-df = df.sample(n=5000)
+# df = df.sample(n=5000)
 
 # Drop all columns not specified
 df.drop([x for x in df.columns if x not in ['MonthId', 'FlowTypeDescription', 'SuppressionIndex',
