@@ -101,11 +101,14 @@ def get_hmrc_commodity_structure(map_code_to_parent: Dict[str, str]) -> (Dict[st
     map_code_to_description = {}
     for c in hmrc_commodity_codes:
         hmrc_code = sanitise_notation(c["Cn8Code"])
-        hierarchy = [(hmrc_code, c["Cn8LongDescription"])] + \
+        hmrc_label = c["Cn8LongDescription"] \
+            or f"({hmrc_code}) {c['Hs6Description'] or c['Hs4Description'] or c['Hs2Description']}" \
+            or hmrc_code
+        hierarchy = [(hmrc_code, hmrc_label)] + \
                     [(sanitise_notation(c[f"Hs{i}Code"]), c[f"Hs{i}Description"]) for i in range(6, 0, -2)]
 
         for (p_code, p_description) in hierarchy:
-            if p_code not in map_code_to_description and p_description and p_description != '-':
+            if p_code not in map_code_to_description or (p_description and p_description != '-'):
                 map_code_to_description[p_code] = p_description
 
         for i in range(0, len(hierarchy)-1):
