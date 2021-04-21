@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.11.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -33,6 +33,8 @@ distribution = scraper.distribution(latest=True)
 mainDescr = scraper.dataset.description
 mainDescr
 # -
+
+distribution
 
 tabs = distribution.as_databaker()
 
@@ -590,7 +592,7 @@ for tab in tabs:
         
         sector_index = [9,14,16,22,32,37,46,54,59,64]
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,30,52]) - tab.excel_ref('B70').expand(DOWN)
-        sector_only = tab.excel_ref('B').expand(DOWN).by_index(sector_index) - tab.excel_ref('B70').expand(DOWN)
+        sector_only = tab.excel_ref('B').expand(DOWN).by_index(sector_index) - tab.excel_ref('B69').expand(DOWN)
         services = tab.excel_ref('B8').expand(DOWN).is_not_blank() - sector_only - flow - tab.excel_ref('B70').expand(DOWN)
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
         year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
@@ -632,7 +634,7 @@ for tab in tabs:
         df['Account Type'] = df['Account Type'].str.rstrip('1')
         df['Services'] = df['Services'].str.rstrip('2')
         df['Services'] = df['Services'].str.lstrip()
-        df = df.replace({'Sector' : {' ' : 'total'}})
+        df = df.replace({'Sector' : {'' : 'total'}})
         
         df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
         df['Marker'].replace(' -', 'unknown', inplace=True)
