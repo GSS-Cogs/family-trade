@@ -415,6 +415,8 @@ product_observations_cvm['Trade Area'].unique()
 
 # +
 #### CHAINED VOLUME MEASURES
+cubes = Cubes(infoFileName)
+
 scraper.dataset.title = 'UK trade time series - Chained Value Measures'
 scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
 scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
@@ -426,9 +428,7 @@ data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/conc
 with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
-cubes = Cubes(infoFileName)
 cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
-cubes.output_all()
 # -
 
 product_observations_cp['Trade Area'] = product_observations_cp['Trade Area'].apply(pathify)
@@ -446,9 +446,14 @@ data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/conc
 with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
-cubes = Cubes(infoFileName)
+#cubes = Cubes(infoFileName)
 cubes.add_cube(copy.deepcopy(scraper), product_observations_cp, scraper.dataset.title)
-cubes.output_all()
+
 # -
+for cube in cubes.cubes:
+    print(cube.scraper.title)
+
+cubes.output_all()
+
 #
 
