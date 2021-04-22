@@ -52,7 +52,7 @@ if len(pmd_chunks) == 0:
     fetch_chunk = min(api_chunks)
 else:
     pmd_chunks = [int(pd.to_datetime(
-        x, format='/id/month/%Y-%m').strftime('%Y%m')) for x in pmd_chunks]
+        x, format='http://reference.data.gov.uk/id/month/%Y-%m').strftime('%Y%m')) for x in pmd_chunks]
     fetch_chunk = max(set(api_chunks)-set(pmd_chunks))
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
