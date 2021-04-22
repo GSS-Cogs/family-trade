@@ -423,12 +423,12 @@ scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decim
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
-data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
-
-cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+product_observations_cvm = product_observations_cvm.drop_duplicates()   
+cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, 'uk-trade-time-series-chained-value-measures', 'uk-trade-time-series-chained-value-measures', data)
 # -
 
 product_observations_cp['Trade Area'] = product_observations_cp['Trade Area'].apply(pathify)
@@ -441,14 +441,12 @@ scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decim
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cp"
-data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
-
-#cubes = Cubes(infoFileName)
-cubes.add_cube(copy.deepcopy(scraper), product_observations_cp, scraper.dataset.title)
-
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cp"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+product_observations_cp = product_observations_cp.drop_duplicates()   
+cubes.add_cube(copy.deepcopy(scraper), product_observations_cp, 'uk-trade-time-series-current-prices', 'uk-trade-time-series-current-prices', data)
 # -
 for cube in cubes.cubes:
     print(cube.scraper.title)
