@@ -24,7 +24,7 @@
             "recWLO6lMVlcBiBiz",
             "recrQBCo8oII5TUpF"
         ],
-        "main_issue": 3,
+        "main_issue": 9,
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
