@@ -441,7 +441,7 @@ scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decim
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cp"
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/current-prices"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
