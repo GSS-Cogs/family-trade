@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs/observations",
+    "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk",
     "url": "observations.csv",
     "tableSchema": {
         "columns": [
@@ -9,63 +9,63 @@
                 "name": "commodity",
                 "datatype": "string",
                 "required": true,
-                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/commodity"
+                "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/commodity"
             },
             {
                 "titles": "description",
                 "name": "description",
                 "datatype": "string",
                 "required": true,
-                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/description"
+                "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/description"
             },
             {
                 "titles": "cet_duty_rate",
                 "name": "cet_duty_rate",
                 "datatype": "decimal",
                 "required": false,
-                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/cet_duty_rate"
+                "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/cet-duty-rate"
             },
             {
                 "titles": "ukgt_duty_rate",
                 "name": "ukgt_duty_rate",
                 "datatype": "decimal",
                 "required": false,
-                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/ukgt_duty_rate"
+                "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/ukgt-duty-rate"
             },
             {
                 "titles": "change",
                 "name": "change",
                 "datatype": "string",
                 "required": false,
-                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/change"
+                "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/change"
             },
             {
                 "titles": "trade_remedy_applies",
                 "name": "trade_remedy_applies",
                 "datatype": "string",
                 "required": false,
-                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/trade_remedy_applies"
+                "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/trade-remedy-applies"
             },
             {
                 "titles": "cet_applies_until_trade_remedy_transition_reviews_concluded",
                 "name": "cet_applies_until_trade_remedy_transition_reviews_concluded",
                 "datatype": "string",
                 "required": false,
-                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/cet_applies_until_trade_remedy_transition_reviews_concluded"
+                "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/cet-applies-until-trade-remedy-transition-reviews-concluded"
             },
             {
                 "titles": "suspension_applies",
                 "name": "suspension_applies",
                 "datatype": "string",
                 "required": false,
-                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/suspension_applies"
+                "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/suspension-applies"
             },
             {
                 "titles": "atg_applies",
                 "name": "atg_applies",
                 "datatype": "string",
                 "required": false,
-                "propertyUrl": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/atg_applies"
+                "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/atg-applies"
             },
             {
                 "name": "virtual_concept", 
@@ -75,70 +75,56 @@
             }
         ],
         "primaryKey": "observations",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/trade-tariffs/{commodity}"
-    },
-    "rdfs:label": "observations",
-    "dc:title": "observations",
-    "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs",
-        "@type": [
-            "skos:ConceptScheme",
-            "http://publishmydata.com/pmdcat#ConceptScheme"
-        ]
+        "aboutUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/{commodity}"
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/commodity",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/commodity",
             "rdfs:label": "Commodity",
             "rdfs:description": "Commodity Name"
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/description",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/description",
             "rdfs:label": "Description",
             "rdfs:description": "Commodity Description"
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/cet_duty_rate",
-            "rdfs:label": "Cet_Duty_Rate",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/cet-duty-rate",
+            "rdfs:label": "CET Duty Rate",
             "rdfs:description": "Tariff rate"
         }, 
         {   
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/ukgt_duty_rate",
-            "rdfs:label": "Ukgt_Duty_Rate",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/ukgt-duty-rate",
+            "rdfs:label": "UKGT Duty Rate",
             "rdfs:description": "Tariff rate"
         }, 
         {   
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/change",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/change",
             "rdfs:label": "Change",
             "rdfs:description": "Tariff rate change"
         }, 
         {   
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/trade_remedy_applies",
-            "rdfs:label": "Trade_Remedy_Applies",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/trade-remedy-applies",
+            "rdfs:label": "Trade Remedy Applies",
             "rdfs:description": ""
         },   
         {   
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/cet_applies_until_trade_remedy_transition_reviews_concluded",
-            "rdfs:label": "Cet_Applies_Until_Trade_Remedy_Transition_Reviews_Concluded",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/cet-applies-until-trade-remedy-transition-reviews-concluded",
+            "rdfs:label": "CET applies until trade remedy transition reviews concluded",
             "rdfs:description": ""
         },   
         {   
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/suspension_applies",
-            "rdfs:label": "Suspension_Applies",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/suspension-applies",
+            "rdfs:label": "Suspension Applies",
             "rdfs:description": ""
-        },   
+        },      
         {   
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/suspension_applies",
-            "rdfs:label": "Suspension_Applies",
-            "rdfs:description": ""
-        },   
-        {   
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/DIT-UK-Tarriffs/atg_applies",
-            "rdfs:label": "Atg_Applies",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/atg-applies",
+            "rdfs:label": "ATG Applies",
             "rdfs:description": ""
         },   
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs/dataset",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
@@ -146,37 +132,37 @@
             "rdfs:label": "Tariffs on goods imported into the UK",
             "dc:title": "Tariffs on goods imported into the UK",
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs"
+                "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk#dataset"
             },
             "rdfs:comment": "Use this service to check the UK Global Tariff that will apply to goods you import from 1 January 2021. You can also check the difference between what you pay now and what you\u2019ll pay from 1 January 2021.",
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs"
+                "@id": "http://gss-data.org.uk/graph/trade/tariffs-on-goods-imported-into-the-uk"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs/catalog-record"
+                "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs/catalog-record",
+            "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/catalog-record",
             "@type": "dcat:CatalogRecord",
             "dc:title": "Tariffs on goods imported into the UK Catalog Record",
             "rdfs:label": "Tariffs on goods imported into the UK Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-01-25T11:58:58.120533"
+                "@value": "2021-04-13T11:58:58.120533"
             },
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs/dataset"
+                "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk#dataset"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-12-23T11:59:10.942836"
+                "@value": "2021-04-13T11:58:58.120533"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/def/trade/concept-scheme/trade-tariffs/observations"
+                "@id": "http://gss-data.org.uk/graph/trade/tariffs-on-goods-imported-into-the-uk"
             }
         }
     ]
