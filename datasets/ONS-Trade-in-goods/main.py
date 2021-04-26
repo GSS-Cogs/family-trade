@@ -156,7 +156,7 @@ pd.set_option('display.float_format', lambda x: '%.0f' % x)
 table.loc[table['Period'].str.len() == 7, 'Period'] = pd.to_datetime(table.loc[table['Period'].str.len() == 7, 'Period'], format='%Y%b').astype(str).map(lambda x: 'month/' + left(x,7))
 #table['Period'] = table['Period'].astype(str)
 table.dropna(subset=['Value'], inplace=True)
-table['Value'] = table['Value'].astype(int)
+#table['Value'] = table['Value'].astype(int)
 
 table['Commodity'].cat.categories = table['Commodity'].cat.categories.map(lambda x: x.split(' ')[0])
 table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
