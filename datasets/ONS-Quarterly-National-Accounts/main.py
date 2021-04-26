@@ -506,11 +506,11 @@ def prefix_refperiod(dataset, dimension):
     
 def convet_dimension_to_int(dataset, dimension):
     try:
-        dataset[dimension] = dataset[dimension].fillna(-1)
-        dataset[dimension] = dataset[dimension].replace('',-1)
+        dataset[dimension] = dataset[dimension].fillna(-1000000000000)
+        dataset[dimension] = dataset[dimension].replace('',-1000000000000)
         dataset[dimension] = dataset[dimension].astype(int)
         dataset[dimension] = dataset[dimension].astype(str)
-        dataset[dimension] = dataset[dimension].replace('-1', np.nan)
+        dataset[dimension] = dataset[dimension].replace('-1000000000000', np.nan)
         return dataset
     except Exception as e:
         print('convet_dimension_to_int: ' + str(e))
@@ -791,6 +791,10 @@ d1['Category of Income'] = d1['Category of Income'].apply(pathify)
 d1 = d1.rename(columns={'OBS':'Value', 'Gross Domestic Product':'Economic Concept'})
 
 d1 = convet_dimension_to_int(d1, 'Value')
+
+d1['Value'][d1['Value'].isna()] = ''
+d1['Marker'] = ''
+d1['Marker'][d1['Value'] == ''] = 'not-available'
 
 d1cdids = d1['CDID'].unique()
 d1.head(5)
