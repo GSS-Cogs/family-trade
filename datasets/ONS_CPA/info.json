@@ -17,7 +17,7 @@
         "main_issue": 18,
         "columns": {
             "CDID": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
                 "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
             },
             "Period": {
