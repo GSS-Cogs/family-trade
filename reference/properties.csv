@@ -80,3 +80,6 @@ trade,CDID,dimension/cdid,qb:DimensionProperty,,,skos:Concept,http://gss-data.or
 trade,ONS Industry Classification,dimension/ons-industry,qb:DimensionProperty,http://gss-data.org.uk/def/trade/property/dimension/industry,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/ons-industry,
 trade,Country Area,dimension/country-area,qb:DimensionProperty,http://purl.org/linked-data/sdmx/2009/dimension#refArea,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/country-area,
 trade,Commodity,dimension/commodity,qb:DimensionProperty,http://gss-data.org.uk/def/trade/property/dimension/product,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/commodity,
+trade,Business Activity,dimension/business-activity,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/business-activity,
+trade,Trade Group,dimension/trade-group,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/trade-group,
+trade,Turnover,dimension/turnover-size-bands,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands,
