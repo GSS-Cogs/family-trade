@@ -792,6 +792,9 @@ d1 = d1.rename(columns={'OBS':'Value', 'Gross Domestic Product':'Economic Concep
 
 d1 = convet_dimension_to_int(d1, 'Value')
 
+d1['Marker'] = ''
+d1['Marker'][d1['Value'] == ''] = 'not-available'
+
 d1cdids = d1['CDID'].unique()
 d1.head(5)
 #d1['Gross Domestic Product'].unique()
