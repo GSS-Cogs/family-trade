@@ -792,6 +792,7 @@ d1 = d1.rename(columns={'OBS':'Value', 'Gross Domestic Product':'Economic Concep
 
 d1 = convet_dimension_to_int(d1, 'Value')
 
+d1['Value'][d1['Value'].isna()] = ''
 d1['Marker'] = ''
 d1['Marker'][d1['Value'] == ''] = 'not-available'
 
