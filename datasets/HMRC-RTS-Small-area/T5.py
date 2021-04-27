@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.11.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -74,10 +74,6 @@ Dimensions = [
 c2 = ConversionSegment(observations1, Dimensions, processTIMEUNIT=True)
 table2 = c2.topandas()
 tidy = pd.concat([tidy, table2], sort=True)
-
-# +
-#savepreviewhtml(c2)
-# -
 
 tidy['Marker'] = tidy['DATAMARKER'].map(lambda x:'not-applicable'
                                   if (x == 'N/A')
@@ -220,9 +216,10 @@ tidy = pd.merge(tidy, c, how = 'left', left_on = 'Geography', right_on = 'Label'
 tidy.columns = ['HMRC Partner Geography' if x=='Notation' else x for x in tidy.columns]
 # -
 
+#QQ if Stores & Provisions
+tidy['HMRC Partner Geography'].loc[(tidy['Geography'] == 'Stores and Provisions')] = 'QQ'
+
 tidy = tidy.rename(columns={'EU / Non EU' : 'EU - Non-EU'})
 import numpy
 tidy['HMRC Partner Geography'] = numpy.where(tidy['HMRC Partner Geography'] == 'residual-trade', tidy['EU - Non-EU'], tidy['HMRC Partner Geography'])
 tidy =tidy[['Year','NUTS Geography','HMRC Partner Geography','Flow','SITC 4','Measure Type', 'Value', 'Unit','Marker']]
-
-tidy
