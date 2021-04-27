@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       jupytext_version: 1.11.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -19,6 +19,7 @@
 # +
 from gssutils import *
 import json
+import copy 
 
 cubes = Cubes("info.json")
 with open("info.json") as f:
@@ -139,24 +140,7 @@ for c in tidy.columns:
     if (c != "Value") & (c != "Year"):
         tidy[c] = tidy[c].apply(pathify)
 
-"""
-c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/age-of-business.csv")
-tidy = pd.merge(tidy, c, how = 'left', left_on = 'Age', right_on = 'Label')
-tidy.columns = ['Age of Business' if x=='Notation' else x for x in tidy.columns]
-
-c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/ref_trade/master/codelists/exporter-and-importer-activity.csv")
-tidy = pd.merge(tidy, c, how = 'left', left_on = 'Import/Export', right_on = 'Label')
-tidy.columns = ['Export and Import Activity' if x=='Notation' else x for x in tidy.columns]
-
-c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/turnover-size-bands.csv")
-tidy = pd.merge(tidy, c, how = 'left', left_on = 'turnover', right_on = 'Label')
-tidy.columns = ['Turnover' if x=='Notation' else x for x in tidy.columns]
-
-c=pd.read_csv("https://raw.githubusercontent.com/GSS-Cogs/family-trade/master/reference/codelists/employment-size-bands.csv")
-tidy = pd.merge(tidy, c, how = 'left', left_on = 'employees', right_on = 'Label')
-tidy.columns = ['Employment' if x=='Notation' else x for x in tidy.columns]
-"""
-
+tidy = tidy.replace({'Employees' : {'250-and-over': '250'}})
 tidy = tidy[['Year','Age of Business', 'Business Activity','Country of Ownership','Trade Group','Turnover'
              ,'Employees','Unit','Measure Type', 'Value']]
 tidy.head()
@@ -180,16 +164,14 @@ cntdat.head()
 
 prodat.head()
 
-# +
+
 scraper.dataset.description = scraper.dataset.description + """
 Users should note that an Annual Business Survey (ABS) sample re-optimisation has been included in the estimates from 2016 onwards. This was last carried out in 2016 and occurs every five years to improve the efficiency of the ABS sample, estimation and reduce sample variability as part of the regular process to improve estimates.
 This re-optimisation has led to a discontinuity between 2015 and 2016 within small and medium sized businesses (those with fewer than 250 employment). Therefore users should not make year-on-year comparisons between 2015 and 2016.
 
 The questions and methodology used to compute these statistics are in their infancy. At this stage the estimates should be considered 
     :experimental official statistics - https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/guidetoexperimentalstatistics
-
 Notes
-
 1. This spreadsheet contains Annual Business Survey (ABS) final estimates on exporters and importers for 2016, revised estimates for 2017 and provisional estimates for 2018.
 2. More details on the methodology used to produce these estimates and the things to be aware of when using the data can be found in the: 
     Exporters and Importers in Great Britain, 2014 Information Paper - http://www.ons.gov.uk/ons/guide-method/method-quality/specific/business-and-energy/annual-business-survey/quality-and-methods/information-paper--annual-business-survey--abs---exporters-and-importers-in-great-britain--2014.pdf
@@ -204,80 +186,43 @@ Notes
  ABS webpage - https://www.ons.gov.uk/businessindustryandtrade/business/businessservices/bulletins/uknonfinancialbusinesseconomy/previousReleases
 """
 
-scraper.set_base_uri('http://gss-data.org.uk')
-# -
-
+# +
+#### Business count 
 scraper.dataset.family = "trade"
+scraper.dataset.title = 'Annual Business Survey exporters and importers - Business count'
 scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
                                                           'Importers and exporters of trade goods and services')
-#cubes.add_cube(scraper, tidy, "Annual Business Survey Exporters and Importers")
-#cubes.add_cube(scraper, cntdat, "Annual Business Survey Exporters and Importers - Business count")
-#cubes.add_cube(scraper, prodat, "Annual Business Survey Exporters and Importers - Business proportion")
+scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
 
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/count"
+    #data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+        
+cntdat = cntdat.drop_duplicates()   
+cubes.add_cube(copy.deepcopy(scraper), cntdat, 'annual-business-survey-exporters-and-importers-business-count', 'annual-business-survey-exporters-and-importers-business-count', data)
 
 # +
-#cubes.output_all()
+#### Business Proportion  
+scraper.dataset.title = 'Annual Business Survey exporters and importers - Business proportion'
+scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
+                                                          'Importers and exporters of trade goods and services')
+scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
 
-# +
-import os
-from urllib.parse import urljoin
-
-#### ONLY OUTPUTTING THE BUSINESS COUNT FOR NOW
-csvName = 'count_observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-cntdat.drop_duplicates().to_csv(out / csvName, index = False)
-cntdat.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-
-#scraper.dataset.title = 'Annual Business Survey exporters and importers - Business count'
-
-dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() 
-scraper.set_base_uri('http://gss-data.org.uk')
-scraper.set_dataset_id(dataset_path)
-
-csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / csvName)
-csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-csvw_transform.write(out / f'{csvName}-metadata.json')
-
-with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/percentage"
+    #data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+        
+prodat = prodat.drop_duplicates()   
+cubes.add_cube(copy.deepcopy(scraper), prodat, 'annual-business-survey-exporters-and-importers-business-proportion', 'annual-business-survey-exporters-and-importers-business-proportion', data)
 # -
 
-"""
-csvName = 'proportion_observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-prodat.drop_duplicates().to_csv(out / csvName, index = False)
-prodat.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+for cube in cubes.cubes:
+    print(cube.scraper.title)
 
-scraper.dataset.title = 'Annual Business Survey exporters and importers - Business proportion Split'
-
-dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name)).lower() + "/business-proportion"
-scraper.set_base_uri('http://gss-data.org.uk')
-scraper.set_dataset_id(dataset_path)
-
-csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / csvName)
-
-j = json.load(open('info.json'))
-j["transform"]["columns"]["Value"]["measure"] = "percentage"
-
-csvw_transform.set_mapping(j)
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-csvw_transform.write(out / f'{csvName}-metadata.json')
-
-with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-"""
-
-
-# +
-#tidy.head(10)
-# -
-
-
-
-
-
+cubes.output_all()

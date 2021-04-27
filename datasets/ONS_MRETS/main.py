@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.11.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -346,7 +346,7 @@ from gssutils.metadata import THEME
 # Rename columns
 rename_columns = {"period": "Period",
                   "country": "Trade Area",
-                  "product": "MRETS Product",
+                  "product": "Product",
                   "direction": "Flow Directions",
                   "basis": "Basis",
                   "unit": "Unit",
@@ -360,12 +360,12 @@ product_observations.rename(rename_columns, axis=1, inplace=True)
 if "Seasonal Adjustment" in product_observations.columns.values:
     product_observations["Seasonal Adjustment"] = product_observations["Seasonal Adjustment"].str.upper()
     
-if "MRETS Product" in product_observations.columns.values:
-    product_observations["MRETS Product"] = product_observations["MRETS Product"].apply(pathify)
+if "Product" in product_observations.columns.values:
+    product_observations["Product"] = product_observations["Product"].apply(pathify)
     
 if "Flow Directions" in product_observations.columns.values:
     product_observations["Flow Directions"] = product_observations["Flow Directions"].apply(fix_short_hand_flow)
-    
+     
 if "Basis" in product_observations.columns.values:
     product_observations = product_observations.drop("Basis", axis=1)
     
@@ -399,54 +399,59 @@ product_observations_cvm['Trade Area'] = product_observations_cvm['Trade Area'].
 del product_observations_cp['Measure Type']
 del product_observations_cp['Unit']
 product_observations_cp['Trade Area'] = product_observations_cp['Trade Area'].str.upper()
+# -
 
-# +
 """
 Measure Type
 'Current Price', 'Chained volume measure', 'Net Mass','Implied Deflator', 'Average value per ton'
 """
+product_observations_cvm['Trade Area'] = product_observations_cvm['Trade Area'].apply(pathify)
+product_observations_cvm.head(10)
 
-product_observations_cp.head(10)
-product_observations_cp['Trade Area'].unique()
-#product_observations_cvm['Trade Area'].unique()
+# +
+
+#product_observations_cp['Trade Area'].unique()
+product_observations_cvm['Trade Area'].unique()
 
 # +
 #### CHAINED VOLUME MEASURES
+cubes = Cubes(infoFileName)
+
 scraper.dataset.title = 'UK trade time series - Chained Value Measures'
 scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
 scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
-data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+product_observations_cvm = product_observations_cvm.drop_duplicates()   
+cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, 'uk-trade-time-series-chained-value-measures', 'uk-trade-time-series-chained-value-measures', data)
+# -
 
-cubes = Cubes(infoFileName)
-cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, scraper.dataset.title)
-cubes.output_all()
+product_observations_cp['Trade Area'] = product_observations_cp['Trade Area'].apply(pathify)
 
 # +
 #### CURRENT PRICES
-#scraper.dataset.title = 'UK trade time series - Current Prices'
-#scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
-#scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
+scraper.dataset.title = 'UK trade time series - Current Prices'
+scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
+scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
 
-#with open("info.json", "r") as jsonFile:
-#    data = json.load(jsonFile)
-#data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cp"
-#data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-#with open("info.json", "w") as jsonFile:
-#    json.dump(data, jsonFile)
-
-#cubes = Cubes(infoFileName)
-#cubes.add_cube(copy.deepcopy(scraper), product_observations_cp, scraper.dataset.title)
-#cubes.output_all()
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/current-prices"
+    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+    with open("info.json", "w") as jsonFile:
+        json.dump(data, jsonFile)
+product_observations_cp = product_observations_cp.drop_duplicates()   
+cubes.add_cube(copy.deepcopy(scraper), product_observations_cp, 'uk-trade-time-series-current-prices', 'uk-trade-time-series-current-prices', data)
 # -
+for cube in cubes.cubes:
+    print(cube.scraper.title)
 
+cubes.output_all()
 
-
-
-
+#
 
