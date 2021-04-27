@@ -84,14 +84,14 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:42.086579"
+                "@value": "2021-04-27T15:39:44.238736"
             },
             "rdfs:label": "Nuts Geography",
             "dc:title": "Nuts Geography",
             "rdfs:comment": "Dataset representing the 'Nuts Geography' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:42.086579"
+                "@value": "2021-04-27T15:39:44.238736"
             }
         },
         {
@@ -113,11 +113,11 @@
             "rdfs:label": "Nuts Geography Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:42.086579"
+                "@value": "2021-04-27T15:39:44.238736"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:42.086579"
+                "@value": "2021-04-27T15:39:44.238736"
             }
         }
     ]
