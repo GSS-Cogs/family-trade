@@ -15,6 +15,9 @@ df = pd.DataFrame()
 cubes = Cubes("info.json")
 info = json.load(open('info.json'))
 scraper = Scraper(seed = 'info.json')
+scraper
+
+# %%
 distribution = scraper.distribution(latest = True)
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
 distribution
@@ -225,9 +228,9 @@ for name, tab in tabs.items():
         tidied_sheets.append(tidy_sheet)
         
     elif name in output_indicators:
-        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank()
-        industry = tab.excel_ref('B3').expand(RIGHT).is_not_blank()
         weights = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
+        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank() - weights
+        industry = tab.excel_ref('B3').expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         sector = industry.shift(UP)
         
@@ -300,14 +303,14 @@ for name, tab in tabs.items():
         
     elif name in household_expenditure_indicators:
         if name in household_expenditure_indicators[0] or name in household_expenditure_indicators[2]:
-            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             COICOP = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
             measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         else:
             p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('B6')
-            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             COICOP = tab.excel_ref('B7').expand(RIGHT)
+            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
             measure = tab.excel_ref('G2').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
             
@@ -327,6 +330,7 @@ for name, tab in tabs.items():
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
+        
     elif name in gross_fixed_capitol:
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
@@ -374,13 +378,13 @@ for name, tab in tabs.items():
         tidied_sheets.append(tidy_sheet)
     elif name in trade: 
         if name in trade[0]:
-            cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
+            cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - goods_services
             flow = goods_services.shift(UP) 
         else:
-            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank()
-            measure = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
             goods_services = tab.excel_ref('B4').expand(RIGHT).is_not_blank() 
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,1).expand(RIGHT).is_not_blank() - goods_services
+            measure = tab.excel_ref('C2').expand(RIGHT).is_not_blank()
             flow = goods_services.shift(UP)
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         
@@ -398,13 +402,11 @@ for name, tab in tabs.items():
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
+        tidy_sheet['Goods or Services'] = tidy_sheet['Goods or Services'].replace('Total 1', 'Total')
         tidied_sheets.append(tidy_sheet)
     else:
         continue
 
-
-# %%
- tidied_sheets[14]['Industry'].unique()
 
 # %% [markdown]
 #     Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
@@ -504,11 +506,11 @@ def prefix_refperiod(dataset, dimension):
     
 def convet_dimension_to_int(dataset, dimension):
     try:
-        dataset[dimension] = dataset[dimension].fillna(-1)
-        dataset[dimension] = dataset[dimension].replace('',-1)
+        dataset[dimension] = dataset[dimension].fillna(-1000000000000)
+        dataset[dimension] = dataset[dimension].replace('',-1000000000000)
         dataset[dimension] = dataset[dimension].astype(int)
         dataset[dimension] = dataset[dimension].astype(str)
-        dataset[dimension] = dataset[dimension].replace('-1', np.nan)
+        dataset[dimension] = dataset[dimension].replace('-1000000000000', np.nan)
         return dataset
     except Exception as e:
         print('convet_dimension_to_int: ' + str(e))
@@ -532,7 +534,7 @@ a2 = prefix_refperiod(a2, 'Period')
 a2['Gross'].loc[a2['CDID'] == 'YBHA'] = 'Gross domestic product at market prices'  
 a2['Indices'].loc[a2['CDID'] == 'YBHA'] = 'Current prices'
 
-a2 = strip_superscripts(a2, 'gross')
+a2 = strip_superscripts(a2, 'Gross')
     
 a2['Indices'].loc[a2['Indices'] == 'Current prices'] = 'current-price'
 a2['Indices'].loc[a2['Indices'] == 'Chained Volume Measure (Reference year 2018)'] = 'chained-volume-measure'
@@ -549,7 +551,6 @@ except:
     ind = ind
 
 a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
-a2cdids = a2['CDID'].unique()
 
 # %%
 mainTitle = scraper.dataset.title
@@ -638,8 +639,11 @@ b2 = convet_dimension_to_int(b2, 'Value')
 
 # %%
 b1b2 = pd.concat([b1, b2])
-b1b2cdids = b1b2['CDID'].unique()
-del b1, b2
+#b1b2cdids = b1b2['CDID'].unique()
+# Delete attribute for now as it is causing problems in PMD4, going into the CDID column!
+#del b1b2['Weights 2018']
+b1b2 = b1b2[['Period','CDID','Weights 2018','Sector','Industry','Value']]
+b1b2.head(20)
 
 # %%
 scraper.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
@@ -788,6 +792,10 @@ d1 = d1.rename(columns={'OBS':'Value', 'Gross Domestic Product':'Economic Concep
 
 d1 = convet_dimension_to_int(d1, 'Value')
 
+d1['Value'][d1['Value'].isna()] = ''
+d1['Marker'] = ''
+d1['Marker'][d1['Value'] == ''] = 'not-available'
+
 d1cdids = d1['CDID'].unique()
 d1.head(5)
 #d1['Gross Domestic Product'].unique()
@@ -843,7 +851,12 @@ e1 = e1.rename(columns={'OBS':'Value'})
 e1 = convet_dimension_to_int(e1, 'Value')
 
 e1cdids = e1['CDID'].unique()
-e1.head(50)
+e1[e1['Expenditure Category'] == 'uk-national-domestic'].head(50)
+e1[e1['CDID'] == 'ABJQ'].head(50)
+
+# %%
+#import dmtools as dm
+#dm.display_dataset_unique_values(e1)
 
 # %%
 # E2
@@ -912,7 +925,7 @@ e3.head(50)
 
 # %%
 # E4
-e4 = tidied_sheets[8]
+e4 = tidied_sheets[10]
 
 try:
     e4 = e4.loc[e4['Percentage Change'].isna()] 
@@ -949,7 +962,8 @@ e4.head(5)
 
 e1e2e3e4 = pd.concat([e1, e2, e3, e4])
 e1e2e3e4.head(10)
-e1e2e3e4['Expenditure Category'].unique()
+#e1e2e3e4['Expenditure Category'].unique()
+#dm.display_dataset_unique_values(e1e2e3e4)
 
 # %%
 scraper.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
@@ -1049,7 +1063,7 @@ f2.head(5)
 
 # %%
 f1f2 = pd.concat([f1,f2])
-f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
+#f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
 f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
 
 # %%
@@ -1106,6 +1120,7 @@ g1 = convet_dimension_to_int(g1, 'Value')
 g1['Level of inventories held at end-December 2018'] = g1['Level of inventories held at end-December 2018'].str.replace('.0','')
 
 g1['Sector'] = g1['Sector'].apply(pathify)
+g1['Industry'] = g1['Industry'].apply(pathify)
 
 g1cdids = g1['CDID'].unique()
 g1.head(5)
@@ -1141,19 +1156,22 @@ g2 = convet_dimension_to_int(g2, 'Value')
 g2['Level of inventories held at end-December 2018'] = g2['Level of inventories held at end-December 2018'].str.replace('.0','')
 
 g2['Sector'] = g2['Sector'].apply(pathify)
+g2['Industry'] = g2['Industry'].apply(pathify)
 
 g2cdids = g2['CDID'].unique()
 g2.head(5)
 
 # %%
 g1g2 = pd.concat([g1,g2])
-g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
+del g1g2['Industry']
+#g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
+#g1g2['Sector'].unique()
 
 # %%
 scraper.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
-scraper.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
+scraper.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
-Change in inventories at current prices and chained volume measures (F1, F2)
+Change in inventories at current prices and chained volume measures (G1, G2)
 Data has been seasonally adjusted
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
 Wholesaling and retailing estimates exclude the motor trades.
@@ -1239,6 +1257,8 @@ h2.head(5)
 # %%
 h1h2 = pd.concat([h1,h2])
 h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
+h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
+#h1h2['Goods or Services'].unique()
 
 # %%
 scraper.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
@@ -1257,7 +1277,10 @@ with open("info.json", "r") as jsonFile:
         json.dump(data, jsonFile)
 h1h2 = h1h2.drop_duplicates()      
 cubes.add_cube(copy.deepcopy(scraper), h1h2, "gbp–data-tables-change-in-trade", 'gbp–data-tables-change-in-trade', data)
+h1h2
 del h1h2
+
+# %%
 
 # %%
 cubes.output_all()
