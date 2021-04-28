@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography",
     "url": "nuts-geography.csv",
     "rdfs:label": "Nuts Geography",
     "dc:title": "Nuts Geography",
@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#concept/nuts-geography/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/nuts-geography/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -56,14 +56,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#concept/nuts-geography/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/nuts-geography/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -71,53 +71,53 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:42.086579"
+                "@value": "2021-04-27T15:39:44.238736"
             },
             "rdfs:label": "Nuts Geography",
             "dc:title": "Nuts Geography",
             "rdfs:comment": "Dataset representing the 'Nuts Geography' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:42.086579"
+                "@value": "2021-04-27T15:39:44.238736"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/nuts-geography"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/nuts-geography"
             },
             "dc:title": "Nuts Geography Catalog Record",
             "rdfs:label": "Nuts Geography Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:42.086579"
+                "@value": "2021-04-27T15:39:44.238736"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:42.086579"
+                "@value": "2021-04-27T15:39:44.238736"
             }
         }
     ]

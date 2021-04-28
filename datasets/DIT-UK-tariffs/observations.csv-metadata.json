@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/def/data/trade/tariffs-on-goods-imported-into-the-uk",
+    "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk",
     "url": "observations.csv",
     "tableSchema": {
         "columns": [

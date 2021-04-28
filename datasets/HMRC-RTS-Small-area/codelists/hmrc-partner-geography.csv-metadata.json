@@ -1,6 +1,6 @@
 {
     "@context": "http://www.w3.org/ns/csvw",
-    "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography",
     "url": "hmrc-partner-geography.csv",
     "rdfs:label": "Hmrc Partner Geography",
     "dc:title": "Hmrc Partner Geography",
@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#concept/hmrc-partner-geography/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/hmrc-partner-geography/{parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -56,14 +56,14 @@
             {
                 "virtual": true,
                 "propertyUrl": "skos:inScheme",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography"
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#concept/hmrc-partner-geography/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/hmrc-partner-geography/{notation}"
     },
     "prov:hadDerivation": {
-        "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography",
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography",
         "@type": [
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#ConceptScheme"
@@ -71,53 +71,53 @@
     },
     "rdfs:seeAlso": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography/dataset",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography/dataset",
             "@type": [
                 "dcat:Dataset",
                 "http://publishmydata.com/pmdcat#Dataset"
             ],
             "http://publishmydata.com/pmdcat#datasetContents": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography"
             },
             "http://publishmydata.com/pmdcat#graph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:25.922805"
+                "@value": "2021-04-27T15:40:26.465507"
             },
             "rdfs:label": "Hmrc Partner Geography",
             "dc:title": "Hmrc Partner Geography",
             "rdfs:comment": "Dataset representing the 'Hmrc Partner Geography' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:25.922805"
+                "@value": "2021-04-27T15:40:26.465507"
             }
         },
         {
             "@id": "http://gss-data.org.uk/catalog/vocabularies",
             "dcat:record": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography/catalog-record"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography/catalog-record"
             }
         },
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography/catalog-record",
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography/catalog-record",
             "@type": "dcat:CatalogRecord",
             "foaf:primaryTopic": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography/dataset"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography/dataset"
             },
             "http://publishmydata.com/pmdcat#metadataGraph": {
-                "@id": "http://gss-data.org.uk/data/gss_data/trade/regional-trade-in-goods-statistics-disaggregated-by-smaller-geographical-areas#scheme/hmrc-partner-geography"
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/hmrc-partner-geography"
             },
             "dc:title": "Hmrc Partner Geography Catalog Record",
             "rdfs:label": "Hmrc Partner Geography Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:25.922805"
+                "@value": "2021-04-27T15:40:26.465507"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-20T09:20:25.922805"
+                "@value": "2021-04-27T15:40:26.465507"
             }
         }
     ]
