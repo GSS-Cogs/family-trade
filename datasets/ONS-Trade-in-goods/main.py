@@ -172,7 +172,7 @@ table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='catego
 #table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
 
 #line not needed data does not need to be supressed
-#table['Marker'] = ' '
+table['Marker'] = ' '
 #table.loc[(table['Value'] == 0), 'Marker'] = 'suppressed'
 
 table = table[['ONS Partner Geography','Period','Flow','Commodity','Seasonal Adjustment','Value','Marker']]
