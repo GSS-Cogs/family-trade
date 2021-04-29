@@ -28,17 +28,25 @@
                 "codelist": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country",
                 "value": "https://api.uktradeinfo.com/Country/{country_id}"
             },
-            "commodity_sitc_id": {
-                "label": "Commodity",
+            "sitc_id": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/sitc",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{commodity_sitc_id}"
+                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{sitc_id}",
+                "label": "Commodity"
             },
-            "port_code": {
+            "cn8_id": {
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "label": "Commodity",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/cn8",
+                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{cn8_id}"
+            },
+            "port": {
                 "label": "Port",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port",
-                "value": "https://api.uktradeinfo.com/Port/{port_code}"
+                "value": "https://api.uktradeinfo.com/Port/{port}"
             },
             "period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "label": "Month",
                 "codelist": false,
                 "value": "http://reference.data.gov.uk{period}"
@@ -65,9 +73,9 @@
     },
     "odataConversion": {
         "publishedLocation": "https://staging.gss-data.org.uk/sparql",
-        "datasetIdentifier": "http://gss-data.org.uk/data/gss_data/trade/hmrc-overseas-trade-statistics#dataset",
+        "datasetIdentifier": "http://gss-data.org.uk/data/gss_data/trade/hmrc-overseas-trade-statistics/hmrc-overseas-trade-statistics-cn8#dataset",
         "chunkColumn": "MonthId",
-        "chunkDimension": "http://gss-data.org.uk/data/gss_data/trade/hmrc-overseas-trade-statistics#dimension/period",
+        "chunkDimension": "http://gss-data.org.uk/data/gss_data/trade/hmrc-overseas-trade-statistics/hmrc-overseas-trade-statistics-cn8#dimension/period",
         "supplementalEndpoints": {
             "FlowType": {
                 "endpoint": "https://api.uktradeinfo.com/FlowType",
@@ -97,8 +105,8 @@
         }
     },
     "load": {
-        "accretiveUpload": false,
-        "publish": false
+        "accretiveUpload": true,
+        "publish": true
     },
     "sizingNotes": "",
     "notes": "Updated with a revised landing page as the stats have moved, this this is available via an API https://www.uktradeinfo.com/api-documentation/",
