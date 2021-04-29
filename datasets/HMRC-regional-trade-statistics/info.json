@@ -52,7 +52,7 @@
                 "dimension": "http://purl.org/linked-data/cube#measureType",
                 "value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
                 "types": [
-                    "gbp-million",
+                    "gbp-thousand",
                     "net-mass"
                 ]
             },
