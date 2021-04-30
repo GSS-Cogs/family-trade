@@ -15,13 +15,19 @@
 # +
 import logging
 import json
+import sys
+
 import pandas as pd
 import sqlite3
+import subprocess
+import os
 
 from gssutils import *
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+echo_arg = os.environ['SPARQL_URL']
+print(echo_arg, file=sys.stderr)
 
 # +
 file = 'info.json'
