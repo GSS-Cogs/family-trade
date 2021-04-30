@@ -179,5 +179,27 @@ table = table[['ONS Partner Geography','Period','Flow','Commodity','Seasonal Adj
 table['Flow'] = table['Flow'].map(lambda x: pathify(x))
 table
 
-cubes.add_cube(scraper1, table, title)
-cubes.output_all()
+#cubes.add_cube(scraper1, table, title)
+#cubes.output_all()
+from urllib.parse import urljoin
+import os
+scraper1.dataset.family = "trade"
+csvName = 'observations.csv'
+out = Path('out')
+out.mkdir(exist_ok=True)
+# Create the temp csv
+tempdat = table.iloc[0:5]
+tempdat.to_csv(out / csvName, index = False)
+table.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper1.dataset.family}/{Path(os.getcwd()).name}'))
+scraper1.set_base_uri('http://gss-data.org.uk')
+scraper1.set_dataset_id(dataset_path)
+csvw_transform = CSVWMapping()
+csvw_transform.set_csv(out / csvName)
+csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_dataset_uri(urljoin(scraper1._base_uri, f'data/{scraper1._dataset_id}'))
+csvw_transform.write(out / f'{csvName}-metadata.json')
+# Delete the temp csv
+(out / csvName).unlink()
+with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+    metadata.write(scraper1.generate_trig())
