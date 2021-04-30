@@ -20,6 +20,9 @@ import sqlite3
 
 from gssutils import *
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 # +
 file = 'info.json'
 
@@ -38,14 +41,14 @@ distro = scraper_cn8.distribution(latest=True)
 
 # Get API Chunks
 api_chunks = distro.get_odata_api_chunks()
-logging.debug(f'The chunks found on api are {api_chunks}')
+logger.debug(f'The chunks found on api are {api_chunks}')
 # Replace line below with line above once gss-utils issue get_odata_api_chunks() query is malformatted #216 is fixed
 # api_chunks = [x["MonthId"] for x in distro._session.get(
 #     distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
 
 # Get PMD Chunks
 pmd_chunks = distro.get_pmd_chunks()
-logging.debug(f'The chunks found on pmd are {api_chunks}')
+logger.debug(f'The chunks found on pmd are {api_chunks}')
 
 # Get next period to download
 if len(pmd_chunks) == 0:
@@ -54,7 +57,8 @@ else:
     pmd_chunks = [int(pd.to_datetime(
         x, format='http://reference.data.gov.uk/id/month/%Y-%m').strftime('%Y%m')) for x in pmd_chunks]
     fetch_chunk = max(set(api_chunks)-set(pmd_chunks))
-logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
+
+logger.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 # Download the chonky dataframe
 df = distro.as_pandas(chunks_wanted=fetch_chunk)
