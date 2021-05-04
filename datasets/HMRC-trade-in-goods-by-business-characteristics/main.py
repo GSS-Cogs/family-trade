@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.1.1
+#       jupytext_version: 1.11.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -29,23 +29,20 @@ cubes = Cubes('info.json')
 # -
 
 scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
-scraper
 scraper.dataset.family = info["families"]
 
 datasetTitle = scraper.title
-datasetTitle
+datasetTitle = "UK trade in goods by business characteristics - data tables" #removing date from title 
 
 distribution = scraper.distribution(latest = True).downloadURL
-distribution
 
 tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
-list(tabs)
 # tabs = {tab.name: tab for tab in distribution.as_databaker}
 
 for name, tab in tabs.items():
     if 'Notes and Contents' in name or '5. Metadata' in name :
         continue
-    datasetTitle = scraper.title
+    #datasetTitle = scraper.title
     columns = ["Flow", "Period", "Country", "Zone", "Business Size", "Age", "Industry Group", "Value", 
                "Business Count", "Employee Count", "Flow Directions", "Year", "Marker"]
 
@@ -94,7 +91,7 @@ for name, tab in tabs.items():
         HDim(employee_count, 'Employee Count', DIRECTLY, RIGHT),
     ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    savepreviewhtml(tidy_sheet, fname = tab.name+ "Preview.html")
+    #savepreviewhtml(tidy_sheet, fname = tab.name+ "Preview.html")
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
@@ -119,6 +116,8 @@ trace.Age("Pathified Age")
 
 df['Industry Group'] = df['Industry Group'].apply(pathify)
 trace.Industry_Group("Pathified Industry Group")
+
+df['Marker'] = df['Marker'].replace('Suppressed', 'suppressed', regex=True)
 
 
 def left(s,amount):
@@ -226,24 +225,22 @@ with pd.option_context('float_format', '{:f}'.format):
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
 
-trace.render("spec_v1.html")
-
 # +
-#for c in df.columns:
-#    if (c not in ['Business Count','Employee Count','Value']):
-#        print(c)
-#        print(df[c].unique())
-#        print("###############################################################")
+# remove valueUrl from business_count and employee_count
+metadata_json = open("./out/uk-trade-in-goods-by-business-characteristics-data-tables.csv-metadata.json", "r")
+metadata = json.load(metadata_json)
+metadata_json.close()
 
-# +
-#'UK trade in goods by business characteristics 2019 - data tables'
+element = metadata["tables"][0]["tableSchema"]["columns"][8]
+if 'valueUrl' in element:
+        del element['valueUrl']
+element = metadata["tables"][0]["tableSchema"]["columns"][9]
+if 'valueUrl' in element:
+        del element['valueUrl']
+
+metadata_json = open("./out/uk-trade-in-goods-by-business-characteristics-data-tables.csv-metadata.json", "w")
+json.dump(metadata, metadata_json, indent=4)
+metadata_json.close()            
 # -
 
-
-
-
-
-
-
-
-
+trace.render("spec_v1.html")
