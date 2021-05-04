@@ -205,7 +205,7 @@ def main():
 
     # Get rid of data where there is no Notation specified.
     merged_data = merged_data[
-        [r["Notation"] is not None and r["Notation"] != "00" for i, r in merged_data.iterrows()]
+        [r["Notation"] is not None for i, r in merged_data.iterrows()]
     ]
 
     # Get rid of data which is in the original CN8 codelist but not in HMRC's codelist.
