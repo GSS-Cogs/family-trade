@@ -48,10 +48,12 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/age-of-business/{age_of_business}"
             },
             "Employee Count": {
-                "attribute": "http://gss-data.org.uk/def/trade/property/attribute/employee-count"
+                "attribute": "http://gss-data.org.uk/def/trade/property/attribute/employee-count",
+                "value": ""
             },
             "Business Count": {
-                "attribute": "http://gss-data.org.uk/def/trade/property/attribute/business-count"
+                "attribute": "http://gss-data.org.uk/def/trade/property/attribute/business-count",
+                "value": ""
             },
             "Value": {
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp",
