@@ -44,7 +44,8 @@
                 "name": "exact_match",
                 "datatype": "string",
                 "required": false,
-                "propertyUrl": "skos:exactMatch"
+                "propertyUrl": "skos:exactMatch",
+                "valueUrl": "{exact_match}"
             },
             {
                 "titles": "Description",
