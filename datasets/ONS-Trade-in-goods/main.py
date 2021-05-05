@@ -179,17 +179,18 @@ table = table[['ONS Partner Geography','Period','Flow','Commodity','Seasonal Adj
 table['Flow'] = table['Flow'].map(lambda x: pathify(x))
 table
 
+info_json_dataset_id = info.get('id', Path.cwd().name)
 years = table['Period'].map(lambda p: p[-7:-3])
 for period in years.unique():
     
     if len(cubes.cubes) == 0:
         graph_uri = f"http://gss-data.org.uk/graph/gss_data/trade/ons-trade-in-goods"
         csv_name = 'ons-trade-in-goods'
-        cubes.add_cube(scraper1, table[years == period], csv_name)
+        cubes.add_cube(scraper1, table[years == period], csv_name, graph=info_json_dataset_id)
     else:
         graph_uri = f"http://gss-data.org.uk/graph/gss_data/trade/ons-trade-in-goods/{period}"
         csv_name = f"ons-trade-in-goods-{period}"
-        cubes.add_cube(scraper1, table[years == period], csv_name, override_containing_graph=graph_uri, suppress_catalog_and_dsd_output=True)
+        cubes.add_cube(scraper1, table[years == period], csv_name, graph=info_json_dataset_id, override_containing_graph=graph_uri, suppress_catalog_and_dsd_output=True)
 
 cubes.output_all()
 
