@@ -47,7 +47,7 @@
                 "name": "source",
                 "datatype": "anyURI",
                 "propertyUrl": "rdfs:isDefinedBy",
-                "valueUrl": "{source}"
+                "valueUrl": "{+source}"
             },
             {
                 "titles": "Parent",
@@ -55,7 +55,7 @@
                 "name": "parent",
                 "datatype": "anyURI",
                 "propertyUrl": "rdfs:subPropertyOf",
-                "valueUrl": "{parent}"
+                "valueUrl": "{+parent}"
             },
             {
                 "titles": "Range",
@@ -63,7 +63,7 @@
                 "name": "range",
                 "datatype": "anyURI",
                 "propertyUrl": "rdfs:range",
-                "valueUrl": "{range}"
+                "valueUrl": "{+range}"
             },
             {
                 "name": "type",

@@ -40,7 +40,7 @@
                 "name": "qb_property_type",
                 "datatype": "string",
                 "propertyUrl": "rdf:type",
-                "valueUrl": "{qb_property_type}"
+                "valueUrl": "{+qb_property_type}"
             },
             {
                 "titles": "Parent Property",
@@ -48,7 +48,7 @@
                 "name": "parent_property",
                 "datatype": "anyURI",
                 "propertyUrl": "rdfs:subPropertyOf",
-                "valueUrl": "{parent_property}"
+                "valueUrl": "{+parent_property}"
             },
             {
                 "titles": "Source",
@@ -56,7 +56,7 @@
                 "name": "source",
                 "datatype": "anyURI",
                 "propertyUrl": "rdfs:isDefinedBy",
-                "valueUrl": "{source}"
+                "valueUrl": "{+source}"
             },
             {
                 "titles": "Range",
@@ -64,14 +64,14 @@
                 "name": "range",
                 "datatype": "anyURI",
                 "propertyUrl": "rdfs:range",
-                "valueUrl": "{range}"
+                "valueUrl": "{+range}"
             },
             {
                 "titles": "Codelist",
                 "name": "codelist",
                 "datatype": "anyURI",
                 "propertyUrl": "qb:codeList",
-                "valueUrl": "{codelist}"
+                "valueUrl": "{+codelist}"
             },
             {
                 "titles": "Comment",
