@@ -83,4 +83,4 @@ trade,Commodity,dimension/commodity,qb:DimensionProperty,http://gss-data.org.uk/
 trade,Business Activity,dimension/business-activity,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/business-activity,
 trade,Trade Group,dimension/trade-group,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/trade-group,
 trade,Turnover,dimension/turnover-size-bands,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands,
-trade,Location,dimension/hmrc-ots-location,qb:DimensionProperty,http://purl.org/linked-data/sdmx/2009/dimension#refArea,,skos:Concept,http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region,
+trade,Location,dimension/hmrc-rts-location,qb:DimensionProperty,http://purl.org/linked-data/sdmx/2009/dimension#refArea,,skos:Concept,http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region,
