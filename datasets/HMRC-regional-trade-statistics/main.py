@@ -64,49 +64,31 @@ else:
 logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 # For a temporary accretive data replacement, instead of fetching a single chunk as the line below
-# df = distro.as_pandas(chunks_wanted=fetch_chunk)
-# We will get 6 in one go.
 df = distro.as_pandas(chunks_wanted=fetch_chunk)
+
+# Drop all columns not specified
+drop_columns = [x for x in df.columns if x not in ['FlowTypeDescription', 'Value', 'NetMass',
+                                                   'MonthId', 'RegionName', 'CountryId', 'Sitc2Code']]
+df = df.drop(drop_columns, axis=1)
 
 # Clearing all blank strings
 df = df.replace(r'^\s*$', np.nan, regex=True)
 
 # For everything which isn't a data column, it's categorical so...
 for col in df.columns:
-    if col not in ['Value', 'NetMass']:
+    if col not in ['Value', 'NetMass', 'MonthId']:
         df[col] = df[col].astype('category')
 
+# Period column
 # Quarter conversion g(x) = x//3+1, so g(1)=1, g(4)=2, g(7)=3, g(10)=4
 df['Period'] = [
-    f"id/quarter/{str(x)[:4]}-Q{str(int(str(x)[-2:])//3+1)}" for x in df['MonthId']]
+    f"{str(x)[:4]}-Q{str(int(str(x)[-2:])//3+1)}" for x in df['MonthId']]
 
-df.head()
-
-df.columns
-
-# Flows
+# Flows - Rename and pathify
 df.rename({"FlowTypeDescription": "Flow Type"}, inplace=True, axis=1)
-df['Flow Type'].cat.rename_categories(lambda x: utils.pathify(x), inplace=True)
+df['Flow Type'].cat.rename_categories(lambda x: pathify(x), inplace=True)
 
-# Region Name
-regions = {
-    'North East': 'http://statistics.data.gov.uk/id/statistical-geography/E12000001',
-    'North West': 'http://statistics.data.gov.uk/id/statistical-geography/E12000002',
-    'Yorkshire and The Humber': 'http://statistics.data.gov.uk/id/statistical-geography/E12000003',
-    'East Midlands': 'http://statistics.data.gov.uk/id/statistical-geography/E12000004',
-    'West Midlands': 'http://statistics.data.gov.uk/id/statistical-geography/E12000005',
-    'South West': 'http://statistics.data.gov.uk/id/statistical-geography/E12000009',
-    # Formally 'East of England'
-    'East': 'http://statistics.data.gov.uk/id/statistical-geography/E12000006',
-    'South East': 'http://statistics.data.gov.uk/id/statistical-geography/E12000008',
-    'London': 'http://statistics.data.gov.uk/id/statistical-geography/E12000007',
-    'Unallocated - Known': 'http://gss-data.org.uk/data/gss_data/trade/HMRC_RTS#concept/uk-region/unallocated-known',
-    'Unallocated - Unknown': 'http://gss-data.org.uk/data/gss_data/trade/HMRC_RTS#concept/uk-region/unallocated-unknown',
-    'Northern Ireland': 'http://statistics.data.gov.uk/id/statistical-geography/N92000002',
-    'Wales': 'http://statistics.data.gov.uk/id/statistical-geography/W92000004',
-    'Scotland': 'http://statistics.data.gov.uk/id/statistical-geography/S92000003'
-}
-
+# Locations
 region_codes = {
     'North East': 'E12000001',
     'North West': 'E12000002',
@@ -117,42 +99,41 @@ region_codes = {
     'East': 'E12000006',  # Formally 'East of England'
     'South East': 'E12000008',
     'London': 'E12000007',
-    'Unallocated - Known': 'unallocated-known',
-    'Unallocated - Unknown': 'unallocated-unknown',
     'Northern Ireland': 'N92000002',
     'Wales': 'W92000004',
     'Scotland': 'S92000003'
 }
-df['UK Region'] = df['RegionName'].cat.rename_categories(regions)
-df['UK Region Code'] = df['RegionName'].cat.rename_categories(region_codes)
+df['Location GSS'] = pd.Categorical(df['RegionName'].replace(
+    region_codes), categories=region_codes.values(), ordered=False)
+
+region_other = {
+    'Unallocated - Known': 'unallocated-known',
+    'Unallocated - Unknown': 'unallocated-unknown'
+}
+df['Location Dataset Local'] = pd.Categorical(df['RegionName'].replace(
+    region_other), categories=region_other.values(), ordered=False)
 
 df['Country'] = df['CountryId'].astype(str)
 
 # # SITC Codes
 # Need to go via strings
+df['SITC Code'] = df['Sitc2Code'].astype(str).astype('category')
 
-df['SITC Code'] = df['Sitc2Code'].astype(str)
-df['SITC Code'] = df['SITC Code'].astype('category')
+# The melty magic to take two values in the same row and create unique records for these values, the source column name becomes the 'variable' column, the column value stays in ends up in the 'value' column.
+df = df.melt(id_vars=['Period', 'Flow Type', 'Location GSS', 'Location Dataset Local',
+             'Country', 'SITC Code'], value_vars=['Value', 'NetMass'])
 
-# Bring Value and NetMass into a single column
-new_df = pd.DataFrame()
-for measure in ['Value', 'NetMass']:
-    temp_df = df[['Period', 'Flow Type', 'UK Region Code',
-                  'UK Region', 'Country', 'SITC Code', measure]]
-    temp_df.rename({measure: 'Value'}, axis=1, inplace=True)
-    temp_df['Measure Type'] = measure
-    new_df = pd.concat([new_df, temp_df], axis=0)
-df = new_df
-del temp_df, new_df
+# Measures & Units
+df.loc[df['variable'] == 'Value', 'measure_type'] = 'monetary-value'
+df.loc[df['variable'] == 'Value',
+       'unit_type'] = 'gbp-thousands'
+df.loc[df['variable'] == 'NetMass', 'measure_type'] = 'net-mass'
+df.loc[df['variable'] == 'NetMass',
+       'unit_type'] = 'tonnes'
+df.drop('variable', axis=1, inplace=True)
+df['unit_type'] = df['unit_type'].astype('category')
+df['measure_type'] = df['measure_type'].astype('category')
 
-# Final formatting - measure-types
-df['Measure Type'] = df['Measure Type'].astype('category')
-df['Measure Type'].cat.rename_categories({'Value': 'gbp-thousand', 'NetMass': 'net-mass'}, inplace=True)
-
-df["Units"] = df["Measure Type"].map(
-    lambda x: x.strip().replace("net-mass", "tonnes"))
-
-# -
 
 cubes.add_cube(scraper, df, info['id'],
                override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}/{fetch_chunk}" if info['load']['accretiveUpload'] else None)
@@ -161,14 +142,17 @@ cubes.add_cube(scraper, df, info['id'],
 cubes.output_all()
 
 # Change the aboutUrl in the -metadata.json so we don't get URIs within URIs.
-metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "r")
+metadata_json = open(
+    "./out/hmrc-regional-trade-statistics.csv-metadata.json", "r")
 metadata = json.load(metadata_json)
 metadata_json.close()
 
 metadata["tables"][0]["tableSchema"]["aboutUrl"] = (
-    metadata["tables"][0]["tableSchema"]["aboutUrl"].replace("{uk_region}", "{uk_region_code}")
+    metadata["tables"][0]["tableSchema"]["aboutUrl"].replace(
+        "{uk_region}", "{uk_region_code}")
 )
 
-metadata_json = open("./out/hmrc-regional-trade-statistics.csv-metadata.json", "w")
+metadata_json = open(
+    "./out/hmrc-regional-trade-statistics.csv-metadata.json", "w")
 json.dump(metadata, metadata_json, indent=4)
 metadata_json.close()

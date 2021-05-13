@@ -16,6 +16,7 @@
 import logging
 import json
 import pandas as pd
+import numpy as np
 import sqlite3
 
 from gssutils import *
@@ -63,8 +64,12 @@ df = distro.as_pandas(chunks_wanted=fetch_chunk)
 # df = df.sample(n=5000)
 
 # Drop all columns not specified
-df.drop([x for x in df.columns if x not in ['MonthId', 'FlowTypeDescription', 'SuppressionIndex',
-        'CountryId', 'Cn8Code', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
+drop_columns = [x for x in df.columns if x not in ['MonthId', 'FlowTypeDescription', 'SuppressionIndex',
+                                                   'CountryId', 'Cn8Code', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']]
+df = df.drop(drop_columns, axis=1)
+
+# Clearing all blank strings
+df = df.replace(r'^\s*$', np.nan, regex=True)
 
 # Convert columns to categorical if categorical
 for col in df.columns:
@@ -73,7 +78,7 @@ for col in df.columns:
 
 # Period column
 df['Period'] = pd.to_datetime(
-    df['MonthId'], format="%Y%m").dt.strftime('/id/month/%Y-%m')
+    df['MonthId'], format="%Y%m").dt.strftime('%Y-%m')
 df.drop('MonthId', inplace=True, axis=1)
 df['Period'] = df['Period'].astype('category')
 
@@ -133,6 +138,8 @@ df.rename(col_names, axis=1, inplace=True)
 
 # +
 # Defaults, get your categorical value series defaults
+
+
 def default(series=pd.Series, value=str) -> pd.DataFrame():
     if value in series.cat.categories:
         return series.fillna(value)

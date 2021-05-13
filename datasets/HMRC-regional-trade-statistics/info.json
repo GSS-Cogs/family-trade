@@ -21,44 +21,45 @@
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/{period}",
+                "value": "http://reference.data.gov.uk/id/quarter/{+period}",
                 "codelist": false
             },
             "Flow Type": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_type}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow_type}"
             },
-            "UK Region Code": false,
-            "UK Region": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "label": "UK Region",
-                "value": "{uk_region}",
-                "codelist": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region"
+            "Location GSS": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-rts-location",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{+location_gss}"
+            },
+            "Location Dataset Local": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/hmrc-rts-location",
+                "value": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#concept/uk-region/{+location_dataset_local}"
             },
             "Country": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "label": "Country",
-                "value": "https://api.uktradeinfo.com/Country/{country}",
+                "value": "https://api.uktradeinfo.com/Country/{+country}",
                 "codelist": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country"
             },
             "SITC Code": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_code}"
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{+sitc_code}"
             },
             "Value": {
                 "datatype": "double"
             },
             "Measure Type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
-                "value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
+                "value": "http://gss-data.org.uk/def/trade/measure/{+measure_type}",
                 "types": [
-                    "gbp-thousand",
+                    "monetary-value",
                     "net-mass"
                 ]
             },
             "Units": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/{units}"
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+units}"
             }
         }
     },

@@ -20,47 +20,47 @@
             "flow_type": {
                 "label": "Flow Type",
                 "codelist": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_type}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow_type}"
             },
             "country_id": {
                 "label": "Country",
                 "codelist": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country",
-                "value": "https://api.uktradeinfo.com/Country/{country_id}"
+                "value": "https://api.uktradeinfo.com/Country/{+country_id}"
             },
             "sitc_id": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/sitc",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{sitc_id}",
+                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{+sitc_id}",
                 "label": "Commodity"
             },
             "cn8_id": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
                 "label": "Commodity",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/cn8",
-                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{cn8_id}"
+                "value": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{+cn8_id}"
             },
             "port": {
                 "label": "Port",
                 "codelist": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/port",
-                "value": "https://api.uktradeinfo.com/Port/{port}"
+                "value": "https://api.uktradeinfo.com/Port/{+port}"
             },
             "period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "label": "Month",
                 "codelist": false,
-                "value": "http://reference.data.gov.uk{period}"
+                "value": "http://reference.data.gov.uk/id/month/{+period}"
             },
             "measure_type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
                 "value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
                 "types": [
-                    "net-mass",
-                    "monetary-value"
+                    "monetary-value",
+                    "net-mass"
                 ]
             },
             "unit_type": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "{unit_type}"
+                "value": "{+unit_type}"
             },
             "value": {
                 "datatype": "decimal"
