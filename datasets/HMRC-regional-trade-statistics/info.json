@@ -46,7 +46,7 @@
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
                 "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{+sitc_code}"
             },
-            "Value": {
+            "value": {
                 "datatype": "double"
             },
             "Measure Type": {
