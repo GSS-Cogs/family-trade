@@ -147,10 +147,10 @@ metadata_json = open(
 metadata = json.load(metadata_json)
 metadata_json.close()
 
-metadata["tables"][0]["tableSchema"]["aboutUrl"] = (
-    metadata["tables"][0]["tableSchema"]["aboutUrl"].replace(
-        "{uk_region}", "{uk_region_code}")
-)
+# metadata["tables"][0]["tableSchema"]["aboutUrl"] = (
+#     metadata["tables"][0]["tableSchema"]["aboutUrl"].replace(
+#         "{uk_region}", "{uk_region_code}")
+# )
 
 metadata_json = open(
     "./out/hmrc-regional-trade-statistics.csv-metadata.json", "w")
