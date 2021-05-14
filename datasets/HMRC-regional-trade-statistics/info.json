@@ -14,7 +14,6 @@
         "stage": "Done"
     },
     "transform": {
-        "validate": false,
         "airtable": "reclNM0WAApNZVyh4",
         "main_issue": 12,
         "to_rdf": "csv2rdf",
