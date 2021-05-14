@@ -48,7 +48,7 @@
             "value": {
                 "datatype": "double"
             },
-            "Measure Type": {
+            "measure_type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
                 "value": "http://gss-data.org.uk/def/trade/measure/{+measure_type}",
                 "types": [
@@ -56,9 +56,9 @@
                     "net-mass"
                 ]
             },
-            "Units": {
+            "unit_type": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+units}"
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+unit_type}"
             }
         }
     },
