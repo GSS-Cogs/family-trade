@@ -14,7 +14,6 @@
         "stage": "Done"
     },
     "transform": {
-        "validate": false,
         "airtable": "reclNM0WAApNZVyh4",
         "main_issue": 12,
         "to_rdf": "csv2rdf",
@@ -41,10 +40,10 @@
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
                 "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{+sitc_code}"
             },
-            "Value": {
+            "value": {
                 "datatype": "double"
             },
-            "Measure Type": {
+            "measure_type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
                 "value": "http://gss-data.org.uk/def/trade/measure/{+measure_type}",
                 "types": [
@@ -52,9 +51,9 @@
                     "net-mass"
                 ]
             },
-            "Units": {
+            "unit_type": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+units}"
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+unit_type}"
             }
         }
     },
