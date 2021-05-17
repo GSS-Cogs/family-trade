@@ -90,28 +90,24 @@ df['Flow Type'].cat.rename_categories(lambda x: pathify(x), inplace=True)
 
 # Locations
 region_codes = {
-    'North East': 'E12000001',
-    'North West': 'E12000002',
-    'Yorkshire and The Humber': 'E12000003',
-    'East Midlands': 'E12000004',
-    'West Midlands': 'E12000005',
-    'South West': 'E12000009',
-    'East': 'E12000006',  # Formally 'East of England'
-    'South East': 'E12000008',
-    'London': 'E12000007',
-    'Northern Ireland': 'N92000002',
-    'Wales': 'W92000004',
-    'Scotland': 'S92000003'
+    'North East': 'http://statistics.data.gov.uk/id/statistical-geography/E12000001',
+    'North West': 'http://statistics.data.gov.uk/id/statistical-geography/E12000002',
+    'Yorkshire and The Humber': 'http://statistics.data.gov.uk/id/statistical-geography/E12000003',
+    'East Midlands': 'http://statistics.data.gov.uk/id/statistical-geography/E12000004',
+    'West Midlands': 'http://statistics.data.gov.uk/id/statistical-geography/E12000005',
+    'South West': 'http://statistics.data.gov.uk/id/statistical-geography/E12000009',
+    # Formally 'East of England'
+    'East': 'http://statistics.data.gov.uk/id/statistical-geography/E12000006',
+    'South East': 'http://statistics.data.gov.uk/id/statistical-geography/E12000008',
+    'London': 'http://statistics.data.gov.uk/id/statistical-geography/E12000007',
+    'Northern Ireland': 'http://statistics.data.gov.uk/id/statistical-geography/N92000002',
+    'Wales': 'http://statistics.data.gov.uk/id/statistical-geography/W92000004',
+    'Scotland': 'http://statistics.data.gov.uk/id/statistical-geography/S92000003',
+    'Unallocated - Known': 'http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#concept/uk-region/unallocated-known',
+    'Unallocated - Unknown': 'http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#concept/uk-region/unallocated-unknown'
 }
-df['Location GSS'] = pd.Categorical(df['RegionName'].replace(
+df['Region'] = pd.Categorical(df['RegionName'].replace(
     region_codes), categories=region_codes.values(), ordered=False)
-
-region_other = {
-    'Unallocated - Known': 'unallocated-known',
-    'Unallocated - Unknown': 'unallocated-unknown'
-}
-df['Location Dataset Local'] = pd.Categorical(df['RegionName'].replace(
-    region_other), categories=region_other.values(), ordered=False)
 
 df['Country'] = df['CountryId'].astype(str)
 
@@ -120,7 +116,7 @@ df['Country'] = df['CountryId'].astype(str)
 df['SITC Code'] = df['Sitc2Code'].astype(str).astype('category')
 
 # The melty magic to take two values in the same row and create unique records for these values, the source column name becomes the 'variable' column, the column value stays in ends up in the 'value' column.
-df = df.melt(id_vars=['Period', 'Flow Type', 'Location GSS', 'Location Dataset Local',
+df = df.melt(id_vars=['Period', 'Flow Type', 'Region',
              'Country', 'SITC Code'], value_vars=['Value', 'NetMass'])
 
 # Measures & Units
