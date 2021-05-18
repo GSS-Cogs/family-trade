@@ -164,9 +164,9 @@ del df
 
 # cn8 cube work - aggregate on cn8 and discard sitc values, pass the resulting dataframe straight into the cube creation
 qry = """
-SELECT marker, country_id, flow_type, cn8_id, port, period, measure_type, unit_type, sum(value) as value
+SELECT min(marker) as marker, country_id, flow_type, cn8_id, port, period, measure_type, unit_type, sum(value) as value
 from data
-group by marker, country_id, flow_type, cn8_id, port, period, measure_type, unit_type
+group by country_id, flow_type, cn8_id, port, period, measure_type, unit_type
 """
 scraper_cn8.dataset.title = "HMRC Overseas Trade Statistics - Combined Nomenclature 8"
 scraper_cn8.set_dataset_id(f"{info['id']}-cn8")
@@ -180,9 +180,9 @@ cube.add_cube(scraper_cn8, pd.read_sql_query(qry, con), f"{info['id']}-cn8",
 
 # sitc cube work - aggregate on sitc and discard sn8 values
 qry = """
-SELECT marker, country_id, flow_type, sitc_id, port, period, measure_type, unit_type, sum(value) as value
+SELECT min(marker) as marker, country_id, flow_type, sitc_id, port, period, measure_type, unit_type, sum(value) as value
 from data
-group by marker, country_id, flow_type, sitc_id, port, period, measure_type, unit_type
+group by country_id, flow_type, sitc_id, port, period, measure_type, unit_type
 """
 scraper_sitc.dataset.title = "HMRC Overseas Trade Statistics - SITCv4"
 scraper_sitc.set_dataset_id(f"{info['id']}-sitc")
