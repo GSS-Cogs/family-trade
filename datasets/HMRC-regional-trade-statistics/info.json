@@ -55,7 +55,7 @@
             },
             "unit_type": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+unit_type}"
+                "value": "{+unit_type}"
             }
         }
     },

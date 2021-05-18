@@ -122,10 +122,10 @@ df = df.melt(id_vars=['Period', 'Flow Type', 'Region',
 # Measures & Units
 df.loc[df['variable'] == 'Value', 'measure_type'] = 'monetary-value'
 df.loc[df['variable'] == 'Value',
-       'unit_type'] = 'gbp-thousands'
+       'unit_type'] = 'http://gss-data.org.uk/def/concept/measurement-units/gbp'
 df.loc[df['variable'] == 'NetMass', 'measure_type'] = 'net-mass'
 df.loc[df['variable'] == 'NetMass',
-       'unit_type'] = 'tonnes'
+       'unit_type'] = 'http://qudt.org/vocab/unit/KiloGM'
 df.drop('variable', axis=1, inplace=True)
 df['unit_type'] = df['unit_type'].astype('category')
 df['measure_type'] = df['measure_type'].astype('category')
