@@ -38,7 +38,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -66,7 +66,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{+notation}"
     },
     "rdfs:label": "HMRC SITC",
     "dc:title": "HMRC SITC",
