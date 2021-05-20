@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#concept/geography/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#concept/geography/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -60,7 +60,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#concept/geography/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#concept/geography/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-bop-individual-countries#scheme/geography",
@@ -84,7 +84,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-04-13T18:46:10.472904"
+                "@value": "2021-05-20T10:55:03.985230"
             },
             "rdfs:label": "Geography",
             "dc:title": "Geography",

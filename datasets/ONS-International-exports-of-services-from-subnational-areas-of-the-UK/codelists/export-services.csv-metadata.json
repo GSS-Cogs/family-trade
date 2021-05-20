@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#concept/export-services/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#concept/export-services/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -60,7 +60,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#concept/export-services/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#concept/export-services/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-exports-of-services-from-subnational-areas-of-the-uk#scheme/export-services",
@@ -84,7 +84,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-04-13T18:55:13.264393"
+                "@value": "2021-05-20T10:55:04.055053"
             },
             "rdfs:label": "Export Services",
             "dc:title": "Export Services",

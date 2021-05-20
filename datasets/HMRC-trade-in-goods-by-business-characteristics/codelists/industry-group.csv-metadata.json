@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-group/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-group/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -60,7 +60,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-group/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#concept/industry-group/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-trade-in-goods-by-business-characteristics#scheme/industry-group",
@@ -84,7 +84,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-09T13:44:37.357997"
+                "@value": "2021-05-20T10:55:04.017113"
             },
             "rdfs:label": "Industry Groups",
             "dc:title": "Industry Groups",

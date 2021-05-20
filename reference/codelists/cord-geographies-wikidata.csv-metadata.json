@@ -17,7 +17,7 @@
                 "datatype": "string",
                 "required": false,
                 "propertyUrl": "owl:sameAs",
-                "valueUrl": "http://www.wikidata.org/entity/{wikidata_id}"
+                "valueUrl": "http://www.wikidata.org/entity/{+wikidata_id}"
             },
             {
                 "titles": "Notation",
@@ -38,7 +38,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -69,7 +69,7 @@
             "notation",
             "parent_notation"
         ],
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cord-geographies-wikidata",
@@ -98,7 +98,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.148231"
+                "@value": "2021-05-20T10:55:04.113977"
             },
             "dc:issued": {
                 "@type": "dateTime",

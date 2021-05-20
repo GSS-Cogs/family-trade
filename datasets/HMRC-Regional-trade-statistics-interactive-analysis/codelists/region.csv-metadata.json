@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#concept/region/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#concept/region/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -53,7 +53,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#concept/region/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#concept/region/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics-interactive-analysis#scheme/region",
@@ -99,7 +99,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-01-25T00:00:00"
+                "@value": "2021-05-20T10:55:04.029280"
             }
         },
         {

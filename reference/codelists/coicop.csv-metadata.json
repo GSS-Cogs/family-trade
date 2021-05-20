@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/concept/coicop/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/concept/coicop/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/concept/coicop/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/concept/coicop/{+notation}"
     },
     "rdfs:label": "COICOP",
     "dc:title": "COICOP",
@@ -87,7 +87,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T11:35:22.815540"
+                "@value": "2021-05-20T10:55:04.151009"
             },
             "dc:issued": {
                 "@type": "dateTime",

@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/combined-nomenclature/2021/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/combined-nomenclature/2021/{+parent_notation}"
             },
             {
                 "titles": "CN8Mapping",
@@ -38,7 +38,7 @@
                 "datatype": "string",
                 "required": false,
                 "propertyUrl": "owl:sameAs",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021/{cn8_mapping}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/combined-nomenclature-8/2021/{+cn8_mapping}"
             },
             {
                 "titles": "Sort Priority",
@@ -66,7 +66,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/combined-nomenclature/2021/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/combined-nomenclature/2021/{+notation}"
     },
     "rdfs:label": "Combined Nomenclature, 2021",
     "dc:title": "Combined Nomenclature, 2021",
@@ -95,7 +95,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-09T12:30:31.629895"
+                "@value": "2021-05-20T10:55:04.148486"
             },
             "dc:issued": {
                 "@type": "dateTime",

@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/cdid/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/cdid/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -51,7 +51,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/cdid/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/cdid/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/cdid",
@@ -82,7 +82,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-18T00:00:00"
+                "@value": "2021-05-20T10:55:04.132849"
             }
         },
         {

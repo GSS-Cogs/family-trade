@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#concept/fdi-component/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#concept/fdi-component/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -60,7 +60,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#concept/fdi-component/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#concept/fdi-component/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-foreign-direct-investment-involving-uk-companies#scheme/fdi-component",
@@ -84,7 +84,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-02T20:22:06.432126"
+                "@value": "2021-05-20T10:55:04.019561"
             },
             "rdfs:label": "FDI Component",
             "dc:title": "FDI Component",

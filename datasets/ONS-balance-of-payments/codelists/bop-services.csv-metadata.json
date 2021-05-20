@@ -42,7 +42,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#concept/bop-services/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#concept/bop-services/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/bop-services",
@@ -66,7 +66,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-23T12:05:05.761894"
+                "@value": "2021-05-20T10:55:04.022998"
             },
             "rdfs:label": "Balance of Payments Services",
             "dc:title": "Balance of Payments Services",

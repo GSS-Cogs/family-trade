@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-origin/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-origin/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-origin/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-origin/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/alcohol-origin",
@@ -87,7 +87,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.191816"
+                "@value": "2021-05-20T10:55:04.153752"
             },
             "dc:issued": {
                 "@type": "dateTime",
