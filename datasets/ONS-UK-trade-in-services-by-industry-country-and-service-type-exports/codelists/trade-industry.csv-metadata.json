@@ -50,7 +50,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/trade-industry/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/trade-industry/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/trade-industry",
@@ -74,7 +74,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-18T15:17:16.218395"
+                "@value": "2021-05-20T10:55:04.001707"
             },
             "rdfs:label": "Trade Industry",
             "dc:title": "Trade Industry",

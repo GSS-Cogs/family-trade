@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/production-and-clearance",
@@ -87,7 +87,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.205430"
+                "@value": "2021-05-20T10:55:04.167268"
             },
             "dc:issued": {
                 "@type": "dateTime",

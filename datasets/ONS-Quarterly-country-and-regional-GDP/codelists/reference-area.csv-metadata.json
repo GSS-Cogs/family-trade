@@ -18,7 +18,7 @@
                 "name": "parent_uri",
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "{parent_uri}"
+                "valueUrl": "{+parent_uri}"
             },
             {
                 "titles": "Sort Priority",
@@ -39,7 +39,7 @@
             }
         ],
         "primaryKey": "uri",
-        "aboutUrl": "{uri}"
+        "aboutUrl": "{+uri}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-quarterly-country-and-regional-gdp#scheme/reference-area",
@@ -76,7 +76,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-09T15:19:31.432030"
+                "@value": "2021-05-20T10:55:04.005137"
             },
             "rdfs:label": "ONS Quarterly Country and Regional GDP - Regions",
             "dc:title": "ONS Quarterly Country and Regional GDP - Regions",

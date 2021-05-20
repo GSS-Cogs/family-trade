@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/trade-area/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/trade-area/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -60,7 +60,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/trade-area/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/trade-area/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/trade-area",
@@ -84,7 +84,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-04-13T19:11:02.830598"
+                "@value": "2021-05-20T10:55:04.056467"
             },
             "rdfs:label": "Trade Area",
             "dc:title": "Trade Area",

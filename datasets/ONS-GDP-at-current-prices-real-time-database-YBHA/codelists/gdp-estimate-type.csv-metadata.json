@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-gdp-at-current-prices-real-time-database-ybha#concept/gdp-estimate-type/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-gdp-at-current-prices-real-time-database-ybha#concept/gdp-estimate-type/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -53,7 +53,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-gdp-at-current-prices-real-time-database-ybha#concept/gdp-estimate-type/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-gdp-at-current-prices-real-time-database-ybha#concept/gdp-estimate-type/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-gdp-at-current-prices-real-time-database-ybha#scheme/gdp-estimate-type",
@@ -77,7 +77,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-03T08:23:56.697351"
+                "@value": "2021-05-20T10:55:04.007995"
             },
             "rdfs:label": "GDP Estimate Type",
             "dc:title": "GDP Estimate Type",

@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/country/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/country/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -53,7 +53,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/country/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/country/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#scheme/country",
@@ -77,7 +77,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-19T10:37:34.524969"
+                "@value": "2021-05-20T10:55:03.997523"
             },
             "rdfs:label": "Country",
             "dc:title": "Country",

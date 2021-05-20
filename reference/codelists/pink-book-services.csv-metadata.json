@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/pink-book-services/{+notation}"
     },
     "rdfs:label": "Pink Book Services",
     "dc:title": "Pink Book Services",
@@ -87,7 +87,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T11:35:22.815540"
+                "@value": "2021-05-20T10:55:04.146455"
             },
             "dc:issued": {
                 "@type": "dateTime",
