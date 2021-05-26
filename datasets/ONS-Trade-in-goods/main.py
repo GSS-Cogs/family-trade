@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -194,7 +194,7 @@ for period in years.unique():
 
 cubes.output_all()
 
-### zippinng currenlty not needed as space issue is resloved ###
+### zipping currenlty not needed as space issue is resloved ###
 #from urllib.parse import urljoin
 #import os
 #scraper1.dataset.family = "trade"
@@ -217,3 +217,71 @@ cubes.output_all()
 #(out / csvName).unlink()
 #with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
  #   metadata.write(scraper1.generate_trig())
+
+# +
+oldStr1 = """<http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods-catalog-entry> a pmdcat:Dataset;
+    rdfs:label "UK trade in goods: country-by-commodity, exports and imports"@en;
+    gdp:family gdp:Trade;
+    gdp:updateDueOn "2021-06-11T00:00:00"^^xsd:dateTime;
+    pmdcat:datasetContents <http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods#dataset>;
+    pmdcat:graph ns1:ons-trade-in-goods;
+    dct:creator gov:office-for-national-statistics;"""
+
+oldStr2 = """ dct:issued "2021-05-12"^^xsd:date;
+    dct:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/>;
+    dct:modified "2021-05-25T08:08:41.773229+00:00"^^xsd:dateTime;
+    dct:publisher gov:office-for-national-statistics;
+    dct:title "UK trade in goods: country-by-commodity, exports and imports"@en;
+    void:sparqlEndpoint <http://gss-data.org.uk/sparql>;
+    rdfs:comment "Monthly export country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted."@en;
+    dcat:contactPoint <mailto:trade@ons.gov.uk>;
+    dcat:landingPage <https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityexports>;
+    dcat:theme <https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments> ."""
+
+newStr1 = """<http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods-catalog-entry> a pmdcat:Dataset;
+    rdfs:label "UK trade in goods: country-by-commodity, exports and imports"@en;
+    gdp:family gdp:Trade;
+    pmdcat:datasetContents <http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods#dataset>;
+    pmdcat:graph ns1:ons-trade-in-goods;
+    dct:creator gov:office-for-national-statistics;
+
+    schema:datePublished "2021-05-12T09:30:00.000+00:00"^^xsd:dateTime ;
+    schema:dateModified "2021-05-12T09:30:00.000+00:00"^^xsd:dateTime ;
+    gdp:updateDueOn "2021-06-11T00:00:00"^^xsd:dateTime;
+    schema:name "UK trade in goods: country-by-commodity, exports and imports" ;
+    schema:publisher gov:office-for-national-statistics;
+    schema:repeatFrequency <http://purl.org/linked-data/sdmx/2009/code#freq-M> ;
+    schema:description "Monthly import/export country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted." ;
+
+    dct:issued "2021-05-12T09:30:00.000+00:00"^^xsd:date;
+    dct:modified "2021-05-12T09:30:00.000+00:00"^^xsd:dateTime;
+    dct:title "UK trade in goods: country-by-commodity, exports and imports"@en;
+    dct:publisher gov:office-for-national-statistics;
+    dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-M> ;"""
+
+newStr2 = """dct:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/>;
+    void:sparqlEndpoint <http://gss-data.org.uk/sparql>;
+    rdfs:comment "Monthly export country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted."@en;
+    dcat:contactPoint <mailto:trade@ons.gov.uk>;
+    dcat:landingPage <https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityexports>;
+    dcat:theme <https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments> ."""
+
+# +
+f = open("out/ons-trade-in-goods.csv-metadata.trig", "r")
+st = f.read()
+f.close()
+
+st = st.replace(oldStr1, newStr1)
+st = st.replace(oldStr2, newStr2)
+
+f = open("out/ons-trade-in-goods.csv-metadata.trig", "w")
+f.write(st)
+f.close()
+
+# -
+
+
+
+
+
+
