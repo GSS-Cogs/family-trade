@@ -1,57 +1,126 @@
 Label,Notation,Parent Notation,Sort Priority
-Total,T,,1
+Food & live animals,0,,1
 Live animals,00,,2
 Meat & meat preparations,01,,3
 Dairy products & eggs,02,,4
-Cereals,04,,5
-Vegetables & fruit,05,,6
-"Coffee, tea, cocoa etc",07,,7
-Animal feeding stuffs,08,,8
-"Hides, skins & furskins",21,,9
-Oil-seeds & oleaginous fruits,22,,10
-Wood & cork,24,,11
-Pulp & waste paper,25,,12
-Other crude animal & vegetable materials,29,,13
-Processed oils & fats,43,,14
-Medicinal & pharmaceutical products,54,,15
-Toilet & cleansing preparations,55,,16
-Processed fertilisers,56,,17
-Other chemicals,59,,18
-Iron & steel,67,,19
-Non-ferrous metals,68,,20
-Miscellaneous metal manufactures,69,,21
-Road vehicles,78,,22
-Other transport equipment,79,,23
-Electrical machinery,7E,,24
-Mechanical machinery,7M,,25
-Other manufactures,8O,,26
-Paper & paperboard,64,,27
-Fish & shellfish,03,,28
-"Coal, coke & briquettes",32,,29
-Rubber manufactures,62,,30
-Crude rubber,23,,31
-Crude minerals & fertilisers,27,,32
-Oil,33,,33
-Gas,34,,34
-Organic chemicals,51,,35
-plus88 Scientific & photographic,87,,36
-Metal ores & scrap,28,,37
-Inorganic chemicals,52,,38
-Plastics in primary forms,57,,39
-Mineral manufactures,66,,40
-"Dyeing, tanning & colouring materials",53,,41
-Wood & cork manufactures,63,,42
-Textile fabrics,65,,43
-Sugar,06,,44
-Miscellaneous foods,09,,45
-Beverages,11,,46
-Animal oils & fats,41,,47
-Vegetable oils & fats,42,,48
-Plastics in non-primary forms,58,,49
-Leather manufactures,61,,50
-Clothing,84,,51
-Tobacco,12,,52
-Textile fibres,26,,53
-Footwear,85,,54
-Unspecified goods,9,,55
-Electricity,35,,56
+Fish & shellfish,03,,5
+Cereals,04,,6
+Vegetables & fruit,05,,7
+Sugar,06,,8
+"Coffee, tea, cocoa etc",07,,9
+Animal feeding stuffs,08,,10
+Miscellaneous foods,09,,11
+Beverages & tobacco,1,,12
+Beverages,11,,13
+Tobacco,12,,14
+Crude materials,2,,15
+"Hides, skins & furskins",21,,16
+Oil-seeds & oleaginous fruits,22,,17
+Crude rubber,23,,18
+Wood & cork,24,,19
+Pulp & waste paper,25,,20
+Textile fibres,26,,21
+Crude minerals & fertilisers,27,,22
+Metal ores & scrap,28,,23
+Other crude animal & vegetable materials,29,,24
+Fuels,3,,25
+"Coal, coke & briquettes",32,,26
+Oil,33,,27
+Crude oil,33O,,28
+Refined oil,33R,,29
+Gas,34,,30
+Electricity,35,,31
+Fuels other than oil,3OF,,32
+Animal & vegetable oils & fats,4,,33
+Animal oils & fats,41,,34
+Vegetable oils & fats,42,,35
+Processed oils & fats,43,,36
+Chemicals,5,,37
+Organic chemicals,51,,38
+Inorganic chemicals,52,,39
+"Dyeing, tanning & colouring materials",53,,40
+Medicinal & pharmaceutical products,54,,41
+Toilet & cleansing preparations,55,,42
+Processed fertilisers,56,,43
+Plastics in primary forms,57,,44
+Plastics in non-primary forms,58,,45
+Other chemicals,59,,46
+Material manufactures,6,,47
+Leather manufactures,61,,48
+Rubber manufactures,62,,49
+Wood & cork manufactures,63,,50
+Paper & paperboard,64,,51
+Textile fabrics,65,,52
+Mineral manufactures,66,,53
+Iron & steel,67,,54
+Non-ferrous metals,68,,55
+Miscellaneous metal manufactures,69,,56
+Machinery & transport equipment,7,,57
+Electric motors (intermediate),71EI,,58
+Electric motors (capital),71EK,,59
+Mechanical power generators (consumer),71MC,,60
+Mechanical power generators (intermediate),71MI,,61
+Mechanical power generators (capital),71MK,,62
+Specialised machinery (consumer),72C,,63
+Specialised machinery (intermediate),72I,,64
+Specialised machinery (capital),72K,,65
+Metal working machinery (intermediate),73I,,66
+Metal working machinery (capital),73K,,67
+General industrial machinery (consumer),74C,,68
+General industrial machinery (intermediate),74I,,69
+General industrial machinery (capital),74K,,70
+Office machinery (consumer),75C,,71
+Office machinery (intermediate),75I,,72
+Office machinery (capital),75K,,73
+Telecoms & sound equipment (consumer),76C,,74
+Telecoms & sound equipment (intermediate),76I,,75
+Telecoms & sound equipment (capital),76K,,76
+Miscellaneous electrical goods (consumer),77C,,77
+Miscellaneous electrical goods (intermediate),77I,,78
+Miscellaneous electrical goods (capital),77K,,79
+Road vehicles,78,,80
+Road vehicles other than cars (consumer),78C,,81
+Road vehicles other than cars (intermediate),78I,,82
+Road vehicles other than cars (capital),78K,,83
+Cars,78M,,84
+Other transport equipment,79,,85
+Railway equipment (intermediate),791I,,86
+Railway equipment (capital),791K,,87
+Aircraft,792,,88
+Ships & aircraft,792/3,,89
+Ships,793,,90
+Electrical machinery,7E,,91
+Electrical machinery (consumer),7EC,,92
+Electrical machinery (intermediate),7EI,,93
+Electrical machinery (intermediate),7EK,,94
+Mechanical machinery,7M,,95
+Mechanical machinery (consumer),7MC,,96
+Mechanical machinery (intermediate),7MI,,97
+Mechanical machinery (capital),7MK,,98
+Miscellaneous manufactures,8,,99
+"Plumbing, heating & lighting fixtures (consumer)",81C,,100
+"Plumbing, heating & lighting fixtures (intermediate)",81I,,101
+"Plumbing, heating & lighting fixtures (capital)",81K,,102
+Furniture (consumer),82C,,103
+Furniture (intermediate),82I,,104
+Furniture (capital),82K,,105
+"Travel goods, handbags etc",83,,106
+Clothing,84,,107
+Footwear,85,,108
+Scientific instruments (consumer),87C,,109
+Scientific instruments (intermediate),87I,,110
+Scientific instruments (capital),87K,,111
+Photographic & optical goods & clocks (consumer),88C,,112
+Photographic & optical goods & clocks (intermediate),88I,,113
+Photographic & optical goods & clocks (capital),88K,,114
+Works of art,896,,115
+Jewellery,897C,,116
+Other manufactures (intermediate),89I,,117
+Other manufactures (capital),89K,,118
+Other manufactures (consumer),89OC,,119
+Other manufactures,8O,,120
+Other miscellaneous manufactures (consumer),8OC,,121
+Other miscellaneous manufactures (intermediate),8OI,,122
+Other miscellaneous manufactures (capital),8OK,,123
+Unspecified goods,9,,124
+Total,T,,125
