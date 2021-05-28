@@ -1,0 +1,83 @@
+@prefix pmdcat: <http://publishmydata.com/pmdcat#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix spdx: <http://spdx.org/rdf/terms#> .
+@prefix pmd: <http://publishmydata.com/def/dataset#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns2: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <http://gss-data.org.uk/graph/gss_data/trade/> .
+@prefix gov: <https://www.gov.uk/government/organisations/> .
+@prefix ns3: <urn:x-rdflib:> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix gdp: <http://gss-data.org.uk/def/gdp#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix theme: <http://gss-data.org.uk/def/concept/statistics-authority-themes/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix schema: <http://schema.org> .
+
+ns1:ons-trade-in-goods-metadata {
+  <http://gss-data.org.uk/catalog/datasets> a dcat:Catalog;
+    dcat:record <http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods-catalog-record> .
+  
+  <http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods#dataset> a pmdcat:DataCube .
+  
+  <http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods-catalog-entry> a pmdcat:Dataset;
+    rdfs:label "UK trade in goods: country-by-commodity, exports and imports"@en;
+    gdp:family gdp:Trade;
+    pmdcat:datasetContents <http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods#dataset>;
+    pmdcat:graph ns1:ons-trade-in-goods;
+    dct:creator gov:office-for-national-statistics;
+
+    schema:datePublished "2021-05-12T09:30:00.000+00:00"^^xsd:dateTime ;
+    schema:dateModified "2021-05-12T09:30:00.000+00:00"^^xsd:dateTime ;
+    gdp:updateDueOn "2021-06-11T00:00:00"^^xsd:dateTime;
+    schema:name "UK trade in goods: country-by-commodity, exports and imports" ;
+    schema:publisher gov:office-for-national-statistics;
+    schema:repeatFrequency <http://purl.org/linked-data/sdmx/2009/code#freq-M> ;
+    schema:description "Monthly import/export country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted." ;
+
+    dct:issued "2021-05-12T09:30:00.000+00:00"^^xsd:date;
+    dct:modified "2021-05-12T09:30:00.000+00:00"^^xsd:dateTime;
+    dct:title "UK trade in goods: country-by-commodity, exports and imports"@en;
+    dct:publisher gov:office-for-national-statistics;
+    dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-M> ;
+    dct:description """ 
+Monthly import country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted.
+
+Users should note the following:
+Industry data has been produced using Standard Industrial Classification 2007 (SIC07).
+Commodity data has been produced using Standard International Trade Classification (SITC).	
+
+Due to risks around disclosing data related to individual firms we are only able to provide data for certain combinations of the dimensions included, i.e. country, commodity and industry. This dataset therefore provides the following two combinations:	
+    Industry (SIC07 2 digit), by Commodity (SITC 2 digit), by geographic region (worldwide, EU and non-EU)
+    Industry (SIC07 2 digit), by Commodity total, by individual country
+
+Methodology improvements
+Within this latest experimental release improvements have been made to the methodology that has resulted in some revisions when compared to our previous release in April 2019.
+These changes include; improvements to the data linking methodology and a targeted allocation of some of the Balance of Payments (BoP) adjustments to industry.
+The data linking improvements were required due to subtleties in both the HMRC data and IDBR not previously recognised within Trade.
+
+While we are happy with the quality of the data in this experimental release we have noticed some data movements, specifically in 2018.
+We will continue to review the movements seen in both the HMRC microdata and the linking methodology and, where appropriate, will further develop the methodology for Trade in Goods by Industry for future releases. 
+
+"""@en;
+    dct:issued "2021-04-13"^^xsd:date;
+    dct:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/>;
+    dct:modified "2021-05-05T13:21:30.480244+00:00"^^xsd:dateTime;
+    dct:publisher gov:office-for-national-statistics;
+    dct:title "UK trade in goods: country-by-commodity, exports and imports"@en;
+    void:sparqlEndpoint <http://gss-data.org.uk/sparql>;
+    rdfs:comment "Monthly export country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted."@en;
+    dcat:contactPoint <mailto:trade@ons.gov.uk>;
+    dcat:landingPage <https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityexports>;
+    dcat:theme <https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments> .
+  
+  <http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods-catalog-record> a dcat:CatalogRecord;
+    rdfs:label "UK trade in goods: country-by-commodity, exports and imports Catalog Record"@en;
+    pmdcat:metadataGraph ns1:ons-trade-in-goods-metadata;
+    dct:issued "2021-04-13"^^xsd:date;
+    dct:modified "2021-05-05T13:21:30.480244+00:00"^^xsd:dateTime;
+    ns2:primaryTopic <http://gss-data.org.uk/data/gss_data/trade/ons-trade-in-goods-catalog-entry> .
+}
