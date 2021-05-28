@@ -5,8 +5,8 @@
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -160,4 +160,13 @@ cubes.add_cube(scraper, merged, scraper.distribution(latest=True).title)
 # Write cube
 cubes.output_all()
 
+#### THIS SHOULD BE TEMP JUST TO DEMONSTRATE SOMETHING TO SWIRRL
+import os
+import shutil
 
+try:
+    os.remove("out/uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig")
+except:
+    i = 0
+
+shutil.copyfile("uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig", "out/uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig")
