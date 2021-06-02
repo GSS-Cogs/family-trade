@@ -30,14 +30,8 @@ ns1:ons_cpa-metadata {
     pmdcat:graph ns1:ons_cpa;
     dct:creator gov:office-for-national-statistics;
     
-    schema:datePublished "2021-03-18T09:30:00.000+00:00"^^xsd:dateTime ;
-    schema:dateModified "2021-03-18T09:30:00.000+00:00"^^xsd:dateTime ;
     gdp:updateDueOn "2021-06-16T00:00:00"^^xsd:dateTime;
-    schema:name "UK trade in goods by classification of product by activity time series" ;
-    schema:publisher gov:office-for-national-statistics;
-    schema:repeatFrequency <http://purl.org/linked-data/sdmx/2009/code#freq-Q> ;
-    schema:description "Quarterly and annual time series of the value of UK imports and exports of goods grouped by product. Goods are attributed to the activity of which they are the principal products." ;
-
+    
     dct:issued "2021-03-18T09:30:00.000+00:00"^^xsd:date;
     dct:modified "2021-03-18T09:30:00.000+00:00"^^xsd:dateTime;
     dct:title "UK trade in goods by classification of product by activity time series"@en;
