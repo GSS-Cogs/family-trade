@@ -161,12 +161,12 @@ cubes.add_cube(scraper, merged, scraper.distribution(latest=True).title)
 cubes.output_all()
 
 #### THIS SHOULD BE TEMP JUST TO DEMONSTRATE SOMETHING TO SWIRRL
-import os
-import shutil
+#import os
+#import shutil
 
-try:
-    os.remove("out/uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig")
-except:
-    i = 0
+#try:
+#    os.remove("out/uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig")
+#except:
+#    i = 0
 
-shutil.copyfile("uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig", "out/uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig")
+#shutil.copyfile("uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig", "out/uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig")
