@@ -36,7 +36,6 @@ ns1:ons_cpa-metadata {
     dct:modified "2021-03-18T09:30:00.000+00:00"^^xsd:dateTime;
     dct:title "UK trade in goods by classification of product by activity time series"@en;
     dct:publisher gov:office-for-national-statistics;
-    dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-Q> ;
         
     dct:description "Quarterly and annual time series of the value of UK imports and exports of goods grouped by product. Goods are attributed to the activity of which they are the principal products."@en; 
     dct:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/>;
