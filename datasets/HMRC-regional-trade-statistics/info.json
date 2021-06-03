@@ -14,49 +14,48 @@
         "stage": "Done"
     },
     "transform": {
-        "validate": false,
         "airtable": "reclNM0WAApNZVyh4",
         "main_issue": 12,
         "to_rdf": "csv2rdf",
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk{period}",
+                "value": "http://reference.data.gov.uk/id/quarter/{+period}",
                 "codelist": false
             },
             "Flow Type": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_type}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow_type}"
             },
-            "UK Region Code": false,
-            "UK Region": {
-                "label": "UK Region",
-                "value": "{uk_region}",
-                "codelist": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region"
+            "Region": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "codelist": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region",
+                "value": "{+region}"
             },
             "Country": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "label": "Country",
-                "value": "https://api.uktradeinfo.com/Country/{country}",
+                "value": "https://api.uktradeinfo.com/Country/{+country}",
                 "codelist": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country"
             },
             "SITC Code": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_code}"
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{+sitc_code}"
             },
-            "Value": {
+            "value": {
                 "datatype": "double"
             },
-            "Measure Type": {
+            "measure_type": {
                 "dimension": "http://purl.org/linked-data/cube#measureType",
-                "value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
+                "value": "http://gss-data.org.uk/def/trade/measure/{+measure_type}",
                 "types": [
-                    "gbp-million",
+                    "monetary-value",
                     "net-mass"
                 ]
             },
-            "Units": {
+            "unit_type": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/{units}"
+                "value": "{+unit_type}"
             }
         }
     },
@@ -89,7 +88,7 @@
         }
     },
     "load": {
-        "accretiveUpload": false,
+        "accretiveUpload": true,
         "publish": true
     },
     "sizingNotes": "",
