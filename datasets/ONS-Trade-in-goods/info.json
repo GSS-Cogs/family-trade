@@ -24,7 +24,7 @@
             "recWLO6lMVlcBiBiz",
             "recrQBCo8oII5TUpF"
         ],
-        "main_issue": 3,
+        "main_issue": 9,
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
@@ -40,6 +40,10 @@
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             },
+            "Seasonal Adjustment": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
+            },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
@@ -49,12 +53,8 @@
                 "value": "http://gss-data.org.uk/def/concept/cl-area/{ons_partner_geography}"
             },
             "Commodity": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
-                "value": "http://gss-data.org.uk/def/concept/commodity/{commodity}"
-            },
-            "Seasonal Adjustment": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustments",
-                "value": "http://gss-data.org.uk/def/concept/seasonal-adjustment/{seasonal_adjustment}"
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
+                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}"
             }
         }
     },
