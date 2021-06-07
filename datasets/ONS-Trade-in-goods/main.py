@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -21,6 +21,16 @@ from gssutils import *
 
 from zipfile import ZipFile
 from io import BytesIO
+
+
+# +
+def left(s, amount):
+    return s[:amount]
+
+def right(s, amount):
+    return s[-amount:]
+
+
 # -
 
 cubes = Cubes("info.json")
@@ -121,8 +131,8 @@ with ZipFile(BytesIO(scraper1.session.get(distribution1.downloadURL).content)) a
                                  'DIRECTION': 'category'
                              }, na_values=['','N/A'], keep_default_na=False)
 
-tidyData1 = yearSum(data1)
-table1 = transform(tidyData1)
+#tidyData1 = yearSum(data1)
+table1 = transform(data1)
 
 '''Country by Commodity Import data'''
 with ZipFile(BytesIO(scraper2.session.get(distribution2.downloadURL).content)) as zip:
@@ -136,36 +146,94 @@ with ZipFile(BytesIO(scraper2.session.get(distribution2.downloadURL).content)) a
                                  'DIRECTION': 'category'
                              }, na_values=['','N/A'], keep_default_na=False)
 
-tidyData2 = yearSum(data2)
-table2 = transform(tidyData2)
+#tidyData2 = yearSum(data2)
+table2 = transform(data2)
 
+# +
+# =================================================================================================
+# =================================================================================================
+# =================================================================================================
+# Get rid of some years as PMD4 is having trouble publishing without timing out
 table = pd.concat([table1, table2])
+#print(table['Commodity'].count())
+
+for y in range(1995, 2018):
+    table = table[~table['Period'].str.contains(str(y))]
+    #print(str(y) + ': ' + str(table['Commodity'].count()))
+    
+table['Period'].unique() 
+# =================================================================================================
+# =================================================================================================
+# =================================================================================================
+# -
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
 
-table['Period'] = table['Period'].astype(str)
+table.loc[table['Period'].str.len() == 7, 'Period'] = pd.to_datetime(table.loc[table['Period'].str.len() == 7, 'Period'], format='%Y%b').astype(str).map(lambda x: 'month/' + left(x,7))
+#table['Period'] = table['Period'].astype(str)
 table.dropna(subset=['Value'], inplace=True)
-table['Value'] = table['Value'].astype(int)
+#table['Value'] = table['Value'].astype(int)
 
 table['Commodity'].cat.categories = table['Commodity'].cat.categories.map(lambda x: x.split(' ')[0])
 table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
 table['Flow'] = table['Flow'].map(lambda x: x.split(' ')[1])
 
-table['Period'] = table['Period'].astype(str)
-table['Period'] = 'year/' + table['Period']
+# +
+#table['Period'] = table['Period'].astype(str)
+#table['Period'] = 'year/' + table['Period']
+# -
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
-table['Measure Type'] = pd.Series('gbp-total', index=table.index, dtype='category') 
-table['Unit'] = pd.Series('gbp million', index=table.index, dtype='category')
+#table['Measure Type'] = pd.Series('gbp-million', index=table.index, dtype='category') 
+#table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
 
+#line not needed data does not need to be supressed
 table['Marker'] = ' '
-table.loc[(table['Value'] == 0), 'Marker'] = 'suppressed'
+#table.loc[(table['Value'] == 0), 'Marker'] = 'suppressed'
 
-table = table[['ONS Partner Geography','Period','Flow','Commodity','Seasonal Adjustment','Measure Type','Value','Marker','Unit']]
+table = table[['ONS Partner Geography','Period','Flow','Commodity','Seasonal Adjustment','Value','Marker']]
 table['Flow'] = table['Flow'].map(lambda x: pathify(x))
 table
 
-cubes.add_cube(scraper1, table, title)
+info_json_dataset_id = info.get('id', Path.cwd().name)
+years = table['Period'].map(lambda p: p[-7:-3])
+for period in years.unique():
+    
+    if len(cubes.cubes) == 0:
+        graph_uri = f"http://gss-data.org.uk/graph/gss_data/trade/ons-trade-in-goods"
+        csv_name = 'ons-trade-in-goods'
+        cubes.add_cube(scraper1, table[years == period], csv_name, graph=info_json_dataset_id)
+    else:
+        graph_uri = f"http://gss-data.org.uk/graph/gss_data/trade/ons-trade-in-goods/{period}"
+        csv_name = f"ons-trade-in-goods-{period}"
+        cubes.add_cube(scraper1, table[years == period], csv_name, graph=info_json_dataset_id, override_containing_graph=graph_uri, suppress_catalog_and_dsd_output=True)
+
 cubes.output_all()
+
+### zipping currenlty not needed as space issue is resloved ###
+#from urllib.parse import urljoin
+#import os
+#scraper1.dataset.family = "trade"
+#csvName = 'observations.csv'
+#out = Path('out')
+#out.mkdir(exist_ok=True)
+# Create the temp csv
+#tempdat = table.iloc[0:5]
+#tempdat.to_csv(out / csvName, index = False)
+#table.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
+#dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper1.dataset.family}/{Path(os.getcwd()).name}'))
+#scraper1.set_base_uri('http://gss-data.org.uk')
+#scraper1.set_dataset_id(dataset_path)
+#csvw_transform = CSVWMapping()
+#csvw_transform.set_csv(out / csvName)
+#csvw_transform.set_mapping(json.load(open('info.json')))
+#csvw_transform.set_dataset_uri(urljoin(scraper1._base_uri, f'data/{scraper1._dataset_id}'))
+#csvw_transform.write(out / f'{csvName}-metadata.json')
+# Delete the temp csv
+#(out / csvName).unlink()
+#with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+ #   metadata.write(scraper1.generate_trig())
+
+
 
 
