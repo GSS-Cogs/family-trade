@@ -234,22 +234,5 @@ cubes.output_all()
 #with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
  #   metadata.write(scraper1.generate_trig())
 
-# +
-import os
-import shutil
-
-try:
-    os.remove("out/ons-trade-in-goods.csv-metadata.trig")
-except:
-    i = 0
-    
-#shutil.move("ons-trade-in-goods.csv-metadata.trig", "out/ons-trade-in-goods.csv-metadata.trig")
-
-shutil.copyfile("ons-trade-in-goods.csv-metadata.trig", "out/ons-trade-in-goods.csv-metadata.trig")
-# -
-
-
-
-
 
 
