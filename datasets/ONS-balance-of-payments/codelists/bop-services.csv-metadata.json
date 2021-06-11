@@ -24,6 +24,17 @@
                 "propertyUrl": "skos:notation"
             },
             {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#concept/bop-services/{+parent_notation}"
+            },
+            {
                 "titles": "Sort Priority",
                 "name": "sort_priority",
                 "datatype": "integer",
