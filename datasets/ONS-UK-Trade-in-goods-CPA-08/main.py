@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -89,6 +89,19 @@ df['CDID'] = df['CDID'].map(lambda x: x if len(x.strip()) > 0 else 'not-applicab
 df = df[['Period', 'Flow Direction', 'Product', 'CDID', 'Value']]
 df['Flow Direction'] = df['Flow Direction'].apply(pathify)
 df
+
+# +
+scraper.dataset.title = "UK Trade in goods by Classification of Product by Activity, time series dataset, Quarterly and Annual"
+
+scraper.dataset.comment = "Publication tables, UK trade in goods, CPA (08). Additional information for UK trade in goods by classification of product by activity. Current price, seasonally adjusted."
+
+scraper.dataset.description = """
+Publication tables, UK trade in goods, CPA (08). 
+Additional information for UK trade in goods by classification of product by activity. 
+Current price, seasonally adjusted.
+This publication includes a residual line which is used to account for any residual between the seasonally adjusted aggregate of 'Total Classification of Product by Activity (CPA)' and the seasonally adjusted aggregate of 'Total Standard International Trade Classification (SITC)' that is published in the UK Trade Statistical Bulletin, Gross Domestic Product (GDP), Balance of Payments (BoP) and Pink Book releases. The seasonal adjustment residual will account for differences at the aggregate level that are introduced because of differences in CPA and SITC classifications at the level at which seasonal adjustment is applied.
+"""
+# -
 
 cubes.add_cube(scraper, df, title)
 cubes.output_all()
