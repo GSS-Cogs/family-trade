@@ -689,15 +689,6 @@ trace.render()
 join_1_df['GDP Estimate Type'].unique()
 join_1_df.head(10)
 
-import dmtools as dm
-# Takes a unique list of codes and checks to see if they are in a particular codelist csv files, make sure to pass the path to the actual csv file
-# If a file has been output it returns the path and name for use in the next method
-dimension = 'Area Type'                                       # Column you want to look at
-codes = join_8_df[dimension].unique()                      # The unique set of values within the column
-filepth = 'codelists/area-type.csv'         # Path to the codelist file
-colnme = 'Notation'                                               # Which column of each codelist to compare to
-outputfoundcodes = False                                           # Output all results (True) or just found codes (False)
-filename = dm.check_all_codes_in_codelist(codes, filepth, colnme, dimension, outputfoundcodes)
-dm.add_missing_codes_to_codelist(filename, filepth)
+
 
 
