@@ -707,5 +707,3 @@ join_1_df['GDP Estimate Type'].unique()
 join_1_df.head(10)
 
 
-
-
