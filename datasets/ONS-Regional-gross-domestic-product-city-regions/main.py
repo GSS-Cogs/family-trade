@@ -438,12 +438,11 @@ with open("info.json", "r") as read_file:
     data["transform"]["columns"]["Value"]["datatype"] = "integer"
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
-# +
 join_3_df['GDP Estimate Type'] = join_3_df['GDP Estimate Type'].replace({
     'gross-domestic-product-gdp-note-1-per-head-note-2-at-current-market-prices':'gross-domestic-product-gdp-at-current-market-prices'
 })
-
-join_3_df['GDP Estimate Type'].unique()
+join_3_df = join_3_df[join_3_df['Geography Code'] != 'Not available']
+join_3_df['Geography Code'].unique()
 
 # +
 #Join 3 : Measure: amp, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cmp
