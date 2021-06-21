@@ -77,13 +77,13 @@ for tab_name in tabs_names_to_process:
     #anchor = tab.excel_ref('A').filter(contains_string("by financial year")).assert_one()
     
     if tab_name == tabs_names_to_process[0]:
-        anchor = tab.excel_ref('A').filter(contains_string("Table 1a. Wine Duty")).assert_one()
+        anchor = tab.excel_ref('A6')#.filter(contains_string("Table 1a. Wine Duty")).assert_one()
     elif tab_name == tabs_names_to_process[1]:
-        anchor = tab.excel_ref('A').filter(contains_string("Table 2a. Wine Duty")).assert_one()
+        anchor = tab.excel_ref('A7')#.filter(contains_string("Table 2a. Wine Duty")).assert_one()
     elif tab_name == tabs_names_to_process[2]:
-        anchor = tab.excel_ref('A').filter(contains_string("Table 3a. Spirits Duty")).assert_one()
+        anchor = tab.excel_ref('A5')#.filter(contains_string("Table 3a. Spirits Duty")).assert_one()
     elif tab_name == tabs_names_to_process[3]:
-        anchor = tab.excel_ref('A').filter(contains_string("Table 4a. Beer Duty and Cider Duty")).assert_one()
+        anchor = tab.excel_ref('A5')#.filter(contains_string("Table 4a. Beer Duty and Cider Duty")).assert_one()
     print(tab_name)
     
     period = anchor.expand(DOWN).is_not_blank().is_not_whitespace()
