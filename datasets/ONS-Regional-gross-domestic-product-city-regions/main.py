@@ -29,7 +29,7 @@ list(tabs)
 #
 
 for name, tab in tabs.items():
-    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name: 
+    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name or 'Correction' in name: 
         continue
 
     datasetTitle = 'Regional gross domestic product city regions'
@@ -95,7 +95,7 @@ scraper
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 
 for name, tab in tabs.items():
-    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name:
+    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name or 'Correction' in name:
         continue
 
     datasetTitle = 'Regional gross domestic product city regions'
