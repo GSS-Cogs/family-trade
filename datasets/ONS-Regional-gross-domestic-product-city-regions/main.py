@@ -29,7 +29,7 @@ list(tabs)
 #
 
 for name, tab in tabs.items():
-    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name: 
+    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name or 'Correction' in name: 
         continue
 
     datasetTitle = 'Regional gross domestic product city regions'
@@ -95,7 +95,7 @@ scraper
 tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 
 for name, tab in tabs.items():
-    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name:
+    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name or 'Correction' in name:
         continue
 
     datasetTitle = 'Regional gross domestic product city regions'
@@ -161,7 +161,7 @@ merged_data['Year'] = "year/" + merged_data['Year']
 merged_data = merged_data.replace({'Area Type' : {'CR' : 'city-region', 'LA' : 'local-authority', 'LEP' : 'local-enterprise-partnerships', 'ER' : 'enterprise-region'}})
 merged_data = merged_data.replace({'Marker' : {'-' : 'not-applicable',}})
 
-del merged_data['Geography Code']
+#del merged_data['Geography Code']
 
 merged_data["Table Number for joining"] = merged_data["GDP Estimate Type"].str.split(':').str[0]
 merged_data["GDP Estimate Type"] = merged_data["GDP Estimate Type"].str.split(':').str[2]
@@ -351,8 +351,41 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 # +
+join_1_df = join_1_df[join_1_df['Geography Code'] != 'Not available']
+join_2_df = join_2_df[join_2_df['Geography Code'] != 'Not available']
+join_3_df = join_3_df[join_3_df['Geography Code'] != 'Not available']
+join_4_df = join_4_df[join_4_df['Geography Code'] != 'Not available']
+join_5_df = join_5_df[join_5_df['Geography Code'] != 'Not available']
+join_6_df = join_6_df[join_6_df['Geography Code'] != 'Not available']
+join_7_df = join_7_df[join_7_df['Geography Code'] != 'Not available']
+join_8_df = join_8_df[join_8_df['Geography Code'] != 'Not available']
+
+join_1_df['Year'] = join_1_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
+join_2_df['Year'] = join_2_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
+join_3_df['Year'] = join_3_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
+join_4_df['Year'] = join_4_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
+join_5_df['Year'] = join_5_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
+join_6_df['Year'] = join_6_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
+join_7_df['Year'] = join_7_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
+join_8_df['Year'] = join_8_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
+
+# +
+join_1_df['GDP Estimate Type'] = join_1_df['GDP Estimate Type'].replace({
+    'gross-value-added-balanced-note-1-2-at-current-basic-prices':'gross-value-added-balanced-at-current-basic-prices',
+    'value-added-tax-vat-on-products-note-1-2': 'value-added-tax-vat-on-products',
+    'other-taxes-on-products-note-1-2': 'other-taxes-on-products',
+    'gross-domestic-product-gdp-note-1-2-at-current-market-prices': 'gross-domestic-product-gdp-at-current-market-prices',
+    'subsidies-on-products-note-1-2': 'subsidies-on-products'
+
+})
+
+join_1_df['GDP Estimate Type'].unique()
+
+# +
 #Join 1 : Measure: cp, Unit: gbp-million, Datatype: integer, dataset_path: dataset_path + /cp
-join_1_df = join_1_df[["Year", "Area Type", 'Area Name', "GDP Estimate Type", "Value", "Marker"]]
+#join_1_df = join_1_df[["Year", "Area Type", 'Area Name', "GDP Estimate Type", "Value", "Marker"]]
+join_1_df = join_1_df[["Year", "Area Type", 'Geography Code', "GDP Estimate Type", "Value", "Marker"]]
+
 try:
     i = 0
     csvName = fn[i]
@@ -384,8 +417,16 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 # +
+join_2_df['GDP Estimate Type'] = join_2_df['GDP Estimate Type'].replace({
+    'total-resident-population-numbers-note-1':'total-resident-population-numbers'
+})
+
+join_2_df['GDP Estimate Type'].unique()
+
+# +
 #Join 2 Measure: count, Unit: persons, Datatype: integer, dataset_path: dataset_path + /pop
-join_2_df = join_2_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+#join_2_df = join_2_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_2_df = join_2_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 1
     csvName = fn[i]
@@ -417,8 +458,15 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 # +
+join_3_df['GDP Estimate Type'] = join_3_df['GDP Estimate Type'].replace({
+    'gross-domestic-product-gdp-note-1-per-head-note-2-at-current-market-prices':'gross-domestic-product-gdp-at-current-market-prices'
+})
+
+#join_3_df['Geography Code'].unique()
+
+# +
 #Join 3 : Measure: amp, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cmp
-join_3_df = join_3_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_3_df = join_3_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 2
     csvName = fn[i]
@@ -450,9 +498,16 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 # +
+join_4_df['GDP Estimate Type'] = join_4_df['GDP Estimate Type'].replace({
+    'whole-economy-gva-implied-deflators-note-1-2':'whole-economy-gva-implied-deflators'
+})
+
+join_4_df['GDP Estimate Type'].unique()
+
+# +
 #Join 4 : Measure: gva, Unit: deflators, Datatype: double, dataset_path: dataset_path + /deflate
 
-join_4_df = join_4_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_4_df = join_4_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 3
     csvName = fn[i]
@@ -484,9 +539,16 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 # +
+join_5_df['GDP Estimate Type'] = join_5_df['GDP Estimate Type'].replace({
+    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-note-2-index':'gross-domestic-product-gdp-chained-volume-measures'
+})
+
+join_5_df['GDP Estimate Type'].unique()
+
+# +
 #Join 5 : Measure: cvm, Unit: index, Datatype: double, dataset_path: dataset_path + /cvmindex
 
-join_5_df = join_5_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_5_df = join_5_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 4
     csvName = fn[i]
@@ -518,9 +580,16 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 # +
+join_6_df['GDP Estimate Type'] = join_6_df['GDP Estimate Type'].replace({
+    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-note-2-in-2018-money-value':'gross-domestic-product-gdp-chained-volume-measures-cvm'
+})
+
+join_6_df['GDP Estimate Type'].unique()
+
+# +
 #Join 6 : Measure: cvm, Unit: index, Datatype: double, dataset_path: dataset_path + /cvmindex
 
-join_6_df = join_6_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_6_df = join_6_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 5
     csvName = fn[i]
@@ -552,9 +621,16 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 # +
+join_7_df['GDP Estimate Type'] = join_7_df['GDP Estimate Type'].replace({
+    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-per-head-note-2':'gross-domestic-product-gdp-chained-volume-measures'
+})
+
+join_7_df['GDP Estimate Type'].unique()
+
+# +
 #Join 7 : Measure: cvm, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cvmhead
 
-join_7_df = join_7_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_7_df = join_7_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 6
     csvName = fn[i]
@@ -586,9 +662,17 @@ with open("info.json", "r") as read_file:
     print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
 
 # +
+join_8_df['GDP Estimate Type'] = join_8_df['GDP Estimate Type'].replace({
+    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-note-2-annual-growth-rates':'gross-domestic-product-gdp-chained-volume-measures-cvm-annual-growth-rates',
+    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-per-head-note-2-annual-growth-rates': 'gross-domestic-product-gdp-chained-volume-measures-cvm-per-head-annual-growth-rates'
+})
+
+join_8_df['GDP Estimate Type'].unique()
+
+# +
 #Join 8 : Measure: cvm, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cvmhead
 
-join_8_df = join_8_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
+join_8_df = join_8_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
 try:
     i = 7
     csvName = fn[i]
@@ -618,3 +702,8 @@ with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 # -
 trace.render()
+
+join_1_df['GDP Estimate Type'].unique()
+join_1_df.head(10)
+
+
