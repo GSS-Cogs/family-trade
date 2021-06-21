@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -61,7 +61,8 @@ datasetTitle = distribution.title
 columns = ["Period", "Marker", "Bulletin Type", "Alcohol Type", "Measure Type", "Unit"]
 distribution.downloadURL
 
-tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
+#tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
+tabs_names_to_process = ["Wine_Duty_(wine)_tables", "Wine_Duty_(made_wine)_tables", "Spirits_Duty_tables", "Beer_Duty_and_Cider_Duty_tables" ]
 for tab_name in tabs_names_to_process:
 
     # Raise an exception if one of our required tabs is missing
@@ -72,9 +73,19 @@ for tab_name in tabs_names_to_process:
     tab = [x for x in tabs if x.name == tab_name][0]
     
     trace.start(datasetTitle, tab, columns, distribution.downloadURL)
-    
-    anchor = tab.excel_ref('A').filter(contains_string("Data by financial year")).assert_one()
 
+    #anchor = tab.excel_ref('A').filter(contains_string("by financial year")).assert_one()
+    
+    if tab_name == tabs_names_to_process[0]:
+        anchor = tab.excel_ref('A').filter(contains_string("Table 1a. Wine Duty")).assert_one()
+    elif tab_name == tabs_names_to_process[1]:
+        anchor = tab.excel_ref('A').filter(contains_string("Table 2a. Wine Duty")).assert_one()
+    elif tab_name == tabs_names_to_process[2]:
+        anchor = tab.excel_ref('A').filter(contains_string("Table 3a. Spirits Duty")).assert_one()
+    elif tab_name == tabs_names_to_process[3]:
+        anchor = tab.excel_ref('A').filter(contains_string("Table 4a. Beer Duty and Cider Duty")).assert_one()
+    print(tab_name)
+    
     period = anchor.expand(DOWN).is_not_blank().is_not_whitespace()
     trace.Period("Taken from column A")
 
@@ -84,22 +95,26 @@ for tab_name in tabs_names_to_process:
     alcohol_type = tab.name
     trace.Alcohol_Type("Name of tabs in XLS sheet")
 
-    if tab_name == "Wine_statistics":
+    #if tab_name == "Wine_statistics":
+    if tab_name == tabs_names_to_process[0]:
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
 
-    elif tab_name == "Made_wine_statistics":
+    #elif tab_name == "Made_wine_statistics":
+    elif tab_name == tabs_names_to_process[1]:
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)-tab.excel_ref("K6").expand(DOWN)
     
-    elif tab_name == "Spirits_statistics":
+    #elif tab_name == "Spirits_statistics":
+    elif tab_name == tabs_names_to_process[2]: 
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)
 
-    elif tab_name == "Beer_and_cider_statistics":
+    #elif tab_name == "Beer_and_cider_statistics":
+    elif tab_name == tabs_names_to_process[3]:
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)
@@ -121,6 +136,7 @@ for tab_name in tabs_names_to_process:
     savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
+    
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
