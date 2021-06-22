@@ -256,7 +256,7 @@ df['Marker'] = df['Marker'].str.replace('[','')
 df['Marker'] = df['Marker'].str.replace(']','')
 df['Marker'] = df['Marker'].apply(pathify)
 df['Marker'].unique()
-#df.head(60)
+
 
 # +
 trace.render()
@@ -296,15 +296,11 @@ for x in range(3):
     
     cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
 
-del df
+#del df
 cubes.output_all()
 
 # +
-#for c in df.columns:
-#    if (c != 'Value') & (c != 'Period'):
-#        print(c)
-#        print(df[c].unique())
-#        print("###################################")
+#df.head(60)
 
 # +
 #scraper.dataset.family = 'trade'
@@ -315,6 +311,8 @@ cubes.output_all()
 #    if cl in df.columns:
 #        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 # -
+
+
 
 
 
