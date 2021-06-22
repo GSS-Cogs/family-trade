@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.4.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -61,7 +61,12 @@ datasetTitle = distribution.title
 columns = ["Period", "Marker", "Bulletin Type", "Alcohol Type", "Measure Type", "Unit"]
 distribution.downloadURL
 
-tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
+# +
+# Old tab names
+#tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
+# New tab names
+tabs_names_to_process = ["Wine_Duty_(wine)_tables", "Wine_Duty_(made_wine)_tables", "Spirits_Duty_tables", "Beer_Duty_and_Cider_Duty_tables" ]
+
 for tab_name in tabs_names_to_process:
 
     # Raise an exception if one of our required tabs is missing
@@ -73,7 +78,14 @@ for tab_name in tabs_names_to_process:
     
     trace.start(datasetTitle, tab, columns, distribution.downloadURL)
     
-    anchor = tab.excel_ref('A').filter(contains_string("Data by financial year")).assert_one()
+    if tab_name == tabs_names_to_process[0]:
+        anchor = tab.excel_ref('A6')#.filter(contains_string("Table 1a:")).assert_one()
+    elif tab_name == tabs_names_to_process[1]:
+        anchor = tab.excel_ref('A7')
+    elif tab_name == tabs_names_to_process[2]:
+        anchor = tab.excel_ref('A5')
+    elif tab_name == tabs_names_to_process[3]:
+        anchor = tab.excel_ref('A5')
 
     period = anchor.expand(DOWN).is_not_blank().is_not_whitespace()
     trace.Period("Taken from column A")
@@ -84,22 +96,22 @@ for tab_name in tabs_names_to_process:
     alcohol_type = tab.name
     trace.Alcohol_Type("Name of tabs in XLS sheet")
 
-    if tab_name == "Wine_statistics":
+    if tab_name == tabs_names_to_process[0]:
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
 
-    elif tab_name == "Made_wine_statistics":
+    elif tab_name == tabs_names_to_process[1]:
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
-        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)-tab.excel_ref("K6").expand(DOWN)
+        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)-tab.excel_ref("K6").expand(DOWN)
     
-    elif tab_name == "Spirits_statistics":
+    elif tab_name == tabs_names_to_process[2]:
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)
 
-    elif tab_name == "Beer_and_cider_statistics":
+    elif tab_name == tabs_names_to_process[3]:
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
         observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)
@@ -121,11 +133,13 @@ for tab_name in tabs_names_to_process:
     savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
+# -
 
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
-df['Marker'].unique() 
+# +
+#df['Marker'].unique() 
 
 # +
 #check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
@@ -144,10 +158,10 @@ df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances"
 f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
 df.loc[f1,'Alcohol Type'] = 'all'
 
-df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == "Wine_statistics" else 
-                                    ("made-wine" if x == "Made_wine_statistics" else 
-                                     ("spirits" if x == "Spirits_statistics" else
-                                      ("beer-and-cider" if x == "Beer_and_cider_statistics" else x))))
+df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else 
+                                    ("made-wine" if x == tabs_names_to_process[1] else 
+                                     ("spirits" if x == tabs_names_to_process[2] else
+                                      ("beer-and-cider" if x == tabs_names_to_process[3] else x))))
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
@@ -199,6 +213,8 @@ def date_time (date):
         return 'government-year/' + left(date, 4) + '-' + left(date, 2) + right(date, 2)
     elif len(date) == 10:
         return 'month/' + left(date, 7) 
+    elif len(date) == 12:
+        return 'government-year/' + left(date, 4) + '-' + left(date, 2) + right(date, 2)
     else:
         return date
 df['Period'] =  df["Period"].apply(date_time)
@@ -207,11 +223,39 @@ df['Period'] =  df["Period"].apply(date_time)
 #quick fix for odd values 
 df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000'}})
 
-df['Marker'].unique()
+# +
+import calendar
+import datetime
+tables = ['Table 1a','Table 1b','Table 1c','Table 2a','Table 2b','Table 2c','Table 3a','Table 3b','Table 3c','Table 4a','Table 4b', 'Table 4c']
+for t in tables:
+    df = df[~df['Period'].str.contains(t)]
+df['Period'] = df['Period'].str.replace('[[ ]]', '')   
+
+
+now = datetime.datetime.now()
+yrnow = now.year
+yrlast = yrnow - 1
+
+for i in range(1,12):
+    yrmthlast = calendar.month_name[i] + ' ' + str(yrlast)
+    yrmthnow = calendar.month_name[i] + ' ' + str(yrnow)
+    if i < 10:
+        mthstr = '0' + str(i)
+    else:
+        mthstr = str(i)
+    df['Period'][df['Period'].str.contains(yrmthlast)] = 'month/' + str(yrlast) + '-' + mthstr
+    df['Period'][df['Period'].str.contains(yrmthnow)] = 'month/' + str(yrnow) + '-' + mthstr
+
+df['Period'][df['Period'].str.contains(str(yrlast) + ' to ' + str(yrnow))] = 'government-year/' + str(yrlast) + '-' + str(yrnow)
 
 # +
-#cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
-#cubes.output_all()
+#list(df['Period'].unique())
+# -
+
+df['Marker'] = df['Marker'].str.replace('[','')
+df['Marker'] = df['Marker'].str.replace(']','')
+df['Marker'].unique()
+#df.head(60)
 
 # +
 trace.render()
@@ -269,3 +313,8 @@ cubes.output_all()
 #for cl in codelistcreation:
 #    if cl in df.columns:
 #        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+# -
+
+
+
+
