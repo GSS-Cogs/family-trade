@@ -254,6 +254,7 @@ df['Period'][df['Period'].str.contains(str(yrlast) + ' to ' + str(yrnow))] = 'go
 
 df['Marker'] = df['Marker'].str.replace('[','')
 df['Marker'] = df['Marker'].str.replace(']','')
+df['Marker'] = df['Marker'].apply(pathify)
 df['Marker'].unique()
 #df.head(60)
 
