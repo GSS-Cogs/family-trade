@@ -280,7 +280,7 @@ for x in range(3):
     else :
         scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic wine, made wine, spirits, beer and cider {tchange[x]}'
     print(str(x) + " - " + scraper.dataset.title + " - " + pathify(tchange[x]))
-    
+    #print(dat.columns)
     with open("info.json", "r") as jsonFile:
         data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/{pathify(tchange[x])}"
@@ -303,13 +303,17 @@ cubes.output_all()
 #df.head(60)
 
 # +
-#scraper.dataset.family = 'trade'
-#codelistcreation = ['Bulletin Type'] 
-#df = df
-#codeclass = CSVCodelists()#
-#for cl in codelistcreation:
-#    if cl in df.columns:
-#        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+#import dmtools as dm
+#dimension = 'Bulletin Type'                                       
+#codes = df[dimension].unique()                      
+#filepth = 'bulletin-type.csv'         
+#colnme = 'Notation'                                               
+#outputfoundcodes = False                                         
+#filename = dm.check_all_codes_in_codelist(codes, filepth, colnme, dimension, outputfoundcodes)
+
+#dm.add_missing_codes_to_codelist(filename, filepth)
+#cdelst = pd.read_csv(filepth)
+#cdelst.head(10)
 # -
 
 
