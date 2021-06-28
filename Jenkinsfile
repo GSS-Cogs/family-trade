@@ -27,7 +27,7 @@ pipeline {
                             def outFiles = findFiles(glob: 'out/*')
                             def newestIn = inFiles.max { it.lastModified }
                             def oldestOut = outFiles.min { it.lastModified }
-                            if (newestIn.lastModified > oldestOut.lastModified) {
+                            if (oldestOut == null || (newestIn.lastModified > oldestOut.lastModified)) {
                                 sh "jupytext --to notebook '*.py'"
                                 sh "jupyter-nbconvert --to html --output-dir='out' --ExecutePreprocessor.timeout=None --execute 'main.ipynb'"
                             }
