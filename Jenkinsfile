@@ -30,6 +30,13 @@ pipeline {
                             if (oldestOut == null || (newestIn.lastModified > oldestOut.lastModified)) {
                                 sh "jupytext --to notebook '*.py'"
                                 sh "jupyter-nbconvert --to html --output-dir='out' --ExecutePreprocessor.timeout=None --execute 'main.ipynb'"
+                                def schemas = []
+                                for (def schema : findFiles(glob: "out/*-metadata.json")) {
+                                    schemas.add("${schema.path}")
+                                }
+                                for (String schema : schemas) {
+                                    sh "csvlint --no-verbose -s ${schema}"
+                                }
                             }
                         }
                     }
