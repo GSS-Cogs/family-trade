@@ -1300,8 +1300,6 @@ interactions:
       - cloudflare
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       Vary:
       - Accept-Encoding
       X-Frame-Options:
@@ -14019,6 +14017,76 @@ interactions:
       Vary:
       - Accept-Encoding, User-Agent
       X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - '1'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompaniesoutwardtables/current/data
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAN1WyW7bMBD9FYKnFvVCSV51KlAjaNANaJNLix5ocewQpkiBi2zD8L9nKNlqgPjQ
+        Aj04AbzQ5Js382aGHh2oMFutDBeO5r8OdCUV0By/NFdVWCpZcC+N9nypwJngt9yKwU65HT3+7lEX
+        qkpBCXhu9zdoGklwvwbr0KqlDFYi43AZnNTg8EME5+2ea+EtF9AdPEFoUzduh4J77sC74cpYkGst
+        pIXCS12D89EtroyqpV6HTWHKimvZRdmGPCyCtQgcVhZqaYIb1gnt0VAhMyzwjaGlLBn3k7TPsjvG
+        8uY1YIz9RFxhbOPQ6K/GyyKicVfxJajWcESPveuTmF6QOGkkpndsnmd/L/Eq5WUX5E0beclrkDe6
+        IG92atAEtSV5OhvMxpMXKm98Qd78fP9efvUmz+WlDC9en01eg7zpRXlYvfTf7x5OCr+v4vYp0sh9
+        DXoxDgGusLKKvDQ/UC99MxhvWmayaKjJbcdNOnJy/4l09Dn51jogrQcah2ZZ4rhEsvORhRWg2wJO
+        IOQqVBCRK0oiKIeslNm6HqmMkzEmRzAjBLjViHIDpN3AfmusOE3gEjxfPJXwf53pJuFc/fC4cFhb
+        mnsbIJYcnwUKH1MGJZexzish3yPHYG3qQdg0xmVM5RdZPHBQ5CNGJQH3PSioHoyOh+9GI/KGvU0m
+        WUZG4/E8zfA2UIsIrPDzuZ2kecqav8XpLHaehp3/3oIRyDKygALKJVgSjRAAQp7y8uFPydv2uRVt
+        nwYtfbvC7r/vfmDH2HMrn55zPncdfXwEDtqDy1AJAAA=
+    headers:
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - DELETE, GET, HEAD, POST, PUT, OPTIONS, PATCH
+      CF-Cache-Status:
+      - REVALIDATED
+      CF-RAY:
+      - 66dba6523a905410-LHR
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '602'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Mon, 12 Jul 2021 16:29:19 GMT
+      Etag:
+      - e4c310cb8fb7320f049b0ed064f03e6662dda241--gzip
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding, User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
       - SAMEORIGIN
       X-XSS-Protection:
       - '1'
