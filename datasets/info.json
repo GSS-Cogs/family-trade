@@ -56,7 +56,8 @@
             "HMRC-overseas-trade-statistics",
             "HMRC-regional-trade-statistics",
             "HMRC-trade-in-goods-by-business-characteristics",
-            "ONS_MRETS"
+          "ONS_MRETS",
+          "ONS-Imports-of-services-by-country-by-modes-of-supply"
         ]
     }
 }
