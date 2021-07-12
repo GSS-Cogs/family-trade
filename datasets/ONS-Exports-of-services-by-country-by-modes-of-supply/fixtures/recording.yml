@@ -2763,8 +2763,6 @@ interactions:
       - cloudflare
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       Vary:
       - Accept-Encoding
       X-Frame-Options:
@@ -4826,6 +4824,71 @@ interactions:
       Vary:
       - Accept-Encoding, User-Agent
       X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - '1'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/importsofservicesbycountrybymodesofsupply/current/data
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAMVSsW7DIBD9F+Y4xnaqJKytOlWd0qVVB2yuEhIGdAdurCj/3kNOo1ZdOrUDCB73
+        3r0HnIQJ794FbUiol5N4sw6EEmMgO8aAiVrZ7NdHR0dxfl0JyjE6GMEnjfM91xYW4xMg2eAXjYyW
+        Jeo+k/VAPJlMCWftTUJtoLY+AXqdmKDdAhmdNEGi+tI1vBHgZAegfh5C9kzv5zEYKCfFw1wPGZF9
+        1BFhsiFTPTViJXJkKbjjwRaK90ruq6Y5yK262ahut97tNs9cNwRmD8XCY0jch6sZdboHV5bn1f/F
+        aH/GaCVnqNrtQe5VJ5WUaynlb2Lw06Q5FvhirWj/ZS7ux+iANhY9oU4CwQGLfXuibdXJQ9txsC/Z
+        wNiFI26vWtnbtGTk+3q6bihk/Ax/+YoP1zs4fwDf/ny05AIAAA==
+    headers:
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - DELETE, GET, HEAD, POST, PUT, OPTIONS, PATCH
+      CF-Cache-Status:
+      - REVALIDATED
+      CF-RAY:
+      - 66da5a2b692ddc1f-LHR
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '322'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Mon, 12 Jul 2021 12:42:34 GMT
+      Etag:
+      - 42c2cc68d73c0512d96e8acfeff5be71f1c9b6ab--gzip
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding, User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
       - SAMEORIGIN
       X-XSS-Protection:
       - '1'
