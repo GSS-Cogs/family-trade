@@ -3401,8 +3401,6 @@ interactions:
       - cloudflare
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       Vary:
       - Accept-Encoding
       X-Frame-Options:
@@ -5878,6 +5876,148 @@ interactions:
       - Mon, 12 Jul 2021 13:09:18 GMT
       Etag:
       - 10e4112e3e22237341335699c50389c5704f9dcf--gzip
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding, User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - '1'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityimports/current/previous/v21/data
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAANWYy6rbMBCG30XrxB5dfNO2pavSVbpp6UKxFRDHsYxsp7gh794ZJ+fQggpdHRRI
+        QFas0afh9/zjXFnnfw69N93E9PcrO7neMs1avwxzWI9r689n37l5defRh3k6ucH02S83stuPHZuW
+        cezt2Q6zCesnXEpBcP5iw+T8cA+5BIcRc9v6wZ/XfDAz/mR6026bTPkRx0Nr/Wk0K4Wa8s7MZrI4
+        WF7mYDr7T5q8XULAJfkY7MX5ZcovnO3YMmIE+xG/uLEAXu+h3nM4QK0laIAMAL7hfa3H1S3hfPGz
+        a+lunO3N0fY0vO3eG17E4ZungJdReA7If+Bcg9S8yVShkoRXcXiOyiH4otSKZ6qWScIXcXixh+rA
+        hS4K/GRcppn5MgLf7IFvsim0arQUmSzTzHwVhxcP2agalYOySfOBrePwEmV/4JUWQkvUfCmShG/i
+        8GqTjdKiosw3vEwSnkOcviB6qDRwSj2IOk36mMcifUn1Bm0KH1nKfVWlSR8zWaSvNuWAFuizdSZ4
+        mtWSx1y2of7mXnEESr/MKpGo7mM221CDQ7pPvcHhMZ9tXjucijoczD2oIk36uNFii4PlHprUcx93
+        WuxxqDVOnj5itQKoyeHyCegjXkv04imUIyJeS/Rbm4Neq0q026xMtN6LiNcSvdrqPWgs+bzMeP1f
+        TRq+mc/rSNMPJIr9/sfp7NQGN9JGTF9ZsL3FgH+98W5mLCTq6g9pWYy9rWEf7oEJf3Dz/Zi4yde3
+        i8kv4fX8jz8jPr+l4fYbsKqiHfUQAAA=
+    headers:
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - DELETE, GET, HEAD, POST, PUT, OPTIONS, PATCH
+      CF-Cache-Status:
+      - REVALIDATED
+      CF-RAY:
+      - 66dac5cca9a9ce4b-LHR
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '593'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Mon, 12 Jul 2021 13:56:02 GMT
+      Etag:
+      - d6309a14c5578653c85d9d2f06b069e0ce0a35d4--gzip
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding, User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - '1'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityimports/current/data
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAANWZTYvbMBCG/4vOia2R5C9dW3oqPaWXlj04jhbMOpbxR4ob8t87o2QXFmYPPbTI
+        kIDjRONHw+t5X+KrOPlffefr0yTsz6t4bjsnrGj80s/jelwbfz77Uzuv7Xnw4zwlv9tB3J52YlqG
+        oXNn18/1uH7BVbQez1/cOLW+v1dbxhaLpa7xvT+vaV/P+FXd1U2oP6VHPO4b55+HeqVSU3qq53py
+        eLC8zGN9ch+CpM0yjrgkHUZ3af0ypRcQO7EMWMF9xjdeWEko97LcgzzI0mpppUyklD/wd43H1Q3h
+        fPNz29Cv8WxXH11Hh7fd/4ZXPHy1CXjNwoNE/gOAldpClZjMRAlveHhA5RB8llsDiSl1lPAZD6/2
+        sjiAslmGrwR0nJ3PGfhqLyHIJrOmslolOo+z8wUPrx6yMSUqB2UT5w1b8vAaZX+AwiplNWo+V1HC
+        Vzy8CbIxVhXU+QryKOFB8vQZ0cvCSqDWS1XGSc95LNLnNG/QpvCWpd4XRZz0nMkifRGUI61Cny0T
+        BXFOS+BctqJ8c584CqWfJ4WKVPeczVYUcEj3sQcc4Hy2ek04BSUc7L00WZz0vNFixMFxL6vYe887
+        LWYcisbR0zNWqySFHNAboGe8lujVJpSjGK8l+hBz0GtNjnab5JHOe8V4LdGbMO+lxZEPeQJlnCHt
+        I/os6B4bH7dymKRA9DmOnfjdSjFJgeiLPZgN9J5JCkRfht5HT88kBaKvwsyJnp5JCkh/zznx0zNJ
+        geghKKeInZ5PCo+cEz09lxQg5JwsfnrNJQUIOWcDytGc10LIOVug57wWKOdsISlozmsh5JwNuJXm
+        vBZCzvl7t3raiXkd6PQDiWr/++3gVU5uasZ2oNrCXsXoOoc13j1ICf/xKP1+Rw7LhTXi01utpW/n
+        +86wTd/fPkx+GV+3/HjG9fVt57c/vEYwH0cbAAA=
+    headers:
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - DELETE, GET, HEAD, POST, PUT, OPTIONS, PATCH
+      CF-Cache-Status:
+      - REVALIDATED
+      CF-RAY:
+      - 66dac5ce9d52ce4b-LHR
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '713'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Mon, 12 Jul 2021 13:56:03 GMT
+      Etag:
+      - 8bd9f9049c152a04870b58c56a477c0802908485--gzip
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Server:
