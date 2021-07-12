@@ -12,7 +12,7 @@ pipeline {
                 }
             }
             environment {
-                RECORD_MODE = 'new_episodes'
+                RECORD_MODE = 'none'
             }
             steps {
                 script {
