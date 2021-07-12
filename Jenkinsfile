@@ -53,6 +53,7 @@ pipeline {
                     }
                     for (String pipeline : testPipelines) {
                         dir("datasets/${pipeline}") {
+                            sh "mkdir -p reports"
                             def schemas = findFiles(glob: 'out/*-metadata.json')
                             def results = findFiles(glob: 'reports/*-report.txt')
                             def newestIn = schemas.max { it.lastModified }
