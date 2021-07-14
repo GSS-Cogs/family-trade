@@ -61,7 +61,7 @@ pipeline {
                             if (oldestOut == null || (newestIn.lastModified > oldestOut.lastModified)) {
                                 for (String schema : schemas) {
                                     String baseName = schema.name.substring(0, schema.name.lastIndexOf('-metadata.json'))
-                                    sh "csvlint --no-verbose -s ${schema} > reports/${baseName}-report.txt"
+                                    sh(returnStatus: true, script: "csvlint --format junit --no-verbose -s ${schema} > reports/${baseName}-report.xml")
                                 }
                             }
                         }
@@ -70,4 +70,12 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            script {
+                junit allowEmptyResults: true, testResults: 'datasets/*/reports/*-report.xml'
+            }
+        }
+    }
+
 }

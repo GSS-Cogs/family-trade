@@ -60,7 +60,8 @@
             "ONS-Imports-of-services-by-country-by-modes-of-supply",
             "ONS-Regional-gross-domestic-product-enterprise-regions",
             "ONS-UK-trade-in-goods-by-industry-country-and-commodity",
-            "ONS-UK-trade-in-services-by-industry-country-and-service-type-exports"
+            "ONS-UK-trade-in-services-by-industry-country-and-service-type-exports",
+            "ONS-BOP-individual-country-data"
         ]
     }
 }
