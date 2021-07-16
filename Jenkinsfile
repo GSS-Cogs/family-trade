@@ -28,8 +28,10 @@ pipeline {
                             def newestIn = inFiles.max { it.lastModified }
                             def oldestOut = outFiles.min { it.lastModified }
                             if (oldestOut == null || (newestIn.lastModified > oldestOut.lastModified)) {
-                                sh "jupytext --to notebook --use-source-timestamp '*.py'"
-                                sh "jupyter-nbconvert --to html --output-dir='out' --ExecutePreprocessor.timeout=None --execute 'main.ipynb'"
+                                warnError("Transform error for ${pipeline}.") {
+                                    sh "jupytext --to notebook --use-source-timestamp '*.py'"
+                                    sh "jupyter-nbconvert --to html --output-dir='out' --ExecutePreprocessor.timeout=None --execute 'main.ipynb'"
+                                }
                             }
                         }
                     }
