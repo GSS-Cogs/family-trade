@@ -7,28 +7,18 @@
     "tableSchema": {
         "columns": [
             {
-                "titles": "URI",
-                "name": "uri",
-                "datatype": "string",
-                "required": true,
-                "suppressOutput": true
-            },
-            {
-                "titles": "Notation",
-                "name": "notation",
-                "datatype": {
-                    "base": "string",
-                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
-                },
-                "required": true,
-                "propertyUrl": "skos:notation"
-            },
-            {
                 "titles": "Label",
                 "name": "label",
                 "datatype": "string",
                 "required": false,
                 "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "URI",
+                "name": "uri",
+                "datatype": "string",
+                "required": true,
+                "suppressOutput": true
             },
             {
                 "titles": "Parent URI",
@@ -43,6 +33,16 @@
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Local Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
             },
             {
                 "virtual": true,
