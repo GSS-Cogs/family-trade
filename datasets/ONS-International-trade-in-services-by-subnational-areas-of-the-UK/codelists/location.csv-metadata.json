@@ -35,6 +35,13 @@
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
             },
             {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
                 "titles": "Local Notation",
                 "name": "notation",
                 "datatype": {
