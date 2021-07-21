@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#concept/trade-sectors/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#concept/trade-sectors/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -61,7 +61,7 @@
             "notation",
             "parent_notation"
         ],
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#concept/trade-sectors/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#concept/trade-sectors/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/dcms-sectors-economic-estimates-2018-trade-in-services#scheme/trade-sectors",
@@ -94,7 +94,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2020-01-28T00:00:00"
+                "@value": "2021-05-20T10:55:03.989293"
             }
         },
         {

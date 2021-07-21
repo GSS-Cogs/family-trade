@@ -32,7 +32,7 @@
             },
             "Service Origin Geography": {
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
-                "value": "{service_origin_geography}"
+                "value": "{+service_origin_geography}"
             },
             "Service Destination": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/service-destination-geography",

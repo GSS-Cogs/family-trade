@@ -1,14 +1,14 @@
-URI,Parent URI,Sort Priority
-http://data.europa.eu/nuts/code/UK,,1
-http://statistics.data.gov.uk/id/statistical-geography/E92000001,http://data.europa.eu/nuts/code/UK,2
-http://data.europa.eu/nuts/code/UKF,http://data.europa.eu/nuts/code/UK,3
-http://data.europa.eu/nuts/code/UKG,http://data.europa.eu/nuts/code/UK,4
-http://data.europa.eu/nuts/code/UKE,http://data.europa.eu/nuts/code/UK,5
-http://data.europa.eu/nuts/code/UKC,http://data.europa.eu/nuts/code/UK,6
-http://data.europa.eu/nuts/code/UKD,http://data.europa.eu/nuts/code/UK,7
-http://data.europa.eu/nuts/code/UKZ,http://data.europa.eu/nuts/code/UK,8
-http://data.europa.eu/nuts/code/UKK,http://data.europa.eu/nuts/code/UK,9
-http://data.europa.eu/nuts/code/UKL,http://data.europa.eu/nuts/code/UK,10
-http://data.europa.eu/nuts/code/UKJ,http://data.europa.eu/nuts/code/UK,11
-http://data.europa.eu/nuts/code/UKH,http://data.europa.eu/nuts/code/UK,12
-http://data.europa.eu/nuts/code/UKI,http://data.europa.eu/nuts/code/UK,13
+Label,URI,Parent URI,Sort Priority
+United Kingdom,http://data.europa.eu/nuts/code/UK,,1
+England,http://statistics.data.gov.uk/id/statistical-geography/E92000001,http://data.europa.eu/nuts/code/UK,2
+East Midlands,http://data.europa.eu/nuts/code/UKF,http://data.europa.eu/nuts/code/UK,3
+West Midlands,http://data.europa.eu/nuts/code/UKG,http://data.europa.eu/nuts/code/UK,4
+Yorkshire and The Humber,http://data.europa.eu/nuts/code/UKE,http://data.europa.eu/nuts/code/UK,5
+North East,http://data.europa.eu/nuts/code/UKC,http://data.europa.eu/nuts/code/UK,6
+North West,http://data.europa.eu/nuts/code/UKD,http://data.europa.eu/nuts/code/UK,7
+Extra-regio NUTS 1,http://data.europa.eu/nuts/code/UKZ,http://data.europa.eu/nuts/code/UK,8
+South West,http://data.europa.eu/nuts/code/UKK,http://data.europa.eu/nuts/code/UK,9
+Wales,http://data.europa.eu/nuts/code/UKL,http://data.europa.eu/nuts/code/UK,10
+South East,http://data.europa.eu/nuts/code/UKJ,http://data.europa.eu/nuts/code/UK,11
+East of England,http://data.europa.eu/nuts/code/UKH,http://data.europa.eu/nuts/code/UK,12
+London,http://data.europa.eu/nuts/code/UKI,http://data.europa.eu/nuts/code/UK,13

@@ -160,8 +160,8 @@ table = pd.concat([table1, table2])
 for y in range(1995, 2018):
     table = table[~table['Period'].str.contains(str(y))]
     #print(str(y) + ': ' + str(table['Commodity'].count()))
-    
-table['Period'].unique() 
+
+table['Period'].unique()
 # =================================================================================================
 # =================================================================================================
 # =================================================================================================
@@ -184,7 +184,7 @@ table['Flow'] = table['Flow'].map(lambda x: x.split(' ')[1])
 # -
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
-#table['Measure Type'] = pd.Series('gbp-million', index=table.index, dtype='category') 
+#table['Measure Type'] = pd.Series('gbp-million', index=table.index, dtype='category')
 #table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
 
 #line not needed data does not need to be supressed
@@ -198,7 +198,7 @@ table
 info_json_dataset_id = info.get('id', Path.cwd().name)
 years = table['Period'].map(lambda p: p[-7:-3])
 for period in years.unique():
-    
+
     if len(cubes.cubes) == 0:
         graph_uri = f"http://gss-data.org.uk/graph/gss_data/trade/ons-trade-in-goods"
         csv_name = 'ons-trade-in-goods'
@@ -209,31 +209,5 @@ for period in years.unique():
         cubes.add_cube(scraper1, table[years == period], csv_name, graph=info_json_dataset_id, override_containing_graph=graph_uri, suppress_catalog_and_dsd_output=True)
 
 cubes.output_all()
-
-### zipping currenlty not needed as space issue is resloved ###
-#from urllib.parse import urljoin
-#import os
-#scraper1.dataset.family = "trade"
-#csvName = 'observations.csv'
-#out = Path('out')
-#out.mkdir(exist_ok=True)
-# Create the temp csv
-#tempdat = table.iloc[0:5]
-#tempdat.to_csv(out / csvName, index = False)
-#table.drop_duplicates().to_csv(out / (csvName + '.gz'), index = False, compression='gzip')
-#dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper1.dataset.family}/{Path(os.getcwd()).name}'))
-#scraper1.set_base_uri('http://gss-data.org.uk')
-#scraper1.set_dataset_id(dataset_path)
-#csvw_transform = CSVWMapping()
-#csvw_transform.set_csv(out / csvName)
-#csvw_transform.set_mapping(json.load(open('info.json')))
-#csvw_transform.set_dataset_uri(urljoin(scraper1._base_uri, f'data/{scraper1._dataset_id}'))
-#csvw_transform.write(out / f'{csvName}-metadata.json')
-# Delete the temp csv
-#(out / csvName).unlink()
-#with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
- #   metadata.write(scraper1.generate_trig())
-
-
 
 

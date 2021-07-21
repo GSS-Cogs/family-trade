@@ -58,7 +58,7 @@
                 "name": "source",
                 "datatype": "anyURI",
                 "propertyUrl": "rdfs:isDefinedBy",
-                "valueUrl": "{source}"
+                "valueUrl": "{+source}"
             },
             {
                 "titles": "Sort Priority",
@@ -102,7 +102,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T15:13:25.192779"
+                "@value": "2021-05-20T10:55:04.143129"
             },
             "rdfs:label": "GSS Trade measurement units",
             "dc:title": "GSS Trade measurement units",

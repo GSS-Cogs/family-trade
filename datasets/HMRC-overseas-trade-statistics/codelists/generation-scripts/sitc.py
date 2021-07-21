@@ -10,7 +10,7 @@ import re
 
 
 api_url = "https://api.uktradeinfo.com/SITC"
-out_file = Path("../sitc.csv")
+out_file = Path("../sitc_id.csv")
 
 
 def get_api_data(url: str) -> List[dict]:

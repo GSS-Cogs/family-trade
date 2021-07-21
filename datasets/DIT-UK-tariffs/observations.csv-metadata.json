@@ -68,9 +68,9 @@
                 "propertyUrl": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/atg-applies"
             },
             {
-                "name": "virtual_concept", 
+                "name": "virtual_concept",
                 "virtual": true,
-                "propertyUrl": "rdf:type", 
+                "propertyUrl": "rdf:type",
                 "valueUrl": "skos:Concept"
             }
         ],
@@ -92,32 +92,32 @@
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/cet-duty-rate",
             "rdfs:label": "CET Duty Rate",
             "rdfs:description": "Tariff rate"
-        }, 
-        {   
+        },
+        {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/ukgt-duty-rate",
             "rdfs:label": "UKGT Duty Rate",
             "rdfs:description": "Tariff rate"
-        }, 
-        {   
+        },
+        {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/change",
             "rdfs:label": "Change",
             "rdfs:description": "Tariff rate change"
-        }, 
-        {   
+        },
+        {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/trade-remedy-applies",
             "rdfs:label": "Trade Remedy Applies",
             "rdfs:description": ""
-        },   
-        {   
+        },
+        {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/cet-applies-until-trade-remedy-transition-reviews-concluded",
             "rdfs:label": "CET applies until trade remedy transition reviews concluded",
             "rdfs:description": ""
-        },   
-        {   
+        },
+        {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/suspension-applies",
             "rdfs:label": "Suspension Applies",
             "rdfs:description": ""
-        },      
+        },
         {   
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/atg-applies",
             "rdfs:label": "ATG Applies",

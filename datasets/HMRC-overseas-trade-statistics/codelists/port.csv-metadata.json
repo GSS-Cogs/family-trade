@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "https://api.uktradeinfo.com/Port/{parent_notation}"
+                "valueUrl": "https://api.uktradeinfo.com/Port/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "https://api.uktradeinfo.com/Port/{notation}"
+        "aboutUrl": "https://api.uktradeinfo.com/Port/{+notation}"
     },
     "rdfs:label": "HMRC Ports",
     "dc:title": "HMRC Ports",
@@ -87,7 +87,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T11:35:22.815540"
+                "@value": "2021-05-20T10:55:04.037788"
             },
             "dc:issued": {
                 "@type": "dateTime",

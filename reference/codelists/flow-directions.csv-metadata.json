@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/flow-directions/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/flow-directions/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/flow-directions",
@@ -94,7 +94,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.189395"
+                "@value": "2021-05-20T10:55:04.152403"
             }
         },
         {

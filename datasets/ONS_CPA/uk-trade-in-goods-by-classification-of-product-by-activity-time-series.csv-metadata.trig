@@ -1,0 +1,54 @@
+@prefix pmdcat: <http://publishmydata.com/pmdcat#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix spdx: <http://spdx.org/rdf/terms#> .
+@prefix pmd: <http://publishmydata.com/def/dataset#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns2: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <http://gss-data.org.uk/graph/gss_data/trade/> .
+@prefix gov: <https://www.gov.uk/government/organisations/> .
+@prefix ns3: <urn:x-rdflib:> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix gdp: <http://gss-data.org.uk/def/gdp#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix theme: <http://gss-data.org.uk/def/concept/statistics-authority-themes/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix schema: <http://schema.org/> .
+
+ns1:ons_cpa-metadata {
+  <http://gss-data.org.uk/catalog/datasets> a dcat:Catalog;
+    dcat:record <http://gss-data.org.uk/data/gss_data/trade/ons_cpa-catalog-record> .
+  
+  <http://gss-data.org.uk/data/gss_data/trade/ons_cpa#dataset> a pmdcat:DataCube .
+  
+  <http://gss-data.org.uk/data/gss_data/trade/ons_cpa-catalog-entry> a pmdcat:Dataset;
+    rdfs:label "UK trade in goods by classification of product by activity time series"@en;
+    gdp:family gdp:Trade;
+    pmdcat:datasetContents <http://gss-data.org.uk/data/gss_data/trade/ons_cpa#dataset>;
+    pmdcat:graph ns1:ons_cpa;
+    dct:creator gov:office-for-national-statistics;
+    
+    gdp:updateDueOn "2021-06-16T00:00:00"^^xsd:dateTime;
+    
+    dct:issued "2021-03-18T09:30:00.000+00:00"^^xsd:date;
+    dct:modified "2021-03-18T09:30:00.000+00:00"^^xsd:dateTime;
+    dct:title "UK trade in goods by classification of product by activity time series"@en;
+    dct:publisher gov:office-for-national-statistics;
+        
+    dct:description "Quarterly and annual time series of the value of UK imports and exports of goods grouped by product. Goods are attributed to the activity of which they are the principal products."@en; 
+    dct:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/>;
+    void:sparqlEndpoint <http://gss-data.org.uk/sparql>;
+    rdfs:comment "Quarterly and annual time series of the value of UK imports and exports of goods grouped by product. Goods are attributed to the activity of which they are the principal products."@en;
+    dcat:contactPoint <mailto:trade@ons.gov.uk>;
+    dcat:landingPage <https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/uktradeingoodsbyclassificationofproductbyactivity>;
+    dcat:theme <https://www.ons.gov.uk/businessindustryandtrade/internationaltrade> .
+  
+  <http://gss-data.org.uk/data/gss_data/trade/ons_cpa-catalog-record> a dcat:CatalogRecord;
+    rdfs:label "UK trade in goods by classification of product by activity time series Catalog Record"@en;
+    pmdcat:metadataGraph ns1:ons_cpa-metadata;
+    dct:issued "2021-03-18"^^xsd:date;
+    dct:modified "2021-06-02T09:12:47.239158+00:00"^^xsd:dateTime;
+    ns2:primaryTopic <http://gss-data.org.uk/data/gss_data/trade/ons_cpa-catalog-entry> .
+}

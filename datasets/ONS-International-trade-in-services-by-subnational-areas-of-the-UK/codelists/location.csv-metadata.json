@@ -7,23 +7,6 @@
     "tableSchema": {
         "columns": [
             {
-                "titles": "URI",
-                "name": "uri",
-                "datatype": "string",
-                "required": true,
-                "suppressOutput": true
-            },
-            {
-                "titles": "Notation",
-                "name": "notation",
-                "datatype": {
-                    "base": "string",
-                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
-                },
-                "required": true,
-                "propertyUrl": "skos:notation"
-            },
-            {
                 "titles": "Label",
                 "name": "label",
                 "datatype": "string",
@@ -31,11 +14,18 @@
                 "propertyUrl": "rdfs:label"
             },
             {
+                "titles": "URI",
+                "name": "uri",
+                "datatype": "string",
+                "required": true,
+                "suppressOutput": true
+            },
+            {
                 "titles": "Parent URI",
                 "name": "parent_uri",
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "{parent_uri}"
+                "valueUrl": "{+parent_uri}"
             },
             {
                 "titles": "Sort Priority",
@@ -43,6 +33,23 @@
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "titles": "Local Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
             },
             {
                 "virtual": true,
@@ -56,7 +63,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "{uri}"
+        "aboutUrl": "{+uri}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/location",
@@ -96,7 +103,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-01-25T00:00:00"
+                "@value": "2021-05-20T10:55:04.048016"
             }
         },
         {

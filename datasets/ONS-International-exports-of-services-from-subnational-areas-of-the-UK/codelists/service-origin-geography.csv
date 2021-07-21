@@ -1,240 +1,240 @@
-URI,Notation,Label,Parent URI,Sort Priority
-http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,nuts,NUTS,,0
-http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,statistical-geographies,UK Government Statistical Geographies,,1
-http://data.europa.eu/nuts/code/UKC,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,2
-http://data.europa.eu/nuts/code/UKD,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,3
-http://data.europa.eu/nuts/code/UKE,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,4
-http://data.europa.eu/nuts/code/UKF,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,5
-http://data.europa.eu/nuts/code/UKG,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,6
-http://data.europa.eu/nuts/code/UKH,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,7
-http://data.europa.eu/nuts/code/UKI,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,8
-http://data.europa.eu/nuts/code/UKJ,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,9
-http://data.europa.eu/nuts/code/UKK,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,10
-http://data.europa.eu/nuts/code/UKL,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,11
-http://data.europa.eu/nuts/code/UKM,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,12
-http://data.europa.eu/nuts/code/UKN,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,13
-http://data.europa.eu/nuts/code/UK,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,14
-http://data.europa.eu/nuts/code/UKC1,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,15
-http://data.europa.eu/nuts/code/UKC2,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,16
-http://data.europa.eu/nuts/code/UKD1,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,17
-http://data.europa.eu/nuts/code/UKD3,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,18
-http://data.europa.eu/nuts/code/UKD4,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,19
-http://data.europa.eu/nuts/code/UKD6,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,20
-http://data.europa.eu/nuts/code/UKD7,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,21
-http://data.europa.eu/nuts/code/UKE1,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,22
-http://data.europa.eu/nuts/code/UKE2,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,23
-http://data.europa.eu/nuts/code/UKE3,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,24
-http://data.europa.eu/nuts/code/UKE4,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,25
-http://data.europa.eu/nuts/code/UKF1,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,26
-http://data.europa.eu/nuts/code/UKF2,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,27
-http://data.europa.eu/nuts/code/UKF3,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,28
-http://data.europa.eu/nuts/code/UKG1,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,29
-http://data.europa.eu/nuts/code/UKG2,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,30
-http://data.europa.eu/nuts/code/UKG3,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,31
-http://data.europa.eu/nuts/code/UKH1,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,32
-http://data.europa.eu/nuts/code/UKH2,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,33
-http://data.europa.eu/nuts/code/UKH3,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,34
-http://data.europa.eu/nuts/code/UKI3,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,35
-http://data.europa.eu/nuts/code/UKI4,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,36
-http://data.europa.eu/nuts/code/UKI5,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,37
-http://data.europa.eu/nuts/code/UKI6,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,38
-http://data.europa.eu/nuts/code/UKI7,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,39
-http://data.europa.eu/nuts/code/UKJ1,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,40
-http://data.europa.eu/nuts/code/UKJ2,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,41
-http://data.europa.eu/nuts/code/UKJ3,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,42
-http://data.europa.eu/nuts/code/UKJ4,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,43
-http://data.europa.eu/nuts/code/UKK1,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,44
-http://data.europa.eu/nuts/code/UKK2,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,45
-http://data.europa.eu/nuts/code/UKK3,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,46
-http://data.europa.eu/nuts/code/UKK4,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,47
-http://data.europa.eu/nuts/code/UKL1,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,48
-http://data.europa.eu/nuts/code/UKL2,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,49
-http://data.europa.eu/nuts/code/UKM5,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,50
-http://data.europa.eu/nuts/code/UKM6,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,51
-http://data.europa.eu/nuts/code/UKM7,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,52
-http://data.europa.eu/nuts/code/UKM8,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,53
-http://data.europa.eu/nuts/code/UKM9,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,54
-http://data.europa.eu/nuts/code/UKC11,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,55
-http://data.europa.eu/nuts/code/UKC12,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,56
-http://data.europa.eu/nuts/code/UKC13,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,57
-http://data.europa.eu/nuts/code/UKC14,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,58
-http://data.europa.eu/nuts/code/UKC21,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,59
-http://data.europa.eu/nuts/code/UKC22,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,60
-http://data.europa.eu/nuts/code/UKC23,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,61
-http://data.europa.eu/nuts/code/UKD11,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,62
-http://data.europa.eu/nuts/code/UKD12,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,63
-http://data.europa.eu/nuts/code/UKD33,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,64
-http://data.europa.eu/nuts/code/UKD34,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,65
-http://data.europa.eu/nuts/code/UKD35,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,66
-http://data.europa.eu/nuts/code/UKD36,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,67
-http://data.europa.eu/nuts/code/UKD37,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,68
-http://data.europa.eu/nuts/code/UKD41,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,69
-http://data.europa.eu/nuts/code/UKD42,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,70
-http://data.europa.eu/nuts/code/UKD44,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,71
-http://data.europa.eu/nuts/code/UKD45,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,72
-http://data.europa.eu/nuts/code/UKD46,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,73
-http://data.europa.eu/nuts/code/UKD47,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,74
-http://data.europa.eu/nuts/code/UKD61,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,75
-http://data.europa.eu/nuts/code/UKD62,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,76
-http://data.europa.eu/nuts/code/UKD63,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,77
-http://data.europa.eu/nuts/code/UKD71,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,78
-http://data.europa.eu/nuts/code/UKD72,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,79
-http://data.europa.eu/nuts/code/UKD73,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,80
-http://data.europa.eu/nuts/code/UKD74,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,81
-http://data.europa.eu/nuts/code/UKE11,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,82
-http://data.europa.eu/nuts/code/UKE12,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,83
-http://data.europa.eu/nuts/code/UKE13,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,84
-http://data.europa.eu/nuts/code/UKE21,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,85
-http://data.europa.eu/nuts/code/UKE22,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,86
-http://data.europa.eu/nuts/code/UKE31,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,87
-http://data.europa.eu/nuts/code/UKE32,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,88
-http://data.europa.eu/nuts/code/UKE41,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,89
-http://data.europa.eu/nuts/code/UKE42,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,90
-http://data.europa.eu/nuts/code/UKE44,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,91
-http://data.europa.eu/nuts/code/UKE45,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,92
-http://data.europa.eu/nuts/code/UKF11,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,93
-http://data.europa.eu/nuts/code/UKF12,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,94
-http://data.europa.eu/nuts/code/UKF13,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,95
-http://data.europa.eu/nuts/code/UKF14,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,96
-http://data.europa.eu/nuts/code/UKF15,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,97
-http://data.europa.eu/nuts/code/UKF16,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,98
-http://data.europa.eu/nuts/code/UKF21,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,99
-http://data.europa.eu/nuts/code/UKF22,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,100
-http://data.europa.eu/nuts/code/UKF24,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,101
-http://data.europa.eu/nuts/code/UKF25,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,102
-http://data.europa.eu/nuts/code/UKF30,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,103
-http://data.europa.eu/nuts/code/UKG11,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,104
-http://data.europa.eu/nuts/code/UKG12,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,105
-http://data.europa.eu/nuts/code/UKG13,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,106
-http://data.europa.eu/nuts/code/UKG21,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,107
-http://data.europa.eu/nuts/code/UKG22,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,108
-http://data.europa.eu/nuts/code/UKG23,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,109
-http://data.europa.eu/nuts/code/UKG24,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,110
-http://data.europa.eu/nuts/code/UKG31,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,111
-http://data.europa.eu/nuts/code/UKG32,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,112
-http://data.europa.eu/nuts/code/UKG33,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,113
-http://data.europa.eu/nuts/code/UKG36,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,114
-http://data.europa.eu/nuts/code/UKG37,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,115
-http://data.europa.eu/nuts/code/UKG38,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,116
-http://data.europa.eu/nuts/code/UKG39,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,117
-http://data.europa.eu/nuts/code/UKH11,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,118
-http://data.europa.eu/nuts/code/UKH12,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,119
-http://data.europa.eu/nuts/code/UKH14,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,120
-http://data.europa.eu/nuts/code/UKH15,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,121
-http://data.europa.eu/nuts/code/UKH16,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,122
-http://data.europa.eu/nuts/code/UKH17,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,123
-http://data.europa.eu/nuts/code/UKH21,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,124
-http://data.europa.eu/nuts/code/UKH23,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,125
-http://data.europa.eu/nuts/code/UKH24,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,126
-http://data.europa.eu/nuts/code/UKH25,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,127
-http://data.europa.eu/nuts/code/UKH31,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,128
-http://data.europa.eu/nuts/code/UKH32,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,129
-http://data.europa.eu/nuts/code/UKH34,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,130
-http://data.europa.eu/nuts/code/UKH35,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,131
-http://data.europa.eu/nuts/code/UKH36,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,132
-http://data.europa.eu/nuts/code/UKH37,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,133
-http://data.europa.eu/nuts/code/UKI31,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,134
-http://data.europa.eu/nuts/code/UKI32,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,135
-http://data.europa.eu/nuts/code/UKI33,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,136
-http://data.europa.eu/nuts/code/UKI34,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,137
-http://data.europa.eu/nuts/code/UKI41,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,138
-http://data.europa.eu/nuts/code/UKI42,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,139
-http://data.europa.eu/nuts/code/UKI43,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,140
-http://data.europa.eu/nuts/code/UKI44,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,141
-http://data.europa.eu/nuts/code/UKI45,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,142
-http://data.europa.eu/nuts/code/UKI51,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,143
-http://data.europa.eu/nuts/code/UKI52,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,144
-http://data.europa.eu/nuts/code/UKI53,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,145
-http://data.europa.eu/nuts/code/UKI54,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,146
-http://data.europa.eu/nuts/code/UKI61,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,147
-http://data.europa.eu/nuts/code/UKI62,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,148
-http://data.europa.eu/nuts/code/UKI63,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,149
-http://data.europa.eu/nuts/code/UKI71,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,150
-http://data.europa.eu/nuts/code/UKI72,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,151
-http://data.europa.eu/nuts/code/UKI73,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,152
-http://data.europa.eu/nuts/code/UKI74,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,153
-http://data.europa.eu/nuts/code/UKI75,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,154
-http://data.europa.eu/nuts/code/UKJ11,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,155
-http://data.europa.eu/nuts/code/UKJ12,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,156
-http://data.europa.eu/nuts/code/UKJ13,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,157
-http://data.europa.eu/nuts/code/UKJ14,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,158
-http://data.europa.eu/nuts/code/UKJ21,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,159
-http://data.europa.eu/nuts/code/UKJ22,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,160
-http://data.europa.eu/nuts/code/UKJ25,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,161
-http://data.europa.eu/nuts/code/UKJ26,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,162
-http://data.europa.eu/nuts/code/UKJ27,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,163
-http://data.europa.eu/nuts/code/UKJ28,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,164
-http://data.europa.eu/nuts/code/UKJ31,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,165
-http://data.europa.eu/nuts/code/UKJ32,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,166
-http://data.europa.eu/nuts/code/UKJ34,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,167
-http://data.europa.eu/nuts/code/UKJ35,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,168
-http://data.europa.eu/nuts/code/UKJ36,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,169
-http://data.europa.eu/nuts/code/UKJ37,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,170
-http://data.europa.eu/nuts/code/UKJ41,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,171
-http://data.europa.eu/nuts/code/UKJ43,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,172
-http://data.europa.eu/nuts/code/UKJ44,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,173
-http://data.europa.eu/nuts/code/UKJ45,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,174
-http://data.europa.eu/nuts/code/UKJ46,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,175
-http://data.europa.eu/nuts/code/UKK11,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,176
-http://data.europa.eu/nuts/code/UKK12,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,177
-http://data.europa.eu/nuts/code/UKK13,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,178
-http://data.europa.eu/nuts/code/UKK14,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,179
-http://data.europa.eu/nuts/code/UKK15,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,180
-http://data.europa.eu/nuts/code/UKK21,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,181
-http://data.europa.eu/nuts/code/UKK22,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,182
-http://data.europa.eu/nuts/code/UKK23,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,183
-http://data.europa.eu/nuts/code/UKK30,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,184
-http://data.europa.eu/nuts/code/UKK41,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,185
-http://data.europa.eu/nuts/code/UKK42,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,186
-http://data.europa.eu/nuts/code/UKK43,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,187
-http://data.europa.eu/nuts/code/UKL11,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,188
-http://data.europa.eu/nuts/code/UKL12,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,189
-http://data.europa.eu/nuts/code/UKL13,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,190
-http://data.europa.eu/nuts/code/UKL14,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,191
-http://data.europa.eu/nuts/code/UKL15,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,192
-http://data.europa.eu/nuts/code/UKL16,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,193
-http://data.europa.eu/nuts/code/UKL17,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,194
-http://data.europa.eu/nuts/code/UKL18,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,195
-http://data.europa.eu/nuts/code/UKL21,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,196
-http://data.europa.eu/nuts/code/UKL22,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,197
-http://data.europa.eu/nuts/code/UKL23,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,198
-http://data.europa.eu/nuts/code/UKL24,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,199
-http://data.europa.eu/nuts/code/UKM50,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,200
-http://data.europa.eu/nuts/code/UKM61,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,201
-http://data.europa.eu/nuts/code/UKM62,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,202
-http://data.europa.eu/nuts/code/UKM63,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,203
-http://data.europa.eu/nuts/code/UKM64,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,204
-http://data.europa.eu/nuts/code/UKM65,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,205
-http://data.europa.eu/nuts/code/UKM66,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,206
-http://data.europa.eu/nuts/code/UKM71,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,207
-http://data.europa.eu/nuts/code/UKM72,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,208
-http://data.europa.eu/nuts/code/UKM73,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,209
-http://data.europa.eu/nuts/code/UKM75,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,210
-http://data.europa.eu/nuts/code/UKM76,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,211
-http://data.europa.eu/nuts/code/UKM77,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,212
-http://data.europa.eu/nuts/code/UKM78,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,213
-http://data.europa.eu/nuts/code/UKM81,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,214
-http://data.europa.eu/nuts/code/UKM82,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,215
-http://data.europa.eu/nuts/code/UKM83,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,216
-http://data.europa.eu/nuts/code/UKM84,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,217
-http://data.europa.eu/nuts/code/UKM91,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,218
-http://data.europa.eu/nuts/code/UKM92,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,219
-http://data.europa.eu/nuts/code/UKM93,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,220
-http://data.europa.eu/nuts/code/UKM94,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,221
-http://data.europa.eu/nuts/code/UKM95,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,222
-http://statistics.data.gov.uk/id/statistical-geography/S12000033,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,223
-http://statistics.data.gov.uk/id/statistical-geography/E47000008,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,224
-http://statistics.data.gov.uk/id/statistical-geography/W42000001,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,225
-http://statistics.data.gov.uk/id/statistical-geography/S11000003,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,226
-http://statistics.data.gov.uk/id/statistical-geography/S12000049,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,227
-http://statistics.data.gov.uk/id/statistical-geography/E47000001,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,228
-http://statistics.data.gov.uk/id/statistical-geography/E13000001,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,229
-http://statistics.data.gov.uk/id/statistical-geography/E47000004,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,230
-http://statistics.data.gov.uk/id/statistical-geography/E47000011,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,231
-http://statistics.data.gov.uk/id/statistical-geography/E13000002,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,232
-http://statistics.data.gov.uk/id/statistical-geography/E47000002,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,233
-http://statistics.data.gov.uk/id/statistical-geography/W42000004,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,234
-http://statistics.data.gov.uk/id/statistical-geography/E47000006,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,235
-http://statistics.data.gov.uk/id/statistical-geography/E47000007,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,236
-http://statistics.data.gov.uk/id/statistical-geography/E47000009,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,237
-http://statistics.data.gov.uk/id/statistical-geography/S11000001,,,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,238
+Label,URI,Parent URI,Sort Priority,Description,Local Notation
+NUTS,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,,0,,nuts
+UK Government Statistical Geographies,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,,1,,statistical-geographies
+NORTH EAST (ENGLAND),http://data.europa.eu/nuts/code/UKC,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,2,,
+NORTH WEST (ENGLAND),http://data.europa.eu/nuts/code/UKD,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,3,,
+YORKSHIRE AND THE HUMBER,http://data.europa.eu/nuts/code/UKE,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,4,,
+EAST MIDLANDS (ENGLAND),http://data.europa.eu/nuts/code/UKF,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,5,,
+WEST MIDLANDS (ENGLAND),http://data.europa.eu/nuts/code/UKG,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,6,,
+EAST OF ENGLAND,http://data.europa.eu/nuts/code/UKH,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,7,,
+LONDON,http://data.europa.eu/nuts/code/UKI,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,8,,
+SOUTH EAST (ENGLAND),http://data.europa.eu/nuts/code/UKJ,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,9,,
+SOUTH WEST (ENGLAND),http://data.europa.eu/nuts/code/UKK,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,10,,
+WALES,http://data.europa.eu/nuts/code/UKL,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,11,,
+SCOTLAND,http://data.europa.eu/nuts/code/UKM,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,12,,
+NORTHERN IRELAND,http://data.europa.eu/nuts/code/UKN,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,13,,
+UNITED KINGDOM,http://data.europa.eu/nuts/code/UK,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,14,,
+Tees Valley and Durham,http://data.europa.eu/nuts/code/UKC1,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,15,,
+Northumberland and Tyne and Wear,http://data.europa.eu/nuts/code/UKC2,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,16,,
+Cumbria,http://data.europa.eu/nuts/code/UKD1,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,17,,
+Greater Manchester,http://data.europa.eu/nuts/code/UKD3,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,18,,
+Lancashire,http://data.europa.eu/nuts/code/UKD4,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,19,,
+Cheshire,http://data.europa.eu/nuts/code/UKD6,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,20,,
+Merseyside,http://data.europa.eu/nuts/code/UKD7,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,21,,
+East Yorkshire and Northern Lincolnshire,http://data.europa.eu/nuts/code/UKE1,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,22,,
+North Yorkshire,http://data.europa.eu/nuts/code/UKE2,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,23,,
+South Yorkshire,http://data.europa.eu/nuts/code/UKE3,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,24,,
+West Yorkshire,http://data.europa.eu/nuts/code/UKE4,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,25,,
+Derbyshire and Nottinghamshire,http://data.europa.eu/nuts/code/UKF1,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,26,,
+"Leicestershire, Rutland and Northamptonshire",http://data.europa.eu/nuts/code/UKF2,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,27,,
+Lincolnshire,http://data.europa.eu/nuts/code/UKF3,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,28,,
+"Herefordshire, Worcestershire and Warwickshire",http://data.europa.eu/nuts/code/UKG1,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,29,,
+Shropshire and Staffordshire,http://data.europa.eu/nuts/code/UKG2,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,30,,
+West Midlands,http://data.europa.eu/nuts/code/UKG3,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,31,,
+East Anglia,http://data.europa.eu/nuts/code/UKH1,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,32,,
+Bedfordshire and Hertfordshire,http://data.europa.eu/nuts/code/UKH2,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,33,,
+Essex,http://data.europa.eu/nuts/code/UKH3,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,34,,
+Inner London - West,http://data.europa.eu/nuts/code/UKI3,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,35,,
+Inner London - East,http://data.europa.eu/nuts/code/UKI4,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,36,,
+Outer London - East and North East,http://data.europa.eu/nuts/code/UKI5,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,37,,
+Outer London - South,http://data.europa.eu/nuts/code/UKI6,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,38,,
+Outer London - West and North West,http://data.europa.eu/nuts/code/UKI7,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,39,,
+"Berkshire, Buckinghamshire and Oxfordshire",http://data.europa.eu/nuts/code/UKJ1,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,40,,
+"Surrey, East and West Sussex",http://data.europa.eu/nuts/code/UKJ2,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,41,,
+Hampshire and Isle of Wight,http://data.europa.eu/nuts/code/UKJ3,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,42,,
+Kent,http://data.europa.eu/nuts/code/UKJ4,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,43,,
+"Gloucestershire, Wiltshire and Bristol/Bath area",http://data.europa.eu/nuts/code/UKK1,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,44,,
+Dorset and Somerset,http://data.europa.eu/nuts/code/UKK2,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,45,,
+Cornwall and Isles of Scilly,http://data.europa.eu/nuts/code/UKK3,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,46,,
+Devon,http://data.europa.eu/nuts/code/UKK4,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,47,,
+West Wales and The Valleys,http://data.europa.eu/nuts/code/UKL1,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,48,,
+East Wales,http://data.europa.eu/nuts/code/UKL2,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,49,,
+North Eastern Scotland,http://data.europa.eu/nuts/code/UKM5,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,50,,
+Highlands and Islands,http://data.europa.eu/nuts/code/UKM6,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,51,,
+Eastern Scotland,http://data.europa.eu/nuts/code/UKM7,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,52,,
+West Central Scotland,http://data.europa.eu/nuts/code/UKM8,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,53,,
+Southern Scotland,http://data.europa.eu/nuts/code/UKM9,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,54,,
+Hartlepool and Stockton-on-Tees,http://data.europa.eu/nuts/code/UKC11,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,55,,
+South Teesside,http://data.europa.eu/nuts/code/UKC12,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,56,,
+Darlington,http://data.europa.eu/nuts/code/UKC13,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,57,,
+Durham CC,http://data.europa.eu/nuts/code/UKC14,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,58,,
+Northumberland,http://data.europa.eu/nuts/code/UKC21,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,59,,
+Tyneside,http://data.europa.eu/nuts/code/UKC22,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,60,,
+Sunderland,http://data.europa.eu/nuts/code/UKC23,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,61,,
+West Cumbria,http://data.europa.eu/nuts/code/UKD11,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,62,,
+East Cumbria,http://data.europa.eu/nuts/code/UKD12,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,63,,
+Manchester,http://data.europa.eu/nuts/code/UKD33,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,64,,
+Greater Manchester South West,http://data.europa.eu/nuts/code/UKD34,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,65,,
+Greater Manchester South East,http://data.europa.eu/nuts/code/UKD35,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,66,,
+Greater Manchester North West,http://data.europa.eu/nuts/code/UKD36,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,67,,
+Greater Manchester North East,http://data.europa.eu/nuts/code/UKD37,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,68,,
+Blackburn with Darwen,http://data.europa.eu/nuts/code/UKD41,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,69,,
+Blackpool,http://data.europa.eu/nuts/code/UKD42,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,70,,
+Lancaster and Wyre,http://data.europa.eu/nuts/code/UKD44,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,71,,
+Mid Lancashire,http://data.europa.eu/nuts/code/UKD45,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,72,,
+East Lancashire,http://data.europa.eu/nuts/code/UKD46,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,73,,
+Chorley and West Lancashire,http://data.europa.eu/nuts/code/UKD47,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,74,,
+Warrington,http://data.europa.eu/nuts/code/UKD61,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,75,,
+Cheshire East,http://data.europa.eu/nuts/code/UKD62,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,76,,
+Cheshire West and Chester,http://data.europa.eu/nuts/code/UKD63,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,77,,
+East Merseyside,http://data.europa.eu/nuts/code/UKD71,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,78,,
+Liverpool,http://data.europa.eu/nuts/code/UKD72,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,79,,
+Sefton,http://data.europa.eu/nuts/code/UKD73,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,80,,
+Wirral,http://data.europa.eu/nuts/code/UKD74,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,81,,
+"Kingston upon Hull, City of",http://data.europa.eu/nuts/code/UKE11,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,82,,
+East Riding of Yorkshire,http://data.europa.eu/nuts/code/UKE12,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,83,,
+North and North East Lincolnshire,http://data.europa.eu/nuts/code/UKE13,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,84,,
+York,http://data.europa.eu/nuts/code/UKE21,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,85,,
+North Yorkshire CC,http://data.europa.eu/nuts/code/UKE22,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,86,,
+"Barnsley, Doncaster and Rotherham",http://data.europa.eu/nuts/code/UKE31,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,87,,
+Sheffield,http://data.europa.eu/nuts/code/UKE32,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,88,,
+Bradford,http://data.europa.eu/nuts/code/UKE41,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,89,,
+Leeds,http://data.europa.eu/nuts/code/UKE42,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,90,,
+Calderdale and Kirklees,http://data.europa.eu/nuts/code/UKE44,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,91,,
+Wakefield,http://data.europa.eu/nuts/code/UKE45,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,92,,
+Derby,http://data.europa.eu/nuts/code/UKF11,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,93,,
+East Derbyshire,http://data.europa.eu/nuts/code/UKF12,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,94,,
+South and West Derbyshire,http://data.europa.eu/nuts/code/UKF13,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,95,,
+Nottingham,http://data.europa.eu/nuts/code/UKF14,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,96,,
+North Nottinghamshire,http://data.europa.eu/nuts/code/UKF15,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,97,,
+South Nottinghamshire,http://data.europa.eu/nuts/code/UKF16,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,98,,
+Leicester,http://data.europa.eu/nuts/code/UKF21,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,99,,
+Leicestershire CC and Rutland,http://data.europa.eu/nuts/code/UKF22,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,100,,
+West Northamptonshire,http://data.europa.eu/nuts/code/UKF24,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,101,,
+North Northamptonshire,http://data.europa.eu/nuts/code/UKF25,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,102,,
+Lincolnshire,http://data.europa.eu/nuts/code/UKF30,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,103,,
+"Herefordshire, County of",http://data.europa.eu/nuts/code/UKG11,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,104,,
+Worcestershire,http://data.europa.eu/nuts/code/UKG12,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,105,,
+Warwickshire,http://data.europa.eu/nuts/code/UKG13,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,106,,
+Telford and Wrekin,http://data.europa.eu/nuts/code/UKG21,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,107,,
+Shropshire CC,http://data.europa.eu/nuts/code/UKG22,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,108,,
+Stoke-on-Trent,http://data.europa.eu/nuts/code/UKG23,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,109,,
+Staffordshire CC,http://data.europa.eu/nuts/code/UKG24,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,110,,
+Birmingham,http://data.europa.eu/nuts/code/UKG31,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,111,,
+Solihull,http://data.europa.eu/nuts/code/UKG32,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,112,,
+Coventry,http://data.europa.eu/nuts/code/UKG33,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,113,,
+Dudley,http://data.europa.eu/nuts/code/UKG36,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,114,,
+Sandwell,http://data.europa.eu/nuts/code/UKG37,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,115,,
+Walsall,http://data.europa.eu/nuts/code/UKG38,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,116,,
+Wolverhampton,http://data.europa.eu/nuts/code/UKG39,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,117,,
+Peterborough,http://data.europa.eu/nuts/code/UKH11,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,118,,
+Cambridgeshire CC,http://data.europa.eu/nuts/code/UKH12,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,119,,
+Suffolk,http://data.europa.eu/nuts/code/UKH14,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,120,,
+Norwich and East Norfolk,http://data.europa.eu/nuts/code/UKH15,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,121,,
+North and West Norfolk,http://data.europa.eu/nuts/code/UKH16,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,122,,
+Breckland and South Norfolk,http://data.europa.eu/nuts/code/UKH17,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,123,,
+Luton,http://data.europa.eu/nuts/code/UKH21,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,124,,
+Hertfordshire,http://data.europa.eu/nuts/code/UKH23,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,125,,
+Bedford,http://data.europa.eu/nuts/code/UKH24,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,126,,
+Central Bedfordshire,http://data.europa.eu/nuts/code/UKH25,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,127,,
+Southend-on-Sea,http://data.europa.eu/nuts/code/UKH31,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,128,,
+Thurrock,http://data.europa.eu/nuts/code/UKH32,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,129,,
+Essex Haven Gateway,http://data.europa.eu/nuts/code/UKH34,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,130,,
+West Essex,http://data.europa.eu/nuts/code/UKH35,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,131,,
+Heart of Essex,http://data.europa.eu/nuts/code/UKH36,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,132,,
+Essex Thames Gateway,http://data.europa.eu/nuts/code/UKH37,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,133,,
+Camden and City of London,http://data.europa.eu/nuts/code/UKI31,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,134,,
+Westminster,http://data.europa.eu/nuts/code/UKI32,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,135,,
+Kensington & Chelsea and Hammersmith & Fulham,http://data.europa.eu/nuts/code/UKI33,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,136,,
+Wandsworth,http://data.europa.eu/nuts/code/UKI34,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,137,,
+Hackney and Newham,http://data.europa.eu/nuts/code/UKI41,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,138,,
+Tower Hamlets,http://data.europa.eu/nuts/code/UKI42,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,139,,
+Haringey and Islington,http://data.europa.eu/nuts/code/UKI43,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,140,,
+Lewisham and Southwark,http://data.europa.eu/nuts/code/UKI44,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,141,,
+Lambeth,http://data.europa.eu/nuts/code/UKI45,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,142,,
+Bexley and Greenwich,http://data.europa.eu/nuts/code/UKI51,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,143,,
+Barking & Dagenham and Havering,http://data.europa.eu/nuts/code/UKI52,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,144,,
+Redbridge and Waltham Forest,http://data.europa.eu/nuts/code/UKI53,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,145,,
+Enfield,http://data.europa.eu/nuts/code/UKI54,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,146,,
+Bromley,http://data.europa.eu/nuts/code/UKI61,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,147,,
+Croydon,http://data.europa.eu/nuts/code/UKI62,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,148,,
+"Merton, Kingston upon Thames and Sutton",http://data.europa.eu/nuts/code/UKI63,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,149,,
+Barnet,http://data.europa.eu/nuts/code/UKI71,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,150,,
+Brent,http://data.europa.eu/nuts/code/UKI72,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,151,,
+Ealing,http://data.europa.eu/nuts/code/UKI73,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,152,,
+Harrow and Hillingdon,http://data.europa.eu/nuts/code/UKI74,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,153,,
+Hounslow and Richmond upon Thames,http://data.europa.eu/nuts/code/UKI75,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,154,,
+Berkshire,http://data.europa.eu/nuts/code/UKJ11,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,155,,
+Milton Keynes,http://data.europa.eu/nuts/code/UKJ12,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,156,,
+Buckinghamshire CC,http://data.europa.eu/nuts/code/UKJ13,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,157,,
+Oxfordshire,http://data.europa.eu/nuts/code/UKJ14,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,158,,
+Brighton and Hove,http://data.europa.eu/nuts/code/UKJ21,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,159,,
+East Sussex CC,http://data.europa.eu/nuts/code/UKJ22,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,160,,
+West Surrey,http://data.europa.eu/nuts/code/UKJ25,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,161,,
+East Surrey,http://data.europa.eu/nuts/code/UKJ26,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,162,,
+West Sussex (South West),http://data.europa.eu/nuts/code/UKJ27,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,163,,
+West Sussex (North East),http://data.europa.eu/nuts/code/UKJ28,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,164,,
+Portsmouth,http://data.europa.eu/nuts/code/UKJ31,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,165,,
+Southampton,http://data.europa.eu/nuts/code/UKJ32,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,166,,
+Isle of Wight,http://data.europa.eu/nuts/code/UKJ34,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,167,,
+South Hampshire,http://data.europa.eu/nuts/code/UKJ35,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,168,,
+Central Hampshire,http://data.europa.eu/nuts/code/UKJ36,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,169,,
+North Hampshire,http://data.europa.eu/nuts/code/UKJ37,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,170,,
+Medway,http://data.europa.eu/nuts/code/UKJ41,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,171,,
+Kent Thames Gateway,http://data.europa.eu/nuts/code/UKJ43,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,172,,
+East Kent,http://data.europa.eu/nuts/code/UKJ44,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,173,,
+Mid Kent,http://data.europa.eu/nuts/code/UKJ45,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,174,,
+West Kent,http://data.europa.eu/nuts/code/UKJ46,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,175,,
+"Bristol, City of",http://data.europa.eu/nuts/code/UKK11,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,176,,
+"Bath and North East Somerset, North Somerset and South Gloucestershire",http://data.europa.eu/nuts/code/UKK12,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,177,,
+Gloucestershire,http://data.europa.eu/nuts/code/UKK13,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,178,,
+Swindon,http://data.europa.eu/nuts/code/UKK14,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,179,,
+Wiltshire CC,http://data.europa.eu/nuts/code/UKK15,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,180,,
+Bournemouth and Poole,http://data.europa.eu/nuts/code/UKK21,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,181,,
+Dorset CC,http://data.europa.eu/nuts/code/UKK22,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,182,,
+Somerset,http://data.europa.eu/nuts/code/UKK23,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,183,,
+Cornwall and Isles of Scilly,http://data.europa.eu/nuts/code/UKK30,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,184,,
+Plymouth,http://data.europa.eu/nuts/code/UKK41,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,185,,
+Torbay,http://data.europa.eu/nuts/code/UKK42,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,186,,
+Devon CC,http://data.europa.eu/nuts/code/UKK43,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,187,,
+Isle of Anglesey,http://data.europa.eu/nuts/code/UKL11,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,188,,
+Gwynedd,http://data.europa.eu/nuts/code/UKL12,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,189,,
+Conwy and Denbighshire,http://data.europa.eu/nuts/code/UKL13,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,190,,
+South West Wales,http://data.europa.eu/nuts/code/UKL14,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,191,,
+Central Valleys,http://data.europa.eu/nuts/code/UKL15,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,192,,
+Gwent Valleys,http://data.europa.eu/nuts/code/UKL16,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,193,,
+Bridgend and Neath Port Talbot,http://data.europa.eu/nuts/code/UKL17,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,194,,
+Swansea,http://data.europa.eu/nuts/code/UKL18,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,195,,
+Monmouthshire and Newport,http://data.europa.eu/nuts/code/UKL21,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,196,,
+Cardiff and Vale of Glamorgan,http://data.europa.eu/nuts/code/UKL22,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,197,,
+Flintshire and Wrexham,http://data.europa.eu/nuts/code/UKL23,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,198,,
+Powys,http://data.europa.eu/nuts/code/UKL24,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,199,,
+Aberdeen City and Aberdeenshire,http://data.europa.eu/nuts/code/UKM50,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,200,,
+Caithness & Sutherland and Ross & Cromarty,http://data.europa.eu/nuts/code/UKM61,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,201,,
+"Inverness & Nairn and Moray, Badenoch & Strathspey",http://data.europa.eu/nuts/code/UKM62,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,202,,
+"Lochaber, Skye & Lochalsh, Arran & Cumbrae and Argyll & Bute",http://data.europa.eu/nuts/code/UKM63,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,203,,
+Na h-Eileanan Siar (Western Isles),http://data.europa.eu/nuts/code/UKM64,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,204,,
+Orkney Islands,http://data.europa.eu/nuts/code/UKM65,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,205,,
+Shetland Islands,http://data.europa.eu/nuts/code/UKM66,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,206,,
+Angus and Dundee City,http://data.europa.eu/nuts/code/UKM71,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,207,,
+Clackmannanshire and Fife,http://data.europa.eu/nuts/code/UKM72,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,208,,
+East Lothian and Midlothian,http://data.europa.eu/nuts/code/UKM73,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,209,,
+"Edinburgh, City of",http://data.europa.eu/nuts/code/UKM75,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,210,,
+Falkirk,http://data.europa.eu/nuts/code/UKM76,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,211,,
+Perth & Kinross and Stirling,http://data.europa.eu/nuts/code/UKM77,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,212,,
+West Lothian,http://data.europa.eu/nuts/code/UKM78,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,213,,
+"East Dunbartonshire, West Dunbartonshire and Helensburgh & Lomond",http://data.europa.eu/nuts/code/UKM81,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,214,,
+Glasgow City,http://data.europa.eu/nuts/code/UKM82,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,215,,
+"Inverclyde, East Renfrewshire and Renfrewshire",http://data.europa.eu/nuts/code/UKM83,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,216,,
+North Lanarkshire,http://data.europa.eu/nuts/code/UKM84,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,217,,
+Scottish Borders,http://data.europa.eu/nuts/code/UKM91,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,218,,
+Dumfries & Galloway,http://data.europa.eu/nuts/code/UKM92,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,219,,
+East Ayrshire and North Ayrshire mainland,http://data.europa.eu/nuts/code/UKM93,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,220,,
+South Ayrshire,http://data.europa.eu/nuts/code/UKM94,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,221,,
+South Lanarkshire,http://data.europa.eu/nuts/code/UKM95,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/nuts,222,,
+Aberdeen City,http://statistics.data.gov.uk/id/statistical-geography/S12000033,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,223,,
+Cambridgeshire and Peterborough,http://statistics.data.gov.uk/id/statistical-geography/E47000008,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,224,,
+Cardiff Capital Region,http://statistics.data.gov.uk/id/statistical-geography/W42000001,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,225,,
+Edinburgh and South East Scotland,http://statistics.data.gov.uk/id/statistical-geography/S11000003,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,226,,
+Glasgow City,http://statistics.data.gov.uk/id/statistical-geography/S12000049,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,227,,
+Greater Manchester,http://statistics.data.gov.uk/id/statistical-geography/E47000001,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,228,,
+Inner London,http://statistics.data.gov.uk/id/statistical-geography/E13000001,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,229,,
+Liverpool City Region,http://statistics.data.gov.uk/id/statistical-geography/E47000004,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,230,,
+North of Tyne,http://statistics.data.gov.uk/id/statistical-geography/E47000011,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,231,,
+Outer London,http://statistics.data.gov.uk/id/statistical-geography/E13000002,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,232,,
+Sheffield City Region,http://statistics.data.gov.uk/id/statistical-geography/E47000002,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,233,,
+Swansea Bay City Region,http://statistics.data.gov.uk/id/statistical-geography/W42000004,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,234,,
+Tees Valley,http://statistics.data.gov.uk/id/statistical-geography/E47000006,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,235,,
+"West Midlands",http://statistics.data.gov.uk/id/statistical-geography/E47000007,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,236,,
+West of England,http://statistics.data.gov.uk/id/statistical-geography/E47000009,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,237,,
+Aberdeen City and Shire,http://statistics.data.gov.uk/id/statistical-geography/S11000001,http://gss-data.org.uk/data/gss_data/trade/international-trade-in-services-by-subnational-areas-of-the-uk#concept-scheme/location/statistical-geographies,238,,

@@ -30,7 +30,6 @@
                 "titles": "CountryCodeAlpha",
                 "name": "countrycodealpha",
                 "suppressOutput": true
-
             },
             {
                 "titles": "Area1",
@@ -93,7 +92,7 @@
                 "valueUrl": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country"
             }
         ],
-        "aboutUrl": "https://api.uktradeinfo.com/Country/{countryid}"
+        "aboutUrl": "https://api.uktradeinfo.com/Country/{+countryid}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country",
@@ -117,7 +116,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-04T08:30:07.796818"
+                "@value": "2021-05-20T10:55:04.131681"
             },
             "rdfs:label": "HMRC Country",
             "dc:title": "HMRC Country",

@@ -18,6 +18,7 @@ import json
 import sys
 
 import pandas as pd
+import numpy as np
 import sqlite3
 import subprocess
 import os
@@ -47,14 +48,14 @@ distro = scraper_cn8.distribution(latest=True)
 
 # Get API Chunks
 api_chunks = distro.get_odata_api_chunks()
-logger.debug(f'The chunks found on api are {api_chunks}')
+logging.debug(f'The chunks found on api are {api_chunks}')
 # Replace line below with line above once gss-utils issue get_odata_api_chunks() query is malformatted #216 is fixed
 # api_chunks = [x["MonthId"] for x in distro._session.get(
 #     distro.uri, params={'$apply': 'groupby((MonthId))'}).json()["value"]]
 
 # Get PMD Chunks
 pmd_chunks = distro.get_pmd_chunks()
-logger.debug(f'The chunks found on pmd are {api_chunks}')
+logging.debug(f'The chunks found on pmd are {api_chunks}')
 
 # Get next period to download
 if len(pmd_chunks) == 0:
@@ -63,8 +64,7 @@ else:
     pmd_chunks = [int(pd.to_datetime(
         x, format='http://reference.data.gov.uk/id/month/%Y-%m').strftime('%Y%m')) for x in pmd_chunks]
     fetch_chunk = max(set(api_chunks)-set(pmd_chunks))
-
-logger.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
+logging.info(f'Earliest chunk not on PMD but found on API is {fetch_chunk}')
 
 # Download the chonky dataframe
 df = distro.as_pandas(chunks_wanted=fetch_chunk)
@@ -73,8 +73,12 @@ df = distro.as_pandas(chunks_wanted=fetch_chunk)
 # df = df.sample(n=5000)
 
 # Drop all columns not specified
-df.drop([x for x in df.columns if x not in ['MonthId', 'FlowTypeDescription', 'SuppressionIndex',
-        'CountryId', 'Cn8Code', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']], axis=1, inplace=True)
+drop_columns = [x for x in df.columns if x not in ['MonthId', 'FlowTypeDescription', 'SuppressionIndex',
+                                                   'CountryId', 'Cn8Code', 'SitcCode', 'PortCodeNumeric', 'Period', 'Value', 'NetMass']]
+df = df.drop(drop_columns, axis=1)
+
+# Clearing all blank strings
+df = df.replace(r'^\s*$', np.nan, regex=True)
 
 # Convert columns to categorical if categorical
 for col in df.columns:
@@ -83,7 +87,7 @@ for col in df.columns:
 
 # Period column
 df['Period'] = pd.to_datetime(
-    df['MonthId'], format="%Y%m").dt.strftime('/id/month/%Y-%m')
+    df['MonthId'], format="%Y%m").dt.strftime('%Y-%m')
 df.drop('MonthId', inplace=True, axis=1)
 df['Period'] = df['Period'].astype('category')
 
@@ -143,6 +147,8 @@ df.rename(col_names, axis=1, inplace=True)
 
 # +
 # Defaults, get your categorical value series defaults
+
+
 def default(series=pd.Series, value=str) -> pd.DataFrame():
     if value in series.cat.categories:
         return series.fillna(value)
@@ -167,9 +173,9 @@ del df
 
 # cn8 cube work - aggregate on cn8 and discard sitc values, pass the resulting dataframe straight into the cube creation
 qry = """
-SELECT marker, country_id, flow_type, cn8_id, port, period, measure_type, unit_type, sum(value) as value
+SELECT min(marker) as marker, country_id, flow_type, cn8_id, port, period, measure_type, unit_type, sum(value) as value
 from data
-group by marker, country_id, flow_type, cn8_id, port, period, measure_type, unit_type
+group by country_id, flow_type, cn8_id, port, period, measure_type, unit_type
 """
 scraper_cn8.dataset.title = "HMRC Overseas Trade Statistics - Combined Nomenclature 8"
 scraper_cn8.set_dataset_id(f"{info['id']}-cn8")
@@ -183,9 +189,9 @@ cube.add_cube(scraper_cn8, pd.read_sql_query(qry, con), f"{info['id']}-cn8",
 
 # sitc cube work - aggregate on sitc and discard sn8 values
 qry = """
-SELECT marker, country_id, flow_type, sitc_id, port, period, measure_type, unit_type, sum(value) as value
+SELECT min(marker) as marker, country_id, flow_type, sitc_id, port, period, measure_type, unit_type, sum(value) as value
 from data
-group by marker, country_id, flow_type, sitc_id, port, period, measure_type, unit_type
+group by country_id, flow_type, sitc_id, port, period, measure_type, unit_type
 """
 scraper_sitc.dataset.title = "HMRC Overseas Trade Statistics - SITCv4"
 scraper_sitc.set_dataset_id(f"{info['id']}-sitc")

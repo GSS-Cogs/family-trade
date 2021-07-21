@@ -139,7 +139,7 @@ df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
 # +
-#df['Marker'].unique() 
+#df['Marker'].unique()
 
 # +
 #check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
@@ -158,8 +158,8 @@ df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances"
 f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
 df.loc[f1,'Alcohol Type'] = 'all'
 
-df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else 
-                                    ("made-wine" if x == tabs_names_to_process[1] else 
+df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else
+                                    ("made-wine" if x == tabs_names_to_process[1] else
                                      ("spirits" if x == tabs_names_to_process[2] else
                                       ("beer-and-cider" if x == tabs_names_to_process[3] else x))))
 
@@ -229,7 +229,7 @@ import datetime
 tables = ['Table 1a','Table 1b','Table 1c','Table 2a','Table 2b','Table 2c','Table 3a','Table 3b','Table 3c','Table 4a','Table 4b', 'Table 4c']
 for t in tables:
     df = df[~df['Period'].str.contains(t)]
-df['Period'] = df['Period'].str.replace('[[ ]]', '')   
+df['Period'] = df['Period'].str.replace('[[ ]]', '')
 
 
 now = datetime.datetime.now()
@@ -254,8 +254,9 @@ df['Period'][df['Period'].str.contains(str(yrlast) + ' to ' + str(yrnow))] = 'go
 
 df['Marker'] = df['Marker'].str.replace('[','')
 df['Marker'] = df['Marker'].str.replace(']','')
+df['Marker'] = df['Marker'].apply(pathify)
 df['Marker'].unique()
-#df.head(60)
+
 
 # +
 trace.render()
@@ -279,7 +280,7 @@ for x in range(3):
     else :
         scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic wine, made wine, spirits, beer and cider {tchange[x]}'
     print(str(x) + " - " + scraper.dataset.title + " - " + pathify(tchange[x]))
-    
+    #print(dat.columns)
     with open("info.json", "r") as jsonFile:
         data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/{pathify(tchange[x])}"
@@ -295,25 +296,27 @@ for x in range(3):
     
     cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
 
-del df
+#del df
 cubes.output_all()
 
 # +
-#for c in df.columns:
-#    if (c != 'Value') & (c != 'Period'):
-#        print(c)
-#        print(df[c].unique())
-#        print("###################################")
+#df.head(60)
 
 # +
-#scraper.dataset.family = 'trade'
-#codelistcreation = ['Bulletin Type'] 
-#df = df
-#codeclass = CSVCodelists()#
-#for cl in codelistcreation:
-#    if cl in df.columns:
-#        codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
+#import dmtools as dm
+#dimension = 'Bulletin Type'
+#codes = df[dimension].unique()
+#filepth = 'bulletin-type.csv'
+#colnme = 'Notation'
+#outputfoundcodes = False
+#filename = dm.check_all_codes_in_codelist(codes, filepth, colnme, dimension, outputfoundcodes)
+
+#dm.add_missing_codes_to_codelist(filename, filepth)
+#cdelst = pd.read_csv(filepth)
+#cdelst.head(10)
 # -
+
+
 
 
 

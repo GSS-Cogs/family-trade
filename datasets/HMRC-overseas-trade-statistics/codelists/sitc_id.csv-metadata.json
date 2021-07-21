@@ -1,4 +1,4 @@
-                                                                           {
+{
     "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#scheme/sitc",
     "url": "sitc_id.csv",
@@ -10,7 +10,7 @@
                 "datatype": "string",
                 "required": false,
                 "propertyUrl": "skos:exactMatch",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/sitc4/{true_sitc_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/sitc4/{+true_sitc_notation}"
             },
             {
                 "titles": "Label",
@@ -38,7 +38,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -66,7 +66,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/sitc/{+notation}"
     },
     "rdfs:label": "HMRC SITC",
     "dc:title": "HMRC SITC",
@@ -95,7 +95,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T11:35:22.815540"
+                "@value": "2021-05-20T10:55:04.036244"
             },
             "dc:issued": {
                 "@type": "dateTime",

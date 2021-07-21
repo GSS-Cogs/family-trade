@@ -32,7 +32,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-service/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-service/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -60,7 +60,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-service/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-service/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#scheme/itis-service",
@@ -84,7 +84,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-04-13T17:22:47.240180"
+                "@value": "2021-05-20T10:55:04.057713"
             },
             "rdfs:label": "Itis Service",
             "dc:title": "Itis Service",

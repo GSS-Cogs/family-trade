@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-industry/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-industry/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-industry/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/ons-industry/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/ons-industry",
@@ -90,7 +90,7 @@
             "rdfs:comment": "Dataset representing the 'ONS industry' code list.",
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:59:33.474759"
+                "@value": "2021-05-20T10:55:04.159573"
             },
             "dc:issued": {
                 "@type": "dateTime",

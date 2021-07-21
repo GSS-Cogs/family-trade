@@ -20,12 +20,12 @@
         "airtable": "recAD78IoUb406XYO",
         "main_issue": 33,
         "columns": {
-            " Geography": {
+            "Geography": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
             },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{period}"
+                "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",

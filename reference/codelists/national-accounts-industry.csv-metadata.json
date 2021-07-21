@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -58,7 +58,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{+notation}"
     },
     "prov:hadDerivation": {
         "@id": "http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-industry",
@@ -87,7 +87,7 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-02-03T08:27:38.187073"
+                "@value": "2021-05-20T10:55:04.147534"
             },
             "dc:issued": {
                 "@type": "dateTime",
