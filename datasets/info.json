@@ -51,5 +51,14 @@
         "ONS_ABS",
         "ONS_CPA",
         "ONS_MRETS"
-    ]
+    ],
+    "tests": {
+        "skip": [
+            "DIT-UK-tariffs",
+            "HMRC-overseas-trade-statistics",
+            "HMRC-regional-trade-statistics",
+            "HMRC-trade-in-goods-by-business-characteristics",
+            "ONS_MRETS"
+        ]
+    }
 }
