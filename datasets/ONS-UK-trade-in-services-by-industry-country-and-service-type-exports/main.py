@@ -159,6 +159,20 @@ scraper.dataset.family = 'trade'
 tidy['Marker'][tidy['Marker'] == 'suppressed-data'] = 'suppressed'
 tidy.head(20)
 
+# As trade industry is mostly SIC but with some additional codes, we'll need to turn the codes into URIs for the time being.
+
+trade_industry_codelist = Path('codelists') / 'trade-industry.csv'
+trade_industry = pd.read_csv(trade_industry_codelist)
+notation_uri = dict(zip(trade_industry['Local Notation'], trade_industry['URI']))
+tidy['Trade Industry'] = tidy['Trade Industry'].apply(lambda x: notation_uri[x])
+tidy
+
+# The `codelists/trade-industry.csv` file is a mixed codelist and should only contain the codes/concepts used by this dataset.
+
+unique_uris = tidy['Trade Industry'].unique()
+codes_used = trade_industry[trade_industry['URI'].isin(unique_uris)]
+codes_used.to_csv(trade_industry_codelist, index=False)
+
 cubes.add_cube(scraper, tidy.drop_duplicates(), scraper.dataset.title)
 cubes.output_all()
 
