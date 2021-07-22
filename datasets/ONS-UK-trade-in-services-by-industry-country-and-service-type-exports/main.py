@@ -9,8 +9,8 @@ df = pd.DataFrame()
 cubes = Cubes("info.json")
 # -
 
-info = json.load(open('info.json')) 
-scraper = Scraper(seed="info.json")   
+info = json.load(open('info.json'))
+scraper = Scraper(info['landingPage'][0])
 scraper 
 
 #Distribution 
@@ -67,21 +67,7 @@ tidy_exports
 
 # Transformation of Imports file to be joined to exports transformation done above 
 
-# +
-""
-#changing landing page to imports URL
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("URL: ", data["landingPage"] )
-    data["landingPage"] = "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeimports" 
-    print("URL changed to: ", data["landingPage"] )
-
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
-# -
-
-info = json.load(open('info.json')) 
-scraper = Scraper(seed="info.json")   
+scraper = Scraper(info['landingPage'][1])
 scraper 
 
 #Distribution 
@@ -167,6 +153,7 @@ These data are our best estimate of these bilateral UK trade flows. Users should
 comment = "Experimental dataset providing a breakdown of UK trade in services by industry, country and service type on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders."
 scraper.dataset.title = 'UK trade in services by industry, country and service type, Imports & Exports'
 scraper.dataset.description = description
+scraper.dataset.family = 'trade'
 # -
 
 tidy['Marker'][tidy['Marker'] == 'suppressed-data'] = 'suppressed'
@@ -174,18 +161,5 @@ tidy.head(20)
 
 cubes.add_cube(scraper, tidy.drop_duplicates(), scraper.dataset.title)
 cubes.output_all()
-
-# +
-""
-#changing landing page back to Exports URL
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("URL: ", data["landingPage"] )
-    data["landingPage"] = "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeexports" 
-    print("URL changed to: ", data["landingPage"] )
-
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
-# -
 
 trace.render()

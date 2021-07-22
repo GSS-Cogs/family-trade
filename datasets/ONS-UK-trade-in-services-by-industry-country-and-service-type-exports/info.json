@@ -1,9 +1,12 @@
 {
     "id": "ons-uk-trade-in-services-by-industry-country-and-service-type-exports",
-    "title": "UK trade in services by industry, country and service type, exports",
+    "title": "UK trade in services by industry, country and service type, imports",
     "publisher": "Office for National Statistics",
     "description": "Experimental dataset providing a breakdown of UK trade in services by industry, country and service type on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders.",
-    "landingPage": "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeexports",
+    "landingPage": [
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeexports",
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeimports"
+    ],
     "datasetNotes": [
         "On the landing page "
     ],
@@ -15,7 +18,10 @@
         "source": "XLS"
     },
     "transform": {
-        "airtable": "rec8meXy1F5qSS0FJ",
+        "airtable": [
+            "rec8meXy1F5qSS0FJ",
+            "recTSgPDxzIKoERmN"
+        ],
         "columns": {
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
@@ -50,5 +56,5 @@
         "publish": true
     },
     "sizingNotes": "",
-    "notes": "Ignore the visible macro-powered sheets, and unhide the rest to reveal the observations and reference data.  This dataset has been combined into one dataset in PMDv4 with  UK trade in services by industry, country and service type, imports."
+    "notes": "Ignore the visible macro-powered sheets, and unhide the rest to reveal the observations and reference data.  Combined with UK trade in services by industry, country and service type, exports in PMDv4 to form 1 dataset."
 }
