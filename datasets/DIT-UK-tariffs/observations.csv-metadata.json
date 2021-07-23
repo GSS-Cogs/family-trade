@@ -105,24 +105,20 @@
         },
         {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/trade-remedy-applies",
-            "rdfs:label": "Trade Remedy Applies",
-            "rdfs:description": ""
+            "rdfs:label": "Trade Remedy Applies"
         },
         {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/cet-applies-until-trade-remedy-transition-reviews-concluded",
-            "rdfs:label": "CET applies until trade remedy transition reviews concluded",
-            "rdfs:description": ""
+            "rdfs:label": "CET applies until trade remedy transition reviews concluded"
         },
         {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/suspension-applies",
-            "rdfs:label": "Suspension Applies",
-            "rdfs:description": ""
+            "rdfs:label": "Suspension Applies"
         },
-        {   
+        {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk/atg-applies",
-            "rdfs:label": "ATG Applies",
-            "rdfs:description": ""
-        },   
+            "rdfs:label": "ATG Applies"
+        },
         {
             "@id": "http://gss-data.org.uk/data/trade/tariffs-on-goods-imported-into-the-uk",
             "@type": [

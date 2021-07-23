@@ -1,9 +1,4 @@
 @Library('pmd@family-pmd4') _
 
 familyTransformPipeline {
-    databaker = 'gsscogs/databaker:1.6.17'
-    csvlint = 'gsscogs/csvlint:1.0.2'
-    csv2rdf = 'gsscogs/csv2rdf:0.4.4-pre-with-fixes'
-    gssjvmbuildtools = 'gsscogs/gss-jvm-build-tools:1.0.0'
-    sparqltests = 'gsscogs/gdp-sparql-tests:1.0.0'
 }

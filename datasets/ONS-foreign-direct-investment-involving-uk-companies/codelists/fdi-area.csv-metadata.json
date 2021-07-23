@@ -78,7 +78,6 @@
             "dc:modified": {
                 "@type": "dateTime",
                 "@value": "2021-05-20T10:55:04.020515"
-                "@value": "2021-04-16T10:39:40.489922"
             },
             "rdfs:label": "FDI Area",
             "dc:title": "FDI Area",

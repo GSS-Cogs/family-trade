@@ -30,7 +30,7 @@
                 },
                 "required": false,
                 "propertyUrl": "skos:broader",
-                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{parent_notation}"
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{+parent_notation}"
             },
             {
                 "titles": "Sort Priority",
@@ -45,7 +45,7 @@
                 "datatype": "string",
                 "required": false,
                 "propertyUrl": "skos:exactMatch",
-                "valueUrl": "{exact_match}"
+                "valueUrl": "{+exact_match}"
             },
             {
                 "titles": "Description",
@@ -66,7 +66,7 @@
             }
         ],
         "primaryKey": "notation",
-        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{notation}"
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/HMRC-overseas-trade-statistics#concept/cn8/{+notation}"
     },
     "rdfs:label": "HMRC Combined Nomenclature 8",
     "dc:title": "HMRC Combined Nomenclature 8",
