@@ -5454,8 +5454,6 @@ interactions:
       - cloudflare
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
       Vary:
       - Accept-Encoding
       X-Frame-Options:
@@ -10014,6 +10012,198 @@ interactions:
       Vary:
       - Accept-Encoding, User-Agent
       X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - '1'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeimports/2016to2019/data
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAD1QwWpDIRD8lbDnJM+8kkLfueTUY3tp6cGnG5D6VHbXNBLev1cbWxCZGXdmB29g
+        43fwUVuG6eMGZ+cRJhDHLtjMQsUtKZLw/ur5CuvnFjin5HHBIJrKqc43Z9UvSOxi6ExKakFWi2YU
+        2EImV/mAJoa4lCFoqcPaa2NiDsLDXHEwGM9JlxbOQ/fykL+EtEUXGOniDPJc/tr9mqnoYPtb29sr
+        D6M6PEqs91Pdb5ENudS2wnQDQo81/VlLqzmq8bBTx914fB0fJqXq2Sul3qsPrbt7oMVtJG56YA5O
+        qlpRInz7JxwzGbzj/iUvekbflHX9ASTQGgxwAQAA
+    headers:
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - DELETE, GET, HEAD, POST, PUT, OPTIONS, PATCH
+      CF-Cache-Status:
+      - REVALIDATED
+      CF-RAY:
+      - 672e86d2bdaf4071-LHR
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '258'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Thu, 22 Jul 2021 17:53:07 GMT
+      Etag:
+      - 0864ff369a2158cdb6a85ac99dcc7a8ec3a47a95--gzip
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding, User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - '1'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeimports/2016to2018/data
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAJ1QMW4DIRD8irW1bfAVkXV1lCpl0iRKsQdrCYUDxIJjdLq/Z7FPeUAkBDMDM7Ni
+        ARt/go9oGcbPBS7OE4xQv0tGSy4w5aszxFNzwVYuuZlYgxwY7HZXWiI3p5gLn443zzdYv/bANSVP
+        M4WCub1Ias8X/UqZXQwb616ps1iQqcAeanbCFZkY4txUwCKP0aO517KaBAdD8ZKw9XBWm5fVP2dW
+        gz49lSj7Wfotscku9VYYF8jkSdKfsfQxBz3ogx4Ow/lN6/G+jlrrD/GRdQ8P9LhdibstsAZXRBWU
+        Mr3/EY41G3rg7UtecSLflXX9BfjAffWWAQAA
+    headers:
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - DELETE, GET, HEAD, POST, PUT, OPTIONS, PATCH
+      CF-Cache-Status:
+      - REVALIDATED
+      CF-RAY:
+      - 672e86d35e834071-LHR
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '255'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Thu, 22 Jul 2021 17:53:07 GMT
+      Etag:
+      - b49eb08ee8f84229c3c8a1fb2ef3b2ce1f275edf--gzip
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding, User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - '1'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeinservicesbyindustrycountryandservicetypeimports/2016to2017/data
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAD1QwU5DIRD8lYZz20er1vjOxpNHvWg8UNgmG3lAdpda8tJ/d7EvJoTMDDM7G2YT
+        8k+K2QU24+dsThjBjEaQMQWctpfIF3P9WhuupUSYIImj9qKu7lf9DMSY08KklR4PThyDmLWphMoH
+        8DnlqQ3JiZpddN7nmoSHo+LkIZ+Ka304D0uWh/ot5AJgYqAzeuBj050qC7W/MDWXwvLWe3EqmTS3
+        t7uDZL0ftT8Ae8LSW804G4IIOv3ZSV9TPU8b+7DZ3b/t70Zr9WyttR+ag4C3TDcdVpJXy8CaUFRV
+        VAje/wnnSh5uePmSV3eE2JXr9ReEykJNZgEAAA==
+    headers:
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - DELETE, GET, HEAD, POST, PUT, OPTIONS, PATCH
+      CF-Cache-Status:
+      - REVALIDATED
+      CF-RAY:
+      - 672e86d3ef774071-LHR
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '256'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Thu, 22 Jul 2021 17:53:07 GMT
+      Etag:
+      - 25631f16b4c6d7165c165f6d85e22f4cbd0dc16d--gzip
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding, User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
       - SAMEORIGIN
       X-XSS-Protection:
       - '1'
