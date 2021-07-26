@@ -101,9 +101,6 @@ Additional information for UK trade in goods by classification of product by act
 Current price, seasonally adjusted.
 This publication includes a residual line which is used to account for any residual between the seasonally adjusted aggregate of 'Total Classification of Product by Activity (CPA)' and the seasonally adjusted aggregate of 'Total Standard International Trade Classification (SITC)' that is published in the UK Trade Statistical Bulletin, Gross Domestic Product (GDP), Balance of Payments (BoP) and Pink Book releases. The seasonal adjustment residual will account for differences at the aggregate level that are introduced because of differences in CPA and SITC classifications at the level at which seasonal adjustment is applied.
 """
-#print(scraper.dataset.title)
-#print(scraper.dataset.comment)
-#print(scraper.dataset.description)
 # -
 
 cubes.add_cube(scraper, df, title)
