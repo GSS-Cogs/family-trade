@@ -139,7 +139,7 @@ df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
 # +
-#df['Marker'].unique() 
+#df['Marker'].unique()
 
 # +
 #check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
@@ -158,8 +158,8 @@ df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances"
 f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
 df.loc[f1,'Alcohol Type'] = 'all'
 
-df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else 
-                                    ("made-wine" if x == tabs_names_to_process[1] else 
+df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else
+                                    ("made-wine" if x == tabs_names_to_process[1] else
                                      ("spirits" if x == tabs_names_to_process[2] else
                                       ("beer-and-cider" if x == tabs_names_to_process[3] else x))))
 
@@ -229,7 +229,7 @@ import datetime
 tables = ['Table 1a','Table 1b','Table 1c','Table 2a','Table 2b','Table 2c','Table 3a','Table 3b','Table 3c','Table 4a','Table 4b', 'Table 4c']
 for t in tables:
     df = df[~df['Period'].str.contains(t)]
-df['Period'] = df['Period'].str.replace('[[ ]]', '')   
+df['Period'] = df['Period'].str.replace('[[ ]]', '')
 
 
 now = datetime.datetime.now()
@@ -304,11 +304,11 @@ cubes.output_all()
 
 # +
 #import dmtools as dm
-#dimension = 'Bulletin Type'                                       
-#codes = df[dimension].unique()                      
-#filepth = 'bulletin-type.csv'         
-#colnme = 'Notation'                                               
-#outputfoundcodes = False                                         
+#dimension = 'Bulletin Type'
+#codes = df[dimension].unique()
+#filepth = 'bulletin-type.csv'
+#colnme = 'Notation'
+#outputfoundcodes = False
 #filename = dm.check_all_codes_in_codelist(codes, filepth, colnme, dimension, outputfoundcodes)
 
 #dm.add_missing_codes_to_codelist(filename, filepth)
