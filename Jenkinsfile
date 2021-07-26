@@ -23,11 +23,14 @@ pipeline {
                     }
                     for (String pipeline : testPipelines) {
                         dir("datasets/${pipeline}") {
-                            def inFiles = findFiles(glob: '*.py') + findFiles(glob: 'codelists/*')
+                            def inFiles = findFiles(glob: '*.py') +
+                                    findFiles(glob: 'codelists/*') +
+                                    findFiles(glob: 'info.json')
                             def outFiles = findFiles(glob: 'out/*')
                             def newestIn = inFiles.max { it.lastModified }
                             def oldestOut = outFiles.min { it.lastModified }
                             if (oldestOut == null || (newestIn.lastModified > oldestOut.lastModified)) {
+                                sh "rm -rf out"
                                 warnError("Transform error for ${pipeline}.") {
                                     sh "jupytext --to notebook --use-source-timestamp '*.py'"
                                     sh "jupyter-nbconvert --to html --output-dir='out' --ExecutePreprocessor.timeout=None --execute 'main.ipynb'"
