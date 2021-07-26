@@ -17,7 +17,8 @@
                 "titles": "URI",
                 "name": "uri",
                 "datatype": "anyURI",
-                "required": true
+                "required": true,
+                "suppressOutput": true
             },
             {
                 "titles": "Parent URI",
