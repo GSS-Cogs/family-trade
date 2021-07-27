@@ -83,3 +83,22 @@ Real estate activities,http://business.data.gov.uk/companies/def/sic-2007/68,htt
 Total,http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/sic-2007/Total,,,,Total
 Unknown Industry,http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/sic-2007/U,,,,U
 No Industry,http://gss-data.org.uk/data/gss_data/trade/ons-uk-trade-in-services-by-industry-country-and-service-type-exports#concept/sic-2007/N,,,,N
+"PROFESSIONAL, SCIENTIFIC AND TECHNICAL ACTIVITIES",http://business.data.gov.uk/companies/def/sic-2007/M,,,,M
+ACCOMMODATION AND FOOD SERVICE ACTIVITIES,http://business.data.gov.uk/companies/def/sic-2007/I,,,,I
+TRANSPORTATION AND STORAGE,http://business.data.gov.uk/companies/def/sic-2007/H,,,,H
+"AGRICULTURE, FORESTRY AND FISHING",http://business.data.gov.uk/companies/def/sic-2007/A,,,,A
+MINING AND QUARRYING,http://business.data.gov.uk/companies/def/sic-2007/B,,,,B
+PUBLIC ADMINISTRATION AND DEFENCE; COMPULSORY SOCIAL SECURITY,http://business.data.gov.uk/companies/def/sic-2007/O,,,,O
+ADMINISTRATIVE AND SUPPORT SERVICE ACTIVITIES,http://business.data.gov.uk/companies/def/sic-2007/N,,,,N
+MANUFACTURING,http://business.data.gov.uk/companies/def/sic-2007/C,,,,C
+CONSTRUCTION,http://business.data.gov.uk/companies/def/sic-2007/F,,,,F
+HUMAN HEALTH AND SOCIAL WORK ACTIVITIES,http://business.data.gov.uk/companies/def/sic-2007/Q,,,,Q
+INFORMATION AND COMMUNICATION,http://business.data.gov.uk/companies/def/sic-2007/J,,,,J
+"WATER SUPPLY; SEWERAGE, WASTE MANAGEMENT AND REMEDIATION ACTIVITIES",http://business.data.gov.uk/companies/def/sic-2007/E,,,,E
+FINANCIAL AND INSURANCE ACTIVITIES,http://business.data.gov.uk/companies/def/sic-2007/K,,,,K
+REAL ESTATE ACTIVITIES,http://business.data.gov.uk/companies/def/sic-2007/L,,,,L
+"ARTS, ENTERTAINMENT AND RECREATION",http://business.data.gov.uk/companies/def/sic-2007/R,,,,R
+"ELECTRICITY, GAS, STEAM AND AIR CONDITIONING SUPPLY",http://business.data.gov.uk/companies/def/sic-2007/D,,,,D
+OTHER SERVICE ACTIVITIES,http://business.data.gov.uk/companies/def/sic-2007/S,,,,S
+EDUCATION,http://business.data.gov.uk/companies/def/sic-2007/P,,,,P
+WHOLESALE AND RETAIL TRADE; REPAIR OF MOTOR VEHICLES AND MOTORCYCLES,http://business.data.gov.uk/companies/def/sic-2007/G,,,,G

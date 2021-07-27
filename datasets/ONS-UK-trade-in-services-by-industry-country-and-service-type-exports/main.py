@@ -167,11 +167,39 @@ notation_uri = dict(zip(trade_industry['Local Notation'], trade_industry['URI'])
 tidy['Trade Industry'] = tidy['Trade Industry'].apply(lambda x: notation_uri[x])
 tidy
 
-# The `codelists/trade-industry.csv` file is a mixed codelist and should only contain the codes/concepts used by this dataset.
+# The `codelists/trade-industry.csv` file is a mixed codelist and should only contain the codes/concepts used by this dataset, along with any parent concepts.
 
-unique_uris = tidy['Trade Industry'].unique()
-codes_used = trade_industry[trade_industry['URI'].isin(unique_uris)]
+# +
+from rdflib import Graph, URIRef
+from rdflib.namespace import SKOS, RDFS
+g = Graph()
+g.load('http://business.data.gov.uk/companies/sources/vocab/sic-2007.ttl', format="turtle")
+
+trade_industry.drop_duplicates(inplace=True, subset=["URI"])
+all_uris = set(trade_industry['URI'].values)
+visited = set()
+to_visit = set()
+to_visit.update(tidy['Trade Industry'].unique())
+
+while len(to_visit) > 0:
+    uri = to_visit.pop()
+    if uri is not None and uri not in set(trade_industry['URI'].values):
+        print(f"Adding {uri}")
+        subj = URIRef(uri)
+        trade_industry = trade_industry.append({
+            'Label': g.value(subj, SKOS.prefLabel),
+            'URI': uri,
+            'Parent URI': g.value(subj, SKOS.broader),
+            'Sort Priority': None,
+            'Description': None,
+            'Local Notation': g.value(subj, SKOS.notation)
+        }, ignore_index=True)
+    parent_uris = set(uri for uri in trade_industry['Parent URI'][trade_industry['URI'] == uri].values if isinstance(uri, str))
+    visited.add(uri)
+    to_visit.update(parent_uris - visited)
+codes_used = trade_industry[trade_industry['URI'].isin(visited)]
 codes_used.to_csv(trade_industry_codelist, index=False)
+# -
 
 cubes.add_cube(scraper, tidy.drop_duplicates(), scraper.dataset.title)
 cubes.output_all()
