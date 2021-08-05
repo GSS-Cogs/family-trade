@@ -333,7 +333,7 @@ tidy.head(5)
 
 #scraper.dataset.title
 #scraper.dataset.description
-scraper.dataset.comment = scraper.dataset.description + """
+scraper.dataset.description = scraper.dataset.description + """
 Sources: UK Balance of Payments - The Pink Book; International Trade in Services; UK Trade in services by industry, country and service type: 2016 to 2017
 
 The estimates shown in this workbook are experimental. While we have made some important changes (please refer to the article),
