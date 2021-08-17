@@ -1,4 +1,5 @@
 {
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema.json",
     "id": "ons-international-trade-in-services-by-subnational-areas-of-the-uk",
     "title": "International trade in services by subnational areas of the UK",
     "publisher": "Office for National Statistics",
@@ -28,7 +29,7 @@
             "Location": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
                 "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
-                "value": "{location}"
+                "value": "{+location}"
             },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
