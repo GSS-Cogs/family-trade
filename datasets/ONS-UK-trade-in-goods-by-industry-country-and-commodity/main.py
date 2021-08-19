@@ -138,7 +138,7 @@ table = table[table['OBS'] != 0]
 table.loc[table['DATAMARKER'].astype(str) == '..', 'DATAMARKER'] = 'suppressed'
 table.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 # LPerryman - changed indice to 2 rather than 1
-table['CORD SITC'] = table['CORD SITC'].str.split(' ', 1, expand=True)
+table['CORD SITC'] = table['CORD SITC'].str[:2]
 table['ONS Partner Geography'] = table['ONS Partner Geography'].str[:2]
 table['SIC 2007'] = table['SIC 2007'].str[:2]
 
