@@ -60,7 +60,6 @@ columns = ['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Me
 for tab in tabs:
     if tab.name not in ['tig_ind_ex', 'tig_ind_im']:
         continue
-    print(tab.name)
     
     trace.start(title1, tab, columns, distribution1.downloadURL)
 #     trace.start(title2, tab, columns, distribution2.downloadURL)
@@ -68,12 +67,11 @@ for tab in tabs:
     if tab.name == 'tig_ind_ex':
         flow = 'exports'
     elif tab.name == 'tig_ind_im':
-        flow = 'imports'
-    print(flow)   
+        flow = 'imports' 
  
-    country = tab.filter('country').fill(DOWN).is_not_blank()
-    industry = tab.filter('industry').fill(DOWN).is_not_blank()
-    commodity = tab.filter('commodity').fill(DOWN).is_not_blank()
+    country = tab.filter('Country').fill(DOWN).is_not_blank()
+    industry = tab.filter('Industry').fill(DOWN).is_not_blank()
+    commodity = tab.filter('Commodity').fill(DOWN).is_not_blank()
     year = tab.excel_ref('E1').expand(RIGHT).is_not_blank()
 
     observations = year.fill(DOWN).is_not_blank()
