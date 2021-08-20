@@ -54,6 +54,10 @@
             }
         }
     },
+    "load": {
+        "accretiveUpload": true,
+        "publish": true
+    },
     "sizingNotes": "",
     "notes": ""
 }
