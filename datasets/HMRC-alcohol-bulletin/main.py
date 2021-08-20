@@ -1,19 +1,5 @@
-# -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.4.2
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
 
+# %%
 # import glob
 from gssutils import *
 from gssutils.metadata import THEME
@@ -27,41 +13,35 @@ import json
 import copy 
 import datetime
 
-# +
+
+# %%
+import json
+import pandas as pd
+from gssutils import *
+from pandas import ExcelWriter
+
+
+# %%
 trace = TransformTrace()
 cubes = Cubes("info.json")
 
 scraper = Scraper(seed="info.json")
-scraper.distributions = [x for x in scraper.distributions if hasattr(x, "mediaType")]
-scraper
-
-# +
-# Conversion of ODS to XLS
-
-original_tabs = scraper.distribution(latest=True, mediaType=ODS)
-
-with original_tabs.open() as ods_obj:
-    excel_obj = BytesIO()
-    book = pyexcel.get_book(file_type = 'ods', file_content = ods_obj, library = 'pyexcel-ods3')
-    old_tab_names = book.sheet_names()
-    
-    for old_tab in old_tab_names:
-        if len(old_tab) > 31:
-            new_tab_names = book.sheet_names()
-            find_index = new_tab_names.index(old_tab)
-            book.remove_sheet(book.sheet_names()[find_index])
-            
-    book.save_to_memory(file_type = 'xls', stream = excel_obj)
-    tableset = messytables.excel.XLSTableSet(fileobj = excel_obj)
-    tabs = list(xypath.loader.get_sheets(tableset, "*"))
-# -
 
 distribution = scraper.distribution(latest = True, mediaType=ODS)
 datasetTitle = distribution.title
 columns = ["Period", "Marker", "Bulletin Type", "Alcohol Type", "Measure Type", "Unit"]
-distribution.downloadURL
 
-# +
+
+# %%
+xls = pd.ExcelFile(distribution.downloadURL, engine="odf")
+with ExcelWriter("data.xls") as writer:
+    for sheet in xls.sheet_names[0:6]:
+        pd.read_excel(xls, sheet).to_excel(writer,sheet, index=False)
+    writer.save()
+tabs = loadxlstabs("data.xls")
+
+
+# %%
 # Old tab names
 #tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
 # New tab names
@@ -130,18 +110,17 @@ for tab_name in tabs_names_to_process:
         HDimConst("Unit", unit)
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+    #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
-# -
 
+
+# %%
 df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
-# +
-#df['Marker'].unique()
 
-# +
+# %%
 #check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
 df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
 #check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
@@ -153,34 +132,43 @@ df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='product
 df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
                                     ("gbp-million" if x == "duty-receipts" else 
                                      ("hectolitres-of-alcohol" if x == "production" else "U")))
-# -
 
+
+# %%
 f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
 df.loc[f1,'Alcohol Type'] = 'all'
 
+
+# %%
 df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else
                                     ("made-wine" if x == tabs_names_to_process[1] else
                                      ("spirits" if x == tabs_names_to_process[2] else
                                       ("beer-and-cider" if x == tabs_names_to_process[3] else x))))
 
+
+# %%
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
 df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
 
-# +
+
+# %%
 df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres)", expand = True)
 df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(£ million)", expand = True)
 #df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres of alcohol)", expand = True)
 
 df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
-# -
 
+
+# %%
 #N/As change to 0 and put not-applicable in Marker column
 df['Marker'].replace('N/A', 'not-applicable', inplace=True)
 f1=(df['Marker'] =='not-applicable')
 df.loc[f1,'Value'] = 0
 df['Period'] = df['Period'].str.strip()
 
+
+# %%
 # Marker column - requirements satisfied
 df['Marker'][df['Period'].str.contains("provisional")] = 'provisional'
 df['Period'] = df['Period'].str.replace('provisional','')
@@ -196,6 +184,7 @@ df = df.replace(np.nan, '', regex=True)
 df.loc[df['Marker'].str.contains('estimate'), 'Marker'] = 'estimate'
 
 
+# %%
 #Period column 
 def left(s, amount):
     return s[:amount]
@@ -220,10 +209,12 @@ def date_time (date):
 df['Period'] =  df["Period"].apply(date_time)
 
 
+# %%
 #quick fix for odd values 
 df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000'}})
 
-# +
+
+# %%
 import calendar
 import datetime
 tables = ['Table 1a','Table 1b','Table 1c','Table 2a','Table 2b','Table 2c','Table 3a','Table 3b','Table 3c','Table 4a','Table 4b', 'Table 4c']
@@ -248,23 +239,26 @@ for i in range(1,12):
 
 df['Period'][df['Period'].str.contains(str(yrlast) + ' to ' + str(yrnow))] = 'government-year/' + str(yrlast) + '-' + str(yrnow)
 
-# +
-#list(df['Period'].unique())
-# -
 
+# %%
+#list(df['Period'].unique())
+
+
+# %%
 df['Marker'] = df['Marker'].str.replace('[','')
 df['Marker'] = df['Marker'].str.replace(']','')
 df['Marker'] = df['Marker'].apply(pathify)
 df['Marker'].unique()
 
 
-# +
+# %%
 trace.render()
 
 # The multimeasures for this dataset is yet to be defined by DMs.
 # The way to proceed with cubes class for multimeasures is yet to be finalized.
 
-# +
+
+# %%
 # This is a multi-unit and multi-measure dataset so splitting up for now as not sure what is going on with anything anymore! :-(
 # Splitting data into 3 and changing scraper values based on output data
 cubes = Cubes("info.json")
@@ -299,10 +293,8 @@ for x in range(3):
 #del df
 cubes.output_all()
 
-# +
-#df.head(60)
 
-# +
+# %%
 #import dmtools as dm
 #dimension = 'Bulletin Type'
 #codes = df[dimension].unique()
@@ -314,10 +306,5 @@ cubes.output_all()
 #dm.add_missing_codes_to_codelist(filename, filepth)
 #cdelst = pd.read_csv(filepth)
 #cdelst.head(10)
-# -
-
-
-
-
 
 
