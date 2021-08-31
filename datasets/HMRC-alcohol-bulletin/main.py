@@ -1,4 +1,3 @@
-
 # %%
 # import glob
 from gssutils import *
@@ -65,14 +64,14 @@ for tab_name in tabs_names_to_process:
     elif tab_name == tabs_names_to_process[2]:
         anchor = tab.excel_ref('A5')
     elif tab_name == tabs_names_to_process[3]:
-        anchor = tab.excel_ref('A5')
+        anchor = tab.excel_ref('A6')
 
     period = anchor.expand(DOWN).is_not_blank().is_not_whitespace()
     trace.Period("Taken from column A")
 
     bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
     trace.Bulletin_Type("Defined from column B obvious header and across")
-
+    #savepreviewhtml(bulletin_type)
     alcohol_type = tab.name
     trace.Alcohol_Type("Name of tabs in XLS sheet")
 
@@ -110,7 +109,7 @@ for tab_name in tabs_names_to_process:
         HDimConst("Unit", unit)
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+    
     trace.with_preview(tidy_sheet)
     trace.store("combined_dataframe", tidy_sheet.topandas())
 
@@ -238,10 +237,6 @@ for i in range(1,12):
     df['Period'][df['Period'].str.contains(yrmthnow)] = 'month/' + str(yrnow) + '-' + mthstr
 
 df['Period'][df['Period'].str.contains(str(yrlast) + ' to ' + str(yrnow))] = 'government-year/' + str(yrlast) + '-' + str(yrnow)
-
-
-# %%
-#list(df['Period'].unique())
 
 
 # %%
