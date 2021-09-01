@@ -152,10 +152,7 @@ df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', rege
 
 
 # %%
-df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres)", expand = True)
-df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(£ million)", expand = True)
-#df['Bulletin Type'] = df['Bulletin Type'].str.rsplit(pat = "(hectolitres of alcohol)", expand = True)
-
+df['Bulletin Type'] = df['Bulletin Type'].str.replace(r"\(.*\)","")
 df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
 
 
