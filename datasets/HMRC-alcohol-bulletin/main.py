@@ -152,7 +152,8 @@ df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', rege
 
 
 # %%
-df['Bulletin Type'] = df['Bulletin Type'].str.replace(r"\(.*\)","")
+df['Bulletin Type'] = df['Bulletin Type'].str.replace("(hectolitres)","")
+df['Bulletin Type'] = df['Bulletin Type'].str.replace("(£ million)","")
 df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
 
 
@@ -178,6 +179,34 @@ df['Value'][df.Marker == ',815 (estimate)'] = 2815
 df['Value'][df.Marker == ',460 (estimate)'] = 2460
 df = df.replace(np.nan, '', regex=True)
 df.loc[df['Marker'].str.contains('estimate'), 'Marker'] = 'estimate'
+
+
+# %%
+import calendar
+import datetime
+tables = ['Table 1a','Table 1b','Table 1c','Table 2a','Table 2b','Table 2c','Table 3a','Table 3b','Table 3c','Table 4a','Table 4b', 'Table 4c']
+for t in tables:
+    df = df[~df['Period'].str.contains(t)]
+df['Period'] = df['Period'].str.replace('[ [ ]]', '')
+df['Period'] = df['Period'].str.strip()
+
+
+# %%
+now = datetime.datetime.now()
+yrnow = now.year
+yrlast = yrnow - 1
+
+for i in range(1,12):
+    yrmthlast = calendar.month_name[i] + ' ' + str(yrlast)
+    yrmthnow = calendar.month_name[i] + ' ' + str(yrnow)
+    if i < 10:
+        mthstr = '0' + str(i)
+    else:
+        mthstr = str(i)
+    df['Period'][df['Period'].str.contains(yrmthlast)] = 'month/' + str(yrlast) + '-' + mthstr
+    df['Period'][df['Period'].str.contains(yrmthnow)] = 'month/' + str(yrnow) + '-' + mthstr
+
+df['Period'][df['Period'].str.contains(str(yrlast) + ' to ' + str(yrnow))] = 'government-year/' + str(yrlast) + '-' + str(yrnow)
 
 
 # %%
@@ -207,33 +236,7 @@ df['Period'] =  df["Period"].apply(date_time)
 
 # %%
 #quick fix for odd values 
-df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000'}})
-
-
-# %%
-import calendar
-import datetime
-tables = ['Table 1a','Table 1b','Table 1c','Table 2a','Table 2b','Table 2c','Table 3a','Table 3b','Table 3c','Table 4a','Table 4b', 'Table 4c']
-for t in tables:
-    df = df[~df['Period'].str.contains(t)]
-df['Period'] = df['Period'].str.replace('[[ ]]', '')
-
-
-now = datetime.datetime.now()
-yrnow = now.year
-yrlast = yrnow - 1
-
-for i in range(1,12):
-    yrmthlast = calendar.month_name[i] + ' ' + str(yrlast)
-    yrmthnow = calendar.month_name[i] + ' ' + str(yrnow)
-    if i < 10:
-        mthstr = '0' + str(i)
-    else:
-        mthstr = str(i)
-    df['Period'][df['Period'].str.contains(yrmthlast)] = 'month/' + str(yrlast) + '-' + mthstr
-    df['Period'][df['Period'].str.contains(yrmthnow)] = 'month/' + str(yrnow) + '-' + mthstr
-
-df['Period'][df['Period'].str.contains(str(yrlast) + ' to ' + str(yrnow))] = 'government-year/' + str(yrlast) + '-' + str(yrnow)
+df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000', 'December 2020' : 'month/2020-12'}})
 
 
 # %%
@@ -281,22 +284,7 @@ for x in range(3):
         del dat['Unit']
     
     cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
-
 #del df
 cubes.output_all()
-
-
-# %%
-#import dmtools as dm
-#dimension = 'Bulletin Type'
-#codes = df[dimension].unique()
-#filepth = 'bulletin-type.csv'
-#colnme = 'Notation'
-#outputfoundcodes = False
-#filename = dm.check_all_codes_in_codelist(codes, filepth, colnme, dimension, outputfoundcodes)
-
-#dm.add_missing_codes_to_codelist(filename, filepth)
-#cdelst = pd.read_csv(filepth)
-#cdelst.head(10)
 
 
