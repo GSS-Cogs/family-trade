@@ -5,13 +5,13 @@ if (dataset.startsWith('spec=')) {
     dataset = dataset.substring(5);
 }
 
-function datasetFetcher(endpoint, landingPages) {
-    let filteredURLs = landingPages.filter(p => {
+function datasetFetcher(endpoint, pipelineJobs) {
+    let filteredURLs = pipelineJobs.filter(p => {
         try {
             new URL(p);
             return true;
         } catch (err) {
-            console.warn(`Invalid landing page URL "${p}"`);
+            console.warn(`Invalid Jenkins job page URL "${p}"`);
             return false;
         }
     });
@@ -21,25 +21,45 @@ function datasetFetcher(endpoint, landingPages) {
             "query": `PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dct: <http://purl.org/dc/terms/>
-SELECT DISTINCT ?page ?ds ?label ?modified WHERE {
-  ?ds dcat:landingPage ?page;
-  rdfs:label ?label .
-  OPTIONAL {
-    ?ds dct:modified ?modified
+PREFIX pmdcat: <http://publishmydata.com/pmdcat#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT DISTINCT ?page ?ds ?label ?modified ?pipelineJob ?cubeType WHERE {
+  ?jobGraph prov:wasGeneratedBy [ prov:wasAssociatedWith ?pipelineJob ] .
+  GRAPH ?jobGraph {
+    ?ds a pmdcat:Dataset;
+      rdfs:label ?label .
+    OPTIONAL {
+      ?ds dcat:landingPage ?page
+    }
+    OPTIONAL {
+      ?ds dct:modified ?modified
+    }
   }
-} VALUES (?page) {
+  ?ds pmdcat:datasetContents [ a qb:DataSet ] .
+} VALUES (?pipelineJob) {
 ${filteredURLs.map(x => `(<${(new URL(x)).href}>)`).join(' ')}
 }`
         },
         dataType: 'json',
         headers: {"Accept": "application/sparql-results+json"}
     }).then(function(results) {
+        function safeGetValue(res, prop) {
+            if (res.hasOwnProperty(prop) && res[prop].hasOwnProperty('value')) {
+                return res[prop].value
+            }
+            return null;
+        }
+        function asDate(v) {
+            return (v !== null) ? new Date(v) : v;
+        }
         return results.results.bindings.map(binding => {
             return {
-                landingPage: (binding.page !== null) ? binding.page.value : null,
-                uri: (binding.ds !== null) ? binding.ds.value : null,
-                label: (binding.label !== null) ? binding.label.value : null,
-                modified: (binding.modified != null && binding.modified.value !== null) ? new Date(binding.modified.value) : null
+                landingPage: safeGetValue(binding, 'page'),
+                uri: safeGetValue(binding, 'ds'),
+                label: safeGetValue(binding, 'label'),
+                modified: asDate(safeGetValue(binding,'modified')),
+                job: safeGetValue(binding, 'pipelineJob')
             };
         });
     });
@@ -76,10 +96,13 @@ if (dataset) {
         }, function (source) {
             const template = Handlebars.compile(source);
             $.getJSON('info.json', function (mainInfo) {
+                const pipelinesBase = mainInfo.jenkins.base + '/' + mainInfo.jenkins.path.map(function (i) {
+                    return 'job/' + i;
+                }).join('/');
                 $.getJSON(dataset + "/info.json", function (info) {
                     let fetchDatasets, lastPublished = null;
                     if (mainInfo.hasOwnProperty('sparql')) {
-                        fetchDatasets = datasetFetcher(mainInfo.sparql, [info.landingPage]);
+                        fetchDatasets = datasetFetcher(mainInfo.sparql, [pipelinesBase + '/job/' + dataset + '/']);
                     } else {
                         fetchDatasets = $.Deferred();
                         fetchDatasets.resolve([]);
@@ -91,7 +114,7 @@ if (dataset) {
                                     lastPublished = ds.modified;
                                 }
                                 return {
-                                    uri: mainInfo.pmd + '/resource?uri=' + encodeURIComponent(ds.uri),
+                                    pmd: mainInfo.pmd + '/cube/explore?uri=' + encodeURIComponent(ds.uri),
                                     label: ds.label,
                                     modified: ds.modified
                                 }
@@ -106,7 +129,7 @@ if (dataset) {
                             }).join('/'),
                             "jenkins_buildicon": 'buildStatus/icon?job=' + encodeURIComponent(mainInfo.jenkins.path.join('/') + '/'),
                             "datasets": datasets,
-                            "github_path": (new URL(mainInfo.github)).pathname
+                            "issue_badge_base": `https://img.shields.io/github/issues/detail/state${(new URL(mainInfo.github)).pathname}`
                         }));
                     });
                     document.title = info.title;
@@ -174,41 +197,27 @@ if (dataset) {
             });
             $.when.apply($, fetches).then(function() {
                 const allInfo = arguments;
+                const pipelinesBase = info.jenkins.base + '/' + info.jenkins.path.map(function (i) {
+                    return 'job/' + i;
+                }).join('/');
                 let collected = info.pipelines.map(function (pipeline, i) {
                     return {
                         'directory': pipeline,
                         'number': i + 1,
+                        'job': pipelinesBase + '/job/' + pipeline + '/',
                         'info': allInfo[i]
                     };
                 });
                 let fetchDatasets;
                 if (info.hasOwnProperty('sparql')) {
-                    fetchDatasets = datasetFetcher(info.sparql, collected.flatMap(function(p) {
-                        if (p && p.hasOwnProperty('info') && (p.info.hasOwnProperty('landingPage'))) {
-                            return p.info.landingPage
-                        } else {
-                            return []
-                        }
-                    }));
+                    fetchDatasets = datasetFetcher(info.sparql, collected.map(p => p.job));
                 } else {
                     fetchDatasets = $.Deferred();
                     fetchDatasets.resolve([]);
                 }
                 fetchDatasets.done(function(datasets) {
                     collected = collected.map(p => {
-                        p.datasets = datasets.filter(ds => {
-                            if (p.info.hasOwnProperty('landingPage') && p.info.landingPage !== null) {
-                                if (typeof (p.info.landingPage) == 'string') {
-                                    return ds.landingPage === p.info.landingPage
-                                } else {
-                                    return p.info.landingPage.includes(ds.landingPage)
-                                }
-                            } else {
-                                return false
-                            }
-                        }).filter(function(ds, i, s) {
-                            return s.findIndex(d => d.uri === ds.uri) === i
-                        });
+                        p.datasets = datasets.filter(ds => (p.job === ds.job));
                         let lastModified = p.datasets
                             .map(a => a.modified)
                             .reduce(function(a, b) {
@@ -222,7 +231,7 @@ if (dataset) {
                                 }, null);
                         if (info.hasOwnProperty('pmd')) {
                             p.datasets = p.datasets.map(ds => {
-                                ds.uri = info.pmd + '/cube/explore?uri=' + encodeURIComponent(ds.uri);
+                                ds.pmd = info.pmd + '/cube/explore?uri=' + encodeURIComponent(ds.uri);
                                 return ds;
                             });
                         };
@@ -242,7 +251,7 @@ if (dataset) {
                         }).join('/'),
                         "jenkins_buildicon": 'buildStatus/icon?job=' + encodeURIComponent(info.jenkins.path.join('/') + '/'),
                         "pipelines": collected,
-                        "github_path": (new URL(info.github)).pathname
+                        "issue_badge_base": `https://img.shields.io/github/issues/detail/state${(new URL(info.github)).pathname}`
                     }));
                     $.fn.dataTable.ext.search.push(
                         function( settings, data, dataIndex ) {

@@ -28,8 +28,7 @@
             <td>{{info.transform.stage}}</td>
             <td>
                 {{#if info.transform.main_issue}}
-                    <a href="{{../github}}/issues/{{info.transform.main_issue}}"><img alt="GitHub issue detail" src="https://img.shields.io/github/issues/detail/state{{../github_path}}/{{info.transform.main_issue}}?style=plastic"></a>
-                    <img alt="GitHub issue labels" src="https://img.shields.io/github/issues/detail/label{{../github_path}}/{{info.transform.main_issue}}?style=plastic"/>
+                    <a href="{{../github}}/issues/{{info.transform.main_issue}}"><img alt="GitHub issue detail" src="{{../issue_badge_base}}/{{info.transform.main_issue}}?style=plastic"></a>
                 {{/if}}
             </td>
             <td>
@@ -51,7 +50,7 @@
                 <div>
                     <ul class="fa-ul">
                         {{#each datasets}}
-                            <li><span class="fa-li"><i class="fas fa-cube"></i></span><a href="{{this.uri}}">{{this.label}}</a>{{#unless @last}}, {{/unless}}</li>
+                            <li><span class="fa-li"><i class="fas fa-cube"></i></span><a href="{{this.pmd}}">{{this.label}}</a>{{#unless @last}}, {{/unless}}</li>
                         {{/each}}
                     </ul>
                 </div>
