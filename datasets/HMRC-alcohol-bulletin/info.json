@@ -42,8 +42,7 @@
         },
         "main_issue": 67
     },
-    "load": {
-        "accretiveUpload": true,
+   "load": {
         "publish": true
     },
     "sizingNotes": "",
