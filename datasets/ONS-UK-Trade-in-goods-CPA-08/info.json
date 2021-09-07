@@ -33,7 +33,7 @@
             },
             "Period": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{period}"
+                "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Product": {
                 "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
