@@ -6,27 +6,26 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.1
+#       jupytext_version: 1.11.5
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
 # ---
 
 # +
-from gssutils import *
-from IPython.core.display import display
 import json
+import pandas as pandas
+from gssutils import *
 
+cubes = Cubes('info.json')
+info = json.load(open('info.json'))
+landingPage = info['landingPage']
+metadata = Scraper(seed="info.json")
+metadata
+# -
 
-info = json.load(open("info.json"))
-scraper = Scraper(seed = "info.json")
-cubes = Cubes("info.json")
-scraper
-
-# +
-
-tabs = scraper.distribution(latest = True, mediaType = Excel).as_databaker()
+tabs = metadata.distribution(latest = True, mediaType = Excel).as_databaker()
 str([tab.name for tab in tabs])
 
 
@@ -77,7 +76,7 @@ def fix_area(row):
 def process_tab(tab):
     tab_group = tab.name.strip()[:len('Table XX')][-2:]
     tab_title = tab.excel_ref('A1').fill(RIGHT).is_not_blank().by_index(1).value.strip()
-    display(f"Processing '{tab.name}' ({tab_group}) '{tab_title}'")
+    #display(f"Processing '{tab.name}' ({tab_group}) '{tab_title}'")
     # not doing C0 which is a bit different
     top_left = tab.excel_ref('A1').fill(DOWN).is_not_blank().by_index(1)
     if tab_group[0] == 'C':
@@ -91,6 +90,9 @@ def process_tab(tab):
     year = top_left.shift(UP).fill(RIGHT).is_not_blank()
     # some flow labels are in a strange place as cells have been merged inconsistently
     flow = top_left.shift(UP).shift(UP).fill(RIGHT).is_not_blank()
+    if tab_group == 'D2':
+        flow = top_left.shift(UP).shift(UP).fill(RIGHT).is_not_blank() | tab.excel_ref('E3')
+    #savepreviewhtml(flow, fname = tab.name+ "Preview.html")
     observations = (h2_labels.fill(RIGHT) & year.fill(DOWN)).is_not_blank()
     h1_dim = HDim(h1_labels, 'H1', CLOSEST, ABOVE) # can this be DIRECTLY?
     h1_dim.AddCellValueOverride('Total European Union', 'Total European Union (EU)')
@@ -127,6 +129,7 @@ def process_tab(tab):
         # Table D2 has 'Exports' in the wrong place
         if tab_group == 'D2':
             obs['Flow'].fillna('exports', inplace=True)
+            obs['Flow'] = obs['Flow'].replace("", "exports")
         obs['ITIS Industry'] = fix_title(tab_title)
         obs['ITIS Service'] = 'total-international-trade-in-services'
         obs['ONS Trade Areas ITIS'] = obs.apply(fix_area, axis='columns')
@@ -138,6 +141,9 @@ def process_tab(tab):
     return obs
     return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry',
                 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
+
+
+# -
 
 observations = pd.concat((process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0']), sort = False)
 
@@ -164,16 +170,14 @@ observations['Year'] = observations['Year'].apply(date_time)
 
 for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     observations[col] = observations[col].astype('category')
-    display(observations[col].cat.categories)
+    #display(observations[col].cat.categories)
 
 # +
 observations.rename(columns={'Flow':'Flow Directions', 'ONS Trade Areas ITIS' : 'Trade Area'}, inplace=True)
 
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
+observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
 # -
 
-observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
-observations
-
-cubes.add_cube(scraper, observations.drop_duplicates(), "International trade in services")
+cubes.add_cube(metadata, observations.drop_duplicates(), "International trade in services")
 cubes.output_all()
