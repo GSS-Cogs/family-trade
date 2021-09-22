@@ -6,9 +6,9 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.1
+#       jupytext_version: 1.11.5
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
 # ---
@@ -17,27 +17,26 @@
 import json
 from os import environ
 import copy 
-
+import pandas as pandas
 from gssutils import *
 from gssutils.metadata import THEME
-
-infoFileName = 'info.json'
-
-info    = json.load(open(infoFileName))
-scraper = Scraper(seed=infoFileName)
-cubes   = Cubes(infoFileName)
-
-# +
 from dateutil import parser
 
+infoFileName = 'info.json'
+cubes = Cubes('info.json')
+info = json.load(open('info.json'))
+landingPage = info['landingPage']
+metadata = Scraper(seed="info.json")
+
 # Convert all issued time to datetime format
-scraper.dataset.issued = parser.parse(str(scraper.dataset.issued))
-for dist in scraper.distributions:
+metadata.dataset.issued = parser.parse(str(metadata.dataset.issued))
+for dist in metadata.distributions:
     dist.issued = parser.parse(str(dist.issued))
 
-dist = scraper.distribution(mediaType='text/prs.ons+csdb', latest=True)
+dist = metadata.distribution(mediaType='text/prs.ons+csdb', latest=True)
 dist
 
+# +
 # # + tags=["outputPrepend"]
 from io import TextIOWrapper
 from itertools import accumulate, zip_longest
@@ -117,6 +116,7 @@ while line:
         ])                                                
     else:
         break
+    
     line = data.readline()[:-1]
 
 slices[header.identifier].append({
@@ -417,9 +417,9 @@ product_observations_cvm['Trade Area'].unique()
 #### CHAINED VOLUME MEASURES
 cubes = Cubes(infoFileName)
 
-scraper.dataset.title = 'UK trade time series - Chained Value Measures'
-scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
-scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
+metadata.dataset.title = 'UK trade time series - Chained Value Measures'
+metadata.dataset.comment = 'Monthly value of UK exports and imports of goods and services by chained volume measures.'
+metadata.dataset.description = metadata.dataset.comment + ' Figures are to 0 decimal places.'
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
@@ -428,16 +428,16 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 product_observations_cvm = product_observations_cvm.drop_duplicates()   
-cubes.add_cube(copy.deepcopy(scraper), product_observations_cvm, 'uk-trade-time-series-chained-value-measures', 'uk-trade-time-series-chained-value-measures', data)
+cubes.add_cube(copy.deepcopy(metadata), product_observations_cvm, 'uk-trade-time-series-chained-value-measures', 'uk-trade-time-series-chained-value-measures', data)
 # -
 
 product_observations_cp['Trade Area'] = product_observations_cp['Trade Area'].apply(pathify)
 
 # +
 #### CURRENT PRICES
-scraper.dataset.title = 'UK trade time series - Current Prices'
-scraper.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
-scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
+metadata.dataset.title = 'UK trade time series - Current Prices'
+metadata.dataset.comment = 'Monthly value of UK exports and imports of goods and services by current prices.'
+metadata.dataset.description = metadata.dataset.comment + ' Figures are to 0 decimal places.'
 
 with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
@@ -446,12 +446,9 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 product_observations_cp = product_observations_cp.drop_duplicates()   
-cubes.add_cube(copy.deepcopy(scraper), product_observations_cp, 'uk-trade-time-series-current-prices', 'uk-trade-time-series-current-prices', data)
+cubes.add_cube(copy.deepcopy(metadata), product_observations_cp, 'uk-trade-time-series-current-prices', 'uk-trade-time-series-current-prices', data)
 # -
 for cube in cubes.cubes:
     print(cube.scraper.title)
 
 cubes.output_all()
-
-#
-
