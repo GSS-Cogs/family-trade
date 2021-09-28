@@ -6,9 +6,9 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.1
+#       jupytext_version: 1.11.5
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
 # ---
@@ -224,23 +224,5 @@ with pd.option_context('float_format', '{:f}'.format):
 
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()
-
-# +
-# remove valueUrl from business_count and employee_count
-metadata_json = open("./out/uk-trade-in-goods-by-business-characteristics-data-tables.csv-metadata.json", "r")
-metadata = json.load(metadata_json)
-metadata_json.close()
-
-element = metadata["tables"][0]["tableSchema"]["columns"][8]
-if 'valueUrl' in element:
-        del element['valueUrl']
-element = metadata["tables"][0]["tableSchema"]["columns"][9]
-if 'valueUrl' in element:
-        del element['valueUrl']
-
-metadata_json = open("./out/uk-trade-in-goods-by-business-characteristics-data-tables.csv-metadata.json", "w")
-json.dump(metadata, metadata_json, indent=4)
-metadata_json.close()            
-# -
 
 trace.render("spec_v1.html")
