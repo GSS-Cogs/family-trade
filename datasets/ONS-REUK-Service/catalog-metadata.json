@@ -1,0 +1,24 @@
+{
+    "title": "Regionalised estimates of UK service exports",
+    "identifier": null,
+    "summary": "The value of UK service exports broken down by country or English region, and by functional category.",
+    "description": "The value of UK service exports broken down by country or English region, and by functional category.",
+    "creator_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "publisher_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "landing_page_uri": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/regionalisedestimatesofukserviceexports",
+    "theme_uris": [
+        "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade"
+    ],
+    "keywords": [
+        "service",
+        "regional",
+        "LonArt",
+        "industry",
+        "exports"
+    ],
+    "dataset_issued": "2018-10-24",
+    "dataset_modified": "2021-10-18T15:06:00.985634+00:00",
+    "license_uri": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "public_contact_point_uri": "mailto:james.p.harris@ons.gov.uk",
+    "uri_safe_identifier_override": null
+}

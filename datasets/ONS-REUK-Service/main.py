@@ -24,9 +24,6 @@ from gssutils import *
 from databaker.framework import *
 from IPython.core.display import display
 
-cubes = Cubes("info.json")
-
-
 # +
 def left(s, amount):
     return s[:amount]
@@ -157,8 +154,8 @@ tidy
 
 # flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 
-cubes.add_cube(scraper, tidy, title)
-cubes.output_all()
+tidy.to_csv("observations.csv", index=False)
+scraper.as_csvqb_catalog_metadata().to_json_file("catalog-metadata.json")
 
 trace.render("spec_v1.html")
 
