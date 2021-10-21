@@ -1,0 +1,434 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "regionalised-estimates-of-uk-service-exports.csv#dataset",
+    "tables": [
+        {
+            "url": "regionalised-estimates-of-uk-service-exports.csv",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "titles": "NUTS Geography",
+                        "name": "nuts_geography",
+                        "propertyUrl": "regionalised-estimates-of-uk-service-exports.csv#dimension/nuts-geography",
+                        "valueUrl": "http://data.europa.eu/nuts/code/{nuts_geography}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Year",
+                        "name": "year",
+                        "propertyUrl": "regionalised-estimates-of-uk-service-exports.csv#dimension/year",
+                        "valueUrl": "http://reference.data.gov.uk/id/year/{year}",
+                        "required": true
+                    },
+                    {
+                        "titles": "ONS Functional Category",
+                        "name": "ons_functional_category",
+                        "propertyUrl": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-category",
+                        "valueUrl": "http://gss-data.org.uk/def/trade/concept/ons-functional-category/{ons_functional_category}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Flow Directions",
+                        "name": "flow_directions",
+                        "propertyUrl": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                        "valueUrl": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}",
+                        "required": true
+                    },
+                    {
+                        "titles": "Value",
+                        "name": "value",
+                        "propertyUrl": "http://gss-data.org.uk/def/trade/measure/gbp-total",
+                        "datatype": "decimal",
+                        "required": true
+                    },
+                    {
+                        "name": "virt_unit",
+                        "virtual": true,
+                        "propertyUrl": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                        "valueUrl": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+                    },
+                    {
+                        "name": "virt_measure",
+                        "virtual": true,
+                        "propertyUrl": "http://purl.org/linked-data/cube#measureType",
+                        "valueUrl": "http://gss-data.org.uk/def/trade/measure/gbp-total"
+                    }
+                ],
+                "foreignKeys": [],
+                "primaryKey": [
+                    "nuts_geography",
+                    "year",
+                    "ons_functional_category",
+                    "flow_directions"
+                ],
+                "aboutUrl": "regionalised-estimates-of-uk-service-exports.csv#obs/{+nuts_geography}/{+year}/{+ons_functional_category}/{+flow_directions}"
+            }
+        }
+    ],
+    "rdfs:seeAlso": [
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#component/flow-directions",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions"
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#structure",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#DataStructureDefinition"
+            ],
+            "http://purl.org/linked-data/cube#component": [
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#component/measure-type"
+                },
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#component/nuts-geography"
+                },
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#component/year"
+                },
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#component/gbp-total"
+                },
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#component/flow-directions"
+                },
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#component/ons-functional-category"
+                },
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#component/unit"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#dimension/nuts-geography"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                },
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                },
+                {
+                    "@id": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-category"
+                },
+                {
+                    "@id": "http://gss-data.org.uk/def/trade/measure/gbp-total"
+                },
+                {
+                    "@id": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions"
+                },
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#dimension/year"
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#dimension/year",
+            "@type": [
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty",
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#class/year"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#dataset",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/ns/dcat#Resource",
+                "http://purl.org/linked-data/cube#Attachable",
+                "http://purl.org/linked-data/cube#DataSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/dc/terms/creator": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/description": [
+                {
+                    "@language": "en",
+                    "@value": "The value of UK service exports broken down by country or English region, and by functional category."
+                }
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "Regionalised estimates of UK service exports"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2018-10-24T00:00:00"
+                }
+            ],
+            "http://purl.org/dc/terms/license": [
+                {
+                    "@id": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2021-10-18T15:06:00.985634+00:00"
+                }
+            ],
+            "http://purl.org/dc/terms/publisher": [
+                {
+                    "@id": "https://www.gov.uk/government/organisations/office-for-national-statistics"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "Regionalised estimates of UK service exports"
+                }
+            ],
+            "http://purl.org/linked-data/cube#structure": [
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#structure"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#comment": [
+                {
+                    "@language": "en",
+                    "@value": "The value of UK service exports broken down by country or English region, and by functional category."
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "Regionalised estimates of UK service exports"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#contactPoint": [
+                {
+                    "@id": "mailto:james.p.harris@ons.gov.uk"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#keyword": [
+                {
+                    "@language": "en",
+                    "@value": "service"
+                },
+                {
+                    "@language": "en",
+                    "@value": "exports"
+                },
+                {
+                    "@language": "en",
+                    "@value": "industry"
+                },
+                {
+                    "@language": "en",
+                    "@value": "regional"
+                },
+                {
+                    "@language": "en",
+                    "@value": "LonArt"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#landingPage": [
+                {
+                    "@id": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade/datasets/regionalisedestimatesofukserviceexports"
+                }
+            ],
+            "http://www.w3.org/ns/dcat#theme": [
+                {
+                    "@id": "https://www.ons.gov.uk/businessindustryandtrade/internationaltrade"
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#component/ons-functional-category",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-category"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://gss-data.org.uk/def/trade/property/dimension/ons-functional-category"
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#component/gbp-total",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://gss-data.org.uk/def/trade/measure/gbp-total"
+                }
+            ],
+            "http://purl.org/linked-data/cube#measure": [
+                {
+                    "@id": "http://gss-data.org.uk/def/trade/measure/gbp-total"
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#component/nuts-geography",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#dimension/nuts-geography"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#dimension/nuts-geography"
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#class/nuts-geography",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/2000/01/rdf-schema#Class"
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#component/unit",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification"
+            ],
+            "http://purl.org/linked-data/cube#attribute": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure"
+                }
+            ],
+            "http://purl.org/linked-data/cube#componentRequired": [
+                {
+                    "@value": true
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#dimension/nuts-geography",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentProperty",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                "http://purl.org/linked-data/cube#CodedProperty",
+                "http://purl.org/linked-data/cube#DimensionProperty"
+            ],
+            "http://purl.org/linked-data/cube#codeList": [
+                {
+                    "@id": "http://data.europa.eu/nuts/scheme/2016"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "NUTS Geography"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#class/nuts-geography"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
+                {
+                    "@id": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#class/year",
+            "@type": [
+                "http://www.w3.org/2000/01/rdf-schema#Class",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#component/year",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#dimension/year"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "regionalised-estimates-of-uk-service-exports.csv#dimension/year"
+                }
+            ]
+        },
+        {
+            "@id": "regionalised-estimates-of-uk-service-exports.csv#component/measure-type",
+            "@type": [
+                "http://purl.org/linked-data/cube#ComponentSet",
+                "http://purl.org/linked-data/cube#ComponentSpecification",
+                "http://www.w3.org/2000/01/rdf-schema#Resource"
+            ],
+            "http://purl.org/linked-data/cube#componentProperty": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ],
+            "http://purl.org/linked-data/cube#dimension": [
+                {
+                    "@id": "http://purl.org/linked-data/cube#measureType"
+                }
+            ]
+        }
+    ]
+}
