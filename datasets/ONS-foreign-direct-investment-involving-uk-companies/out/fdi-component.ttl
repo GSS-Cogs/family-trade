@@ -1,0 +1,220 @@
+
+<file:/workspace/out/fdi-component.csv#scheme/fdi-component> a <http://www.w3.org/2000/01/rdf-schema#Resource>,
+    <http://www.w3.org/2004/02/skos/core#ConceptScheme>, <http://www.w3.org/ns/dcat#Dataset>,
+    <http://www.w3.org/ns/dcat#Resource>;
+  <http://purl.org/dc/terms/identifier> "FDI Component";
+  <http://purl.org/dc/terms/issued> "2021-10-27T14:27:09.574513"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://purl.org/dc/terms/modified> "2021-10-27T14:27:09.574513"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://purl.org/dc/terms/title> "FDI Component"@en;
+  <http://www.w3.org/2000/01/rdf-schema#label> "FDI Component"@en;
+  <http://www.w3.org/2000/01/rdf-schema#seeAlso> <file:/workspace/out/fdi-component.csv#scheme/fdi-component> .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/amount-due-to-foreign-parent-companies-on-inter-company-account-at-end-period>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Amount Due To Foreign Parent Companies On Inter-Company Account At End Period";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "amount-due-to-foreign-parent-companies-on-inter-company-account-at-end-period";
+  <http://www.w3.org/ns/ui#sortPriority> 0 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/amount-due-to-uk-parent-companies-on-inter-company-account-at-end-period>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Amount Due To Uk Parent Companies On Inter-Company Account At End Period";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "amount-due-to-uk-parent-companies-on-inter-company-account-at-end-period";
+  <http://www.w3.org/ns/ui#sortPriority> 1 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/earnings-fdi-foreign-branches>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Earnings Fdi Foreign Branches";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "earnings-fdi-foreign-branches";
+  <http://www.w3.org/ns/ui#sortPriority> 2 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/earnings-fdi-foreign-subsidiaries-and-associates>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Earnings Fdi Foreign Subsidiaries And Associates";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "earnings-fdi-foreign-subsidiaries-and-associates";
+  <http://www.w3.org/ns/ui#sortPriority> 3 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/earnings-fdi-net-interest-accrued-by-uk-companies>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Earnings Fdi Net Interest Accrued By Uk Companies";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "earnings-fdi-net-interest-accrued-by-uk-companies";
+  <http://www.w3.org/ns/ui#sortPriority> 4 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/earnings-fdi-net-interest-accrued-to-foreign-parent-companies>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Earnings Fdi Net Interest Accrued To Foreign Parent Companies";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "earnings-fdi-net-interest-accrued-to-foreign-parent-companies";
+  <http://www.w3.org/ns/ui#sortPriority> 5 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/earnings-fdi-total-net-fdi-earnings-abroad>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Earnings Fdi Total Net Fdi Earnings Abroad";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "earnings-fdi-total-net-fdi-earnings-abroad";
+  <http://www.w3.org/ns/ui#sortPriority> 6 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/earnings-fdi-total-net-fdi-earnings-in-the-uk>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Earnings Fdi Total Net Fdi Earnings In The Uk";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "earnings-fdi-total-net-fdi-earnings-in-the-uk";
+  <http://www.w3.org/ns/ui#sortPriority> 7 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/earnings-fdi-uk-branches>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Earnings Fdi Uk Branches";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "earnings-fdi-uk-branches";
+  <http://www.w3.org/ns/ui#sortPriority> 8 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/earnings-fdi-uk-subsidiaries-and-associates>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Earnings Fdi Uk Subsidiaries And Associates";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "earnings-fdi-uk-subsidiaries-and-associates";
+  <http://www.w3.org/ns/ui#sortPriority> 9 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-acquisition-of-foreign-companies-share-loan-capital>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Acquisition Of Foreign Companies' Share & Loan Capital";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-acquisition-of-foreign-companies-share-loan-capital";
+  <http://www.w3.org/ns/ui#sortPriority> 10 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-acquisition-of-uk-companies-share-loan-capital>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Acquisition Of Uk Companies' Share & Loan Capital";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-acquisition-of-uk-companies-share-loan-capital";
+  <http://www.w3.org/ns/ui#sortPriority> 11 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-disposal-of-foreign-companies-share-loan-capital>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Disposal Of Foreign Companies' Share & Loan Capital";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-disposal-of-foreign-companies-share-loan-capital";
+  <http://www.w3.org/ns/ui#sortPriority> 12 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-disposal-of-uk-companies-share-loan-capital>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Disposal Of Uk Companies' Share & Loan Capital";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-disposal-of-uk-companies-share-loan-capital";
+  <http://www.w3.org/ns/ui#sortPriority> 13 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-foreign-branches>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Foreign Branches";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-foreign-branches";
+  <http://www.w3.org/ns/ui#sortPriority> 14 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-foreign-subsidiaries-and-associates>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Foreign Subsidiaries And Associates";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-foreign-subsidiaries-and-associates";
+  <http://www.w3.org/ns/ui#sortPriority> 15 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-increase-in-amounts-due-to-foreign-parents-on-inter-company-account>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Increase In Amounts Due To Foreign Parents On Inter-Company Account";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-increase-in-amounts-due-to-foreign-parents-on-inter-company-account";
+  <http://www.w3.org/ns/ui#sortPriority> 16 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-increase-in-amounts-due-to-uk-parents-on-inter-company-account>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Increase In Amounts Due To Uk Parents On Inter-Company Account";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-increase-in-amounts-due-to-uk-parents-on-inter-company-account";
+  <http://www.w3.org/ns/ui#sortPriority> 17 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-less-dividends-paid-to-foreign-parent-companies>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Less Dividends Paid To Foreign Parent Companies";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-less-dividends-paid-to-foreign-parent-companies";
+  <http://www.w3.org/ns/ui#sortPriority> 18 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-less-dividends-received-by-uk-companies>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Less Dividends Received By Uk Companies";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-less-dividends-received-by-uk-companies";
+  <http://www.w3.org/ns/ui#sortPriority> 19 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-total-net-foreign-direct-investment-abroad>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Total Net Foreign Direct Investment Abroad";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-total-net-foreign-direct-investment-abroad";
+  <http://www.w3.org/ns/ui#sortPriority> 20 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-total-net-foreign-direct-investment-in-the-uk>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Total Net Foreign Direct Investment In The Uk";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-total-net-foreign-direct-investment-in-the-uk";
+  <http://www.w3.org/ns/ui#sortPriority> 21 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-uk-branches> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Fdi Uk Branches";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-uk-branches";
+  <http://www.w3.org/ns/ui#sortPriority> 22 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-uk-subsidiaries-and-associates>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Uk Subsidiaries And Associates";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-uk-subsidiaries-and-associates";
+  <http://www.w3.org/ns/ui#sortPriority> 23 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/fdi-unremitted-profits-reinvested-earnings>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Fdi Unremitted Profits (Reinvested Earnings)";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "fdi-unremitted-profits-reinvested-earnings";
+  <http://www.w3.org/ns/ui#sortPriority> 24 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/foreign-branches> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Foreign Branches";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "foreign-branches";
+  <http://www.w3.org/ns/ui#sortPriority> 25 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/foreign-subsidiaries-and-associates>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Foreign Subsidiaries And Associates";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "foreign-subsidiaries-and-associates";
+  <http://www.w3.org/ns/ui#sortPriority> 26 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/total-net-fdi-abroad>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Total Net Fdi Abroad";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "total-net-fdi-abroad";
+  <http://www.w3.org/ns/ui#sortPriority> 27 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/total-net-fdi-earnings-abroad>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Total Net Fdi Earnings Abroad";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "total-net-fdi-earnings-abroad";
+  <http://www.w3.org/ns/ui#sortPriority> 28 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/total-net-fdi-earnings-in-the-uk>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Total Net Fdi Earnings In The Uk";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "total-net-fdi-earnings-in-the-uk";
+  <http://www.w3.org/ns/ui#sortPriority> 29 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/total-net-fdi-in-the-uk>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Total Net Fdi In The Uk";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "total-net-fdi-in-the-uk";
+  <http://www.w3.org/ns/ui#sortPriority> 30 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/total-net-fdi-international-investment-position-abroad-at-end-period>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Total Net Fdi International Investment Position Abroad At End Period";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "total-net-fdi-international-investment-position-abroad-at-end-period";
+  <http://www.w3.org/ns/ui#sortPriority> 31 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/total-net-fdi-international-investment-position-in-the-uk-at-end-period>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Total Net Fdi International Investment Position In The Uk At End Period";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "total-net-fdi-international-investment-position-in-the-uk-at-end-period";
+  <http://www.w3.org/ns/ui#sortPriority> 32 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/uk-branches> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Uk Branches";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "uk-branches";
+  <http://www.w3.org/ns/ui#sortPriority> 33 .
+
+<file:/workspace/out/fdi-component.csv#concept/fdi-component/uk-subsidiaries-and-associates>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Uk Subsidiaries And Associates";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-component.csv#scheme/fdi-component>;
+  <http://www.w3.org/2004/02/skos/core#notation> "uk-subsidiaries-and-associates";
+  <http://www.w3.org/ns/ui#sortPriority> 34 .

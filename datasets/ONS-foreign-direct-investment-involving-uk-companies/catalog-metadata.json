@@ -1,0 +1,22 @@
+{
+    "title": "Foreign direct investment involving UK companies (directional)",
+    "identifier": null,
+    "summary": "Annual statistics on the investment of foreign companies into the UK and of UK companies abroad, including for investment flows, positions and earnings.",
+    "description": "Inward reference table including data for flows, positions and earnings.",
+    "creator_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "publisher_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "landing_page_uri": "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompanies2013inwardtables",
+    "theme_uris": [
+        "http://gss-data.org.uk/def/concept/statistics-authority-themes/business-industry-trade-energy"
+    ],
+    "keywords": [
+        "investment flows",
+        "stocks",
+        "business investment"
+    ],
+    "dataset_issued": "2020-12-21",
+    "dataset_modified": "2021-10-27T14:24:22.168289+00:00",
+    "license_uri": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "public_contact_point_uri": "mailto:fdi@ons.gov.uk",
+    "uri_safe_identifier_override": null
+}

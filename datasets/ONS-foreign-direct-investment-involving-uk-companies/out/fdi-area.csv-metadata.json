@@ -1,0 +1,46 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "./fdi-area.csv#scheme/fdi-area",
+    "url": "fdi-area.csv",
+    "tableSchema": "fdi-area.table.json",
+    "rdfs:seeAlso": [
+        {
+            "@id": "./fdi-area.csv#scheme/fdi-area",
+            "@type": [
+                "http://www.w3.org/ns/dcat#Dataset",
+                "http://www.w3.org/2004/02/skos/core#ConceptScheme",
+                "http://www.w3.org/2000/01/rdf-schema#Resource",
+                "http://www.w3.org/ns/dcat#Resource"
+            ],
+            "http://purl.org/dc/terms/identifier": [
+                {
+                    "@value": "FDI Area"
+                }
+            ],
+            "http://purl.org/dc/terms/issued": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2021-10-27T14:27:09.536384"
+                }
+            ],
+            "http://purl.org/dc/terms/modified": [
+                {
+                    "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+                    "@value": "2021-10-27T14:27:09.536384"
+                }
+            ],
+            "http://purl.org/dc/terms/title": [
+                {
+                    "@language": "en",
+                    "@value": "FDI Area"
+                }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+                {
+                    "@language": "en",
+                    "@value": "FDI Area"
+                }
+            ]
+        }
+    ]
+}

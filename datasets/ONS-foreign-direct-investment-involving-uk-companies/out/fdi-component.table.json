@@ -1,0 +1,45 @@
+{
+    "columns": [
+        {
+            "titles": "Label",
+            "name": "label",
+            "required": true,
+            "propertyUrl": "rdfs:label"
+        },
+        {
+            "titles": "Notation",
+            "name": "notation",
+            "required": true,
+            "propertyUrl": "skos:notation"
+        },
+        {
+            "titles": "Parent Notation",
+            "name": "parent_notation",
+            "required": false,
+            "propertyUrl": "skos:broader",
+            "valueUrl": "./fdi-component.csv#concept/fdi-component/{+parent_notation}"
+        },
+        {
+            "titles": "Sort Priority",
+            "name": "sort_priority",
+            "required": false,
+            "datatype": "integer",
+            "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+        },
+        {
+            "titles": "Description",
+            "name": "description",
+            "required": false,
+            "propertyUrl": "rdfs:comment"
+        },
+        {
+            "virtual": true,
+            "name": "virt_inScheme",
+            "required": false,
+            "propertyUrl": "skos:inScheme",
+            "valueUrl": "./fdi-component.csv#scheme/fdi-component"
+        }
+    ],
+    "aboutUrl": "./fdi-component.csv#concept/fdi-component/{+notation}",
+    "primaryKey": "notation"
+}

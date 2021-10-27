@@ -1,0 +1,124 @@
+
+<file:/workspace/out/fdi-industry.csv#scheme/fdi-industry> a <http://www.w3.org/2000/01/rdf-schema#Resource>,
+    <http://www.w3.org/2004/02/skos/core#ConceptScheme>, <http://www.w3.org/ns/dcat#Dataset>,
+    <http://www.w3.org/ns/dcat#Resource>;
+  <http://purl.org/dc/terms/identifier> "FDI Industry";
+  <http://purl.org/dc/terms/issued> "2021-10-27T14:27:09.592019"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://purl.org/dc/terms/modified> "2021-10-27T14:27:09.592019"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://purl.org/dc/terms/title> "FDI Industry"@en;
+  <http://www.w3.org/2000/01/rdf-schema#label> "FDI Industry"@en;
+  <http://www.w3.org/2000/01/rdf-schema#seeAlso> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry> .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/administrative-and-support-service-activities>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Administrative and support service activities";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "administrative-and-support-service-activities";
+  <http://www.w3.org/ns/ui#sortPriority> 0 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/agriculture-forest-fishing>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Agriculture, forest & fishing";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "agriculture-forest-fishing";
+  <http://www.w3.org/ns/ui#sortPriority> 1 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/all-activities> <http://www.w3.org/2000/01/rdf-schema#label>
+    "All Activities";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "all-activities";
+  <http://www.w3.org/ns/ui#sortPriority> 2 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/computer-electronic-and-optical-products>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Computer, electronic and optical products";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "computer-electronic-and-optical-products";
+  <http://www.w3.org/ns/ui#sortPriority> 3 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/construction> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Construction";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "construction";
+  <http://www.w3.org/ns/ui#sortPriority> 4 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/electricity-gas-water-and-waste>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Electricity, gas, water and waste";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "electricity-gas-water-and-waste";
+  <http://www.w3.org/ns/ui#sortPriority> 5 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/financial-services> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Financial services";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "financial-services";
+  <http://www.w3.org/ns/ui#sortPriority> 6 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/food-products-beverages-tobacco-products>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Food products, beverages & tobacco products";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "food-products-beverages-tobacco-products";
+  <http://www.w3.org/ns/ui#sortPriority> 7 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/information-and-communication>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Information and communication";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "information-and-communication";
+  <http://www.w3.org/ns/ui#sortPriority> 8 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/metal-and-machinery-products>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Metal and machinery products";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "metal-and-machinery-products";
+  <http://www.w3.org/ns/ui#sortPriority> 9 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/mining-quarrying> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Mining & quarrying";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "mining-quarrying";
+  <http://www.w3.org/ns/ui#sortPriority> 10 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/other-manufacturing> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Other manufacturing";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "other-manufacturing";
+  <http://www.w3.org/ns/ui#sortPriority> 11 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/other-services> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Other services";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "other-services";
+  <http://www.w3.org/ns/ui#sortPriority> 12 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/petroleum-chemicals-pharmaceuticals-rubber-plastic-products>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Petroleum, chemicals, pharmaceuticals, rubber, plastic products";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "petroleum-chemicals-pharmaceuticals-rubber-plastic-products";
+  <http://www.w3.org/ns/ui#sortPriority> 13 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/professional-scientific-technical-services>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Professional, scientific & technical services";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "professional-scientific-technical-services";
+  <http://www.w3.org/ns/ui#sortPriority> 14 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/retail-wholesale-trade-repair-of-motor-vehicles-motor-cycles>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Retail & wholesale trade, repair of motor vehicles & motor cycles,";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "retail-wholesale-trade-repair-of-motor-vehicles-motor-cycles";
+  <http://www.w3.org/ns/ui#sortPriority> 15 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/textiles-wood-activities>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Textiles & wood activities";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "textiles-wood-activities";
+  <http://www.w3.org/ns/ui#sortPriority> 16 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/transport-equipment> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Transport equipment";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "transport-equipment";
+  <http://www.w3.org/ns/ui#sortPriority> 17 .
+
+<file:/workspace/out/fdi-industry.csv#concept/fdi-industry/transportation-storage>
+  <http://www.w3.org/2000/01/rdf-schema#label> "Transportation & storage";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-industry.csv#scheme/fdi-industry>;
+  <http://www.w3.org/2004/02/skos/core#notation> "transportation-storage";
+  <http://www.w3.org/ns/ui#sortPriority> 18 .

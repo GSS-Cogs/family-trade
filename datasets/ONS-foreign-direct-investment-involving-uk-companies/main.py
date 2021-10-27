@@ -1,24 +1,7 @@
-# -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.10.2
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
-# +
 from gssutils import *
 from IPython.display import display
 import json
 
-cubes = Cubes("info.json")
 trace = TransformTrace()
 
 info = json.load(open('info.json'))
@@ -153,8 +136,8 @@ for (name, direction), tab in tabs.items():
     # Post processing
     table.rename(columns={'OBS': 'Value'}, inplace=True)
     trace.FDI_Area('Add "fdi/" prefix then pathify')
-    table['FDI Area'] = table['FDI Area'].map(lambda x: pathify(x.strip()))
-    table['FDI Area'] = table['FDI Area'].replace({"other-european", "other-european-countries"})
+    table['FDI Area'] = table['FDI Area'].map(lambda x: x.strip().title())
+    table['FDI Area'] = table['FDI Area'].replace({"Other European", "Other European Countries"})
     if minor == '1':
         # top header row is year
         table.rename(columns={'top': 'Year'}, inplace=True)
@@ -162,38 +145,37 @@ for (name, direction), tab in tabs.items():
     if minor != '2':
         trace.FDI_Component("Set based on source tab primary number, 2.x, 3.x etc")
         table['FDI Component'] = {
-            '2': {'outward': 'total-net-fdi-abroad',
-                  'inward': 'total-net-fdi-in-the-uk'},
-            '3': {'outward': 'total-net-fdi-international-investment-position-abroad-at-end-period',
-                  'inward': 'total-net-fdi-international-investment-position-in-the-uk-at-end-period'},
-            '4': {'outward': 'total-net-fdi-earnings-abroad',
-                  'inward': 'total-net-fdi-earnings-in-the-uk'}
+            '2': {'outward': 'Total Net FDI Abroad',
+                  'inward': 'Total Net FDI in the UK'},
+            '3': {'outward': 'Total Net FDI International Investment Position Abroad at End Period',
+                  'inward': 'Total Net FDI International Investment Position in the UK at End Period'},
+            '4': {'outward': 'Total Net FDI Earnings Abroad',
+                  'inward': 'Total Net FDI Earnings in the UK'}
         }.get(major).get(direction)
     else:
         trace.FDI_Component("Pathify all values")
         table.rename(columns={'top': 'FDI Component'}, inplace=True)
-        table['FDI Component'] = table['FDI Component'].map(pathify)
     if minor == '3':
         table.rename(columns={'top': 'FDI Industry'}, inplace=True)
-        trace.FDI_Industry('Replace any occurance of "Total" with "all-activites".')
+        trace.FDI_Industry('Replace any occurance of "Total" with "All Activites".')
         table['FDI Industry'] = table['FDI Industry'].map(
-            lambda x: pathify(x) if x != 'Total' else 'all-activities'
+            lambda x: x if x != 'Total' else 'All Activities'
         )
     else:
-        trace.FDI_Industry('Set all to "all-activities".')
-        table['FDI Industry'] = 'all-activities'
+        trace.FDI_Industry('Set all to "All Activities".')
+        table['FDI Industry'] = 'All Activities'
     # Disambiguate FDI Component between tabs 2.2 and 4.2
     if name == '2.2':
-        trace.FDI_Component('Add prefixes, either "fdi-"" or "total-net-fdi-".')
+        trace.FDI_Component('Add prefixes, either "fdi-"" or "Total Net FDI ".')
         table['FDI Component'] = table['FDI Component'].map(
-            lambda x: 'fdi-' + x if not x.startswith('total-net-foreign-direct-investment-') else
-            'total-net-fdi-' + x[len('total-net-foreign-direct-investment-'):]
+            lambda x: 'FDI ' + x if not x.startswith('Total Net Foreign Direct Investment') else
+            'Total Net FDI' + x[len('Total Net Foreign Direct Investment'):]
         )
     elif name == '4.2':
         trace.FDI_Component('Add prefixes, either "earnings-fdi-"" or "total-net-".')
         table['FDI Component'] = table['FDI Component'].map(
-            lambda x: 'earnings-fdi-' + x if not x.startswith('total-net-') else
-            'total-net-' + x[len('total-net-'):].replace('foreign-direct-investment', 'fdi')
+            lambda x: 'Earnings FDI ' + x if not x.startswith('Total Net') else
+            'Total Net ' + x[len('Total Net '):].replace('Foreign Direct Investment', 'FDI')
         )
     trace.International_Trade_Basis('Set as BPM5 for pre 2012, else BPM5')
     table['International Trade Basis'] = table['Year'].map(lambda year: 'BPM5' if year < 2012 else 'BPM6')
@@ -253,17 +235,17 @@ observations.shape, observation_duplicate.shape, observations_unique.shape
 # The data producer is using different labels for the same thing within the same dataset
 # We need to force them to same
 fix = {
-    "other-european": "other-european-countries",
-    "other-europen-countries": "other-european-countries",
-    "other": "other-european-countries",
-    "uk-offshore":"uk-offshore-islands",
-    "near-middle-east": "near-middle-east-countries",
-    "near-middle": "near-middle-east-countries",
-    "australasia": "australasia-oceania",
-    "central-eastern": "central-eastern-europe",
-    "central": "central-eastern-europe",
-    "gulf-arabian": "gulf-arabian-countries",
-    "other-asian": "other-asian-countries"
+    "Other European": "Other European Countries",
+    "Other European Countries": "Other European Countries",
+    "Other": "Other European Countries",
+    "UK Offshore":"UK Offshore Islands",
+    "Near Middle East": "Near Middle East Countries",
+    "Near Middle": "Near Middle East Countries",
+    "Australasia": "Australasia-Oceania",
+    "Central Eastern": "Central Eastern Europe",
+    "Central": "Central Eastern Europe",
+    "Gulf Arabian": "Gulf Arabian Countries",
+    "Other Asian": "Other Asian Countries"
 }
 observations["FDI Area"] = observations["FDI Area"].map(lambda x: fix.get(x, x))
 
@@ -279,10 +261,11 @@ from gssutils.metadata import THEME
 inward_scraper.dataset.theme = THEME['business-industry-trade-energy']
 inward_scraper.dataset.family = 'trade'
 
-cubes.add_cube(inward_scraper, observations.drop_duplicates(), inward_scraper.dataset.title)
-cubes.output_all()
+observations['FDI Component'] = observations['FDI Component'].map(lambda x: x.title())
 
-# -
+inward_scraper.as_csvqb_catalog_metadata().to_json_file("catalog-metadata.json")
+observations.to_csv("observations.csv", index=False)
+
 trace.render("spec_v1.html")
 
 

@@ -1,0 +1,418 @@
+
+<file:/workspace/out/fdi-area.csv#scheme/fdi-area> a <http://www.w3.org/2000/01/rdf-schema#Resource>,
+    <http://www.w3.org/2004/02/skos/core#ConceptScheme>, <http://www.w3.org/ns/dcat#Dataset>,
+    <http://www.w3.org/ns/dcat#Resource>;
+  <http://purl.org/dc/terms/identifier> "FDI Area";
+  <http://purl.org/dc/terms/issued> "2021-10-27T14:27:09.536384"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://purl.org/dc/terms/modified> "2021-10-27T14:27:09.536384"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+  <http://purl.org/dc/terms/title> "FDI Area"@en;
+  <http://www.w3.org/2000/01/rdf-schema#label> "FDI Area"@en;
+  <http://www.w3.org/2000/01/rdf-schema#seeAlso> <file:/workspace/out/fdi-area.csv#scheme/fdi-area> .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/africa> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Africa";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "africa";
+  <http://www.w3.org/ns/ui#sortPriority> 0 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/asia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Asia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "asia";
+  <http://www.w3.org/ns/ui#sortPriority> 1 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/australasia-oceania> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Australasia & Oceania";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "australasia-oceania";
+  <http://www.w3.org/ns/ui#sortPriority> 2 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/australia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Australia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "australia";
+  <http://www.w3.org/ns/ui#sortPriority> 3 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/austria> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Austria";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "austria";
+  <http://www.w3.org/ns/ui#sortPriority> 4 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/belgium> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Belgium";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "belgium";
+  <http://www.w3.org/ns/ui#sortPriority> 5 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/bermuda> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Bermuda";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "bermuda";
+  <http://www.w3.org/ns/ui#sortPriority> 6 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/brazil> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Brazil";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "brazil";
+  <http://www.w3.org/ns/ui#sortPriority> 7 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/bulgaria> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Bulgaria";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "bulgaria";
+  <http://www.w3.org/ns/ui#sortPriority> 8 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/canada> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Canada";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "canada";
+  <http://www.w3.org/ns/ui#sortPriority> 9 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/central-eastern-europe> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Central & Eastern Europe";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "central-eastern-europe";
+  <http://www.w3.org/ns/ui#sortPriority> 10 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/chile> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Chile";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "chile";
+  <http://www.w3.org/ns/ui#sortPriority> 11 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/china> <http://www.w3.org/2000/01/rdf-schema#label>
+    "China";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "china";
+  <http://www.w3.org/ns/ui#sortPriority> 12 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/colombia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Colombia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "colombia";
+  <http://www.w3.org/ns/ui#sortPriority> 13 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/croatia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Croatia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "croatia";
+  <http://www.w3.org/ns/ui#sortPriority> 14 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/cyprus> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Cyprus";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "cyprus";
+  <http://www.w3.org/ns/ui#sortPriority> 15 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/czech-republic> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Czech Republic";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "czech-republic";
+  <http://www.w3.org/ns/ui#sortPriority> 16 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/denmark> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Denmark";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "denmark";
+  <http://www.w3.org/ns/ui#sortPriority> 17 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/efta> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Efta";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "efta";
+  <http://www.w3.org/ns/ui#sortPriority> 18 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/estonia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Estonia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "estonia";
+  <http://www.w3.org/ns/ui#sortPriority> 19 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/eu> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Eu";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "eu";
+  <http://www.w3.org/ns/ui#sortPriority> 20 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/europe> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Europe";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "europe";
+  <http://www.w3.org/ns/ui#sortPriority> 21 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/finland> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Finland";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "finland";
+  <http://www.w3.org/ns/ui#sortPriority> 22 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/france> <http://www.w3.org/2000/01/rdf-schema#label>
+    "France";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "france";
+  <http://www.w3.org/ns/ui#sortPriority> 23 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/germany> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Germany";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "germany";
+  <http://www.w3.org/ns/ui#sortPriority> 24 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/greece> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Greece";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "greece";
+  <http://www.w3.org/ns/ui#sortPriority> 25 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/gulf-arabian-countries> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Gulf Arabian Countries";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "gulf-arabian-countries";
+  <http://www.w3.org/ns/ui#sortPriority> 26 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/hong-kong> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Hong Kong";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "hong-kong";
+  <http://www.w3.org/ns/ui#sortPriority> 27 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/hungary> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Hungary";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "hungary";
+  <http://www.w3.org/ns/ui#sortPriority> 28 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/india> <http://www.w3.org/2000/01/rdf-schema#label>
+    "India";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "india";
+  <http://www.w3.org/ns/ui#sortPriority> 29 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/indonesia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Indonesia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "indonesia";
+  <http://www.w3.org/ns/ui#sortPriority> 30 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/irish-republic> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Irish Republic";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "irish-republic";
+  <http://www.w3.org/ns/ui#sortPriority> 31 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/italy> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Italy";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "italy";
+  <http://www.w3.org/ns/ui#sortPriority> 32 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/japan> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Japan";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "japan";
+  <http://www.w3.org/ns/ui#sortPriority> 33 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/kenya> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Kenya";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "kenya";
+  <http://www.w3.org/ns/ui#sortPriority> 34 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/latvia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Latvia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "latvia";
+  <http://www.w3.org/ns/ui#sortPriority> 35 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/lithuania> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Lithuania";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "lithuania";
+  <http://www.w3.org/ns/ui#sortPriority> 36 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/luxembourg> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Luxembourg";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "luxembourg";
+  <http://www.w3.org/ns/ui#sortPriority> 37 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/malaysia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Malaysia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "malaysia";
+  <http://www.w3.org/ns/ui#sortPriority> 38 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/malta> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Malta";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "malta";
+  <http://www.w3.org/ns/ui#sortPriority> 39 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/mexico> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Mexico";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "mexico";
+  <http://www.w3.org/ns/ui#sortPriority> 40 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/near-middle-east-countries> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Near & Middle East Countries";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "near-middle-east-countries";
+  <http://www.w3.org/ns/ui#sortPriority> 41 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/netherlands> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Netherlands";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "netherlands";
+  <http://www.w3.org/ns/ui#sortPriority> 42 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/new-zealand> <http://www.w3.org/2000/01/rdf-schema#label>
+    "New Zealand";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "new-zealand";
+  <http://www.w3.org/ns/ui#sortPriority> 43 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/nigeria> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Nigeria";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "nigeria";
+  <http://www.w3.org/ns/ui#sortPriority> 44 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/norway> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Norway";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "norway";
+  <http://www.w3.org/ns/ui#sortPriority> 45 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/oecd> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Oecd";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "oecd";
+  <http://www.w3.org/ns/ui#sortPriority> 46 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/other-asian-countries> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Other Asian Countries";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "other-asian-countries";
+  <http://www.w3.org/ns/ui#sortPriority> 47 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/other-european-countries> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Other European Countries";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "other-european-countries";
+  <http://www.w3.org/ns/ui#sortPriority> 48 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/panama> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Panama";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "panama";
+  <http://www.w3.org/ns/ui#sortPriority> 49 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/poland> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Poland";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "poland";
+  <http://www.w3.org/ns/ui#sortPriority> 50 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/portugal> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Portugal";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "portugal";
+  <http://www.w3.org/ns/ui#sortPriority> 51 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/romania> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Romania";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "romania";
+  <http://www.w3.org/ns/ui#sortPriority> 52 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/russia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Russia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "russia";
+  <http://www.w3.org/ns/ui#sortPriority> 53 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/singapore> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Singapore";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "singapore";
+  <http://www.w3.org/ns/ui#sortPriority> 54 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/slovakia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Slovakia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "slovakia";
+  <http://www.w3.org/ns/ui#sortPriority> 55 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/slovenia> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Slovenia";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "slovenia";
+  <http://www.w3.org/ns/ui#sortPriority> 56 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/south-africa> <http://www.w3.org/2000/01/rdf-schema#label>
+    "South Africa";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "south-africa";
+  <http://www.w3.org/ns/ui#sortPriority> 57 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/south-korea> <http://www.w3.org/2000/01/rdf-schema#label>
+    "South Korea";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "south-korea";
+  <http://www.w3.org/ns/ui#sortPriority> 58 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/spain> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Spain";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "spain";
+  <http://www.w3.org/ns/ui#sortPriority> 59 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/sweden> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Sweden";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "sweden";
+  <http://www.w3.org/ns/ui#sortPriority> 60 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/switzerland> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Switzerland";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "switzerland";
+  <http://www.w3.org/ns/ui#sortPriority> 61 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/thailand> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Thailand";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "thailand";
+  <http://www.w3.org/ns/ui#sortPriority> 62 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/the-americas> <http://www.w3.org/2000/01/rdf-schema#label>
+    "The Americas";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "the-americas";
+  <http://www.w3.org/ns/ui#sortPriority> 63 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/uk-offshore-islands> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Uk Offshore Islands";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "uk-offshore-islands";
+  <http://www.w3.org/ns/ui#sortPriority> 64 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/usa> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Usa";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "usa";
+  <http://www.w3.org/ns/ui#sortPriority> 65 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/world-total> <http://www.w3.org/2000/01/rdf-schema#label>
+    "World Total";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "world-total";
+  <http://www.w3.org/ns/ui#sortPriority> 66 .
+
+<file:/workspace/out/fdi-area.csv#concept/fdi-area/zimbabwe> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Zimbabwe";
+  <http://www.w3.org/2004/02/skos/core#inScheme> <file:/workspace/out/fdi-area.csv#scheme/fdi-area>;
+  <http://www.w3.org/2004/02/skos/core#notation> "zimbabwe";
+  <http://www.w3.org/ns/ui#sortPriority> 67 .
