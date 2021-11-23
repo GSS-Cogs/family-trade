@@ -19,13 +19,13 @@ import json
 import requests
 import pandas as pd
 
-info = json.load(open('info.json'))
+info = json.load(open('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json'))
 
-scraper = Scraper(seed = 'info.json')
+scraper = Scraper(seed = '/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json')
 scraper
 
 trace = TransformTrace()
-cubes = Cubes('info.json')
+cubes = Cubes('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json')
 # -
 
 scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
@@ -35,6 +35,7 @@ datasetTitle = scraper.title
 datasetTitle = "UK trade in goods by business characteristics - data tables" #removing date from title 
 
 distribution = scraper.distribution(latest = True).downloadURL
+print(distribution)
 
 tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
 # tabs = {tab.name: tab for tab in distribution.as_databaker}
@@ -56,8 +57,9 @@ for name, tab in tabs.items():
     year = cell.shift(1,0).fill(DOWN).is_not_blank().is_not_whitespace()
     trace.Period("Defined form cell ref B1 down")
     
-    country = cell.shift(2,0).fill(DOWN).is_not_blank().is_not_whitespace()
-    trace.Country("Defined form cell ref C1 down")
+    country = tab.excel_ref("C1").fill(DOWN).is_not_blank().is_not_whitespace()
+    # trace.Country("Defined form cell ref C1 down")
+    savepreviewhtml(country, fname=tab.name +"Preview.html")
     
     zone = cell.shift(3,0).fill(DOWN).is_not_blank().is_not_whitespace()
     trace.Zone("Defined form cell ref D1 down")
