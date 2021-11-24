@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[804]:
+# In[1]:
 
 
 import pandas as pd
@@ -14,7 +14,7 @@ cubes = Cubes('info.json')
 scraper
 
 
-# In[805]:
+# In[2]:
 
 
 scraper.select_dataset(latest=True)
@@ -27,13 +27,13 @@ dataset_year = int(year_cell.value.replace(' data', ''))
 dataset_year
 
 
-# In[806]:
+# In[3]:
 
 
 tidied_tabs = []
 
 
-# In[807]:
+# In[4]:
 
 
 tab = tabs['T1 ITL1 (Summary Data)']
@@ -134,7 +134,7 @@ tidy = tidy[['Year', 'ITL Geography','HMRC Partner Geography','Flow','SITC 4','M
 tidied_tabs.append(tidy)
 
 
-# In[808]:
+# In[5]:
 
 
 tab = tabs['T2 ITL2']
@@ -225,7 +225,7 @@ tidy =tidy[['Year', 'ITL Geography','HMRC Partner Geography','Flow','SITC 4','Me
 tidied_tabs.append(tidy)
 
 
-# In[809]:
+# In[6]:
 
 
 tab = tabs['T5 ITL3'] #Current releases
@@ -317,7 +317,7 @@ tidy = tidy[(tidy['Marker'] != 'below-threshold-traders') & (tidy['Value'].notna
 tidied_tabs.append(tidy)
 
 
-# In[810]:
+# In[7]:
 
 
 tab = tabs['T3 ITL2 SITC Section'] #Current releases
@@ -432,7 +432,7 @@ tidy['SITC 4'].unique()
 tidied_tabs.append(tidy)
 
 
-# In[811]:
+# In[8]:
 
 
 tab = tabs['T4 ITL2 Partner Country'] #Current releases
@@ -573,14 +573,14 @@ tidy =tidy[['Year','ITL Geography','HMRC Partner Geography','Flow','SITC 4','Mea
 tidied_tabs.append(tidy)
 
 
-# In[812]:
+# In[9]:
 
 
 table = pd.concat(tidied_tabs)
 table.count()
 
 
-# In[813]:
+# In[10]:
 
 
 import numpy
@@ -599,15 +599,15 @@ table['Unit'] = 'gbp-million'
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 
-# In[814]:
+# In[11]:
 
 
-table['HMRC Partner Geography'] = table.apply(lambda x: 'Total' if x['HMRC Partner Geography'] == 'europe' else x['HMRC Partner Geography'], axis = 1)
+table['HMRC Partner Geography'] = table.apply(lambda x: 'all' if x['HMRC Partner Geography'] == 'europe' else x['HMRC Partner Geography'], axis = 1)
 
 scraper.dataset.comment = """HMRC experimental statistics that subdivide the existing Regional Trade in Goods Statistics (RTS) into smaller UK geographic areas (NUTS2 and NUTS3)."""
 
 
-# In[815]:
+# In[12]:
 
 
 
