@@ -63,6 +63,9 @@
         ],
         "main_issue": 87
     },
+    "load": {
+        "publish": true
+    },
     "sizingNotes": "",
     "notes": ""
 }
