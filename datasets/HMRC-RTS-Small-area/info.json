@@ -25,9 +25,7 @@
                 "codelist": false
             },
             "ITL Geography": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/itl-geography",
-                "value": "http://gss-data.org.uk/def/trade/concept/itl-geography/{itl_geography}",
-                "codelist": false
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
             },
             "HMRC Partner Geography": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"

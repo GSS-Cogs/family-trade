@@ -604,7 +604,7 @@ table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 table['HMRC Partner Geography'] = table.apply(lambda x: 'all' if x['HMRC Partner Geography'] == 'europe' else x['HMRC Partner Geography'], axis = 1)
 
-scraper.dataset.comment = """HMRC experimental statistics that subdivide the existing Regional Trade in Goods Statistics (RTS) into smaller UK geographic areas (NUTS2 and NUTS3)."""
+scraper.dataset.comment = """HMRC experimental statistics that subdivide the existing Regional Trade in Goods Statistics (RTS) into smaller UK geographic areas (ITL2 and ITL3)."""
 
 
 # In[12]:

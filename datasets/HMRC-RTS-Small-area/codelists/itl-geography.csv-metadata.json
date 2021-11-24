@@ -1,0 +1,124 @@
+{
+    "@context": "http://www.w3.org/ns/csvw",
+    "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography",
+    "url": "itl-geography.csv",
+    "rdfs:label": "ITL Geography",
+    "dc:title": "ITL Geography",
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
+            {
+                "titles": "Notation",
+                "name": "notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*$"
+                },
+                "required": true,
+                "propertyUrl": "skos:notation"
+            },
+            {
+                "titles": "Parent Notation",
+                "name": "parent_notation",
+                "datatype": {
+                    "base": "string",
+                    "format": "^(-?[\\w\\.\\/\\+]+(-[\\w\\.\\/\\+]+)*|)$"
+                },
+                "required": false,
+                "propertyUrl": "skos:broader",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/itl-geography/{+parent_notation}"
+            },
+            {
+                "titles": "Sort Priority",
+                "name": "sort_priority",
+                "datatype": "integer",
+                "required": false,
+                "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept"
+            },
+            {
+                "virtual": true,
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography"
+            }
+        ],
+        "primaryKey": "notation",
+        "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/itl-geography/{+notation}"
+    },
+    "prov:hadDerivation": {
+        "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography",
+        "@type": [
+            "skos:ConceptScheme",
+            "http://publishmydata.com/pmdcat#ConceptScheme"
+        ]
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T10:55:03.995685"
+            },
+            "rdfs:label": "ITL Geography",
+            "dc:title": "ITL Geography",
+            "rdfs:comment": "Dataset representing the 'ITL Geography' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-04-27T15:40:26.465507"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#scheme/itl-geography"
+            },
+            "dc:title": "ITL Geography Catalog Record",
+            "rdfs:label": "ITL Geography Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-04-27T15:40:26.465507"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-04-27T15:40:26.465507"
+            }
+        }
+    ]
+}
