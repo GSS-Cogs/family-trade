@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.5
+#       jupytext_version: 1.10.2
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -19,37 +19,73 @@ import json
 import requests
 import pandas as pd
 
-info = json.load(open('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json'))
-
 scraper = Scraper(seed = '/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json')
 scraper
-
-trace = TransformTrace()
-cubes = Cubes('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json')
 # -
 
+info = json.load(open('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json'))
+
+cubes = Cubes('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json')
+
+trace = TransformTrace()
+
 scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
-scraper.dataset.family = info["families"]
 
-datasetTitle = scraper.title
-datasetTitle = "UK trade in goods by business characteristics - data tables" #removing date from title 
+distribution = scraper.distribution(latest = True)
+# datasetTitle = scraper.title
+display(distribution)
 
-distribution = scraper.distribution(latest = True).downloadURL
-print(distribution)
+tabs = distribution.as_databaker()
 
-tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
-# tabs = {tab.name: tab for tab in distribution.as_databaker}
+for tab in tabs:
+    print(tab.name)
 
-for name, tab in tabs.items():
-    if 'Notes and Contents' in name or '5. Metadata' in name :
-        continue
-    #datasetTitle = scraper.title
     columns = ["Flow", "Period", "Country", "Zone", "Business Size", "Age", "Industry Group", "Value", 
                "Business Count", "Employee Count", "Flow Directions", "Year", "Marker"]
 
+# +
+# scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
+# scraper.dataset.family = info["families"]
+
+# +
+
+# datasetTitle = "UK trade in goods by business characteristics - data tables" #removing date from title 
+
+# +
+# tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
+# print(type(tabs))
+# -
+
+for tab in tabs:
+    if tab.name in ["Notes and Contents", "7. Metadata"]:
+        continue
+    print(tab.name)
+    # trace.start(datasetTitle, tab, columns, distribution)
+    cell = tab.excel_ref("A1")
+    savepreviewhtml(cell, fname=tab.name +"Preview.html")
+
+# +
+# for name, tab in tabs.items():
+#     if "Notes and Contents" in tab.name or "5. Metadata" in tab.name:
+#         continue
+#     print(tab.name)
+#     trace.start(datasetTitle, tab, columns, distribution)
+#     cell = tab.excel_ref("A1")
+#     savepreviewhtml(cell, fname=tab.name +"Preview.html")
+
+
+# +
+#     #datasetTitle = scraper.title
+
+
     trace.start(datasetTitle, tab, columns, distribution) 
+# -
+
+#     cell = tab.excel_ref("A1")
+#     savepreviewhtml(cell, fname=tab.name +"Preview.html")
 
     cell = tab.excel_ref("A1")
+    savepreviewhtml(cell, fname=tab.name +"Preview.html")
     
     flow = cell.fill(DOWN).is_not_blank().is_not_whitespace()
     trace.Flow("Defined from cell ref A1 down")
@@ -61,7 +97,7 @@ for name, tab in tabs.items():
     # trace.Country("Defined form cell ref C1 down")
     savepreviewhtml(country, fname=tab.name +"Preview.html")
     
-    zone = cell.shift(3,0).fill(DOWN).is_not_blank().is_not_whitespace()
+    zone = tab.excel_ref("D2").expand(DOWN).is_not_blank().is_not_whitespace()
     trace.Zone("Defined form cell ref D1 down")
     
     business_size = cell.shift(4,0).fill(DOWN).is_not_blank().is_not_whitespace()
