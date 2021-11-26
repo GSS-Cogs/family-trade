@@ -55,30 +55,35 @@ for tab in tabs:
 
 tidied_sheets = []
 
-# +
 for tab in tabs:
     # if tab.name in ["Notes and Contents", "2. Age Group","3. Business Size","4. Industry_Age", "5. Industry_BusinessSize", "6. BusinessSize_Age", "7. Metadata"]:
     if tab.name not in ["1. Industry Group"]:
         continue
-    print(tab.name)
-    # trace.start(datasetTitle, tab, columns, distribution)
+    # print(tab.name)
+
     cell = tab.excel_ref("A1")
-    # df = pd.DataFrame(cell)
-    # print(df)
-    # list(cell)
 
-    unwanted_1 = cell.shift(0,20).fill(DOWN).expand(RIGHT)|tab.filter(contains_string('Total'))
-    # savepreviewhtml(unwanted_1, fname=tab.name +"Preview.html")
+    del_row_21 = tab.filter("Total").expand(RIGHT).is_not_blank()|tab.filter("Total [note 9]").expand(RIGHT).is_not_blank()
 
-    flow = cell.shift(0,7).fill(RIGHT).is_not_blank().is_not_whitespace()
-    # savepreviewhtml(flow, fname=tab.name +"Preview.html")
-    
-    industry_group = cell.shift(0,8).fill(DOWN).is_not_blank().is_not_whitespace()-unwanted_1
-    # savepreviewhtml(industry_group, fname=tab.name +"Preview.html")
+    del_row_22 = del_row_21.fill(DOWN).is_blank()
 
-    observations = flow.waffle(industry_group)
+    del_row_23 = tab.filter(contains_string("by industry group")).expand(RIGHT).is_not_blank()
+
+    del_row_24 = tab.filter(contains_string("Export")).fill(LEFT)
+
+    del_row_54 = tab.filter(contains_string("Source")).expand(DOWN)
+
+    del_row_56 = tab.filter(contains_string("Notes")).expand(DOWN)
+
+    total_del = del_row_21|del_row_22|del_row_23|del_row_24|del_row_54|del_row_56
+
+    flow = tab.filter("Exports")|tab.filter("Imports")
+
+    industry_group = cell.shift(0,8).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    observations = flow.waffle(industry_group)-total_del
     # savepreviewhtml(observations, fname=tab.name +"Preview.html")
-
+    
     dimensions = [
         HDim(flow, "Flow", DIRECTLY, ABOVE),
         HDim(industry_group, "Industry Group", DIRECTLY, LEFT)
