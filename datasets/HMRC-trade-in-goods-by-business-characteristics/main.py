@@ -44,15 +44,6 @@ for tab in tabs:
     columns = ["Flow", "Period", "Country", "Zone", "Business Size", "Age", "Industry Group", "Value", 
                "Business Count", "Employee Count", "Flow Directions", "Year", "Marker"]
 
-# +
-
-# datasetTitle = "UK trade in goods by business characteristics - data tables" #removing date from title 
-
-# +
-# tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
-# print(type(tabs))
-# -
-
 tidied_sheets = []
 
 for tab in tabs:
@@ -71,25 +62,72 @@ for tab in tabs:
 
     del_row_24 = tab.filter(contains_string("Export")).fill(LEFT)
 
+    del_row_25 = tab.filter(contains_string("Industry group")).expand(RIGHT)
+
     del_row_54 = tab.filter(contains_string("Source")).expand(DOWN)
 
     del_row_56 = tab.filter(contains_string("Notes")).expand(DOWN)
 
-    total_del = del_row_21|del_row_22|del_row_23|del_row_24|del_row_54|del_row_56
+    total_del = del_row_21|del_row_22|del_row_23|del_row_24|del_row_25|del_row_54|del_row_56
 
     flow = tab.filter("Exports")|tab.filter("Imports")
 
-    industry_group = cell.shift(0,8).fill(DOWN).is_not_blank().is_not_whitespace()
+    industry_group = cell.shift(0,8).fill(DOWN).is_not_blank().is_not_whitespace()-total_del
+
+    count = tab.filter(contains_string("by industry group")) #Can be used latter for multimeasure extraction
 
     observations = flow.waffle(industry_group)-total_del
     # savepreviewhtml(observations, fname=tab.name +"Preview.html")
     
     dimensions = [
         HDim(flow, "Flow", DIRECTLY, ABOVE),
-        HDim(industry_group, "Industry Group", DIRECTLY, LEFT)
+        HDim(industry_group, "Industry Group", DIRECTLY, LEFT),
+        HDim(count, "Count", CLOSEST, ABOVE)
+    ]
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    tidied_sheets.append(tidy_sheet.topandas())
+
+for tab in tabs:
+    if tab.name not in ["2. Age Group"]:
+        continue
+    print(tab.name)
+
+    cell = tab.excel_ref("A1")
+
+    del_row_17 = tab.filter("Total").expand(RIGHT).is_not_blank()|tab.filter("Total [note 8]").expand(RIGHT).is_not_blank()
+
+    del_row_18 = del_row_17.fill(DOWN).is_blank()
+
+    del_row_19 = tab.filter(contains_string("by age of business")).expand(RIGHT).is_not_blank()
+
+    del_row_20 = tab.filter(contains_string("Export")).fill(LEFT)
+
+    del_row_21 = tab.filter(contains_string("Age (years)")).expand(RIGHT)
+
+    del_row_42 = tab.filter(contains_string("Source")).expand(DOWN)
+
+    del_row_56 = tab.filter(contains_string("Notes")).expand(DOWN)
+
+    total_del = del_row_17|del_row_18|del_row_19|del_row_20|del_row_21|del_row_42|del_row_56
+
+    flow = tab.filter("Exports")|tab.filter("Imports")
+
+    age = cell.shift(0,8).fill(DOWN).is_not_blank().is_not_whitespace()-total_del
+
+    count = tab.filter(contains_string("by age of business")) #Can be used latter for multimeasure extraction
+
+    observations = flow.waffle(age)-total_del
+    # savepreviewhtml(observations, fname=tab.name+ "Preview.html")
+
+    dimensions = [
+        HDim(flow, "Flow", DIRECTLY, ABOVE),
+        HDim(age, "Industry Group", DIRECTLY, LEFT),
+        HDim(count, "Count", CLOSEST, ABOVE)
     ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     tidied_sheets.append(tidy_sheet.topandas())
 
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
 df
+
+
