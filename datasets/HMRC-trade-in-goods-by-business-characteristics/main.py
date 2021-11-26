@@ -90,7 +90,6 @@ for tab in tabs:
 for tab in tabs:
     if tab.name not in ["2. Age Group"]:
         continue
-    print(tab.name)
 
     cell = tab.excel_ref("A1")
 
@@ -121,7 +120,46 @@ for tab in tabs:
 
     dimensions = [
         HDim(flow, "Flow", DIRECTLY, ABOVE),
-        HDim(age, "Industry Group", DIRECTLY, LEFT),
+        HDim(age, "Age", DIRECTLY, LEFT),
+        HDim(count, "Count", CLOSEST, ABOVE)
+    ]
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    tidied_sheets.append(tidy_sheet.topandas())
+
+for tab in tabs:
+    if tab.name not in ["3. Business Size"]:
+        continue
+
+    cell = tab.excel_ref("A1")
+
+    del_row_16 = tab.filter("Total").expand(RIGHT).is_not_blank()|tab.filter("Total [note 8]").expand(RIGHT).is_not_blank()
+
+    del_row_17 = del_row_16.fill(DOWN).is_blank()
+
+    del_row_18 = tab.filter(contains_string("by business size")).expand(RIGHT).is_not_blank()
+    
+    del_row_19 = tab.filter(contains_string("Export")).fill(LEFT)
+
+    del_row_20 = tab.filter(contains_string("Business size  (no. of employees)")).expand(RIGHT)
+
+    del_row_39 = tab.filter(contains_string("Source")).expand(DOWN)
+
+    del_row_56 = tab.filter(contains_string("Notes")).expand(DOWN)
+
+    total_del = del_row_16|del_row_17|del_row_18|del_row_19|del_row_20|del_row_39|del_row_56
+
+    flow = tab.filter("Exports")|tab.filter("Imports")
+
+    business_size = cell.shift(0,8).fill(DOWN).is_not_blank().is_not_whitespace()-total_del
+
+    count = tab.filter(contains_string("by business size")) #Can be used latter for multimeasure extraction
+
+    observations = flow.waffle(business_size)-total_del
+    # savepreviewhtml(observations, fname=tab.name+ "Preview.html")
+
+    dimensions = [
+        HDim(flow, "Flow", DIRECTLY, ABOVE),
+        HDim(business_size, "Business Size", DIRECTLY, LEFT),
         HDim(count, "Count", CLOSEST, ABOVE)
     ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
@@ -129,5 +167,3 @@ for tab in tabs:
 
 df = pd.concat(tidied_sheets, ignore_index = True, sort = False)
 df
-
-
