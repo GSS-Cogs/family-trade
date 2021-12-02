@@ -211,4 +211,12 @@ for i, row in df3.iloc[6:18].iterrows():
 
 df3.shape
 
+df3 = pd.melt(df3, id_vars = ["Business_size", "measure_map"], value_vars = ["Exports", "Imports"], var_name = "flow", value_name = "value")
+
+# +
+# df3
+# -
+
+df3.shape
+
 
