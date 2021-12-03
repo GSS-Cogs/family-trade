@@ -31,8 +31,21 @@ metadata
 counter = 0
 source_name_and_distro = {}
 
-for distribution in metadata.distributions:
-    distribution = metadata.distributions[counter].open()
+for table in metadata.distributions:
+    xls = pd.ExcelFile(metadata.distributions[counter].downloadURL)
+
+    with ExcelWriter("data" + str(counter) + ".xls") as writer:
+        for sheet in xls.sheet_names:
+
+            if sheet == "Database (YR)" or sheet == "Database (QR)" or sheet == "Database (Regional Year)" or sheet == "Database (Regional Qtr)":
+                pd.read_excel(xls, sheet).to_excel(writer,sheet)
+
+            else:
+                continue
+
+        writer.save()
+
+    
     source_name_and_distro["data" + str(counter) + ".xls"] = metadata.distributions[counter]
     counter += 1
 

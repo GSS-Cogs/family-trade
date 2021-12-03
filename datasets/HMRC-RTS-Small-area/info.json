@@ -24,7 +24,7 @@
                 "value": "http://reference.data.gov.uk/id/year/{year}",
                 "codelist": false
             },
-            "NUTS Geography": {
+            "ITL Geography": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
             },
             "HMRC Partner Geography": {
