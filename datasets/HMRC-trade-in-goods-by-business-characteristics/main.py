@@ -28,195 +28,179 @@ info = json.load(open('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-
 
 cubes = Cubes('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json')
 
-trace = TransformTrace()
-
 scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
 scraper.dataset.family = info["families"]
 
-distribution = scraper.distribution(latest = True)
-# datasetTitle = scraper.title
-display(distribution)
-dcat_data = distribution.downloadURL
-display(dcat_data)
+datasetTitle = scraper.title
+datasetTitle = "UK trade in goods by business characteristics - data tables"
 
-    # columns = ["Flow", "Period", "Country", "Zone", "Business Size", "Age", "Industry Group", "Value", 
-    #            "Business Count", "Employee Count", "Flow Directions", "Year", "Marker"]
+distribution = scraper.distribution(title = lambda t : 'data tables' in t, latest = True)
+distribution
 
-df = distribution.as_pandas()
+tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
+list(tabs)
 
-# +
-# the input file is not in the format I want, and that I am doing something to go around it
-# xl = pd.ExcelFile('https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1033097/IDBR_OTS_tables_2020.xlsx')
-# df = xl.parse("1. Industry Group", header=None, names=['Industry Group', 'Exports', 'Imports'])# 
+tidied_sheets = []
 
 # +
+for name, tab in tabs.items():
+    if 'Notes and Contents' in name or '5. Metadata' in name :
+        continue
+    # print(tab.name)
 
-df = pd.read_excel(dcat_data, sheet_name="1. Industry Group", header=None, names=["Industry_Group", "Exports", "Imports"], skiprows=9, usecols = "A:D", comment = "Total", skipfooter=13) 
+    cell = tab.excel_ref("A1")
+    
+    flow = tab.filter(contains_string("Flow")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    year = tab.filter(contains_string("Year")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    country = tab.filter(contains_string("Country")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    zone = tab.filter(contains_string("Zone")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    business_size = tab.filter(contains_string("Business Size")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    age = tab.filter(contains_string("Age (Years)")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    industry_group = tab.filter(contains_string("Industry Group")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    business_count = tab.filter(contains_string("Business Count")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    employee_count = tab.filter(contains_string("Employee Count")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+    observations = cell.shift(7,2).fill(DOWN).is_not_blank().is_not_whitespace()
+    
+    dimensions = [
+        HDim(flow, 'Flow', DIRECTLY, LEFT),
+        HDim(year, 'Period', DIRECTLY, LEFT),
+        HDim(country, 'Country', DIRECTLY, LEFT),
+        HDim(zone, 'Zone', DIRECTLY, LEFT),
+        HDim(business_size, 'Business Size', DIRECTLY, LEFT),
+        HDim(age, 'Age', DIRECTLY, LEFT),
+        HDim(industry_group, 'Industry Group', DIRECTLY, LEFT),
+        HDim(business_count, 'Business Count', DIRECTLY, RIGHT),
+        HDim(employee_count, 'Employee Count', DIRECTLY, RIGHT),
+    ]
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    # savepreviewhtml(tidy_sheet, fname = tab.name+ "Preview.html")
+    tidied_sheets.append(tidy_sheet.topandas())
+
+
+
 # -
 
-# df.head(55)
-df.shape
+df = pd.concat(tidied_sheets, sort = True)
 
-values = ["Business count by industry group", "Industry group", "Employee count for businesses by industry group"]
-df = df[df.Industry_Group.isin(values) == False]
-df=df.dropna(how="all")
-df = df[(df.Exports != "Exports") & (df.Imports != "Imports")]
-df = df[(df.Industry_Group != "Industry group") & (df.Exports != 2020) & (df.Imports != 2020)]
+df.rename(columns= {'OBS':'Value', 'Period':'Year', 'Flow':'Flow Directions', 'DATAMARKER':'Marker'}, inplace = True)
 
-# df.head(55)
-df.shape
-
-# +
-# df["measure_map"] = df["Industry_Group"].copy()
-# discount = df["measure_map"]
-# -
-
-# df1=df.merge(discount,left_index=True, right_index=True)
+df['Flow Directions'] = df['Flow Directions'].apply(pathify)
 
 
-df["measure_map"] = df["Industry_Group"]
-
-# df.drop(["measure_map_y"], axis = 1)
-# df.head(55)
-df.shape
-
-for i, row in df.iloc[:11].iterrows():
-    for column in ["measure_map"]:
-        df.at[i,column] = "£ millions"
-
-# df.head(50)
-df.shape
-
-for i, row in df.iloc[11:40].iterrows():
-    for column in ["measure_map"]:
-        df.at[i,column] = "number"
-
-# +
-# df.head
-
-# +
-# df.shape
-# -
-
-df1 = pd.melt(df, id_vars = ["Industry_Group", "measure_map"], value_vars = ["Exports", "Imports"], var_name = "flow", value_name = "value")
-
-# +
-# df1
-
-# +
-#########################################################################################
-# End of first tab
-
-# +
-
-df2 = pd.read_excel(dcat_data, sheet_name="2. Age Group", header=None, names=["Age", "Exports", "Imports"], skiprows=9, usecols = "A:D", comment = "Total", skipfooter=13) 
-
-# +
-# df2
-# -
-
-df2.shape
-
-values = ["Business count by age of business", "Age (years)", "Employee count for businesses by age of business"]
-df2 = df2[df2.Age.isin(values) == False]
-df2=df2.dropna(how="all")
-df2 = df2[(df2.Exports != "Exports") & (df2.Imports != "Imports")]
-df2 = df2[(df2.Age != "Age (years)") & (df2.Exports != 2020) & (df2.Imports != 2020)]
-
-df2.shape
-
-# +
-# df2
-# -
-
-df2["measure_map"] = df2["Age"]
-
-df2.shape
-
-for i, row in df.iloc[:7].iterrows():
-    for column in ["measure_map"]:
-        df2.at[i,column] = "£ millions"
-
-# +
-# df2
-# -
-
-df2.shape
-
-for i, row in df2.iloc[7:21].iterrows():
-    for column in ["measure_map"]:
-        df2.at[i,column] = "number"
-
-# +
-# df2
-# -
-
-df2.head(1)
-
-df2 = pd.melt(df2, id_vars = ["Age", "measure_map"], value_vars = ["Exports", "Imports"], var_name = "flow", value_name = "value")
-
-# +
-# df2
-# -
-
-df2.shape
-
-# +
-#####################################
-# End of second dataframe df2
-
-# +
-
-df3 = pd.read_excel(dcat_data, sheet_name="3. Business Size", header=None, names=["Business_size", "Exports", "Imports"], skiprows=9, comment = "Total", skipfooter=14) 
-
-# +
-# df3
-# -
-
-df3.shape
-
-values = ["Business size  (no. of employees)", "Business count by business size", "Employee count for businesses by business size"]
-df3 = df3[df3.Business_size.isin(values) == False]
-df3=df3.dropna(how="all")
-df3 = df3[(df3.Exports != "Exports") & (df3.Imports != "Imports")]
-df3 = df3[(df3.Business_size != "Business size (no. of employees)") & (df3.Exports != 2020) & (df3.Imports != 2020)]
-
-df3.shape
-
-# +
-# df3
-# -
-
-df3["measure_map"] = df3["Business_size"]
-
-# +
-# df3
-# -
-
-for i, row in df3.iloc[:6].iterrows():
-    for column in ["measure_map"]:
-        df3.at[i,column] = "£ millions"
-
-# +
-# df3
-# -
-
-for i, row in df3.iloc[6:18].iterrows():
-    for column in ["measure_map"]:
-        df3.at[i,column] = "number"
-
-# +
-# df3
-# -
-
-df3.shape
-
-df3 = pd.melt(df3, id_vars = ["Business_size", "measure_map"], value_vars = ["Exports", "Imports"], var_name = "flow", value_name = "value")
-
-# +
-# df3
-# -
-
-df3.shape
+df['Country'] = df['Country'].apply(pathify)
 
 
+df['Zone'] = df['Zone'].apply(pathify)
+
+df['Business Size'] = df['Business Size'].apply(pathify)
+
+df['Age'] = df['Age'].apply(pathify)
+
+df['Industry Group'] = df['Industry Group'].apply(pathify)
+
+df["Employee Count"] = df["Employee Count"].apply(lambda x: str(x).split(".")[0])
+df["Business Count"] = df["Business Count"].apply(lambda x:str(x).split(".")[0])
+
+df['Marker'] = df['Marker'].replace('Suppressed', 'suppressed', regex=True)
+
+
+def left(s,amount):
+    return s[:amount]
+def right(s,amount):
+    return s[-amount:]
+def date_time(date):
+    if len(date) == 5:
+        return 'year/' + left(date, 4)
+df['Year'] = df['Year'].astype(str).replace('\.', '', regex=True)
+df['Year'] = df['Year'].apply(date_time)
+
+df['Country'] = df['Country'].map({
+    'belgium': 'BE', 'czech-republic': 'CZ', 'denmark': 'DK', 'france': 'FR',
+    'germany': 'DE', 'republic-of-ireland': 'IE', 'italy': 'IT', 'netherlands': 'NL',
+    'poland': 'PL', 'spain': 'ES', 'sweden': 'SE', 'algeria': 'DZ', 
+    'australia': 'AU', 'bangladesh': 'BD', 'brazil': 'BR', 'canada': 'CA', 
+    'china': 'CN', 'hong-kong': 'HK', 'india': 'IN', 'israel': 'IL', 
+    'japan': 'JP', 'malaysia': 'MY', 'mexico': 'MX', 'nigeria': 'NG', 
+    'norway': 'NO', 'qatar': 'QA', 'russia': 'RU', 'saudi-arabia': 'SA',
+    'singapore': 'SG', 'south-africa': 'ZA', 'south-korea': 'KP', 'sri-lanka': 'LK',
+    'switzerland': 'CH', 'taiwan': 'TW', 'thailand': 'TH', 'turkey': 'TR', 
+    'uae': 'AE', 'united-states': 'US', 'vietnam': 'VN', 'eu': 'B5', 
+    'non-eu': 'D5', 'world': 'W1'
+})
+
+df['Zone'] = df['Zone'].map({ 
+    'eu': 'B5', 'non-eu': 'D5', 'world': 'W1'
+})
+
+df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age": "Age of Business"})
+
+df['Flow'].loc[(df['Flow'] == 'import')] = 'imports'
+df['Flow'].loc[(df['Flow'] == 'export')] = 'exports'
+df['Value'].loc[(df['Value'] == '')] = 0
+df['Value'] = df['Value'].astype(int)
+
+desc = """
+HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). 
+These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. 
+This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK. 
+These experimental releases are also accessible at www.uktradeinfo.com
+Disclaimer
+The methodology used to compute these statistics is still under development. 
+All data should be considered experimental official statistics: https://webarchive.nationalarchives.gov.uk/20160106005532/http://www.ons.gov.uk/ons/guide-method/method-quality/general-methodology/guide-to-experimental-statistics/index.html
+Notes
+1. This data contains estimates of Trade in Goods data matched with registered businesses from the Inter-Departmental Business Register (IDBR) for exporters and importers in 2019 for a selection of countries (see Metadata tab for more information).
+2. This data is now presented on a 'Special Trade' basis, in line with the change in the compilation method  for the UK Overseas Trade Statistics (OTS) - See section 3.1.1 in OTS Methodology: https://www.gov.uk/government/statistics/overseas-trade-statistics-methodologies
+3. More details on the methodology used to produce these estimates and issues to be aware of when using the data can be found on the metadata tab.
+4. These estimates do not cover all businesses. They do not cover:
+    • Unregistered businesses (those not registered for VAT or Economic Operator Registration and Identification (EORI)).
+5. Due to these experimental statistics being subject to active disclosure controls the data has been suppressed according to GSS guidance on disclosure control. 
+    Suppressed cells are shown as 'Suppressed'.
+7. The industry groups are based on UK Standard Industrial Classification 2007 (UK SIC 2007)
+8. Information about trade in goods statistics can be found here - https://www.uktradeinfo.com/trade-data/help-with-using-our-data/help
+    Information about trade the Inter-Departmental Business Register (IDBR) can be found here - https://www.ons.gov.uk/aboutus/whatwedo/paidservices/interdepartmentalbusinessregisteridbr		the ONS IDBR webpages
+    Information about UK Standard Industrial Classification 2007 (UK SIC 2007) can be found here - https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007
+Copyright
+© Crown copyright 2020
+This publication is licensed under the terms of the Open Government Licence v3.0
+except where otherwise stated. To view this licence, visit:
+nationalarchives.gov.uk/doc/open-government-licence/version/3
+You may re-use this document/publication free of charge in any format for research,
+private study or internal circulation within an organisation. You must re-use it accurately
+and not use it in a misleading context. The material must be acknowledged as Crown
+copyright and you must give the title of the source document / publication.
+Where we have identified any third party copyright information you will need to obtain
+permission from the copyright holders concerned.
+Any enquiries regarding this publication should be sent to:
+uktradeinfo@hmrc.gov.uk
+Contact Details
+HM Revenue and Customs
+Alexander House
+21 Victoria Avenue
+Southend on Sea
+SS99 1AA
+Email: uktradeinfo@hmrc.gov.uk
+Telephone: +44 (0) 3000 594250
+"""
+
+scraper.dataset.description = ""
+scraper.dataset.comment = """
+HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). 
+These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. 
+This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK. 
+These experimental releases are also accessible at www.uktradeinfo.com
+"""
+
+with pd.option_context('float_format', '{:f}'.format):
+    print(df)
+
+cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
+cubes.output_all()
