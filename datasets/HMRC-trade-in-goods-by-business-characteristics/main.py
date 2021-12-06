@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       jupytext_version: 1.13.0
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -42,32 +42,25 @@ list(tabs)
 
 tidied_sheets = []
 
-# +
 for name, tab in tabs.items():
     if 'Notes and Contents' in name or '5. Metadata' in name :
         continue
-    # print(tab.name)
-
-    cell = tab.excel_ref("A1")
     
+    cell = tab.excel_ref("A1")
     flow = tab.filter(contains_string("Flow")).fill(DOWN).is_not_blank().is_not_whitespace()
-
-    year = tab.filter(contains_string("Year")).fill(DOWN).is_not_blank().is_not_whitespace()
-
+    
+   # year = tab.filter(contains_string("Year")).fill(DOWN).is_not_blank().is_not_whitespace()
+   # savepreviewhtml(year, fname = tab.name+ "Preview.html")
+    
+    year = cell.shift(1,3).expand(DOWN).is_not_blank().is_not_whitespace()
+    
     country = tab.filter(contains_string("Country")).fill(DOWN).is_not_blank().is_not_whitespace()
-
     zone = tab.filter(contains_string("Zone")).fill(DOWN).is_not_blank().is_not_whitespace()
-
     business_size = tab.filter(contains_string("Business Size")).fill(DOWN).is_not_blank().is_not_whitespace()
-
     age = tab.filter(contains_string("Age (Years)")).fill(DOWN).is_not_blank().is_not_whitespace()
-
     industry_group = tab.filter(contains_string("Industry Group")).fill(DOWN).is_not_blank().is_not_whitespace()
-
     business_count = tab.filter(contains_string("Business Count")).fill(DOWN).is_not_blank().is_not_whitespace()
-
     employee_count = tab.filter(contains_string("Employee Count")).fill(DOWN).is_not_blank().is_not_whitespace()
-
     observations = cell.shift(7,2).fill(DOWN).is_not_blank().is_not_whitespace()
     
     dimensions = [
@@ -82,12 +75,8 @@ for name, tab in tabs.items():
         HDim(employee_count, 'Employee Count', DIRECTLY, RIGHT),
     ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    # savepreviewhtml(tidy_sheet, fname = tab.name+ "Preview.html")
+    #savepreviewhtml(tidy_sheet, fname = tab.name+ "Preview.html")
     tidied_sheets.append(tidy_sheet.topandas())
-
-
-
-# -
 
 df = pd.concat(tidied_sheets, sort = True)
 
@@ -96,7 +85,11 @@ df.rename(columns= {'OBS':'Value', 'Period':'Year', 'Flow':'Flow Directions', 'D
 df['Flow Directions'] = df['Flow Directions'].apply(pathify)
 
 
+# +
 df['Country'] = df['Country'].apply(pathify)
+
+#df['Country'].unique()
+# -
 
 
 df['Zone'] = df['Zone'].apply(pathify)
@@ -125,7 +118,7 @@ df['Year'] = df['Year'].apply(date_time)
 
 df['Country'] = df['Country'].map({
     'belgium': 'BE', 'czech-republic': 'CZ', 'denmark': 'DK', 'france': 'FR',
-    'germany': 'DE', 'republic-of-ireland': 'IE', 'italy': 'IT', 'netherlands': 'NL',
+    'germany': 'DE', 'republic-of-ireland': 'IE', 'ireland' : 'IE', 'italy': 'IT', 'netherlands': 'NL',
     'poland': 'PL', 'spain': 'ES', 'sweden': 'SE', 'algeria': 'DZ', 
     'australia': 'AU', 'bangladesh': 'BD', 'brazil': 'BR', 'canada': 'CA', 
     'china': 'CN', 'hong-kong': 'HK', 'india': 'IN', 'israel': 'IL', 
@@ -198,9 +191,6 @@ These experimental statistics releases gives some expanded analyses showing over
 This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK. 
 These experimental releases are also accessible at www.uktradeinfo.com
 """
-
-with pd.option_context('float_format', '{:f}'.format):
-    print(df)
 
 cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
 cubes.output_all()

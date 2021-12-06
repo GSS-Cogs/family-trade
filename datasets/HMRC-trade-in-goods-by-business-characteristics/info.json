@@ -4,7 +4,6 @@
     "publisher": "HM Revenue & Customs",
     "description": "Supporting tables for the UK trade in goods by business characteristics",
     "landingPage": "https://www.gov.uk/government/collections/uk-trade-in-goods-statistics-by-business-characteristics",
-    "landingPage2": "https://www.gov.uk/government/statistical-data-sets/uk-trade-in-goods-by-business-characteristics-2018-data-tables",
     "datasetNotes": [
         "Data can be found by clicking on the most recent link to named 'UK trade in goods by business characteristics xxxx - data tables' where xxxx is the year.   Only 'IDBR detailed overseas trade in goods statistics by country data tables' is required as this contains all the information contained in the 'IDBR detailed overseas trade in goods statistics tables'"
     ],
@@ -21,7 +20,7 @@
         "columns": {
             "Year": {
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+year}"
+                "value": "http://reference.data.gov.uk/id/{year}"
             },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
