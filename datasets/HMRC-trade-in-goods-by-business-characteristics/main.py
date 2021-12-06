@@ -20,13 +20,13 @@ import requests
 import pandas as pd
 import numpy as np
 
-scraper = Scraper(seed = '/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json')
+scraper = Scraper(seed = 'info.json')
 scraper
 # -
 
-info = json.load(open('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json'))
+info = json.load(open('info.json'))
 
-cubes = Cubes('/workspaces/family-trade/datasets/HMRC-trade-in-goods-by-business-characteristics/info.json')
+cubes = Cubes('info.json')
 
 scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
 scraper.dataset.family = info["families"]
