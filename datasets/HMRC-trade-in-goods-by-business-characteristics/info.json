@@ -64,6 +64,9 @@
         },
         "main_issue": 8
     },
+        "load": {
+        "publish": true
+    },
     "sizingNotes": "Non-simple file structure but with multiple table within tabs, multiple dimensions, subdimensions and footnotes.",
     "notes": "Supporting information is available in the PDF on the lading page .  This is an annual publication and a decision is yet to be taken on how this should be recorded i.e. each publication overwritten by the newest, each publication published seperately, a timeseries created etc."
 }
