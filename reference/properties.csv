@@ -83,3 +83,5 @@ trade,Commodity,dimension/commodity,qb:DimensionProperty,http://gss-data.org.uk/
 trade,Business Activity,dimension/business-activity,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/business-activity,
 trade,Trade Group,dimension/trade-group,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/trade-group,
 trade,Turnover,dimension/turnover-size-bands,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands,
+trade,Business Count,attribute/business-count,qb:Attribute,,,http://gss-data.org.uk/def/trade/concept-scheme/business-count,Business Count,
+trade,Employee Count,attribute/employee-count,qb:Attribute,,,http://gss-data.org.uk/def/trade/concept-scheme/employee-count,Employee Count,
