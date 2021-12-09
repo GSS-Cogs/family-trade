@@ -5,23 +5,53 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.4.2
+#       jupytext_version: 1.13.0
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
 # ---
 
 # UK trade in goods, CPA (08)
 
+# +
 import json
-import pandas as pd
+import pandas as pandas
 from gssutils import *
 
-cubes = Cubes('info.json')
-
 pd.options.mode.chained_assignment = None 
-pd.set_option('display.float_format', lambda x: '%.0f' % x)
+pd.set_option('display.float_format', lambda x: '%.0f' % x) 
+
+cubes = Cubes('info.json')
+info = json.load(open('info.json'))
+landingPage = info['landingPage']
+metadata = Scraper(seed="info.json")
+distribution = metadata.distribution(latest = True)
+title = distribution.title
+distribution
+# -
+
+tabs = distribution.as_databaker()
+tidied_sheets = []
+
+for tab in tabs:
+    if tab.name not in ['Index', 'Contact']:
+
+        flow_direction = tab.name.split(' ', 1)[1]
+        period = tab.excel_ref("C4").expand(RIGHT).is_not_blank()
+        product = tab.excel_ref("A5").expand(DOWN).is_not_blank() 
+        cdid = tab.excel_ref('B5').expand(DOWN)
+        observations = tab.excel_ref('C5').expand(DOWN).expand(RIGHT).is_not_blank() 
+
+        dimensions = [
+            HDim(period, 'Period', DIRECTLY, ABOVE),
+            HDim(product, 'Product', DIRECTLY, LEFT),
+            HDim(cdid, 'CDID', DIRECTLY, LEFT),
+            HDimConst('Flow Direction', flow_direction)
+            ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        table = tidy_sheet.topandas()
+        tidied_sheets.append(table)
 
 
 # +
@@ -34,51 +64,8 @@ def right(s, amount):
 
 # -
 
-scraper = Scraper(seed="info.json")
-scraper
-
-distribution = scraper.distribution(latest=True)
-distribution
-
-tabs = distribution.as_databaker()
-
-# +
-trace = TransformTrace()
-title = distribution.title
-
-scraper.dataset.title = 'UK trade in goods, CPA(08)'
-columns = ['Period', 'Flow Direction', 'Product', 'CDID', 'Unit', 'Value']
-for tab in tabs:
-    if tab.name not in ['Index', 'Contact']:
-        print(tab.name)
-        trace.start(title, tab, columns, distribution.downloadURL)
-        
-        flow_direction = tab.name.split(' ', 1)[1]
-        
-        period = tab.excel_ref("C4").expand(RIGHT).is_not_blank()
-        product = tab.excel_ref("A5").expand(DOWN).is_not_blank() 
-        cdid = tab.excel_ref('B5').expand(DOWN)
-        observations = tab.excel_ref('C5').expand(DOWN).expand(RIGHT).is_not_blank() 
-
-        dimensions = [
-            HDim(period, 'Period', DIRECTLY, ABOVE),
-            HDim(product, 'Product', DIRECTLY, LEFT),
-            HDim(cdid, 'CDID', DIRECTLY, LEFT),
-            HDimConst('Flow Direction', flow_direction)
-            ]
-
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)   
-        trace.store("combined_dataframe", tidy_sheet.topandas())
-# -
-
-df = trace.combine_and_trace(title, "combined_dataframe")
-
-# +
-# df = df[df['CDID'] != ' '] 
-# -
-
+df = pd.concat(tidied_sheets, sort=True)
 df = df[df['OBS'] != 0]
-
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 df['Value'] = df['Value'].astype(int)
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
@@ -91,11 +78,11 @@ df['Flow Direction'] = df['Flow Direction'].apply(pathify)
 df
 
 # +
-scraper.dataset.title = "UK Trade in goods by Classification of Product by Activity, time series dataset, Quarterly and Annual"
+metadata.dataset.title = "UK Trade in goods by Classification of Product by Activity, time series dataset, Quarterly and Annual"
 
-scraper.dataset.comment = "Publication tables, UK trade in goods, CPA (08). Additional information for UK trade in goods by classification of product by activity. Current price, seasonally adjusted."
+metadata.dataset.comment = "Publication tables, UK trade in goods, CPA (08). Additional information for UK trade in goods by classification of product by activity. Current price, seasonally adjusted."
 
-scraper.dataset.description = """
+metadata.dataset.description = """
 Publication tables, UK trade in goods, CPA (08). 
 Additional information for UK trade in goods by classification of product by activity. 
 Current price, seasonally adjusted.
@@ -103,9 +90,7 @@ This publication includes a residual line which is used to account for any resid
 """
 # -
 
-cubes.add_cube(scraper, df, title)
+cubes.add_cube(metadata, df, metadata.dataset.title)
 cubes.output_all()
-
-trace.render("spec_v1.html")
 
 
