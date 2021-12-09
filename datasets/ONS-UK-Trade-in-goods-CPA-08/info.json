@@ -40,7 +40,7 @@
             }
         }
     },
-   "load": {
+    "load": {
         "publish": true
     },
     "sizingNotes": "",
