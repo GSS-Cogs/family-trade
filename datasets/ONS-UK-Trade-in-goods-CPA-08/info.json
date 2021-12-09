@@ -40,6 +40,9 @@
             }
         }
     },
+    "load": {
+        "publish": true
+    },
     "sizingNotes": "",
     "notes": ""
 }

@@ -92,5 +92,3 @@ This publication includes a residual line which is used to account for any resid
 
 cubes.add_cube(metadata, df, metadata.dataset.title)
 cubes.output_all()
-
-
