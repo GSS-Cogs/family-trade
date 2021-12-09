@@ -1,0 +1,55 @@
+{
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
+    "title":"UK Trade in Goods Statistics by Business Characteristics",
+    "id": "HMRC",
+    "published":"24-11-2021",
+    "description": "Supporting tables for the UK trade in goods by business characteristics",
+    "landingPage": "https://www.gov.uk/government/statistical-data-sets/uk-trade-in-goods-by-business-characteristics-2020-data-tables",
+    "publisher":"HM Revenue & Customs",
+    "families":[
+        "Trade"
+    ],
+    "transform":{
+        "airtable": "recVDI0VC5iKZCd2r",
+        "columns":{
+            "Flow":{
+                "type":"dimension"
+            },
+            "Country":{
+                "type":"dimension"
+            },
+            "Zone":{
+                "type":"dimension"
+            },
+            "Number of Employees":{
+                "type":"dimension"
+            },
+            "Age of Business":{
+                "type":"dimension"
+            },
+            "Employee Count": {
+                "type":"attribute"
+            },
+            "Business Count": {
+                "type":"attribute"
+            },
+            "Year": {
+                "type":"dimension"
+            },
+            "Marker":{
+                "type":"attribute"
+            },
+            "Value":{
+                "type": "observations",
+                "measure":{
+                    "label":"something_measure"
+                },
+                "unit":{
+                    "label":"GBP"
+                }
+            } 
+        }  
+    },
+    "sizingNotes": "Non-simple file structure but with multiple table within tabs, multiple dimensions, subdimensions and footnotes.",
+    "notes": "Supporting information is available in the PDF on the lading page .  This is an annual publication and a decision is yet to be taken on how this should be recorded i.e. each publication overwritten by the newest, each publication published seperately, a timeseries created etc."
+}
