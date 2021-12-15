@@ -6,9 +6,9 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.1
+#       jupytext_version: 1.13.0
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
 # ---
@@ -344,9 +344,9 @@ for tab in tabs:
          GNI own resource and adjustments: Includes VAT-based third EU own resource and GNI-based fourth own resource.
         """
         
-        flow = tab.excel_ref('B').expand(DOWN).by_index([7,24,43]) - tab.excel_ref('B51').expand(DOWN)
-        sector = tab.excel_ref('B').expand(DOWN).by_index([8,14,25,34,44,45]) - tab.excel_ref('B51').expand(DOWN)
-        income = tab.excel_ref('B10').expand(DOWN).is_not_blank() - tab.excel_ref('B51').expand(DOWN)
+        flow = tab.excel_ref('B').expand(DOWN).by_index([7,24,44]) - tab.excel_ref('B52').expand(DOWN)
+        sector = tab.excel_ref('B').expand(DOWN).by_index([8,14,25,35,45,46]) - tab.excel_ref('B52').expand(DOWN)
+        income = tab.excel_ref('B10').expand(DOWN).is_not_blank() - tab.excel_ref('B52').expand(DOWN)
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
         year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
         quarter = tab.excel_ref('D5').expand(RIGHT)
@@ -475,7 +475,7 @@ for tab in tabs:
         df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
         
         df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
-        df['Marker'].replace(' -', 'unknown', inplace=True)
+        #df['Marker'].replace(' -', 'unknown', inplace=True)
         
         df['Flow Directions'] = df['Flow Directions'].str.strip().apply(pathify)
         df['Account Type'] = df['Account Type'].str.strip().apply(pathify)
@@ -484,7 +484,7 @@ for tab in tabs:
         df['Members'] = df['Members'].str.strip().apply(pathify)
         
         #tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Marker']]
+        tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value']]
 
         cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
 
@@ -663,11 +663,3 @@ for cube in cubes.cubes:
 cubes.output_all()
 
 trace.render("spec_v1.html")
-
-# +
-#scraper.dataset.description
-# -
-
-
-
-
