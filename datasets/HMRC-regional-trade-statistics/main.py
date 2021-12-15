@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       jupytext_version: 1.13.1
 #   kernelspec:
 #     display_name: Python 3.8.8 64-bit
 #     metadata:
@@ -130,6 +130,22 @@ df.drop('variable', axis=1, inplace=True)
 df['unit_type'] = df['unit_type'].astype('category')
 df['measure_type'] = df['measure_type'].astype('category')
 
+
+# +
+scraper.dataset.comment = """
+
+International trade in goods data at summary product and country level, by UK regions and devolved administrations.
+"""
+
+
+scraper.dataset.description = scraper.dataset.comment + """
+
+HM Revenue & Customs (HMRC) collects the UK's international trade in goods data, which are published as two National Statistics series - the 'Overseas Trade in Goods Statistics (OTS)' and the 'Regional Trade in Goods Statistics (RTS)'. The RTS are published quarterly showing trade at summary product and country level, split by UK regions and devolved administrations.
+
+RTS data is categorised by partner country and Standard International Trade Classification, Rev.4 (SITC) at division level (2-digit). In this release RTS data is analysed mainly at partner country and SITC section (1-digit) level, with references to specific SITC divisions where appropriate. The collection and publication methodology for the RTS is available on www.gov.uk.
+
+"""
+# -
 
 cubes.add_cube(scraper, df, info['id'],
                override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}/{fetch_chunk}" if info['load']['accretiveUpload'] else None)
