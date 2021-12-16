@@ -80,6 +80,9 @@
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             }
+        },
+        "load": {
+        "publish": true
         }
     },
     "sizingNotes": "",
