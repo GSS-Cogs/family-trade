@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.1
+#       jupytext_version: 1.13.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -33,11 +33,65 @@ sheets = scraper.distribution(latest=True).as_databaker()
 scraper.distribution(latest=True)
 
 # +
+# sheet_names_to_process = [sheet.name for sheet in sheets[10:-1]]
+# print(sheet_names_to_process)
+#     # print(sheet.name)
+
+# +
+# for sheet in sheets:
+#     print(sheet.name)
+
+# +
+# 2019 Goods and Services - 3
+# 2019 Goods - 3
+# 2019 Services - 3
+# 2018 Goods and Services - 5
+# 2018 Goods - 5
+# 2018 Services  - 5
+# 2017 Goods and Services - 5
+# 2017 Goods  - 5
+# 2017 Services  - 4
+
+# +
+# # sheet_names_to_process = {'2019 Goods and Services','2019 Goods','2019 Services','2018 Goods and Services','2018 Goods', '2018 Services', '2017 Goods and Services','2017 Goods','2017 Services'}
+# if len(set(sheet_names_to_process)-{sheet.name for sheet in sheets}) != 0:
+#     raise ValueError(f'Aborting. A tab namedset {set(sheet_names_to_process)-{sheet.name for sheet in sheets}} required but not found')
+# -
+
+all_tidy = []
+
+# +
 import re
 tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
-tidy = pd.DataFrame()
 
-for sheet in sheets[1:-1]:
+for sheet in sheets[2:5]:
+    try:
+        name_match = tab_name_re.match(sheet.name)
+        assert name_match, "sheet name doesn't match regex"
+        for breakdown in ['Detailed employment', 'Employment', 'Turnover']:
+            year = HDimConst('Year', name_match.group(1))
+            trade = HDimConst('Trade', name_match.group(2).strip())
+            breakdown_on_down = sheet.filter(starts_with(breakdown)).fill(DOWN).expand(RIGHT).is_not_blank()
+            breakdown_obs = breakdown_on_down - \
+                breakdown_on_down.filter(contains_string('Total')).expand(DOWN).expand(RIGHT) - \
+                sheet.filter(starts_with(breakdown)).fill(DOWN)
+            classifiers = sheet.filter(starts_with(breakdown)).fill(DOWN).is_not_blank()
+            classifiers = classifiers - classifiers.filter(contains_string('Total')).expand(DOWN)
+            classifiers = HDim(classifiers, breakdown, DIRECTLY, LEFT, cellvalueoverride={'2 to9': '2 to 9'})
+            import_export = sheet.filter(starts_with(breakdown)).fill(RIGHT).is_not_blank()
+            import_export = HDim(import_export, 'Import/Export', DIRECTLY, ABOVE, cellvalueoverride={'Businesses 4':'Businesses', 'Exporter and/or Importer 7':'Exporter and/or Importer'})
+            measure = sheet.filter(starts_with(breakdown)).shift(UP).fill(RIGHT).is_not_blank()
+            measure = HDim(measure, 'Measure Type', CLOSEST, LEFT, cellvalueoverride={'Number of 5':'Count', '% 6':'Proportion of all Business'})
+            tidy_sheet = ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure])
+            all_tidy.append(tidy_sheet.topandas()) 
+    except Exception as err:
+        raise Exception(f'Issue encountered on tab {sheet.name}') from err
+
+# +
+import re
+tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
+
+for sheet in sheets[5:10]:
     try:
         name_match = tab_name_re.match(sheet.name)
         assert name_match, "sheet name doesn't match regex"
@@ -55,10 +109,48 @@ for sheet in sheets[1:-1]:
             import_export = HDim(import_export, 'Import/Export', DIRECTLY, ABOVE, cellvalueoverride={'Businesses 4':'Businesses', 'Exporter and/or Importer 7':'Exporter and/or Importer'})
             measure = sheet.filter(starts_with(breakdown)).shift(UP).fill(RIGHT).is_not_blank()
             measure = HDim(measure, 'Measure Type', CLOSEST, LEFT, cellvalueoverride={'Number of 5':'Count', '% 6':'Proportion of all Business'})
-            tidy = tidy.append(ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure]).topandas(), sort=True)
+            tidy_sheet = ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure])
+            all_tidy.append(tidy_sheet.topandas())
     except Exception as err:
-        raise Exception(f'Issue encountered on tab {tab.name}') from err
+        raise Exception(f'Issue encountered on tab {sheet.name}') from err
+
+# +
+import re
+tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
+
+for sheet in sheets[10:-1]:
+    try:
+        name_match = tab_name_re.match(sheet.name)
+        assert name_match, "sheet name doesn't match regex"
+        for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover']:
+            year = HDimConst('Year', name_match.group(1))
+            trade = HDimConst('Trade', name_match.group(2).strip())
+            breakdown_on_down = sheet.filter(starts_with(breakdown)).fill(DOWN).expand(RIGHT).is_not_blank()
+            breakdown_obs = breakdown_on_down - \
+                breakdown_on_down.filter(contains_string('Total')).expand(DOWN).expand(RIGHT) - \
+                sheet.filter(starts_with(breakdown)).fill(DOWN)
+            classifiers = sheet.filter(starts_with(breakdown)).fill(DOWN).is_not_blank()
+            classifiers = classifiers - classifiers.filter(contains_string('Total')).expand(DOWN)
+            classifiers = HDim(classifiers, breakdown, DIRECTLY, LEFT, cellvalueoverride={'2 to9': '2 to 9'})
+            import_export = sheet.filter(starts_with(breakdown)).fill(RIGHT).is_not_blank()
+            import_export = HDim(import_export, 'Import/Export', DIRECTLY, ABOVE, cellvalueoverride={'Businesses 4':'Businesses', 'Exporter and/or Importer 7':'Exporter and/or Importer'})
+            measure = sheet.filter(starts_with(breakdown)).shift(UP).fill(RIGHT).is_not_blank()
+            measure = HDim(measure, 'Measure Type', CLOSEST, LEFT, cellvalueoverride={'Number of 5':'Count', '% 6':'Proportion of all Business'})
+            tidy_sheet = ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure])
+            all_tidy.append(tidy_sheet.topandas())
+    except Exception as err:
+        raise Exception(f'Issue encountered on tab {sheet.name}') from err
 # -
+
+print(all_tidy)
+
+tidy = pd.concat(all_tidy,sort = True)
+
+# +
+# tidy = pd.concat(tidied_sheets, sort = True)
+# -
+
+tidy
 
 # Check for duplicate rows
 
