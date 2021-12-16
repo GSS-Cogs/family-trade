@@ -82,7 +82,7 @@
             }
         },
         "load": {
-        "publish": true
+            "publish": true
         }
     },
     "sizingNotes": "",
