@@ -5,12 +5,10 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.1
+#       jupytext_version: 1.13.0
 #   kernelspec:
-#     display_name: Python 3.8.8 64-bit
-#     metadata:
-#       interpreter:
-#         hash: 4cd7ab41f5fca4b9b44701077e38c5ffd31fe66a6cab21e0214b68d958d0e462
+#     display_name: Python 3 (ipykernel)
+#     language: python
 #     name: python3
 # ---
 
@@ -136,7 +134,6 @@ scraper.dataset.comment = """
 
 International trade in goods data at summary product and country level, by UK regions and devolved administrations.
 """
-
 
 scraper.dataset.description = scraper.dataset.comment + """
 
