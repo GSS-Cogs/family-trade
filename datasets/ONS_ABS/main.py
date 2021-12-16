@@ -20,6 +20,7 @@
 from gssutils import *
 import json
 import copy 
+import re
 
 cubes = Cubes("info.json")
 with open("info.json") as f:
@@ -34,8 +35,6 @@ scraper.distribution(latest=True)
 
 all_tidy = []
 
-# +
-import re
 tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
 
 for sheet in sheets[2:5]:
@@ -61,10 +60,6 @@ for sheet in sheets[2:5]:
     except Exception as err:
         raise Exception(f'Issue encountered on tab {sheet.name}') from err
 
-# +
-import re
-tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
-
 for sheet in sheets[5:10]:
     try:
         name_match = tab_name_re.match(sheet.name)
@@ -88,10 +83,6 @@ for sheet in sheets[5:10]:
     except Exception as err:
         raise Exception(f'Issue encountered on tab {sheet.name}') from err
 
-# +
-import re
-tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
-
 for sheet in sheets[10:-1]:
     try:
         name_match = tab_name_re.match(sheet.name)
@@ -114,7 +105,6 @@ for sheet in sheets[10:-1]:
             all_tidy.append(tidy_sheet.topandas())
     except Exception as err:
         raise Exception(f'Issue encountered on tab {sheet.name}') from err
-# -
 
 tidy = pd.concat(all_tidy,sort = True)
 
