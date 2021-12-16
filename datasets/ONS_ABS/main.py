@@ -32,32 +32,6 @@ scraper
 sheets = scraper.distribution(latest=True).as_databaker()
 scraper.distribution(latest=True)
 
-# +
-# sheet_names_to_process = [sheet.name for sheet in sheets[10:-1]]
-# print(sheet_names_to_process)
-#     # print(sheet.name)
-
-# +
-# for sheet in sheets:
-#     print(sheet.name)
-
-# +
-# 2019 Goods and Services - 3
-# 2019 Goods - 3
-# 2019 Services - 3
-# 2018 Goods and Services - 5
-# 2018 Goods - 5
-# 2018 Services  - 5
-# 2017 Goods and Services - 5
-# 2017 Goods  - 5
-# 2017 Services  - 4
-
-# +
-# # sheet_names_to_process = {'2019 Goods and Services','2019 Goods','2019 Services','2018 Goods and Services','2018 Goods', '2018 Services', '2017 Goods and Services','2017 Goods','2017 Services'}
-# if len(set(sheet_names_to_process)-{sheet.name for sheet in sheets}) != 0:
-#     raise ValueError(f'Aborting. A tab namedset {set(sheet_names_to_process)-{sheet.name for sheet in sheets}} required but not found')
-# -
-
 all_tidy = []
 
 # +
@@ -142,15 +116,7 @@ for sheet in sheets[10:-1]:
         raise Exception(f'Issue encountered on tab {sheet.name}') from err
 # -
 
-print(all_tidy)
-
 tidy = pd.concat(all_tidy,sort = True)
-
-# +
-# tidy = pd.concat(tidied_sheets, sort = True)
-# -
-
-tidy
 
 # Check for duplicate rows
 
@@ -176,7 +142,7 @@ tidy["Measure Type"].unique()
 
 print(tidy.columns.values)
 print(tidy['Employment'].unique())
-display(tidy['Detailed employment'].unique())
+print(tidy['Detailed employment'].unique())
 tidy['employees'] = tidy.apply(lambda x: x['Employment'] if pd.notnull(x['Employment']) else x['Detailed employment'], axis=1)
 tidy = tidy.drop(columns=['Employment', 'Detailed employment'])
 
