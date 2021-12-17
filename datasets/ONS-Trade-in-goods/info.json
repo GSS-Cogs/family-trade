@@ -58,6 +58,9 @@
             }
         }
     },
+    "load": {
+        "publish": true
+    },
     "sizingNotes": "Large table simple format",
     "notes": "The data set is located in a Zip folder"
 }
