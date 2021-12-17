@@ -40,7 +40,7 @@
             },
             "SITC Code": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sitc",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{+sitc_code}"
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc/{+sitc_code}"
             },
             "value": {
                 "datatype": "double"
