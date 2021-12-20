@@ -1,6 +1,6 @@
 {
     "id": "hmrc-regional-trade-statistics",
-    "title": "REGIONAL TRADE STATISTICS",
+    "title": "Regional Trade Statistics",
     "publisher": "HM Revenue & Customs",
     "description": "",
     "landingPage": "https://www.uktradeinfo.com/trade-data/regional/",
@@ -39,8 +39,8 @@
                 "codelist": "http://gss-data.org.uk/def/trade/hmrc/concept-scheme/country"
             },
             "SITC Code": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{+sitc_code}"
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sitc",
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc/{+sitc_code}"
             },
             "value": {
                 "datatype": "double"
@@ -88,7 +88,7 @@
         }
     },
     "load": {
-        "accretiveUpload": true,
+        "accretiveUpload": false,
         "publish": true
     },
     "sizingNotes": "",

@@ -2,28 +2,23 @@
     "@context": "http://www.w3.org/ns/csvw",
     "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region",
     "url": "uk-region.csv",
-    "rdfs:label": "UK Region",
-    "dc:title": "UK Region",
+    "rdfs:label": "Uk Region",
+    "dc:title": "Uk Region",
     "tableSchema": {
         "columns": [
+            {
+                "titles": "Label",
+                "name": "label",
+                "datatype": "string",
+                "required": true,
+                "propertyUrl": "rdfs:label"
+            },
             {
                 "titles": "URI",
                 "name": "uri",
                 "datatype": "string",
                 "required": true,
                 "suppressOutput": true
-            },
-            {
-                "titles": "Notation",
-                "name": "notation",
-                "datatype": "string",
-                "propertyUrl": "skos:notation"
-            },
-            {
-                "titles": "Label",
-                "name": "label",
-                "datatype": "string",
-                "propertyUrl": "rdfs:label"
             },
             {
                 "titles": "Parent URI",
@@ -38,6 +33,17 @@
                 "datatype": "integer",
                 "required": false,
                 "propertyUrl": "http://www.w3.org/ns/ui#sortPriority"
+            },
+            {
+                "titles": "Description",
+                "name": "description",
+                "datatype": "string",
+                "required": false,
+                "propertyUrl": "rdfs:comment"
+            },
+            {
+                "titles": "Local Notation",
+                "name": "local_notation"
             },
             {
                 "virtual": true,
@@ -75,14 +81,14 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T10:55:03.990852"
+                "@value": "2021-12-15T15:38:45.767918"
             },
-            "rdfs:label": "UK Region",
-            "dc:title": "UK Region",
-            "rdfs:comment": "Dataset representing the 'UK Region' code list.",
+            "rdfs:label": "Uk Region",
+            "dc:title": "Uk Region",
+            "rdfs:comment": "Dataset representing the 'Uk Region' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-04T11:26:43.718525"
+                "@value": "2021-12-15T15:38:45.767918"
             }
         },
         {
@@ -100,15 +106,15 @@
             "http://publishmydata.com/pmdcat#metadataGraph": {
                 "@id": "http://gss-data.org.uk/data/gss_data/trade/hmrc-regional-trade-statistics#scheme/uk-region"
             },
-            "dc:title": "UK Region Catalog Record",
-            "rdfs:label": "UK Region Catalog Record",
+            "dc:title": "Uk Region Catalog Record",
+            "rdfs:label": "Uk Region Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-03-04T11:26:43.718525"
+                "@value": "2021-12-15T15:38:45.767918"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-03-04T11:26:43.718525"
+                "@value": "2021-12-15T15:38:45.767918"
             }
         }
     ]
