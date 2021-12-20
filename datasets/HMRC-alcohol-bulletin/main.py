@@ -116,23 +116,33 @@ for tab_name in tabs_names_to_process:
 
 df = pd.concat(tidied_sheets, sort = True)
 
+df
+
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
 
 # +
+# Measure Type - Tax would be a more appropriate value rather than production.
+
 #check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
 df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
 #check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
 df.loc[(df['Bulletin Type']).str.contains('receipts'),'Measure Type']='duty-receipts'
+
+
+# +
 #check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
-df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='production'
+df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='Tax'
 
 #Setting the Unit based on Measure Type Column 
 df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
                                     ("gbp-million" if x == "duty-receipts" else 
-                                     ("hectolitres-of-alcohol" if x == "production" else "U")))
+                                     ("hectolitres-of-alcohol" if x == "Tax" else "U")))
 # -
 
+df
+
+df['Measure Type'].unique()
 
 f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
 df.loc[f1,'Alcohol Type'] = 'all'
@@ -146,8 +156,10 @@ df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
-df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
 
+
+# Duty receipts – hectolitres this should be pound/millions
+df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','pound/millions', regex=False)
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(hectolitres)","")
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(£ million)","")
@@ -239,11 +251,24 @@ df['Marker'] = df['Marker'].apply(pathify)
 df['Marker'].unique()
 
 
-# +
 # The multimeasures for this dataset is yet to be defined by DMs.
 # The way to proceed with cubes class for multimeasures is yet to be finalized.
-# -
+df
 
+
+df['Alcohol Type'].unique()
+
+df['Measure Type'].unique()
+
+df['Unit'].unique()
+
+# +
+# Alcohol Type - Spirits are measured in hectolitres of alcohol
+
+# df.loc[df['Alcohol Type'] == 'spirits', 'Unit'].unique()
+# df.query('Alcohol Type == spirits')['Unit']
+df['Unit'][df['Alcohol Type'] == 'spirits']
+# -
 
 # This is a multi-unit and multi-measure dataset so splitting up for now as not sure what is going on with anything anymore! :-(
 # Splitting data into 3 and changing scraper values based on output data
