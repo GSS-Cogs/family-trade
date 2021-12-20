@@ -1,4 +1,4 @@
-# %%
+# -*- coding: utf-8 -*-
 # import glob
 from gssutils import *
 from gssutils.metadata import THEME
@@ -13,14 +13,13 @@ import copy
 import datetime
 
 
-# %%
 import json
 import pandas as pd
 from gssutils import *
 from pandas import ExcelWriter
 
 
-# %%
+# +
 trace = TransformTrace()
 cubes = Cubes("info.json")
 
@@ -29,9 +28,10 @@ scraper = Scraper(seed="info.json")
 distribution = scraper.distribution(latest = True, mediaType=ODS)
 datasetTitle = distribution.title
 columns = ["Period", "Marker", "Bulletin Type", "Alcohol Type", "Measure Type", "Unit"]
+distribution
+# -
 
 
-# %%
 xls = pd.ExcelFile(distribution.downloadURL, engine="odf")
 with ExcelWriter("data.xls") as writer:
     for sheet in xls.sheet_names[0:6]:
@@ -40,7 +40,9 @@ with ExcelWriter("data.xls") as writer:
 tabs = loadxlstabs("data.xls")
 
 
-# %%
+tidied_sheets = []
+
+# +
 # Old tab names
 #tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
 # New tab names
@@ -54,52 +56,50 @@ for tab_name in tabs_names_to_process:
 
     # Select the tab in question
     tab = [x for x in tabs if x.name == tab_name][0]
+
+    unwanted = tab.filter(contains_string("End of worksheet"))
     
-    trace.start(datasetTitle, tab, columns, distribution.downloadURL)
+
     
     if tab_name == tabs_names_to_process[0]:
-        anchor = tab.excel_ref('A6')#.filter(contains_string("Table 1a:")).assert_one()
+        anchor = tab.excel_ref('A7')#.filter(contains_string("Table 1a:")).assert_one()
     elif tab_name == tabs_names_to_process[1]:
-        anchor = tab.excel_ref('A7')
+        anchor = tab.excel_ref('A8')
     elif tab_name == tabs_names_to_process[2]:
-        anchor = tab.excel_ref('A5')
+        anchor = tab.excel_ref('A8')
     elif tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
 
-    period = anchor.expand(DOWN).is_not_blank().is_not_whitespace()
-    trace.Period("Taken from column A")
+    period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-unwanted
+
 
     bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
-    trace.Bulletin_Type("Defined from column B obvious header and across")
+
+    observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
+    
     #savepreviewhtml(bulletin_type)
     alcohol_type = tab.name
-    trace.Alcohol_Type("Name of tabs in XLS sheet")
+
 
     if tab_name == tabs_names_to_process[0]:
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
-        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
 
     elif tab_name == tabs_names_to_process[1]:
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
-        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)-tab.excel_ref("K6").expand(DOWN)
     
     elif tab_name == tabs_names_to_process[2]:
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
-        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)
 
     elif tab_name == tabs_names_to_process[3]:
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
-        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)
     
     else:
         raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
 
-    trace.Measure_Type("Measure is different for different values")
-    trace.Unit("Unit is different for different values")
     
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
@@ -109,17 +109,17 @@ for tab_name in tabs_names_to_process:
         HDimConst("Unit", unit)
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    
-    trace.with_preview(tidy_sheet)
-    trace.store("combined_dataframe", tidy_sheet.topandas())
+    # savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
+    tidied_sheets.append(tidy_sheet.topandas())
+# -
 
 
-# %%
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+df = pd.concat(tidied_sheets, sort = True)
+
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
 
-# %%
+# +
 #check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
 df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
 #check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
@@ -131,33 +131,29 @@ df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='product
 df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
                                     ("gbp-million" if x == "duty-receipts" else 
                                      ("hectolitres-of-alcohol" if x == "production" else "U")))
+# -
 
 
-# %%
 f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
 df.loc[f1,'Alcohol Type'] = 'all'
 
 
-# %%
 df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else
                                     ("made-wine" if x == tabs_names_to_process[1] else
                                      ("spirits" if x == tabs_names_to_process[2] else
                                       ("beer-and-cider" if x == tabs_names_to_process[3] else x))))
 
 
-# %%
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
 df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
 
 
-# %%
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(hectolitres)","")
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(£ million)","")
 df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
 
 
-# %%
 #N/As change to 0 and put not-applicable in Marker column
 df['Marker'].replace('N/A', 'not-applicable', inplace=True)
 f1=(df['Marker'] =='not-applicable')
@@ -165,7 +161,6 @@ df.loc[f1,'Value'] = 0
 df['Period'] = df['Period'].str.strip()
 
 
-# %%
 # Marker column - requirements satisfied
 df['Marker'][df['Period'].str.contains("provisional")] = 'provisional'
 df['Period'] = df['Period'].str.replace('provisional','')
@@ -181,7 +176,6 @@ df = df.replace(np.nan, '', regex=True)
 df.loc[df['Marker'].str.contains('estimate'), 'Marker'] = 'estimate'
 
 
-# %%
 import calendar
 import datetime
 tables = ['Table 1a','Table 1b','Table 1c','Table 2a','Table 2b','Table 2c','Table 3a','Table 3b','Table 3c','Table 4a','Table 4b', 'Table 4c']
@@ -191,7 +185,7 @@ df['Period'] = df['Period'].str.replace('[ [ ]]', '')
 df['Period'] = df['Period'].str.strip()
 
 
-# %%
+# +
 now = datetime.datetime.now()
 yrnow = now.year
 yrlast = yrnow - 1
@@ -209,7 +203,8 @@ for i in range(1,12):
 df['Period'][df['Period'].str.contains(str(yrlast) + ' to ' + str(yrnow))] = 'government-year/' + str(yrlast) + '-' + str(yrnow)
 
 
-# %%
+# -
+
 #Period column 
 def left(s, amount):
     return s[:amount]
@@ -234,26 +229,22 @@ def date_time (date):
 df['Period'] =  df["Period"].apply(date_time)
 
 
-# %%
 #quick fix for odd values 
 df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000', 'December 2020' : 'month/2020-12'}})
 
 
-# %%
 df['Marker'] = df['Marker'].str.replace('[','')
 df['Marker'] = df['Marker'].str.replace(']','')
 df['Marker'] = df['Marker'].apply(pathify)
 df['Marker'].unique()
 
 
-# %%
-trace.render()
-
+# +
 # The multimeasures for this dataset is yet to be defined by DMs.
 # The way to proceed with cubes class for multimeasures is yet to be finalized.
+# -
 
 
-# %%
 # This is a multi-unit and multi-measure dataset so splitting up for now as not sure what is going on with anything anymore! :-(
 # Splitting data into 3 and changing scraper values based on output data
 cubes = Cubes("info.json")
