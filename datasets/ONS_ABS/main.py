@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.1
+#       jupytext_version: 1.13.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -20,6 +20,7 @@
 from gssutils import *
 import json
 import copy 
+import re
 
 cubes = Cubes("info.json")
 with open("info.json") as f:
@@ -32,12 +33,34 @@ scraper
 sheets = scraper.distribution(latest=True).as_databaker()
 scraper.distribution(latest=True)
 
-# +
-import re
-tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
-tidy = pd.DataFrame()
+all_tidy = []
 
-for sheet in sheets[1:-1]:
+tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
+
+for sheet in sheets[2:5]:
+    try:
+        name_match = tab_name_re.match(sheet.name)
+        assert name_match, "sheet name doesn't match regex"
+        for breakdown in ['Detailed employment', 'Employment', 'Turnover']:
+            year = HDimConst('Year', name_match.group(1))
+            trade = HDimConst('Trade', name_match.group(2).strip())
+            breakdown_on_down = sheet.filter(starts_with(breakdown)).fill(DOWN).expand(RIGHT).is_not_blank()
+            breakdown_obs = breakdown_on_down - \
+                breakdown_on_down.filter(contains_string('Total')).expand(DOWN).expand(RIGHT) - \
+                sheet.filter(starts_with(breakdown)).fill(DOWN)
+            classifiers = sheet.filter(starts_with(breakdown)).fill(DOWN).is_not_blank()
+            classifiers = classifiers - classifiers.filter(contains_string('Total')).expand(DOWN)
+            classifiers = HDim(classifiers, breakdown, DIRECTLY, LEFT, cellvalueoverride={'2 to9': '2 to 9'})
+            import_export = sheet.filter(starts_with(breakdown)).fill(RIGHT).is_not_blank()
+            import_export = HDim(import_export, 'Import/Export', DIRECTLY, ABOVE, cellvalueoverride={'Businesses 4':'Businesses', 'Exporter and/or Importer 7':'Exporter and/or Importer'})
+            measure = sheet.filter(starts_with(breakdown)).shift(UP).fill(RIGHT).is_not_blank()
+            measure = HDim(measure, 'Measure Type', CLOSEST, LEFT, cellvalueoverride={'Number of 5':'Count', '% 6':'Proportion of all Business'})
+            tidy_sheet = ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure])
+            all_tidy.append(tidy_sheet.topandas()) 
+    except Exception as err:
+        raise Exception(f'Issue encountered on tab {sheet.name}') from err
+
+for sheet in sheets[5:10]:
     try:
         name_match = tab_name_re.match(sheet.name)
         assert name_match, "sheet name doesn't match regex"
@@ -55,10 +78,35 @@ for sheet in sheets[1:-1]:
             import_export = HDim(import_export, 'Import/Export', DIRECTLY, ABOVE, cellvalueoverride={'Businesses 4':'Businesses', 'Exporter and/or Importer 7':'Exporter and/or Importer'})
             measure = sheet.filter(starts_with(breakdown)).shift(UP).fill(RIGHT).is_not_blank()
             measure = HDim(measure, 'Measure Type', CLOSEST, LEFT, cellvalueoverride={'Number of 5':'Count', '% 6':'Proportion of all Business'})
-            tidy = tidy.append(ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure]).topandas(), sort=True)
+            tidy_sheet = ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure])
+            all_tidy.append(tidy_sheet.topandas())
     except Exception as err:
-        raise Exception(f'Issue encountered on tab {tab.name}') from err
-# -
+        raise Exception(f'Issue encountered on tab {sheet.name}') from err
+
+for sheet in sheets[10:-1]:
+    try:
+        name_match = tab_name_re.match(sheet.name)
+        assert name_match, "sheet name doesn't match regex"
+        for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover']:
+            year = HDimConst('Year', name_match.group(1))
+            trade = HDimConst('Trade', name_match.group(2).strip())
+            breakdown_on_down = sheet.filter(starts_with(breakdown)).fill(DOWN).expand(RIGHT).is_not_blank()
+            breakdown_obs = breakdown_on_down - \
+                breakdown_on_down.filter(contains_string('Total')).expand(DOWN).expand(RIGHT) - \
+                sheet.filter(starts_with(breakdown)).fill(DOWN)
+            classifiers = sheet.filter(starts_with(breakdown)).fill(DOWN).is_not_blank()
+            classifiers = classifiers - classifiers.filter(contains_string('Total')).expand(DOWN)
+            classifiers = HDim(classifiers, breakdown, DIRECTLY, LEFT, cellvalueoverride={'2 to9': '2 to 9'})
+            import_export = sheet.filter(starts_with(breakdown)).fill(RIGHT).is_not_blank()
+            import_export = HDim(import_export, 'Import/Export', DIRECTLY, ABOVE, cellvalueoverride={'Businesses 4':'Businesses', 'Exporter and/or Importer 7':'Exporter and/or Importer'})
+            measure = sheet.filter(starts_with(breakdown)).shift(UP).fill(RIGHT).is_not_blank()
+            measure = HDim(measure, 'Measure Type', CLOSEST, LEFT, cellvalueoverride={'Number of 5':'Count', '% 6':'Proportion of all Business'})
+            tidy_sheet = ConversionSegment(breakdown_obs, [classifiers, import_export, year, trade, measure])
+            all_tidy.append(tidy_sheet.topandas())
+    except Exception as err:
+        raise Exception(f'Issue encountered on tab {sheet.name}') from err
+
+tidy = pd.concat(all_tidy,sort = True)
 
 # Check for duplicate rows
 
@@ -84,7 +132,7 @@ tidy["Measure Type"].unique()
 
 print(tidy.columns.values)
 print(tidy['Employment'].unique())
-display(tidy['Detailed employment'].unique())
+print(tidy['Detailed employment'].unique())
 tidy['employees'] = tidy.apply(lambda x: x['Employment'] if pd.notnull(x['Employment']) else x['Detailed employment'], axis=1)
 tidy = tidy.drop(columns=['Employment', 'Detailed employment'])
 
