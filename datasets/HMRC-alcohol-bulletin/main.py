@@ -58,9 +58,7 @@ for tab_name in tabs_names_to_process:
     tab = [x for x in tabs if x.name == tab_name][0]
 
     unwanted = tab.filter(contains_string("End of worksheet"))
-    
-
-    
+     
     if tab_name == tabs_names_to_process[0]:
         anchor = tab.excel_ref('A7')#.filter(contains_string("Table 1a:")).assert_one()
     elif tab_name == tabs_names_to_process[1]:
@@ -128,16 +126,24 @@ df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
 #check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
 df.loc[(df['Bulletin Type']).str.contains('receipts'),'Measure Type']='duty-receipts'
-
-
-# +
 #check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
-df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='Tax'
+df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='production'
 
 #Setting the Unit based on Measure Type Column 
 df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
                                     ("gbp-million" if x == "duty-receipts" else 
-                                     ("hectolitres-of-alcohol" if x == "Tax" else "U")))
+                                     ("hectolitres-of-alcohol" if x == "production" else "U")))
+
+
+
+# +
+# #check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
+# df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='Tax'
+
+# #Setting the Unit based on Measure Type Column 
+# df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
+#                                     ("gbp-million" if x == "duty-receipts" else 
+#                                      ("hectolitres-of-alcohol" if x == "Tax" else "U")))
 # -
 
 df
@@ -156,10 +162,13 @@ df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
+df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
 
 
-# Duty receipts – hectolitres this should be pound/millions
-df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','pound/millions', regex=False)
+# +
+# # Duty receipts – hectolitres this should be pound/millions
+# df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','pound/millions', regex=False)
+# -
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(hectolitres)","")
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(£ million)","")
@@ -275,6 +284,7 @@ df['Unit'][df['Alcohol Type'] == 'spirits']
 cubes = Cubes("info.json")
 tchange = ['Clearances','Duty Receipts','Production']
 uchange = ['hectolitres', 'gbp-million', 'hectolitres']
+# mchange = ['Clearances','Duty Receipts','Tax']
 scraper.dataset.family = 'trade'
 for x in range(3): 
     dat = df[df['Measure Type'] == pathify(tchange[x])]
