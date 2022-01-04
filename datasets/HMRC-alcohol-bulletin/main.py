@@ -68,47 +68,62 @@ for tab_name in tabs_names_to_process:
     elif tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
 
-    period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-unwanted
+    # period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-unwanted
 
 
     bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
 
-    observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
+    
+    year_month = tab.filter(contains_string("clearances data"))
+    # savepreviewhtml(year_month, fname=tab.name+ "Preview.html")
+
+    combined_unwanted = unwanted|year_month
+
+    period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
+    savepreviewhtml(period, fname=tab.name+ "Preview.html")
+
+    # observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
     
     #savepreviewhtml(bulletin_type)
-    alcohol_type = tab.name
+    # alcohol_type = tab.name
 
 
     if tab_name == tabs_names_to_process[0]:
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
+        year_month = tab.filter(contains_string("clearances data"))
+        # in_between = year_month.fill(RIGHT).is_not_blank().is_not_whitespace()
+        # savepreviewhtml(in_between, fname=tab.name+ "Preview.html")
 
-    elif tab_name == tabs_names_to_process[1]:
-        measure_type = "clearances duty-receipts"
-        unit = "hectolitres gbp-million"
+    # elif tab_name == tabs_names_to_process[1]:
+    #     measure_type = "clearances duty-receipts"
+    #     unit = "hectolitres gbp-million"
     
-    elif tab_name == tabs_names_to_process[2]:
-        measure_type = "production clearances duty-receipts"
-        unit = "hectolitres-of-alcohol gbp-million"
+    # elif tab_name == tabs_names_to_process[2]:
+    #     measure_type = "production clearances duty-receipts"
+    #     unit = "hectolitres-of-alcohol gbp-million"
 
-    elif tab_name == tabs_names_to_process[3]:
-        measure_type = "production clearances duty-receipts"
-        unit = "hectolitres-of-alcohol gbp-million"
+    # elif tab_name == tabs_names_to_process[3]:
+    #     measure_type = "production clearances duty-receipts"
+    #     unit = "hectolitres-of-alcohol gbp-million"
     
-    else:
-        raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
+    # else:
+    #     raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
+
+    observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
+    # savepreviewhtml(observations, fname=tab.name+ "Preview.html")
 
     
-    dimensions = [
-        HDim(period, 'Period', DIRECTLY, LEFT),
-        HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
-        HDimConst("Alcohol Type", tab.name),
-        HDimConst("Measure Type", measure_type),
-        HDimConst("Unit", unit)
-        ]
-    tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    # savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
-    tidied_sheets.append(tidy_sheet.topandas())
+    # dimensions = [
+    #     HDim(period, 'Period', DIRECTLY, LEFT),
+    #     HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
+    #     HDimConst("Alcohol Type", tab.name),
+    #     HDimConst("Measure Type", measure_type),
+    #     HDimConst("Unit", unit)
+    #     ]
+    # tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    # # savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
+    # tidied_sheets.append(tidy_sheet.topandas())
 # -
 
 
