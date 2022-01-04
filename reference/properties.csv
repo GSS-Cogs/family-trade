@@ -85,4 +85,4 @@ trade,Trade Group,dimension/trade-group,qb:DimensionProperty,,,skos:Concept,http
 trade,Turnover,dimension/turnover-size-bands,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/turnover-size-bands,
 trade,Business Count,attribute/business-count,qb:Attribute,,,http://gss-data.org.uk/def/trade/concept-scheme/business-count,Business Count,
 trade,Employee Count,attribute/employee-count,qb:Attribute,,,http://gss-data.org.uk/def/trade/concept-scheme/employee-count,Employee Count,
-trade,SITC Code,dimension/sitc-code,qb:DimensionProperty,http://gss-data.org.uk/def/trade/property/dimension/product,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/sitc-code,Standard International Trade Classification
+trade,SITC Code,dimension/sitc-code,qb:DimensionProperty,http://gss-data.org.uk/def/trade/property/dimension/product,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/sitc4,Standard International Trade Classification
