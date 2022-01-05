@@ -21,7 +21,7 @@
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
-            "Business size": {
+            "Business Size": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-band",
                 "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{business_size}"
             },
