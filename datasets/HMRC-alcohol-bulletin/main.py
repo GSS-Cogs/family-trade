@@ -73,14 +73,6 @@ for tab_name in tabs_names_to_process:
 
     bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
 
-    
-    year_month = tab.filter(contains_string("clearances data"))
-    # savepreviewhtml(year_month, fname=tab.name+ "Preview.html")
-
-    combined_unwanted = unwanted|year_month
-
-    period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-    savepreviewhtml(period, fname=tab.name+ "Preview.html")
 
     # observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
     
@@ -92,8 +84,16 @@ for tab_name in tabs_names_to_process:
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
         year_month = tab.filter(contains_string("clearances data"))
-        # in_between = year_month.fill(RIGHT).is_not_blank().is_not_whitespace()
-        # savepreviewhtml(in_between, fname=tab.name+ "Preview.html")
+        combined_unwanted = unwanted|year_month
+        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
+        # unwanted_2 = bulletin_type.fill(DOWN)
+        # unwanted_3 = year_month|unwanted|unwanted_2
+        # period = bulletin_type.fill(DOWN).shift(LEFT)-unwanted_3
+        # in_between_1 = tab.filter(contains_string("clearances data by calendar year")).expand(RIGHT).is_not_blank().is_not_whitespace()
+        # in_between_2 = tab.filter(contains_string("wine clearances data by month")).expand(RIGHT).is_not_blank().is_not_whitespace()
+        # combined_in_between = in_between_1|in_between_2
+        # savepreviewhtml(in_between_1, fname=tab.name+ "Preview.html")
+        # savepreviewhtml(period, fname=tab.name+ "Preview.html")
 
     # elif tab_name == tabs_names_to_process[1]:
     #     measure_type = "clearances duty-receipts"
@@ -110,20 +110,22 @@ for tab_name in tabs_names_to_process:
     # else:
     #     raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
 
-    observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
+    # observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-combined_in_between
+    observations = period.waffle(bulletin_type)
     # savepreviewhtml(observations, fname=tab.name+ "Preview.html")
 
     
-    # dimensions = [
-    #     HDim(period, 'Period', DIRECTLY, LEFT),
-    #     HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
-    #     HDimConst("Alcohol Type", tab.name),
-    #     HDimConst("Measure Type", measure_type),
-    #     HDimConst("Unit", unit)
-    #     ]
-    # tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    # # savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
-    # tidied_sheets.append(tidy_sheet.topandas())
+    dimensions = [
+        HDim(period, 'Period', DIRECTLY, LEFT),
+        HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
+        HDim(year_month, "Break Down", CLOSEST, ABOVE),
+        HDimConst("Alcohol Type", tab.name),
+        HDimConst("Measure Type", measure_type),
+        HDimConst("Unit", unit)
+        ]
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
+    tidied_sheets.append(tidy_sheet.topandas())
 # -
 
 
