@@ -85,7 +85,7 @@ for tab_name in tabs_names_to_process:
         # savepreviewhtml(year_month, fname=tab.name+ "Preview.html")
         combined_unwanted = unwanted|year_month
         period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        observations = period.waffle(bulletin_type)
+        # observations = period.waffle(bulletin_type)
 
     if tab_name == tabs_names_to_process[1]:
         anchor = tab.excel_ref('A8')
@@ -95,7 +95,7 @@ for tab_name in tabs_names_to_process:
         year_month = tab.filter(contains_string("clearances statistics by"))
         combined_unwanted = unwanted|year_month
         period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        observations = period.waffle(bulletin_type)
+        # observations = period.waffle(bulletin_type)
 
     elif tab_name == tabs_names_to_process[2]:
         anchor = tab.excel_ref('A8')
@@ -105,133 +105,23 @@ for tab_name in tabs_names_to_process:
         year_month = tab.filter(contains_string("clearances statistics by"))
         combined_unwanted = unwanted|year_month
         period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        observations = period.waffle(bulletin_type)
+        # observations = period.waffle(bulletin_type)
 
+# Beer production and cider production is not included in here
     elif tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
-        unwanted_bulletin = anchor.fill(RIGHT).is_not_blank().is_not_whitespace().filter(lambda x: type(x.value) != ("Total alcohol duty receipts(£ million)") not in x.value)
-        cider_lower = bulletin_type.filter(contains_string("Total cider")).is_not_blank().is_not_whitespace()
-        cider_upper = bulletin_type.filter(contains_string("Total Cider")).is_not_blank().is_not_whitespace()
+        unwanted_bulletin = anchor.fill(RIGHT).is_not_blank().is_not_whitespace().filter(lambda x: type(x.value) != "Total alcohol duty receipts(£ million)" not in x.value) 
+        cider_lower = unwanted_bulletin.filter(contains_string("Total cider")).is_not_blank().is_not_whitespace()
+        cider_upper = unwanted_bulletin.filter(contains_string("Total Cider")).is_not_blank().is_not_whitespace()
         total_cider = cider_lower|cider_upper
         bulletin_type = unwanted_bulletin-total_cider
-        # savepreviewhtml(bulletin_type, fname=tab.name+ "Preview.html")
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
         year_month = tab.filter(contains_string("production statistics by"))
         combined_unwanted = unwanted|year_month
         period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        observations = period.waffle(bulletin_type)
-
-    dimensions = [
-        HDim(period, 'Period', DIRECTLY, LEFT),
-        HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
-        HDim(year_month, "Break Down", CLOSEST, ABOVE),
-        HDimConst("Alcohol Type", tab.name),
-        HDimConst("Measure Type", measure_type),
-        HDimConst("Unit", unit)
-        ]
-    tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
-    tidied_sheets.append(tidy_sheet.topandas())
-
-# +
-# Old tab names
-#tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
-# New tab names
-# tabs_names_to_process = ["Wine_Duty_(wine)_tables", "Wine_Duty_(made_wine)_tables", "Spirits_Duty_tables", "Beer_Duty_and_Cider_Duty_tables" ]
-
-# for tab_name in tabs_names_to_process:
-
-#     # Raise an exception if one of our required tabs is missing
-#     if tab_name not in [x.name for x in tabs]:
-#         raise ValueError(f'Aborting. A tab named {tab_name} required but not found')
-
-    # Select the tab in question
-tab = [x for x in tabs if x.name == tab_name][0]
-
-unwanted = tab.filter(contains_string("End of worksheet"))
-alcohol_type = tab.name
-     
-if tab_name == tabs_names_to_process[0]:
-    anchor = tab.excel_ref('A7')#.filter(contains_string("Table 1a:")).assert_one()
-    bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
-    measure_type = "clearances duty-receipts"
-    unit = "hectolitres gbp-million"
-    year_month = tab.filter(contains_string("clearances data"))
-    combined_unwanted = unwanted|year_month
-    period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
+        # observations = period.waffle(bulletin_type)
     observations = period.waffle(bulletin_type)
-        # savepreviewhtml(observations, fname=tab.name+ "Preview.html")
-    # elif tab_name == tabs_names_to_process[1]:
-    #     anchor = tab.excel_ref('A8')
-    #     bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
-    #     measure_type = "clearances duty-receipts"
-    #     unit = "hectolitres gbp-million"
-    #     year_month = tab.filter(contains_string("clearances statistics by"))
-    #     combined_unwanted = unwanted|year_month
-    #     period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-    # elif tab_name == tabs_names_to_process[2]:
-    #     anchor = tab.excel_ref('A8')
-    #     bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
-    #     measure_type = "production clearances duty-receipts"
-    #     unit = "hectolitres-of-alcohol gbp-million"
-    #     year_month = tab.filter(contains_string("clearances statistics by"))
-    #     combined_unwanted = unwanted|year_month
-    #     period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-
-    # elif tab_name == tabs_names_to_process[3]:
-    #     anchor = tab.excel_ref('A6')
-    #     unwanted_bulletin = anchor.fill(RIGHT).is_not_blank().is_not_whitespace().filter(lambda x: type(x.value) != ("Total alcohol duty receipts(£ million)") not in x.value)
-    #     cider_lower = bulletin_type.filter(contains_string("Total cider")).is_not_blank().is_not_whitespace()
-    #     cider_upper = bulletin_type.filter(contains_string("Total Cider")).is_not_blank().is_not_whitespace()
-    #     total_cider = cider_lower|cider_upper
-    #     bulletin_type = unwanted_bulletin-total_cider
-    #     savepreviewhtml(bulletin_type, fname=tab.name+ "Preview.html")
-    #     measure_type = "production clearances duty-receipts"
-    #     unit = "hectolitres-of-alcohol gbp-million"
-    #     year_month = tab.filter(contains_string("production statistics by"))
-    #     combined_unwanted = unwanted|year_month
-    #     period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-
-
-    # bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
-    
-    # alcohol_type = tab.name
-
-
-    # if tab_name == tabs_names_to_process[0]:
-    #     measure_type = "clearances duty-receipts"
-    #     unit = "hectolitres gbp-million"
-    #     year_month = tab.filter(contains_string("clearances data"))
-    #     combined_unwanted = unwanted|year_month
-    #     period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-
-    # elif tab_name == tabs_names_to_process[1]:
-    #     measure_type = "clearances duty-receipts"
-    #     unit = "hectolitres gbp-million"
-    #     year_month = tab.filter(contains_string("clearances statistics by"))
-    #     combined_unwanted = unwanted|year_month
-    #     period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-    
-    # elif tab_name == tabs_names_to_process[2]:
-    #     measure_type = "production clearances duty-receipts"
-    #     unit = "hectolitres-of-alcohol gbp-million"
-    #     year_month = tab.filter(contains_string("clearances statistics by"))
-    #     combined_unwanted = unwanted|year_month
-    #     period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-
-    # elif tab_name == tabs_names_to_process[3]:
-    #     measure_type = "production clearances duty-receipts"
-    #     unit = "hectolitres-of-alcohol gbp-million"
-    #     year_month = tab.filter(contains_string("production statistics by"))
-    #     combined_unwanted = unwanted|year_month
-    #     period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-    
-    # else:
-    #     raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
-
-    # observations = period.waffle(bulletin_type)
-
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
         HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
@@ -244,8 +134,8 @@ if tab_name == tabs_names_to_process[0]:
     savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
     tidied_sheets.append(tidy_sheet.topandas())
 
-
 # +
+# Work in progress,  CIDER production.
 if tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
         unwanted_bulletin = anchor.fill(RIGHT).is_not_blank().is_not_whitespace().filter(lambda x: type(x.value) != ("Total alcohol duty receipts(£ million)") not in x.value)
