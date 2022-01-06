@@ -51,6 +51,9 @@
             }
         }
     },
+    "load": {
+        "publish": true
+    },
     "sizingNotes": "Multiple tabs with multiple small tables and simple structure but some footnotes",
     "notes": ""
 }
