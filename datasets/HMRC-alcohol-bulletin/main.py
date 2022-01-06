@@ -121,6 +121,7 @@ for tab_name in tabs_names_to_process:
         combined_unwanted = unwanted|year_month
         period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
         # observations = period.waffle(bulletin_type)
+
     observations = period.waffle(bulletin_type)
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
@@ -131,25 +132,22 @@ for tab_name in tabs_names_to_process:
         HDimConst("Unit", unit)
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
+    # savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
     tidied_sheets.append(tidy_sheet.topandas())
 
 # +
 # Work in progress,  CIDER production.
 if tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
-        unwanted_bulletin = anchor.fill(RIGHT).is_not_blank().is_not_whitespace().filter(lambda x: type(x.value) != ("Total alcohol duty receipts(£ million)") not in x.value)
-        cider_lower = bulletin_type.filter(contains_string("Total cider")).is_not_blank().is_not_whitespace()
-        cider_upper = bulletin_type.filter(contains_string("Total Cider")).is_not_blank().is_not_whitespace()
-        total_cider = cider_lower|cider_upper
-        bulletin_type = unwanted_bulletin-total_cider
+        cider_lower = anchor.shift(7, 0).is_not_blank().is_not_whitespace()
+        cider_upper = anchor.shift(9, 0).is_not_blank().is_not_whitespace()
+        bulletin_type = cider_lower|cider_upper
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
         year_month = tab.filter(contains_string("production statistics by"))
         combined_unwanted = unwanted|year_month
         period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
         observations = period.waffle(bulletin_type)
-        savepreviewhtml(observations, fname=tab.name+ "Preview.html")
 
 dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
@@ -159,9 +157,9 @@ dimensions = [
         HDimConst("Measure Type", measure_type),
         HDimConst("Unit", unit)
         ]
-    tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    # savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
-    tidied_sheets.append(tidy_sheet.topandas())
+tidy_sheet = ConversionSegment(tab, dimensions, observations)
+savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
+tidied_sheets.append(tidy_sheet.topandas())
 # -
 
 
@@ -169,6 +167,8 @@ dimensions = [
 df = pd.concat(tidied_sheets, sort = True)
 
 df
+
+df['Bulletin Type'].unique()
 
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
