@@ -89,7 +89,7 @@
         }
     },
     "load": {
-        "accretiveUpload": flase,
+        "accretiveUpload": false,
         "publish": true
     },
     "sizingNotes": "",
