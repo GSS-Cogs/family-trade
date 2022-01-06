@@ -107,7 +107,7 @@ for tab_name in tabs_names_to_process:
         period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
         # observations = period.waffle(bulletin_type)
 
-# Beer production and cider production is not included in here
+# Beer production
     elif tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
         unwanted_bulletin = anchor.fill(RIGHT).is_not_blank().is_not_whitespace().filter(lambda x: type(x.value) != "Total alcohol duty receipts(£ million)" not in x.value) 
@@ -136,29 +136,29 @@ for tab_name in tabs_names_to_process:
     tidied_sheets.append(tidy_sheet.topandas())
 
 # +
-# Work in progress,  CIDER production.
+# CIDER production.
 if tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
         cider_lower = anchor.shift(7, 0).is_not_blank().is_not_whitespace()
         cider_upper = anchor.shift(9, 0).is_not_blank().is_not_whitespace()
-        bulletin_type = cider_lower|cider_upper
+        cider_bulletin_type = cider_lower|cider_upper
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
         year_month = tab.filter(contains_string("production statistics by"))
         combined_unwanted = unwanted|year_month
         period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        observations = period.waffle(bulletin_type)
+        observations = period.waffle(cider_bulletin_type)
 
 dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
-        HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
+        HDim(cider_bulletin_type, 'Cider Bulletin', DIRECTLY, ABOVE),
         HDim(year_month, "Break Down", CLOSEST, ABOVE),
         HDimConst("Alcohol Type", tab.name),
         HDimConst("Measure Type", measure_type),
         HDimConst("Unit", unit)
         ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
-savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
+# savepreviewhtml(tidy_sheet, fname=tab.name+ "Preview.html")
 tidied_sheets.append(tidy_sheet.topandas())
 # -
 
@@ -169,6 +169,8 @@ df = pd.concat(tidied_sheets, sort = True)
 df
 
 df['Bulletin Type'].unique()
+
+df['Cider Bulletin'].unique()
 
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
