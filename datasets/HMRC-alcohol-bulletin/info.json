@@ -1,1 +1,47 @@
-{"id": "hmrc-alcohol-bulletin", "title": "alcohol-bulletin", "publisher": "HM Revenue & Customs", "description": "All bulletins provide a full historic series of data detailing amounts of goods cleared and amount of duty collected. This information is provided on a monthly, calendar and financial year basis.", "landingPage": "https://www.gov.uk/government/statistics/alcohol-bulletin", "datasetNotes": ["\"UK Alcohol Duty Statistics Tables\" Excel file, latest version on page"], "published": "2019-02-28", "families": ["Trade"], "extract": {"source": "XLS", "stage": "Done"}, "transform": {"airtable": "recys4OhEtE0gE14P", "columns": {"Period": {"parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", "value": "http://reference.data.gov.uk/id/{+period}"}, "Alcohol Type": {"dimension": "http://gss-data.org.uk/def/trade/property/dimension/alcohol-type", "value": "http://gss-data.org.uk/def/trade/concept/alcohol-type/{alcohol_type}"}, "Bulletin Type": {"dimension": "http://gss-data.org.uk/def/trade/property/dimension/bulletin-type", "value": "http://gss-data.org.uk/def/trade/concept/bulletin-type/{bulletin_type}"}, "Value": {"unit": "http://gss-data.org.uk/def/concept/measurement-units/hectolitres", "measure": "http://gss-data.org.uk/def/measure/production", "datatype": "double"}, "Marker": {"attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus", "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"}}, "main_issue": 67}, "sizingNotes": "", "notes": ""}
+{
+    "id": "hmrc-alcohol-bulletin", 
+    "title": "alcohol-bulletin", 
+    "publisher": "HM Revenue & Customs", 
+    "description": "All bulletins provide a full historic series of data detailing amounts of goods cleared and amount of duty collected. This information is provided on a monthly, calendar and financial year basis.", 
+    "landingPage": "https://www.gov.uk/government/statistics/alcohol-bulletin", 
+    "datasetNotes": [
+        "\"UK Alcohol Duty Statistics Tables\" Excel file, latest version on page"
+    ], 
+    "published": "2019-02-28", 
+    "families": [
+        "Trade"
+    ], 
+    "extract": {
+        "source": "XLS", 
+        "stage": "Done"
+    }, 
+    "transform": {
+        "airtable": "recys4OhEtE0gE14P", 
+        "columns": {
+            "Period": {
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", 
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            }, 
+            "Alcohol Type": {
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/alcohol-type", 
+                "value": "http://gss-data.org.uk/def/trade/concept/alcohol-type/{alcohol_type}"
+            }, 
+            "Bulletin Type": {
+                    "dimension": "http://gss-data.org.uk/def/trade/property/dimension/bulletin-type", 
+                    "value": "http://gss-data.org.uk/def/trade/concept/bulletin-type/{bulletin_type}"
+            },
+            "Value": {
+                    "unit": "http://gss-data.org.uk/def/concept/measurement-units/hectolitres", 
+                    "measure": "http://gss-data.org.uk/def/measure/production", 
+                    "datatype": "double"
+            }, 
+            "Marker": {
+                    "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus", 
+                    "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            }
+        }, 
+        "main_issue": 67
+    }, 
+        "sizingNotes": "", 
+        "notes": ""
+}
