@@ -164,31 +164,40 @@ tidied_sheets.append(tidy_sheet.topandas())
 
 
 
-df = pd.concat(tidied_sheets, sort = True)
+df = pd.concat(tidied_sheets, sort = True).fillna('')
 
-df
-
-df['Bulletin Type'].unique()
+# +
+# df
+# -
 
 df['Cider Bulletin'].unique()
 
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
 
+df["Measure Type"].unique()
+
 # +
 # Measure Type - Tax would be a more appropriate value rather than production.
 
-#check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
+#check column Bulletin Type & Cider Bulletin string contains the word clearances or Clearances and make Measure Type  = clearances
 df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
-#check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
+
+df.loc[(df['Cider Bulletin']).str.contains('clearances') | (df['Cider Bulletin']).str.contains('Clearances'),'Measure Type']='clearances'
+#check column Bulletin Type & Cider Bulletin string contains the word receipts and make Measure Type  = duty-receipts
 df.loc[(df['Bulletin Type']).str.contains('receipts'),'Measure Type']='duty-receipts'
-#check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
-df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='production'
+
+df.loc[(df['Cider Bulletin']).str.contains('receipts'),'Measure Type']='duty-receipts'
+
+#check column Bulletin Type & Cider Bulletin string contains the word receipts and make Measure Type  = duty-receipts
+df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='tax'
+
+df.loc[(df['Cider Bulletin']).str.contains('production'), 'Measure Type']='tax'
 
 #Setting the Unit based on Measure Type Column 
 df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
                                     ("gbp-million" if x == "duty-receipts" else 
-                                     ("hectolitres-of-alcohol" if x == "production" else "U")))
+                                     ("hectolitres-of-alcohol" if x == "tax" else "U")))
 
 
 
@@ -200,20 +209,26 @@ df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances"
 # df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
 #                                     ("gbp-million" if x == "duty-receipts" else 
 #                                      ("hectolitres-of-alcohol" if x == "Tax" else "U")))
+
+# +
+# df
 # -
 
-df
+df['Bulletin Type'].unique()
 
 df['Measure Type'].unique()
+# tchange = ['Clearances','Duty Receipts','Production']
 
 f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
 df.loc[f1,'Alcohol Type'] = 'all'
 
 
+df['Alcohol Type'].unique()
+
 df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else
                                     ("made-wine" if x == tabs_names_to_process[1] else
                                      ("spirits" if x == tabs_names_to_process[2] else
-                                      ("beer-and-cider" if x == tabs_names_to_process[3] else x))))
+                                      ("beer" if x == tabs_names_to_process[3] else x))))
 
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
@@ -321,9 +336,25 @@ df['Marker'].unique()
 df
 
 
+df
+
 df['Alcohol Type'].unique()
 
 df['Measure Type'].unique()
+
+df['Cider Bulletin'].unique()
+
+# +
+df.loc[(df['Cider Bulletin'] == 'Total cider clearances(thousand hectolitres)') & (df['Measure Type'] == 'clearances'), 'Alcohol Type'] = 'cider'
+df.loc[(df['Cider Bulletin'] == 'Total Cider Duty receipts(£ million)') & (df['Measure Type'] == 'duty-receipts'), 'Alcohol Type'] = 'cider'
+
+# df['Alcohol Type'] = df['Cider Bulletin'].map(lambda x: 'cider' if x == 'Total cider clearances(thousand hectolitres)' 
+#                                     else 'cider' if x == 'Total Cider Duty receipts(£ million)' else x)
+# -
+
+df['Alcohol Type'].unique()
+
+df['Alcohol Type'].unique()
 
 df['Unit'].unique()
 
@@ -332,13 +363,15 @@ df['Unit'].unique()
 
 # df.loc[df['Alcohol Type'] == 'spirits', 'Unit'].unique()
 # df.query('Alcohol Type == spirits')['Unit']
-df['Unit'][df['Alcohol Type'] == 'spirits']
+df['Unit'][df['Alcohol Type'] == 'spirits'].count()
 # -
+
+df['Measure Type'].unique()
 
 # This is a multi-unit and multi-measure dataset so splitting up for now as not sure what is going on with anything anymore! :-(
 # Splitting data into 3 and changing scraper values based on output data
 cubes = Cubes("info.json")
-tchange = ['Clearances','Duty Receipts','Production']
+tchange = ['Clearances','Duty Receipts','Tax']
 uchange = ['hectolitres', 'gbp-million', 'hectolitres']
 # mchange = ['Clearances','Duty Receipts','Tax']
 scraper.dataset.family = 'trade'
