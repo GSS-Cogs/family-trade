@@ -34,8 +34,8 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/country-of-ownership/{ownership}"
             },
             "Industry": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sic-2007",
-                "value": "http://business.data.gov.uk/companies/def/sic-2007/{industry}"
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-industry",
+                "value": "http://business.data.gov.uk/companies/def/ons-industry/{industry}"
             },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",

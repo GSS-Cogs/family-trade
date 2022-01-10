@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[66]:
+# In[7]:
 
 
 from gssutils import *
@@ -16,7 +16,7 @@ scraper = Scraper(seed = 'info.json')
 scraper
 
 
-# In[67]:
+# In[8]:
 
 
 tidied_sheets = []
@@ -246,7 +246,7 @@ for name, tab in tabs.items():
         continue
 
 
-# In[73]:
+# In[9]:
 
 
 #Post Processing
@@ -270,6 +270,9 @@ df["Ownership"] = df["Ownership"].map(lambda x: "uk" if x == "Domestic"
                                     else ("foreign" if x == "Foreign"
                                     else ("unknown" if x == "Unknown" else "any")))
 
+df["Flow"] = df["Flow"].map(lambda x : "exports" if x == 'Export'
+                            else ("imports" if x == "Import"
+                            else x))
 
 df['Value'] = pd.to_numeric(df['Value'], errors='coerce').astype('Int64')
 
@@ -281,7 +284,7 @@ df = df[['Period', 'Business Size', 'Country', 'Ownership', 'Industry', 'Flow', 
 df
 
 
-# In[74]:
+# In[10]:
 
 
 #additional scraper info needed
