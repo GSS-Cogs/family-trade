@@ -141,17 +141,17 @@ if tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
         cider_lower = anchor.shift(7, 0).is_not_blank().is_not_whitespace()
         cider_upper = anchor.shift(9, 0).is_not_blank().is_not_whitespace()
-        cider_bulletin_type = cider_lower|cider_upper
+        bulletin_type = cider_lower|cider_upper
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
         year_month = tab.filter(contains_string("production statistics by"))
         combined_unwanted = unwanted|year_month
         period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        observations = period.waffle(cider_bulletin_type)
+        observations = period.waffle(bulletin_type)
 
 dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
-        HDim(cider_bulletin_type, 'Cider Bulletin', DIRECTLY, ABOVE),
+        HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
         HDim(year_month, "Break Down", CLOSEST, ABOVE),
         HDimConst("Alcohol Type", tab.name),
         HDimConst("Measure Type", measure_type),
@@ -162,20 +162,10 @@ tidy_sheet = ConversionSegment(tab, dimensions, observations)
 tidied_sheets.append(tidy_sheet.topandas())
 # -
 
-
-
 df = pd.concat(tidied_sheets, sort = True).fillna('')
-
-# +
-# df
-# -
-
-df['Cider Bulletin'].unique()
 
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
-
-df["Measure Type"].unique()
 
 # +
 # Measure Type - Tax would be a more appropriate value rather than production.
@@ -183,41 +173,20 @@ df["Measure Type"].unique()
 #check column Bulletin Type & Cider Bulletin string contains the word clearances or Clearances and make Measure Type  = clearances
 df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
 
-df.loc[(df['Cider Bulletin']).str.contains('clearances') | (df['Cider Bulletin']).str.contains('Clearances'),'Measure Type']='clearances'
 #check column Bulletin Type & Cider Bulletin string contains the word receipts and make Measure Type  = duty-receipts
 df.loc[(df['Bulletin Type']).str.contains('receipts'),'Measure Type']='duty-receipts'
 
-df.loc[(df['Cider Bulletin']).str.contains('receipts'),'Measure Type']='duty-receipts'
 
 #check column Bulletin Type & Cider Bulletin string contains the word receipts and make Measure Type  = duty-receipts
 df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='tax'
-
-df.loc[(df['Cider Bulletin']).str.contains('production'), 'Measure Type']='tax'
 
 #Setting the Unit based on Measure Type Column 
 df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
                                     ("gbp-million" if x == "duty-receipts" else 
                                      ("hectolitres-of-alcohol" if x == "tax" else "U")))
 
-
-
-# +
-# #check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
-# df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='Tax'
-
-# #Setting the Unit based on Measure Type Column 
-# df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
-#                                     ("gbp-million" if x == "duty-receipts" else 
-#                                      ("hectolitres-of-alcohol" if x == "Tax" else "U")))
-
-# +
-# df
 # -
 
-df['Bulletin Type'].unique()
-
-df['Measure Type'].unique()
-# tchange = ['Clearances','Duty Receipts','Production']
 
 f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
 df.loc[f1,'Alcohol Type'] = 'all'
@@ -231,15 +200,16 @@ df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_
                                       ("beer" if x == tabs_names_to_process[3] else x))))
 
 
+df.loc[(df['Bulletin Type'] == 'Total cider clearances(thousand hectolitres)'), 'Alcohol Type'] = 'cider'
+df.loc[(df['Bulletin Type'] == 'Total Cider Duty receipts(£ million)'), 'Alcohol Type'] = 'cider'
+
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
 df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
 
 
-# +
-# # Duty receipts – hectolitres this should be pound/millions
-# df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','pound/millions', regex=False)
-# -
+# Duty receipts – hectolitres this should be pound/millions
+df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','pound/millions', regex=False)
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(hectolitres)","")
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(£ million)","")
@@ -336,25 +306,13 @@ df['Marker'].unique()
 df
 
 
-df
-
 df['Alcohol Type'].unique()
-
-df['Measure Type'].unique()
-
-df['Cider Bulletin'].unique()
 
 # +
-df.loc[(df['Cider Bulletin'] == 'Total cider clearances(thousand hectolitres)') & (df['Measure Type'] == 'clearances'), 'Alcohol Type'] = 'cider'
-df.loc[(df['Cider Bulletin'] == 'Total Cider Duty receipts(£ million)') & (df['Measure Type'] == 'duty-receipts'), 'Alcohol Type'] = 'cider'
-
-# df['Alcohol Type'] = df['Cider Bulletin'].map(lambda x: 'cider' if x == 'Total cider clearances(thousand hectolitres)' 
-#                                     else 'cider' if x == 'Total Cider Duty receipts(£ million)' else x)
+# df['Value'].round()
 # -
 
-df['Alcohol Type'].unique()
-
-df['Alcohol Type'].unique()
+df['Measure Type'].unique()
 
 df['Unit'].unique()
 
@@ -363,7 +321,8 @@ df['Unit'].unique()
 
 # df.loc[df['Alcohol Type'] == 'spirits', 'Unit'].unique()
 # df.query('Alcohol Type == spirits')['Unit']
-df['Unit'][df['Alcohol Type'] == 'spirits'].count()
+# df['Unit'][df['Alcohol Type'] == 'spirits'].unique()
+# df['Measure Type'][df['Unit'] == 'hectolitres'].unique()
 # -
 
 df['Measure Type'].unique()
@@ -380,7 +339,9 @@ for x in range(3):
     scraper.dataset.title = f"Alcohol Bulletin - {tchange[x]}"
     scraper.dataset.comment = f"Monthly {tchange[x]} statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs"
     if x == 2:
-        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, beer and cider {tchange[x]}'  
+        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, beer {tchange[x]}'
+    elif x == 3:
+        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, cider {tchange[x]}'
     else :
         scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic wine, made wine, spirits, beer and cider {tchange[x]}'
     print(str(x) + " - " + scraper.dataset.title + " - " + pathify(tchange[x]))
@@ -402,4 +363,8 @@ for x in range(3):
 #del df
 cubes.output_all()
 
-
+# +
+# Get rid of cider bulletin dimensions
+# Change Alcholol Type accordingly
+# For Duty-receipts, the units should be pound/millions
+# For Alcohol type spirits are measured in hectolitres of alcohol - Change hectolitres to hectolitres of alcohol
