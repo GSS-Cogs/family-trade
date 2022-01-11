@@ -32,12 +32,12 @@
             },
             "Value": {
                     "unit": "http://gss-data.org.uk/def/concept/measurement-units/hectolitres", 
-                    "measure": "http://gss-data.org.uk/def/measure/production", 
+                    "measure": "http://gss-data.org.uk/def/measure/tax", 
                     "datatype": "double"
             }, 
             "Marker": {
                     "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus", 
-                    "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                    "value": "http://gss-data.org.uk/def/concept/trade/markers/{marker}"
             }
         }, 
         "main_issue": 67
