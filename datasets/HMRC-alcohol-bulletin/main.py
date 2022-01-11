@@ -200,6 +200,7 @@ df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_
                                       ("beer" if x == tabs_names_to_process[3] else x))))
 
 
+# cider in Alcohol Type column (seperate from beer)
 df.loc[(df['Bulletin Type'] == 'Total cider clearances(thousand hectolitres)'), 'Alcohol Type'] = 'cider'
 df.loc[(df['Bulletin Type'] == 'Total Cider Duty receipts(£ million)'), 'Alcohol Type'] = 'cider'
 
@@ -207,9 +208,6 @@ df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres o
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
 df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
 
-
-# Duty receipts – hectolitres this should be pound/millions
-df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','pound/millions', regex=False)
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(hectolitres)","")
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(£ million)","")
@@ -308,30 +306,43 @@ df
 
 df['Alcohol Type'].unique()
 
+# Observations rounded to two decimal places
+df['Value'] = pd.to_numeric(df.Value, errors = 'coerce')
+df.round({"Value":2})
+
+df['Bulletin Type'].unique()
+
 # +
-# df['Value'].round()
-# -
+# df['Alcohol Type'].unique()
 
-df['Measure Type'].unique()
+# +
+# df['Measure Type'].unique()
 
-df['Unit'].unique()
+# +
+# df.loc[df['Alcohol Type'] == 'spirits', 'Measure Type'].unique()
 
 # +
 # Alcohol Type - Spirits are measured in hectolitres of alcohol
+df.loc[df['Alcohol Type'] == 'spirits','Unit'] = 'hectolitres of alcohol'
 
-# df.loc[df['Alcohol Type'] == 'spirits', 'Unit'].unique()
-# df.query('Alcohol Type == spirits')['Unit']
-# df['Unit'][df['Alcohol Type'] == 'spirits'].unique()
-# df['Measure Type'][df['Unit'] == 'hectolitres'].unique()
+# Duty receipts – hectolitres this should be pound/millions
+df.loc[df['Measure Type'] == 'duty-receipts', 'Unit'] = 'gbp-million'
+
+# +
+# df['Unit'].unique()
 # -
 
+df.loc[df['Alcohol Type'] == 'spirits', 'Unit'].unique()
+
 df['Measure Type'].unique()
+
+df.loc[df['Measure Type'] == 'duty-receipts', 'Unit'].unique()
 
 # This is a multi-unit and multi-measure dataset so splitting up for now as not sure what is going on with anything anymore! :-(
 # Splitting data into 3 and changing scraper values based on output data
 cubes = Cubes("info.json")
 tchange = ['Clearances','Duty Receipts','Tax']
-uchange = ['hectolitres', 'gbp-million', 'hectolitres']
+uchange = ['hectolitres', 'gbp-million', 'hectolitres of alcohol']
 # mchange = ['Clearances','Duty Receipts','Tax']
 scraper.dataset.family = 'trade'
 for x in range(3): 
@@ -339,13 +350,11 @@ for x in range(3):
     scraper.dataset.title = f"Alcohol Bulletin - {tchange[x]}"
     scraper.dataset.comment = f"Monthly {tchange[x]} statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs"
     if x == 2:
-        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, beer {tchange[x]}'
-    elif x == 3:
-        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, cider {tchange[x]}'
+        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, beer and cider {tchange[x]}'
     else :
         scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic wine, made wine, spirits, beer and cider {tchange[x]}'
     print(str(x) + " - " + scraper.dataset.title + " - " + pathify(tchange[x]))
-    #print(dat.columns)
+    # print(dat.columns)
     with open("info.json", "r") as jsonFile:
         data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/{pathify(tchange[x])}"
@@ -362,9 +371,3 @@ for x in range(3):
     cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
 #del df
 cubes.output_all()
-
-# +
-# Get rid of cider bulletin dimensions
-# Change Alcholol Type accordingly
-# For Duty-receipts, the units should be pound/millions
-# For Alcohol type spirits are measured in hectolitres of alcohol - Change hectolitres to hectolitres of alcohol
