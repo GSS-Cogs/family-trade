@@ -81,31 +81,22 @@ for tab_name in tabs_names_to_process:
         bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
-        year_month = tab.filter(contains_string("clearances data"))
-        # savepreviewhtml(year_month, fname=tab.name+ "Preview.html")
-        combined_unwanted = unwanted|year_month
-        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        # observations = period.waffle(bulletin_type)
+        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-unwanted
 
     if tab_name == tabs_names_to_process[1]:
         anchor = tab.excel_ref('A8')
         bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
         measure_type = "clearances duty-receipts"
         unit = "hectolitres gbp-million"
-        year_month = tab.filter(contains_string("clearances statistics by"))
-        combined_unwanted = unwanted|year_month
-        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        # observations = period.waffle(bulletin_type)
+        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-unwanted
 
     elif tab_name == tabs_names_to_process[2]:
         anchor = tab.excel_ref('A8')
         bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
-        year_month = tab.filter(contains_string("clearances statistics by"))
-        combined_unwanted = unwanted|year_month
-        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        # observations = period.waffle(bulletin_type)
+        combined_unwanted = unwanted
+        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-unwanted
 
 # Beer production
     elif tab_name == tabs_names_to_process[3]:
@@ -117,16 +108,12 @@ for tab_name in tabs_names_to_process:
         bulletin_type = unwanted_bulletin-total_cider
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
-        year_month = tab.filter(contains_string("production statistics by"))
-        combined_unwanted = unwanted|year_month
-        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
-        # observations = period.waffle(bulletin_type)
+        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-unwanted
 
     observations = period.waffle(bulletin_type)
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
         HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
-        HDim(year_month, "Break Down", CLOSEST, ABOVE),
         HDimConst("Alcohol Type", tab.name),
         HDimConst("Measure Type", measure_type),
         HDimConst("Unit", unit)
@@ -144,15 +131,12 @@ if tab_name == tabs_names_to_process[3]:
         bulletin_type = cider_lower|cider_upper
         measure_type = "production clearances duty-receipts"
         unit = "hectolitres-of-alcohol gbp-million"
-        year_month = tab.filter(contains_string("production statistics by"))
-        combined_unwanted = unwanted|year_month
-        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-combined_unwanted
+        period = anchor.fill(DOWN).is_not_blank().is_not_whitespace()-unwanted
         observations = period.waffle(bulletin_type)
 
 dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
         HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
-        HDim(year_month, "Break Down", CLOSEST, ABOVE),
         HDimConst("Alcohol Type", tab.name),
         HDimConst("Measure Type", measure_type),
         HDimConst("Unit", unit)
@@ -181,7 +165,7 @@ df.loc[(df['Bulletin Type']).str.contains('receipts'),'Measure Type']='duty-rece
 df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='tax'
 
 #Setting the Unit based on Measure Type Column 
-df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
+df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres-of-alcohol" if x == "clearances" else 
                                     ("gbp-million" if x == "duty-receipts" else 
                                      ("hectolitres-of-alcohol" if x == "tax" else "U")))
 
@@ -206,7 +190,7 @@ df.loc[(df['Bulletin Type'] == 'Total Cider Duty receipts(£ million)'), 'Alcoho
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
 df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
-df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
+# df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
 
 
 df['Bulletin Type'] = df['Bulletin Type'].str.replace("(hectolitres)","")
@@ -228,10 +212,6 @@ df['Marker'][df['Period'].str.contains("revised")] = 'revised'
 df['Period'] = df['Period'].str.replace('revised','')
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df['Period'] = df['Period'].str.strip()
-# As the value 2815(estimate) and 2460(estimate) in the spread sheet is not picked up by databaker properly
-# A quick fix is done to resolve the issue
-df['Value'][df.Marker == ',815 (estimate)'] = 2815
-df['Value'][df.Marker == ',460 (estimate)'] = 2460
 df = df.replace(np.nan, '', regex=True)
 df.loc[df['Marker'].str.contains('estimate'), 'Marker'] = 'estimate'
 
@@ -296,6 +276,8 @@ df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999
 df['Marker'] = df['Marker'].str.replace('[','')
 df['Marker'] = df['Marker'].str.replace(']','')
 df['Marker'] = df['Marker'].apply(pathify)
+df['Marker'] = df['Marker'].str.replace('x','not-available')
+df['Marker'] = df['Marker'].str.replace('d','data-not-provided')
 df['Marker'].unique()
 
 
@@ -323,51 +305,96 @@ df['Bulletin Type'].unique()
 
 # +
 # Alcohol Type - Spirits are measured in hectolitres of alcohol
-df.loc[df['Alcohol Type'] == 'spirits','Unit'] = 'hectolitres of alcohol'
+df.loc[df['Alcohol Type'] == 'spirits','Unit'] = 'hectolitres-of-alcohol'
 
 # Duty receipts – hectolitres this should be pound/millions
 df.loc[df['Measure Type'] == 'duty-receipts', 'Unit'] = 'gbp-million'
-
-# +
-# df['Unit'].unique()
 # -
+
+df.loc[df['Unit'] == 'hectolitres-of-alcohol', "Alcohol Type"].unique()
 
 df.loc[df['Alcohol Type'] == 'spirits', 'Unit'].unique()
 
 df['Measure Type'].unique()
 
-df.loc[df['Measure Type'] == 'duty-receipts', 'Unit'].unique()
+df.loc[df['Measure Type'] == 'tax', 'Unit'].unique()
 
-# This is a multi-unit and multi-measure dataset so splitting up for now as not sure what is going on with anything anymore! :-(
-# Splitting data into 3 and changing scraper values based on output data
-cubes = Cubes("info.json")
-tchange = ['Clearances','Duty Receipts','Tax']
-uchange = ['hectolitres', 'gbp-million', 'hectolitres of alcohol']
-# mchange = ['Clearances','Duty Receipts','Tax']
-scraper.dataset.family = 'trade'
-for x in range(3): 
-    dat = df[df['Measure Type'] == pathify(tchange[x])]
-    scraper.dataset.title = f"Alcohol Bulletin - {tchange[x]}"
-    scraper.dataset.comment = f"Monthly {tchange[x]} statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs"
-    if x == 2:
-        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, beer and cider {tchange[x]}'
-    else :
-        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic wine, made wine, spirits, beer and cider {tchange[x]}'
-    print(str(x) + " - " + scraper.dataset.title + " - " + pathify(tchange[x]))
-    # print(dat.columns)
-    with open("info.json", "r") as jsonFile:
-        data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/{pathify(tchange[x])}"
-    data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/{uchange[x]}"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
-    del data
-    
-    if 'Measure Type' in dat.columns:
-        del dat['Measure Type']
-    if 'Unit' in dat.columns:
-        del dat['Unit']
-    
-    cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
-#del df
+df['Unit'].unique()
+
+# +
+#Split data for measure type tax only Clearances
+df_clearance = df[df['Measure Type'] == 'clearances']
+# Metadata for Clearances cube 
+scraper.dataset.title = "Alcohol Bulletin - clearances"
+scraper.dataset.comment = 'Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs'
+scraper.dataset.description = scraper.dataset.comment + ' Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs Table of historic wine, made wine, spirits, beer and cider'
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/clearances"
+data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/hectolitres-of-alcohol"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+del data  
+
+if 'Measure Type' in df_clearance.columns:
+    del df_clearance['Measure Type']
+if 'Unit' in df_clearance.columns:
+    del df_clearance['Unit']
+# -
+
+cubes.add_cube(copy.deepcopy(scraper), df_clearance, scraper.dataset.title)
+
+# +
+#Split data for measure type tax only Duty-Receipts
+df_duty_re = df[df['Measure Type'] == 'duty-receipts']
+# Metadata for Duty-Receipts cube 
+scraper.dataset.title = "Alcohol Bulletin - duty-receipts"
+scraper.dataset.comment = 'Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs'
+scraper.dataset.description = scraper.dataset.comment + ' Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs Table of historic wine, made wine, spirits, beer and cider'
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/duty-receipts"
+data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+del data   
+     
+if 'Measure Type' in df_duty_re.columns:
+    del df_duty_re['Measure Type']
+if 'Unit' in df_duty_re.columns:
+    del df_duty_re['Unit']
+# -
+
+cubes.add_cube(copy.deepcopy(scraper), df_duty_re, scraper.dataset.title)
+
+# +
+#Split data for measure type tax only (Production)
+df_tax = df[df['Measure Type'] == 'tax']
+# Metadata for Production cube 
+scraper.dataset.title = "Alcohol Bulletin - Production"
+scraper.dataset.comment = 'Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs'
+scraper.dataset.description = scraper.dataset.comment + ' Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs Table of historic spirits, beer and cider Production'
+
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/tax"
+data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/hectolitres-of-alcohol"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+del data 
+        
+if 'Measure Type' in df_tax.columns:
+    del df_tax['Measure Type']
+if 'Unit' in df_tax.columns:
+    del df_tax['Unit']
+# -
+
+cubes.add_cube(copy.deepcopy(scraper), df_tax, scraper.dataset.title)
+
+# +
+# df
+# -
+
 cubes.output_all()
