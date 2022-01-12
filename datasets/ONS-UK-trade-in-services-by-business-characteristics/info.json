@@ -21,7 +21,7 @@
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
-            "Business size": {
+            "Business Size": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/employment-size-band",
                 "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{business_size}"
             },
@@ -34,17 +34,27 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/country-of-ownership/{ownership}"
             },
             "Industry": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sic-2007",
-                "value": "http://business.data.gov.uk/companies/def/sic-2007/{industry}"
+                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-industry",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-industry/{industry}"
             },
             "Flow": {
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
             },
+            "Unit": {
+                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
+            },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/current-prices",
                 "datatype": "integer"
+            },
+            "Measure Type": {
+                "dimension": "http://purl.org/linked-data/cube#measureType",
+                "value": "http://gss-data.org.uk/def/measure/{measure_type}",
+                "types": [
+                    "value-of-trade",
+                    "count"
+                ]
             },
             "Marker": {
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
