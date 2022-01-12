@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[7]:
+# In[11]:
 
 
 from gssutils import *
@@ -16,7 +16,7 @@ scraper = Scraper(seed = 'info.json')
 scraper
 
 
-# In[8]:
+# In[12]:
 
 
 tidied_sheets = []
@@ -108,9 +108,9 @@ for name, tab in tabs.items():
 
         business_size = 'all'
 
-        measure_type = 'firms-trading'
+        measure_type = 'count'
 
-        unit = 'count'
+        unit = 'firms-trading'
 
         observations = period.fill(DOWN).is_not_blank()
 
@@ -149,9 +149,9 @@ for name, tab in tabs.items():
         business_size = pivot.fill(DOWN).is_not_blank()
 
         if 'count' in tab.name.lower():
-            measure_type = 'firms-trading'
+            measure_type = 'count'
 
-            unit = 'count'
+            unit = 'firms-trading'
 
         else:
             measure_type = 'value-of-trade'
@@ -201,9 +201,9 @@ for name, tab in tabs.items():
             business_size = 'all'
 
         if 'count' in tab.name.lower():
-            measure_type = 'firms-trading'
+            measure_type = 'count'
 
-            unit = 'count'
+            unit = 'firms-trading'
 
         else:
             measure_type = 'value-of-trade'
@@ -246,7 +246,7 @@ for name, tab in tabs.items():
         continue
 
 
-# In[9]:
+# In[13]:
 
 
 #Post Processing
@@ -284,7 +284,7 @@ df = df[['Period', 'Business Size', 'Country', 'Ownership', 'Industry', 'Flow', 
 df
 
 
-# In[10]:
+# In[14]:
 
 
 #additional scraper info needed

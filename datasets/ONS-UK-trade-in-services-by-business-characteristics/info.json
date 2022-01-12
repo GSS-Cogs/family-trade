@@ -53,7 +53,7 @@
                 "value": "http://gss-data.org.uk/def/measure/{measure_type}",
                 "types": [
                     "value-of-trade",
-                    "firms-trading"
+                    "count"
                 ]
             },
             "Marker": {
