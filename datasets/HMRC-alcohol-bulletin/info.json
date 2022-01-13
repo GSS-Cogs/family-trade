@@ -31,8 +31,8 @@
                     "value": "http://gss-data.org.uk/def/trade/concept/bulletin-type/{bulletin_type}"
             },
             "Value": {
-                    "unit": "http://gss-data.org.uk/def/concept/measurement-units/hectolitres", 
-                    "measure": "http://gss-data.org.uk/def/measure/tax", 
+                    "unit": "http://gss-data.org.uk/def/concept/measurement-units/hectolitres-of-alcohol", 
+                    "measure": "http://gss-data.org.uk/def/measure/clearances", 
                     "datatype": "double"
             }, 
             "Marker": {
