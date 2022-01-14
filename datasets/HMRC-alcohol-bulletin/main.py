@@ -257,6 +257,9 @@ df['Marker'] = df['Marker'].str.replace('d','data-not-provided')
 df['Marker'].unique()
 
 
+#quick fix for odd values 
+df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000'}})
+
 # +
 # The multimeasures for this dataset is yet to be defined by DMs.
 # The way to proceed with cubes class for multimeasures is yet to be finalized.
