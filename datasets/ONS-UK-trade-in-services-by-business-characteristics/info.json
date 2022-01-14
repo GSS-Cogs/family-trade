@@ -53,7 +53,7 @@
                 "value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
             },
             "Value": {
-                "data_type": "integer"
+                "datatype": "integer"
             },
             "Measure Type": {
                 "uri": "http://purl.org/linked-data/cube#measureType",
