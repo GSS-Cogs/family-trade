@@ -49,23 +49,17 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
             },
             "Unit": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
+                "type": "units"
             },
             "Value": {
+                "type": "observations",
                 "datatype": "integer"
             },
             "Measure Type": {
-                "uri": "http://purl.org/linked-data/cube#measureType",
-                "value": "http://gss-data.org.uk/def/measure/{measure_type}",
-                "types": [
-                    "value-of-trade",
-                    "count"
-                ]
+                "type": "measures"
             },
             "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "type": "attribute"
             }
         },
         "stage": [
