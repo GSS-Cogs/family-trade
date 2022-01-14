@@ -176,8 +176,6 @@ f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
 df.loc[f1,'Alcohol Type'] = 'all'
 
 
-df['Alcohol Type'].unique()
-
 df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else
                                     ("made-wine" if x == tabs_names_to_process[1] else
                                      ("spirits" if x == tabs_names_to_process[2] else
@@ -269,8 +267,10 @@ def date_time (date):
 df['Period'] =  df["Period"].apply(date_time)
 
 
+# +
 #quick fix for odd values 
-df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000', 'December 2020' : 'month/2020-12'}})
+# df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000', 'December 2020' : 'month/2020-12'}})
+# -
 
 
 df['Marker'] = df['Marker'].str.replace('[','')
@@ -287,22 +287,9 @@ df['Marker'].unique()
 # -
 
 
-df['Alcohol Type'].unique()
-
 # Observations rounded to two decimal places
 df['Value'] = pd.to_numeric(df.Value, errors = 'coerce')
 df.round({"Value":2})
-
-df['Bulletin Type'].unique()
-
-# +
-# df['Alcohol Type'].unique()
-
-# +
-# df['Measure Type'].unique()
-
-# +
-# df.loc[df['Alcohol Type'] == 'spirits', 'Measure Type'].unique()
 
 # +
 # Alcohol Type - Spirits are measured in hectolitres of alcohol
@@ -310,17 +297,6 @@ df.loc[df['Alcohol Type'] == 'spirits','Unit'] = 'hectolitres-of-alcohol'
 
 # Duty receipts – hectolitres this should be pound/millions
 df.loc[df['Measure Type'] == 'duty-receipts', 'Unit'] = 'gbp-million'
-# -
-
-df.loc[df['Unit'] == 'hectolitres-of-alcohol', "Alcohol Type"].unique()
-
-df.loc[df['Alcohol Type'] == 'spirits', 'Unit'].unique()
-
-df['Measure Type'].unique()
-
-df.loc[df['Measure Type'] == 'tax', 'Unit'].unique()
-
-df['Unit'].unique()
 
 # +
 #Split data for measure type tax only Clearances
@@ -395,5 +371,3 @@ if 'Unit' in df_tax.columns:
 cubes.add_cube(copy.deepcopy(scraper), df_tax, scraper.dataset.title)
 
 cubes.output_all()
-
-
