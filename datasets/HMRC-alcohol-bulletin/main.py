@@ -281,9 +281,10 @@ df['Marker'] = df['Marker'].str.replace('d','data-not-provided')
 df['Marker'].unique()
 
 
+# +
 # The multimeasures for this dataset is yet to be defined by DMs.
 # The way to proceed with cubes class for multimeasures is yet to be finalized.
-df
+# -
 
 
 df['Alcohol Type'].unique()
@@ -322,52 +323,45 @@ df.loc[df['Measure Type'] == 'tax', 'Unit'].unique()
 df['Unit'].unique()
 
 # +
-# #Split data for measure type tax only Clearances
-# df_clearance = df[df['Measure Type'] == 'clearances']
-# # Metadata for Clearances cube 
-# scraper.dataset.title = "Alcohol Bulletin - clearances"
-# scraper.dataset.comment = 'Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs'
-# scraper.dataset.description = scraper.dataset.comment + ' Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs Table of historic wine, made wine, spirits, beer and cider'
+#Split data for measure type tax only Clearances
+df_clearance = df[df['Measure Type'] == 'clearances']
+# Metadata for Clearances cube 
+scraper.dataset.title = "Alcohol Bulletin - clearances"
+scraper.dataset.comment = 'Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs'
+scraper.dataset.description = scraper.dataset.comment + ' Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs Table of historic wine, made wine, spirits, beer and cider'
 
-# with open("info.json", "r") as jsonFile:
-#     data = json.load(jsonFile)
-#     print(data)
-# data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/clearances"
-# data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/hectolitres-of-alcohol"
-# with open("info.json", "w") as jsonFile:
-#     json.dump(data, jsonFile)
-# # del data  
-#     print(data)
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/clearances"
+data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/hectolitres-of-alcohol"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+del data  
 
-# # if 'Measure Type' in df_clearance.columns:
-# #     del df_clearance['Measure Type']
-# # if 'Unit' in df_clearance.columns:
-# #     del df_clearance['Unit']
+if 'Measure Type' in df_clearance.columns:
+    del df_clearance['Measure Type']
+if 'Unit' in df_clearance.columns:
+    del df_clearance['Unit']
+# -
 
-# +
-# cubes.add_cube(copy.deepcopy(scraper), df_clearance, scraper.dataset.title)
+cubes.add_cube(copy.deepcopy(scraper), df_clearance, scraper.dataset.title)
 
 # +
-#Split data for measure type tax only Duty-Receipts
+#Split data for measure type gbp/million only Duty-Receipts
 df_duty_re = df[df['Measure Type'] == 'duty-receipts']
 # Metadata for Duty-Receipts cube 
 scraper.dataset.title = "Alcohol Bulletin - duty-receipts"
 scraper.dataset.comment = 'Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs'
 scraper.dataset.description = scraper.dataset.comment + ' Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs Table of historic wine, made wine, spirits, beer and cider'
 
-with open("info.json", "r+") as jsonFile:
+with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
-    print(data)
-    data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/duty-receipts"
-    data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-# with open("info.json", "w") as jsonFile:
-#     json.dump(data, jsonFile)
-# # del data 
-#     print(data)
-    jsonFile.seek(0)
-    jsonFile.write(json.dumps(data))
-    jsonFile.truncate()
-     
+data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/duty-receipts"
+data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+del data   
+
 if 'Measure Type' in df_duty_re.columns:
     del df_duty_re['Measure Type']
 if 'Unit' in df_duty_re.columns:
@@ -377,34 +371,28 @@ if 'Unit' in df_duty_re.columns:
 cubes.add_cube(copy.deepcopy(scraper), df_duty_re, scraper.dataset.title)
 
 # +
-# #Split data for measure type tax only (Production)
-# df_tax = df[df['Measure Type'] == 'tax']
-# # Metadata for Production cube 
-# scraper.dataset.title = "Alcohol Bulletin - Production"
-# scraper.dataset.comment = 'Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs'
-# scraper.dataset.description = scraper.dataset.comment + ' Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs Table of historic spirits, beer and cider Production'
+#Split data for measure type tax only (Production)
+df_tax = df[df['Measure Type'] == 'tax']
+# Metadata for Production cube 
+scraper.dataset.title = "Alcohol Bulletin - Production"
+scraper.dataset.comment = 'Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs'
+scraper.dataset.description = scraper.dataset.comment + ' Monthly Production statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs Table of historic spirits, beer and cider Production'
 
-# with open("info.json", "r") as jsonFile:
-#     data = json.load(jsonFile)
-#     print(data)
-# data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/tax"
-# data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/hectolitres-of-alcohol"
-# with open("info.json", "w") as jsonFile:
-#     json.dump(data, jsonFile)
-# # del data
-#     print(data)
-        
-# if 'Measure Type' in df_tax.columns:
-#     del df_tax['Measure Type']
-# if 'Unit' in df_tax.columns:
-#     del df_tax['Unit']
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/tax"
+data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/hectolitres-of-alcohol"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
+del data 
 
-# +
-# cubes.add_cube(copy.deepcopy(scraper), df_tax, scraper.dataset.title)
-
-# +
-# df
+if 'Measure Type' in df_tax.columns:
+    del df_tax['Measure Type']
+if 'Unit' in df_tax.columns:
+    del df_tax['Unit']
 # -
+
+cubes.add_cube(copy.deepcopy(scraper), df_tax, scraper.dataset.title)
 
 cubes.output_all()
 
