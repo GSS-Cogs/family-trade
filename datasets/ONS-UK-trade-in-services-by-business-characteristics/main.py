@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[8]:
+# In[1]:
 
 
 from gssutils import *
@@ -15,7 +15,7 @@ scraper = Scraper(seed = 'info.json')
 scraper
 
 
-# In[9]:
+# In[2]:
 
 
 tidied_sheets = []
@@ -243,7 +243,7 @@ for name, tab in tabs.items():
         continue
 
 
-# In[10]:
+# In[3]:
 
 
 #Post Processing
@@ -281,7 +281,7 @@ df = df[['Period', 'Business Size', 'Country', 'Ownership', 'Industry', 'Flow', 
 df
 
 
-# In[11]:
+# In[4]:
 
 
 #additional scraper info needed
@@ -328,7 +328,7 @@ for c in df.columns:
 
 df.to_csv('observations.csv', index=False)
 
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('observations-catalog-metadata.json')
 
 
