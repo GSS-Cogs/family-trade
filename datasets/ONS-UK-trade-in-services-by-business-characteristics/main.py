@@ -329,7 +329,7 @@ for c in df.columns:
 df.to_csv('observations.csv', index=False)
 
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('observations-catalog-metadata.json')
+catalog_metadata.to_json_file('catalog-metadata.json')
 
 
 # In[ ]:
