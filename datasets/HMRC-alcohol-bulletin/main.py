@@ -43,24 +43,6 @@ tabs = loadxlstabs("data.xls")
 tidied_sheets = []
 
 # +
-# Old tab names
-#tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
-# New tab names
-tabs_names_to_process = ["Wine_Duty_(wine)_tables", "Wine_Duty_(made_wine)_tables", "Spirits_Duty_tables", "Beer_Duty_and_Cider_Duty_tables" ]
-
-for tab_name in tabs_names_to_process:
-
-    # Raise an exception if one of our required tabs is missing
-    if tab_name not in [x.name for x in tabs]:
-        raise ValueError(f'Aborting. A tab named {tab_name} required but not found')
-
-    tab = [x for x in tabs if x.name == tab_name][0]
-    # savepreviewhtml(tab, fname=tab.name+ "Preview.html")
-
-# +
-# Old tab names
-#tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
-# New tab names
 tabs_names_to_process = ["Wine_Duty_(wine)_tables", "Wine_Duty_(made_wine)_tables", "Spirits_Duty_tables", "Beer_Duty_and_Cider_Duty_tables" ]
 
 for tab_name in tabs_names_to_process:
@@ -265,12 +247,6 @@ def date_time (date):
     else:
         return date
 df['Period'] =  df["Period"].apply(date_time)
-
-
-# +
-#quick fix for odd values 
-# df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000', 'December 2020' : 'month/2020-12'}})
-# -
 
 
 df['Marker'] = df['Marker'].str.replace('[','')
