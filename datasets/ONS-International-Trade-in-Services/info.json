@@ -37,15 +37,18 @@
             },
             "ITIS Service": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/product"
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "value": "http://gss-data.org.uk/def/trade/concept/itis-service/{itis_service}"
             },
             "ITIS Industry": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry"
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry",
+                "value": "http://gss-data.org.uk/def/trade/concept/industry/{industry}"
             },
             "Trade Area": {
                 "type": "dimension",
-                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{trade_area}"
             },
             "Value": {
                 "type": "observations",
