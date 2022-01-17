@@ -49,7 +49,8 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
             },
             "Unit": {
-                "type": "units"
+                "type": "units",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+unit}"
             },
             "Value": {
                 "type": "observations",
