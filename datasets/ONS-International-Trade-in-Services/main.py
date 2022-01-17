@@ -186,8 +186,8 @@ observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
 
 observations.to_csv('observations.csv', index=False)
 
-scraper.comment = "test"
-scraper.description = "test2"
+scraper.dataset.comment = "test"
+scraper.dataset.description = "test2"
 
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
