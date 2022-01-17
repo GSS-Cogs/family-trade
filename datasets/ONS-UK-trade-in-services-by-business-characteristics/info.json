@@ -57,6 +57,7 @@
             },
             "Measure Type": {
                 "type": "measures"
+                "value": "http://gss-data.org.uk/def/measure/{measure_type}"
             },
             "Marker": {
                 "type": "attribute"
