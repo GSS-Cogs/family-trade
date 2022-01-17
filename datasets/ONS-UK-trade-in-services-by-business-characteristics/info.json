@@ -61,7 +61,8 @@
                 "value": "http://gss-data.org.uk/def/measure/{+measure_type}"
             },
             "Marker": {
-                "type": "attribute"
+                "type": "attribute",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
         },
         "stage": [
