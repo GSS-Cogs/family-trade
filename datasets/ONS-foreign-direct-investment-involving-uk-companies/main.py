@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       jupytext_version: 1.13.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -15,16 +15,20 @@
 
 # +
 from gssutils import *
+import pandas as pd
 from IPython.display import display
 import json
 
-cubes = Cubes("info.json")
-trace = TransformTrace()
+cubes = Cubes("foreign_direct_investment-info.json")
 
-info = json.load(open('info.json'))
+
+info = json.load(open('foreign_direct_investment-info.json'))
 landingPages = info['landingPage']
 
 display(landingPages)
+
+# metadata = Scraper(seed = "foreign_direct_investment-info.json")
+# display(metadata)
 
 inward_scraper = Scraper(next(page for page in landingPages if 'inwardtables' in page))
 outward_scraper = Scraper(next(page for page in landingPages if 'outwardtables' in page))
@@ -76,6 +80,7 @@ def split_overrides(bag, splits):
 
 
 # +
+tidied_sheets = []
 tables = []
 for (name, direction), tab in tabs.items():
     
@@ -83,13 +88,14 @@ for (name, direction), tab in tabs.items():
     if '.' not in name:
         continue
     major, minor = name.split('.')
+    # print(major)
     if major not in ['2', '3', '4']:
         continue
     display(f'Processing tab {name}: {direction}')
     
-    # Add transformTrace
+#     # Add transformTrace
     columns = ["Investment Direction", "Year", "International Trade Basis", "FDI Area", "FDI Component", "FDI Industry"]
-    trace.start("{}:{}".format(name, direction), tab, columns, inward_scraper.distribution(latest=True).downloadURL if direction == "inward" else outward_scraper.distribution(latest=True).downloadURL)
+#     # trace.start("{}:{}".format(name, direction), tab, columns, inward_scraper.distribution(latest=True).downloadURL if direction == "inward" else outward_scraper.distribution(latest=True).downloadURL)
     
     # Set anchors for header row
     top_right = tab.filter('£ million')
@@ -97,9 +103,10 @@ for (name, direction), tab in tabs.items():
     left_top = tab.filter('EUROPE').by_index(1)
     
     top_row = (left_top.fill(UP).fill(RIGHT) & top_right.expand(LEFT).fill(DOWN)).is_not_blank().is_not_whitespace()
-    
+    print(tab.name)
     dims = []
     dims.append(HDim(top_row, 'top', DIRECTLY, ABOVE))
+    # display(dims)
     
     # Select all the footer info as "bottom_block"
     bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown due to rounding.')
@@ -125,34 +132,38 @@ for (name, direction), tab in tabs.items():
         ('OTHER ASIAN', 'COUNTRIES')
     ])
     
-    trace.FDI_Area('Take from lefthand side of tab')
     if to_remove:
         left_col = left_col - to_remove
-        trace.FDI_Area('Removing unwanted text')
+
     left_dim = HDim(left_col, 'FDI Area', CLOSEST, UP)
+    # print(left_dim)
     
     for cell, replace in overrides:
         left_dim.AddCellValueOverride(cell, replace)
     # Also, "IRELAND" should be "IRISH REPUBLIC"
-    trace.FDI_Area('Overrid any occurances of "IRELAND" to "IRISH REPUBLIC".')
     left_dim.AddCellValueOverride('IRELAND', 'IRISH REPUBLIC')
     dims.append(left_dim)
     
     if minor != '1':
-        trace.Year("Take year values from the column of continuous numbers higher than 1900")
+
         year_col = left_top.fill(RIGHT).is_number().filter(lambda x: x.value > 1900).by_index(1).expand(DOWN).is_number() - bottom_block
         dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
         obs = year_col.fill(RIGHT) & top_row.fill(DOWN)
     else:
-        trace.Year("Take year values from the header row")
+
         obs = left_col.fill(RIGHT) & top_row.fill(DOWN)
     
+    # cs = ConversionSegment(obs, dims, includecellxy=True)
+    # cs = ConversionSegment(tab, dims, obs)
+    # table = tables.append(cs.topandas())
+    # display(table)
+
     cs = ConversionSegment(obs, dims, includecellxy=True)
     table = cs.topandas()
-
+    # display(table)
+    
     # Post processing
-    table.rename(columns={'OBS': 'Value'}, inplace=True)
-    trace.FDI_Area('Add "fdi/" prefix then pathify')
+
     table['FDI Area'] = table['FDI Area'].map(lambda x: pathify(x.strip()))
     table['FDI Area'] = table['FDI Area'].replace({"other-european", "other-european-countries"})
     if minor == '1':
@@ -160,7 +171,7 @@ for (name, direction), tab in tabs.items():
         table.rename(columns={'top': 'Year'}, inplace=True)
     table['Year'] = table['Year'].map(lambda x: int(float(x)))
     if minor != '2':
-        trace.FDI_Component("Set based on source tab primary number, 2.x, 3.x etc")
+
         table['FDI Component'] = {
             '2': {'outward': 'total-net-fdi-abroad',
                   'inward': 'total-net-fdi-in-the-uk'},
@@ -170,39 +181,37 @@ for (name, direction), tab in tabs.items():
                   'inward': 'total-net-fdi-earnings-in-the-uk'}
         }.get(major).get(direction)
     else:
-        trace.FDI_Component("Pathify all values")
+
         table.rename(columns={'top': 'FDI Component'}, inplace=True)
         table['FDI Component'] = table['FDI Component'].map(pathify)
     if minor == '3':
         table.rename(columns={'top': 'FDI Industry'}, inplace=True)
-        trace.FDI_Industry('Replace any occurance of "Total" with "all-activites".')
+
         table['FDI Industry'] = table['FDI Industry'].map(
             lambda x: pathify(x) if x != 'Total' else 'all-activities'
         )
     else:
-        trace.FDI_Industry('Set all to "all-activities".')
+
         table['FDI Industry'] = 'all-activities'
     # Disambiguate FDI Component between tabs 2.2 and 4.2
     if name == '2.2':
-        trace.FDI_Component('Add prefixes, either "fdi-"" or "total-net-fdi-".')
+
         table['FDI Component'] = table['FDI Component'].map(
             lambda x: 'fdi-' + x if not x.startswith('total-net-foreign-direct-investment-') else
             'total-net-fdi-' + x[len('total-net-foreign-direct-investment-'):]
         )
     elif name == '4.2':
-        trace.FDI_Component('Add prefixes, either "earnings-fdi-"" or "total-net-".')
+
         table['FDI Component'] = table['FDI Component'].map(
             lambda x: 'earnings-fdi-' + x if not x.startswith('total-net-') else
             'total-net-' + x[len('total-net-'):].replace('foreign-direct-investment', 'fdi')
         )
-    trace.International_Trade_Basis('Set as BPM5 for pre 2012, else BPM5')
+
     table['International Trade Basis'] = table['Year'].map(lambda year: 'BPM5' if year < 2012 else 'BPM6')
-    
-    trace.Investment_Direction('Set direction as "{}".'.format(direction))
     table['Investment Direction'] = direction
-    trace.store("FDI", table)
-                
-observations = trace.combine_and_trace("FDI", "FDI")
+    tidied_sheets.append(table)
+
+observations = pd.concat(tidied_sheets, sort = True)
 observations
 # -
 
@@ -222,7 +231,7 @@ for col in observations:
 
 observations = observations[['Investment Direction', 'Year', 'International Trade Basis',
                              'FDI Area', 'FDI Component', 'FDI Industry',
-                             'Value', 'Marker',
+                             'OBS', 'Marker',
                              '__x', '__y', '__tablename']]
 # -
 
@@ -243,7 +252,7 @@ observations_unique = observations.drop_duplicates(['Investment Direction', 'Yea
 
 observations.shape, observation_duplicate.shape, observations_unique.shape
 
-observations = observation_duplicate[observation_duplicate['Value'] != '']
+observations = observation_duplicate[observation_duplicate['OBS'] != '']
 
 observations = pd.concat([observations_unique, observations])
 
@@ -281,8 +290,3 @@ inward_scraper.dataset.family = 'trade'
 
 cubes.add_cube(inward_scraper, observations.drop_duplicates(), inward_scraper.dataset.title)
 cubes.output_all()
-
-# -
-trace.render("spec_v1.html")
-
-
