@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.4
+#       jupytext_version: 1.13.5
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -19,16 +19,13 @@ import pandas as pd
 from IPython.display import display
 import json
 
-# cubes = Cubes("foreign_direct_investment-info.json")
-
+metadata = Scraper(seed = 'foreign_direct_investment-info.json')
+display(metadata)
 
 # info = json.load(open('foreign_direct_investment-info.json'))
 # landingPages = info['landingPage']
-
 # display(landingPages)
 
-metadata = Scraper(seed = 'foreign_direct_investment-info.json')
-display(metadata)
 
 # inward_scraper = Scraper(next(page for page in landingPages if 'inwardtables' in page))
 # outward_scraper = Scraper(next(page for page in landingPages if 'outwardtables' in page))
@@ -37,11 +34,40 @@ display(metadata)
 # display(outward_scraper)
 # -
 
+inward_scraper = metadata.distribution(latest = True)
+inward_scraper
+
+# +
+# from gssutils import *
+# import pandas as pd
+# from IPython.display import display
+# import json
+
+# cubes = Cubes("foreign_direct_investment-info.json")
+
+# # metadata = Scraper(seed = 'foreign_direct_investment-info.json')
+# info = json.load(open('foreign_direct_investment-info.json'))
+# landingPages = info['landingPage']
+# # display(info)
+
+# display(landingPages)
+
+# inward_scraper = Scraper(next(page for page in landingPages if 'inwardtables' in page))
+# # outward_scraper = Scraper(next(page for page in landingPages if 'outwardtables' in page))
+
+# # metadata = Scraper(seed = 'foreign_direct_investment-info.json')
+# # display(metadata)
+# # landingPages = metadata['landingPage']
+
+# display(inward_scraper)
+# # display(outward_scraper)
+# -
+
 # Collect together all tabs in one list of `((tab name, direction), tab)`
 
 tabs = {
-    ** {(tab.name.strip(), 'inward'): tab for tab in inward_scraper.distribution(latest=True).as_databaker()},
-    ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.distribution(latest=True).as_databaker()}
+    ** {(tab.name.strip(), 'inward'): tab for tab in inward_scraper.as_databaker()},
+    # ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.distribution(latest=True).as_databaker()}
 }
 print(list(tabs.keys()))
 
@@ -277,13 +303,14 @@ fix = {
 observations["FDI Area"] = observations["FDI Area"].map(lambda x: fix.get(x, x))
 
 
-inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
-inward_scraper.dataset.comment = inward_scraper.dataset.comment.replace(
-    'into the UK', 'into the UK and of UK companies abroad')
-inward_scraper.dataset.landingPage = landingPages
+inward_scraper.title = inward_scraper.title.replace(': inward', '')
+inward_scraper.comment = 'Inward reference table including data for flows, positions and earnings.'
+
+
+inward_scraper
 
 observations.to_csv('foreign_direct_investment-observations.csv', index = False)
-catalog_metadata = info.as_csvqb_catalog_metadata()
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('foreign_direct_investment-catalog-metadata.json')
 
 # +
