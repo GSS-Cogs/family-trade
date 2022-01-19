@@ -19,22 +19,22 @@ import pandas as pd
 from IPython.display import display
 import json
 
-cubes = Cubes("foreign_direct_investment-info.json")
+# cubes = Cubes("foreign_direct_investment-info.json")
 
 
-info = json.load(open('foreign_direct_investment-info.json'))
-landingPages = info['landingPage']
+# info = json.load(open('foreign_direct_investment-info.json'))
+# landingPages = info['landingPage']
 
-display(landingPages)
+# display(landingPages)
 
-# metadata = Scraper(seed = "foreign_direct_investment-info.json")
-# display(metadata)
+metadata = Scraper(seed = 'foreign_direct_investment-info.json')
+display(metadata)
 
-inward_scraper = Scraper(next(page for page in landingPages if 'inwardtables' in page))
-outward_scraper = Scraper(next(page for page in landingPages if 'outwardtables' in page))
+# inward_scraper = Scraper(next(page for page in landingPages if 'inwardtables' in page))
+# outward_scraper = Scraper(next(page for page in landingPages if 'outwardtables' in page))
 
-display(inward_scraper)
-display(outward_scraper)
+# display(inward_scraper)
+# display(outward_scraper)
 # -
 
 # Collect together all tabs in one list of `((tab name, direction), tab)`
@@ -277,16 +277,28 @@ fix = {
 observations["FDI Area"] = observations["FDI Area"].map(lambda x: fix.get(x, x))
 
 
-# +
-
 inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
 inward_scraper.dataset.comment = inward_scraper.dataset.comment.replace(
     'into the UK', 'into the UK and of UK companies abroad')
 inward_scraper.dataset.landingPage = landingPages
 
-from gssutils.metadata import THEME
-inward_scraper.dataset.theme = THEME['business-industry-trade-energy']
-inward_scraper.dataset.family = 'trade'
+observations.to_csv('foreign_direct_investment-observations.csv', index = False)
+catalog_metadata = info.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('foreign_direct_investment-catalog-metadata.json')
 
-cubes.add_cube(inward_scraper, observations.drop_duplicates(), inward_scraper.dataset.title)
-cubes.output_all()
+# +
+
+# inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
+# inward_scraper.dataset.comment = inward_scraper.dataset.comment.replace(
+#     'into the UK', 'into the UK and of UK companies abroad')
+# inward_scraper.dataset.landingPage = landingPages
+
+# from gssutils.metadata import THEME
+# inward_scraper.dataset.theme = THEME['business-industry-trade-energy']
+# inward_scraper.dataset.family = 'trade'
+
+# cubes.add_cube(inward_scraper, observations.drop_duplicates(), inward_scraper.dataset.title)
+# cubes.output_all()
+
+# -
+
