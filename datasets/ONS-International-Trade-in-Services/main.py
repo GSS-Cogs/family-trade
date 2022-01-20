@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[20]:
+# In[1]:
 
 
 import json
@@ -13,7 +13,7 @@ scraper = Scraper(seed="info.json")
 scraper
 
 
-# In[21]:
+# In[2]:
 
 
 
@@ -21,7 +21,7 @@ tabs = scraper.distribution(latest = True, mediaType = Excel).as_databaker()
 str([tab.name for tab in tabs])
 
 
-# In[22]:
+# In[3]:
 
 
 def fix_service(row):
@@ -134,14 +134,14 @@ def process_tab(tab):
     return obs#[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry', 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
 
-# In[23]:
+# In[4]:
 
 
 
 observations = pd.concat((process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0']), sort = False)
 
 
-# In[24]:
+# In[5]:
 
 
 observations.rename(index= str, columns= {'DATAMARKER':'Marker'}, inplace = True)
@@ -154,7 +154,7 @@ observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil'
 observations['Value'] = observations['Value'].round(decimals=2)
 
 
-# In[25]:
+# In[6]:
 
 
 
@@ -171,7 +171,7 @@ for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     #display(observations[col].cat.categories)
 
 
-# In[26]:
+# In[7]:
 
 
 observations.rename(columns={'Flow':'Flow Directions', 'ONS Trade Areas ITIS' : 'Trade Area'}, inplace=True)
@@ -180,14 +180,13 @@ observations.rename(columns={'Flow':'Flow Directions', 'ONS Trade Areas ITIS' : 
 observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
 
 
-# In[27]:
+# In[8]:
 
 
 
 observations.to_csv('observations.csv', index=False)
 
-scraper.dataset.comment = "test"
-scraper.dataset.description = "test2"
+scraper.dataset.comment = "Detailed breakdown of annual trade in UK services estimates, analysing data by country, product and industry."
 
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
