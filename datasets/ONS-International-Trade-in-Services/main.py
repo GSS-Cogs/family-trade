@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[10]:
 
 
 import json
@@ -13,7 +13,7 @@ scraper = Scraper(seed="info.json")
 scraper
 
 
-# In[2]:
+# In[11]:
 
 
 
@@ -21,7 +21,7 @@ tabs = scraper.distribution(latest = True, mediaType = Excel).as_databaker()
 str([tab.name for tab in tabs])
 
 
-# In[3]:
+# In[12]:
 
 
 def fix_service(row):
@@ -134,15 +134,12 @@ def process_tab(tab):
     return obs#[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry', 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
 
-# In[4]:
+# In[24]:
 
 
+import numpy as np
 
 observations = pd.concat((process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0']), sort = False)
-
-
-# In[5]:
-
 
 observations.rename(index= str, columns= {'DATAMARKER':'Marker'}, inplace = True)
 observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil',
@@ -153,8 +150,12 @@ observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil'
 
 observations['Value'] = observations['Value'].round(decimals=2)
 
+observations['Value'] = observations.apply(lambda x: x['Value'] if pd.isnull(x['Marker']) else 0, axis = 1)
 
-# In[6]:
+observations
+
+
+# In[15]:
 
 
 
@@ -171,7 +172,7 @@ for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     #display(observations[col].cat.categories)
 
 
-# In[7]:
+# In[16]:
 
 
 observations.rename(columns={'Flow':'Flow Directions', 'ONS Trade Areas ITIS' : 'Trade Area'}, inplace=True)
@@ -180,7 +181,7 @@ observations.rename(columns={'Flow':'Flow Directions', 'ONS Trade Areas ITIS' : 
 observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
 
 
-# In[8]:
+# In[17]:
 
 
 
