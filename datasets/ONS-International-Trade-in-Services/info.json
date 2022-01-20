@@ -1,5 +1,5 @@
 {
-    "schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons-international-trade-in-services",
     "title": "International trade in services",
     "publisher": "Office for National Statistics",
@@ -37,18 +37,18 @@
             },
             "ITIS Service": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/itis-service",
                 "value": "http://gss-data.org.uk/def/trade/concept/itis-service/{itis_service}"
             },
             "ITIS Industry": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry",
-                "value": "http://gss-data.org.uk/def/trade/concept/industry/{industry}"
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
+                "value": "http://gss-data.org.uk/def/trade/concept/industry/{itis_industry}"
             },
             "Trade Area": {
                 "type": "dimension",
-                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://statistics.data.gov.uk/id/statistical-geography/{trade_area}"
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/trade-area",
+                "value": "http://gss-data.org.uk/def/trade/concept/trade-area/{trade_area}"
             },
             "Value": {
                 "type": "observations",
@@ -58,8 +58,7 @@
             },
             "Marker": {
                 "type": "attribute",
-                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
         }
     },
