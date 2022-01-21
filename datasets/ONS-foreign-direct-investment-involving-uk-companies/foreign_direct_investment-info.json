@@ -26,7 +26,7 @@
       "Investment Direction": {
         "type": "dimension",
         "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-        "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+investment_direction}"
+        "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+investment-direction}"
       },
       "Year": {
         "type": "dimension",
@@ -39,22 +39,22 @@
       "FDI Component": {
         "type": "dimension",
         "uri": "http://gss-data.org.uk/def/trade/property/dimension/FDI-component",
-        "value": "http://gss-data.org.uk/def/trade/concept/fdi-component/{+fdi_component}"
+        "value": "http://gss-data.org.uk/def/trade/concept/fdi-component/{+fdi-component}"
       },
       "FDI Area": {
         "type": "dimension",
         "uri": "http://gss-data.org.uk/def/trade/property/dimension/FDI-area",
-        "value": "http://gss-data.org.uk/def/trade/concept/fdi-area/{+fdi_area}"
+        "value": "http://gss-data.org.uk/def/trade/concept/fdi-area/{+fdi-area}"
       },
       "FDI Industry": {
         "type": "dimension",
         "uri": "http://gss-data.org.uk/def/trade/property/dimension/FDI-industry",
-        "value": "http://gss-data.org.uk/def/trade/concept/fdi-industry/{+fdi_industry}"
+        "value": "http://gss-data.org.uk/def/trade/concept/fdi-industry/{+fdi-industry}"
       },
       "International Trade Basis": {
         "type": "dimension",
         "uri": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
-        "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
+        "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international-trade-basis}"
       },
       "Value": {
         "type": "observations",
