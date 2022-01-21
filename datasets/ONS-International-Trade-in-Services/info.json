@@ -36,19 +36,13 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
             },
             "ITIS Service": {
-                "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/itis-service",
-                "value": "http://gss-data.org.uk/def/trade/concept/itis-service/{itis_service}"
+                "type": "dimension"
             },
             "ITIS Industry": {
-                "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/itis-industry",
-                "value": "http://gss-data.org.uk/def/trade/concept/industry/{itis_industry}"
+                "type": "dimension"
             },
             "Trade Area": {
-                "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/trade-area",
-                "value": "http://gss-data.org.uk/def/trade/concept/trade-area/{trade_area}"
+                "type": "dimension"
             },
             "Value": {
                 "type": "observations",
