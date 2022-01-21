@@ -36,13 +36,22 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
             },
             "ITIS Service": {
-                "type": "dimension"
+                "type": "dimension",
+                    "new": {
+                    "codelist": "./codelists/itis-service.csv-metadata.json"
+                            }
             },
             "ITIS Industry": {
-                "type": "dimension"
+                "type": "dimension",
+                    "new": {
+                    "codelist": "./codelists/itis-industry.csv-metadata.json"
+                            }
             },
             "Trade Area": {
-                "type": "dimension"
+                "type": "dimension",
+                    "new": {
+                    "codelist": "./codelists/trade-area.csv-metadata.json"
+                            }
             },
             "Value": {
                 "type": "observations",
