@@ -21,53 +21,30 @@ import json
 
 metadata = Scraper(seed = 'foreign_direct_investment-info.json')
 display(metadata)
-
-# info = json.load(open('foreign_direct_investment-info.json'))
-# landingPages = info['landingPage']
-# display(landingPages)
-
-
-# inward_scraper = Scraper(next(page for page in landingPages if 'inwardtables' in page))
-# outward_scraper = Scraper(next(page for page in landingPages if 'outwardtables' in page))
-
-# display(inward_scraper)
-# display(outward_scraper)
 # -
 
 inward_scraper = metadata.distribution(latest = True)
 inward_scraper
 
-# +
-# from gssutils import *
-# import pandas as pd
-# from IPython.display import display
-# import json
+with open("foreign_direct_investment-info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["landingPage"] = "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompaniesoutwardtables"
+with open("foreign_direct_investment-info.json", "w") as jsonFile:
+    json.dump(data, jsonFile, indent=2)
+del data
 
-# cubes = Cubes("foreign_direct_investment-info.json")
 
-# # metadata = Scraper(seed = 'foreign_direct_investment-info.json')
-# info = json.load(open('foreign_direct_investment-info.json'))
-# landingPages = info['landingPage']
-# # display(info)
+metadata_1 = Scraper(seed = 'foreign_direct_investment-info.json')
+display(metadata_1)
 
-# display(landingPages)
-
-# inward_scraper = Scraper(next(page for page in landingPages if 'inwardtables' in page))
-# # outward_scraper = Scraper(next(page for page in landingPages if 'outwardtables' in page))
-
-# # metadata = Scraper(seed = 'foreign_direct_investment-info.json')
-# # display(metadata)
-# # landingPages = metadata['landingPage']
-
-# display(inward_scraper)
-# # display(outward_scraper)
-# -
+outward_scraper = metadata_1.distribution(latest = True)
+outward_scraper
 
 # Collect together all tabs in one list of `((tab name, direction), tab)`
 
 tabs = {
     ** {(tab.name.strip(), 'inward'): tab for tab in inward_scraper.as_databaker()},
-    # ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.distribution(latest=True).as_databaker()}
+    ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.as_databaker()}
 }
 print(list(tabs.keys()))
 
@@ -121,7 +98,6 @@ for (name, direction), tab in tabs.items():
     
 #     # Add transformTrace
     columns = ["Investment Direction", "Year", "International Trade Basis", "FDI Area", "FDI Component", "FDI Industry"]
-#     # trace.start("{}:{}".format(name, direction), tab, columns, inward_scraper.distribution(latest=True).downloadURL if direction == "inward" else outward_scraper.distribution(latest=True).downloadURL)
     
     # Set anchors for header row
     top_right = tab.filter('£ million')
@@ -178,20 +154,14 @@ for (name, direction), tab in tabs.items():
     else:
 
         obs = left_col.fill(RIGHT) & top_row.fill(DOWN)
-    
-    # cs = ConversionSegment(obs, dims, includecellxy=True)
-    # cs = ConversionSegment(tab, dims, obs)
-    # table = tables.append(cs.topandas())
-    # display(table)
 
     cs = ConversionSegment(obs, dims, includecellxy=True)
     table = cs.topandas()
-    # display(table)
     
     # Post processing
 
-    table['FDI Area'] = table['FDI Area'].map(lambda x: pathify(x.strip()))
-    table['FDI Area'] = table['FDI Area'].replace({"other-european", "other-european-countries"})
+    table['Geography'] = table['Geography'].map(lambda x: pathify(x.strip()))
+    table['Geography'] = table['Geography'].replace({"other-european", "other-european-countries"})
     if minor == '1':
         # top header row is year
         table.rename(columns={'top': 'Year'}, inplace=True)
@@ -246,6 +216,8 @@ observations['Marker'] = observations['DATAMARKER'].map(
                '-' : 'itis-nil'
         }.get(x, x))
 
+observations['Value'] = pd.to_numeric(observations['OBS'], errors = 'coerce')
+
 from IPython.core.display import HTML
 for col in observations:
     if col != 'Value':
@@ -256,8 +228,8 @@ for col in observations:
 # +
 
 observations = observations[['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry',
-                             'OBS', 'Marker',
+                             'Geography', 'FDI Component', 'FDI Industry',
+                             'Value', 'Marker',
                              '__x', '__y', '__tablename']]
 # -
 
@@ -269,16 +241,18 @@ observations.drop_duplicates(subset=observations.columns.difference(['Value']), 
 # There are mutiple duplicate values due to empty cells from source data that makes error in Jenkins Those empty cells with no values are removed 
 
 observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
+                             'Geography', 'FDI Component', 'FDI Industry'
                               ],keep=False)]
 
+observation_duplicate.columns.unique()
+
 observations_unique = observations.drop_duplicates(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
+                             'Geography', 'FDI Component', 'FDI Industry'
                               ],keep=False)
 
 observations.shape, observation_duplicate.shape, observations_unique.shape
 
-observations = observation_duplicate[observation_duplicate['OBS'] != '']
+observations = observation_duplicate[observation_duplicate['Value'] != '']
 
 observations = pd.concat([observations_unique, observations])
 
@@ -300,7 +274,7 @@ fix = {
     "gulf-arabian": "gulf-arabian-countries",
     "other-asian": "other-asian-countries"
 }
-observations["FDI Area"] = observations["FDI Area"].map(lambda x: fix.get(x, x))
+observations['Geography'] = observations['Geography'].map(lambda x: fix.get(x, x))
 
 
 inward_scraper.title = inward_scraper.title.replace(': inward', '')
@@ -312,20 +286,3 @@ inward_scraper
 observations.to_csv('foreign_direct_investment-observations.csv', index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('foreign_direct_investment-catalog-metadata.json')
-
-# +
-
-# inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
-# inward_scraper.dataset.comment = inward_scraper.dataset.comment.replace(
-#     'into the UK', 'into the UK and of UK companies abroad')
-# inward_scraper.dataset.landingPage = landingPages
-
-# from gssutils.metadata import THEME
-# inward_scraper.dataset.theme = THEME['business-industry-trade-energy']
-# inward_scraper.dataset.family = 'trade'
-
-# cubes.add_cube(inward_scraper, observations.drop_duplicates(), inward_scraper.dataset.title)
-# cubes.output_all()
-
-# -
-
