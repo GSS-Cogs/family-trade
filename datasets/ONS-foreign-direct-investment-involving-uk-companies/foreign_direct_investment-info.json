@@ -59,7 +59,7 @@
       "Value": {
         "type": "observations",
         "measure": {
-          "label": "gbp-total"
+          "label": "capital"
         },
         "unit": {
           "label": "gbp-million"
