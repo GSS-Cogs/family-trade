@@ -41,10 +41,10 @@
         "uri": "http://gss-data.org.uk/def/trade/property/dimension/FDI-component",
         "value": "http://gss-data.org.uk/def/trade/concept/fdi-component/{+fdi-component}"
       },
-      "FDI Area": {
+      "Geography": {
         "type": "dimension",
-        "uri": "http://gss-data.org.uk/def/trade/property/dimension/FDI-area",
-        "value": "http://gss-data.org.uk/def/trade/concept/fdi-area/{+fdi-area}"
+        "uri": "http://gss-data.org.uk/def/trade/property/dimension/geography",
+        "value": "http://gss-data.org.uk/def/trade/concept/fdi-area/{+geography}"
       },
       "FDI Industry": {
         "type": "dimension",
