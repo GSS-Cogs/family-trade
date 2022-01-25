@@ -41,11 +41,10 @@
         "uri": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",
         "value": "http://gss-data.org.uk/def/trade/concept/fdi-component/{+fdi-component}"
       },
-      "Geography": {
-        "type": "dimension",
-        "uri": "http://gss-data.org.uk/def/trade/property/dimension/geography",
-        "value": "http://gss-data.org.uk/def/trade/concept/fdi-area/{+geography}"
-      },
+      "FDI Area": {
+        "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+        "label": "Geography"
+    },
       "FDI Industry": {
         "type": "dimension",
         "uri": "http://gss-data.org.uk/def/trade/property/dimension/fdi-industry",
@@ -59,7 +58,7 @@
       "Value": {
         "type": "observations",
         "measure": {
-          "label": "capital"
+          "label": "gbp-total"
         },
         "unit": {
           "label": "gbp-million"
