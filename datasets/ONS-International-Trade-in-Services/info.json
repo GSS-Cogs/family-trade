@@ -38,19 +38,19 @@
             "ITIS Service": {
                 "type": "dimension",
                     "new": {
-                    "codelist": "./codelists/itis-service.csv-metadata.json"
+                        "codelist": "./codelists/itis-service.csv-metadata.json"
                             }
             },
             "ITIS Industry": {
                 "type": "dimension",
                     "new": {
-                    "codelist": "./codelists/itis-industry.csv-metadata.json"
+                        "codelist": "./codelists/itis-industry.csv-metadata.json"
                             }
             },
             "Trade Area": {
                 "type": "dimension",
                     "new": {
-                    "codelist": "./codelists/trade-area.csv-metadata.json"
+                        "codelist": "./codelists/trade-area.csv-metadata.json"
                             }
             },
             "Value": {
