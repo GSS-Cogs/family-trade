@@ -33,7 +33,7 @@
             "HMRC Partner Geography": {
                 "type": "dimension",
                 "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://data.europa.eu/nuts/code/{hmrc_geography}"
+                "value": "http://data.europa.eu/nuts/code/{hmrc_partner_geography}"
             },
             "Flow Directions": {
                 "type": "dimension",
