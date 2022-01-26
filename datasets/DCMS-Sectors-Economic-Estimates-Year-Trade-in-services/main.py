@@ -4,7 +4,6 @@ from gssutils import *
 import json 
 from urllib.parse import urljoin
 
-trace = TransformTrace()
 df = pd.DataFrame()
 # -
 
@@ -22,22 +21,22 @@ list(tabs)
 tab = tabs["Imports"]
 datasetTitle = 'dcms-sectors-economic-estimates-2018-trade-in-services'
 columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
-trace.start(datasetTitle, tab, columns, scraper.distributions[1].downloadURL)
+
 
 flow = "imports"
-trace.Flow("Hardcoded as Imports")
+
 
 period = "year/2018" #TAKEN FROM SHEET TITLE
-trace.Period("Hardcoded as year/2018")
+
 
 country = tab.excel_ref("A5").expand(DOWN)
-trace.Country("Values taken from cell A5 Down")
+
 
 sector = tab.excel_ref("A3").expand(RIGHT).is_not_blank()
-trace.Sector("Non blank values from cell A3 across")
+
 
 sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
-trace.Subsector("Non blank values from cell B4 across ")
+
 
 observations = country.waffle(sector_tpe).is_not_blank() 
 dimensions = [
@@ -48,9 +47,8 @@ dimensions = [
     HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-trace.store("import_dataframe", tidy_sheet.topandas())
-df_imports = trace.combine_and_trace(datasetTitle, "import_dataframe")
+
+
 # -
 
 # Sheet : Exports 
@@ -59,22 +57,22 @@ df_imports = trace.combine_and_trace(datasetTitle, "import_dataframe")
 tab = tabs["Exports"]
 datasetTitle = 'DCMS Sectors Economic Estimates 2018: Trade in services : Exports'
 columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
-trace.start(datasetTitle, tab, columns, scraper.distributions[1].downloadURL)
+
 
 flow = "exports"
-trace.Flow("Hardcoded as Exports")
+
 
 period = "year/2018" #TAKEN FROM SHEET TITLE
-trace.Period("Hardcoded as year/2018")
+
 
 country = tab.excel_ref("A5").expand(DOWN)
-trace.Country("Values taken from cell A5 Down")
+
 
 sector = tab.excel_ref("A3").expand(RIGHT).is_not_blank()
-trace.Sector("Non blank values from cell A3 across")
+
 
 sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
-trace.Subsector("Non blank values from cell B4 across ")
+
 
 observations = country.waffle(sector_tpe).is_not_blank()  
 dimensions = [
@@ -85,12 +83,9 @@ dimensions = [
     HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-trace.store("exports_dataframe", tidy_sheet.topandas())
-df_exports = trace.combine_and_trace(datasetTitle, "exports_dataframe")
 
 # +
-tidy = pd.concat([df_exports, df_imports])
+
 
 #Post Processing
 tidy.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
@@ -177,6 +172,6 @@ with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
 
 tidy
 
-trace.render()
+
 
 
