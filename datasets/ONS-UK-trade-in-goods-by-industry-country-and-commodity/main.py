@@ -1,70 +1,72 @@
-# -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
+# %%
 
 # UK trade in goods by industry, country and commodity, exports and imports
+
+
+
+# [Notes for Shannon]
+# overall i think the ticket 231 mainly wants me to sort the order of columns
+# the original file from the amster branch strips out the descriptive part of the commodity, Industry and ONS Partner Geography columns. Do we want that as the end goal? keeping them allows me to sort properly but could delete after.
 
 import pandas as pd
 import json
 from gssutils import *
 
-pd.options.mode.chained_assignment = None 
+# TODO Rich - look at what this means
+# pd.options.mode.chained_assignment = None 
 
 cubes = Cubes("info.json")
-
-# +
 info = json.load(open('info.json'))
 
+# %%
+# get landing page(s) url to where data is located
 landingPage = info['landingPage']
 landingPage
 
-# +
+# %%
+# two speparate landing pages
 scraper1 = Scraper(landingPage[0])
 scraper2 = Scraper(landingPage[1])
 
+# TODO find out what this is doing exactly
 scraper1.dataset.family = info['families']
-scraper1
-# -
+# %%
 
-scraper2
+scraper2.session
+# %%
+# just grab latest dataset from both landing pages. They're structured the same but one is concerned with exports the other imports.
+distribution1 = scraper1.distribution(latest=True) # exports
+distribution2 = scraper2.distribution(latest=True) # imports
 
-distribution1 = scraper1.distribution(latest=True)
-distribution2 = scraper2.distribution(latest=True)
-distribution1
-
-distribution2
-
+# %%
+# TODO Rich - is new to me. see how to use loadxlstabs function from Databaker or pandas to get data from these distribution objects.
+# i imagine it's a case of using distribution1.downloadURL
 tabs1 = distribution1.as_databaker()
 tabs2 = distribution2.as_databaker()
 tabs = tabs1 + tabs2
+# tabs
 
-title1 = distribution1.title
-title2 = distribution2.title
+# %%
+# not using this atm
+url = distribution1.downloadURL
+url
 
-# +
-trace = TransformTrace()
+# %%
+# TODO Shannon - i remove tabs we're not interested in. I had to add ' final' to export tab name. should we control for backwards compatibility?
+tabs = [x for x in tabs if x.name in ('tig_ind_ex final', 'tig_ind_im') ]
+
+
+# %%
+tidied_sheets = []
+
+# the title of both datasets is the same except one is for exports the other imports, so just take title from first distribution and add 'and imports' for the combined dataset
 title = distribution1.title + ' and imports' 
-columns = ['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type','Value','Unit', 'Marker']
 
 for tab in tabs:
-    if tab.name not in ['tig_ind_ex', 'tig_ind_im']:
-        continue
+
+    # [Dimensions]
     
-    trace.start(title1, tab, columns, distribution1.downloadURL)
-#     trace.start(title2, tab, columns, distribution2.downloadURL)
-    
-    if tab.name == 'tig_ind_ex':
+    if tab.name == 'tig_ind_ex final':
         flow = 'exports'
     elif tab.name == 'tig_ind_im':
         flow = 'imports' 
@@ -73,27 +75,32 @@ for tab in tabs:
     industry = tab.filter('Industry').fill(DOWN).is_not_blank()
     commodity = tab.filter('Commodity').fill(DOWN).is_not_blank()
     year = tab.excel_ref('E1').expand(RIGHT).is_not_blank()
+    # # comment out these dimensions because they can be defined by info.json file
+    # measure = 'GBP Total'
+    # unit = 'gbp-million'
 
-    observations = year.fill(DOWN).is_not_blank()
+    # [Dimensions]
+
+    observations = year.fill(DOWN).is_not_blank() 
+
+    # [Mapping obs to dimensions]
 
     dimensions = [
-                HDimConst('Measure Type', 'GBP Total'),
-                HDimConst('Unit', 'gbp-million'),
                 HDimConst('Flow', flow),
-
                 HDim(year,'Period', DIRECTLY,ABOVE),
                 HDim(country,'ONS Partner Geography', DIRECTLY,LEFT),
-                HDim(commodity,'CORD SITC', DIRECTLY,LEFT),
-                HDim(industry,'SIC 2007', DIRECTLY,LEFT)       
+                HDim(commodity,'Commodity', DIRECTLY,LEFT),
+                HDim(industry,'Industry', DIRECTLY,LEFT)       
                 ]
     cs = ConversionSegment(tab, dimensions, observations)
     tidy_sheet = cs.topandas()
-    trace.store("combined_dataframe", tidy_sheet) 
-# -
+    tidied_sheets.append(tidy_sheet)
+# %%
 
+# TODO Rich - cehckout what this is
 pd.set_option('display.float_format', lambda x: '%.1f' % x) 
 
-table = trace.combine_and_trace(title, "combined_dataframe").fillna('')
+table = pd.concat(tidied_sheets, sort = True).fillna('') 
 
 descr = """
 Experimental dataset providing a breakdown of UK trade in goods by industry, country and commodity on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders.
@@ -127,54 +134,87 @@ Trade Asymmetries
 These data are our best estimate of these bilateral UK trade flows. Users should note that alternative estimates are available, in some cases, via the statistical agencies for bilateral countries or through central databases such as UN Comtrade.
 UN Comtrade.
 """
-
+# %%
+# TODO Shannon - why are we updating both of these, and they're different from the title created earlier? Does the scraper object get used later?
 scraper1.dataset.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
 scraper2.dataset.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
 scraper1.dataset.description = descr
 scraper2.dataset.description = descr
 
-# +
-table = table[table['OBS'] != 0]
-table.loc[table['DATAMARKER'].astype(str) == '..', 'DATAMARKER'] = 'suppressed'
-table.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-# LPerryman - changed indice to 2 rather than 1
-table['CORD SITC'] = table['CORD SITC'].str[:2]
-table['ONS Partner Geography'] = table['ONS Partner Geography'].str[:2]
-table['SIC 2007'] = table['SIC 2007'].str[:2]
+# [Clean up]
+# %%
 
-# LPerryman - changing names back to what is in the spreadsheet, can't remember why they were changed
-# Some values have a space on the end and deleting Measure type and Unit coluns as these can be defined in the info.json
-# Converting Value to integer
-table = table.rename(columns={"CORD SITC": "Commodity", 'SIC 2007': 'Industry'})
-table['Industry'] = table['Industry'].str.strip()
-table['Commodity'] = table['Commodity'].str.strip()
-del table['Measure Type']
-del table['Unit']
-table['Value'].loc[(table['Value'] == '')] = 0
-table['Value'] = table['Value'].astype(int)
+#remove rows
+# TODO Rich - confused. i'm removing observations here if zero, but putting them back in two lines down...maybe it's totals
+table = table[table['OBS'] != 0] # remove rows with 0 values in observations
+
+# replace DATAMARKER values
+table.loc[table['DATAMARKER'].astype(str) == '..', 'DATAMARKER'] = 'suppressed' 
+# replace empty values with 0
+table['OBS'].loc[(table['OBS'] == '')] = 0 
+table['OBS'] = table['OBS'].astype(int) 
+
+
+# %%
+## pre-sort preparation
+
+# separate code from descriptive name so can order columns later
+table['Commodity Code'] = table['Commodity'].str[:2]
+table['ONS Partner Geography Code'] = table['ONS Partner Geography'].str[:2]
+table['Industry Code'] = table['Industry'].str[:2]
+#%%
+# TODO Rich - might come back to this. see if end users want code separated
+# # need to remove code from descriptive name
+# table['Commodity'] = table['Commodity'].str[2:]
+# table['ONS Partner Geography'] = table['ONS Partner Geography'].str[2:]
+# table['Industry'] = table['Industry'].str[2:]
+#%%
+#trimming the code and description columns would have left some unwanted spaces so removing them
+# TODO Rich - might un comment these depending on previous TODO
+# table['Industry'] = table['Industry'].str.strip()
+# table['Commodity'] = table['Commodity'].str.strip()
+# table['ONS Partner Geography'] = table['ONS Partner Geography'].str.strip()
+table['Industry Code'] = table['Industry Code'].str.strip()
+table['Commodity Code'] = table['Commodity Code'].str.strip()
+table['ONS Partner Geography Code'] = table['ONS Partner Geography Code'].str.strip()
+
+# %%
+# temporarily replace non numeric codes. picked 99 so non-numeric codes go at end of table and don't think it's being used by others
+non_numeric_codes_to_replace = {
+'Commodity Code' : { 'T' : '99', '7E' : '99', '7M' : '99' ,'8O': '99'} # TODO Rich - search a quicker way to set them all to 99
+,'Industry Code': {'U':'99'}
+}
+
+table = table.replace(non_numeric_codes_to_replace) 
+
+# %%
+#convert codes to int so i can sort later. need to replace letters with numbers first then change back later
+table['Commodity Code']= table['Commodity Code'].astype(int)
+table['Industry Code'] = table['Industry Code'].astype(int)
+
 table.head(10)
-# -
+# %%
+# sort column order
+table = table.sort_values(['Period', 'ONS Partner Geography Code','Industry Code','Commodity Code'], ascending = (False, True, True, True))
 
+# TODO Rich - del columns no longer needed...might come back and put them in depending on previous
+del table['Industry Code']
+del table['Commodity Code']
+del table['ONS Partner Geography Code']
+
+# %%
 table['Period'] = 'year/' + table['Period'].str[0:4]
 
-#table = table[['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type', 'Value', 'Unit', 'Marker']]
-table = table[['ONS Partner Geography', 'Period','Flow','Commodity', 'Industry', 'Value', 'Marker']]
 
+#%%
+#rename columns
+table.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
+
+# %%
+#reorder columns
+table = table[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value', 'Marker']]
+
+#%%
 
 cubes.add_cube(scraper1, table, title)
 cubes.output_all()
-
-trace.render("spec_v1.html")
-
-# +
-#table['Industry'].unique()
-
-# +
-#table['Commodity'].unique()
-
-# +
-#print(scraper1.dataset.title)
-#print(scraper2.dataset.comment)
-# -
-
-
