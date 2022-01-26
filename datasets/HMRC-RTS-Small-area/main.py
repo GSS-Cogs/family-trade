@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[13]:
 
 
 import pandas as pd
@@ -12,7 +12,7 @@ scraper = Scraper(seed='info.json')
 scraper
 
 
-# In[2]:
+# In[14]:
 
 
 scraper.select_dataset(latest=True)
@@ -25,13 +25,13 @@ dataset_year = int(year_cell.value.replace(' data', ''))
 dataset_year
 
 
-# In[3]:
+# In[15]:
 
 
 tidied_tabs = []
 
 
-# In[4]:
+# In[16]:
 
 
 tab = tabs['T1 ITL1 (Summary Data)']
@@ -132,7 +132,7 @@ tidy = tidy[['Year', 'ITL Geography','HMRC Partner Geography','Flow','SITC 4','M
 tidied_tabs.append(tidy)
 
 
-# In[5]:
+# In[17]:
 
 
 tab = tabs['T2 ITL2']
@@ -223,7 +223,7 @@ tidy =tidy[['Year', 'ITL Geography','HMRC Partner Geography','Flow','SITC 4','Me
 tidied_tabs.append(tidy)
 
 
-# In[6]:
+# In[18]:
 
 
 tab = tabs['T5 ITL3'] #Current releases
@@ -315,7 +315,7 @@ tidy = tidy[(tidy['Marker'] != 'below-threshold-traders') & (tidy['Value'].notna
 tidied_tabs.append(tidy)
 
 
-# In[7]:
+# In[19]:
 
 
 tab = tabs['T3 ITL2 SITC Section'] #Current releases
@@ -430,7 +430,7 @@ tidy['SITC 4'].unique()
 tidied_tabs.append(tidy)
 
 
-# In[8]:
+# In[20]:
 
 
 tab = tabs['T4 ITL2 Partner Country'] #Current releases
@@ -571,14 +571,14 @@ tidy =tidy[['Year','ITL Geography','HMRC Partner Geography','Flow','SITC 4','Mea
 tidied_tabs.append(tidy)
 
 
-# In[9]:
+# In[21]:
 
 
 table = pd.concat(tidied_tabs)
 table.count()
 
 
-# In[10]:
+# In[22]:
 
 
 import numpy
@@ -597,17 +597,20 @@ table['Unit'] = 'gbp-million'
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 
-# In[11]:
+# In[23]:
 
 
 table['HMRC Partner Geography'] = table.apply(lambda x: 'all' if x['HMRC Partner Geography'] == 'europe' else x['HMRC Partner Geography'], axis = 1)
 
 table['ITL Geography'] = table.apply(lambda x: x['ITL Geography'].lower() if 'UN' in x['ITL Geography'] else x['ITL Geography'], axis = 1)
 
+table['Value'] = table.apply(lambda x: x['Value'] if pd.isnull(x['Marker']) else 0, axis = 1)
+# Make sure all the observations with markers have 0 in the value field
+
 scraper.dataset.comment = """HMRC experimental statistics that subdivide the existing Regional Trade in Goods Statistics (RTS) into smaller UK geographic areas (ITL2 and ITL3)."""
 
 
-# In[12]:
+# In[24]:
 
 
 
