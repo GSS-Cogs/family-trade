@@ -1,20 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[13]:
+# In[1]:
 
 
 import pandas as pd
 from gssutils import *
 import json
 
-info = json.load(open('info.json'))
 scraper = Scraper(seed='info.json')
-cubes = Cubes('info.json')
 scraper
 
 
-# In[14]:
+# In[2]:
 
 
 scraper.select_dataset(latest=True)
@@ -27,13 +25,13 @@ dataset_year = int(year_cell.value.replace(' data', ''))
 dataset_year
 
 
-# In[15]:
+# In[3]:
 
 
 tidied_tabs = []
 
 
-# In[16]:
+# In[4]:
 
 
 tab = tabs['T1 ITL1 (Summary Data)']
@@ -134,7 +132,7 @@ tidy = tidy[['Year', 'ITL Geography','HMRC Partner Geography','Flow','SITC 4','M
 tidied_tabs.append(tidy)
 
 
-# In[17]:
+# In[5]:
 
 
 tab = tabs['T2 ITL2']
@@ -225,7 +223,7 @@ tidy =tidy[['Year', 'ITL Geography','HMRC Partner Geography','Flow','SITC 4','Me
 tidied_tabs.append(tidy)
 
 
-# In[18]:
+# In[6]:
 
 
 tab = tabs['T5 ITL3'] #Current releases
@@ -317,7 +315,7 @@ tidy = tidy[(tidy['Marker'] != 'below-threshold-traders') & (tidy['Value'].notna
 tidied_tabs.append(tidy)
 
 
-# In[19]:
+# In[7]:
 
 
 tab = tabs['T3 ITL2 SITC Section'] #Current releases
@@ -432,7 +430,7 @@ tidy['SITC 4'].unique()
 tidied_tabs.append(tidy)
 
 
-# In[20]:
+# In[8]:
 
 
 tab = tabs['T4 ITL2 Partner Country'] #Current releases
@@ -573,14 +571,14 @@ tidy =tidy[['Year','ITL Geography','HMRC Partner Geography','Flow','SITC 4','Mea
 tidied_tabs.append(tidy)
 
 
-# In[21]:
+# In[9]:
 
 
 table = pd.concat(tidied_tabs)
 table.count()
 
 
-# In[22]:
+# In[10]:
 
 
 import numpy
@@ -599,7 +597,7 @@ table['Unit'] = 'gbp-million'
 table.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 
 
-# In[23]:
+# In[11]:
 
 
 table['HMRC Partner Geography'] = table.apply(lambda x: 'all' if x['HMRC Partner Geography'] == 'europe' else x['HMRC Partner Geography'], axis = 1)
@@ -609,11 +607,14 @@ table['ITL Geography'] = table.apply(lambda x: x['ITL Geography'].lower() if 'UN
 scraper.dataset.comment = """HMRC experimental statistics that subdivide the existing Regional Trade in Goods Statistics (RTS) into smaller UK geographic areas (ITL2 and ITL3)."""
 
 
-# In[24]:
+# In[12]:
 
 
 
 scraper.dataset.family = 'trade'
-cubes.add_cube(scraper, table, "HMRC RTS Small area")
-cubes.output_all()
+
+table.to_csv('observations.csv', index=False)
+
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 
