@@ -97,16 +97,12 @@ for (name, direction), tab in tabs.items():
         continue
     display(f'Processing tab {name}: {direction}')
     
-#     # Add transformTrace
-    columns = ["Investment Direction", "Year", "International Trade Basis", "FDI Area", "FDI Component", "FDI Industry"]
-    
     # Set anchors for header row
     top_right = tab.filter('£ million')
     top_right.assert_one()
     left_top = tab.filter('EUROPE').by_index(1)
     
     top_row = (left_top.fill(UP).fill(RIGHT) & top_right.expand(LEFT).fill(DOWN)).is_not_blank().is_not_whitespace()
-    print(tab.name)
     dims = []
     dims.append(HDim(top_row, 'top', DIRECTLY, ABOVE))
     
@@ -280,9 +276,10 @@ observations['FDI Area'] = observations['FDI Area'].map(lambda x: fix.get(x, x))
 observations.to_csv('foreign_direct_investment-observations.csv', index = False)
 
 catalog_metadata: CatalogMetadata = CatalogMetadata(
-    title = "Foreign direct investment involving UK companies (directional): inward",
-    summary = "Annual statistics on the investment of foreign companies into the UK, including for investment flows, positions and earnings.",
-    description = "The sum of constituent items may not always agree exactly with the totals shown due to rounding. \
+    title = "Foreign direct investment involving UK companies (directional)",
+    summary = "Annual statistics on the investment of foreign companies into the UK, including for investment flows, positions and earnings into the UK and of UK companies abroad.",
+    description = "Inward and Outward reference table including data for flows, positions and earnings. \
+The sum of constituent items may not always agree exactly with the totals shown due to rounding. \
 A negative sign before values indicates a net disinvestment in the UK. \
 Component breakdown excludes the activities of private property, public corporations and bank holding companies.These are included in the total.",
     identifier = "ons-foreign-direct-investment-involving-uk-companies",
@@ -295,7 +292,8 @@ Component breakdown excludes the activities of private property, public corporat
         "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation"
     ],
     landing_page_uris = [
-        "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompanies2013inwardtables"
+        "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompanies2013inwardtables",
+        "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompaniesoutwardtables"
     ],
     creator_uri = "https://www.gov.uk/government/organisations/office-for-national-statistics",
     publisher_uri = "https://www.gov.uk/government/organisations/office-for-national-statistics",
