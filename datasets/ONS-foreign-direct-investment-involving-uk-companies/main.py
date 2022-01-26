@@ -93,7 +93,6 @@ for (name, direction), tab in tabs.items():
     if '.' not in name:
         continue
     major, minor = name.split('.')
-    # print(major)
     if major not in ['2', '3', '4']:
         continue
     display(f'Processing tab {name}: {direction}')
@@ -110,7 +109,6 @@ for (name, direction), tab in tabs.items():
     print(tab.name)
     dims = []
     dims.append(HDim(top_row, 'top', DIRECTLY, ABOVE))
-    # display(dims)
     
     # Select all the footer info as "bottom_block"
     bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown due to rounding.')
@@ -140,7 +138,6 @@ for (name, direction), tab in tabs.items():
         left_col = left_col - to_remove
 
     left_dim = HDim(left_col, "FDI Area", CLOSEST, UP)
-    # print(left_dim)
     
     for cell, replace in overrides:
         left_dim.AddCellValueOverride(cell, replace)
@@ -280,54 +277,32 @@ observations['FDI Area'] = observations['FDI Area'].map(lambda x: fix.get(x, x))
 
 
 # +
-# metadata.title = metadata.title.replace(': inward', '')
-# metadata.comment = 'Inward reference table including data for flows, positions and earnings.'
-# metadata.description = metadata.description + """
-
-# The sum of constituent items may not always agree exactly with the totals shown due to rounding.								
-# A negative sign before values indicates a net disinvestment in the UK.															
-# Component breakdown excludes the activities of private property, public corporations and bank holding companies.  These are included in the total. 															
-# """
-
-# -
-
-metadata.title
-
-observations['FDI Component'].unique()
-
-# +
 observations.to_csv('foreign_direct_investment-observations.csv', index = False)
 
 catalog_metadata: CatalogMetadata = CatalogMetadata(
     title = "Foreign direct investment involving UK companies (directional): inward",
     summary = "Annual statistics on the investment of foreign companies into the UK, including for investment flows, positions and earnings.",
     description = "The sum of constituent items may not always agree exactly with the totals shown due to rounding. \
-        A negative sign before values indicates a net disinvestment in the UK. \
-            Component breakdown excludes the activities of private property, public corporations and bank holding companies.These are included in the total.",
+A negative sign before values indicates a net disinvestment in the UK. \
+Component breakdown excludes the activities of private property, public corporations and bank holding companies.These are included in the total.",
     identifier = "ons-foreign-direct-investment-involving-uk-companies",
-    keywords: [
+    keywords = [
         "business investment",
         "stocks",
         "investment flows"
     ],
-    theme_uris: [
+    theme_uris = [
         "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation"
     ],
-    landing_page_uris: [
+    landing_page_uris = [
         "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompanies2013inwardtables"
     ],
-    creator_uri: "https://www.gov.uk/government/organisations/office-for-national-statistics",
-    publisher_uri: "https://www.gov.uk/government/organisations/office-for-national-statistics",
-    license_uri: "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-    dataset_issued: "2020-12-21",
-    dataset_modified: "2022-01-25T12:53:20.941413+00:00",
-    public_contact_point_uri: "mailto:fdi@ons.gov.uk"
+    creator_uri = "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    publisher_uri = "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    license_uri = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    dataset_issued = "2020-12-21",
+    dataset_modified = "2022-01-25T12:53:20.941413+00:00",
+    public_contact_point_uri = "mailto:fdi@ons.gov.uk"
 )
 
 catalog_metadata.to_json_file('foreign_direct_investment-catalog-metadata.json')
-
-# +
-# inward_scraper
-# -
-
-
