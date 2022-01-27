@@ -1,0 +1,78 @@
+{
+  "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
+  "id": "ons-foreign-direct-investment-involving-uk-companies",
+  "title": "Foreign direct investment involving UK companies: inward",
+  "publisher": "Office for National Statistics",
+  "description": "Annual statistics on the investment of foreign companies into the UK, including for investment flows, positions and earnings.",
+  "landingPage": "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompanies2013inwardtables",
+  "datasetNotes": [
+    "On landing page, latest version"
+  ],
+  "published": "2020-02-06",
+  "families": [
+    "Trade"
+  ],
+  "extract": {
+    "source": "XLS",
+    "stage": "Done"
+  },
+  "transform": {
+    "airtable": [
+      "reclbpcTgt5imCd6y",
+      "recoIg2XstRRBKPfL"
+    ],
+    "main_issue": 28,
+    "columns": {
+      "Investment Direction": {
+        "type": "dimension",
+        "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+        "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+investment-direction}"
+      },
+      "Year": {
+        "type": "dimension",
+        "new": {
+          "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+          "codelist": true
+        },
+        "value": "http://reference.data.gov.uk/id/year/{+year}"
+      },
+      "FDI Component": {
+        "type": "dimension",
+        "uri": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",
+        "value": "http://gss-data.org.uk/def/trade/concept/fdi-component/{+fdi-component}"
+      },
+      "FDI Area": {
+        "type": "dimension",
+        "new": {
+          "codelist": "./codelists/fdi-area.csv-metadata.json"
+        }
+      },
+      "FDI Industry": {
+        "type": "dimension",
+        "uri": "http://gss-data.org.uk/def/trade/property/dimension/fdi-industry",
+        "value": "http://gss-data.org.uk/def/trade/concept/fdi-industry/{+fdi-industry}"
+      },
+      "International Trade Basis": {
+        "type": "dimension",
+        "uri": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
+        "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international-trade-basis}"
+      },
+      "Value": {
+        "type": "observations",
+        "measure": {
+          "label": "count"
+        },
+        "unit": {
+          "label": "gbp-million"
+        }
+      },
+      "Marker": {
+        "type": "attribute",
+        "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+        "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
+      }
+    }
+  },
+  "sizingNotes": "",
+  "notes": "Published in PMD combined with FDI: outward"
+}
