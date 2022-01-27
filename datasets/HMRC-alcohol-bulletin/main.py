@@ -17,8 +17,8 @@ def left(s, amount):
 def right(s, amount):
     return s[-amount:]
 # %%
-metadata = Scraper(seed='alcohol_bulletin_clearances-info.json')
-distribution = metadata.distribution(latest = True, mediaType=ODS)
+scraper = Scraper(seed='info.json')
+distribution = scraper.distribution(latest = True, mediaType=ODS)
 datasetTitle = distribution.title
 
 # %%
@@ -47,47 +47,101 @@ for tab_name in tabs_names_to_process:
         anchor = tab.excel_ref('A8')
     elif tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
-    
+
     alcohol_type = tab.name #will neeed to be fixed during post ptocessing.
     period = anchor.shift(0,1).expand(DOWN).is_not_blank().is_not_whitespace()
-    bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace() #unit is held at end inside brackets.
+    clearance_origin = anchor.fill(RIGHT).is_not_blank().is_not_whitespace() #other dimensions and unit is held within this dimension, will be broken out during post processing.
     unwanted = tab.filter(contains_string("Table")).expand(RIGHT)
-    observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace() - unwanted
+    observations = clearance_origin.fill(DOWN).is_not_blank().is_not_whitespace() - unwanted
+    
+    #remove duplicate cells and defining observations based on tab
+    if tab_name == tabs_names_to_process[1]:
+        observations = observations - tab.excel_ref('J8').expand(RIGHT).expand(DOWN) 
+    elif tab_name == tabs_names_to_process[2]:
+        observations = observations - tab.excel_ref('J7').expand(RIGHT).expand(DOWN) 
+    elif tab_name == tabs_names_to_process[3]:
+        observations = observations - tab.excel_ref('K5').expand(RIGHT).expand(DOWN) 
+    
     
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
-        HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
+        HDim(clearance_origin, 'Clearance Origin', DIRECTLY, ABOVE),
         HDimConst("Alcohol Type", tab.name),
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     df = tidy_sheet.topandas()
-    #add unit and removed from end of Bulletin Type. 
-    df['Unit'] = df['Bulletin Type'].str.extract('.*\((.*)\).*')
+    #add unit and removed from end of Clearance Origin. 
+    df['Unit'] = df['Clearance Origin'].str.extract('.*\((.*)\).*')
     df["Unit"] = df["Unit"].map(lambda x: pathify(x))
     df['Unit'] = df['Unit'].str.replace("ps-million","gbp-million").str.strip()
-    df['Bulletin Type'] = df['Bulletin Type'].str.replace(r"\(.*\)","").str.strip().str.lower()
-    df['Alcohol Type'] = df['Alcohol Type'].str.lower()
-    #add Measure Type 
-    df["Measure Type"] = df["Bulletin Type"].map(lambda x: "clearances" if "clearances" in x else 
-                                    ("duty-receipts" if "receipts" in x else 
-                                     ("tax" if "production" in x else x)))
+    df['Clearance Origin'] = df['Clearance Origin'].str.replace(r"\(.*\)","").str.strip().str.lower()
     tidied_sheets.append(df)
 
 # %%
-#Post Processing
+#bring sheets together and start Post Processing
 df = pd.concat(tidied_sheets, sort = True).fillna('') 
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
-#Fixing Alcohol Type to be either ; beer, cider, wine, made wine or spirits
-df.loc[(df['Bulletin Type'].str.contains("beer")) , 'Alcohol Type'] = 'beer'
-df.loc[(df['Bulletin Type'].str.contains("cider")) , 'Alcohol Type'] = 'cider'
-df.loc[(df['Alcohol Type'].str.contains("beer_duty_and_cider_duty_tables")) , 'Alcohol Type'] = 'all'
-df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if "wine" in x else 
-                                    ("made wine" if "made_wine" in x else 
-                                     ("spirits" if "spirits" in x else x)))
-df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
-df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: pathify(x))
+# add Measure Type 
+df["Measure Type"] = df["Clearance Origin"].map(lambda x: "clearances" if "clearances" in x else 
+                                    ("alcohol-duty-receipts" if "total alcohol duty receipts" in x else 
+                                     ("wine-duty-receipts" if "total wine duty receipts" in x else
+                                      ('production' if 'production' in x else 
+                                       ("spirits-duty-receipts" if "total spirits duty receipts" in x else 
+                                        ("beer-duty-receipts" if "beer duty receipts" in x else 
+                                         ("cider-duty-receipts" if "total cider duty receipts" in x else x )))))))
+                                        
+# fix Alcohol Type
+df['Alcohol Type'] = df['Alcohol Type'].str.lower()
+df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "made-wine" if "(made_wine)" in x else 
+                                    ("wine" if "wine" in x else 
+                                     ("spirits" if "spirits" in x else 
+                                      ("beer-and-cider" if "beer_duty_and_cider_duty_tables" in x else  x))))
+df.loc[(df['Clearance Origin'].str.contains("beer")) , 'Alcohol Type'] = 'beer'
+df.loc[(df['Clearance Origin'].str.contains("cider")) , 'Alcohol Type'] = 'cider'
 
+# fix Alcohol sub type
+df['Alcohol Sub Type'] = df['Clearance Origin'].map(lambda x: "still" if "still" in x else 
+                                    ("sparkling" if "sparkling" in x else 
+                                     ("uk-potable" if "uk potable spirits" in x else
+                                      ("uk-malt" if "uk malt whiskey" in x else
+                                       ("uk-grain-and-blend" if "uk grain and blend" in x else
+                                        ('uk' if "uk beer production" in x else
+                                         ('uk-registered' if "uk registered clearances" in x else  
+                                            ("all" if "total" in x else
+                                             ("all" if "clearances" in x else x )))))))))
+#fix Alcohol Content 
+df['Alcohol Content'] = df['Clearance Origin'].map(lambda x: "up-to-15" if "up to 15% abv" in x else
+                                                ("over-15" if "over 15% abv" in x else 
+                                                 ("over-5.5" if "over 5.5% abv" in x else 
+                                                  ("1.2-to-5.5" if "1.2% to 5.5% abv" in x else 
+                                                   ("5.5-to-15" if "5.5% to 15% abv" in x else 'all' )))))
+#fix Clearance Origin
+df['Clearance Origin'] = df['Clearance Origin'].map(lambda x:"ex-warehouse-and-ex-ship" if "ex-warehouse and ex-ship clearances" in x else
+                                                    ("ex-ship" if "ex-ship clearances" in x else
+                                                     ("ex-warehouse" if "ex-warehouse clearances" in x else
+                                                       ("uk-origin" if "uk origin clearances" in x else (
+                                                         ('ex-ship' if "ex-ship and other clearances" in x 
+                                                           else "all"))))))
+
+#Fix up units / Measure Type
+f1=((df['Alcohol Type'].str.contains("spirits")) & (df["Measure Type"] == 'clearances'))
+df.loc[f1,'Measure Type'] = "clearances-of-alcohol"
+df.loc[f1,'Unit'] = "hectolitres"
+
+f1=((df['Alcohol Type'].str.contains("spirits")) & (df["Measure Type"] == 'production'))
+df.loc[f1,'Measure Type'] = "production-of-alcohol"
+df.loc[f1,'Unit'] = "hectolitres"
+
+f1=((df['Alcohol Type'].str.contains("beer")) & (df["Measure Type"] == 'production'))
+df.loc[f1,'Measure Type'] = "production-of-alcohol"
+df.loc[f1,'Unit'] = "thousand-hectolitres"
+
+f1=((df['Unit'].str.contains("thousand-hectolitres-of-alcohol")) & (df["Measure Type"] == 'clearances'))
+df.loc[f1,'Measure Type'] = "clearances-of-alcohol"
+df.loc[f1,'Unit'] = "thousand-hectolitres"
+
+# %%
 #Fixing Marker column : '', '[x]', '[d]' and taking provisonal / revised from period column. 
 df = df.replace({'Marker' : {'[x]' : 'not-available', '[d]':'data-not-provided'}})
 f1=((df['Period'].str.contains("provisional")) & (df["Marker"] == ''))
@@ -131,44 +185,18 @@ def date_time (date):
     else:
         return date
 df['Period'] =  df["Period"].apply(date_time)
-df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000'}})
+df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000'}}) #quick hack
 
 
 # Observations rounded to two decimal places
 df['Value'] = pd.to_numeric(df.Value, errors = 'coerce')
-df = df.round({"Value":2})
-df = df[[ 'Period', 'Alcohol Type', 'Bulletin Type','Value','Measure Type', 'Unit', 'Marker']].drop_duplicates()
-
-#Split out data into 3 seperate cubes depending on their Measure Type. 
-df_clearance = df[df['Measure Type'] == 'clearances']
-df_duty_re = df[df['Measure Type'] == 'duty-receipts']
-df_tax = df[df['Measure Type'] == 'tax']
-
+df = df.round({"Value":2}).fillna('') 
+df = df[[ 'Period', 'Alcohol Type', 'Alcohol Sub Type', 'Alcohol Content', 'Clearance Origin','Value','Measure Type', 'Unit', 'Marker']].drop_duplicates()
+df
+# %%
+df.to_csv('observations.csv', index=False)
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 
 # %%
-#Make a deep copy of scraper/metadata to alter for each cube.
-metadata_copy = copy.deepcopy(metadata)
 
-# %%
-#Cube 1 - Alcohol Bulletin - Clearances (Multi Unit, Single Measure Type)
-df_clearance.to_csv('alcohol_bulletin_clearances-observations.csv', index=False)
-catalog_metadata: CatalogMetadata = metadata_copy.as_csvqb_catalog_metadata()
-catalog_metadata.title = catalog_metadata.title + ' - Clearance'
-#catalog_metadata = metadata_copy.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('alcohol_bulletin_clearances-catalog-metadata.json')
-
-# %%
-#Cube 2 - Alcohol Bulletin - Duty Receipts (Multi Unit, Single Measure Type)
-df_duty_re.to_csv('alcohol_bulletin_duty_receipts-observations.csv', index=False)
-catalog_metadata: CatalogMetadata = metadata_copy.as_csvqb_catalog_metadata()
-catalog_metadata.title = catalog_metadata.title + ' - Duty Receipts'
-#catalog_metadata = metadata_copy.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('alcohol_bulletin_duty_receipts-catalog-metadata.json')
-
-# %%
-#Cube 3 - Alcohol Bulletin - Production (Multi Unit, Single Measure Type)
-df_tax.to_csv('alcohol_bulletin_production-observations.csv', index=False)
-catalog_metadata: CatalogMetadata = metadata_copy.as_csvqb_catalog_metadata()
-catalog_metadata.title = catalog_metadata.title + ' - Production'
-#catalog_metadata = metadata_copy.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('alcohol_bulletin_production-catalog-metadata.json')
