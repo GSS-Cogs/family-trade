@@ -7,13 +7,15 @@ from urllib.parse import urljoin
 df = pd.DataFrame()
 # -
 
-info = json.load(open('info.json')) 
-scraper = Scraper(seed="info.json")   
-scraper 
+info = json.load(open('dcms_sectors_economic_estimates-info.json')) 
+scraper = Scraper(seed="dcms_sectors_economic_estimates-info.json")   
+scraper
 
 #Distribution 2: Imports and Exports of services by sector 
 tabs = { tab.name: tab for tab in scraper.distributions[1].as_databaker() }
 list(tabs)
+
+tidied_sheets = []
 
 # Sheet : Imports 
 
@@ -47,6 +49,7 @@ dimensions = [
     HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
+tidied_sheets.append(tidy_sheet.topandas())
 
 
 # -
@@ -83,6 +86,10 @@ dimensions = [
     HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
+tidied_sheets.append(tidy_sheet.topandas())
+# -
+
+tidy = pd.concat(tidied_sheets, sort = True)
 
 # +
 
@@ -143,6 +150,8 @@ del tidy['Measure Type']
 del tidy['Unit']
 tidy = tidy.fillna('')
 
+tidy
+
 # +
 csvName = 'observations.csv'
 out = Path('out')
@@ -162,7 +171,7 @@ scraper.set_dataset_id(dataset_path)
 
 csvw_transform = CSVWMapping()
 csvw_transform.set_csv(out / csvName)
-csvw_transform.set_mapping(json.load(open('info.json')))
+csvw_transform.set_mapping(json.load(open('dcms_sectors_economic_estimates-info.json')))
 csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
 csvw_transform.write(out / f'{csvName}-metadata.json')
 
