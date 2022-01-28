@@ -203,8 +203,8 @@ del table['Commodity Code']
 del table['ONS Partner Geography Code']
 
 # %%
+#reformat period column
 table['Period'] = 'year/' + table['Period'].str[0:4]
-
 
 #%%
 #rename columns
