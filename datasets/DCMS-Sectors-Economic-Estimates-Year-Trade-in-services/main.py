@@ -12,7 +12,7 @@ scraper = Scraper(seed="dcms_sectors_economic_estimates-info.json")
 scraper
 
 #Distribution 2: Imports and Exports of services by sector 
-tabs = { tab.name: tab for tab in scraper.distributions[1].as_databaker() }
+tabs = { tab.name: tab for tab in scraper.distribution(title = lambda x: "Imports and Exports" in x).as_databaker() }
 list(tabs)
 
 tidied_sheets = []
@@ -21,35 +21,40 @@ tidied_sheets = []
 
 # +
 tab = tabs["Imports"]
-datasetTitle = 'dcms-sectors-economic-estimates-2018-trade-in-services'
-columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
-
-
+# datasetTitle = 'dcms-sectors-economic-estimates-2018-trade-in-services'
+# columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
+anchor = tab.excel_ref("A4")
 flow = "imports"
 
 
 period = "year/2018" #TAKEN FROM SHEET TITLE
 
 
-country = tab.excel_ref("A5").expand(DOWN)
+# country = tab.excel_ref("A5").expand(DOWN)
+country = tab.filter("Country").fill(DOWN).is_not_blank().is_not_whitespace()
 
 
-sector = tab.excel_ref("A3").expand(RIGHT).is_not_blank()
+row_3 = tab.filter("DCMS Sectors (exc Tourism and Civil Society)").expand(RIGHT).filter(lambda x: type(x.value) != "Audio Visual" not in x.value)
+column_7 = anchor.shift(7,0).expand(RIGHT)
+row_4 = anchor.shift(4, 0).expand(RIGHT)-column_7
+sector = row_3 | row_4
+savepreviewhtml(sector, fname=tab.name+"Preview.html")
 
 
 sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
 
 
-observations = country.waffle(sector_tpe).is_not_blank() 
-dimensions = [
-    HDimConst('Period', period),
-    HDimConst('Flow', flow),
-    HDim(country, 'Country', DIRECTLY, LEFT),
-    HDim(sector, 'Sector', CLOSEST, LEFT),
-    HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
-    ]
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-tidied_sheets.append(tidy_sheet.topandas())
+# observations = country.waffle(sector_tpe).is_not_blank() 
+
+# dimensions = [
+#     HDimConst('Period', period),
+#     HDimConst('Flow', flow),
+#     HDim(country, 'Country', DIRECTLY, LEFT),
+#     HDim(sector, 'Sector', CLOSEST, LEFT),
+#     HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
+#     ]
+# tidy_sheet = ConversionSegment(tab, dimensions, observations)
+# tidied_sheets.append(tidy_sheet.topandas())
 
 
 # -
@@ -77,7 +82,7 @@ sector = tab.excel_ref("A3").expand(RIGHT).is_not_blank()
 sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
 
 
-observations = country.waffle(sector_tpe).is_not_blank()  
+observations = country.waffle(sector_tpe).is_not_blank() 
 dimensions = [
     HDimConst('Period', period),
     HDimConst('Flow', flow),
@@ -153,34 +158,38 @@ tidy = tidy.fillna('')
 tidy
 
 # +
-csvName = 'observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / csvName, index = False)
+# csvName = 'observations.csv'
+# out = Path('out')
+# out.mkdir(exist_ok=True)
+# tidy.drop_duplicates().to_csv(out / csvName, index = False)
 
-scraper.dataset.family = 'trade'
-scraper.dataset.description = description
-scraper.dataset.comment = comment
-scraper.dataset.title = 'Sectors Economic Estimates 2018: Trade in services'
+# scraper.dataset.family = 'trade'
+# scraper.dataset.description = description
+# scraper.dataset.comment = comment
+# scraper.dataset.title = 'Sectors Economic Estimates 2018: Trade in services'
 
-#dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name) + '/pcn').lower()
-dataset_path = pathify(f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name).lower()
+# #dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name) + '/pcn').lower()
+# dataset_path = pathify(f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name).lower()
 
-scraper.set_base_uri('http://gss-data.org.uk')
-scraper.set_dataset_id(dataset_path)
+# scraper.set_base_uri('http://gss-data.org.uk')
+# scraper.set_dataset_id(dataset_path)
 
-csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / csvName)
-csvw_transform.set_mapping(json.load(open('dcms_sectors_economic_estimates-info.json')))
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-csvw_transform.write(out / f'{csvName}-metadata.json')
+# csvw_transform = CSVWMapping()
+# csvw_transform.set_csv(out / csvName)
+# csvw_transform.set_mapping(json.load(open('dcms_sectors_economic_estimates-info.json')))
+# csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
+# csvw_transform.write(out / f'{csvName}-metadata.json')
 
-with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
+# with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
+#     metadata.write(scraper.generate_trig())
 # -
 
 tidy
 
+tidy['Sector'].unique()
 
+tidy['Subsector'].unique()
+
+tidy['Flow'].unique()
 
 
