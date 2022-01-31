@@ -11,9 +11,51 @@ info = json.load(open('dcms_sectors_economic_estimates-info.json'))
 scraper = Scraper(seed="dcms_sectors_economic_estimates-info.json")   
 scraper
 
+# +
 #Distribution 2: Imports and Exports of services by sector 
-tabs = { tab.name: tab for tab in scraper.distribution(title = lambda x: "Imports and Exports" in x).as_databaker() }
-list(tabs)
+# tabs = { tab.name: tab for tab in scraper.distribution(title = lambda x: "Imports and Exports" in x).as_databaker() }
+# list(tabs)
+# -
+
+distribution = scraper.distribution(title = lambda x: "Imports and Exports" in x)
+distribution
+
+path = distribution.downloadURL
+
+df1 = pd.read_excel(path, "Imports")
+
+df1
+
+# +
+# df1 = df1.drop(labels = 0, axis = 0)
+# -
+
+df1.head()
+
+header_row = 1
+df1.columns = df1.iloc[header_row]
+
+
+df1 = df1.drop(header_row)
+df1 = df1.reset_index(drop = True)
+
+df1
+
+df1.columns = pd.MultiIndex.from_arrays([df1.columns, df1.iloc[1].values])
+df1 = df1.iloc[2:]
+
+df1
+
+# df1.index.nlevels 
+df1.columns.nlevels
+isinstance(df1.index, pd.MultiIndex)
+# isinstance(df1.keys(), pd.core.indexes.multi.MultiIndex)
+
+# +
+# tabs = distribution.as_pandas()
+# -
+
+tabs
 
 tidied_sheets = []
 
