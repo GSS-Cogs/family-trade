@@ -87,7 +87,7 @@ def set_measure_type(mt):
     elif "total wine duty receipts" in mt:
         return "wine-duty-receipts"
     elif "production" in mt:
-        return "production"
+        return "production-volume"
     elif "total spirits duty receipts" in mt:
         return "spirits-duty-receipts"
     elif "beer duty receipts" in mt:
@@ -96,7 +96,7 @@ def set_measure_type(mt):
         return "cider-duty-receipts"
     else:
         return "UNKNOWN"
-
+    
 def set_alcohol_type(mt):   
     if "(made_wine)" in mt:
         return "made-wine"
@@ -104,8 +104,6 @@ def set_alcohol_type(mt):
         return "wine"
     elif "spirits" in mt:
         return "spirits"
-    elif "production" in mt:
-        return "production"
     elif "beer_duty_and_cider_duty_tables" in mt:
         return "beer-and-cider"
     else:
@@ -201,12 +199,12 @@ f1=((df['Alcohol Type'].str.contains("spirits")) & (df["Measure Type"] == 'clear
 df.loc[f1,'Measure Type'] = "clearances-of-alcohol"
 df.loc[f1,'Unit'] = "hectolitres"
 
-f1=((df['Alcohol Type'].str.contains("spirits")) & (df["Measure Type"] == 'production'))
-df.loc[f1,'Measure Type'] = "production-of-alcohol"
+f1=((df['Alcohol Type'].str.contains("spirits")) & (df["Measure Type"] == 'production-volume'))
+df.loc[f1,'Measure Type'] = "production-volume-alocohol"
 df.loc[f1,'Unit'] = "hectolitres"
 
-f1=((df['Alcohol Type'].str.contains("beer")) & (df["Measure Type"] == 'production') & (df["Unit"] == 'thousand-hectolitres-of-alcohol'))
-df.loc[f1,'Measure Type'] = "production-of-alcohol"
+f1=((df['Alcohol Type'].str.contains("beer")) & (df["Measure Type"] == 'production-volume') & (df["Unit"] == 'thousand-hectolitres-of-alcohol'))
+df.loc[f1,'Measure Type'] = "production-volume-alocohol"
 df.loc[f1,'Unit'] = "thousand-hectolitres"
 
 f1=((df['Unit'].str.contains("thousand-hectolitres-of-alcohol")) & (df["Measure Type"] == 'clearances'))
