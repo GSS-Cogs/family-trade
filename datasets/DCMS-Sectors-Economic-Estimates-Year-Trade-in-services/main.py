@@ -17,44 +17,81 @@ list(tabs)
 
 tidied_sheets = []
 
+# +
+tab = tabs["Imports"]
+anchor = tab.excel_ref("A4")
+
+
+sector = tab.filter("DCMS Sectors (exc Tourism and Civil Society)").expand(RIGHT).is_not_blank().filter(lambda x: type(x.value) != "Audio Visual" not in x.value)
+column_7 = anchor.shift(7,0).expand(RIGHT)
+
+empty_delete = anchor.fill(RIGHT).filter(contains_string("Empty column"))
+
+del_sector_1 = anchor.shift(4,0)
+del_sector_2 = del_sector_1.shift(RIGHT)
+del_sector_3 = del_sector_2.shift(RIGHT)
+total_del_sector = del_sector_1 | del_sector_2 | del_sector_3 | empty_delete
+
+sub_sector = anchor.fill(RIGHT).is_not_blank().is_not_whitespace() - total_del_sector
+
+# country = anchor.fill(DOWN).is_not_blank().is_not_whitespace()
+
+observations = sub_sector.fill(DOWN).is_not_blank().is_not_whitespace()
+
+
+dimensions = [
+    HDim(sector, "Sector", CLOSEST, LEFT),
+    # HDim(country, "Country", DIRECTLY, LEFT),
+    HDim(sub_sector, "Sub-sector", DIRECTLY, ABOVE)
+]
+tidy_sheet = ConversionSegment(tab, dimensions, observations)
+# savepreviewhtml(tidy_sheet, fname=tab.name+"Preview.html")
+tidied_sheets.append(tidy_sheet.topandas())
+df = pd.concat(tidied_sheets, sort = True)
+# -
+
+df
+
+df.loc[df["Sector"] == "All UK service imports (2018 Pink Book estimate)", "Sub-sector"].unique()
+
 # Sheet : Imports 
 
 # +
-tab = tabs["Imports"]
-# datasetTitle = 'dcms-sectors-economic-estimates-2018-trade-in-services'
-# columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
-anchor = tab.excel_ref("A4")
-flow = "imports"
+# tab = tabs["Imports"]
+# # datasetTitle = 'dcms-sectors-economic-estimates-2018-trade-in-services'
+# # columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
+# anchor = tab.excel_ref("A4")
+# flow = "imports"
 
 
-period = "year/2018" #TAKEN FROM SHEET TITLE
+# period = "year/2018" #TAKEN FROM SHEET TITLE
 
 
-# country = tab.excel_ref("A5").expand(DOWN)
-country = tab.filter("Country").fill(DOWN).is_not_blank().is_not_whitespace()
+# # country = tab.excel_ref("A5").expand(DOWN)
+# country = tab.filter("Country").fill(DOWN).is_not_blank().is_not_whitespace()
 
 
-row_3 = tab.filter("DCMS Sectors (exc Tourism and Civil Society)").expand(RIGHT).filter(lambda x: type(x.value) != "Audio Visual" not in x.value)
-column_7 = anchor.shift(7,0).expand(RIGHT)
-row_4 = anchor.shift(4, 0).expand(RIGHT)-column_7
-sector = row_3 | row_4
-savepreviewhtml(sector, fname=tab.name+"Preview.html")
+# row_3 = tab.filter("DCMS Sectors (exc Tourism and Civil Society)").expand(RIGHT).filter(lambda x: type(x.value) != "Audio Visual" not in x.value)
+# column_7 = anchor.shift(7,0).expand(RIGHT)
+# row_4 = anchor.shift(4, 0).expand(RIGHT)-column_7
+# sector = row_3 | row_4
+# savepreviewhtml(sector, fname=tab.name+"Preview.html")
 
 
-sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
+# sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
 
 
-# observations = country.waffle(sector_tpe).is_not_blank() 
+# # observations = country.waffle(sector_tpe).is_not_blank() 
 
-# dimensions = [
-#     HDimConst('Period', period),
-#     HDimConst('Flow', flow),
-#     HDim(country, 'Country', DIRECTLY, LEFT),
-#     HDim(sector, 'Sector', CLOSEST, LEFT),
-#     HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
-#     ]
-# tidy_sheet = ConversionSegment(tab, dimensions, observations)
-# tidied_sheets.append(tidy_sheet.topandas())
+# # dimensions = [
+# #     HDimConst('Period', period),
+# #     HDimConst('Flow', flow),
+# #     HDim(country, 'Country', DIRECTLY, LEFT),
+# #     HDim(sector, 'Sector', CLOSEST, LEFT),
+# #     HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
+# #     ]
+# # tidy_sheet = ConversionSegment(tab, dimensions, observations)
+# # tidied_sheets.append(tidy_sheet.topandas())
 
 
 # -
@@ -108,9 +145,10 @@ tidy = tidy.replace({'Subsector' : {'Crafts4' : 'Cultural Crafts'}})
 tidy['Unit'] = "gbp-million"
 tidy['Measure Type'] = "count"
 
-# -
 
-tidy['Country'] = tidy['Country'].apply(pathify)
+# +
+# tidy['Country'] = tidy['Country'].apply(pathify)
+# -
 
 
 
