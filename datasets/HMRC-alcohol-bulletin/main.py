@@ -111,68 +111,54 @@ def set_alcohol_type(mt):
 
 def set_alcohol_sub_type(mt):   
     if "still" in mt:
-        return "still"
+        return "Still"
     elif "sparkling" in mt:
-        return "sparkling"
+        return "Sparkling"
     elif "uk potable spirits" in mt:
-        return "uk-potable"
+        return "UK Potable"
     elif "uk malt whiskey" in mt:
-        return "uk-malt"
+        return "Uk Malt"
     elif "uk grain and blend" in mt:
-        return "uk-grain-and-blend"
+        return "UK Grain and Blend"
     elif "uk beer production" in mt:
-        return "uk"
+        return "UK"
     elif "uk registered clearances" in mt:
-        return "uk-registered"
+        return "UK Registered"
     elif "ready to drink" in mt: 
-        return "ready-to-drink"
+        return "Ready to Drink"
     elif "total" in mt or "clearances" in mt: 
-        return "all"
+        return "All"
     else:
         return "UNKNOWN"
 
 def set_alcohol_content(mt):
     if "up to 15% abv" in mt:
-        return "up-to-15"
+        return "up to 15% abv"
     elif "over 15% abv" in mt:
-        return "over-15"
+        return "over 15% abv"
     elif "over 5.5% abv" in mt:
-        return "over-5.5"
+        return "over 5.5% abv"
     elif "1.2% to 5.5% abv" in mt: 
-        return "1.2-to-5.5"
+        return "1.2% to 5.5% abv"
     elif "5.5% to 15% abv" in mt: 
-        return "5.5-to-15"
+        return "5.5% to 15% abv"
     else:
-        return "all"
-
-def set_alcohol_content(mt):
-    if "up to 15% abv" in mt:
-        return "up-to-15"
-    elif "over 15% abv" in mt:
-        return "over-15"
-    elif "over 5.5% abv" in mt:
-        return "over-5.5"
-    elif "1.2% to 5.5% abv" in mt: 
-        return "1.2-to-5.5"
-    elif "5.5% to 15% abv" in mt: 
-        return "5.5-to-15"
-    else:
-        return "all"    
+        return "All"
+   
     
 def set_clearence_origin(mt):
     if "ex-warehouse and ex-ship clearances" in mt:
-        return "ex-warehouse-and-ex-ship"
+        return "Ex-warehouse and Ex-ship Clearances"
     elif "ex-ship clearances" in mt:
-        return "ex-ship"
+        return "Ex-ship"
     elif "ex-warehouse clearances" in mt:
-        return "ex-warehouse"
+        return "Ex-warehouse"
     elif "uk origin clearances" in mt: 
-        return "uk-origin"
+        return "UK Origin"
     elif "ex-ship and other clearances" in mt: 
-        return "ex-ship"
+        return "Ex-ship"
     else:
-        return "all" 
-    
+        return "All" 
 
 
 # %%
@@ -200,11 +186,11 @@ df.loc[f1,'Measure Type'] = "clearances-of-alcohol"
 df.loc[f1,'Unit'] = "hectolitres"
 
 f1=((df['Alcohol Type'].str.contains("spirits")) & (df["Measure Type"] == 'production-volume'))
-df.loc[f1,'Measure Type'] = "production-volume-alocohol"
+df.loc[f1,'Measure Type'] = "production-volume-alcohol"
 df.loc[f1,'Unit'] = "hectolitres"
 
 f1=((df['Alcohol Type'].str.contains("beer")) & (df["Measure Type"] == 'production-volume') & (df["Unit"] == 'thousand-hectolitres-of-alcohol'))
-df.loc[f1,'Measure Type'] = "production-volume-alocohol"
+df.loc[f1,'Measure Type'] = "production-volume-alcohol"
 df.loc[f1,'Unit'] = "thousand-hectolitres"
 
 f1=((df['Unit'].str.contains("thousand-hectolitres-of-alcohol")) & (df["Measure Type"] == 'clearances'))
@@ -260,7 +246,7 @@ df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999
 # Observations rounded to two decimal places
 df['Value'] = pd.to_numeric(df.Value, errors = 'coerce')
 df = df.round({"Value":2}).fillna('') 
-df = df[[ 'Period', 'Alcohol Type', 'Alcohol Sub Type', 'Alcohol Content', 'Clearance Origin','Value','Measure Type', 'Unit', 'Marker']].drop_duplicates()
+df = df[[ 'Period', 'Alcohol Type', 'Alcohol Sub Type', 'Alcohol Content', 'Clearance Origin','Value','Measure Type', 'Unit', 'Marker']]
 # %%
 df.to_csv('observations.csv', index=False)
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
