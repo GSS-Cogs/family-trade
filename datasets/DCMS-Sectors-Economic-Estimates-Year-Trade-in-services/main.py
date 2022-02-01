@@ -51,6 +51,67 @@ df1.columns.nlevels
 isinstance(df1.index, pd.MultiIndex)
 # isinstance(df1.keys(), pd.core.indexes.multi.MultiIndex)
 
+
+
+df2 = df1.T
+
+df2.head(20)
+
+# +
+# needed_vars = ["DCMS Sectors (exc Tourism and Civil Society)", 
+# "Creative Industries sub-sectors", 
+# "Digital Sector sub-sectors", 
+# "Culture Sector sub-sector", "All UK service imports (2018 Pink Book estimate)"]
+# df2.melt(id_vars=["Country"])
+
+# +
+# header_row = 0
+# df2.columns = df2.iloc[header_row]
+# -
+
+df2.index.names = ['sector', "sub-sector"]
+
+df2.head()
+
+df2.columns = df2.columns.astype(str)
+
+df2.columns.map(type)
+
+header_row = 0
+df2.columns = df2.iloc[header_row]
+
+df2
+
+df2.head()
+
+import numpy as np
+df2.drop(index = (np.nan, 'Country'))
+
+df2 = df2.reset_index()
+
+df2
+
+df2.reset_index(drop=True, inplace=True)
+
+df2
+
+df2.head(0)
+
+df2.set_index(["sector", "sub-sector"], inplace = True)
+
+df2.head(0)
+
+# +
+# df2 = df2.reset_index(level = "World")
+# -
+
+list(df2.columns)
+
+df2
+
+df2 = df2.drop(header_row)
+df2 = df2.reset_index(drop = True)
+
 # +
 # tabs = distribution.as_pandas()
 # -
