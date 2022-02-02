@@ -20,7 +20,7 @@ info = json.load(open('info.json'))
 
 # %%
 # get landing page(s) url to where data is located
-landingPage = info['landingPage']
+landingPage = info['landingPage'] # 
 landingPage
 
 # %%
@@ -29,7 +29,7 @@ scraper1 = Scraper(landingPage[0])
 scraper2 = Scraper(landingPage[1])
 
 # TODO find out what this is doing exactly
-scraper1.dataset.family = info['families']
+scraper1.dataset.family = info['families'] # 
 # %%
 
 scraper2.session
@@ -147,6 +147,7 @@ scraper2.dataset.description = descr
 #remove rows
 # TODO Rich - confused. i'm removing observations here if zero, but putting them back in two lines down...maybe it's totals
 table = table[table['OBS'] != 0] # remove rows with 0 values in observations
+# TODO TODO check what is being removed and put back in place
 
 # replace DATAMARKER values
 table.loc[table['DATAMARKER'].astype(str) == '..', 'DATAMARKER'] = 'suppressed' 
