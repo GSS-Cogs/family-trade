@@ -1,35 +1,22 @@
+# -*- coding: utf-8 -*-
 # %%
-# import glob
 from gssutils import *
-from gssutils.metadata import THEME
 from gssutils.metadata.mimetype import ODS
 import pandas as pd
-import pyexcel
-import messytables
-from io import BytesIO
-import numpy as np
-import json
-import copy 
 import datetime
-
-
-# %%
-import json
-import pandas as pd
-from gssutils import *
 from pandas import ExcelWriter
+import calendar
+import datetime
+from csvcubed.models.cube.qb.catalog import CatalogMetadata
 
-
+def left(s, amount):
+    return s[:amount]
+def right(s, amount):
+    return s[-amount:]
 # %%
-trace = TransformTrace()
-cubes = Cubes("info.json")
-
-scraper = Scraper(seed="info.json")
-
+scraper = Scraper(seed='info.json')
 distribution = scraper.distribution(latest = True, mediaType=ODS)
 datasetTitle = distribution.title
-columns = ["Period", "Marker", "Bulletin Type", "Alcohol Type", "Measure Type", "Unit"]
-
 
 # %%
 xls = pd.ExcelFile(distribution.downloadURL, engine="odf")
@@ -39,159 +26,188 @@ with ExcelWriter("data.xls") as writer:
     writer.save()
 tabs = loadxlstabs("data.xls")
 
-
 # %%
-# Old tab names
-#tabs_names_to_process = ["Wine_statistics", "Made_wine_statistics", "Spirits_statistics", "Beer_and_cider_statistics" ]
-# New tab names
+tidied_sheets = []
 tabs_names_to_process = ["Wine_Duty_(wine)_tables", "Wine_Duty_(made_wine)_tables", "Spirits_Duty_tables", "Beer_Duty_and_Cider_Duty_tables" ]
-
 for tab_name in tabs_names_to_process:
-
     # Raise an exception if one of our required tabs is missing
     if tab_name not in [x.name for x in tabs]:
         raise ValueError(f'Aborting. A tab named {tab_name} required but not found')
 
-    # Select the tab in question
     tab = [x for x in tabs if x.name == tab_name][0]
-    
-    trace.start(datasetTitle, tab, columns, distribution.downloadURL)
-    
     if tab_name == tabs_names_to_process[0]:
-        anchor = tab.excel_ref('A6')#.filter(contains_string("Table 1a:")).assert_one()
-    elif tab_name == tabs_names_to_process[1]:
         anchor = tab.excel_ref('A7')
+    elif tab_name == tabs_names_to_process[1]:
+        anchor = tab.excel_ref('A8')
     elif tab_name == tabs_names_to_process[2]:
-        anchor = tab.excel_ref('A5')
+        anchor = tab.excel_ref('A8')
     elif tab_name == tabs_names_to_process[3]:
         anchor = tab.excel_ref('A6')
 
-    period = anchor.expand(DOWN).is_not_blank().is_not_whitespace()
-    trace.Period("Taken from column A")
-
-    bulletin_type = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
-    trace.Bulletin_Type("Defined from column B obvious header and across")
-    #savepreviewhtml(bulletin_type)
-    alcohol_type = tab.name
-    trace.Alcohol_Type("Name of tabs in XLS sheet")
-
-    if tab_name == tabs_names_to_process[0]:
-        measure_type = "clearances duty-receipts"
-        unit = "hectolitres gbp-million"
-        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()
-
-    elif tab_name == tabs_names_to_process[1]:
-        measure_type = "clearances duty-receipts"
-        unit = "hectolitres gbp-million"
-        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)-tab.excel_ref("K6").expand(DOWN)
+    alcohol_type = tab.name #will neeed to be fixed during post ptocessing.
+    period = anchor.shift(0,1).expand(DOWN).is_not_blank().is_not_whitespace()
+    clearance_origin = anchor.fill(RIGHT).is_not_blank().is_not_whitespace() #other dimensions and unit is held within this dimension, will be broken out during post processing.
+    unwanted = tab.filter(contains_string("Table")).expand(RIGHT)
+    observations = clearance_origin.fill(DOWN).is_not_blank().is_not_whitespace() - unwanted
     
+    #remove duplicate cells and defining observations based on tab
+    if tab_name == tabs_names_to_process[1]:
+        observations = observations - tab.excel_ref('J8').expand(RIGHT).expand(DOWN) 
     elif tab_name == tabs_names_to_process[2]:
-        measure_type = "production clearances duty-receipts"
-        unit = "hectolitres-of-alcohol gbp-million"
-        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("J6").expand(DOWN)
-
+        observations = observations - tab.excel_ref('J7').expand(RIGHT).expand(DOWN) 
     elif tab_name == tabs_names_to_process[3]:
-        measure_type = "production clearances duty-receipts"
-        unit = "hectolitres-of-alcohol gbp-million"
-        observations = bulletin_type.fill(DOWN).is_not_blank().is_not_whitespace()-tab.excel_ref("K6").expand(DOWN)
+        observations = observations - tab.excel_ref('K5').expand(RIGHT).expand(DOWN) 
     
-    else:
-        raise ValueError('Aborting, we don\`t have handling for tab: {tab_name}')
-
-    trace.Measure_Type("Measure is different for different values")
-    trace.Unit("Unit is different for different values")
     
     dimensions = [
         HDim(period, 'Period', DIRECTLY, LEFT),
-        HDim(bulletin_type, 'Bulletin Type', DIRECTLY, ABOVE),
+        HDim(clearance_origin, 'Clearance Origin', DIRECTLY, ABOVE),
         HDimConst("Alcohol Type", tab.name),
-        HDimConst("Measure Type", measure_type),
-        HDimConst("Unit", unit)
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    
-    trace.with_preview(tidy_sheet)
-    trace.store("combined_dataframe", tidy_sheet.topandas())
-
+    df = tidy_sheet.topandas()
+    #add unit and removed from end of Clearance Origin. 
+    df['Unit'] = df['Clearance Origin'].str.extract('.*\((.*)\).*')
+    df["Unit"] = df["Unit"].map(lambda x: pathify(x))
+    df['Unit'] = df['Unit'].str.replace("ps-million","gbp-million").str.strip()
+    df['Clearance Origin'] = df['Clearance Origin'].str.replace(r"\(.*\)","").str.strip().str.lower()
+    tidied_sheets.append(df)
 
 # %%
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
+#bring sheets together and start Post Processing
+df = pd.concat(tidied_sheets, sort = True).fillna('') 
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
 
+#functions for post processing
+def set_measure_type(mt):   
+    if "clearances" in mt:
+        return "clearances"
+    elif "total alcohol duty receipts" in mt:
+        return "alcohol-duty-receipts"
+    elif "total wine duty receipts" in mt:
+        return "wine-duty-receipts"
+    elif "production" in mt:
+        return "production-volume"
+    elif "total spirits duty receipts" in mt:
+        return "spirits-duty-receipts"
+    elif "beer duty receipts" in mt:
+        return "beer-duty-receipts"
+    elif "total cider duty receipts" in mt:
+        return "cider-duty-receipts"
+    else:
+        return "UNKNOWN"
+    
+def set_alcohol_type(mt):   
+    if "(made_wine)" in mt:
+        return "made-wine"
+    elif "wine" in mt:
+        return "wine"
+    elif "spirits" in mt:
+        return "spirits"
+    elif "beer_duty_and_cider_duty_tables" in mt:
+        return "beer-and-cider"
+    else:
+        return "UNKNOWN"
+
+def set_alcohol_sub_type(mt):   
+    if "still" in mt:
+        return "Still"
+    elif "sparkling" in mt:
+        return "Sparkling"
+    elif "uk potable spirits" in mt:
+        return "UK Potable"
+    elif "uk malt whiskey" in mt:
+        return "Uk Malt"
+    elif "uk grain and blend" in mt:
+        return "UK Grain and Blend"
+    elif "uk beer production" in mt:
+        return "UK"
+    elif "uk registered clearances" in mt:
+        return "UK Registered"
+    elif "ready to drink" in mt: 
+        return "Ready to Drink"
+    elif "total" in mt or "clearances" in mt: 
+        return "All"
+    else:
+        return "UNKNOWN"
+
+def set_alcohol_content(mt):
+    if "up to 15% abv" in mt:
+        return "up to 15% abv"
+    elif "over 15% abv" in mt:
+        return "over 15% abv"
+    elif "over 5.5% abv" in mt:
+        return "over 5.5% abv"
+    elif "1.2% to 5.5% abv" in mt: 
+        return "1.2% to 5.5% abv"
+    elif "5.5% to 15% abv" in mt: 
+        return "5.5% to 15% abv"
+    else:
+        return "All"
+   
+    
+def set_clearence_origin(mt):
+    if "ex-warehouse and ex-ship clearances" in mt:
+        return "Ex-warehouse and Ex-ship Clearances"
+    elif "ex-ship clearances" in mt:
+        return "Ex-ship"
+    elif "ex-warehouse clearances" in mt:
+        return "Ex-warehouse"
+    elif "uk origin clearances" in mt: 
+        return "UK Origin"
+    elif "ex-ship and other clearances" in mt: 
+        return "Ex-ship"
+    else:
+        return "All" 
+
 
 # %%
-#check column Bulletin Type string contains the word clearances or Clearances and make Measure Type  = clearances
-df.loc[(df['Bulletin Type']).str.contains('clearances') | (df['Bulletin Type']).str.contains('Clearances'),'Measure Type']='clearances'
-#check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
-df.loc[(df['Bulletin Type']).str.contains('receipts'),'Measure Type']='duty-receipts'
-#check column Bulletin Type string contains the word receipts and make Measure Type  = duty-receipts
-df.loc[(df['Bulletin Type']).str.contains('production'),'Measure Type']='production'
+# add Measure Type 
+df["Measure Type"] = df["Clearance Origin"].apply(set_measure_type)
 
-#Setting the Unit based on Measure Type Column 
-df["Unit"] = df["Measure Type"].map(lambda x: "hectolitres" if x == "clearances" else 
-                                    ("gbp-million" if x == "duty-receipts" else 
-                                     ("hectolitres-of-alcohol" if x == "production" else "U")))
+# fix Alcohol Type
+df['Alcohol Type'] = df['Alcohol Type'].str.lower().apply(set_alcohol_type)
+df.loc[(df['Clearance Origin'].str.contains("beer")) , 'Alcohol Type'] = 'beer'
+df.loc[(df['Clearance Origin'].str.contains("cider")) , 'Alcohol Type'] = 'cider'
+df.loc[(df['Clearance Origin'].str.contains("whiskey")) , 'Alcohol Type'] = 'whiskey'
 
+# fix Alcohol sub type
+df['Alcohol Sub Type'] = df['Clearance Origin'].apply(set_alcohol_sub_type)
 
-# %%
-f1=(df['Bulletin Type'] =='Total alcohol duty receipts (£ million)')
-df.loc[f1,'Alcohol Type'] = 'all'
+#fix Alcohol Content 
+df['Alcohol Content'] = df['Clearance Origin'].apply(set_alcohol_content)
 
+#fix Clearance Origin
+df['Clearance Origin'] = df['Clearance Origin'].apply(set_clearence_origin)
 
-# %%
-df["Alcohol Type"] = df["Alcohol Type"].map(lambda x: "wine" if x == tabs_names_to_process[0] else
-                                    ("made-wine" if x == tabs_names_to_process[1] else
-                                     ("spirits" if x == tabs_names_to_process[2] else
-                                      ("beer-and-cider" if x == tabs_names_to_process[3] else x))))
+#Fix up units / Measure Type
+f1=((df['Alcohol Type'].str.contains("spirits")) & (df["Measure Type"] == 'clearances'))
+df.loc[f1,'Measure Type'] = "clearances-of-alcohol"
+df.loc[f1,'Unit'] = "hectolitres"
 
+f1=((df['Alcohol Type'].str.contains("spirits")) & (df["Measure Type"] == 'production-volume'))
+df.loc[f1,'Measure Type'] = "production-volume-alcohol"
+df.loc[f1,'Unit'] = "hectolitres"
 
-# %%
-df['Bulletin Type'] = df['Bulletin Type'].str.replace('clearances (hectolitres of alcohol)','clearances (alcohol)', regex=False)
-df['Bulletin Type'] = df['Bulletin Type'].str.replace('production (hectolitres of alcohol)','production (alcohol)', regex=False)
-df['Unit'] = df['Unit'].str.replace('hectolitres-of-alcohol','hectolitres', regex=False)
+f1=((df['Alcohol Type'].str.contains("beer")) & (df["Measure Type"] == 'production-volume') & (df["Unit"] == 'thousand-hectolitres-of-alcohol'))
+df.loc[f1,'Measure Type'] = "production-volume-alcohol"
+df.loc[f1,'Unit'] = "thousand-hectolitres"
 
+f1=((df['Unit'].str.contains("thousand-hectolitres-of-alcohol")) & (df["Measure Type"] == 'clearances'))
+df.loc[f1,'Measure Type'] = "clearances-of-alcohol"
+df.loc[f1,'Unit'] = "thousand-hectolitres"
 
-# %%
-df['Bulletin Type'] = df['Bulletin Type'].str.replace("(hectolitres)","")
-df['Bulletin Type'] = df['Bulletin Type'].str.replace("(£ million)","")
-df["Bulletin Type"] = df["Bulletin Type"].map(lambda x: pathify(x))
-
-
-# %%
-#N/As change to 0 and put not-applicable in Marker column
-df['Marker'].replace('N/A', 'not-applicable', inplace=True)
-f1=(df['Marker'] =='not-applicable')
-df.loc[f1,'Value'] = 0
-df['Period'] = df['Period'].str.strip()
-
-
-# %%
-# Marker column - requirements satisfied
-df['Marker'][df['Period'].str.contains("provisional")] = 'provisional'
-df['Period'] = df['Period'].str.replace('provisional','')
-df['Marker'][df['Period'].str.contains("revised")] = 'revised'
-df['Period'] = df['Period'].str.replace('revised','')
+#Fixing Marker column : '', '[x]', '[d]' and taking provisonal / revised from period column. 
+df = df.replace({'Marker' : {'[x]' : 'not-available', '[d]':'data-not-provided'}})
+f1=((df['Period'].str.contains("provisional")) & (df["Marker"] == ''))
+df.loc[f1,'Marker'] = "provisional"
+f1=((df['Period'].str.contains("revised")) & (df["Marker"] == ''))
+df.loc[f1,'Marker'] = "revised"
+df['Period'] = df['Period'].str.replace(r"\[.*\]","").str.strip()
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
-df['Period'] = df['Period'].str.strip()
-# As the value 2815(estimate) and 2460(estimate) in the spread sheet is not picked up by databaker properly
-# A quick fix is done to resolve the issue
-df['Value'][df.Marker == ',815 (estimate)'] = 2815
-df['Value'][df.Marker == ',460 (estimate)'] = 2460
-df = df.replace(np.nan, '', regex=True)
-df.loc[df['Marker'].str.contains('estimate'), 'Marker'] = 'estimate'
-
 
 # %%
-import calendar
-import datetime
-tables = ['Table 1a','Table 1b','Table 1c','Table 2a','Table 2b','Table 2c','Table 3a','Table 3b','Table 3c','Table 4a','Table 4b', 'Table 4c']
-for t in tables:
-    df = df[~df['Period'].str.contains(t)]
-df['Period'] = df['Period'].str.replace('[ [ ]]', '')
-df['Period'] = df['Period'].str.strip()
-
-
-# %%
+#Fixing period column 
 now = datetime.datetime.now()
 yrnow = now.year
 yrlast = yrnow - 1
@@ -205,16 +221,8 @@ for i in range(1,12):
         mthstr = str(i)
     df['Period'][df['Period'].str.contains(yrmthlast)] = 'month/' + str(yrlast) + '-' + mthstr
     df['Period'][df['Period'].str.contains(yrmthnow)] = 'month/' + str(yrnow) + '-' + mthstr
-
 df['Period'][df['Period'].str.contains(str(yrlast) + ' to ' + str(yrnow))] = 'government-year/' + str(yrlast) + '-' + str(yrnow)
 
-
-# %%
-#Period column 
-def left(s, amount):
-    return s[:amount]
-def right(s, amount):
-    return s[-amount:]
 def date_time (date):
     if len(date)  == 4:
         return 'year/' + left(date, 4)
@@ -232,59 +240,14 @@ def date_time (date):
     else:
         return date
 df['Period'] =  df["Period"].apply(date_time)
+df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000'}}) #quick hack
 
 
+# Observations rounded to two decimal places
+df['Value'] = pd.to_numeric(df.Value, errors = 'coerce')
+df = df.round({"Value":2}).fillna('') 
+df = df[[ 'Period', 'Alcohol Type', 'Alcohol Sub Type', 'Alcohol Content', 'Clearance Origin','Value','Measure Type', 'Unit', 'Marker']]
 # %%
-#quick fix for odd values 
-df = df.replace({'Period' : {'government-year/1999-1900' : 'government-year/1999-2000', 'December 2020' : 'month/2020-12'}})
-
-
-# %%
-df['Marker'] = df['Marker'].str.replace('[','')
-df['Marker'] = df['Marker'].str.replace(']','')
-df['Marker'] = df['Marker'].apply(pathify)
-df['Marker'].unique()
-
-
-# %%
-trace.render()
-
-# The multimeasures for this dataset is yet to be defined by DMs.
-# The way to proceed with cubes class for multimeasures is yet to be finalized.
-
-
-# %%
-# This is a multi-unit and multi-measure dataset so splitting up for now as not sure what is going on with anything anymore! :-(
-# Splitting data into 3 and changing scraper values based on output data
-cubes = Cubes("info.json")
-tchange = ['Clearances','Duty Receipts','Production']
-uchange = ['hectolitres', 'gbp-million', 'hectolitres']
-scraper.dataset.family = 'trade'
-for x in range(3): 
-    dat = df[df['Measure Type'] == pathify(tchange[x])]
-    scraper.dataset.title = f"Alcohol Bulletin - {tchange[x]}"
-    scraper.dataset.comment = f"Monthly {tchange[x]} statistics from the 4 different alcohol duty regimes administered by HM Revenue and Customs"
-    if x == 2:
-        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic spirits, beer and cider {tchange[x]}'  
-    else :
-        scraper.dataset.description = scraper.dataset.comment + f'\n Table of historic wine, made wine, spirits, beer and cider {tchange[x]}'
-    print(str(x) + " - " + scraper.dataset.title + " - " + pathify(tchange[x]))
-    #print(dat.columns)
-    with open("info.json", "r") as jsonFile:
-        data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = f"http://gss-data.org.uk/def/measure/{pathify(tchange[x])}"
-    data["transform"]["columns"]["Value"]["unit"] = f"http://gss-data.org.uk/def/concept/measurement-units/{uchange[x]}"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
-    del data
-    
-    if 'Measure Type' in dat.columns:
-        del dat['Measure Type']
-    if 'Unit' in dat.columns:
-        del dat['Unit']
-    
-    cubes.add_cube(copy.deepcopy(scraper), dat, scraper.dataset.title)
-#del df
-cubes.output_all()
-
-
+df.to_csv('observations.csv', index=False)
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
