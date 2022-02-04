@@ -1,18 +1,5 @@
 # -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.13.5
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
+# %%
 # +
 from gssutils import *
 import pandas as pd
@@ -27,7 +14,7 @@ metadata = Scraper(seed = 'foreign_direct_investment-info.json')
 
 inward_scraper = metadata.distribution(latest = True)
 #inward_scraper
-
+# %%
 #change to outward landing page.
 with open("foreign_direct_investment-info.json", "r") as jsonFile:
     data = json.load(jsonFile)
@@ -42,8 +29,8 @@ metadata_1 = Scraper(seed = 'foreign_direct_investment-info.json')
 
 outward_scraper = metadata_1.distribution(latest = True)
 #outward_scraper
-=======
 
+# %%
 # Collect together all tabs in one list of `((tab name, direction), tab)`
 
 tabs = {
@@ -51,7 +38,7 @@ tabs = {
     ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.as_databaker()}
 }
 #print(list(tabs.keys()))
-
+# %%
 # A common issue is where a dimension label is split over more than one cell.
 # The following function does a rudimentary search for these splits in a bag, returns a list of
 # pairs of cells and their replacement, along with a list of extraneous cells to remove
@@ -84,7 +71,7 @@ def split_overrides(bag, splits):
                         to_remove = to_remove | c
     return (overrides, to_remove)
 
-
+# %%
 tidied_sheets = []
 tables = []
 for (name, direction), tab in tabs.items():
@@ -96,7 +83,6 @@ for (name, direction), tab in tabs.items():
     if major not in ['2', '3', '4']:
         continue
     #display(f'Processing tab {name}: {direction}')
-
     
     # Set anchors for header row
     top_right = tab.filter('£ million')
@@ -203,13 +189,18 @@ for (name, direction), tab in tabs.items():
     table['International Trade Basis'] = table['Year'].map(lambda year: 'BPM5' if year < 2012 else 'BPM6')
     table['Investment Direction'] = direction
     tidied_sheets.append(table)
-
+# %%
 # +
 observations = pd.concat(tidied_sheets, sort = True)
 observations['Marker'] = observations['DATAMARKER'].map(
     lambda x: { '..' : 'disclosive',
                '-' : 'itis-nil'
         }.get(x, x))
+observations['Value'] = pd.to_numeric(observations['OBS'], errors = 'coerce')
+#drop columns no longer needed and duplicates where values have been repeated across some tabs.
+observations.drop(columns=['__x', '__y', '__tablename','DATAMARKER'],axis = 1, inplace = True)
+observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
+
 # --- Force Consistant labels ---:
 # The data producer is using different labels for the same thing within the same dataset
 # We need to force them to same
@@ -228,16 +219,13 @@ fix = {
 }
 observations['FDI Area'] = observations['FDI Area'].map(lambda x: fix.get(x, x))
 # -
-
+# %%
 #checking no duplicates
 observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
                              'FDI Area', 'FDI Component', 'FDI Industry'
                               ],keep=False)]
 observation_duplicate
-=======
-
-
-
+# %%
 # +
 observations.to_csv('foreign_direct_investment-observations.csv', index = False)
 
