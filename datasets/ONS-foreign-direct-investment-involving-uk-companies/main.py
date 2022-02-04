@@ -107,7 +107,7 @@ for (name, direction), tab in tabs.items():
     dims.append(HDim(top_row, 'top', DIRECTLY, ABOVE))
     
     # Select all the footer info as "bottom_block"
-    bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown due to rounding.')
+    bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown because of rounding.')
     bottom.assert_one()
     bottom_block = bottom.shift(UP).expand(RIGHT).expand(DOWN)
     
@@ -204,7 +204,14 @@ for (name, direction), tab in tabs.items():
 
 observations = pd.concat(tidied_sheets, sort = True)
 observations
+
+# +
+# Investment Direction	    Year	International Trade Basis	FDI Area	FDI Component	        FDI Industry	Value	Marker
+# outward	                2016	BPM6	                    new-zealand	total-net-fdi-abroad	all-activities	NaN	    disclosive
+# outward	                2016	BPM6	                    new-zealand	total-net-fdi-abroad	all-activities	1.0	    NaN
 # -
+
+observations['FDI Industry'].unique()
 
 observations['Marker'] = observations['DATAMARKER'].map(
     lambda x: { '..' : 'disclosive',
@@ -228,30 +235,55 @@ observations = observations[['Investment Direction', 'Year', 'International Trad
                              '__x', '__y', '__tablename']]
 # -
 
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
+observations
+
+# +
+# destinationFolder = Path('out')
+# destinationFolder.mkdir(exist_ok=True, parents=True)
 observations.drop(columns=['__x', '__y', '__tablename'],axis = 1, inplace = True)
-observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
+
+# There may be duplicates across other columns except "Value" column in the dataframe but what if the Value is different for duplicated rows across other columns. It won't be actually duplicates but valid observation.
+# observations.drop_duplicates(subset=observations.columns.difference(['Value', '__tablename']), inplace =True)
+# -
+
+observations
 
 # There are mutiple duplicate values due to empty cells from source data that makes error in Jenkins Those empty cells with no values are removed 
 
-observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
-                              ],keep=False)]
+# +
+# observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+#                              'FDI Area', 'FDI Component', 'FDI Industry'
+#                               ],keep=False)]
 
-observation_duplicate.columns.unique()
+# +
+# observation_duplicate.columns.unique()
 
-observations_unique = observations.drop_duplicates(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
-                              ],keep=False)
+# +
+# observation_duplicate
 
-observations.shape, observation_duplicate.shape, observations_unique.shape
+# +
+# observations_unique = observations.drop_duplicates(['Investment Direction', 'Year', 'International Trade Basis',
+#                              'FDI Area', 'FDI Component', 'FDI Industry'
+#                               ],keep=False)
 
-observations = observation_duplicate[observation_duplicate['Value'] != '']
+# +
+# observations.shape, observation_duplicate.shape, observations_unique.shape
 
-observations = pd.concat([observations_unique, observations])
+# +
+# observations = observation_duplicate[observation_duplicate['Value'] != '']
 
-observations.shape, observation_duplicate.shape, observations_unique.shape
+# +
+# observations
+
+# +
+# observations = pd.concat([observations_unique, observations])
+
+# +
+# observations
+
+# +
+# observations.shape, observation_duplicate.shape, observations_unique.shape
+# -
 
 # --- Force Consistant labels ---:
 # The data producer is using different labels for the same thing within the same dataset
@@ -271,6 +303,85 @@ fix = {
 }
 observations['FDI Area'] = observations['FDI Area'].map(lambda x: fix.get(x, x))
 
+
+duplicateRowsDF = observations[observations.duplicated(['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry'], keep=False)]
+duplicateRowsDF
+
+sorted_duplicates = duplicateRowsDF.sort_values(by = ['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
+sorted_duplicates
+
+
+sorted_duplicates.to_csv('sorted_duplicates.csv', index = False)
+
+no_duplicates = sorted_duplicates.drop_duplicates(subset=['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
+no_duplicates
+
+no_duplicates.to_csv('no_duplicates.csv', index = False)
+
+observations
+
+observations = observations.drop_duplicates(subset= observations.columns.difference(['Value']))
+
+observations
+
+observations = pd.concat([observations, no_duplicates])
+
+observations
+
+any_duplicates_again = observations[observations.duplicated(['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry'], keep=False)]
+
+any_duplicates_again
+
+sorted_any_duplicates_again = duplicateRowsDF.sort_values(by = ['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
+
+sorted_any_duplicates_again.to_csv('sorted_any_duplicates_again.csv', index = False)
+
+
+
+# +
+# all_duplicate_keys = observations.sort_values(by = ['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
+
+# +
+# all_duplicate_keys.drop_duplicates(subset=['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'], keep=False)
+
+# +
+# observations.loc[observations["Value"] == '', "Marker"]
+
+# +
+# observations.head()
+
+# +
+# observations.loc[observations['Value'] == '', 'Marker']
+# -
+
+# Select all duplicate rows based on multiple column names in list
+duplicateRowsDF = observations[observations.duplicated(['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry'], keep=False)]
+duplicateRowsDF
+
+# +
+# required = duplicateRowsDF.sort_values(by = ['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
+
+# +
+# required.to_csv('required.csv', index = False)
+
+# +
+# required_without_duplicates = required.drop_duplicates(subset=['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
+
+# +
+# required_without_duplicates.to_csv('required_without_duplicates.csv', index = False)
+
+# +
+# import numpy as np
+# for every_value in duplicateRowsDF['Value']:
+#     if every_value != '':
+#         print(every_value)
+
+# +
+
+# duplicateRowsDF.loc[duplicateRowsDF['Value'] != '', 'Marker']
+# -
+
+observations
 
 # +
 observations.to_csv('foreign_direct_investment-observations.csv', index = False)
@@ -304,3 +415,6 @@ Component breakdown excludes the activities of private property, public corporat
 )
 
 catalog_metadata.to_json_file('foreign_direct_investment-catalog-metadata.json')
+# -
+
+
