@@ -198,7 +198,7 @@ observations['Marker'] = observations['DATAMARKER'].map(
         }.get(x, x))
 observations['Value'] = pd.to_numeric(observations['OBS'], errors = 'coerce')
 #drop columns no longer needed and duplicates where values have been repeated across some tabs.
-observations.drop(columns=['__x', '__y', '__tablename','DATAMARKER'],axis = 1, inplace = True)
+observations.drop(columns=['__x', '__y', '__tablename','DATAMARKER','OBS'],axis = 1, inplace = True)
 observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
 
 # --- Force Consistant labels ---:
@@ -218,6 +218,7 @@ fix = {
     "other-asian": "other-asian-countries"
 }
 observations['FDI Area'] = observations['FDI Area'].map(lambda x: fix.get(x, x))
+observations
 # -
 # %%
 #checking no duplicates
