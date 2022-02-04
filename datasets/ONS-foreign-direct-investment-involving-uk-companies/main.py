@@ -6,9 +6,9 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.5
+#       jupytext_version: 1.13.0
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
 # ---
@@ -22,12 +22,13 @@ from csvcubed.models.cube.qb.catalog import CatalogMetadata
 from datetime import datetime
 
 metadata = Scraper(seed = 'foreign_direct_investment-info.json')
-display(metadata)
+#display(metadata)
 # -
 
 inward_scraper = metadata.distribution(latest = True)
-inward_scraper
+#inward_scraper
 
+#change to outward landing page.
 with open("foreign_direct_investment-info.json", "r") as jsonFile:
     data = json.load(jsonFile)
 data["landingPage"] = "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompaniesoutwardtables"
@@ -37,10 +38,10 @@ del data
 
 
 metadata_1 = Scraper(seed = 'foreign_direct_investment-info.json')
-display(metadata_1)
+#display(metadata_1)
 
 outward_scraper = metadata_1.distribution(latest = True)
-outward_scraper
+#outward_scraper
 
 # Collect together all tabs in one list of `((tab name, direction), tab)`
 
@@ -48,8 +49,7 @@ tabs = {
     ** {(tab.name.strip(), 'inward'): tab for tab in inward_scraper.as_databaker()},
     ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.as_databaker()}
 }
-print(list(tabs.keys()))
-
+#print(list(tabs.keys()))
 
 # A common issue is where a dimension label is split over more than one cell.
 # The following function does a rudimentary search for these splits in a bag, returns a list of
@@ -84,7 +84,6 @@ def split_overrides(bag, splits):
     return (overrides, to_remove)
 
 
-# +
 tidied_sheets = []
 tables = []
 for (name, direction), tab in tabs.items():
@@ -95,7 +94,7 @@ for (name, direction), tab in tabs.items():
     major, minor = name.split('.')
     if major not in ['2', '3', '4']:
         continue
-    display(f'Processing tab {name}: {direction}')
+    #display(f'Processing tab {name}: {direction}')
     
     # Set anchors for header row
     top_right = tab.filter('£ million')
@@ -142,12 +141,14 @@ for (name, direction), tab in tabs.items():
     dims.append(left_dim)
     
     if minor != '1':
-
         year_col = left_top.fill(RIGHT).is_number().filter(lambda x: x.value > 1900).by_index(1).expand(DOWN).is_number() - bottom_block
         dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
         obs = year_col.fill(RIGHT) & top_row.fill(DOWN)
+ 
+    if minor == '2' and major == '2':
+        obs = year_col.fill(RIGHT).is_not_blank() - top_right.fill(DOWN)
+    
     else:
-
         obs = left_col.fill(RIGHT) & top_row.fill(DOWN)
 
     cs = ConversionSegment(obs, dims, includecellxy=True)
@@ -186,7 +187,6 @@ for (name, direction), tab in tabs.items():
         table['FDI Industry'] = 'all-activities'
     # Disambiguate FDI Component between tabs 2.2 and 4.2
     if name == '2.2':
-
         table['FDI Component'] = table['FDI Component'].map(
             lambda x: 'fdi-' + x if not x.startswith('total-net-foreign-direct-investment-') else
             'total-net-fdi-' + x[len('total-net-foreign-direct-investment-'):]
@@ -202,88 +202,16 @@ for (name, direction), tab in tabs.items():
     table['Investment Direction'] = direction
     tidied_sheets.append(table)
 
-observations = pd.concat(tidied_sheets, sort = True)
-observations
-
 # +
-# Investment Direction	    Year	International Trade Basis	FDI Area	FDI Component	        FDI Industry	Value	Marker
-# outward	                2016	BPM6	                    new-zealand	total-net-fdi-abroad	all-activities	NaN	    disclosive
-# outward	                2016	BPM6	                    new-zealand	total-net-fdi-abroad	all-activities	1.0	    NaN
-# -
-
-observations['FDI Industry'].unique()
-
+observations = pd.concat(tidied_sheets, sort = True)
 observations['Marker'] = observations['DATAMARKER'].map(
     lambda x: { '..' : 'disclosive',
                '-' : 'itis-nil'
         }.get(x, x))
-
 observations['Value'] = pd.to_numeric(observations['OBS'], errors = 'coerce')
-
-from IPython.core.display import HTML
-for col in observations:
-    if col != 'Value':
-        observations[col] = observations[col].astype('category')
-        display(HTML(f'<h3>{col}</h3'))
-        display(observations[col].cat.categories)
-
-# +
-
-observations = observations[['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry',
-                             'Value', 'Marker',
-                             '__x', '__y', '__tablename']]
-# -
-
-observations
-
-# +
-# destinationFolder = Path('out')
-# destinationFolder.mkdir(exist_ok=True, parents=True)
-observations.drop(columns=['__x', '__y', '__tablename'],axis = 1, inplace = True)
-
-# There may be duplicates across other columns except "Value" column in the dataframe but what if the Value is different for duplicated rows across other columns. It won't be actually duplicates but valid observation.
-# observations.drop_duplicates(subset=observations.columns.difference(['Value', '__tablename']), inplace =True)
-# -
-
-observations
-
-# There are mutiple duplicate values due to empty cells from source data that makes error in Jenkins Those empty cells with no values are removed 
-
-# +
-# observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
-#                              'FDI Area', 'FDI Component', 'FDI Industry'
-#                               ],keep=False)]
-
-# +
-# observation_duplicate.columns.unique()
-
-# +
-# observation_duplicate
-
-# +
-# observations_unique = observations.drop_duplicates(['Investment Direction', 'Year', 'International Trade Basis',
-#                              'FDI Area', 'FDI Component', 'FDI Industry'
-#                               ],keep=False)
-
-# +
-# observations.shape, observation_duplicate.shape, observations_unique.shape
-
-# +
-# observations = observation_duplicate[observation_duplicate['Value'] != '']
-
-# +
-# observations
-
-# +
-# observations = pd.concat([observations_unique, observations])
-
-# +
-# observations
-
-# +
-# observations.shape, observation_duplicate.shape, observations_unique.shape
-# -
+#drop columns no longer needed and duplicates where values have been repeated across some tabs.
+observations.drop(columns=['__x', '__y', '__tablename','DATAMARKER'],axis = 1, inplace = True)
+observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
 
 # --- Force Consistant labels ---:
 # The data producer is using different labels for the same thing within the same dataset
@@ -302,86 +230,13 @@ fix = {
     "other-asian": "other-asian-countries"
 }
 observations['FDI Area'] = observations['FDI Area'].map(lambda x: fix.get(x, x))
-
-
-duplicateRowsDF = observations[observations.duplicated(['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry'], keep=False)]
-duplicateRowsDF
-
-sorted_duplicates = duplicateRowsDF.sort_values(by = ['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
-sorted_duplicates
-
-
-sorted_duplicates.to_csv('sorted_duplicates.csv', index = False)
-
-no_duplicates = sorted_duplicates.drop_duplicates(subset=['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
-no_duplicates
-
-no_duplicates.to_csv('no_duplicates.csv', index = False)
-
-observations
-
-observations = observations.drop_duplicates(subset= observations.columns.difference(['Value']))
-
-observations
-
-observations = pd.concat([observations, no_duplicates])
-
-observations
-
-any_duplicates_again = observations[observations.duplicated(['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry'], keep=False)]
-
-any_duplicates_again
-
-sorted_any_duplicates_again = duplicateRowsDF.sort_values(by = ['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
-
-sorted_any_duplicates_again.to_csv('sorted_any_duplicates_again.csv', index = False)
-
-
-
-# +
-# all_duplicate_keys = observations.sort_values(by = ['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
-
-# +
-# all_duplicate_keys.drop_duplicates(subset=['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'], keep=False)
-
-# +
-# observations.loc[observations["Value"] == '', "Marker"]
-
-# +
-# observations.head()
-
-# +
-# observations.loc[observations['Value'] == '', 'Marker']
 # -
 
-# Select all duplicate rows based on multiple column names in list
-duplicateRowsDF = observations[observations.duplicated(['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry'], keep=False)]
-duplicateRowsDF
-
-# +
-# required = duplicateRowsDF.sort_values(by = ['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
-
-# +
-# required.to_csv('required.csv', index = False)
-
-# +
-# required_without_duplicates = required.drop_duplicates(subset=['Year', 'Investment Direction', 'International Trade Basis', 'FDI Area', 'FDI Component', 'FDI Industry', 'Value'])
-
-# +
-# required_without_duplicates.to_csv('required_without_duplicates.csv', index = False)
-
-# +
-# import numpy as np
-# for every_value in duplicateRowsDF['Value']:
-#     if every_value != '':
-#         print(every_value)
-
-# +
-
-# duplicateRowsDF.loc[duplicateRowsDF['Value'] != '', 'Marker']
-# -
-
-observations
+#checking no duplicates
+observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+                             'FDI Area', 'FDI Component', 'FDI Industry'
+                              ],keep=False)]
+observation_duplicate
 
 # +
 observations.to_csv('foreign_direct_investment-observations.csv', index = False)
@@ -415,6 +270,3 @@ Component breakdown excludes the activities of private property, public corporat
 )
 
 catalog_metadata.to_json_file('foreign_direct_investment-catalog-metadata.json')
-# -
-
-
