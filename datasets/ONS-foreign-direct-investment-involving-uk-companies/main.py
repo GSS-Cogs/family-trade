@@ -8,7 +8,7 @@
 #       format_version: '1.5'
 #       jupytext_version: 1.13.5
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
 # ---
@@ -22,12 +22,13 @@ from csvcubed.models.cube.qb.catalog import CatalogMetadata
 from datetime import datetime
 
 metadata = Scraper(seed = 'foreign_direct_investment-info.json')
-display(metadata)
+#display(metadata)
 # -
 
 inward_scraper = metadata.distribution(latest = True)
-inward_scraper
+#inward_scraper
 
+#change to outward landing page.
 with open("foreign_direct_investment-info.json", "r") as jsonFile:
     data = json.load(jsonFile)
 data["landingPage"] = "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompaniesoutwardtables"
@@ -37,10 +38,11 @@ del data
 
 
 metadata_1 = Scraper(seed = 'foreign_direct_investment-info.json')
-display(metadata_1)
+#display(metadata_1)
 
 outward_scraper = metadata_1.distribution(latest = True)
-outward_scraper
+#outward_scraper
+=======
 
 # Collect together all tabs in one list of `((tab name, direction), tab)`
 
@@ -48,8 +50,7 @@ tabs = {
     ** {(tab.name.strip(), 'inward'): tab for tab in inward_scraper.as_databaker()},
     ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.as_databaker()}
 }
-print(list(tabs.keys()))
-
+#print(list(tabs.keys()))
 
 # A common issue is where a dimension label is split over more than one cell.
 # The following function does a rudimentary search for these splits in a bag, returns a list of
@@ -84,7 +85,6 @@ def split_overrides(bag, splits):
     return (overrides, to_remove)
 
 
-# +
 tidied_sheets = []
 tables = []
 for (name, direction), tab in tabs.items():
@@ -95,7 +95,8 @@ for (name, direction), tab in tabs.items():
     major, minor = name.split('.')
     if major not in ['2', '3', '4']:
         continue
-    display(f'Processing tab {name}: {direction}')
+    #display(f'Processing tab {name}: {direction}')
+
     
     # Set anchors for header row
     top_right = tab.filter('£ million')
@@ -107,7 +108,7 @@ for (name, direction), tab in tabs.items():
     dims.append(HDim(top_row, 'top', DIRECTLY, ABOVE))
     
     # Select all the footer info as "bottom_block"
-    bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown due to rounding.')
+    bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown because of rounding.')
     bottom.assert_one()
     bottom_block = bottom.shift(UP).expand(RIGHT).expand(DOWN)
     
@@ -142,12 +143,14 @@ for (name, direction), tab in tabs.items():
     dims.append(left_dim)
     
     if minor != '1':
-
         year_col = left_top.fill(RIGHT).is_number().filter(lambda x: x.value > 1900).by_index(1).expand(DOWN).is_number() - bottom_block
         dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
         obs = year_col.fill(RIGHT) & top_row.fill(DOWN)
+ 
+    if minor == '2' and major == '2':
+        obs = year_col.fill(RIGHT).is_not_blank() - top_right.fill(DOWN)
+    
     else:
-
         obs = left_col.fill(RIGHT) & top_row.fill(DOWN)
 
     cs = ConversionSegment(obs, dims, includecellxy=True)
@@ -186,7 +189,6 @@ for (name, direction), tab in tabs.items():
         table['FDI Industry'] = 'all-activities'
     # Disambiguate FDI Component between tabs 2.2 and 4.2
     if name == '2.2':
-
         table['FDI Component'] = table['FDI Component'].map(
             lambda x: 'fdi-' + x if not x.startswith('total-net-foreign-direct-investment-') else
             'total-net-fdi-' + x[len('total-net-foreign-direct-investment-'):]
@@ -202,57 +204,12 @@ for (name, direction), tab in tabs.items():
     table['Investment Direction'] = direction
     tidied_sheets.append(table)
 
+# +
 observations = pd.concat(tidied_sheets, sort = True)
-observations
-# -
-
 observations['Marker'] = observations['DATAMARKER'].map(
     lambda x: { '..' : 'disclosive',
                '-' : 'itis-nil'
         }.get(x, x))
-
-observations['Value'] = pd.to_numeric(observations['OBS'], errors = 'coerce')
-
-from IPython.core.display import HTML
-for col in observations:
-    if col != 'Value':
-        observations[col] = observations[col].astype('category')
-        display(HTML(f'<h3>{col}</h3'))
-        display(observations[col].cat.categories)
-
-# +
-
-observations = observations[['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry',
-                             'Value', 'Marker',
-                             '__x', '__y', '__tablename']]
-# -
-
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-observations.drop(columns=['__x', '__y', '__tablename'],axis = 1, inplace = True)
-observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
-
-# There are mutiple duplicate values due to empty cells from source data that makes error in Jenkins Those empty cells with no values are removed 
-
-observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
-                              ],keep=False)]
-
-observation_duplicate.columns.unique()
-
-observations_unique = observations.drop_duplicates(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
-                              ],keep=False)
-
-observations.shape, observation_duplicate.shape, observations_unique.shape
-
-observations = observation_duplicate[observation_duplicate['Value'] != '']
-
-observations = pd.concat([observations_unique, observations])
-
-observations.shape, observation_duplicate.shape, observations_unique.shape
-
 # --- Force Consistant labels ---:
 # The data producer is using different labels for the same thing within the same dataset
 # We need to force them to same
@@ -270,6 +227,15 @@ fix = {
     "other-asian": "other-asian-countries"
 }
 observations['FDI Area'] = observations['FDI Area'].map(lambda x: fix.get(x, x))
+# -
+
+#checking no duplicates
+observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+                             'FDI Area', 'FDI Component', 'FDI Industry'
+                              ],keep=False)]
+observation_duplicate
+=======
+
 
 
 # +
