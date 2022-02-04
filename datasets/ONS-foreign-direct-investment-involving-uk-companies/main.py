@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.0
+#       jupytext_version: 1.13.5
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -42,6 +42,7 @@ metadata_1 = Scraper(seed = 'foreign_direct_investment-info.json')
 
 outward_scraper = metadata_1.distribution(latest = True)
 #outward_scraper
+=======
 
 # Collect together all tabs in one list of `((tab name, direction), tab)`
 
@@ -95,6 +96,7 @@ for (name, direction), tab in tabs.items():
     if major not in ['2', '3', '4']:
         continue
     #display(f'Processing tab {name}: {direction}')
+
     
     # Set anchors for header row
     top_right = tab.filter('£ million')
@@ -208,11 +210,6 @@ observations['Marker'] = observations['DATAMARKER'].map(
     lambda x: { '..' : 'disclosive',
                '-' : 'itis-nil'
         }.get(x, x))
-observations['Value'] = pd.to_numeric(observations['OBS'], errors = 'coerce')
-#drop columns no longer needed and duplicates where values have been repeated across some tabs.
-observations.drop(columns=['__x', '__y', '__tablename','DATAMARKER'],axis = 1, inplace = True)
-observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
-
 # --- Force Consistant labels ---:
 # The data producer is using different labels for the same thing within the same dataset
 # We need to force them to same
@@ -237,6 +234,9 @@ observation_duplicate = observations[observations.duplicated(['Investment Direct
                              'FDI Area', 'FDI Component', 'FDI Industry'
                               ],keep=False)]
 observation_duplicate
+=======
+
+
 
 # +
 observations.to_csv('foreign_direct_investment-observations.csv', index = False)
