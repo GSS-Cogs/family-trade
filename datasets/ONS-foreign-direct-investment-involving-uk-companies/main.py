@@ -257,7 +257,7 @@ df_dup
 
 # %%
 # +
-observations.to_csv('foreign_direct_investment-observations.csv', index = False)
+df.to_csv('foreign_direct_investment-observations.csv', index = False)
 
 catalog_metadata: CatalogMetadata = CatalogMetadata(
     title = "Foreign direct investment involving UK companies (directional)",
