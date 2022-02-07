@@ -1,47 +1,44 @@
 # -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.10.2
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
+# %%
 # +
 from gssutils import *
+import pandas as pd
 from IPython.display import display
 import json
+from csvcubed.models.cube.qb.catalog import CatalogMetadata
+from datetime import datetime
 
-cubes = Cubes("info.json")
-trace = TransformTrace()
-
-info = json.load(open('info.json'))
-landingPages = info['landingPage']
-
-display(landingPages)
-
-inward_scraper = Scraper(next(page for page in landingPages if 'inwardtables' in page))
-outward_scraper = Scraper(next(page for page in landingPages if 'outwardtables' in page))
-
-display(inward_scraper)
-display(outward_scraper)
+metadata = Scraper(seed = 'foreign_direct_investment-info.json')
+#display(metadata)
 # -
 
+inward_scraper = metadata.distribution(latest = True)
+#inward_scraper
+# %%
+#change to outward landing page.
+with open("foreign_direct_investment-info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["landingPage"] = "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompaniesoutwardtables"
+with open("foreign_direct_investment-info.json", "w") as jsonFile:
+    json.dump(data, jsonFile, indent=2)
+del data
+
+
+metadata_1 = Scraper(seed = 'foreign_direct_investment-info.json')
+#display(metadata_1)
+
+outward_scraper = metadata_1.distribution(latest = True)
+#outward_scraper
+
+# %%
 # Collect together all tabs in one list of `((tab name, direction), tab)`
 
 tabs = {
-    ** {(tab.name.strip(), 'inward'): tab for tab in inward_scraper.distribution(latest=True).as_databaker()},
-    ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.distribution(latest=True).as_databaker()}
+    ** {(tab.name.strip(), 'inward'): tab for tab in inward_scraper.as_databaker()},
+    ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.as_databaker()}
 }
-print(list(tabs.keys()))
-
-
+#print(list(tabs.keys()))
+# %%
 # A common issue is where a dimension label is split over more than one cell.
 # The following function does a rudimentary search for these splits in a bag, returns a list of
 # pairs of cells and their replacement, along with a list of extraneous cells to remove
@@ -74,8 +71,8 @@ def split_overrides(bag, splits):
                         to_remove = to_remove | c
     return (overrides, to_remove)
 
-
-# +
+# %%
+tidied_sheets = []
 tables = []
 for (name, direction), tab in tabs.items():
     
@@ -85,11 +82,7 @@ for (name, direction), tab in tabs.items():
     major, minor = name.split('.')
     if major not in ['2', '3', '4']:
         continue
-    display(f'Processing tab {name}: {direction}')
-    
-    # Add transformTrace
-    columns = ["Investment Direction", "Year", "International Trade Basis", "FDI Area", "FDI Component", "FDI Industry"]
-    trace.start("{}:{}".format(name, direction), tab, columns, inward_scraper.distribution(latest=True).downloadURL if direction == "inward" else outward_scraper.distribution(latest=True).downloadURL)
+    #display(f'Processing tab {name}: {direction}')
     
     # Set anchors for header row
     top_right = tab.filter('£ million')
@@ -97,12 +90,11 @@ for (name, direction), tab in tabs.items():
     left_top = tab.filter('EUROPE').by_index(1)
     
     top_row = (left_top.fill(UP).fill(RIGHT) & top_right.expand(LEFT).fill(DOWN)).is_not_blank().is_not_whitespace()
-    
     dims = []
     dims.append(HDim(top_row, 'top', DIRECTLY, ABOVE))
     
     # Select all the footer info as "bottom_block"
-    bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown due to rounding.')
+    bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown because of rounding.')
     bottom.assert_one()
     bottom_block = bottom.shift(UP).expand(RIGHT).expand(DOWN)
     
@@ -125,42 +117,44 @@ for (name, direction), tab in tabs.items():
         ('OTHER ASIAN', 'COUNTRIES')
     ])
     
-    trace.FDI_Area('Take from lefthand side of tab')
     if to_remove:
         left_col = left_col - to_remove
-        trace.FDI_Area('Removing unwanted text')
-    left_dim = HDim(left_col, 'FDI Area', CLOSEST, UP)
+
+    left_dim = HDim(left_col, "FDI Area", CLOSEST, UP)
     
     for cell, replace in overrides:
         left_dim.AddCellValueOverride(cell, replace)
     # Also, "IRELAND" should be "IRISH REPUBLIC"
-    trace.FDI_Area('Overrid any occurances of "IRELAND" to "IRISH REPUBLIC".')
     left_dim.AddCellValueOverride('IRELAND', 'IRISH REPUBLIC')
     dims.append(left_dim)
     
-    if minor != '1':
-        trace.Year("Take year values from the column of continuous numbers higher than 1900")
-        year_col = left_top.fill(RIGHT).is_number().filter(lambda x: x.value > 1900).by_index(1).expand(DOWN).is_number() - bottom_block
-        dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
-        obs = year_col.fill(RIGHT) & top_row.fill(DOWN)
-    else:
-        trace.Year("Take year values from the header row")
-        obs = left_col.fill(RIGHT) & top_row.fill(DOWN)
-    
-    cs = ConversionSegment(obs, dims, includecellxy=True)
-    table = cs.topandas()
-
-    # Post processing
-    table.rename(columns={'OBS': 'Value'}, inplace=True)
-    trace.FDI_Area('Add "fdi/" prefix then pathify')
-    table['FDI Area'] = table['FDI Area'].map(lambda x: pathify(x.strip()))
-    table['FDI Area'] = table['FDI Area'].replace({"other-european", "other-european-countries"})
     if minor == '1':
-        # top header row is year
-        table.rename(columns={'top': 'Year'}, inplace=True)
+        year_col = tab.excel_ref('D5').expand(RIGHT).is_not_blank()
+        dims.append(HDim(year_col, 'Year', DIRECTLY, ABOVE))
+        obs = year_col.fill(DOWN).is_not_blank() - bottom_block
+    if minor == '2':
+        year_col = tab.excel_ref('D7').expand(DOWN).is_not_blank()
+        dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
+        obs = year_col.fill(RIGHT).is_not_blank() - bottom_block
+        
+       # if major == "2" :
+       #     obs = year_col.fill(RIGHT).is_not_blank() - top_right.fill(DOWN) - bottom_block
+    
+    if minor == '3':
+        year_col = tab.excel_ref('E6').expand(DOWN).is_not_blank()
+        dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
+        obs = year_col.fill(RIGHT).is_not_blank() - bottom_block
+
+    cs = ConversionSegment(obs, dims, includecellxy=True)
+    #savepreviewhtml(cs, fname= tab.name + "PREVIEW.html") 
+    table = cs.topandas()
+    
+        # Post processing
     table['Year'] = table['Year'].map(lambda x: int(float(x)))
+    table["FDI Area"] = table["FDI Area"].map(lambda x: pathify(x.strip()))
+    table["FDI Area"] = table["FDI Area"].replace({"other-european", "other-european-countries"})
+
     if minor != '2':
-        trace.FDI_Component("Set based on source tab primary number, 2.x, 3.x etc")
         table['FDI Component'] = {
             '2': {'outward': 'total-net-fdi-abroad',
                   'inward': 'total-net-fdi-in-the-uk'},
@@ -170,85 +164,42 @@ for (name, direction), tab in tabs.items():
                   'inward': 'total-net-fdi-earnings-in-the-uk'}
         }.get(major).get(direction)
     else:
-        trace.FDI_Component("Pathify all values")
         table.rename(columns={'top': 'FDI Component'}, inplace=True)
         table['FDI Component'] = table['FDI Component'].map(pathify)
     if minor == '3':
         table.rename(columns={'top': 'FDI Industry'}, inplace=True)
-        trace.FDI_Industry('Replace any occurance of "Total" with "all-activites".')
         table['FDI Industry'] = table['FDI Industry'].map(
-            lambda x: pathify(x) if x != 'Total' else 'all-activities'
-        )
+            lambda x: pathify(x) if x != 'Total' else 'all-activities')
     else:
-        trace.FDI_Industry('Set all to "all-activities".')
         table['FDI Industry'] = 'all-activities'
     # Disambiguate FDI Component between tabs 2.2 and 4.2
     if name == '2.2':
-        trace.FDI_Component('Add prefixes, either "fdi-"" or "total-net-fdi-".')
         table['FDI Component'] = table['FDI Component'].map(
             lambda x: 'fdi-' + x if not x.startswith('total-net-foreign-direct-investment-') else
             'total-net-fdi-' + x[len('total-net-foreign-direct-investment-'):]
         )
     elif name == '4.2':
-        trace.FDI_Component('Add prefixes, either "earnings-fdi-"" or "total-net-".')
+
         table['FDI Component'] = table['FDI Component'].map(
             lambda x: 'earnings-fdi-' + x if not x.startswith('total-net-') else
             'total-net-' + x[len('total-net-'):].replace('foreign-direct-investment', 'fdi')
         )
-    trace.International_Trade_Basis('Set as BPM5 for pre 2012, else BPM5')
+
     table['International Trade Basis'] = table['Year'].map(lambda year: 'BPM5' if year < 2012 else 'BPM6')
-    
-    trace.Investment_Direction('Set direction as "{}".'.format(direction))
     table['Investment Direction'] = direction
-    trace.store("FDI", table)
-                
-observations = trace.combine_and_trace("FDI", "FDI")
-observations
-# -
+    tidied_sheets.append(table)
 
-observations['Marker'] = observations['DATAMARKER'].map(
-    lambda x: { '..' : 'disclosive',
-               '-' : 'itis-nil'
-        }.get(x, x))
 
-from IPython.core.display import HTML
-for col in observations:
-    if col != 'Value':
-        observations[col] = observations[col].astype('category')
-        display(HTML(f'<h3>{col}</h3'))
-        display(observations[col].cat.categories)
+# %%
+df = pd.concat(tidied_sheets, sort = True)
+df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
+df = df.replace({'Marker' : {'..' : 'disclosive', '-' : 'itis-nil'}})
+df['Value'] = pd.to_numeric(df['Value'], errors = 'coerce')
+df.drop(columns=['__x', '__y', '__tablename','top'],axis = 1, inplace = True)
+df.drop_duplicates(subset=df.columns.difference(['Value']), inplace =True)
+df
 
-# +
-
-observations = observations[['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry',
-                             'Value', 'Marker',
-                             '__x', '__y', '__tablename']]
-# -
-
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-observations.drop(columns=['__x', '__y', '__tablename'],axis = 1, inplace = True)
-observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
-
-# There are mutiple duplicate values due to empty cells from source data that makes error in Jenkins Those empty cells with no values are removed 
-
-observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
-                              ],keep=False)]
-
-observations_unique = observations.drop_duplicates(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
-                              ],keep=False)
-
-observations.shape, observation_duplicate.shape, observations_unique.shape
-
-observations = observation_duplicate[observation_duplicate['Value'] != '']
-
-observations = pd.concat([observations_unique, observations])
-
-observations.shape, observation_duplicate.shape, observations_unique.shape
-
+# %%
 # --- Force Consistant labels ---:
 # The data producer is using different labels for the same thing within the same dataset
 # We need to force them to same
@@ -265,24 +216,75 @@ fix = {
     "gulf-arabian": "gulf-arabian-countries",
     "other-asian": "other-asian-countries"
 }
-observations["FDI Area"] = observations["FDI Area"].map(lambda x: fix.get(x, x))
+df['FDI Area'] = df['FDI Area'].map(lambda x: fix.get(x, x))
+df
+
+# %%
+#tabs 2.1, 2.2 have duplicate data down for cell year2019, AUSTRALIA, under "Total net foreign direct investment abroad" 
+#In tab 2.1 the value is 300 but in 2.2 is .. meaning Indicates value is disclosive. These tabs could of been colated in a differnet manner. as all the other values for that column match across the two tabs. 
+#The same applies for tabs 4.1 and 4.2 for data relating to year2020, NEW ZEALAND, "Total net FDI earnings abroad"
+#I made (shannon) an informed descion to drop the the 2 values that hold a marker and use the observation with an actual numerical value. 
+df_dup = df[df.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+                             'FDI Area', 'FDI Component', 'FDI Industry'
+                              ],keep=False)]
+filtered_df = df_dup[df_dup['Value'].isnull()]
+filtered_df
 
 
+# %%
+def dataframe_difference(df1: df, df2: df, which=None):
+    """Find rows which are different between two DataFrames."""
+    comparison_df = df1.merge(
+        df2,
+        indicator=True,
+        how='outer'
+    )
+    if which is None:
+        diff_df = comparison_df[comparison_df['_merge'] != 'both']
+    else:
+        diff_df = comparison_df[comparison_df['_merge'] == which]
+    diff_df.drop(columns=['_merge'],axis = 1, inplace = True)
+    return diff_df
+
+df = dataframe_difference(df, filtered_df)
+
+# %%
+#checking no duplicates
+df_dup = df[df.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+                             'FDI Area', 'FDI Component', 'FDI Industry'
+                              ],keep=False)]
+df_dup
+
+# %%
 # +
+df.to_csv('foreign_direct_investment-observations.csv', index = False)
 
-inward_scraper.dataset.title = inward_scraper.dataset.title.replace(': inward', '')
-inward_scraper.dataset.comment = inward_scraper.dataset.comment.replace(
-    'into the UK', 'into the UK and of UK companies abroad')
-inward_scraper.dataset.landingPage = landingPages
+catalog_metadata: CatalogMetadata = CatalogMetadata(
+    title = "Foreign direct investment involving UK companies (directional)",
+    summary = "Annual statistics on the investment of foreign companies into the UK, including for investment flows, positions and earnings into the UK and of UK companies abroad.",
+    description = "Inward and Outward reference table including data for flows, positions and earnings. \
+The sum of constituent items may not always agree exactly with the totals shown due to rounding. \
+A negative sign before values indicates a net disinvestment in the UK. \
+Component breakdown excludes the activities of private property, public corporations and bank holding companies.These are included in the total.",
+    identifier = "ons-foreign-direct-investment-involving-uk-companies",
+    keywords = [
+        "business investment",
+        "stocks",
+        "investment flows"
+    ],
+    theme_uris = [
+        "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation"
+    ],
+    landing_page_uris = [
+        "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompanies2013inwardtables",
+        "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompaniesoutwardtables"
+    ],
+    creator_uri = "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    publisher_uri = "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    license_uri = "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    dataset_issued = "2020-12-21",
+    dataset_modified = "2022-01-25T12:53:20.941413+00:00",
+    public_contact_point_uri = "mailto:fdi@ons.gov.uk"
+)
 
-from gssutils.metadata import THEME
-inward_scraper.dataset.theme = THEME['business-industry-trade-energy']
-inward_scraper.dataset.family = 'trade'
-
-cubes.add_cube(inward_scraper, observations.drop_duplicates(), inward_scraper.dataset.title)
-cubes.output_all()
-
-# -
-trace.render("spec_v1.html")
-
-
+catalog_metadata.to_json_file('foreign_direct_investment-catalog-metadata.json')
