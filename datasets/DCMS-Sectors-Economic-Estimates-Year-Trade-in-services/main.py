@@ -46,6 +46,15 @@ df1 = df1.iloc[2:]
 
 df1
 
+df1.head(0)
+
+df1.columns.nlevels
+df1.index.nlevels
+
+# +
+# stop
+# -
+
 # df1.index.nlevels 
 df1.columns.nlevels
 isinstance(df1.index, pd.MultiIndex)
@@ -55,7 +64,7 @@ isinstance(df1.index, pd.MultiIndex)
 
 df2 = df1.T
 
-df2.head(20)
+df2.head()
 
 # +
 # needed_vars = ["DCMS Sectors (exc Tourism and Civil Society)", 
@@ -73,52 +82,252 @@ df2.index.names = ['sector', "sub-sector"]
 
 df2.head()
 
-df2.columns = df2.columns.astype(str)
-
-df2.columns.map(type)
-
 header_row = 0
 df2.columns = df2.iloc[header_row]
 
-df2
-
-df2.head()
-
 import numpy as np
-df2.drop(index = (np.nan, 'Country'))
+df3 = df2.drop((np.nan, 'Country'))
 
-df2 = df2.reset_index()
+df3.head()
 
-df2
+# +
+# df3 = df3.to_frame()
 
-df2.reset_index(drop=True, inplace=True)
+# +
+# df3 = df3.set_index((["sector", "sub-sector"])
+# .stack()
+# .reset_index(name="Value")
+# .rename(columns={"level_2":"Country"}))
+# -
 
-df2
+df3 = df3.stack()
 
-df2.head(0)
+df3
 
-df2.set_index(["sector", "sub-sector"], inplace = True)
+df3.index.nlevels
 
-df2.head(0)
+df3 = df3.to_frame()
+
+type(df3)
+
+df3
+
+df3.head()
+
+# +
+# print(df3)
+
+# +
+# df3 = df3.set_index("sector")
+# -
+
+df3.head()
+
+df3.columns.nlevels
+
+for col in df3.columns:
+    if col == 0:
+        print(col)
+
+df3.head()
+
+df3 = df3.reset_index()
+
+df3
+
+df3.head(0)
+
+df3 = df3.rename(columns = {(np.nan, 'Country'):"country", 0:"value"})
+
+list(df3)
+
+df3
+
+type(df3)
+
+df3
+
+df3.tail(100)
+
+df3.head(0)
+
+df3["sector"].unique()
+
+df3["sub-sector"].unique()
+
+for val in df3["sub-sector"]:
+    df3["sector"]
+
+# +
+# df3 = df3.groupby(["sector", "sub-sector", "country"])["value"]
+
+# +
+# df3 = df3.reindex(df3.index, method = "ffill", limit = 1)
+# -
+
+df3.index.values
+
+next(df3.iterrows())
+
+df3.head(300)
+
+df3.head(150)
+
+for df3.column in df3:
+    print(df3.column)
+
+
+df3 = df3.fillna(method = "ffill")
+
+df3.loc[df3["sub-sector"] == "All_Imports", "sector"]
+
+df3.head(100)
+
+# +
+# df3.loc[df3["sub-sector"] == "Digital Sector", "DCMS total"]
+# -
+
+df3.head(200)
+
+# +
+# df3 = df3.set_index(["sector", "sub-sector"])
+# -
+
+df3.iloc[2065]
+
+for col in df3.columns:
+    print(col)
+
+# +
+# (df3.shape) 
+# (df3.index.nlevels)
+# (df3.columns.nlevels)
+# type(reset_df3)
+# df3.set_index(["sector", "sub-sector"]
+type(df3)
+
+
+# -
+
+df3 = df3.to_frame()
+
+type(df3)
+df3.index.nlevels
+df3.columns.nlevels
+
+df3 = df3.set_index(["sector", "sub-sector"])
+
+# +
+# reset_df3 = df3.reset_index()
+# reset_df3
+
+# +
+# for every_column in df3.columns:
+#     print(every_column)
+
+# +
+# reset_df3 = df3.set_index(["sector", "sub-sector"]).stack()
+
+# +
+# reset_df3.columns.names = ["New"]
+# reset_df3 = reset_df3.drop(np.nan, "Country", inplace=True, axis=1)
+# df3 = df2.drop((np.nan, 'Country'))
+
+# +
+# col = ["sector", "sub-sector"]
+# reset_df3 = reset_df3.loc[:, df.columns != col]
+
+
+
+# reset_df3.shape
+# -
+
+
+
+# +
+# for every_name in reset_df3.columns:
+#     if every_name != "New":
+#         print(every_name)
+
+# +
+# reset_df3
+
+# +
+# columns = ['New']
+# reset_df3.drop(columns, inplace=True, axis=1)
+# # reset_df3 = reset_df3.drop("New", axis=1, inplace=True)
+
+# +
+# reset_df3
+
+# +
+# df3.melt(id_vars = ["sector", "sub-sector"], var_name= "location", value_name="Value")
+
+# +
+# df3
+
+# +
+# df2.columns = df2.columns.astype(str)
+
+# +
+# df2.columns.map(type)
+
+# +
+# header_row = 0
+# df2.columns = df2.iloc[header_row]
+
+# +
+# df2
+
+# +
+# df2.head()
+
+# +
+# import numpy as np
+# df2.drop(index = (np.nan, 'Country'))
+
+# +
+# df2 = df2.reset_index()
+
+# +
+# df2
+
+# +
+# df2.reset_index(drop=True, inplace=True)
+
+# +
+# df2
+
+# +
+# df2.head(0)
+
+# +
+# df2.set_index(["sector", "sub-sector"], inplace = True)
+
+# +
+# df2.head(0)
 
 # +
 # df2 = df2.reset_index(level = "World")
-# -
 
-list(df2.columns)
+# +
+# list(df2.columns)
 
-df2
+# +
+# df2
 
-df2 = df2.drop(header_row)
-df2 = df2.reset_index(drop = True)
+# +
+# df2 = df2.drop(header_row)
+# df2 = df2.reset_index(drop = True)
 
 # +
 # tabs = distribution.as_pandas()
-# -
 
-tabs
+# +
+# tabs
 
-tidied_sheets = []
+# +
+# tidied_sheets = []
 
 # +
 tab = tabs["Imports"]
