@@ -128,30 +128,33 @@ for (name, direction), tab in tabs.items():
     left_dim.AddCellValueOverride('IRELAND', 'IRISH REPUBLIC')
     dims.append(left_dim)
     
-    if minor != '1':
-        year_col = left_top.fill(RIGHT).is_number().filter(lambda x: x.value > 1900).by_index(1).expand(DOWN).is_number() - bottom_block
+    if minor == '1':
+        year_col = tab.excel_ref('D5').expand(RIGHT).is_not_blank()
+        dims.append(HDim(year_col, 'Year', DIRECTLY, ABOVE))
+        obs = year_col.fill(DOWN).is_not_blank() - bottom_block
+    if minor == '2':
+        year_col = tab.excel_ref('D7').expand(DOWN).is_not_blank()
         dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
-        obs = year_col.fill(RIGHT) & top_row.fill(DOWN)
- 
-    if minor == '2' and major == '2':
-        obs = year_col.fill(RIGHT).is_not_blank() - top_right.fill(DOWN)
+        obs = year_col.fill(RIGHT).is_not_blank() - bottom_block
+        
+       # if major == "2" :
+       #     obs = year_col.fill(RIGHT).is_not_blank() - top_right.fill(DOWN) - bottom_block
     
-    else:
-        obs = left_col.fill(RIGHT) & top_row.fill(DOWN)
+    if minor == '3':
+        year_col = tab.excel_ref('E6').expand(DOWN).is_not_blank()
+        dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
+        obs = year_col.fill(RIGHT).is_not_blank() - bottom_block
 
     cs = ConversionSegment(obs, dims, includecellxy=True)
+    #savepreviewhtml(cs, fname= tab.name + "PREVIEW.html") 
     table = cs.topandas()
     
-    # Post processing
-
+        # Post processing
+    table['Year'] = table['Year'].map(lambda x: int(float(x)))
     table["FDI Area"] = table["FDI Area"].map(lambda x: pathify(x.strip()))
     table["FDI Area"] = table["FDI Area"].replace({"other-european", "other-european-countries"})
-    if minor == '1':
-        # top header row is year
-        table.rename(columns={'top': 'Year'}, inplace=True)
-    table['Year'] = table['Year'].map(lambda x: int(float(x)))
-    if minor != '2':
 
+    if minor != '2':
         table['FDI Component'] = {
             '2': {'outward': 'total-net-fdi-abroad',
                   'inward': 'total-net-fdi-in-the-uk'},
@@ -161,17 +164,13 @@ for (name, direction), tab in tabs.items():
                   'inward': 'total-net-fdi-earnings-in-the-uk'}
         }.get(major).get(direction)
     else:
-
         table.rename(columns={'top': 'FDI Component'}, inplace=True)
         table['FDI Component'] = table['FDI Component'].map(pathify)
     if minor == '3':
         table.rename(columns={'top': 'FDI Industry'}, inplace=True)
-
         table['FDI Industry'] = table['FDI Industry'].map(
-            lambda x: pathify(x) if x != 'Total' else 'all-activities'
-        )
+            lambda x: pathify(x) if x != 'Total' else 'all-activities')
     else:
-
         table['FDI Industry'] = 'all-activities'
     # Disambiguate FDI Component between tabs 2.2 and 4.2
     if name == '2.2':
@@ -189,18 +188,18 @@ for (name, direction), tab in tabs.items():
     table['International Trade Basis'] = table['Year'].map(lambda year: 'BPM5' if year < 2012 else 'BPM6')
     table['Investment Direction'] = direction
     tidied_sheets.append(table)
-# %%
-# +
-observations = pd.concat(tidied_sheets, sort = True)
-observations['Marker'] = observations['DATAMARKER'].map(
-    lambda x: { '..' : 'disclosive',
-               '-' : 'itis-nil'
-        }.get(x, x))
-observations['Value'] = pd.to_numeric(observations['OBS'], errors = 'coerce')
-#drop columns no longer needed and duplicates where values have been repeated across some tabs.
-observations.drop(columns=['__x', '__y', '__tablename','DATAMARKER','OBS'],axis = 1, inplace = True)
-observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
 
+
+# %%
+df = pd.concat(tidied_sheets, sort = True)
+df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
+df = df.replace({'Marker' : {'..' : 'disclosive', '-' : 'itis-nil'}})
+df['Value'] = pd.to_numeric(df['Value'], errors = 'coerce')
+df.drop(columns=['__x', '__y', '__tablename','top'],axis = 1, inplace = True)
+df.drop_duplicates(subset=df.columns.difference(['Value']), inplace =True)
+df
+
+# %%
 # --- Force Consistant labels ---:
 # The data producer is using different labels for the same thing within the same dataset
 # We need to force them to same
@@ -217,15 +216,45 @@ fix = {
     "gulf-arabian": "gulf-arabian-countries",
     "other-asian": "other-asian-countries"
 }
-observations['FDI Area'] = observations['FDI Area'].map(lambda x: fix.get(x, x))
-observations
-# -
+df['FDI Area'] = df['FDI Area'].map(lambda x: fix.get(x, x))
+df
+
 # %%
-#checking no duplicates
-observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+#tabs 2.1, 2.2 have duplicate data down for cell year2019, AUSTRALIA, under "Total net foreign direct investment abroad" 
+#In tab 2.1 the value is 300 but in 2.2 is .. meaning Indicates value is disclosive. These tabs could of been colated in a differnet manner. as all the other values for that column match across the two tabs. 
+#The same applies for tabs 4.1 and 4.2 for data relating to year2020, NEW ZEALAND, "Total net FDI earnings abroad"
+#I made (shannon) an informed descion to drop the the 2 values that hold a marker and use the observation with an actual numerical value. 
+df_dup = df[df.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
                              'FDI Area', 'FDI Component', 'FDI Industry'
                               ],keep=False)]
-observation_duplicate
+filtered_df = df_dup[df_dup['Value'].isnull()]
+filtered_df
+
+
+# %%
+def dataframe_difference(df1: df, df2: df, which=None):
+    """Find rows which are different between two DataFrames."""
+    comparison_df = df1.merge(
+        df2,
+        indicator=True,
+        how='outer'
+    )
+    if which is None:
+        diff_df = comparison_df[comparison_df['_merge'] != 'both']
+    else:
+        diff_df = comparison_df[comparison_df['_merge'] == which]
+    diff_df.drop(columns=['_merge'],axis = 1, inplace = True)
+    return diff_df
+
+df = dataframe_difference(df, filtered_df)
+
+# %%
+#checking no duplicates
+df_dup = df[df.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+                             'FDI Area', 'FDI Component', 'FDI Industry'
+                              ],keep=False)]
+df_dup
+
 # %%
 # +
 observations.to_csv('foreign_direct_investment-observations.csv', index = False)
