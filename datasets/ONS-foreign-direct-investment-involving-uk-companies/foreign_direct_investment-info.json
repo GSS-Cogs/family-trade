@@ -38,8 +38,9 @@
       },
       "FDI Component": {
         "type": "dimension",
-        "uri": "http://gss-data.org.uk/def/trade/property/dimension/fdi-component",
-        "value": "http://gss-data.org.uk/def/trade/concept/fdi-component/{+fdi_component}"
+        "new": {
+          "codelist": "./codelists/fdi-component.csv-metadata.json"
+        }
       },
       "FDI Area": {
         "type": "dimension",
@@ -49,8 +50,9 @@
       },
       "FDI Industry": {
         "type": "dimension",
-        "uri": "http://gss-data.org.uk/def/trade/property/dimension/fdi-industry",
-        "value": "http://gss-data.org.uk/def/trade/concept/fdi-industry/{+fdi_industry}"
+        "new": {
+          "codelist": "./codelists/fdi-industry.csv-metadata.json"
+        }
       },
       "International Trade Basis": {
         "type": "dimension",
