@@ -3,64 +3,51 @@
 # UK trade in goods by industry, country and commodity, exports and imports
 
 
-
-# [Notes for Shannon]
-# overall i think the ticket 231 mainly wants me to sort the order of columns
-# the original file from the amster branch strips out the descriptive part of the commodity, Industry and ONS Partner Geography columns. Do we want that as the end goal? keeping them allows me to sort properly but could delete after.
-
 import pandas as pd
 import json
 from gssutils import *
+from csvcubed.models.cube.qb.catalog import CatalogMetadata # make sure you're in the test container
 
-# TODO Rich - look at what this means
-# pd.options.mode.chained_assignment = None 
+info_json_file = 'UK_goods_trade_by_industry_country_commodity-info.json'
 
-cubes = Cubes("info.json")
-info = json.load(open('info.json'))
+# %% 
+# get first landing page details
+metadata = Scraper(seed = info_json_file)
+# display(metadata) #  to see exactly the data we are loading 
+# %%
+# load export data
+distribution1 = metadata.distribution(latest = True)
+# display(distribution1)
+# %%
+# there are two separate landing pages as we're combining two datasets so need to overwrite the landing page in the info.json (exports) with the other (imports) landing page.
+with open(info_json_file, "r") as jsonFile:
+    data = json.load(jsonFile)
+# change landing page 
+data["landingPage"] = "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityimports"
+with open(info_json_file, "w") as jsonFile:
+    json.dump(data, jsonFile, indent=2) # put it back in the info json file
+del data
+# %%
+#get the second landing page details
+metadata = Scraper(seed = info_json_file)
+# display(metadata)
+# %%
+# load import data
+distribution2 = metadata.distribution(latest = True)
+# display(distribution2)
 
 # %%
-# get landing page(s) url to where data is located
-landingPage = info['landingPage'] # 
-landingPage
-
-# %%
-# two speparate landing pages
-scraper1 = Scraper(landingPage[0])
-scraper2 = Scraper(landingPage[1])
-
-# TODO find out what this is doing exactly
-scraper1.dataset.family = info['families'] # 
-# %%
-
-scraper2.session
-# %%
-# just grab latest dataset from both landing pages. They're structured the same but one is concerned with exports the other imports.
-distribution1 = scraper1.distribution(latest=True) # exports
-distribution2 = scraper2.distribution(latest=True) # imports
-
-# %%
-# TODO Rich - is new to me. see how to use loadxlstabs function from Databaker or pandas to get data from these distribution objects.
-# i imagine it's a case of using distribution1.downloadURL
+# load tabs from two different distributions/excel workbooks and combine
 tabs1 = distribution1.as_databaker()
 tabs2 = distribution2.as_databaker()
 tabs = tabs1 + tabs2
-# tabs
 
 # %%
-# not using this atm
-url = distribution1.downloadURL
-url
-
-# %%
-# TODO Shannon - i remove tabs we're not interested in. I had to add ' final' to export tab name. should we control for backwards compatibility?
+# keep tabs we're interested in
 tabs = [x for x in tabs if x.name in ('tig_ind_ex final', 'tig_ind_im') ]
-
 
 # %%
 tidied_sheets = []
-
-# the title of both datasets is the same except one is for exports the other imports, so just take title from first distribution and add 'and imports' for the combined dataset
-title = distribution1.title + ' and imports' 
 
 for tab in tabs:
 
@@ -75,11 +62,8 @@ for tab in tabs:
     industry = tab.filter('Industry').fill(DOWN).is_not_blank()
     commodity = tab.filter('Commodity').fill(DOWN).is_not_blank()
     year = tab.excel_ref('E1').expand(RIGHT).is_not_blank()
-    # # comment out these dimensions because they can be defined by info.json file
-    # measure = 'GBP Total'
-    # unit = 'gbp-million'
 
-    # [Dimensions]
+    # [Observations]
 
     observations = year.fill(DOWN).is_not_blank() 
 
@@ -97,10 +81,11 @@ for tab in tabs:
     tidied_sheets.append(tidy_sheet)
 # %%
 
-# TODO Rich - cehckout what this is
+# set float values to 1 sf
 pd.set_option('display.float_format', lambda x: '%.1f' % x) 
 
-table = pd.concat(tidied_sheets, sort = True).fillna('') 
+#craete dataframe from tab data and convert NaN to blanks
+df = pd.concat(tidied_sheets, sort = True).fillna('') 
 
 descr = """
 Experimental dataset providing a breakdown of UK trade in goods by industry, country and commodity on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders.
@@ -135,87 +120,42 @@ These data are our best estimate of these bilateral UK trade flows. Users should
 UN Comtrade.
 """
 # %%
-# TODO Shannon - why are we updating both of these, and they're different from the title created earlier? Does the scraper object get used later?
-scraper1.dataset.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
-scraper2.dataset.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
-scraper1.dataset.description = descr
-scraper2.dataset.description = descr
+# update metadata's title as now we've combined the datasets
+metadata.dataset.title = 'UK trade in goods by industry, country and commodity - Imports & Exports'
+metadata.dataset.description = descr
 
 # [Clean up]
 # %%
 
-#remove rows
-# TODO Rich - confused. i'm removing observations here if zero, but putting them back in two lines down...maybe it's totals
-table = table[table['OBS'] != 0] # remove rows with 0 values in observations
-# TODO TODO check what is being removed and put back in place
-
+# remove rows with 0 values in observations. there are blank obs as well but these are dealt with later
+# i do get a warning somewhere in this section saying "trying to be set on a copy of a slice from a DataFrame"
+df = df[df['OBS'] != 0] 
 # replace DATAMARKER values
-table.loc[table['DATAMARKER'].astype(str) == '..', 'DATAMARKER'] = 'suppressed' 
-# replace empty values with 0
-table['OBS'].loc[(table['OBS'] == '')] = 0 
-table['OBS'] = table['OBS'].astype(int) 
-
-
-# %%
-## pre-sort preparation
-
-# separate code from descriptive name so can order columns later
-table['Commodity Code'] = table['Commodity'].str[:2]
-table['ONS Partner Geography Code'] = table['ONS Partner Geography'].str[:2]
-table['Industry Code'] = table['Industry'].str[:2]
-#%%
-# TODO Rich - might come back to this. see if end users want code separated
-# # need to remove code from descriptive name
-# table['Commodity'] = table['Commodity'].str[2:]
-# table['ONS Partner Geography'] = table['ONS Partner Geography'].str[2:]
-# table['Industry'] = table['Industry'].str[2:]
-#%%
-#trimming the code and description columns would have left some unwanted spaces so removing them
-# TODO Rich - might un comment these depending on previous TODO
-# table['Industry'] = table['Industry'].str.strip()
-# table['Commodity'] = table['Commodity'].str.strip()
-# table['ONS Partner Geography'] = table['ONS Partner Geography'].str.strip()
-table['Industry Code'] = table['Industry Code'].str.strip()
-table['Commodity Code'] = table['Commodity Code'].str.strip()
-table['ONS Partner Geography Code'] = table['ONS Partner Geography Code'].str.strip()
-
-# %%
-# temporarily replace non numeric codes. picked 99 so non-numeric codes go at end of table and don't think it's being used by others
-non_numeric_codes_to_replace = {
-'Commodity Code' : { 'T' : '99', '7E' : '99', '7M' : '99' ,'8O': '99'} # TODO Rich - search a quicker way to set them all to 99
-,'Industry Code': {'U':'99'}
-}
-
-table = table.replace(non_numeric_codes_to_replace) 
-
-# %%
-#convert codes to int so i can sort later. need to replace letters with numbers first then change back later
-table['Commodity Code']= table['Commodity Code'].astype(int)
-table['Industry Code'] = table['Industry Code'].astype(int)
-
-table.head(10)
-# %%
-# sort column order
-table = table.sort_values(['Period', 'ONS Partner Geography Code','Industry Code','Commodity Code'], ascending = (False, True, True, True))
-
-# TODO Rich - del columns no longer needed...might come back and put them in depending on previous
-del table['Industry Code']
-del table['Commodity Code']
-del table['ONS Partner Geography Code']
+df.loc[df['DATAMARKER'].astype(str) == '..', 'DATAMARKER'] = 'suppressed' 
+# this will replace the blank observations from supressed rows with 0
+df['OBS'].loc[(df['OBS'] == '')] = 0 
+df['OBS'] = df['OBS'].astype(int) 
 
 # %%
 #reformat period column
-table['Period'] = 'year/' + table['Period'].str[0:4]
+df['Period'] = 'year/' + df['Period'].str[0:4]
+df['Commodity'] = df['Commodity'].str[:2] # codelist has 3 char long codes included but in this datset there are only categories with 1 to 2 char long in their code
+df['Commodity'] = df['Commodity'].str.strip() # codes included in this datset are only 1 to 2 characters long
+df['ONS Partner Geography'] = df['ONS Partner Geography'].str[:2]
+df['Industry'] = df['Industry'].str[:2] 
+df['Industry'] = df['Industry'].str.strip() # strip incase 'U unknown industry' appears
 
 #%%
 #rename columns
-table.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
+df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
 # %%
 #reorder columns
-table = table[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value', 'Marker']]
+df = df[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value', 'Marker']]
 
 #%%
+df.to_csv('UK_goods_trade_by_industry_country_commodity-observations.csv', index=False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('UK_goods_trade_by_industry_country_commodity-catalog-metadata.json') 
 
-cubes.add_cube(scraper1, table, title)
-cubes.output_all()
+# %%
