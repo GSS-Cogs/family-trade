@@ -88,6 +88,8 @@ df3.loc[df3["sub-sector"] == "Empty column", "sector"]
 
 df3.tail(10)
 
+
+
 df4 = pd.read_excel(path, "Imports")
 
 header_row = 1
@@ -139,7 +141,11 @@ df6 = df6.fillna(method = "ffill")
 
 df6.tail(10)
 
+frames = [df3, df6]
 
+result = pd.concat(frames)
+
+result
 
 # +
 
