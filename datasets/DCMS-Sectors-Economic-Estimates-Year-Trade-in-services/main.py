@@ -88,6 +88,59 @@ df3.loc[df3["sub-sector"] == "Empty column", "sector"]
 
 df3.tail(10)
 
+df4 = pd.read_excel(path, "Imports")
+
+header_row = 1
+df4.columns = df4.iloc[header_row]
+
+df4 = df4.drop(header_row)
+df4 = df4.reset_index(drop = True)
+
+df4
+
+df4.columns = pd.MultiIndex.from_arrays([df4.columns, df4.iloc[1].values])
+df4 = df4.iloc[2:]
+
+df4
+
+df5 = df4.T
+
+df5.index.names = ['sector', 'sub-sector']
+
+df5.head()
+
+header_row = 0
+df5.columns = df5.iloc[header_row]
+
+df6 = df5.drop((np.nan, "Country"))
+
+df6.head()
+
+df6 = df6.stack()
+
+df6
+
+df6 = df6.to_frame()
+
+df6
+
+df6 = df6.reset_index()
+
+df6.head(0)
+
+df6 = df6.rename(columns = {(np.nan, 'Country'):"country", 0:"value"})
+
+df6.loc[df6["sector"] == "sheet", "value"]
+
+for val in df6["sub-sector"]:
+    df6["sector"]
+
+df6 = df6.fillna(method = "ffill")
+
+df6.tail(10)
+
+
+
 # +
 
 
