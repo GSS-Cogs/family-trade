@@ -105,8 +105,6 @@ frames = [df3, df6]
 
 tidy = pd.concat(frames).fillna('')
 
-tidy
-
 tidy['Marker'] = tidy.apply(lambda x: 'suppressed' if x['value'] == '-' else x['Marker'], axis = 1)
 
 tidy["sector"] = tidy.apply(lambda x: "Gambling" if x["subsector"] == "Gambling" 
@@ -121,16 +119,16 @@ tidy["subsector"] = tidy.apply(lambda x: 'N/A' if x["sector"] == "Gambling"
                                         else "Cultural Crafts" if x["subsector"] == "Crafts4"
                                             else x["subsector"], axis =1)
 
-tidy["sector"] = tidy.apply(lambda x: "creative-industries" if x["sector"] == "creative industries sub-sectors"
-                                else "digital-sector" if x["sector"] == "digital sector sub-sectors"
-                                    else "cultural-sector" if x["sector"] == "culture sector sub-sector"
-                                        else "all-uk-2018-pink-book-estimate" if x["sector"] == "all uk service imports (2018 pink book estimate)"
-                                            else "all-uk-2018-pink-book-estimate" if x["sector"] == "all uk service exports (2018 pink book estimate)"
+tidy["sector"] = tidy.apply(lambda x: "Creative-industries" if x["sector"] == "Creative Industries sub-sectors"
+                                else "Digital-sector" if x["sector"] == "Digital Sector sub-sectors"
+                                    else "Cultural-sector" if x["sector"] == "Culture Sector sub-sector"
+                                        else "All-uk-2018-pink-book-estimate" if x["sector"] == "All UK service imports (2018 Pink Book estimate)"
+                                            else "All-uk-2018-pink-book-estimate" if x["sector"] == "All UK service exports (2018 Pink Book estimate)"
                                                 else x['sector'], axis = 1)
 
-tidy["subsector"] = tidy.apply(lambda x : "all-uk-2018-pink-book-estimate" if x["subsector"] == "all_exports"
-                                    else "all-uk-2018-pink-book-estimate" if x["subsector"] == "all_imports"
-                                        else "dcms-sectors-exc-tourism-and-civil-society" if x["subsector"] =="dcms total"
+tidy["subsector"] = tidy.apply(lambda x : "All-uk-2018-pink-book-estimate" if x["subsector"] == "All_Exports"
+                                    else "All-uk-2018-pink-book-estimate" if x["subsector"] == "All_Imports"
+                                        else "Dcms-sectors-exc-tourism-and-civil-society" if x["subsector"] =="DCMS total"
                                             else x["subsector"], axis = 1)
 
 tidy["unit"] = "gbp-million"
@@ -138,8 +136,6 @@ tidy["measure type"] = "count"
 tidy["year"] = "year/2018"
 
 tidy.columns = map(str.title, tidy.columns)
-
-tidy
 
 tidy = tidy[["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"]]
 
