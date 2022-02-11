@@ -1,18 +1,5 @@
 # -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.13.5
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
+# %%
 # +
 from gssutils import *
 import pandas as pd
@@ -22,12 +9,13 @@ from csvcubed.models.cube.qb.catalog import CatalogMetadata
 from datetime import datetime
 
 metadata = Scraper(seed = 'foreign_direct_investment-info.json')
-display(metadata)
+#display(metadata)
 # -
 
 inward_scraper = metadata.distribution(latest = True)
-inward_scraper
-
+#inward_scraper
+# %%
+#change to outward landing page.
 with open("foreign_direct_investment-info.json", "r") as jsonFile:
     data = json.load(jsonFile)
 data["landingPage"] = "https://www.ons.gov.uk/businessindustryandtrade/business/businessinnovation/datasets/foreigndirectinvestmentinvolvingukcompaniesoutwardtables"
@@ -37,20 +25,20 @@ del data
 
 
 metadata_1 = Scraper(seed = 'foreign_direct_investment-info.json')
-display(metadata_1)
+#display(metadata_1)
 
 outward_scraper = metadata_1.distribution(latest = True)
-outward_scraper
+#outward_scraper
 
+# %%
 # Collect together all tabs in one list of `((tab name, direction), tab)`
 
 tabs = {
     ** {(tab.name.strip(), 'inward'): tab for tab in inward_scraper.as_databaker()},
     ** {(tab.name.strip(), 'outward'): tab for tab in outward_scraper.as_databaker()}
 }
-print(list(tabs.keys()))
-
-
+#print(list(tabs.keys()))
+# %%
 # A common issue is where a dimension label is split over more than one cell.
 # The following function does a rudimentary search for these splits in a bag, returns a list of
 # pairs of cells and their replacement, along with a list of extraneous cells to remove
@@ -83,8 +71,7 @@ def split_overrides(bag, splits):
                         to_remove = to_remove | c
     return (overrides, to_remove)
 
-
-# +
+# %%
 tidied_sheets = []
 tables = []
 for (name, direction), tab in tabs.items():
@@ -95,7 +82,7 @@ for (name, direction), tab in tabs.items():
     major, minor = name.split('.')
     if major not in ['2', '3', '4']:
         continue
-    display(f'Processing tab {name}: {direction}')
+    #display(f'Processing tab {name}: {direction}')
     
     # Set anchors for header row
     top_right = tab.filter('£ million')
@@ -107,7 +94,7 @@ for (name, direction), tab in tabs.items():
     dims.append(HDim(top_row, 'top', DIRECTLY, ABOVE))
     
     # Select all the footer info as "bottom_block"
-    bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown due to rounding.')
+    bottom = tab.filter('The sum of constituent items may not always agree exactly with the totals shown because of rounding.')
     bottom.assert_one()
     bottom_block = bottom.shift(UP).expand(RIGHT).expand(DOWN)
     
@@ -141,28 +128,33 @@ for (name, direction), tab in tabs.items():
     left_dim.AddCellValueOverride('IRELAND', 'IRISH REPUBLIC')
     dims.append(left_dim)
     
-    if minor != '1':
-
-        year_col = left_top.fill(RIGHT).is_number().filter(lambda x: x.value > 1900).by_index(1).expand(DOWN).is_number() - bottom_block
+    if minor == '1':
+        year_col = tab.excel_ref('D5').expand(RIGHT).is_not_blank()
+        dims.append(HDim(year_col, 'Year', DIRECTLY, ABOVE))
+        obs = year_col.fill(DOWN).is_not_blank() - bottom_block
+    if minor == '2':
+        year_col = tab.excel_ref('D7').expand(DOWN).is_not_blank()
         dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
-        obs = year_col.fill(RIGHT) & top_row.fill(DOWN)
-    else:
-
-        obs = left_col.fill(RIGHT) & top_row.fill(DOWN)
+        obs = year_col.fill(RIGHT).is_not_blank() - bottom_block
+        
+       # if major == "2" :
+       #     obs = year_col.fill(RIGHT).is_not_blank() - top_right.fill(DOWN) - bottom_block
+    
+    if minor == '3':
+        year_col = tab.excel_ref('E6').expand(DOWN).is_not_blank()
+        dims.append(HDim(year_col, 'Year', DIRECTLY, LEFT))
+        obs = year_col.fill(RIGHT).is_not_blank() - bottom_block
 
     cs = ConversionSegment(obs, dims, includecellxy=True)
+    #savepreviewhtml(cs, fname= tab.name + "PREVIEW.html") 
     table = cs.topandas()
     
-    # Post processing
-
+        # Post processing
+    table['Year'] = table['Year'].map(lambda x: int(float(x)))
     table["FDI Area"] = table["FDI Area"].map(lambda x: pathify(x.strip()))
     table["FDI Area"] = table["FDI Area"].replace({"other-european", "other-european-countries"})
-    if minor == '1':
-        # top header row is year
-        table.rename(columns={'top': 'Year'}, inplace=True)
-    table['Year'] = table['Year'].map(lambda x: int(float(x)))
-    if minor != '2':
 
+    if minor != '2':
         table['FDI Component'] = {
             '2': {'outward': 'total-net-fdi-abroad',
                   'inward': 'total-net-fdi-in-the-uk'},
@@ -172,21 +164,16 @@ for (name, direction), tab in tabs.items():
                   'inward': 'total-net-fdi-earnings-in-the-uk'}
         }.get(major).get(direction)
     else:
-
         table.rename(columns={'top': 'FDI Component'}, inplace=True)
         table['FDI Component'] = table['FDI Component'].map(pathify)
     if minor == '3':
         table.rename(columns={'top': 'FDI Industry'}, inplace=True)
-
         table['FDI Industry'] = table['FDI Industry'].map(
-            lambda x: pathify(x) if x != 'Total' else 'all-activities'
-        )
+            lambda x: pathify(x) if x != 'Total' else 'all-activities')
     else:
-
         table['FDI Industry'] = 'all-activities'
     # Disambiguate FDI Component between tabs 2.2 and 4.2
     if name == '2.2':
-
         table['FDI Component'] = table['FDI Component'].map(
             lambda x: 'fdi-' + x if not x.startswith('total-net-foreign-direct-investment-') else
             'total-net-fdi-' + x[len('total-net-foreign-direct-investment-'):]
@@ -202,57 +189,17 @@ for (name, direction), tab in tabs.items():
     table['Investment Direction'] = direction
     tidied_sheets.append(table)
 
-observations = pd.concat(tidied_sheets, sort = True)
-observations
-# -
 
-observations['Marker'] = observations['DATAMARKER'].map(
-    lambda x: { '..' : 'disclosive',
-               '-' : 'itis-nil'
-        }.get(x, x))
+# %%
+df = pd.concat(tidied_sheets, sort = True)
+df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
+df = df.replace({'Marker' : {'..' : 'disclosive', '-' : 'itis-nil'}})
+df['Value'] = pd.to_numeric(df['Value'], errors = 'coerce')
+df.drop(columns=['__x', '__y', '__tablename','top'],axis = 1, inplace = True)
+df.drop_duplicates(subset=df.columns.difference(['Value']), inplace =True)
+df
 
-observations['Value'] = pd.to_numeric(observations['OBS'], errors = 'coerce')
-
-from IPython.core.display import HTML
-for col in observations:
-    if col != 'Value':
-        observations[col] = observations[col].astype('category')
-        display(HTML(f'<h3>{col}</h3'))
-        display(observations[col].cat.categories)
-
-# +
-
-observations = observations[['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry',
-                             'Value', 'Marker',
-                             '__x', '__y', '__tablename']]
-# -
-
-destinationFolder = Path('out')
-destinationFolder.mkdir(exist_ok=True, parents=True)
-observations.drop(columns=['__x', '__y', '__tablename'],axis = 1, inplace = True)
-observations.drop_duplicates(subset=observations.columns.difference(['Value']), inplace =True)
-
-# There are mutiple duplicate values due to empty cells from source data that makes error in Jenkins Those empty cells with no values are removed 
-
-observation_duplicate = observations[observations.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
-                              ],keep=False)]
-
-observation_duplicate.columns.unique()
-
-observations_unique = observations.drop_duplicates(['Investment Direction', 'Year', 'International Trade Basis',
-                             'FDI Area', 'FDI Component', 'FDI Industry'
-                              ],keep=False)
-
-observations.shape, observation_duplicate.shape, observations_unique.shape
-
-observations = observation_duplicate[observation_duplicate['Value'] != '']
-
-observations = pd.concat([observations_unique, observations])
-
-observations.shape, observation_duplicate.shape, observations_unique.shape
-
+# %%
 # --- Force Consistant labels ---:
 # The data producer is using different labels for the same thing within the same dataset
 # We need to force them to same
@@ -269,11 +216,48 @@ fix = {
     "gulf-arabian": "gulf-arabian-countries",
     "other-asian": "other-asian-countries"
 }
-observations['FDI Area'] = observations['FDI Area'].map(lambda x: fix.get(x, x))
+df['FDI Area'] = df['FDI Area'].map(lambda x: fix.get(x, x))
+df
+
+# %%
+#tabs 2.1, 2.2 have duplicate data down for cell year2019, AUSTRALIA, under "Total net foreign direct investment abroad" 
+#In tab 2.1 the value is 300 but in 2.2 is .. meaning Indicates value is disclosive. These tabs could of been colated in a differnet manner. as all the other values for that column match across the two tabs. 
+#The same applies for tabs 4.1 and 4.2 for data relating to year2020, NEW ZEALAND, "Total net FDI earnings abroad"
+#I made (shannon) an informed descion to drop the the 2 values that hold a marker and use the observation with an actual numerical value. 
+df_dup = df[df.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+                             'FDI Area', 'FDI Component', 'FDI Industry'
+                              ],keep=False)]
+filtered_df = df_dup[df_dup['Value'].isnull()]
+filtered_df
 
 
+# %%
+def dataframe_difference(df1: df, df2: df, which=None):
+    """Find rows which are different between two DataFrames."""
+    comparison_df = df1.merge(
+        df2,
+        indicator=True,
+        how='outer'
+    )
+    if which is None:
+        diff_df = comparison_df[comparison_df['_merge'] != 'both']
+    else:
+        diff_df = comparison_df[comparison_df['_merge'] == which]
+    diff_df.drop(columns=['_merge'],axis = 1, inplace = True)
+    return diff_df
+
+df = dataframe_difference(df, filtered_df)
+
+# %%
+#checking no duplicates
+df_dup = df[df.duplicated(['Investment Direction', 'Year', 'International Trade Basis',
+                             'FDI Area', 'FDI Component', 'FDI Industry'
+                              ],keep=False)]
+df_dup
+
+# %%
 # +
-observations.to_csv('foreign_direct_investment-observations.csv', index = False)
+df.to_csv('foreign_direct_investment-observations.csv', index = False)
 
 catalog_metadata: CatalogMetadata = CatalogMetadata(
     title = "Foreign direct investment involving UK companies (directional)",

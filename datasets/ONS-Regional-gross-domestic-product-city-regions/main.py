@@ -1,709 +1,117 @@
+# %%
 # +
-from gssutils import * 
-import json 
-import numpy as np 
-from urllib.parse import urljoin
+from gssutils import *
+import json
+from csvcubed.models.cube.qb.catalog import CatalogMetadata
+
+#TWO LANDING PAGES 
+# https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions
+# https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions
+
+scraper = Scraper(seed = 'info.json')
+enterpriseregions_scraper = scraper.distribution(latest = True)
+
+#change to outward landing page.
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+data["landingPage"] = "https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile, indent=2)
+del data
 
 
-cubes = Cubes("info.json")
-trace = TransformTrace()
-df = pd.DataFrame()
-out = Path('out')
-out.mkdir(exist_ok=True)
-# -
+scraper = Scraper(seed = 'info.json')
+cityregions_scraper = scraper.distribution(latest = True)
 
-info = json.load(open('info.json')) 
-scraper = Scraper(seed="info.json")   
-scraper 
 
-#Distribution 
-tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
-list(tabs)
-
-# - Tables 1 - 5 : how the calculation of GDP in current prices in tables
-# - Tables 6 - 7 : calculate GDP per head 
-# - Table 8 : shows the implied deflators from the GVA(B) dataset
-# - Table 9 - 10 : table 8 is used to remove the effect of price inflation and derive volume measures of regional GDP shown in tables 9 and 10.
-# - Table 11 : shows volume GDP per head
-# - Table 12 - 13 - show the annual growth rates of volume GDP and volume GDP per head
-#
-
-for name, tab in tabs.items():
+# %%
+# Collect together all tabs in one list of `((tab name, direction), tab)`
+tabs = {
+    ** {(tab.name.strip(), 'enterprise'): tab for tab in enterpriseregions_scraper.as_databaker()},
+    ** {(tab.name.strip(), 'city'): tab for tab in cityregions_scraper.as_databaker()}
+}
+# %%
+tidied_sheets = []
+for (name, direction), tab in tabs.items():
     if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name or 'Correction' in name: 
         continue
-
-    datasetTitle = 'Regional gross domestic product city regions'
-    columns=["Period", "Area Type", "Geo Code", "Area Name", "Dimension name unsure", "Marker", "Measure Type", "Unit"]
-    trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
         
-    area_type = tab.excel_ref('A3').expand(DOWN)
-    trace.Area_Type("Values taken from cell A3 Down")
-        
-    geo_code = tab.excel_ref('B3').expand(DOWN)
-    trace.Geo_Code("Values taken from cell B3 Down")
-        
-    area_name = tab.excel_ref('C3').expand(DOWN)
-    trace.Area_Name("Values taken from cell C3 Down")
-        
+    measure = tab.excel_ref('A1')
+    unit = tab.excel_ref('Y1')
+    bottom_anchor = tab.filter(contains_string("Note 1"))
+    area_type = bottom_anchor.fill(UP).is_not_blank() - measure - measure.shift(0,1)
+    geo_code = bottom_anchor.shift(1,0).fill(UP).is_not_blank() - measure.shift(1,1)
+    area_name = bottom_anchor.shift(2,0).fill(UP).is_not_blank() - measure.shift(2,1)
     period = tab.excel_ref('D2').expand(RIGHT)
-    trace.Period("Values taken from cell D2 across")
-        
-    unsure = tab.excel_ref('A1')
-    trace.Dimension_name_unsure("Values taken from cell A1")
-        
-    unit = tab.excel_ref('X1')
-    trace.Unit("Value taken from cell X1")
-        
-    observations = period.fill(DOWN).is_not_blank() 
+    tab_name = tab.name
+    observations = area_name.waffle(period).is_not_blank()
+    
     dimensions = [
         HDim(period, 'Year', DIRECTLY, ABOVE),
         HDim(area_type, 'Area Type', DIRECTLY, LEFT),
         HDim(geo_code, 'Geography Code', DIRECTLY, LEFT),
         HDim(area_name, 'Area Name', DIRECTLY, LEFT),
-        HDim(unit, 'Unit', CLOSEST, ABOVE),
-        HDim(unsure, 'GDP Estimate Type', CLOSEST, LEFT),
+        HDimConst('TAB NAME', tab_name),
         ]
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    trace.with_preview(tidy_sheet)
-    #savepreviewhtml(tidy_sheet, fname= tab.name + "PREVIEW.html") 
-    trace.store("combined_dataframe", tidy_sheet.topandas())
+    df = tidy_sheet.topandas()
+    tidied_sheets.append(df)
+
+df = pd.concat(tidied_sheets, sort = True)
+df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
+
+# %%
+#Post Processing
+
+#Marker Column
+f1=((df['Year'].str.contains("note 3")))
+df.loc[f1,'Marker'] = "provisional"
+df = df.replace({'Marker' : {'-' : 'not-applicable',}})
+#Year
+df['Year'] = df['Year'].str[:4]
+df['Year'] = "year/" + df['Year']
 
 
-city_regions = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-#city_regions = city_regions.drop_duplicates()
+# Area Type
+#Note update codelist with values 'LEP', 'LA', 'ER', 'CR'
 
-# Transformation of Imports file to be joined to ONS-Regional-gross-domestic-product-enterprise-regions 
+#Measure 
+measures = {"Table 1": "GVA at Current Prices",
+      "Table 2": "VAT on Products",
+      "Table 3": "Other Taxes on Products",
+      "Table 4": "Subsidies on Products",
+      "Table 5": "GDP at Current Market Prices",
+      "Table 6": "Count",
+      "Table 7": "GDP per Capita",
+      "Table 8": "GVA Implied Deflators",
+      "Table 9": "GDP at Chained Volume Measures",
+      "Table 10": "GDP at Chained Volume Measures",
+      "Table 11": "GDP per Capita",
+      "Table 12": "GDP at Chained Volume Measures - Annual Growth Rates",
+      "Table 13": "GDP at Chained Volume Measures - per Head Annual Growth Rates"}
+df['Measure Type'] = df['TAB NAME'].map(measures)
 
-# +
-""
-#changing landing page to ONS-Regional-gross-domestic-product-enterprise-regions  URL
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("URL: ", data["landingPage"] )
-    data["landingPage"] = "https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductenterpriseregions" 
-    print("URL changed to: ", data["landingPage"] )
-
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
+#Units 
+units = {"Table 1": "GBP Million",
+      "Table 2": "GBP Million",
+      "Table 3": "GBP Million",
+      "Table 4": "GBP Million",
+      "Table 5": "GBP Million",
+      "Table 6": "Person",
+      "Table 7": "GBP",
+      "Table 8": "Index",
+      "Table 9": "Index",
+      "Table 10": "GBP Million",
+      "Table 11": "GBP",
+      "Table 12": "Percentage Change",
+      "Table 13": "Percentage Change"}
+df['Unit'] = df['TAB NAME'].map(units)
 # -
-
-info = json.load(open('info.json')) 
-scraper = Scraper(seed="info.json")   
-scraper 
-
-#Distribution 
-tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
-
-for name, tab in tabs.items():
-    if 'Information' in name or 'ESRI_MAPINFO_SHEET' in name or 'Correction' in name:
-        continue
-
-    datasetTitle = 'Regional gross domestic product city regions'
-    columns=["Period", "Area Type", "Geo Code", "Area Name", "Dimension name unsure", "Marker", "Measure Type", "Unit"]
-    trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
-        
-    area_type = tab.excel_ref('A3').expand(DOWN)
-    trace.Area_Type("Values taken from cell A3 Down")
-        
-    geo_code = tab.excel_ref('B3').expand(DOWN)
-    trace.Geo_Code("Values taken from cell B3 Down")
-        
-    area_name = tab.excel_ref('C3').expand(DOWN)
-    trace.Area_Name("Values taken from cell C3 Down")
-        
-    period = tab.excel_ref('D2').expand(RIGHT)
-    trace.Period("Values taken from cell D2 across")
-        
-    unsure = tab.excel_ref('A1')
-    trace.Dimension_name_unsure("Values taken from cell A1")
-        
-    unit = tab.excel_ref('X1')
-    trace.Unit("Value taken from cell X1")
-        
-    if 'Table 6' in name or 'Table 7' in name or 'Table 11' in name or 'Table 12' in name or 'Table 13' in name:
-        cherwell_double = tab.excel_ref('A373').expand(RIGHT)
-        observations = period.fill(DOWN).is_not_blank() - cherwell_double
-       # savepreviewhtml(observations, fname= tab.name + "cherwell_double.html") 
-    else:
-        observations = period.fill(DOWN).is_not_blank() 
-    dimensions = [
-        HDim(period, 'Year', DIRECTLY, ABOVE),
-        HDim(area_type, 'Area Type', DIRECTLY, LEFT),
-        HDim(geo_code, 'Geography Code', DIRECTLY, LEFT),
-        HDim(area_name, 'Area Name', DIRECTLY, LEFT),
-        HDim(unit, 'Unit', CLOSEST, ABOVE),
-        HDim(unsure, 'GDP Estimate Type', CLOSEST, LEFT),
-        ]
-    tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    trace.with_preview(tidy_sheet)
-    #savepreviewhtml(tidy_sheet, fname= tab.name + "PREVIEW.html") 
-    trace.store("combined_dataframe_2", tidy_sheet.topandas())
-
-enterprise_regions = trace.combine_and_trace(datasetTitle, "combined_dataframe_2")
-#enterprise_regions = enterprise_regions.drop_duplicates()
-
-""
-#concatenating all the distributions togther - Easy to output all data togther once multiple measure types can be handeld
-merged_data = pd.concat([city_regions, enterprise_regions], ignore_index=True)
-
-merged_data['Area Type'].unique()
-
-# +
-#post processing 
-merged_data.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-merged_data = merged_data.replace({'Year' : {'20183' : '2018',}})
-merged_data['Year'] = merged_data['Year'].astype(str).replace('\.0', '', regex=True)
-merged_data['Year'] = "year/" + merged_data['Year']
-
-#Greater London Authority = E61000001
-#### merged_data = merged_data.replace({'Geography Code' : {'Not available' : 'E61000001',}})
-#city-region' and 'local-authority'
-merged_data = merged_data.replace({'Area Type' : {'CR' : 'city-region', 'LA' : 'local-authority', 'LEP' : 'local-enterprise-partnerships', 'ER' : 'enterprise-region'}})
-merged_data = merged_data.replace({'Marker' : {'-' : 'not-applicable',}})
-
-#del merged_data['Geography Code']
-
-merged_data["Table Number for joining"] = merged_data["GDP Estimate Type"].str.split(':').str[0]
-merged_data["GDP Estimate Type"] = merged_data["GDP Estimate Type"].str.split(':').str[2]
-merged_data["GDP Estimate Type"] = merged_data["GDP Estimate Type"].str.lstrip()
-
-merged_data = merged_data.replace({'GDP Estimate Type' : {'Gross Value Added (Balanced)1,2 at current basic prices' : 'Gross Value Added (Balanced) at current basic prices',
-                                       'Value Added Tax (VAT) on products1,2' : 'Value Added Tax (VAT) on products',
-                                        'Other taxes on products1,2' : 'Other taxes on products',
-                                        'Subsidies on products1,2' : 'Subsidies on products',
-                                        'Gross Domestic Product (GDP)1,2 at current market prices' : 'Gross Domestic Product (GDP) at current market prices',
-                                        'Total resident population numbers1' : 'Total resident population numbers',
-                                        'Gross Domestic Product (GDP)1 per head2 at current market prices' : 'Gross Domestic Product (GDP) per head at current market prices',
-                                        'Whole economy GVA implied deflators1,2' : 'Whole economy GVA implied deflators',
-                                        'Gross Domestic Product (GDP)1 chained volume measures (CVM)2 index' : 'Gross Domestic Product (GDP) chained volume measures (CVM) index',
-                                        'Gross Domestic Product (GDP)1 chained volume measures (CVM)2 in 2016 money value' : 'Gross Domestic Product (GDP) chained volume measures (CVM) in 2016 money value',
-                                        'Gross Domestic Product (GDP)1 chained volume measures (CVM) per head2' : 'Gross Domestic Product (GDP) chained volume measures (CVM) per head',
-                                        'Gross Domestic Product (GDP)1 chained volume measures (CVM)2 annual growth rates' : 'Gross Domestic Product (GDP) chained volume measures (CVM) annual growth rates',
-                                        'Gross Domestic Product (GDP)1 chained volume measures (CVM) per head2 annual growth rates' : 'Gross Domestic Product (GDP) chained volume measures (CVM) per head annual growth rates'
-                                       }})
-merged_data['GDP Estimate Type'] = merged_data['GDP Estimate Type'].map(lambda x: pathify(x))
-merged_data['Area Name'] = merged_data['Area Name'].map(lambda x: pathify(x))
-#2018 = provisional
-f1=((merged_data['Year'] =='year/2018'))
-merged_data.loc[f1,'Marker'] = 'provisional'
-merged_data = merged_data.replace(np.nan, '', regex=True)
-merged_data
-# -
-
-
-
-merged_data = merged_data.replace({'Table Number for joining' : { 'Table 1' : 'Join 1', 'Table 2' : 'Join 1', 'Table 3' : 'Join 1', 'Table 4' : 'Join 1', 'Table 5' : 'Join 1',
-                                                     'Table 6' : 'Join 2',
-                                                     'Table 7' : 'Join 3',
-                                                     'Table 8' : 'Join 4',
-                                                     'Table 9' : 'Join 5',
-                                                     'Table 10' : 'Join 6',
-                                                     'Table 11' : 'Join 7',
-                                                     'Table 12' : 'Join 8', 'Table 13' : 'Join 8',  }})
-merged_data['Table Number for joining'].unique()
-
-
-merged_data['Marker'].unique()
-
-#create unique list of Unit's (children, familes)
-unique_joins = merged_data['Table Number for joining'].unique()
-print(unique_joins)
-
-#create a data frame dictionary to store data frames
-DataFrameDict = {elem : pd.DataFrame for elem in unique_joins}
-
-#creating the sperate datasets from the dict
-for key in DataFrameDict.keys():
-    DataFrameDict[key] = merged_data[:][merged_data['Table Number for joining'] == key]
-join_1_df = DataFrameDict['Join 1']
-join_2_df = DataFrameDict['Join 2']
-join_3_df = DataFrameDict['Join 3']
-join_4_df = DataFrameDict['Join 4']
-join_5_df = DataFrameDict['Join 5']
-join_6_df = DataFrameDict['Join 6']
-join_7_df = DataFrameDict['Join 7']
-join_8_df = DataFrameDict['Join 8']
-
-
-# +
-#checking each only has one unit and correct value datatype
-print('Join 1 unit ', join_1_df['Unit'].unique())
-join_1_df['Value'] = join_1_df['Value'].astype(int)
-#join_1_df.dtypes
-
-print('Join 2 unit ', join_2_df['Unit'].unique())
-join_2_df['Value'] = join_2_df['Value'].astype(int)
-#join_2_df.dtypes
-
-print('Join 3 unit ', join_3_df['Unit'].unique())
-join_3_df['Value'] = join_3_df['Value'].astype(int)
-#join_3_df.dtypes
-
-print('Join 4 unit ', join_4_df['Unit'].unique())
-join_4_df['Value'] = join_4_df['Value'].astype(float)
-#join_4_df.dtypes
-
-print('Join 5 unit ', join_5_df['Unit'].unique())
-join_5_df['Value'] = join_5_df['Value'].astype(float)
-#join_5_df.dtypes
-
-print('Join 6 unit ', join_6_df['Unit'].unique())
-join_6_df['Value'] = join_6_df['Value'].astype(int)
-#join_6_df.dtypes
-
-print('Join 7 unit ', join_7_df['Unit'].unique())
-join_7_df['Value'] = join_7_df['Value'].astype(int)
-#join_7_df.dtypes
-
-print('Join 8 unit ', join_8_df['Unit'].unique())
-join_8_df['Value']  = pd.to_numeric(join_8_df.Value, errors='coerce')
-#join_8_df.dtypes
-
-# +
-
-# Output filenames
-fn = ['cp-observations.csv','pop-observations.csv', 'cmp-observations.csv', 'deflate-observations.csv', 'cvmindex-observations.csv', 'cvmmoney-observations.csv', 'cvmhead-observations.csv', 'cvmrate-observations.csv']
-# Comments
-co = [
-    'Annual estimates of balanced UK regional Gross Domestic Product (GDP). Current price estimates for combined authorities and city regions.',
-    'Annual estimates of balanced UK regional Gross Domestic Product (GDP). Total resident population numbers for combined authorities and city regions.',
-    'Annual estimates of balanced UK regional Gross Domestic Product (GDP). CGDP per Head at Current Market Prices for combined authorities and city regions..',
-    'Annual estimates of balanced UK regional Gross Domestic Product (GDP). Whole Economy GVA Implied Deflators for combined authorities and city regions.',
-    'Annual estimates of balanced UK regional Gross Domestic Product (GDP). Chained Volume Measures index for combined authorities and city regions.',
-    'Annual estimates of balanced UK regional Gross Domestic Product (GDP). Chained Volume Measures in 2016 money value for combined authorities and city regions.',
-    ' Annual estimates of balanced UK regional Gross Domestic Product (GDP). Chained Volume Measures per head for combined authorities and city regions.',
-    'Annual estimates of balanced UK regional Gross Domestic Product (GDP). Chained Volume Measures annual growth rates for combined authorities and city regions.'
-]
-# Title
-ti = [
-    'Regional Gross Domestic Product city regions - GDP in Current Prices ',
-    'Regional Gross Domestic Product city regions - Total resident Population numbers',
-    'Regional Gross Domestic Product city regions - GDP per Head at Current Market Prices',
-    'Regional Gross Domestic Product city regions - Whole Economy GVA Implied Deflators',
-    'Regional Gross Domestic Product city regions - Chained Volume Measures index',
-    'Regional Gross Domestic Product city regions - Chained Volume Measures in 2016 money value',
-    'Regional Gross Domestic Product city regions - Chained Volume Measures per head',
-    'Regional Gross Domestic Product city regions - Chained Volume Measures annual growth rates'
-    
-    
-]
-# Paths
-pa = ['/cp', '/pop', '/cmp', '/deflate', '/cvmindex', '/cvmmoney', '/cvmhead', '/cvmrate']
-
-# Description
-de = """
-These tables are part of the regional economic activity by Gross Domestic Product release
-
-The data herein are based on the balanced measure of regional gross value added (GVA(B)), which combines estimates produced using the income and production approaches to create a single best estimate of GVA for each industry in each region.
-We have now included the effects of taxes and subsidies on products to derive annual estimates of regional GDP for the first time. GDP is equivalent to GVA plus Value Added Tax (VAT) plus other taxes on products less subsidies on products.
-This is part of several datasets that give the full picture of Gross Domestic Product
-Current Price data
-Regional Gross Domestic Product city regions - GDP in Current Prices
-Gross Value Added (Balanced) at current basic prices
- Value Added Tax (VAT) on products
- Other taxes on products
- Subsidies on products
- Gross Domestic Product (GDP) at current market prices
-
-Used to calculate GDP per head:
-Regional Gross Domestic Product city regions - Total resident Population numbers
-Regional Gross Domestic Product city regions - GDP per Head at Current Market Prices
-
-The implied deflators from the GVA(B) dataset:
-Regional Gross Domestic Product city regions - Whole Economy GVA Implied Deflators
-
-The deflators are used to remove the effect of price inflation and derive volume measures of regional GDP:
-Regional Gross Domestic Product city regions - Chained Volume Measures index
- Regional Gross Domestic Product city regions - Chained Volume Measures in 2016 money value
-
-Volume GDP per head is given in:
-Regional Gross Domestic Product city regions - Chained Volume Measures per head
-
-And the annual growth rates of volume GDP and volume GDP per head are given in:
-Regional Gross Domestic Product city regions - Chained Volume Measures annual growth rates
-Snnual growth rates
-Per head annual growth rates
- 
-All calculations are carried out using unrounded data.
-
-Workplace-based estimates are allocated to the region in which the economic activity takes place. 
-Components may not sum to totals as a result of rounding.
-Implied deflators are derived from whole economy current price and chained volume measures of GVA. 
-Use of implied deflators duplicates the effect of chain-linking, though technically this results in constant price volume measures.
-Components will not sum to totals since chain-linking produces non-additive volume estimates.
-"""
-# -
-
-""
-#changing measure to cp,  unit to gbp-million and value dtype to integer for join1 output 
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million" 
-    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
-    
-    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/current-prices"
-    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
-    
-    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-    data["transform"]["columns"]["Value"]["datatype"] = "integer"
-    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
-
-# +
-join_1_df = join_1_df[join_1_df['Geography Code'] != 'Not available']
-join_2_df = join_2_df[join_2_df['Geography Code'] != 'Not available']
-join_3_df = join_3_df[join_3_df['Geography Code'] != 'Not available']
-join_4_df = join_4_df[join_4_df['Geography Code'] != 'Not available']
-join_5_df = join_5_df[join_5_df['Geography Code'] != 'Not available']
-join_6_df = join_6_df[join_6_df['Geography Code'] != 'Not available']
-join_7_df = join_7_df[join_7_df['Geography Code'] != 'Not available']
-join_8_df = join_8_df[join_8_df['Geography Code'] != 'Not available']
-
-join_1_df['Year'] = join_1_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
-join_2_df['Year'] = join_2_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
-join_3_df['Year'] = join_3_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
-join_4_df['Year'] = join_4_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
-join_5_df['Year'] = join_5_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
-join_6_df['Year'] = join_6_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
-join_7_df['Year'] = join_7_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
-join_8_df['Year'] = join_8_df['Year'].replace({"year/2019\n[note 3]":"year/2019"})
-
-# +
-join_1_df['GDP Estimate Type'] = join_1_df['GDP Estimate Type'].replace({
-    'gross-value-added-balanced-note-1-2-at-current-basic-prices':'gross-value-added-balanced-at-current-basic-prices',
-    'value-added-tax-vat-on-products-note-1-2': 'value-added-tax-vat-on-products',
-    'other-taxes-on-products-note-1-2': 'other-taxes-on-products',
-    'gross-domestic-product-gdp-note-1-2-at-current-market-prices': 'gross-domestic-product-gdp-at-current-market-prices',
-    'subsidies-on-products-note-1-2': 'subsidies-on-products'
-
-})
-
-join_1_df['GDP Estimate Type'].unique()
-
-# +
-#Join 1 : Measure: cp, Unit: gbp-million, Datatype: integer, dataset_path: dataset_path + /cp
-#join_1_df = join_1_df[["Year", "Area Type", 'Area Name', "GDP Estimate Type", "Value", "Marker"]]
-join_1_df = join_1_df[["Year", "Area Type", 'Geography Code', "GDP Estimate Type", "Value", "Marker"]]
-
-try:
-    i = 0
-    csvName = fn[i]
-    scraper.dataset.family = 'trade'
-    scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
-    scraper.dataset.comment = co[i]
-    scraper.dataset.title = ti[i]
-
-    cubes.add_cube(scraper, join_1_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
-
-except Exception as s:
-    print(str(s))
-# -
-
-""
-#changing measure to count, unit to persons and value dtype to integer for join2 output 
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/persons" 
-    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
-    
-    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/count"
-    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
-    
-    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-    data["transform"]["columns"]["Value"]["datatype"] = "integer"
-    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
-
-# +
-join_2_df['GDP Estimate Type'] = join_2_df['GDP Estimate Type'].replace({
-    'total-resident-population-numbers-note-1':'total-resident-population-numbers'
-})
-
-join_2_df['GDP Estimate Type'].unique()
-
-# +
-#Join 2 Measure: count, Unit: persons, Datatype: integer, dataset_path: dataset_path + /pop
-#join_2_df = join_2_df[["Year", "Area Type", "Area Name", "GDP Estimate Type", "Value", "Marker"]]
-join_2_df = join_2_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
-try:
-    i = 1
-    csvName = fn[i]
-    scraper.dataset.family = 'trade'
-    scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
-    scraper.dataset.comment = co[i]
-    scraper.dataset.title = ti[i]
-
-    cubes.add_cube(scraper, join_2_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
-
-except Exception as s:
-    print(str(s))
-# -
-
-""
-#changing measure to cmp, unit to gbp and value dtype to integer for join3 output 
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp" 
-    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
-    
-    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cmp"
-    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
-    
-    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-    data["transform"]["columns"]["Value"]["datatype"] = "integer"
-    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
-
-# +
-join_3_df['GDP Estimate Type'] = join_3_df['GDP Estimate Type'].replace({
-    'gross-domestic-product-gdp-note-1-per-head-note-2-at-current-market-prices':'gross-domestic-product-gdp-at-current-market-prices'
-})
-
-#join_3_df['Geography Code'].unique()
-
-# +
-#Join 3 : Measure: amp, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cmp
-join_3_df = join_3_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
-try:
-    i = 2
-    csvName = fn[i]
-    scraper.dataset.family = 'trade'
-    scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
-    scraper.dataset.comment = co[i]
-    scraper.dataset.title = ti[i]
-
-    cubes.add_cube(scraper, join_3_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
-
-except Exception as s:
-    print(str(s))
-# -
-
-""
-#changing measure to gva, unit to deflators and value dtype to double for join4 output 
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/deflators" 
-    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
-    
-    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gva"
-    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
-    
-    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-    data["transform"]["columns"]["Value"]["datatype"] = "float"
-    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
-
-# +
-join_4_df['GDP Estimate Type'] = join_4_df['GDP Estimate Type'].replace({
-    'whole-economy-gva-implied-deflators-note-1-2':'whole-economy-gva-implied-deflators'
-})
-
-join_4_df['GDP Estimate Type'].unique()
-
-# +
-#Join 4 : Measure: gva, Unit: deflators, Datatype: double, dataset_path: dataset_path + /deflate
-
-join_4_df = join_4_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
-try:
-    i = 3
-    csvName = fn[i]
-    scraper.dataset.family = 'trade'
-    scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
-    scraper.dataset.comment = co[i]
-    scraper.dataset.title = ti[i]
-
-    cubes.add_cube(scraper, join_4_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
-
-except Exception as s:
-    print(str(s))
-# -
-
-""
-#changing measure to cvm, unit to index and value dtype to double for join5 output 
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/index" 
-    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
-    
-    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
-    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
-    
-    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-    data["transform"]["columns"]["Value"]["datatype"] = "float"
-    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
-
-# +
-join_5_df['GDP Estimate Type'] = join_5_df['GDP Estimate Type'].replace({
-    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-note-2-index':'gross-domestic-product-gdp-chained-volume-measures'
-})
-
-join_5_df['GDP Estimate Type'].unique()
-
-# +
-#Join 5 : Measure: cvm, Unit: index, Datatype: double, dataset_path: dataset_path + /cvmindex
-
-join_5_df = join_5_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
-try:
-    i = 4
-    csvName = fn[i]
-    scraper.dataset.family = 'trade'
-    scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
-    scraper.dataset.comment = co[i]
-    scraper.dataset.title = ti[i]
-
-    cubes.add_cube(scraper, join_5_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
-
-except Exception as s:
-    print(str(s))
-# -
-
-""
-#changing measure to cvm, unit to gbp-million and value dtype to integer for join6 output 
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million" 
-    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
-    
-    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
-    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
-    
-    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-    data["transform"]["columns"]["Value"]["datatype"] = "integer"
-    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
-
-# +
-join_6_df['GDP Estimate Type'] = join_6_df['GDP Estimate Type'].replace({
-    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-note-2-in-2018-money-value':'gross-domestic-product-gdp-chained-volume-measures-cvm'
-})
-
-join_6_df['GDP Estimate Type'].unique()
-
-# +
-#Join 6 : Measure: cvm, Unit: index, Datatype: double, dataset_path: dataset_path + /cvmindex
-
-join_6_df = join_6_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
-try:
-    i = 5
-    csvName = fn[i]
-    scraper.dataset.family = 'trade'
-    scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
-    scraper.dataset.comment = co[i]
-    scraper.dataset.title = ti[i]
-
-    cubes.add_cube(scraper, join_6_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
-
-except Exception as s:
-    print(str(s))
-# -
-
-""
-#changing measure to cvm, unit to gbp and value dtype to integer for join7 output 
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp" 
-    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
-    
-    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
-    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
-    
-    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-    data["transform"]["columns"]["Value"]["datatype"] = "integer"
-    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
-
-# +
-join_7_df['GDP Estimate Type'] = join_7_df['GDP Estimate Type'].replace({
-    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-per-head-note-2':'gross-domestic-product-gdp-chained-volume-measures'
-})
-
-join_7_df['GDP Estimate Type'].unique()
-
-# +
-#Join 7 : Measure: cvm, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cvmhead
-
-join_7_df = join_7_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
-try:
-    i = 6
-    csvName = fn[i]
-    scraper.dataset.family = 'trade'
-    scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
-    scraper.dataset.comment = co[i]
-    scraper.dataset.title = ti[i]
-
-    cubes.add_cube(scraper, join_7_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
-
-except Exception as s:
-    print(str(s))
-# -
-
-""
-#changing measure to cvm, unit to rate and value dtype to double for join8 output 
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("Unit: ", data["transform"]["columns"]["Value"]["unit"] )
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/rate" 
-    print("Unit changed to: ", data["transform"]["columns"]["Value"]["unit"] )
-    
-    print("Value measure type: ", data["transform"]["columns"]["Value"]["measure"] )
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/cvm"
-    print("Value measure changed to: ", data["transform"]["columns"]["Value"]["measure"] )
-    
-    print("Value dtype: ", data["transform"]["columns"]["Value"]["datatype"] )
-    data["transform"]["columns"]["Value"]["datatype"] = "float"
-    print("Value dtype changed to: ", data["transform"]["columns"]["Value"]["datatype"] )
-
-# +
-join_8_df['GDP Estimate Type'] = join_8_df['GDP Estimate Type'].replace({
-    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-note-2-annual-growth-rates':'gross-domestic-product-gdp-chained-volume-measures-cvm-annual-growth-rates',
-    'gross-domestic-product-gdp-note-1-chained-volume-measures-cvm-per-head-note-2-annual-growth-rates': 'gross-domestic-product-gdp-chained-volume-measures-cvm-per-head-annual-growth-rates'
-})
-
-join_8_df['GDP Estimate Type'].unique()
-
-# +
-#Join 8 : Measure: cvm, Unit: gbp, Datatype: integer, dataset_path: dataset_path + /cvmhead
-
-join_8_df = join_8_df[["Year", "Area Type", "Geography Code", "GDP Estimate Type", "Value", "Marker"]]
-try:
-    i = 7
-    csvName = fn[i]
-    scraper.dataset.family = 'trade'
-    scraper.dataset.description = scraper.dataset.description + '\n' + de[i]
-    scraper.dataset.comment = co[i]
-    scraper.dataset.title = ti[i]
-
-    cubes.add_cube(scraper, join_8_df.drop_duplicates(), csvName, info_json_dict=data, graph="ONS-Regional-gross-domestic-product-city-regions")
-
-except Exception as s:
-    print(str(s))
-# -
-
-cubes.output_all()
-
-# +
-""
-#changing landing page to ONS-Regional-gross-domestic-product-enterprise-regions  URL
-with open("info.json", "r") as read_file:
-    data = json.load(read_file)
-    print("URL: ", data["landingPage"] )
-    data["landingPage"] = "https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductcityregions" 
-    print("URL changed to: ", data["landingPage"] )
-
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile)
-# -
-trace.render()
-
-join_1_df['GDP Estimate Type'].unique()
-join_1_df.head(10)
-
-
+# %%
+del df['TAB NAME']
+df = df[[ 'Year', 'Area Name', 'Area Type', 'Geography Code','Value','Measure Type', 'Unit', 'Marker']]
+df
+# %%
+df.to_csv('observations.csv', index=False)
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
