@@ -8,7 +8,7 @@ import json
 from gssutils import *
 from csvcubed.models.cube.qb.catalog import CatalogMetadata # make sure you're in the test container
 
-info_json_file = 'UK_goods_trade_by_industry_country_commodity-info.json'
+info_json_file = 'info.json'
 
 # %% 
 # get first landing page details
@@ -62,6 +62,7 @@ for tab in tabs:
     industry = tab.filter('Industry').fill(DOWN).is_not_blank()
     commodity = tab.filter('Commodity').fill(DOWN).is_not_blank()
     year = tab.excel_ref('E1').expand(RIGHT).is_not_blank()
+    
 
     # [Observations]
 
@@ -149,13 +150,19 @@ df['Industry'] = df['Industry'].str.strip() # strip incase 'U unknown industry' 
 #rename columns
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
+# add constant values since they're defined in info.json
+df["Unit"] = "GBP Million"
+df['Measure Type'] = 'Current Prices'
+
 # %%
 #reorder columns
-df = df[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value', 'Marker']]
+df = df[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value','Measure Type', 'Unit', 'Marker']]
+
+
 
 #%%
-df.to_csv('UK_goods_trade_by_industry_country_commodity-observations.csv', index=False)
+df.to_csv('observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('UK_goods_trade_by_industry_country_commodity-catalog-metadata.json') 
+catalog_metadata.to_json_file('catalog-metadata.json') 
 
 # %%
