@@ -1,5 +1,5 @@
 {
-    "image": "gsscogs/databaker:dev",
+    "image": "gsscogs/databaker:test",
     "extensions": ["github.vscode-pull-request-github",
                    "ms-toolsai.jupyter",
                    "ms-python.vscode-pylance",
