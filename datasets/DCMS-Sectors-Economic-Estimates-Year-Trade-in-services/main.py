@@ -78,8 +78,10 @@ tidy = tidy[["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "
 duplicate_tidy = tidy[tidy.duplicated(["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"])]
 duplicate_tidy
 
+metadata.dataset.title = metadata.title.lstrip("DCMS").lstrip()
+
 # +
-metadata.set_description = f"""
+metadata.dataset.description = f"""
 DCMS Sector Economic Estimates 2018: Trade in Services is an official statistic and has been produced to the standards set out in the Code of Practice for Statistics.
 DCMS Sectors Economic Estimates 2018: Trade in services report:
 https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863862/DCMS_Sectors_Economic_Estimates_2018_Trade_In_Services.pdf
@@ -93,7 +95,7 @@ A revised backseries of calculations on the current basis is expected to be prov
 
 """
 
-metadata.comment = "Official Statistics used to provide an estimate of the contribution of DCMS Sectors to the UK economy, measured by imports and exports of services."
+metadata.dataset.comment = "Official Statistics used to provide an estimate of the contribution of DCMS Sectors to the UK economy, measured by imports and exports of services."
 # -
 tidy.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
