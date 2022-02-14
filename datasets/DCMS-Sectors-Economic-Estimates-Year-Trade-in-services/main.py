@@ -25,7 +25,7 @@ for name, tab in tabs.items():
 
     country = tab.filter("Country").fill(DOWN).is_not_blank().is_not_whitespace()
 
-    sector = tab.filter("DCMS Sectors (exc Tourism and Civil Society)").expand(RIGHT).filter(lambda x: type(x.value) != "Audio Visual" not in x.value).is_not_blank().is_not_whitespace()
+    sector = tab.filter("DCMS Sectors (exc Tourism and Civil Society)").expand(RIGHT).is_not_blank().is_not_whitespace()
 
     empty_column = tab.filter(contains_string("Empty column"))
 
