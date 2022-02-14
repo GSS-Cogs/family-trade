@@ -1,0 +1,73 @@
+{
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
+    "id": "dcms-dcms-sectors-economic-estimates-year-trade-in-services",
+    "title": "DCMS Sectors Economic Estimates [Year]: Trade in services",
+    "publisher": "Department for Digital, Culture, Media & Sport",
+    "description": "Official Statistics used to provide an estimate of the contribution of DCMS Sectors to the UK economy, measured by imports and exports of services.",
+    "landingPage": "https://www.gov.uk/government/statistics/dcms-sectors-economic-estimates-2018-trade-in-services",
+    "datasetNotes": [
+        "On landing page under documents "
+    ],
+    "published": "2020-02-06",
+    "families": [
+        "Trade"
+    ],
+    "extract": {
+        "source": "XLS"
+    },
+    "transform": {
+        "airtable": "recmp8VQCu6Nya893",
+        "main_issue": 86,
+        "columns": {
+            "Year": {
+                "type":"dimension",
+                "new": {
+                    "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                    "codelist": true
+                },
+                "value": "http://reference.data.gov.uk/id/year/{+year}"
+            },
+            "Country":{
+                "type":"dimension",
+                "new":{
+                    "codelist":"./codelists/country.csv-metadata.json"
+                }
+            },
+            "Sector": {
+                "type":"dimension",
+                "new":{
+                    "codelist":"./codelists/trade-sectors.csv-metadata.json"
+                }
+            },
+            "Subsector": {
+                "type":"dimension",
+                "new":{
+                    "codelist":"./codelists/subsector.csv-metadata.json"
+                }
+            },
+            "Flow": {
+                "type":"dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow}"
+            },
+            "Value": {
+                "type": "observations",
+                "datatype": "double"
+              },
+            "Measure Type": {
+                "type": "measures",
+                "value": "http://gss-data.org.uk/def/measure/current-prices"
+             },
+            "Unit": {
+                "type": "units",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+            },
+            "Marker": {
+                "type": "attribute",
+                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
+            }
+        }},
+    "sizingNotes": "",
+    "notes": ""
+}
