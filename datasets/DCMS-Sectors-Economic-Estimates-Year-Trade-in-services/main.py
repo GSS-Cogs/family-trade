@@ -1,18 +1,16 @@
-#%%
+# -*- coding: utf-8 -*-
 from gssutils import * 
 import json 
 from urllib.parse import urljoin
 import numpy as np
-#%%
 info = json.load(open('info.json')) 
 metadata = Scraper(seed="info.json")   
 metadata
-#%%
+metadata.title
+
 distribution = metadata.distribution(title = lambda x: "Imports and Exports" in x)
 distribution
-#%%
 tabs = {tab.name: tab for tab in metadata.distribution (title = lambda x: "Imports and Exports"in x).as_databaker()}
-#%%
 tidied_sheets =[]
 for name, tab in tabs.items():
     if "Cover sheet" in name:
@@ -45,49 +43,42 @@ for name, tab in tabs.items():
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     # savepreviewhtml(tidy_sheet, fname= tab.name + "Preview.html")
     tidied_sheets.append(tidy_sheet.topandas())
-#%%
 tidy = pd.concat(tidied_sheets, sort = True).fillna('')
 tidy.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 tidy = tidy.replace({'Marker' : {'-' : 'suppressed'}})
-tidy['Value'] = tidy.apply(lambda x: 0 if x['Marker']== "suppressed" else x['Value'], axis=1)
 tidy = tidy.replace({'Subsector' : {'Crafts4' : 'Cultural Crafts'}})
-#%%
 tidy['Unit'] = "GBP Million"
-tidy['Measure Type'] = "Count"
+tidy['Measure Type'] = "Current prices"
 
-#%%
 tidy['Sector'].replace({
-    "Creative Industries sub-sectors": "creative-industries", 
-    "Digital Sector sub-sectors": "digital-sector",
-    "Culture Sector sub-sector": "cultural-sector",
+    "Creative Industries sub-sectors": "Creative-industries", 
+    "Digital Sector sub-sectors": "Digital-sector",
+    "Culture Sector sub-sector": "Cultural-sector",
     "All UK service imports (2018 Pink Book estimate)": "all-uk-2018-pink-book-estimate",
     "All UK service exports (2018 Pink Book estimate)": "all-uk-2018-pink-book-estimate"
     }, inplace=True)
-#%%
 tidy["Sector"] = tidy.apply(lambda x: "Gambling" if x["Subsector"] == "Gambling" 
                                     else "Sport" if x["Subsector"] == "Sport" 
                                         else "Telecoms"if x["Subsector"] == "Telecoms" 
                                             else x["Sector"], axis = 1)
-#%%
 tidy['Subsector'].replace({
     "All_Exports": "All-uk-2018-pink-book-estimate", 
     "All_Imports": "All-uk-2018-pink-book-estimate",
     "DCMS total": "Dcms-sectors-exc-tourism-and-civil-society"
     }, inplace=True)
-#%%
 tidy["Subsector"] = tidy.apply(lambda x: 'Not Applicable' if x["Sector"] == "Gambling" 
                                 else 'Not Applicable' if  x["Sector"] == "Sport" 
                                     else 'Not Applicable' if  x["Sector"] == "Telecoms"
                                         else "Cultural Crafts" if x["Subsector"] == "Crafts4"
                                             else x["Subsector"], axis =1)
-tidy["Subsector"].unique()
-#%%
+tidy['Value'] = pd.to_numeric(tidy.Value, errors = 'coerce')
+tidy = tidy.round({"Value":1}).fillna('')
+
 tidy = tidy[["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"]]
-#%%
 duplicate_tidy = tidy[tidy.duplicated(["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"])]
 duplicate_tidy
 
-#%%
+# +
 metadata.set_description = f"""
 DCMS Sector Economic Estimates 2018: Trade in Services is an official statistic and has been produced to the standards set out in the Code of Practice for Statistics.
 DCMS Sectors Economic Estimates 2018: Trade in services report:
@@ -103,12 +94,7 @@ A revised backseries of calculations on the current basis is expected to be prov
 """
 
 metadata.comment = "Official Statistics used to provide an estimate of the contribution of DCMS Sectors to the UK economy, measured by imports and exports of services."
-metadata.summary = f"""
-Economic Estimates are Official Statistics used to provide an estimate of imports and exports of services by DCMS Sectors (excluding Tourism and Civil Society).
-This release only covers trade in services, and aims to provide a timely summary of the key findings for 2018, the latest year for which data are available.
-
-"""
-#%%
+# -
 tidy.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
