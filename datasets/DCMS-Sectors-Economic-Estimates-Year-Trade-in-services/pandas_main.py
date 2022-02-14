@@ -52,11 +52,6 @@ df3.head(0)
 
 df3 = df3.rename(columns = {(np.nan, 'Country'):"country", 0:"value"})
 
-df3.loc[df3["sector"] == "sheet", "value"]
-
-for val in df3["subsector"]:
-    df3["sector"]
-
 df3 = df3.fillna(method = "ffill")
 
 df3.loc[df3["subsector"] == "Empty column", "sector"]
@@ -132,7 +127,7 @@ tidy["subsector"] = tidy.apply(lambda x : "All-uk-2018-pink-book-estimate" if x[
                                             else x["subsector"], axis = 1)
 
 tidy["unit"] = "gbp-million"
-tidy["measure type"] = "count"
+tidy["measure type"] = "Current prices"
 tidy["year"] = "year/2018"
 
 tidy.columns = map(str.title, tidy.columns)
