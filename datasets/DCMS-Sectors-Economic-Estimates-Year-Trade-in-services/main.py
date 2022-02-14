@@ -1,133 +1,87 @@
 # -*- coding: utf-8 -*-
-# +
 from gssutils import * 
 import json 
 from urllib.parse import urljoin
-
-trace = TransformTrace()
-df = pd.DataFrame()
-# -
-
+import numpy as np
 info = json.load(open('info.json')) 
-scraper = Scraper(seed="info.json")   
-scraper 
+metadata = Scraper(seed="info.json")   
+metadata
+metadata.title
 
-#Distribution 2: Imports and Exports of services by sector 
-tabs = { tab.name: tab for tab in scraper.distributions[1].as_databaker() }
-list(tabs)
+distribution = metadata.distribution(title = lambda x: "Imports and Exports" in x)
+distribution
+tabs = {tab.name: tab for tab in metadata.distribution (title = lambda x: "Imports and Exports"in x).as_databaker()}
+tidied_sheets =[]
+for name, tab in tabs.items():
+    if "Cover sheet" in name:
+        continue
+    
+    if tab.name == "Imports":
+        flow = "imports"
+    else:
+        flow = "exports"
 
-# Sheet : Imports 
+    period = "year/2018" #TAKEN FROM SHEET TITLE
 
-# +
-tab = tabs["Imports"]
-datasetTitle = 'dcms-sectors-economic-estimates-2018-trade-in-services'
-columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
-trace.start(datasetTitle, tab, columns, scraper.distributions[1].downloadURL)
+    country = tab.filter("Country").fill(DOWN).is_not_blank().is_not_whitespace()
 
-flow = "imports"
-trace.Flow("Hardcoded as Imports")
+    sector = tab.filter("DCMS Sectors (exc Tourism and Civil Society)").expand(RIGHT).is_not_blank().is_not_whitespace()
 
-period = "year/2018" #TAKEN FROM SHEET TITLE
-trace.Period("Hardcoded as year/2018")
+    empty_column = tab.filter(contains_string("Empty column"))
 
-country = tab.excel_ref("A5").expand(DOWN)
-trace.Country("Values taken from cell A5 Down")
+    sub_sector = tab.filter("Creative Industries").expand(RIGHT).is_not_blank().is_not_whitespace()-empty_column
 
-sector = tab.excel_ref("A3").expand(RIGHT).is_not_blank()
-trace.Sector("Non blank values from cell A3 across")
+    observations = country.fill(RIGHT).is_not_blank().is_not_whitespace()
 
-sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
-trace.Subsector("Non blank values from cell B4 across ")
-
-observations = country.waffle(sector_tpe).is_not_blank() 
-dimensions = [
-    HDimConst('Period', period),
-    HDimConst('Flow', flow),
-    HDim(country, 'Country', DIRECTLY, LEFT),
-    HDim(sector, 'Sector', CLOSEST, LEFT),
-    HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
+    dimensions = [
+        HDimConst("Year", period),
+        HDimConst("Flow", flow),
+        HDim(country, "Country", DIRECTLY, LEFT),
+        HDim(sector, "Sector", CLOSEST, LEFT),
+        HDim(sub_sector, "Subsector", DIRECTLY, ABOVE)
     ]
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-trace.store("import_dataframe", tidy_sheet.topandas())
-df_imports = trace.combine_and_trace(datasetTitle, "import_dataframe")
-# -
-
-# Sheet : Exports 
-
-# +
-tab = tabs["Exports"]
-datasetTitle = 'DCMS Sectors Economic Estimates 2018: Trade in services : Exports'
-columns=["Period", "Flow", "Country", "Sector", "Subsector", "Marker", "Measure Type", "Unit"]
-trace.start(datasetTitle, tab, columns, scraper.distributions[1].downloadURL)
-
-flow = "exports"
-trace.Flow("Hardcoded as Exports")
-
-period = "year/2018" #TAKEN FROM SHEET TITLE
-trace.Period("Hardcoded as year/2018")
-
-country = tab.excel_ref("A5").expand(DOWN)
-trace.Country("Values taken from cell A5 Down")
-
-sector = tab.excel_ref("A3").expand(RIGHT).is_not_blank()
-trace.Sector("Non blank values from cell A3 across")
-
-sector_tpe = tab.excel_ref("B4").expand(RIGHT).is_not_blank()
-trace.Subsector("Non blank values from cell B4 across ")
-
-observations = country.waffle(sector_tpe).is_not_blank()  
-dimensions = [
-    HDimConst('Period', period),
-    HDimConst('Flow', flow),
-    HDim(country, 'Country', DIRECTLY, LEFT),
-    HDim(sector, 'Sector', CLOSEST, LEFT),
-    HDim(sector_tpe, 'Subsector', DIRECTLY, ABOVE),
-    ]
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-trace.with_preview(tidy_sheet)
-trace.store("exports_dataframe", tidy_sheet.topandas())
-df_exports = trace.combine_and_trace(datasetTitle, "exports_dataframe")
-
-# +
-tidy = pd.concat([df_exports, df_imports])
-
-#Post Processing
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    # savepreviewhtml(tidy_sheet, fname= tab.name + "Preview.html")
+    tidied_sheets.append(tidy_sheet.topandas())
+tidy = pd.concat(tidied_sheets, sort = True).fillna('')
 tidy.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 tidy = tidy.replace({'Marker' : {'-' : 'suppressed'}})
-tidy['Value'] = tidy.apply(lambda x: 0 if x['Marker']== "suppressed" else x['Value'], axis=1)
 tidy = tidy.replace({'Subsector' : {'Crafts4' : 'Cultural Crafts'}})
+tidy['Unit'] = "GBP Million"
+tidy['Measure Type'] = "Current prices"
 
-tidy['Unit'] = "gbp-million"
-tidy['Measure Type'] = "count"
-
-# -
-
-tidy['Country'] = tidy['Country'].apply(pathify)
-
-
-
-tidy['Sector'] = tidy['Sector'].apply(pathify)
 tidy['Sector'].replace({
-    "creative-industries-sub-sectors": "creative-industries", 
-    "digital-sector-sub-sectors": "digital-sector",
-    "culture-sector-sub-sector": "cultural-sector",
-    "all-uk-service-exports-2018-pink-book-estimate": "all-uk-2018-pink-book-estimate",
-    "all-uk-service-imports-2018-pink-book-estimate": "all-uk-2018-pink-book-estimate"
+    "Creative Industries sub-sectors": "Creative-industries", 
+    "Digital Sector sub-sectors": "Digital-sector",
+    "Culture Sector sub-sector": "Cultural-sector",
+    "All UK service imports (2018 Pink Book estimate)": "all-uk-2018-pink-book-estimate",
+    "All UK service exports (2018 Pink Book estimate)": "all-uk-2018-pink-book-estimate"
     }, inplace=True)
-
-tidy['Subsector'] = tidy['Subsector'].apply(pathify)
+tidy["Sector"] = tidy.apply(lambda x: "Gambling" if x["Subsector"] == "Gambling" 
+                                    else "Sport" if x["Subsector"] == "Sport" 
+                                        else "Telecoms"if x["Subsector"] == "Telecoms" 
+                                            else x["Sector"], axis = 1)
 tidy['Subsector'].replace({
-    "all_exports": "all-uk-2018-pink-book-estimate", 
-    "all_imports": "all-uk-2018-pink-book-estimate",
-    "dcms-total": "dcms-sectors-exc-tourism-and-civil-society"
+    "All_Exports": "All-uk-2018-pink-book-estimate", 
+    "All_Imports": "All-uk-2018-pink-book-estimate",
+    "DCMS total": "Dcms-sectors-exc-tourism-and-civil-society"
     }, inplace=True)
+tidy["Subsector"] = tidy.apply(lambda x: 'Not Applicable' if x["Sector"] == "Gambling" 
+                                else 'Not Applicable' if  x["Sector"] == "Sport" 
+                                    else 'Not Applicable' if  x["Sector"] == "Telecoms"
+                                        else "Cultural Crafts" if x["Subsector"] == "Crafts4"
+                                            else x["Subsector"], axis =1)
+tidy['Value'] = pd.to_numeric(tidy.Value, errors = 'coerce')
+tidy = tidy.round({"Value":1}).fillna('')
 
-tidy = tidy[['Period', 'Country', 'Sector', 'Subsector', 'Flow', 'Measure Type', 'Unit', 'Value', 'Marker']]
+tidy = tidy[["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"]]
+duplicate_tidy = tidy[tidy.duplicated(["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"])]
+duplicate_tidy
 
+metadata.dataset.title = metadata.title.lstrip("DCMS").lstrip()
 
 # +
-description = f"""
+metadata.dataset.description = f"""
 DCMS Sector Economic Estimates 2018: Trade in Services is an official statistic and has been produced to the standards set out in the Code of Practice for Statistics.
 DCMS Sectors Economic Estimates 2018: Trade in services report:
 https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/863862/DCMS_Sectors_Economic_Estimates_2018_Trade_In_Services.pdf
@@ -141,42 +95,8 @@ A revised backseries of calculations on the current basis is expected to be prov
 
 """
 
-comment = "Official Statistics used to provide an estimate of the contribution of DCMS Sectors to the UK economy, measured by imports and exports of services."
+metadata.dataset.comment = "Official Statistics used to provide an estimate of the contribution of DCMS Sectors to the UK economy, measured by imports and exports of services."
 # -
-
-del tidy['Measure Type']
-del tidy['Unit']
-tidy = tidy.fillna('')
-
-# +
-csvName = 'observations.csv'
-out = Path('out')
-out.mkdir(exist_ok=True)
-tidy.drop_duplicates().to_csv(out / csvName, index = False)
-
-scraper.dataset.family = 'trade'
-scraper.dataset.description = description
-scraper.dataset.comment = comment
-scraper.dataset.title = 'Sectors Economic Estimates 2018: Trade in services'
-
-#dataset_path = pathify(os.environ.get('JOB_NAME', f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name) + '/pcn').lower()
-dataset_path = pathify(f'gss_data/{scraper.dataset.family}/' + Path(os.getcwd()).name).lower()
-
-scraper.set_base_uri('http://gss-data.org.uk')
-scraper.set_dataset_id(dataset_path)
-
-csvw_transform = CSVWMapping()
-csvw_transform.set_csv(out / csvName)
-csvw_transform.set_mapping(json.load(open('info.json')))
-csvw_transform.set_dataset_uri(urljoin(scraper._base_uri, f'data/{scraper._dataset_id}'))
-csvw_transform.write(out / f'{csvName}-metadata.json')
-
-with open(out / f'{csvName}-metadata.trig', 'wb') as metadata:
-    metadata.write(scraper.generate_trig())
-# -
-
-tidy
-
-trace.render()
-
-
+tidy.to_csv("observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
