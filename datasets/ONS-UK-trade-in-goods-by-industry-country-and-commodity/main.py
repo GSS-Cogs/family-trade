@@ -144,6 +144,7 @@ df['Commodity'] = df['Commodity'].str[:2] # codelist has 3 char long codes inclu
 df['Commodity'] = df['Commodity'].str.strip() # codes included in this datset are only 1 to 2 characters long
 df['ONS Partner Geography'] = df['ONS Partner Geography'].str[:2]
 df['Industry'] = df['Industry'].str[:2] 
+df['Industry'] = df['Industry'].str.lstrip('0')
 df['Industry'] = df['Industry'].str.strip() # strip incase 'U unknown industry' appears
 
 #%%
@@ -158,8 +159,6 @@ df['Measure Type'] = 'Current Prices'
 #reorder columns
 df = df.replace({'ONS Partner Geography' : {'NA' : 'NAM',}})
 df = df[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value','Measure Type', 'Unit', 'Marker']]
-
-
 
 #%%
 df.to_csv('observations.csv', index=False)
