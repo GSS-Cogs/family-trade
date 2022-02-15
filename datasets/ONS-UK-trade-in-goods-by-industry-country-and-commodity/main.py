@@ -156,6 +156,7 @@ df['Measure Type'] = 'Current Prices'
 
 # %%
 #reorder columns
+df = df.replace({'ONS Partner Geography' : {'NA' : 'NAM',}})
 df = df[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value','Measure Type', 'Unit', 'Marker']]
 
 
