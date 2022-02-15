@@ -32,7 +32,7 @@
                         "codelist": "./codelists/itl-geography.csv-metadata.json"
                             },
 
-                "value": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/hmrc-partner-geography/{+itl_partner_geography}"
+                "value": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/itl-geography/{+itl_geography}"
             },
             "HMRC Partner Geography": {
                 "type": "dimension",
