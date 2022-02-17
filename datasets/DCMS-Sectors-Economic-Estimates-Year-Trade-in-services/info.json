@@ -42,7 +42,7 @@
             "Subsector": {
                 "type":"dimension",
                 "new":{
-                    "codelist":"./codelists/subsector.csv-metadata.json"
+                    "codelist": false
                 }
             },
             "Flow": {
