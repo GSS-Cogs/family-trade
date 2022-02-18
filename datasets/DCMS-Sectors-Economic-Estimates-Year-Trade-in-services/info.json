@@ -21,17 +21,13 @@
         "columns": {
             "Year": {
                 "type": "dimension",
-                "new": {
-                    "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                    "codelist": true
-                },
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/year/{+year}"
             },
             "Country": {
                 "type": "dimension",
-                "new": {
-                    "codelist": true
-                }
+                "uri": "http://gss-data.org.uk/def/common/property/dimension/dcms-country",
+                "value": "http://gss-data.org.uk/def/common/concept/csms-country/{country}"
             },
             "Sector": {
                 "type": "dimension",
