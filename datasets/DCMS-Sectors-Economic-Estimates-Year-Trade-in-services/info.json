@@ -22,7 +22,7 @@
             "Year": {
                 "type": "dimension",
                 "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{+year}"
+                "value": "http://reference.data.gov.uk/id/{+year}"
             },
             "Country": {
                 "type": "dimension",
