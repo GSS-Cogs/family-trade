@@ -27,7 +27,7 @@
             "Country": {
                 "type": "dimension",
                 "uri": "http://gss-data.org.uk/def/property/dimension/dcms-country",
-                "value": "http://gss-data.org.uk/def/concept/csms-country/{country}"
+                "value": "http://gss-data.org.uk/def/concept/dcms-country/{country}"
             },
             "Sector": {
                 "type": "dimension",
