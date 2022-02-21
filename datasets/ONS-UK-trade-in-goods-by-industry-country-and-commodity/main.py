@@ -138,14 +138,13 @@ df['OBS'].loc[(df['OBS'] == '')] = 0
 df['OBS'] = df['OBS'].astype(int) 
 
 # %%
-#reformat period column
+#reformat columns
 df['Period'] = 'year/' + df['Period'].str[0:4]
 df['Commodity'] = df['Commodity'].str[:2] # codelist has 3 char long codes included but in this datset there are only categories with 1 to 2 char long in their code
 df['Commodity'] = df['Commodity'].str.strip() # codes included in this datset are only 1 to 2 characters long
 df['ONS Partner Geography'] = df['ONS Partner Geography'].str[:2]
-df['Industry'] = df['Industry'].str[:2] 
-df['Industry'] = df['Industry'].str.strip() # strip incase 'U unknown industry' appears
-
+df['Industry'] = df['Industry'].str[2:] # remove numbers as we're creating a new codelist. just first 2 characters in case 'U unknown industry' is used
+df['Industry'] = df['Industry'].str.strip()
 #%%
 #rename columns
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
