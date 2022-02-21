@@ -1,0 +1,27 @@
+{
+    "title": "UK trade in goods by industry, country and commodity - Imports & Exports",
+    "identifier": null,
+    "summary": "Experimental dataset providing a breakdown of UK trade in goods by industry, country and commodity on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders.",
+    "description": "\nExperimental dataset providing a breakdown of UK trade in goods by industry, country and commodity on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders.\n\nUsers should note the following:\nIndustry data has been produced using Standard Industrial Classification 2007 (SIC07).\n\nCommodity data has been produced using Standard International Trade Classification (SITC).\n\nDue to risks around disclosing data related to individual firms we are only able to provide data for certain combinations of the dimensions included, i.e. country, commodity and industry. This dataset therefore provides the following two combinations:\n    Industry (SIC07 2 digit), by Commodity (SITC 2 digit), by geographic region (worldwide, EU and non-EU)\n    Industry (SIC07 2 digit), by Commodity total, by individual country\n\nSome data has been suppressed to protect confidentiality so that individual traders cannot be identified.\n\nMethodology improvements\nWithin this latest experimental release improvements have been made to the methodology that has resulted in some revisions when compared to our previous release in April 2019.\nThese changes include; improvements to the data linking methodology and a targeted allocation of some of the Balance of Payments (BoP) adjustments to industry.\nThe data linking improvements were required due to subtleties in both the HMRC data and IDBR not previously recognised within Trade.\n\nWhile we are happy with the quality of the data in this experimental release we have noticed some data movements, specifically in 2018.\nWe will continue to review the movements seen in both the HMRC microdata and the linking methodology and, where appropriate, will further develop the methodology for Trade in Goods by Industry for future releases. \n\nData\nAll data is in \u00a3 million, current prices.\n\nRounding\nSome of the totals within this release (e.g. EU, Non EU and worldwide) may not exactly match data published via other trade releases due to small rounding differences.\n\nTrade Asymmetries\nThese data are our best estimate of these bilateral UK trade flows. Users should note that alternative estimates are available, in some cases, via the statistical agencies for bilateral countries or through central databases such as UN Comtrade.\nUN Comtrade.\n",
+    "creator_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "publisher_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "landing_page_uris": [
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityimports"
+    ],
+    "theme_uris": [
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments"
+    ],
+    "keywords": [
+        "trade with non-EU",
+        "CP",
+        "trade",
+        "trade with EU",
+        "partner countries",
+        "import"
+    ],
+    "dataset_issued": "2021-05-28",
+    "dataset_modified": "2022-02-21T12:50:25.445050+00:00",
+    "license_uri": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "public_contact_point_uri": "mailto:trade@ons.gov.uk",
+    "uri_safe_identifier_override": null
+}
