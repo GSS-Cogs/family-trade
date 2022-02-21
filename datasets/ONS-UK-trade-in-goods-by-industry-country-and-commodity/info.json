@@ -44,7 +44,7 @@
       "Industry": {
         "type": "dimension",
         "new": {
-          "codelist": "./codelists/industry.csv-metadata.json"
+          "codelist": true
         }
       },
       "Value": {
