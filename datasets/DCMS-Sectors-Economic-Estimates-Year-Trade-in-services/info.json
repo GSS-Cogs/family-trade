@@ -26,8 +26,8 @@
             },
             "Country": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/country",
-                "value": "http://gss-data.org.uk/def/concept/dcms-country/{+country}"
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "https://api.uktradeinfo.com/Country/{+country}"
             },
             "Sector": {
                 "type": "dimension",
