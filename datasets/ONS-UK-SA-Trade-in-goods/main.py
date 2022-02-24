@@ -15,21 +15,6 @@
 
 # UK trade in services: all countries, non-seasonally adjusted
 
-# +
-# import json
-# import pandas as pandas
-# from gssutils import *
-
-# cubes = Cubes('info.json')
-# info = json.load(open('info.json'))
-# landingPage = info['landingPage']
-# metadata = Scraper(seed="info.json")
-# distribution = metadata.distribution(latest = True)
-# title = distribution.title
-# tabs = distribution.as_databaker()
-# tidied_sheets = []
-# -
-
 import json
 import pandas as pandas
 from gssutils import *
@@ -39,8 +24,6 @@ landingPage = info['landingPage']
 
 metadata = Scraper(seed="info.json")
 distribution = metadata.distribution(latest = True)
-
-distribution
 
 title = distribution.title
 tabs = distribution.as_databaker()
@@ -59,35 +42,35 @@ def date_time(date):
         raise Exception(f'Aborting, failing to convert value "{date}" to period')
 
 
-# +
 for tab in tabs:
 
     anchor = tab.excel_ref("A1")
     flow = str(tab.name.split()[1]).lower()
     observations = anchor.shift(2, 5).expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
     year = anchor.shift(2, 3).expand(RIGHT).is_not_blank().is_not_whitespace()
-    # .split()[1]).lower()
-    savepreviewhtml(year, fname=tab.name+"Preview.html")
-    # observations = tab.excel_ref('C6').expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
-#     geo = tab.excel_ref('A7').expand(DOWN).is_not_blank().is_not_whitespace()
-#     dimensions = [
-#         HDim(year,'Period',DIRECTLY,ABOVE),
-#         HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
-#         HDimConst("Flow", flow),
-#         HDimConst("Seasonal Adjustment", "SA")
-#     ]
-#     tidy_sheet = ConversionSegment(tab, dimensions, observations)
-#     table = tidy_sheet.topandas()
-#     tidied_sheets.append(table)
+    footer = tab.filter(contains_string("Earliest date for revisions")).expand(DOWN)
+    geo = anchor.shift(0, 5).expand(DOWN).is_not_blank().is_not_whitespace()-footer
+    dimensions = [
+        HDim(year,'Period',DIRECTLY,ABOVE),
+        HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
+        HDimConst("Flow", flow),
+        HDimConst("Seasonal Adjustment", "SA")
+    ]
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    table = tidy_sheet.topandas()
+    tidied_sheets.append(table)
+    # savepreviewhtml(tidy_sheet, fname=tab.name+"Preview.html")
 
-# df = pd.concat(tidied_sheets, sort=True)
-# df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-# df["Period"] =  df["Period"].apply(date_time)
-# df = df.fillna('')
-# df["Value"] = df["Value"].map(lambda x: int(x) if isinstance(x, float) else x)
-# df["Marker"] = df["Marker"].str.replace("N/A", "not-applicable")
-# df = df[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Value", "Marker"]]
-# -
+df = pd.concat(tidied_sheets, sort=True)
+
+df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
+df["Period"] =  df["Period"].apply(date_time)
+df = df.fillna('')
+df["Marker"] = df["Marker"].str.replace("N/A", "not-applicable")
+df = df[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Value", "Marker"]]
+
+df['Unit'] = "GBP Million"
+df['Measure Type'] = "Current prices"
 
 #scraper.dataset.family = 'trade'
 metadata.dataset.description = metadata.dataset.description + """
@@ -96,6 +79,7 @@ UN Comtrade (https://comtrade.un.org/).
 
 Some data for countries have been marked with N/A. This is because Trade in Goods do not collate data from these countries.
 """
-cubes.add_cube(metadata, df.drop_duplicates(), metadata.dataset.title)
-cubes.output_all()
-df.head(10)
+
+df.to_csv("observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')

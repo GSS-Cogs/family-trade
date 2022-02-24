@@ -16,35 +16,43 @@
         "airtable": "rec2vZJEjUBsBay90",
         "columns": {
             "Period": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Flow": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow}"
             }, 
             "ONS Partner Geography": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/concept/cl-area/{ons_partner_geography}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "value": "http://gss-data.org.uk/def/concept/cl-area/{+ons_partner_geography}"
             },
             "Seasonal Adjustment": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{+seasonal_adjustment}"
+            },
+            "Measure Type": {
+                "type": "measures",
+                "value": "http://gss-data.org.uk/def/measure/current-prices"
+            },
+            "Unit": {
+                "type": "units",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/current-prices",
+                "type": "observations",
                 "datatype": "integer"
             },
             "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "type": "attribute",
+                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
-        },
-        "main_issue": 2
-    },
-    "load": {
-        "publish": true
+        }
     },
     "sizingNotes": "",
     "notes": ""
