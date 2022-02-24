@@ -8,9 +8,7 @@ import pandas as pd
 from gssutils import *
 import json
 
-info = json.load(open('info.json'))
 scraper = Scraper(seed='info.json')
-cubes = Cubes('info.json')
 scraper
 
 
@@ -606,6 +604,9 @@ table['HMRC Partner Geography'] = table.apply(lambda x: 'all' if x['HMRC Partner
 
 table['ITL Geography'] = table.apply(lambda x: x['ITL Geography'].lower() if 'UN' in x['ITL Geography'] else x['ITL Geography'], axis = 1)
 
+table['Value'] = table.apply(lambda x: x['Value'] if pd.isnull(x['Marker']) else 0, axis = 1)
+# Make sure all the observations with markers have 0 in the value field
+
 scraper.dataset.comment = """HMRC experimental statistics that subdivide the existing Regional Trade in Goods Statistics (RTS) into smaller UK geographic areas (ITL2 and ITL3)."""
 
 
@@ -614,6 +615,9 @@ scraper.dataset.comment = """HMRC experimental statistics that subdivide the exi
 
 
 scraper.dataset.family = 'trade'
-cubes.add_cube(scraper, table, "HMRC RTS Small area")
-cubes.output_all()
+
+table.to_csv('observations.csv', index=False)
+
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 
