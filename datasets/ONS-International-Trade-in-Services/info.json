@@ -40,7 +40,7 @@
                     "new": {
                         "codelist": "./codelists/itis-service.csv-metadata.json"
                             },
-                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-industry/{+itis_service}"
+                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-service/{+itis_service}"
             },
             "ITIS Industry": {
                 "type": "dimension",
