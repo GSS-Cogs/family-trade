@@ -1,4 +1,5 @@
 {
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons-international-trade-in-services",
     "title": "International trade in services",
     "publisher": "Office for National Statistics",
@@ -20,34 +21,49 @@
         "main_issue": 4,
         "columns": {
             "Year": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+year}"
             },
             "Flow Directions": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
             "International Trade Basis": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
                 "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
             },
             "ITIS Service": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
+                "type": "dimension",
+                    "new": {
+                        "codelist": "./codelists/itis-service.csv-metadata.json"
+                            },
+                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-industry/{+itis_service}"
             },
             "ITIS Industry": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/industry"
+                "type": "dimension",
+                    "new": {
+                        "codelist": "./codelists/itis-industry.csv-metadata.json"
+                            },
+                "value": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services#concept/itis-industry/{+itis_industry}"
             },
             "Trade Area": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                "type": "dimension",
+                    "new": {
+                        "codelist": "./codelists/trade-area.csv-metadata.json"
+                            }
             },
             "Value": {
+                "type": "observations",
                 "measure": "http://gss-data.org.uk/def/trade/measure/gbp-total",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "datatype": "decimal"
             },
             "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
+                "type": "attribute",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
         }
     },

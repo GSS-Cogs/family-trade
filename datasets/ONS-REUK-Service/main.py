@@ -1,22 +1,8 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.6.0
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
-# +
-# #!/usr/bin/env python
+#!/usr/bin/env python
 # coding: utf-8
-# %%
-# -
+
+# In[12]:
+
 
 import pandas as pd
 import numpy as np
@@ -24,10 +10,7 @@ from gssutils import *
 from databaker.framework import *
 from IPython.core.display import display
 
-cubes = Cubes("info.json")
 
-
-# +
 def left(s, amount):
     return s[:amount]
 
@@ -38,31 +21,37 @@ def mid(s, offset, amount):
     return s[offset:offset+amount]
 
 
-# -
+# In[13]:
+
+
 
 scraper = Scraper(seed='info.json')
 scraper
 
-# %%
+
+# In[14]:
+
+
 distribution = scraper.distribution(latest=True)
 distribution
 
 tabs = distribution.as_databaker()
 
-# +
-trace = TransformTrace()
+
+# In[15]:
+
+
+
 title = distribution.title
-columns = ['Functional category', 'Area', 'Value', 'Unit', 'Measure Type', 'Flow', 'Year']
 
 tidied_sheets = []
 
 for tab in tabs:
     if 'NUTS1 by category' in tab.name:
         print (tab.name)
-        
-        trace.start(title, tab, columns, scraper.distributions[0].downloadURL)
+
         tab_df = distribution.as_pandas(sheet_name = tab.name)
-        
+
         observations = tab_df.iloc[2:17]
         observations.rename(columns = observations.iloc[0], inplace = True)
         observations.drop(observations.index[0], inplace = True)
@@ -72,18 +61,17 @@ for tab in tabs:
         table['Unit'] = 'gbp-million'
         table['Measure Type'] = 'GBP Total'
         table['Year']  = right(tab.name,4)
-        table['Flow'] = 'exports'    
+        table['Flow'] = 'exports'
 
-        trace.store("combined_dataframe", table)
-        
+        tidied_sheets.append(table)
+
     elif tab.name == "Northern Ireland":
         print(tab.name)
-        
-        trace.start(title, tab, columns, scraper.distributions[0].downloadURL)
+
         tabNI = distribution.as_pandas(sheet_name = 'Northern Ireland')
-        
+
         observations = tabNI.iloc[3:18, :6]
-        
+
         observations.rename(columns= observations.iloc[0], inplace=True)
         observations.drop(observations.index[0], inplace = True)
         observations.columns.values[0] = 1
@@ -96,14 +84,18 @@ for tab in tabs:
         table['Flow'] = 'exports'
         table['Year'] = table['Year'].apply(lambda x: pd.to_numeric(x, downcast='integer'))
         table['Year'] = table['Year'].astype(int)
-        table['Functional category'] = table['Functional category'].map(lambda x: { 
+        table['Functional category'] = table['Functional category'].map(lambda x: {
                             'Total in all categories':'Total in all categories for NUTS1 area' }.get(x, x))
 
-        trace.store("combined_dataframe", table)
-# -
+        tidied_sheets.append(table)
 
-tidy = trace.combine_and_trace(title, "combined_dataframe")
+tidy = pd.concat(tidied_sheets)
 tidy
+
+
+# In[16]:
+
+
 
 tidy['Area'] = tidy['Area'].map(lambda x: { 'Yorkshire and the Humber':'Yorkshire and The Humber' }.get(x, x))
 
@@ -114,39 +106,39 @@ for col in tidy.columns:
         display(tidy[col].cat.categories)
 
 tidy['NUTS Geography'] = tidy['Area'].cat.rename_categories({
-    'East Midlands' : 'UKF', 
-    'East of England': 'UKH', 
-    'London' : 'UKI', 
+    'East Midlands' : 'UKF',
+    'East of England': 'UKH',
+    'London' : 'UKI',
     'North East' : 'UKC',
-    'North West' : 'UKD', 
-    'Scotland' : 'UKM', 
-    'South East' : 'UKJ', 
+    'North West' : 'UKD',
+    'Scotland' : 'UKM',
+    'South East' : 'UKJ',
     'South West' : 'UKK',
-    'Total for functional category' : 'UK', 
-    'Wales' : 'UKL', 
+    'Total for functional category' : 'UK',
+    'Wales' : 'UKL',
     'West Midlands' : 'UKG',
     'Yorkshire and The Humber' : 'UKE',
     'Northern Ireland' : 'UKN'
 })
 tidy['ONS Functional Category'] = tidy['Functional category'].cat.rename_categories({
-    'Administrative and support services' : 'administrative-support' , 
-    'Construction' :'construction', 
+    'Administrative and support services' : 'administrative-support' ,
+    'Construction' :'construction',
     'Financial' : 'financial',
-    'Information and communication' : 'information-communication', 
+    'Information and communication' : 'information-communication',
     'Insurance and pension services' : 'insurance-pension',
-    'Manufacturing' : 'manufacturing', 
-    'Other services' : 'other', 
+    'Manufacturing' : 'manufacturing',
+    'Other services' : 'other',
     'Primary and utilities' :'primary-utilities',
     'Real estate, professional, scientific and technical' : 'real-estate',
     'Retail (excluding motor trades)' : 'retail',
     'Total in all categories for NUTS1 area' : 'all',
-    'Transport' : 'transport', 
+    'Transport' : 'transport',
     'Travel' : 'travel',
-    'Wholesale and motor trades' : 'wholesale-motor'            
+    'Wholesale and motor trades' : 'wholesale-motor'
 })
 
-tidy['Value'] = tidy['Value'].map(lambda x:'' 
-                            if (x == ':') | (x == 'xx') | (x == '..') 
+tidy['Value'] = tidy['Value'].map(lambda x:''
+                            if (x == ':') | (x == 'xx') | (x == '..')
                             else int(x))
 tidy = tidy[tidy['Value'] != '']
 
@@ -155,10 +147,12 @@ tidy = tidy[['NUTS Geography','Year','ONS Functional Category','Flow','Value']]
 tidy.rename(columns={'Flow':'Flow Directions'}, inplace=True)
 tidy
 
-# flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 
-cubes.add_cube(scraper, tidy, title)
-cubes.output_all()
+# In[17]:
 
-trace.render("spec_v1.html")
+
+tidy.to_csv('observations.csv', index=False)
+
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 
