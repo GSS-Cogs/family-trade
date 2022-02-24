@@ -1,35 +1,29 @@
-# -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.13.0
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
+#!/usr/bin/env python
+# coding: utf-8
 
-# +
+# In[10]:
+
+
 import json
 import pandas as pandas
 from gssutils import *
 
-cubes = Cubes('info.json')
-info = json.load(open('info.json'))
-landingPage = info['landingPage']
-metadata = Scraper(seed="info.json")
-metadata
-# -
 
-tabs = metadata.distribution(latest = True, mediaType = Excel).as_databaker()
+scraper = Scraper(seed="info.json")
+scraper
+
+
+# In[11]:
+
+
+
+tabs = scraper.distribution(latest = True, mediaType = Excel).as_databaker()
 str([tab.name for tab in tabs])
 
 
-# +
+# In[12]:
+
+
 def fix_service(row):
     service = pathify(row['H2'])
     group = pathify(row['H1'])
@@ -84,8 +78,7 @@ def process_tab(tab):
     else:
         bottom_left = tab.filter('TOTAL INTERNATIONAL TRADE IN SERVICES')
     bottom_left.assert_one()
-    h1_labels = (top_left.expand(DOWN) & bottom_left.expand(UP)).filter(lambda c: c.value.strip() != '') | \
-        (top_left.shift(RIGHT).expand(DOWN) & bottom_left.shift(RIGHT).expand(UP)).filter(lambda c: c.value.strip() != '')
+    h1_labels = (top_left.expand(DOWN) & bottom_left.expand(UP)).filter(lambda c: c.value.strip() != '') |         (top_left.shift(RIGHT).expand(DOWN) & bottom_left.shift(RIGHT).expand(UP)).filter(lambda c: c.value.strip() != '')
     h2_labels = (top_left.expand(DOWN) & bottom_left.expand(UP)).shift(RIGHT).shift(RIGHT)
     year = top_left.shift(UP).fill(RIGHT).is_not_blank()
     # some flow labels are in a strange place as cells have been merged inconsistently
@@ -112,7 +105,7 @@ def process_tab(tab):
 #     obs.dropna(subset=['Value'], inplace=True)
     obs.drop(columns=['OBS'], inplace=True)
 #     if 'Marker' in obs:
-#         obs.drop(columns=['Marker'], inplace=True)  
+#         obs.drop(columns=['Marker'], inplace=True)
     obs['Year'] = obs['Year'].apply(lambda y: int(float(y)))
     if tab_group[0] in ['A', 'B']:
         obs['ITIS Industry'] = 'all'
@@ -138,16 +131,16 @@ def process_tab(tab):
     obs['International Trade Basis'] = 'BOP'
     obs['Measure Type'] = 'GBP Total'
     obs['Unit'] = 'gbp-million'
-    return obs
-    return obs[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry',
-                'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
+    return obs#[['ONS Trade Areas ITIS', 'Year', 'Flow', 'ITIS Service', 'ITIS Industry', 'International Trade Basis','Measure Type','Value','Unit', 'Marker']]
 
 
-# -
+# In[24]:
+
+
+import numpy as np
 
 observations = pd.concat((process_tab(t) for t in tabs if t.name not in ['Contents', 'Table C0']), sort = False)
 
-# +
 observations.rename(index= str, columns= {'DATAMARKER':'Marker'}, inplace = True)
 observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil',
                                                                '..' : 'disclosive',
@@ -157,8 +150,14 @@ observations['Marker'] = observations['Marker'].map(lambda x: { '-' : 'itis-nil'
 
 observations['Value'] = observations['Value'].round(decimals=2)
 
+observations['Value'] = observations.apply(lambda x: x['Value'] if pd.isnull(x['Marker']) else 0, axis = 1)
 
-# -
+observations
+
+
+# In[15]:
+
+
 
 def left(s, amount):
    return s[:amount]
@@ -172,12 +171,24 @@ for col in ['ONS Trade Areas ITIS', 'Flow', 'ITIS Service', 'ITIS Industry']:
     observations[col] = observations[col].astype('category')
     #display(observations[col].cat.categories)
 
-# +
+
+# In[16]:
+
+
 observations.rename(columns={'Flow':'Flow Directions', 'ONS Trade Areas ITIS' : 'Trade Area'}, inplace=True)
 
 #Flow has been changed to Flow Direction to differentiate from Migration Flow dimension
 observations.drop(columns=['Measure Type', 'Unit'], inplace=True)
-# -
 
-cubes.add_cube(metadata, observations.drop_duplicates(), "International trade in services")
-cubes.output_all()
+
+# In[17]:
+
+
+
+observations.to_csv('observations.csv', index=False)
+
+scraper.dataset.comment = "Detailed breakdown of annual trade in UK services estimates, analysing data by country, product and industry."
+
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
+
