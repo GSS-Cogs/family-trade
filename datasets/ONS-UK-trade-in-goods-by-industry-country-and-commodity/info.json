@@ -49,15 +49,9 @@
       },
       "Value": {
         "type": "observations",
-        "datatype": "double"
-      },
-      "Measure Type": {
-        "type": "measures",
-        "value": "http://gss-data.org.uk/def/measure/current-prices"
-      },
-      "Unit": {
-        "type": "units",
-        "value": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+        "datatype": "double",
+        "measure": "http://gss-data.org.uk/def/measure/current-prices",
+        "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
       },
       "Marker": {
         "type": "attribute",

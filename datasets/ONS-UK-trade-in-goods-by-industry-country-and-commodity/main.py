@@ -149,13 +149,10 @@ df['Industry'] = df['Industry'].str.strip()
 #rename columns
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
-# add constant values since they're defined in info.json
-df["Unit"] = "GBP Million"
-df['Measure Type'] = 'Current Prices'
 
 # %%
 #reorder columns
-df = df[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value','Measure Type', 'Unit', 'Marker']]
+df = df[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value', 'Marker']]
 
 
 

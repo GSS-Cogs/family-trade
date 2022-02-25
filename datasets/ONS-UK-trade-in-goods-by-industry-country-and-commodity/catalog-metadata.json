@@ -12,15 +12,15 @@
         "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments"
     ],
     "keywords": [
-        "trade with non-EU",
         "CP",
+        "trade with non-EU",
         "trade",
         "trade with EU",
         "partner countries",
         "import"
     ],
     "dataset_issued": "2021-05-28",
-    "dataset_modified": "2022-02-21T12:50:25.445050+00:00",
+    "dataset_modified": "2022-02-25T11:55:55.568677+00:00",
     "license_uri": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
     "public_contact_point_uri": "mailto:trade@ons.gov.uk",
     "uri_safe_identifier_override": null
