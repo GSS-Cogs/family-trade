@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.5
+#       jupytext_version: 1.13.7
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -61,13 +61,15 @@ for tab in tabs:
     tidied_sheets.append(table)
     # savepreviewhtml(tidy_sheet, fname=tab.name+"Preview.html")
 
-df = pd.concat(tidied_sheets, sort=True)
+df = pd.concat(tidied_sheets, sort=True).fillna('')
 
 df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df["Period"] =  df["Period"].apply(date_time)
-df = df.fillna('')
 df["Marker"] = df["Marker"].str.replace("N/A", "not-applicable")
 df = df[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Value", "Marker"]]
+
+df['Value'] = pd.to_numeric(df['Value'], errors="raise", downcast="float")
+df["Value"] = df["Value"].astype(float).round(2)
 
 df['Unit'] = "GBP Million"
 df['Measure Type'] = "Current prices"
