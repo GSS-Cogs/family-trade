@@ -71,9 +71,6 @@ df = df[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Valu
 df['Value'] = pd.to_numeric(df['Value'], errors="raise", downcast="float")
 df["Value"] = df["Value"].astype(float).round(2)
 
-df['Unit'] = "GBP Million"
-df['Measure Type'] = "Current prices"
-
 #scraper.dataset.family = 'trade'
 metadata.dataset.description = metadata.dataset.description + """
 These data are our best estimate of these bilateral UK trade flows. Users should note that alternative estimates are available, in some cases, via the statistical agencies for bilateral countries or through central databases such as 
