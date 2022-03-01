@@ -1,26 +1,18 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[ ]:
-
-
-
-
-
-# In[1]:
+# In[16]:
 
 
 # UK trade in goods by industry, country and commodity, exports and imports
 
-import pandas as pd
+#import pandas as pd
 import json
 from gssutils import *
-from csvcubed.models.cube.qb.catalog import CatalogMetadata # make sure you're in the test container
+#from csvcubed.models.cube.qb.catalog import CatalogMetadata # make sure you're in the test container
 
 info_json_file = 'info.json'
 
 
-# In[2]:
+# In[17]:
 
 
 # get first landing page details
@@ -28,7 +20,7 @@ metadata = Scraper(seed = info_json_file)
 # display(metadata) #  to see exactly the data we are loading
 
 
-# In[3]:
+# In[18]:
 
 
 # load export data
@@ -36,7 +28,7 @@ distribution1 = metadata.distribution(latest = True)
 # display(distribution1)
 
 
-# In[4]:
+# In[19]:
 
 
 # there are two separate landing pages as we're combining two datasets so need to overwrite the landing page in the info.json (exports) with the other (imports) landing page.
@@ -49,7 +41,7 @@ with open(info_json_file, "w") as jsonFile:
 del data
 
 
-# In[5]:
+# In[20]:
 
 
 #get the second landing page details
@@ -61,7 +53,7 @@ distribution2 = metadata.distribution(latest = True)
 # display(distribution2)
 
 
-# In[6]:
+# In[21]:
 
 
 # load tabs from two different distributions/excel workbooks and combine
@@ -70,14 +62,14 @@ tabs2 = distribution2.as_databaker()
 tabs = tabs1 + tabs2
 
 
-# In[7]:
+# In[22]:
 
 
 # keep tabs we're interested in
 tabs = [x for x in tabs if x.name in ('tig_ind_ex final', 'tig_ind_im') ]
 
 
-# In[8]:
+# In[23]:
 
 
 tidied_sheets = []
@@ -115,7 +107,7 @@ for tab in tabs:
     tidied_sheets.append(tidy_sheet)
 
 
-# In[9]:
+# In[24]:
 
 
 
@@ -159,7 +151,7 @@ UN Comtrade.
 """
 
 
-# In[10]:
+# In[25]:
 
 
 # update metadata's title as now we've combined the datasets
@@ -169,7 +161,7 @@ metadata.dataset.description = descr
 # [Clean up]
 
 
-# In[11]:
+# In[26]:
 
 
 
@@ -183,7 +175,7 @@ df['OBS'].loc[(df['OBS'] == '')] = 0
 df['OBS'] = df['OBS'].astype(int)
 
 
-# In[12]:
+# In[27]:
 
 
 #reformat columns
@@ -195,14 +187,14 @@ df['Industry'] = df['Industry'].str[2:] # remove numbers as we're creating a new
 df['Industry'] = df['Industry'].str.strip()
 
 
-# In[13]:
+# In[28]:
 
 
 #rename columns
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
 
-# In[14]:
+# In[29]:
 
 
 #reorder columns
@@ -210,7 +202,7 @@ df = df[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value'
 
 
 
-# In[15]:
+# In[30]:
 
 
 df.to_csv('observations.csv', index=False)
@@ -218,7 +210,7 @@ catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
 
-# In[15]:
+# In[30]:
 
 
 
