@@ -1,5 +1,5 @@
 {
-    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema.json",
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons-international-trade-in-services-by-subnational-areas-of-the-uk",
     "title": "International trade in services by subnational areas of the UK",
     "publisher": "Office for National Statistics",
@@ -23,6 +23,7 @@
         "main_issue": 84,
         "columns": {
             "Period": {
+                "type": "dimension",
                 "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
@@ -32,17 +33,22 @@
                 "value": "{+location}"
             },
             "Flow": {
+                "type": "dimension",
                 "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow}"
             },
             "Industry Grouping": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
+                "type": "dimension",
+                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "value":"http://gss-data.org.uk/def/trade/concept/industry-grouping/{+industry_grouping}"
             },
             "Marker": {
+                "type": "attribute",
                 "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
             },
             "Value": {
+                "type": "observations",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/measure/trade",
                 "datatype": "double"
