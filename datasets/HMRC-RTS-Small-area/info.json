@@ -1,4 +1,5 @@
 {
+    "$schema" : "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "hmrc-rts-small-area",
     "title": "Regional trade in goods statistics disaggregated by smaller geographical areas",
     "publisher": "HM Revenue & Customs",
@@ -20,43 +21,53 @@
         "main_issue": 16,
         "columns": {
             "Year": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/year/{year}",
-                "codelist": false
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/year/{year}"
             },
             "ITL Geography": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                "type": "dimension",
+                    "new": {
+                        "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                        "codelist": "./codelists/itl-geography.csv-metadata.json"
+                            },
+
+                "value": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/itl-geography/{+itl_geography}"
             },
             "HMRC Partner Geography": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                "type": "dimension",
+                    "new": {
+                        "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                        "codelist": "./codelists/hmrc-partner-geography.csv-metadata.json"
+                            },
+
+                "value": "http://gss-data.org.uk/data/gss_data/trade/hmrc-rts-small-area#concept/hmrc-partner-geography/{+hmrc_partner_geography}"
             },
             "Flow Directions": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
             "SITC 4": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
-                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}",
-                "codelist": false
-            },
-            "Measure Type": {
-                "dimension": "http://purl.org/linked-data/cube#measureType",
-                "value": "http://gss-data.org.uk/def/measure/{measure_type}",
-                "types": [
-                    "businesses",
-                    "statistical-value"
-                ]
-            },
-            "Unit": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/{unit}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/sitc-4",
+                "value": "http://gss-data.org.uk/def/trade/concept/sitc4/{sitc_4}"
             },
             "Value": {
+                "type": "observations",
                 "datatype": "decimal"
             },
+            "Measure Type": {
+                "type": "measures",
+                "value": "http://gss-data.org.uk/def/measure/{+measure_type}"
+            },
+            "Unit": {
+                "type": "units",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+unit}"
+            },
             "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/marker/{marker}"
+                "type": "attribute",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
         }
     },

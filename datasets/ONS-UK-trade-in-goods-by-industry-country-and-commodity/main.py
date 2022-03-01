@@ -1,59 +1,70 @@
-# %%
+# -*- coding: utf-8 -*-
+# ---
+# jupyter:
+#   jupytext:
+#     text_representation:
+#       extension: .py
+#       format_name: light
+#       format_version: '1.4'
+#       jupytext_version: 1.1.1
+#   kernelspec:
+#     display_name: Python 3
+#     language: python
+#     name: python3
+# ---
 
 # UK trade in goods by industry, country and commodity, exports and imports
-
 
 import pandas as pd
 import json
 from gssutils import *
-from csvcubed.models.cube.qb.catalog import CatalogMetadata # make sure you're in the test container
 
-info_json_file = 'info.json'
+pd.options.mode.chained_assignment = None 
 
-# %% 
-# get first landing page details
-metadata = Scraper(seed = info_json_file)
-# display(metadata) #  to see exactly the data we are loading 
-# %%
-# load export data
-distribution1 = metadata.distribution(latest = True)
-# display(distribution1)
-# %%
-# there are two separate landing pages as we're combining two datasets so need to overwrite the landing page in the info.json (exports) with the other (imports) landing page.
-with open(info_json_file, "r") as jsonFile:
-    data = json.load(jsonFile)
-# change landing page 
-data["landingPage"] = "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityimports"
-with open(info_json_file, "w") as jsonFile:
-    json.dump(data, jsonFile, indent=2) # put it back in the info json file
-del data
-# %%
-#get the second landing page details
-metadata = Scraper(seed = info_json_file)
-# display(metadata)
-# %%
-# load import data
-distribution2 = metadata.distribution(latest = True)
-# display(distribution2)
+cubes = Cubes("info.json")
 
-# %%
-# load tabs from two different distributions/excel workbooks and combine
+# +
+info = json.load(open('info.json'))
+
+landingPage = info['landingPage']
+landingPage
+
+# +
+scraper1 = Scraper(landingPage[0])
+scraper2 = Scraper(landingPage[1])
+
+scraper1.dataset.family = info['families']
+scraper1
+# -
+
+scraper2
+
+distribution1 = scraper1.distribution(latest=True)
+distribution2 = scraper2.distribution(latest=True)
+distribution1
+
+distribution2
+
 tabs1 = distribution1.as_databaker()
 tabs2 = distribution2.as_databaker()
 tabs = tabs1 + tabs2
 
-# %%
-# keep tabs we're interested in
-tabs = [x for x in tabs if x.name in ('tig_ind_ex final', 'tig_ind_im') ]
+title1 = distribution1.title
+title2 = distribution2.title
 
-# %%
-tidied_sheets = []
+# +
+trace = TransformTrace()
+title = distribution1.title + ' and imports' 
+columns = ['ONS Partner Geography', 'Period','Flow','CORD SITC', 'SIC 2007', 'Measure Type','Value','Unit', 'Marker']
 
 for tab in tabs:
-
-    # [Dimensions]
+    if tab.name not in ['tig_ind_ex', 'tig_ind_im']:
+        continue
     
-    if tab.name == 'tig_ind_ex final':
+    trace.start(title1, tab, columns, distribution1.downloadURL)
+#     trace.start(title2, tab, columns, distribution2.downloadURL)
+    
+    if tab.name == 'tig_ind_ex':
         flow = 'exports'
     elif tab.name == 'tig_ind_im':
         flow = 'imports' 
@@ -62,31 +73,27 @@ for tab in tabs:
     industry = tab.filter('Industry').fill(DOWN).is_not_blank()
     commodity = tab.filter('Commodity').fill(DOWN).is_not_blank()
     year = tab.excel_ref('E1').expand(RIGHT).is_not_blank()
-    
 
-    # [Observations]
-
-    observations = year.fill(DOWN).is_not_blank() 
-
-    # [Mapping obs to dimensions]
+    observations = year.fill(DOWN).is_not_blank()
 
     dimensions = [
+                HDimConst('Measure Type', 'GBP Total'),
+                HDimConst('Unit', 'gbp-million'),
                 HDimConst('Flow', flow),
+
                 HDim(year,'Period', DIRECTLY,ABOVE),
                 HDim(country,'ONS Partner Geography', DIRECTLY,LEFT),
-                HDim(commodity,'Commodity', DIRECTLY,LEFT),
-                HDim(industry,'Industry', DIRECTLY,LEFT)       
+                HDim(commodity,'CORD SITC', DIRECTLY,LEFT),
+                HDim(industry,'SIC 2007', DIRECTLY,LEFT)       
                 ]
     cs = ConversionSegment(tab, dimensions, observations)
     tidy_sheet = cs.topandas()
-    tidied_sheets.append(tidy_sheet)
-# %%
+    trace.store("combined_dataframe", tidy_sheet) 
+# -
 
-# set float values to 1 sf
 pd.set_option('display.float_format', lambda x: '%.1f' % x) 
 
-#craete dataframe from tab data and convert NaN to blanks
-df = pd.concat(tidied_sheets, sort = True).fillna('') 
+table = trace.combine_and_trace(title, "combined_dataframe").fillna('')
 
 descr = """
 Experimental dataset providing a breakdown of UK trade in goods by industry, country and commodity on a balance of payments basis. Data are subject to disclosure control, which means some data have been suppressed to protect confidentiality of individual traders.
