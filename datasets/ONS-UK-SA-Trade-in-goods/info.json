@@ -38,7 +38,7 @@
             },
             "Value": {
                 "type": "observations",
-                "measure": "http://gss-data.org.uk/def/trade/measure/current-prices",
+                "measure": "http://gss-data.org.uk/def/measure/current-prices",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "datatype": "integer"
             },
