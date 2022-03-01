@@ -35,16 +35,10 @@
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
                 "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{+seasonal_adjustment}"
             },
-            "Measure Type": {
-                "type": "measures",
-                "value": "http://gss-data.org.uk/def/measure/current-prices"
-            },
-            "Unit": {
-                "type": "units",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-            },
             "Value": {
                 "type": "observations",
+                "measure": "http://gss-data.org.uk/def/trade/measure/current-prices",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "datatype": "integer"
             },
             "Marker": {
