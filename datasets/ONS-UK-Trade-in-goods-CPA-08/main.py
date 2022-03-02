@@ -1,26 +1,18 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.13.0
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
-# UK trade in goods, CPA (08)
-
-# +
+# %%
 import json
 import pandas as pandas
 from gssutils import *
+from csvcubed.models.cube.qb.catalog import CatalogMetadata # make sure you're in the test container until it's sorted
 
-pd.options.mode.chained_assignment = None 
-pd.set_option('display.float_format', lambda x: '%.0f' % x) 
+info_json_file = 'info.json'
+
+# %%
+
+# get first landing page details
+metadata = Scraper(seed = info_json_file)
+
+# load data
+distribution1 = metadata.distribution(latest = True)
 
 cubes = Cubes('info.json')
 info = json.load(open('info.json'))
