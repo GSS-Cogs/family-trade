@@ -50,6 +50,12 @@
                     "codelist": true
                 }
             },
+            "Location":{
+                "type":"dimension",
+                "new": {
+                    "codelist": true
+                }
+            },
             "Industry Grouping":{
                 "type": "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/product",
