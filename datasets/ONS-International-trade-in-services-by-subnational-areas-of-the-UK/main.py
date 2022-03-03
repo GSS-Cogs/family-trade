@@ -93,10 +93,6 @@ tidied_sheets.append(tidy_sheet.topandas())
 
 df = pd.concat(tidied_sheets, sort = True).fillna('')
 
-# +
-# df
-# -
-
 df['Travel Type'] = df.apply(lambda x: 'total' if (x['nuts_level'] == 'NUTS1' and x['Industry Grouping'] == 'Travel') else 'not-applicable', axis = 1)
 df['Includes Travel'] = df['nuts_level'].map(lambda x: 'includes-travel' if 'NUTS1' in x else 'excludes-travel')
 df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1) 
@@ -111,6 +107,8 @@ df["Flow"] = df["Flow"].str.replace("imports", "Imports")
 df["Period"]= df["Period"].str.split(",", n = 1, expand = True)[1]
 df['Period'] = df['Period'].str.strip()
 df['Period'] = df.apply(lambda x: 'year/' + x['Period'], axis = 1)
+
+df['Origin'] = df['Origin'].replace({'Rest of the World': 'Rest of world'})
 
 df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/UKC',
                                 'North West' : 'http://data.europa.eu/nuts/code/UKD',
@@ -144,15 +142,11 @@ df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/U
                                   'Personal travel-related' : 'personal',
                                   'Total travel-related' : 'total'},
                 
-                'Origin' : {'Total': 'all-countries',
-                            'Rest of the World': 'rest-of-world'},
+                'Origin' : {'Total': 'All countries',
+                            'Rest of the World': 'Rest of world'},
                  
                 'Industry Grouping' : {'travel': 'travel-related-trade', 'Travel' : 'travel-related-trade'}
                 })
-
-df
-
-df['Travel Type'].unique()
 
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
