@@ -24,28 +24,40 @@
         "columns": {
             "Period": {
                 "type": "dimension",
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
-            },
-            "Location": {
-                "type": "dimension",
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "description": "NUTS1, NUTS2, and NUTS3 codes and descriptions",
-                "value": "http://reference.data.gov.uk/id/{+location}"
             },
             "Flow": {
                 "type": "dimension",
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow}"
             },
-            "Industry Grouping": {
+            "Includes Travel":{
+                "type":"dimension",
+                "new": {
+                    "codelist": true
+                }
+            },
+            "Origin":{
+                "type":"dimension",
+                "new": {
+                    "codelist": true
+                }
+            },
+            "Travel Type":{
+                "type":"dimension",
+                "new": {
+                    "codelist": true
+                }
+            },
+            "Industry Grouping":{
                 "type": "dimension",
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/product",
                 "value":"http://gss-data.org.uk/def/trade/concept/industry-grouping/{+industry_grouping}"
             },
             "Marker": {
                 "type": "attribute",
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             },
             "Value": {
