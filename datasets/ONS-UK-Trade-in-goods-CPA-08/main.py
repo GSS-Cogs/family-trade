@@ -4,6 +4,12 @@ import pandas as pandas
 from gssutils import *
 from csvcubed.models.cube.qb.catalog import CatalogMetadata # make sure you're in the test container until it's sorted
 
+# to ignore potential chained_assignment warning 
+pd.options.mode.chained_assignment = None 
+
+# round float values to 1 decimal
+pd.set_option('display.float_format', lambda x: '%.0f' % x)
+
 info_json_file = 'info.json'
 
 # %%
@@ -12,19 +18,12 @@ info_json_file = 'info.json'
 metadata = Scraper(seed = info_json_file)
 
 # load data
-distribution1 = metadata.distribution(latest = True)
-
-cubes = Cubes('info.json')
-info = json.load(open('info.json'))
-landingPage = info['landingPage']
-metadata = Scraper(seed="info.json")
 distribution = metadata.distribution(latest = True)
-title = distribution.title
-distribution
-# -
+# %%
 
 tabs = distribution.as_databaker()
-tidied_sheets = []
+tidied_sheets = [] 
+# %%
 
 for tab in tabs:
     if tab.name not in ['Index', 'Contact']:
@@ -46,25 +45,34 @@ for tab in tabs:
         tidied_sheets.append(table)
 
 
-# +
-def left(s, amount):
+# %%
+# functions to trim x number of characters from a string
+def left(s: str, amount: int) -> str:
     return s[:amount]
 
-def right(s, amount):
+def right(s: str, amount: int) -> str:
     return s[-amount:]
+# %%
 
+#create dataframe from tab data and convert NaN to blanks
+df = pd.concat(tidied_sheets, sort=True).fillna('')
+# %%
 
-# -
-
-df = pd.concat(tidied_sheets, sort=True)
+# remove rows with 0 values in observations. there are blank obs as well but these are dealt with later
 df = df[df['OBS'] != 0]
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-df['Value'] = df['Value'].astype(int)
-df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
+# %%
+
+# reformat columns
+df['OBS'] = df['OBS'].astype(int)
+df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2)) # column includes yearly and quartely periods
 df['Product'] = df['Product'].map(lambda x: x.split(' ', 1)[0])
-
 df['CDID'] = df['CDID'].map(lambda x: x if len(x.strip()) > 0 else 'not-applicable')
+# %%
 
+# rename
+df.rename(columns={'OBS' : 'Value'}, inplace=True)
+
+# reorder
 df = df[['Period', 'Flow Direction', 'Product', 'CDID', 'Value']]
 df['Flow Direction'] = df['Flow Direction'].apply(pathify)
 df
@@ -82,5 +90,10 @@ This publication includes a residual line which is used to account for any resid
 """
 # -
 
-cubes.add_cube(metadata, df, metadata.dataset.title)
-cubes.output_all()
+
+#%%
+df.to_csv('observations.csv', index=False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json') 
+
+# %%
