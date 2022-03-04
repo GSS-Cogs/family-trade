@@ -19,31 +19,51 @@ from gssutils import *
 import json 
 
 info = json.load(open('info.json')) 
-metadata = Scraper(seed="info.json")
-# metadata  
+metadata = Scraper(seed="info.json")  
 # -
 
 distribution = metadata.distribution(latest=True)
 title = distribution.title
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
-# distribution
-
-# +
-# tab = [tab for name, tab in tabs.items()]
-# -
 
 total_tabs = {tab_name for tab_name in tabs}
-total_tabs
 
 tabs_to_transform =['8. Travel', '9. Tidy format']
 
 if len(set(tabs_to_transform)-(total_tabs)) != 2:
     raise ValueError(f"Aborting. A tab named{set(tabs_to_transform)-(total_tabs)} required but not found")
 
-for name, tab in tabs.items():
-    print(name)
-
 tidied_sheets =[]
+
+tab = tabs["9.Tidy format"]
+year = tab.filter(contains_string("Total value of trade"))
+nuts_level = tab.filter(contains_string("ITL level")).fill(DOWN).is_not_blank().is_not_whitespace()
+nuts_code = tab.filter("ITL code").fill(DOWN).is_not_blank().is_not_whitespace()
+nuts_area_name = tab.filter("ITL name").fill(DOWN).is_not_blank().is_not_whitespace()
+flow_direction = tab.filter("Direction of trade").fill(DOWN).is_not_blank().is_not_whitespace()
+origin = tab.filter("Country destination").fill(DOWN).is_not_blank().is_not_whitespace()
+industry_grouping = tab.filter("Industry").fill(DOWN).is_not_blank().is_not_whitespace()
+observations = tab.filter("Value").fill(DOWN).is_not_blank().is_not_whitespace()
+dimensions = [
+    HDim(year, "Period", CLOSEST, LEFT),
+    HDim(nuts_code, "Location", DIRECTLY, LEFT),
+    HDim(nuts_level, "nuts_level", DIRECTLY, LEFT),
+    HDim(nuts_area_name, "nuts_area_name", DIRECTLY, LEFT),
+    HDim(flow_direction, "Flow", DIRECTLY, LEFT),
+    HDim(origin, "Origin", DIRECTLY, LEFT),
+    HDim(industry_grouping, "Industry Grouping", DIRECTLY, LEFT)
+    ]
+df = ConversionSegment(tab, dimensions, observations)
+df = df.topandas()
+# savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+df['Travel Type'] = df.apply(lambda x: 'total' if (x['nuts_level'] == 'NUTS1' and x['Industry Grouping'] == 'Travel') else 'not-applicable', axis = 1)
+df['Includes Travel'] = df['nuts_level'].map(lambda x: 'includes-travel' if 'NUTS1' in x else 'excludes-travel')
+df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1) 
+df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['nuts_area_name'] == 'United Kingdom') else x['Location'], axis = 1)
+df['Location'] = df.apply(lambda x: x['nuts_area_name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
+df = df.drop(['nuts_level', 'nuts_area_name'], axis=1)
+
+tidied_sheets.append(df)
 
 tab = tabs["8.Travel"]
 footer = tab.filter(contains_string("Sources: UK Trade; International Passenger Survey")).expand(DOWN)
@@ -66,46 +86,21 @@ dimensions = [
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 # savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-tidied_sheets.append(tidy_sheet.topandas())
+tidy_sheet = tidy_sheet.topandas()
 
-
-tab = tabs["9.Tidy format"]
-year = tab.filter(contains_string("Total value of trade"))
-nuts_level = tab.filter(contains_string("ITL level")).fill(DOWN).is_not_blank().is_not_whitespace()
-nuts_code = tab.filter("ITL code").fill(DOWN).is_not_blank().is_not_whitespace()
-nuts_area_name = tab.filter("ITL name").fill(DOWN).is_not_blank().is_not_whitespace()
-flow_direction = tab.filter("Direction of trade").fill(DOWN).is_not_blank().is_not_whitespace()
-origin = tab.filter("Country destination").fill(DOWN).is_not_blank().is_not_whitespace()
-industry_grouping = tab.filter("Industry").fill(DOWN).is_not_blank().is_not_whitespace()
-observations = tab.filter("Value").fill(DOWN).is_not_blank().is_not_whitespace()
-dimensions = [
-    HDim(year, "Period", CLOSEST, LEFT),
-    HDim(nuts_code, "Location", DIRECTLY, LEFT),
-    HDim(nuts_level, "nuts_level", DIRECTLY, LEFT),
-    HDim(nuts_area_name, "nuts_area_name", DIRECTLY, LEFT),
-    HDim(flow_direction, "Flow", DIRECTLY, LEFT),
-    HDim(origin, "Origin", DIRECTLY, LEFT),
-    HDim(industry_grouping, "Industry Grouping", DIRECTLY, LEFT)
-    ]
-tidy_sheet = ConversionSegment(tab, dimensions, observations)
-# savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-tidied_sheets.append(tidy_sheet.topandas())
+tidied_sheets.append(tidy_sheet)
 
 df = pd.concat(tidied_sheets, sort = True).fillna('')
-
-df['Travel Type'] = df.apply(lambda x: 'total' if (x['nuts_level'] == 'NUTS1' and x['Industry Grouping'] == 'Travel') else 'not-applicable', axis = 1)
-df['Includes Travel'] = df['nuts_level'].map(lambda x: 'includes-travel' if 'NUTS1' in x else 'excludes-travel')
-df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1) 
-df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['nuts_area_name'] == 'United Kingdom') else x['Location'], axis = 1)
-df['Location'] = df.apply(lambda x: x['nuts_area_name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
-df = df.drop(['nuts_level', 'nuts_area_name'], axis=1)
 
 df.rename(columns= {'OBS':'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'] = df['Marker'].replace('..', 'suppressed')
 df["Marker"] = df["Marker"].str.replace("n/a", "not-applicable")
+df["Marker"] = df["Marker"].str.replace('', "not-applicable")
 df["Flow"] = df["Flow"].str.replace("imports", "Imports")
 df["Period"]= df["Period"].str.split(",", n = 1, expand = True)[1]
 df['Period'] = df['Period'].str.strip()
+df['Includes Travel'] = df['Includes Travel'].str.title()
+df['Travel Type'] = df['Travel Type'].str.title()
 df['Period'] = df.apply(lambda x: 'year/' + x['Period'], axis = 1)
 
 df['Origin'] = df['Origin'].replace({'Rest of the World': 'Rest of world'})
@@ -143,7 +138,7 @@ df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/U
                                   'Total travel-related' : 'total'},
                 
                 'Origin' : {'Total': 'All countries',
-                            'Rest of the World': 'Rest of world'},
+                            'Rest of the World': 'rest-of-world'},
                  
                 'Industry Grouping' : {'travel': 'travel-related-trade', 'Travel' : 'travel-related-trade'}
                 })
