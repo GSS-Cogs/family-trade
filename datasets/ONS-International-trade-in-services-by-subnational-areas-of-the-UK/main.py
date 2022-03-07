@@ -140,7 +140,7 @@ df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/U
                 'Origin' : {'Total': 'All countries',
                             'Rest of the World': 'rest-of-world'},
                  
-                'Industry Grouping' : {'travel': 'travel-related-trade', 'Travel' : 'travel-related-trade'}
+                'Industry Grouping' : {'travel': 'travel-related-trade', 'Travel' : 'travel-related-trade', 'All Industries' : 'All industries'}
                 })
 
 df.to_csv("observations.csv", index = False)
