@@ -68,6 +68,8 @@ df["Period"] =  df["Period"].apply(date_time)
 df["Marker"] = df["Marker"].str.replace("N/A", "not-applicable")
 df = df[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Value", "Marker"]]
 
+df = df.replace({"ONS Partner Geography": {"NA":"NAM"}})
+
 df['Value'] = pd.to_numeric(df['Value'], errors="raise", downcast="float")
 df["Value"] = df["Value"].astype(float).round(2)
 
