@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[29]:
+# In[46]:
 
 
 from gssutils import * 
@@ -11,7 +11,7 @@ info = json.load(open('info.json'))
 metadata = Scraper(seed="info.json")  
 
 
-# In[30]:
+# In[47]:
 
 
 distribution = metadata.distribution(latest=True)
@@ -55,8 +55,6 @@ df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['
 df['Location'] = df.apply(lambda x: x['nuts_area_name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
 df = df.drop(['nuts_level', 'nuts_area_name'], axis=1)
 
-df.drop_duplicates().to_csv('test.csv', index = False)
-
 tidied_sheets.append(df)
 
 tab = tabs["8.Travel"]
@@ -85,11 +83,10 @@ tidy_sheet = tidy_sheet.topandas()
 tidied_sheets.append(tidy_sheet)
 
 df = pd.concat(tidied_sheets, sort = True).fillna('')
-
 df
 
 
-# In[31]:
+# In[48]:
 
 
 
@@ -98,22 +95,15 @@ df.rename(columns= {'OBS':'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'] = df['Marker'].replace('..', 'suppressed')
 df["Marker"] = df["Marker"].str.replace("n/a", "not-applicable")
 
-df["Flow"] = df["Flow"].str.replace("imports", "Imports")
 df["Period"]= df["Period"].str.split(",", n = 1, expand = True)[1]
 df['Period'] = df['Period'].str.strip()
 df['Includes Travel'] = df['Includes Travel'].str.title()
 df['Travel Type'] = df['Travel Type'].str.title()
 df['Period'] = df.apply(lambda x: 'year/' + x['Period'], axis = 1)
 
-df
-
-
-# In[32]:
-
-
-
-
 df['Origin'] = df['Origin'].replace({'Rest of the World': 'Rest of world'})
+
+df['Flow'] = df.apply(lambda x: x.pathify(), axis = 1)
 
 df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/UKC',
                                 'North West' : 'http://data.europa.eu/nuts/code/UKD',
