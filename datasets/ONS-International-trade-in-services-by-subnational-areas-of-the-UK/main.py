@@ -1,26 +1,18 @@
-# -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.13.7
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
+#!/usr/bin/env python
+# coding: utf-8
 
-# +
+# In[29]:
+
+
 from gssutils import * 
 import json 
 
 info = json.load(open('info.json')) 
 metadata = Scraper(seed="info.json")  
-# -
+
+
+# In[30]:
+
 
 distribution = metadata.distribution(latest=True)
 title = distribution.title
@@ -63,6 +55,8 @@ df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['
 df['Location'] = df.apply(lambda x: x['nuts_area_name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
 df = df.drop(['nuts_level', 'nuts_area_name'], axis=1)
 
+df.drop_duplicates().to_csv('test.csv', index = False)
+
 tidied_sheets.append(df)
 
 tab = tabs["8.Travel"]
@@ -92,16 +86,32 @@ tidied_sheets.append(tidy_sheet)
 
 df = pd.concat(tidied_sheets, sort = True).fillna('')
 
+df
+
+
+# In[31]:
+
+
+
+
 df.rename(columns= {'OBS':'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'] = df['Marker'].replace('..', 'suppressed')
 df["Marker"] = df["Marker"].str.replace("n/a", "not-applicable")
-df["Marker"] = df["Marker"].str.replace('', "not-applicable")
+
 df["Flow"] = df["Flow"].str.replace("imports", "Imports")
 df["Period"]= df["Period"].str.split(",", n = 1, expand = True)[1]
 df['Period'] = df['Period'].str.strip()
 df['Includes Travel'] = df['Includes Travel'].str.title()
 df['Travel Type'] = df['Travel Type'].str.title()
 df['Period'] = df.apply(lambda x: 'year/' + x['Period'], axis = 1)
+
+df
+
+
+# In[32]:
+
+
+
 
 df['Origin'] = df['Origin'].replace({'Rest of the World': 'Rest of world'})
 
@@ -146,3 +156,6 @@ df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/U
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
+
+
+# 
