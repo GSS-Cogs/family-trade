@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       jupytext_version: 1.13.7
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -18,9 +18,6 @@
 # +
 from gssutils import *
 import numpy as np
-
-cubes = Cubes("info.json")
-trace = TransformTrace()
 
 scraper = Scraper(seed="info.json")
 scraper
@@ -40,22 +37,17 @@ for tab in tabs:
 
     columns = ["Geography", "Period", "CDID",
                "Pink Book Services", "Flow Directions", "Value", "Marker"]
-    trace.start(tab.name, tab, columns, scraper.distributions[0].downloadURL)
 
     anchor = tab.excel_ref('B3')
 
     cdid = anchor.shift(1, 0).fill(DOWN).is_not_blank().is_not_whitespace()
-    trace.CDID("Selected cdids from column B")
 
     flow = anchor.fill(DOWN).one_of(
         ['Exports (Credits)', 'Imports (Debits)', 'Balances'])
-    trace.Flow_Directions(
-        "Set as one of 'Exports (Credits)', 'Imports (Debits)', 'Balances'")
     period = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
 
     observations = period.fill(DOWN).is_not_blank().is_not_whitespace()
 
-    trace.Geography('Hard code geography to "K02000001"')
     geography = "K02000001"
 
     dimensions = [
@@ -79,10 +71,7 @@ for tab in tabs:
             'Balances': 'Balance'}.get(x, x))
 
     df.rename(index=str, columns={'OBS': 'Value'}, inplace=True)
-    trace.store("pinkbook combined dataframe", df)
 
-df = trace.combine_and_trace(
-    "pinkbook combined dataframe", "pinkbook combined dataframe")
 df.head(60)
 # -
 
@@ -102,12 +91,14 @@ df[df.cdid.isnull() == True]['CDID'].unique()
 
 # Belo codes need to upload in to PMD
 
-trace.CDID("Remove CDIDs FJOW, FJQO, FJSI")
+# +
+
 df = df[(df['CDID'] != 'FJOW') &
         (df['CDID'] != 'FJQO') &
         (df['CDID'] != 'FJSI')]
 # Temp remove CWVK & CWVL as we do not have a reference code for it, have asked BAs to look into it (appeared in 2019 publication)
 #df = df[(df['CDID'] != 'CWVK') & (df['CDID'] != 'CWVL')]
+# -
 
 # Order columns
 df = df[['Geography', 'Period', 'CDID', 'Pink Book Services',
@@ -126,7 +117,6 @@ df['Marker'] = df['DATAMARKER'].map(
 df['Pink Book Services'] = df['Pink Book Services'].astype(str)
 df["Flow Directions"].unique()
 
-trace.Flow_Directions('Pathify the "Flow Directions" column')
 df['Flow Directions'] = df['Flow Directions'].str.strip().map(
     lambda x: {
         'Exports (Credits)': 'exports',
@@ -145,10 +135,6 @@ scraper.dataset.title = 'The Pink Book, Trade in Services'
 # scraper.dataset.comment
 scraper.dataset.description = scraper.dataset.description + \
     '\n Non Seasonally Adjusted'
-
-cubes.add_cube(scraper, df.drop_duplicates(), "ONS Pink Book")
-cubes.output_all()
-# trace.render("spec_v1.html")
 
 """
 a = pd.DataFrame(pd.read_csv('cdid.csv'))
