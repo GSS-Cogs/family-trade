@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[46]:
+# In[1]:
 
 
 from gssutils import * 
@@ -11,7 +11,7 @@ info = json.load(open('info.json'))
 metadata = Scraper(seed="info.json")  
 
 
-# In[47]:
+# In[2]:
 
 
 distribution = metadata.distribution(latest=True)
@@ -86,7 +86,7 @@ df = pd.concat(tidied_sheets, sort = True).fillna('')
 df
 
 
-# In[48]:
+# In[3]:
 
 
 
@@ -103,7 +103,7 @@ df['Period'] = df.apply(lambda x: 'year/' + x['Period'], axis = 1)
 
 df['Origin'] = df['Origin'].replace({'Rest of the World': 'Rest of world'})
 
-df['Flow'] = df.apply(lambda x: x.pathify(), axis = 1)
+df['Flow'] = df['Flow'].apply(pathify)
 
 df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/UKC',
                                 'North West' : 'http://data.europa.eu/nuts/code/UKD',
