@@ -27,10 +27,10 @@ distribution = metadata.distribution(latest = True)
 # distribution
 
 tabs = {tab.name: tab for tab in metadata.distribution(latest=True).as_databaker()}
-list(tabs)
+# list(tabs)
 
 total_tabs = {tab_name for tab_name in tabs}
-total_tabs
+# total_tabs
 
 sheetname = ['3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9', '3.10']
 
@@ -43,9 +43,6 @@ tabs = [x for x in metadata.distribution(
     latest=True).as_databaker() if x.name in sheetname]
 for tab in tabs:
 
-    columns = ["Geography", "Period", "CDID",
-               "Pink Book Services", "Flow Directions", "Value", "Marker"]
-
     anchor = tab.excel_ref('B3')
 
     cdid = anchor.shift(1, 0).fill(DOWN).is_not_blank().is_not_whitespace()
@@ -56,10 +53,7 @@ for tab in tabs:
 
     observations = period.fill(DOWN).is_not_blank().is_not_whitespace()
 
-    geography = "K02000001"
-
     dimensions = [
-        HDimConst('Geography', geography),
         HDim(period, 'Period', DIRECTLY, ABOVE),
         HDim(cdid, 'CDID', DIRECTLY, LEFT),
         HDim(flow, 'Flow Directions', CLOSEST, ABOVE)
@@ -80,7 +74,7 @@ for tab in tabs:
 
     df.rename(index=str, columns={'OBS': 'Value'}, inplace=True)
 
-df.head(60)
+# df.head(60)
 # -
 
 classifications_table = pd.read_csv(
@@ -109,20 +103,11 @@ df = df[(df['CDID'] != 'FJOW') &
 # -
 
 # Order columns
-df = df[['Geography', 'Period', 'CDID', 'Pink Book Services',
-         'Flow Directions', 'Value']]
+df = df[['Period', 'CDID', 'Pink Book Services', 'Flow Directions', 'Value']]
 
 #df['Pink Book Services'] = df['Pink Book Services'].astype(str).apply(pathify)
 print(df['Pink Book Services'].unique())
 #df = df[df['Pink Book Services'].isnull() == False]
-
-# +
-# df['Marker'] = df['DATAMARKER'].map(
-#     lambda x: {'NA': 'not-available',
-#                ' -': 'nil-or-less-than-a-million'
-#                }.get(x, x))
-# #df = df.rename(columns={'SEASADJ':'Seasonal Adjustment'})
-# -
 
 df['Pink Book Services'] = df['Pink Book Services'].astype(str)
 df["Flow Directions"].unique()
@@ -135,17 +120,14 @@ df['Flow Directions'] = df['Flow Directions'].str.strip().map(
 )
 
 df['Period'] = 'year/' + df['Period'].astype(str)
-#df['Value'] = df['Value'].astype(int)
+df['Value'] = df['Value'].astype(int)
 
-#df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
-df = df[['Period', 'CDID', 'Pink Book Services',
-         'Flow Directions', 'Value']]
+df = df[['Period', 'CDID', 'Pink Book Services', 'Flow Directions', 'Value']]
 
 duplicate_df = df[df.duplicated(['Period', 'CDID', 'Pink Book Services', 'Flow Directions', 'Value'])]
 duplicate_df
 
 metadata.dataset.title = 'The Pink Book, Trade in Services'
-# scraper.dataset.comment
 metadata.dataset.description = metadata.dataset.description + \
     '\n Non Seasonally Adjusted'
 
