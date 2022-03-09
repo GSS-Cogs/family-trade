@@ -1,4 +1,5 @@
 {
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons-pink-book-trade-in-services",
     "title": "03 Trade in services, The Pink Book",
     "publisher": "Office for National Statistics",
