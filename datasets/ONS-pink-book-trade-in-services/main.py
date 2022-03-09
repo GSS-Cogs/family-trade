@@ -19,19 +19,27 @@
 from gssutils import *
 import numpy as np
 
-scraper = Scraper(seed="info.json")
-scraper
+metadata = Scraper(seed="info.json")
+# metadata
 # -
 
-tabs = {tab.name: tab for tab in scraper.distribution(
-    latest=True).as_databaker()}
+distribution = metadata.distribution(latest = True)
+# distribution
+
+tabs = {tab.name: tab for tab in metadata.distribution(latest=True).as_databaker()}
 list(tabs)
+
+total_tabs = {tab_name for tab_name in tabs}
+total_tabs
 
 sheetname = ['3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9', '3.10']
 
+if len(set(sheetname)-(total_tabs)) != 0:
+    raise ValueError(f'Aborting. A tab named {set(sheetname)-(total_tabs)} required but not found')
+
 # +
 
-tabs = [x for x in scraper.distribution(
+tabs = [x for x in metadata.distribution(
     latest=True).as_databaker() if x.name in sheetname]
 for tab in tabs:
 
@@ -102,17 +110,19 @@ df = df[(df['CDID'] != 'FJOW') &
 
 # Order columns
 df = df[['Geography', 'Period', 'CDID', 'Pink Book Services',
-         'Flow Directions', 'Value', 'DATAMARKER']]
+         'Flow Directions', 'Value']]
 
 #df['Pink Book Services'] = df['Pink Book Services'].astype(str).apply(pathify)
 print(df['Pink Book Services'].unique())
 #df = df[df['Pink Book Services'].isnull() == False]
 
-df['Marker'] = df['DATAMARKER'].map(
-    lambda x: {'NA': 'not-available',
-               ' -': 'nil-or-less-than-a-million'
-               }.get(x, x))
-#df = df.rename(columns={'SEASADJ':'Seasonal Adjustment'})
+# +
+# df['Marker'] = df['DATAMARKER'].map(
+#     lambda x: {'NA': 'not-available',
+#                ' -': 'nil-or-less-than-a-million'
+#                }.get(x, x))
+# #df = df.rename(columns={'SEASADJ':'Seasonal Adjustment'})
+# -
 
 df['Pink Book Services'] = df['Pink Book Services'].astype(str)
 df["Flow Directions"].unique()
@@ -129,11 +139,14 @@ df['Period'] = 'year/' + df['Period'].astype(str)
 
 #df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
 df = df[['Period', 'CDID', 'Pink Book Services',
-         'Flow Directions', 'Value', 'Marker']]
+         'Flow Directions', 'Value']]
 
-scraper.dataset.title = 'The Pink Book, Trade in Services'
+duplicate_df = df[df.duplicated(['Period', 'CDID', 'Pink Book Services', 'Flow Directions', 'Value'])]
+duplicate_df
+
+metadata.dataset.title = 'The Pink Book, Trade in Services'
 # scraper.dataset.comment
-scraper.dataset.description = scraper.dataset.description + \
+metadata.dataset.description = metadata.dataset.description + \
     '\n Non Seasonally Adjusted'
 
 """
@@ -164,3 +177,7 @@ b
 #p['Parent Notation'] = p['Parent Notation'].astype(str).apply(pathify)
 #p.drop_duplicates().to_csv('pink-book-services.csv', index = False)
 # p
+
+df.to_csv("observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
