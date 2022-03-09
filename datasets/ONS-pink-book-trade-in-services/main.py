@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.2
+#       jupytext_version: 1.13.7
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -19,47 +19,41 @@
 from gssutils import *
 import numpy as np
 
-cubes = Cubes("info.json")
-trace = TransformTrace()
-
-scraper = Scraper(seed="info.json")
-scraper
+metadata = Scraper(seed="info.json")
+# metadata
 # -
 
-tabs = {tab.name: tab for tab in scraper.distribution(
-    latest=True).as_databaker()}
-list(tabs)
+distribution = metadata.distribution(latest = True)
+# distribution
+
+tabs = {tab.name: tab for tab in metadata.distribution(latest=True).as_databaker()}
+# list(tabs)
+
+total_tabs = {tab_name for tab_name in tabs}
+# total_tabs
 
 sheetname = ['3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9', '3.10']
 
+if len(set(sheetname)-(total_tabs)) != 0:
+    raise ValueError(f'Aborting. A tab named {set(sheetname)-(total_tabs)} required but not found')
+
 # +
 
-tabs = [x for x in scraper.distribution(
+tabs = [x for x in metadata.distribution(
     latest=True).as_databaker() if x.name in sheetname]
 for tab in tabs:
-
-    columns = ["Geography", "Period", "CDID",
-               "Pink Book Services", "Flow Directions", "Value", "Marker"]
-    trace.start(tab.name, tab, columns, scraper.distributions[0].downloadURL)
 
     anchor = tab.excel_ref('B3')
 
     cdid = anchor.shift(1, 0).fill(DOWN).is_not_blank().is_not_whitespace()
-    trace.CDID("Selected cdids from column B")
 
     flow = anchor.fill(DOWN).one_of(
         ['Exports (Credits)', 'Imports (Debits)', 'Balances'])
-    trace.Flow_Directions(
-        "Set as one of 'Exports (Credits)', 'Imports (Debits)', 'Balances'")
     period = anchor.fill(RIGHT).is_not_blank().is_not_whitespace()
 
     observations = period.fill(DOWN).is_not_blank().is_not_whitespace()
 
-    trace.Geography('Hard code geography to "K02000001"')
-    geography = "K02000001"
-
     dimensions = [
-        HDimConst('Geography', geography),
         HDim(period, 'Period', DIRECTLY, ABOVE),
         HDim(cdid, 'CDID', DIRECTLY, LEFT),
         HDim(flow, 'Flow Directions', CLOSEST, ABOVE)
@@ -79,11 +73,8 @@ for tab in tabs:
             'Balances': 'Balance'}.get(x, x))
 
     df.rename(index=str, columns={'OBS': 'Value'}, inplace=True)
-    trace.store("pinkbook combined dataframe", df)
 
-df = trace.combine_and_trace(
-    "pinkbook combined dataframe", "pinkbook combined dataframe")
-df.head(60)
+# df.head(60)
 # -
 
 classifications_table = pd.read_csv(
@@ -102,31 +93,25 @@ df[df.cdid.isnull() == True]['CDID'].unique()
 
 # Belo codes need to upload in to PMD
 
-trace.CDID("Remove CDIDs FJOW, FJQO, FJSI")
+# +
+
 df = df[(df['CDID'] != 'FJOW') &
         (df['CDID'] != 'FJQO') &
         (df['CDID'] != 'FJSI')]
 # Temp remove CWVK & CWVL as we do not have a reference code for it, have asked BAs to look into it (appeared in 2019 publication)
 #df = df[(df['CDID'] != 'CWVK') & (df['CDID'] != 'CWVL')]
+# -
 
 # Order columns
-df = df[['Geography', 'Period', 'CDID', 'Pink Book Services',
-         'Flow Directions', 'Value', 'DATAMARKER']]
+df = df[['Period', 'CDID', 'Pink Book Services', 'Flow Directions', 'Value']]
 
 #df['Pink Book Services'] = df['Pink Book Services'].astype(str).apply(pathify)
 print(df['Pink Book Services'].unique())
 #df = df[df['Pink Book Services'].isnull() == False]
 
-df['Marker'] = df['DATAMARKER'].map(
-    lambda x: {'NA': 'not-available',
-               ' -': 'nil-or-less-than-a-million'
-               }.get(x, x))
-#df = df.rename(columns={'SEASADJ':'Seasonal Adjustment'})
-
 df['Pink Book Services'] = df['Pink Book Services'].astype(str)
 df["Flow Directions"].unique()
 
-trace.Flow_Directions('Pathify the "Flow Directions" column')
 df['Flow Directions'] = df['Flow Directions'].str.strip().map(
     lambda x: {
         'Exports (Credits)': 'exports',
@@ -135,20 +120,16 @@ df['Flow Directions'] = df['Flow Directions'].str.strip().map(
 )
 
 df['Period'] = 'year/' + df['Period'].astype(str)
-#df['Value'] = df['Value'].astype(int)
+df['Value'] = df['Value'].astype(int)
 
-#df = df[['Geography','Period','CDID','Pink Book Services','Flow Directions', 'Value','Marker']]
-df = df[['Period', 'CDID', 'Pink Book Services',
-         'Flow Directions', 'Value', 'Marker']]
+df = df[['Period', 'CDID', 'Pink Book Services', 'Flow Directions', 'Value']]
 
-scraper.dataset.title = 'The Pink Book, Trade in Services'
-# scraper.dataset.comment
-scraper.dataset.description = scraper.dataset.description + \
+duplicate_df = df[df.duplicated(['Period', 'CDID', 'Pink Book Services', 'Flow Directions', 'Value'])]
+duplicate_df
+
+metadata.dataset.title = 'The Pink Book, Trade in Services'
+metadata.dataset.description = metadata.dataset.description + \
     '\n Non Seasonally Adjusted'
-
-cubes.add_cube(scraper, df.drop_duplicates(), "ONS Pink Book")
-cubes.output_all()
-# trace.render("spec_v1.html")
 
 """
 a = pd.DataFrame(pd.read_csv('cdid.csv'))
@@ -178,3 +159,7 @@ b
 #p['Parent Notation'] = p['Parent Notation'].astype(str).apply(pathify)
 #p.drop_duplicates().to_csv('pink-book-services.csv', index = False)
 # p
+
+df.to_csv("observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
