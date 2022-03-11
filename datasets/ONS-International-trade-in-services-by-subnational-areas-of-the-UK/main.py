@@ -19,7 +19,7 @@ from gssutils import *
 import json 
 
 info = json.load(open('info.json')) 
-metadata = Scraper(seed="info.json")  
+metadata = Scraper(seed="info.json") 
 # -
 
 distribution = metadata.distribution(latest=True)
@@ -54,14 +54,17 @@ dimensions = [
     HDim(industry_grouping, "Industry Grouping", DIRECTLY, LEFT)
     ]
 df = ConversionSegment(tab, dimensions, observations)
+# savepreviewhtml(df, fname=tab.name + "Preview.html")
 df = df.topandas()
-# savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+
+
+# +
+
 df['Travel Type'] = df.apply(lambda x: 'total' if (x['nuts_level'] == 'NUTS1' and x['Industry Grouping'] == 'Travel') else 'not-applicable', axis = 1)
-df['Includes Travel'] = df['nuts_level'].map(lambda x: 'includes-travel' if 'NUTS1' in x else 'excludes-travel')
-# df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1) 
+df['Includes Travel'] = df.apply(lambda x: 'includes-travel' if x['nuts_level'] == 'NUTS1' else 'excludes-travel', axis = 1) 
 df['Location'] = df.apply(lambda x: 'UK' if (x['Location'] == 'N/A' and x['nuts_area_name'] == 'United Kingdom') else x['Location'], axis = 1)
-# df['Location'] = df.apply(lambda x: x['nuts_area_name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
 df = df.drop(['nuts_level', 'nuts_area_name'], axis=1)
+# -
 
 tidied_sheets.append(df)
 
@@ -92,8 +95,6 @@ tidied_sheets.append(tidy_sheet)
 
 df = pd.concat(tidied_sheets, sort = True).fillna('')
 
-df['Location'].unique()
-
 df.rename(columns= {'OBS':'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'] = df['Marker'].replace('..', 'suppressed')
 df["Marker"] = df["Marker"].str.replace("n/a", "not-applicable")
@@ -103,8 +104,6 @@ df['Period'] = df['Period'].str.strip()
 df['Includes Travel'] = df['Includes Travel'].str.title()
 df['Travel Type'] = df['Travel Type'].str.title()
 df['Period'] = df.apply(lambda x: 'year/' + x['Period'], axis = 1)
-
-df['Location'].unique()
 
 df['Origin'] = df['Origin'].replace({'Rest of the World': 'Rest of world'})
 
@@ -136,18 +135,26 @@ df = df.replace({'Location' : {'North East' : 'UKC',
 df = df[['Flow', 'Period', 'Includes Travel', 'Industry Grouping', 'Travel Type', 
         'Origin', 'Location', 'Value', 'Marker']]
 
-df
+# Output - 1
+# With respect to "Value", if there are duplicate rows(same value in all the DataFrame columns), keep the first occurance and drop all other duplicate rows
+# Output is a dataframe with no duplicates
+# Same as output-2
+df.drop_duplicates(subset = df.columns.difference(['Value']), inplace = True)
 
 # +
-# df.drop_duplicates(subset = df.columns.difference(['Value']), inplace = True)
 # df
 # -
 
+# see if there are any duplicates in Dataframe after droping the duplicates. There shouln't be anything as the duplicates are already dropped
 duplicate_df = df[df.duplicated(['Flow', 'Period', 'Includes Travel', 'Industry Grouping', 'Travel Type',
        'Origin', 'Location', 'Value', 'Marker'], keep = False)]
 duplicate_df
 
 
+# Output - 2
+# This function compares to drop duplicates from the DataFrame(df) without duplicates and DataFrame with duplicates if we have one(duplicate_df:-empty as of now)
+# We have achieved already what is wanted, this step is to reiterate in another way that there are no duplicates and the out put of both the methods are same
+# Same as output - 1
 def dataframe_difference(df1: df, df2: df, which=None):
     """Find rows which are different between two DataFrames."""
     comparison_df = df1.merge(
@@ -165,38 +172,11 @@ def dataframe_difference(df1: df, df2: df, which=None):
 
 df = dataframe_difference(df, duplicate_df)
 
-df
+# +
+# This should be same as droping the duplicate rows with respect to column "Value" or same as output - 1
+# df
+# -
 
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
-
-# +
-# df.to_excel("excel_observations.xlsx", index = False)
-# -
-
-df
-
-duplicate_df = df[df.duplicated(['Flow', 'Period', 'Includes Travel', 'Industry Grouping', 'Travel Type',
-       'Origin', 'Location', 'Value', 'Marker'])]
-duplicate_df
-
-df
-
-# +
-# duplicate_df = df[df.duplicated(['Flow', 'Period', 'Includes Travel', 'Industry Grouping', 'Travel Type',
-#        'Origin', 'Location', 'Value', 'Marker'])]
-# duplicate_df
-
-# +
-# df.drop_duplicates(subset = df.columns.difference(['Value']), inplace = True)
-# df
-# -
-
-duplicate_df = df[df.duplicated(['Flow', 'Period', 'Includes Travel', 'Industry Grouping', 'Travel Type',
-       'Origin', 'Location', 'Value', 'Marker'])]
-duplicate_df
-
-df
-
-
