@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.13.7
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -19,17 +19,15 @@ from gssutils import *
 import json 
 from urllib.parse import urljoin
 
-cubes = Cubes("info.json")
-trace = TransformTrace()
 df = pd.DataFrame()
 tidied_sheets = []
 # -
 
 info = json.load(open('info.json')) 
-scraper = Scraper(seed="info.json")   
-scraper 
+metadata = Scraper(seed="info.json")   
+metadata
 
-distribution = scraper.distributions[0]
+distribution = metadata.distributions[0]
 tabs = (t for t in distribution.as_databaker())
 
 
@@ -55,32 +53,30 @@ def date_time(time_value):
 for tab in tabs:
        
         datasetTitle = 'ONS-GDP-at-current-prices-real-time-database-YBHA'
-        columns=['Vintage','Publication','Estimate Type', 'CDID', 'Seasonal Adjustment', 'Marker']
-        trace.start(datasetTitle, tab, columns, scraper.distributions[0].downloadURL)
         
         if (tab.name == '1989 - 1999') or (tab.name == '2000 - 2010') or (tab.name == '2011 - 2017') or (tab.name == '2018 -'):
             
             seasonal_adjustment = 'SA'
-            trace.Seasonal_Adjustment("Hardcoded as SA, taken from source")
+
             
             code = tab.excel_ref('B3')
-            trace.CDID("Taken from cell ref B3")
+
             
             vintage = tab.excel_ref('A6').expand(DOWN).is_not_blank() 
-            trace.Vintage("Taken from cell A6 down")
+
             
             estimate_type = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
-            trace.Estimate_Type("Taken from cell B6 across")
+
             
             publication = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
-            trace.Publication("Taken from cell B7 across")
+
                 
             if (tab.name == '2011 - 2017') or (tab.name == '2018 -'):
                 estimate_type = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
-                trace.Estimate_Type("Taken from cell B5 across")
+
                 
                 publication = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
-                trace.Publication("Taken from cell B6 across")
+
         
             observations = publication.fill(DOWN).is_not_blank()
         
@@ -94,22 +90,19 @@ for tab in tabs:
 
             tidy_sheet = ConversionSegment(tab, dimensions, observations)        
             #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
-            trace.with_preview(tidy_sheet)
-            trace.store("combined_dataframe", tidy_sheet.topandas())
 
 
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
-df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
+df
+
+df.rename(columns={'OBS' : 'Value'}, inplace=True)
 #df['CDID'] = df['CDID'].map(lambda x: right(x,4)) #dropped for now
 df['Publication Date'].replace('Q3  1990', 'Q3 1990', inplace=True)  #removing space
 df['Publication Date'].replace('Q 2004', 'Q4 2004', inplace=True) #fixing typo
 df['GDP Reference Period'].replace('Q2 1010', 'Q2 2010', inplace=True) #fixing typo
 df["GDP Reference Period"] = df["GDP Reference Period"].apply(date_time)
 df["Publication Date"] = df["Publication Date"].apply(date_time)
-df['Marker'].replace('..', 'unknown', inplace=True)
+# df['Marker'].replace('..', 'unknown', inplace=True)
 df = df.fillna('')
-
-df['Marker'].unique()
 
 # info = json.load(open('info.json')) 
 # codelistcreation = info['transform']['codelists'] 
@@ -124,7 +117,7 @@ df['Marker'].unique()
 #         codeclass.create_codelists(pd.DataFrame(df[cl]), 'codelists', scraper.dataset.family, Path(os.getcwd()).name.lower())
 
 # +
-tidy = df[['GDP Reference Period','Publication Date','Value','GDP Estimate Type','Marker']]
+tidy = df[['GDP Reference Period','Publication Date','Value','GDP Estimate Type']]
 for column in tidy:
     if column in ('GDP Estimate Type'):
         tidy[column] = tidy[column].str.lstrip()
@@ -132,11 +125,5 @@ for column in tidy:
         tidy[column] = tidy[column].apply(pathify)
 
 tidy['GDP Estimate Type'] = tidy['GDP Estimate Type'].replace({"m1": "M1", "m2": "M2", "qna": "QNA"})
-
-cubes.add_cube(scraper, tidy, "GDP at current prices – real-time database (YBHA)")
 tidy
-# -
 
-
-cubes.output_all()
-trace.render()
