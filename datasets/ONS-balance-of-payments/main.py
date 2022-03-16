@@ -4,13 +4,12 @@
 from gssutils import *
 import json
 import numpy as np
+from csvcubed.models.cube.qb.catalog import CatalogMetadata
 
+#TODO: look to remove the use of this trace object
 trace = TransformTrace()
-df = pd.DataFrame()
-cubes = Cubes("info.json")
-info = json.load(open('info.json')) 
-scraper = Scraper(seed="info.json")   
-scraper 
+
+info_json_file = 'info.json'
 
 # %%
 bop_services = {
@@ -54,10 +53,19 @@ def date_time(date):
         return "Date Formatting Error Unknown"
 
 
+
+# get first landing page details
+metadata = Scraper(seed = info_json_file)
+# display(metadata) #  to see exactly the data we are loading
+
+
 # %%
-distribution = scraper.distribution(latest = True)
+distribution = metadata.distribution(latest = True)
 datasetTitle = distribution.title
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
+
+## TODO: [uncomment in future] keep tabs we're interested in
+#tabs = [x for x in tabs if x.name not in ('tig_ind_ex final', 'tig_ind_im') ]
 
 # %%
 for name, tab in tabs.items():
@@ -65,9 +73,12 @@ for name, tab in tabs.items():
     trace.start(datasetTitle, tab, columns, distribution.downloadURL)
     if 'Index' in name or 'Records' in name or 'Table R1' in name or 'Table R2' in name or 'Table R3' in name:
         continue 
+
+    print(name)
+
     cdid = tab.excel_ref('C5').expand(DOWN).is_not_blank()
     trace.CDID("CDID's taken from column C in tab")
-    
+
     year = tab.excel_ref('C4').expand(RIGHT).is_not_blank()
     quarter = tab.excel_ref('D5').expand(RIGHT)
     trace.Period("Taken from Year and Quarter ; rows 4 and 5")
@@ -166,8 +177,12 @@ df['BOP Services'].unique()
 df['CDID'].unique()
 
 # %%
-cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
-cubes.output_all()
-trace.render("spec_v1.html")
+# cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
+# cubes.output_all()
+# trace.render("spec_v1.html")
+
+df.to_csv('observations.csv', index=False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 
 # %%
