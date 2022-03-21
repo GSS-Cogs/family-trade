@@ -1,26 +1,14 @@
-# -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.13.7
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
+#!/usr/bin/env python
+# coding: utf-8
 
-# +
+# In[1]:
+
+
 from gssutils import * 
 import json 
 
 info = json.load(open('info.json')) 
 metadata = Scraper(seed="info.json") 
-# -
 
 distribution = metadata.distribution(latest=True)
 title = distribution.title
@@ -94,6 +82,7 @@ tidy_sheet = tidy_sheet.topandas()
 tidied_sheets.append(tidy_sheet)
 
 df = pd.concat(tidied_sheets, sort = True).fillna('')
+df
 
 df.rename(columns= {'OBS':'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'] = df['Marker'].replace('..', 'suppressed')
