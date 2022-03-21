@@ -24,7 +24,7 @@
       "Period": {
         "type": "dimension",
         "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-        "value": "http://reference.data.gov.uk/id/{period}"
+        "value": "http://reference.data.gov.uk/id/year/{period}"
       },
       "Flow": {
         "type": "dimension",
@@ -56,8 +56,8 @@
       "Marker": {
         "type": "attribute",
         "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-        "value": "http://gss-data.org.uk/def/concept/trade/markers/{+marker}"
-      }
+        "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
+    }
     }
   },
   "sizingNotes": "",

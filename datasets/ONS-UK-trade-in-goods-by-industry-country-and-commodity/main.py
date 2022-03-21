@@ -185,7 +185,7 @@ df['OBS'] = df['OBS'].astype(int)
 
 
 #reformat columns
-df['Period'] = 'year/' + df['Period'].str[0:4]
+df['Period'] = df['Period'].str[0:4]
 df['Commodity'] = df['Commodity'].str[:2] # codelist has 3 char long codes included but in this datset there are only categories with 1 to 2 char long in their code
 df['Commodity'] = df['Commodity'].str.strip() # codes included in this datset are only 1 to 2 characters long
 df['ONS Partner Geography'] = df['ONS Partner Geography'].str[:2]
