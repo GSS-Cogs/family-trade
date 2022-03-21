@@ -8,11 +8,7 @@ from gssutils import *
 import json 
 
 info = json.load(open('info.json')) 
-metadata = Scraper(seed="info.json")  
-
-
-# In[2]:
-
+metadata = Scraper(seed="info.json") 
 
 distribution = metadata.distribution(latest=True)
 title = distribution.title
@@ -46,14 +42,17 @@ dimensions = [
     HDim(industry_grouping, "Industry Grouping", DIRECTLY, LEFT)
     ]
 df = ConversionSegment(tab, dimensions, observations)
+# savepreviewhtml(df, fname=tab.name + "Preview.html")
 df = df.topandas()
-# savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+
+
+# +
+
 df['Travel Type'] = df.apply(lambda x: 'total' if (x['nuts_level'] == 'NUTS1' and x['Industry Grouping'] == 'Travel') else 'not-applicable', axis = 1)
-df['Includes Travel'] = df['nuts_level'].map(lambda x: 'includes-travel' if 'NUTS1' in x else 'excludes-travel')
-df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/' + x['Location'] if x['Location'] != 'N/A' else x['Location'], axis = 1) 
-df['Location'] = df.apply(lambda x: 'http://data.europa.eu/nuts/code/UK' if (x['Location'] == 'N/A' and x['nuts_area_name'] == 'United Kingdom') else x['Location'], axis = 1)
-df['Location'] = df.apply(lambda x: x['nuts_area_name'] if x['Location'] == 'N/A' else x['Location'], axis = 1)
+df['Includes Travel'] = df.apply(lambda x: 'includes-travel' if x['nuts_level'] == 'NUTS1' else 'excludes-travel', axis = 1) 
+df['Location'] = df.apply(lambda x: 'UK' if (x['Location'] == 'N/A' and x['nuts_area_name'] == 'United Kingdom') else x['Location'], axis = 1)
 df = df.drop(['nuts_level', 'nuts_area_name'], axis=1)
+# -
 
 tidied_sheets.append(df)
 
@@ -74,7 +73,7 @@ dimensions = [
     HDim(origin, "Origin", DIRECTLY, ABOVE),
     HDimConst("Includes Travel", includes_travel),
     HDimConst("Industry Grouping", industry_grouping),
-    HDimConst("Flow", flow),
+    HDimConst("Flow", flow)
     ]
 tidy_sheet = ConversionSegment(tab, dimensions, observations)
 # savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
@@ -85,16 +84,10 @@ tidied_sheets.append(tidy_sheet)
 df = pd.concat(tidied_sheets, sort = True).fillna('')
 df
 
-
-# In[3]:
-
-
-
-
 df.rename(columns= {'OBS':'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'] = df['Marker'].replace('..', 'suppressed')
 df["Marker"] = df["Marker"].str.replace("n/a", "not-applicable")
-
+df["Flow"] = df["Flow"].str.replace("imports", "Imports")
 df["Period"]= df["Period"].str.split(",", n = 1, expand = True)[1]
 df['Period'] = df['Period'].str.strip()
 df['Includes Travel'] = df['Includes Travel'].str.title()
@@ -103,36 +96,21 @@ df['Period'] = df.apply(lambda x: 'year/' + x['Period'], axis = 1)
 
 df['Origin'] = df['Origin'].replace({'Rest of the World': 'Rest of world'})
 
-df['Flow'] = df['Flow'].apply(pathify)
+df = df.replace({'Location' : {'North East' : 'UKC',
+                                'North West' : 'UKD',
+                                'Yorkshire and The Humber' : 'UKE',
+                                'East Midlands' : 'UKF',
+                                'West Midlands' : 'UKG',
+                                'East of England' : 'UKH',
+                                'London' : 'UKI',
+                                'South East' : 'UKJ',
+                                'South West ' : 'UKK',
+                                'Wales' : 'UKL',
+                                'Scotland' : 'UKM',
+                                'Northern Ireland' : 'UKN',
+                                'UK' : 'UK',
+                                'N/A': 'Not-applicable'},
 
-df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/UKC',
-                                'North West' : 'http://data.europa.eu/nuts/code/UKD',
-                                'Yorkshire and The Humber' : 'http://data.europa.eu/nuts/code/UKE',
-                                'East Midlands' : 'http://data.europa.eu/nuts/code/UKF',
-                                'West Midlands' : 'http://data.europa.eu/nuts/code/UKG',
-                                'East of England' : 'http://data.europa.eu/nuts/code/UKH',
-                                'London' : 'http://data.europa.eu/nuts/code/UKI',
-                                'South East' : 'http://data.europa.eu/nuts/code/UKJ',
-                                'South West ' : 'http://data.europa.eu/nuts/code/UKK',
-                                'Wales' : 'http://data.europa.eu/nuts/code/UKL',
-                                'Scotland' : 'http://data.europa.eu/nuts/code/UKM',
-                                'Northern Ireland' : 'http://data.europa.eu/nuts/code/UKN',
-                                'UK' : 'http://data.europa.eu/nuts/code/UK',
-                                'Cambridgeshire and Peterborough Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000008',
-                                'Aberdeen City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/S12000033', #NOTE DOWN
-                                'Cardiff Capital Region' : 'http://statistics.data.gov.uk/id/statistical-geography/W42000001',
-                                'Edinburgh and South East Scotland City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/S11000003', #NOTE DOWN
-                                'Glasgow City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/S12000049', #NOTE DOWN
-                                'Greater Manchester Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000001',
-                                'Inner London' : 'http://statistics.data.gov.uk/id/statistical-geography/E13000001',
-                                'Liverpool City Region Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000004',
-                                'North of Tyne Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000011',
-                                'Outer London' : 'http://statistics.data.gov.uk/id/statistical-geography/E13000002',
-                                'Sheffield City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000002',
-                                'Swansea Bay City Region' : 'http://statistics.data.gov.uk/id/statistical-geography/W42000004',
-                                'Tees Valley Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000006',
-                                'West Midlands Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000007',
-                                'West of England Combined Authority' : 'http://statistics.data.gov.uk/id/statistical-geography/E47000009'},
                  'Travel Type' : {'Business travel-related' : 'business',
                                   'Personal travel-related' : 'personal',
                                   'Total travel-related' : 'total'},
@@ -143,9 +121,51 @@ df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/U
                 'Industry Grouping' : {'travel': 'travel-related-trade', 'Travel' : 'travel-related-trade', 'All Industries' : 'All industries'}
                 })
 
+df = df[['Flow', 'Period', 'Includes Travel', 'Industry Grouping', 'Travel Type', 
+        'Origin', 'Location', 'Value', 'Marker']]
+
+# Output - 1
+# With respect to "Value", if there are duplicate rows(same value in all the DataFrame columns), keep the first occurance and drop all other duplicate rows
+# Output is a dataframe with no duplicates
+# Same as output-2
+df.drop_duplicates(subset = df.columns.difference(['Value']), inplace = True)
+
+# +
+# df
+# -
+
+# see if there are any duplicates in Dataframe after droping the duplicates. There shouln't be anything as the duplicates are already dropped
+duplicate_df = df[df.duplicated(['Flow', 'Period', 'Includes Travel', 'Industry Grouping', 'Travel Type',
+       'Origin', 'Location', 'Value', 'Marker'], keep = False)]
+duplicate_df
+
+
+# Output - 2
+# This function compares to drop duplicates from the DataFrame(df) without duplicates and DataFrame with duplicates if we have one(duplicate_df:-empty as of now)
+# We have achieved already what is wanted, this step is to reiterate in another way that there are no duplicates and the out put of both the methods are same
+# Same as output - 1
+def dataframe_difference(df1: df, df2: df, which=None):
+    """Find rows which are different between two DataFrames."""
+    comparison_df = df1.merge(
+        df2,
+        indicator=True,
+        how='outer'
+    )
+    if which is None:
+        diff_df = comparison_df[comparison_df['_merge'] != 'both']
+    else:
+        diff_df = comparison_df[comparison_df['_merge'] == which]
+    diff_df.drop(columns=['_merge'],axis = 1, inplace = True)
+    return diff_df
+
+
+df = dataframe_difference(df, duplicate_df)
+
+# +
+# This should be same as droping the duplicate rows with respect to column "Value" or same as output - 1
+# df
+# -
+
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
-
-
-# 
