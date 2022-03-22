@@ -43,7 +43,7 @@ for (name, direction), tab in tabs.items():
     geo_code = bottom_anchor.shift(1,0).fill(UP).is_not_blank() - measure.shift(1,1)
     area_name = bottom_anchor.shift(2,0).fill(UP).is_not_blank() - measure.shift(2,1)
     period = tab.excel_ref('D2').expand(RIGHT)
-    tab_name = tab.name
+    tab_name = tab.name.strip()
     observations = area_name.waffle(period).is_not_blank()
     
     dimensions = [
@@ -56,10 +56,10 @@ for (name, direction), tab in tabs.items():
     tidy_sheet = ConversionSegment(tab, dimensions, observations)
     df = tidy_sheet.topandas()
     tidied_sheets.append(df)
-
+# %%
 df = pd.concat(tidied_sheets, sort = True)
 df.rename(columns = {'OBS': 'Value', 'DATAMARKER':'Marker'}, inplace = True)
-
+df
 # %%
 #Post Processing
 
@@ -76,42 +76,44 @@ df['Year'] = "year/" + df['Year']
 #Note update codelist with values 'LEP', 'LA', 'ER', 'CR'
 
 #Measure 
-measures = {"Table 1": "GVA at Current Prices",
-      "Table 2": "VAT on Products",
-      "Table 3": "Other Taxes on Products",
-      "Table 4": "Subsidies on Products",
-      "Table 5": "GDP at Current Market Prices",
-      "Table 6": "Count",
-      "Table 7": "GDP per Capita",
-      "Table 8": "GVA Implied Deflators",
-      "Table 9": "GDP at Chained Volume Measures",
-      "Table 10": "GDP at Chained Volume Measures",
-      "Table 11": "GDP per Capita",
-      "Table 12": "GDP at Chained Volume Measures - Annual Growth Rates",
-      "Table 13": "GDP at Chained Volume Measures - per Head Annual Growth Rates"}
+measures = {"Table 1": "gva-at-cp",
+      "Table 2": "vat-on-products",
+      "Table 3": "other-taxes-on-products",
+      "Table 4": "subsidies-on-products", 
+      "Table 5": "gdp-at-cmp",
+      "Table 6": "count",
+      "Table 7": "gdp-per-capita",
+      "Table 8": "gva-implied-deflators",
+      "Table 9": "gdp-at-cvm",
+      "Table 10": "gdp-at-cvm-2018-money",
+      "Table 11": "gdp-per-capita",
+      "Table 12": "gdp-at-cvm-agr",
+      "Table 13": "gdp-at-cvm-per-head-agr"}
 df['Measure Type'] = df['TAB NAME'].map(measures)
 
 #Units 
-units = {"Table 1": "GBP Million",
-      "Table 2": "GBP Million",
-      "Table 3": "GBP Million",
-      "Table 4": "GBP Million",
-      "Table 5": "GBP Million",
-      "Table 6": "Person",
-      "Table 7": "GBP",
-      "Table 8": "Index",
-      "Table 9": "Index",
-      "Table 10": "GBP Million",
-      "Table 11": "GBP",
-      "Table 12": "Percentage Change",
-      "Table 13": "Percentage Change"}
+units = {"Table 1": "gbp-million",
+      "Table 2": "gbp-million",
+      "Table 3": "gbp-million",
+      "Table 4": "gbp-million",
+      "Table 5": "gbp-million",
+      "Table 6": "persons",
+      "Table 7": "gbp",
+      "Table 8": "index",
+      "Table 9": "index",
+      "Table 10": "gbp-million",
+      "Table 11": "gbp",
+      "Table 12": "percentage-change",
+      "Table 13": "percentage-change"}
 df['Unit'] = df['TAB NAME'].map(units)
 # -
 # %%
 del df['TAB NAME']
-df = df[[ 'Year', 'Area Name', 'Area Type', 'Geography Code','Value','Measure Type', 'Unit', 'Marker']]
-df
+df = df[['Year', 'Area Name', 'Area Type', 'Geography Code','Value','Measure Type', 'Unit', 'Marker']]
 # %%
 df.to_csv('observations.csv', index=False)
+
+# %%
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
+# %%
