@@ -70,10 +70,15 @@ df = df.replace({'Marker' : {'-' : 'not-applicable',}})
 #Year
 df['Year'] = df['Year'].str[:4]
 df['Year'] = "year/" + df['Year']
-
-
+#Area Name 
+df['Area Name'] = df['Area Name'].apply(pathify)
 # Area Type
-#Note update codelist with values 'LEP', 'LA', 'ER', 'CR'
+area_types = {"CR": "City Region",
+      "ER": "Enterprise Region",
+      "LA": "Local Authority",
+      "LEP": "Local Enterprise Partnership"}
+df['Area Type'] = df['Area Type'].map(area_types)
+df['Area Type'] = df['Area Type'].apply(pathify)
 
 #Measure 
 measures = {"Table 1": "gva-at-cp",
@@ -112,8 +117,8 @@ del df['TAB NAME']
 df = df[['Year', 'Area Name', 'Area Type', 'Geography Code','Value','Measure Type', 'Unit', 'Marker']]
 # %%
 df.to_csv('observations.csv', index=False)
-
 # %%
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
+
 # %%
