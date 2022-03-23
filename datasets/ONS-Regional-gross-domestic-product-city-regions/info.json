@@ -34,7 +34,7 @@
       "Area Type": {
         "type": "dimension",
         "new": {
-          "codelist": "./codelists/area-name.csv-metadata.json"
+          "codelist": "./codelists/area-type.csv-metadata.json"
         }
       },
       "Geography Code": {

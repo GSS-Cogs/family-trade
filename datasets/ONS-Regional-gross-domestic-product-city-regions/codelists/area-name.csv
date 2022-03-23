@@ -1,446 +1,443 @@
 Label,Notation,Parent Notation,Sort Priority
-Greater london authority,greater-london-authority,,1
-City of london,city-of-london,,2
-Barking and dagenham,barking-and-dagenham,,3
-Barnet,barnet,,4
-Bexley,bexley,,5
-Brent,brent,,6
-Bromley,bromley,,7
-Camden,camden,,8
-Croydon,croydon,,9
-Ealing,ealing,,10
-Enfield,enfield,,11
-Greenwich,greenwich,,12
-Hackney,hackney,,13
-Hammersmith and fulham,hammersmith-and-fulham,,14
-Haringey,haringey,,15
-Harrow,harrow,,16
-Havering,havering,,17
-Hillingdon,hillingdon,,18
-Hounslow,hounslow,,19
-Islington,islington,,20
-Kensington and chelsea,kensington-and-chelsea,,21
-Kingston upon thames,kingston-upon-thames,,22
-Lambeth,lambeth,,23
-Lewisham,lewisham,,24
-Merton,merton,,25
-Newham,newham,,26
-Redbridge,redbridge,,27
-Richmond upon thames,richmond-upon-thames,,28
-Southwark,southwark,,29
-Sutton,sutton,,30
-Tower hamlets,tower-hamlets,,31
-Waltham forest,waltham-forest,,32
-Wandsworth,wandsworth,,33
-Westminster,westminster,,34
-Greater manchester combined authority,greater-manchester-combined-authority,,35
-Bolton,bolton,,36
-Bury,bury,,37
-Manchester,manchester,,38
-Oldham,oldham,,39
-Rochdale,rochdale,,40
-Salford,salford,,41
-Stockport,stockport,,42
-Tameside,tameside,,43
-Trafford,trafford,,44
-Wigan,wigan,,45
-Sheffield city region,sheffield-city-region,,46
-Barnsley,barnsley,,47
-Doncaster,doncaster,,48
-Rotherham,rotherham,,49
-Sheffield,sheffield,,50
-West yorkshire combined authority,west-yorkshire-combined-authority,,51
-York,york,,52
-Craven,craven,,53
-Harrogate,harrogate,,54
-Selby,selby,,55
-Bradford,bradford,,56
-Calderdale,calderdale,,57
-Kirklees,kirklees,,58
-Leeds,leeds,,59
-Wakefield,wakefield,,60
-Liverpool city region combined authority,liverpool-city-region-combined-authority,,61
-Halton,halton,,62
-Knowsley,knowsley,,63
-Liverpool,liverpool,,64
-St. helens,st-helens,,65
-Sefton,sefton,,66
-Wirral,wirral,,67
-North of tyne combined authority,north-of-tyne-combined-authority,,68
-Northumberland,northumberland,,69
-Newcastle upon tyne,newcastle-upon-tyne,,70
-North tyneside,north-tyneside,,71
-North east combined authority,north-east-combined-authority,,72
-County durham,county-durham,,73
-South tyneside,south-tyneside,,74
-Sunderland,sunderland,,75
-Gateshead,gateshead,,76
-Tees valley combined authority,tees-valley-combined-authority,,77
-Hartlepool,hartlepool,,78
-Middlesbrough,middlesbrough,,79
-Redcar and cleveland,redcar-and-cleveland,,80
-Stockton on tees,stockton-on-tees,,81
-Darlington,darlington,,82
-West midlands combined authority,west-midlands-combined-authority,,83
-Birmingham,birmingham,,84
-Coventry,coventry,,85
-Dudley,dudley,,86
-Sandwell,sandwell,,87
-Solihull,solihull,,88
-Walsall,walsall,,89
-Wolverhampton,wolverhampton,,90
-Cambridgeshire and peterborough combined authority,cambridgeshire-and-peterborough-combined-authority,,91
-Peterborough,peterborough,,92
-Cambridge,cambridge,,93
-East cambridgeshire,east-cambridgeshire,,94
-Fenland,fenland,,95
-Huntingdonshire,huntingdonshire,,96
-South cambridgeshire,south-cambridgeshire,,97
-West of england combined authority,west-of-england-combined-authority,,98
-Bath and north east somerset,bath-and-north-east-somerset,,99
-"Bristol, city of",bristol-city-of,,100
-South gloucestershire,south-gloucestershire,,101
-North wales growth deal,north-wales-growth-deal,,102
-Isle of anglesey,isle-of-anglesey,,103
-Gwynedd,gwynedd,,104
-Conwy,conwy,,105
-Denbighshire,denbighshire,,106
-Flintshire,flintshire,,107
-Wrexham,wrexham,,108
-Mid wales growth deal,mid-wales-growth-deal,,109
-Ceredigion,ceredigion,,110
-Powys,powys,,111
-Swansea bay city region,swansea-bay-city-region,,112
-Pembrokeshire,pembrokeshire,,113
-Carmarthenshire,carmarthenshire,,114
-Swansea,swansea,,115
-Neath port talbot,neath-port-talbot,,116
-Cardiff capital region,cardiff-capital-region,,117
-Bridgend,bridgend,,118
-Vale of glamorgan,vale-of-glamorgan,,119
-Cardiff,cardiff,,120
-Rhondda cynon taf,rhondda-cynon-taf,,121
-Caerphilly,caerphilly,,122
-Blaenau gwent,blaenau-gwent,,123
-Torfaen,torfaen,,124
-Monmouthshire,monmouthshire,,125
-Newport,newport,,126
-Merthyr tydfil,merthyr-tydfil,,127
-Scottish island councils,scottish-island-councils,,128
-Na h eileanan siar,na-h-eileanan-siar,,129
-Orkney islands,orkney-islands,,130
-Shetland islands,shetland-islands,,131
-Aberdeen city region,aberdeen-city-region,,132
-Aberdeen city,aberdeen-city,,133
-Aberdeenshire,aberdeenshire,,134
-Tay cities region,tay-cities-region,,135
-Angus,angus,,136
-Dundee city,dundee-city,,137
-Fife,fife,,138
-Perth and kinross,perth-and-kinross,,139
-Stirling and clackmannanshire city region,stirling-and-clackmannanshire-city-region,,140
-Clackmannanshire,clackmannanshire,,141
-Stirling,stirling,,142
-Edinburgh and south east scotland city region,edinburgh-and-south-east-scotland-city-region,,143
-East lothian,east-lothian,,144
-Midlothian,midlothian,,145
-Scottish borders,scottish-borders,,146
-City of edinburgh,city-of-edinburgh,,147
-West lothian,west-lothian,,148
-Glasgow city region,glasgow-city-region,,149
-East renfrewshire,east-renfrewshire,,150
-Inverclyde,inverclyde,,151
-South lanarkshire,south-lanarkshire,,152
-Renfrewshire,renfrewshire,,153
-West dunbartonshire,west-dunbartonshire,,154
-North lanarkshire,north-lanarkshire,,155
-East dunbartonshire,east-dunbartonshire,,156
-Glasgow city,glasgow-city,,157
-Ayrshires,ayrshires,,158
-East ayrshire,east-ayrshire,,159
-North ayrshire,north-ayrshire,,160
-South ayrshire,south-ayrshire,,161
-South of scotland,south-of-scotland,,162
-Dumfries and galloway,dumfries-and-galloway,,163
-Belfast city region,belfast-city-region,,164
-Antrim and newtownabbey,antrim-and-newtownabbey,,165
-Belfast,belfast,,166
-Lisburn and castlereagh,lisburn-and-castlereagh,,167
-Mid and east antrim,mid-and-east-antrim,,168
-"Newry, mourne and down",newry-mourne-and-down,,169
-Ards and north down,ards-and-north-down,,170
-Derry londonderry city region,derry-londonderry-city-region,,171
-Derry city and strabane,derry-city-and-strabane,,172
-Black country,black-country,,173
-Buckinghamshire thames valley,buckinghamshire-thames-valley,,174
-Aylesbury vale,aylesbury-vale,,175
-Chiltern,chiltern,,176
-South bucks,south-bucks,,177
-Wycombe,wycombe,,178
-Cheshire and warrington,cheshire-and-warrington,,179
-Warrington,warrington,,180
-Cheshire east,cheshire-east,,181
-Cheshire west and chester,cheshire-west-and-chester,,182
-Coast to capital,coast-to-capital,,183
-Brighton and hove,brighton-and-hove,,184
-Lewes,lewes,,185
-Epsom and ewell,epsom-and-ewell,,186
-Mole valley,mole-valley,,187
-Reigate and banstead,reigate-and-banstead,,188
-Tandridge,tandridge,,189
-Adur,adur,,190
-Arun,arun,,191
-Chichester,chichester,,192
-Crawley,crawley,,193
-Horsham,horsham,,194
-Mid sussex,mid-sussex,,195
-Worthing,worthing,,196
-Cornwall and isles of scilly,cornwall-and-isles-of-scilly,,197
-Cornwall,cornwall,,198
-Isles of scilly,isles-of-scilly,,199
-Coventry and warwickshire,coventry-and-warwickshire,,200
-North warwickshire,north-warwickshire,,201
-Nuneaton and bedworth,nuneaton-and-bedworth,,202
-Rugby,rugby,,203
-Stratford on avon,stratford-on-avon,,204
-Warwick,warwick,,205
-Cumbria,cumbria,,206
-Allerdale,allerdale,,207
-Barrow in furness,barrow-in-furness,,208
-Carlisle,carlisle,,209
-Copeland,copeland,,210
-Eden,eden,,211
-South lakeland,south-lakeland,,212
-"Derby, derbyshire, nottingham and nottinghamshire",derby-derbyshire-nottingham-and-nottinghamshire,,213
-Derby,derby,,214
-Nottingham,nottingham,,215
-Amber valley,amber-valley,,216
-Bolsover,bolsover,,217
-Chesterfield,chesterfield,,218
-Derbyshire dales,derbyshire-dales,,219
-Erewash,erewash,,220
-High peak,high-peak,,221
-North east derbyshire,north-east-derbyshire,,222
-South derbyshire,south-derbyshire,,223
-Ashfield,ashfield,,224
-Bassetlaw,bassetlaw,,225
-Broxtowe,broxtowe,,226
-Gedling,gedling,,227
-Mansfield,mansfield,,228
-Newark and sherwood,newark-and-sherwood,,229
-Rushcliffe,rushcliffe,,230
-Dorset,dorset,,231
-"Bournemouth, christchurch and poole",bournemouth-christchurch-and-poole,,232
-Enterprise m3,enterprise-m3,,233
-Basingstoke and deane,basingstoke-and-deane,,234
-East hampshire,east-hampshire,,235
-Hart,hart,,236
-New forest,new-forest,,237
-Rushmoor,rushmoor,,238
-Test valley,test-valley,,239
-Winchester,winchester,,240
-Elmbridge,elmbridge,,241
-Guildford,guildford,,242
-Runnymede,runnymede,,243
-Spelthorne,spelthorne,,244
-Surrey heath,surrey-heath,,245
-Waverley,waverley,,246
-Woking,woking,,247
-Gloucestershire,gloucestershire,,248
-Cheltenham,cheltenham,,249
-Cotswold,cotswold,,250
-Forest of dean,forest-of-dean,,251
-Gloucester,gloucester,,252
-Stroud,stroud,,253
-Tewkesbury,tewkesbury,,254
-Greater birmingham and solihull,greater-birmingham-and-solihull,,255
-Cannock chase,cannock-chase,,256
-East staffordshire,east-staffordshire,,257
-Lichfield,lichfield,,258
-Tamworth,tamworth,,259
-Bromsgrove,bromsgrove,,260
-Redditch,redditch,,261
-Wyre forest,wyre-forest,,262
-Greater lincolnshire,greater-lincolnshire,,263
-North east lincolnshire,north-east-lincolnshire,,264
-North lincolnshire,north-lincolnshire,,265
-Boston,boston,,266
-East lindsey,east-lindsey,,267
-Lincoln,lincoln,,268
-North kesteven,north-kesteven,,269
-South holland,south-holland,,270
-South kesteven,south-kesteven,,271
-West lindsey,west-lindsey,,272
-Greater manchester,greater-manchester,,273
-Heart of the south west,heart-of-the-south-west,,274
-Plymouth,plymouth,,275
-Torbay,torbay,,276
-East devon,east-devon,,277
-Exeter,exeter,,278
-Mid devon,mid-devon,,279
-North devon,north-devon,,280
-South hams,south-hams,,281
-Teignbridge,teignbridge,,282
-Torridge,torridge,,283
-West devon,west-devon,,284
-Mendip,mendip,,285
-Sedgemoor,sedgemoor,,286
-South somerset,south-somerset,,287
-Somerset west and taunton,somerset-west-and-taunton,,288
-Hertfordshire,hertfordshire,,289
-Broxbourne,broxbourne,,290
-Dacorum,dacorum,,291
-Hertsmere,hertsmere,,292
-North hertfordshire,north-hertfordshire,,293
-Three rivers,three-rivers,,294
-Watford,watford,,295
-St albans,st-albans,,296
-Welwyn hatfield,welwyn-hatfield,,297
-East hertfordshire,east-hertfordshire,,298
-Stevenage,stevenage,,299
-Humber,humber,,300
-"Kingston upon hull, city of",kingston-upon-hull-city-of,,301
-East riding of yorkshire,east-riding-of-yorkshire,,302
-Lancashire,lancashire,,303
-Blackburn with darwen,blackburn-with-darwen,,304
-Blackpool,blackpool,,305
-Burnley,burnley,,306
-Chorley,chorley,,307
-Fylde,fylde,,308
-Hyndburn,hyndburn,,309
-Lancaster,lancaster,,310
-Pendle,pendle,,311
-Preston,preston,,312
-Ribble valley,ribble-valley,,313
-Rossendale,rossendale,,314
-South ribble,south-ribble,,315
-West lancashire,west-lancashire,,316
-Wyre,wyre,,317
-Leeds city region,leeds-city-region,,318
-Leicester and leicestershire,leicester-and-leicestershire,,319
-Leicester,leicester,,320
-Blaby,blaby,,321
-Charnwood,charnwood,,322
-Harborough,harborough,,323
-Hinckley and bosworth,hinckley-and-bosworth,,324
-Melton,melton,,325
-North west leicestershire,north-west-leicestershire,,326
-Oadby and wigston,oadby-and-wigston,,327
-Liverpool city region,liverpool-city-region,,328
-London,london,,329
-New anglia,new-anglia,,330
-Breckland,breckland,,331
-Broadland,broadland,,332
-Great yarmouth,great-yarmouth,,333
-King's lynn and west norfolk,king-s-lynn-and-west-norfolk,,334
-North norfolk,north-norfolk,,335
-Norwich,norwich,,336
-South norfolk,south-norfolk,,337
-Babergh,babergh,,338
-Ipswich,ipswich,,339
-Mid suffolk,mid-suffolk,,340
-East suffolk,east-suffolk,,341
-West suffolk,west-suffolk,,342
-North east,north-east,,343
-Oxfordshire,oxfordshire,,344
-Cherwell,cherwell,,345
-Oxford,oxford,,346
-South oxfordshire,south-oxfordshire,,347
-Vale of white horse,vale-of-white-horse,,348
-West oxfordshire,west-oxfordshire,,349
-Solent,solent,,350
-Portsmouth,portsmouth,,351
-Southampton,southampton,,352
-Isle of wight,isle-of-wight,,353
-Eastleigh,eastleigh,,354
-Fareham,fareham,,355
-Gosport,gosport,,356
-Havant,havant,,357
-South east,south-east,,358
-Southend on sea,southend-on-sea,,359
-Thurrock,thurrock,,360
-Medway,medway,,361
-Eastbourne,eastbourne,,362
-Hastings,hastings,,363
-Rother,rother,,364
-Wealden,wealden,,365
-Basildon,basildon,,366
-Braintree,braintree,,367
-Brentwood,brentwood,,368
-Castle point,castle-point,,369
-Chelmsford,chelmsford,,370
-Colchester,colchester,,371
-Epping forest,epping-forest,,372
-Harlow,harlow,,373
-Maldon,maldon,,374
-Rochford,rochford,,375
-Tendring,tendring,,376
-Uttlesford,uttlesford,,377
-Ashford,ashford,,378
-Canterbury,canterbury,,379
-Dartford,dartford,,380
-Dover,dover,,381
-Gravesham,gravesham,,382
-Maidstone,maidstone,,383
-Sevenoaks,sevenoaks,,384
-Folkestone and hythe,folkestone-and-hythe,,385
-Swale,swale,,386
-Thanet,thanet,,387
-Tonbridge and malling,tonbridge-and-malling,,388
-Tunbridge wells,tunbridge-wells,,389
-Stoke on trent and staffordshire,stoke-on-trent-and-staffordshire,,390
-Stoke on trent,stoke-on-trent,,391
-Newcastle under lyme,newcastle-under-lyme,,392
-South staffordshire,south-staffordshire,,393
-Stafford,stafford,,394
-Staffordshire moorlands,staffordshire-moorlands,,395
-Swindon and wiltshire,swindon-and-wiltshire,,396
-Swindon,swindon,,397
-Wiltshire,wiltshire,,398
-Tees valley,tees-valley,,399
-Thames valley berkshire,thames-valley-berkshire,,400
-Bracknell forest,bracknell-forest,,401
-West berkshire,west-berkshire,,402
-Reading,reading,,403
-Slough,slough,,404
-Windsor and maidenhead,windsor-and-maidenhead,,405
-Wokingham,wokingham,,406
-The marches,the-marches,,407
-"Herefordshire, county of",herefordshire-county-of,,408
-Telford and wrekin,telford-and-wrekin,,409
-Shropshire,shropshire,,410
-West of england,west-of-england,,411
-North somerset,north-somerset,,412
-Worcestershire,worcestershire,,413
-Malvern hills,malvern-hills,,414
-Worcester,worcester,,415
-Wychavon,wychavon,,416
-"York, north yorkshire and east riding",york-north-yorkshire-and-east-riding,,417
-Hambleton,hambleton,,418
-Richmondshire,richmondshire,,419
-Ryedale,ryedale,,420
-Scarborough,scarborough,,421
-South east midlands,south-east-midlands,,422
-Luton,luton,,423
-Milton keynes,milton-keynes,,424
-Bedford,bedford,,425
-Central bedfordshire,central-bedfordshire,,426
-Corby,corby,,427
-Daventry,daventry,,428
-East northamptonshire,east-northamptonshire,,429
-Kettering,kettering,,430
-Northampton,northampton,,431
-South northamptonshire,south-northamptonshire,,432
-Wellingborough,wellingborough,,433
-Greater cambridge and greater peterborough,greater-cambridge-and-greater-peterborough,,434
-Rutland,rutland,,435
-North wales economic region,north-wales-economic-region,,436
-Mid and south west wales economic region,mid-and-south-west-wales-economic-region,,437
-South east wales economic region,south-east-wales-economic-region,,438
-Highlands and islands enterprise,highlands-and-islands-enterprise,,439
-Highland,highland,,440
-Moray,moray,,441
-Argyll and bute,argyll-and-bute,,442
-Scottish enterprise,scottish-enterprise,,443
-Falkirk,falkirk,,444
-The borderlands partnership,the-borderlands-partnership,,445
+Black Country,black-country,,1
+Dudley,dudley,,2
+Sandwell,sandwell,,3
+Walsall,walsall,,4
+Wolverhampton,wolverhampton,,5
+Cheshire and Warrington,cheshire-and-warrington,,6
+Warrington,warrington,,7
+Cheshire East,cheshire-east,,8
+Cheshire West and Chester,cheshire-west-and-chester,,9
+Cornwall and Isles of Scilly,cornwall-and-isles-of-scilly,,10
+Cornwall,cornwall,,11
+Isles of Scilly,isles-of-scilly,,12
+Coventry and Warwickshire,coventry-and-warwickshire,,13
+North Warwickshire,north-warwickshire,,14
+Nuneaton and Bedworth,nuneaton-and-bedworth,,15
+Rugby,rugby,,16
+Stratford-on-Avon,stratford-on-avon,,17
+Warwick,warwick,,18
+Coventry,coventry,,19
+Cumbria,cumbria,,20
+Allerdale,allerdale,,21
+Barrow-in-Furness,barrow-in-furness,,22
+Carlisle,carlisle,,23
+Copeland,copeland,,24
+Eden,eden,,25
+South Lakeland,south-lakeland,,26
+Dorset,dorset,,27
+"Bournemouth, Christchurch and Poole",bournemouth-christchurch-and-poole,,28
+Gloucestershire,gloucestershire,,29
+Cheltenham,cheltenham,,30
+Cotswold,cotswold,,31
+Forest of Dean,forest-of-dean,,32
+Gloucester,gloucester,,33
+Stroud,stroud,,34
+Tewkesbury,tewkesbury,,35
+Greater Birmingham and Solihull,greater-birmingham-and-solihull,,36
+Cannock Chase,cannock-chase,,37
+East Staffordshire,east-staffordshire,,38
+Lichfield,lichfield,,39
+Tamworth,tamworth,,40
+Bromsgrove,bromsgrove,,41
+Redditch,redditch,,42
+Wyre Forest,wyre-forest,,43
+Birmingham,birmingham,,44
+Solihull,solihull,,45
+Greater Manchester,greater-manchester,,46
+Bolton,bolton,,47
+Bury,bury,,48
+Manchester,manchester,,49
+Oldham,oldham,,50
+Rochdale,rochdale,,51
+Salford,salford,,52
+Stockport,stockport,,53
+Tameside,tameside,,54
+Trafford,trafford,,55
+Wigan,wigan,,56
+Heart of the South West,heart-of-the-south-west,,57
+Plymouth,plymouth,,58
+Torbay,torbay,,59
+East Devon,east-devon,,60
+Exeter,exeter,,61
+Mid Devon,mid-devon,,62
+North Devon,north-devon,,63
+South Hams,south-hams,,64
+Teignbridge,teignbridge,,65
+Torridge,torridge,,66
+West Devon,west-devon,,67
+Mendip,mendip,,68
+Sedgemoor,sedgemoor,,69
+South Somerset,south-somerset,,70
+Somerset West and Taunton,somerset-west-and-taunton,,71
+Lancashire,lancashire,,72
+Blackburn with Darwen,blackburn-with-darwen,,73
+Blackpool,blackpool,,74
+Burnley,burnley,,75
+Chorley,chorley,,76
+Fylde,fylde,,77
+Hyndburn,hyndburn,,78
+Lancaster,lancaster,,79
+Pendle,pendle,,80
+Preston,preston,,81
+Ribble Valley,ribble-valley,,82
+Rossendale,rossendale,,83
+South Ribble,south-ribble,,84
+West Lancashire,west-lancashire,,85
+Wyre,wyre,,86
+Leicester and Leicestershire,leicester-and-leicestershire,,87
+Leicester,leicester,,88
+Blaby,blaby,,89
+Charnwood,charnwood,,90
+Harborough,harborough,,91
+Hinckley and Bosworth,hinckley-and-bosworth,,92
+Melton,melton,,93
+North West Leicestershire,north-west-leicestershire,,94
+Oadby and Wigston,oadby-and-wigston,,95
+Liverpool City Region,liverpool-city-region,,96
+Halton,halton,,97
+Knowsley,knowsley,,98
+Liverpool,liverpool,,99
+St. Helens,st-helens,,100
+Sefton,sefton,,101
+Wirral,wirral,,102
+North East,north-east,,103
+County Durham,county-durham,,104
+Northumberland,northumberland,,105
+Newcastle upon Tyne,newcastle-upon-tyne,,106
+North Tyneside,north-tyneside,,107
+South Tyneside,south-tyneside,,108
+Sunderland,sunderland,,109
+Gateshead,gateshead,,110
+Stoke-on-Trent and Staffordshire,stoke-on-trent-and-staffordshire,,111
+Stoke-on-Trent,stoke-on-trent,,112
+Newcastle-under-Lyme,newcastle-under-lyme,,113
+South Staffordshire,south-staffordshire,,114
+Stafford,stafford,,115
+Staffordshire Moorlands,staffordshire-moorlands,,116
+Swindon and Wiltshire,swindon-and-wiltshire,,117
+Swindon,swindon,,118
+Wiltshire,wiltshire,,119
+Tees Valley,tees-valley,,120
+Hartlepool,hartlepool,,121
+Middlesbrough,middlesbrough,,122
+Redcar and Cleveland,redcar-and-cleveland,,123
+Stockton-on-Tees,stockton-on-tees,,124
+Darlington,darlington,,125
+Thames Valley Berkshire,thames-valley-berkshire,,126
+Bracknell Forest,bracknell-forest,,127
+West Berkshire,west-berkshire,,128
+Reading,reading,,129
+Slough,slough,,130
+Windsor and Maidenhead,windsor-and-maidenhead,,131
+Wokingham,wokingham,,132
+The Marches,the-marches,,133
+"Herefordshire, County of",herefordshire-county-of,,134
+Telford and Wrekin,telford-and-wrekin,,135
+Shropshire,shropshire,,136
+West of England,west-of-england,,137
+Bath and North East Somerset,bath-and-north-east-somerset,,138
+"Bristol, City of",bristol-city-of,,139
+North Somerset,north-somerset,,140
+South Gloucestershire,south-gloucestershire,,141
+Worcestershire,worcestershire,,142
+Malvern Hills,malvern-hills,,143
+Worcester,worcester,,144
+Wychavon,wychavon,,145
+Buckinghamshire Thames Valley,buckinghamshire-thames-valley,,146
+Buckinghamshire,buckinghamshire,,147
+Coast to Capital,coast-to-capital,,148
+Brighton and Hove,brighton-and-hove,,149
+Epsom and Ewell,epsom-and-ewell,,150
+Mole Valley,mole-valley,,151
+Reigate and Banstead,reigate-and-banstead,,152
+Tandridge,tandridge,,153
+Adur,adur,,154
+Arun,arun,,155
+Chichester,chichester,,156
+Crawley,crawley,,157
+Horsham,horsham,,158
+Mid Sussex,mid-sussex,,159
+Worthing,worthing,,160
+"Derby, Derbyshire, Nottingham and Nottinghamshire",derby-derbyshire-nottingham-and-nottinghamshire,,161
+Derby,derby,,162
+Nottingham,nottingham,,163
+Amber Valley,amber-valley,,164
+Bolsover,bolsover,,165
+Chesterfield,chesterfield,,166
+Derbyshire Dales,derbyshire-dales,,167
+Erewash,erewash,,168
+High Peak,high-peak,,169
+North East Derbyshire,north-east-derbyshire,,170
+South Derbyshire,south-derbyshire,,171
+Ashfield,ashfield,,172
+Bassetlaw,bassetlaw,,173
+Broxtowe,broxtowe,,174
+Gedling,gedling,,175
+Mansfield,mansfield,,176
+Newark and Sherwood,newark-and-sherwood,,177
+Rushcliffe,rushcliffe,,178
+Enterprise M3,enterprise-m3,,179
+Basingstoke and Deane,basingstoke-and-deane,,180
+East Hampshire,east-hampshire,,181
+Hart,hart,,182
+Rushmoor,rushmoor,,183
+Test Valley,test-valley,,184
+Winchester,winchester,,185
+Elmbridge,elmbridge,,186
+Guildford,guildford,,187
+Runnymede,runnymede,,188
+Spelthorne,spelthorne,,189
+Surrey Heath,surrey-heath,,190
+Waverley,waverley,,191
+Woking,woking,,192
+Hertfordshire,hertfordshire,,193
+Broxbourne,broxbourne,,194
+Dacorum,dacorum,,195
+Hertsmere,hertsmere,,196
+North Hertfordshire,north-hertfordshire,,197
+Three Rivers,three-rivers,,198
+Watford,watford,,199
+St Albans,st-albans,,200
+Welwyn Hatfield,welwyn-hatfield,,201
+East Hertfordshire,east-hertfordshire,,202
+Stevenage,stevenage,,203
+London,london,,204
+City of London,city-of-london,,205
+Barking and Dagenham,barking-and-dagenham,,206
+Barnet,barnet,,207
+Bexley,bexley,,208
+Brent,brent,,209
+Bromley,bromley,,210
+Camden,camden,,211
+Croydon,croydon,,212
+Ealing,ealing,,213
+Enfield,enfield,,214
+Greenwich,greenwich,,215
+Hackney,hackney,,216
+Hammersmith and Fulham,hammersmith-and-fulham,,217
+Haringey,haringey,,218
+Harrow,harrow,,219
+Havering,havering,,220
+Hillingdon,hillingdon,,221
+Hounslow,hounslow,,222
+Islington,islington,,223
+Kensington and Chelsea,kensington-and-chelsea,,224
+Kingston upon Thames,kingston-upon-thames,,225
+Lambeth,lambeth,,226
+Lewisham,lewisham,,227
+Merton,merton,,228
+Newham,newham,,229
+Redbridge,redbridge,,230
+Richmond upon Thames,richmond-upon-thames,,231
+Southwark,southwark,,232
+Sutton,sutton,,233
+Tower Hamlets,tower-hamlets,,234
+Waltham Forest,waltham-forest,,235
+Wandsworth,wandsworth,,236
+Westminster,westminster,,237
+New Anglia,new-anglia,,238
+Breckland,breckland,,239
+Broadland,broadland,,240
+Great Yarmouth,great-yarmouth,,241
+King's Lynn and West Norfolk,king-s-lynn-and-west-norfolk,,242
+North Norfolk,north-norfolk,,243
+Norwich,norwich,,244
+South Norfolk,south-norfolk,,245
+Babergh,babergh,,246
+Ipswich,ipswich,,247
+Mid Suffolk,mid-suffolk,,248
+East Suffolk,east-suffolk,,249
+West Suffolk,west-suffolk,,250
+Oxfordshire,oxfordshire,,251
+Cherwell,cherwell,,252
+Oxford,oxford,,253
+South Oxfordshire,south-oxfordshire,,254
+Vale of White Horse,vale-of-white-horse,,255
+West Oxfordshire,west-oxfordshire,,256
+Sheffield City Region,sheffield-city-region,,257
+Barnsley,barnsley,,258
+Doncaster,doncaster,,259
+Rotherham,rotherham,,260
+Sheffield,sheffield,,261
+Solent,solent,,262
+Portsmouth,portsmouth,,263
+Southampton,southampton,,264
+Isle of Wight,isle-of-wight,,265
+Eastleigh,eastleigh,,266
+Fareham,fareham,,267
+Gosport,gosport,,268
+Havant,havant,,269
+New Forest,new-forest,,270
+South East,south-east,,271
+Southend-on-Sea,southend-on-sea,,272
+Thurrock,thurrock,,273
+Medway,medway,,274
+Eastbourne,eastbourne,,275
+Hastings,hastings,,276
+Lewes,lewes,,277
+Rother,rother,,278
+Wealden,wealden,,279
+Basildon,basildon,,280
+Braintree,braintree,,281
+Brentwood,brentwood,,282
+Castle Point,castle-point,,283
+Chelmsford,chelmsford,,284
+Colchester,colchester,,285
+Epping Forest,epping-forest,,286
+Harlow,harlow,,287
+Maldon,maldon,,288
+Rochford,rochford,,289
+Tendring,tendring,,290
+Uttlesford,uttlesford,,291
+Ashford,ashford,,292
+Canterbury,canterbury,,293
+Dartford,dartford,,294
+Dover,dover,,295
+Gravesham,gravesham,,296
+Maidstone,maidstone,,297
+Sevenoaks,sevenoaks,,298
+Folkestone and Hythe,folkestone-and-hythe,,299
+Swale,swale,,300
+Thanet,thanet,,301
+Tonbridge and Malling,tonbridge-and-malling,,302
+Tunbridge Wells,tunbridge-wells,,303
+South East Midlands,south-east-midlands,,304
+Luton,luton,,305
+Milton Keynes,milton-keynes,,306
+Bedford,bedford,,307
+Central Bedfordshire,central-bedfordshire,,308
+North Northamptonshire,north-northamptonshire,,309
+West Northamptonshire,west-northamptonshire,,310
+York and North Yorkshire,york-and-north-yorkshire,,311
+York,york,,312
+Craven,craven,,313
+Hambleton,hambleton,,314
+Harrogate,harrogate,,315
+Richmondshire,richmondshire,,316
+Ryedale,ryedale,,317
+Scarborough,scarborough,,318
+Selby,selby,,319
+Greater Cambridge and Greater Peterborough,greater-cambridge-and-greater-peterborough,,320
+Peterborough,peterborough,,321
+Cambridge,cambridge,,322
+East Cambridgeshire,east-cambridgeshire,,323
+Fenland,fenland,,324
+Huntingdonshire,huntingdonshire,,325
+South Cambridgeshire,south-cambridgeshire,,326
+Greater Lincolnshire,greater-lincolnshire,,327
+North East Lincolnshire,north-east-lincolnshire,,328
+North Lincolnshire,north-lincolnshire,,329
+Rutland,rutland,,330
+Boston,boston,,331
+East Lindsey,east-lindsey,,332
+Lincoln,lincoln,,333
+North Kesteven,north-kesteven,,334
+South Holland,south-holland,,335
+South Kesteven,south-kesteven,,336
+West Lindsey,west-lindsey,,337
+Hull and East Riding,hull-and-east-riding,,338
+"Kingston upon Hull, City of",kingston-upon-hull-city-of,,339
+East Riding of Yorkshire,east-riding-of-yorkshire,,340
+Leeds City Region,leeds-city-region,,341
+Bradford,bradford,,342
+Calderdale,calderdale,,343
+Kirklees,kirklees,,344
+Leeds,leeds,,345
+Wakefield,wakefield,,346
+North Wales Economic Region,north-wales-economic-region,,347
+Isle of Anglesey,isle-of-anglesey,,348
+Gwynedd,gwynedd,,349
+Conwy,conwy,,350
+Denbighshire,denbighshire,,351
+Flintshire,flintshire,,352
+Wrexham,wrexham,,353
+Mid and South West Wales Economic Region,mid-and-south-west-wales-economic-region,,354
+Ceredigion,ceredigion,,355
+Pembrokeshire,pembrokeshire,,356
+Carmarthenshire,carmarthenshire,,357
+Swansea,swansea,,358
+Neath Port Talbot,neath-port-talbot,,359
+Powys,powys,,360
+South East Wales Economic Region,south-east-wales-economic-region,,361
+Bridgend,bridgend,,362
+Vale of Glamorgan,vale-of-glamorgan,,363
+Cardiff,cardiff,,364
+Rhondda Cynon Taf,rhondda-cynon-taf,,365
+Caerphilly,caerphilly,,366
+Blaenau Gwent,blaenau-gwent,,367
+Torfaen,torfaen,,368
+Monmouthshire,monmouthshire,,369
+Newport,newport,,370
+Merthyr Tydfil,merthyr-tydfil,,371
+Highlands and Islands Enterprise,highlands-and-islands-enterprise,,372
+Na h-Eileanan Siar,na-h-eileanan-siar,,373
+Highland,highland,,374
+Moray,moray,,375
+Orkney Islands,orkney-islands,,376
+Shetland Islands,shetland-islands,,377
+Argyll and Bute,argyll-and-bute,,378
+Scottish Enterprise,scottish-enterprise,,379
+Clackmannanshire,clackmannanshire,,380
+Dumfries and Galloway,dumfries-and-galloway,,381
+East Ayrshire,east-ayrshire,,382
+East Lothian,east-lothian,,383
+East Renfrewshire,east-renfrewshire,,384
+Falkirk,falkirk,,385
+Inverclyde,inverclyde,,386
+Midlothian,midlothian,,387
+North Ayrshire,north-ayrshire,,388
+Scottish Borders,scottish-borders,,389
+South Ayrshire,south-ayrshire,,390
+South Lanarkshire,south-lanarkshire,,391
+Stirling,stirling,,392
+Aberdeen City,aberdeen-city,,393
+Aberdeenshire,aberdeenshire,,394
+City of Edinburgh,city-of-edinburgh,,395
+Renfrewshire,renfrewshire,,396
+West Dunbartonshire,west-dunbartonshire,,397
+West Lothian,west-lothian,,398
+Angus,angus,,399
+Dundee City,dundee-city,,400
+East Dunbartonshire,east-dunbartonshire,,401
+Fife,fife,,402
+Perth and Kinross,perth-and-kinross,,403
+Glasgow City,glasgow-city,,404
+North Lanarkshire,north-lanarkshire,,405
+The Borderlands Partnership,the-borderlands-partnership,,406
+Greater London Authority,greater-london-authority,,407
+Greater Manchester Combined Authority,greater-manchester-combined-authority,,408
+West Yorkshire Combined Authority,west-yorkshire-combined-authority,,409
+Liverpool City Region Combined Authority,liverpool-city-region-combined-authority,,410
+Tees Valley Combined Authority,tees-valley-combined-authority,,411
+West Midlands Combined Authority,west-midlands-combined-authority,,412
+Cambridgeshire and Peterborough Combined Authority,cambridgeshire-and-peterborough-combined-authority,,413
+West of England Combined Authority,west-of-england-combined-authority,,414
+North East Combined Authority,north-east-combined-authority,,415
+North of Tyne Combined Authority,north-of-tyne-combined-authority,,416
+Cardiff Capital Region,cardiff-capital-region,,417
+Growing Mid Wales,growing-mid-wales,,418
+North Wales Economic Ambition Board ,north-wales-economic-ambition-board,,419
+Swansea Bay City Region,swansea-bay-city-region,,420
+Aberdeen City Region,aberdeen-city-region,,421
+Ayrshires,ayrshires,,422
+Edinburgh and South East Scotland City Region,edinburgh-and-south-east-scotland-city-region,,423
+Glasgow City Region,glasgow-city-region,,424
+Scottish Island Councils,scottish-island-councils,,425
+South of Scotland,south-of-scotland,,426
+Stirling and Clackmannanshire City Region,stirling-and-clackmannanshire-city-region,,427
+Tay Cities Region,tay-cities-region,,428
+Belfast City Region,belfast-city-region,,429
+Antrim and Newtownabbey,antrim-and-newtownabbey,,430
+Ards and North Down,ards-and-north-down,,431
+Belfast,belfast,,432
+Lisburn and Castlereagh,lisburn-and-castlereagh,,433
+Mid and East Antrim,mid-and-east-antrim,,434
+"Newry, Mourne and Down",newry-mourne-and-down,,435
+Derry-Londonderry City Region,derry-londonderry-city-region,,436
+Derry City and Strabane,derry-city-and-strabane,,437
+Rest of Northern Ireland,rest-of-northern-ireland,,438
+"Armagh City, Banbridge and Craigavon",armagh-city-banbridge-and-craigavon,,439
+Mid Ulster,mid-ulster,,440
+Causeway Coast and Glens,causeway-coast-and-glens,,441
+Fermanagh and Omagh,fermanagh-and-omagh,,442
