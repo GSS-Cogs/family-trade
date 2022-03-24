@@ -116,6 +116,7 @@ df['Unit'] = df['TAB NAME'].map(units)
 del df['TAB NAME']
 df = df[['Year', 'Area Name', 'Area Type', 'Geography Code','Value','Measure Type', 'Unit', 'Marker']]
 # %%
+df = df.drop_duplicates()
 df.to_csv('observations.csv', index=False)
 # %%
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
