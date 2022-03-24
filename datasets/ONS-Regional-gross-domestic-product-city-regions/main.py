@@ -87,11 +87,11 @@ measures = {"Table 1": "gva-at-cp",
       "Table 4": "subsidies-on-products", 
       "Table 5": "gdp-at-cmp",
       "Table 6": "count",
-      "Table 7": "gdp-per-capita",
+      "Table 7": "gdp-per-capita-cp",
       "Table 8": "gva-implied-deflators",
       "Table 9": "gdp-at-cvm",
       "Table 10": "gdp-at-cvm-2018-money",
-      "Table 11": "gdp-per-capita",
+      "Table 11": "gdp-per-capita-cvm",
       "Table 12": "gdp-at-cvm-agr",
       "Table 13": "gdp-at-cvm-per-head-agr"}
 df['Measure Type'] = df['TAB NAME'].map(measures)
