@@ -94,7 +94,7 @@ for tab in tabs:
                 HDim(estimate_type_publication, 'GDP Estimate Type Publication', DIRECTLY, ABOVE)
             ]
             tidy_sheet = ConversionSegment(tab, dimensions, observations)
-            savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+            # savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
             tidied_sheets.append(tidy_sheet.topandas())
 
 
@@ -102,21 +102,138 @@ df = pd.concat(tidied_sheets, sort = True).fillna('')
 
 df
 
-df['GDP Estimate Type'] = df['GDP Estimate Type Publication']
-
-tidy_sheet
+# +
+# df = df.sort_values(by='GDP_Estimate_Type_Publication')
+# -
 
 df
 
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-#df['CDID'] = df['CDID'].map(lambda x: right(x,4)) #dropped for now
+df[['Publication Date', 'GDP Estimate Type']] = df['GDP Estimate Type Publication'].str.rsplit(n=1, expand = True)
+
+df
+
+df.drop(['GDP Estimate Type Publication'], axis = 1)
+df[['GDP Reference Period', 'Publication Date', 'GDP Estimate Type', 'OBS']]
+
+df['Publication Date'].unique()
+
 df['Publication Date'].replace('Q3  1990', 'Q3 1990', inplace=True)  #removing space
-df['Publication Date'].replace('Q 2004', 'Q4 2004', inplace=True) #fixing typo
-df['GDP Reference Period'].replace('Q2 1010', 'Q2 2010', inplace=True) #fixing typo
-df["GDP Reference Period"] = df["GDP Reference Period"].apply(date_time)
-df["Publication Date"] = df["Publication Date"].apply(date_time)
-# df['Marker'].replace('..', 'unknown', inplace=True)
-df = df.fillna('')
+df['Publication Date'].replace('Q 2004', 'Q4 2004', inplace=True)
+
+# df['GDP Reference Period'].unique()
+df.rename(columns={'OBS' : 'Value'}, inplace=True)
+
+df['GDP Estimate Type'].unique()
+
+# for columns in df.columns:
+#     if 'Publication Date' in columns:
+#         print(df.columns)
+df[['Month', 'Year']] = df['Publication Date'].str.rsplit(pat = "-" ,n=1, expand = True)
+
+# +
+# This doesn't make any sense or doesn't do what it is expected to do
+# df['Year'] = df['Year'].map(lambda x: x['Month'] if x['Year'] == None else x)
+# -
+
+# df = df.apply(lambda x: )
+df
+
+stop
+
+df[['Month', 'Year']] = df['Publication Date'].str.rsplit(pat = ' ' ,n=1, expand = True)
+
+df
+
+stop
+
+df['Month'].unique()
+# calendar.month_name[list(calendar.month_abbr).index(['Apr'])]
+
+df['Month'].replace('June', 'Jun', inplace = True)
+
+df['Month'].unique()
+
+
+# +
+# def month_abrev_to_full_name(some_month_abrev_string):
+#     month_dict = {"Jan": "January",
+#               "Feb": "February",
+#               "Mar": "March",
+#               "Apr": "April",
+#               "May": "May",
+#               "Jun": "June",
+#               "Jul": "July",
+#               "Aug": "August",
+#               "Sep": "September",
+#               "Oct": "October",
+#               "Nov": "November",
+#               "Dec": "December"}
+#     find_abrev = filter(lambda abrev_month: abrev_month in some_month_abrev_string, month_dict.keys())
+#     for abrev in find_abrev:
+#         some_month_abrev_string = some_month_abrev_string.replace(abrev, month_dict[abrev])
+#     return some_month_abrev_string
+
+# df['Month'] = df['Month'].map(month_abrev_to_full_name)
+
+# +
+def month_abrev_to_full_name(some_month_abrev_string):
+    month_dict = {"Jan": 1,
+              "Feb": 2,
+              "Mar": 3,
+              "Apr": 4,
+              "May": 5,
+              "Jun": 6,
+              "Jul": 7,
+              "Aug": 8,
+              "Sep": 9,
+              "Oct": 10,
+              "Nov": 11,
+              "Dec": 12}
+    find_abrev = filter(lambda abrev_month: abrev_month in some_month_abrev_string, month_dict.keys())
+    for abrev in find_abrev:
+        some_month_abrev_string = some_month_abrev_string.replace(abrev, str(month_dict[abrev])+"-")
+    return some_month_abrev_string
+
+df['Month'] = df['Month'].map(month_abrev_to_full_name)
+# -
+
+df['Month'].unique()
+
+df['Year'].unique()
+
+df['Year'] = df['Year'].replace([None], 'Hi', inplace = True)
+
+df['new_publication_date'] = df['Month']+df['Year']
+
+df['Year'].unique()
+
+df
+
+df['Month']
+
+# +
+# df['Month'] = df.apply(lambda x: pd.to_datetime(df.Month, format='%B').dt.month if x['Month'] == "January" or "February" or "March" or "April" or "May" or "June" or "July" or "August" or "September" or "October" or "November" or "December" else x, axis = 1)
+
+# +
+# from time import strptime
+# month_number = strptime(df.Month, '%b').tm_mon
+# month_number
+# This doesn't take Series
+# -
+
+stop
+
+# +
+# df.rename(columns={'OBS' : 'Value'}, inplace=True)
+# #df['CDID'] = df['CDID'].map(lambda x: right(x,4)) #dropped for now
+# df['Publication Date'].replace('Q3  1990', 'Q3 1990', inplace=True)  #removing space
+# df['Publication Date'].replace('Q 2004', 'Q4 2004', inplace=True) #fixing typo
+# df['GDP Reference Period'].replace('Q2 1010', 'Q2 2010', inplace=True) #fixing typo
+# df["GDP Reference Period"] = df["GDP Reference Period"].apply(date_time)
+# df["Publication Date"] = df["Publication Date"].apply(date_time)
+# # df['Marker'].replace('..', 'unknown', inplace=True)
+# df = df.fillna('')
+# -
 
 # info = json.load(open('info.json')) 
 # codelistcreation = info['transform']['codelists'] 
@@ -140,4 +257,11 @@ for column in tidy:
 
 tidy['GDP Estimate Type'] = tidy['GDP Estimate Type'].replace({"m1": "M1", "m2": "M2", "qna": "QNA"})
 tidy
+# -
+
+
+df['Publication Date'].unique()
+
+df[6010:6015]
+
 
