@@ -27,9 +27,30 @@ info = json.load(open('info.json'))
 metadata = Scraper(seed="info.json")   
 metadata
 
-distribution = metadata.distributions[0]
-tabs = (t for t in distribution.as_databaker())
+# +
+# distribution = metadata.distributions[0]
+# distribution
 
+# +
+# distribution = metadata.distributions[0]
+# tabs = {tab.name: tab for tab in metadata.distribution(latest = True).as_databaker()}
+
+# +
+# list(tabs)
+# -
+
+
+
+# +
+# for name, tab in tabs.items():
+#     # if 'Cover_sheet' in name or 'Table_of_contents' in name:
+#     if (tab.name == '1989 - 1999') or (tab.name == '2000 - 2010') or (tab.name == '2011 - 2017') or (tab.name == '2018 -'):
+#         continue
+#     print(tab.name)
+
+# +
+# for tab in tabs:
+#     print(tab.name)
 
 # +
 def left(s, amount):
@@ -50,47 +71,40 @@ def date_time(time_value):
 
 # -
 
+distribution = metadata.distributions[0]
+tabs = (t for t in distribution.as_databaker())
+
 for tab in tabs:
        
         datasetTitle = 'ONS-GDP-at-current-prices-real-time-database-YBHA'
         
-        if (tab.name == '1989 - 1999') or (tab.name == '2000 - 2010') or (tab.name == '2011 - 2017') or (tab.name == '2018 -'):
+        if (tab.name == '1989 - 1999') or (tab.name == '2000 - 2010') or (tab.name == '2011 - 2017') or (tab.name == '2018 - '):
+            print(tab.name)
             
             seasonal_adjustment = 'SA'
 
-            
-            code = tab.excel_ref('B3')
+            vintage = tab.filter("Publication date and time period").fill(DOWN).is_not_blank().is_not_whitespace()
 
-            
-            vintage = tab.excel_ref('A6').expand(DOWN).is_not_blank() 
+            estimate_type_publication = tab.filter("Publication date and time period").fill(RIGHT).is_not_blank().is_not_whitespace()
 
-            
-            estimate_type = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
+            observations = vintage.waffle(estimate_type_publication).is_not_blank()
 
-            
-            publication = tab.excel_ref('B7').expand(RIGHT).is_not_blank()
-
-                
-            if (tab.name == '2011 - 2017') or (tab.name == '2018 -'):
-                estimate_type = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
-
-                
-                publication = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
-
-        
-            observations = publication.fill(DOWN).is_not_blank()
-        
             dimensions = [
                 HDim(vintage, 'GDP Reference Period', DIRECTLY, LEFT),
-                HDim(estimate_type, 'GDP Estimate Type', DIRECTLY, ABOVE),
-                HDim(publication, 'Publication Date', DIRECTLY, ABOVE),
-                #HDim(code, 'CDID', CLOSEST, ABOVE), #dropped for now
-                #HDimConst('Seasonal Adjustment', seasonal_adjustment), #dropped for now
+                HDim(estimate_type_publication, 'GDP Estimate Type Publication', DIRECTLY, ABOVE)
             ]
+            tidy_sheet = ConversionSegment(tab, dimensions, observations)
+            savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
+            tidied_sheets.append(tidy_sheet.topandas())
 
-            tidy_sheet = ConversionSegment(tab, dimensions, observations)        
-            #savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
 
+df = pd.concat(tidied_sheets, sort = True).fillna('')
+
+df
+
+df['GDP Estimate Type'] = df['GDP Estimate Type Publication']
+
+tidy_sheet
 
 df
 
