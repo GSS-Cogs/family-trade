@@ -130,6 +130,57 @@ df['GDP Estimate Type'].unique()
 #         print(df.columns)
 df[['Month', 'Year']] = df['Publication Date'].str.rsplit(pat = "-" ,n=1, expand = True)
 
+df
+
+# Got it
+check_condition = ~(df['Year'].isna())
+df['Year'].where(check_condition, df['Month'], inplace = True)
+
+df
+
+df['Month'].unique()
+
+df[['Month', 'Year']] = df['Month'].str.rsplit(pat = ' ' ,n=1, expand = True)
+
+df
+
+df[['again_month', 'again_year']] = df['Publication Date'].str.rsplit(pat = "-" ,n=1, expand = True)
+
+df
+
+# Got it
+check_condition = ~(df['Year'].isna())
+df['Year'].where(check_condition, df['again_year'], inplace = True)
+
+df
+
+df['again_month'] = df['again_month']+' '+df['again_year']
+
+df
+
+# +
+# stop
+
+# +
+# df
+
+# +
+# df = df.drop(columns = ['GDP Estimate Type Publication', 'again_month', 'again_year'])
+# -
+
+df
+
+# +
+# Year =[]
+
+# for i in df.Year:
+#     if df.loc[i, 'Year'] in ['None', 0]:
+#         Year.append(df.loc[i, 'Month'])
+#     else:
+#         Year.append(df.loc[i, 'Year'])
+
+# df['Year'] = Year
+
 # +
 # This doesn't make any sense or doesn't do what it is expected to do
 # df['Year'] = df['Year'].map(lambda x: x['Month'] if x['Year'] == None else x)
@@ -137,14 +188,6 @@ df[['Month', 'Year']] = df['Publication Date'].str.rsplit(pat = "-" ,n=1, expand
 
 # df = df.apply(lambda x: )
 df
-
-stop
-
-df[['Month', 'Year']] = df['Publication Date'].str.rsplit(pat = ' ' ,n=1, expand = True)
-
-df
-
-stop
 
 df['Month'].unique()
 # calendar.month_name[list(calendar.month_abbr).index(['Apr'])]
@@ -177,21 +220,21 @@ df['Month'].unique()
 
 # +
 def month_abrev_to_full_name(some_month_abrev_string):
-    month_dict = {"Jan": 1,
-              "Feb": 2,
-              "Mar": 3,
-              "Apr": 4,
-              "May": 5,
-              "Jun": 6,
-              "Jul": 7,
-              "Aug": 8,
-              "Sep": 9,
-              "Oct": 10,
-              "Nov": 11,
-              "Dec": 12}
+    month_dict = {"Jan": "Q1",
+              "Feb": "Q1",
+              "Mar": "Q1",
+              "Apr": "Q2",
+              "May": "Q2",
+              "Jun": "Q2",
+              "Jul": "Q3",
+              "Aug": "Q3",
+              "Sep": "Q3",
+              "Oct": "Q4",
+              "Nov": "Q4",
+              "Dec": "Q4"}
     find_abrev = filter(lambda abrev_month: abrev_month in some_month_abrev_string, month_dict.keys())
     for abrev in find_abrev:
-        some_month_abrev_string = some_month_abrev_string.replace(abrev, str(month_dict[abrev])+"-")
+        some_month_abrev_string = some_month_abrev_string.replace(abrev, str(month_dict[abrev]))
     return some_month_abrev_string
 
 df['Month'] = df['Month'].map(month_abrev_to_full_name)
@@ -201,9 +244,32 @@ df['Month'].unique()
 
 df['Year'].unique()
 
-df['Year'] = df['Year'].replace([None], 'Hi', inplace = True)
+df
 
-df['new_publication_date'] = df['Month']+df['Year']
+# +
+# stop
+
+# +
+# df['Year'] = df['Year'].replace([None], 'Hi', inplace = True)
+# -
+
+df['Publication Date'] = df['Month']+' '+df['Year']
+
+df
+
+stop
+
+df[['unwanted_month', 'unwanted_year']] = df['again_month'].str.rsplit(pat = ' ' ,n=1, expand = True)
+
+df
+
+df['unwanted_month'] = df['unwanted_month'].map(month_abrev_to_full_name)
+
+df['qtr'] = pd.to_datetime(df.unwanted_month).dt.quarter
+
+df
+
+stop
 
 df['Year'].unique()
 
