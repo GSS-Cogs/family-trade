@@ -25,8 +25,7 @@ tidied_sheets = []
 
 info = json.load(open('info.json')) 
 metadata = Scraper(seed="info.json")   
-metadata
-
+# metadata
 
 # +
 def left(s, amount):
@@ -84,7 +83,6 @@ df[['GDP Reference Period', 'Publication Date', 'GDP Estimate Type', 'OBS']]
 df['Publication Date'].replace('Q3  1990', 'Q3 1990', inplace=True)  #removing space
 df['Publication Date'].replace('Q 2004', 'Q4 2004', inplace=True)
 
-# df['GDP Reference Period'].unique()
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 
 df['GDP Estimate Type'].unique()
