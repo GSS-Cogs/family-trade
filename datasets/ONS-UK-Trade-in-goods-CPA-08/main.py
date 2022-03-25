@@ -18,18 +18,18 @@
 import json
 import pandas as pandas
 from gssutils import *
+from csvcubed.models.cube.qb.catalog import CatalogMetadata
 
 pd.options.mode.chained_assignment = None 
 pd.set_option('display.float_format', lambda x: '%.0f' % x) 
 
-cubes = Cubes('info.json')
-info = json.load(open('info.json'))
-landingPage = info['landingPage']
-metadata = Scraper(seed="info.json")
+# get first landing page details
+metadata = Scraper(seed = "info.json")
+# display(metadata) #  to see exactly the data we are loading
+
+# load export data
 distribution = metadata.distribution(latest = True)
-title = distribution.title
-distribution
-# -
+# display(distribution1)
 
 tabs = distribution.as_databaker()
 tidied_sheets = []
@@ -90,5 +90,7 @@ This publication includes a residual line which is used to account for any resid
 """
 # -
 
-cubes.add_cube(metadata, df, metadata.dataset.title)
-cubes.output_all()
+
+df.to_csv('observations.csv', index=False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
