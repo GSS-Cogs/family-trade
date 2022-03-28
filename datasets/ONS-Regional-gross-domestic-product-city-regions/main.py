@@ -119,7 +119,11 @@ df = df[['Year', 'Area Name', 'Area Type', 'Geography Code','Value','Measure Typ
 df = df.drop_duplicates()
 df.to_csv('observations.csv', index=False)
 # %%
+scraper.title = "Regional gross domestic product: city and enterprise regions"
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
+
+# %%
+scraper.title
 
 # %%
