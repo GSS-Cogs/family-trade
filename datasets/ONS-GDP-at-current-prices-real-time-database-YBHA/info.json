@@ -26,8 +26,9 @@
             },
             "GDP Estimate Type":{
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/gdp-estimate-type",
-                "value":"http://gss-data.org.uk/def/trade/concept/gdp-estimate-type/{+gdp_estimate_type}"
+                "new": {
+                  "codelist": "./codelists/gdp-estimate-type.csv-metadata.json"
+                }
             },
             "Publication Date": {
                 "type": "dimension",
