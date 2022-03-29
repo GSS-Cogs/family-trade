@@ -21,7 +21,7 @@
         "columns": {
             "GDP Reference Period": {
                 "type": "dimension",
-                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}"
             },
             "GDP Estimate Type":{
@@ -32,7 +32,7 @@
             },
             "Publication Date": {
                 "type": "dimension",
-                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+publication_date}"
             },
             "Value": {
