@@ -54,9 +54,7 @@ for tab in tabs:
         datasetTitle = 'ONS-GDP-at-current-prices-real-time-database-YBHA'
         
         if (tab.name == '1989 - 1999') or (tab.name == '2000 - 2010') or (tab.name == '2011 - 2017') or (tab.name == '2018 - '):
-            print(tab.name)
-            
-            seasonal_adjustment = 'SA'
+            # print(tab.name)
 
             vintage = tab.filter("Publication date and time period").fill(DOWN).is_not_blank().is_not_whitespace()
 
@@ -84,8 +82,6 @@ df['Publication Date'].replace('Q3  1990', 'Q3 1990', inplace=True)  #removing s
 df['Publication Date'].replace('Q 2004', 'Q4 2004', inplace=True)
 
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
-
-df['GDP Estimate Type'].unique()
 
 df[['Month', 'Year']] = df['Publication Date'].str.rsplit(pat = "-" ,n=1, expand = True)
 
@@ -137,9 +133,6 @@ df.drop_duplicates(subset = df.columns.difference(['Value']), inplace = True)
 duplicate_df = df[df.duplicated(['GDP Reference Period', 'Value', 'Publication Date',
        'GDP Estimate Type'], keep = False)]
 duplicate_df
-
-df["GDP Reference Period"] = df["GDP Reference Period"].apply(date_time)
-df["Publication Date"] = df["Publication Date"].apply(date_time)
 
 df[['GDP Reference Period', 'GDP Estimate Type', 'Publication Date', 'Value']]
 

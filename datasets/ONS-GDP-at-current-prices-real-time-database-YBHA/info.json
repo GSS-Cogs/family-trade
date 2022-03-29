@@ -25,7 +25,7 @@
                       "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                       "codelist": true
                  },
-                "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}"
+                "value": "http://reference.data.gov.uk/id/quarter"
             },
             "GDP Estimate Type":{
                 "type": "dimension",
@@ -39,7 +39,7 @@
                       "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                       "codelist": true
                  },
-                "value": "http://reference.data.gov.uk/id/{+publication_date}"
+                "value": "http://reference.data.gov.uk/id/quarter"
             },
             "Value": {
                 "type": "observations",
