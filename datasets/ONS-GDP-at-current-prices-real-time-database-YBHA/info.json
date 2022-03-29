@@ -22,7 +22,8 @@
             "GDP Reference Period": {
                 "type": "dimension",
                 "new": {
-                      "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                      "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                      "codelist": true
                  },
                 "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}"
             },
@@ -35,7 +36,8 @@
             "Publication Date": {
                 "type": "dimension",
                 "new": {
-                      "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod"
+                      "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                      "codelist": true
                  },
                 "value": "http://reference.data.gov.uk/id/{+publication_date}"
             },
