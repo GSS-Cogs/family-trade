@@ -22,7 +22,7 @@
             "GDP Reference Period": {
                 "type": "dimension",
                 "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}"
+                "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}"
             },
             "GDP Estimate Type":{
                 "type": "dimension",
@@ -32,9 +32,8 @@
             },
             "Publication Date": {
                 "type": "dimension",
-                "new": {
-                    "codelist": true
-                }
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+publication_date}"
             },
             "Value": {
                 "type": "observations",
