@@ -44,10 +44,10 @@
             "Value": {
                 "type": "observations",
                 "measure": {
-                  "label": "Current-Prices"
+                  "label": "Current Prices"
                 },
                 "unit": {
-                  "label": "GBP-Million"
+                  "label": "GBP Million"
                 }
             }
         },
