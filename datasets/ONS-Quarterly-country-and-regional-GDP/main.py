@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.3
+#       jupytext_version: 1.13.7
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,6 +17,13 @@ from gssutils import *
 import json
 import numpy as np
 
+df = pd.DataFrame()
+info = json.load(open('info.json'))
+metadata = Scraper(seed = 'info.json')
+metadata
+
+
+# +
 #Format Date/Quarter
 def left(s, amount):
     return s[:amount]
@@ -32,38 +39,35 @@ def date_time(date):
     else:
         return "Date Formatting Error"
 
-trace = TransformTrace()
-df = pd.DataFrame()
-cubes = Cubes("info.json")
-info = json.load(open('info.json'))
-scraper = Scraper(seed = 'info.json')
-scraper
+
 # -
 
-distribution = scraper.distribution(latest = True)
+distribution = metadata.distribution(latest = True)
+distribution
+
 datasetTitle = distribution.title
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
 
 for name, tab in tabs.items():
-    columns=['Period','Reference Area','Sector', 'Industry Section', 'Change Type', 'Measure Type''Marker']
-    trace.start(datasetTitle, tab, columns, distribution.downloadURL)
+    # columns=['Period','Reference Area','Sector', 'Industry Section', 'Change Type', 'Measure Type''Marker']
+
     if 'Contents' in name or 'NOTE' in name:
-        continue   
+        print(tab.name)
+        continue
+        
     elif tab.name == "Key Figures":
         reference_area = tab.excel_ref("B5").expand(RIGHT).is_not_blank()
-        trace.Reference_Area("Selected as all non-blank values from cell ref B5 going right/across.")
     else:
         reference_area = tab.name
-        trace.Reference_Area("Selected as the tab name.")
         
         #sector = tab.excel_ref("B5").expand(RIGHT).is_not_blank()
         #trace.Sector("Selected as all non-blank values from cell ref B5 going right/across.")
         
     industry_section = tab.excel_ref("B6").expand(RIGHT).is_not_blank()
-    trace.Industry_Section("Selected as all non-blank values from cell ref B6 going down")
     
     indicies_or_percentage = tab.excel_ref('A7').fill(DOWN).one_of(['Indices 2016=100','Percentage change, quarter on previous quarter', 'Percentage change, quarter on same quarter a year ago', 'Percentage change, year on year'])
-    period = tab.excel_ref('A9').expand(DOWN).is_not_blank() - indicies_or_percentage
+    period = tab.excel_ref('A9').expand(DOWN).is_not_blank() 
+    # - indicies_or_percentage
     observations = industry_section.fill(DOWN).is_not_blank()
                
     if tab.name == "Key Figures":                
@@ -75,8 +79,7 @@ for name, tab in tabs.items():
             HDim(indicies_or_percentage, "Unit", CLOSEST, ABOVE),
         ]
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        # trace.with_preview(tidy_sheet)
-        trace.store("combined_dataframe", tidy_sheet.topandas())
+
     else:                
         dimensions = [
             HDim(period, "Period", DIRECTLY, LEFT),
@@ -87,8 +90,6 @@ for name, tab in tabs.items():
         ]
 
         tidy_sheet = ConversionSegment(tab, dimensions, observations)
-        # trace.with_preview(tidy_sheet)
-        trace.store("combined_dataframe", tidy_sheet.topandas())
 
 map_regions = {
         "North East":"http://data.europa.eu/nuts/code/UKC",
@@ -107,7 +108,6 @@ map_regions = {
 }
 
 #Post Processing 
-df = trace.combine_and_trace(datasetTitle, "combined_dataframe")
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Reference Area"] = df["Reference Area"].map(lambda x: map_regions[x])
@@ -134,7 +134,3 @@ Any apparent inconsistencies between the index numbers and the percentage change
 scraper.dataset.description = comment + des
 scraper.dataset.comment = comment
 scraper.dataset.title = datasetTitle
-
-cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
-cubes.output_all()
-trace.render("spec_v1.html")
