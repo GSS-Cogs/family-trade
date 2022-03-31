@@ -47,14 +47,9 @@ distribution
 
 datasetTitle = distribution.title
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
-list(tabs)
+# list(tabs)
 
 total_tabs = {tab_name for tab_name in tabs}
-
-total_tabs
-
-for name, tab in tabs.items():
-    print(tab.name)
 
 tabs_name_to_process = ["Key Figures", "North East", "North West", "Yorkshire and The Humber",
 "East Midlands", "West Midlands", "East of England", "London", "South East", "South West",
@@ -63,30 +58,31 @@ tabs_name_to_process = ["Key Figures", "North East", "North West", "Yorkshire an
 if len(set(tabs_name_to_process)-(total_tabs)) != 0:
     raise ValueError(f"Aborting. A tab named{set(tabs_name_to_process)-(total_tabs)} required but not found")
 
-# +
-# for tab_name in tabs_name_to_process:
-#     if tab_name not in [x.name for x in tabs]:
-#         raise ValueError(f'Aborting. A tab named {tab_name} required but not found')
-
-#     tab = [x for x in tabs if x.name == tab_name]
-#     if tab_name == tabs_name_to_process[0]:
-#         print(tab_name.name)
-# -
-
 tidied_sheets =[]
 
 tab = tabs["Key Figures"]
-period = tab.filter("Section")
-savepreviewhtml(period, fname= tab.name + "Preview.html")
+footer = tab.filter(contains_string("1  Regional GDP is designated")).expand(DOWN)
+indicies_or_percentage = tab.filter("Section").fill(DOWN).one_of(['Indices 2016=100', 'Percentage change, quarter on previous quarter']).is_not_blank().is_not_whitespace()-footer
+unwanted = indicies_or_percentage|footer
+period = tab.filter("Section").fill(DOWN).is_not_blank().is_not_whitespace() - unwanted
+reference_area = tab.filter("Region").fill(RIGHT).is_not_blank().is_not_whitespace()
+industry_section = tab.filter("Section").fill(RIGHT).is_not_blank().is_not_whitespace()
+observations = period.waffle(industry_section)
+dimensions = [
+                HDim(period, "Period", DIRECTLY, LEFT),
+            HDim(reference_area, "Reference Area", DIRECTLY, ABOVE),
+            HDim(industry_section, "Industry Section", DIRECTLY, ABOVE),
+            HDim(indicies_or_percentage, "Measure Type", CLOSEST, ABOVE),
+            HDim(indicies_or_percentage, "Unit", CLOSEST, ABOVE),
+]
+tidy_sheet = ConversionSegment(tab, dimensions, observations)
+# savepreviewhtml(tidy_sheet, fname= tab.name + "Preview.html")
+tidied_sheets.append(tidy_sheet.topandas())
 
-stop
 
-for tab_name in tabs_name_to_process:
-    if tab_name == tabs_name_to_process[0]:
-        print(tab_name)
-        period = tab.filter("Section")
-        savepreviewhtml(period, fname= tab.name + "Preview.html")
-        
+# +
+# tidied_sheets
+# -
 
 stop
 
