@@ -177,9 +177,6 @@ df['BOP Services'].unique()
 df['CDID'].unique()
 
 # %%
-# cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
-# cubes.output_all()
-# trace.render("spec_v1.html")
 
 df.to_csv('observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
