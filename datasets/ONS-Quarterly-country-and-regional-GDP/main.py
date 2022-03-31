@@ -47,6 +47,48 @@ distribution
 
 datasetTitle = distribution.title
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
+list(tabs)
+
+total_tabs = {tab_name for tab_name in tabs}
+
+total_tabs
+
+for name, tab in tabs.items():
+    print(tab.name)
+
+tabs_name_to_process = ["Key Figures", "North East", "North West", "Yorkshire and The Humber",
+"East Midlands", "West Midlands", "East of England", "London", "South East", "South West",
+"England", "Wales", "Extra-Regio"]
+
+if len(set(tabs_name_to_process)-(total_tabs)) != 0:
+    raise ValueError(f"Aborting. A tab named{set(tabs_name_to_process)-(total_tabs)} required but not found")
+
+# +
+# for tab_name in tabs_name_to_process:
+#     if tab_name not in [x.name for x in tabs]:
+#         raise ValueError(f'Aborting. A tab named {tab_name} required but not found')
+
+#     tab = [x for x in tabs if x.name == tab_name]
+#     if tab_name == tabs_name_to_process[0]:
+#         print(tab_name.name)
+# -
+
+tidied_sheets =[]
+
+tab = tabs["Key Figures"]
+period = tab.filter("Section")
+savepreviewhtml(period, fname= tab.name + "Preview.html")
+
+stop
+
+for tab_name in tabs_name_to_process:
+    if tab_name == tabs_name_to_process[0]:
+        print(tab_name)
+        period = tab.filter("Section")
+        savepreviewhtml(period, fname= tab.name + "Preview.html")
+        
+
+stop
 
 for name, tab in tabs.items():
     # columns=['Period','Reference Area','Sector', 'Industry Section', 'Change Type', 'Measure Type''Marker']
