@@ -47,7 +47,7 @@ distribution
 
 datasetTitle = distribution.title
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
-# list(tabs)
+list(tabs)
 
 total_tabs = {tab_name for tab_name in tabs}
 
@@ -69,7 +69,7 @@ reference_area = tab.filter("Region").fill(RIGHT).is_not_blank().is_not_whitespa
 industry_section = tab.filter("Section").fill(RIGHT).is_not_blank().is_not_whitespace()
 observations = period.waffle(industry_section)
 dimensions = [
-                HDim(period, "Period", DIRECTLY, LEFT),
+            HDim(period, "Period", DIRECTLY, LEFT),
             HDim(reference_area, "Reference Area", DIRECTLY, ABOVE),
             HDim(industry_section, "Industry Section", DIRECTLY, ABOVE),
             HDim(indicies_or_percentage, "Measure Type", CLOSEST, ABOVE),
@@ -79,6 +79,33 @@ tidy_sheet = ConversionSegment(tab, dimensions, observations)
 # savepreviewhtml(tidy_sheet, fname= tab.name + "Preview.html")
 tidied_sheets.append(tidy_sheet.topandas())
 
+
+for name, tab in tabs.items():
+    if 'Important information' in name or 'Contents' in name or 'Key Figures' in name:
+        continue
+    # print(tab.name)
+
+    footer = tab.filter(contains_string("1  Regional GDP is designated")).expand(DOWN)
+    indicies_or_percentage = tab.filter("Section").fill(DOWN).one_of(["Percentage change, quarter on previous quarter"]).is_not_blank().is_not_whitespace()-footer
+    unwanted = indicies_or_percentage|footer
+    period = tab.filter("Section").fill(DOWN).is_not_blank().is_not_whitespace()-unwanted
+    reference_area = tab.name
+    industry_section = tab.filter("Section").fill(RIGHT).is_not_blank().is_not_whitespace()
+    observations = period.waffle(industry_section)
+    # savepreviewhtml(observations, fname= tab.name + "Preview.html")
+    dimensions = [
+            HDim(period, "Period", DIRECTLY, LEFT),
+            HDimConst("Reference Area", reference_area),
+            HDim(industry_section, "Industry Section", DIRECTLY, ABOVE),
+            HDim(indicies_or_percentage, "Measure Type", CLOSEST, ABOVE),
+            HDim(indicies_or_percentage, "Unit", CLOSEST, ABOVE),
+    ]
+    tidy_sheet = ConversionSegment(tab, dimensions, observations)
+    # savepreviewhtml(tidy_sheet, fname= tab.name + "Preview.html")
+    tidied_sheets.append(tidy_sheet.topandas())    
+
+df = pd.concat(tidied_sheets, sort = True).fillna('')
+df
 
 # +
 # tidied_sheets
