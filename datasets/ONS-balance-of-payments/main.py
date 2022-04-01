@@ -182,6 +182,11 @@ df['CDID'].unique()
 
 # %%
 
+# TODO: add unit column and check with santhosh monday how to add values in there. Does it come from the measure type codelist since we have several types?
+df["Unit"] = ""
+
+#%%
+
 df.to_csv('observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
