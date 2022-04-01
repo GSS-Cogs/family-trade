@@ -107,84 +107,49 @@ for name, tab in tabs.items():
 df = pd.concat(tidied_sheets, sort = True).fillna('')
 df
 
-# +
-# tidied_sheets
-# -
-
-stop
-
-for name, tab in tabs.items():
-    # columns=['Period','Reference Area','Sector', 'Industry Section', 'Change Type', 'Measure Type''Marker']
-
-    if 'Contents' in name or 'NOTE' in name:
-        print(tab.name)
-        continue
-        
-    elif tab.name == "Key Figures":
-        reference_area = tab.excel_ref("B5").expand(RIGHT).is_not_blank()
-    else:
-        reference_area = tab.name
-        
-        #sector = tab.excel_ref("B5").expand(RIGHT).is_not_blank()
-        #trace.Sector("Selected as all non-blank values from cell ref B5 going right/across.")
-        
-    industry_section = tab.excel_ref("B6").expand(RIGHT).is_not_blank()
-    
-    indicies_or_percentage = tab.excel_ref('A7').fill(DOWN).one_of(['Indices 2016=100','Percentage change, quarter on previous quarter', 'Percentage change, quarter on same quarter a year ago', 'Percentage change, year on year'])
-    period = tab.excel_ref('A9').expand(DOWN).is_not_blank() 
-    # - indicies_or_percentage
-    observations = industry_section.fill(DOWN).is_not_blank()
-               
-    if tab.name == "Key Figures":                
-        dimensions = [
-            HDim(period, "Period", DIRECTLY, LEFT),
-            HDim(reference_area, "Reference Area", DIRECTLY, ABOVE),
-            HDim(industry_section, "Industry Section", DIRECTLY, ABOVE),
-            HDim(indicies_or_percentage, "Measure Type", CLOSEST, ABOVE),
-            HDim(indicies_or_percentage, "Unit", CLOSEST, ABOVE),
-        ]
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)
-
-    else:                
-        dimensions = [
-            HDim(period, "Period", DIRECTLY, LEFT),
-            HDimConst("Reference Area", reference_area),
-            HDim(industry_section, "Industry Section", DIRECTLY, ABOVE),
-            HDim(indicies_or_percentage, "Measure Type", CLOSEST, ABOVE),
-            HDim(indicies_or_percentage, "Unit", CLOSEST, ABOVE),
-        ]
-
-        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+df['Reference Area'].unique()
 
 map_regions = {
-        "North East":"http://data.europa.eu/nuts/code/UKC",
-        "North West":"http://data.europa.eu/nuts/code/UKD",
-        "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
-        "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
-        "East Midlands":"http://data.europa.eu/nuts/code/UKF",
-        "West Midlands":"http://data.europa.eu/nuts/code/UKG",
-        "East of England":"http://data.europa.eu/nuts/code/UKH",
-        "London":"http://data.europa.eu/nuts/code/UKI",
-        "South East":"http://data.europa.eu/nuts/code/UKJ",
-        "South West":"http://data.europa.eu/nuts/code/UKK",
-        "England":"http://statistics.data.gov.uk/id/statistical-geography/E92000001",
-        "Wales":"http://data.europa.eu/nuts/code/UKL",
-        "Extra-Regio":"http://data.europa.eu/nuts/code/UKZ"
+        "North East":"UKC",
+        "North West":"UKD",
+        "Yorkshire and The Humber":"UKE",
+        "Yorkshire and The Humber":"UKE",
+        "East Midlands":"UKF",
+        "West Midlands":"UKG",
+        "East of England":"UKH",
+        "London":"UKI",
+        "South East":"UKJ",
+        "South West":"UKK",
+        "England":"E92000001", # NUTS code for UK needs to be changed
+        "Wales":"UKL",
+        "Extra-Regio":"UKZ"
 }
 
-#Post Processing 
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
-df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Reference Area"] = df["Reference Area"].map(lambda x: map_regions[x])
-df['Industry Section'] = df['Industry Section'].map(lambda x: pathify(x))
+
+df['Reference Area'].unique()
+
+df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Period"] =  df["Period"].apply(date_time)
-df['Measure Type'] = df['Measure Type'].str.rstrip()
-df['Measure Type'] = df['Measure Type'].apply(lambda x: 'y-on-y-delta-gdp-from-gva' if 'Percentage change, year on year' in x else 
-                                      ('q-on-q-delta-gdp-from-gva' if 'Percentage change, quarter on previous quarter' in x else 
-                                       ('q-on-last-year-q-delta-gdp-from-gva' if 'Percentage change, quarter on same quarter a year ago' in x else 'gdp-from-gva')))
-df['Unit']= df['Unit'].str.split(" ", n = 1, expand = True) 
+
+df["Period"]
+
+df['Measure Type'].unique()
+
+# 'Indices 2016=100'needs to be changed
+df['Measure Type'] = df['Measure Type'].apply(lambda x: 'q-on-q-delta-gdp-from-gva' if 'Percentage change, quarter on previous quarter' in x else 'gdp-from-gva')
+
+df['Measure Type'].unique()
+
+df['Unit'].unique()
+
 df['Unit']= df['Unit'].apply(lambda x: 'percentage' if 'Percentage' in x else 
                                       ('indices' if 'Indices' in x else x ))
+
+df['Unit'].unique()
+
+df.rename(columns={'OBS' : 'Value'}, inplace=True)
+
 df = df[['Period', 'Reference Area', 'Industry Section', 'Measure Type', 'Unit', 'Value']]
 df
 
@@ -196,6 +161,22 @@ Indices reflect values measured at basic prices, which exclude taxes less subsid
 Estimates cannot be regarded as accurate to the last digit shown.
 Any apparent inconsistencies between the index numbers and the percentage change are due to rounding.
 """
-scraper.dataset.description = comment + des
-scraper.dataset.comment = comment
-scraper.dataset.title = datasetTitle
+metadata.dataset.description = comment + des
+metadata.dataset.comment = comment
+metadata.dataset.title = datasetTitle
+
+df.columns
+
+duplicate_df = df[df.duplicated(['Period', 'Reference Area', 'Industry Section', 'Measure Type', 'Unit',
+       'Value'], keep = False)]
+duplicate_df
+
+df.drop_duplicates(subset = df.columns.difference(['Value']), inplace = True)
+
+duplicate_df = df[df.duplicated(['Period', 'Reference Area', 'Industry Section', 'Measure Type', 'Unit',
+       'Value'], keep = False)]
+duplicate_df
+
+df.to_csv("observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
