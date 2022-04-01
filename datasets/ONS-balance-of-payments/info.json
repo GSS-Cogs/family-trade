@@ -23,52 +23,39 @@
             "Period": {
                 "type": "dimension",
                 "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{period}"
+                "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "CDID": {
                 "type": "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
-                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{+cdid}"
             },
             "Seasonal Adjustment": {
                 "type": "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{+seasonal_adjustment}"
             },
             "Flow Directions": {
                 "type": "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow_directions}"
             },
             "Measure Type": {
-                "type": "dimension",
-                "uri": "http://purl.org/linked-data/cube#measureType",
-                "value": "http://gss-data.org.uk/def/trade/measure/{measure_type}",
-                "types": [
-                    "summary-of-balance-of-payments",
-                    "current-account",
-                    "current-account-excluding-precious-metals",
-                    "current-account-transactions-with-the-european-union-eu-and-with-non-eu-countries",
-                    "summary-of-international-investment-position-financial-account-and-investment-income",
-                    "trade-in-goods",
-                    "trade-in-services",
-                    "primary-income",
-                    "secondary-income",
-                    "capital-account",
-                    "financial-account",
-                    "international-investment-position"
-                ]
+                "type": "measures",
+                "value": "http://gss-data.org.uk/def/measure/{+measure_type}"
             },
             "Value": {
                 "type": "observations",
-                "datatype": "double",
-                "measure": "http://gss-data.org.uk/def/measure/current-prices",
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+                "datatype": "double"
+            },
+            "Unit": {
+                "type": "units",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+unit}"
             },
             "Marker": {
                 "type": "attribute",
                 "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "value": "http://gss-data.org.uk/def/concept/trade/markers/{+marker}"
             }
         }
     },
