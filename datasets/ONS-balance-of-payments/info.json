@@ -30,6 +30,12 @@
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
                 "value": "http://gss-data.org.uk/def/trade/concept/cdid/{+cdid}"
             },
+            "BOP Services": {
+                "type": "dimension",
+                "new": {
+                    "codelist": "./codelists/bop-services.csv-metadata.json"
+                }               
+            },
             "Seasonal Adjustment": {
                 "type": "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
