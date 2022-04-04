@@ -24,9 +24,9 @@
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Reference Area": {
-                "type":"dimension",
+                "type": "dimension",
                 "new": {
-                    "codelist": true
+                  "codelist": "./codelists/reference-area.csv-metadata.json"
                 }
             },
             "Industry Section": {
