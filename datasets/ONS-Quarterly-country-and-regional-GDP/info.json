@@ -27,7 +27,7 @@
             "Reference Area": {
                 "type": "dimension",
                 "new": {
-                  "codelist": "./codelists/reference-area.csv-metadata.json"
+                    "codelist": true
                 }
             },
             "Industry Section": {
