@@ -24,6 +24,37 @@ bop_services = {
         "Government":"12",
 }
 
+unit_values_draft = {
+ "summary-of-balance-of-payments": "£ million"
+ ,"Current account":  "£ million"
+ ,"Current account excluding precious metals1":  "£ million"
+ ,"Current account Transactions with the European Union (EU) and with non-EU countries":  "£ million"
+ ,"Summary of international investment position, financial account and investment income":  "£ billion"
+ ,"Trade in goods": "£ million"
+ ,"Trade in services":  "£ million"
+ ,"Primary income":  "£ million"
+ ,"Secondary income":  "£ million"
+ ,"Capital account":  "£ million"
+ ,"Financial account1,2":  "£ million"
+ ,"International investment position1":  "£ billion"
+}
+
+unit_values = {
+"summary-of-balance-of-payments": "£ million"
+,"current-account": "£ million"
+,"current-account-excluding-precious-metals": "£ million"
+,"current-account-transactions-with-the-european-union-eu-and-with-non-eu-countries": "£ million"
+,"summary-of-international-investment-position-financial-account-and-investment-income": "£ billion"
+,"trade-in-goods": "£ million"
+,"trade-in-services": "£ million"
+,"primary-income": "£ million"
+,"secondary-income": "£ million"
+,"capital-account": "£ million"
+,"financial-account": "£ million"
+,"international-investment-position":"£ billion"
+}
+
+
 
 # %%
 # Reusable Functions
@@ -183,7 +214,7 @@ df['CDID'].unique()
 # %%
 
 # TODO: add unit column and check with santhosh monday how to add values in there. Does it come from the measure type codelist since we have several types?
-df["Unit"] = ""
+#df["Unit"] = ""
 
 #%%
 
