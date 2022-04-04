@@ -1,4 +1,5 @@
 {
+    "$schema" : "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons-quarterly-country-and-regional-gdp",
     "title": "Quarterly country and regional GDP",
     "publisher": "Office for National Statistics",
