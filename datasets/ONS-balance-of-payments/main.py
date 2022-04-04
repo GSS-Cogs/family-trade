@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
-# %%
+# +
 from gssutils import *
 import json
 import numpy as np
 
 
 info_json_file = 'info.json'
+# -
 
-# %%
 bop_services = {
         "Total":"0",
         "Manufacturing and maintenance services":"1+2",
@@ -24,39 +24,8 @@ bop_services = {
         "Government":"12",
 }
 
-unit_values_draft = {
- "summary-of-balance-of-payments": "£ million"
- ,"Current account":  "£ million"
- ,"Current account excluding precious metals1":  "£ million"
- ,"Current account Transactions with the European Union (EU) and with non-EU countries":  "£ million"
- ,"Summary of international investment position, financial account and investment income":  "£ billion"
- ,"Trade in goods": "£ million"
- ,"Trade in services":  "£ million"
- ,"Primary income":  "£ million"
- ,"Secondary income":  "£ million"
- ,"Capital account":  "£ million"
- ,"Financial account1,2":  "£ million"
- ,"International investment position1":  "£ billion"
-}
 
-unit_values = {
-"summary-of-balance-of-payments": "£ million"
-,"current-account": "£ million"
-,"current-account-excluding-precious-metals": "£ million"
-,"current-account-transactions-with-the-european-union-eu-and-with-non-eu-countries": "£ million"
-,"summary-of-international-investment-position-financial-account-and-investment-income": "£ billion"
-,"trade-in-goods": "£ million"
-,"trade-in-services": "£ million"
-,"primary-income": "£ million"
-,"secondary-income": "£ million"
-,"capital-account": "£ million"
-,"financial-account": "£ million"
-,"international-investment-position":"£ billion"
-}
-
-
-
-# %%
+# +
 # Reusable Functions
 class is_one_of(object):
     def __init__(self, allowed):
@@ -84,13 +53,13 @@ def date_time(date: str) -> str:
         return 'quarter/' + left(date,4) + '-' + right(date,2)
     else:
         return "Date Formatting Error Unknown"
-# %%
+# +
 
 
 # get first landing page details
 metadata = Scraper(seed = info_json_file)
 # display(metadata) #  to see exactly the data we are loading
-# %%
+# +
 
 
 distribution = metadata.distribution(latest = True)
@@ -101,12 +70,12 @@ datasetTitle = distribution.title
 # keep tabs we're interested in. The Annex A and Annex B tabs weren't in  previous code so maybe new additions?
 tabs = [x for x in tabs if x.name not in ('Index', 'Records','Table R1', 'Table R2','Table R3','Annex A', 'Annex B') ]
 
-# In[23]:
+# +
 
 # to collate the transformed files later
 tidied_sheets = []
+# -
 
-# %%
 for tab in tabs:
     columns=['Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Measure Type', 'Marker']
 
@@ -148,10 +117,11 @@ for tab in tabs:
     tidy_sheet = cs.topandas()
     tidied_sheets.append(tidy_sheet)
 
- # %%
 #convert separate tabs into one dataframe
 df = pd.concat(tidied_sheets, sort = True).fillna('')
-# %%
+df
+
+# +
 #Post Processing
 
 df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
@@ -175,51 +145,56 @@ df = df.replace({'Measure Type': {
     'current-account-excluding-precious-metals1': 'current-account-excluding-precious-metals', 
     'international-investment-position1': 'international-investment-position'}})
 df = df.replace({"BOP Services": {
-    "net-errors-and-omissions2": "net-errors-and-omissions",
-    "exports-of-services6": "exports-of-services",
-    "exports-of-goods6": "exports-of-goods",
-    "total-exports-of-goods-and-services6": "total-exports-of-goods-and-services",
-    "imports-of-goods6": "imports-of-goods",
-    "imports-of-services6": "imports-of-services",
-    "total-imports-of-goods-and-services6": "total-imports-of-goods-and-services",
-    "trade-in-goods6": "trade-in-goods",
-    "trade-in-services6": "trade-in-services",
-    "total-trade-in-goods-and-services6": "total-trade-in-goods-and-services",
-    "of-which-eu-institutions1": "of-which-eu-institutions"
-}})
+     "net-errors-and-omissions2": "net-errors-and-omissions",
+     "exports-of-services6": "exports-of-services",
+     "exports-of-goods6": "exports-of-goods",
+     "total-exports-of-goods-and-services6": "total-exports-of-goods-and-services",
+     "imports-of-goods6": "imports-of-goods",
+     "imports-of-services6": "imports-of-services",
+     "total-imports-of-goods-and-services6": "total-imports-of-goods-and-services",
+     "trade-in-goods6": "trade-in-goods",
+     "trade-in-services6": "trade-in-services",
+     "total-trade-in-goods-and-services6": "total-trade-in-goods-and-services",
+     "of-which-eu-institutions1": "of-which-eu-institutions"
+ }})
+# -
 
-# %%
+df.columns
+
 # TODO: i think i remember Andrew saying not to drop duplicates as if there are any something is wrong. To the PR reviewer - should i remove it?
-df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Measure Type', 'Marker' ,'Value',]].drop_duplicates()
+#df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Measure Type', 'Marker' ,'Value',]].drop_duplicates()
 df
 
-# %%
 df['Period'].unique()
 
-# %%
 df['Measure Type'].unique()
 
-# %%
 df['Flow Directions'].unique()
 
-# %%
 df['Seasonal Adjustment'].unique()
 
-# %%
 df['BOP Services'].unique()
 
-# %%
 df['CDID'].unique()
 
-# %%
+df.columns
 
-# TODO: add unit column and check with santhosh monday how to add values in there. Does it come from the measure type codelist since we have several types?
-#df["Unit"] = ""
+df['Measure Type'].unique()
 
-#%%
+
+
+# TODO: add unit column and check with santhosh monday how to add values in there
+df["Unit"] = "gbp-million"
+
+df = df.drop("Year",  axis = 1)
+
+df.head()
+
+# +
 
 df.to_csv('observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
+# -
 
-# %%
+
