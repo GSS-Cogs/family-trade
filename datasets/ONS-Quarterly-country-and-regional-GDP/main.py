@@ -20,8 +20,7 @@ import numpy as np
 df = pd.DataFrame()
 info = json.load(open('info.json'))
 metadata = Scraper(seed = 'info.json')
-metadata
-
+# metadata
 
 # +
 #Format Date/Quarter
@@ -43,11 +42,11 @@ def date_time(date):
 # -
 
 distribution = metadata.distribution(latest = True)
-distribution
+# distribution
 
 datasetTitle = distribution.title
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
-list(tabs)
+# list(tabs)
 
 total_tabs = {tab_name for tab_name in tabs}
 
@@ -105,9 +104,7 @@ for name, tab in tabs.items():
     tidied_sheets.append(tidy_sheet.topandas())    
 
 df = pd.concat(tidied_sheets, sort = True).fillna('')
-df
-
-df['Reference Area'].unique()
+# df
 
 map_regions = {
         "North East":"UKC",
@@ -120,38 +117,28 @@ map_regions = {
         "London":"UKI",
         "South East":"UKJ",
         "South West":"UKK",
-        "England":"E92000001", # NUTS code for UK needs to be changed
+        "England":"E92000001",
         "Wales":"UKL",
         "Extra-Regio":"UKZ"
 }
 
 df["Reference Area"] = df["Reference Area"].map(lambda x: map_regions[x])
 
-df['Reference Area'].unique()
-
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Period"] =  df["Period"].apply(date_time)
-
-df["Period"]
 
 df['Measure Type'].unique()
 
 # 'Indices 2016=100'needs to be changed
 df['Measure Type'] = df['Measure Type'].apply(lambda x: 'q-on-q-delta-gdp-from-gva' if 'Percentage change, quarter on previous quarter' in x else 'gdp-from-gva')
 
-df['Measure Type'].unique()
-
-df['Unit'].unique()
-
 df['Unit']= df['Unit'].apply(lambda x: 'percentage' if 'Percentage' in x else 
                                       ('indices' if 'Indices' in x else x ))
-
-df['Unit'].unique()
 
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 
 df = df[['Period', 'Reference Area', 'Industry Section', 'Measure Type', 'Unit', 'Value']]
-df
+# df
 
 #additional scraper info needed
 comment = "Quarterly economic activity within Wales and the nine English regions (North East, North West, Yorkshire and The Humber, East Midlands, West Midlands, East of England, London, South East, South West) and Extra-Regio."
@@ -165,14 +152,15 @@ metadata.dataset.description = comment + des
 metadata.dataset.comment = comment
 metadata.dataset.title = datasetTitle
 
-df.columns
-
+# Check if there are any duplicates
 duplicate_df = df[df.duplicated(['Period', 'Reference Area', 'Industry Section', 'Measure Type', 'Unit',
        'Value'], keep = False)]
 duplicate_df
 
+# Drop duplicates
 df.drop_duplicates(subset = df.columns.difference(['Value']), inplace = True)
 
+# Check if there are any duplicates still after droping them
 duplicate_df = df[df.duplicated(['Period', 'Reference Area', 'Industry Section', 'Measure Type', 'Unit',
        'Value'], keep = False)]
 duplicate_df
