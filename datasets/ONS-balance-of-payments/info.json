@@ -25,6 +25,11 @@
                 "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
+            "Geography":{
+                "type":"dimension",
+                "uri":"http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://reference.data.gov.uk/id/{+geography}"
+            },
             "CDID": {
                 "type": "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
