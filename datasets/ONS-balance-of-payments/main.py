@@ -59,12 +59,14 @@ def date_time(date: str) -> str:
 # get first landing page details
 metadata = Scraper(seed = info_json_file)
 # display(metadata) #  to see exactly the data we are loading
-# +
-
-
+#metadata
+# -
 distribution = metadata.distribution(latest = True)
+#distribution
+
 tabs = distribution.as_databaker()
 
+# +
 datasetTitle = distribution.title
 
 # keep tabs we're interested in. The Annex A and Annex B tabs weren't in  previous code so maybe new additions?
@@ -77,14 +79,12 @@ tidied_sheets = []
 # -
 
 for tab in tabs:
-    columns=['Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Measure Type', 'Marker']
-
     # example value: "BOKI"
     cdid = tab.excel_ref('C5').expand(DOWN).is_not_blank()
 
     year = tab.excel_ref('C4').expand(RIGHT).is_not_blank()
-    quarter = tab.excel_ref('D5').expand(RIGHT)
 
+    quarter = tab.excel_ref('D5').expand(RIGHT)
     flow = tab.excel_ref('B1').expand(DOWN).filter(is_one_of(["Imports", "Exports", "Balances", "Credits", "Debits", "Balances (net transactions)"])) | tab.excel_ref('A1')
     
     seasonal_adjustment = tab.excel_ref('B').filter(is_one_of(["Seasonally adjusted", "Not seasonally adjusted"])) | tab.excel_ref('A1')
@@ -94,7 +94,7 @@ for tab in tabs:
     services = tab.excel_ref('B').is_not_blank() - flow
     services = services - tab.excel_ref('B1').expand(UP)
     Currency = tab.excel_ref('N3')
-    
+
     if tab.name == 'Table B' or tab.name == 'Table BX':
         observations = services.waffle(year).is_not_blank() - tab.excel_ref('B67').expand(RIGHT).expand(DOWN)
     else:
@@ -111,10 +111,10 @@ for tab in tabs:
     ]
     cs = ConversionSegment(tab, dimensions, observations)
 
-    # # create preview files of each tabs data
-    # savepreviewhtml(cs, fname= tab.name + "PREVIEW.html")
+    # create preview files of each tabs data
     
     tidy_sheet = cs.topandas()
+    # savepreviewhtml(services, fname= tab.name + "PREVIEW.html")
     tidied_sheets.append(tidy_sheet)
 
 #convert separate tabs into one dataframe
@@ -125,21 +125,32 @@ df
 #Post Processing
 
 df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
+
 df['Year'] = df['Year'].astype(str).replace('\.0', '', regex=True)
 df['Year'] = df['Year'].str.strip()
+
+
 df['Quarter'] = df['Quarter'].str.strip()
 df['Period'] = df['Year'] + df['Quarter']
 df["Period"] =  df["Period"].apply(date_time)
+
+
 df['CDID'] = df['CDID'].str.strip()
+
+
 df["Flow Directions"].fillna('not-applicable', inplace=True)
+
+
 for column in df:
     if column in ('Measure Type', 'Flow Directions', 'BOP Services'):
         df[column] = df[column].str.strip()
         df[column] = df[column].map(lambda x: pathify(x))
+
 df = df.replace({'Flow Directions' : {'balances-net-transactions' : 'balances', 'd' : 'not-applicable', 'j' : 'not-applicable', 'k' : 'not-applicable' }})
-df = df.replace({'Marker' : {'-' : 'unknown'}})
+df = df.replace({'Marker' : {' -' : 'unknown'}})
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted' : 'NSA', ' K' : 'NSA' }})
 df["Seasonal Adjustment"].fillna('nsa', inplace=True)
+
 df = df.replace({'Measure Type': {
     'financial-account1-2': 'financial-account', 
     'current-account-excluding-precious-metals1': 'current-account-excluding-precious-metals', 
@@ -157,44 +168,35 @@ df = df.replace({"BOP Services": {
      "total-trade-in-goods-and-services6": "total-trade-in-goods-and-services",
      "of-which-eu-institutions1": "of-which-eu-institutions"
  }})
+
+# +
+# TODO: i think i remember Andrew saying not to drop duplicates as if there are any something is wrong. To the PR reviewer - should i remove it?
+# df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Measure Type', 'Marker' ,'Geography', 'Quarter', 'Year', 'Value',]].drop_duplicates()
+# df
 # -
 
-df.columns
+duplicated_df = df[df.duplicated(['BOP Services', 'CDID', 'Marker', 'Flow Directions', 'Geography',
+       'Measure Type', 'Quarter', 'Seasonal Adjustment', 'Year',
+       'Period', 'Value'], keep = False)]
+duplicated_df.sort_values(by = 'Value').to_csv("duplicates.csv")
 
-# TODO: i think i remember Andrew saying not to drop duplicates as if there are any something is wrong. To the PR reviewer - should i remove it?
-#df = df[[ 'Period', 'CDID', 'Seasonal Adjustment', 'BOP Services', 'Flow Directions', 'Measure Type', 'Marker' ,'Value',]].drop_duplicates()
-df
+df.drop_duplicates(subset = df.columns.difference(["Value"]), inplace = True)
 
-df['Period'].unique()
+duplicated_df = df[df.duplicated(['BOP Services', 'CDID', 'Marker', 'Flow Directions', 'Geography',
+       'Measure Type', 'Quarter', 'Seasonal Adjustment', 'Year',
+       'Period', 'Value'], keep = False)]
+duplicated_df
 
-df['Measure Type'].unique()
-
-df['Flow Directions'].unique()
-
-df['Seasonal Adjustment'].unique()
-
-df['BOP Services'].unique()
-
-df['CDID'].unique()
-
-df.columns
-
-df['Measure Type'].unique()
-
-
-
-# TODO: add unit column and check with santhosh monday how to add values in there
 df["Unit"] = "gbp-million"
 
-df = df.drop("Year",  axis = 1)
+# TODO: add unit column and check with santhosh monday how to add values in there
+df["Unit"] = df.apply(lambda x: "gbp-billion" if x['Measure Type'] == 'summary-of-international-investment-position-financial-account-and-investment-income' 
+                        else "gbp-billion" if x['Measure Type'] == 'international-investment-position' else x['Unit'], axis = 1)
 
-df.head()
+df = df.drop(columns = ["Year", "Quarter"],  axis = 1)
 
 # +
 
 df.to_csv('observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
-# -
-
-
