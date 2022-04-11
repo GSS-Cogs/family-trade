@@ -16,42 +16,52 @@
         "airtable": "reczfd6qupE77fzEV",
         "main_issue": 18,
         "columns": {
+            "Period": {
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            },
             "CDID": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
+                "type" : "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
                 "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
             },
-            "Period": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}",
-                "codelist": false
-            },
             "CPA 2008": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
+                "type" : "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "value" : "http://gss-data.org.uk/def/trade/concept/cpa-2008/{cpa_2008}"
             },
             "ONS Partner Geography": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
+                "type" : "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
                 "value": "http://gss-data.org.uk/def/concept/cl-area/{ons_partner_geography}"
             },
             "Flow Directions": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "type" : "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
             },
             "Seasonal Adjustment": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
+                "type" : "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
                 "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
             },
             "International Trade Basis": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
+                "type" : "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
                 "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/trade-in-goods",
+                "type": "observations",
                 "datatype": "integer"
             },
-            "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+            "Measure Type": {
+                "type": "measures",
+                "value": "http://gss-data.org.uk/def/measure/trade-in-goods"
+            },
+            "Unit": {
+                "type": "units",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
             }
         }
     },
