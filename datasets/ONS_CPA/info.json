@@ -28,8 +28,8 @@
             },
             "CPA 2008": {
                 "type" : "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/product",
-                "value" : "http://gss-data.org.uk/def/trade/concept/cpa-2008/{cpa_2008}"
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/cpa",
+                "value" : "http://gss-data.org.uk/def/trade/concept/product/{cpa_2008}"
             },
             "ONS Partner Geography": {
                 "type" : "dimension",
