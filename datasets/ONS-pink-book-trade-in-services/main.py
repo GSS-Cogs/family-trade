@@ -71,6 +71,7 @@ df = df[(df['CDID'] != 'FJOW') &
 # Temp remove CWVK & CWVL as we do not have a reference code for it, have asked BAs to look into it (appeared in 2019 publication)
 #df = df[(df['CDID'] != 'CWVK') & (df['CDID'] != 'CWVL')]
 # -
+df = df[df['Pink Book Services'].isnull() == False]
 # %%
 df['Marker'] = df['DATAMARKER'].map(
     lambda x: {'NA': 'not-available',
