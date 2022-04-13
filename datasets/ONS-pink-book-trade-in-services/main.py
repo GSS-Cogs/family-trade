@@ -72,8 +72,12 @@ df = df[(df['CDID'] != 'FJOW') &
 #df = df[(df['CDID'] != 'CWVK') & (df['CDID'] != 'CWVL')]
 # -
 # %%
+df['Marker'] = df['DATAMARKER'].map(
+    lambda x: {'NA': 'not-available',
+               ' -': 'nil-or-less-than-a-million'
+               }.get(x, x))
 # Order columns
-df = df[['Period', 'CDID', 'Pink Book Services', 'Flow Directions', 'Value']]
+df = df[['Period', 'CDID', 'Pink Book Services', 'Flow Directions', 'Value', 'Marker']]
 df['Pink Book Services'] = df['Pink Book Services'].astype(str)
 df['Flow Directions'] = df['Flow Directions'].str.strip().map(
     lambda x: {
@@ -90,5 +94,7 @@ metadata.dataset.description = metadata.dataset.description + \
     '\n Non Seasonally Adjusted'
 
 df.to_csv("observations.csv", index = False)
+df
+#%%
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
