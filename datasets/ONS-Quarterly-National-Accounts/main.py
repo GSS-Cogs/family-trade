@@ -10,7 +10,6 @@ import copy
 import numpy as np
 
 df = pd.DataFrame()
-cubes = Cubes("info.json")
 info = json.load(open('info.json'))
 scraper = Scraper(seed = 'info.json')
 scraper
@@ -1269,8 +1268,6 @@ del h1h2
 # -
 
 
-
-cubes.output_all()
 
 # +
 #cids = pd.concat([pd.DataFrame(f1f2cdids),pd.DataFrame(g1g2cdids),pd.DataFrame(h1h2cdids)])
