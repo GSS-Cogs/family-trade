@@ -11,11 +11,11 @@ import numpy as np
 
 df = pd.DataFrame()
 info = json.load(open('info.json'))
-scraper = Scraper(seed = 'info.json')
-scraper
+metadata = Scraper(seed = 'info.json')
+metadata
 # -
 
-distribution = scraper.distribution(latest = True)
+distribution = metadata.distribution(latest = True)
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
 distribution
 
@@ -541,15 +541,18 @@ except:
     print("something went wrong")
 
 a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
+# -
+
+a2 = a2.drop_duplicates()
 
 # +
-mainTitle = scraper.dataset.title
-maincomme = scraper.dataset.comment
-maindescr = scraper.dataset.description
+mainTitle = metadata.dataset.title
+maincomme = metadata.dataset.comment
+maindescr = metadata.dataset.description
 
-scraper.dataset.title = mainTitle + ' - National Accounts aggregates (A2)'
-scraper.dataset.comment = maincomme + ' - National Accounts aggregates (A2) - GDP and GVA in £ million. Seasonally Adjusted'
-scraper.dataset.description = maindescr + """
+metadata.dataset.title = mainTitle + ' - National Accounts aggregates (A2)'
+metadata.dataset.comment = maincomme + ' - National Accounts aggregates (A2) - GDP and GVA in £ million. Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree. 
 Data has been Seasonally Adjusted. 
 Reference year is 2018. 
@@ -561,10 +564,15 @@ with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/na-aggregates"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
-a2 = a2.drop_duplicates()      
-del a2
+    with open("national_account_aggregates-info.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent = 3)
+# a2 = a2.drop_duplicates()      
+# del a2
+# -
+
+a2.to_csv("national_account_aggregates-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
 
 # +
 # B1
@@ -635,9 +643,9 @@ b1b2 = b1b2[['Period','CDID','Weights 2018','Sector','Industry','Value']]
 b1b2.head(20)
 
 # +
-scraper.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
-scraper.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
-scraper.dataset.description = maindescr + """
+metadata.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
+metadata.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
 Estimates cannot be regarded as accurate to the last digit shown.
 Data has been Seasonally Adjusted. 
 Reference year is 2018.
@@ -650,8 +658,8 @@ with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gva"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
+    with open("output_indicators-info.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent = 3)
 b1b2 = b1b2.drop_duplicates()     
 del b1b2
 
@@ -727,9 +735,9 @@ c1c2cdids = c1c2['CDID'].unique()
 del c1, c2
 
 # +
-scraper.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
-scraper.dataset.comment = maincomme + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2) - Seasonally Adjusted'
-scraper.dataset.description = maindescr + """
+metadata.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
+metadata.dataset.comment = maincomme + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
 Data has been Seasonally Adjusted. 
 Reference year is 2018.
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
@@ -745,8 +753,8 @@ with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gdp"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
+    with open("expenditure_indicators-info.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent = 3)
 c1c2 = c1c2.drop_duplicates()       
 del c1c2
 
@@ -788,9 +796,9 @@ d1.head(5)
 #d1['Gross Domestic Product'].unique()
 
 # +
-scraper.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
-scraper.dataset.comment = maincomme + ' - Gross domestic product: by category of income at current prices (D) - Seasonally Adjusted'
-scraper.dataset.description = maindescr + """
+metadata.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
+metadata.dataset.comment = maincomme + ' - Gross domestic product: by category of income at current prices (D) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
 Data has been seasonally adjusted.
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
 Private. non-financial corporations: Quarterly alignment adjustment included in this series.
@@ -802,8 +810,8 @@ with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gdp"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
+    with open("income_indicators-info.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent = 3)
 d1 = d1.drop_duplicates()       
 del d1
 
@@ -952,9 +960,9 @@ e1e2e3e4.head(10)
 #dm.display_dataset_unique_values(e1e2e3e4)
 
 # +
-scraper.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
-scraper.dataset.comment = maincomme + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4) - Seasonally Adjusted'
-scraper.dataset.description = maindescr + """
+metadata.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
+metadata.dataset.comment = maincomme + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
 Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)
 Data has been seasonally adjusted
 COICOP: ESA 10 Classification of Individual Consumption by Purpose.
@@ -967,8 +975,8 @@ with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/hh-final-consumption"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
+    with open("household_expenditure_indicators-info.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent = 3)
 e1e2e3e4 = e1e2e3e4.drop_duplicates()       
 del e1e2e3e4
 
@@ -1052,9 +1060,9 @@ f1f2 = pd.concat([f1,f2])
 f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
 
 # +
-scraper.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
-scraper.dataset.comment = maincomme + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
-scraper.dataset.description = maindescr + """
+metadata.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
+metadata.dataset.comment = maincomme + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
 Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)
 Data has been seasonally adjusted
 Business Investment: Not including expenditure on dwellings, land and existing buildings and costs associated with the transfer of ownership of non-produced assets.
@@ -1068,8 +1076,8 @@ with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gfcf"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
+    with open("gross_fixed_capitol-info.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent = 3)
 f1f2 = f1f2.drop_duplicates()      
 del f1f2
 
@@ -1152,9 +1160,9 @@ del g1g2['Industry']
 #g1g2['Sector'].unique()
 
 # +
-scraper.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
-scraper.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
-scraper.dataset.description = maindescr + """
+metadata.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
+metadata.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
 Change in inventories at current prices and chained volume measures (G1, G2)
 Data has been seasonally adjusted
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
@@ -1167,8 +1175,8 @@ with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/change-in-inventories"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
+    with open("inventories-info.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent = 3)
 g1g2 = g1g2.drop_duplicates()      
 del g1g2
 
@@ -1244,9 +1252,9 @@ h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 #h1h2['Goods or Services'].unique()
 
 # +
-scraper.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
-scraper.dataset.comment = maincomme + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2) - Seasonally Adjusted'
-scraper.dataset.description = maindescr + """
+metadata.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
+metadata.dataset.comment = maincomme + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
 Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)
 Data has been seasonally adjusted
 Trade balance is calculated by using exports of goods and services minus imports of goods and services
@@ -1256,8 +1264,8 @@ with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
+    with open("trade-info.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent = 3)
 h1h2 = h1h2.drop_duplicates()      
 h1h2
 del h1h2
