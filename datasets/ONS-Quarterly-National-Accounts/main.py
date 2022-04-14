@@ -20,11 +20,7 @@ tabs = { tab.name: tab for tab in distribution.as_databaker() }
 distribution
 
 #grouping tab into topics to iterate through by their names
-national_account_aggregates_1 = ['A1 AGGREGATES']
-national_account_aggregates_2 = ['A2 AGGREGATES']
 national_account_aggregates = ['A1 AGGREGATES', 'A2 AGGREGATES']
-output_indicators_1 = ['B1 CVM OUTPUT']
-output_indicators_2 = ['B2 CVM OUTPUT']
 output_indicators = ['B1 CVM OUTPUT', 'B2 CVM OUTPUT']
 expenditure_indicators = ['C1 EXPENDITURE', 'C2 EXPENDITURE']
 income_indicators = ['D INCOME']
