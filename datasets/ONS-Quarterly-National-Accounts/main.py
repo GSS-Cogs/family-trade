@@ -1,30 +1,31 @@
 #!/usr/bin/env python
 # coding: utf-8
-# %% [markdown]
 # ### ONS Quarterly National Accounts
 #
 
-# %%
+# +
 from gssutils import *
 import json
 import copy 
 import numpy as np
 
-trace = TransformTrace()
 df = pd.DataFrame()
 cubes = Cubes("info.json")
 info = json.load(open('info.json'))
 scraper = Scraper(seed = 'info.json')
 scraper
+# -
 
-# %%
 distribution = scraper.distribution(latest = True)
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
 distribution
 
-# %%
 #grouping tab into topics to iterate through by their names
+national_account_aggregates_1 = ['A1 AGGREGATES']
+national_account_aggregates_2 = ['A2 AGGREGATES']
 national_account_aggregates = ['A1 AGGREGATES', 'A2 AGGREGATES']
+output_indicators_1 = ['B1 CVM OUTPUT']
+output_indicators_2 = ['B2 CVM OUTPUT']
 output_indicators = ['B1 CVM OUTPUT', 'B2 CVM OUTPUT']
 expenditure_indicators = ['C1 EXPENDITURE', 'C2 EXPENDITURE']
 income_indicators = ['D INCOME']
@@ -35,7 +36,6 @@ trade = ['H1 TRADE', 'H2 TRADE']
 tidied_sheets = []
 
 
-# %%
 def with_indices_overrides(indices_dimension):
     """
     Adding a cellvalue overrides to each cell within the dimension AFTER
@@ -43,6 +43,7 @@ def with_indices_overrides(indices_dimension):
     So replacing the value of any dimensions cells that are blank with the appropriate index (or indice).
     """
     not_blank_cells = [cell for cell in indices_dimension.hbagset if cell.value != '']
+    print(not_blank_cells)
     for cell in indices_dimension.hbagset:
         # If a dimension cell is blank
         if cell.value == '': 
@@ -66,7 +67,6 @@ def with_indices_overrides(indices_dimension):
     return indices_dimension
 
 
-# %%
 def with_sector_overrides(sector_dimension):
     not_blank_cells = [cell for cell in sector_dimension.hbagset if cell.value != '']
     for cell in sector_dimension.hbagset:
@@ -95,7 +95,6 @@ def with_sector_overrides(sector_dimension):
     return sector_dimension
 
 
-# %%
 def with_expenditure_overrides(expenditure_dimension):
     not_blank_cells = [cell for cell in expenditure_dimension.hbagset if cell.value != '']
     for cell in expenditure_dimension.hbagset:
@@ -114,7 +113,6 @@ def with_expenditure_overrides(expenditure_dimension):
     return expenditure_dimension
 
 
-# %%
 def with_gross_overrides(gross_dimension):
     not_blank_cells = [cell for cell in gross_dimension.hbagset if cell.value != '']
     for cell in gross_dimension.hbagset:
@@ -131,7 +129,6 @@ def with_gross_overrides(gross_dimension):
     return gross_dimension
 
 
-# %%
 def with_analysis_by_overrides(analysis_by_dimension):
     not_blank_cells = [cell for cell in analysis_by_dimension.hbagset if cell.value != '']
     for cell in analysis_by_dimension.hbagset:
@@ -160,7 +157,6 @@ def with_analysis_by_overrides(analysis_by_dimension):
     return analysis_by_dimension
 
 
-# %%
 def with_industry_overrides(industry_dimension):
     not_blank_cells = [cell for cell in industry_dimension.hbagset if cell.value != '']
     for cell in industry_dimension.hbagset:
@@ -182,7 +178,6 @@ def with_industry_overrides(industry_dimension):
     return industry_dimension
 
 
-# %%
 def with_flow_overrides(flow_dimension):
     not_blank_cells = [cell for cell in flow_dimension.hbagset if cell.value != '']
     for cell in flow_dimension.hbagset:
@@ -196,7 +191,6 @@ def with_flow_overrides(flow_dimension):
     return flow_dimension
 
 
-# %%
 for name, tab in tabs.items():
     #shared dimensions across all tabs
     seasonal_adjustment = tab.excel_ref('A5').expand(DOWN).filter(contains_string('Seasonally'))
@@ -408,7 +402,6 @@ for name, tab in tabs.items():
         continue
 
 
-# %% [markdown]
 #     Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
 #     Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
 #
@@ -474,7 +467,7 @@ for name, tab in tabs.items():
 #      'AG Annex G'
 #      
 
-# %%
+# +
 import numpy as np
 
 def strip_superscripts(dataset, dimension):
@@ -517,17 +510,18 @@ def convet_dimension_to_int(dataset, dimension):
         return dataset
 
 
-# %%
-cubes = Cubes("info.json")
+# +
+# cubes = Cubes("info.json")
 
-# %%
+# +
 # A2
 a2 = tidied_sheets[1]
 # Only use the main value data for now
 try:
     a2 = a2.loc[a2['Percentage Change'].isna()] 
 except:
-    ind = ind 
+    # ind = ind
+    print("something went wrong") 
 
 a2 = prefix_refperiod(a2, 'Period')
 
@@ -548,11 +542,12 @@ a2 = convet_dimension_to_int(a2, 'Value')
 try:
     a2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
-    ind = ind
+    # ind = ind
+    print("something went wrong")
 
 a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
 
-# %%
+# +
 mainTitle = scraper.dataset.title
 maincomme = scraper.dataset.comment
 maindescr = scraper.dataset.description
@@ -574,10 +569,9 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 a2 = a2.drop_duplicates()      
-cubes.add_cube(copy.deepcopy(scraper), a2, "gbp–data-tables-aggregates", 'gbp–data-tables-aggregates', data)
 del a2
 
-# %%
+# +
 # B1
 b1 = tidied_sheets[2]
 # Only use the main value data for now, CVMs
@@ -610,7 +604,7 @@ b1 = b1.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
 b1 = convet_dimension_to_int(b1, 'Value')
 
 
-# %%
+# +
 # B2
 b2 = tidied_sheets[3]
 
@@ -635,9 +629,9 @@ b2['Industry'] = b2['Industry'].apply(pathify)
 
 b2 = b2.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
 b2 = convet_dimension_to_int(b2, 'Value')
+# -
 
 
-# %%
 b1b2 = pd.concat([b1, b2])
 #b1b2cdids = b1b2['CDID'].unique()
 # Delete attribute for now as it is causing problems in PMD4, going into the CDID column!
@@ -645,7 +639,7 @@ b1b2 = pd.concat([b1, b2])
 b1b2 = b1b2[['Period','CDID','Weights 2018','Sector','Industry','Value']]
 b1b2.head(20)
 
-# %%
+# +
 scraper.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
 scraper.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
@@ -664,10 +658,9 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 b1b2 = b1b2.drop_duplicates()     
-cubes.add_cube(copy.deepcopy(scraper), b1b2, "gbp–data-tables-cvm-output", 'gbp–data-tables-cvm-output', data)
 del b1b2
 
-# %%
+# +
 # C1
 c1 = tidied_sheets[4]
 
@@ -700,7 +693,7 @@ c1 = convet_dimension_to_int(c1, 'Value')
 c1['Estimate Type'] = 'current-price'
 c1.head(5)
 
-# %%
+# +
 # C2
 c2 = tidied_sheets[5]
 
@@ -732,13 +725,13 @@ c2 = convet_dimension_to_int(c2, 'Value')
     
 c2['Estimate Type'] = 'chained-volume-measure'
 c2.head(5)
+# -
 
-# %%
 c1c2 = pd.concat([c1, c2])
 c1c2cdids = c1c2['CDID'].unique()
 del c1, c2
 
-# %%
+# +
 scraper.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
 scraper.dataset.comment = maincomme + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
@@ -760,10 +753,9 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 c1c2 = c1c2.drop_duplicates()       
-cubes.add_cube(copy.deepcopy(scraper), c1c2, "gbp–data-tables-expenditure", 'gbp–data-tables-expenditure', data)
 del c1c2
 
-# %%
+# +
 # D1
 d1 = tidied_sheets[6]
 
@@ -781,7 +773,7 @@ d1 = strip_superscripts(d1, 'Category of Income')
 d1 = prefix_refperiod(d1, 'Period')
 
 try:
-    d1.drop(['Seasonal Adjustment','Percentage Change','measure','DATAMARKER'], axis=1, inplace=True)
+    d1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
     ind = ind   
 
@@ -800,7 +792,7 @@ d1cdids = d1['CDID'].unique()
 d1.head(5)
 #d1['Gross Domestic Product'].unique()
 
-# %%
+# +
 scraper.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
 scraper.dataset.comment = maincomme + ' - Gross domestic product: by category of income at current prices (D) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
@@ -818,10 +810,9 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 d1 = d1.drop_duplicates()       
-cubes.add_cube(copy.deepcopy(scraper), d1, "gbp–data-tables-income", 'gbp–data-tables-income', data)
 del d1
 
-# %%
+# +
 # E1
 e1 = tidied_sheets[7]
 
@@ -854,11 +845,11 @@ e1cdids = e1['CDID'].unique()
 e1[e1['Expenditure Category'] == 'uk-national-domestic'].head(50)
 e1[e1['CDID'] == 'ABJQ'].head(50)
 
-# %%
+# +
 #import dmtools as dm
 #dm.display_dataset_unique_values(e1)
 
-# %%
+# +
 # E2
 e2 = tidied_sheets[8]
 
@@ -891,7 +882,7 @@ e2['Expenditure Category'] = 'uk-domestic'
 e2cdids = e2['CDID'].unique()
 e2.head(5)
 
-# %%
+# +
 # E3
 e3 = tidied_sheets[9]
 
@@ -923,7 +914,7 @@ e3 = convet_dimension_to_int(e3, 'Value')
 e3cdids = e3['CDID'].unique()
 e3.head(50)
 
-# %%
+# +
 # E4
 e4 = tidied_sheets[10]
 
@@ -956,7 +947,7 @@ e4['Expenditure Category'] = 'uk-domestic'
 e4cdids = e4['CDID'].unique()
 e4.head(5)
 
-# %%
+# +
 #e1e2e3e4cdids = pd.concat([pd.DataFrame(e1cdids),pd.DataFrame(e2cdids),pd.DataFrame(e3cdids),pd.DataFrame(e4cdids)])
 #del e1cdids, e2cdids, e3cdids, e4cdids
 
@@ -965,7 +956,7 @@ e1e2e3e4.head(10)
 #e1e2e3e4['Expenditure Category'].unique()
 #dm.display_dataset_unique_values(e1e2e3e4)
 
-# %%
+# +
 scraper.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
 scraper.dataset.comment = maincomme + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
@@ -984,10 +975,9 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 e1e2e3e4 = e1e2e3e4.drop_duplicates()       
-cubes.add_cube(copy.deepcopy(scraper), e1e2e3e4, "gbp–data-tables-expenditure", 'gbp–data-tables-expenditure', data)
 del e1e2e3e4
 
-# %%
+# +
 # F1
 f1 = tidied_sheets[11]
 
@@ -1024,7 +1014,7 @@ f1['Analysis'] = f1['Analysis'].apply(pathify)
 f1cdids = f1['CDID'].unique()
 f1.head(5)
 
-# %%
+# +
 # F2
 f2 = tidied_sheets[12]
 
@@ -1060,13 +1050,13 @@ f2['Analysis'] = f2['Analysis'].apply(pathify)
 
 f2cdids = f2['CDID'].unique()
 f2.head(5)
+# -
 
-# %%
 f1f2 = pd.concat([f1,f2])
 #f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
 f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
 
-# %%
+# +
 scraper.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
 scraper.dataset.comment = maincomme + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
@@ -1086,10 +1076,9 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 f1f2 = f1f2.drop_duplicates()      
-cubes.add_cube(copy.deepcopy(scraper), f1f2, "gbp–data-tables-gfcf", 'gbp–data-tables-gfcf', data)
 del f1f2
 
-# %%
+# +
 # G1
 g1 = tidied_sheets[13]
 
@@ -1125,7 +1114,7 @@ g1['Industry'] = g1['Industry'].apply(pathify)
 g1cdids = g1['CDID'].unique()
 g1.head(5)
 
-# %%
+# +
 # G2
 g2 = tidied_sheets[14]
 
@@ -1160,14 +1149,14 @@ g2['Industry'] = g2['Industry'].apply(pathify)
 
 g2cdids = g2['CDID'].unique()
 g2.head(5)
+# -
 
-# %%
 g1g2 = pd.concat([g1,g2])
 del g1g2['Industry']
 #g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
 #g1g2['Sector'].unique()
 
-# %%
+# +
 scraper.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
 scraper.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
@@ -1186,10 +1175,9 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 g1g2 = g1g2.drop_duplicates()      
-cubes.add_cube(copy.deepcopy(scraper), g1g2, "gbp–data-tables-change-in-inventories", 'gbp–data-tables-change-in-inventories', data)
 del g1g2
 
-# %%
+# +
 # H1
 h1 = tidied_sheets[15]
 
@@ -1222,7 +1210,7 @@ h1['Flow'] = h1['Flow'].apply(pathify)
 h1cdids = h1['CDID'].unique()
 h1.head(5)
 
-# %%
+# +
 # H2
 h2 = tidied_sheets[16]
 
@@ -1253,14 +1241,14 @@ h2['Flow'] = h2['Flow'].apply(pathify)
 
 h2cdids = h2['CDID'].unique()
 h2.head(5)
+# -
 
-# %%
 h1h2 = pd.concat([h1,h2])
 h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
 h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 #h1h2['Goods or Services'].unique()
 
-# %%
+# +
 scraper.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
 scraper.dataset.comment = maincomme + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2) - Seasonally Adjusted'
 scraper.dataset.description = maindescr + """
@@ -1276,16 +1264,15 @@ with open("info.json", "r") as jsonFile:
     with open("info.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 h1h2 = h1h2.drop_duplicates()      
-cubes.add_cube(copy.deepcopy(scraper), h1h2, "gbp–data-tables-change-in-trade", 'gbp–data-tables-change-in-trade', data)
 h1h2
 del h1h2
+# -
 
-# %%
 
-# %%
+
 cubes.output_all()
 
-# %%
+# +
 #cids = pd.concat([pd.DataFrame(f1f2cdids),pd.DataFrame(g1g2cdids),pd.DataFrame(h1h2cdids)])
 #print('Before: ' + str(cids[0].count()))
 #cids = cids.drop_duplicates()
@@ -1296,15 +1283,17 @@ cubes.output_all()
 #cids['Sort Priority'] = np.arange(cids.shape[0]) + 6654
 #cids.to_csv('cdids.csv', index=False)
 #cids
+# -
 
-# %%
 
-# %%
 
-# %%
+
+
+# +
 #import dmtools as dm
 #fldrpth = '/users/leigh/Development/family-trade/reference/codelists/'
 #dm.search_for_codes_using_levenshtein_and_fuzzywuzzy(tidied_sheets[ind]['Sector'].unique(), fldrpth, 'Notation', 'sector', 3, 0.8)
 #dm.search_codelists_for_codes(d1['Category of Income'].unique(), fldrpth, 'Notation', 'Category of Income')
+# -
 
-# %%
+
