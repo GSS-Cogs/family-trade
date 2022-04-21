@@ -69,7 +69,7 @@ df.rename(columns= {'OBS':'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'] = df['Marker'].replace('..', 'suppressed')
 df["Period"]= df["Period"].str.split(",", n = 1, expand = True)[1]
 df['Period'] = df['Period'].str.strip()
-
+df['Period'] = 'year/' + df['Period']
 df['Flow'] = df['Flow'].apply(pathify)
 
 df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/UKC',
