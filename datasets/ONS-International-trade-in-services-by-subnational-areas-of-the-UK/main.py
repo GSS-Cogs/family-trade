@@ -109,7 +109,8 @@ df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/U
                  
                 'Industry Grouping' : {'travel': 'travel-related-trade', 'Travel' : 'travel-related-trade'}
                 })
-
+df['Industry Grouping'] = df['Industry Grouping'].apply(pathify)
+df['Origin'] = df['Origin'].apply(pathify)
 df = df[['Period', 'Location', 'Industry Grouping', 'Origin', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
 df = df.drop_duplicates() #remove valid duplicates, total appears in both tabs with same values. 
 # %%
