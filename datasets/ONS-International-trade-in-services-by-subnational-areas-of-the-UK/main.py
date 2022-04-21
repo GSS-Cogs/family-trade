@@ -112,7 +112,12 @@ df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/U
 df['Industry Grouping'] = df['Industry Grouping'].apply(pathify)
 df['Origin'] = df['Origin'].apply(pathify)
 df = df[['Period', 'Location', 'Industry Grouping', 'Origin', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
+
 df = df.drop_duplicates() #remove valid duplicates, total appears in both tabs with same values. 
+#the publisher has inputted duplicates in their own data while doing corrections. Held inside thier tidy tab (9). 172 obs have to be dropped.
+duplicateRowsDF = df[df.duplicated(['Period', 'Location', 'Industry Grouping', 'Origin', 'Flow', 'Travel Type', 'Includes Travel'], keep=False)]
+df = df[~df.isin(duplicateRowsDF)].dropna()
+
 # %%
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
