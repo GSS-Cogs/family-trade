@@ -130,6 +130,7 @@ df["Period"] =  df["Period"].apply(date_time)
 
 # 'Indices 2016=100'needs to be changed
 df['Measure Type'] = df['Measure Type'].apply(lambda x: 'q-on-q-delta-gdp-from-gva' if 'Percentage change, quarter on previous quarter' in x else 'gdp-from-gva')
+df['Industry Section'] = df['Industry Section'].astype(str).replace('a-t', 'a_t', regex=True)
 
 df['Unit']= df['Unit'].apply(lambda x: 'percentage' if 'Percentage' in x else 
                                       ('indices' if 'Indices' in x else x ))
@@ -155,6 +156,8 @@ metadata.dataset.title = datasetTitle
 duplicate_df = df[df.duplicated(['Period', 'Reference Area', 'Industry Section', 'Measure Type', 'Unit',
        'Value'], keep = False)]
 duplicate_df
+
+df = df.drop_duplicates()
 
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
