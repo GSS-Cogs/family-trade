@@ -57,25 +57,25 @@ tabs_name_to_process = ["Key Figures", "North East", "North West", "Yorkshire an
 if len(set(tabs_name_to_process)-(total_tabs)) != 0:
     raise ValueError(f"Aborting. A tab named{set(tabs_name_to_process)-(total_tabs)} required but not found")
 
-
-def ref_area_map_regions(regions):
-    map_regions = {
-        "North East":"http://data.europa.eu/nuts/code/UKC",
-        "North West":"http://data.europa.eu/nuts/code/UKD",
-        "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
-        "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
-        "East Midlands":"http://data.europa.eu/nuts/code/UKF",
-        "West Midlands":"http://data.europa.eu/nuts/code/UKG",
-        "East of England":"http://data.europa.eu/nuts/code/UKH",
-        "London":"http://data.europa.eu/nuts/code/UKI",
-        "South East":"http://data.europa.eu/nuts/code/UKJ",
-        "South West":"http://data.europa.eu/nuts/code/UKK",
-        "England":"http://statistics.data.gov.uk/id/statistical-geography/E92000001",
-        "Wales":"http://data.europa.eu/nuts/code/UKL",
-        "Extra-Regio":"http://data.europa.eu/nuts/code/UKZ"
-    }
-    return map_regions.get(regions, regions)
-
+# +
+# def ref_area_map_regions(regions):
+#     map_regions = {
+#         "North East":"http://data.europa.eu/nuts/code/UKC",
+#         "North West":"http://data.europa.eu/nuts/code/UKD",
+#         "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
+#         "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
+#         "East Midlands":"http://data.europa.eu/nuts/code/UKF",
+#         "West Midlands":"http://data.europa.eu/nuts/code/UKG",
+#         "East of England":"http://data.europa.eu/nuts/code/UKH",
+#         "London":"http://data.europa.eu/nuts/code/UKI",
+#         "South East":"http://data.europa.eu/nuts/code/UKJ",
+#         "South West":"http://data.europa.eu/nuts/code/UKK",
+#         "England":"http://statistics.data.gov.uk/id/statistical-geography/E92000001",
+#         "Wales":"http://data.europa.eu/nuts/code/UKL",
+#         "Extra-Regio":"http://data.europa.eu/nuts/code/UKZ"
+#     }
+#     return map_regions.get(regions, regions)
+# -
 
 tidied_sheets =[]
 
@@ -89,7 +89,7 @@ industry_section = tab.filter("Section").fill(RIGHT).is_not_blank().is_not_white
 observations = period.waffle(industry_section)
 dimensions = [
             HDim(period, "Period", DIRECTLY, LEFT),
-            HDim(reference_area, "Reference Area", DIRECTLY, ABOVE, apply = ref_area_map_regions),
+            HDim(reference_area, "Reference Area", DIRECTLY, ABOVE),
             HDim(industry_section, "Industry Section", DIRECTLY, ABOVE),
             HDim(indicies_or_percentage, "Measure Type", CLOSEST, ABOVE),
             HDim(indicies_or_percentage, "Unit", CLOSEST, ABOVE),
@@ -125,6 +125,23 @@ for name, tab in tabs.items():
 
 df = pd.concat(tidied_sheets, sort = True).fillna('')
 # df
+
+map_regions = {
+        "North East":"http://data.europa.eu/nuts/code/UKC",
+        "North West":"http://data.europa.eu/nuts/code/UKD",
+        "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
+        "East Midlands":"http://data.europa.eu/nuts/code/UKF",
+        "West Midlands":"http://data.europa.eu/nuts/code/UKG",
+        "East of England":"http://data.europa.eu/nuts/code/UKH",
+        "London":"http://data.europa.eu/nuts/code/UKI",
+        "South East":"http://data.europa.eu/nuts/code/UKJ",
+        "South West":"http://data.europa.eu/nuts/code/UKK",
+        "England":"http://statistics.data.gov.uk/id/statistical-geography/E92000001",
+        "Wales":"http://data.europa.eu/nuts/code/UKL",
+        "Extra-Regio":"http://data.europa.eu/nuts/code/UKZ"
+    }
+
+df['Reference Area'] = df['Reference Area'].map(map_regions)
 
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Period"] =  df["Period"].apply(date_time)
