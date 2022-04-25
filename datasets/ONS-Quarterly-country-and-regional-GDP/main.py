@@ -57,26 +57,6 @@ tabs_name_to_process = ["Key Figures", "North East", "North West", "Yorkshire an
 if len(set(tabs_name_to_process)-(total_tabs)) != 0:
     raise ValueError(f"Aborting. A tab named{set(tabs_name_to_process)-(total_tabs)} required but not found")
 
-# +
-# def ref_area_map_regions(regions):
-#     map_regions = {
-#         "North East":"http://data.europa.eu/nuts/code/UKC",
-#         "North West":"http://data.europa.eu/nuts/code/UKD",
-#         "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
-#         "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
-#         "East Midlands":"http://data.europa.eu/nuts/code/UKF",
-#         "West Midlands":"http://data.europa.eu/nuts/code/UKG",
-#         "East of England":"http://data.europa.eu/nuts/code/UKH",
-#         "London":"http://data.europa.eu/nuts/code/UKI",
-#         "South East":"http://data.europa.eu/nuts/code/UKJ",
-#         "South West":"http://data.europa.eu/nuts/code/UKK",
-#         "England":"http://statistics.data.gov.uk/id/statistical-geography/E92000001",
-#         "Wales":"http://data.europa.eu/nuts/code/UKL",
-#         "Extra-Regio":"http://data.europa.eu/nuts/code/UKZ"
-#     }
-#     return map_regions.get(regions, regions)
-# -
-
 tidied_sheets =[]
 
 tab = tabs["Key Figures"]
@@ -143,10 +123,10 @@ map_regions = {
 
 df['Reference Area'] = df['Reference Area'].map(map_regions)
 
+df['Industry Section'] = df['Industry Section'].apply(pathify)
+
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df["Period"] =  df["Period"].apply(date_time)
-
-df['Measure Type'].unique()
 
 # 'Indices 2016=100'needs to be changed
 df['Measure Type'] = df['Measure Type'].apply(lambda x: 'q-on-q-delta-gdp-from-gva' if 'Percentage change, quarter on previous quarter' in x else 'gdp-from-gva')
@@ -172,14 +152,6 @@ metadata.dataset.comment = comment
 metadata.dataset.title = datasetTitle
 
 # Check if there are any duplicates
-duplicate_df = df[df.duplicated(['Period', 'Reference Area', 'Industry Section', 'Measure Type', 'Unit',
-       'Value'], keep = False)]
-duplicate_df
-
-# Drop duplicates
-df.drop_duplicates(subset = df.columns.difference(['Value']), inplace = True)
-
-# Check if there are any duplicates still after droping them
 duplicate_df = df[df.duplicated(['Period', 'Reference Area', 'Industry Section', 'Measure Type', 'Unit',
        'Value'], keep = False)]
 duplicate_df
