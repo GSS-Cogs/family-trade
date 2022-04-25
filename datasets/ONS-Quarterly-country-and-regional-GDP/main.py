@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.7
+#       jupytext_version: 1.13.8
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -107,19 +107,19 @@ df = pd.concat(tidied_sheets, sort = True).fillna('')
 # df
 
 map_regions = {
-        "North East":"UKC",
-        "North West":"UKD",
-        "Yorkshire and The Humber":"UKE",
-        "Yorkshire and The Humber":"UKE",
-        "East Midlands":"UKF",
-        "West Midlands":"UKG",
-        "East of England":"UKH",
-        "London":"UKI",
-        "South East":"UKJ",
-        "South West":"UKK",
-        "England":"E92000001",
-        "Wales":"UKL",
-        "Extra-Regio":"UKZ"
+        "North East":"http://data.europa.eu/nuts/code/UKC",
+        "North West":"http://data.europa.eu/nuts/code/UKD",
+        "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
+        "Yorkshire and The Humber":"http://data.europa.eu/nuts/code/UKE",
+        "East Midlands":"http://data.europa.eu/nuts/code/UKF",
+        "West Midlands":"http://data.europa.eu/nuts/code/UKG",
+        "East of England":"http://data.europa.eu/nuts/code/UKH",
+        "London":"http://data.europa.eu/nuts/code/UKI",
+        "South East":"http://data.europa.eu/nuts/code/UKJ",
+        "South West":"http://data.europa.eu/nuts/code/UKK",
+        "England":"http://statistics.data.gov.uk/id/statistical-geography/E92000001",
+        "Wales":"http://data.europa.eu/nuts/code/UKL",
+        "Extra-Regio":"http://data.europa.eu/nuts/code/UKZ"
 }
 
 df["Reference Area"] = df["Reference Area"].map(lambda x: map_regions[x])
