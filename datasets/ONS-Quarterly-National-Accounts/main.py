@@ -543,6 +543,17 @@ except:
 a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
 # -
 
+a2.columns
+
+duplicate_df = a2[a2.duplicated(['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period'], keep = False)]
+duplicate_df
+
+#
+
+# +
+# stop
+# -
+
 a2 = a2.drop_duplicates()
 
 # +
@@ -564,11 +575,53 @@ with open("info.json", "r") as jsonFile:
     data = json.load(jsonFile)
     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/na-aggregates"
     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+
+    # for x in data["transform"]["columns"]:
+    #     print(x)
+
+    remove_values = ["Industry","Sector", "Expenditure Category","Economic Concept","Category of Income","COICOP","Capital Formation","Analysis","Goods or Services","Flow","Weights 2018","Level of inventories held at end-December 2018","Marker"]
+
+    def remove_vals_from_json(ele):
+        global remove_values
+        # print(type(ele))
+        for key, *val in ele:
+            return val != remove_values
+            # print(key, val)
+
+    res = dict()
+    for key, val in data.items():
+        if isinstance(val, dict):
+            res[key] = dict(filter(remove_vals_from_json, val.items()))
+        # else:
+        #     res[key] = val
+
+    data = remove_vals_from_json(data["transform"]["columns"])
+    # print(res)
+            # print(f'{val} is value of dict')
+        # print(f'Key={k}, Value={v}')
+
+    # my_dict = data["transform"]["columns"]
+    # key_list = ["Period","CDID","Estimate Type","Value","Aggregate","Industry","Sector", "Expenditure Category","Economic Concept","Category of Income","COICOP","Capital Formation","Analysis","Goods or Services","Flow","Weights 2018","Level of inventories held at end-December 2018","Marker"]
+    # sub = my_dict  
+    # for i in key_list[:-13]:
+    #     sub = sub[i]
+    # del sub[key_list[:-13]]
+    # print(my_dict)
+
+    # del data["transform"]["columns"]["Industry"]
+    # del data["transform"]["columns"]["Sector"]
+    # ["Sector"]
+    # ["Expenditure Category"]["Economic Concept"]
+    # del data["transform"]["columns"]["Category of Income"]["COICOP"]["Capital Formation"]["Analysis"]
+    # del data["transform"]["columns"]["Goods or Services"]["Flow"]["Weights 2018"]["Level of inventories held at end-December 2018"]["Marker"]
     with open("national_account_aggregates-info.json", "w") as jsonFile:
         json.dump(data, jsonFile, indent = 3)
 # a2 = a2.drop_duplicates()      
 # del a2
+# ['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period']
 # -
+
+stop
 
 a2.to_csv("national_account_aggregates-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
