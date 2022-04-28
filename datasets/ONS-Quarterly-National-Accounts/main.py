@@ -597,7 +597,8 @@ a2.to_csv("national_account_aggregates-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
 
-stop
+# +
+# stop
 
 # +
 # mainTitle = metadata.dataset.title
@@ -679,9 +680,9 @@ stop
 # # a2 = a2.drop_duplicates()      
 # # del a2
 # # ['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period']
-# -
 
-stop
+# +
+# stop
 
 # +
 # a2.to_csv("national_account_aggregates-observations.csv", index = False)
@@ -759,6 +760,11 @@ b1b2.head(20)
 b1b2.columns
 
 # +
+# ['Period', 'CDID', 'Weights 2018', 'Sector', 'Industry', 'Value']
+# duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', 'Weights 2018', 'Sector', 'Industry', 'Value'], keep = False)]
+# duplicate_df.sort_values(by = 'Value').to_csv("b1b2duplicates.csv")
+
+# +
 metadata.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
 metadata.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
 metadata.dataset.description = maindescr + """
@@ -770,14 +776,19 @@ Weights may not sum to totals due to rounding.
 This is a balanced index of UK GVA, taking into account data from the income and expenditure approaches. Thus it will not necessarily be the weighted sum of the industrial indices.
 """
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gva"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("output_indicators-info.json", "w") as jsonFile:
-        json.dump(data, jsonFile, indent = 3)
-b1b2 = b1b2.drop_duplicates()     
-del b1b2
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gva"
+#     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#     with open("output_indicators-info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile, indent = 3)
+# b1b2 = b1b2.drop_duplicates()     
+# del b1b2
+# -
+
+b1b2.to_csv("output_indicators-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('output_indicators-catalog-metadata.json')
 
 # +
 # C1
@@ -850,7 +861,7 @@ c1c2 = pd.concat([c1, c2])
 c1c2cdids = c1c2['CDID'].unique()
 # del c1, c2
 
-c1c2cdids.columns
+c1c2.columns
 
 # +
 metadata.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
@@ -867,14 +878,19 @@ Trade balance is calculated by using exports of goods and services minus imports
 Non-profit institutions: There is a small difference between the gross operating surplus of the NPISH sector in the SFA release, compared with the consumption of fixed capital for the NPISH sector published in the GDP release.  This affects 2019Q1 onwards. The latest figures for the affected series can be found in the SFA release.
 """
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gdp"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("expenditure_indicators-info.json", "w") as jsonFile:
-        json.dump(data, jsonFile, indent = 3)
-c1c2 = c1c2.drop_duplicates()       
-del c1c2
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gdp"
+#     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#     with open("expenditure_indicators-info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile, indent = 3)
+# c1c2 = c1c2.drop_duplicates()       
+# del c1c2
+# -
+
+c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('expenditure_indicators-catalog-metadata.json')
 
 # +
 # D1
@@ -914,7 +930,7 @@ d1.head(5)
 #d1['Gross Domestic Product'].unique()
 # -
 
-d1cdids.columns
+d1.columns
 
 # +
 metadata.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
@@ -927,14 +943,19 @@ Gross operating surplus of corporations total includes the operating surplus of 
 Other income includes mixed income and the operating surplus of the non-corporate sector.
 """
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gdp"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("income_indicators-info.json", "w") as jsonFile:
-        json.dump(data, jsonFile, indent = 3)
-d1 = d1.drop_duplicates()       
-del d1
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gdp"
+#     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#     with open("income_indicators-info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile, indent = 3)
+# d1 = d1.drop_duplicates()       
+# del d1
+# -
+
+d1.to_csv("income_indicators-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('income_indicators-catalog-metadata.json')
 
 # +
 # E1
@@ -1095,14 +1116,19 @@ UK National: Final consumption by UK Households in the UK & abroad.
 UK National & Domestic: Final consumption expenditure in the UK by UK & foreign households and final consumption by UK Households in the UK & abroad.
 """
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/hh-final-consumption"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("household_expenditure_indicators-info.json", "w") as jsonFile:
-        json.dump(data, jsonFile, indent = 3)
-e1e2e3e4 = e1e2e3e4.drop_duplicates()       
-del e1e2e3e4
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/hh-final-consumption"
+#     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#     with open("household_expenditure_indicators-info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile, indent = 3)
+# e1e2e3e4 = e1e2e3e4.drop_duplicates()       
+# del e1e2e3e4
+# -
+
+e1e2e3e4.to_csv("household_expenditure_indicators-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('household_expenditure_indicators-catalog-metadata.json')
 
 # +
 # F1
@@ -1183,7 +1209,7 @@ f1f2 = pd.concat([f1,f2])
 #f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
 f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
 
-f1f2cdids.columns
+f1f2.columns
 
 # +
 metadata.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
@@ -1198,14 +1224,19 @@ Dwellings: Includes new dwellings and improvements to dwellings.
 Other buildings and structures: Including costs associated with the transfer of ownership of buildings, dwellings and non-produced assets.
 """
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gfcf"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("gross_fixed_capitol-info.json", "w") as jsonFile:
-        json.dump(data, jsonFile, indent = 3)
-f1f2 = f1f2.drop_duplicates()      
-del f1f2
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/gfcf"
+#     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#     with open("gross_fixed_capitol-info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile, indent = 3)
+# f1f2 = f1f2.drop_duplicates()      
+# del f1f2
+# -
+
+f1f2.to_csv("gross_fixed_capitol-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file("gross_fixed_capitol-catalog-metadata.json")
 
 # +
 # G1
@@ -1299,14 +1330,20 @@ Total change in inventories: Quarterly alignment adjustment included in this ser
 Please note, inventories estimates for 2020 Q4 at this stage face additional uncertainty due to the lower data content. 
 """
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/change-in-inventories"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("inventories-info.json", "w") as jsonFile:
-        json.dump(data, jsonFile, indent = 3)
-g1g2 = g1g2.drop_duplicates()      
-del g1g2
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/change-in-inventories"
+#     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#     with open("inventories-info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile, indent = 3)
+# g1g2 = g1g2.drop_duplicates()      
+# del g1g2
+
+# +
+
+g1g2.to_csv("change_in_inventories-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file("change_in_inventories-catalog-metadata.json")
 
 # +
 # H1
@@ -1379,7 +1416,7 @@ h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
 h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 #h1h2['Goods or Services'].unique()
 
-h1h2cdids.columns
+h1h2.columns
 
 # +
 metadata.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
@@ -1390,18 +1427,21 @@ Data has been seasonally adjusted
 Trade balance is calculated by using exports of goods and services minus imports of goods and services
 """
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-    with open("trade-info.json", "w") as jsonFile:
-        json.dump(data, jsonFile, indent = 3)
-h1h2 = h1h2.drop_duplicates()      
-h1h2
-del h1h2
-# -
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/trade"
+#     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#     with open("trade-info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile, indent = 3)
+# h1h2 = h1h2.drop_duplicates()      
+# h1h2
+# del h1h2
 
+# +
 
+h1h2.to_csv("trade-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file("trade-catalog-metadata.json")
 
 # +
 #cids = pd.concat([pd.DataFrame(f1f2cdids),pd.DataFrame(g1g2cdids),pd.DataFrame(h1h2cdids)])
