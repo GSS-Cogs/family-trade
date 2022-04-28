@@ -43,7 +43,7 @@
             "Value": {
                 "type": "observations",
                 "measure": {
-                    "label": "na-aggregates"
+                    "label": "gdp"
                 },
                 "unit": {
                     "label": "gbp-million"
