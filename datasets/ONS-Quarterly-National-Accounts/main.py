@@ -507,6 +507,10 @@ def convet_dimension_to_int(dataset, dimension):
 
 # +
 # cubes = Cubes("info.json")
+# -
+
+a2 = tidied_sheets[1]
+a2
 
 # +
 # A2
@@ -545,6 +549,15 @@ a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
 
 a2.columns
 
+# +
+# Note - This change needs to be finalised
+
+a2["Estimate Type"] = a2["Estimate Type"].replace({"Chained Volume Measure (Reference year 2019)" : "chained-volume-measure"})
+a2["Estimate Type"].unique()
+# -
+
+a2['Aggregate'].unique()
+
 duplicate_df = a2[a2.duplicated(['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period'], keep = False)]
 duplicate_df
 
@@ -552,9 +565,9 @@ duplicate_df
 
 # +
 # stop
-# -
 
-a2 = a2.drop_duplicates()
+# +
+# a2 = a2.drop_duplicates()
 
 # +
 mainTitle = metadata.dataset.title
@@ -571,61 +584,109 @@ Less Basic price adjustment: Taxes on products less subsidies.
 Gross value added excluding oil & gas: Calculated by using gross value added at basic prices minus extraction of crude petroleum and natural gas.
 """
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/na-aggregates"
-    data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
-
-    # for x in data["transform"]["columns"]:
-    #     print(x)
-
-    remove_values = ["Industry","Sector", "Expenditure Category","Economic Concept","Category of Income","COICOP","Capital Formation","Analysis","Goods or Services","Flow","Weights 2018","Level of inventories held at end-December 2018","Marker"]
-
-    def remove_vals_from_json(ele):
-        global remove_values
-        # print(type(ele))
-        for key, *val in ele:
-            return val != remove_values
-            # print(key, val)
-
-    res = dict()
-    for key, val in data.items():
-        if isinstance(val, dict):
-            res[key] = dict(filter(remove_vals_from_json, val.items()))
-        # else:
-        #     res[key] = val
-
-    data = remove_vals_from_json(data["transform"]["columns"])
-    # print(res)
-            # print(f'{val} is value of dict')
-        # print(f'Key={k}, Value={v}')
-
-    # my_dict = data["transform"]["columns"]
-    # key_list = ["Period","CDID","Estimate Type","Value","Aggregate","Industry","Sector", "Expenditure Category","Economic Concept","Category of Income","COICOP","Capital Formation","Analysis","Goods or Services","Flow","Weights 2018","Level of inventories held at end-December 2018","Marker"]
-    # sub = my_dict  
-    # for i in key_list[:-13]:
-    #     sub = sub[i]
-    # del sub[key_list[:-13]]
-    # print(my_dict)
-
-    # del data["transform"]["columns"]["Industry"]
-    # del data["transform"]["columns"]["Sector"]
-    # ["Sector"]
-    # ["Expenditure Category"]["Economic Concept"]
-    # del data["transform"]["columns"]["Category of Income"]["COICOP"]["Capital Formation"]["Analysis"]
-    # del data["transform"]["columns"]["Goods or Services"]["Flow"]["Weights 2018"]["Level of inventories held at end-December 2018"]["Marker"]
-    with open("national_account_aggregates-info.json", "w") as jsonFile:
-        json.dump(data, jsonFile, indent = 3)
-# a2 = a2.drop_duplicates()      
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/na-aggregates"
+#     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+#     with open("national_account_aggregates-info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile, indent = 3)      
 # del a2
-# ['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period']
 # -
-
-stop
 
 a2.to_csv("national_account_aggregates-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
+
+stop
+
+# +
+# mainTitle = metadata.dataset.title
+# maincomme = metadata.dataset.comment
+# maindescr = metadata.dataset.description
+
+# metadata.dataset.title = mainTitle + ' - National Accounts aggregates (A2)'
+# metadata.dataset.comment = maincomme + ' - National Accounts aggregates (A2) - GDP and GVA in £ million. Seasonally Adjusted'
+# metadata.dataset.description = maindescr + """
+# Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree. 
+# Data has been Seasonally Adjusted. 
+# Reference year is 2018. 
+# Less Basic price adjustment: Taxes on products less subsidies. 
+# Gross value added excluding oil & gas: Calculated by using gross value added at basic prices minus extraction of crude petroleum and natural gas.
+# """
+
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/na-aggregates"
+#     data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+
+#     # for x in data["transform"]["columns"]:
+#     #     print(x)
+
+#     remove_values = ["Industry","Sector", "Expenditure Category","Economic Concept","Category of Income","COICOP","Capital Formation","Analysis","Goods or Services","Flow","Weights 2018","Level of inventories held at end-December 2018","Marker"]
+
+
+
+#     def delete_keys(remove, dic):
+#         if remove in dic:
+#             del dic[remove]
+#         for vals in dic.values():
+#             if isinstance(vals, dict):
+#                 delete_keys(remove, vals)
+#         return dic
+
+
+#     def delete_unwanted_dimension(remove_values):
+#         for ele in remove_values:
+#             return ele
+
+#     data = delete_keys(remove_values, data)
+
+#     # def remove_vals_from_json(ele):
+#     #     global remove_values
+#     #     # print(type(ele))
+#     #     for key, *val in ele:
+#     #         return val != remove_values
+#     #         # print(key, val)
+
+#     # res = dict()
+#     # for key, val in data.items():
+#     #     if isinstance(val, dict):
+#     #         res[key] = dict(filter(remove_vals_from_json, val.items()))
+#     #     # else:
+#     #     #     res[key] = val
+
+#     # data = remove_vals_from_json(data["transform"]["columns"])
+#     # print(res)
+#             # print(f'{val} is value of dict')
+#         # print(f'Key={k}, Value={v}')
+
+#     # my_dict = data["transform"]["columns"]
+#     # key_list = ["Period","CDID","Estimate Type","Value","Aggregate","Industry","Sector", "Expenditure Category","Economic Concept","Category of Income","COICOP","Capital Formation","Analysis","Goods or Services","Flow","Weights 2018","Level of inventories held at end-December 2018","Marker"]
+#     # sub = my_dict  
+#     # for i in key_list[:-13]:
+#     #     sub = sub[i]
+#     # del sub[key_list[:-13]]
+#     # print(my_dict)
+
+#     # del data["transform"]["columns"]["Industry"]
+#     # del data["transform"]["columns"]["Sector"]
+#     # ["Sector"]
+#     # ["Expenditure Category"]["Economic Concept"]
+#     # del data["transform"]["columns"]["Category of Income"]["COICOP"]["Capital Formation"]["Analysis"]
+#     # del data["transform"]["columns"]["Goods or Services"]["Flow"]["Weights 2018"]["Level of inventories held at end-December 2018"]["Marker"]
+#     with open("national_account_aggregates-info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile, indent = 3)
+# # a2 = a2.drop_duplicates()      
+# # del a2
+# # ['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period']
+# -
+
+stop
+
+# +
+# a2.to_csv("national_account_aggregates-observations.csv", index = False)
+# catalog_metadata = metadata.as_csvqb_catalog_metadata()
+# catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
 
 # +
 # B1
@@ -694,6 +755,8 @@ b1b2 = pd.concat([b1, b2])
 #del b1b2['Weights 2018']
 b1b2 = b1b2[['Period','CDID','Weights 2018','Sector','Industry','Value']]
 b1b2.head(20)
+
+b1b2.columns
 
 # +
 metadata.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
@@ -785,7 +848,9 @@ c2.head(5)
 
 c1c2 = pd.concat([c1, c2])
 c1c2cdids = c1c2['CDID'].unique()
-del c1, c2
+# del c1, c2
+
+c1c2cdids.columns
 
 # +
 metadata.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
@@ -847,6 +912,9 @@ d1['Marker'][d1['Value'] == ''] = 'not-available'
 d1cdids = d1['CDID'].unique()
 d1.head(5)
 #d1['Gross Domestic Product'].unique()
+# -
+
+d1cdids.columns
 
 # +
 metadata.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
@@ -1011,6 +1079,9 @@ e1e2e3e4 = pd.concat([e1, e2, e3, e4])
 e1e2e3e4.head(10)
 #e1e2e3e4['Expenditure Category'].unique()
 #dm.display_dataset_unique_values(e1e2e3e4)
+# -
+
+e1e2e3e4.columns
 
 # +
 metadata.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
@@ -1112,6 +1183,8 @@ f1f2 = pd.concat([f1,f2])
 #f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
 f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
 
+f1f2cdids.columns
+
 # +
 metadata.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
 metadata.dataset.comment = maincomme + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
@@ -1212,6 +1285,8 @@ del g1g2['Industry']
 #g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
 #g1g2['Sector'].unique()
 
+g1g2.columns
+
 # +
 metadata.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
 metadata.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
@@ -1303,6 +1378,8 @@ h1h2 = pd.concat([h1,h2])
 h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
 h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 #h1h2['Goods or Services'].unique()
+
+h1h2cdids.columns
 
 # +
 metadata.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
