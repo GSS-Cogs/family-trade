@@ -27,13 +27,13 @@
             },
             "Industry": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-industry", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{+industry}"
             }, 
             "Sector": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-industry", 
-                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{+sector}"
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/sector", 
+                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industrial-sector/{+sector}"
             },
             "Weights 2018": {
                 "type": "attribute",
