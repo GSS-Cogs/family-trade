@@ -229,7 +229,7 @@ for name, tab in tabs.items():
             HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
-            HDim(weights, '2018 Weights',DIRECTLY,ABOVE),
+            HDim(weights, '2019 Weights',DIRECTLY,ABOVE),
             HDim(industry, 'Industry',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
             
@@ -355,7 +355,7 @@ for name, tab in tabs.items():
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
             HDim(sector, 'Sector',DIRECTLY,ABOVE),
-            HDim(level_held, 'Level of inventories held at end-December 2018',DIRECTLY,ABOVE),
+            HDim(level_held, 'Level of inventories held at end-December 2019',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
         ]
         dimensions[0] = with_industry_overrides(dimensions[0])
@@ -656,10 +656,13 @@ b2 = convet_dimension_to_int(b2, 'Value')
 
 
 b1b2 = pd.concat([b1, b2])
+
+# +
+
 #b1b2cdids = b1b2['CDID'].unique()
 # Delete attribute for now as it is causing problems in PMD4, going into the CDID column!
 #del b1b2['Weights 2018']
-b1b2 = b1b2[['Period','CDID','Weights 2018','Sector','Industry','Value']]
+b1b2 = b1b2[['Period','CDID','2019 Weights','Sector','Industry','Value']]
 b1b2.head(20)
 
 # +
@@ -984,6 +987,8 @@ e1e2e3e4.head(10)
 e1e2e3e4.columns
 # e1e2e3e4 = e1e2e3e4.drop_duplicates()
 
+e1e2e3e4["COICOP"].unique()
+
 metadata.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
 metadata.dataset.comment = maincomme + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4) - Seasonally Adjusted'
 metadata.dataset.description = maindescr + """
@@ -1125,7 +1130,7 @@ except:
 g1 = g1.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
 
 g1 = convet_dimension_to_int(g1, 'Value')
-g1['Level of inventories held at end-December 2018'] = g1['Level of inventories held at end-December 2018'].str.replace('.0','')
+g1['Level of inventories held at end-December 2019'] = g1['Level of inventories held at end-December 2019'].str.replace('.0','')
 
 g1['Sector'] = g1['Sector'].apply(pathify)
 g1['Industry'] = g1['Industry'].apply(pathify)
@@ -1161,7 +1166,7 @@ except:
 g2 = g2.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
 
 g2 = convet_dimension_to_int(g2, 'Value')
-g2['Level of inventories held at end-December 2018'] = g2['Level of inventories held at end-December 2018'].str.replace('.0','')
+g2['Level of inventories held at end-December 2019'] = g2['Level of inventories held at end-December 2019'].str.replace('.0','')
 
 g2['Sector'] = g2['Sector'].apply(pathify)
 g2['Industry'] = g2['Industry'].apply(pathify)
@@ -1175,10 +1180,10 @@ del g1g2['Industry']
 #g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
 #g1g2['Sector'].unique()
 
-# +
-# g1g2.columns
+g1g2.columns
 # g1g2 = g1g2.drop_duplicates()
-# -
+
+g1g2["Level of inventories held at end-December 2019"].unique()
 
 metadata.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
 metadata.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
