@@ -35,7 +35,7 @@
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/estimate-type", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-estimate-type/{+economic_concept}"
             },
-            "Level of inventories held at end-December 2018": {
+            "Level of inventories held at end-December 2019": {
                 "type": "attribute",
                 "uri": "http://gss-data.org.uk/def/trade/property/attribute/level-of-inventories-held-at-end-december-2018",
                 "value":"http://gss-data.org.uk/def/trade/concept-scheme/Level-of-inventories-held-at-end-December-2018/{+Level_of _inventories_held_at_end_December_2018}"
