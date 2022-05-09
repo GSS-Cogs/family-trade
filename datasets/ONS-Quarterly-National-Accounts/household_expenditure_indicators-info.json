@@ -27,8 +27,8 @@
             },
             "COICOP": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/property/dimension/coicop", 
-                "value": "http://gss-data.org.uk/def/concept/coicop/{+coicop}"
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/coicop", 
+                "value": "http://gss-data.org.uk/def/trade/concept/coicop/{+coicop}"
             },
             "Expenditure Category": {
                 "type": "dimension",
