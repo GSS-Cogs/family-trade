@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.6.0
+#       jupytext_version: 1.13.8
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -22,18 +22,18 @@ import numpy as np
 from gssutils import *
 from databaker.framework import *
 
-cubes = Cubes("info.json")
 
-scraper = Scraper(seed='info.json')
-scraper
 
-distribution = scraper.distribution(latest=True)
+metadata = Scraper(seed='info.json')
+metadata
+
+distribution = metadata.distribution(latest=True)
 distribution
 
 tabs = distribution.as_databaker()
+# -
 
 
-# +
 
 # +
 def left(s, amount):
@@ -44,7 +44,7 @@ def right(s, amount):
 
 
 # +
-trace = TransformTrace()
+tidied_sheets = []
 title = distribution.title
 columns = ['Geography','Period','Flow','Measure Type','Value','Unit']
 
@@ -53,7 +53,6 @@ for tab in tabs:
         continue
     print(tab.name)
     
-    trace.start(title, tab, columns, distribution.downloadURL)
     period = tab.excel_ref('A4').expand(DOWN).is_not_blank()
     country = tab.excel_ref('B3').expand(RIGHT).is_not_blank()
 
@@ -71,10 +70,10 @@ for tab in tabs:
 
     cs = ConversionSegment(tab, dimensions, observations)
     tidy_sheet = cs.topandas()
-    trace.store('combined_dataframe', tidy_sheet)
+    tidied_sheets.append(tidy_sheet)
 # -
 
-df = trace.combine_and_trace(title, "combined_dataframe")
+df = pd.concat(tidied_sheets, sort = True).fillna('')
 
 df = df[df['OBS'] != 0]
 
@@ -89,12 +88,3 @@ df.loc[df['Geography'].str.len() > 2, 'Geography'] = df['Geography'].str[:2]
 
 df = df[['Geography','Period','Flow','Value']]
 df['Flow'] = df['Flow'].map(lambda x: pathify(x))
-
-cubes.add_cube(scraper, df, title)
-cubes.output_all()
-
-trace.render("spec_v1.html")
-
-# +
-
-# --
