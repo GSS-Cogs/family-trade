@@ -293,12 +293,14 @@ for name, tab in tabs.items():
     elif name in household_expenditure_indicators:
         if name in household_expenditure_indicators[0] or name in household_expenditure_indicators[2]:
             COICOP = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
+            # savepreviewhtml(COICOP, fname=tab.name + "Preview.html")
             cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
             measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         else:
             p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('B6')
             COICOP = tab.excel_ref('B7').expand(RIGHT)
+            # savepreviewhtml(COICOP, fname=tab.name + "Preview.html")
             cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
             measure = tab.excel_ref('G2').expand(RIGHT).is_not_blank()
             expenditure = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
@@ -315,7 +317,7 @@ for name, tab in tabs.items():
 
         ]
         c1 = ConversionSegment(tab, dimensions, observations)   
-        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        # savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
@@ -396,6 +398,10 @@ for name, tab in tabs.items():
     else:
         continue
 
+
+# +
+# e1["COICOP"].unique()
+# -
 
 #     Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
 #     Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
@@ -519,8 +525,8 @@ a2 = tidied_sheets[1]
 try:
     a2 = a2.loc[a2['Percentage Change'].isna()] 
 except:
-    # ind = ind
-    print("something went wrong") 
+    ind = ind
+    # print("something went wrong") 
 
 a2 = prefix_refperiod(a2, 'Period')
 
@@ -556,8 +562,6 @@ a2.columns
 a2["Estimate Type"].unique()
 # -
 
-a2['Aggregate'].unique()
-
 duplicate_df = a2[a2.duplicated(['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period'], keep = False)]
 duplicate_df
 
@@ -587,21 +591,14 @@ catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
 
 # +
-# stop
-
-# +
-# a2.to_csv("national_account_aggregates-observations.csv", index = False)
-# catalog_metadata = metadata.as_csvqb_catalog_metadata()
-# catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
-
-# +
 # B1
 b1 = tidied_sheets[2]
 # Only use the main value data for now, CVMs
 try:
     b1 = b1.loc[b1['Percentage Change'].isna()] 
 except:
-    ind = ind 
+    # ind = ind
+    print("something went wrong")
     
 b1 = strip_superscripts(b1, 'Industry')
 
@@ -617,7 +614,8 @@ b1 = prefix_refperiod(b1, 'Period')
 try:
     b1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
-    ind = ind    
+    # ind = ind
+    print("something went wrong")  
 
 b1['Sector'] = b1['Sector'].apply(pathify)
 b1['Industry'] = b1['Industry'].apply(pathify)
@@ -634,7 +632,8 @@ b2 = tidied_sheets[3]
 try:
     b2 = b2.loc[b2['Percentage Change'].isna()] 
 except:
-    ind = ind 
+    # ind = ind
+    print("something went wrong")
     
 b2['Sector'] = 'Service industries'
 
@@ -1003,6 +1002,10 @@ UK National & Domestic: Final consumption expenditure in the UK by UK & foreign 
 e1e2e3e4.to_csv("household_expenditure_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('household_expenditure_indicators-catalog-metadata.json')
+
+e1e2e3e4.columns
+
+e1e2e3e4['COICOP'].unique()
 
 # +
 # F1
