@@ -31,8 +31,6 @@ distribution = metadata.distribution(latest=True)
 distribution
 
 tabs = distribution.as_databaker()
-# -
-
 
 
 # +
@@ -60,8 +58,6 @@ for tab in tabs:
     observations = tab.excel_ref('B4').expand(DOWN).expand(RIGHT).is_not_blank()
 
     dimensions = [
-        # HDimConst('Measure Type', 'GBP Total'),
-        # HDimConst('Unit', '£ Million'),
         HDimConst('Flow', flow_direction),
         HDim(period, 'Period', DIRECTLY, LEFT),
         HDim(country, 'ONS Partner Geography', DIRECTLY, ABOVE)       
