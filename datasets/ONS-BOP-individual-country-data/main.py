@@ -74,11 +74,7 @@ for tab in tabs:
 
 df = pd.concat(tidied_sheets, sort = True).fillna('')
 
-df.columns
-
 df = df[df['OBS'] != 0]
-
-df.columns
 
 df.loc[df['Period'].str.len() == 7, 'Period'] = pd.to_datetime(df.loc[df['Period'].str.len() == 7, 'Period'], format='%Y%b').astype(str).map(lambda x: 'month/' + left(x,7))
 
@@ -92,16 +88,6 @@ df.loc[df['Geography'].str.len() > 2, 'Geography'] = df['Geography'].str[:2]
 df = df[['Geography','Period','Flow','Value']]
 df['Flow'] = df['Flow'].map(lambda x: pathify(x))
 
-df
-
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
-
-df
-
-df.columns
-
-df.info()
-
-
