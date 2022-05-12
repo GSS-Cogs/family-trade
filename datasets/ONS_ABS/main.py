@@ -196,18 +196,18 @@ experimental official statistics - https://www.ons.gov.uk/methodology/methodolog
 	
 Notes	
 	
-1	This spreadsheet contains Annual Business Survey (ABS) revised final estimates on exporters and importers for 2017, revised final estimates for 2018 and final estimates for 2019.
+1. This spreadsheet contains Annual Business Survey (ABS) revised final estimates on exporters and importers for 2017, revised final estimates for 2018 and final estimates for 2019.
 	
-2	More details on the methodology used to produce these estimates and the things to be aware of when using the data can be found in the:
+2. More details on the methodology used to produce these estimates and the things to be aware of when using the data can be found in the:
 	Exporters and Importers in Great Britain, 2014 Information Paper - https://webarchive.nationalarchives.gov.uk/ukgwa/20160105160709/http://www.ons.gov.uk/ons/guide-method/method-quality/specific/business-and-energy/annual-business-survey/quality-and-methods/information-paper--annual-business-survey--abs---exporters-and-importers-in-great-britain--2014.pdf
 	
-3	These estimates do not cover all businesses. They do not cover: 
+3. These estimates do not cover all businesses. They do not cover: 
 • Businesses in Northern Ireland, only those in Great Britain. 
 • Businesses in the Insurance and reinsurance industries – Section K (65.1 and 65.2) 
 • The majority of the agriculture sector. 
 • Unregistered businesses (those not registered for PAYE or VAT). As coverage of the ABS estimates is not for all businesses it may be more appropriate for users to focus on the percentages rather than the levels. 
 
-4	The export figures plus the import figures will not sum to the total proportion of businesses trading internationally as some businesses do both import and export. This overlap is provided in the tables (labelled both Exporter and Importer). Further, the goods figures plus the services figures do not sum to the goods and/or services figures as some businesses undertake trade in both goods and services. The Information Note provides more detail of how to interpret the data in these tables.
+4. The export figures plus the import figures will not sum to the total proportion of businesses trading internationally as some businesses do both import and export. This overlap is provided in the tables (labelled both Exporter and Importer). Further, the goods figures plus the services figures do not sum to the goods and/or services figures as some businesses undertake trade in both goods and services. The Information Note provides more detail of how to interpret the data in these tables.
 
 """
 
