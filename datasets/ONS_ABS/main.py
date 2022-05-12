@@ -201,7 +201,8 @@ Notes
 2. More details on the methodology used to produce these estimates and the things to be aware of when using the data can be found in the:
 	Exporters and Importers in Great Britain, 2014 Information Paper - https://webarchive.nationalarchives.gov.uk/ukgwa/20160105160709/http://www.ons.gov.uk/ons/guide-method/method-quality/specific/business-and-energy/annual-business-survey/quality-and-methods/information-paper--annual-business-survey--abs---exporters-and-importers-in-great-britain--2014.pdf
 	
-3. These estimates do not cover all businesses. They do not cover: 
+3. These estimates do not cover all businesses. They do not cover:
+ 
 • Businesses in Northern Ireland, only those in Great Britain. 
 • Businesses in the Insurance and reinsurance industries – Section K (65.1 and 65.2) 
 • The majority of the agriculture sector. 
