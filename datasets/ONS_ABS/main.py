@@ -42,7 +42,6 @@ for sheet in sheets[2:5]:
     try:
         name_match = tab_name_re.match(sheet.name)
         assert name_match, "sheet name doesn't match regex"
-        print(name_match)
         for breakdown in ['Detailed employment', 'Employment', 'Turnover']:
             year = HDimConst('Year', name_match.group(1))
             trade = HDimConst('Trade', name_match.group(2).strip())
@@ -66,7 +65,6 @@ for sheet in sheets[5:10]:
     try:
         name_match = tab_name_re.match(sheet.name)
         assert name_match, "sheet name doesn't match regex"
-        print(name_match)
         for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover', 'Age']:
             year = HDimConst('Year', name_match.group(1))
             trade = HDimConst('Trade', name_match.group(2).strip())
@@ -90,7 +88,6 @@ for sheet in sheets[10:-1]:
     try:
         name_match = tab_name_re.match(sheet.name)
         assert name_match, "sheet name doesn't match regex"
-        print(name_match)
         for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover']:
             year = HDimConst('Year', name_match.group(1))
             trade = HDimConst('Trade', name_match.group(2).strip())
