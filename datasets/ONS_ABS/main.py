@@ -7,9 +7,9 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.1
+#       jupytext_version: 1.13.8
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3.9.12 64-bit
 #     language: python
 #     name: python3
 # ---
@@ -26,21 +26,23 @@ cubes = Cubes("info.json")
 with open("info.json") as f:
     info = json.load(f)
     
-scraper = Scraper(info["landingPage"])
-scraper
+metadata = Scraper(info["landingPage"])
+metadata
 # -
 
-sheets = scraper.distribution(latest=True).as_databaker()
-scraper.distribution(latest=True)
+sheets = metadata.distribution(latest=True).as_databaker()
+metadata.distribution(latest=True)
 
 all_tidy = []
 
 tab_name_re = re.compile(r'^([0-9]{4}) (.*)$')
+print(tab_name_re)
 
 for sheet in sheets[2:5]:
     try:
         name_match = tab_name_re.match(sheet.name)
         assert name_match, "sheet name doesn't match regex"
+        print(name_match)
         for breakdown in ['Detailed employment', 'Employment', 'Turnover']:
             year = HDimConst('Year', name_match.group(1))
             trade = HDimConst('Trade', name_match.group(2).strip())
@@ -64,6 +66,7 @@ for sheet in sheets[5:10]:
     try:
         name_match = tab_name_re.match(sheet.name)
         assert name_match, "sheet name doesn't match regex"
+        print(name_match)
         for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover', 'Age']:
             year = HDimConst('Year', name_match.group(1))
             trade = HDimConst('Trade', name_match.group(2).strip())
@@ -87,6 +90,7 @@ for sheet in sheets[10:-1]:
     try:
         name_match = tab_name_re.match(sheet.name)
         assert name_match, "sheet name doesn't match regex"
+        print(name_match)
         for breakdown in ['Detailed employment', 'Employment', 'Ownership', 'Turnover']:
             year = HDimConst('Year', name_match.group(1))
             trade = HDimConst('Trade', name_match.group(2).strip())
@@ -193,27 +197,33 @@ tidy = tidy[['Year','Age of Business', 'Business Activity','Country of Ownership
              ,'Employees','Unit','Measure Type', 'Value']]
 tidy.head()
 
+tidy['Unit'].unique()
+
+tidy["Measure Type"].unique()
+
 # +
-tidy['Value'] = tidy['Value'].astype(int)
+# tidy['Value'] = tidy['Value'].astype(int)
 
-print("Measure types are:", tidy["Measure Type"].unique())
-print("Units are:", tidy["Unit"].unique())
+# print("Measure types are:", tidy["Measure Type"].unique())
+# print("Units are:", tidy["Unit"].unique())
 
-cntdat = tidy[tidy['Unit'] == 'businesses']
-prodat = tidy[tidy['Unit'] == 'percent']
+# cntdat = tidy[tidy['Unit'] == 'businesses']
+# prodat = tidy[tidy['Unit'] == 'percent']
 
-del cntdat['Measure Type']
-del cntdat['Unit']
-del prodat['Measure Type']
-del prodat['Unit']
+# del cntdat['Measure Type']
+# del cntdat['Unit']
+# del prodat['Measure Type']
+# del prodat['Unit']
+
+# +
+# cntdat.head()
+
+# +
+# prodat.head()
 # -
 
-cntdat.head()
 
-prodat.head()
-
-
-scraper.dataset.description = scraper.dataset.description + """
+metadata.dataset.description = metadata.dataset.description + """
 Users should note that an Annual Business Survey (ABS) sample re-optimisation has been included in the estimates from 2016 onwards. This was last carried out in 2016 and occurs every five years to improve the efficiency of the ABS sample, estimation and reduce sample variability as part of the regular process to improve estimates.
 This re-optimisation has led to a discontinuity between 2015 and 2016 within small and medium sized businesses (those with fewer than 250 employment). Therefore users should not make year-on-year comparisons between 2015 and 2016.
 
@@ -234,43 +244,48 @@ Notes
  ABS webpage - https://www.ons.gov.uk/businessindustryandtrade/business/businessservices/bulletins/uknonfinancialbusinesseconomy/previousReleases
 """
 
-# +
-#### Business count 
-scraper.dataset.family = "trade"
-scraper.dataset.title = 'Annual Business Survey exporters and importers - Business count'
-scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
-                                                          'Importers and exporters of trade goods and services')
-scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
-
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/count"
-    #data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
-        
-cntdat = cntdat.drop_duplicates()   
-cubes.add_cube(copy.deepcopy(scraper), cntdat, 'annual-business-survey-exporters-and-importers-business-count', 'annual-business-survey-exporters-and-importers-business-count', data)
+tidy.to_csv("observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 
 # +
-#### Business Proportion  
-scraper.dataset.title = 'Annual Business Survey exporters and importers - Business proportion'
-scraper.dataset.comment = scraper.dataset.comment.replace('Importers and exporters of goods and services',
-                                                          'Importers and exporters of trade goods and services')
-scraper.dataset.description = scraper.dataset.comment + ' Figures are to 0 decimal places.'
+# #### Business count 
+# metadata.dataset.family = "trade"
+# metadata.dataset.title = 'Annual Business Survey exporters and importers - Business count'
+# metadata.dataset.comment = metadata.dataset.comment.replace('Importers and exporters of goods and services',
+#                                                           'Importers and exporters of trade goods and services')
+# metadata.dataset.description = metadata.dataset.comment + ' Figures are to 0 decimal places.'
 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-    data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/percentage"
-    #data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
-    with open("info.json", "w") as jsonFile:
-        json.dump(data, jsonFile)
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/count"
+#     #data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
+#     with open("info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile)
         
-prodat = prodat.drop_duplicates()   
-cubes.add_cube(copy.deepcopy(scraper), prodat, 'annual-business-survey-exporters-and-importers-business-proportion', 'annual-business-survey-exporters-and-importers-business-proportion', data)
-# -
+# cntdat = cntdat.drop_duplicates()   
+# cubes.add_cube(copy.deepcopy(metadata), cntdat, 'annual-business-survey-exporters-and-importers-business-count', 'annual-business-survey-exporters-and-importers-business-count', data)
 
-for cube in cubes.cubes:
-    print(cube.scraper.title)
+# +
+# #### Business Proportion  
+# metadata.dataset.title = 'Annual Business Survey exporters and importers - Business proportion'
+# metadata.dataset.comment = metadata.dataset.comment.replace('Importers and exporters of goods and services',
+#                                                           'Importers and exporters of trade goods and services')
+# metadata.dataset.description = metadata.dataset.comment + ' Figures are to 0 decimal places.'
 
-cubes.output_all()
+# with open("info.json", "r") as jsonFile:
+#     data = json.load(jsonFile)
+#     data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/percentage"
+#     #data["transform"]["columns"]["Value"]["unit"] = "http://gss-data.org.uk/def/concept/measurement-units/businesses"
+#     with open("info.json", "w") as jsonFile:
+#         json.dump(data, jsonFile)
+        
+# prodat = prodat.drop_duplicates()   
+# cubes.add_cube(copy.deepcopy(metadata), prodat, 'annual-business-survey-exporters-and-importers-business-proportion', 'annual-business-survey-exporters-and-importers-business-proportion', data)
+
+# +
+# for cube in cubes.cubes:
+#     print(cube.scraper.title)
+
+# +
+# cubes.output_all()
