@@ -1,4 +1,5 @@
 {
+    "$schema" : "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons_abs",
     "title": "Annual Business Survey exporters and importers",
     "publisher": "Office for National Statistics",
@@ -13,7 +14,7 @@
     ],
     "extract": {
         "source": "XLS",
-        "stage": "Done"
+        "stage": "Done"  
     },
     "transform": {
         "airtable": "rec6SF5JMLyIYm8z9",
@@ -56,14 +57,15 @@
             },
             "Value": {
                 "type": "observations",
-                "measure": "http://gss-data.org.uk/def/measure/percentage",
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
-                "datatype": "integer"
+                "datatype": "double"
             },
-            "Marker": {
-                "type": "attribute",
-                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
+            "Measure Type": {
+                "type": "measures",
+                "value": "http://gss-data.org.uk/def/measure/{+measure_type}"
+            },
+            "Unit": {
+                "type": "units",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+unit}"
             }
         }
     },
