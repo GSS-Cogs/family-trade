@@ -8,7 +8,7 @@
 #       format_version: '1.5'
 #       jupytext_version: 1.13.8
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3.9.12 64-bit
 #     language: python
 #     name: python3
 # ---
@@ -82,7 +82,6 @@ df.rename(columns= {'ONS Partner Geography': 'Geography'}, inplace=True)
 df.loc[df['Geography'].str.len() > 2, 'Geography'] = df['Geography'].str[:2]
 
 df = df[['Geography','Period','Flow','Value']]
-df['Flow'] = df['Flow'].map(lambda x: pathify(x))
 
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
