@@ -55,8 +55,9 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/employment-size-bands/{+employees}"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
+                "type": "observations",
                 "measure": "http://gss-data.org.uk/def/measure/percentage",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/businesses",
                 "datatype": "integer"
             },
             "Marker": {
