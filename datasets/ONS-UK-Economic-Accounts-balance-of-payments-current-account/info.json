@@ -1,4 +1,5 @@
 {
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons-uk-economic-accounts-balance-of-payments-current-account",
     "title": "UK Economic Accounts; balance of payments - current account",
     "publisher": "Office for National Statistics",
