@@ -6,9 +6,9 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.0
+#       jupytext_version: 1.13.8
 #   kernelspec:
-#     display_name: Python 3 (ipykernel)
+#     display_name: Python 3.9.12 64-bit
 #     language: python
 #     name: python3
 # ---
@@ -22,15 +22,15 @@ from gssutils import *
 import json
 from databaker.framework import *
 
-cubes = Cubes("info.json")
+# cubes = Cubes("info.json")
 
-pd.options.mode.chained_assignment = None 
+# pd.options.mode.chained_assignment = None 
 
-scraper = Scraper(seed='info.json')
+# metadata = metadata(seed='info.json')
+metadata = Scraper(seed='info.json')
+distribution = metadata.distribution(latest=True)
 
-distribution = scraper.distribution(latest=True)
-
-mainDescr = scraper.dataset.description
+mainDescr = metadata.dataset.description
 # -
 
 distribution
@@ -54,6 +54,8 @@ data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/m
 with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile, indent = 2)
 
+tidied_sheets =[]
+
 # +
 trace = TransformTrace()
 
@@ -64,9 +66,9 @@ for tab in tabs:
            'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL) 
         
-        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Summary of balance of payments"
-        scraper.dataset.comment = "Contents of the balance of payments: Current Account. Summary of balance of payments - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment  + """
+        metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Summary of balance of payments"
+        metadata.dataset.comment = "Contents of the balance of payments: Current Account. Summary of balance of payments - Quarterly transactions"
+        metadata.dataset.description = metadata.dataset.comment  + """
         Current balance as a percentage of GDP: using series YBHA: GDP at current market prices
         Financial Accounts: when downloading data from the UKEA dataset users should reverse the sign of series that have an identifier that is prefixed with a minus sign.
         Net errors and omossions: This series represents net errors and omissions in the balance of payments accounts. It is the converse of the not seasonally adjusted current and capital balances (HBOG and FKMJ) and net financial account transactions (HBNT) and is required to balance these three accounts.
@@ -104,9 +106,11 @@ for tab in tabs:
         ]
         
         cs = ConversionSegment(tab, dimensions, observations)        
-        tidy_sheet = cs.topandas() 
-        trace.store('dataframeB1', tidy_sheet)
-        df = trace.combine_and_trace(title, 'dataframeB1')
+        tidy_sheet = cs.topandas()
+        tidied_sheets.append(tidy_sheet)
+
+        # trace.store('dataframeB1', tidy_sheet)
+        df = pd.concat(tidied_sheets, sort = True).fillna('')
 
         df['Period'] = df.Period.str.replace('\.0', '')
         df['Quarter'] = df['Quarter'].str.lstrip()
@@ -137,24 +141,22 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
 
-        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
+        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
     
     
     # B2 B2A B3B3A
     title = distribution.title + ' :Trade in goods and services'
     #columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
     columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
-    scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Trade in goods and services"
-    scraper.dataset.comment = "Contents of the balance of payments: Trade in goods and services - Quarterly transactions"
-    scraper.dataset.description = scraper.dataset.comment
+    metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Trade in goods and services"
+    metadata.dataset.comment = "Contents of the balance of payments: Trade in goods and services - Quarterly transactions"
+    metadata.dataset.description = metadata.dataset.comment
     
     if 'B2' in tab.name: 
 
-        trace.start(title, tab, columns, distribution.downloadURL)
-        trace.Flow_Directions("Selected as Exports, Imports and Balances")
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
 
-        trace.Product("Selcted as products from cell B and removing flow directions, trade and seasonal adjustment")
+        # trace.Product("Selcted as products from cell B and removing flow directions, trade and seasonal adjustment")
         product = tab.excel_ref('B').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
 
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
@@ -178,8 +180,9 @@ for tab in tabs:
         ]
         
         cs = ConversionSegment(tab, dimensions, observations) 
-        tidy_sheet = cs.topandas() 
-        trace.store('combined_dataframeB23', tidy_sheet)
+        tidy_sheet = cs.topandas()
+        tidied_sheets.append(tidy_sheet)
+        # trace.store('combined_dataframeB23', tidy_sheet)
 
     elif 'B3' in tab.name: 
 
@@ -208,9 +211,10 @@ for tab in tabs:
          ]
 
         cs = ConversionSegment(tab, dimensions, observations)
-        tidy_sheet = cs.topandas() 
-        trace.store('combined_dataframeB23', tidy_sheet)
-        df = trace.combine_and_trace(title, "combined_dataframeB23")
+        tidy_sheet = cs.topandas()
+        tidied_sheets.append(tidy_sheet)
+        # trace.store('combined_dataframeB23', tidy_sheet)
+        df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
         df['Quarter'] = df['Quarter'].str.lstrip()
@@ -237,7 +241,7 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
 
-        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
+        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
         
     #B4, B4A & B4B
     if 'B4' in tab.name: 
@@ -245,14 +249,12 @@ for tab in tabs:
         #columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']
         
-        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Primary Income"
-        scraper.dataset.comment = "Contents of the balance of payments: Primary Income - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment + """
+        metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Primary Income"
+        metadata.dataset.comment = "Contents of the balance of payments: Primary Income - Quarterly transactions"
+        metadata.dataset.description = metadata.dataset.comment + """
         Other primary income: includes taxes and subsidies on products and production was previously classified to secondary income.
         Monetary financial institutions:  Banks and building societies
-        """
-        
-        trace.start(title, tab, columns, distribution.downloadURL)   
+        """   
         
         income = tab.excel_ref('B10').expand(DOWN).is_not_blank()  
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
@@ -288,8 +290,9 @@ for tab in tabs:
         
         cs = ConversionSegment(tab, dimensions, observations)
         tidy_sheet = cs.topandas() 
-        trace.store('combined_dataframeB4', tidy_sheet)
-        df = trace.combine_and_trace(title, "combined_dataframeB4")
+        tidied_sheets.append(tidy_sheet)
+        # trace.store('combined_dataframeB4', tidy_sheet)
+        df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
         df['Quarter'] = df['Quarter'].str.lstrip()
@@ -324,7 +327,7 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.rstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
 
-        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
+        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
     # Tabs B5 and B5A    
     if (tab.name == 'B5') or (tab.name == 'B5A'):
@@ -333,11 +336,10 @@ for tab in tabs:
         #   'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 
            'Value', 'Marker', 'Measure Type', 'Unit']
-        trace.start(title, tab, columns, distribution.downloadURL)
         
-        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Secondary Income"
-        scraper.dataset.comment = "Contents of the balance of payments: Secondary Income - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment + """
+        metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Secondary Income"
+        metadata.dataset.comment = "Contents of the balance of payments: Secondary Income - Quarterly transactions"
+        metadata.dataset.description = metadata.dataset.comment + """
          Taxes and subsidies on products and production are now classified to other primary income within the primary income account.
          Social fund: receipts by local goverment are included up to 2005 Q4. From 2006 Q1 they are included in general government other EU receipts.
          GNI own resource and adjustments: Includes VAT-based third EU own resource and GNI-based fourth own resource.
@@ -368,9 +370,10 @@ for tab in tabs:
         ]
         
         cs = ConversionSegment(tab, dimensions, observations)
-        tidy_sheet = cs.topandas() 
-        trace.store('combined_dataframeB5', tidy_sheet)
-        df = trace.combine_and_trace(title, "combined_dataframeB5")
+        tidy_sheet = cs.topandas()
+        tidied_sheets.append(tidy_sheet)
+        # trace.store('combined_dataframeB5', tidy_sheet)
+        df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
         df['Quarter'] = df["Quarter"].str.lstrip()
@@ -403,7 +406,7 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
 
-        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
+        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
        
       
     if (tab.name == 'B6') or (tab.name == 'B6A'):
@@ -411,11 +414,10 @@ for tab in tabs:
         #columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']
         
-        trace.start(title, tab, columns, distribution.downloadURL)
         
-        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Transactions with the EU and EMU"
-        scraper.dataset.comment = "Contents of the balance of payments: Transactions with the EU and EMU - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment + """
+        metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Transactions with the EU and EMU"
+        metadata.dataset.comment = "Contents of the balance of payments: Transactions with the EU and EMU - Quarterly transactions"
+        metadata.dataset.description = metadata.dataset.comment + """
         Includes transactions with European Union institutions.
         Transactions with non-EU countries continue to be shown in tables B6B and B6C.
         EMU members : Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Irish Republic, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Portugal, Slovakia, Slovenia and Spain.
@@ -451,9 +453,10 @@ for tab in tabs:
         ]
         
         cs = ConversionSegment(tab, dimensions, observations)
-        tidy_sheet = cs.topandas() 
-        trace.store('combined_dataframeB6A', tidy_sheet)
-        df = trace.combine_and_trace(title, "combined_dataframeB6A")
+        tidy_sheet = cs.topandas()
+        tidied_sheets.append(tidy_sheet)
+        # trace.store('combined_dataframeB6A', tidy_sheet)
+        df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
         df['Quarter'] = df['Quarter'].map(lambda x: x.lstrip() if isinstance(x, str) else x)
@@ -485,7 +488,7 @@ for tab in tabs:
         #tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
         tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value']]
 
-        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
+        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
         
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
@@ -497,9 +500,9 @@ for tab in tabs:
            'Value', 'Marker', 'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
        
-        scraper.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Transactions with non-EU countries"
-        scraper.dataset.comment = "Contents of the balance of payments: Transactions with non-EU countries - Quarterly transactions"
-        scraper.dataset.description = scraper.dataset.comment + """
+        metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Transactions with non-EU countries"
+        metadata.dataset.comment = "Contents of the balance of payments: Transactions with non-EU countries - Quarterly transactions"
+        metadata.dataset.description = metadata.dataset.comment + """
         Includes transactions with international organisations other than European Union institutions.
         """
     
@@ -540,8 +543,9 @@ for tab in tabs:
         
         cs = ConversionSegment(tab, dimensions, observations)
         tidy_sheet = cs.topandas() 
-        trace.store('combined_dataframeB6B', tidy_sheet)
-        df = trace.combine_and_trace(title, 'combined_dataframeB6B')
+        tidied_sheets.append(tidy_sheet)
+        # trace.store('combined_dataframeB6B', tidy_sheet)
+        df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
         df['Quarter'] = df['Quarter'].map(lambda x: x.lstrip() if isinstance(x, str) else x)
@@ -570,7 +574,7 @@ for tab in tabs:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
+        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
     
     # # Tabs B7_B7A
@@ -582,9 +586,9 @@ for tab in tabs:
            'Marker','Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
         
-        scraper.dataset.title = "UK Economic Accounts: balance of payments - Capital Account"
-        scraper.dataset.comment = "Contents of the balance of payments: Capital Account"
-        scraper.dataset.description = scraper.dataset.comment + """
+        metadata.dataset.title = "UK Economic Accounts: balance of payments - Capital Account"
+        metadata.dataset.comment = "Contents of the balance of payments: Capital Account"
+        metadata.dataset.description = metadata.dataset.comment + """
         Under the Balance of Payments Manual edition 6 there is no longer a record of migrant transfers within the Capital Account.
         Total debt forgiveness: this series also appears in the Financial Account (see Table B12 in spreadsheet publication)
         """
@@ -613,9 +617,10 @@ for tab in tabs:
             HDimConst('Unit', 'gbp-million'),
         ]
         cs = ConversionSegment(tab, dimensions, observations)
-        tidy_sheet = cs.topandas() 
-        trace.store('combined_dataframeB7', tidy_sheet)
-        df = trace.combine_and_trace(title, 'combined_dataframeB7')
+        tidy_sheet = cs.topandas()
+        tidied_sheets.append(tidy_sheet)
+        # trace.store('combined_dataframeB7', tidy_sheet)
+        df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
         df['Quarter'] = df["Quarter"].map(lambda x: x.lstrip() if isinstance(x, str) else x)
@@ -653,12 +658,4 @@ for tab in tabs:
         with open("info.json", "w") as jsonFile:
             json.dump(data, jsonFile)
     
-        cubes.add_cube(copy.deepcopy(scraper), tidy, scraper.dataset.title)
-# -
-
-for cube in cubes.cubes:
-    print(cube.scraper.title)
-
-cubes.output_all()
-
-trace.render("spec_v1.html")
+        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
