@@ -184,6 +184,13 @@ tidy = tidy[['Year','Age of Business', 'Business Activity','Country of Ownership
              ,'Employees','Unit','Measure Type', 'Value']]
 tidy.head()
 
+duplicate_df = tidy[tidy.duplicated(['Year', 'Age of Business', 'Business Activity', 'Country of Ownership',
+       'Trade Group', 'Turnover', 'Employees', 'Unit', 'Measure Type',
+       'Value'], keep = False)]
+duplicate_df
+
+tidy.drop_duplicates(subset = tidy.columns.difference(['Value']), inplace = True)
+
 metadata.dataset.description = metadata.dataset.description + """
 Users should note that an Annual Business Survey (ABS) sample re-optimisation has been included in the estimates from 2016 onwards. This was last carried out in 2016 and occurs every five years to improve the efficiency of the ABS sample, estimation and reduce sample variability as part of the regular process to improve estimates.
 This re-optimisation has led to a discontinuity between 2015 and 2016 within small and medium sized businesses (those with fewer than 250 employment). Therefore users should not make year-on-year comparisons between 2015 and 2016.
