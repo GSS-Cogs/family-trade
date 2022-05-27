@@ -847,10 +847,10 @@ try:
 except:
     ind = ind 
 
-e1['COICOP'] = 'CP' + e1['COICOP'].astype(str) 
-e1['COICOP'].loc[e1['CDID'].isin(['ABJQ'])] = 'TOTAL'
-e1['COICOP'].loc[e1['COICOP'] == 'CP0.0'] = 'CP00'
-e1['COICOP'].loc[e1['CDID'].isin(['ABTF'])] = 'net-tourism'
+# e1['COICOP'] = 'CP' + e1['COICOP'].astype(str) 
+# e1['COICOP'].loc[e1['CDID'].isin(['ABJQ'])] = 'TOTAL'
+# e1['COICOP'].loc[e1['COICOP'] == 'CP0.0'] = 'CP00'
+# e1['COICOP'].loc[e1['CDID'].isin(['ABTF'])] = 'net-tourism'
 
 e1['Expenditure Category'] = 'uk-national-domestic'
 e1['Expenditure Category'].loc[e1['CDID'].isin(['ABJQ','ABTF'])] = 'uk-national'
@@ -861,7 +861,8 @@ e1 = prefix_refperiod(e1, 'Period')
 try:
     e1.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
 except:
-    ind = ind   
+    # ind = ind   
+    print("something went wrong")
 
 e1 = e1.rename(columns={'OBS':'Value'})
 
@@ -947,14 +948,15 @@ e4 = tidied_sheets[10]
 try:
     e4 = e4.loc[e4['Percentage Change'].isna()] 
 except:
-    ind = ind 
+    # ind = ind 
+    print("something went wrong")
 
 #e4['COICOP'] = 'CP' + e4['COICOP'].astype(str) 
 e4 = e4.loc[e4['CDID'] != 'ABJR']
 e4 = e4.loc[e4['CDID'] != 'ABTH']
 e4 = e4.loc[e4['CDID'] != 'ZAKW']
 
-e4['COICOP'].loc[e4['CDID'].isin(['UTIH'])] = 'total-goods'
+# e4['COICOP'].loc[e4['CDID'].isin(['UTIH'])] = 'total-goods'
 e4['Economic Concept'] = 'chained-volume-measure'
 
 e4 = prefix_refperiod(e4, 'Period')
@@ -962,7 +964,8 @@ e4 = prefix_refperiod(e4, 'Period')
 try:
     e4.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
 except:
-    ind = ind   
+    # ind = ind
+    print("something went wrong")   
 
 e4 = e4.rename(columns={'OBS':'Value'})
 
@@ -981,12 +984,14 @@ e1e2e3e4 = pd.concat([e1, e2, e3, e4])
 e1e2e3e4.head(10)
 #e1e2e3e4['Expenditure Category'].unique()
 #dm.display_dataset_unique_values(e1e2e3e4)
-# -
 
-e1e2e3e4.columns
+# +
+# e1e2e3e4.columns
 # e1e2e3e4 = e1e2e3e4.drop_duplicates()
 
-e1e2e3e4["COICOP"].unique()
+# +
+# e1e2e3e4["COICOP"].unique()
+# -
 
 metadata.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
 metadata.dataset.comment = maincomme + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4) - Seasonally Adjusted'
