@@ -504,11 +504,13 @@ tidy["Income"].unique()
 
 tidy["Income Description"].unique()
 tidy["Income Description"].replace({'':"not-applicable"})
+tidy["Income Description"].unique()
 # ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
 #        'Account Type', 'Seasonal Adjustment', 'Value']
 
 tidy["Sector"].unique()
 tidy["Sector"].replace({'':"not-applicable"})
+tidy["Sector"].unique()
 # ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
 #        'Account Type', 'Seasonal Adjustment', 'Value']
 
@@ -524,89 +526,11 @@ tidy.to_csv("secondary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('secondary_income-catalog-metadata.json')
 
-stop
+# +
+# End of fourth cube
+# -
 
-
-    # # Tabs B5 and B5A    
-    # if (tab.name == 'B5') or (tab.name == 'B5A'):
-    #     title = distribution.title + ' :Secondary income'
-    #     #columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 
-    #     #   'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
-    #     columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 
-    #        'Value', 'Marker', 'Measure Type', 'Unit']
-        
-    #     metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Secondary Income"
-    #     metadata.dataset.comment = "Contents of the balance of payments: Secondary Income - Quarterly transactions"
-    #     metadata.dataset.description = metadata.dataset.comment + """
-    #      Taxes and subsidies on products and production are now classified to other primary income within the primary income account.
-    #      Social fund: receipts by local goverment are included up to 2005 Q4. From 2006 Q1 they are included in general government other EU receipts.
-    #      GNI own resource and adjustments: Includes VAT-based third EU own resource and GNI-based fourth own resource.
-    #     """
-        
-    #     flow = tab.excel_ref('B').expand(DOWN).by_index([7,24,44]) - tab.excel_ref('B52').expand(DOWN)
-    #     sector = tab.excel_ref('B').expand(DOWN).by_index([8,14,25,35,45,46]) - tab.excel_ref('B52').expand(DOWN)
-    #     income = tab.excel_ref('B10').expand(DOWN).is_not_blank() - tab.excel_ref('B52').expand(DOWN)
-    #     code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
-    #     year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
-    #     quarter = tab.excel_ref('D5').expand(RIGHT)
-    #     seasonal_adjustment = tab.excel_ref('B2')
-    #     income_type = tab.excel_ref('B1')
-    #     observations = quarter.fill(DOWN).is_not_blank()
-        
-    #     dimensions = [
-    #         HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
-    #         HDim(sector, 'Sector', CLOSEST, ABOVE),
-    #         HDim(income, 'Income Description', DIRECTLY, LEFT),
-    #         HDim(code, 'CDID', DIRECTLY, LEFT),
-    #         HDim(year, 'Period', DIRECTLY, ABOVE),
-    #         HDim(quarter, 'Quarter', DIRECTLY, ABOVE),        
-    #         HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
-    #         HDim(income_type, 'Income', CLOSEST, LEFT),
-    #         HDimConst('Account Type', 'Current Account'),
-    #         HDimConst('Measure Type', 'bop-current-account'),
-    #         HDimConst('Unit', 'gbp-million'),
-    #     ]
-        
-    #     cs = ConversionSegment(tab, dimensions, observations)
-    #     tidy_sheet = cs.topandas()
-    #     tidied_sheets.append(tidy_sheet)
-    #     # trace.store('combined_dataframeB5', tidy_sheet)
-    #     df = pd.concat(tidied_sheets, sort = True).fillna('')
-        
-    #     df['Period'] = df.Period.str.replace('\.0', '')
-    #     df['Quarter'] = df["Quarter"].str.lstrip()
-    #     df['Period'] = df['Period'] + df['Quarter']
-    #     df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
-    #     df.drop(['Quarter'], axis=1, inplace=True)
-        
-    #     if 'CDID' in df.columns:
-    #         df.drop('CDID', axis=1, inplace=True)
-        
-    #     df['OBS'].loc[(df['OBS'] == '')] = '0'
-    #     df['OBS'] = df['OBS'].astype(int)
-        
-    #     df['Income Description'] = df['Income Description'].str.rstrip('2')
-    #     df['Income Description'] = df['Income Description'].str.rstrip('3')
-    #     df['Income Description'] = df['Income Description'].str.lstrip()
-        
-    #     df['Income'] = df['Income'].str.rstrip('1')
-    #     df['Sector'] = df['Sector'].str.lstrip()
-        
-    #     df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not Seasonally adjusted': 'NSA' }})
-        
-    #     df.rename(columns={'OBS' : 'Value', 'DATAMAKER' : 'Marker'}, inplace=True)
-        
-    #     #tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
-    #     tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'Value']]
-        
-    #     for column in tidy:
-    #         if column in ('Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type'):
-    #             tidy[column] = tidy[column].str.lstrip()
-    #             tidy[column] = tidy[column].map(lambda x: pathify(x))
-
-    #     # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
-       
-      
+for tab in tabs:
     if (tab.name == 'B6') or (tab.name == 'B6A'):
         title = distribution.title + ' :Transactions with the EU and EMU'
         #columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']
@@ -688,7 +612,47 @@ stop
 
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
-        
+tidy.columns
+
+tidy["Period"].unique()
+# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
+#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
+
+tidy["Flow Directions"].unique()
+# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
+#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
+
+tidy["Account Type"].unique()
+# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
+#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
+
+tidy["Transaction Type"].unique()
+tidy["Transaction Type"].replace({'' : "not-applicable"})
+tidy["Transaction Type"].unique()
+# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
+#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
+
+tidy["Services"].unique()
+# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
+#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
+
+tidy["Members"].unique()
+# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
+#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
+
+tidy["Seasonal Adjustment"].unique()
+# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
+#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
+
+tidy.to_csv("transactions_with_eu_and_emu-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('transactions_with_eu_and_emu-catalog-metadata.json')
+
+# +
+# end of fifth cube
+# -
+
+   
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
     if (tab.name == 'B6B') or (tab.name == 'B6B_2') or (tab.name == 'B6B_3') or (tab.name == 'B6C') or (tab.name == 'B6C_2') or (tab.name == 'B6C_3'):
         title = distribution.title + ' :Transactions with non-EU countries'
