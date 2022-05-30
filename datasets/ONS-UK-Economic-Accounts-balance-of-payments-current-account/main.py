@@ -279,77 +279,56 @@ catalog_metadata.to_json_file('trade_in_goods_and_services-catalog-metadata.json
 # End of Second Cube
 # -
 
-
-    # B2 B2A B3B3A
-    title = distribution.title + ' :Trade in goods and services'
-    #columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
-    columns = ['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']
-    metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Trade in goods and services"
-    metadata.dataset.comment = "Contents of the balance of payments: Trade in goods and services - Quarterly transactions"
-    metadata.dataset.description = metadata.dataset.comment
-    
-    if 'B2' in tab.name: 
-
-        flow = tab.excel_ref('B').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
-
-        # trace.Product("Selcted as products from cell B and removing flow directions, trade and seasonal adjustment")
-        product = tab.excel_ref('B').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
-
-        code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
-        year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
-        quarter = tab.excel_ref('D5').expand(RIGHT)
-        seasonal_adjustment = tab.excel_ref('B2')
-        trade = tab.excel_ref('B1')
-        observations = quarter.fill(DOWN).is_not_blank()
-
-        dimensions = [
-            HDim(year, 'Period', DIRECTLY, ABOVE),
-            HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDim(code, 'CDID', DIRECTLY, LEFT),
-            HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
-            HDim(product, 'Product', DIRECTLY, LEFT),
-            HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
-            HDim(trade, 'Services', CLOSEST, LEFT),
-            HDimConst('Account Type', 'Current Account')#,
-            #HDimConst('Measure Type', 'bop-current-account'),
-            #HDimConst('Unit', 'gbp-million')   
-        ]
+for tab in tabs:
+    #B4, B4A & B4B
+    if 'B4' in tab.name: 
+        title = distribution.title + ' :Primary income'
+        #columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
+        columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']
         
-        cs = ConversionSegment(tab, dimensions, observations) 
-        tidy_sheet = cs.topandas()
-        tidied_sheets.append(tidy_sheet)
-        # trace.store('combined_dataframeB23', tidy_sheet)
-
-    elif 'B3' in tab.name: 
-
-        trace.start(title, tab, columns, distribution.downloadURL)
-
-        flow = tab.excel_ref('B').expand(DOWN).by_index([7,22,37]) - tab.excel_ref('B51').expand(DOWN)
-        product = tab.excel_ref('B').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
+        metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Primary Income"
+        metadata.dataset.comment = "Contents of the balance of payments: Primary Income - Quarterly transactions"
+        metadata.dataset.description = metadata.dataset.comment + """
+        Other primary income: includes taxes and subsidies on products and production was previously classified to secondary income.
+        Monetary financial institutions:  Banks and building societies
+        """   
+        
+        income = tab.excel_ref('B10').expand(DOWN).is_not_blank()  
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
         year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
         quarter = tab.excel_ref('D5').expand(RIGHT)
         seasonal_adjustment = tab.excel_ref('B2')
-        trade = tab.excel_ref('B1')
+        income_type = tab.excel_ref('B1')
         observations = quarter.fill(DOWN).is_not_blank()
-
+        
+        if tab.name == 'B4B':
+            flow = tab.excel_ref('B').expand(DOWN).by_index([7,18,29]) - tab.excel_ref('B40').expand(DOWN)
+            earning_type = tab.excel_ref('B').expand(DOWN).by_index([9,20,31]) - tab.excel_ref('B40').expand(DOWN)
+        if tab.name == 'B4':
+            earning_type = tab.excel_ref('B').expand(DOWN).by_index([9,31,52]) - tab.excel_ref('B72').expand(DOWN)
+            flow = tab.excel_ref('B').expand(DOWN).by_index([7,29,50]) - tab.excel_ref('B72').expand(DOWN)
+        if tab.name == 'B4A':
+            earning_type = tab.excel_ref('B').expand(DOWN).by_index([9,31,51]) - tab.excel_ref('B70').expand(DOWN)
+            flow = tab.excel_ref('B').expand(DOWN).by_index([7,29,50]) - tab.excel_ref('B70').expand(DOWN)
+        
         dimensions = [
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
             HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
-            HDim(product, 'Product', DIRECTLY, LEFT),
+            HDim(income, 'Income Description', DIRECTLY, LEFT),
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
-            HDim(trade, 'Services', CLOSEST, LEFT),
+            HDim(earning_type, 'Earnings', CLOSEST, ABOVE),
+            HDim(income_type, 'Income', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
             HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million'),
-         ]
-
+        ]
+        
         cs = ConversionSegment(tab, dimensions, observations)
-        tidy_sheet = cs.topandas()
+        tidy_sheet = cs.topandas() 
         tidied_sheets.append(tidy_sheet)
-        # trace.store('combined_dataframeB23', tidy_sheet)
+        # trace.store('combined_dataframeB4', tidy_sheet)
         df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
@@ -364,20 +343,71 @@ catalog_metadata.to_json_file('trade_in_goods_and_services-catalog-metadata.json
         df['OBS'].loc[(df['OBS'] == '')] = '0'
         df['OBS'] = df['OBS'].astype(int)
         
-        df['Flow Directions'] = df['Flow Directions'].map(lambda x: x.split()[0])
-        df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted' : 'NSA' }})
-        df['Product'] = df['Product'].str.lstrip()
-        df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
-        df['Marker'].replace(' -', 'unknown', inplace=True)
+        df.rename(columns={'OBS' : 'Value'}, inplace=True)
+
+        df['Income Description'] = df['Income Description'].str.lstrip()
+        df['Income Description'] = df['Income Description'].str.rstrip('1')
         
-        #tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker']]
+        df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA', ' Sector analysis': 'sector-analysis' }})
+        df = df.replace({'Earnings' : { '' : 'Net earnings', 
+                                   ' (Net earnings)' : 'Net earnings',
+                                   ' (Earnings of UK residents on investment abroad)' : 'Earnings of UK residents on investment abroad',
+                                   ' (Foreign earnings on investment in UK)' : 'Foreign earnings on investment in the UK',
+                                   ' (Foreign earnings on investment in the UK)' : 'Foreign earnings on investment in the UK'}})
+    
+        #tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
+        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value']]
+        
         for column in tidy:
-            if column in ('Flow Directions', 'Product', 'Services', 'Account Type'):
+            if column in ('Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
+                tidy[column] = tidy[column].str.rstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
 
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
+
+tidy.columns
+
+tidy["Period"].unique()
+# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
+#        'Account Type', 'Seasonal Adjustment', 'Value']
+
+tidy["Flow Directions"].unique()
+# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
+#        'Account Type', 'Seasonal Adjustment', 'Value']
+
+tidy["Income"].unique()
+tidy["Income"].replace({'' : "not-applicable"}, inplace = True)
+tidy["Income"].unique()
+# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
+#        'Account Type', 'Seasonal Adjustment', 'Value']
+
+tidy["Income Description"].unique()
+tidy["Income Description"].replace({'' : "not-applicable"}, inplace = True)
+tidy["Income Description"].unique()
+# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
+#        'Account Type', 'Seasonal Adjustment', 'Value']
+
+tidy["Earnings"].unique()
+# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
+#        'Account Type', 'Seasonal Adjustment', 'Value']
+
+tidy["Account Type"].unique()
+# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
+#        'Account Type', 'Seasonal Adjustment', 'Value']
+
+tidy["Seasonal Adjustment"].unique()
+# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
+#        'Account Type', 'Seasonal Adjustment', 'Value']
+
+tidy.to_csv("primary_income-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('primary_income-catalog-metadata.json')
+
+# +
+# End of third Cube
+# -
+
         
     #B4, B4A & B4B
     if 'B4' in tab.name: 
