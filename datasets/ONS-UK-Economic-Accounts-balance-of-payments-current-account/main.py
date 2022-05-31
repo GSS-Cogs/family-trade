@@ -775,10 +775,7 @@ catalog_metadata.to_json_file('transactions_with_non_eu-catalog-metadata.json')
 # End of sixth cube
 # -
 
-   
-
-
-    
+for tab in tabs:
     # # Tabs B7_B7A
     if 'B7' in tab.name: 
         title = distribution.title + ' :Capital Account'
@@ -861,3 +858,34 @@ catalog_metadata.to_json_file('transactions_with_non_eu-catalog-metadata.json')
             json.dump(data, jsonFile)
     
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
+
+tidy.columns
+
+tidy["Period"].unique()
+
+tidy["Flow Directions"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Sector',
+#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
+
+tidy["Services"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Sector',
+#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
+
+tidy["Sector"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Sector',
+#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
+
+tidy["Seasonal Adjustment"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Sector',
+#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
+
+tidy["Account Type"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Sector',
+#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
+
+tidy.to_csv("capital_account-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('capital_account-catalog-metadata.json')
+
+# +
+# End of seventh cube
