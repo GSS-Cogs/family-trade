@@ -652,7 +652,7 @@ catalog_metadata.to_json_file('transactions_with_eu_and_emu-catalog-metadata.jso
 # end of fifth cube
 # -
 
-   
+for tab in tabs:
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
     if (tab.name == 'B6B') or (tab.name == 'B6B_2') or (tab.name == 'B6B_3') or (tab.name == 'B6C') or (tab.name == 'B6C_2') or (tab.name == 'B6C_3'):
         title = distribution.title + ' :Transactions with non-EU countries'
@@ -737,6 +737,46 @@ catalog_metadata.to_json_file('transactions_with_eu_and_emu-catalog-metadata.jso
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
+
+tidy.columns
+
+tidy["Flow Directions"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Account Type',
+#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
+#        'Value']
+
+tidy["Services"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Account Type',
+#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
+#        'Value']
+
+tidy["Account Type"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Account Type',
+#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
+#        'Value']
+
+tidy["Transaction Type"].unique()
+tidy["Transaction Type"].replace({'':"not-applicable"}, inplace = True)
+tidy["Transaction Type"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Account Type',
+#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
+#        'Value']
+
+tidy["Seasonal Adjustment"].unique()
+# ['Period', 'Flow Directions', 'Services', 'Account Type',
+#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
+#        'Value']
+
+tidy.to_csv("transactions_with_non_eu-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('transactions_with_non_eu-catalog-metadata.json')
+
+# +
+# End of sixth cube
+# -
+
+   
+
 
     
     # # Tabs B7_B7A
