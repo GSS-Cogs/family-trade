@@ -30,8 +30,27 @@ mainDescr = metadata.dataset.description
 
 distribution
 
+# +
+# # grouping tab into topics to iterate through by their names
+
+# summary_of_balance_of_payments = ["B1"]
+# trade_in_goods_and_services = ["B2", "B2A", "B3", "B3A"]
+# primary_income = ["B4", "B4A", "B4B"]
+# secondary_income = ["B5", "B5A"]
+# transactions_with_the_EU_and_EMU = ["B6", "B6A"]
+# transactions_with_non_EU_countries = ["B6B", "B6B_2", "B6B_3", "B6C", "B6C_2", "B6C_3"]
+# capital_account = ["B7", "B7A"]
+# -
+
 tabs = distribution.as_databaker()
 
+
+# +
+# tabs = {tab.name: tab for tab in distribution.as_databaker()}
+
+# +
+# for name, tab in tabs.items():
+#     print(tab.name)
 
 # +
 def left(s, amount):
@@ -57,9 +76,6 @@ trace = TransformTrace()
 for tab in tabs:
     if 'B1' in tab.name:      
         title = distribution.title + ' - Summary of balance of payments' 
-        columns = ['Period','Flow Directions','Services','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
-           'Measure Type', 'Unit']
-        trace.start(title, tab, columns, distribution.downloadURL) 
         
         metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Summary of balance of payments"
         metadata.dataset.comment = "Contents of the balance of payments: Current Account. Summary of balance of payments - Quarterly transactions"
@@ -72,15 +88,12 @@ for tab in tabs:
         ## "Removing records of 'Balances as a percentage of GDP' & 'Current balance as a % of GDP' information")
         remove_percentage = tab.excel_ref('A30').expand(RIGHT).expand(DOWN) - tab.excel_ref('A41').expand(RIGHT).expand(DOWN)
         
-        trace.Account_Type("Selected as current account and financial account")
         account_type = tab.excel_ref('B').expand(DOWN).by_index([9,44,66]) - tab.excel_ref('B76').expand(DOWN)
         
-        trace.Seasonal_Adjustment("Selected as Seasonally Adjusted or Non-seasonally Adjusted")
         seasonal_adjustment = tab.excel_ref('B').expand(DOWN).by_index([7,42]) - tab.excel_ref('B76').expand(DOWN)
         
         flow = tab.excel_ref('B2')
-        
-        trace.Services("Selected as trade activities, from cell 'B' with the removal of percentage, account type and seasonal ajuestment")
+
         services = tab.excel_ref('B10').expand(DOWN).is_not_blank() - remove_percentage - account_type - seasonal_adjustment 
         
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
@@ -142,6 +155,8 @@ tidy.columns
 
 tidy["Sheet"].unique()
 
+tidy
+
 tidy.to_csv("quarterly_summary_of_balance_of_payments-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('quarterly_summary_of_balance_of_payments-catalog-metadata.json')
@@ -153,11 +168,12 @@ for tab in tabs:
     metadata.dataset.comment = "Contents of the balance of payments: Trade in goods and services - Quarterly transactions"
     metadata.dataset.description = metadata.dataset.comment
     
-    if 'B2' in tab.name: 
+    if 'B2' in tab.name:
+        # print(name)
 
-        flow = tab.excel_ref('B').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
+        flow = tab.excel_ref('B1').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
 
-        product = tab.excel_ref('B').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
+        product = tab.excel_ref('B1').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
 
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
         year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
@@ -185,9 +201,10 @@ for tab in tabs:
         tidied_sheets.append(tidy_sheet)
 
     elif 'B3' in tab.name: 
+        # print(name)
 
-        flow = tab.excel_ref('B').expand(DOWN).by_index([7,22,37]) - tab.excel_ref('B51').expand(DOWN)
-        product = tab.excel_ref('B').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
+        flow = tab.excel_ref('B1').expand(DOWN).by_index([7,22,37]) - tab.excel_ref('B51').expand(DOWN)
+        product = tab.excel_ref('B1').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
         year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
         quarter = tab.excel_ref('D5').expand(RIGHT)
@@ -247,8 +264,19 @@ tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inpla
 
 tidy["Sheet"].unique()
 
+tidy[tidy["Sheet"] == "B1"]
+
+tidy["Sheet"].unique()
+
+tidy = tidy[tidy.Sheet != "B1"]
+
+tidy
+
+tidy["Sheet"].unique()
+
 # +
 #We don't need B1 here and B3, B3A is not covered
+# Successfully removed B1
 # -
 
 tidy.to_csv("trade_in_goods_and_services-observations.csv", index = False)
@@ -351,8 +379,13 @@ tidy["Account Type"].unique()
 
 tidy["Sheet"].unique()
 
+tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & (tidy["Sheet"] != '')]
+
+tidy["Sheet"].unique()
+
 # +
 # ['B1', 'B2', 'B2A', '',] needs to be droped
+# Successfully dropped
 # -
 
 tidy.to_csv("primary_income-observations.csv", index = False)
