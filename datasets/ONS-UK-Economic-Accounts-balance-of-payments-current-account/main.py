@@ -393,6 +393,8 @@ tidy["Earnings"].unique()
 #        'Account Type', 'Seasonal Adjustment', 'Value']
 
 tidy["Account Type"].unique()
+tidy["Account Type"].replace({'financial-account2' : "financial-account"}, inplace = True)
+tidy["Account Type"].unique()
 # ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
 #        'Account Type', 'Seasonal Adjustment', 'Value']
 
@@ -503,13 +505,13 @@ tidy["Income"].unique()
 #        'Account Type', 'Seasonal Adjustment', 'Value']
 
 tidy["Income Description"].unique()
-tidy["Income Description"].replace({'':"not-applicable"})
+tidy["Income Description"].replace({'':"not-applicable"}, inplace = True)
 tidy["Income Description"].unique()
 # ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
 #        'Account Type', 'Seasonal Adjustment', 'Value']
 
 tidy["Sector"].unique()
-tidy["Sector"].replace({'':"not-applicable"})
+tidy["Sector"].replace({'':"not-applicable"}, inplace = True)
 tidy["Sector"].unique()
 # ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
 #        'Account Type', 'Seasonal Adjustment', 'Value']
@@ -623,11 +625,13 @@ tidy["Flow Directions"].unique()
 #        'Services', 'Members', 'Seasonal Adjustment', 'Value']
 
 tidy["Account Type"].unique()
+tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
+tidy["Account Type"].unique()
 # ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
 #        'Services', 'Members', 'Seasonal Adjustment', 'Value']
 
 tidy["Transaction Type"].unique()
-tidy["Transaction Type"].replace({'' : "not-applicable"})
+tidy["Transaction Type"].replace({'' : "not-applicable"}, inplace = True)
 tidy["Transaction Type"].unique()
 # ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
 #        'Services', 'Members', 'Seasonal Adjustment', 'Value']
@@ -750,6 +754,8 @@ tidy["Services"].unique()
 #        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
 #        'Value']
 
+tidy["Account Type"].unique()
+tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
 tidy["Account Type"].unique()
 # ['Period', 'Flow Directions', 'Services', 'Account Type',
 #        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
@@ -879,6 +885,8 @@ tidy["Seasonal Adjustment"].unique()
 # ['Period', 'Flow Directions', 'Services', 'Sector',
 #        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
 
+tidy["Account Type"].unique()
+tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
 tidy["Account Type"].unique()
 # ['Period', 'Flow Directions', 'Services', 'Sector',
 #        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
