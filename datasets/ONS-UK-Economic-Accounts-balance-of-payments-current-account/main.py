@@ -144,16 +144,6 @@ for tab in tabs:
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 # -
 
-tidy.columns
-
-tidy['Flow Directions'].unique()
-
-tidy["Services"].unique()
-
-tidy["Seasonal Adjustment"].unique()
-
-tidy["Account Type"].unique()
-
 tidy.to_csv("quarterly_summary_of_balance_of_payments-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('quarterly_summary_of_balance_of_payments-catalog-metadata.json')
@@ -256,20 +246,13 @@ for tab in tabs:
 
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
-tidy.columns
-
-tidy["Flow Directions"].unique()
-
-tidy["Product"].unique()
 tidy["Product"].replace({'' : "not-applicable"}, inplace = True)
-
-tidy["Product"].unique()
 
 tidy["Seasonal Adjustment"].unique()
 
 tidy["Services"].unique()
 
-tidy["Account Type"].unique()
+tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
 
 tidy.to_csv("trade_in_goods_and_services-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -366,41 +349,11 @@ for tab in tabs:
 
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
-tidy.columns
-
-tidy["Period"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
-
-tidy["Flow Directions"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
-
-tidy["Income"].unique()
 tidy["Income"].replace({'' : "not-applicable"}, inplace = True)
-tidy["Income"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
 
-tidy["Income Description"].unique()
 tidy["Income Description"].replace({'' : "not-applicable"}, inplace = True)
-tidy["Income Description"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
 
-tidy["Earnings"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
-
-tidy["Account Type"].unique()
 tidy["Account Type"].replace({'financial-account2' : "financial-account"}, inplace = True)
-tidy["Account Type"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
-
-tidy["Seasonal Adjustment"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Earnings',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
 
 tidy.to_csv("primary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -490,39 +443,9 @@ for tab in tabs:
 
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
-tidy.columns
-
-tidy["Period"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
-
-tidy["Flow Directions"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
-
-tidy["Income"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
-
-tidy["Income Description"].unique()
 tidy["Income Description"].replace({'':"not-applicable"}, inplace = True)
-tidy["Income Description"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
 
-tidy["Sector"].unique()
 tidy["Sector"].replace({'':"not-applicable"}, inplace = True)
-tidy["Sector"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
-
-tidy["Account Type"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
-
-tidy["Seasonal Adjustment"].unique()
-# ['Period', 'Flow Directions', 'Income', 'Income Description', 'Sector',
-#        'Account Type', 'Seasonal Adjustment', 'Value']
 
 tidy.to_csv("secondary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -614,39 +537,9 @@ for tab in tabs:
 
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
-tidy.columns
-
-tidy["Period"].unique()
-# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
-#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
-
-tidy["Flow Directions"].unique()
-# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
-#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
-
-tidy["Account Type"].unique()
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
-tidy["Account Type"].unique()
-# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
-#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
 
-tidy["Transaction Type"].unique()
 tidy["Transaction Type"].replace({'' : "not-applicable"}, inplace = True)
-tidy["Transaction Type"].unique()
-# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
-#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
-
-tidy["Services"].unique()
-# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
-#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
-
-tidy["Members"].unique()
-# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
-#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
-
-tidy["Seasonal Adjustment"].unique()
-# ['Period', 'Flow Directions', 'Account Type', 'Transaction Type',
-#        'Services', 'Members', 'Seasonal Adjustment', 'Value']
 
 tidy.to_csv("transactions_with_eu_and_emu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -742,36 +635,9 @@ for tab in tabs:
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
-tidy.columns
-
-tidy["Flow Directions"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Account Type',
-#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
-#        'Value']
-
-tidy["Services"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Account Type',
-#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
-#        'Value']
-
-tidy["Account Type"].unique()
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
-tidy["Account Type"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Account Type',
-#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
-#        'Value']
 
-tidy["Transaction Type"].unique()
 tidy["Transaction Type"].replace({'':"not-applicable"}, inplace = True)
-tidy["Transaction Type"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Account Type',
-#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
-#        'Value']
-
-tidy["Seasonal Adjustment"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Account Type',
-#        'Transaction Type', 'Country Transaction', 'Seasonal Adjustment',
-#        'Value']
 
 tidy.to_csv("transactions_with_non_eu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -865,31 +731,7 @@ for tab in tabs:
     
         # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
-tidy.columns
-
-tidy["Period"].unique()
-
-tidy["Flow Directions"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Sector',
-#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
-
-tidy["Services"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Sector',
-#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
-
-tidy["Sector"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Sector',
-#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
-
-tidy["Seasonal Adjustment"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Sector',
-#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
-
-tidy["Account Type"].unique()
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
-tidy["Account Type"].unique()
-# ['Period', 'Flow Directions', 'Services', 'Sector',
-#        'Seasonal Adjustment', 'Account Type', 'Value', 'Marker']
 
 tidy.to_csv("capital_account-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
