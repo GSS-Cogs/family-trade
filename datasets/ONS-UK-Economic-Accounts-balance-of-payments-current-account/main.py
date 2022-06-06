@@ -22,11 +22,6 @@ from gssutils import *
 import json
 from databaker.framework import *
 
-# cubes = Cubes("info.json")
-
-# pd.options.mode.chained_assignment = None 
-
-# metadata = metadata(seed='info.json')
 metadata = Scraper(seed='info.json')
 distribution = metadata.distribution(latest=True)
 
@@ -92,6 +87,9 @@ for tab in tabs:
         year =  tab.excel_ref('D4').expand(RIGHT).is_not_blank()
         quarter = tab.excel_ref('D5').expand(RIGHT)
         observations = quarter.fill(DOWN).is_not_blank() - remove_percentage
+
+        sheet = tab.name
+        # print(sheet)
         
         dimensions = [
             HDim(account_type, 'Account Type', CLOSEST, ABOVE),
@@ -102,14 +100,14 @@ for tab in tabs:
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
             HDimConst('Measure Type', 'bop-current-account'),
-            HDimConst('Unit', 'gbp-million')
+            HDimConst('Unit', 'gbp-million'),
+            HDimConst("Sheet", sheet)
         ]
         
         cs = ConversionSegment(tab, dimensions, observations)        
         tidy_sheet = cs.topandas()
         tidied_sheets.append(tidy_sheet)
 
-        # trace.store('dataframeB1', tidy_sheet)
         df = pd.concat(tidied_sheets, sort = True).fillna('')
 
         df['Period'] = df.Period.str.replace('\.0', '')
@@ -133,16 +131,16 @@ for tab in tabs:
         df['Flow Directions'] = df['Flow Directions'].map(lambda x: x.split()[0])
         df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
-        #tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
-        #  'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'Account Type', 'Value']]
+        tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'Account Type', 'Value', 'Sheet']]
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-
-        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 # -
+
+tidy.columns
+
+tidy["Sheet"].unique()
 
 tidy.to_csv("quarterly_summary_of_balance_of_payments-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -159,7 +157,6 @@ for tab in tabs:
 
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
 
-        # trace.Product("Selcted as products from cell B and removing flow directions, trade and seasonal adjustment")
         product = tab.excel_ref('B').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
 
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
@@ -169,6 +166,8 @@ for tab in tabs:
         trade = tab.excel_ref('B1')
         observations = quarter.fill(DOWN).is_not_blank()
 
+        sheet = tab.name
+
         dimensions = [
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
@@ -177,19 +176,15 @@ for tab in tabs:
             HDim(product, 'Product', DIRECTLY, LEFT),
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(trade, 'Services', CLOSEST, LEFT),
-            HDimConst('Account Type', 'Current Account')#,
-            #HDimConst('Measure Type', 'bop-current-account'),
-            #HDimConst('Unit', 'gbp-million')   
+            HDimConst('Account Type', 'Current Account'),
+            HDimConst("Sheet", sheet)  
         ]
         
         cs = ConversionSegment(tab, dimensions, observations) 
         tidy_sheet = cs.topandas()
         tidied_sheets.append(tidy_sheet)
-        # trace.store('combined_dataframeB23', tidy_sheet)
 
     elif 'B3' in tab.name: 
-
-        trace.start(title, tab, columns, distribution.downloadURL)
 
         flow = tab.excel_ref('B').expand(DOWN).by_index([7,22,37]) - tab.excel_ref('B51').expand(DOWN)
         product = tab.excel_ref('B').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
@@ -216,7 +211,6 @@ for tab in tabs:
         cs = ConversionSegment(tab, dimensions, observations)
         tidy_sheet = cs.topandas()
         tidied_sheets.append(tidy_sheet)
-        # trace.store('combined_dataframeB23', tidy_sheet)
         df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
@@ -237,14 +231,11 @@ for tab in tabs:
         df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
         df['Marker'].replace(' -', 'unknown', inplace=True)
         
-        #tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'CDID', 'Services', 'Account Type', 'Value', 'Marker', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker']]
+        tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker', "Sheet"]]
         for column in tidy:
             if column in ('Flow Directions', 'Product', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-
-        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
 tidy["Product"].replace({'' : "not-applicable"}, inplace = True)
 
@@ -253,6 +244,12 @@ tidy["Seasonal Adjustment"].unique()
 tidy["Services"].unique()
 
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
+
+tidy["Sheet"].unique()
+
+# +
+#We don't need B1 here and B3, B3A is not covered
+# -
 
 tidy.to_csv("trade_in_goods_and_services-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -266,7 +263,6 @@ for tab in tabs:
     #B4, B4A & B4B
     if 'B4' in tab.name: 
         title = distribution.title + ' :Primary income'
-        #columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value', 'Marker', 'Measure Type', 'Unit']
         
         metadata.dataset.title = "UK Economic Accounts: balance of payments - Current Account - Primary Income"
@@ -283,6 +279,8 @@ for tab in tabs:
         seasonal_adjustment = tab.excel_ref('B2')
         income_type = tab.excel_ref('B1')
         observations = quarter.fill(DOWN).is_not_blank()
+
+        sheet = tab.name
         
         if tab.name == 'B4B':
             flow = tab.excel_ref('B').expand(DOWN).by_index([7,18,29]) - tab.excel_ref('B40').expand(DOWN)
@@ -304,14 +302,12 @@ for tab in tabs:
             HDim(earning_type, 'Earnings', CLOSEST, ABOVE),
             HDim(income_type, 'Income', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
-            HDimConst('Measure Type', 'bop-current-account'),
-            HDimConst('Unit', 'gbp-million'),
+            HDimConst("Sheet", sheet)
         ]
         
         cs = ConversionSegment(tab, dimensions, observations)
         tidy_sheet = cs.topandas() 
         tidied_sheets.append(tidy_sheet)
-        # trace.store('combined_dataframeB4', tidy_sheet)
         df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
@@ -337,9 +333,8 @@ for tab in tabs:
                                    ' (Earnings of UK residents on investment abroad)' : 'Earnings of UK residents on investment abroad',
                                    ' (Foreign earnings on investment in UK)' : 'Foreign earnings on investment in the UK',
                                    ' (Foreign earnings on investment in the UK)' : 'Foreign earnings on investment in the UK'}})
-    
-        #tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value']]
+
+        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type', 'Seasonal Adjustment', 'Value', "Sheet"]]
         
         for column in tidy:
             if column in ('Flow Directions', 'Income', 'Income Description', 'Earnings', 'Account Type'):
@@ -347,13 +342,18 @@ for tab in tabs:
                 tidy[column] = tidy[column].str.rstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
 
-        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
-
 tidy["Income"].replace({'' : "not-applicable"}, inplace = True)
 
 tidy["Income Description"].replace({'' : "not-applicable"}, inplace = True)
 
 tidy["Account Type"].replace({'financial-account2' : "financial-account"}, inplace = True)
+tidy["Account Type"].unique()
+
+tidy["Sheet"].unique()
+
+# +
+# ['B1', 'B2', 'B2A', '',] needs to be droped
+# -
 
 tidy.to_csv("primary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -367,8 +367,6 @@ for tab in tabs:
     # Tabs B5 and B5A    
     if (tab.name == 'B5') or (tab.name == 'B5A'):
         title = distribution.title + ' :Secondary income'
-        #columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 
-        #   'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 
            'Value', 'Marker', 'Measure Type', 'Unit']
         
@@ -389,6 +387,8 @@ for tab in tabs:
         seasonal_adjustment = tab.excel_ref('B2')
         income_type = tab.excel_ref('B1')
         observations = quarter.fill(DOWN).is_not_blank()
+
+        sheet = tab.name
         
         dimensions = [
             HDim(flow, 'Flow Directions', CLOSEST, ABOVE),
@@ -400,14 +400,12 @@ for tab in tabs:
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(income_type, 'Income', CLOSEST, LEFT),
             HDimConst('Account Type', 'Current Account'),
-            HDimConst('Measure Type', 'bop-current-account'),
-            HDimConst('Unit', 'gbp-million'),
+            HDimConst("Sheet", sheet)
         ]
         
         cs = ConversionSegment(tab, dimensions, observations)
         tidy_sheet = cs.topandas()
         tidied_sheets.append(tidy_sheet)
-        # trace.store('combined_dataframeB5', tidy_sheet)
         df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
@@ -432,20 +430,22 @@ for tab in tabs:
         df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not Seasonally adjusted': 'NSA' }})
         
         df.rename(columns={'OBS' : 'Value', 'DATAMAKER' : 'Marker'}, inplace=True)
-        
-        #tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'Value']]
+        tidy = df[['Period','Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type', 'Seasonal Adjustment', 'Value', "Sheet"]]
         
         for column in tidy:
             if column in ('Flow Directions', 'Income', 'Income Description', 'Sector', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
 
-        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
-
 tidy["Income Description"].replace({'':"not-applicable"}, inplace = True)
 
 tidy["Sector"].replace({'':"not-applicable"}, inplace = True)
+
+tidy["Sheet"].unique()
+
+# +
+# ['B1', 'B2', 'B2A', '', 'B4', 'B4A', 'B4B'] needs to be removed
+# -
 
 tidy.to_csv("secondary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -458,7 +458,6 @@ catalog_metadata.to_json_file('secondary_income-catalog-metadata.json')
 for tab in tabs:
     if (tab.name == 'B6') or (tab.name == 'B6A'):
         title = distribution.title + ' :Transactions with the EU and EMU'
-        #columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', 'Measure Type', 'Unit']
         
         
@@ -484,6 +483,8 @@ for tab in tabs:
         year =  tab.excel_ref('D5').expand(RIGHT).is_not_blank()
         quarter = tab.excel_ref('D6').expand(RIGHT)
         observations = quarter.fill(DOWN).is_not_blank()
+
+        sheet = tab.name
         
         dimensions = [
             HDim(account_Type, 'Account Type', CLOSEST, LEFT),
@@ -497,12 +498,12 @@ for tab in tabs:
             HDim(emu_and_services, 'Members', DIRECTLY, LEFT),
             HDimConst('Measure Type', 'bop-current-account'),
             HDimConst('Unit', 'gbp-million'),
+            HDimConst("Sheet", sheet)
         ]
         
         cs = ConversionSegment(tab, dimensions, observations)
         tidy_sheet = cs.topandas()
         tidied_sheets.append(tidy_sheet)
-        # trace.store('combined_dataframeB6A', tidy_sheet)
         df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
@@ -524,7 +525,6 @@ for tab in tabs:
         df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
         
         df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
-        #df['Marker'].replace(' -', 'unknown', inplace=True)
         
         df['Flow Directions'] = df['Flow Directions'].str.strip().apply(pathify)
         df['Account Type'] = df['Account Type'].str.strip().apply(pathify)
@@ -532,14 +532,17 @@ for tab in tabs:
         df['Services'] = df['Services'].str.strip().apply(pathify)
         df['Members'] = df['Members'].str.strip().apply(pathify)
         
-        #tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value']]
-
-        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
+        tidy = df[['Period','Flow Directions', 'Account Type', 'Transaction Type', 'Services', 'Members', 'Seasonal Adjustment', 'Value', "Sheet"]]
 
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
 
 tidy["Transaction Type"].replace({'' : "not-applicable"}, inplace = True)
+
+tidy["Sheet"].unique()
+
+# +
+# ['B1', 'B2', 'B2A', '', 'B4', 'B4A', 'B4B', 'B5', 'B5A'] needs to be removed
+# -
 
 tidy.to_csv("transactions_with_eu_and_emu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -553,8 +556,6 @@ for tab in tabs:
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
     if (tab.name == 'B6B') or (tab.name == 'B6B_2') or (tab.name == 'B6B_3') or (tab.name == 'B6C') or (tab.name == 'B6C_2') or (tab.name == 'B6C_3'):
         title = distribution.title + ' :Transactions with non-EU countries'
-        #columns = ['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 
-        #   'CDID', 'Value', 'Marker', 'Measure Type', 'Unit']
         columns = ['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 
            'Value', 'Marker', 'Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
@@ -574,6 +575,8 @@ for tab in tabs:
         code = tab.excel_ref('C7').expand(DOWN).is_not_blank()
         year =  tab.excel_ref('D5').expand(RIGHT).is_not_blank()
         quarter = tab.excel_ref('D6').expand(RIGHT)
+
+        sheet = tab.name
         
         if (tab.name == 'B6B_2') or (tab.name == 'B6B_3') or (tab.name == 'B6C_2') or (tab.name == 'B6C_3'):
             transaction_type = tab.excel_ref('B9')
@@ -596,14 +599,12 @@ for tab in tabs:
             HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDimConst('Measure Type', 'bop-current-account'),
-            HDimConst('Unit', 'gbp-million'),
+            HDimConst("Sheet", sheet)
         ]
         
         cs = ConversionSegment(tab, dimensions, observations)
         tidy_sheet = cs.topandas() 
         tidied_sheets.append(tidy_sheet)
-        # trace.store('combined_dataframeB6B', tidy_sheet)
         df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
@@ -626,18 +627,18 @@ for tab in tabs:
         
         df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
         
-        #tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 'CDID', 'Value', 'Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 'Value']]
+        tidy = df[['Period','Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction', 'Seasonal Adjustment', 'Value', "Sheet"]]
         
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Transaction Type', 'Country Transaction'):
                 tidy[column] = tidy[column].str.lstrip()
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
-        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
 
 tidy["Transaction Type"].replace({'':"not-applicable"}, inplace = True)
+
+tidy["Sheet"].unique()
 
 tidy.to_csv("transactions_with_non_eu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -651,8 +652,6 @@ for tab in tabs:
     # # Tabs B7_B7A
     if 'B7' in tab.name: 
         title = distribution.title + ' :Capital Account'
-        #columns = ['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
-        #   'Marker','Measure Type', 'Unit']
         columns = ['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'Account Type', 'Value', 
            'Marker','Measure Type', 'Unit']
         trace.start(title, tab, columns, distribution.downloadURL)
@@ -674,6 +673,8 @@ for tab in tabs:
         seasonal_adjustment = tab.excel_ref('B2')
         account_Type = tab.excel_ref('B1')
         observations = quarter.fill(DOWN).is_not_blank()
+
+        sheet = tab.name
         
         dimensions = [
             HDim(account_Type, 'Account Type', CLOSEST, LEFT),
@@ -684,13 +685,11 @@ for tab in tabs:
             HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDimConst('Measure Type', 'bop-capital-account'),
-            HDimConst('Unit', 'gbp-million'),
+            HDimConst("Sheet", sheet)
         ]
         cs = ConversionSegment(tab, dimensions, observations)
         tidy_sheet = cs.topandas()
         tidied_sheets.append(tidy_sheet)
-        # trace.store('combined_dataframeB7', tidy_sheet)
         df = pd.concat(tidied_sheets, sort = True).fillna('')
         
         df['Period'] = df.Period.str.replace('\.0', '')
@@ -715,9 +714,7 @@ for tab in tabs:
         df['Marker'].replace(' -', 'unknown', inplace=True)
         
         df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted': 'NSA' }})
-        #tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'CDID', 'Account Type', 'Value', 
-        #   'Marker','Measure Type', 'Unit']]
-        tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'Account Type', 'Value', 'Marker']]
+        tidy = df[['Period','Flow Directions','Services','Sector','Seasonal Adjustment', 'Account Type', 'Value', 'Marker', "Sheet"]]
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type', 'Sector'):
                 tidy[column] = tidy[column].str.lstrip()
@@ -728,10 +725,15 @@ for tab in tabs:
         data["transform"]["columns"]["Value"]["measure"] = "http://gss-data.org.uk/def/measure/bop-capital-account"
         with open("info.json", "w") as jsonFile:
             json.dump(data, jsonFile)
-    
-        # cubes.add_cube(copy.deepcopy(metadata), tidy, metadata.dataset.title)
 
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
+
+tidy["Sheet"].unique()
+
+# +
+# ['B1', 'B2', 'B2A', '', 'B4', 'B4A', 'B4B', 'B5', 'B5A', 'B6',
+#        'B6A', 'B6B', 'B6B_2', 'B6B_3', 'B6C', 'B6C_2', 'B6C_3'] needs to be removed
+# -
 
 tidy.to_csv("capital_account-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
