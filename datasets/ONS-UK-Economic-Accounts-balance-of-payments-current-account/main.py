@@ -30,27 +30,8 @@ mainDescr = metadata.dataset.description
 
 distribution
 
-# +
-# # grouping tab into topics to iterate through by their names
-
-# summary_of_balance_of_payments = ["B1"]
-# trade_in_goods_and_services = ["B2", "B2A", "B3", "B3A"]
-# primary_income = ["B4", "B4A", "B4B"]
-# secondary_income = ["B5", "B5A"]
-# transactions_with_the_EU_and_EMU = ["B6", "B6A"]
-# transactions_with_non_EU_countries = ["B6B", "B6B_2", "B6B_3", "B6C", "B6C_2", "B6C_3"]
-# capital_account = ["B7", "B7A"]
-# -
-
 tabs = distribution.as_databaker()
 
-
-# +
-# tabs = {tab.name: tab for tab in distribution.as_databaker()}
-
-# +
-# for name, tab in tabs.items():
-#     print(tab.name)
 
 # +
 def left(s, amount):
@@ -148,10 +129,6 @@ for tab in tabs:
                 tidy[column] = tidy[column].map(lambda x: pathify(x))
 # -
 
-tidy.columns
-
-tidy
-
 tidy.to_csv("quarterly_summary_of_balance_of_payments-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('quarterly_summary_of_balance_of_payments-catalog-metadata.json')
@@ -215,9 +192,7 @@ for tab in tabs:
             HDim(product, 'Product', DIRECTLY, LEFT),
             HDim(seasonal_adjustment, 'Seasonal Adjustment', CLOSEST, LEFT),
             HDim(trade, 'Services', CLOSEST, LEFT),
-            HDimConst('Account Type', 'Current Account'),
-            HDimConst('Measure Type', 'bop-current-account'),
-            HDimConst('Unit', 'gbp-million'),
+            HDimConst('Account Type', 'Current Account')
          ]
 
         cs = ConversionSegment(tab, dimensions, observations)
@@ -251,39 +226,15 @@ for tab in tabs:
 
 tidy["Product"].replace({'' : "not-applicable"}, inplace = True)
 
-tidy["Seasonal Adjustment"].unique()
-
-tidy["Services"].unique()
-
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
-
-tidy["Sheet"].unique()
-
-tidy["Sheet"].unique()
 
 tidy = tidy[tidy.Sheet != "B1"]
 
-tidy["Sheet"].unique()
-
-tidy.columns
-
-tidy["Sheet"].unique()
-
 tidy.drop("Sheet", axis = 1, inplace = True)
-# tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker']]
-
-# +
-#We don't need B1 here and B3, B3A is not covered
-# Successfully removed B1
-# -
 
 tidy.to_csv("trade_in_goods_and_services-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('trade_in_goods_and_services-catalog-metadata.json')
-
-# +
-# End of Second Cube
-# -
 
 for tab in tabs:
     #B4, B4A & B4B
@@ -373,30 +324,14 @@ tidy["Income"].replace({'' : "not-applicable"}, inplace = True)
 tidy["Income Description"].replace({'' : "not-applicable"}, inplace = True)
 
 tidy["Account Type"].replace({'financial-account2' : "financial-account"}, inplace = True)
-tidy["Account Type"].unique()
-
-tidy["Sheet"].unique()
 
 tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & (tidy["Sheet"] != '')]
 
-tidy["Sheet"].unique()
-
 tidy.drop("Sheet", axis = 1, inplace = True)
-
-tidy.columns
-
-# +
-# ['B1', 'B2', 'B2A', '',] needs to be droped
-# Successfully dropped
-# -
 
 tidy.to_csv("primary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('primary_income-catalog-metadata.json')
-
-# +
-# End of third Cube
-# -
 
 for tab in tabs:
     # Tabs B5 and B5A    
@@ -476,30 +411,15 @@ tidy["Income Description"].replace({'':"not-applicable"}, inplace = True)
 
 tidy["Sector"].replace({'':"not-applicable"}, inplace = True)
 
-tidy["Sheet"].unique()
-
 tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & 
             (tidy["Sheet"] != '') & (tidy["Sheet"] != "B4") & (tidy["Sheet"] != "B4A") & 
             (tidy["Sheet"] != "B4B")]
 
-tidy["Sheet"].unique()
-
-# +
-# ['B1', 'B2', 'B2A', '', 'B4', 'B4A', 'B4B'] needs to be removed
-# successfully removed
-# -
-
 tidy.drop("Sheet", axis = 1, inplace = True)
-
-tidy.columns
 
 tidy.to_csv("secondary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('secondary_income-catalog-metadata.json')
-
-# +
-# End of fourth cube
-# -
 
 for tab in tabs:
     if (tab.name == 'B6') or (tab.name == 'B6A'):
@@ -582,30 +502,15 @@ tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inpla
 
 tidy["Transaction Type"].replace({'' : "not-applicable"}, inplace = True)
 
-tidy["Sheet"].unique()
-
 tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & 
             (tidy["Sheet"] != '') & (tidy["Sheet"] != "B4") & (tidy["Sheet"] != "B4A") & 
             (tidy["Sheet"] != "B4B") & (tidy["Sheet"] != "B5") & (tidy["Sheet"] != "B5A")]
 
-tidy["Sheet"].unique()
-
-# +
-# ['B1', 'B2', 'B2A', '', 'B4', 'B4A', 'B4B', 'B5', 'B5A'] needs to be removed
-# successfully removed
-# -
-
 tidy.drop("Sheet", axis = 1, inplace = True)
-
-tidy.columns
 
 tidy.to_csv("transactions_with_eu_and_emu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('transactions_with_eu_and_emu-catalog-metadata.json')
-
-# +
-# end of fifth cube
-# -
 
 for tab in tabs:
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
@@ -693,26 +598,16 @@ tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inpla
 
 tidy["Transaction Type"].replace({'':"not-applicable"}, inplace = True)
 
-tidy["Sheet"].unique()
-
 tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & 
             (tidy["Sheet"] != '') & (tidy["Sheet"] != "B4") & (tidy["Sheet"] != "B4A") & 
             (tidy["Sheet"] != "B4B") & (tidy["Sheet"] != "B5") & (tidy["Sheet"] != "B5A") & 
             (tidy["Sheet"] != "B6") & (tidy["Sheet"] != "B6A")]
 
-tidy["Sheet"].unique()
-
 tidy.drop("Sheet", axis = 1, inplace = True)
-
-tidy.columns
 
 tidy.to_csv("transactions_with_non_eu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('transactions_with_non_eu-catalog-metadata.json')
-
-# +
-# End of sixth cube
-# -
 
 for tab in tabs:
     # # Tabs B7_B7A
@@ -794,13 +689,6 @@ for tab in tabs:
 
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
 
-tidy["Sheet"].unique()
-
-# +
-# ['B1', 'B2', 'B2A', '', 'B4', 'B4A', 'B4B', 'B5', 'B5A', 'B6',
-#        'B6A', 'B6B', 'B6B_2', 'B6B_3', 'B6C', 'B6C_2', 'B6C_3'] needs to be removed
-# -
-
 tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & 
             (tidy["Sheet"] != '') & (tidy["Sheet"] != "B4") & (tidy["Sheet"] != "B4A") & 
             (tidy["Sheet"] != "B4B") & (tidy["Sheet"] != "B5") & (tidy["Sheet"] != "B5A") & 
@@ -808,15 +696,8 @@ tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] !
             (tidy["Sheet"] != "B6B_2") & (tidy["Sheet"] != "B6B_3") & (tidy["Sheet"] != "B6C") & 
             (tidy["Sheet"] != "B6C_2") & (tidy["Sheet"] != "B6C_3")]
 
-tidy["Sheet"].unique()
-
 tidy.drop("Sheet", axis = 1, inplace = True)
-
-tidy.columns
 
 tidy.to_csv("capital_account-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('capital_account-catalog-metadata.json')
-
-# +
-# End of seventh cube
