@@ -111,10 +111,7 @@ for tab in tabs:
             HDim(services, 'Services', DIRECTLY, LEFT),
             HDim(code, 'CDID', DIRECTLY, LEFT),
             HDim(year, 'Period', DIRECTLY, ABOVE),
-            HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
-            HDimConst('Measure Type', 'bop-current-account'),
-            HDimConst('Unit', 'gbp-million'),
-            HDimConst("Sheet", sheet)
+            HDim(quarter, 'Quarter', DIRECTLY, ABOVE)
         ]
         
         cs = ConversionSegment(tab, dimensions, observations)        
@@ -144,7 +141,7 @@ for tab in tabs:
         df['Flow Directions'] = df['Flow Directions'].map(lambda x: x.split()[0])
         df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
-        tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'Account Type', 'Value', 'Sheet']]
+        tidy = df[['Period','Flow Directions','Services','Seasonal Adjustment', 'Account Type', 'Value']]
         for column in tidy:
             if column in ('Flow Directions', 'Services', 'Account Type'):
                 tidy[column] = tidy[column].str.lstrip()
@@ -152,8 +149,6 @@ for tab in tabs:
 # -
 
 tidy.columns
-
-tidy["Sheet"].unique()
 
 tidy
 
@@ -169,7 +164,7 @@ for tab in tabs:
     metadata.dataset.description = metadata.dataset.comment
     
     if 'B2' in tab.name:
-        # print(name)
+        print(tab.name)
 
         flow = tab.excel_ref('B1').expand(DOWN).by_index([7,21,35]) - tab.excel_ref('B46').expand(DOWN)
 
@@ -201,7 +196,7 @@ for tab in tabs:
         tidied_sheets.append(tidy_sheet)
 
     elif 'B3' in tab.name: 
-        # print(name)
+        print(tab.name)
 
         flow = tab.excel_ref('B1').expand(DOWN).by_index([7,22,37]) - tab.excel_ref('B51').expand(DOWN)
         product = tab.excel_ref('B1').expand(DOWN).is_not_blank().is_not_whitespace() - flow  - tab.excel_ref('B3').expand(UP)
@@ -264,15 +259,18 @@ tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inpla
 
 tidy["Sheet"].unique()
 
-tidy[tidy["Sheet"] == "B1"]
-
 tidy["Sheet"].unique()
 
 tidy = tidy[tidy.Sheet != "B1"]
 
-tidy
+tidy["Sheet"].unique()
+
+tidy.columns
 
 tidy["Sheet"].unique()
+
+tidy.drop("Sheet", axis = 1, inplace = True)
+# tidy = df[['Period','Flow Directions','Product','Seasonal Adjustment', 'Services', 'Account Type', 'Value', 'Marker']]
 
 # +
 #We don't need B1 here and B3, B3A is not covered
@@ -383,6 +381,10 @@ tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] !
 
 tidy["Sheet"].unique()
 
+tidy.drop("Sheet", axis = 1, inplace = True)
+
+tidy.columns
+
 # +
 # ['B1', 'B2', 'B2A', '',] needs to be droped
 # Successfully dropped
@@ -476,9 +478,20 @@ tidy["Sector"].replace({'':"not-applicable"}, inplace = True)
 
 tidy["Sheet"].unique()
 
+tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & 
+            (tidy["Sheet"] != '') & (tidy["Sheet"] != "B4") & (tidy["Sheet"] != "B4A") & 
+            (tidy["Sheet"] != "B4B")]
+
+tidy["Sheet"].unique()
+
 # +
 # ['B1', 'B2', 'B2A', '', 'B4', 'B4A', 'B4B'] needs to be removed
+# successfully removed
 # -
+
+tidy.drop("Sheet", axis = 1, inplace = True)
+
+tidy.columns
 
 tidy.to_csv("secondary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -529,8 +542,6 @@ for tab in tabs:
             HDim(quarter, 'Quarter', DIRECTLY, ABOVE),
             HDim(services, 'Services', CLOSEST, ABOVE),
             HDim(emu_and_services, 'Members', DIRECTLY, LEFT),
-            HDimConst('Measure Type', 'bop-current-account'),
-            HDimConst('Unit', 'gbp-million'),
             HDimConst("Sheet", sheet)
         ]
         
@@ -573,9 +584,20 @@ tidy["Transaction Type"].replace({'' : "not-applicable"}, inplace = True)
 
 tidy["Sheet"].unique()
 
+tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & 
+            (tidy["Sheet"] != '') & (tidy["Sheet"] != "B4") & (tidy["Sheet"] != "B4A") & 
+            (tidy["Sheet"] != "B4B") & (tidy["Sheet"] != "B5") & (tidy["Sheet"] != "B5A")]
+
+tidy["Sheet"].unique()
+
 # +
 # ['B1', 'B2', 'B2A', '', 'B4', 'B4A', 'B4B', 'B5', 'B5A'] needs to be removed
+# successfully removed
 # -
+
+tidy.drop("Sheet", axis = 1, inplace = True)
+
+tidy.columns
 
 tidy.to_csv("transactions_with_eu_and_emu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -673,6 +695,17 @@ tidy["Transaction Type"].replace({'':"not-applicable"}, inplace = True)
 
 tidy["Sheet"].unique()
 
+tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & 
+            (tidy["Sheet"] != '') & (tidy["Sheet"] != "B4") & (tidy["Sheet"] != "B4A") & 
+            (tidy["Sheet"] != "B4B") & (tidy["Sheet"] != "B5") & (tidy["Sheet"] != "B5A") & 
+            (tidy["Sheet"] != "B6") & (tidy["Sheet"] != "B6A")]
+
+tidy["Sheet"].unique()
+
+tidy.drop("Sheet", axis = 1, inplace = True)
+
+tidy.columns
+
 tidy.to_csv("transactions_with_non_eu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('transactions_with_non_eu-catalog-metadata.json')
@@ -767,6 +800,19 @@ tidy["Sheet"].unique()
 # ['B1', 'B2', 'B2A', '', 'B4', 'B4A', 'B4B', 'B5', 'B5A', 'B6',
 #        'B6A', 'B6B', 'B6B_2', 'B6B_3', 'B6C', 'B6C_2', 'B6C_3'] needs to be removed
 # -
+
+tidy = tidy[(tidy["Sheet"] != "B1") & (tidy["Sheet"] != "B2") & (tidy["Sheet"] != "B2A") & 
+            (tidy["Sheet"] != '') & (tidy["Sheet"] != "B4") & (tidy["Sheet"] != "B4A") & 
+            (tidy["Sheet"] != "B4B") & (tidy["Sheet"] != "B5") & (tidy["Sheet"] != "B5A") & 
+            (tidy["Sheet"] != "B6") & (tidy["Sheet"] != "B6A") & (tidy["Sheet"] != "B6B") & 
+            (tidy["Sheet"] != "B6B_2") & (tidy["Sheet"] != "B6B_3") & (tidy["Sheet"] != "B6C") & 
+            (tidy["Sheet"] != "B6C_2") & (tidy["Sheet"] != "B6C_3")]
+
+tidy["Sheet"].unique()
+
+tidy.drop("Sheet", axis = 1, inplace = True)
+
+tidy.columns
 
 tidy.to_csv("capital_account-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
