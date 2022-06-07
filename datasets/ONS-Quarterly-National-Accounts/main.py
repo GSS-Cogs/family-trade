@@ -24,9 +24,7 @@ national_account_aggregates = ['A1 AGGREGATES', 'A2 AGGREGATES']
 output_indicators = ['B1 CVM OUTPUT', 'B2 CVM OUTPUT']
 expenditure_indicators = ['C1 EXPENDITURE', 'C2 EXPENDITURE']
 income_indicators = ['D INCOME']
-household_expenditure_indicators = ['E1 EXPENDITURE', 'E2 EXPENDITURE', 'E3 EXPENDITURE', 'E4 EXPENDITURE']
 gross_fixed_capitol = ['F1 GFCF', 'F2 GFCF']
-inventories = ['G1 INVENTORIES', 'G2 INVENTORIES']
 trade = ['H1 TRADE', 'H2 TRADE']
 tidied_sheets = []
 
@@ -290,38 +288,6 @@ for name, tab in tabs.items():
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
         
-    elif name in household_expenditure_indicators:
-        if name in household_expenditure_indicators[0] or name in household_expenditure_indicators[2]:
-            COICOP = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
-            # savepreviewhtml(COICOP, fname=tab.name + "Preview.html")
-            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
-            measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
-            expenditure = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
-        else:
-            p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('B6')
-            COICOP = tab.excel_ref('B7').expand(RIGHT)
-            # savepreviewhtml(COICOP, fname=tab.name + "Preview.html")
-            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
-            measure = tab.excel_ref('G2').expand(RIGHT).is_not_blank()
-            expenditure = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
-            
-        observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
-        dimensions = [
-            HDim(period,'Period',DIRECTLY,LEFT),
-            HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
-            HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
-            HDim(cdid, 'CDID',DIRECTLY,ABOVE),
-            HDim(COICOP, 'COICOP',DIRECTLY,ABOVE),
-            HDim(expenditure, 'Household Expenditure',DIRECTLY,ABOVE),
-            HDim(measure, 'measure',CLOSEST,ABOVE),
-
-        ]
-        c1 = ConversionSegment(tab, dimensions, observations)   
-        # savepreviewhtml(c1, fname=tab.name + "Preview.html")
-        tidy_sheet = c1.topandas()
-        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
-        tidied_sheets.append(tidy_sheet)
-        
     elif name in gross_fixed_capitol:
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
@@ -343,30 +309,7 @@ for name, tab in tabs.items():
         tidy_sheet = c1.topandas()
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
-    elif name in inventories:
-        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
-        observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
-        sector = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
-        level_held_title = tab.excel_ref('A4').is_not_blank() 
-        level_held = level_held_title.expand(RIGHT).is_not_blank()
-        industry = sector.shift(UP)
-        dimensions = [
-            HDim(industry,'Industry',DIRECTLY,ABOVE),
-            HDim(period,'Period',DIRECTLY,LEFT),
-            HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
-            HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
-            HDim(cdid, 'CDID',DIRECTLY,ABOVE),
-            HDim(sector, 'Sector',DIRECTLY,ABOVE),
-            HDim(level_held, 'Level of inventories held at end-December 2019',DIRECTLY,ABOVE),
-            HDim(measure, 'measure',CLOSEST,ABOVE),
-        ]
-        dimensions[0] = with_industry_overrides(dimensions[0])
-        c1 = ConversionSegment(tab, dimensions, observations)   
-        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
-        tidy_sheet = c1.topandas()
-        tidy_sheet['Industry'] = tidy_sheet['Industry'].replace('', 'Distributive trades')
-        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
-        tidied_sheets.append(tidy_sheet)
+
     elif name in trade: 
         if name in trade[0]:
             goods_services = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
@@ -420,31 +363,18 @@ for name, tab in tabs.items():
 #    
 # ##### Income indicators
 #     tidied_sheets[6] (D Income)
-#     
-# ##### Household Expendisture Indicators
-#     tidied_sheets[7] (E1 Expenditure)
-#     tidied_sheets[8] (E2 Expenditure)
-#     tidied_sheets[9] (E3 Expenditure)
-#     tidied_sheets[10](E4 Expenditure)
-#     
-#     Note another dimension will need to be added during post processsing called something like 'Expenditure Category' which will either be: Public corporations or Private sector, depending on the value in Household expenditure dimension. 
-#    
+#
 #
 # ##### Gross Fixed Capitol 
-#     tidied_sheets[11](F1 GFCF)
-#     tidied_sheets[12](F1 GFCF)
+#     tidied_sheets[7](F1 GFCF)
+#     tidied_sheets[8](F1 GFCF)
 #      
 #      Note another dimension will need to be added during post processsing called something like 'Sector' which will either be: UK National or UK dommestic, depending on the value in Capital Formation dimension.    
 #
-# ##### Inventories 
-#     tidied_sheets[13](G1 Inventories)
-#     tidied_sheets[14](G2 Inventories)
-#     
-#     Note another dimension will need to be added during post processsing called something like 'Industry' which will either be: Manufacturing industries or Distributive, depending on the value in Sector dimension.    
 #     
 # ##### Trade 
-#     tidied_sheets[15](H1 TRADE)
-#     tidied_sheets[16](H2 TRADE)
+#     tidied_sheets[9](H1 TRADE)
+#     tidied_sheets[10](H2 TRADE)
 #     
 #     Note I will need to do a bit of wrangling to fix the flow dimension in post processing, this is due to some tables using a horrible centered headings for flow values. 
 #     
@@ -462,10 +392,7 @@ for name, tab in tabs.items():
 #      'AA Annex A',
 #      'AB Annex B',
 #      'AC Annex C',
-#      'AD Annex D',
-#      'AE Annex E',
-#      'AF Annex F',
-#      'AG Annex G'
+#      'AD Annex D'
 #      
 
 # +
@@ -511,8 +438,6 @@ def convet_dimension_to_int(dataset, dimension):
         return dataset
 
 
-# +
-# cubes = Cubes("info.json")
 # -
 
 a2 = tidied_sheets[1]
@@ -839,182 +764,8 @@ catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('income_indicators-catalog-metadata.json')
 
 # +
-# E1
-e1 = tidied_sheets[7]
-
-try:
-    e1 = e1.loc[e1['Percentage Change'].isna()] 
-except:
-    ind = ind 
-
-# e1['COICOP'] = 'CP' + e1['COICOP'].astype(str) 
-# e1['COICOP'].loc[e1['CDID'].isin(['ABJQ'])] = 'TOTAL'
-# e1['COICOP'].loc[e1['COICOP'] == 'CP0.0'] = 'CP00'
-# e1['COICOP'].loc[e1['CDID'].isin(['ABTF'])] = 'net-tourism'
-
-e1['Expenditure Category'] = 'uk-national-domestic'
-e1['Expenditure Category'].loc[e1['CDID'].isin(['ABJQ','ABTF'])] = 'uk-national'
-e1['Economic Concept'] = 'current-price'
-
-e1 = prefix_refperiod(e1, 'Period')
-
-try:
-    e1.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
-except:
-    # ind = ind   
-    print("something went wrong")
-
-e1 = e1.rename(columns={'OBS':'Value'})
-
-e1 = convet_dimension_to_int(e1, 'Value')
-
-e1cdids = e1['CDID'].unique()
-e1[e1['Expenditure Category'] == 'uk-national-domestic'].head(50)
-e1[e1['CDID'] == 'ABJQ'].head(50)
-
-# +
-#import dmtools as dm
-#dm.display_dataset_unique_values(e1)
-
-# +
-# E2
-e2 = tidied_sheets[8]
-
-try:
-    e2 = e2.loc[e2['Percentage Change'].isna()] 
-except:
-    ind = ind 
-
-#e2['COICOP'] = 'CP' + e2['COICOP'].astype(str) 
-e2 = e2.loc[e2['CDID'] != 'ABJQ']
-e2 = e2.loc[e2['CDID'] != 'ABTF']
-e2 = e2.loc[e2['CDID'] != 'ZAKV']
-
-e2['COICOP'].loc[e2['CDID'].isin(['UTIF'])] = 'total-goods'
-e2['Economic Concept'] = 'current-price'
-
-e2 = prefix_refperiod(e2, 'Period')
-
-try:
-    e2.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
-except:
-    ind = ind   
-
-e2 = e2.rename(columns={'OBS':'Value'})
-
-e2 = convet_dimension_to_int(e2, 'Value')
-
-e2['Expenditure Category'] = 'uk-domestic'
-
-e2cdids = e2['CDID'].unique()
-e2.head(5)
-
-# +
-# E3
-e3 = tidied_sheets[9]
-
-try:
-    e3 = e3.loc[e3['Percentage Change'].isna()] 
-except:
-    ind = ind 
-
-e3['COICOP'] = 'CP' + e3['COICOP'].astype(str) 
-e3['COICOP'].loc[e3['CDID'].isin(['ABJR'])] = 'TOTAL'
-e3['COICOP'].loc[e3['COICOP'] == 'CP0.0'] = 'CP00'
-e3['COICOP'].loc[e3['CDID'].isin(['ABTH'])] = 'net-tourism'
-
-e3['Expenditure Category'] = 'uk-national-domestic'
-e3['Expenditure Category'].loc[e3['CDID'].isin(['ABJR','ABTH'])] = 'uk-national'
-e3['Economic Concept'] = 'chained-volume-measure'
-
-e3 = prefix_refperiod(e3, 'Period')
-
-try:
-    e3.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
-except:
-    ind = ind   
-
-e3 = e3.rename(columns={'OBS':'Value'})
-
-e3 = convet_dimension_to_int(e3, 'Value')
-
-e3cdids = e3['CDID'].unique()
-e3.head(50)
-
-# +
-# E4
-e4 = tidied_sheets[10]
-
-try:
-    e4 = e4.loc[e4['Percentage Change'].isna()] 
-except:
-    # ind = ind 
-    print("something went wrong")
-
-#e4['COICOP'] = 'CP' + e4['COICOP'].astype(str) 
-e4 = e4.loc[e4['CDID'] != 'ABJR']
-e4 = e4.loc[e4['CDID'] != 'ABTH']
-e4 = e4.loc[e4['CDID'] != 'ZAKW']
-
-# e4['COICOP'].loc[e4['CDID'].isin(['UTIH'])] = 'total-goods'
-e4['Economic Concept'] = 'chained-volume-measure'
-
-e4 = prefix_refperiod(e4, 'Period')
-
-try:
-    e4.drop(['Seasonal Adjustment','Percentage Change','measure','Household Expenditure'], axis=1, inplace=True)
-except:
-    # ind = ind
-    print("something went wrong")   
-
-e4 = e4.rename(columns={'OBS':'Value'})
-
-e4 = convet_dimension_to_int(e4, 'Value')
-
-e4['Expenditure Category'] = 'uk-domestic'
-
-e4cdids = e4['CDID'].unique()
-e4.head(5)
-
-# +
-#e1e2e3e4cdids = pd.concat([pd.DataFrame(e1cdids),pd.DataFrame(e2cdids),pd.DataFrame(e3cdids),pd.DataFrame(e4cdids)])
-#del e1cdids, e2cdids, e3cdids, e4cdids
-
-e1e2e3e4 = pd.concat([e1, e2, e3, e4])
-e1e2e3e4.head(10)
-#e1e2e3e4['Expenditure Category'].unique()
-#dm.display_dataset_unique_values(e1e2e3e4)
-
-# +
-# e1e2e3e4.columns
-# e1e2e3e4 = e1e2e3e4.drop_duplicates()
-
-# +
-# e1e2e3e4["COICOP"].unique()
-# -
-
-metadata.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
-metadata.dataset.comment = maincomme + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4) - Seasonally Adjusted'
-metadata.dataset.description = maindescr + """
-Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)
-Data has been seasonally adjusted
-COICOP: ESA 10 Classification of Individual Consumption by Purpose.
-UK Domestic: Final consumption expenditure in the UK by UK & foreign households
-UK National: Final consumption by UK Households in the UK & abroad.
-UK National & Domestic: Final consumption expenditure in the UK by UK & foreign households and final consumption by UK Households in the UK & abroad.
-"""
-
-e1e2e3e4.to_csv("household_expenditure_indicators-observations.csv", index = False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('household_expenditure_indicators-catalog-metadata.json')
-
-e1e2e3e4.columns
-
-e1e2e3e4['COICOP'].unique()
-
-# +
 # F1
-f1 = tidied_sheets[11]
+f1 = tidied_sheets[7]
 
 try:
     f1 = f1.loc[f1['Percentage Change'].isna()] 
@@ -1051,7 +802,7 @@ f1.head(5)
 
 # +
 # F2
-f2 = tidied_sheets[12]
+f2 = tidied_sheets[8]
 
 try:
     f2 = f2.loc[f2['Percentage Change'].isna()] 
@@ -1111,108 +862,8 @@ catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file("gross_fixed_capitol-catalog-metadata.json")
 
 # +
-# G1
-g1 = tidied_sheets[13]
-
-try:
-    g1 = g1.loc[g1['Percentage Change'].isna()] 
-except:
-    ind = 13 
-
-g1 = strip_superscripts(g1, 'Sector')
-
-g1['Sector'].loc[g1['CDID'].isin(['FAGF','FADY','FALR','NZTP'])] = 'Manufacturing - ' + g1['Sector'].loc[g1['CDID'].isin(['FAGF','FADY','FALR','NZTP'])].astype(str)
-g1['Sector'].loc[g1['CDID'].isin(['FBHE','FAHA'])] = 'Distributive trades - ' + g1['Sector'].loc[g1['CDID'].isin(['FBHE','FAHA'])].astype(str)
-g1['Sector'].loc[g1['CDID'].isin(['CAEX'])] = 'Total' 
-
-
-g1['Economic Concept'] = 'current-price'
-
-g1 = prefix_refperiod(g1, 'Period')
-
-try:
-    g1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-except:
-    ind = 13   
-
-g1 = g1.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
-
-g1 = convet_dimension_to_int(g1, 'Value')
-g1['Level of inventories held at end-December 2019'] = g1['Level of inventories held at end-December 2019'].str.replace('.0','')
-
-g1['Sector'] = g1['Sector'].apply(pathify)
-g1['Industry'] = g1['Industry'].apply(pathify)
-
-g1cdids = g1['CDID'].unique()
-g1.head(5)
-
-# +
-# G2
-g2 = tidied_sheets[14]
-
-try:
-    g2 = g2.loc[g2['Percentage Change'].isna()] 
-except:
-    ind = 14
-
-g2 = strip_superscripts(g2, 'Sector')
-
-g2['Sector'].loc[g2['CDID'].isin(['FBNF','FBNG','FBNH','DHBM'])] = 'Manufacturing - ' + g2['Sector'].loc[g2['CDID'].isin(['FBNF','FBNG','FBNH','DHBM'])].astype(str)
-g2['Sector'].loc[g2['CDID'].isin(['FAJX','FBYN'])] = 'Distributive trades - ' + g2['Sector'].loc[g2['CDID'].isin(['FAJX','FBYN'])].astype(str)
-g2['Sector'].loc[g2['CDID'].isin(['CAFU'])] = 'Total' 
-
-
-g2['Economic Concept'] = 'chained-volume-measure'
-
-g2 = prefix_refperiod(g2, 'Period')
-
-try:
-    g2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-except:
-    ind = 14  
-
-g2 = g2.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
-
-g2 = convet_dimension_to_int(g2, 'Value')
-g2['Level of inventories held at end-December 2019'] = g2['Level of inventories held at end-December 2019'].str.replace('.0','')
-
-g2['Sector'] = g2['Sector'].apply(pathify)
-g2['Industry'] = g2['Industry'].apply(pathify)
-
-g2cdids = g2['CDID'].unique()
-g2.head(5)
-# -
-
-g1g2 = pd.concat([g1,g2])
-del g1g2['Industry']
-#g1g2cdids = pd.concat([pd.DataFrame(g1cdids),pd.DataFrame(g2cdids)])
-#g1g2['Sector'].unique()
-
-g1g2.columns
-# g1g2 = g1g2.drop_duplicates()
-
-g1g2["Level of inventories held at end-December 2019"].unique()
-
-metadata.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
-metadata.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
-metadata.dataset.description = maindescr + """
-Change in inventories at current prices and chained volume measures (G1, G2)
-Data has been seasonally adjusted
-Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
-Wholesaling and retailing estimates exclude the motor trades.
-Total change in inventories: Quarterly alignment adjustment included in this series.
-Please note, inventories estimates for 2020 Q4 at this stage face additional uncertainty due to the lower data content. 
-"""
-
-# +
-
-g1g2.to_csv("change_in_inventories-observations.csv", index = False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file("change_in_inventories-catalog-metadata.json")
-
-# +
 # H1
-h1 = tidied_sheets[15]
+h1 = tidied_sheets[9]
 
 try:
     h1 = h1.loc[h1['Percentage Change'].isna()] 
@@ -1245,7 +896,7 @@ h1.head(5)
 
 # +
 # H2
-h2 = tidied_sheets[16]
+h2 = tidied_sheets[10]
 
 try:
     h2 = h2.loc[h2['Percentage Change'].isna()] 
