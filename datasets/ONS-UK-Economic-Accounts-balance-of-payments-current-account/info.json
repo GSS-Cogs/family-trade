@@ -1,4 +1,5 @@
 {
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons-uk-economic-accounts-balance-of-payments-current-account",
     "title": "UK Economic Accounts; balance of payments - current account",
     "publisher": "Office for National Statistics",
@@ -20,65 +21,86 @@
         "main_issue": 11,
         "columns": {
             "Period": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Flow Directions": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow_directions}"
             },
             "Seasonal Adjustment": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{+seasonal_adjustment}"
             },
             "Services": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/services",
-                "value": "http://gss-data.org.uk/def/trade/concept/services/{services}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/services",
+                "value": "http://gss-data.org.uk/def/trade/concept/services/{+services}"
             },
             "Sector": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/sector",
-                "value": "http://gss-data.org.uk/def/trade/concept/sector/{sector}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/sector",
+                "value": "http://gss-data.org.uk/def/trade/concept/sector/{+sector}"
             },
             "Account Type": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/account-type",
-                "value": "http://gss-data.org.uk/def/trade/concept/account-type/{account_type}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/account-type",
+                "value": "http://gss-data.org.uk/def/trade/concept/account-type/{+account_type}"
             },
             "Income": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/income",
-                "value": "http://gss-data.org.uk/def/trade/concept/income/{income}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/income",
+                "value": "http://gss-data.org.uk/def/trade/concept/income/{+income}"
             },
             "Income Description": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/income-description",
-                "value": "http://gss-data.org.uk/def/trade/concept/income-description/{income_description}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/income-description",
+                "value": "http://gss-data.org.uk/def/trade/concept/income-description/{+income_description}"
             },
             "Earnings": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/earnings",
-                "value": "http://gss-data.org.uk/def/trade/concept/earnings/{earnings}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/earnings",
+                "value": "http://gss-data.org.uk/def/trade/concept/earnings/{+earnings}"
             },
             "Product": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/product",
-                "value": "http://gss-data.org.uk/def/trade/concept/product/{product}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "value": "http://gss-data.org.uk/def/trade/concept/product/{+product}"
             },
             "Transaction Type": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/transaction-type",
-                "value": "http://gss-data.org.uk/def/trade/concept/transaction-type/{transaction_type}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/transaction-type",
+                "value": "http://gss-data.org.uk/def/trade/concept/transaction-type/{+transaction_type}"
             },
             "Members": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/members",
-                "value": "http://gss-data.org.uk/def/trade/concept/members/{members}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/members",
+                "value": "http://gss-data.org.uk/def/trade/concept/members/{+members}"
             },
             "Country Transaction": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/country-transaction",
-                "value": "http://gss-data.org.uk/def/trade/concept/country-transaction/{country_transaction}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/country-transaction",
+                "value": "http://gss-data.org.uk/def/trade/concept/country-transaction/{+country_transaction}"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/bop-current-account",
+                "type": "observations",
                 "datatype": "integer"
             },
+            "Measure Type": {
+                "type": "measures",
+                "value": "http://gss-data.org.uk/def/measure/bop-current-account"
+            },
+            "Unit": {
+                "type": "units",
+                "value": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
+            },
             "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "type": "attribute",
+                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
         }
     },
