@@ -450,8 +450,7 @@ a2 = tidied_sheets[1]
 try:
     a2 = a2.loc[a2['Percentage Change'].isna()] 
 except:
-    ind = ind
-    # print("something went wrong") 
+    print("something went wrong") 
 
 a2 = prefix_refperiod(a2, 'Period')
 
@@ -487,10 +486,14 @@ a2.columns
 a2["Estimate Type"].unique()
 # -
 
+a2["CDID"].unique()
+
+a2["Aggregate"].unique()
+
+a2["Period"].unique()
+
 duplicate_df = a2[a2.duplicated(['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period'], keep = False)]
 duplicate_df
-
-#
 
 # +
 # a2 = a2.drop_duplicates()
@@ -522,7 +525,6 @@ b1 = tidied_sheets[2]
 try:
     b1 = b1.loc[b1['Percentage Change'].isna()] 
 except:
-    # ind = ind
     print("something went wrong")
     
 b1 = strip_superscripts(b1, 'Industry')
@@ -539,8 +541,7 @@ b1 = prefix_refperiod(b1, 'Period')
 try:
     b1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
-    # ind = ind
-    print("something went wrong")  
+    print("something went wrong while droping")  
 
 b1['Sector'] = b1['Sector'].apply(pathify)
 b1['Industry'] = b1['Industry'].apply(pathify)
@@ -557,7 +558,6 @@ b2 = tidied_sheets[3]
 try:
     b2 = b2.loc[b2['Percentage Change'].isna()] 
 except:
-    # ind = ind
     print("something went wrong")
     
 b2['Sector'] = 'Service industries'
@@ -569,7 +569,7 @@ b2 = prefix_refperiod(b2, 'Period')
 try:
     b2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
-    ind = ind   
+    print("something went wrong while droping")   
 
 b2['Sector'] = b2['Sector'].apply(pathify)
 b2['Industry'] = b2['Industry'].apply(pathify)
@@ -620,7 +620,7 @@ c1 = tidied_sheets[4]
 try:
     c1 = c1.loc[c1['Percentage Change'].isna()] 
 except:
-    ind = ind 
+    print("something went wrong") 
 
 c1 = c1.loc[c1['CDID'] != 'YBHA'] # This is already in one of the other datasets
 c1['Expenditure'].loc[c1['CDID'].isin(['YBIL','IKBH','ABMF','IKBI','IKBJ','GIXM'])] = 'not-applicable'
@@ -634,7 +634,7 @@ c1 = prefix_refperiod(c1, 'Period')
 try:
     c1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
-    ind = ind   
+    print("something went wrong while droping")   
 
 c1['Expenditure Category'] = c1['Expenditure Category'].apply(pathify)
 c1['Expenditure'] = c1['Expenditure'].apply(pathify)
@@ -653,7 +653,7 @@ c2 = tidied_sheets[5]
 try:
     c2 = c2.loc[c2['Percentage Change'].isna()] 
 except:
-    ind = ind 
+    print("something went wrong") 
 
 c2 = c2.loc[c2['CDID'] != 'ABMI'] # This is already in one of the other datasets
 c2['Expenditure'].loc[c2['CDID'].isin(['YBIM','IKBK','ABMG','IKBL','IKBM','GIXS'])] = 'not-applicable'
@@ -667,7 +667,7 @@ c2 = prefix_refperiod(c2, 'Period')
 try:
     c2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
-    ind = ind   
+    print("something went wrong while droping")   
 
 c2['Expenditure Category'] = c2['Expenditure Category'].apply(pathify)
 c2['Expenditure'] = c2['Expenditure'].apply(pathify)
@@ -715,7 +715,7 @@ d1 = tidied_sheets[6]
 try:
     d1 = d1.loc[d1['Percentage Change'].isna()] 
 except:
-    ind = ind 
+    print("something went wrong") 
 
 d1 = d1.loc[d1['CDID'] != 'YBHA'] # This is already in one of the other datasets
 d1['Gross Domestic Product'].loc[d1['CDID'].isin(['CAER'])] = 'Gross operating surplus of corporations'
@@ -728,7 +728,7 @@ d1 = prefix_refperiod(d1, 'Period')
 try:
     d1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
-    ind = ind   
+    print("something went wrong while droping")   
 
 d1['Gross Domestic Product'] = d1['Gross Domestic Product'].apply(pathify)
 d1['Category of Income'] = d1['Category of Income'].apply(pathify)
