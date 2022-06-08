@@ -18,27 +18,35 @@
         "airtable": "recc32OyjkAnzrFR3",
         "columns": {
             "Period": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Country": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{country}"
             },
             "Service Account": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/product",
+                "value": "http://gss-data.org.uk/def/trade/concept/product/{service_account}" 
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "type": "observations",
+                "datatype": "double",
                 "measure": "http://gss-data.org.uk/def/measure/current-prices",
-                "datatype": "double"
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
             },
             "Direction": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{direction}"
             },
             "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "type": "attribute",
+                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
         },
         "stage": [
