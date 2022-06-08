@@ -23,9 +23,10 @@
              "value":"http://reference.data.gov.uk/id/{+period}"
           },
           "Country":{
-             "type":"dimension",
-             "uri":"http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-             "value":"http://gss-data.org.uk/def/trade/concept/ons-partner-geography/{country}"
+            "type": "dimension",
+            "new": {
+              "codelist": "./codelists/country.csv-metadata.json"
+            }
           },
           "Mode":{
                 "type": "dimension",
