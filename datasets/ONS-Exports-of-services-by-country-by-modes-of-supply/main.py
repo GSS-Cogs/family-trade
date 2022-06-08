@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[208]:
+# In[218]:
 
 
 from gssutils import *
@@ -10,7 +10,7 @@ import numpy as np
 import re
 
 
-# In[209]:
+# In[219]:
 
 
 #changing landing page back to Exports URL (First dataset to run)
@@ -24,7 +24,7 @@ with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
 
-# In[210]:
+# In[220]:
 
 
 df = pd.DataFrame()
@@ -81,7 +81,7 @@ tidy_exports
 # \|Transformation of Imports file to be joined to esports transformation done above 
 
 
-# In[211]:
+# In[221]:
 
 
 #changing landing page to imports URL
@@ -95,7 +95,7 @@ with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
 
-# In[212]:
+# In[222]:
 
 
 info = json.load(open('info.json')) 
@@ -107,7 +107,7 @@ tabs = { tab.name: tab for tab in scraper.distribution(latest=True).as_databaker
 list(tabs)
 
 
-# In[213]:
+# In[223]:
 
 
 tab = tabs["Modes 1, 2 and 4"]
@@ -138,7 +138,7 @@ savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
 tidy_tabs.append(tidy_sheet.topandas())
 
 
-# In[214]:
+# In[224]:
 
 
 df = df = pd.concat(tidy_tabs)
@@ -159,12 +159,12 @@ tidy['Mode'].unique()
 
 tidy['Direction'] = tidy['Direction'].apply(pathify)
 
-tidy['Country'].unique()
+tidy = tidy.replace({'Service Account' : {'0' : 'Total'}})
 
 tidy
 
 
-# In[215]:
+# In[225]:
 
 
 description = f"""
@@ -189,7 +189,7 @@ scraper.dataset.comment = comment
 scraper.dataset.title = 'Imports and Exports of services by country, by modes of supply'
 
 
-# In[216]:
+# In[226]:
 
 
 tidy.to_csv('observations.csv', index=False)
@@ -198,7 +198,7 @@ catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
 
-# In[217]:
+# In[227]:
 
 
 from IPython.core.display import HTML
