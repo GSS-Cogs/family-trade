@@ -34,9 +34,10 @@
                 }
           },
           "Service Account":{
-             "type":"dimension",
-             "uri":"http://gss-data.org.uk/def/trade/property/dimension/product",
-             "value":"http://gss-data.org.uk/def/trade/concept/product/{service_account}"
+            "type": "dimension",
+            "new": {
+              "codelist": "./codelists/service-account.csv-metadata.json"
+            }
           },
           "Value":{
              "type":"observations",
