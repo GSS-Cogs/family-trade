@@ -159,8 +159,6 @@ tidy['Mode'].unique()
 
 tidy['Direction'] = tidy['Direction'].apply(pathify)
 
-tidy = tidy.replace({'Service Account' : {'0' : 'Total'}})
-
 tidy
 
 
