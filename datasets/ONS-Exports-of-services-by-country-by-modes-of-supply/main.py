@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[191]:
+# In[208]:
 
 
 from gssutils import *
@@ -10,7 +10,7 @@ import numpy as np
 import re
 
 
-# In[192]:
+# In[209]:
 
 
 #changing landing page back to Exports URL (First dataset to run)
@@ -24,7 +24,7 @@ with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
 
-# In[193]:
+# In[210]:
 
 
 df = pd.DataFrame()
@@ -81,7 +81,7 @@ tidy_exports
 # \|Transformation of Imports file to be joined to esports transformation done above 
 
 
-# In[194]:
+# In[211]:
 
 
 #changing landing page to imports URL
@@ -95,7 +95,7 @@ with open("info.json", "w") as jsonFile:
     json.dump(data, jsonFile)
 
 
-# In[195]:
+# In[212]:
 
 
 info = json.load(open('info.json')) 
@@ -107,7 +107,7 @@ tabs = { tab.name: tab for tab in scraper.distribution(latest=True).as_databaker
 list(tabs)
 
 
-# In[196]:
+# In[213]:
 
 
 tab = tabs["Modes 1, 2 and 4"]
@@ -138,13 +138,13 @@ savepreviewhtml(tidy_sheet, fname=tab.name + "Preview.html")
 tidy_tabs.append(tidy_sheet.topandas())
 
 
-# In[197]:
+# In[214]:
 
 
 df = df = pd.concat(tidy_tabs)
 
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
-df = df.replace({'Direction' : {'IM' : 'imports'}})
+
 df["Country"] = df["Country"].str.split(' ').str[0]
 df["Service Account"] = df["Service Account"].str.split(' ').str[0]
 df['Mode'] = df['Mode'].apply(pathify)
@@ -157,14 +157,14 @@ tidy = pd.concat([tidy_exports, tidy_imports], ignore_index=True)
 tidy['Marker'] = 'estimated'
 tidy['Mode'].unique()
 
-tidy["Direction"][tidy["Direction"] == "EX"] = "exports"
+tidy['Direction'] = tidy['Direction'].apply(pathify)
 
 tidy['Country'].unique()
 
 tidy
 
 
-# In[198]:
+# In[215]:
 
 
 description = f"""
@@ -189,7 +189,7 @@ scraper.dataset.comment = comment
 scraper.dataset.title = 'Imports and Exports of services by country, by modes of supply'
 
 
-# In[199]:
+# In[216]:
 
 
 tidy.to_csv('observations.csv', index=False)
@@ -198,7 +198,7 @@ catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
 
-# In[200]:
+# In[217]:
 
 
 from IPython.core.display import HTML
