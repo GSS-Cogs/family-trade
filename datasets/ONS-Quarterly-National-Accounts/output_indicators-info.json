@@ -37,7 +37,6 @@
             },
             "2019 Weights": {
                 "type": "attribute",
-                "uri": "http://gss-data.org.uk/def/trade/property/attribute/2019-weights",
                 "value":"http://gss-data.org.uk/def/trade/concept/weights-2019/{+2019_Weights'}"
             },
             "Value": {
