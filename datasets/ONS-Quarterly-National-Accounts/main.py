@@ -190,6 +190,7 @@ for name, tab in tabs.items():
     period = tab.excel_ref('A6').expand(DOWN).is_not_blank() - seasonal_adjustment
     measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
     p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('A3')
+    sheet = tab.name
    
     if name in national_account_aggregates:
         cdid = tab.excel_ref('B4').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
@@ -441,7 +442,6 @@ def convet_dimension_to_int(dataset, dimension):
 # -
 
 a2 = tidied_sheets[1]
-a2
 
 # +
 # A2
@@ -479,24 +479,14 @@ a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
 
 a2.columns
 
+duplicate_df_a2 = a2[a2.duplicated(['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period'], keep = False)]
+duplicate_df_a2
+
 # +
 # Note - This change needs to be finalised
 
 # a2["Estimate Type"] = a2["Estimate Type"].replace({"Chained Volume Measure (Reference year 2019)" : "chained-volume-measure"})
 a2["Estimate Type"].unique()
-# -
-
-a2["CDID"].unique()
-
-a2["Aggregate"].unique()
-
-a2["Period"].unique()
-
-duplicate_df = a2[a2.duplicated(['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period'], keep = False)]
-duplicate_df
-
-# +
-# a2 = a2.drop_duplicates()
 
 # +
 mainTitle = metadata.dataset.title
@@ -587,16 +577,27 @@ b1b2 = pd.concat([b1, b2])
 # Delete attribute for now as it is causing problems in PMD4, going into the CDID column!
 #del b1b2['Weights 2018']
 b1b2 = b1b2[['Period','CDID','2019 Weights','Sector','Industry','Value']]
-b1b2.head(20)
+# b1b2.head(20)
+# -
 
-# +
-# ['Period', 'CDID', 'Weights 2018', 'Sector', 'Industry', 'Value']
-# duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', 'Weights 2018', 'Sector', 'Industry', 'Value'], keep = False)]
+# There are duplicates in this DataFrame.
+duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
 # duplicate_df.sort_values(by = 'Value').to_csv("b1b2duplicates.csv")
+# duplicate_df
 
 # +
 # b1b2 = b1b2.drop_duplicates()
 # -
+
+b1b2.columns
+
+b1b2["Period"].unique()
+
+b1b2["CDID"].unique()
+
+b1b2["Sector"].unique()
+
+b1b2["Industry"].unique()
 
 metadata.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
 metadata.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
@@ -684,6 +685,21 @@ c1c2 = pd.concat([c1, c2])
 c1c2cdids = c1c2['CDID'].unique()
 # del c1, c2
 
+c1c2.columns
+
+duplicate_df_c1c2 = c1c2[c1c2.duplicated(['Value', 'CDID', 'Economic Concept', 'Period', 'Expenditure Category', 'Estimate Type'], keep = False)]
+duplicate_df_c1c2
+
+c1c2["CDID"].unique()
+
+c1c2["Economic Concept"].unique()
+
+c1c2["Period"].unique()
+
+c1c2["Expenditure Category"].unique()
+
+c1c2["Estimate Type"].unique()
+
 # +
 # c1c2 = c1c2.drop_duplicates()
 # -
@@ -746,8 +762,23 @@ d1.head(5)
 #d1['Gross Domestic Product'].unique()
 # -
 
-# d1.columns
-d1 = d1.drop_duplicates()
+d1.columns
+
+duplicate_df_d1 = d1[d1.duplicated(['Value', 'CDID', 'Economic Concept', 'Period', 'Category of Income', 'Marker'], keep = False)]
+duplicate_df_d1
+
+d1["CDID"].unique()
+
+d1["Economic Concept"].unique()
+
+d1["Period"].unique()
+
+d1["Category of Income"].unique()
+
+# +
+# # d1.columns
+# d1 = d1.drop_duplicates()
+# -
 
 metadata.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
 metadata.dataset.comment = maincomme + ' - Gross domestic product: by category of income at current prices (D) - Seasonally Adjusted'
@@ -845,6 +876,19 @@ f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
 f1f2.columns
 # f1f2 = f1f2.drop_duplicates()
 
+duplicate_df_f1f2 = f1f2[f1f2.duplicated(['Value', 'CDID', 'Analysis', 'Period', 'Capital Formation', 'Economic Concept'], keep = False)]
+duplicate_df_f1f2
+
+f1f2["CDID"].unique()
+
+f1f2["Analysis"].unique()
+
+f1f2["Period"].unique()
+
+f1f2["Capital Formation"].unique()
+
+f1f2["Economic Concept"].unique()
+
 metadata.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
 metadata.dataset.comment = maincomme + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
 metadata.dataset.description = maindescr + """
@@ -931,6 +975,21 @@ h1h2 = pd.concat([h1,h2])
 h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
 h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 #h1h2['Goods or Services'].unique()
+
+h1h2.columns
+
+duplicate_df_h1h2 = h1h2[h1h2.duplicated(['Value', 'CDID', 'Flow', 'Period', 'Goods or Services', 'Economic Concept'], keep = False)]
+duplicate_df_h1h2
+
+h1h2["CDID"].unique()
+
+h1h2["Flow"].unique()
+
+h1h2["Period"].unique()
+
+h1h2["Goods or Services"].unique()
+
+h1h2["Economic Concept"].unique()
 
 # +
 # h1h2.columns
