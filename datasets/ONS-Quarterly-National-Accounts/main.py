@@ -343,10 +343,6 @@ for name, tab in tabs.items():
         continue
 
 
-# +
-# e1["COICOP"].unique()
-# -
-
 #     Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
 #     Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
 #
@@ -475,18 +471,12 @@ except:
     print("something went wrong")
 
 a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
-# -
-
-a2.columns
-
-duplicate_df_a2 = a2[a2.duplicated(['Value', 'CDID', 'Estimate Type', 'Aggregate', 'Period'], keep = False)]
-duplicate_df_a2
 
 # +
 # Note - This change needs to be finalised
 
 # a2["Estimate Type"] = a2["Estimate Type"].replace({"Chained Volume Measure (Reference year 2019)" : "chained-volume-measure"})
-a2["Estimate Type"].unique()
+# a2["Estimate Type"].unique()
 
 # +
 mainTitle = metadata.dataset.title
@@ -498,7 +488,7 @@ metadata.dataset.comment = maincomme + ' - National Accounts aggregates (A2) - G
 metadata.dataset.description = maindescr + """
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree. 
 Data has been Seasonally Adjusted. 
-Reference year is 2018. 
+Reference year is 2019. 
 Less Basic price adjustment: Taxes on products less subsidies. 
 Gross value added excluding oil & gas: Calculated by using gross value added at basic prices minus extraction of crude petroleum and natural gas.
 """
@@ -578,10 +568,10 @@ b1b2 = pd.concat([b1, b2])
 #del b1b2['Weights 2018']
 b1b2 = b1b2[['Period','CDID','2019 Weights','Sector','Industry','Value']]
 # b1b2.head(20)
-# -
 
+# +
 # There are duplicates in this DataFrame.
-duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
+# duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
 # duplicate_df.sort_values(by = 'Value').to_csv("b1b2duplicates.csv")
 # duplicate_df
 
@@ -589,22 +579,12 @@ duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector',
 # b1b2 = b1b2.drop_duplicates()
 # -
 
-b1b2.columns
-
-b1b2["Period"].unique()
-
-b1b2["CDID"].unique()
-
-b1b2["Sector"].unique()
-
-b1b2["Industry"].unique()
-
 metadata.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
 metadata.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
 metadata.dataset.description = maindescr + """
 Estimates cannot be regarded as accurate to the last digit shown.
 Data has been Seasonally Adjusted. 
-Reference year is 2018.
+Reference year is 2019.
 Components of outputs are valued at basic prices, which excludes taxes and includes subsidies on products.
 Weights may not sum to totals due to rounding.
 This is a balanced index of UK GVA, taking into account data from the income and expenditure approaches. Thus it will not necessarily be the weighted sum of the industrial indices.
@@ -685,30 +665,11 @@ c1c2 = pd.concat([c1, c2])
 c1c2cdids = c1c2['CDID'].unique()
 # del c1, c2
 
-c1c2.columns
-
-duplicate_df_c1c2 = c1c2[c1c2.duplicated(['Value', 'CDID', 'Economic Concept', 'Period', 'Expenditure Category', 'Estimate Type'], keep = False)]
-duplicate_df_c1c2
-
-c1c2["CDID"].unique()
-
-c1c2["Economic Concept"].unique()
-
-c1c2["Period"].unique()
-
-c1c2["Expenditure Category"].unique()
-
-c1c2["Estimate Type"].unique()
-
-# +
-# c1c2 = c1c2.drop_duplicates()
-# -
-
 metadata.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
 metadata.dataset.comment = maincomme + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2) - Seasonally Adjusted'
 metadata.dataset.description = maindescr + """
 Data has been Seasonally Adjusted. 
-Reference year is 2018.
+Reference year is 2019.
 Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
 Non-profit institutions: Non-profit institutions serving households.
 Further breakdown of business investment can be found in the 'Business investment in the UK' bulletin
@@ -717,8 +678,6 @@ Acquisitions less disposals of valuables can be a volatile series, due to the in
 Trade balance is calculated by using exports of goods and services minus imports of goods and services
 Non-profit institutions: There is a small difference between the gross operating surplus of the NPISH sector in the SFA release, compared with the consumption of fixed capital for the NPISH sector published in the GDP release.  This affects 2019Q1 onwards. The latest figures for the affected series can be found in the SFA release.
 """
-
-c1c2["Economic Concept"].unique()
 
 c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -760,24 +719,6 @@ d1['Marker'][d1['Value'] == ''] = 'not-available'
 d1cdids = d1['CDID'].unique()
 d1.head(5)
 #d1['Gross Domestic Product'].unique()
-# -
-
-d1.columns
-
-duplicate_df_d1 = d1[d1.duplicated(['Value', 'CDID', 'Economic Concept', 'Period', 'Category of Income', 'Marker'], keep = False)]
-duplicate_df_d1
-
-d1["CDID"].unique()
-
-d1["Economic Concept"].unique()
-
-d1["Period"].unique()
-
-d1["Category of Income"].unique()
-
-# +
-# # d1.columns
-# d1 = d1.drop_duplicates()
 # -
 
 metadata.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
@@ -873,22 +814,6 @@ f1f2 = pd.concat([f1,f2])
 #f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
 f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
 
-f1f2.columns
-# f1f2 = f1f2.drop_duplicates()
-
-duplicate_df_f1f2 = f1f2[f1f2.duplicated(['Value', 'CDID', 'Analysis', 'Period', 'Capital Formation', 'Economic Concept'], keep = False)]
-duplicate_df_f1f2
-
-f1f2["CDID"].unique()
-
-f1f2["Analysis"].unique()
-
-f1f2["Period"].unique()
-
-f1f2["Capital Formation"].unique()
-
-f1f2["Economic Concept"].unique()
-
 metadata.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
 metadata.dataset.comment = maincomme + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
 metadata.dataset.description = maindescr + """
@@ -975,26 +900,6 @@ h1h2 = pd.concat([h1,h2])
 h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
 h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 #h1h2['Goods or Services'].unique()
-
-h1h2.columns
-
-duplicate_df_h1h2 = h1h2[h1h2.duplicated(['Value', 'CDID', 'Flow', 'Period', 'Goods or Services', 'Economic Concept'], keep = False)]
-duplicate_df_h1h2
-
-h1h2["CDID"].unique()
-
-h1h2["Flow"].unique()
-
-h1h2["Period"].unique()
-
-h1h2["Goods or Services"].unique()
-
-h1h2["Economic Concept"].unique()
-
-# +
-# h1h2.columns
-# h1h2 = h1h2.drop_duplicates()
-# -
 
 metadata.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
 metadata.dataset.comment = maincomme + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2) - Seasonally Adjusted'
