@@ -35,13 +35,15 @@
             },
             "Trade Industry": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/energy/property/dimension/industry",
-                "value": "http://gss-data.org.uk/def/energy/concept/industry/{trade_industry}" 
+                "new": {
+                  "codelist": "./codelists/trade-industry.csv-metadata.json"
+                }
             },
             "Service Account": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/energy/property/dimension/product",
-                "value": "http://gss-data.org.uk/def/energy/concept/product/{service_account}" 
+                "new": {
+                  "codelist": "./codelists/service-account.csv-metadata.json"
+                }
             },
             "Value": {
                 "type": "observations",
