@@ -32,12 +32,12 @@
           "Estimate Type": {
              "type": "dimension",
              "uri": "http://gss-data.org.uk/def/trade/property/dimension/estimate-type",
-             "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-estimate-type/{+estimate_type}"
+             "value": "http://gss-data.org.uk/def/trade/concept/estimate-type/{+estimate_type}"
           },
           "Aggregate": {
              "type": "dimension",
              "uri": "http://gss-data.org.uk/def/trade/property/dimension/aggregate",
-             "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-aggregate/{+aggregate}"
+             "value": "http://gss-data.org.uk/def/trade/concept/aggregate/{+aggregate}"
           },
           "Value": {
             "type": "observations",
