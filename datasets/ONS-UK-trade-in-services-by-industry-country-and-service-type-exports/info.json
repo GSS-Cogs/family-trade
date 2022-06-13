@@ -24,30 +24,39 @@
         ],
         "columns": {
             "Period": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Country": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                "value": "http://statistics.data.gov.uk/id/statistical-geography/{country}"
             },
             "Trade Industry": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/industry",
-                "value": "{+trade_industry}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/energy/property/dimension/industry",
+                "value": "http://gss-data.org.uk/def/energy/concept/industry/{trade_industry}" 
             },
             "Service Account": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/energy/property/dimension/product",
+                "value": "http://gss-data.org.uk/def/energy/concept/product/{service_account}" 
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
+                "type": "observations",
+                "datatype": "double",
                 "measure": "http://gss-data.org.uk/def/measure/current-prices",
-                "datatype": "double"
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
             },
             "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "type": "attribute",
+                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             },
             "Flow": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
             }
         },
