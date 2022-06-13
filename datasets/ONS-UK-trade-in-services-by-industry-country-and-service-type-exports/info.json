@@ -30,13 +30,14 @@
             },
             "Country": {
                 "type": "dimension",
-                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://statistics.data.gov.uk/id/statistical-geography/{country}"
+                "new": {
+                   "codelist": "./codelists/country.csv-metadata.json"
+                }
             },
             "Trade Industry": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/energy/property/dimension/ons-industry",
-                "value": "http://gss-data.org.uk/def/energy/concept/ons-industry/{trade_industry}" 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/ons-industry",
+                "value": "http://gss-data.org.uk/def/trade/concept/ons-industry/{trade_industry}" 
             },
             "Service Account": {
                 "type": "dimension",
