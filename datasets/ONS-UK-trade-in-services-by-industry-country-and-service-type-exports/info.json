@@ -35,9 +35,8 @@
             },
             "Trade Industry": {
                 "type": "dimension",
-                "new": {
-                  "codelist": "./codelists/trade-industry.csv-metadata.json"
-                }
+                "uri": "http://gss-data.org.uk/def/energy/property/dimension/ons-industry",
+                "value": "http://gss-data.org.uk/def/energy/concept/ons-industry/{trade_industry}" 
             },
             "Service Account": {
                 "type": "dimension",

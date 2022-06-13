@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[56]:
+# In[82]:
 
 
 from gssutils import * 
@@ -11,7 +11,7 @@ from urllib.parse import urljoin
 df = pd.DataFrame()
 
 
-# In[57]:
+# In[83]:
 
 
 info = json.load(open('info.json'))
@@ -23,7 +23,7 @@ tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 list(tabs)
 
 
-# In[58]:
+# In[84]:
 
 
 tidied_sheets = []
@@ -54,7 +54,7 @@ savepreviewhtml(tidy_sheet, fname="Preview.html")
 tidied_sheets.append(tidy_sheet.topandas())
 
 
-# In[59]:
+# In[85]:
 
 
 df = pd.concat(tidied_sheets)
@@ -70,7 +70,7 @@ tidy_exports = df[["Period", "Country", "Industry", "Flow", "Service Account", "
 tidy_exports
 
 
-# In[60]:
+# In[86]:
 
 
 # Transformation of Imports file to be joined to exports transformation done above 
@@ -83,7 +83,7 @@ tabs = { tab.name: tab for tab in scraper.distributions[0].as_databaker() }
 list(tabs)
 
 
-# In[61]:
+# In[87]:
 
 
 tidied_sheets = []
@@ -114,7 +114,7 @@ savepreviewhtml(tidy_sheet, fname="Preview.html")
 tidied_sheets.append(tidy_sheet.topandas())
 
 
-# In[62]:
+# In[88]:
 
 
 df = pd.concat(tidied_sheets)
@@ -133,7 +133,7 @@ tidy = pd.concat([tidy_exports, tidy_imports])
 tidy.rename(columns={'Industry' : 'Trade Industry'}, inplace=True)
 
 
-# In[63]:
+# In[89]:
 
 
 description = f"""
@@ -165,24 +165,32 @@ scraper.dataset.description = description
 scraper.dataset.family = 'trade'
 
 
-# In[64]:
+# In[90]:
 
 
 tidy['Marker'][tidy['Marker'] == 'Suppressed'] = 'suppressed'
+
+tidy = tidy.replace({'Trade Industry' : {'Total' : 'T'}})
+
 tidy.head(20)
+
+
+# In[91]:
+
+
 
 # As trade industry is mostly SIC but with some additional codes, we'll need to turn the codes into URIs for the time being.
 
-trade_industry_codelist = Path('codelists') / 'trade-industry.csv'
+"""trade_industry_codelist = Path('codelists') / 'trade-industry.csv'
 trade_industry = pd.read_csv(trade_industry_codelist)
 notation_uri = dict(zip(trade_industry['Local Notation'], trade_industry['URI']))
 tidy['Trade Industry'] = tidy['Trade Industry'].apply(lambda x: notation_uri[x])
-tidy
+tidy"""
 
 # The `codelists/trade-industry.csv` file is a mixed codelist and should only contain the codes/concepts used by this dataset, along with any parent concepts.
 
 
-# In[65]:
+# In[92]:
 
 
 # This address seems to be having issues at the moment so cant pull to create new codelists, hopefully they havent changed (doesnt look like it from a glance)
@@ -219,15 +227,26 @@ codes_used.to_csv(trade_industry_codelist, index=False)
 """
 
 
-# In[66]:
+# In[93]:
 
 
 tidy.to_csv('observations.csv', index=False)
 
 
-# In[67]:
+# In[94]:
 
 
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
+
+
+# In[95]:
+
+
+from IPython.core.display import HTML
+for col in tidy:
+    if col not in ['Value']:
+        tidy[col] = tidy[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(tidy[col].cat.categories)
 
