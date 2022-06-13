@@ -1,0 +1,58 @@
+{
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
+    "id": "ons-quarterly-national-accounts", 
+    "title": "Quarterly National Accounts", 
+    "publisher": "Office for National Statistics", 
+    "description": "Annual and quarterly data for UK gross domestic product (GDP) estimates, in chained volume measures and current market prices.", 
+    "landingPage": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/uksecondestimateofgdpdatatables", 
+    "datasetNotes": ["On landing page, latest version of First Estimate, separately latest version of quarterly national accounts"], 
+    "published": "2020-02-11", 
+    "families": ["Trade"], 
+    "extract": {
+        "source": "XLS", 
+        "stage": "Prioritized"
+    }, 
+    "transform": {
+        "airtable": "recvRRELh7LMjqFtF", 
+        "columns": {
+            "Period": {
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", 
+                "value": "http://reference.data.gov.uk/id/{+period}"
+            }, 
+            "CDID": {
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/cdid", 
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{+cdid}"
+            },
+            "Sector": {
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry", 
+                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{+sector}"
+            },
+            "Economic Concept": {
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/estimate-type", 
+                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-estimate-type/{+economic_concept}"
+            },
+            "Level of inventories held at end-December 2019": {
+                "type": "attribute",
+                "uri": "http://gss-data.org.uk/def/trade/property/attribute/level-of-inventories-held-at-end-december-2018",
+                "value":"http://gss-data.org.uk/def/trade/concept-scheme/Level-of-inventories-held-at-end-December-2018/{+Level_of _inventories_held_at_end_December_2018}"
+            },
+            "Value": {
+                "type": "observations",
+                "measure": {
+                    "label": "change-in-inventories"
+                },
+                "unit": {
+                    "label": "gbp-million"
+                }
+            }
+        },
+        "main_issue": 13
+     },
+     "sizingNotes": "",
+     "notes": ""
+    
+}
