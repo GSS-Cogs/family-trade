@@ -36,8 +36,7 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/industrial-sector/{+sector}"
             },
             "2019 Weights": {
-                "type": "attribute",
-                "valueUrl": "http://gss-data.org.uk/def/trade/concept/weights-2019/{+2019_Weights'}"
+                "type": "attribute"
             },
             "Value": {
                 "type": "observations",
