@@ -74,6 +74,7 @@ df.rename(columns={'OBS' : 'Value','DATAMARKER' : 'Marker'}, inplace=True)
 df['Trade Type'] = df['Trade Type'].apply(lambda x: 'total' if 'Total Trade' in x else 
                                     ('goods' if 'Trade in Goods' in x else 
                                     ('services' if 'Trade in Services' in x else x)))
+df['Marker'].replace('N/A', 'not-collated', inplace=True)
 df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df['Period'] =  df["Period"].apply(date_time)
 df = df[['Period', 'Country', 'Flow', 'Trade Type', 'Marker', 'Value']]
