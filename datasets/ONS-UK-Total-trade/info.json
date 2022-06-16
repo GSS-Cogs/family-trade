@@ -25,9 +25,7 @@
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Country": {
-                "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/country-area",
-                "value": "http://gss-data.org.uk/def/trade/concept/country-area/{+country}"
+                "type": "dimension"
             },
             "Flow": {
                 "type": "dimension",
