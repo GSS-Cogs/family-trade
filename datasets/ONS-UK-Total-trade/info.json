@@ -36,14 +36,15 @@
             },
             "Trade Type" : {
                 "type": "dimension",
-               "uri": "http://gss-data.org.uk/def/trade/property/dimension/trade-type",
-               "value": "http://gss-data.org.uk/def/trade/concept/trade-type/{+trade_type}"
-            },
+                "new": {
+                    "codelist": "./codelists/trade-type.csv-metadata.json"
+                    }
+                },
             "Value": {
                 "type": "observations",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/measure/current-prices",
-                "datatype": "decimal"
+                "datatype": "integer"
             },
             "Marker": {
                 "type": "attribute",
