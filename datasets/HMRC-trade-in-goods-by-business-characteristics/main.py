@@ -6,9 +6,9 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.0
+#       jupytext_version: 1.13.8
 #   kernelspec:
-#     display_name: Python 3 (ipykernel)
+#     display_name: Python 3.9.12 64-bit
 #     language: python
 #     name: python3
 # ---
@@ -20,24 +20,22 @@ import requests
 import pandas as pd
 import numpy as np
 
-scraper = Scraper(seed = 'info.json')
-scraper
+metadata = Scraper(seed = 'info.json')
+metadata
 # -
 
 info = json.load(open('info.json'))
 
-cubes = Cubes('info.json')
+metadata.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
+metadata.dataset.family = info["families"]
 
-scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
-scraper.dataset.family = info["families"]
-
-datasetTitle = scraper.title
+datasetTitle = metadata.title
 datasetTitle = "UK trade in goods by business characteristics - data tables"
 
-distribution = scraper.distribution(title = lambda t : 'data tables' in t, latest = True)
+distribution = metadata.distribution(title = lambda t : 'data tables' in t, latest = True)
 distribution
 
-tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
+tabs = {tab.name: tab for tab in metadata.distribution(title = lambda t : 'data tables' in t).as_databaker()}
 list(tabs)
 
 tidied_sheets = []
@@ -143,10 +141,7 @@ df['Flow'].loc[(df['Flow'] == 'export')] = 'exports'
 df['Value'].loc[(df['Value'] == '')] = 0
 df['Value'] = df['Value'].astype(int)
 
-scraper.dataset.comment = 'UK trade in goods by business characteristics data details international trade in goods by industry, age and size of business'
+metadata.dataset.comment = 'UK trade in goods by business characteristics data details international trade in goods by industry, age and size of business'
 
-scraper.dataset.description = """HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK.
+metadata.dataset.description = """HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK.
 """
-
-cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
-cubes.output_all()
