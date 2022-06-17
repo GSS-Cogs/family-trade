@@ -71,7 +71,7 @@
             },
             "Marker": {
                 "type": "attribute",
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
                 "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
         },
