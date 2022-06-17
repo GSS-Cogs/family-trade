@@ -43,6 +43,7 @@ tidied_sheets = []
 for name, tab in tabs.items():
     if 'Notes and Contents' in name or '5. Metadata' in name :
         continue
+    print(tab.name)
     
     cell = tab.excel_ref("A1")
     flow = tab.filter(contains_string("Flow")).fill(DOWN).is_not_blank().is_not_whitespace()
@@ -82,24 +83,6 @@ df = pd.concat(tidied_sheets, sort = True)
 
 df.rename(columns= {'OBS':'Value', 'Period':'Year', 'Flow':'Flow Directions', 'DATAMARKER':'Marker'}, inplace = True)
 
-df['Flow Directions'] = df['Flow Directions'].apply(pathify)
-
-
-# +
-df['Country'] = df['Country'].apply(pathify)
-
-#df['Country'].unique()
-# -
-
-
-df['Zone'] = df['Zone'].apply(pathify)
-
-df['Business Size'] = df['Business Size'].apply(pathify)
-
-df['Age'] = df['Age'].apply(pathify)
-
-df['Industry Group'] = df['Industry Group'].apply(pathify)
-
 df["Employee Count"] = df["Employee Count"].apply(lambda x: str(x).split(".")[0])
 df["Business Count"] = df["Business Count"].apply(lambda x:str(x).split(".")[0])
 
@@ -136,12 +119,29 @@ df['Zone'] = df['Zone'].map({
 
 df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age": "Age of Business"})
 
-df['Flow'].loc[(df['Flow'] == 'import')] = 'imports'
-df['Flow'].loc[(df['Flow'] == 'export')] = 'exports'
+df["Flow"].replace({"Export":"Exports", "Import":"Imports"}, inplace = True)
+
 df['Value'].loc[(df['Value'] == '')] = 0
 df['Value'] = df['Value'].astype(int)
 
-metadata.dataset.comment = 'UK trade in goods by business characteristics data details international trade in goods by industry, age and size of business'
+df["Flow"].unique()
 
-metadata.dataset.description = """HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK.
+# metadata.dataset.comment = 'UK trade in goods by business characteristics data details international trade in goods by industry, age and size of business'
+metadata.dataset.comment = metadata.catalog.description
+metadata.dataset.comment
+
+
+metadata.dataset.description = f"""
+HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). 
+These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. 
+This release focuses on trade by industry group, age of business and size of business (number of employees) 
+This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK.
 """
+
+df.to_csv("observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
+
+df.columns
+
+df["Zone"].unique()
