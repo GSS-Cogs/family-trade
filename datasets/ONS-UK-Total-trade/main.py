@@ -79,7 +79,7 @@ df['Period'] = df['Period'].astype(str).replace('\.0', '', regex=True)
 df['Period'] =  df["Period"].apply(date_time)
 df = df[['Period', 'Country', 'Flow', 'Trade Type', 'Marker', 'Value']]
 
-df['Flow'] = df['Flow'].map(lambda x: 'export'  if 'Exports' in x else 'import')
+df['Flow'] = df['Flow'].map(lambda x: 'exports'  if 'Exports' in x else 'imports')
 
 add_to_des = """
 These tables have been produced to provide an aggregated quarterly goods and services estimate and combines the most recent estimates for goods and services split by country.
