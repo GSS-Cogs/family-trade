@@ -25,7 +25,13 @@
             "Flow": {
                 "type": "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow}"
+            },
+            "Industry Group":{
+                "type": "dimension",
+                "new":{
+                    "codelist": ".codelists/industry-group.csv-metadata.json"
+                }
             },
             "Country": {
                 "type": "dimension",
@@ -54,7 +60,7 @@
             },
             "Business Count": {
                 "type": "attribute",
-                "attribute": "http://gss-data.org.uk/def/trade/property/attribute/business-count",
+                "uri": "http://gss-data.org.uk/def/trade/property/attribute/business-count",
                 "value":"http://gss-data.org.uk/def/trade/concept-scheme/employee-count/{+business_count}"
             },
             "Value": {
