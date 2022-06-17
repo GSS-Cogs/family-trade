@@ -1,4 +1,5 @@
 {
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "hmrc-trade-in-goods-by-business-characteristics",
     "title": "UK Trade in Goods Statistics by Business Characteristics",
     "publisher": "HM Revenue & Customs",
@@ -19,6 +20,7 @@
         "airtable": "recVDI0VC5iKZCd2r",
         "columns": {
             "Year": {
+                "type": "dimension",
                 "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
                 "value": "http://reference.data.gov.uk/id/{+year}"
             },
