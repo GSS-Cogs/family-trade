@@ -43,7 +43,6 @@ tidied_sheets = []
 for name, tab in tabs.items():
     if 'Notes and Contents' in name or '5. Metadata' in name :
         continue
-    print(tab.name)
     
     cell = tab.excel_ref("A1")
     flow = tab.filter(contains_string("Flow")).fill(DOWN).is_not_blank().is_not_whitespace()
@@ -114,22 +113,21 @@ df['Country'] = df['Country'].map({
 })
 
 df['Zone'] = df['Zone'].map({ 
-    'eu': 'B5', 'non-eu': 'D5', 'world': 'W1'
+    'EU': 'B5', 'Non-EU': 'D5', 'World': 'W1'
 })
 
 df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age": "Age of Business"})
 
 df["Flow"].replace({"Export":"Exports", "Import":"Imports"}, inplace = True)
 
+df["Flow"].replace({"Export":"Exports", "Import":"Imports"}, inplace = True)
+
 df['Value'].loc[(df['Value'] == '')] = 0
 df['Value'] = df['Value'].astype(int)
-
-df["Flow"].unique()
 
 # metadata.dataset.comment = 'UK trade in goods by business characteristics data details international trade in goods by industry, age and size of business'
 metadata.dataset.comment = metadata.catalog.description
 metadata.dataset.comment
-
 
 metadata.dataset.description = f"""
 HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). 
@@ -141,7 +139,3 @@ This is a collection of all experimental UK trade in goods statistics by busines
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
-
-df.columns
-
-df["Zone"].unique()
