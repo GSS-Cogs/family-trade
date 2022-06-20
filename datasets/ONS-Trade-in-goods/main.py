@@ -257,10 +257,13 @@ for period in years.unique():
 graph_uri"""
 
 
-# In[115]:
+# In[120]:
 
 
 table.to_csv('observations.csv', index=False)
+
+catalog_metadata = scraper1.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 
 
 # In[116]:
