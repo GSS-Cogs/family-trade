@@ -80,8 +80,6 @@ for name, tab in tabs.items():
 
 df = pd.concat(tidied_sheets, sort = True)
 
-df["Country"].unique()
-
 df.rename(columns= {'OBS':'Value', 'Period':'Year', 'Flow':'Flow Directions', 'DATAMARKER':'Marker'}, inplace = True)
 
 df["Employee Count"] = df["Employee Count"].apply(lambda x: str(x).split(".")[0])
@@ -105,7 +103,7 @@ df['Country'] = df['Country'].map({
     'Germany': 'DE', 'Ireland' : 'IE', 'Italy': 'IT', 'Netherlands': 'NL',
     'Poland': 'PL', 'Spain': 'ES', 'Sweden': 'SE', 'Algeria': 'DZ', 
     'Australia': 'AU', 'Bangladesh': 'BD', 'Brazil': 'BR', 'Canada': 'CA', 
-    'China': 'CN', 'Hong-Kong': 'HK', 'India': 'IN', 'Israel': 'IL', 
+    'China': 'CN', 'Hong Kong': 'HK', 'India': 'IN', 'Israel': 'IL', 
     'Japan': 'JP', 'Malaysia': 'MY', 'Mexico': 'MX', 'Nigeria': 'NG', 
     'Norway': 'NO', 'Qatar': 'QA', 'Russia': 'RU', 'Saudi Arabia': 'SA',
     'Singapore': 'SG', 'South Africa': 'ZA', 'South Korea': 'KP', 'Sri Lanka': 'LK',
@@ -113,8 +111,6 @@ df['Country'] = df['Country'].map({
     'UAE': 'AE', 'United States': 'US', 'Vietnam': 'VN', 'EU': 'B5', 
     'Non-EU': 'D5', 'World': 'W1'
 })
-
-df['Country'].unique()
 
 df['Zone'] = df['Zone'].map({ 
     'EU': 'B5', 'Non-EU': 'D5', 'World': 'W1'
