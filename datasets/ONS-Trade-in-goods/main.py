@@ -1,20 +1,9 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.13.1
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
+#!/usr/bin/env python
+# coding: utf-8
 
-# UK Trade in goods: country-by-commodity, exports and imports
+# In[1]:
 
-# +
+
 import pandas as pd
 import json
 from gssutils import *
@@ -23,7 +12,9 @@ from zipfile import ZipFile
 from io import BytesIO
 
 
-# +
+# In[2]:
+
+
 def left(s, amount):
     return s[:amount]
 
@@ -31,11 +22,10 @@ def right(s, amount):
     return s[-amount:]
 
 
-# -
+# In[3]:
 
-cubes = Cubes("info.json")
 
-pd.options.mode.chained_assignment = None 
+pd.options.mode.chained_assignment = None
 
 info = json.load(open('info.json'))
 
@@ -55,14 +45,14 @@ distribution1
 distribution2 = scraper2.distribution(mediaType=lambda x: 'zip' in x, latest=True)
 distribution2
 
-descr = """ 
+descr = """
 Monthly import country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted.
 
 Users should note the following:
 Industry data has been produced using Standard Industrial Classification 2007 (SIC07).
-Commodity data has been produced using Standard International Trade Classification (SITC).	
+Commodity data has been produced using Standard International Trade Classification (SITC).
 
-Due to risks around disclosing data related to individual firms we are only able to provide data for certain combinations of the dimensions included, i.e. country, commodity and industry. This dataset therefore provides the following two combinations:	
+Due to risks around disclosing data related to individual firms we are only able to provide data for certain combinations of the dimensions included, i.e. country, commodity and industry. This dataset therefore provides the following two combinations:
     Industry (SIC07 2 digit), by Commodity (SITC 2 digit), by geographic region (worldwide, EU and non-EU)
     Industry (SIC07 2 digit), by Commodity total, by individual country
 
@@ -72,7 +62,7 @@ These changes include; improvements to the data linking methodology and a target
 The data linking improvements were required due to subtleties in both the HMRC data and IDBR not previously recognised within Trade.
 
 While we are happy with the quality of the data in this experimental release we have noticed some data movements, specifically in 2018.
-We will continue to review the movements seen in both the HMRC microdata and the linking methodology and, where appropriate, will further develop the methodology for Trade in Goods by Industry for future releases. 
+We will continue to review the movements seen in both the HMRC microdata and the linking methodology and, where appropriate, will further develop the methodology for Trade in Goods by Industry for future releases.
 
 """
 
@@ -86,7 +76,7 @@ scraper2.dataset.description = descr
 def yearSum(dataframe):
     '''
     sums up the observations for each respective year from Jan to Dec
-        and returns the dataframe with summed year-observation columns 
+        and returns the dataframe with summed year-observation columns
     '''
     df = dataframe
     new_data = []
@@ -106,7 +96,7 @@ def yearSum(dataframe):
 
 def transform(dataframe):
     '''transforms the dataframe to a datacube
-    ''' 
+    '''
     df = dataframe
     df.rename(columns={
         'COMMODITY': 'Commodity',
@@ -115,41 +105,71 @@ def transform(dataframe):
         }, inplace=True)
     tidy = pd.melt(df, id_vars=['Commodity','ONS Partner Geography', 'Flow'], var_name='Period', value_name='Value')
     tidy_sheet = tidy.sort_values(['Commodity','ONS Partner Geography', 'Flow'])
-    tidy_sheet = tidy_sheet[tidy_sheet['Value'] != 0]
+    #tidy_sheet = tidy_sheet[tidy_sheet['Value'] != 0]
     return tidy_sheet
 
+
+# In[4]:
+
+
+tab_names = ['1. Annual Exports', '2. Quarterly Exports', '3. Monthly Exports']
+tidy_tabs = []
 
 '''Country by Commodity Export data'''
 with ZipFile(BytesIO(scraper1.session.get(distribution1.downloadURL).content)) as zip:
     assert(len(zip.namelist()) == 1)
     with zip.open(zip.namelist()[0]) as excelFile:
         buffered_fobj = BytesIO(excelFile.read())
-        data1 = pd.read_excel(buffered_fobj,
-                             sheet_name=1, dtype={
-                                 'COMMODITY': 'category',
-                                 'COUNTRY': 'category',
-                                 'DIRECTION': 'category'
-                             }, na_values=['','N/A'], keep_default_na=False)
+        for i in tab_names:
+            data1 = pd.read_excel(buffered_fobj,
+                                sheet_name=i, skiprows=3, dtype={
+                                    'COMMODITY': 'category',
+                                    'COUNTRY': 'category',
+                                    'DIRECTION': 'category'
+                                }, na_values=['','N/A'], keep_default_na=False)
+            tidy_tabs.append(data1)
 
-#tidyData1 = yearSum(data1)
-table1 = transform(data1)
+export_sheets = []
+
+for i in tidy_tabs:
+    export_sheets.append(transform(i))
+
+table1 = pd.concat(export_sheets)
+table1
+
+
+# In[5]:
+
+
+tab_names = ['1. Annual Imports', '2. Quarterly Imports', '3. Monthly Imports']
+tidy_tabs = []
 
 '''Country by Commodity Import data'''
 with ZipFile(BytesIO(scraper2.session.get(distribution2.downloadURL).content)) as zip:
     assert(len(zip.namelist()) == 1)
     with zip.open(zip.namelist()[0]) as excelFile:
         buffered_fobj = BytesIO(excelFile.read())
-        data2 = pd.read_excel(buffered_fobj,
-                             sheet_name=1, dtype={
-                                 'COMMODITY': 'category',
-                                 'COUNTRY': 'category',
-                                 'DIRECTION': 'category'
-                             }, na_values=['','N/A'], keep_default_na=False)
+        for i in tab_names:
+            data2 = pd.read_excel(buffered_fobj,
+                                sheet_name=i, skiprows=3, dtype={
+                                    'COMMODITY': 'category',
+                                    'COUNTRY': 'category',
+                                    'DIRECTION': 'category'
+                                }, na_values=['','N/A'], keep_default_na=False)
+            tidy_tabs.append(data2)
 
-#tidyData2 = yearSum(data2)
-table2 = transform(data2)
+import_sheets = []
 
-# +
+for i in tidy_tabs:
+    import_sheets.append(transform(i))
+
+table2 = pd.concat(import_sheets)
+table2
+
+
+# In[6]:
+
+
 # =================================================================================================
 # =================================================================================================
 # =================================================================================================
@@ -157,15 +177,18 @@ table2 = transform(data2)
 table = pd.concat([table1, table2])
 #print(table['Commodity'].count())
 
-for y in range(1995, 2018):
+"""for y in range(1995, 2018):
     table = table[~table['Period'].str.contains(str(y))]
-    #print(str(y) + ': ' + str(table['Commodity'].count()))
+    #print(str(y) + ': ' + str(table['Commodity'].count()))"""
 
 table['Period'].unique()
 # =================================================================================================
 # =================================================================================================
 # =================================================================================================
-# -
+
+
+# In[7]:
+
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
 
@@ -178,25 +201,76 @@ table['Commodity'].cat.categories = table['Commodity'].cat.categories.map(lambda
 table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
 table['Flow'] = table['Flow'].map(lambda x: x.split(' ')[1])
 
-# +
-#table['Period'] = table['Period'].astype(str)
-#table['Period'] = 'year/' + table['Period']
-# -
+
+# In[8]:
+
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
 #table['Measure Type'] = pd.Series('gbp-million', index=table.index, dtype='category')
 #table['Unit'] = pd.Series('gbp-million', index=table.index, dtype='category')
 
-#line not needed data does not need to be supressed
-table['Marker'] = ' '
-#table.loc[(table['Value'] == 0), 'Marker'] = 'suppressed'
-
-table = table[['ONS Partner Geography','Period','Flow','Commodity','Seasonal Adjustment','Value','Marker']]
+table = table[['ONS Partner Geography','Period','Flow','Commodity','Seasonal Adjustment','Value']]
 table['Flow'] = table['Flow'].map(lambda x: pathify(x))
+
 table
 
+
+# In[9]:
+
+
+import numpy as np
+
+class MyDict(dict):
+    def __missing__(self, key):
+        return key
+
+df = table.reset_index(drop=True)
+
+df['Marker'] = ''
+df['Marker'] = np.where(df['Value'].str.isnumeric() == False, df['Value'], df['Marker'])
+
+markerRep = MyDict({'X' : 'data-not-collated'})
+valRep = MyDict({'X' : ''})
+
+df['Marker'] = df['Marker'].map(markerRep)
+df['Value'] = df['Value'].map(valRep)
+
+df
+
+
+# In[10]:
+
+
+dfMonth = df[df['Period'].str.contains("month")]
+dfQuarter = df[df['Period'].str.contains("Q")]
+dfQuarter['Period'] = dfQuarter['Period'].map(lambda x: 'quarter/' + left(x, 4) + '-' + right(x, 2))
+dfYear = df[~df['Period'].str.contains("month|Q")]
+dfYear['Period'] = dfYear['Period'].map(lambda x: 'year/' + x)
+
+df = pd.concat([dfYear, dfQuarter, dfMonth]).reset_index(drop=True)
+
+df['Commodity'] = df['Commodity'].astype(str)
+
+df
+
+
+# In[15]:
+
+
+df.dtypes
+
+
+# In[11]:
+
+
 info_json_dataset_id = info.get('id', Path.cwd().name)
-years = table['Period'].map(lambda p: p[-7:-3])
+info_json_dataset_id
+
+
+# In[12]:
+
+
+"""years = table['Period'].map(lambda p: p[-7:-3])
 for period in years.unique():
 
     if len(cubes.cubes) == 0:
@@ -208,4 +282,25 @@ for period in years.unique():
         csv_name = f"ons-trade-in-goods-{period}"
         cubes.add_cube(scraper1, table[years == period], csv_name, graph=info_json_dataset_id, override_containing_graph=graph_uri, suppress_catalog_and_dsd_output=True)
 
-cubes.output_all()
+graph_uri"""
+
+
+# In[13]:
+
+
+df.to_csv('observations.csv', index=False)
+
+catalog_metadata = scraper1.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
+
+
+# In[14]:
+
+
+from IPython.core.display import HTML
+for col in df:
+    if col not in ['Value']:
+        df[col] = df[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(df[col].cat.categories)
+
