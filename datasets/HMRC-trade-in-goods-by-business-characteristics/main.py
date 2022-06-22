@@ -6,9 +6,9 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.0
+#       jupytext_version: 1.13.8
 #   kernelspec:
-#     display_name: Python 3 (ipykernel)
+#     display_name: Python 3.9.12 64-bit
 #     language: python
 #     name: python3
 # ---
@@ -20,25 +20,23 @@ import requests
 import pandas as pd
 import numpy as np
 
-scraper = Scraper(seed = 'info.json')
-scraper
+metadata = Scraper(seed = 'info.json')
+metadata
 # -
 
 info = json.load(open('info.json'))
 
-cubes = Cubes('info.json')
+metadata.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
+metadata.dataset.family = info["families"]
 
-scraper.select_dataset(title = lambda x: x.endswith('data tables'), latest = True)
-scraper.dataset.family = info["families"]
-
-datasetTitle = scraper.title
+datasetTitle = metadata.title
 datasetTitle = "UK trade in goods by business characteristics - data tables"
 
-distribution = scraper.distribution(title = lambda t : 'data tables' in t, latest = True)
-distribution
+distribution = metadata.distribution(title = lambda t : 'data tables' in t, latest = True)
+# distribution
 
-tabs = {tab.name: tab for tab in scraper.distribution(title = lambda t : 'data tables' in t).as_databaker()}
-list(tabs)
+tabs = {tab.name: tab for tab in metadata.distribution(title = lambda t : 'data tables' in t).as_databaker()}
+# list(tabs)
 
 tidied_sheets = []
 
@@ -47,11 +45,7 @@ for name, tab in tabs.items():
         continue
     
     cell = tab.excel_ref("A1")
-    flow = tab.filter(contains_string("Flow")).fill(DOWN).is_not_blank().is_not_whitespace()
-    
-   # year = tab.filter(contains_string("Year")).fill(DOWN).is_not_blank().is_not_whitespace()
-   # savepreviewhtml(year, fname = tab.name+ "Preview.html")
-    
+    flow = tab.filter(contains_string("Flow")).fill(DOWN).is_not_blank().is_not_whitespace()    
     year = cell.shift(1,3).expand(DOWN).is_not_blank().is_not_whitespace()
     
     country = tab.filter(contains_string("Country")).fill(DOWN).is_not_blank().is_not_whitespace()
@@ -61,7 +55,6 @@ for name, tab in tabs.items():
     industry_group = tab.filter(contains_string("Industry Group")).fill(DOWN).is_not_blank().is_not_whitespace()
     business_count = tab.filter(contains_string("Business Count")).fill(DOWN).is_not_blank().is_not_whitespace()
     employee_count = tab.filter(contains_string("Employee Count")).fill(DOWN).is_not_blank().is_not_whitespace()
-    
     
     observations = cell.shift(7,2).fill(DOWN).is_not_blank().is_not_whitespace()
     
@@ -84,26 +77,10 @@ df = pd.concat(tidied_sheets, sort = True)
 
 df.rename(columns= {'OBS':'Value', 'Period':'Year', 'Flow':'Flow Directions', 'DATAMARKER':'Marker'}, inplace = True)
 
-df['Flow Directions'] = df['Flow Directions'].apply(pathify)
-
-
-# +
-df['Country'] = df['Country'].apply(pathify)
-
-#df['Country'].unique()
-# -
-
-
-df['Zone'] = df['Zone'].apply(pathify)
-
-df['Business Size'] = df['Business Size'].apply(pathify)
-
-df['Age'] = df['Age'].apply(pathify)
-
-df['Industry Group'] = df['Industry Group'].apply(pathify)
-
 df["Employee Count"] = df["Employee Count"].apply(lambda x: str(x).split(".")[0])
 df["Business Count"] = df["Business Count"].apply(lambda x:str(x).split(".")[0])
+
+df["Business Size"] = df["Business Size"].apply(pathify)
 
 df['Marker'] = df['Marker'].replace('Suppressed', 'suppressed', regex=True)
 
@@ -119,34 +96,52 @@ df['Year'] = df['Year'].astype(str).replace('\.', '', regex=True)
 df['Year'] = df['Year'].apply(date_time)
 
 df['Country'] = df['Country'].map({
-    'belgium': 'BE', 'czech-republic': 'CZ', 'denmark': 'DK', 'france': 'FR',
-    'germany': 'DE', 'republic-of-ireland': 'IE', 'ireland' : 'IE', 'italy': 'IT', 'netherlands': 'NL',
-    'poland': 'PL', 'spain': 'ES', 'sweden': 'SE', 'algeria': 'DZ', 
-    'australia': 'AU', 'bangladesh': 'BD', 'brazil': 'BR', 'canada': 'CA', 
-    'china': 'CN', 'hong-kong': 'HK', 'india': 'IN', 'israel': 'IL', 
-    'japan': 'JP', 'malaysia': 'MY', 'mexico': 'MX', 'nigeria': 'NG', 
-    'norway': 'NO', 'qatar': 'QA', 'russia': 'RU', 'saudi-arabia': 'SA',
-    'singapore': 'SG', 'south-africa': 'ZA', 'south-korea': 'KP', 'sri-lanka': 'LK',
-    'switzerland': 'CH', 'taiwan': 'TW', 'thailand': 'TH', 'turkey': 'TR', 
-    'uae': 'AE', 'united-states': 'US', 'vietnam': 'VN', 'eu': 'B5', 
-    'non-eu': 'D5', 'world': 'W1'
+    'Belgium': 'BE', 'Czech Republic': 'CZ', 'Denmark': 'DK', 'France': 'FR',
+    'Germany': 'DE', 'Ireland' : 'IE', 'Italy': 'IT', 'Netherlands': 'NL',
+    'Poland': 'PL', 'Spain': 'ES', 'Sweden': 'SE', 'Algeria': 'DZ', 
+    'Australia': 'AU', 'Bangladesh': 'BD', 'Brazil': 'BR', 'Canada': 'CA', 
+    'China': 'CN', 'Hong Kong': 'HK', 'India': 'IN', 'Israel': 'IL', 
+    'Japan': 'JP', 'Malaysia': 'MY', 'Mexico': 'MX', 'Nigeria': 'NG', 
+    'Norway': 'NO', 'Qatar': 'QA', 'Russia': 'RU', 'Saudi Arabia': 'SA',
+    'Singapore': 'SG', 'South Africa': 'ZA', 'South Korea': 'KP', 'Sri Lanka': 'LK',
+    'Switzerland': 'CH', 'Taiwan': 'TW', 'Thailand': 'TH', 'Turkey': 'TR', 
+    'UAE': 'AE', 'United States': 'US', 'Vietnam': 'VN', 'EU': 'B5', 
+    'Non-EU': 'D5', 'World': 'W1'
 })
 
 df['Zone'] = df['Zone'].map({ 
-    'eu': 'B5', 'non-eu': 'D5', 'world': 'W1'
+    'EU': 'B5', 'Non-EU': 'D5', 'World': 'W1'
 })
+
+to_replace_industry_group = {'All':'all', 'Group1':'group1', 
+                            'Group2':'group2','Group3':'group3', 
+                            'Group4':'group4','Group5':'group5', 
+                            'Group6':'group6','Group7':'group7', 
+                            'Group8':'group8', 'Group9':'group9', 
+                            'Group10':'group10', 'Unknown':'unknown'}
+df["Industry Group"] = df["Industry Group"].replace(to_replace_industry_group)     
 
 df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age": "Age of Business"})
 
-df['Flow'].loc[(df['Flow'] == 'import')] = 'imports'
-df['Flow'].loc[(df['Flow'] == 'export')] = 'exports'
+df['Age of Business'] = df['Age of Business'].apply(pathify)
+df["Flow"] = df["Flow"].apply(pathify)
+
+df["Flow"].replace({"export":"exports", "import":"imports"}, inplace = True)
+
 df['Value'].loc[(df['Value'] == '')] = 0
 df['Value'] = df['Value'].astype(int)
 
-scraper.dataset.comment = 'UK trade in goods by business characteristics data details international trade in goods by industry, age and size of business'
+# metadata.dataset.comment = 'UK trade in goods by business characteristics data details international trade in goods by industry, age and size of business'
+metadata.dataset.comment = metadata.catalog.description
+metadata.dataset.comment
 
-scraper.dataset.description = """HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. This release focuses on trade by industry group, age of business and size of business (number of employees) This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK.
+metadata.dataset.description = f"""
+HM Revenue and Customs has linked the overseas trade statistics (OTS) trade in goods data with the Office for National Statistics (ONS) business statistics data, sourced from the Inter-Departmental Business Register (IDBR). 
+These experimental statistics releases gives some expanded analyses showing overseas trade by business characteristics, which provides information about the businesses that are trading those goods. 
+This release focuses on trade by industry group, age of business and size of business (number of employees) 
+This is a collection of all experimental UK trade in goods statistics by business characteristics available on GOV.UK.
 """
 
-cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
-cubes.output_all()
+df.to_csv("observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
