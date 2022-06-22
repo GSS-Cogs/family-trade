@@ -35,15 +35,21 @@
                     "codelist": "./codelists/industry-group.csv-metadata.json"
                 }
             },
-            "Country": {
-                "type": "dimension",
-                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://gss-data.org.uk/def/concept/cl-area/{+country}"
+            "Country":{
+                "type":"dimension",
+                "new": {
+                    "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                    "codelist": "http://gss-data.org.uk/def/concept-scheme/cl-area"
+                },
+                "value":"http://gss-data.org.uk/def/concept/cl-area/{+country}"
             },
-            "Zone": {
-                "type": "dimension",
-                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
-                "value": "http://gss-data.org.uk/def/concept/cl-area/{+zone}"
+            "Zone":{
+                "type":"dimension",
+                "new": {
+                    "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refArea",
+                    "codelist": "http://gss-data.org.uk/def/concept-scheme/cl-area"
+                },
+                "value":"http://gss-data.org.uk/def/concept/cl-area/{+zone}"
             },
             "Number of Employees": {
                 "type": "dimension",

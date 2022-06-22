@@ -124,8 +124,9 @@ df["Industry Group"] = df["Industry Group"].replace(to_replace_industry_group)
 df = df.rename(columns={'Flow Directions': "Flow", "Business Size": "Number of Employees", "Age": "Age of Business"})
 
 df['Age of Business'] = df['Age of Business'].apply(pathify)
+df["Flow"] = df["Flow"].apply(pathify)
 
-df["Flow"].replace({"Export":"Exports", "Import":"Imports"}, inplace = True)
+df["Flow"].replace({"export":"exports", "import":"imports"}, inplace = True)
 
 df['Value'].loc[(df['Value'] == '')] = 0
 df['Value'] = df['Value'].astype(int)
