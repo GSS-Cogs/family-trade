@@ -33,10 +33,10 @@ datasetTitle = metadata.title
 datasetTitle = "UK trade in goods by business characteristics - data tables"
 
 distribution = metadata.distribution(title = lambda t : 'data tables' in t, latest = True)
-distribution
+# distribution
 
 tabs = {tab.name: tab for tab in metadata.distribution(title = lambda t : 'data tables' in t).as_databaker()}
-list(tabs)
+# list(tabs)
 
 tidied_sheets = []
 
@@ -45,11 +45,7 @@ for name, tab in tabs.items():
         continue
     
     cell = tab.excel_ref("A1")
-    flow = tab.filter(contains_string("Flow")).fill(DOWN).is_not_blank().is_not_whitespace()
-    
-   # year = tab.filter(contains_string("Year")).fill(DOWN).is_not_blank().is_not_whitespace()
-   # savepreviewhtml(year, fname = tab.name+ "Preview.html")
-    
+    flow = tab.filter(contains_string("Flow")).fill(DOWN).is_not_blank().is_not_whitespace()    
     year = cell.shift(1,3).expand(DOWN).is_not_blank().is_not_whitespace()
     
     country = tab.filter(contains_string("Country")).fill(DOWN).is_not_blank().is_not_whitespace()
@@ -59,7 +55,6 @@ for name, tab in tabs.items():
     industry_group = tab.filter(contains_string("Industry Group")).fill(DOWN).is_not_blank().is_not_whitespace()
     business_count = tab.filter(contains_string("Business Count")).fill(DOWN).is_not_blank().is_not_whitespace()
     employee_count = tab.filter(contains_string("Employee Count")).fill(DOWN).is_not_blank().is_not_whitespace()
-    
     
     observations = cell.shift(7,2).fill(DOWN).is_not_blank().is_not_whitespace()
     
@@ -84,6 +79,8 @@ df.rename(columns= {'OBS':'Value', 'Period':'Year', 'Flow':'Flow Directions', 'D
 
 df["Employee Count"] = df["Employee Count"].apply(lambda x: str(x).split(".")[0])
 df["Business Count"] = df["Business Count"].apply(lambda x:str(x).split(".")[0])
+
+df["Business Size"] = df["Business Size"].apply(pathify)
 
 df['Marker'] = df['Marker'].replace('Suppressed', 'suppressed', regex=True)
 
