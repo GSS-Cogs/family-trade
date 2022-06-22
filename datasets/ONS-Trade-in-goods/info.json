@@ -20,7 +20,6 @@
         "stage": "Done"
     },
     "transform": {
-        "csvcubed_uri_style": "WithoutFileExtensions",
         "validate": false,
         "airtable": [
             "recWLO6lMVlcBiBiz",
