@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[67]:
 
 
 import pandas as pd
@@ -12,7 +12,7 @@ from zipfile import ZipFile
 from io import BytesIO
 
 
-# In[2]:
+# In[68]:
 
 
 def left(s, amount):
@@ -22,7 +22,7 @@ def right(s, amount):
     return s[-amount:]
 
 
-# In[3]:
+# In[69]:
 
 
 pd.options.mode.chained_assignment = None
@@ -109,7 +109,7 @@ def transform(dataframe):
     return tidy_sheet
 
 
-# In[4]:
+# In[70]:
 
 
 tab_names = ['1. Annual Exports', '2. Quarterly Exports', '3. Monthly Exports']
@@ -138,7 +138,7 @@ table1 = pd.concat(export_sheets)
 table1
 
 
-# In[5]:
+# In[71]:
 
 
 tab_names = ['1. Annual Imports', '2. Quarterly Imports', '3. Monthly Imports']
@@ -167,7 +167,7 @@ table2 = pd.concat(import_sheets)
 table2
 
 
-# In[6]:
+# In[72]:
 
 
 # =================================================================================================
@@ -187,7 +187,7 @@ table['Period'].unique()
 # =================================================================================================
 
 
-# In[7]:
+# In[73]:
 
 
 pd.set_option('display.float_format', lambda x: '%.0f' % x)
@@ -202,7 +202,7 @@ table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].c
 table['Flow'] = table['Flow'].map(lambda x: x.split(' ')[1])
 
 
-# In[8]:
+# In[74]:
 
 
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
@@ -215,7 +215,7 @@ table['Flow'] = table['Flow'].map(lambda x: pathify(x))
 table
 
 
-# In[9]:
+# In[75]:
 
 
 import numpy as np
@@ -238,7 +238,7 @@ df['Value'] = df['Value'].map(valRep)
 df
 
 
-# In[10]:
+# In[76]:
 
 
 dfMonth = df[df['Period'].str.contains("month")]
@@ -254,20 +254,20 @@ df['Commodity'] = df['Commodity'].astype(str)
 df
 
 
-# In[15]:
+# In[77]:
 
 
 df.dtypes
 
 
-# In[11]:
+# In[80]:
 
 
 info_json_dataset_id = info.get('id', Path.cwd().name)
 info_json_dataset_id
 
 
-# In[12]:
+# In[81]:
 
 
 """years = table['Period'].map(lambda p: p[-7:-3])
@@ -285,7 +285,7 @@ for period in years.unique():
 graph_uri"""
 
 
-# In[13]:
+# In[82]:
 
 
 df.to_csv('observations.csv', index=False)
@@ -294,7 +294,7 @@ catalog_metadata = scraper1.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
 
-# In[14]:
+# In[83]:
 
 
 from IPython.core.display import HTML

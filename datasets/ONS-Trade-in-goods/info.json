@@ -62,7 +62,7 @@
             "Commodity": {
                 "type":"dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
-                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{+commodity}"
+                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}"
             }
         }
     },
