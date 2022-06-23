@@ -63,7 +63,7 @@ df = df[df['OBS'] != 0]
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 df['Value'] = df['Value'].astype(int)
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
-df['Product'] = df['Product'].map(lambda x: x.split(' ', 1)[1])
+df['Product'] = df['Product'].map(lambda x: x.split(' ', 1)[0])
 df['Flow Direction'] = df['Flow Direction'].apply(pathify)
 df['Flow Direction'] = df['Flow Direction'].str.rstrip("-annual")
 df['Flow Direction'] = df['Flow Direction'].str.rstrip("-quarter")
