@@ -42,7 +42,10 @@
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Product": {
-                "type": "dimension"
+                "type": "dimension",
+                "new": {
+                    "codelist": "./codelists/product.csv-metadata.json"
+                  }
             }
         }
     },

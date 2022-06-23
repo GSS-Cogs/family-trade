@@ -31,7 +31,6 @@ for tab in tabs:
 
         flow_direction = tab.name.split(' ', 1)[1]
         period = tab.excel_ref("C4").expand(RIGHT).is_not_blank().is_not_whitespace()
-        # savepreviewhtml(period,fname=tab.name + "Preview.html")
         product = tab.excel_ref("A5").expand(DOWN).is_not_blank().is_not_whitespace()
         cdid = tab.excel_ref('B5').expand(DOWN)
         observations = tab.excel_ref('C5').expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace() 
@@ -64,8 +63,10 @@ df = df[df['OBS'] != 0]
 df.rename(columns={'OBS' : 'Value'}, inplace=True)
 df['Value'] = df['Value'].astype(int)
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
-df['Product'] = df['Product'].map(lambda x: x.split(' ', 1)[0])
+df['Product'] = df['Product'].map(lambda x: x.split(' ', 1)[1])
 df['Flow Direction'] = df['Flow Direction'].apply(pathify)
+df['Flow Direction'] = df['Flow Direction'].str.rstrip("-annual")
+df['Flow Direction'] = df['Flow Direction'].str.rstrip("-quarter")
 df['CDID'] = df['CDID'].map(lambda x: x if len(x.strip()) > 0 else 'not-applicable')
 
 df = df[['Period', 'Flow Direction', 'Product', 'CDID', 'Value']]
