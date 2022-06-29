@@ -228,7 +228,7 @@ df = df.replace({'Service Origin Geography' : {
      }})   
 # -
 
-df = df[['Period','Export Services','Service Origin Geography', 'Service Destination', 'Flow Directions', 'Marker', 'Value']]
+df = df[['Period','Export Services','Service Origin Geography', 'Service Destination', 'Flow Directions', 'Value', 'Marker']]
 
 add_to_des = """
 Sources: UK Balance of Payments - The Pink Book; International Trade in Services; UK Trade in services by industry, country and service type: 2016 to 2017
