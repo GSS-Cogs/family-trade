@@ -230,7 +230,7 @@ for name, tab in tabs.items():
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
             HDim(weights, '2019 Weights',DIRECTLY,ABOVE),
             HDim(industry, 'Industry',DIRECTLY,ABOVE),
-            HDim(measure, 'measure',CLOSEST,ABOVE),
+            HDim(measure, 'measure',CLOSEST,ABOVE)
             
         ]
         dimensions[0] = with_expenditure_overrides(dimensions[0])
@@ -561,23 +561,17 @@ b2 = convet_dimension_to_int(b2, 'Value')
 
 b1b2 = pd.concat([b1, b2])
 
-# +
+b1b2.columns
 
-#b1b2cdids = b1b2['CDID'].unique()
-# Delete attribute for now as it is causing problems in PMD4, going into the CDID column!
-#del b1b2['Weights 2018']
 b1b2 = b1b2[['Period','CDID','2019 Weights','Sector','Industry','Value']]
 # b1b2.head(20)
 
-# +
 # There are duplicates in this DataFrame.
-# duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
-# duplicate_df.sort_values(by = 'Value').to_csv("b1b2duplicates.csv")
+duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
+# duplicate_df.sort_values(by = ['Value', '2019 Weights', 'Period', 'CDID']).to_csv("b1b2duplicates.csv")
 # duplicate_df
 
-# +
-# b1b2 = b1b2.drop_duplicates()
-# -
+b1b2 = b1b2.drop_duplicates()
 
 metadata.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
 metadata.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
