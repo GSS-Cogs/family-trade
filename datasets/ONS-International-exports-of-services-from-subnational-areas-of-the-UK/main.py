@@ -18,6 +18,7 @@
 
 import pandas as pandas
 from gssutils import *
+import numpy as np
 
 metadata = Scraper(seed="info.json")
 
@@ -26,8 +27,6 @@ distribution = metadata.distribution(latest = True)
 title = distribution.title
 
 tabs = {tab.name: tab for tab in distribution.as_databaker()}
-
-columns = ['Period', 'Export Services', 'Service Origin Geography', 'Flow Directions', 'Service Destination', 'Marker', 'Sheet Name']
 
 # +
 tidied_sheets = []
@@ -197,7 +196,11 @@ df.loc[f1,'Service Origin Geography'] = df.loc[f1,'Service Origin Geography'].ma
         'Wales':'UKL',
         'Scotland':'UKM',
         'Northern Ireland':'UKN'      
-         }.get(x, x))        
+         }.get(x, x))       
+
+df['NUTS'].replace(np.nan, '', inplace=True)
+
+df['Service Origin Geography'] = df['NUTS'] + df['Service Origin Geography']
 
 # +
 df = df.replace({'Service Origin Geography' : {
