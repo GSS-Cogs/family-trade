@@ -60,7 +60,7 @@
             },
             "Unit": {
                 "type": "units",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/{+unit}"
+                "value": "{+unit}"
             }
         }
     },
