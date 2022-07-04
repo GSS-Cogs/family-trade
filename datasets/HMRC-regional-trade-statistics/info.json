@@ -56,7 +56,7 @@
             },
             "Measure Type": {
                 "type": "measures",
-                "value": "http://gss-data.org.uk/def/measure/{+measure_type}"
+                "value": "http://gss-data.org.uk/def/trade/measure/{+measure_type}"
             },
             "Unit": {
                 "type": "units",
