@@ -21,8 +21,11 @@
         "columns": {
             "Period": {
                 "type": "dimension",
-                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/quarter/{period}"
+                "new": {
+                    "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                    "codelist": false
+                },
+                "value": "https://reference.data.gov.uk/id/quarter/{+period}"
             },
             "Flow Type": {
                 "type": "dimension",
