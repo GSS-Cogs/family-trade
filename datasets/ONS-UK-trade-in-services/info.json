@@ -24,10 +24,16 @@
                 "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Country": {
-                "type": "dimension"
+                "type": "dimension",
+                "new": {
+                    "codelist": "./codelists/country.csv-metadata.json"
+                    }
             },
             "Trade Services": {
-                "type": "dimension"
+                "type": "dimension",
+                "new":{
+                    "codelist": "./codelists/trade-services.csv-metadata.json"
+                    }
             },
             "Flow": {
                 "type":"dimension",
