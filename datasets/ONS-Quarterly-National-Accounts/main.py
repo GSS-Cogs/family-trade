@@ -304,6 +304,36 @@ for name, tab in tabs.items():
         tidy_sheet['Gross Domestic Product'] = tidy_sheet['Gross Domestic Product'].replace('', 'Gross operating surplus of corporations')
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
+
+    elif name in household_expenditure_indicators:
+        if name in household_expenditure_indicators[0] or name in household_expenditure_indicators[2]:
+            COICOP = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
+            measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
+            expenditure = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
+        else:
+            p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('B6')
+            COICOP = tab.excel_ref('B7').expand(RIGHT)
+            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
+            measure = tab.excel_ref('G2').expand(RIGHT).is_not_blank()
+            expenditure = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
+            
+        observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
+        dimensions = [
+            HDim(period,'Period',DIRECTLY,LEFT),
+            HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
+            HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
+            HDim(cdid, 'CDID',DIRECTLY,ABOVE),
+            HDim(COICOP, 'COICOP',DIRECTLY,ABOVE),
+            HDim(expenditure, 'Household Expenditure',DIRECTLY,ABOVE),
+            HDim(measure, 'measure',CLOSEST,ABOVE),
+
+        ]
+        c1 = ConversionSegment(tab, dimensions, observations)   
+        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
+        tidied_sheets.append(tidy_sheet)
         
     elif name in gross_fixed_capitol:
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
@@ -324,6 +354,31 @@ for name, tab in tabs.items():
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
+        tidied_sheets.append(tidy_sheet)
+
+    elif name in inventories:
+        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
+        observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
+        sector = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
+        level_held_title = tab.excel_ref('A4').is_not_blank() 
+        level_held = level_held_title.expand(RIGHT).is_not_blank()
+        industry = sector.shift(UP)
+        dimensions = [
+            HDim(industry,'Industry',DIRECTLY,ABOVE),
+            HDim(period,'Period',DIRECTLY,LEFT),
+            HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
+            HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
+            HDim(cdid, 'CDID',DIRECTLY,ABOVE),
+            HDim(sector, 'Sector',DIRECTLY,ABOVE),
+            HDim(level_held, 'Level of inventories held at end-December 2018',DIRECTLY,ABOVE),
+            HDim(measure, 'measure',CLOSEST,ABOVE),
+        ]
+        dimensions[0] = with_industry_overrides(dimensions[0])
+        c1 = ConversionSegment(tab, dimensions, observations)   
+        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        tidy_sheet = c1.topandas()
+        tidy_sheet['Industry'] = tidy_sheet['Industry'].replace('', 'Distributive trades')
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
 
@@ -751,6 +806,10 @@ Other income includes mixed income and the operating surplus of the non-corporat
 d1.to_csv("income_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('income_indicators-catalog-metadata.json')
+
+e1 = tidied_sheets[7]
+
+e1.columns
 
 # +
 e1 = tidied_sheets[7]
