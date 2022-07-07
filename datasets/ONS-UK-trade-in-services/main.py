@@ -70,10 +70,7 @@ df['Trade Services'] = df['Trade Services'].astype(str).replace('\.0', '', regex
 df.loc[(df['Marker'] == 'disclosive'),'Value'] = 0
 df['Value'] = df['Value'].astype(int)
 df['Marker'].fillna('', inplace=True)
-df = df.drop_duplicates()
 
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
-
-df.head()
