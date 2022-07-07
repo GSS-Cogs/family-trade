@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[34]:
+# In[26]:
 
 
 import logging
@@ -12,23 +12,24 @@ import numpy as np
 from gssutils import *
 
 
-# In[35]:
+# In[27]:
 
 
 logging.basicConfig(level=logging.DEBUG)
 
 
-# In[36]:
+# In[28]:
 
 
 infoFileName = 'info.json'
 
 info = json.load(open(infoFileName))
 scraper = Scraper(seed=infoFileName)
+cubes = Cubes(infoFileName)
 distro = scraper.distribution(latest=True)
 
 
-# In[37]:
+# In[29]:
 
 
 scraper.dataset.family = info['families']
@@ -129,7 +130,7 @@ df['Measure Type'] = df['Measure Type'].astype('category')
 df
 
 
-# In[38]:
+# In[30]:
 
 
 df = df.rename(columns={'value' : 'Value'})
@@ -149,11 +150,12 @@ RTS data is categorised by partner country and Standard International Trade Clas
 df
 
 
-# In[39]:
+# In[31]:
 
 
-df.to_csv('observations.csv', index=False)
+cubes.add_cube(scraper, df, info['id'],
+               override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}/{fetch_chunk}" if info['load']['accretiveUpload'] else None)
 
-catalog_metadata = scraper.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('catalog-metadata.json')
+# Write cube
+cubes.output_all()
 
