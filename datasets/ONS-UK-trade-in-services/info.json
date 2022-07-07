@@ -1,4 +1,5 @@
 {
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons-uk-trade-in-services",
     "title": "UK trade in services: service type by partner country, non-seasonally adjusted",
     "publisher": "Office for National Statistics",
@@ -18,32 +19,42 @@
         "main_issue": 17,
         "columns": {
             "Period": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+period}",
-                "codelist": false
+                "type": "dimension",
+                "uri": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                "value": "http://reference.data.gov.uk/id/{+period}"
             },
             "Country": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+                "type": "dimension",
+                "new": {
+                    "codelist": "./codelists/country.csv-metadata.json"
+                    }
             },
             "Trade Services": {
-                "parent": "http://gss-data.org.uk/def/trade/property/dimension/product"
+                "type": "dimension",
+                "new":{
+                    "codelist": "./codelists/trade-services.csv-metadata.json"
+                    }
             },
             "Flow": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow}"
+                "type":"dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow}"
             },
             "Seasonal Adjustment": {
-                "dimension": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{+seasonal_adjustment}"
             },
             "Value": {
+                "type": "observations",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "measure": "http://gss-data.org.uk/def/trade/measure/trade-in-services",
-                "datatype": "double"
+                "datatype": "integer"
             },
             "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "type": "attribute",
+                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
+                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
         }
     },
