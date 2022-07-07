@@ -432,17 +432,27 @@ for name, tab in tabs.items():
 # ##### Income indicators
 #     tidied_sheets[6] (D Income)
 #
+# ##### Household Expenditure Indicators
+#     tidied_sheets[7] (E1 Expenditure)
+#     tidied_sheets[8] (E1 Expenditure)
+#     tidied_sheets[9] (E1 Expenditure)
+#     tidied_sheets[10](E1 Expenditure)
+#
 #
 # ##### Gross Fixed Capitol 
-#     tidied_sheets[7](F1 GFCF)
-#     tidied_sheets[8](F1 GFCF)
+#     tidied_sheets[11](F1 GFCF)
+#     tidied_sheets[12](F1 GFCF)
 #      
-#      Note another dimension will need to be added during post processsing called something like 'Sector' which will either be: UK National or UK dommestic, depending on the value in Capital Formation dimension.    
+#      Note another dimension will need to be added during post processsing called something like 'Sector' which will either be: UK National or UK dommestic, depending on the value in Capital Formation dimension.
+#
+# ##### Inventories
+#     tidied_sheets[13](G1 Inventories)
+#     tidied_sheets[14](G1 Inventories)
 #
 #     
 # ##### Trade 
-#     tidied_sheets[9](H1 TRADE)
-#     tidied_sheets[10](H2 TRADE)
+#     tidied_sheets[15](H1 TRADE)
+#     tidied_sheets[16](H2 TRADE)
 #     
 #     Note I will need to do a bit of wrangling to fix the flow dimension in post processing, this is due to some tables using a horrible centered headings for flow values. 
 #     
@@ -461,7 +471,9 @@ for name, tab in tabs.items():
 #      'AB Annex B',
 #      'AC Annex C',
 #      'AD Annex D'
-#      
+#      'AE Annex E',
+#      'AF Annex F',
+#      'AG Annex G'     
 
 # +
 import numpy as np
