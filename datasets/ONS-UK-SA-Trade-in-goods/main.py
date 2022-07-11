@@ -1,19 +1,8 @@
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.13.7
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
+#!/usr/bin/env python
+# coding: utf-8
 
-# UK trade in services: all countries, non-seasonally adjusted
+# In[64]:
+
 
 import json
 import pandas as pandas
@@ -30,42 +19,84 @@ tabs = distribution.as_databaker()
 tidied_sheets = []
 
 
-def date_time(date):
-    # Various ways they're representing a 4 digit year
-    if isinstance(date, float) or len(date) == 6 and date.endswith(".0") or len(date) == 4:
-        return f'year/{str(date).replace(".0", "")}'
-    # Month and year
-    elif len(date) == 7:
-        date = pd.to_datetime(date, format='%Y%b')
-        return date.strftime('month/%Y-%m')
-    else:
-        raise Exception(f'Aborting, failing to convert value "{date}" to period')
+# In[65]:
+
+
+for i in tabs:
+    print(i.name)
+
+
+# In[66]:
 
 
 for tab in tabs:
 
-    anchor = tab.excel_ref("A1")
-    flow = str(tab.name.split()[1]).lower()
-    observations = anchor.shift(2, 5).expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace()
-    year = anchor.shift(2, 3).expand(RIGHT).is_not_blank().is_not_whitespace()
-    footer = tab.filter(contains_string("Earliest date for revisions")).expand(DOWN)
-    geo = anchor.shift(0, 5).expand(DOWN).is_not_blank().is_not_whitespace()-footer
-    dimensions = [
-        HDim(year,'Period',DIRECTLY,ABOVE),
-        HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
-        HDimConst("Flow", flow),
-        HDimConst("Seasonal Adjustment", "SA")
-    ]
-    tidy_sheet = ConversionSegment(tab, dimensions, observations)
-    table = tidy_sheet.topandas()
-    tidied_sheets.append(table)
-    # savepreviewhtml(tidy_sheet, fname=tab.name+"Preview.html")
+    if '.' in tab.name:
+
+        print(tab.name)
+
+        flow = tab.name
+
+        geo = tab.filter(contains_string("Country Code")).fill(DOWN).is_not_blank().is_not_whitespace()
+
+        year = tab.filter(contains_string('Country Name')).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
+
+        observations = geo.shift(2, 0).expand(RIGHT).is_not_blank().is_not_whitespace()
+
+        dimensions = [
+            HDim(year,'Period',DIRECTLY,ABOVE),
+            HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
+            HDimConst("Flow", flow),
+            HDimConst("Seasonal Adjustment", "SA")
+        ]
+        tidy_sheet = ConversionSegment(tab, dimensions, observations)
+        savepreviewhtml(tidy_sheet, fname=tab.name+"Preview.html")
+        table = tidy_sheet.topandas()
+        tidied_sheets.append(table)
+        
+
+
+# In[67]:
+
 
 df = pd.concat(tidied_sheets, sort=True).fillna('')
 
+df['Period 2'] = df['Period'].map(lambda x: x[4:])
+
+df['Period'] = df['Period'].map(lambda x: x[:4])
+
+df = df.replace({'Flow' : {'1. Annual Exports' : 'exports', 
+                          '2. Annual Imports' : 'imports', 
+                          '3. Quarterly Exports' : 'exports', 
+                          '4. Quarterly Imports' : 'imports', 
+                          '5. Monthly Exports' : 'exports', 
+                          '6. Monthly Imports' : 'imports'},
+                 'Period 2' : {'Jan' : '01',
+                               'Feb' : '02',
+                               'Mar' : '03',
+                               'Apr' : '04',
+                               'May' : '05',
+                               'Jun' : '06',
+                               'Jul' : '07',
+                               'Aug' : '08',
+                               'Sep' : '09',
+                               'Oct' : '10',
+                               'Nov' : '11',
+                               'Dec' : '12'}})
+
+df['Period'] = df.apply(lambda x: 'quarter/' + x['Period'] + '-' + x['Period 2'] if 'Q' in x['Period 2'] else ('month/' + x['Period'] + '-' + x['Period 2'] if '0' in x['Period 2'] else 'year/' + x['Period']), axis = 1)
+
+df = df.drop(columns=['Period 2'])
+
+df
+
+
+# In[72]:
+
+
 df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
-df["Period"] =  df["Period"].apply(date_time)
-df["Marker"] = df["Marker"].str.replace("N/A", "not-applicable")
+
+df["Marker"] = df["Marker"].str.replace("X", "data-not-collated")
 df = df[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Value", "Marker"]]
 
 df = df.replace({"ONS Partner Geography": {"NA":"NAM"}})
@@ -81,6 +112,22 @@ UN Comtrade (https://comtrade.un.org/).
 Some data for countries have been marked with N/A. This is because Trade in Goods do not collate data from these countries.
 """
 
+
+# In[69]:
+
+
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
+
+
+# In[70]:
+
+
+from IPython.core.display import HTML
+for col in df:
+    if col not in ['Value']:
+        df[col] = df[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(df[col].cat.categories)
+
