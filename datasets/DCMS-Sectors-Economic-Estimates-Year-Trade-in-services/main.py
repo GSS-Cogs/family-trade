@@ -59,8 +59,8 @@ tidy = pd.concat(tidied_sheets, sort = True).fillna('')
 tidy.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 tidy = tidy.replace({'Marker' : {'-' : 'suppressed'}})
 tidy = tidy.replace({'Subsector' : {'Crafts4' : 'Cultural Crafts'}})
-tidy['Unit'] = "gbp-million"
-tidy['Measure Type'] = "current-prices"
+#tidy['Unit'] = "gbp-million"
+#tidy['Measure Type'] = "current-prices"
 
 # %%
 tidy['Sector'].replace({
@@ -95,7 +95,7 @@ tidy['Value'] = pd.to_numeric(tidy.Value, errors = 'coerce')
 tidy = tidy.round({"Value":1}).fillna('')
 tidy['Country'] = tidy['Country'].map(lambda x: pathify(x))
 # %%
-tidy = tidy[["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"]]
+tidy = tidy[["Sector", "Subsector", "Country", "Year", "Flow", "Value", "Marker"]]
 #duplicate_tidy = tidy[tidy.duplicated(["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"])]
 #duplicate_tidy
 
