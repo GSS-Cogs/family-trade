@@ -27,37 +27,37 @@
             }, 
             "Estimate Type": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-estimate-type", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/estimate-type", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-estimate-type/{+estimate_type}"
             }, 
             "Aggregate": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-aggregate", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/aggregate", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-aggregate/{+aggregate}"
             }, 
             "Industry": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-industry", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{+industry}"
             }, 
             "Sector": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-industry", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{+sector}"
             }, 
             "Expenditure Category": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-expenditure", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/expenditure", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-expenditure/{+expenditure_category}"
             }, 
             "Economic Concept": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-estimate-type", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/estimate-type", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-estimate-type/{+economic_concept}"
             }, 
             "Category of Income": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-income-indicator", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/income-indicator", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-income-indicator/{+category_of_income}"
             }, 
             "COICOP": {
@@ -67,17 +67,17 @@
             }, 
             "Capital Formation": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-capital-formation", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/capital-formation", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-capital-formation/{+capital_formation}"
             }, 
             "Analysis": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-analysis", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/analysis", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-analysis/{+analysis}"
             }, 
             "Goods or Services": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/national-accounts-trade-type", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/trade-type", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-trade-type/{+goods_or_services}"
             }, 
             "Flow": {
@@ -85,15 +85,15 @@
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions", 
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow}"
             }, 
-            "Weights 2018": {
+            "2019 Weights": {
                 "type": "attribute",
-                "uri": "http://gss-data.org.uk/def/trade/property/attribute/weights-2018",
-                "value":"http://gss-data.org.uk/def/trade/concept-scheme/weights-2018/{+weights_2018}"
+                "uri": "http://gss-data.org.uk/def/trade/property/attribute/weights-2019",
+                "value":"http://gss-data.org.uk/def/trade/concept/weights-2019/{+2019_Weights'}"
             }, 
-            "Level of inventories held at end-December 2018": {
+            "Level of inventories held at end-December 2019": {
                 "type": "attribute",
-                "uri": "http://gss-data.org.uk/def/trade/property/attribute/level-of-inventories-held-at-end-december-2018",
-                "value":"http://gss-data.org.uk/def/trade/concept-scheme/Level-of-inventories-held-at-end-December-2018/{+Level_of _inventories_held_at_end_December_2018}"
+                "uri": "http://gss-data.org.uk/def/trade/property/attribute/level-of-inventories-held-at-end-december-2019",
+                "value":"http://gss-data.org.uk/def/trade/concept-scheme/Level-of-inventories-held-at-end-December-2019/{+Level_of _inventories_held_at_end_December_2019}"
             },
             "Value": {
                 "type": "observations",
