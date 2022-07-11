@@ -61,9 +61,7 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-income-indicator/{+category_of_income}"
             }, 
             "COICOP": {
-                "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/property/dimension/coicop", 
-                "value": "http://gss-data.org.uk/def/concept/coicop/{+coicop}"
+                "type": "dimension"
             }, 
             "Capital Formation": {
                 "type": "dimension",
