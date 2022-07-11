@@ -93,7 +93,7 @@ tidy["Subsector"] = tidy.apply(lambda x: 'Not Applicable' if x["Sector"] == "Gam
 
 tidy['Value'] = pd.to_numeric(tidy.Value, errors = 'coerce')
 tidy = tidy.round({"Value":1}).fillna('')
-
+df['Country'] = df['Country'].map(lambda x: pathify(x))
 # %%
 tidy = tidy[["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"]]
 #duplicate_tidy = tidy[tidy.duplicated(["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"])]
