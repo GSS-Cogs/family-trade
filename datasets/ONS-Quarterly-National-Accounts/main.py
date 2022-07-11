@@ -371,7 +371,7 @@ for name, tab in tabs.items():
             HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
             HDim(cdid, 'CDID',DIRECTLY,ABOVE),
             HDim(sector, 'Sector',DIRECTLY,ABOVE),
-            HDim(level_held, 'Level of inventories held at end-December 2018',DIRECTLY,ABOVE),
+            HDim(level_held, 'Level of inventories held at end-December 2019',DIRECTLY,ABOVE),
             HDim(measure, 'measure',CLOSEST,ABOVE),
         ]
         dimensions[0] = with_industry_overrides(dimensions[0])
@@ -539,7 +539,7 @@ a2['Indices'].loc[a2['CDID'] == 'YBHA'] = 'Current prices'
 a2 = strip_superscripts(a2, 'Gross')
     
 a2['Indices'].loc[a2['Indices'] == 'Current prices'] = 'current-price'
-a2['Indices'].loc[a2['Indices'] == 'Chained Volume Measure (Reference year 2018)'] = 'chained-volume-measure'
+a2['Indices'].loc[a2['Indices'] == 'Chained Volume Measure (Reference year 2019)'] = 'chained-volume-measure'
 
 a2['Gross'] = a2['Gross'].apply(pathify)
 
@@ -577,6 +577,10 @@ Gross value added excluding oil & gas: Calculated by using gross value added at 
 """
 # -
 
+a2.columns
+
+a2["Estimate Type"].unique()
+
 a2.to_csv("national_account_aggregates-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
@@ -609,10 +613,13 @@ except:
 b1['Sector'] = b1['Sector'].apply(pathify)
 b1['Industry'] = b1['Industry'].apply(pathify)
 
-b1 = b1.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
+# b1 = b1.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
 
 b1 = convet_dimension_to_int(b1, 'Value')
+# -
 
+
+b1.columns
 
 # +
 # B2
@@ -637,12 +644,16 @@ except:
 b2['Sector'] = b2['Sector'].apply(pathify)
 b2['Industry'] = b2['Industry'].apply(pathify)
 
-b2 = b2.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
+# b2 = b2.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
 b2 = convet_dimension_to_int(b2, 'Value')
 # -
 
 
+b2.columns
+
 b1b2 = pd.concat([b1, b2])
+
+b1b2 = b1b2.rename(columns={'OBS':'Value'})
 
 b1b2.columns
 
@@ -673,6 +684,8 @@ Components of outputs are valued at basic prices, which excludes taxes and inclu
 Weights may not sum to totals due to rounding.
 This is a balanced index of UK GVA, taking into account data from the income and expenditure approaches. Thus it will not necessarily be the weighted sum of the industrial indices.
 """     
+
+b1b2.columns
 
 b1b2.to_csv("output_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -763,6 +776,14 @@ Trade balance is calculated by using exports of goods and services minus imports
 Non-profit institutions: There is a small difference between the gross operating surplus of the NPISH sector in the SFA release, compared with the consumption of fixed capital for the NPISH sector published in the GDP release.  This affects 2019Q1 onwards. The latest figures for the affected series can be found in the SFA release.
 """
 
+c1c2.columns
+
+c1c2["Estimate Type"].unique()
+
+c1c2["Economic Concept"].unique()
+
+c1c2["Expenditure Category"].unique()
+
 c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('expenditure_indicators-catalog-metadata.json')
@@ -814,6 +835,8 @@ Private. non-financial corporations: Quarterly alignment adjustment included in 
 Gross operating surplus of corporations total includes the operating surplus of financial corporations, private non-financial corporations and public corporations.
 Other income includes mixed income and the operating surplus of the non-corporate sector.
 """
+
+d1.columns
 
 d1.to_csv("income_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -965,6 +988,10 @@ UK National: Final consumption by UK Households in the UK & abroad.
 UK National & Domestic: Final consumption expenditure in the UK by UK & foreign households and final consumption by UK Households in the UK & abroad.
 """
 
+e1e2e3e4.columns
+
+e1e2e3e4["Expenditure Category"].unique()
+
 e1e2e3e4.to_csv("household_expenditure_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file("household_expenditure_indicators-catalog-metadata.json")
@@ -1034,7 +1061,7 @@ except:
     ind = 12   
 
 f2 = f2.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
-
+f2["Analysis"] = f2["Analysis"].loc[f2['Analysis'] == "analysis-by-sector-7"] = "analysis-by-sector"
 f2 = convet_dimension_to_int(f2, 'Value')
 
 f2['Capital Formation'] = f2['Capital Formation'].apply(pathify)
@@ -1043,6 +1070,10 @@ f2['Analysis'] = f2['Analysis'].apply(pathify)
 f2cdids = f2['CDID'].unique()
 f2.head(5)
 # -
+
+f1["Analysis"].unique()
+
+f2["Analysis"].unique()
 
 f1f2 = pd.concat([f1,f2])
 #f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
@@ -1059,6 +1090,10 @@ ICT equipment and other machinery and equipment: Includes cultivated biological 
 Dwellings: Includes new dwellings and improvements to dwellings.
 Other buildings and structures: Including costs associated with the transfer of ownership of buildings, dwellings and non-produced assets.
 """
+
+f1f2.columns
+
+f1f2["Analysis"].unique()
 
 f1f2.to_csv("gross_fixed_capitol-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -1091,7 +1126,7 @@ except:
 g1 = g1.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
 
 g1 = convet_dimension_to_int(g1, 'Value')
-g1['Level of inventories held at end-December 2018'] = g1['Level of inventories held at end-December 2018'].str.replace('.0','')
+g1['Level of inventories held at end-December 2019'] = g1['Level of inventories held at end-December 2019'].str.replace('.0','')
 
 g1['Sector'] = g1['Sector'].apply(pathify)
 g1['Industry'] = g1['Industry'].apply(pathify)
@@ -1126,7 +1161,7 @@ except:
 g2 = g2.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
 
 g2 = convet_dimension_to_int(g2, 'Value')
-g2['Level of inventories held at end-December 2018'] = g2['Level of inventories held at end-December 2018'].str.replace('.0','')
+g2['Level of inventories held at end-December 2019'] = g2['Level of inventories held at end-December 2019'].str.replace('.0','')
 
 g2['Sector'] = g2['Sector'].apply(pathify)
 g2['Industry'] = g2['Industry'].apply(pathify)
@@ -1134,7 +1169,7 @@ g2['Industry'] = g2['Industry'].apply(pathify)
 g2cdids = g2['CDID'].unique()
 g2.head(5)
 
-# %%
+# %% 
 g1g2 = pd.concat([g1,g2])
 del g1g2['Industry']
 # -
@@ -1151,7 +1186,9 @@ Please note, inventories estimates for 2020 Q4 at this stage face additional unc
 """
 
 
-f1f2.to_csv("inventories-observations.csv", index = False)
+g1g2.columns
+
+g1g2.to_csv("inventories-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file("inventories-catalog-metadata.json")
 
@@ -1225,6 +1262,8 @@ h1h2 = pd.concat([h1,h2])
 h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
 h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 #h1h2['Goods or Services'].unique()
+
+h1h2.columns
 
 metadata.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
 metadata.dataset.comment = maincomme + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2) - Seasonally Adjusted'
