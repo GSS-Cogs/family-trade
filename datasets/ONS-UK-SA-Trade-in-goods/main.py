@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[64]:
+# In[121]:
 
 
 import json
@@ -19,14 +19,14 @@ tabs = distribution.as_databaker()
 tidied_sheets = []
 
 
-# In[65]:
+# In[122]:
 
 
 for i in tabs:
     print(i.name)
 
 
-# In[66]:
+# In[123]:
 
 
 for tab in tabs:
@@ -34,15 +34,10 @@ for tab in tabs:
     if '.' in tab.name:
 
         print(tab.name)
-
         flow = tab.name
-
         geo = tab.filter(contains_string("Country Code")).fill(DOWN).is_not_blank().is_not_whitespace()
-
         year = tab.filter(contains_string('Country Name')).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
-
         observations = geo.shift(2, 0).expand(RIGHT).is_not_blank().is_not_whitespace()
-
         dimensions = [
             HDim(year,'Period',DIRECTLY,ABOVE),
             HDim(geo,'ONS Partner Geography',DIRECTLY,LEFT),
@@ -56,14 +51,14 @@ for tab in tabs:
         
 
 
-# In[67]:
+# In[124]:
 
 
 df = pd.concat(tidied_sheets, sort=True).fillna('')
 
 df['Period 2'] = df['Period'].map(lambda x: x[4:])
 
-df['Period'] = df['Period'].map(lambda x: x[:4])
+df['Period 3'] = df['Period'].map(lambda x: x[:4])
 
 df = df.replace({'Flow' : {'1. Annual Exports' : 'exports', 
                           '2. Annual Imports' : 'imports', 
@@ -84,14 +79,14 @@ df = df.replace({'Flow' : {'1. Annual Exports' : 'exports',
                                'Nov' : '11',
                                'Dec' : '12'}})
 
-df['Period'] = df.apply(lambda x: 'quarter/' + x['Period'] + '-' + x['Period 2'] if 'Q' in x['Period 2'] else ('month/' + x['Period'] + '-' + x['Period 2'] if '0' in x['Period 2'] else 'year/' + x['Period']), axis = 1)
+df['Period'] = df.apply(lambda x: 'quarter/' + x['Period 3'] + '-' + x['Period 2'] if 'Q' in x['Period 2'] else ('month/' + x['Period 3'] + '-' + x['Period 2'] if x['Period 2'].isnumeric() else 'year/' + x['Period']), axis = 1)
 
-df = df.drop(columns=['Period 2'])
+df = df.drop(columns=['Period 2', 'Period 3'])
 
 df
 
 
-# In[72]:
+# In[125]:
 
 
 df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
@@ -100,6 +95,8 @@ df["Marker"] = df["Marker"].str.replace("X", "data-not-collated")
 df = df[["Period", "ONS Partner Geography", "Seasonal Adjustment", "Flow", "Value", "Marker"]]
 
 df = df.replace({"ONS Partner Geography": {"NA":"NAM"}})
+
+df['Value'] = df.apply(lambda x: 0 if 'data-not-collated' in x['Marker'] else x['Value'], axis = 1)
 
 df['Value'] = pd.to_numeric(df['Value'], errors="raise", downcast="float")
 df["Value"] = df["Value"].astype(float).round(2)
@@ -113,7 +110,7 @@ Some data for countries have been marked with N/A. This is because Trade in Good
 """
 
 
-# In[69]:
+# In[126]:
 
 
 df.to_csv("observations.csv", index = False)
@@ -121,7 +118,7 @@ catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
 
-# In[70]:
+# In[128]:
 
 
 from IPython.core.display import HTML
