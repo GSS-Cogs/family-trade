@@ -84,14 +84,10 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow}"
             }, 
             "2019 Weights": {
-                "type": "attribute",
-                "uri": "http://gss-data.org.uk/def/trade/property/attribute/weights-2019",
-                "value":"http://gss-data.org.uk/def/trade/concept/weights-2019/{+2019_Weights'}"
+                "type": "attribute"
             }, 
             "Level of inventories held at end-December 2019": {
-                "type": "attribute",
-                "uri": "http://gss-data.org.uk/def/trade/property/attribute/level-of-inventories-held-at-end-december-2019",
-                "value":"http://gss-data.org.uk/def/trade/concept-scheme/Level-of-inventories-held-at-end-December-2019/{+Level_of _inventories_held_at_end_December_2019}"
+                "type": "attribute"
             },
             "Value": {
                 "type": "observations",
