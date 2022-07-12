@@ -32,7 +32,7 @@
             }, 
             "Sector": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/sector", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industrial-sector/{+sector}"
             },
             "2019 Weights": {
