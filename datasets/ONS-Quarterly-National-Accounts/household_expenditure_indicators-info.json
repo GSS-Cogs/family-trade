@@ -25,26 +25,29 @@
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/cdid", 
                 "value": "http://gss-data.org.uk/def/trade/concept/cdid/{+cdid}"
             },
-            "Industry": {
-                "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry", 
-                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{+industry}"
-            }, 
-            "Sector": {
-                "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry", 
-                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industrial-sector/{+sector}"
+            "COICOP": {
+                "type": "dimension"
             },
-            "2019 Weights": {
-                "type": "attribute"
+            "Expenditure Category": {
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/expenditure", 
+                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-expenditure/{+expenditure_category}"
+            },
+            "Economic Concept": {
+                "type": "dimension",
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/estimate-type", 
+                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-estimate-type/{+economic_concept}"
             },
             "Value": {
                 "type": "observations",
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million", 
-                "measure": "http://gss-data.org.uk/def/measure/gva", 
-                "datatype": "integer"
+                "measure": {
+                    "label": "hh-final-consumption"
+                },
+                "unit": {
+                    "label": "gbp-million"
+                }
             }
-        }, 
+        },
         "main_issue": 13
     }, 
     "sizingNotes": "", 
