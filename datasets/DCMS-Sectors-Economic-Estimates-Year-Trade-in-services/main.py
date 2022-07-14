@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# +
+# %%
 from gssutils import *
 import json
 from urllib.parse import urljoin
@@ -8,16 +8,18 @@ import numpy as np
 
 info = json.load(open('info.json'))
 metadata = Scraper(seed="info.json")
-metadata
 metadata.title
-# -
+
+# %%
 
 distribution = metadata.distribution(title = lambda x: "Imports and Exports" in x)
-distribution
 
+
+# %%
 tabs = {tab.name: tab for tab in metadata.distribution (title = lambda x: "Imports and Exports"in x).as_databaker()}
 tidied_sheets =[]
 
+# %%
 for name, tab in tabs.items():
     if "Cover sheet" in name:
         continue
@@ -51,14 +53,16 @@ for name, tab in tabs.items():
     tidied_sheets.append(tidy_sheet.topandas())
 
 
+# %%
 tidy = pd.concat(tidied_sheets, sort = True).fillna('')
 
 tidy.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 tidy = tidy.replace({'Marker' : {'-' : 'suppressed'}})
 tidy = tidy.replace({'Subsector' : {'Crafts4' : 'Cultural Crafts'}})
-tidy['Unit'] = "GBP Million"
-tidy['Measure Type'] = "Current prices"
+#tidy['Unit'] = "gbp-million"
+#tidy['Measure Type'] = "current-prices"
 
+# %%
 tidy['Sector'].replace({
     "Creative Industries sub-sectors": "Creative-industries",
     "Digital Sector sub-sectors": "Digital-sector",
@@ -66,16 +70,21 @@ tidy['Sector'].replace({
     "All UK service imports (2018 Pink Book estimate)": "all-uk-2018-pink-book-estimate",
     "All UK service exports (2018 Pink Book estimate)": "all-uk-2018-pink-book-estimate"
     }, inplace=True)
+
+# %%
 tidy["Sector"] = tidy.apply(lambda x: "Gambling" if x["Subsector"] == "Gambling"
                                     else "Sport" if x["Subsector"] == "Sport"
                                         else "Telecoms"if x["Subsector"] == "Telecoms"
                                             else x["Sector"], axis = 1)
 
+# %%
 tidy['Subsector'].replace({
     "All_Exports": "All-uk-2018-pink-book-estimate",
     "All_Imports": "All-uk-2018-pink-book-estimate",
     "DCMS total": "Dcms-sectors-exc-tourism-and-civil-society"
     }, inplace=True)
+
+# %%
 tidy["Subsector"] = tidy.apply(lambda x: 'Not Applicable' if x["Sector"] == "Gambling"
                                 else 'Not Applicable' if  x["Sector"] == "Sport"
                                     else 'Not Applicable' if  x["Sector"] == "Telecoms"
@@ -84,13 +93,14 @@ tidy["Subsector"] = tidy.apply(lambda x: 'Not Applicable' if x["Sector"] == "Gam
 
 tidy['Value'] = pd.to_numeric(tidy.Value, errors = 'coerce')
 tidy = tidy.round({"Value":1}).fillna('')
+tidy['Country'] = tidy['Country'].map(lambda x: pathify(x))
+# %%
+tidy = tidy[["Sector", "Subsector", "Country", "Year", "Flow", "Value", "Marker"]]
+#duplicate_tidy = tidy[tidy.duplicated(["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"])]
+#duplicate_tidy
 
-tidy = tidy[["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"]]
-duplicate_tidy = tidy[tidy.duplicated(["Sector", "Subsector", "Country", "Year", "Flow", "Measure Type", "Unit", "Value", "Marker"])]
-duplicate_tidy
-
+# %%
 metadata.dataset.title = metadata.title.lstrip("DCMS").lstrip()
-
 # +
 metadata.dataset.description = f"""
 DCMS Sector Economic Estimates 2018: Trade in Services is an official statistic and has been produced to the standards set out in the Code of Practice for Statistics.
@@ -114,3 +124,5 @@ tidy.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
+
+# %%

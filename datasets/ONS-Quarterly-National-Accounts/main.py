@@ -19,19 +19,6 @@ distribution = metadata.distribution(latest = True)
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
 distribution
 
-list(tabs)
-
-# +
-
-#  'A1 AGGREGATES ACCESSIBLE',
-#  'E1 EXPENDITURE',
-#  'E2 EXPENDITURE',
-#  'E3 EXPENDITURE',
-#  'E4 EXPENDITURE',
-#  'G1 INVENTORIES',
-#  'G2 INVENTORIES',
-
-# -
 
 #grouping tab into topics to iterate through by their names
 national_account_aggregates = ['A1 AGGREGATES', 'A2 AGGREGATES']
@@ -438,7 +425,6 @@ for name, tab in tabs.items():
 #     tidied_sheets[9] (E1 Expenditure)
 #     tidied_sheets[10](E1 Expenditure)
 #
-#
 # ##### Gross Fixed Capitol 
 #     tidied_sheets[11](F1 GFCF)
 #     tidied_sheets[12](F1 GFCF)
@@ -448,7 +434,6 @@ for name, tab in tabs.items():
 # ##### Inventories
 #     tidied_sheets[13](G1 Inventories)
 #     tidied_sheets[14](G1 Inventories)
-#
 #     
 # ##### Trade 
 #     tidied_sheets[15](H1 TRADE)
@@ -470,10 +455,10 @@ for name, tab in tabs.items():
 #      'AA Annex A',
 #      'AB Annex B',
 #      'AC Annex C',
-#      'AD Annex D'
+#      'AD Annex D',
 #      'AE Annex E',
 #      'AF Annex F',
-#      'AG Annex G'     
+#      'AG Annex G' 
 
 # +
 import numpy as np
@@ -618,7 +603,6 @@ b1['Industry'] = b1['Industry'].apply(pathify)
 b1 = convet_dimension_to_int(b1, 'Value')
 # -
 
-
 b1.columns
 
 # +
@@ -647,7 +631,6 @@ b2['Industry'] = b2['Industry'].apply(pathify)
 # b2 = b2.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
 b2 = convet_dimension_to_int(b2, 'Value')
 # -
-
 
 b2.columns
 
@@ -998,7 +981,7 @@ catalog_metadata.to_json_file("household_expenditure_indicators-catalog-metadata
 
 # +
 # F1
-f1 = tidied_sheets[11]
+f1 = tidied_sheets[7]
 
 try:
     f1 = f1.loc[f1['Percentage Change'].isna()] 
@@ -1035,7 +1018,7 @@ f1.head(5)
 
 # +
 # F2
-f2 = tidied_sheets[12]
+f2 = tidied_sheets[8]
 
 try:
     f2 = f2.loc[f2['Percentage Change'].isna()] 
@@ -1194,7 +1177,7 @@ catalog_metadata.to_json_file("inventories-catalog-metadata.json")
 
 # +
 # H1
-h1 = tidied_sheets[15]
+h1 = tidied_sheets[9]
 
 try:
     h1 = h1.loc[h1['Percentage Change'].isna()] 
@@ -1227,7 +1210,7 @@ h1.head(5)
 
 # +
 # H2
-h2 = tidied_sheets[16]
+h2 = tidied_sheets[10]
 
 try:
     h2 = h2.loc[h2['Percentage Change'].isna()] 

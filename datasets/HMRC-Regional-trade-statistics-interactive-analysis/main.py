@@ -1,14 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
 # %%
 import json
 import pandas as pandas
 from gssutils import *
 from pandas import ExcelWriter
-import math
-
-tidied_sheets = []
-df = pd.DataFrame()
+import math 
 
 def left(s, amount):
     return s[:amount]
@@ -20,12 +15,11 @@ def cell_to_string(cell):
     substring = s[start:end].strip("'")
     return substring
 
-cubes = Cubes('info.json')
-info = json.load(open('info.json'))
-landingPage = info['landingPage']
-metadata = Scraper(seed="info.json")
-#note all 4 dstributions need to be transformed. 
-metadata
+
+metadata = Scraper(seed='info.json')
+
+tidied_sheets = []
+df = pd.DataFrame()
 
 # %%
 counter = 0
@@ -274,7 +268,6 @@ for source_name, distro in source_name_and_distro.items():
             raise Exception(f'failed on source {source_name} and tab {tab.name})') from err
     counter += 1
 
-
 # %%
 formatted_sheets = []
 # Regional Trade in goods statistics - Business Count (Exports, proportion method)
@@ -471,31 +464,11 @@ metadata.dataset.title = 'RTS Business Counts'
 # %%
 print("Number of dataframes in List: " + str(len(formatted_sheets)))
 formatted_df = pd.concat(formatted_sheets, sort = True).fillna('')
-
-print(formatted_df['Period'].count())
-formatted_df = formatted_df.drop_duplicates()
-print(formatted_df['Period'].count())
-print(formatted_df.columns)
 formatted_df = formatted_df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
-formatted_df.head(5)
-
 
 # %%
-cubes.add_cube(metadata, formatted_df.drop_duplicates(), metadata.dataset.title)
-
-
-# %%
-df = formatted_df
-
-from IPython.core.display import HTML
-for col in df:
-    if col not in ['Value']:
-        df[col] = df[col].astype('category')
-        display(HTML(f"<h2>{col}</h2>"))
-        display(df[col].cat.categories)
-
-
-# %%
-cubes.output_all()
+formatted_df.to_csv("observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 

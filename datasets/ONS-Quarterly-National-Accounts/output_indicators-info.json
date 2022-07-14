@@ -36,17 +36,13 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industrial-sector/{+sector}"
             },
             "2019 Weights": {
-                "type": "attribute",
-                "value":"http://gss-data.org.uk/def/trade/concept/weights-2019/{+2019_Weights'}"
+                "type": "attribute"
             },
             "Value": {
                 "type": "observations",
-                "measure": {
-                    "label": "gva"
-                },
-                "unit": {
-                    "label": "gbp-million"
-                }
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million", 
+                "measure": "http://gss-data.org.uk/def/measure/gva", 
+                "datatype": "integer"
             }
         }, 
         "main_issue": 13

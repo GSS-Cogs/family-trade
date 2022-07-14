@@ -69,7 +69,7 @@ df.rename(columns= {'OBS':'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 df['Marker'] = df['Marker'].replace('..', 'suppressed')
 df["Period"]= df["Period"].str.split(",", n = 1, expand = True)[1]
 df['Period'] = df['Period'].str.strip()
-
+df['Period'] = 'year/' + df['Period']
 df['Flow'] = df['Flow'].apply(pathify)
 
 df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/UKC',
@@ -109,9 +109,15 @@ df = df.replace({'Location' : {'North East' : 'http://data.europa.eu/nuts/code/U
                  
                 'Industry Grouping' : {'travel': 'travel-related-trade', 'Travel' : 'travel-related-trade'}
                 })
-
+df['Industry Grouping'] = df['Industry Grouping'].apply(pathify)
+df['Origin'] = df['Origin'].apply(pathify)
 df = df[['Period', 'Location', 'Industry Grouping', 'Origin', 'Flow', 'Travel Type', 'Includes Travel', 'Value', 'Marker']]
+df.drop(df.loc[df['Industry Grouping']=='percentage-to/from-the-eu'].index, inplace=True)
 df = df.drop_duplicates() #remove valid duplicates, total appears in both tabs with same values. 
+#the publisher has inputted duplicates in their own data while doing corrections. Held inside thier tidy tab (9). 172 obs have to be dropped.
+duplicateRowsDF = df[df.duplicated(['Period', 'Location', 'Industry Grouping', 'Origin', 'Flow', 'Travel Type', 'Includes Travel'], keep=False)]
+df = df[~df.isin(duplicateRowsDF)].dropna()
+
 # %%
 df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
