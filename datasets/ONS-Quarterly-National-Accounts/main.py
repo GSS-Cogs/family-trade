@@ -1304,6 +1304,9 @@ h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 #h1h2['Goods or Services'].unique()
 
 h1h2.columns
+# -
+
+h1h2.info()
 
 # +
 

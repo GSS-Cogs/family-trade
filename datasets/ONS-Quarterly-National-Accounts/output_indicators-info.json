@@ -42,7 +42,7 @@
                 "type": "observations",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million", 
                 "measure": "http://gss-data.org.uk/def/measure/gva", 
-                "datatype": "integer"
+                "datatype": "double"
             }
         }, 
         "main_issue": 13
