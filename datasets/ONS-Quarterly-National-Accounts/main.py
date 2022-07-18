@@ -325,6 +325,7 @@ for name, tab in tabs.items():
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
         capitol_formation = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
         analysis_by = capitol_formation.shift(0,-2)
+        tab_name = tab.name
         
         dimensions = [
             HDim(analysis_by, 'Analysed by',DIRECTLY,ABOVE),
@@ -1125,6 +1126,19 @@ f1f2["Analysis"].unique()
 
 # +
 
+# There are duplicates in this DataFrame.
+duplicate_df_f1f2 = f1f2[f1f2.duplicated(['Value', 'CDID', 'Analysis', 'Period', 'Capital Formation','Economic Concept'], keep = False)]
+# duplicate_df_f1f2.sort_values(by = ['Value']).to_csv("f1f2duplicates.csv")
+# duplicate_df_f1f2
+# -
+
+f1f2.drop_duplicates(subset = f1f2.columns.difference(['Value']), inplace = True)
+
+duplicate_df_f1f2 = f1f2[f1f2.duplicated(['Value', 'CDID', 'Analysis', 'Period', 'Capital Formation','Economic Concept'], keep = False)]
+duplicate_df_f1f2
+
+f1f2.head(5)
+
 f1f2.to_csv("gross_fixed_capitol-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file("gross_fixed_capitol-catalog-metadata.json")
@@ -1304,9 +1318,6 @@ h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 #h1h2['Goods or Services'].unique()
 
 h1h2.columns
-# -
-
-h1h2.info()
 
 # +
 
