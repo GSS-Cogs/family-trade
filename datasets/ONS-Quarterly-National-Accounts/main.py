@@ -1154,7 +1154,7 @@ try:
 except:
     ind = 13   
 
-g1 = g1.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
+g1 = g1.rename(columns={'OBS':'Value'})
 
 g1 = convet_dimension_to_int(g1, 'Value')
 g1['Level of inventories held at end-December 2019'] = g1['Level of inventories held at end-December 2019'].str.replace('.0','')
@@ -1190,7 +1190,7 @@ try:
 except:
     ind = 14  
 
-g2 = g2.rename(columns={'OBS':'Value', 'analysed by':'Analysis'})
+g2 = g2.rename(columns={'OBS':'Value'})
 
 g2 = convet_dimension_to_int(g2, 'Value')
 g2['Level of inventories held at end-December 2019'] = g2['Level of inventories held at end-December 2019'].str.replace('.0','')
