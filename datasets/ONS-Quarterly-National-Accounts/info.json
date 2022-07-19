@@ -69,11 +69,6 @@
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/capital-formation", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-capital-formation/{+capital_formation}"
             }, 
-            "Analysis": {
-                "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/analysis",
-                "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-analysis/{+analysis}"
-            }, 
             "Goods or Services": {
                 "type": "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/trade-type",
