@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[23]:
 
 
 import json
@@ -27,7 +27,7 @@ tidied_sheets = []
 df = pd.DataFrame()
 
 
-# In[2]:
+# In[24]:
 
 
 counter = 0
@@ -52,7 +52,7 @@ for table in metadata.distributions:
     counter += 1
 
 
-# In[3]:
+# In[25]:
 
 
 counter = 0
@@ -280,7 +280,7 @@ for source_name, distro in source_name_and_distro.items():
     counter += 1
 
 
-# In[4]:
+# In[26]:
 
 
 formatted_sheets = []
@@ -293,7 +293,7 @@ df['Flow'] = df.apply(lambda x: 'exports' if 'Exporters' in x['Measure Type'] el
 df['Marker'] = df.apply(lambda x: 'suppressed' if x['Value'] == '' else '', axis = 1)
 df['Value'] = df.apply(lambda x: 0 if x['Marker'] == 'suppressed' else x['Value'], axis = 1)
 
-COLUMNS_TO_NOT_PATHIFY = ['Value']
+COLUMNS_TO_NOT_PATHIFY = ['Value', 'Period']
 for col in df.columns.values.tolist():
 	if col in COLUMNS_TO_NOT_PATHIFY:
 		continue
@@ -312,7 +312,7 @@ df['Value'] = df['Value'].astype(int)
 formatted_sheets.append(df)
 
 
-# In[5]:
+# In[27]:
 
 
 # Regional Trade in goods statistics - Regional Comparison (Exports, proportion method)
@@ -325,7 +325,7 @@ df['Unit'] = df.apply(lambda x: 'count' if 'Number' in x['Measure Type'] else x[
 df = df.drop(['Code', 'Quarter'], axis=1)
 df['Flow'] = df.apply(lambda x: 'exports' if 'export' in x['Measure Type'] else ('imports' if 'import' in x['Measure Type'] else 'ERROR'), axis = 1)
 
-COLUMNS_TO_NOT_PATHIFY = ['Value']
+COLUMNS_TO_NOT_PATHIFY = ['Value', 'Period']
 
 for col in df.columns.values.tolist():
 	if col in COLUMNS_TO_NOT_PATHIFY:
@@ -336,7 +336,7 @@ for col in df.columns.values.tolist():
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
 
-# In[6]:
+# In[28]:
 
 
 df['Measure Type'] = df['Measure Type'].str.replace('-ps-thousands','')
@@ -352,7 +352,7 @@ df = df[df['Unit'] != 'businesses']
 formatted_sheets.append(df)
 
 
-# In[7]:
+# In[29]:
 
 
 # Regional Trade in goods statistics - Business Count (Exports, whole number method)
@@ -366,7 +366,7 @@ df = df[df['Country'] != '0.0']
 df['Marker'] = df.apply(lambda x: 'suppressed' if x['Value'] == '' else '', axis = 1)
 df['Value'] = df.apply(lambda x: 0 if x['Marker'] == 'suppressed' else x['Value'], axis = 1)
 
-COLUMNS_TO_NOT_PATHIFY = ['Value']
+COLUMNS_TO_NOT_PATHIFY = ['Value', 'Period']
 
 for col in df.columns.values.tolist():
 	if col in COLUMNS_TO_NOT_PATHIFY:
@@ -379,7 +379,7 @@ for col in df.columns.values.tolist():
 df['Value'] = df['Value'].astype(int)
 
 
-# In[8]:
+# In[30]:
 
 
 df['Measure Type'] = 'number-of-exporters'
@@ -392,7 +392,7 @@ df = df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Marker', 'Me
 formatted_sheets.append(df)
 
 
-# In[9]:
+# In[31]:
 
 
 # Regional Trade in goods statistics - Regional Comparisons (Exports, whole number method)
@@ -416,7 +416,7 @@ for col in df.columns.values.tolist():
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
 
-# In[10]:
+# In[32]:
 
 
 df['Measure Type'] = df['Measure Type'].str.replace('-ps-thousands','')
@@ -433,7 +433,7 @@ df = df[df['Unit'] != 'businesses']
 formatted_sheets.append(df)
 
 
-# In[11]:
+# In[33]:
 
 
 notes = """
@@ -485,7 +485,7 @@ https://www.uktradeinfo.com/Statistics/BuildYourOwnTables/Pages/Home.aspx
 """
 
 
-# In[12]:
+# In[34]:
 
 
 metadata.dataset.comment = "These spreadsheets provide supplementary data to that in the release of the HM Revenue & Customs Regional trade in goods statistics."
@@ -497,18 +497,16 @@ metadata.dataset.title = 'RTS Business Counts'
 #print(metadata.dataset.description)
 
 
-# In[19]:
+# In[35]:
 
 
 print("Number of dataframes in List: " + str(len(formatted_sheets)))
 formatted_df = pd.concat(formatted_sheets, sort = True).fillna('')
 
-formatted_df['Period'] = formatted_df['Period'].str.replace('q' , 'Q')
-
 formatted_df = formatted_df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 
-# In[20]:
+# In[36]:
 
 
 formatted_df.to_csv("observations.csv", index = False)
@@ -516,7 +514,7 @@ catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
 
-# In[21]:
+# In[37]:
 
 
 from IPython.core.display import HTML
