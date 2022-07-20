@@ -1,23 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
-# +
+# %%
 from gssutils import *
 import json
 import copy 
 import numpy as np
 
 df = pd.DataFrame()
-info = json.load(open('info.json'))
 metadata = Scraper(seed = 'info.json')
-metadata
-# -
-
+# %%
 distribution = metadata.distribution(latest = True)
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
-distribution
 
-list(tabs)
-
+# %%
 #grouping tab into topics to iterate through by their names
 national_account_aggregates = ['A1 AGGREGATES', 'A2 AGGREGATES']
 output_indicators = ['B1 CVM OUTPUT', 'B2 CVM OUTPUT']
@@ -29,7 +22,7 @@ inventories = ['G1 INVENTORIES', 'G2 INVENTORIES']
 trade = ['H1 TRADE', 'H2 TRADE']
 tidied_sheets = []
 
-
+# %%
 def with_indices_overrides(indices_dimension):
     """
     Adding a cellvalue overrides to each cell within the dimension AFTER
@@ -60,7 +53,7 @@ def with_indices_overrides(indices_dimension):
                 
     return indices_dimension
 
-
+# %%
 def with_sector_overrides(sector_dimension):
     not_blank_cells = [cell for cell in sector_dimension.hbagset if cell.value != '']
     for cell in sector_dimension.hbagset:
@@ -88,7 +81,7 @@ def with_sector_overrides(sector_dimension):
                 
     return sector_dimension
 
-
+# %%
 def with_expenditure_overrides(expenditure_dimension):
     not_blank_cells = [cell for cell in expenditure_dimension.hbagset if cell.value != '']
     for cell in expenditure_dimension.hbagset:
@@ -106,7 +99,7 @@ def with_expenditure_overrides(expenditure_dimension):
                 
     return expenditure_dimension
 
-
+# %%
 def with_gross_overrides(gross_dimension):
     not_blank_cells = [cell for cell in gross_dimension.hbagset if cell.value != '']
     for cell in gross_dimension.hbagset:
@@ -122,7 +115,7 @@ def with_gross_overrides(gross_dimension):
                 gross_dimension.AddCellValueOverride(cell, cell_checked[0].value) 
     return gross_dimension
 
-
+# %%
 def with_analysis_by_overrides(analysis_by_dimension):
     not_blank_cells = [cell for cell in analysis_by_dimension.hbagset if cell.value != '']
     for cell in analysis_by_dimension.hbagset:
@@ -150,7 +143,7 @@ def with_analysis_by_overrides(analysis_by_dimension):
                 analysis_by_dimension.AddCellValueOverride(cell, cell_checked[0].value)
     return analysis_by_dimension
 
-
+# %%
 def with_industry_overrides(industry_dimension):
     not_blank_cells = [cell for cell in industry_dimension.hbagset if cell.value != '']
     for cell in industry_dimension.hbagset:
@@ -171,7 +164,7 @@ def with_industry_overrides(industry_dimension):
 
     return industry_dimension
 
-
+# %%
 def with_flow_overrides(flow_dimension):
     not_blank_cells = [cell for cell in flow_dimension.hbagset if cell.value != '']
     for cell in flow_dimension.hbagset:
@@ -184,7 +177,7 @@ def with_flow_overrides(flow_dimension):
                 flow_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
     return flow_dimension
 
-
+# %%
 for name, tab in tabs.items():
     #shared dimensions across all tabs
     seasonal_adjustment = tab.excel_ref('A5').expand(DOWN).filter(contains_string('Seasonally'))
@@ -460,7 +453,7 @@ for name, tab in tabs.items():
 # #      'AF Annex F',
 # #      'AG Annex G'
 
-# +
+# %%
 import numpy as np
 
 def strip_superscripts(dataset, dimension):
@@ -476,8 +469,7 @@ def strip_superscripts(dataset, dimension):
         print('strip_superscripts error: ' + str(e))
         return dataset
 
-
-# +
+# %%
 
 def prefix_refperiod(dataset, dimension):
     try:
@@ -507,7 +499,7 @@ def convet_dimension_to_int(dataset, dimension):
         return dataset
 
 
-# +
+# %%
 a2 = tidied_sheets[1]
 
 a2 = tidied_sheets[1]
@@ -571,7 +563,7 @@ a2.to_csv("national_account_aggregates-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
 
-# +
+# %%
 b1 = tidied_sheets[2]
 # Only use the main value data for now, CVMs
 try:
@@ -687,11 +679,11 @@ b1b2.columns
 
 # +
 
-b1b2.to_csv("output_indicators-observations.csv", index = False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('output_indicators-catalog-metadata.json')
+#b1b2.to_csv("output_indicators-observations.csv", index = False)
+#catalog_metadata = metadata.as_csvqb_catalog_metadata()
+#catalog_metadata.to_json_file('output_indicators-catalog-metadata.json')
 
-# +
+# %%
 
 c1 = tidied_sheets[4]
 
@@ -793,10 +785,10 @@ c1c2["Expenditure Category"].unique()
 
 # +
 
-c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('expenditure_indicators-catalog-metadata.json')
-
+#c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
+#catalog_metadata = metadata.as_csvqb_catalog_metadata()
+#catalog_metadata.to_json_file('expenditure_indicators-catalog-metadata.json')
+# %%
 # + endofcell="--"
 d1 = tidied_sheets[6]
 
@@ -851,11 +843,11 @@ d1.columns
 
 # +
 
-d1.to_csv("income_indicators-observations.csv", index = False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file('income_indicators-catalog-metadata.json')
+#d1.to_csv("income_indicators-observations.csv", index = False)
+#catalog_metadata = metadata.as_csvqb_catalog_metadata()
+#catalog_metadata.to_json_file('income_indicators-catalog-metadata.json')
 
-# +
+# %%
 
 e1 = tidied_sheets[7]
 
@@ -1016,11 +1008,11 @@ e1e2e3e4["Expenditure Category"].unique()
 
 # +
 
-e1e2e3e4.to_csv("household_expenditure_indicators-observations.csv", index = False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file("household_expenditure_indicators-catalog-metadata.json")
+#e1e2e3e4.to_csv("household_expenditure_indicators-observations.csv", index = False)
+#catalog_metadata = metadata.as_csvqb_catalog_metadata()
+#catalog_metadata.to_json_file("household_expenditure_indicators-catalog-metadata.json")
 
-# +
+# %%
 
 f1 = tidied_sheets[11]
 
@@ -1139,9 +1131,9 @@ duplicate_df_f1f2
 
 f1f2.head(5)
 
-f1f2.to_csv("gross_fixed_capitol-observations.csv", index = False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file("gross_fixed_capitol-catalog-metadata.json")
+#f1f2.to_csv("gross_fixed_capitol-observations.csv", index = False)
+#catalog_metadata = metadata.as_csvqb_catalog_metadata()
+#catalog_metadata.to_json_file("gross_fixed_capitol-catalog-metadata.json")
 
 # +
 
@@ -1239,11 +1231,11 @@ g1g2.head(5)
 
 # +
 
-g1g2.to_csv("inventories-observations.csv", index = False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file("inventories-catalog-metadata.json")
+#g1g2.to_csv("inventories-observations.csv", index = False)
+#catalog_metadata = metadata.as_csvqb_catalog_metadata()
+#catalog_metadata.to_json_file("inventories-catalog-metadata.json")
 
-# +
+# %%
 
 h1 = tidied_sheets[15]
 
@@ -1330,26 +1322,6 @@ Trade balance is calculated by using exports of goods and services minus imports
 """
 # -
 
-h1h2.to_csv("trade-observations.csv", index = False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata()
-catalog_metadata.to_json_file("trade-catalog-metadata.json")
-
-# +
-
-# # +
-#cids = pd.concat([pd.DataFrame(f1f2cdids),pd.DataFrame(g1g2cdids),pd.DataFrame(h1h2cdids)])
-#print('Before: ' + str(cids[0].count()))
-#cids = cids.drop_duplicates()
-#print('After: ' + str(cids[0].count()))
-#cids = cids.rename(columns={cids.columns[0]:'Label'})
-#cids['Notation'] = cids['Label']
-#cids['Parent Notation'] = ''
-#cids['Sort Priority'] = np.arange(cids.shape[0]) + 6654
-#cids.to_csv('cdids.csv', index=False)
-#cids
-
-# # +
-#import dmtools as dm
-#fldrpth = '/users/leigh/Development/family-trade/reference/codelists/'
-#dm.search_for_codes_using_levenshtein_and_fuzzywuzzy(tidied_sheets[ind]['Sector'].unique(), fldrpth, 'Notation', 'sector', 3, 0.8)
-#dm.search_codelists_for_codes(d1['Category of Income'].unique(), fldrpth, 'Notation', 'Category of Income')
+#h1h2.to_csv("trade-observations.csv", index = False)
+#catalog_metadata = metadata.as_csvqb_catalog_metadata()
+#catalog_metadata.to_json_file("trade-catalog-metadata.json")
