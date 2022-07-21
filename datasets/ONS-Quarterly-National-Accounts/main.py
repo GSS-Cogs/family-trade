@@ -563,125 +563,83 @@ a2.to_csv("national_account_aggregates-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
 
-# # +
-# b1 = tidied_sheets[2]
-# # Only use the main value data for now, CVMs
-# try:
-#     b1 = b1.loc[b1['Percentage Change'].isna()] 
-# except:
-#     print("something went wrong")
+# %%
+b1 = tidied_sheets[2]
+ # Only use the main value data for now, CVMs
+try:
+     b1 = b1.loc[b1['Percentage Change'].isna()] 
+except:
+     print("something went wrong")
     
-# b1 = strip_superscripts(b1, 'Industry')
+b1 = strip_superscripts(b1, 'Industry')
 
-# b1 = b1.loc[b1['CDID'] != 'CGCE'] # We do not want Gross value added at basic prices as it messes up the cube
-# b1 = b1.loc[b1['CDID'] != 'KLH7'] # We do not want Gross value added excluding oil & gas as it messes up the cube
+b1 = b1.loc[b1['CDID'] != 'CGCE'] # We do not want Gross value added at basic prices as it messes up the cube
+b1 = b1.loc[b1['CDID'] != 'KLH7'] # We do not want Gross value added excluding oil & gas as it messes up the cube
 
-# b1['Sector'].loc[b1['CDID'].isin(['L2KR'])] = 'Production'
-# b1['Sector'].loc[b1['CDID'].isin(['L2KL'])] = 'Agriculture'  
-# b1['Sector'].loc[b1['CDID'].isin(['L2N8'])] = 'Construction' 
+b1['Sector'].loc[b1['CDID'].isin(['L2KR'])] = 'Production'
+b1['Sector'].loc[b1['CDID'].isin(['L2KL'])] = 'Agriculture'  
+b1['Sector'].loc[b1['CDID'].isin(['L2N8'])] = 'Construction' 
 
-# b1 = prefix_refperiod(b1, 'Period')
+b1 = prefix_refperiod(b1, 'Period')
     
-# try:
-#     b1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-# except:
-#     print("something went wrong while droping")  
+try:
+    b1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    print("something went wrong while droping")  
 
-# b1['Sector'] = b1['Sector'].apply(pathify)
-# b1['Industry'] = b1['Industry'].apply(pathify)
+b1['Sector'] = b1['Sector'].apply(pathify)
+b1['Industry'] = b1['Industry'].apply(pathify)
 
-# # b1 = b1.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
+ # b1 = b1.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
 
-# b1 = convet_dimension_to_int(b1, 'Value')
-# # -
+b1 = convet_dimension_to_int(b1, 'Value')
 
-# b1.columns
-
-# # +
-
-# b2 = tidied_sheets[3]
-
-# try:
-#     b2 = b2.loc[b2['Percentage Change'].isna()] 
-# except:
-#     print("something went wrong")
+# %%
+b2 = tidied_sheets[3]
+try:
+    b2 = b2.loc[b2['Percentage Change'].isna()] 
+except:
+    print("something went wrong")
     
-# b2['Sector'] = 'Service industries'
+b2['Sector'] = 'Service industries'
+b2 = strip_superscripts(b2, 'Industry')
+b2 = prefix_refperiod(b2, 'Period')
 
-# b2 = strip_superscripts(b2, 'Industry')
+try:
+     b2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+     print("something went wrong while droping")   
 
-# b2 = prefix_refperiod(b2, 'Period')
-
-# try:
-#     b2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-# except:
-#     print("something went wrong while droping")   
-
-# b2['Sector'] = b2['Sector'].apply(pathify)
-# b2['Industry'] = b2['Industry'].apply(pathify)
-
-# # b2 = b2.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
-# b2 = convet_dimension_to_int(b2, 'Value')
-# # -
-
-# b2.columns
-
-# # +
-
-# b1b2 = pd.concat([b1, b2])
-
-# b1b2 = b1b2.rename(columns={'OBS':'Value'})
-
-# # +
-
-# b1b2.columns
-
-# # +
-
-# b1b2 = b1b2[['Period','CDID','2019 Weights','Sector','Industry','Value']]
-# # b1b2.head(20)
-
-# # +
-
+b2['Sector'] = b2['Sector'].apply(pathify)
+b2['Industry'] = b2['Industry'].apply(pathify)
+# b2 = b2.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
+b2 = convet_dimension_to_int(b2, 'Value')
+b1b2 = pd.concat([b1, b2])
+b1b2 = b1b2.rename(columns={'OBS':'Value'})
+b1b2 = b1b2[['Period','CDID','2019 Weights','Sector','Industry','Value']]
 # # There are duplicates in this DataFrame.
-# duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
+duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
 # # duplicate_df.sort_values(by = ['Value', '2019 Weights', 'Period', 'CDID']).to_csv("b1b2duplicates.csv")
 # # duplicate_df
-
-# # +
-
 # # b1b2 = b1b2.drop_duplicates()
-# b1b2.drop_duplicates(subset = b1b2.columns.difference(['Value']), inplace = True)
-
-# # +
-
-
+b1b2.drop_duplicates(subset = b1b2.columns.difference(['Value']), inplace = True)
 # # There are duplicates in this DataFrame.
 # duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
 # # duplicate_df.sort_values(by = ['Value', '2019 Weights', 'Period', 'CDID']).to_csv("b1b2duplicates.csv")
 # # duplicate_df
-
-# # +
-
-# metadata.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
-# metadata.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
-# metadata.dataset.description = maindescr + """
-# Estimates cannot be regarded as accurate to the last digit shown.
-# Data has been Seasonally Adjusted. 
-# Reference year is 2019.
-# Components of outputs are valued at basic prices, which excludes taxes and includes subsidies on products.
-# Weights may not sum to totals due to rounding.
-# This is a balanced index of UK GVA, taking into account data from the income and expenditure approaches. Thus it will not necessarily be the weighted sum of the industrial indices.
-# """
-# # -
-
-# b1b2.columns
-
-# # +
-
-# b1b2.to_csv("output_indicators-observations.csv", index = False)
-# catalog_metadata = metadata.as_csvqb_catalog_metadata()
-# catalog_metadata.to_json_file('output_indicators-catalog-metadata.json')
+metadata.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
+metadata.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
+Estimates cannot be regarded as accurate to the last digit shown.
+Data has been Seasonally Adjusted. 
+Reference year is 2019.
+Components of outputs are valued at basic prices, which excludes taxes and includes subsidies on products.
+Weights may not sum to totals due to rounding.
+This is a balanced index of UK GVA, taking into account data from the income and expenditure approaches. Thus it will not necessarily be the weighted sum of the industrial indices.
+"""
+b1b2.to_csv("output_indicators-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('output_indicators-catalog-metadata.json')
 
 # # +
 
@@ -1345,3 +1303,4 @@ catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json
 # #fldrpth = '/users/leigh/Development/family-trade/reference/codelists/'
 # #dm.search_for_codes_using_levenshtein_and_fuzzywuzzy(tidied_sheets[ind]['Sector'].unique(), fldrpth, 'Notation', 'sector', 3, 0.8)
 # #dm.search_codelists_for_codes(d1['Category of Income'].unique(), fldrpth, 'Notation', 'Category of Income')
+# %%
