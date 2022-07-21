@@ -1,15 +1,15 @@
+# %%
 from gssutils import *
 import json
 import copy 
 import numpy as np
 
 df = pd.DataFrame()
-info = json.load(open('info.json'))
 metadata = Scraper(seed = 'national_account_aggregates-info.json')
-
+# %%
 distribution = metadata.distribution(latest = True)
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
-
+# %%
 #grouping tab into topics to iterate through by their names
 national_account_aggregates = ['A1 AGGREGATES', 'A2 AGGREGATES']
 output_indicators = ['B1 CVM OUTPUT', 'B2 CVM OUTPUT']
@@ -21,7 +21,7 @@ inventories = ['G1 INVENTORIES', 'G2 INVENTORIES']
 trade = ['H1 TRADE', 'H2 TRADE']
 tidied_sheets = []
 
-
+# %%
 def with_indices_overrides(indices_dimension):
     """
     Adding a cellvalue overrides to each cell within the dimension AFTER
@@ -176,7 +176,7 @@ def with_flow_overrides(flow_dimension):
                 flow_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
     return flow_dimension
 
-
+# %%
 for name, tab in tabs.items():
     #shared dimensions across all tabs
     seasonal_adjustment = tab.excel_ref('A5').expand(DOWN).filter(contains_string('Seasonally'))
@@ -452,7 +452,7 @@ for name, tab in tabs.items():
 # #      'AF Annex F',
 # #      'AG Annex G'
 
-# +
+# %%
 import numpy as np
 
 def strip_superscripts(dataset, dimension):
@@ -499,7 +499,7 @@ def convet_dimension_to_int(dataset, dimension):
         return dataset
 
 
-# +
+# %%
 a2 = tidied_sheets[1]
 
 a2 = tidied_sheets[1]
@@ -539,7 +539,7 @@ a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
 # a2["Estimate Type"] = a2["Estimate Type"].replace({"Chained Volume Measure (Reference year 2019)" : "chained-volume-measure"})
 # a2["Estimate Type"].unique()
 
-# # +
+# %%
 mainTitle = metadata.dataset.title
 maincomme = metadata.dataset.comment
 maindescr = metadata.dataset.description
