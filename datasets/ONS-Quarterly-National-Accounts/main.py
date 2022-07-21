@@ -643,109 +643,93 @@ catalog_metadata.to_json_file('output_indicators-catalog-metadata.json')
 
 # # +
 
-# c1 = tidied_sheets[4]
+c1 = tidied_sheets[4]
 
-# try:
-#     c1 = c1.loc[c1['Percentage Change'].isna()] 
-# except:
-#     print("something went wrong") 
+try:
+    c1 = c1.loc[c1['Percentage Change'].isna()] 
+except:
+    print("something went wrong") 
 
-# c1 = c1.loc[c1['CDID'] != 'YBHA'] # This is already in one of the other datasets
-# c1['Expenditure'].loc[c1['CDID'].isin(['YBIL','IKBH','ABMF','IKBI','IKBJ','GIXM'])] = 'not-applicable'
-# c1['Expenditure'].loc[c1['CDID'].isin(['ABJQ'])] = 'Final consumption expenditure'
-# c1['Expenditure'].loc[c1['CDID'].isin(['NPQS','NPEK'])] = 'Gross capital formation'
+c1 = c1.loc[c1['CDID'] != 'YBHA'] # This is already in one of the other datasets
+c1['Expenditure'].loc[c1['CDID'].isin(['YBIL','IKBH','ABMF','IKBI','IKBJ','GIXM'])] = 'not-applicable'
+c1['Expenditure'].loc[c1['CDID'].isin(['ABJQ'])] = 'Final consumption expenditure'
+c1['Expenditure'].loc[c1['CDID'].isin(['NPQS','NPEK'])] = 'Gross capital formation'
 
-# c1 = strip_superscripts(c1, 'Expenditure Category')
+c1 = strip_superscripts(c1, 'Expenditure Category')
 
-# c1 = prefix_refperiod(c1, 'Period')
+c1 = prefix_refperiod(c1, 'Period')
 
-# try:
-#     c1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-# except:
-#     print("something went wrong while droping")   
+try:
+    c1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    print("something went wrong while droping")   
 
-# c1['Expenditure Category'] = c1['Expenditure Category'].apply(pathify)
-# c1['Expenditure'] = c1['Expenditure'].apply(pathify)
+c1['Expenditure Category'] = c1['Expenditure Category'].apply(pathify)
+c1['Expenditure'] = c1['Expenditure'].apply(pathify)
 
-# c1 = c1.rename(columns={'OBS':'Value','Expenditure Category':'Expenditure Category','Expenditure':'Economic Concept'})
+c1 = c1.rename(columns={'OBS':'Value','Expenditure Category':'Expenditure Category','Expenditure':'Economic Concept'})
 
-# c1 = convet_dimension_to_int(c1, 'Value')
+c1 = convet_dimension_to_int(c1, 'Value')
 
-# c1['Estimate Type'] = 'current-price'
+c1['Estimate Type'] = 'current-price'
 # c1.head(5)
 
 # # + endofcell="--"
 
-# c2 = tidied_sheets[5]
+c2 = tidied_sheets[5]
 
-# try:
-#     c2 = c2.loc[c2['Percentage Change'].isna()] 
-# except:
-#     print("something went wrong") 
+try:
+   c2 = c2.loc[c2['Percentage Change'].isna()] 
+except:
+   print("something went wrong") 
 
-# c2 = c2.loc[c2['CDID'] != 'ABMI'] # This is already in one of the other datasets
-# c2['Expenditure'].loc[c2['CDID'].isin(['YBIM','IKBK','ABMG','IKBL','IKBM','GIXS'])] = 'not-applicable'
-# c2['Expenditure'].loc[c2['CDID'].isin(['ABJR'])] = 'Final consumption expenditure'
-# c2['Expenditure'].loc[c2['CDID'].isin(['NPQT','NPEL'])] = 'Gross capital formation'
+c2 = c2.loc[c2['CDID'] != 'ABMI'] # This is already in one of the other datasets
+c2['Expenditure'].loc[c2['CDID'].isin(['YBIM','IKBK','ABMG','IKBL','IKBM','GIXS'])] = 'not-applicable'
+c2['Expenditure'].loc[c2['CDID'].isin(['ABJR'])] = 'Final consumption expenditure'
+c2['Expenditure'].loc[c2['CDID'].isin(['NPQT','NPEL'])] = 'Gross capital formation'
 
-# c2 = strip_superscripts(c2, 'Expenditure Category')
+c2 = strip_superscripts(c2, 'Expenditure Category')
 
-# c2 = prefix_refperiod(c2, 'Period')
+c2 = prefix_refperiod(c2, 'Period')
 
-# try:
-#     c2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-# except:
-#     print("something went wrong while droping")   
+try:
+    c2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    print("something went wrong while droping")   
 
-# c2['Expenditure Category'] = c2['Expenditure Category'].apply(pathify)
-# c2['Expenditure'] = c2['Expenditure'].apply(pathify)
+c2['Expenditure Category'] = c2['Expenditure Category'].apply(pathify)
+c2['Expenditure'] = c2['Expenditure'].apply(pathify)
 
-# c2 = c2.rename(columns={'OBS':'Value','Expenditure Category':'Expenditure Category','Expenditure':'Economic Concept'})
+c2 = c2.rename(columns={'OBS':'Value','Expenditure Category':'Expenditure Category','Expenditure':'Economic Concept'})
 
-# c2 = convet_dimension_to_int(c2, 'Value')
+c2 = convet_dimension_to_int(c2, 'Value')
     
-# c2['Estimate Type'] = 'chained-volume-measure'
-# c2.head(5)
+c2['Estimate Type'] = 'chained-volume-measure'
+#c2.head(5)
 # # -
 
-# c1c2 = pd.concat([c1, c2])
+c1c2 = pd.concat([c1, c2])
 # c1c2cdids = c1c2['CDID'].unique()
 # # del c1, c2
 
-# metadata.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
-# metadata.dataset.comment = maincomme + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2) - Seasonally Adjusted'
-# metadata.dataset.description = maindescr + """
-# Data has been Seasonally Adjusted. 
-# Reference year is 2019.
-# Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
-# Non-profit institutions: Non-profit institutions serving households.
-# Further breakdown of business investment can be found in the 'Business investment in the UK' bulletin
-# Changes in inventories: Quarterly alignment adjustment included in this series.
-# Acquisitions less disposals of valuables can be a volatile series, due to the inclusion of non-monetary gold, but any volatility is likely to be GDP neutral as this is offset in UK trade figures
-# Trade balance is calculated by using exports of goods and services minus imports of goods and services
-# Non-profit institutions: There is a small difference between the gross operating surplus of the NPISH sector in the SFA release, compared with the consumption of fixed capital for the NPISH sector published in the GDP release.  This affects 2019Q1 onwards. The latest figures for the affected series can be found in the SFA release.
-# """
+metadata.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
+metadata.dataset.comment = maincomme + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
+Data has been Seasonally Adjusted. 
+Reference year is 2019.
+Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
+Non-profit institutions: Non-profit institutions serving households.
+Further breakdown of business investment can be found in the 'Business investment in the UK' bulletin
+Changes in inventories: Quarterly alignment adjustment included in this series.
+Acquisitions less disposals of valuables can be a volatile series, due to the inclusion of non-monetary gold, but any volatility is likely to be GDP neutral as this is offset in UK trade figures
+Trade balance is calculated by using exports of goods and services minus imports of goods and services
+Non-profit institutions: There is a small difference between the gross operating surplus of the NPISH sector in the SFA release, compared with the consumption of fixed capital for the NPISH sector published in the GDP release.  This affects 2019Q1 onwards. The latest figures for the affected series can be found in the SFA release.
+"""
 # # --
 
-# c1c2.columns
-
-# # +
-
-# c1c2["Estimate Type"].unique()
-
-# # +
-
-# c1c2["Economic Concept"].unique()
-
-# # +
-
-# c1c2["Expenditure Category"].unique()
-
-# # +
-
-# c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
-# catalog_metadata = metadata.as_csvqb_catalog_metadata()
-# catalog_metadata.to_json_file('expenditure_indicators-catalog-metadata.json')
+c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('expenditure_indicators-catalog-metadata.json')
 
 # # + endofcell="--"
 # d1 = tidied_sheets[6]
