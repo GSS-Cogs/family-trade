@@ -37,7 +37,7 @@ trade,Earnings,dimension/earnings,qb:DimensionProperty,,,skos:Concept,http://gss
 trade,Sector,dimension/sector,qb:DimensionProperty,http://gss-data.org.uk/def/trade/property/dimension/industry,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/sector,Sector
 trade,Transaction Type,dimension/transaction-type,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/transaction-type,Transaction Type
 trade,Inventory,dimension/inventory,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/inventory,
-trade,Expenditure Category,dimension/expenditure-category,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/expenditure-category,
+trade,Expenditure Category,dimension/expenditure-category,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-expenditure,
 trade,Analysis,dimension/analysis,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/analysis,
 trade,Income Category,dimension/income-category,qb:DimensionProperty,,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/income-category,
 trade,Industrial Sector,dimension/industrial-sector,qb:DimensionProperty,http://gss-data.org.uk/def/trade/property/dimension/industry,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/industrial-sector,
