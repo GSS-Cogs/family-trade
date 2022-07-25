@@ -1,4 +1,5 @@
 {
+    "$schema": "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons_cpa",
     "title": "UK trade in goods by classification of product by activity time series",
     "publisher": "Office for National Statistics",
@@ -24,7 +25,7 @@
             "CDID": {
                 "type" : "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/cdid",
-                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{cdid}"
+                "value": "http://gss-data.org.uk/def/trade/concept/cdid/{+cdid}"
             },
             "CPA 2008": {
                 "type" : "dimension",
@@ -33,8 +34,7 @@
                     "codelist": "./codelists/cpa-2008.csv-metadata.json"
                 }
             },
-            "Price Classification" :
-            {
+            "Price Classification" : {
                 "type": "dimension",
                 "new": {
                     "codelist": "./codelists/price-classification.csv-metadata.json"
@@ -43,34 +43,28 @@
             "ONS Partner Geography": {
                 "type" : "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/ons-partner-geography",
-                "value": "http://gss-data.org.uk/def/concept/cl-area/{ons_partner_geography}"
+                "value": "http://gss-data.org.uk/def/concept/cl-area/{+ons_partner_geography}"
             },
             "Flow Directions": {
                 "type" : "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/flow-directions",
-                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{flow_directions}"
+                "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow_directions}"
             },
             "Seasonal Adjustment": {
                 "type" : "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/seasonal-adjustment",
-                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{seasonal_adjustment}"
+                "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{+seasonal_adjustment}"
             },
             "International Trade Basis": {
                 "type" : "dimension",
                 "uri": "http://gss-data.org.uk/def/trade/property/dimension/international-trade-basis",
-                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{international_trade_basis}"
+                "value": "http://gss-data.org.uk/def/trade/concept/international-trade-basis/{+international_trade_basis}"
             },
             "Value": {
                 "type": "observations",
+                "measure": "http://gss-data.org.uk/def/measure/trade-in-goods",
+                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "datatype": "integer"
-            },
-            "Measure Type": {
-                "type": "measures",
-                "value": "http://gss-data.org.uk/def/measure/trade-in-goods"
-            },
-            "Unit": {
-                "type": "units",
-                "value": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million"
             }
         }
     },
