@@ -1,30 +1,14 @@
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.4.2
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
+# %%
 from gssutils import *
 import json 
 import re
+#from csvcubed.models.cube.qb.catalog import CatalogMetadata
 
-# # + tags=["outputPrepend"]
-info = json.load(open('info.json'))
+
 scraper = Scraper(seed='info.json')
-cubes = Cubes('info.json')
-scraper.dataset.family = info['families']
 df = scraper.distribution(latest=True).as_pandas(header=None, na_values=[], keep_default_na=False, index_col=0)
-# -
 
+# %%
 # Build the column multiindex to allow melting
 df.columns = pd.MultiIndex.from_frame(df.iloc[0:7].T)
 # Remove the records from the dataframe which are now the column headers
@@ -41,8 +25,8 @@ df.rename({0: 'Period'}, axis=1, inplace=True)
 df['Period'].loc[df['Period'].str.len() == 7] = df['Period'].apply(lambda x:'quarter/{year}-{quarter}'.format(year=x[:4], quarter=x[-2:]))
 df['Period'].loc[df['Period'].str.len() == 4] = df['Period'].apply(lambda x:'year/{year}'.format(year=x[:4]))
 # Interprate the release dates and format
-df['Next release'] = pd.to_datetime(df['Next release'], format='%d %B %Y').dt.strftime('/id/day/%Y-%m-%d')
-df['Release Date'] = pd.to_datetime(df['Release Date'], format='%d-%m-%Y').dt.strftime('/id/day/%Y-%m-%d')
+df['Next release'] = pd.to_datetime(df['Next release'], format='%d %B %Y').dt.strftime('day/%Y-%m-%d')
+df['Release Date'] = pd.to_datetime(df['Release Date'], format='%d-%m-%Y').dt.strftime('day/%Y-%m-%d')
 # We don't use the data within these cells
 df.drop(labels=['Title', 'PreUnit', 'Unit', 'Important Notes'], axis=1, inplace=True)
 
@@ -51,7 +35,7 @@ df.rename(columns={'CDID' : 'cdid'}, inplace=True)
 n = len(pd.unique(df['cdid'])) 
 print("No.of.unique values :",  
       n)
-
+# %%
 from IPython.display import display, HTML
 from io import BytesIO
 def fetch_table(t):
@@ -82,7 +66,7 @@ remaining_cdids = set(
 assert not remaining_cdids, 'Not all CDIDs defined: ' + str(remaining_cdids)
 
 
-# +
+# %%
 class Re(object):
   def __init__(self):
     self.last_match = None
@@ -129,13 +113,14 @@ cdids['CPA 2008'].cat.categories = cdids['CPA 2008'].cat.categories.map(product2
 cdids['Flow Directions'].cat.categories = cdids['Flow Directions'].cat.categories.map(
     lambda x: 'balance' if x == 'BAL' else 'imports' if x == 'IM' else 'exports' if x == 'EX' else None
 )
-# -
+# %%
 
 merged = pd.merge(df, cdids, on='cdid', how='left').drop_duplicates()
 merged.rename(columns={'cdid' : 'CDID'}, inplace=True)
+merged['Measure Type'] = "trade-in-goods"
+merged['Unit'] = "gbp-million"
 merged = merged[['ONS Partner Geography', 'Period', 'CDID', 'International Trade Basis',
-                             'Flow Directions', 'CPA 2008', 'Price Classification', 'Seasonal Adjustment','Value',]].drop_duplicates()
-merged.head(10)
+                             'Flow Directions', 'CPA 2008', 'Price Classification', 'Seasonal Adjustment','Value', 'Measure Type', 'Unit']].drop_duplicates()
 
 # Have set up the CPA codelist to just include the code, so removeing prefix
 merged['CPA 2008'] = merged['CPA 2008'].str.replace('group/','')
@@ -143,30 +128,12 @@ merged['CPA 2008'] = merged['CPA 2008'].str.replace('division/','')
 merged['CPA 2008'] = merged['CPA 2008'].str.replace('section/','')
 merged['CPA 2008'] = merged['CPA 2008'].str.replace('class/','')
 merged['CPA 2008'] = merged['CPA 2008'].str.replace('ons/TOTAL','total')
-merged['CPA 2008'].unique()
+#merged['CPA 2008'].unique()
 
+# %%
+merged.to_csv("observations.csv", index = False)
+# %%
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 
-
-# Add dataframe is in the cube
-cubes.add_cube(scraper, merged, scraper.distribution(latest=True).title)
-
-# +
-#print(scraper.dataset.family)
-#print(scraper.dataset.title)
-#print(scraper.dataset.comment)
-#print(scraper.dataset.description)
-# -
-
-# Write cube
-cubes.output_all()
-
-#### THIS SHOULD BE TEMP JUST TO DEMONSTRATE SOMETHING TO SWIRRL
-import os
-import shutil
-
-try:
-    os.remove("out/uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig")
-except:
-    i = 0
-
-shutil.copyfile("uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig", "out/uk-trade-in-goods-by-classification-of-product-by-activity-time-series.csv-metadata.trig")
+# %%
