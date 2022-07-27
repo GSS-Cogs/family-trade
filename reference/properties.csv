@@ -86,4 +86,4 @@ trade,Turnover,dimension/turnover-size-bands,qb:DimensionProperty,,,skos:Concept
 trade,Business Count,attribute/business-count,qb:Attribute,,,http://gss-data.org.uk/def/trade/concept-scheme/business-count,Business Count,
 trade,Employee Count,attribute/employee-count,qb:Attribute,,,http://gss-data.org.uk/def/trade/concept-scheme/employee-count,Employee Count,
 trade,SITC Code,dimension/sitc-code,qb:DimensionProperty,http://gss-data.org.uk/def/trade/property/dimension/product,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/sitc4,Standard International Trade Classification
-trade,Sector,dimension/qna-sector,qb:DimensionProperty,http://gss-data.org.uk/def/trade/property/dimension/industry,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-industry,
+trade,Sector,dimension/qna-sector,qb:DimensionProperty,http://gss-data.org.uk/def/trade/property/dimension/industry,,skos:Concept,http://gss-data.org.uk/def/trade/concept-scheme/national-accounts-industrial-sector,
