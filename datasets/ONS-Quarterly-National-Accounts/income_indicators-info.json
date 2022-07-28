@@ -32,7 +32,7 @@
             }, 
             "Category of Income": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/income-indicator", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/category-of-income", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-income-indicator/{+category_of_income}"
             },
             "Value": {
