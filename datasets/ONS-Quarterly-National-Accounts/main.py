@@ -1177,100 +1177,102 @@ g1g2.columns
 g1g2.head(5)
 # -
 
+g1g2.columns
+
+g1g2["Sector"].unique()
+
 g1g2.to_csv("inventories-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file("inventories-catalog-metadata.json")
 
 # +
 
-# h1 = tidied_sheets[15]
+h1 = tidied_sheets[15]
 
-# try:
-#     h1 = h1.loc[h1['Percentage Change'].isna()] 
-# except:
-#     ind = 15 
+try:
+    h1 = h1.loc[h1['Percentage Change'].isna()] 
+except:
+    ind = 15 
 
-# h1['Flow'].loc[h1['CDID'].isin(['BOKG','IKBB','IKBH'])] = 'Exports'
-# h1['Flow'].loc[h1['CDID'].isin(['BOKH','IKBC','IKBI'])] = 'Imports'
-# h1['Flow'].loc[h1['CDID'].isin(['BOKI','IKBO','IKBJ'])] = 'Balance'
+h1['Flow'].loc[h1['CDID'].isin(['BOKG','IKBB','IKBH'])] = 'Exports'
+h1['Flow'].loc[h1['CDID'].isin(['BOKH','IKBC','IKBI'])] = 'Imports'
+h1['Flow'].loc[h1['CDID'].isin(['BOKI','IKBO','IKBJ'])] = 'Balance'
 
 
-# h1['Economic Concept'] = 'current-price'
+h1['Economic Concept'] = 'current-price'
 
-# h1 = prefix_refperiod(h1, 'Period')
+h1 = prefix_refperiod(h1, 'Period')
 
-# try:
-#     h1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-# except:
-#     ind = 15  
+try:
+    h1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 15  
 
-# h1 = h1.rename(columns={'OBS':'Value'})
+h1 = h1.rename(columns={'OBS':'Value'})
 
-# h1 = convet_dimension_to_int(h1, 'Value')
+h1 = convet_dimension_to_int(h1, 'Value')
 
-# h1['Goods or Services'] = h1['Goods or Services'].apply(pathify)
-# h1['Flow'] = h1['Flow'].apply(pathify)
+h1['Goods or Services'] = h1['Goods or Services'].apply(pathify)
+h1['Flow'] = h1['Flow'].apply(pathify)
 
-# h1cdids = h1['CDID'].unique()
-# h1.head(5)
+h1cdids = h1['CDID'].unique()
+h1.head(5)
 
-# # +
 
-# h2 = tidied_sheets[16]
+h2 = tidied_sheets[16]
 
-# try:
-#     h2 = h2.loc[h2['Percentage Change'].isna()] 
-# except:
-#     ind = 16
+try:
+    h2 = h2.loc[h2['Percentage Change'].isna()] 
+except:
+    ind = 16
 
-# h2['Flow'].loc[h2['CDID'].isin(['BQKQ','IKBE','IKBK'])] = 'Exports'
-# h2['Flow'].loc[h2['CDID'].isin(['BQKO','IKBF','IKBL'])] = 'Imports'
-# h2['Flow'].loc[h2['CDID'].isin(['IKBM'])] = 'Balance'
+h2['Flow'].loc[h2['CDID'].isin(['BQKQ','IKBE','IKBK'])] = 'Exports'
+h2['Flow'].loc[h2['CDID'].isin(['BQKO','IKBF','IKBL'])] = 'Imports'
+h2['Flow'].loc[h2['CDID'].isin(['IKBM'])] = 'Balance'
 
-# h2['Economic Concept'] = 'chained-volume-measure'
+h2['Economic Concept'] = 'chained-volume-measure'
 
-# h2 = prefix_refperiod(h2, 'Period')
+h2 = prefix_refperiod(h2, 'Period')
 
-# try:
-#     h2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-# except:
-#     ind = 16
+try:
+    h2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 16
 
-# h2 = h2.rename(columns={'OBS':'Value'})
+h2 = h2.rename(columns={'OBS':'Value'})
 
-# h2 = convet_dimension_to_int(h2, 'Value')
+h2 = convet_dimension_to_int(h2, 'Value')
 
-# h2['Goods or Services'] = h2['Goods or Services'].apply(pathify)
-# h2['Flow'] = h2['Flow'].apply(pathify)
+h2['Goods or Services'] = h2['Goods or Services'].apply(pathify)
+h2['Flow'] = h2['Flow'].apply(pathify)
 
-# h2cdids = h2['CDID'].unique()
-# h2.head(5)
+h2cdids = h2['CDID'].unique()
+h2.head(5)
 
-# # +
 
-# h1h2 = pd.concat([h1,h2])
-# h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
-# h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
+h1h2 = pd.concat([h1,h2])
+h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
+h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
 
-# # +
-# #h1h2['Goods or Services'].unique()
+#h1h2['Goods or Services'].unique()
 
-# h1h2.columns
+h1h2.columns
 
-# # +
 
-# metadata.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
-# metadata.dataset.comment = maincomme + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2) - Seasonally Adjusted'
-# metadata.dataset.description = maindescr + """
-# Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)
-# Data has been seasonally adjusted
-# Trade balance is calculated by using exports of goods and services minus imports of goods and services
-# """
-# # -
+metadata.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
+metadata.dataset.comment = maincomme + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
+Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)
+Data has been seasonally adjusted
+Trade balance is calculated by using exports of goods and services minus imports of goods and services
+"""
+# -
 
-# h1h2.to_csv("trade-observations.csv", index = False)
-# catalog_metadata = metadata.as_csvqb_catalog_metadata()
-# catalog_metadata.to_json_file("trade-catalog-metadata.json")
+h1h2.to_csv("trade-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file("trade-catalog-metadata.json")
+
+# +
 
 # # +
 
