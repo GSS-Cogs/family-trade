@@ -1,4 +1,4 @@
-# +
+# %%
 from gssutils import *
 import json
 import copy 
@@ -6,9 +6,10 @@ import numpy as np
 
 df = pd.DataFrame()
 metadata = Scraper(seed = 'national_account_aggregates-info.json')
-# -
+# %%
 distribution = metadata.distribution(latest = True)
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
+# %%
 #grouping tab into topics to iterate through by their names
 national_account_aggregates = ['A1 AGGREGATES', 'A2 AGGREGATES']
 output_indicators = ['B1 CVM OUTPUT', 'B2 CVM OUTPUT']
@@ -20,7 +21,7 @@ inventories = ['G1 INVENTORIES', 'G2 INVENTORIES']
 trade = ['H1 TRADE', 'H2 TRADE']
 tidied_sheets = []
 
-# +
+# %%
 def with_indices_overrides(indices_dimension):
     """
     Adding a cellvalue overrides to each cell within the dimension AFTER
@@ -175,7 +176,7 @@ def with_flow_overrides(flow_dimension):
                 flow_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
     return flow_dimension
 
-# +
+# %%
 for name, tab in tabs.items():
     #shared dimensions across all tabs
     seasonal_adjustment = tab.excel_ref('A5').expand(DOWN).filter(contains_string('Seasonally'))
@@ -390,68 +391,68 @@ for name, tab in tabs.items():
     else:
         continue
 
-# # Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
-# # Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
-# #
-# # ##### National Accounts aggregates 
-# #     tidied_sheets[0] (A1 AGGREGATES)
-# #     tidied_sheets[1] (A2 AGGREGATES)
-# #   
-# # ##### Output indicators
-# #     tidied_sheets[2] (B1 CVM OUTPUT)
-# #     tidied_sheets[3] (B2 CVM OUTPUT)
-# #     
-# # ##### Expenditure Indicators 
-# #     tidied_sheets[4] (C1 Expenditure)
-# #     tidied_sheets[5] (C2 Expenditure)
-# #    
-# # ##### Income indicators
-# #     tidied_sheets[6] (D Income)
-# #
-# # ##### Household Expenditure Indicators
-# #     tidied_sheets[7] (E1 Expenditure)
-# #     tidied_sheets[8] (E1 Expenditure)
-# #     tidied_sheets[9] (E1 Expenditure)
-# #     tidied_sheets[10](E1 Expenditure)
-# #
-# #
-# # ##### Gross Fixed Capitol 
-# #     tidied_sheets[11](F1 GFCF)
-# #     tidied_sheets[12](F1 GFCF)
-# #      
-# #      Note another dimension will need to be added during post processsing called something like 'Sector' which will either be: UK National or UK dommestic, depending on the value in Capital Formation dimension.
-# #
-# # ##### Inventories
-# #     tidied_sheets[13](G1 Inventories)
-# #     tidied_sheets[14](G1 Inventories)
-# #
-# #     
-# # ##### Trade 
-# #     tidied_sheets[15](H1 TRADE)
-# #     tidied_sheets[16](H2 TRADE)
-# #     
-# #     Note I will need to do a bit of wrangling to fix the flow dimension in post processing, this is due to some tables using a horrible centered headings for flow values. 
-# #     
-# # ##### Other 
-# #
-# #     The following tabs were not included when this was previously done, is this still the case ?
-# #     
-# #     
-# #      'L GVAbp',
-# #      'M Alignment adjustments',
-# #      'N Financial Year Variables',
-# #      'O Selected imp def',
-# #      'P GDP per head',
-# #      'R Quarterly Revisions',
-# #      'AA Annex A',
-# #      'AB Annex B',
-# #      'AC Annex C',
-# #      'AD Annex D'
-# #      'AE Annex E',
-# #      'AF Annex F',
-# #      'AG Annex G'
+# Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
+# Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
 
-# + endofcell="--"
+# ##### National Accounts aggregates 
+#     tidied_sheets[0] (A1 AGGREGATES)
+#     tidied_sheets[1] (A2 AGGREGATES)
+#   
+# ##### Output indicators
+#     tidied_sheets[2] (B1 CVM OUTPUT)
+#     tidied_sheets[3] (B2 CVM OUTPUT)
+#     
+# ##### Expenditure Indicators 
+#     tidied_sheets[4] (C1 Expenditure)
+#     tidied_sheets[5] (C2 Expenditure)
+#    
+# ##### Income indicators
+#     tidied_sheets[6] (D Income)
+#
+# ##### Household Expenditure Indicators
+#     tidied_sheets[7] (E1 Expenditure)
+#     tidied_sheets[8] (E1 Expenditure)
+#     tidied_sheets[9] (E1 Expenditure)
+#     tidied_sheets[10](E1 Expenditure)
+#
+#
+# ##### Gross Fixed Capitol 
+#     tidied_sheets[11](F1 GFCF)
+#     tidied_sheets[12](F1 GFCF)
+#      
+#      Note another dimension will need to be added during post processsing called something like 'Sector' which will either be: UK National or UK dommestic, depending on the value in Capital Formation dimension.
+#
+# ##### Inventories
+#     tidied_sheets[13](G1 Inventories)
+#     tidied_sheets[14](G1 Inventories)
+#
+#     
+# ##### Trade 
+#     tidied_sheets[15](H1 TRADE)
+#     tidied_sheets[16](H2 TRADE)
+#     
+#     Note I will need to do a bit of wrangling to fix the flow dimension in post processing, this is due to some tables using a horrible centered headings for flow values. 
+#     
+# ##### Other 
+#
+#     The following tabs were not included when this was previously done, is this still the case ?
+#     
+#     
+#      'L GVAbp',
+#      'M Alignment adjustments',
+#      'N Financial Year Variables',
+#      'O Selected imp def',
+#      'P GDP per head',
+#      'R Quarterly Revisions',
+#      'AA Annex A',
+#      'AB Annex B',
+#      'AC Annex C',
+#      'AD Annex D'
+#      'AE Annex E',
+#      'AF Annex F',
+#      'AG Annex G'
+
+
 import numpy as np
 
 def strip_superscripts(dataset, dimension):
@@ -468,7 +469,7 @@ def strip_superscripts(dataset, dimension):
         return dataset
 
 
-# # +
+# +
 
 def prefix_refperiod(dataset, dimension):
     try:
@@ -496,10 +497,9 @@ def convet_dimension_to_int(dataset, dimension):
     except Exception as e:
         print('convet_dimension_to_int: ' + str(e))
         return dataset
-# --
 
 
-# +
+# %%
 a2 = tidied_sheets[1]
 
 a2 = tidied_sheets[1]
@@ -539,7 +539,7 @@ a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
 # a2["Estimate Type"] = a2["Estimate Type"].replace({"Chained Volume Measure (Reference year 2019)" : "chained-volume-measure"})
 # a2["Estimate Type"].unique()
 
-# + endofcell="--"
+# %%
 mainTitle = metadata.dataset.title
 maincomme = metadata.dataset.comment
 maindescr = metadata.dataset.description
@@ -562,9 +562,8 @@ a2["Estimate Type"].unique()
 a2.to_csv("national_account_aggregates-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
-# --
 
-# +
+# %%
 b1 = tidied_sheets[2]
  # Only use the main value data for now, CVMs
 try:
@@ -595,7 +594,7 @@ b1['Industry'] = b1['Industry'].apply(pathify)
 
 b1 = convet_dimension_to_int(b1, 'Value')
 
-# +
+# %%
 b2 = tidied_sheets[3]
 try:
     b2 = b2.loc[b2['Percentage Change'].isna()] 
@@ -642,7 +641,7 @@ b1b2.to_csv("output_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('output_indicators-catalog-metadata.json')
 
-# +
+# %%
 
 c1 = tidied_sheets[4]
 
@@ -732,8 +731,6 @@ c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('expenditure_indicators-catalog-metadata.json')
 
-# + endofcell="---"
-
 
 d1 = tidied_sheets[6]
 
@@ -782,13 +779,9 @@ Other income includes mixed income and the operating surplus of the non-corporat
 """
 # --
 
+# +
 
 d1.columns
-
-
-# ---
-
-d1["Category of Income"].unique()
 
 # +
 
@@ -796,10 +789,7 @@ d1.to_csv("income_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('income_indicators-catalog-metadata.json')
 
-
 # +
-
-# # +
 
 e1 = tidied_sheets[7]
 
@@ -869,7 +859,7 @@ e2['Expenditure Category'] = 'uk-domestic'
 e2cdids = e2['CDID'].unique()
 e2.head(5)
 
-
+# +
 e3 = tidied_sheets[9]
 
 try:
@@ -900,7 +890,7 @@ e3 = convet_dimension_to_int(e3, 'Value')
 e3cdids = e3['CDID'].unique()
 e3.head(50)
 
-
+# +
 e4 = tidied_sheets[10]
 
 try:
@@ -932,12 +922,12 @@ e4['Expenditure Category'] = 'uk-domestic'
 e4cdids = e4['CDID'].unique()
 e4.head(5)
 
-
+# +
 
 e1e2e3e4 = pd.concat([e1, e2, e3, e4])
 e1e2e3e4.head(10)
 
-
+# +
 
 metadata.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
 metadata.dataset.comment = maincomme + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4) - Seasonally Adjusted'
@@ -950,146 +940,140 @@ UK National: Final consumption by UK Households in the UK & abroad.
 UK National & Domestic: Final consumption expenditure in the UK by UK & foreign households and final consumption by UK Households in the UK & abroad.
 """
 
-
+# +
 
 e1e2e3e4.columns
 
-
+# +
 
 e1e2e3e4["Expenditure Category"].unique()
 
-
-
-# -
+# +
 
 e1e2e3e4.to_csv("household_expenditure_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file("household_expenditure_indicators-catalog-metadata.json")
 
+
+
+f1 = tidied_sheets[11]
+
+try:
+    f1 = f1.loc[f1['Percentage Change'].isna()] 
+except:
+    ind = 11 
+
+f1['Capital Formation'].loc[f1['CDID'].isin(['L62R'])] = 'Public Corporations - Dwellings'
+f1['Capital Formation'].loc[f1['CDID'].isin(['L62S'])] = 'Public Corporations - Costs of transfer of ownership of non-produced assests'
+f1['Capital Formation'].loc[f1['CDID'].isin(['L62T'])] = 'Private Sector - Dwellings'
+f1['Capital Formation'].loc[f1['CDID'].isin(['L62U'])] = 'Private Sector - Costs of transfer of ownership of non-produced assests'
+
+f1['Analysed by'].loc[f1['CDID'].isin(['NPEK','RPZG'])] = 'Analysis by sector'
+
+f1 = strip_superscripts(f1, 'Capital Formation')
+
+f1['Economic Concept'] = 'current-price'
+
+f1 = prefix_refperiod(f1, 'Period')
+
+try:
+    f1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 11   
+
+f1 = f1.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
+
+f1 = convet_dimension_to_int(f1, 'Value')
+
+f1['Capital Formation'] = f1['Capital Formation'].apply(pathify)
+f1['Analysis'] = f1['Analysis'].apply(pathify)
+
+f1cdids = f1['CDID'].unique()
+f1.head(5)
+
+
+f2 = tidied_sheets[12]
+
+try:
+    f2 = f2.loc[f2['Percentage Change'].isna()] 
+except:
+    ind = 12 
+
+f2['Capital Formation'].loc[f2['CDID'].isin(['L634'])] = 'Public Corporations - Dwellings'
+f2['Capital Formation'].loc[f2['CDID'].isin(['L635'])] = 'Public Corporations - Costs of transfer of ownership of non-produced assests'
+f2['Capital Formation'].loc[f2['CDID'].isin(['L636'])] = 'Private Sector - Dwellings'
+f2['Capital Formation'].loc[f2['CDID'].isin(['L637'])] = 'Private Sector - Costs of transfer of ownership of non-produced assests'
+
+f2['Analysed by'].loc[f2['CDID'].isin(['NPEL','DLWF'])] = 'Analysis by sector'
+
+f2 = strip_superscripts(f2, 'Capital Formation')
+
+f2['Economic Concept'] = 'chained-volume-measure'
+
+f2 = prefix_refperiod(f2, 'Period')
+
+try:
+    f2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    ind = 12   
+
+f2 = f2.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
+f2["Analysis"] = f2["Analysis"].loc[f2['Analysis'] == "analysis-by-sector-7"] = "analysis-by-sector"
+f2 = convet_dimension_to_int(f2, 'Value')
+
+f2['Capital Formation'] = f2['Capital Formation'].apply(pathify)
+f2['Analysis'] = f2['Analysis'].apply(pathify)
+
+f2cdids = f2['CDID'].unique()
+f2.head(5)
+# -
+
+f1["Analysis"].unique()
+
+f2["Analysis"].unique()
+
+f1f2 = pd.concat([f1,f2])
+#f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
+f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
+
+metadata.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
+metadata.dataset.comment = maincomme + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
+Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)
+Data has been seasonally adjusted
+Business Investment: Not including expenditure on dwellings, land and existing buildings and costs associated with the transfer of ownership of non-produced assets.
+Public Corporations: Remaining investment by public non-financial corporations included within business investment.
+ICT equipment and other machinery and equipment: Includes cultivated biological resources (AN.115) and weapons (AN.114)
+Dwellings: Includes new dwellings and improvements to dwellings.
+Other buildings and structures: Including costs associated with the transfer of ownership of buildings, dwellings and non-produced assets.
+"""
+
 # +
 
-# # +
+f1f2.columns
 
-# f1 = tidied_sheets[11]
+# +
 
-# try:
-#     f1 = f1.loc[f1['Percentage Change'].isna()] 
-# except:
-#     ind = 11 
+f1f2["Analysis"].unique()
 
-# f1['Capital Formation'].loc[f1['CDID'].isin(['L62R'])] = 'Public Corporations - Dwellings'
-# f1['Capital Formation'].loc[f1['CDID'].isin(['L62S'])] = 'Public Corporations - Costs of transfer of ownership of non-produced assests'
-# f1['Capital Formation'].loc[f1['CDID'].isin(['L62T'])] = 'Private Sector - Dwellings'
-# f1['Capital Formation'].loc[f1['CDID'].isin(['L62U'])] = 'Private Sector - Costs of transfer of ownership of non-produced assests'
+# +
 
-# f1['Analysed by'].loc[f1['CDID'].isin(['NPEK','RPZG'])] = 'Analysis by sector'
-
-# f1 = strip_superscripts(f1, 'Capital Formation')
-
-# f1['Economic Concept'] = 'current-price'
-
-# f1 = prefix_refperiod(f1, 'Period')
-
-# try:
-#     f1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-# except:
-#     ind = 11   
-
-# f1 = f1.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
-
-# f1 = convet_dimension_to_int(f1, 'Value')
-
-# f1['Capital Formation'] = f1['Capital Formation'].apply(pathify)
-# f1['Analysis'] = f1['Analysis'].apply(pathify)
-
-# f1cdids = f1['CDID'].unique()
-# f1.head(5)
-
-# # + endofcell="--"
-
-# f2 = tidied_sheets[12]
-
-# try:
-#     f2 = f2.loc[f2['Percentage Change'].isna()] 
-# except:
-#     ind = 12 
-
-# f2['Capital Formation'].loc[f2['CDID'].isin(['L634'])] = 'Public Corporations - Dwellings'
-# f2['Capital Formation'].loc[f2['CDID'].isin(['L635'])] = 'Public Corporations - Costs of transfer of ownership of non-produced assests'
-# f2['Capital Formation'].loc[f2['CDID'].isin(['L636'])] = 'Private Sector - Dwellings'
-# f2['Capital Formation'].loc[f2['CDID'].isin(['L637'])] = 'Private Sector - Costs of transfer of ownership of non-produced assests'
-
-# f2['Analysed by'].loc[f2['CDID'].isin(['NPEL','DLWF'])] = 'Analysis by sector'
-
-# f2 = strip_superscripts(f2, 'Capital Formation')
-
-# f2['Economic Concept'] = 'chained-volume-measure'
-
-# f2 = prefix_refperiod(f2, 'Period')
-
-# try:
-#     f2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-# except:
-#     ind = 12   
-
-# f2 = f2.rename(columns={'OBS':'Value', 'Analysed by':'Analysis'})
-# f2["Analysis"] = f2["Analysis"].loc[f2['Analysis'] == "analysis-by-sector-7"] = "analysis-by-sector"
-# f2 = convet_dimension_to_int(f2, 'Value')
-
-# f2['Capital Formation'] = f2['Capital Formation'].apply(pathify)
-# f2['Analysis'] = f2['Analysis'].apply(pathify)
-
-# f2cdids = f2['CDID'].unique()
-# f2.head(5)
-# # -
-
-# f1["Analysis"].unique()
-
-# f2["Analysis"].unique()
-
-# f1f2 = pd.concat([f1,f2])
-# #f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
-# f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
-
-# metadata.dataset.title = mainTitle + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)'
-# metadata.dataset.comment = maincomme + ' - Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2) - Seasonally Adjusted'
-# metadata.dataset.description = maindescr + """
-# Gross fixed capital formation by sector and type of asset at current prices and chained volume measures (F1, F2)
-# Data has been seasonally adjusted
-# Business Investment: Not including expenditure on dwellings, land and existing buildings and costs associated with the transfer of ownership of non-produced assets.
-# Public Corporations: Remaining investment by public non-financial corporations included within business investment.
-# ICT equipment and other machinery and equipment: Includes cultivated biological resources (AN.115) and weapons (AN.114)
-# Dwellings: Includes new dwellings and improvements to dwellings.
-# Other buildings and structures: Including costs associated with the transfer of ownership of buildings, dwellings and non-produced assets.
-# """
-# # --
-
-# # +
-
-# f1f2.columns
-
-# # +
-
-# f1f2["Analysis"].unique()
-
-# # +
-
-# # There are duplicates in this DataFrame.
-# duplicate_df_f1f2 = f1f2[f1f2.duplicated(['Value', 'CDID', 'Analysis', 'Period', 'Capital Formation','Economic Concept'], keep = False)]
-# # duplicate_df_f1f2.sort_values(by = ['Value']).to_csv("f1f2duplicates.csv")
-# # duplicate_df_f1f2
-# # -
-
-# f1f2.drop_duplicates(subset = f1f2.columns.difference(['Value']), inplace = True)
-
-# duplicate_df_f1f2 = f1f2[f1f2.duplicated(['Value', 'CDID', 'Analysis', 'Period', 'Capital Formation','Economic Concept'], keep = False)]
+# There are duplicates in this DataFrame.
+duplicate_df_f1f2 = f1f2[f1f2.duplicated(['Value', 'CDID', 'Analysis', 'Period', 'Capital Formation','Economic Concept'], keep = False)]
+# duplicate_df_f1f2.sort_values(by = ['Value']).to_csv("f1f2duplicates.csv")
 # duplicate_df_f1f2
+# -
 
-# f1f2.head(5)
+f1f2.drop_duplicates(subset = f1f2.columns.difference(['Value']), inplace = True)
 
-# f1f2.to_csv("gross_fixed_capitol-observations.csv", index = False)
-# catalog_metadata = metadata.as_csvqb_catalog_metadata()
-# catalog_metadata.to_json_file("gross_fixed_capitol-catalog-metadata.json")
+duplicate_df_f1f2 = f1f2[f1f2.duplicated(['Value', 'CDID', 'Analysis', 'Period', 'Capital Formation','Economic Concept'], keep = False)]
+duplicate_df_f1f2
+
+f1f2.head(5)
+
+f1f2.to_csv("gross_fixed_capitol-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file("gross_fixed_capitol-catalog-metadata.json")
 
 # # +
 
@@ -1301,6 +1285,4 @@ catalog_metadata.to_json_file("household_expenditure_indicators-catalog-metadata
 # #fldrpth = '/users/leigh/Development/family-trade/reference/codelists/'
 # #dm.search_for_codes_using_levenshtein_and_fuzzywuzzy(tidied_sheets[ind]['Sector'].unique(), fldrpth, 'Notation', 'sector', 3, 0.8)
 # #dm.search_codelists_for_codes(d1['Category of Income'].unique(), fldrpth, 'Notation', 'Category of Income')
-# -
-
-
+# %%
