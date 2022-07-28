@@ -391,68 +391,68 @@ for name, tab in tabs.items():
     else:
         continue
 
-# # Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
-# # Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
-# #
-# # ##### National Accounts aggregates 
-# #     tidied_sheets[0] (A1 AGGREGATES)
-# #     tidied_sheets[1] (A2 AGGREGATES)
-# #   
-# # ##### Output indicators
-# #     tidied_sheets[2] (B1 CVM OUTPUT)
-# #     tidied_sheets[3] (B2 CVM OUTPUT)
-# #     
-# # ##### Expenditure Indicators 
-# #     tidied_sheets[4] (C1 Expenditure)
-# #     tidied_sheets[5] (C2 Expenditure)
-# #    
-# # ##### Income indicators
-# #     tidied_sheets[6] (D Income)
-# #
-# # ##### Household Expenditure Indicators
-# #     tidied_sheets[7] (E1 Expenditure)
-# #     tidied_sheets[8] (E1 Expenditure)
-# #     tidied_sheets[9] (E1 Expenditure)
-# #     tidied_sheets[10](E1 Expenditure)
-# #
-# #
-# # ##### Gross Fixed Capitol 
-# #     tidied_sheets[11](F1 GFCF)
-# #     tidied_sheets[12](F1 GFCF)
-# #      
-# #      Note another dimension will need to be added during post processsing called something like 'Sector' which will either be: UK National or UK dommestic, depending on the value in Capital Formation dimension.
-# #
-# # ##### Inventories
-# #     tidied_sheets[13](G1 Inventories)
-# #     tidied_sheets[14](G1 Inventories)
-# #
-# #     
-# # ##### Trade 
-# #     tidied_sheets[15](H1 TRADE)
-# #     tidied_sheets[16](H2 TRADE)
-# #     
-# #     Note I will need to do a bit of wrangling to fix the flow dimension in post processing, this is due to some tables using a horrible centered headings for flow values. 
-# #     
-# # ##### Other 
-# #
-# #     The following tabs were not included when this was previously done, is this still the case ?
-# #     
-# #     
-# #      'L GVAbp',
-# #      'M Alignment adjustments',
-# #      'N Financial Year Variables',
-# #      'O Selected imp def',
-# #      'P GDP per head',
-# #      'R Quarterly Revisions',
-# #      'AA Annex A',
-# #      'AB Annex B',
-# #      'AC Annex C',
-# #      'AD Annex D'
-# #      'AE Annex E',
-# #      'AF Annex F',
-# #      'AG Annex G'
+# Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
+# Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
 
-# %%
+# ##### National Accounts aggregates 
+#     tidied_sheets[0] (A1 AGGREGATES)
+#     tidied_sheets[1] (A2 AGGREGATES)
+#   
+# ##### Output indicators
+#     tidied_sheets[2] (B1 CVM OUTPUT)
+#     tidied_sheets[3] (B2 CVM OUTPUT)
+#     
+# ##### Expenditure Indicators 
+#     tidied_sheets[4] (C1 Expenditure)
+#     tidied_sheets[5] (C2 Expenditure)
+#    
+# ##### Income indicators
+#     tidied_sheets[6] (D Income)
+#
+# ##### Household Expenditure Indicators
+#     tidied_sheets[7] (E1 Expenditure)
+#     tidied_sheets[8] (E1 Expenditure)
+#     tidied_sheets[9] (E1 Expenditure)
+#     tidied_sheets[10](E1 Expenditure)
+#
+#
+# ##### Gross Fixed Capitol 
+#     tidied_sheets[11](F1 GFCF)
+#     tidied_sheets[12](F1 GFCF)
+#      
+#      Note another dimension will need to be added during post processsing called something like 'Sector' which will either be: UK National or UK dommestic, depending on the value in Capital Formation dimension.
+#
+# ##### Inventories
+#     tidied_sheets[13](G1 Inventories)
+#     tidied_sheets[14](G1 Inventories)
+#
+#     
+# ##### Trade 
+#     tidied_sheets[15](H1 TRADE)
+#     tidied_sheets[16](H2 TRADE)
+#     
+#     Note I will need to do a bit of wrangling to fix the flow dimension in post processing, this is due to some tables using a horrible centered headings for flow values. 
+#     
+# ##### Other 
+#
+#     The following tabs were not included when this was previously done, is this still the case ?
+#     
+#     
+#      'L GVAbp',
+#      'M Alignment adjustments',
+#      'N Financial Year Variables',
+#      'O Selected imp def',
+#      'P GDP per head',
+#      'R Quarterly Revisions',
+#      'AA Annex A',
+#      'AB Annex B',
+#      'AC Annex C',
+#      'AD Annex D'
+#      'AE Annex E',
+#      'AF Annex F',
+#      'AG Annex G'
+
+
 import numpy as np
 
 def strip_superscripts(dataset, dimension):
@@ -731,63 +731,63 @@ c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('expenditure_indicators-catalog-metadata.json')
 
-# # + endofcell="--"
-# d1 = tidied_sheets[6]
 
-# try:
-#     d1 = d1.loc[d1['Percentage Change'].isna()] 
-# except:
-#     print("something went wrong") 
+d1 = tidied_sheets[6]
 
-# d1 = d1.loc[d1['CDID'] != 'YBHA'] # This is already in one of the other datasets
-# d1['Gross Domestic Product'].loc[d1['CDID'].isin(['CAER'])] = 'Gross operating surplus of corporations'
-# d1['Gross Domestic Product'].loc[d1['CDID'].isin(['CGBX','CGCB','CMVL','GIXQ'])] = 'Gross domestic product'
+try:
+    d1 = d1.loc[d1['Percentage Change'].isna()] 
+except:
+    print("something went wrong") 
 
-# d1 = strip_superscripts(d1, 'Category of Income')
+d1 = d1.loc[d1['CDID'] != 'YBHA'] # This is already in one of the other datasets
+d1['Gross Domestic Product'].loc[d1['CDID'].isin(['CAER'])] = 'Gross operating surplus of corporations'
+d1['Gross Domestic Product'].loc[d1['CDID'].isin(['CGBX','CGCB','CMVL','GIXQ'])] = 'Gross domestic product'
 
-# d1 = prefix_refperiod(d1, 'Period')
+d1 = strip_superscripts(d1, 'Category of Income')
 
-# try:
-#     d1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
-# except:
-#     print("something went wrong while droping")   
+d1 = prefix_refperiod(d1, 'Period')
 
-# d1['Gross Domestic Product'] = d1['Gross Domestic Product'].apply(pathify)
-# d1['Category of Income'] = d1['Category of Income'].apply(pathify)
+try:
+    d1.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
+except:
+    print("something went wrong while droping")   
 
-# d1 = d1.rename(columns={'OBS':'Value', 'Gross Domestic Product':'Economic Concept'})
+d1['Gross Domestic Product'] = d1['Gross Domestic Product'].apply(pathify)
+d1['Category of Income'] = d1['Category of Income'].apply(pathify)
 
-# d1 = convet_dimension_to_int(d1, 'Value')
+d1 = d1.rename(columns={'OBS':'Value', 'Gross Domestic Product':'Economic Concept'})
 
-# d1['Value'][d1['Value'].isna()] = ''
-# d1['Marker'] = ''
-# d1['Marker'][d1['Value'] == ''] = 'not-available'
+d1 = convet_dimension_to_int(d1, 'Value')
 
-# d1cdids = d1['CDID'].unique()
-# d1.head(5)
-# #d1['Gross Domestic Product'].unique()
-# # -
+d1['Value'][d1['Value'].isna()] = ''
+d1['Marker'] = ''
+d1['Marker'][d1['Value'] == ''] = 'not-available'
 
-# metadata.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
-# metadata.dataset.comment = maincomme + ' - Gross domestic product: by category of income at current prices (D) - Seasonally Adjusted'
-# metadata.dataset.description = maindescr + """
-# Data has been seasonally adjusted.
-# Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
-# Private. non-financial corporations: Quarterly alignment adjustment included in this series.
-# Gross operating surplus of corporations total includes the operating surplus of financial corporations, private non-financial corporations and public corporations.
-# Other income includes mixed income and the operating surplus of the non-corporate sector.
-# """
-# # --
+d1cdids = d1['CDID'].unique()
+d1.head(5)
+#d1['Gross Domestic Product'].unique()
+# -
 
-# # +
+metadata.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
+metadata.dataset.comment = maincomme + ' - Gross domestic product: by category of income at current prices (D) - Seasonally Adjusted'
+metadata.dataset.description = maindescr + """
+Data has been seasonally adjusted.
+Estimates are given to the nearest £ million but cannot be regarded as accurate to this degree.
+Private. non-financial corporations: Quarterly alignment adjustment included in this series.
+Gross operating surplus of corporations total includes the operating surplus of financial corporations, private non-financial corporations and public corporations.
+Other income includes mixed income and the operating surplus of the non-corporate sector.
+"""
+# --
 
-# d1.columns
+# +
 
-# # +
+d1.columns
 
-# d1.to_csv("income_indicators-observations.csv", index = False)
-# catalog_metadata = metadata.as_csvqb_catalog_metadata()
-# catalog_metadata.to_json_file('income_indicators-catalog-metadata.json')
+# +
+
+d1.to_csv("income_indicators-observations.csv", index = False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('income_indicators-catalog-metadata.json')
 
 # # +
 
