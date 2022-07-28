@@ -30,7 +30,7 @@
             },
             "Expenditure Category": {
                 "type": "dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/expenditure", 
+                "uri": "http://gss-data.org.uk/def/trade/property/dimension/expenditure-category", 
                 "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-expenditure/{+expenditure_category}"
             },
             "Economic Concept": {
