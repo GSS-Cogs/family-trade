@@ -32,8 +32,8 @@
                     }, 
                     "Sector": {
                         "type": "dimension",
-                        "uri": "http://gss-data.org.uk/def/trade/property/dimension/qna-sector", 
-                        "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industrial-sector/{+sector}"
+                        "uri": "http://gss-data.org.uk/def/trade/property/dimension/industry", 
+                        "value": "http://gss-data.org.uk/def/trade/concept/national-accounts-industry/{+sector}"
                     }, 
                     "Level of inventories held at end-December 2019": {
                         "type": "attribute"
