@@ -1,7 +1,5 @@
 # +
 from gssutils import *
-import json
-import copy 
 import numpy as np
 
 df = pd.DataFrame()
@@ -175,7 +173,9 @@ def with_flow_overrides(flow_dimension):
                 flow_dimension.AddCellValueOverride(cell, cell_checked[0].value)  
     return flow_dimension
 
-# +
+
+# -
+
 for name, tab in tabs.items():
     #shared dimensions across all tabs
     seasonal_adjustment = tab.excel_ref('A5').expand(DOWN).filter(contains_string('Seasonally'))
@@ -390,68 +390,69 @@ for name, tab in tabs.items():
     else:
         continue
 
-# # Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
-# # Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
-# #
-# # ##### National Accounts aggregates 
-# #     tidied_sheets[0] (A1 AGGREGATES)
-# #     tidied_sheets[1] (A2 AGGREGATES)
-# #   
-# # ##### Output indicators
-# #     tidied_sheets[2] (B1 CVM OUTPUT)
-# #     tidied_sheets[3] (B2 CVM OUTPUT)
-# #     
-# # ##### Expenditure Indicators 
-# #     tidied_sheets[4] (C1 Expenditure)
-# #     tidied_sheets[5] (C2 Expenditure)
-# #    
-# # ##### Income indicators
-# #     tidied_sheets[6] (D Income)
-# #
-# # ##### Household Expenditure Indicators
-# #     tidied_sheets[7] (E1 Expenditure)
-# #     tidied_sheets[8] (E1 Expenditure)
-# #     tidied_sheets[9] (E1 Expenditure)
-# #     tidied_sheets[10](E1 Expenditure)
-# #
-# #
-# # ##### Gross Fixed Capitol 
-# #     tidied_sheets[11](F1 GFCF)
-# #     tidied_sheets[12](F1 GFCF)
-# #      
-# #      Note another dimension will need to be added during post processsing called something like 'Sector' which will either be: UK National or UK dommestic, depending on the value in Capital Formation dimension.
-# #
-# # ##### Inventories
-# #     tidied_sheets[13](G1 Inventories)
-# #     tidied_sheets[14](G1 Inventories)
-# #
-# #     
-# # ##### Trade 
-# #     tidied_sheets[15](H1 TRADE)
-# #     tidied_sheets[16](H2 TRADE)
-# #     
-# #     Note I will need to do a bit of wrangling to fix the flow dimension in post processing, this is due to some tables using a horrible centered headings for flow values. 
-# #     
-# # ##### Other 
-# #
-# #     The following tabs were not included when this was previously done, is this still the case ?
-# #     
-# #     
-# #      'L GVAbp',
-# #      'M Alignment adjustments',
-# #      'N Financial Year Variables',
-# #      'O Selected imp def',
-# #      'P GDP per head',
-# #      'R Quarterly Revisions',
-# #      'AA Annex A',
-# #      'AB Annex B',
-# #      'AC Annex C',
-# #      'AD Annex D'
-# #      'AE Annex E',
-# #      'AF Annex F',
-# #      'AG Annex G'
+#
+# # # Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
+# # # Things to note, I have done no post processing atm due to this being a little annoying and want clarity from a DM first. 
+# # #
+# # # ##### National Accounts aggregates 
+# # #     tidied_sheets[0] (A1 AGGREGATES)
+# # #     tidied_sheets[1] (A2 AGGREGATES)
+# # #   
+# # # ##### Output indicators
+# # #     tidied_sheets[2] (B1 CVM OUTPUT)
+# # #     tidied_sheets[3] (B2 CVM OUTPUT)
+# # #     
+# # # ##### Expenditure Indicators 
+# # #     tidied_sheets[4] (C1 Expenditure)
+# # #     tidied_sheets[5] (C2 Expenditure)
+# # #    
+# # # ##### Income indicators
+# # #     tidied_sheets[6] (D Income)
+# # #
+# # # ##### Household Expenditure Indicators
+# # #     tidied_sheets[7] (E1 Expenditure)
+# # #     tidied_sheets[8] (E1 Expenditure)
+# # #     tidied_sheets[9] (E1 Expenditure)
+# # #     tidied_sheets[10](E1 Expenditure)
+# # #
+# # #
+# # # ##### Gross Fixed Capitol 
+# # #     tidied_sheets[11](F1 GFCF)
+# # #     tidied_sheets[12](F1 GFCF)
+# # #      
+# # #      Note another dimension will need to be added during post processsing called something like 'Sector' which will either be: UK National or UK dommestic, depending on the value in Capital Formation dimension.
+# # #
+# # # ##### Inventories
+# # #     tidied_sheets[13](G1 Inventories)
+# # #     tidied_sheets[14](G1 Inventories)
+# # #
+# # #     
+# # # ##### Trade 
+# # #     tidied_sheets[15](H1 TRADE)
+# # #     tidied_sheets[16](H2 TRADE)
+# # #     
+# # #     Note I will need to do a bit of wrangling to fix the flow dimension in post processing, this is due to some tables using a horrible centered headings for flow values. 
+# # #     
+# # # ##### Other 
+# # #
+# # #     The following tabs were not included when this was previously done, is this still the case ?
+# # #     
+# # #     
+# # #      'L GVAbp',
+# # #      'M Alignment adjustments',
+# # #      'N Financial Year Variables',
+# # #      'O Selected imp def',
+# # #      'P GDP per head',
+# # #      'R Quarterly Revisions',
+# # #      'AA Annex A',
+# # #      'AB Annex B',
+# # #      'AC Annex C',
+# # #      'AD Annex D'
+# # #      'AE Annex E',
+# # #      'AF Annex F',
+# # #      'AG Annex G'
 
-# + endofcell="--"
+# +
 import numpy as np
 
 def strip_superscripts(dataset, dimension):
@@ -468,7 +469,6 @@ def strip_superscripts(dataset, dimension):
         return dataset
 
 
-# # +
 
 def prefix_refperiod(dataset, dimension):
     try:
@@ -483,7 +483,6 @@ def prefix_refperiod(dataset, dimension):
         return dataset
 
 
-# -
 
 def convet_dimension_to_int(dataset, dimension):
     try:
@@ -496,12 +495,9 @@ def convet_dimension_to_int(dataset, dimension):
     except Exception as e:
         print('convet_dimension_to_int: ' + str(e))
         return dataset
-# --
 
 
 # +
-a2 = tidied_sheets[1]
-
 a2 = tidied_sheets[1]
 # Only use the main value data for now
 try:
@@ -528,18 +524,11 @@ a2 = convet_dimension_to_int(a2, 'Value')
 try:
     a2.drop(['Seasonal Adjustment','Percentage Change','measure'], axis=1, inplace=True)
 except:
-    # ind = ind
     print("something went wrong")
 
 a2 = a2.rename(columns={'Indices':'Estimate Type', 'Gross':'Aggregate'})
 
-# # +
-# Note - This change needs to be finalised
-
-# a2["Estimate Type"] = a2["Estimate Type"].replace({"Chained Volume Measure (Reference year 2019)" : "chained-volume-measure"})
-# a2["Estimate Type"].unique()
-
-# + endofcell="--"
+# +
 mainTitle = metadata.dataset.title
 maincomme = metadata.dataset.comment
 maindescr = metadata.dataset.description
@@ -555,14 +544,9 @@ Gross value added excluding oil & gas: Calculated by using gross value added at 
 """
 # -
 
-a2.columns
-
-a2["Estimate Type"].unique()
-
 a2.to_csv("national_account_aggregates-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('national_account_aggregates-catalog-metadata.json')
-# --
 
 # +
 b1 = tidied_sheets[2]
@@ -591,7 +575,7 @@ except:
 b1['Sector'] = b1['Sector'].apply(pathify)
 b1['Industry'] = b1['Industry'].apply(pathify)
 
- # b1 = b1.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
+b1 = b1.rename(columns={'OBS':'Value'})
 
 b1 = convet_dimension_to_int(b1, 'Value')
 
@@ -613,21 +597,21 @@ except:
 
 b2['Sector'] = b2['Sector'].apply(pathify)
 b2['Industry'] = b2['Industry'].apply(pathify)
-# b2 = b2.rename(columns={'OBS':'Value', '2018 Weights':'Weights 2018'})
+b2 = b2.rename(columns={'OBS':'Value'})
 b2 = convet_dimension_to_int(b2, 'Value')
 b1b2 = pd.concat([b1, b2])
 b1b2 = b1b2.rename(columns={'OBS':'Value'})
 b1b2 = b1b2[['Period','CDID','2019 Weights','Sector','Industry','Value']]
-# # There are duplicates in this DataFrame.
+# -
+
+# There are duplicates in this DataFrame.
 duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
-# # duplicate_df.sort_values(by = ['Value', '2019 Weights', 'Period', 'CDID']).to_csv("b1b2duplicates.csv")
-# # duplicate_df
-# # b1b2 = b1b2.drop_duplicates()
+# duplicate_df.sort_values(by = ['Value', '2019 Weights', 'Period', 'CDID']).to_csv("b1b2duplicates.csv")
+# duplicate_df
+
+# b1b2 = b1b2.drop_duplicates()
 b1b2.drop_duplicates(subset = b1b2.columns.difference(['Value']), inplace = True)
-# # There are duplicates in this DataFrame.
-# duplicate_df = b1b2[b1b2.duplicated(['Period', 'CDID', '2019 Weights', 'Sector', 'Industry', 'Value'], keep = False)]
-# # duplicate_df.sort_values(by = ['Value', '2019 Weights', 'Period', 'CDID']).to_csv("b1b2duplicates.csv")
-# # duplicate_df
+
 metadata.dataset.title = mainTitle + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2)'
 metadata.dataset.comment = maincomme + ' - Gross value added chained volume measures at basic prices, by category of output (B1 & B2) - Seasonally Adjusted'
 metadata.dataset.description = maindescr + """
@@ -638,6 +622,7 @@ Components of outputs are valued at basic prices, which excludes taxes and inclu
 Weights may not sum to totals due to rounding.
 This is a balanced index of UK GVA, taking into account data from the income and expenditure approaches. Thus it will not necessarily be the weighted sum of the industrial indices.
 """
+
 b1b2.to_csv("output_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('output_indicators-catalog-metadata.json')
@@ -674,9 +659,7 @@ c1 = convet_dimension_to_int(c1, 'Value')
 
 c1['Estimate Type'] = 'current-price'
 # c1.head(5)
-
-# # + endofcell="--"
-
+# +
 c2 = tidied_sheets[5]
 
 try:
@@ -707,11 +690,9 @@ c2 = convet_dimension_to_int(c2, 'Value')
     
 c2['Estimate Type'] = 'chained-volume-measure'
 #c2.head(5)
-# # -
 
 c1c2 = pd.concat([c1, c2])
-# c1c2cdids = c1c2['CDID'].unique()
-# # del c1, c2
+# -
 
 metadata.dataset.title = mainTitle + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2)'
 metadata.dataset.comment = maincomme + ' - Gross domestic product: expenditure at current prices and chained volume measures (C1 & C2) - Seasonally Adjusted'
@@ -726,15 +707,12 @@ Acquisitions less disposals of valuables can be a volatile series, due to the in
 Trade balance is calculated by using exports of goods and services minus imports of goods and services
 Non-profit institutions: There is a small difference between the gross operating surplus of the NPISH sector in the SFA release, compared with the consumption of fixed capital for the NPISH sector published in the GDP release.  This affects 2019Q1 onwards. The latest figures for the affected series can be found in the SFA release.
 """
-# # --
 
 c1c2.to_csv("expenditure_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('expenditure_indicators-catalog-metadata.json')
 
-# + endofcell="---"
-
-
+# +
 d1 = tidied_sheets[6]
 
 try:
@@ -766,9 +744,8 @@ d1['Value'][d1['Value'].isna()] = ''
 d1['Marker'] = ''
 d1['Marker'][d1['Value'] == ''] = 'not-available'
 
-d1cdids = d1['CDID'].unique()
+# d1cdids = d1['CDID'].unique()
 d1.head(5)
-#d1['Gross Domestic Product'].unique()
 # -
 
 metadata.dataset.title = mainTitle + ' - Gross domestic product: by category of income at current prices (D)'
@@ -780,27 +757,12 @@ Private. non-financial corporations: Quarterly alignment adjustment included in 
 Gross operating surplus of corporations total includes the operating surplus of financial corporations, private non-financial corporations and public corporations.
 Other income includes mixed income and the operating surplus of the non-corporate sector.
 """
-# --
-
-
-d1.columns
-
-
-# ---
-
-d1["Category of Income"].unique()
-
-# +
 
 d1.to_csv("income_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('income_indicators-catalog-metadata.json')
 
-
 # +
-
-# # +
-
 e1 = tidied_sheets[7]
 
 e1.columns
@@ -837,7 +799,7 @@ e1cdids = e1['CDID'].unique()
 e1[e1['Expenditure Category'] == 'uk-national-domestic'].head(50)
 e1[e1['CDID'] == 'ABJQ'].head(50)
 
-# # +
+# +
 e2 = tidied_sheets[8]
 
 try:
@@ -869,7 +831,7 @@ e2['Expenditure Category'] = 'uk-domestic'
 e2cdids = e2['CDID'].unique()
 e2.head(5)
 
-
+# +
 e3 = tidied_sheets[9]
 
 try:
@@ -900,7 +862,7 @@ e3 = convet_dimension_to_int(e3, 'Value')
 e3cdids = e3['CDID'].unique()
 e3.head(50)
 
-
+# +
 e4 = tidied_sheets[10]
 
 try:
@@ -931,13 +893,10 @@ e4['Expenditure Category'] = 'uk-domestic'
 
 e4cdids = e4['CDID'].unique()
 e4.head(5)
-
-
+# -
 
 e1e2e3e4 = pd.concat([e1, e2, e3, e4])
 e1e2e3e4.head(10)
-
-
 
 metadata.dataset.title = mainTitle + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4)'
 metadata.dataset.comment = maincomme + ' - Household final consumption by purpose and goods and services at Current Prices & Chained Volume Measures (E1, E2, E3, E4) - Seasonally Adjusted'
@@ -949,18 +908,6 @@ UK Domestic: Final consumption expenditure in the UK by UK & foreign households
 UK National: Final consumption by UK Households in the UK & abroad.
 UK National & Domestic: Final consumption expenditure in the UK by UK & foreign households and final consumption by UK Households in the UK & abroad.
 """
-
-
-
-e1e2e3e4.columns
-
-
-
-e1e2e3e4["Expenditure Category"].unique()
-
-
-
-# -
 
 e1e2e3e4.to_csv("household_expenditure_indicators-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -1002,7 +949,7 @@ f1['Analysis'] = f1['Analysis'].apply(pathify)
 f1cdids = f1['CDID'].unique()
 f1.head(5)
 
-# + endofcell="--"
+# +
 f2 = tidied_sheets[12]
 
 try:
@@ -1037,12 +984,8 @@ f2['Analysis'] = f2['Analysis'].apply(pathify)
 
 f2cdids = f2['CDID'].unique()
 f2.head(5)
-# -
 
-f1["Analysis"].unique()
-
-f2["Analysis"].unique()
-
+# +
 f1f2 = pd.concat([f1,f2])
 #f1f2['Analysis'] = f1f2['Analysis'].str.replace('analysis-by-','')
 f1f2cdids = pd.concat([pd.DataFrame(f1cdids),pd.DataFrame(f2cdids)])
@@ -1058,18 +1001,7 @@ ICT equipment and other machinery and equipment: Includes cultivated biological 
 Dwellings: Includes new dwellings and improvements to dwellings.
 Other buildings and structures: Including costs associated with the transfer of ownership of buildings, dwellings and non-produced assets.
 """
-
-
-# --
-
-# +
-
-f1f2.columns
-
-
 # -
-
-f1f2["Analysis"].unique()
 
 # There are duplicates in this DataFrame.
 duplicate_df_f1f2 = f1f2[f1f2.duplicated(['Value', 'CDID', 'Analysis', 'Period', 'Capital Formation','Economic Concept'], keep = False)]
@@ -1122,7 +1054,7 @@ g1['Industry'] = g1['Industry'].apply(pathify)
 g1cdids = g1['CDID'].unique()
 g1.head(5)
 
-
+# +
 g2 = tidied_sheets[14]
 
 try:
@@ -1156,10 +1088,10 @@ g2['Industry'] = g2['Industry'].apply(pathify)
 
 g2cdids = g2['CDID'].unique()
 g2.head(5)
+# -
 
 g1g2 = pd.concat([g1,g2])
 del g1g2['Industry']
-
 
 metadata.dataset.title = mainTitle + ' - Change in inventories at current prices and chained volume measures (G1, G2)'
 metadata.dataset.comment = maincomme + ' - Change in inventories at current prices and chained volume measures (G1, G2) - Seasonally Adjusted'
@@ -1172,21 +1104,11 @@ Total change in inventories: Quarterly alignment adjustment included in this ser
 Please note, inventories estimates for 2020 Q4 at this stage face additional uncertainty due to the lower data content. 
 """
 
-g1g2.columns
-
-g1g2.head(5)
-# -
-
-g1g2.columns
-
-g1g2["Sector"].unique()
-
 g1g2.to_csv("inventories-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file("inventories-catalog-metadata.json")
 
 # +
-
 h1 = tidied_sheets[15]
 
 try:
@@ -1218,7 +1140,7 @@ h1['Flow'] = h1['Flow'].apply(pathify)
 h1cdids = h1['CDID'].unique()
 h1.head(5)
 
-
+# +
 h2 = tidied_sheets[16]
 
 try:
@@ -1248,16 +1170,11 @@ h2['Flow'] = h2['Flow'].apply(pathify)
 
 h2cdids = h2['CDID'].unique()
 h2.head(5)
-
+# -
 
 h1h2 = pd.concat([h1,h2])
 h1h2cdids = pd.concat([pd.DataFrame(h1cdids),pd.DataFrame(h2cdids)])
 h1h2['Goods or Services'][h1h2['Goods or Services'] == 'total-1'] = 'total'
-
-#h1h2['Goods or Services'].unique()
-
-h1h2.columns
-
 
 metadata.dataset.title = mainTitle + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2)'
 metadata.dataset.comment = maincomme + ' - Exports and Imports of goods and services at current prices and chained volume measures (H1, H2) - Seasonally Adjusted'
@@ -1266,7 +1183,6 @@ Exports and Imports of goods and services at current prices and chained volume m
 Data has been seasonally adjusted
 Trade balance is calculated by using exports of goods and services minus imports of goods and services
 """
-# -
 
 h1h2.to_csv("trade-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
@@ -1293,6 +1209,3 @@ catalog_metadata.to_json_file("trade-catalog-metadata.json")
 # #fldrpth = '/users/leigh/Development/family-trade/reference/codelists/'
 # #dm.search_for_codes_using_levenshtein_and_fuzzywuzzy(tidied_sheets[ind]['Sector'].unique(), fldrpth, 'Notation', 'sector', 3, 0.8)
 # #dm.search_codelists_for_codes(d1['Category of Income'].unique(), fldrpth, 'Notation', 'Category of Income')
-# -
-
-
