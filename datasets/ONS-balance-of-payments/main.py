@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
-# +
+# %%
 from gssutils import *
 import json
 import numpy as np
 
-
+# %%
 # TODO could ask santhosh if it's okay not to have a datamarker column. there was one coming back when i had duplicates now there's not. 
 # TODO table [current account, transactions with EU and non EU countries] has X values which i need to find the explanation for and input into DataMArker column in post processing
 # TODO sort out the weird symbol before the poung sign in the currency column
@@ -15,15 +15,15 @@ import numpy as np
 #                        else "gbp-billion" if x['Measure Type'] == 'international-investment-position' else x['Unit'], axis = 1)
 # TODO should i bother with the R tables as they're just all 0 values - and this code is big as it is?
 # TODO should understand this code - "catalog_metadata = metadata.as_csvqb_catalog_metadata()"" - probably no need to keep repeating for each cube
-
+# %%
 # variables
 info_json_file = 'info.json' # name of info json file
 metadata = Scraper(seed = info_json_file) # get first landing page details
 metadata # display(metadata) #  to see exactly the data we are loading
 
-
+# %%
 metadata
-
+# %%
 bop_services = {
         "Total":"0",
         "Manufacturing and maintenance services":"1+2",
@@ -40,7 +40,7 @@ bop_services = {
 }
 
 
-# +
+# %%
 # Reusable Functions
 class is_one_of(object):
     def __init__(self, allowed):
@@ -70,11 +70,11 @@ def date_time(date: str) -> str:
         return "Date Formatting Error Unknown"
 
 
-# -
+# %%
 distribution = metadata.distribution(latest = True)
 # distribution
 
-# +
+# %%
 # convert source data to databaker object
 tabs = distribution.as_databaker()
 
@@ -88,7 +88,7 @@ tabs = {tab.name: tab for tab in tabs}
 datasetTitle = distribution.title
 
 
-# +
+# %%
 # identifying tabs for for loop. Naming them so i know which tab the for loop is working on.
 summary_of_balance_of_payments = "Table_A"
 current_account ="Table_B"
@@ -109,7 +109,7 @@ international_investment_position = "Table_K"
 #for name,tab in tabs.items():
 #    print(name)
 
-# +
+# %%
 tidied_sheets = [] # reset this for each cube
 
 # [summary_of_balance_of_payments]
@@ -118,7 +118,7 @@ for name,tab in tabs.items():
         # my thinking is separate out the differnt tables on each tab by identifying the last one, then the second one but remove the last, then the first one and remove the last two.
 
         bop_tab = 'Summary of Balance of Payments'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table A.1, Current Account, seasonally adjusted (£ million)")
@@ -222,6 +222,7 @@ for name,tab in tabs.items():
     else:
         continue
 
+# %%
 # convert the separate tables into one dataframe
 df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
@@ -231,25 +232,30 @@ df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
 # convert blank observations to zeros and convert to int type
-df['OBS'].loc[(df['OBS'] == '')] = '0'
+#df['OBS'].loc[(df['OBS'] == '')] = '0'
 df['OBS'] = df['OBS'].astype(int)
+df['Measure Type'] = 'net-transactions'
+df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
+df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
+df
 
+#%% 
 #reorder columns
-df = df[['BoP Section','Table Name','Seasonal Adjustment','BOP Service','CDID','Period','Value','Currency']]
+df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
-
+# %%
 df.to_csv('summary_of_balance_of_payments-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() # TODO should understand this, probably no need to keep repeating for each cube
 catalog_metadata.to_json_file('summary_of_balance_of_payments-catalog-metadata.json')
 
+#notes for cube 1 
+# - remove BoP Section dimension. 
+#Change Table Name to Account Type
 
-
-# -
-
-
+# moving onto cube 2. 
 
 # +
 tidied_sheets = [] # think i want to reset this each time
@@ -588,7 +594,7 @@ catalog_metadata.to_json_file('current_account_excluding_precious_metals-catalog
 
 
 
-# +
+# %%
 tidied_sheets = [] # think i want to reset this each time
 
 # [current account, transactions with EU and non EU countries]
@@ -777,6 +783,7 @@ for name,tab in tabs.items():
         continue
 
 
+# %%
 # convert the separate tables into one dataframe
 df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
@@ -789,17 +796,23 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'].loc[(df['OBS'] == '')] = '0'
 df['OBS'] = df['OBS'].astype(int)
 
+# %%
 #rename columns
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
+df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
+
+# %%
 
 #reorder columns
-df = df[['BoP Section','Table Name','Seasonal Adjustment','BOP Service','CDID','Period','Value','Currency']]
+df = df[['Period','BoP Section','Table Name','Seasonal Adjustment','BOP Service','CDID','Currency','Value', 'Marker']]
 
 
+# %%
 df.to_csv('current_account_transaction_with_the_eu_and_non_eu_countries-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('current_account_transaction_with_the_eu_and_non_eu_countries-catalog-metadata.json')
 
+
+# %%
 
 
 
