@@ -5,7 +5,7 @@ from gssutils import *
 import json
 import numpy as np
 
-# %%
+# %% 
 # TODO i've put net-transactions as default for measure type column since table A was. find out what the others should be. in original the DE put the BoP topics (e..g current account, financial account) as measure type
 # TODO sort out the weird symbol before the poung sign in the unity column
 # TODO think i need to replace currency value with a pathify version e.g. "gbp-million". Ask santhosh if i should do this change pre or post processing
