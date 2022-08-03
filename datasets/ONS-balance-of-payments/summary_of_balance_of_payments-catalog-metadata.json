@@ -1,0 +1,26 @@
+{
+    "title": "Balance of payments",
+    "identifier": null,
+    "summary": "Quarterly summary of balance of payments accounts including the current account, capital transfers, transactions, and levels of UK external assets and liabilities.",
+    "description": "Quarterly summary of balance of payments accounts including the current account, capital transfers, transactions, and levels of UK external assets and liabilities.",
+    "creator_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "publisher_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "landing_page_uris": [
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/balanceofpaymentsstatisticalbulletintables"
+    ],
+    "theme_uris": [
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments"
+    ],
+    "keywords": [
+        "monetary",
+        "foreign",
+        "rest of the world",
+        "BoP",
+        "economy"
+    ],
+    "dataset_issued": "2022-06-30",
+    "dataset_modified": "2022-08-03T15:18:40.073193+00:00",
+    "license_uri": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "public_contact_point_uri": "mailto:bop@ons.gov.uk",
+    "uri_safe_identifier_override": null
+}
