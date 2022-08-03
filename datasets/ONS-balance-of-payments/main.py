@@ -6,9 +6,8 @@ import json
 import numpy as np
 
 # %%
-# TODO could ask santhosh if it's okay not to have a datamarker column. there was one coming back when i had duplicates now there's not. 
-# TODO table [current account, transactions with EU and non EU countries] has X values which i need to find the explanation for and input into DataMArker column in post processing
-# TODO sort out the weird symbol before the poung sign in the currency column
+# TODO i've put net-transactions as default for measure type column since table A was. find out what the others should be. in original the DE put the BoP topics (e..g current account, financial account) as measure type
+# TODO sort out the weird symbol before the poung sign in the unity column
 # TODO think i need to replace currency value with a pathify version e.g. "gbp-million". Ask santhosh if i should do this change pre or post processing
 ## add unit column and check with santhosh monday how to add values in there
 #df["Unit"] = df.apply(lambda x: "gbp-billion" if x['Measure Type'] == 'summary-of-international-investment-position-financial-account-and-investment-income' 
@@ -259,7 +258,7 @@ catalog_metadata.to_json_file('summary_of_balance_of_payments-catalog-metadata.j
 
 # moving onto cube 2. 
 
-# +
+# %%
 tidied_sheets = [] # think i want to reset this each time
 
 # [current account, seasonally adjusted]
