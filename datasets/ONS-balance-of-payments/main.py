@@ -251,6 +251,8 @@ df.to_csv('summary_of_balance_of_payments-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() # TODO should understand this, probably no need to keep repeating for each cube
 catalog_metadata.to_json_file('summary_of_balance_of_payments-catalog-metadata.json')
 
+
+
 #notes for cube 1 
 # - remove BoP Section dimension. 
 #Change Table Name to Account Type
@@ -406,14 +408,19 @@ df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
 # convert blank observations to zeros and convert to int type
-df['OBS'].loc[(df['OBS'] == '')] = '0'
+#df['OBS'].loc[(df['OBS'] == '')] = '0'
 df['OBS'] = df['OBS'].astype(int)
+df['Measure Type'] = 'net-transactions'
+df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
+df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
+df
 
+#%% 
 #reorder columns
-df = df[['BoP Section','Table Name','Seasonal Adjustment','BOP Service','CDID','Period','Value','Currency']]
+df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
 
 df.to_csv('current_account-observations.csv', index=False)
@@ -574,14 +581,19 @@ df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
 # convert blank observations to zeros and convert to int type
-df['OBS'].loc[(df['OBS'] == '')] = '0'
+#df['OBS'].loc[(df['OBS'] == '')] = '0'
 df['OBS'] = df['OBS'].astype(int)
+df['Measure Type'] = 'net-transactions'
+df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
+df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
+df
 
+#%% 
 #reorder columns
-df = df[['BoP Section','Table Name','Seasonal Adjustment','BOP Service','CDID','Period','Value','Currency']]
+df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
 
 df.to_csv('current_account_excluding_precious_metals-observations.csv', index=False)
@@ -793,17 +805,19 @@ df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
 # convert blank observations to zeros and convert to int type
-df['OBS'].loc[(df['OBS'] == '')] = '0'
+#df['OBS'].loc[(df['OBS'] == '')] = '0'
 df['OBS'] = df['OBS'].astype(int)
+df['Measure Type'] = 'net-transactions'
+df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].apply(pathify)
 
-# %%
 #rename columns
-df.rename(columns={'OBS' : 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
+df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit','DATAMARKER' : 'Marker'}, inplace=True)
+df
 
-# %%
-
+#%% 
 #reorder columns
-df = df[['Period','BoP Section','Table Name','Seasonal Adjustment','BOP Service','CDID','Currency','Value', 'Marker']]
+df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Marker','Measure Type']]
 
 
 # %%
