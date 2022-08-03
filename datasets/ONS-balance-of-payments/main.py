@@ -1182,14 +1182,19 @@ df = pd.concat(tidied_sheets_iip, sort = True, ignore_index=True).fillna('')
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
 # convert blank observations to zeros and convert to int type
-df['OBS'].loc[(df['OBS'] == '')] = '0'
+#df['OBS'].loc[(df['OBS'] == '')] = '0'
 df['OBS'] = df['OBS'].astype(int)
+df['Measure Type'] = 'net-transactions'
+df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
+df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
+df
 
+#%% 
 #reorder columns
-df = df[['BoP Section','Table Name','Seasonal Adjustment','BOP Service','CDID','Period','Value','Currency']]
+df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
 
 df.to_csv('summary_of_IIP_financial_account_investment_income-observations.csv', index=False)
@@ -1320,14 +1325,19 @@ df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
 # convert blank observations to zeros and convert to int type
-df['OBS'].loc[(df['OBS'] == '')] = '0'
+#df['OBS'].loc[(df['OBS'] == '')] = '0'
 df['OBS'] = df['OBS'].astype(int)
+df['Measure Type'] = 'net-transactions'
+df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
-df.rename(columns={'OBS' : 'Value'}, inplace=True)
+df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
+df
 
+#%% 
 #reorder columns
-df = df[['BoP Section','Table Name','Seasonal Adjustment','BOP Service','CDID','Period','Value','Currency']]
+df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
 
 df.to_csv('goods-observations.csv', index=False)
