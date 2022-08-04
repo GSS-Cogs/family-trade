@@ -38,7 +38,7 @@
             "Account Type" : {
                 "type" : "dimension"
             },
-            "BOP Services": {
+            "BOP Service": {
                 "type": "dimension",
                 "new": {
                     "codelist": "./codelists/bop-services.csv-metadata.json"
