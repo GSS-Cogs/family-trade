@@ -18,10 +18,9 @@ import numpy as np
 # variables
 info_json_file = 'info.json' # name of info json file
 metadata = Scraper(seed = info_json_file) # get first landing page details
-metadata # display(metadata) #  to see exactly the data we are loading
 
 # %%
-metadata
+metadata # display(metadata) #  to see exactly the data we are loading
 # %%
 bop_services = {
         "Total":"0",
@@ -244,6 +243,7 @@ df
 #%% 
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
+
 
 # %%
 df.to_csv('summary_of_balance_of_payments-observations.csv', index=False)

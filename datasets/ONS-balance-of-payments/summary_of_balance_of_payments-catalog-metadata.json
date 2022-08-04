@@ -13,13 +13,13 @@
     ],
     "keywords": [
         "monetary",
-        "foreign",
-        "rest of the world",
+        "economy",
         "BoP",
-        "economy"
+        "rest of the world",
+        "foreign"
     ],
     "dataset_issued": "2022-06-30",
-    "dataset_modified": "2022-08-03T15:18:40.073193+00:00",
+    "dataset_modified": "2022-08-04T13:53:50.168359+00:00",
     "license_uri": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
     "public_contact_point_uri": "mailto:bop@ons.gov.uk",
     "uri_safe_identifier_override": null
