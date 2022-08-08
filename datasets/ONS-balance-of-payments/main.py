@@ -6,6 +6,7 @@ import json
 import numpy as np
 
 # %% 
+# TODO not allowed to replace blanks with zeros but for current account transaction getting error 'ValueError: invalid literal for int() with base 10: ''
 # TODO once I've checked all the builds work i need to alter each title and whatnot for each info.json
 # TODO i've put net-transactions as default for measure type column since table A was. find out what the others should be. in original the DE put the BoP topics (e..g current account, financial account) as measure type
 # TODO sort out the weird symbol before the poung sign in the unity column
@@ -108,9 +109,13 @@ international_investment_position = "Table_K"
 #for name,tab in tabs.items():
 #    print(name)
 
-'''
+
 
 # %%
+
+'''
+
+
 tidied_sheets = [] # reset this for each cube
 
 # [summary_of_balance_of_payments]
@@ -602,7 +607,7 @@ df.to_csv('current_account_exc_precious_metals-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metadata.json')
 
-#'''
+'''
 
 # -
 
@@ -802,16 +807,18 @@ for name,tab in tabs.items():
 df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
 ## [Postrocessing]
-
+# %%
 # change period values to ONS standard
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
 # convert blank observations to zeros and convert to int type
-#df['OBS'].loc[(df['OBS'] == '')] = '0'
-df['OBS'] = df['OBS'].astype(int)
+df['OBS'].loc[(df['OBS'] == '')] = None
+#df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
+# replace data marker values
+df['DATAMARKER'].loc[(df['DATAMARKER'] == 'x')] ="unavailable data" # check with Shannon if I should do this replacement. it described x like this in the source excel doc
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit','DATAMARKER' : 'Marker'}, inplace=True)
@@ -823,9 +830,9 @@ df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Val
 
 
 # %%
-df.to_csv('current_account_transaction_with_the_eu_and_non_eu_countries-observations.csv', index=False)
+df.to_csv('current_account_transactions_with_the_eu_and_non_eu_countries-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
-catalog_metadata.to_json_file('current_account_transaction_with_the_eu_and_non_eu_countries-catalog-metadata.json')
+catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_eu_countries-catalog-metadata.json')
 
 
 # %%
