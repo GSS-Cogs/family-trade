@@ -271,7 +271,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Current Acount'
         seasonal_adjustment = 'SA'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table B.1, Current Account Credits (£ million)")
@@ -446,7 +446,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Current Acount Exc Precious Metals'
         seasonal_adjustment = 'SA'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table BX.1, Current Account Credits, excluding precious metals (£ million)")
@@ -618,7 +618,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Current Acount Trans with EU and Non-EU'
         seasonal_adjustment = 'SA'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table C.1, Transactions with the European Union, Credits [note 1] [note 2] [note 3] [note 4] [note 5] (£ million)")
@@ -1214,7 +1214,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Trade in Goods'
         seasonal_adjustment = 'SA'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table E.1, Exports of goods (£ million)")
@@ -1359,7 +1359,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Trade in Services'
         seasonal_adjustment = 'SA'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table F.1, Exports of services (£ million)")
@@ -1505,7 +1505,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Primary Income'
         seasonal_adjustment = 'SA'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table G.1, Primary income, credits (£ million)")
@@ -1651,7 +1651,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Secondary Income'
         seasonal_adjustment = 'SA'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table H.1, Secondary income, credits (£ million)")
@@ -1797,7 +1797,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Capital Account'
         seasonal_adjustment = 'SA'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table I.1, Capital account, credits (£ million)")
@@ -1943,7 +1943,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Financial Account'
         seasonal_adjustment = 'NSA'
-        currency = '£ million'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table J.1, UK Investment Abroad (net acquisition of financial assets) (£ million)")
