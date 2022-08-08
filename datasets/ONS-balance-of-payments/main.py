@@ -254,7 +254,6 @@ catalog_metadata = metadata.as_csvqb_catalog_metadata() # TODO should understand
 catalog_metadata.to_json_file('summary_of_balance_of_payments-catalog-metadata.json')
 
 
-#'''
 
 #notes for cube 1 
 # - remove BoP Section dimension. 
@@ -599,11 +598,11 @@ df
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
 
-df.to_csv('current_account_excluding_precious_metals-observations.csv', index=False)
+df.to_csv('current_account_exc_precious_metals-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
-catalog_metadata.to_json_file('current_account_excluding_precious_metals-catalog-metadata.json')
+catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metadata.json')
 
-
+#'''
 
 # -
 
@@ -831,7 +830,7 @@ catalog_metadata.to_json_file('current_account_transaction_with_the_eu_and_non_e
 
 # %%
 
-
+'''
 
 # +
 tidied_sheets_iip = [] # changing name because i'm combining the next three tabs
@@ -2090,7 +2089,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'International Investment Position'
         seasonal_adjustment = 'NSA'
-        currency = '£ billion'
+        currency = 'gbp-million'
 
         #table locators
         title_of_table_1 = tab.filter("Table K.1, UK Assets (£ billion)")
