@@ -6,6 +6,7 @@ import json
 import numpy as np
 
 # %% 
+# TODO once I've checked all the builds work i need to alter each title and whatnot for each info.json
 # TODO i've put net-transactions as default for measure type column since table A was. find out what the others should be. in original the DE put the BoP topics (e..g current account, financial account) as measure type
 # TODO sort out the weird symbol before the poung sign in the unity column
 # TODO think i need to replace currency value with a pathify version e.g. "gbp-million". Ask santhosh if i should do this change pre or post processing
@@ -106,6 +107,8 @@ international_investment_position = "Table_K"
 # +
 #for name,tab in tabs.items():
 #    print(name)
+
+'''
 
 # %%
 tidied_sheets = [] # reset this for each cube
@@ -251,6 +254,7 @@ catalog_metadata = metadata.as_csvqb_catalog_metadata() # TODO should understand
 catalog_metadata.to_json_file('summary_of_balance_of_payments-catalog-metadata.json')
 
 
+#'''
 
 #notes for cube 1 
 # - remove BoP Section dimension. 
@@ -2224,6 +2228,6 @@ catalog_metadata.to_json_file('international_investment_position-catalog-metadat
 
 
 
-# -
+# '''
 
 
