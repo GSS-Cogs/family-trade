@@ -242,7 +242,30 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+# %%
+# Update all the metadata for each cube 
+# mainTitle = metadata.dataset.title # orig title didn't have capital letters for the first letter of each word
+mainTitle = 'Balance of Payments'
+maincomment = "Balance of Payments: Quarterly summary of balance of payments accounts including the current account, capital transfers, transactions, and levels of UK external assets and liabilities.\n"
+maindescr = "Balance of Payments:\n\nQuarterly summary of balance of payments accounts including the current account, capital transfers, transactions, and levels of UK external assets and liabilities.\n"
+# %%
+# +
+metadata.dataset.title = mainTitle + ' - Summary of Balance of Payments'
+metadata.dataset.comment = maincomment + """
+Summary of Balance of Payments (£ million)
+"""
+metadata.dataset.description = maindescr + """
+Summary of Balance of Payments:
 
+This series represents net errors and omissions in the balance of payments accounts. It is the converse of the current and capital balances (HBOG and FKMJ) and net financial account transactions (HBNT) and is required to balance these three accounts, not seasonally adjusted.
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
+# -
 # %%
 df.to_csv('summary_of_balance_of_payments-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() # TODO should understand this, probably no need to keep repeating for each cube
