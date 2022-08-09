@@ -6,15 +6,7 @@ import json
 import numpy as np
 
 # %% 
-# TODO not allowed to replace blanks with zeros but for current account transaction getting error 'ValueError: invalid literal for int() with base 10: ''
-# TODO once I've checked all the builds work i need to alter each title and whatnot for each info.json
 # TODO i've put net-transactions as default for measure type column since table A was. find out what the others should be. in original the DE put the BoP topics (e..g current account, financial account) as measure type
-# TODO sort out the weird symbol before the poung sign in the unity column
-# TODO think i need to replace currency value with a pathify version e.g. "gbp-million". Ask santhosh if i should do this change pre or post processing
-## add unit column and check with santhosh monday how to add values in there
-#df["Unit"] = df.apply(lambda x: "gbp-billion" if x['Measure Type'] == 'summary-of-international-investment-position-financial-account-and-investment-income' 
-#                        else "gbp-billion" if x['Measure Type'] == 'international-investment-position' else x['Unit'], axis = 1)
-# TODO should i bother with the R tables as they're just all 0 values - and this code is big as it is?
 # TODO should understand this code - "catalog_metadata = metadata.as_csvqb_catalog_metadata()"" - probably no need to keep repeating for each cube
 # %%
 # variables
@@ -112,8 +104,6 @@ international_investment_position = "Table_K"
 
 
 # %%
-
-'''
 
 
 tidied_sheets = [] # reset this for each cube
@@ -218,7 +208,7 @@ for name,tab in tabs.items():
         tb3_tidy_sheet = tb3_cs.topandas()
 
         # create preview files of each tabs data
-        savepreviewhtml(tb1_cs, fname= name + "PREVIEW.html")
+        #savepreviewhtml(tb1_cs, fname= name + "PREVIEW.html")
 
         # append all tables together
         tidied_sheets.append(tb1_tidy_sheet)
@@ -607,8 +597,6 @@ df.to_csv('current_account_exc_precious_metals-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metadata.json')
 
-'''
-
 # -
 
 
@@ -837,7 +825,6 @@ catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_
 
 # %%
 
-'''
 
 # +
 tidied_sheets_iip = [] # changing name because i'm combining the next three tabs
@@ -2232,8 +2219,5 @@ df.to_csv('international_investment_position-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('international_investment_position-catalog-metadata.json')
 
-
-
-# '''
 
 
