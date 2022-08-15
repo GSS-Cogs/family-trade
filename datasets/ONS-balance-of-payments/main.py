@@ -6,6 +6,7 @@ import json
 import numpy as np
 
 # %% 
+# TODO check current account still makes sense since it also contains % values and we removed the two columns
 # TODO i've put net-transactions as default for measure type column since table A was. find out what the others should be. in original the DE put the BoP topics (e..g current account, financial account) as measure type
 # TODO should understand this code - "catalog_metadata = metadata.as_csvqb_catalog_metadata()"" - probably no need to keep repeating for each cube
 # %%
