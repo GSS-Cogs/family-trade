@@ -252,7 +252,7 @@ maindescr = "Balance of Payments:\n\nQuarterly summary of balance of payments ac
 # +
 metadata.dataset.title = mainTitle + ' - Summary of Balance of Payments'
 metadata.dataset.comment = maincomment + r"""
-Summary of Balance of Payments (£ million)
+This dataset: Summary of Balance of Payments (£ million)
 """
 metadata.dataset.description = maindescr + r"""
 Summary of Balance of Payments:
