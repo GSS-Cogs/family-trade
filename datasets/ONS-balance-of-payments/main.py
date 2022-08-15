@@ -251,10 +251,10 @@ maindescr = "Balance of Payments:\n\nQuarterly summary of balance of payments ac
 # %%
 # +
 metadata.dataset.title = mainTitle + ' - Summary of Balance of Payments'
-metadata.dataset.comment = maincomment + """
+metadata.dataset.comment = maincomment + r"""
 Summary of Balance of Payments (£ million)
 """
-metadata.dataset.description = maindescr + """
+metadata.dataset.description = maindescr + r"""
 Summary of Balance of Payments:
 
 This series represents net errors and omissions in the balance of payments accounts. It is the converse of the current and capital balances (HBOG and FKMJ) and net financial account transactions (HBNT) and is required to balance these three accounts, not seasonally adjusted.
