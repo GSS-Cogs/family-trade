@@ -442,6 +442,21 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Current Account'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Current Account (£ million)
+"""
+metadata.dataset.description = maindescr + r"""
+Current Account:
+
+Using series YBHA, GDP at current market prices.
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('current_account-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
