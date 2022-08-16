@@ -1,6 +1,7 @@
 # ignore ALL html files
 *.html
-*-info.json
+#*-info.json
 *-observations.csv
 *-catalog-metadata.json
 andrew_code_help.py
+main_orig.py

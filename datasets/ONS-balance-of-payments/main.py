@@ -445,7 +445,7 @@ df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Val
 
 metadata.dataset.title = mainTitle + ' - Current Account'
 metadata.dataset.comment = maincomment + r"""
-This dataset: Current Account (£ million)
+This dataset: Current Account, seasonally adjusted (£ million and %)
 """
 metadata.dataset.description = maindescr + r"""
 Current Account:
@@ -631,6 +631,23 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Current Acount Excluding Precious Metals'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Current Acount Excluding Precious Metals, seasonally adjusted (£ million and %)
+"""
+metadata.dataset.description = maindescr + r"""
+Current Account:
+
+Precious metals includes: Non:Monetary Gold (NMG), Platinum, Palladium and Silver.
+
+Using series YBHA, GDP at current market prices.
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('current_account_exc_precious_metals-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
@@ -855,6 +872,33 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Marker','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Current account, Transactions with the European Union (EU) and with non-EU countries'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Current account, Transactions with the European Union (EU) and with non-EU countries, seasonally adjusted (£ million)
+"""
+metadata.dataset.description = maindescr + r"""
+Current account, Transactions with the European Union (EU) and with non-EU countries:
+
+EU presented on an EU basis.
+
+Includes transactions with European Union institutions.
+
+A quarterly breakdown of the UK's current account with the Euro area (as a whole) is published in table B6 of United Kingdom Economic Accounts (UKEA) at http://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts
+
+These data are our best estimates of these bilateral UK trade flows. Users should note that alternative estimates are Available, in some cases, via the statistical agencies for bilateral countries or through the central databases such as UN Comtrade (www.comtrade.un.org).
+
+Cells containing 'x' represent unavailable data.
+
+A quarterly geographic breakdown of the UK's current account with the USA, Japan, Canada, Switzerland, Brazil, China, Hong Kong, India and Russia is also Available and is published in table B6B of UKEA (see [note 3])
+
+Includes transactions with international organisations other than European Union institutions.
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 # %%
 df.to_csv('current_account_transactions_with_the_eu_and_non_eu_countries-observations.csv', index=False)
@@ -1231,6 +1275,17 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Summary of international investment position (IIP), financial account transactions, and investment income'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Summary of international investment position (IIP), financial account transactions, and investment income; not seasonally adjusted (£ billion)
+"""
+metadata.dataset.description = maindescr + r"""
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('summary_of_IIP_financial_account_investment_income-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
@@ -1374,6 +1429,19 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Trade in Goods'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Trade in goods; seasonally adjusted (£ million)
+"""
+metadata.dataset.description = maindescr + r"""
+Trade in Goods:
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('goods-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
@@ -1520,6 +1588,19 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Trade in Services'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Trade in services; seasonally adjusted (£ million)
+"""
+metadata.dataset.description = maindescr + r"""
+Trade in Services:
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('services-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
@@ -1666,6 +1747,19 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Primary Income'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Primary income; seasonally adjusted (£ million)
+"""
+metadata.dataset.description = maindescr + r"""
+Primary Income:
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('primary_income-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
@@ -1812,6 +1906,19 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Secondary Income'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Secondary income; seasonally adjusted (£ million)
+"""
+metadata.dataset.description = maindescr + r"""
+Secondary Income:
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('secondary_income-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
@@ -1958,6 +2065,19 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Capital Account'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Capital Account; seasonally adjusted (£ million)
+"""
+metadata.dataset.description = maindescr + r"""
+Capital Account:
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('capital_account-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
@@ -2104,7 +2224,21 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - Financial Account'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Financial account; not seasonally adjusted (£ million)
+"""
+metadata.dataset.description = maindescr + r"""
+Financial Account:
 
+Further detail of the quarterly financial account is published in tables B8 to B13 of United Kingdom Economic Accounts at http://www.ons.gov.uk/ons/search/index.html?newquery=ukea
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('financial_account-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
@@ -2252,7 +2386,21 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+metadata.dataset.title = mainTitle + ' - International Investment Position'
+metadata.dataset.comment = maincomment + r"""
+This dataset: International investment position; not seasonally adjusted (£ billion)
+"""
+metadata.dataset.description = maindescr + r"""
+International Investment Position:
 
+Further detail of the quarterly international investment position is published in tables B14 to B19 of United Kingdom Economic Accounts at http://www.ons.gov.uk/ons/search/index.html?newquery=ukea
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
 
 df.to_csv('international_investment_position-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
