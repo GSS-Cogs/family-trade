@@ -6,7 +6,6 @@ import json
 import numpy as np
 
 # %% 
-# TODO check current account still makes sense since it also contains % values and we removed the two columns
 # TODO i've put net-transactions as default for measure type column since table A was. find out what the others should be. in original the DE put the BoP topics (e..g current account, financial account) as measure type
 # TODO should understand this code - "catalog_metadata = metadata.as_csvqb_catalog_metadata()"" - probably no need to keep repeating for each cube
 # %%
@@ -233,6 +232,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -433,6 +433,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip() # whitespace in total credit
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -443,6 +444,7 @@ df
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+#%%
 metadata.dataset.title = mainTitle + ' - Current Account'
 metadata.dataset.comment = maincomment + r"""
 This dataset: Current Account, seasonally adjusted (£ million and %)
@@ -459,11 +461,12 @@ These tables refer to CDID's which stands for Central Database Identifier, the c
 As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
 """
 
+#%%
 df.to_csv('current_account-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('current_account-catalog-metadata.json')
 
-
+#%%
 # -
 
 
@@ -621,6 +624,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -860,6 +864,7 @@ df['OBS'].loc[(df['OBS'] == '')] = None
 #df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 # replace data marker values
 df['DATAMARKER'].loc[(df['DATAMARKER'] == 'x')] ="unavailable data" # check with Shannon if I should do this replacement. it described x like this in the source excel doc
@@ -1265,6 +1270,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -1419,6 +1425,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -1578,6 +1585,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -1737,6 +1745,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -1896,6 +1905,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -2055,6 +2065,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -2214,6 +2225,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
@@ -2376,6 +2388,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
