@@ -923,7 +923,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Summary of IIP, financial account and investment income'
         seasonal_adjustment = 'NSA'
-        currency = '£ billion'
+        currency = 'gbp-billion'
 
         #table locators
         title_of_table_1 = tab.filter("Table D.1, Investment abroad, International investment position (£ billion)")
@@ -1037,7 +1037,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Summary of IIP, financial account and investment income'
         seasonal_adjustment = 'NSA'
-        currency = '£ billion'
+        currency = 'gbp-billion'
 
         #table locators
         title_of_table_1 = tab.filter("Table D.4, Investment in the UK, International investment position (£ billion)")
@@ -1151,7 +1151,7 @@ for name,tab in tabs.items():
 
         bop_tab = 'Summary of IIP, financial account and investment income'
         seasonal_adjustment = 'NSA'
-        currency = '£ billion'
+        currency = 'gbp-billion'
 
         #table locators
         title_of_table_1 = tab.filter("Table D.7, Net investment, International investment position (£ billion)")
