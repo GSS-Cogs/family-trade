@@ -235,9 +235,16 @@ df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
 df['BOP Service'] = df['BOP Service'].apply(pathify)
 
+
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
+
+#
+df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted' : 'NSA' }})
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Summary of Balance of Payments"
 
 #%% 
 #reorder columns
@@ -440,6 +447,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
 
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Current account"
+
 #%% 
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
@@ -630,6 +641,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
+
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Current account excluding precious metals"
 
 #%% 
 #reorder columns
@@ -872,6 +887,10 @@ df['DATAMARKER'].loc[(df['DATAMARKER'] == 'x')] ="unavailable data" # check with
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit','DATAMARKER' : 'Marker'}, inplace=True)
 df
+
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Current account transactions with the EU and with non-EU countries"
 
 #%% 
 #reorder columns
@@ -1277,6 +1296,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
 
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Summary of international investment position financial account and investment income"
+
 #%% 
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
@@ -1431,6 +1454,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
+
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Trade in Goods"
 
 #%% 
 #reorder columns
@@ -1592,6 +1619,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
 
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Trade in Services"
+
 #%% 
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
@@ -1751,6 +1782,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
+
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Primary income"
 
 #%% 
 #reorder columns
@@ -1912,6 +1947,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
 
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Secondary income"
+
 #%% 
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
@@ -2072,6 +2111,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
 
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Capital account"
+
 #%% 
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
@@ -2231,6 +2274,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
+
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Financial account"
 
 #%% 
 #reorder columns
@@ -2394,6 +2441,10 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
+
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "International investment position"
 
 #%% 
 #reorder columns
