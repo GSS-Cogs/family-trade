@@ -52,8 +52,8 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/flow-directions/{+flow_directions}"
             },
             "Measure Type": {
-                "type": "measures",
-                "value": "http://gss-data.org.uk/def/measure/{+measure_type}"
+                "type" :"measures",
+                "value": "http://gss-data.org.uk/def/trade/measure/{+measure_type}"
             },
             "Value": {
                 "type": "observations",
