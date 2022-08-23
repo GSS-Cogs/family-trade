@@ -191,30 +191,37 @@ for name,tab in tabs.items():
     else:
         continue
 
-# %%
 # convert the separate tables into one dataframe
 df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
 ## [Postrocessing]
 
+# %%
 # change period values to ONS standard
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
+
 
 # convert blank observations to zeros and convert to int type
 #df['OBS'].loc[(df['OBS'] == '')] = '0'
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
-df = df.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True)
+# df = df.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True)
 df['BOP Service'] = df['BOP Service'].str.strip()
-df = df.replace({'BOP Service' : {',' : ' , ' }})
+df["BOP Service"] = df["BOP Service"].replace(r'\n',' ', regex=True) 
+df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
+# the BOP services showing subtotal values include a lot of spaces between words so replacing them with just one. warning, it also removes all whitespace characters (space, tab, newline, return, formfeed)
+df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
+
+# %%
+#df = df.replace({'BOP Service' : {',' : ' , ' }})
 
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
 df
 
-#
+# %%
 df = df.replace({'Seasonal Adjustment' : {' Seasonally adjusted' : 'SA', ' Not seasonally adjusted' : 'NSA' }})
 
 # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
@@ -399,6 +406,7 @@ df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
 ## [Postrocessing]
 
+#%%
 # change period values to ONS standard
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
@@ -407,11 +415,12 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
-df = df.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True)
 df['BOP Service'] = df['BOP Service'].str.strip() # whitespace in total credit
-df = df.replace({'BOP Service' : {',' : ' , ' }})
-#df['BOP Service'] = df['BOP Service'].apply(pathify)
-
+#df = df.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True)
+df["BOP Service"] = df["BOP Service"].replace(r'\n',' ', regex=True) 
+df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
+# the BOP services showing subtotal values includea lot of spaces between words so replacing them with just one. warning, it also removes all whitespace characters (space, tab, newline, return, formfeed)
+df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
 
 
 #rename columns
@@ -420,7 +429,7 @@ df
 
 
 # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-df['Measure Type'] = "Current account"
+df['Measure Type'] = "current-account"
 
 #%% 
 #reorder columns
