@@ -250,206 +250,203 @@ As previously announced by HMRC, changes to the way EU imports data have been re
 # -
 # %%
 df.to_csv('summary_of_balance_of_payments-observations.csv', index=False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata() # TODO should understand this, probably no need to keep repeating for each cube
+catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('summary_of_balance_of_payments-catalog-metadata.json')
 
 
+# %%
+tidied_sheets = [] 
 
-# #notes for cube 1 
-# # - remove BoP Section dimension. 
-# #Change Table Name to Account Type
+# [current account, seasonally adjusted]
+for name,tab in tabs.items():
+    if name == current_account: # should be Table_B
 
-# # moving onto cube 2. 
+        bop_tab = 'Current Acount'
+        seasonal_adjustment = 'SA'
+        currency = 'gbp-million'
 
-# # %%
-# tidied_sheets = [] # think i want to reset this each time
-
-# # [current account, seasonally adjusted]
-# for name,tab in tabs.items():
-#     if name == current_account: # should be Table_B
-
-#         bop_tab = 'Current Acount'
-#         seasonal_adjustment = 'SA'
-#         currency = 'gbp-million'
-
-#         #table locators
-#         title_of_table_1 = tab.filter("Table B.1, Current Account Credits (£ million)")
-#         title_of_table_2 = tab.filter("Table B.2, Current Account Debits (£ million)")
-#         title_of_table_3 = tab.filter("Table B.3, Current Account Balances (£ million)")
-#         title_of_table_4 = tab.filter("Table B.4, Current Account Balances as a percentage of GDP (percentage) [note 1]")
+        #table locators
+        title_of_table_1 = tab.filter("Table B.1, Current Account Credits (£ million)")
+        title_of_table_2 = tab.filter("Table B.2, Current Account Debits (£ million)")
+        title_of_table_3 = tab.filter("Table B.3, Current Account Balances (£ million)")
+        title_of_table_4 = tab.filter("Table B.4, Current Account Balances as a percentage of GDP (percentage) [note 1]")
 
 
-#         # separate bags of tables to remove later on
-#         tb4_bag = title_of_table_4.expand(DOWN).expand(RIGHT)
-#         tb3_tb4_bag = title_of_table_3.expand(DOWN).expand(RIGHT)
-#         tb2_tb3_tb4_bag = title_of_table_2.expand(DOWN).expand(RIGHT)
+        # separate bags of tables to remove later on
+        tb4_bag = title_of_table_4.expand(DOWN).expand(RIGHT)
+        tb3_tb4_bag = title_of_table_3.expand(DOWN).expand(RIGHT)
+        tb2_tb3_tb4_bag = title_of_table_2.expand(DOWN).expand(RIGHT)
 
 
 
-#         # [Table 1 - Credits]
-#         tb1_table_name = 'Credits'
+        # [Table 1 - Credits]
+        tb1_table_name = 'Credits'
 
-#         table_1_period = title_of_table_1.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb2_tb3_tb4_bag
-#         table_1_BOP_service = title_of_table_1.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb2_tb3_tb4_bag
-#         table_1_CDID = title_of_table_1.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb2_tb3_tb4_bag
+        table_1_period = title_of_table_1.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb2_tb3_tb4_bag
+        table_1_BOP_service = title_of_table_1.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb2_tb3_tb4_bag
+        table_1_CDID = title_of_table_1.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb2_tb3_tb4_bag
 
-#         tb1_obs = table_1_CDID.waffle(table_1_period) 
-
-
-
-#         # [Table 2 Current accounts]
-#         tb2_table_name = 'Debits'
-
-#         #table_A_2_all = title_of_table_2.expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace() - table_A_3_all
-#         table_2_period = title_of_table_2.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb3_tb4_bag
-#         table_2_BOP_service = title_of_table_2.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb3_tb4_bag
-#         table_2_CDID = title_of_table_2.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb3_tb4_bag
-
-#         tb2_obs = table_2_CDID.waffle(table_2_period)
+        tb1_obs = table_1_CDID.waffle(table_1_period) 
 
 
 
-#         # [Table 3 Financial accounts]
-#         tb3_table_name = 'Balances'
+        # [Table 2 Current accounts]
+        tb2_table_name = 'Debits'
 
-#         #table_A_3_all = title_of_table_3.expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace() # so i can remove it later
-#         table_3_period = title_of_table_3.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb4_bag
-#         table_3_BOP_service = title_of_table_3.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb4_bag
-#         table_3_CDID = title_of_table_3.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb4_bag
+        #table_A_2_all = title_of_table_2.expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace() - table_A_3_all
+        table_2_period = title_of_table_2.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb3_tb4_bag
+        table_2_BOP_service = title_of_table_2.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb3_tb4_bag
+        table_2_CDID = title_of_table_2.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb3_tb4_bag
 
-#         tb3_obs = table_3_CDID.waffle(table_3_period)
+        tb2_obs = table_2_CDID.waffle(table_2_period)
 
 
 
-#         # [Table 4 Financial accounts]
-#         tb4_table_name = 'Balances as %'
+        # [Table 3 Financial accounts]
+        tb3_table_name = 'Balances'
 
-#         #table_A_3_all = title_of_table_3.expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace() # so i can remove it later
-#         table_4_period = title_of_table_4.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace()
-#         table_4_BOP_service = title_of_table_4.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
-#         table_4_CDID = title_of_table_4.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
+        #table_A_3_all = title_of_table_3.expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace() # so i can remove it later
+        table_3_period = title_of_table_3.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb4_bag
+        table_3_BOP_service = title_of_table_3.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb4_bag
+        table_3_CDID = title_of_table_3.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb4_bag
 
-#         tb4_obs = table_4_CDID.waffle(table_4_period)
+        tb3_obs = table_3_CDID.waffle(table_3_period)
+
+
+
+        # [Table 4 Financial accounts]
+        tb4_table_name = 'Balances as %'
+
+        #table_A_3_all = title_of_table_3.expand(DOWN).expand(RIGHT).is_not_blank().is_not_whitespace() # so i can remove it later
+        table_4_period = title_of_table_4.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace()
+        table_4_BOP_service = title_of_table_4.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
+        table_4_CDID = title_of_table_4.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
+
+        tb4_obs = table_4_CDID.waffle(table_4_period)
 
 
 
 
-#         # [Table 1]
-#         tb1_dimensions = [
-#             HDimConst('Table Name', tb1_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_1_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_1_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_1_CDID,'CDID',DIRECTLY,UP),
-#         ]
+        # [Table 1]
+        tb1_dimensions = [
+            HDimConst('Table Name', tb1_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_1_period, "Period", DIRECTLY, LEFT),
+            HDim(table_1_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_1_CDID,'CDID',DIRECTLY,UP),
+        ]
 
-#         # [Table 2]
-#         tb2_dimensions = [
-#             HDimConst('Table Name', tb2_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_2_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_2_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_2_CDID,'CDID',DIRECTLY,UP),
-#         ]
+        # [Table 2]
+        tb2_dimensions = [
+            HDimConst('Table Name', tb2_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_2_period, "Period", DIRECTLY, LEFT),
+            HDim(table_2_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_2_CDID,'CDID',DIRECTLY,UP),
+        ]
 
-#         # [Table 3]
-#         tb3_dimensions = [
-#             HDimConst('Table Name', tb3_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_3_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_3_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_3_CDID,'CDID',DIRECTLY,UP),
-#         ]
+        # [Table 3]
+        tb3_dimensions = [
+            HDimConst('Table Name', tb3_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_3_period, "Period", DIRECTLY, LEFT),
+            HDim(table_3_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_3_CDID,'CDID',DIRECTLY,UP),
+        ]
 
-#             # [Table 4]
-#         tb4_dimensions = [
-#             HDimConst('Table Name', tb4_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_4_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_4_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_4_CDID,'CDID',DIRECTLY,UP),
-#         ]
+            # [Table 4]
+        tb4_dimensions = [
+            HDimConst('Table Name', tb4_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_4_period, "Period", DIRECTLY, LEFT),
+            HDim(table_4_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_4_CDID,'CDID',DIRECTLY,UP),
+        ]
         
-#         tb1_cs = ConversionSegment(tab, tb1_dimensions, tb1_obs)
-#         tb2_cs = ConversionSegment(tab, tb2_dimensions, tb2_obs)
-#         tb3_cs = ConversionSegment(tab, tb3_dimensions, tb3_obs)
-#         tb4_cs = ConversionSegment(tab, tb4_dimensions, tb4_obs)
+        tb1_cs = ConversionSegment(tab, tb1_dimensions, tb1_obs)
+        tb2_cs = ConversionSegment(tab, tb2_dimensions, tb2_obs)
+        tb3_cs = ConversionSegment(tab, tb3_dimensions, tb3_obs)
+        tb4_cs = ConversionSegment(tab, tb4_dimensions, tb4_obs)
         
-#         tb1_tidy_sheet = tb1_cs.topandas()
-#         tb2_tidy_sheet = tb2_cs.topandas()
-#         tb3_tidy_sheet = tb3_cs.topandas()
-#         tb4_tidy_sheet = tb4_cs.topandas()
+        tb1_tidy_sheet = tb1_cs.topandas()
+        tb2_tidy_sheet = tb2_cs.topandas()
+        tb3_tidy_sheet = tb3_cs.topandas()
+        tb4_tidy_sheet = tb4_cs.topandas()
 
-#         ## create preview files of one table
-#         #savepreviewhtml(tb1_cs, fname= name + "PREVIEW.html")
+        ## create preview files of one table
+        #savepreviewhtml(tb1_cs, fname= name + "PREVIEW.html")
 
-#         # append all tables together
-#         tidied_sheets.append(tb1_tidy_sheet)
-#         tidied_sheets.append(tb2_tidy_sheet)
-#         tidied_sheets.append(tb3_tidy_sheet)
-#         tidied_sheets.append(tb4_tidy_sheet)
+        # append all tables together
+        tidied_sheets.append(tb1_tidy_sheet)
+        tidied_sheets.append(tb2_tidy_sheet)
+        tidied_sheets.append(tb3_tidy_sheet)
+        tidied_sheets.append(tb4_tidy_sheet)
 
-#     else:
-#         continue
-
-
-# # convert the separate tables into one dataframe
-# df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
-
-# ## [Postrocessing]
-
-# # change period values to ONS standard
-# df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
-
-# # convert blank observations to zeros and convert to int type
-# #df['OBS'].loc[(df['OBS'] == '')] = '0'
-# df['OBS'] = df['OBS'].astype(int)
-# df['Measure Type'] = 'net-transactions'
-# df['CDID'] = df['CDID'].str.strip()
-# df['BOP Service'] = df['BOP Service'].str.strip() # whitespace in total credit
-# #df['BOP Service'] = df['BOP Service'].apply(pathify)
-
-# #rename columns
-# df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
-# df
+    else:
+        continue
 
 
-# # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "Current account"
+# convert the separate tables into one dataframe
+df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
-# #%% 
-# #reorder columns
-# df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
+## [Postrocessing]
 
-# #%%
-# metadata.dataset.title = mainTitle + ' - Current Account'
-# metadata.dataset.comment = maincomment + r"""
-# This dataset: Current Account, seasonally adjusted (£ million and %)
-# """
-# metadata.dataset.description = maindescr + r"""
-# Current Account:
+# change period values to ONS standard
+df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
-# Using series YBHA, GDP at current market prices.
+# convert blank observations to zeros and convert to int type
+#df['OBS'].loc[(df['OBS'] == '')] = '0'
+df['OBS'] = df['OBS'].astype(int)
+df['Measure Type'] = 'net-transactions'
+df['CDID'] = df['CDID'].str.strip()
+df = df.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True)
+df['BOP Service'] = df['BOP Service'].str.strip() # whitespace in total credit
+df = df.replace({'BOP Service' : {',' : ' , ' }})
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
-# The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
 
-# These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
 
-# As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
-# """
+#rename columns
+df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
+df
 
-# #%%
-# df.to_csv('current_account-observations.csv', index=False)
-# catalog_metadata = metadata.as_csvqb_catalog_metadata() 
-# catalog_metadata.to_json_file('current_account-catalog-metadata.json')
+
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "Current account"
+
+#%% 
+#reorder columns
+df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
+
+#%%
+metadata.dataset.title = mainTitle + ' - Current Account'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Current Account, seasonally adjusted (£ million and %)
+"""
+metadata.dataset.description = maindescr + r"""
+Current Account:
+
+Using series YBHA, GDP at current market prices.
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
+
+#%%
+df.to_csv('current_account-observations.csv', index=False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata() 
+catalog_metadata.to_json_file('current_account-catalog-metadata.json')
 
 # #%%
 # # -
