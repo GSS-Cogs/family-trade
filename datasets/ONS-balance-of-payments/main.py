@@ -233,7 +233,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 
 #rename columns
@@ -441,7 +441,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip() # whitespace in total credit
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -636,7 +636,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -880,7 +880,7 @@ df['OBS'].loc[(df['OBS'] == '')] = None
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 # replace data marker values
 df['DATAMARKER'].loc[(df['DATAMARKER'] == 'x')] ="unavailable data" # check with Shannon if I should do this replacement. it described x like this in the source excel doc
 
@@ -1290,7 +1290,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -1449,7 +1449,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -1613,7 +1613,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -1777,7 +1777,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -1941,7 +1941,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -2105,7 +2105,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -2269,7 +2269,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -2436,7 +2436,7 @@ df['OBS'] = df['OBS'].astype(int)
 df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip()
-df['BOP Service'] = df['BOP Service'].apply(pathify)
+#df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
