@@ -413,7 +413,7 @@ df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x el
 # convert blank observations to zeros and convert to int type
 #df['OBS'].loc[(df['OBS'] == '')] = '0'
 df['OBS'] = df['OBS'].astype(int)
-df['Measure Type'] = 'net-transactions'
+# df['Measure Type'] = 'net-transactions'
 df['CDID'] = df['CDID'].str.strip()
 df['BOP Service'] = df['BOP Service'].str.strip() # whitespace in total credit
 #df = df.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True)
