@@ -1,0 +1,26 @@
+{
+    "title": "Balance of Payments - Current Account",
+    "identifier": null,
+    "summary": "Balance of Payments: Quarterly summary of balance of payments accounts including the current account, capital transfers, transactions, and levels of UK external assets and liabilities.\n\nThis dataset: Current Account, seasonally adjusted (\u00a3 million and %)\n",
+    "description": "Balance of Payments:\n\nQuarterly summary of balance of payments accounts including the current account, capital transfers, transactions, and levels of UK external assets and liabilities.\n\nCurrent Account:\n\nUsing series YBHA, GDP at current market prices.\n\nThe quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.\n\nThese tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.\n\nAs previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. \n",
+    "creator_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "publisher_uri": "https://www.gov.uk/government/organisations/office-for-national-statistics",
+    "landing_page_uris": [
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/balanceofpaymentsstatisticalbulletintables"
+    ],
+    "theme_uris": [
+        "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments"
+    ],
+    "keywords": [
+        "rest of the world",
+        "foreign",
+        "economy",
+        "monetary",
+        "BoP"
+    ],
+    "dataset_issued": "2022-06-30",
+    "dataset_modified": "2022-08-23T14:41:37.999746+00:00",
+    "license_uri": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "public_contact_point_uri": "mailto:bop@ons.gov.uk",
+    "uri_safe_identifier_override": null
+}
