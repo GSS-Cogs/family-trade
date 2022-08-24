@@ -421,6 +421,8 @@ df["BOP Service"] = df["BOP Service"].replace(r'\n',' ', regex=True)
 df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
 # the BOP services showing subtotal values includea lot of spaces between words so replacing them with just one. warning, it also removes all whitespace characters (space, tab, newline, return, formfeed)
 df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
+# conflicting value in Trade total and Trade Total when making a codelist
+df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 
 
 #rename columns
