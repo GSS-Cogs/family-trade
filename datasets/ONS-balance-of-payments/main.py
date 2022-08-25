@@ -191,6 +191,8 @@ for name,tab in tabs.items():
     else:
         continue
 
+
+# %%
 # convert the separate tables into one dataframe
 df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
@@ -212,7 +214,7 @@ df["BOP Service"] = df["BOP Service"].replace(r'\n',' ', regex=True)
 df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
 # the BOP services showing subtotal values include a lot of spaces between words so replacing them with just one. warning, it also removes all whitespace characters (space, tab, newline, return, formfeed)
 df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
-
+df['BOP Service'] = df['BOP Service'].apply(pathify)
 # %%
 #df = df.replace({'BOP Service' : {',' : ' , ' }})
 
@@ -259,7 +261,6 @@ As previously announced by HMRC, changes to the way EU imports data have been re
 df.to_csv('summary_of_balance_of_payments-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('summary_of_balance_of_payments-catalog-metadata.json')
-
 
 # %%
 tidied_sheets = [] 
@@ -423,7 +424,7 @@ df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
 df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
 # conflicting value in Trade total and Trade Total when making a codelist
 df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
-
+df['BOP Service'] = df['BOP Service'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -2456,3 +2457,5 @@ catalog_metadata.to_json_file('current_account-catalog-metadata.json')
 
 
 
+
+# %%

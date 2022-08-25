@@ -39,7 +39,10 @@
                 "type" : "dimension"
             },
             "BOP Service": {
-                "type": "dimension"              
+                "type": "dimension",
+                "new": {
+                    "codelist": "./codelists/bop-services.csv-metadata.json"
+                }              
             },
             "Measure Type": {
                 "type" :"measures",
