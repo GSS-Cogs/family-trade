@@ -36,7 +36,10 @@
                 "value": "http://gss-data.org.uk/def/trade/concept/seasonal-adjustments/{+seasonal_adjustment}"
             },
             "Account Type" : {
-                "type" : "dimension"
+                "type": "dimension",
+                "new": {
+                    "codelist": "./codelists/account-type.csv-metadata.json"
+                }   
             },
             "BOP Service": {
                 "type": "dimension",
