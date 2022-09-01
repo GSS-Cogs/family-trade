@@ -52,9 +52,7 @@
                 "value": "http://gss-data.org.uk/def/concept/cl-area/{ons_partner_geography}"
             },
             "Commodity": {
-                "type":"dimension",
-                "uri": "http://gss-data.org.uk/def/trade/property/dimension/commodity",
-                "value": "http://gss-data.org.uk/def/trade/concept/commodity/{commodity}"
+                "type":"dimension"
             }
         }
     },
