@@ -23,7 +23,6 @@ distribution1 = scraper1.distribution(mediaType=lambda x: 'zip' in x, latest=Tru
 scraper2 = Scraper(landingPage[1])
 distribution2 = scraper2.distribution(mediaType=lambda x: 'zip' in x, latest=True)
 
-
 def transform(dataframe):
     '''transforms the dataframe to a datacube
     '''
@@ -38,7 +37,6 @@ def transform(dataframe):
     return tidy_sheet
 
 # %%
-
 tab_names = ['1. Annual Exports', '2. Quarterly Exports', '3. Monthly Exports']
 tidy_tabs = []
 
@@ -61,7 +59,6 @@ for i in tidy_tabs:
     export_sheets.append(transform(i))
 
 table1 = pd.concat(export_sheets)
-
 # %%
 tab_names = ['1. Annual Imports', '2. Quarterly Imports', '3. Monthly Imports']
 tidy_tabs = []
@@ -85,21 +82,25 @@ for i in tidy_tabs:
     import_sheets.append(transform(i))
 
 table2 = pd.concat(import_sheets)
-
 # %%
 table = pd.concat([table1, table2])
-
+pd.set_option('display.float_format', lambda x: '%.0f' % x)
 # Post ptocessing 
 # %%
 table.loc[table['Period'].str.len() == 7, 'Period'] = pd.to_datetime(table.loc[table['Period'].str.len() == 7, 'Period'], format='%Y%b').astype(str).map(lambda x: 'month/' + x[:7])# + left(x,7))
+# %%
 table['Period'] = table['Period'].apply(lambda x: 'year/' + x if len(x) == 4  else (
     'quarter/' + x[:4] + '-' + x[4:] if len(x) == 6  else x ))
+
+# %%   
 table['Flow'] = table['Flow'].map(lambda x: x.split(' ')[1])
 table['Flow'] = table['Flow'].map(lambda x: pathify(x))
+# %% 
+table['Commodity'] = table['Commodity'].map(lambda x: x.split(' ')[0])
+# %%
 table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
-table['Commodity'].cat.categories = table['Commodity'].cat.categories.map(lambda x: x.split(' ')[0])
+# %%
 table['Seasonal Adjustment'] = pd.Series('NSA', index=table.index, dtype='category')
-
 # %%
 table['Marker'] = ''
 table['Marker'] = np.where(table['Value'].str.isnumeric() == False, table['Value'], table['Marker'])
@@ -109,11 +110,11 @@ valRep = MyDict({'X' : ''})
 
 table['Marker'] = table['Marker'].map(markerRep)
 table['Value'] = table['Value'].map(valRep)
+table['Commodity'] = table['Commodity'].astype(str)
+# %%
+table = table.drop_duplicates()
 # %%
 table = table[['Period','ONS Partner Geography','Flow','Commodity','Seasonal Adjustment','Value', 'Marker']]
-table
-
-
 descr = """
 Monthly import country-by-commodity data on the UK's trade in goods, including trade by all countries and selected commodities, non-seasonally adjusted.
 
@@ -134,15 +135,13 @@ While we are happy with the quality of the data in this experimental release we 
 We will continue to review the movements seen in both the HMRC microdata and the linking methodology and, where appropriate, will further develop the methodology for Trade in Goods by Industry for future releases.
 
 """
-
 title = "Trade in goods: country by commodity, exports and imports 2021"
 scraper1.dataset.title = title
 scraper1.dataset.description = descr
-
 
 # %%
 table.to_csv('observations.csv', index=False)
 catalog_metadata = scraper1.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
-# %%
+
