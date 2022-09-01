@@ -96,7 +96,7 @@ table['Period'] = table['Period'].apply(lambda x: 'year/' + x if len(x) == 4  el
 table['Flow'] = table['Flow'].map(lambda x: x.split(' ')[1])
 table['Flow'] = table['Flow'].map(lambda x: pathify(x))
 # %% 
-table['Commodity'] = table['Commodity'].map(lambda x: x.split(' ')[1])
+table['Commodity'] = table['Commodity'].str.split(n=1).str[1]
 # %%
 table['ONS Partner Geography'].cat.categories = table['ONS Partner Geography'].cat.categories.map(lambda x: x[:2])
 # %%
