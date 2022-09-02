@@ -216,7 +216,7 @@ df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
 df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
 # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 df['BOP Service'] = df['BOP Service'].apply(pathify)
-df['Account Type'] = df['Account Type'].apply(pathify)
+df['Table Name'] = df['Table Name'].apply(pathify)
 # %%
 #df = df.replace({'BOP Service' : {',' : ' , ' }})
 
@@ -428,7 +428,7 @@ df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
 df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 df['BOP Service'] = df['BOP Service'].apply(pathify)
-df['Account Type'] = df['Account Type'].apply(pathify)
+df['Table Name'] = df['Table Name'].apply(pathify)
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -629,7 +629,7 @@ df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
 df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 df['BOP Service'] = df['BOP Service'].apply(pathify)
-df['Account Type'] = df['Account Type'].apply(pathify)
+df['Table Name'] = df['Table Name'].apply(pathify)
 
 
 #rename columns
@@ -881,7 +881,7 @@ catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metad
 # df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 # df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Account Type'] = df['Account Type'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 # # replace data marker values
 # df['DATAMARKER'].loc[(df['DATAMARKER'] == 'x')] ="unavailable data" # check with Shannon if I should do this replacement. it described x like this in the source excel doc
@@ -1300,7 +1300,7 @@ catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metad
 # df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 # df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Account Type'] = df['Account Type'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 # #%%
 
@@ -1469,7 +1469,7 @@ catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metad
 # df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 # df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Account Type'] = df['Account Type'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 
 # #%%
@@ -1644,7 +1644,7 @@ catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metad
 # df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 # df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Account Type'] = df['Account Type'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 
 # # %%
@@ -1819,7 +1819,7 @@ catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metad
 # df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 # df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Account Type'] = df['Account Type'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 
 # #%%
@@ -1994,7 +1994,7 @@ catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metad
 # df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 # df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Account Type'] = df['Account Type'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 
 # #%%
@@ -2169,7 +2169,7 @@ catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metad
 # df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 # df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Account Type'] = df['Account Type'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 
 # #%%
@@ -2344,7 +2344,7 @@ catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metad
 # df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
 # # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 # df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Account Type'] = df['Account Type'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 
 # #%%
@@ -2516,7 +2516,7 @@ catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metad
 # df['BOP Service'] = df['BOP Service'].str.strip()
 # # because we're linking with the local codelists in the codelist directory we have to pathify these columns
 # df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Account Type'] = df['Account Type'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 
 # #rename columns
