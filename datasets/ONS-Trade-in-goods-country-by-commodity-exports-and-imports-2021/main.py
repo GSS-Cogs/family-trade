@@ -106,10 +106,10 @@ table['Marker'] = ''
 table['Marker'] = np.where(table['Value'].str.isnumeric() == False, table['Value'], table['Marker'])
 
 markerRep = MyDict({'X' : 'data-not-collated'})
-valRep = MyDict({'X' : ''})
+valRep = MyDict({'X' : np.nan})
 
 table['Marker'] = table['Marker'].map(markerRep)
-table['Value'] = table['Value'].map(valRep)
+table['Value'] = table['Value'].map(valRep).round(2)
 table['Commodity'] = table['Commodity'].astype(str)
 # %%
 table = table.drop_duplicates()
@@ -140,8 +140,10 @@ scraper1.dataset.title = title
 scraper1.dataset.description = descr
 
 # %%
-table.to_csv('observations.csv', index=False)
+table.to_csv('observations.csv', index=False, )
 catalog_metadata = scraper1.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
 
+
+# %%
