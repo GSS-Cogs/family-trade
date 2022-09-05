@@ -1315,6 +1315,8 @@ df['Measure Type'] = "summary-of-international-investment-position-financial-acc
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
 
+
+#%%
 metadata.dataset.title = mainTitle + ' - Summary of international investment position (IIP), financial account transactions, and investment income'
 metadata.dataset.comment = maincomment + r"""
 This dataset: Summary of international investment position (IIP), financial account transactions, and investment income; not seasonally adjusted (£ billion)
