@@ -1310,7 +1310,7 @@ catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_
 
 
 # # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "Summary of international investment position financial account and investment income"
+# df['Measure Type'] = "summary-of-international-investment-position-financial-account-and-investment-income"
 
 # #%% 
 # #reorder columns
@@ -1480,7 +1480,7 @@ catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_
 
 
 # # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "Trade in Goods"
+# df['Measure Type'] = "trade-in-goods"
 
 # #%% 
 # #reorder columns
@@ -1655,7 +1655,7 @@ catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_
 
 
 # # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "Trade in Services"
+# df['Measure Type'] = "trade-in-services"
 
 # #%% 
 # #reorder columns
@@ -1830,7 +1830,7 @@ catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_
 
 
 # # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "Primary income"
+# df['Measure Type'] = "primary-income"
 
 # #%% 
 # #reorder columns
@@ -2005,7 +2005,7 @@ catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_
 
 
 # # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "Secondary income"
+# df['Measure Type'] = "secondary-income"
 
 # #%% 
 # #reorder columns
@@ -2180,7 +2180,7 @@ catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_
 
 
 # # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "Capital account"
+# df['Measure Type'] = "capital-account"
 
 # #%% 
 # #reorder columns
@@ -2355,7 +2355,7 @@ catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_
 
 
 # # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "Financial account"
+# df['Measure Type'] = "financial-account"
 
 # #%% 
 # #reorder columns
@@ -2525,7 +2525,7 @@ catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_
 
 
 # # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "International investment position"
+# df['Measure Type'] = "international-investment-position"
 
 # #%% 
 # #reorder columns
