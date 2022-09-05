@@ -61,5 +61,57 @@
             "skos:ConceptScheme",
             "http://publishmydata.com/pmdcat#DatasetContents"
         ]
-    }
+    },
+    "rdfs:seeAlso": [
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/account-type/dataset",
+            "@type": [
+                "dcat:Dataset",
+                "http://publishmydata.com/pmdcat#Dataset"
+            ],
+            "http://publishmydata.com/pmdcat#datasetContents": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/account-type"
+            },
+            "http://publishmydata.com/pmdcat#graph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/account-type"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-05-20T10:55:04.022998"
+            },
+            "rdfs:label": "Balance of Payments Services",
+            "dc:title": "Balance of Payments Services",
+            "rdfs:comment": "Dataset representing the 'Balance of Payments Services' code list.",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-23T12:05:05.761894"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/catalog/vocabularies",
+            "dcat:record": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/account-type/catalog-record"
+            }
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/account-type/catalog-record",
+            "@type": "dcat:CatalogRecord",
+            "foaf:primaryTopic": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/account-type/dataset"
+            },
+            "http://publishmydata.com/pmdcat#metadataGraph": {
+                "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-balance-of-payments#scheme/account-type"
+            },
+            "dc:title": "Balance of Payments Services Catalog Record",
+            "rdfs:label": "Balance of Payments Services Catalog Record",
+            "dc:issued": {
+                "@type": "dateTime",
+                "@value": "2021-03-23T12:05:05.761894"
+            },
+            "dc:modified": {
+                "@type": "dateTime",
+                "@value": "2021-03-23T12:05:05.761894"
+            }
+        }
+    ]
 }
