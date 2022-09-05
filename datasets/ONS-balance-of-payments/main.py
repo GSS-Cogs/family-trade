@@ -638,7 +638,7 @@ df
 
 
 # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-df['Measure Type'] = "Current account excluding precious metals"
+df['Measure Type'] = "current-account-excluding-precious-metals"
 
 #%% 
 #reorder columns
