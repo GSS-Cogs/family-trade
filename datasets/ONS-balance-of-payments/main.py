@@ -857,12 +857,12 @@ for name,tab in tabs.items():
         continue
 
 
-# %%
+
 # convert the separate tables into one dataframe
 df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
 ## [Postrocessing]
-# %%
+
 # change period values to ONS standard
 df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
