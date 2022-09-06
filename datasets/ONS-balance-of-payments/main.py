@@ -667,7 +667,7 @@ df.to_csv('current_account_exc_precious_metals-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metadata.json')
 
-#t
+#%%
 
 # # %%
 # tidied_sheets = [] # think i want to reset this each time
@@ -1825,7 +1825,6 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 df['Table Name'] = df['Table Name'].apply(pathify)
 
 
-#%%
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -1835,10 +1834,10 @@ df
 # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
 df['Measure Type'] = "primary-income"
 
-#%% 
+
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
-
+#%% 
 metadata.dataset.title = mainTitle + ' - Primary Income'
 metadata.dataset.comment = maincomment + r"""
 This dataset: Primary income; seasonally adjusted (£ million)
@@ -2350,7 +2349,6 @@ catalog_metadata.to_json_file('primary_income-catalog-metadata.json')
 # df['Table Name'] = df['Table Name'].apply(pathify)
 
 
-# #%%
 
 # #rename columns
 # df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
@@ -2363,6 +2361,7 @@ catalog_metadata.to_json_file('primary_income-catalog-metadata.json')
 # #%% 
 # #reorder columns
 # df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
+# #%%
 
 # metadata.dataset.title = mainTitle + ' - Financial Account'
 # metadata.dataset.comment = maincomment + r"""
@@ -2533,7 +2532,7 @@ catalog_metadata.to_json_file('primary_income-catalog-metadata.json')
 # #%% 
 # #reorder columns
 # df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
-
+# #%%
 # metadata.dataset.title = mainTitle + ' - International Investment Position'
 # metadata.dataset.comment = maincomment + r"""
 # This dataset: International investment position; not seasonally adjusted (£ billion)
