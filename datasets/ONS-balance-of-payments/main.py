@@ -464,7 +464,7 @@ df.to_csv('current_account-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('current_account-catalog-metadata.json')
 
-
+#%%
 
 # +
 tidied_sheets = [] # think i want to reset this each time
@@ -640,9 +640,10 @@ df
 # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
 df['Measure Type'] = "current-account-excluding-precious-metals"
 
-#%% 
+
 #reorder columns
 df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
+#%% 
 
 metadata.dataset.title = mainTitle + ' - Current Acount Excluding Precious Metals'
 metadata.dataset.comment = maincomment + r"""
