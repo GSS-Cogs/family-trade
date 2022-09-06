@@ -464,7 +464,7 @@ df.to_csv('current_account-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('current_account-catalog-metadata.json')
 
-#%%
+#%% 
 
 # +
 tidied_sheets = [] # think i want to reset this each time
