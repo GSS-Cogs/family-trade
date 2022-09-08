@@ -2032,7 +2032,6 @@ df.to_csv('secondary_income-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('secondary_income-catalog-metadata.json')
 
-%%
 
 
 # +
