@@ -668,6 +668,7 @@ catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metadata.json')
 
 #%%
+#TODO continue from here
 
 # # %%
 # tidied_sheets = [] # think i want to reset this each time
