@@ -2035,176 +2035,176 @@ catalog_metadata.to_json_file('secondary_income-catalog-metadata.json')
 #%%
 
 
-# +
-tidied_sheets = [] # reset this each time so you're not appending to previous tables
+# # +
+# tidied_sheets = [] # reset this each time so you're not appending to previous tables
 
-# [Capital Account]
-for name,tab in tabs.items():
-    if name == capital_account: # should be Table_I
+# # [Capital Account]
+# for name,tab in tabs.items():
+#     if name == capital_account: # should be Table_I
 
-        bop_tab = 'Capital Account'
-        seasonal_adjustment = 'SA'
-        currency = 'gbp-million'
+#         bop_tab = 'Capital Account'
+#         seasonal_adjustment = 'SA'
+#         currency = 'gbp-million'
 
-        #table locators
-        title_of_table_1 = tab.filter("Table I.1, Capital account, credits (£ million)")
-        title_of_table_2 = tab.filter("Table I.2, Capital account, debits (£ million)")
-        title_of_table_3 = tab.filter("Table I.3, Capital account, balances (£ million)")
-
-
-
-        # separate bags of tables to remove later on
-        tb3_bag = title_of_table_3.expand(DOWN).expand(RIGHT)
-        tb3_tb2_bag = title_of_table_2.expand(DOWN).expand(RIGHT)
+#         #table locators
+#         title_of_table_1 = tab.filter("Table I.1, Capital account, credits (£ million)")
+#         title_of_table_2 = tab.filter("Table I.2, Capital account, debits (£ million)")
+#         title_of_table_3 = tab.filter("Table I.3, Capital account, balances (£ million)")
 
 
 
-        # [Assigning values to dimensions and observations]
-
-        tb1_table_name = 'Credits'
-
-        table_1_period = title_of_table_1.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() -tb3_tb2_bag
-        table_1_BOP_service = title_of_table_1.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() -tb3_tb2_bag
-        table_1_CDID = title_of_table_1.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() -tb3_tb2_bag
-
-        tb1_obs = table_1_CDID.waffle(table_1_period) 
+#         # separate bags of tables to remove later on
+#         tb3_bag = title_of_table_3.expand(DOWN).expand(RIGHT)
+#         tb3_tb2_bag = title_of_table_2.expand(DOWN).expand(RIGHT)
 
 
 
-        tb2_table_name = 'Debits'
+#         # [Assigning values to dimensions and observations]
 
-        table_2_period = title_of_table_2.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb3_bag
-        table_2_BOP_service = title_of_table_2.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb3_bag
-        table_2_CDID = title_of_table_2.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb3_bag
+#         tb1_table_name = 'Credits'
 
-        tb2_obs = table_2_CDID.waffle(table_2_period)
+#         table_1_period = title_of_table_1.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() -tb3_tb2_bag
+#         table_1_BOP_service = title_of_table_1.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() -tb3_tb2_bag
+#         table_1_CDID = title_of_table_1.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() -tb3_tb2_bag
 
-
-
-        tb3_table_name = 'Balances'
-
-        table_3_period = title_of_table_3.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() 
-        table_3_BOP_service = title_of_table_3.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
-        table_3_CDID = title_of_table_3.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() 
-
-        tb3_obs = table_3_CDID.waffle(table_3_period)
+#         tb1_obs = table_1_CDID.waffle(table_1_period) 
 
 
 
+#         tb2_table_name = 'Debits'
 
-        # [Coupling observations with dimensions]
+#         table_2_period = title_of_table_2.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb3_bag
+#         table_2_BOP_service = title_of_table_2.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb3_bag
+#         table_2_CDID = title_of_table_2.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb3_bag
 
-        # [Table 1]
-        tb1_dimensions = [
-            HDimConst('Table Name', tb1_table_name),
-            HDimConst('Seasonal Adjustment', seasonal_adjustment),
-            HDimConst('Currency', currency),
-            HDimConst('BoP Section', bop_tab),
-            HDim(table_1_period, "Period", DIRECTLY, LEFT),
-            HDim(table_1_BOP_service,'BOP Service',DIRECTLY,UP),
-            HDim(table_1_CDID,'CDID',DIRECTLY,UP),
-        ]
-
-        # [Table 2]
-        tb2_dimensions = [
-            HDimConst('Table Name', tb2_table_name),
-            HDimConst('Seasonal Adjustment', seasonal_adjustment),
-            HDimConst('Currency', currency),
-            HDimConst('BoP Section', bop_tab),
-            HDim(table_2_period, "Period", DIRECTLY, LEFT),
-            HDim(table_2_BOP_service,'BOP Service',DIRECTLY,UP),
-            HDim(table_2_CDID,'CDID',DIRECTLY,UP),
-        ]
-
-        # [Table 3]
-        tb3_dimensions = [
-            HDimConst('Table Name', tb3_table_name),
-            HDimConst('Seasonal Adjustment', seasonal_adjustment),
-            HDimConst('Currency', currency),
-            HDimConst('BoP Section', bop_tab),
-            HDim(table_3_period, "Period", DIRECTLY, LEFT),
-            HDim(table_3_BOP_service,'BOP Service',DIRECTLY,UP),
-            HDim(table_3_CDID,'CDID',DIRECTLY,UP),
-        ]
+#         tb2_obs = table_2_CDID.waffle(table_2_period)
 
 
 
-        tb1_cs = ConversionSegment(tab, tb1_dimensions, tb1_obs)
-        tb2_cs = ConversionSegment(tab, tb2_dimensions, tb2_obs)
-        tb3_cs = ConversionSegment(tab, tb3_dimensions, tb3_obs)
+#         tb3_table_name = 'Balances'
+
+#         table_3_period = title_of_table_3.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() 
+#         table_3_BOP_service = title_of_table_3.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
+#         table_3_CDID = title_of_table_3.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() 
+
+#         tb3_obs = table_3_CDID.waffle(table_3_period)
+
+
+
+
+#         # [Coupling observations with dimensions]
+
+#         # [Table 1]
+#         tb1_dimensions = [
+#             HDimConst('Table Name', tb1_table_name),
+#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
+#             HDimConst('Currency', currency),
+#             HDimConst('BoP Section', bop_tab),
+#             HDim(table_1_period, "Period", DIRECTLY, LEFT),
+#             HDim(table_1_BOP_service,'BOP Service',DIRECTLY,UP),
+#             HDim(table_1_CDID,'CDID',DIRECTLY,UP),
+#         ]
+
+#         # [Table 2]
+#         tb2_dimensions = [
+#             HDimConst('Table Name', tb2_table_name),
+#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
+#             HDimConst('Currency', currency),
+#             HDimConst('BoP Section', bop_tab),
+#             HDim(table_2_period, "Period", DIRECTLY, LEFT),
+#             HDim(table_2_BOP_service,'BOP Service',DIRECTLY,UP),
+#             HDim(table_2_CDID,'CDID',DIRECTLY,UP),
+#         ]
+
+#         # [Table 3]
+#         tb3_dimensions = [
+#             HDimConst('Table Name', tb3_table_name),
+#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
+#             HDimConst('Currency', currency),
+#             HDimConst('BoP Section', bop_tab),
+#             HDim(table_3_period, "Period", DIRECTLY, LEFT),
+#             HDim(table_3_BOP_service,'BOP Service',DIRECTLY,UP),
+#             HDim(table_3_CDID,'CDID',DIRECTLY,UP),
+#         ]
+
+
+
+#         tb1_cs = ConversionSegment(tab, tb1_dimensions, tb1_obs)
+#         tb2_cs = ConversionSegment(tab, tb2_dimensions, tb2_obs)
+#         tb3_cs = ConversionSegment(tab, tb3_dimensions, tb3_obs)
         
-        tb1_tidy_sheet = tb1_cs.topandas()
-        tb2_tidy_sheet = tb2_cs.topandas()
-        tb3_tidy_sheet = tb3_cs.topandas()
+#         tb1_tidy_sheet = tb1_cs.topandas()
+#         tb2_tidy_sheet = tb2_cs.topandas()
+#         tb3_tidy_sheet = tb3_cs.topandas()
 
-        ## create preview files of one table
-        #savepreviewhtml(tb1_cs, fname= name + "PREVIEW.html")
+#         ## create preview files of one table
+#         #savepreviewhtml(tb1_cs, fname= name + "PREVIEW.html")
 
-        # append all tables together
-        tidied_sheets.append(tb1_tidy_sheet)
-        tidied_sheets.append(tb2_tidy_sheet)
-        tidied_sheets.append(tb3_tidy_sheet)
-
-
-    else:
-        continue
+#         # append all tables together
+#         tidied_sheets.append(tb1_tidy_sheet)
+#         tidied_sheets.append(tb2_tidy_sheet)
+#         tidied_sheets.append(tb3_tidy_sheet)
 
 
-# convert the separate tables into one dataframe
-df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
-
-## [Postrocessing]
-
-# change period values to ONS standard
-df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
-
-# convert blank observations to zeros and convert to int type
-#df['OBS'].loc[(df['OBS'] == '')] = '0'
-df['OBS'] = df['OBS'].astype(int)
-df['Measure Type'] = 'net-transactions'
-df['CDID'] = df['CDID'].str.strip()
-df['BOP Service'] = df['BOP Service'].str.strip()
-df["BOP Service"] = df["BOP Service"].replace(r'\n',' ', regex=True) 
-df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
-# the BOP services showing subtotal values includea lot of spaces between words so replacing them with just one. warning, it also removes all whitespace characters (space, tab, newline, return, formfeed)
-df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
-# conflicting value in Trade total and Trade Total when making a codelist
-df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
-# because we're linking with the local codelists in the codelist directory we have to pathify these columns
-df['BOP Service'] = df['BOP Service'].apply(pathify)
-df['Table Name'] = df['Table Name'].apply(pathify)
+#     else:
+#         continue
 
 
+# # convert the separate tables into one dataframe
+# df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
-#rename columns
-df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
-df
+# ## [Postrocessing]
+
+# # change period values to ONS standard
+# df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
+
+# # convert blank observations to zeros and convert to int type
+# #df['OBS'].loc[(df['OBS'] == '')] = '0'
+# df['OBS'] = df['OBS'].astype(int)
+# df['Measure Type'] = 'net-transactions'
+# df['CDID'] = df['CDID'].str.strip()
+# df['BOP Service'] = df['BOP Service'].str.strip()
+# df["BOP Service"] = df["BOP Service"].replace(r'\n',' ', regex=True) 
+# df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
+# # the BOP services showing subtotal values includea lot of spaces between words so replacing them with just one. warning, it also removes all whitespace characters (space, tab, newline, return, formfeed)
+# df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
+# # conflicting value in Trade total and Trade Total when making a codelist
+# df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
+# # because we're linking with the local codelists in the codelist directory we have to pathify these columns
+# df['BOP Service'] = df['BOP Service'].apply(pathify)
+# df['Table Name'] = df['Table Name'].apply(pathify)
 
 
-# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-df['Measure Type'] = "capital-account"
+
+# #rename columns
+# df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit'}, inplace=True)
+# df
 
 
-#reorder columns
-df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
-#%%
-metadata.dataset.title = mainTitle + ' - Capital Account'
-metadata.dataset.comment = maincomment + r"""
-This dataset: Capital Account; seasonally adjusted (£ million)
-"""
-metadata.dataset.description = maindescr + r"""
-Capital Account:
+# # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+# df['Measure Type'] = "capital-account"
 
-The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
 
-These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+# #reorder columns
+# df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Measure Type']]
+# #%%
+# metadata.dataset.title = mainTitle + ' - Capital Account'
+# metadata.dataset.comment = maincomment + r"""
+# This dataset: Capital Account; seasonally adjusted (£ million)
+# """
+# metadata.dataset.description = maindescr + r"""
+# Capital Account:
 
-As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
-"""
+# The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
 
-df.to_csv('capital_account-observations.csv', index=False)
-catalog_metadata = metadata.as_csvqb_catalog_metadata() 
-catalog_metadata.to_json_file('capital_account-catalog-metadata.json')
+# These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+# As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+# """
+
+# df.to_csv('capital_account-observations.csv', index=False)
+# catalog_metadata = metadata.as_csvqb_catalog_metadata() 
+# catalog_metadata.to_json_file('capital_account-catalog-metadata.json')
 
 
 # #%%
