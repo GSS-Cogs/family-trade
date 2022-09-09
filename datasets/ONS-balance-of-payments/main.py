@@ -884,7 +884,7 @@ df['BOP Service'] = df['BOP Service'].apply(pathify)
 df['Table Name'] = df['Table Name'].apply(pathify)
 
 # replace data marker values
-df['DATAMARKER'].loc[(df['DATAMARKER'] == 'x')] ="not-available" # check with Shannon if I should do this replacement. it described x like this in the source excel doc
+df['DATAMARKER'].loc[(df['DATAMARKER'] == 'x')] ="not-available"
 
 #rename columns
 df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit','DATAMARKER' : 'Marker'}, inplace=True)
