@@ -667,274 +667,270 @@ df.to_csv('current_account_exc_precious_metals-observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata() 
 catalog_metadata.to_json_file('current_account_exc_precious_metals-catalog-metadata.json')
 
-#%%
-#TODO continue from here
 
-# # %%
-# tidied_sheets = [] # think i want to reset this each time
+# %%
+tidied_sheets = [] # think i want to reset this each time
 
-# # [current account, transactions with EU and non EU countries]
-# for name,tab in tabs.items():
-#     if name == current_account_transaction_with_the_eu_and_non_eu_countries: # should be Table_C 
+# [current account, transactions with EU and non EU countries]
+for name,tab in tabs.items():
+    if name == current_account_transaction_with_the_eu_and_non_eu_countries: # should be Table_C 
 
-#         bop_tab = 'Current Acount Trans with EU and Non-EU'
-#         seasonal_adjustment = 'SA'
-#         currency = 'gbp-million'
+        bop_tab = 'Current Acount Trans with EU and Non-EU'
+        seasonal_adjustment = 'SA'
+        currency = 'gbp-million'
 
-#         #table locators
-#         title_of_table_1 = tab.filter("Table C.1, Transactions with the European Union, Credits [note 1] [note 2] [note 3] [note 4] [note 5] (£ million)")
-#         title_of_table_2 = tab.filter("Table C.2, Transactions with the European Union, Debits [note 1] [note 2] [note 3] [note 4] [note 5] (£ million)")
-#         title_of_table_3 = tab.filter("Table C.3, Transactions with the European Union, Balances [note 1] [note 2] [note 3] [note 4] [note 5] (£ million)")
-#         title_of_table_4 = tab.filter("Table C.4, Transactions with non-EU countries, Credits [note 4] [note 5] [note 6] [note 7] (£ million)")
-#         title_of_table_5 = tab.filter("Table C.5, Transactions with non-EU countries, Debits [note 4] [note 5] [note 6] [note 7] (£ million)")
-#         title_of_table_6 = tab.filter("Table C.6, Transactions with non-EU countries, Balances [note 4] [note 5] [note 6] [note 7] (£ million)")
+        #table locators
+        title_of_table_1 = tab.filter("Table C.1, Transactions with the European Union, Credits [note 1] [note 2] [note 3] [note 4] [note 5] (£ million)")
+        title_of_table_2 = tab.filter("Table C.2, Transactions with the European Union, Debits [note 1] [note 2] [note 3] [note 4] [note 5] (£ million)")
+        title_of_table_3 = tab.filter("Table C.3, Transactions with the European Union, Balances [note 1] [note 2] [note 3] [note 4] [note 5] (£ million)")
+        title_of_table_4 = tab.filter("Table C.4, Transactions with non-EU countries, Credits [note 4] [note 5] [note 6] [note 7] (£ million)")
+        title_of_table_5 = tab.filter("Table C.5, Transactions with non-EU countries, Debits [note 4] [note 5] [note 6] [note 7] (£ million)")
+        title_of_table_6 = tab.filter("Table C.6, Transactions with non-EU countries, Balances [note 4] [note 5] [note 6] [note 7] (£ million)")
 
 
 
-#         # separate bags of tables to remove later on
-#         tb6_bag = title_of_table_6.expand(DOWN).expand(RIGHT)
-#         tb6_tb5_bag = title_of_table_5.expand(DOWN).expand(RIGHT)
-#         tb6_tb5_tb4_bag = title_of_table_4.expand(DOWN).expand(RIGHT)
-#         tb6_tb5_tb4_tb3_bag = title_of_table_3.expand(DOWN).expand(RIGHT)
-#         tb6_tb5_tb4_tb3_tb2_bag = title_of_table_2.expand(DOWN).expand(RIGHT) # TODO
+        # separate bags of tables to remove later on
+        tb6_bag = title_of_table_6.expand(DOWN).expand(RIGHT)
+        tb6_tb5_bag = title_of_table_5.expand(DOWN).expand(RIGHT)
+        tb6_tb5_tb4_bag = title_of_table_4.expand(DOWN).expand(RIGHT)
+        tb6_tb5_tb4_tb3_bag = title_of_table_3.expand(DOWN).expand(RIGHT)
+        tb6_tb5_tb4_tb3_tb2_bag = title_of_table_2.expand(DOWN).expand(RIGHT) # TODO
 
 
 
-#         # [Assigning values to dimensions and observations]
+        # [Assigning values to dimensions and observations]
 
-#         tb1_table_name = 'EU Credits'
+        tb1_table_name = 'EU Credits'
 
-#         table_1_period = title_of_table_1.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_tb2_bag
-#         table_1_BOP_service = title_of_table_1.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_tb2_bag
-#         table_1_CDID = title_of_table_1.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_tb2_bag
+        table_1_period = title_of_table_1.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_tb2_bag
+        table_1_BOP_service = title_of_table_1.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_tb2_bag
+        table_1_CDID = title_of_table_1.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_tb2_bag
 
-#         tb1_obs = table_1_CDID.waffle(table_1_period) 
-
-
-
-#         tb2_table_name = 'EU Debits'
-
-#         table_2_period = title_of_table_2.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_bag
-#         table_2_BOP_service = title_of_table_2.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_bag
-#         table_2_CDID = title_of_table_2.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_bag
-
-#         tb2_obs = table_2_CDID.waffle(table_2_period)
+        tb1_obs = table_1_CDID.waffle(table_1_period) 
 
 
 
-#         tb3_table_name = 'EU Balances'
+        tb2_table_name = 'EU Debits'
 
-#         table_3_period = title_of_table_3.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_bag
-#         table_3_BOP_service = title_of_table_3.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_bag
-#         table_3_CDID = title_of_table_3.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_bag
+        table_2_period = title_of_table_2.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_bag
+        table_2_BOP_service = title_of_table_2.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_bag
+        table_2_CDID = title_of_table_2.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_tb3_bag
 
-#         tb3_obs = table_3_CDID.waffle(table_3_period)
-
-
-
-#         tb4_table_name = 'Non-EU Credits'
-
-#         table_4_period = title_of_table_4.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_tb5_bag
-#         table_4_BOP_service = title_of_table_4.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_bag
-#         table_4_CDID = title_of_table_4.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_bag
-
-#         tb4_obs = table_4_CDID.waffle(table_4_period)
+        tb2_obs = table_2_CDID.waffle(table_2_period)
 
 
 
-#         tb5_table_name = 'Non-EU Debits'
+        tb3_table_name = 'EU Balances'
 
-#         table_5_period = title_of_table_5.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_bag
-#         table_5_BOP_service = title_of_table_5.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_bag
-#         table_5_CDID = title_of_table_5.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_bag
+        table_3_period = title_of_table_3.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_bag
+        table_3_BOP_service = title_of_table_3.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_bag
+        table_3_CDID = title_of_table_3.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_tb4_bag
 
-#         tb5_obs = table_5_CDID.waffle(table_5_period)
-
-
-
-#         tb6_table_name = 'Non-EU Balances'
-
-#         table_6_period = title_of_table_6.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace()
-#         table_6_BOP_service = title_of_table_6.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
-#         table_6_CDID = title_of_table_6.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
-
-#         tb6_obs = table_6_CDID.waffle(table_6_period)
+        tb3_obs = table_3_CDID.waffle(table_3_period)
 
 
-#         # [Coupling observations with dimensions]
 
-#         # [Table 1]
-#         tb1_dimensions = [
-#             HDimConst('Table Name', tb1_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_1_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_1_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_1_CDID,'CDID',DIRECTLY,UP),
-#         ]
+        tb4_table_name = 'Non-EU Credits'
 
-#         # [Table 2]
-#         tb2_dimensions = [
-#             HDimConst('Table Name', tb2_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_2_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_2_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_2_CDID,'CDID',DIRECTLY,UP),
-#         ]
+        table_4_period = title_of_table_4.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_tb5_bag
+        table_4_BOP_service = title_of_table_4.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_bag
+        table_4_CDID = title_of_table_4.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_tb5_bag
 
-#         # [Table 3]
-#         tb3_dimensions = [
-#             HDimConst('Table Name', tb3_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_3_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_3_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_3_CDID,'CDID',DIRECTLY,UP),
-#         ]
-
-#             # [Table 4]
-#         tb4_dimensions = [
-#             HDimConst('Table Name', tb4_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_4_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_4_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_4_CDID,'CDID',DIRECTLY,UP),
-#         ]
-
-#             # [Table 5]
-#         tb5_dimensions = [
-#             HDimConst('Table Name', tb5_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_5_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_5_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_5_CDID,'CDID',DIRECTLY,UP),
-#         ]
-
-#             # [Table 6]
-#         tb6_dimensions = [
-#             HDimConst('Table Name', tb6_table_name),
-#             HDimConst('Seasonal Adjustment', seasonal_adjustment),
-#             HDimConst('Currency', currency),
-#             HDimConst('BoP Section', bop_tab),
-#             HDim(table_6_period, "Period", DIRECTLY, LEFT),
-#             HDim(table_6_BOP_service,'BOP Service',DIRECTLY,UP),
-#             HDim(table_6_CDID,'CDID',DIRECTLY,UP),
-#         ]
+        tb4_obs = table_4_CDID.waffle(table_4_period)
 
 
-#         tb1_cs = ConversionSegment(tab, tb1_dimensions, tb1_obs)
-#         tb2_cs = ConversionSegment(tab, tb2_dimensions, tb2_obs)
-#         tb3_cs = ConversionSegment(tab, tb3_dimensions, tb3_obs)
-#         tb4_cs = ConversionSegment(tab, tb4_dimensions, tb4_obs)
-#         tb5_cs = ConversionSegment(tab, tb5_dimensions, tb5_obs)
-#         tb6_cs = ConversionSegment(tab, tb6_dimensions, tb6_obs)
+
+        tb5_table_name = 'Non-EU Debits'
+
+        table_5_period = title_of_table_5.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace() - tb6_bag
+        table_5_BOP_service = title_of_table_5.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_bag
+        table_5_CDID = title_of_table_5.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace() - tb6_bag
+
+        tb5_obs = table_5_CDID.waffle(table_5_period)
+
+
+
+        tb6_table_name = 'Non-EU Balances'
+
+        table_6_period = title_of_table_6.shift(DOWN).shift(DOWN).shift(DOWN).expand(DOWN).is_not_blank().is_not_whitespace()
+        table_6_BOP_service = title_of_table_6.shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
+        table_6_CDID = title_of_table_6.shift(DOWN).shift(DOWN).shift(RIGHT).expand(RIGHT).is_not_blank().is_not_whitespace()
+
+        tb6_obs = table_6_CDID.waffle(table_6_period)
+
+
+        # [Coupling observations with dimensions]
+
+        # [Table 1]
+        tb1_dimensions = [
+            HDimConst('Table Name', tb1_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_1_period, "Period", DIRECTLY, LEFT),
+            HDim(table_1_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_1_CDID,'CDID',DIRECTLY,UP),
+        ]
+
+        # [Table 2]
+        tb2_dimensions = [
+            HDimConst('Table Name', tb2_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_2_period, "Period", DIRECTLY, LEFT),
+            HDim(table_2_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_2_CDID,'CDID',DIRECTLY,UP),
+        ]
+
+        # [Table 3]
+        tb3_dimensions = [
+            HDimConst('Table Name', tb3_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_3_period, "Period", DIRECTLY, LEFT),
+            HDim(table_3_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_3_CDID,'CDID',DIRECTLY,UP),
+        ]
+
+            # [Table 4]
+        tb4_dimensions = [
+            HDimConst('Table Name', tb4_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_4_period, "Period", DIRECTLY, LEFT),
+            HDim(table_4_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_4_CDID,'CDID',DIRECTLY,UP),
+        ]
+
+            # [Table 5]
+        tb5_dimensions = [
+            HDimConst('Table Name', tb5_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_5_period, "Period", DIRECTLY, LEFT),
+            HDim(table_5_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_5_CDID,'CDID',DIRECTLY,UP),
+        ]
+
+            # [Table 6]
+        tb6_dimensions = [
+            HDimConst('Table Name', tb6_table_name),
+            HDimConst('Seasonal Adjustment', seasonal_adjustment),
+            HDimConst('Currency', currency),
+            HDimConst('BoP Section', bop_tab),
+            HDim(table_6_period, "Period", DIRECTLY, LEFT),
+            HDim(table_6_BOP_service,'BOP Service',DIRECTLY,UP),
+            HDim(table_6_CDID,'CDID',DIRECTLY,UP),
+        ]
+
+
+        tb1_cs = ConversionSegment(tab, tb1_dimensions, tb1_obs)
+        tb2_cs = ConversionSegment(tab, tb2_dimensions, tb2_obs)
+        tb3_cs = ConversionSegment(tab, tb3_dimensions, tb3_obs)
+        tb4_cs = ConversionSegment(tab, tb4_dimensions, tb4_obs)
+        tb5_cs = ConversionSegment(tab, tb5_dimensions, tb5_obs)
+        tb6_cs = ConversionSegment(tab, tb6_dimensions, tb6_obs)
         
-#         tb1_tidy_sheet = tb1_cs.topandas()
-#         tb2_tidy_sheet = tb2_cs.topandas()
-#         tb3_tidy_sheet = tb3_cs.topandas()
-#         tb4_tidy_sheet = tb4_cs.topandas()
-#         tb5_tidy_sheet = tb5_cs.topandas()
-#         tb6_tidy_sheet = tb6_cs.topandas()
+        tb1_tidy_sheet = tb1_cs.topandas()
+        tb2_tidy_sheet = tb2_cs.topandas()
+        tb3_tidy_sheet = tb3_cs.topandas()
+        tb4_tidy_sheet = tb4_cs.topandas()
+        tb5_tidy_sheet = tb5_cs.topandas()
+        tb6_tidy_sheet = tb6_cs.topandas()
 
-#         ## create preview files of one table
-#         #savepreviewhtml(tb1_cs, fname= name + "PREVIEW.html")
+        ## create preview files of one table
+        #savepreviewhtml(tb1_cs, fname= name + "PREVIEW.html")
 
-#         # append all tables together
-#         tidied_sheets.append(tb1_tidy_sheet)
-#         tidied_sheets.append(tb2_tidy_sheet)
-#         tidied_sheets.append(tb3_tidy_sheet)
-#         tidied_sheets.append(tb4_tidy_sheet)
-#         tidied_sheets.append(tb5_tidy_sheet)
-#         tidied_sheets.append(tb6_tidy_sheet)
+        # append all tables together
+        tidied_sheets.append(tb1_tidy_sheet)
+        tidied_sheets.append(tb2_tidy_sheet)
+        tidied_sheets.append(tb3_tidy_sheet)
+        tidied_sheets.append(tb4_tidy_sheet)
+        tidied_sheets.append(tb5_tidy_sheet)
+        tidied_sheets.append(tb6_tidy_sheet)
 
-#     else:
-#         continue
-
-
-
-# # convert the separate tables into one dataframe
-# df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
-
-# ## [Postrocessing]
-
-# # change period values to ONS standard
-# df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
-
-# # convert blank observations to zeros and convert to int type
-# df['OBS'].loc[(df['OBS'] == '')] = None
-# #df['OBS'] = df['OBS'].astype(int)
-# df['Measure Type'] = 'net-transactions'
-# df['CDID'] = df['CDID'].str.strip()
-# df['BOP Service'] = df['BOP Service'].str.strip() # whitespace in total credit
-# #df = df.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True)
-# df["BOP Service"] = df["BOP Service"].replace(r'\n',' ', regex=True) 
-# df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
-# # the BOP services showing subtotal values includea lot of spaces between words so replacing them with just one. warning, it also removes all whitespace characters (space, tab, newline, return, formfeed)
-# df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
-# # conflicting value in Trade total and Trade Total when making a codelist
-# df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
-# # because we're linking with the local codelists in the codelist directory we have to pathify these columns
-# df['BOP Service'] = df['BOP Service'].apply(pathify)
-# df['Table Name'] = df['Table Name'].apply(pathify)
-
-# # replace data marker values
-# df['DATAMARKER'].loc[(df['DATAMARKER'] == 'x')] ="not-available" # check with Shannon if I should do this replacement. it described x like this in the source excel doc
-
-# #rename columns
-# df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit','DATAMARKER' : 'Marker'}, inplace=True)
-# df
+    else:
+        continue
 
 
-# # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-# df['Measure Type'] = "current-account-transactions-with-the-eu-and-with-non-eu-countries"
 
-# #%% 
-# #reorder columns
-# df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Marker','Measure Type']]
+# convert the separate tables into one dataframe
+df = pd.concat(tidied_sheets, sort = True, ignore_index=True).fillna('')
 
-# metadata.dataset.title = mainTitle + ' - Current account, Transactions with the European Union (EU) and with non-EU countries'
-# metadata.dataset.comment = maincomment + r"""
-# This dataset: Current account, Transactions with the European Union (EU) and with non-EU countries, seasonally adjusted (£ million)
-# """
-# metadata.dataset.description = maindescr + r"""
-# Current account, Transactions with the European Union (EU) and with non-EU countries:
+## [Postrocessing]
 
-# EU presented on an EU basis.
+# change period values to ONS standard
+df['Period'] = df['Period'].map(lambda x: 'year/' + left(x,4) if 'Q' not in x else 'quarter/' + left(x,4) + '-' + right(x,2))
 
-# Includes transactions with European Union institutions.
+# convert blank observations to zeros and convert to int type
+df['OBS'].loc[(df['OBS'] == '')] = None
+#df['OBS'] = df['OBS'].astype(int)
+df['Measure Type'] = 'net-transactions'
+df['CDID'] = df['CDID'].str.strip()
+df['BOP Service'] = df['BOP Service'].str.strip() # whitespace in total credit
+#df = df.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True)
+df["BOP Service"] = df["BOP Service"].replace(r'\n',' ', regex=True) 
+df["BOP Service"] = df["BOP Service"].replace(',',' ', regex=True)
+# the BOP services showing subtotal values includea lot of spaces between words so replacing them with just one. warning, it also removes all whitespace characters (space, tab, newline, return, formfeed)
+df["BOP Service"] = df["BOP Service"].apply(lambda x: " ".join(x.split()))
+# conflicting value in Trade total and Trade Total when making a codelist
+df["BOP Service"] = df["BOP Service"].replace('Trade total','Trade Total', regex=True)
+# because we're linking with the local codelists in the codelist directory we have to pathify these columns
+df['BOP Service'] = df['BOP Service'].apply(pathify)
+df['Table Name'] = df['Table Name'].apply(pathify)
 
-# A quarterly breakdown of the UK's current account with the Euro area (as a whole) is published in table B6 of United Kingdom Economic Accounts (UKEA) at http://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts
+# replace data marker values
+df['DATAMARKER'].loc[(df['DATAMARKER'] == 'x')] ="not-available" # check with Shannon if I should do this replacement. it described x like this in the source excel doc
 
-# These data are our best estimates of these bilateral UK trade flows. Users should note that alternative estimates are Available, in some cases, via the statistical agencies for bilateral countries or through the central databases such as UN Comtrade (www.comtrade.un.org).
-
-# Cells containing 'x' represent unavailable data.
-
-# A quarterly geographic breakdown of the UK's current account with the USA, Japan, Canada, Switzerland, Brazil, China, Hong Kong, India and Russia is also Available and is published in table B6B of UKEA (see [note 3])
-
-# Includes transactions with international organisations other than European Union institutions.
-
-# The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
-
-# These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
-
-# As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
-# """
-
-# # %%
-# df.to_csv('current_account_transactions_with_the_eu_and_non_eu_countries-observations.csv', index=False)
-# catalog_metadata = metadata.as_csvqb_catalog_metadata() 
-# catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_eu_countries-catalog-metadata.json')
+#rename columns
+df.rename(columns={'OBS' : 'Value', 'Table Name' : 'Account Type', 'Currency' : 'Unit','DATAMARKER' : 'Marker'}, inplace=True)
+df
 
 
-#%%
+# TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
+df['Measure Type'] = "current-account-transactions-with-the-eu-and-with-non-eu-countries"
+
+#%% 
+#reorder columns
+df = df[['Period','CDID','Seasonal Adjustment','Account Type','BOP Service','Value','Unit','Marker','Measure Type']]
+
+metadata.dataset.title = mainTitle + ' - Current account, Transactions with the European Union (EU) and with non-EU countries'
+metadata.dataset.comment = maincomment + r"""
+This dataset: Current account, Transactions with the European Union (EU) and with non-EU countries, seasonally adjusted (£ million)
+"""
+metadata.dataset.description = maindescr + r"""
+Current account, Transactions with the European Union (EU) and with non-EU countries:
+
+EU presented on an EU basis.
+
+Includes transactions with European Union institutions.
+
+A quarterly breakdown of the UK's current account with the Euro area (as a whole) is published in table B6 of United Kingdom Economic Accounts (UKEA) at http://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts
+
+These data are our best estimates of these bilateral UK trade flows. Users should note that alternative estimates are Available, in some cases, via the statistical agencies for bilateral countries or through the central databases such as UN Comtrade (www.comtrade.un.org).
+
+Cells containing 'x' represent unavailable data.
+
+A quarterly geographic breakdown of the UK's current account with the USA, Japan, Canada, Switzerland, Brazil, China, Hong Kong, India and Russia is also Available and is published in table B6B of UKEA (see [note 3])
+
+Includes transactions with international organisations other than European Union institutions.
+
+The quarters in the table refer to: Q1 = Jan to Mar, Q2 = Apr to June, Q3 = July to Sept, Q4 = Oct to Dec.
+
+These tables refer to CDID's which stands for Central Database Identifier, the codes used to identify specific datasets.
+
+As previously announced by HMRC, changes to the way EU imports data have been recorded collected from January 2022 onwards may have led to a discontinuity in trade figures and the Current Account. We advise caution when interpreting 2022 compared with other periods as the impacts of these changes are still being investigated. In addition, changes to the sample framework for foreign direct investment (FDI) statistics means there is a higher degree of uncertainty than usual with inward FDI data. As such, users should be cautious when interpreting Q1 2022 balance of payments statistics. 
+"""
+
+# %%
+df.to_csv('current_account_transactions_with_the_eu_and_non_eu_countries-observations.csv', index=False)
+catalog_metadata = metadata.as_csvqb_catalog_metadata() 
+catalog_metadata.to_json_file('current_account_transactions_with_the_eu_and_non_eu_countries-catalog-metadata.json')
+
 
 
 # +
