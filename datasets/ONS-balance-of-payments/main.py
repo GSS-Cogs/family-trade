@@ -892,7 +892,7 @@ df
 
 
 # TODO this is temporary until me, SB and RB agree what to put. Copied value from https://github.com/GSS-Cogs/family-trade/blob/master/reference/measures.csv
-df['Measure Type'] = "current-account-transactions-with-the-eu-and-with-non-eu-countries"
+df['Measure Type'] = "current-account-transactions-with-the-european-union-eu-and-with-non-eu-countries"
 
 #%% 
 #reorder columns
