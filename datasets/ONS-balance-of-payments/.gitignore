@@ -1,0 +1,8 @@
+# ignore ALL html files
+*.html
+#*-info.json
+*-observations.csv
+*-catalog-metadata.json
+scrapbook.txt
+andrew_code_help.py
+main_orig.py
