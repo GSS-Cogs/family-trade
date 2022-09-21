@@ -84,14 +84,14 @@
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-05-20T10:55:04.057713"
+                "@value": "2021-05-20T10:55:04.059085"
             },
             "rdfs:label": "Itis Service",
             "dc:title": "Itis Service",
             "rdfs:comment": "Dataset representing the 'Itis Service' code list.",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-04-13T17:22:47.240180"
+                "@value": "2021-04-13T10:04:13.589262"
             }
         },
         {
@@ -113,11 +113,11 @@
             "rdfs:label": "Itis Service Catalog Record",
             "dc:issued": {
                 "@type": "dateTime",
-                "@value": "2021-04-13T17:22:47.240180"
+                "@value": "2021-04-13T10:04:13.589262"
             },
             "dc:modified": {
                 "@type": "dateTime",
-                "@value": "2021-04-13T17:22:47.240180"
+                "@value": "2021-05-20T10:55:04.059085"
             }
         }
     ]

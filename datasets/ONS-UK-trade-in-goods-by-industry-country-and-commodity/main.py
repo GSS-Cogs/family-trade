@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
-
-
-
-# In[1]:
+# In[54]:
 
 
 # UK trade in goods by industry, country and commodity, exports and imports
@@ -18,7 +12,21 @@ from gssutils import *
 #from csvcubed.models.cube.qb.catalog import CatalogMetadata # make sure you're in the test container
 
 
-# In[2]:
+# In[55]:
+
+
+# there are two separate landing pages as we're combining two datasets so need to overwrite the landing page in the info.json (exports) with the other (imports) landing page. 
+# We need to put the original one back or we just end up running the same one twice when running multiple times locally 
+with open("info.json", "r") as jsonFile:
+    data = json.load(jsonFile)
+# change landing page
+data["landingPage"] = "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityexports"
+with open("info.json", "w") as jsonFile:
+    json.dump(data, jsonFile, indent=2) # put it back in the info json file
+del data
+
+
+# In[56]:
 
 
 # get first landing page details
@@ -26,15 +34,15 @@ metadata = Scraper(seed = "info.json")
 # display(metadata) #  to see exactly the data we are loading
 
 
-# In[3]:
+# In[57]:
 
 
 # load export data
 distribution1 = metadata.distribution(latest = True)
-# display(distribution1)
+display(distribution1)
 
 
-# In[4]:
+# In[58]:
 
 
 # there are two separate landing pages as we're combining two datasets so need to overwrite the landing page in the info.json (exports) with the other (imports) landing page.
@@ -47,7 +55,7 @@ with open("info.json", "w") as jsonFile:
 del data
 
 
-# In[5]:
+# In[59]:
 
 
 #get the second landing page details
@@ -56,10 +64,10 @@ metadata = Scraper(seed = "info.json")
 # %%
 # load import data
 distribution2 = metadata.distribution(latest = True)
-# display(distribution2)
+display(distribution2)
 
 
-# In[6]:
+# In[60]:
 
 
 # load tabs from two different distributions/excel workbooks and combine
@@ -68,31 +76,35 @@ tabs2 = distribution2.as_databaker()
 tabs = tabs1 + tabs2
 
 
-# In[7]:
+# In[61]:
 
 
 # keep tabs we're interested in
-tabs = [x for x in tabs if x.name in ('tig_ind_ex final', 'tig_ind_im') ]
+tabs = [x for x in tabs if x.name in ('TiG by industry imports', 'TiG Industry exports') ]
+for i in tabs:
+    print(i.name)
 
 
-# In[8]:
+# In[62]:
 
 
 tidied_sheets = []
 
 for tab in tabs:
 
+    print(tab.name)
+
     # [Dimensions]
 
-    if tab.name == 'tig_ind_ex final':
+    if tab.name == 'TiG Industry exports':
         flow = 'exports'
-    elif tab.name == 'tig_ind_im':
+    elif tab.name == 'TiG by industry imports':
         flow = 'imports'
 
     country = tab.filter('Country').fill(DOWN).is_not_blank()
     industry = tab.filter('Industry').fill(DOWN).is_not_blank()
     commodity = tab.filter('Commodity').fill(DOWN).is_not_blank()
-    year = tab.excel_ref('E1').expand(RIGHT).is_not_blank()
+    year = tab.filter('Commodity').fill(RIGHT).is_not_blank()
 
 
     # [Observations]
@@ -113,7 +125,7 @@ for tab in tabs:
     tidied_sheets.append(tidy_sheet)
 
 
-# In[9]:
+# In[63]:
 
 
 
@@ -157,7 +169,7 @@ UN Comtrade.
 """
 
 
-# In[10]:
+# In[64]:
 
 
 # update metadata's title as now we've combined the datasets
@@ -167,7 +179,7 @@ metadata.dataset.description = descr
 # [Clean up]
 
 
-# In[11]:
+# In[65]:
 
 
 
@@ -181,11 +193,11 @@ df['OBS'].loc[(df['OBS'] == '')] = 0
 df['OBS'] = df['OBS'].astype(int)
 
 
-# In[12]:
+# In[66]:
 
 
 #reformat columns
-df['Period'] = df['Period'].str[0:4]
+df['Period'] = 'year/' + df['Period'].str[0:4]
 df['Commodity'] = df['Commodity'].str[:2] # codelist has 3 char long codes included but in this datset there are only categories with 1 to 2 char long in their code
 df['Commodity'] = df['Commodity'].str.strip() # codes included in this datset are only 1 to 2 characters long
 df['ONS Partner Geography'] = df['ONS Partner Geography'].str[:2]
@@ -195,14 +207,14 @@ df['Industry'] = df['Industry'].str.strip()
 df = df.replace({"ONS Partner Geography": {"NA":"NAM"}})
 
 
-# In[13]:
+# In[67]:
 
 
 #rename columns
 df.rename(columns={'OBS': 'Value', 'DATAMARKER' : 'Marker'}, inplace=True)
 
 
-# In[14]:
+# In[68]:
 
 
 #reorder columns
@@ -210,24 +222,10 @@ df = df[['Period','ONS Partner Geography','Industry','Flow','Commodity', 'Value'
 
 
 
-# In[15]:
+# In[69]:
 
 
 df.to_csv('observations.csv', index=False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
-
-
-# In[ ]:
-
-
-# there are two separate landing pages as we're combining two datasets so need to overwrite the landing page in the info.json (exports) with the other (imports) landing page. 
-# We need to put the original one back or we just end up running the same one twice when running multiple times locally 
-with open("info.json", "r") as jsonFile:
-    data = json.load(jsonFile)
-# change landing page
-data["landingPage"] = "https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradeingoodsbyindustrycountryandcommodityexports"
-with open("info.json", "w") as jsonFile:
-    json.dump(data, jsonFile, indent=2) # put it back in the info json file
-del data
 

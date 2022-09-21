@@ -1,32 +1,32 @@
 #!/usr/bin/env python
 # coding: utf-8
+# %%
 
-# In[11]:
+# %%
 
 
 from gssutils import *
 import json
 import numpy as np
 
-trace = TransformTrace()
+
 df = pd.DataFrame()
-cubes = Cubes("info.json")
-info = json.load(open('info.json'))
+
 scraper = Scraper(seed = 'info.json')
 scraper
 
-
-# In[12]:
 
 
 tidied_sheets = []
 
 distribution = scraper.distribution(latest = True)
-title = distribution.title
+distribution
+
+
+# %%
 tabs = { tab.name: tab for tab in distribution.as_databaker() }
 
 for name, tab in tabs.items():
-    datasetTitle = title
 
     period = tab.name[0:4]
 
@@ -246,7 +246,7 @@ for name, tab in tabs.items():
         continue
 
 
-# In[13]:
+# %%
 
 
 #Post Processing
@@ -284,7 +284,7 @@ df = df[['Period', 'Business Size', 'Country', 'Ownership', 'Industry', 'Flow', 
 df
 
 
-# In[14]:
+# %%
 
 
 #additional scraper info needed
@@ -320,7 +320,7 @@ These data are our best estimate of these bilateral UK trade flows. Users should
 """
 scraper.dataset.description = des
 scraper.dataset.comment = comment
-scraper.dataset.title = datasetTitle
+scraper.dataset.title = distribution.title
 
 df.head(10)
 for c in df.columns:
@@ -329,11 +329,13 @@ for c in df.columns:
         print(df[c].unique())
         print("########################################################")
 
-cubes.add_cube(scraper, df.drop_duplicates(), datasetTitle)
-cubes.output_all()
+df.to_csv('observations.csv', index=False)
+
+catalog_metadata = scraper.as_csvqb_catalog_metadata()
+catalog_metadata.to_json_file('catalog-metadata.json')
 
 
-# In[ ]:
+# %%
 
 
 

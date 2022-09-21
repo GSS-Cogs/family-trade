@@ -1,36 +1,36 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.13.0
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
+#!/usr/bin/env python
+# coding: utf-8
 
-# +
+# In[26]:
+
+
 import logging
 import json
 import pandas as pd
 import numpy as np
 
 from gssutils import *
-# -
+
+
+# In[27]:
+
 
 logging.basicConfig(level=logging.DEBUG)
 
-# +
+
+# In[28]:
+
+
 infoFileName = 'info.json'
 
 info = json.load(open(infoFileName))
 scraper = Scraper(seed=infoFileName)
 cubes = Cubes(infoFileName)
 distro = scraper.distribution(latest=True)
-# -
+
+
+# In[29]:
+
 
 scraper.dataset.family = info['families']
 
@@ -118,18 +118,23 @@ df = df.melt(id_vars=['Period', 'Flow Type', 'Region',
              'Country', 'SITC Code'], value_vars=['Value', 'NetMass'])
 
 # Measures & Units
-df.loc[df['variable'] == 'Value', 'measure_type'] = 'monetary-value'
+df.loc[df['variable'] == 'Value', 'Measure Type'] = 'monetary-value'
 df.loc[df['variable'] == 'Value',
-       'unit_type'] = 'http://gss-data.org.uk/def/concept/measurement-units/gbp'
-df.loc[df['variable'] == 'NetMass', 'measure_type'] = 'net-mass'
+       'Unit'] = 'http://gss-data.org.uk/def/concept/measurement-units/gbp'
+df.loc[df['variable'] == 'NetMass', 'Measure Type'] = 'net-mass'
 df.loc[df['variable'] == 'NetMass',
-       'unit_type'] = 'http://qudt.org/vocab/unit/KiloGM'
+       'Unit'] = 'http://qudt.org/vocab/unit/KiloGM'
 df.drop('variable', axis=1, inplace=True)
-df['unit_type'] = df['unit_type'].astype('category')
-df['measure_type'] = df['measure_type'].astype('category')
+df['Unit'] = df['Unit'].astype('category')
+df['Measure Type'] = df['Measure Type'].astype('category')
+df
 
 
-# +
+# In[30]:
+
+
+df = df.rename(columns={'value' : 'Value'})
+
 scraper.dataset.comment = """
 
 International trade in goods data at summary product and country level, by UK regions and devolved administrations.
@@ -142,10 +147,15 @@ HM Revenue & Customs (HMRC) collects the UK's international trade in goods data,
 RTS data is categorised by partner country and Standard International Trade Classification, Rev.4 (SITC) at division level (2-digit). In this release RTS data is analysed mainly at partner country and SITC section (1-digit) level, with references to specific SITC divisions where appropriate. The collection and publication methodology for the RTS is available on www.gov.uk.
 
 """
-# -
+df
+
+
+# In[31]:
+
 
 cubes.add_cube(scraper, df, info['id'],
                override_containing_graph=f"http://gss-data.org.uk/graph/gss_data/trade/{info['id']}/{fetch_chunk}" if info['load']['accretiveUpload'] else None)
 
 # Write cube
 cubes.output_all()
+

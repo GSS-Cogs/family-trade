@@ -1,4 +1,5 @@
 {
+    "$schema" : "http://gss-cogs.github.io/family-schemas/dataset-schema-1.1.0.json",
     "id": "ons-gdp-at-current-prices-real-time-database-ybha",
     "title": "GDP at current prices - real time database (YBHA)",
     "publisher": "Office for National Statistics",
@@ -19,28 +20,37 @@
         "airtable": "recRRRJmihn12ddNh",
         "columns": {
             "GDP Reference Period": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+gdp_reference_period}",
-                "codelist": false
+                "type": "dimension",
+                "new": {
+                      "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                      "codelist": true
+                 },
+                "value": "http://reference.data.gov.uk/id/quarter"
+            },
+            "GDP Estimate Type":{
+                "type": "dimension",
+                "new": {
+                  "codelist": "./codelists/gdp-estimate-type.csv-metadata.json"
+                }
             },
             "Publication Date": {
-                "parent": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
-                "value": "http://reference.data.gov.uk/id/{+publication_date}",
-                "codelist": false
+                "type": "dimension",
+                "new": {
+                      "subPropertyOf": "http://purl.org/linked-data/sdmx/2009/dimension#refPeriod",
+                      "codelist": true
+                 },
+                "value": "http://reference.data.gov.uk/id/quarter"
             },
             "Value": {
-                "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
-                "measure": "http://gss-data.org.uk/def/measure/current-prices",
-                "datatype": "double"
-            },
-            "Marker": {
-                "attribute": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{marker}"
+                "type": "observations",
+                "measure": {
+                  "label": "Current Prices"
+                },
+                "unit": {
+                  "label": "GBP Million"
+                }
             }
         },
-        "codelists": [
-            "GDP Estimate Type"
-        ],
         "main_issue": 7
     },
     "sizingNotes": "Will probably need a conversation about what it means",

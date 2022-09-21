@@ -1,4 +1,9 @@
-# %%
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[23]:
+
+
 import json
 import pandas as pandas
 from gssutils import *
@@ -21,7 +26,10 @@ metadata = Scraper(seed='info.json')
 tidied_sheets = []
 df = pd.DataFrame()
 
-# %%
+
+# In[24]:
+
+
 counter = 0
 source_name_and_distro = {}
 
@@ -43,7 +51,10 @@ for table in metadata.distributions:
     source_name_and_distro["data" + str(counter) + ".xls"] = metadata.distributions[counter]
     counter += 1
 
-# %%
+
+# In[25]:
+
+
 counter = 0
 for source_name, distro in source_name_and_distro.items():
     tabs = loadxlstabs(source_name)
@@ -268,7 +279,10 @@ for source_name, distro in source_name_and_distro.items():
             raise Exception(f'failed on source {source_name} and tab {tab.name})') from err
     counter += 1
 
-# %%
+
+# In[26]:
+
+
 formatted_sheets = []
 # Regional Trade in goods statistics - Business Count (Exports, proportion method)
 df = pd.concat([tidied_sheets[0],tidied_sheets[1],tidied_sheets[8],tidied_sheets[9]], sort = True)
@@ -279,7 +293,7 @@ df['Flow'] = df.apply(lambda x: 'exports' if 'Exporters' in x['Measure Type'] el
 df['Marker'] = df.apply(lambda x: 'suppressed' if x['Value'] == '' else '', axis = 1)
 df['Value'] = df.apply(lambda x: 0 if x['Marker'] == 'suppressed' else x['Value'], axis = 1)
 
-COLUMNS_TO_NOT_PATHIFY = ['Value']
+COLUMNS_TO_NOT_PATHIFY = ['Value', 'Period']
 for col in df.columns.values.tolist():
 	if col in COLUMNS_TO_NOT_PATHIFY:
 		continue
@@ -298,7 +312,9 @@ df['Value'] = df['Value'].astype(int)
 formatted_sheets.append(df)
 
 
-# %%
+# In[27]:
+
+
 # Regional Trade in goods statistics - Regional Comparison (Exports, proportion method)
 df = pd.concat([tidied_sheets[2],tidied_sheets[3],tidied_sheets[10],tidied_sheets[11]], sort = True)
 df = df.rename(columns={'Year' : 'Period'})
@@ -309,7 +325,7 @@ df['Unit'] = df.apply(lambda x: 'count' if 'Number' in x['Measure Type'] else x[
 df = df.drop(['Code', 'Quarter'], axis=1)
 df['Flow'] = df.apply(lambda x: 'exports' if 'export' in x['Measure Type'] else ('imports' if 'import' in x['Measure Type'] else 'ERROR'), axis = 1)
 
-COLUMNS_TO_NOT_PATHIFY = ['Value']
+COLUMNS_TO_NOT_PATHIFY = ['Value', 'Period']
 
 for col in df.columns.values.tolist():
 	if col in COLUMNS_TO_NOT_PATHIFY:
@@ -320,7 +336,9 @@ for col in df.columns.values.tolist():
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
 
-# %%
+# In[28]:
+
+
 df['Measure Type'] = df['Measure Type'].str.replace('-ps-thousands','')
 df['Measure Type'] = df['Measure Type'].str.replace('-ps-billions','')
 df['Unit'] = df['Unit'].str.replace('count','businesses')
@@ -333,7 +351,10 @@ df = df[df['Unit'] != 'businesses']
 
 formatted_sheets.append(df)
 
-# %%
+
+# In[29]:
+
+
 # Regional Trade in goods statistics - Business Count (Exports, whole number method)
 df = pd.concat([tidied_sheets[4],tidied_sheets[5],tidied_sheets[12],tidied_sheets[13]], sort = True)
 df = df.rename(columns={'Year' : 'Period'})
@@ -345,7 +366,7 @@ df = df[df['Country'] != '0.0']
 df['Marker'] = df.apply(lambda x: 'suppressed' if x['Value'] == '' else '', axis = 1)
 df['Value'] = df.apply(lambda x: 0 if x['Marker'] == 'suppressed' else x['Value'], axis = 1)
 
-COLUMNS_TO_NOT_PATHIFY = ['Value']
+COLUMNS_TO_NOT_PATHIFY = ['Value', 'Period']
 
 for col in df.columns.values.tolist():
 	if col in COLUMNS_TO_NOT_PATHIFY:
@@ -358,7 +379,9 @@ for col in df.columns.values.tolist():
 df['Value'] = df['Value'].astype(int)
 
 
-# %%
+# In[30]:
+
+
 df['Measure Type'] = 'number-of-exporters'
 df['Unit'] = 'businesses'
 df['Method'] = 'whole-number'
@@ -368,7 +391,10 @@ df.head(5)
 df = df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Value', 'Marker', 'Measure Type', 'Unit']]
 formatted_sheets.append(df)
 
-# %%
+
+# In[31]:
+
+
 # Regional Trade in goods statistics - Regional Comparisons (Exports, whole number method)
 df = pd.concat([tidied_sheets[6],tidied_sheets[7],tidied_sheets[14],tidied_sheets[15]], sort = True)
 df = df.rename(columns={'Year' : 'Period'})
@@ -389,7 +415,10 @@ for col in df.columns.values.tolist():
 	except Exception as err:
 		raise Exception('Failed to pathify column "{}".'.format(col)) from err
 
-# %%
+
+# In[32]:
+
+
 df['Measure Type'] = df['Measure Type'].str.replace('-ps-thousands','')
 df['Measure Type'] = df['Measure Type'].str.replace('-ps-billions','')
 df['Unit'] = df['Unit'].str.replace('count','businesses')
@@ -403,7 +432,10 @@ df = df[df['Unit'] != 'businesses']
 
 formatted_sheets.append(df)
 
-# %%
+
+# In[33]:
+
+
 notes = """
 Data source
 
@@ -452,7 +484,10 @@ https://www.uktradeinfo.com/Statistics/BuildYourOwnTables/Pages/Home.aspx
 2020 data is provisional and subject to update.
 """
 
-# %%
+
+# In[34]:
+
+
 metadata.dataset.comment = "These spreadsheets provide supplementary data to that in the release of the HM Revenue & Customs Regional trade in goods statistics."
 metadata.dataset.description = notes
 #request from publisher to change title to RTS business counts
@@ -461,14 +496,31 @@ metadata.dataset.title = 'RTS Business Counts'
 #print(metadata.dataset.comment)
 #print(metadata.dataset.description)
 
-# %%
+
+# In[35]:
+
+
 print("Number of dataframes in List: " + str(len(formatted_sheets)))
 formatted_df = pd.concat(formatted_sheets, sort = True).fillna('')
+
 formatted_df = formatted_df[['Period', 'Country', 'Region', 'Flow', 'Method', 'Measure Type', 'Unit', 'Marker', 'Value']]
 
 
-# %%
+# In[36]:
+
+
 formatted_df.to_csv("observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
+
+
+# In[37]:
+
+
+from IPython.core.display import HTML
+for col in formatted_df:
+    if col not in ['Value']:
+        formatted_df[col] = formatted_df[col].astype('category')
+        display(HTML(f"<h2>{col}</h2>"))
+        display(formatted_df[col].cat.categories)
 

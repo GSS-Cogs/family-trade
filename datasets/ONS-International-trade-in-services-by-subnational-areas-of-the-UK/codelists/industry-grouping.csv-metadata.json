@@ -2,37 +2,6 @@
     "@context": "http://www.w3.org/ns/csvw",
     "tables": [
         {
-            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/industry-grouping/sic-mappings",
-            "url": "industry-grouping-mappings.csv",
-            "tableSchema": {
-                "columns": [
-                    {
-                        "titles": "Industry Grouping",
-                        "name": "industryGrouping",
-                        "required": true,
-                        "datatype": "string"
-                    },
-                    {
-                        "titles": "SIC07 Mapping",
-                        "name": "sic07Mapping",
-                        "required": true
-                    }
-                ],
-                "foreignKeys": [
-                    {
-                        "columnReference": "industryGrouping",
-                        "reference": {
-                            "resource": "industry-grouping.csv",
-                            "columnReference": "notation"
-                        }
-                    }
-                ],
-                "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/industry-grouping/{industryGrouping}",
-                "propertyUrl": "rdfs:seeAlso",
-                "valueUrl": "http://business.data.gov.uk/companies/def/sic-2007/{sic07Mapping}"
-            }
-        },
-        {
             "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/industry-grouping",
             "url": "industry-grouping.csv",
             "tableSchema": {
@@ -173,6 +142,37 @@
                     }
                 }
             ]
+        },
+        {
+            "@id": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#scheme/industry-grouping/sic-mappings",
+            "url": "industry-grouping-mappings.csv",
+            "tableSchema": {
+                "columns": [
+                    {
+                        "titles": "Industry Grouping",
+                        "name": "industryGrouping",
+                        "required": true,
+                        "datatype": "string"
+                    },
+                    {
+                        "titles": "SIC07 Mapping",
+                        "name": "sic07Mapping",
+                        "required": true
+                    }
+                ],
+                "foreignKeys": [
+                    {
+                        "columnReference": "industryGrouping",
+                        "reference": {
+                            "resource": "industry-grouping.csv",
+                            "columnReference": "notation"
+                        }
+                    }
+                ],
+                "aboutUrl": "http://gss-data.org.uk/data/gss_data/trade/ons-international-trade-in-services-by-subnational-areas-of-the-uk#concept/industry-grouping/{industryGrouping}",
+                "propertyUrl": "rdfs:seeAlso",
+                "valueUrl": "http://business.data.gov.uk/companies/def/sic-2007/{sic07Mapping}"
+            }
         }
     ]
 }
