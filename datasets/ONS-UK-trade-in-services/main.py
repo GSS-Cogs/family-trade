@@ -14,17 +14,17 @@ tabs = {tab.name: tab for tab in distribution.as_databaker()}
 # +
 tidied_sheets = []
 
-tab = tabs['Time Series']
+tab = tabs['Sheet 1. Time Series']
 
-observations = tab.excel_ref("F2").expand(RIGHT).expand(DOWN).is_not_blank()
+observations = tab.excel_ref("F4").expand(RIGHT).expand(DOWN).is_not_blank()
 
-period = tab.excel_ref("F1").expand(RIGHT).is_not_blank()
+period = tab.excel_ref("F3").expand(RIGHT).is_not_blank()
 
-flow = tab.excel_ref("A2").expand(DOWN).is_not_blank()
+flow = tab.excel_ref("A4").expand(DOWN).is_not_blank()
 
-trade_services = tab.excel_ref("B2").expand(DOWN).is_not_blank()
+trade_services = tab.excel_ref("B4").expand(DOWN).is_not_blank()
 
-ons_partner_geography = tab.excel_ref("D2").expand(DOWN).is_not_blank()
+ons_partner_geography = tab.excel_ref("D4").expand(DOWN).is_not_blank()
 
 dimensions =[
         HDim(period, 'Period', DIRECTLY, ABOVE),
@@ -59,16 +59,15 @@ def date_time (date):
         return date       
 
 
-#Post Processing 
+#Post Processing
 df['Period'] = df['Period'].astype(str).replace('\.', '', regex=True)
 df['Period'] =  df["Period"].apply(date_time)
 df = df.replace({'Marker' : {'-' : 'itis-nil', '..' : 'disclosive'}})
 df['Seasonal Adjustment'] =  'NSA'
 df['Flow'] = df['Flow'].apply(pathify)
-df = df[['Period','Flow','Trade Services','Country','Seasonal Adjustment','Value','Marker' ]]
+df = df[['Period','Flow','Trade Services','Country','Seasonal Adjustment','Value','Marker']]
 df['Trade Services'] = df['Trade Services'].astype(str).replace('\.0', '', regex=True)
 df.loc[(df['Marker'] == 'disclosive'),'Value'] = 0
-df['Value'] = df['Value'].astype(int)
 df['Marker'].fillna('', inplace=True)
 
 df.to_csv("observations.csv", index = False)
