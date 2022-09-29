@@ -15,7 +15,7 @@
 
 # ## Balance of Payments: Current Account and Capital Accounts
 
-# +
+# %%
 import copy 
 import pandas as pd
 from gssutils import *
@@ -132,7 +132,7 @@ for tab in tabs:
 tidy.to_csv("quarterly_summary_of_balance_of_payments-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('quarterly_summary_of_balance_of_payments-catalog-metadata.json')
-
+# %%
 for tab in tabs:
     # B2 B2A B3B3A
     title = distribution.title + ' :Trade in goods and services'
@@ -227,6 +227,7 @@ for tab in tabs:
 tidy["Product"].replace({'' : "not-applicable"}, inplace = True)
 
 tidy["Account Type"].replace({"financial-account2" : "financial-account"}, inplace = True)
+tidy["Services"].replace({"net-errors-and-omissions3" : "net-errors-and-omissions"}, inplace = True)
 
 tidy = tidy[tidy.Sheet != "B1"]
 
@@ -235,7 +236,7 @@ tidy.drop("Sheet", axis = 1, inplace = True)
 tidy.to_csv("trade_in_goods_and_services-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('trade_in_goods_and_services-catalog-metadata.json')
-
+# %%
 for tab in tabs:
     #B4, B4A & B4B
     if 'B4' in tab.name: 
@@ -332,7 +333,7 @@ tidy.drop("Sheet", axis = 1, inplace = True)
 tidy.to_csv("primary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('primary_income-catalog-metadata.json')
-
+# %%
 for tab in tabs:
     # Tabs B5 and B5A    
     if (tab.name == 'B5') or (tab.name == 'B5A'):
@@ -420,7 +421,7 @@ tidy.drop("Sheet", axis = 1, inplace = True)
 tidy.to_csv("secondary_income-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('secondary_income-catalog-metadata.json')
-
+# %%
 for tab in tabs:
     if (tab.name == 'B6') or (tab.name == 'B6A'):
         title = distribution.title + ' :Transactions with the EU and EMU'
@@ -511,7 +512,7 @@ tidy.drop("Sheet", axis = 1, inplace = True)
 tidy.to_csv("transactions_with_eu_and_emu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('transactions_with_eu_and_emu-catalog-metadata.json')
-
+# %%
 for tab in tabs:
     # # Tabs B6B_B6B2_B6B3_B6C_B6C2_B6C3
     if (tab.name == 'B6B') or (tab.name == 'B6B_2') or (tab.name == 'B6B_3') or (tab.name == 'B6C') or (tab.name == 'B6C_2') or (tab.name == 'B6C_3'):
@@ -608,7 +609,7 @@ tidy.drop("Sheet", axis = 1, inplace = True)
 tidy.to_csv("transactions_with_non_eu-observations.csv", index = False)
 catalog_metadata = metadata.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('transactions_with_non_eu-catalog-metadata.json')
-
+# %%
 for tab in tabs:
     # # Tabs B7_B7A
     if 'B7' in tab.name: 
