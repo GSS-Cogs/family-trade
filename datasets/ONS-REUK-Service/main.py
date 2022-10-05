@@ -92,7 +92,6 @@ for tab in tabs:
 tidy = pd.concat(tidied_sheets)
 tidy
 
-
 # In[16]:
 
 
@@ -145,14 +144,8 @@ tidy = tidy[tidy['Value'] != '']
 tidy = tidy[['NUTS Geography','Year','ONS Functional Category','Flow','Value']]
 
 tidy.rename(columns={'Flow':'Flow Directions'}, inplace=True)
-tidy
-
-
 # In[17]:
-
-
 tidy.to_csv('observations.csv', index=False)
-
 catalog_metadata = scraper.as_csvqb_catalog_metadata()
 catalog_metadata.to_json_file('catalog-metadata.json')
 
