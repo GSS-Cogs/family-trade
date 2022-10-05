@@ -14,7 +14,9 @@ national_account_aggregates = ['A1 AGGREGATES', 'A2 AGGREGATES']
 output_indicators = ['B1 CVM OUTPUT', 'B2 CVM OUTPUT']
 expenditure_indicators = ['C1 EXPENDITURE', 'C2 EXPENDITURE']
 income_indicators = ['D INCOME']
+household_expenditure_indicators = ['E1 EXPENDITURE', 'E2 EXPENDITURE', 'E3 EXPENDITURE', 'E4 EXPENDITURE']
 gross_fixed_capitol = ['F1 GFCF', 'F2 GFCF']
+inventories = ['G1 INVENTORIES', 'G2 INVENTORIES']
 trade = ['H1 TRADE', 'H2 TRADE']
 tidied_sheets = []
 
@@ -282,6 +284,36 @@ for name, tab in tabs.items():
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
         
+    elif name in household_expenditure_indicators:
+        if name in household_expenditure_indicators[0] or name in household_expenditure_indicators[2]:
+            COICOP = tab.excel_ref('B5').expand(RIGHT).is_not_blank()
+            cdid = tab.excel_ref('B6').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
+            measure = tab.excel_ref('G1').expand(RIGHT).is_not_blank()
+            expenditure = tab.excel_ref('B4').expand(RIGHT).is_not_blank()
+        else:
+            p_change =  tab.excel_ref('A6').expand(DOWN).filter(contains_string('Percentage'))  | tab.excel_ref('B6')
+            COICOP = tab.excel_ref('B7').expand(RIGHT)
+            cdid = tab.excel_ref('B8').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank() - COICOP
+            measure = tab.excel_ref('G2').expand(RIGHT).is_not_blank()
+            expenditure = tab.excel_ref('B6').expand(RIGHT).is_not_blank()
+            
+        observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
+        dimensions = [
+            HDim(period,'Period',DIRECTLY,LEFT),
+            HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
+            HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
+            HDim(cdid, 'CDID',DIRECTLY,ABOVE),
+            HDim(COICOP, 'COICOP',DIRECTLY,ABOVE),
+            HDim(expenditure, 'Household Expenditure',DIRECTLY,ABOVE),
+            HDim(measure, 'measure',CLOSEST,ABOVE),
+
+        ]
+        c1 = ConversionSegment(tab, dimensions, observations)   
+        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
+        tidied_sheets.append(tidy_sheet)
+        
     elif name in gross_fixed_capitol:
         cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
         observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
@@ -302,6 +334,31 @@ for name, tab in tabs.items():
         c1 = ConversionSegment(tab, dimensions, observations)   
         #savepreviewhtml(c1, fname=tab.name + "Preview.html")
         tidy_sheet = c1.topandas()
+        tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
+        tidied_sheets.append(tidy_sheet)
+
+    elif name in inventories:
+        cdid = tab.excel_ref('B5').expand(RIGHT).is_not_blank() | p_change.shift(1,2).expand(RIGHT).is_not_blank()
+        observations = cdid.fill(DOWN).is_not_blank().is_not_whitespace() - cdid
+        sector = tab.excel_ref('B3').expand(RIGHT).is_not_blank() 
+        level_held_title = tab.excel_ref('A4').is_not_blank() 
+        level_held = level_held_title.expand(RIGHT).is_not_blank()
+        industry = sector.shift(UP)
+        dimensions = [
+            HDim(industry,'Industry',DIRECTLY,ABOVE),
+            HDim(period,'Period',DIRECTLY,LEFT),
+            HDim(seasonal_adjustment,'Seasonal Adjustment',CLOSEST,ABOVE),
+            HDim(p_change, 'Percentage Change',CLOSEST,ABOVE),
+            HDim(cdid, 'CDID',DIRECTLY,ABOVE),
+            HDim(sector, 'Sector',DIRECTLY,ABOVE),
+            HDim(level_held, 'Level of inventories held at end-December 2019',DIRECTLY,ABOVE),
+            HDim(measure, 'measure',CLOSEST,ABOVE),
+        ]
+        dimensions[0] = with_industry_overrides(dimensions[0])
+        c1 = ConversionSegment(tab, dimensions, observations)   
+        #savepreviewhtml(c1, fname=tab.name + "Preview.html")
+        tidy_sheet = c1.topandas()
+        tidy_sheet['Industry'] = tidy_sheet['Industry'].replace('', 'Distributive trades')
         tidy_sheet = tidy_sheet.replace(r'^\s*$', np.nan, regex=True)
         tidied_sheets.append(tidy_sheet)
 
@@ -335,6 +392,7 @@ for name, tab in tabs.items():
         tidied_sheets.append(tidy_sheet)
     else:
         continue
+
 
 #
 # # # Tabs transformed and appended to tidied_sheets to make it easier to understand for a DM.. hopefully 
