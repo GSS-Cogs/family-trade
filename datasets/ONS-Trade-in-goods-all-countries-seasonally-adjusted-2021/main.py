@@ -27,8 +27,10 @@ for tab in tabs:
 
 # %%
 df = pd.concat(tidied_sheets, sort=True)  # .fillna('')
-df.rename(columns={'OBS': 'Value', 'DATAMARKER': 'Marker'}, inplace=True)
-df["Marker"] = df["Marker"].str.replace("X", "data-not-collated")
+df
+# %%
+df.rename(columns={'OBS': 'Value' }, inplace=True )#, 'DATAMARKER': 'Marker'}, inplace=True)
+#df["Marker"] = df["Marker"].str.replace("X", "data-not-collated")
 df['Flow'] = df['Flow'].apply(lambda x: 'exports' if 'Exports' in x else
                               ('imports' if 'Imports' in x else x))
 df['Period 2'] = df['Period'].map(lambda x: x[4:])
@@ -50,7 +52,7 @@ df['Period'] = df.apply(lambda x: 'quarter/' + x['Period 3'] + '-' + x['Period 2
     'month/' + x['Period 3'] + '-' + x['Period 2'] if x['Period 2'].isnumeric() else 'year/' + x['Period']), axis=1)
 df = df.drop(columns=['Period 2', 'Period 3'])
 df = df[["Period", "ONS Partner Geography",
-         "Seasonal Adjustment", "Flow", "Value", "Marker"]]
+         "Seasonal Adjustment", "Flow", "Value" ]]#, "Marker"]]
 
 # %%
 metadata.dataset.title = metadata.dataset.title + " 2021"
