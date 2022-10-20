@@ -44,11 +44,6 @@
                 "measure": "http://gss-data.org.uk/def/measure/current-prices",
                 "unit": "http://gss-data.org.uk/def/concept/measurement-units/gbp-million",
                 "datatype": "integer"
-            },
-            "Marker": {
-                "type": "attribute",
-                "uri": "http://purl.org/linked-data/sdmx/2009/attribute#obsStatus",
-                "value": "http://gss-data.org.uk/def/concept/cogs-markers/{+marker}"
             }
         }
     },
